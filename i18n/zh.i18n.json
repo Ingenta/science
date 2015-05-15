@@ -1,6 +1,9 @@
 {
     "Click Here": "Click Here",
     "PleaseWait": "等一点...",
+    "Search": "搜索",
+    "Name" : "名字",
+    "Email" : "邮件地址",
     "Nav": {
         "Publishers": "出版时",
         "Publications": "出版物",
@@ -24,5 +27,8 @@
         "SignUp": "注册",
         "AlreadyAMember": "注册过了吗?",
         "SignInHere": "登绿"
+    },
+    "AdminPage":{
+        "Users": "用户"
     }
 }

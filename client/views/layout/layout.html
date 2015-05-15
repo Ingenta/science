@@ -137,17 +137,14 @@
 </template>
 
 <template name="PrivateLayoutLeftMenu">
-	<ul id="menu-items" class="nav navbar-nav">
-		<li id="menu-item-simple" class="{{menuItemClass 'home_private'}}">
-			<a href="{{pathFor 'home_private'}}">
-				Home
-			</a>
-		</li>
-	</ul>
+	{{> PublicLayoutLeftMenu}}
 </template>
 
 <template name="PrivateLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
+		<li id="menu-item-simple">
+			{{> i18n_buttons}}
+		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'admin'}}">
 			<a href="{{pathFor 'admin'}}">
 				Admin

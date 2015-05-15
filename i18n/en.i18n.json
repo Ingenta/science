@@ -1,6 +1,7 @@
 {
     "ClickHere": "Click Here",
     "PleaseWait": "Please wait...",
+    "Email": "E-mail",
     "Nav": {
         "Publishers": "Publishers",
         "Publications": "Publications",
@@ -24,5 +25,8 @@
         "SignUp": "Sign up",
         "AlreadyAMember": "Already a member?",
         "SignInHere": "Sign in here"
+    },
+    "AdminPage":{
+        "Users": "Users"
     }
 }
