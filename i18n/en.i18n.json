@@ -1,0 +1,25 @@
+{
+    "ClickHere": "Click Here",
+    "Nav": {
+        "Publishers": "Publishers",
+        "Publications": "Publications",
+        "Topics": "Topics",
+        "Collections": "Collections",
+        "Reader Centre": "Reader Centre",
+        "Register": "Register",
+        "Login": "Login"
+    },
+    "LoginPage": {
+        "PleaseSignIn": "Please sign in",
+        "SignIn": "Sign in",
+        "NotAMember": "Not a member?",
+        "ForgotPassword": "Forgot password?",
+        "SignUpHere": "Sign up here"
+    },
+    "RegisterPage":{
+        "PleaseSignUp": "Please sign up",
+        "SignUp": "Sign up",
+        "AlreadyAMember": "Already a member?",
+        "SignInHere": "Sign in here"
+    }
+}

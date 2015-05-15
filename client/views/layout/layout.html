@@ -54,27 +54,27 @@
 	<ul id="menu-items" class="nav navbar-nav">
 		<li id="menu-item-simple" class="{{menuItemClass 'home_public'}}">
 			<a href="{{pathFor 'home_public'}}">
-				Publishers
+				{{_ "Nav.Publishers"}}
 			</a>
 		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'home_public'}}">
 			<a href="{{pathFor 'home_public'}}">
-				Publications
+				{{_ "Nav.Publications"}}
 			</a>
 		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'home_public'}}">
 			<a href="{{pathFor 'home_public'}}">
-				Topics
+				{{_ "Nav.Topics"}}
 			</a>
 		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'home_public'}}">
 			<a href="{{pathFor 'home_public'}}">
-				Collections
+				{{_ "Nav.Collections"}}
 			</a>
 		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'home_public'}}">
 			<a href="{{pathFor 'home_public'}}">
-				Reader Centre
+				{{_ "Nav.Reader Centre"}}
 			</a>
 		</li>
 	</ul>
@@ -82,14 +82,17 @@
 
 <template name="PublicLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
+		<li id="menu-item-simple">
+			{{> i18n_buttons}}
+		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'register'}}">
 			<a href="{{pathFor 'register'}}">
-				Register
+				{{_ "Nav.Register"}}
 			</a>
 		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'login'}}">
 			<a href="{{pathFor 'login'}}">
-				Login
+				{{_ "Nav.Login"}}
 			</a>
 		</li>
 	</ul>
@@ -159,12 +162,12 @@
 			<ul id="menu-items" class="dropdown-menu">
 				<li class="{{menuItemClass 'user_settings'}}">
 					<a href="{{pathFor 'user_settings'}}">
-						Settings
+						{{_ "Nav.Settings"}}
 					</a>
 				</li>
 				<li class="{{menuItemClass 'logout'}}">
 					<a href="{{pathFor 'logout'}}">
-						Logout
+						{{_ "Nav.Logout"}}
 					</a>
 				</li>
 			</ul>

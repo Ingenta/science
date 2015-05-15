@@ -1,0 +1,25 @@
+{
+    "Click Here": "Click Here",
+    "Nav": {
+        "Publishers": "出版时",
+        "Publications": "出版物",
+        "Topics": "主题",
+        "Collections": "虚拟产品包",
+        "Reader Centre": "作者中心",
+        "Register": "注册",
+        "Login": "登绿"
+    },
+    "LoginPage": {
+        "PleaseSignIn": "登绿",
+        "SignIn": "登绿",
+        "NotAMember": "没有用户?",
+        "ForgotPassword": "忘记密码?",
+        "SignUpHere": "注册"
+    },
+    "RegisterPage":{
+        "PleaseSignUp": "新用户注册",
+        "SignUp": "注册",
+        "AlreadyAMember": "注册过了吗?",
+        "SignInHere": "登绿"
+    }
+}
