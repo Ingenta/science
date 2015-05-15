@@ -1,5 +1,6 @@
 {
     "ClickHere": "Click Here",
+    "PleaseWait": "Please wait...",
     "Nav": {
         "Publishers": "Publishers",
         "Publications": "Publications",
@@ -7,7 +8,9 @@
         "Collections": "Collections",
         "Reader Centre": "Reader Centre",
         "Register": "Register",
-        "Login": "Login"
+        "Login": "Login",
+        "Logout": "Log Out",
+        "Settings": "Settings"
     },
     "LoginPage": {
         "PleaseSignIn": "Please sign in",

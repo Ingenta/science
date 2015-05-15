@@ -6,7 +6,7 @@ Meteor.startup(function() {
 		}
 	}
 
-	
+
 });
 
 Meteor.methods({
@@ -15,7 +15,7 @@ Meteor.methods({
 			throw new Meteor.Error(403, "Access denied.");
 		}
 
-		var userOptions = {};		
+		var userOptions = {};
 		if(options.username) userOptions.username = options.username;
 		if(options.email) userOptions.email = options.email;
 		if(options.password) userOptions.password = options.password;
@@ -38,7 +38,7 @@ Meteor.methods({
 			}
 		}
 
-		var userOptions = {};		
+		var userOptions = {};
 		if(options.username) userOptions.username = options.username;
 		if(options.email) userOptions.email = options.email;
 		if(options.password) userOptions.password = options.password;
@@ -76,13 +76,13 @@ Meteor.methods({
 });
 
 Accounts.onCreateUser(function (options, user) {
-	user.roles = ["user"];
+	user.roles = ["admin"];
 
 	if(options.profile) {
 		user.profile = options.profile;
 	}
 
-	
+
 
 	return user;
 });
@@ -112,7 +112,7 @@ Users.before.update(function(userId, doc, fieldNames, modifier, options) {
 });
 
 Accounts.onLogin(function (info) {
-	
+
 });
 
 Accounts.urls.resetPassword = function (token) {

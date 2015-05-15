@@ -1,5 +1,6 @@
 {
     "Click Here": "Click Here",
+    "PleaseWait": "等一点...",
     "Nav": {
         "Publishers": "出版时",
         "Publications": "出版物",
@@ -7,7 +8,9 @@
         "Collections": "虚拟产品包",
         "Reader Centre": "作者中心",
         "Register": "注册",
-        "Login": "登绿"
+        "Login": "登绿",
+        "Logout": "Log Out",
+        "Settings": "Settings"
     },
     "LoginPage": {
         "PleaseSignIn": "登绿",
