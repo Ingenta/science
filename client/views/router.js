@@ -6,7 +6,7 @@ Router.configure({
 	loadingTemplate: "loading"
 });
 
-var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
+var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password", "topics"];
 var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
 var zonelessRoutes = [];
 
@@ -33,7 +33,7 @@ this.firstGrantedRoute = function() {
 
 	if(grantedRoute == "") {
 		if(routeGranted("home_private")) {
-			return "home_private";				
+			return "home_private";
 		} else {
 			return "home_public";
 		}
@@ -125,10 +125,11 @@ Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
 Router.map(function () {
-	
+
 	this.route("home_public", {path: "/", controller: "HomePublicController"});
 	this.route("login", {path: "/login", controller: "LoginController"});
 	this.route("register", {path: "/register", controller: "RegisterController"});
+	this.route("topics", {path: "/topics", controller: "TopicsController"});
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
 	this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
