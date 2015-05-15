@@ -1,6 +1,7 @@
 this.TopicsController = RouteController.extend({
     template: "Topics",
 
+
     yieldTemplates: {
         /*YIELD_TEMPLATES*/
     },

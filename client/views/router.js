@@ -6,9 +6,9 @@ Router.configure({
 	loadingTemplate: "loading"
 });
 
-var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password", "topics"];
+var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
 var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
-var zonelessRoutes = [];
+var zonelessRoutes = ["topics"];
 
 var roleMap = [
 	{ route: "admin",	roles: ["admin"] },
@@ -129,7 +129,7 @@ Router.map(function () {
 	this.route("home_public", {path: "/", controller: "HomePublicController"});
 	this.route("login", {path: "/login", controller: "LoginController"});
 	this.route("register", {path: "/register", controller: "RegisterController"});
-	this.route("topics", {path: "/topics", controller: "TopicsController"});
+	this.route("topics");
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
 	this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
