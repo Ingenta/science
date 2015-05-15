@@ -11,14 +11,14 @@ var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.detail
 var zonelessRoutes = ["topics"];
 
 var roleMap = [
-	{ route: "admin",	roles: ["admin"] },
-	{ route: "admin.users",	roles: ["admin"] },
-	{ route: "admin.users.details",	roles: ["admin"] },
-	{ route: "admin.users.insert",	roles: ["admin"] },
-	{ route: "admin.users.edit",	roles: ["admin"] },
-	{ route: "user_settings",	roles: ["user","admin"] },
-	{ route: "user_settings.profile",	roles: ["user","admin"] },
-	{ route: "user_settings.change_pass",	roles: ["user","admin"] }
+{ route: "admin",	roles: ["admin"] },
+{ route: "admin.users",	roles: ["admin"] },
+{ route: "admin.users.details",	roles: ["admin"] },
+{ route: "admin.users.insert",	roles: ["admin"] },
+{ route: "admin.users.edit",	roles: ["admin"] },
+{ route: "user_settings",	roles: ["user","admin"] },
+{ route: "user_settings.profile",	roles: ["user","admin"] },
+{ route: "user_settings.change_pass",	roles: ["user","admin"] }
 ];
 
 this.firstGrantedRoute = function() {
