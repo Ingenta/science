@@ -110,6 +110,7 @@ Router.ensureNotLogged = function() {
 };
 
 Meteor.subscribe("current_user_data");
+Meteor.subscribe("publishers");
 
 Router.onBeforeAction(function() {
 	// loading indicator here

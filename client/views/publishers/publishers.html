@@ -1,28 +1,31 @@
 <template name="Publishers">
     <div class="page-container container">
-       <div class="row">
-         <h2>Publishers</h2>
-     </div>
-     Scitation provides researchers, students, and educators with access to current, cutting edge research plus a deep archive of seminal physics content that supports the study and advancement of physics and related disciplines including physics, chemistry, geosciences, engineering, and acoustics.
-
-     Including journals, conference proceedings, and magazines, Scitation hosts nearly one million articles published by AIP Publishing and AIP Member Societies
      <div class="row">
-        {{> PublisherList}}
-    </div>
+       <h2>Publishers</h2>
+   </div>
+   Scitation provides researchers, students, and educators with access to current, cutting edge research plus a deep archive of seminal physics content that supports the study and advancement of physics and related disciplines including physics, chemistry, geosciences, engineering, and acoustics.
+
+   Including journals, conference proceedings, and magazines, Scitation hosts nearly one million articles published by AIP Publishing and AIP Member Societies
+   <div class="row">
+    {{> PublisherList}}
+</div>
 </div>
 </template>
 
+
 <template name="PublisherList">
-   <div class="row">
-       <h3>AIP Publishing</h3>
-   </div>
-   <div class="row">
-    One of the world’s largest publishers of scientific information in physics and the related sciences, AIP Publishing employs innovative technologies and offers publishing services for the American Institute of Physics and AIP Member Society publishing partners. AIP Publishing’s suite of publications includes 17 journals, three of which are published in partnership with other organizations; magazines, including AIP’s flagship publication Physics Today; and the AIP Conference Proceedings series.
-</div>
-<div class="row">
-   <h3>Acoustical Society of America</h3>
-</div>
-<div class="row">
-    The purpose of the Acoustical Society of America is to increase the knowledge of acoustics and to promote its practical applications. Established in 1929, the present membership includes leaders in acoustics worldwide. Diverse fields of interest in acoustics include physics, engineering, architecture, noise, oceanography, biology, speech and hearing, psychology and music.
-</div>
+    {{#each publishers}}
+    {{> SinglePublisher}}
+    {{else}}
+    No publishers found!
+    {{/each}}
+</template>
+
+<template name="SinglePublisher">
+    <div class="row">
+     <h3>{{name}}</h3>
+ </div>
+ <div class="row">
+     {{description}}
+ </div>
 </template>
