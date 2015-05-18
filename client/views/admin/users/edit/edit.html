@@ -20,8 +20,8 @@
 			<div class="alert alert-warning">
 				{{errorMessage}}
 			</div>
-			{{/if}}				
-				
+			{{/if}}
+
 			{{#if infoMessage}}
 			<div class="alert alert-success">
 				{{infoMessage}}
@@ -66,6 +66,12 @@
 						<label>
 							<input type="radio" value="admin" name="roles" data-type="array" {{itemIsChecked admin_user.roles "admin"}}>
 							Admin
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" value="editor" name="roles" data-type="array" {{itemIsChecked admin_user.roles "editor"}}>
+							Editor
 						</label>
 					</div>
 					<div class="radio">

@@ -1,16 +1,28 @@
 <template name="Publishers">
     <div class="page-container container">
-     <div class="row">
-       <h2>Publishers</h2>
-   </div>
-   Scitation provides researchers, students, and educators with access to current, cutting edge research plus a deep archive of seminal physics content that supports the study and advancement of physics and related disciplines including physics, chemistry, geosciences, engineering, and acoustics.
+       <div class="row">
+         <h2>Publishers</h2>
+     </div>
+     Scitation provides researchers, students, and educators with access to current, cutting edge research plus a deep archive of seminal physics content that supports the study and advancement of physics and related disciplines including physics, chemistry, geosciences, engineering, and acoustics.
 
-   Including journals, conference proceedings, and magazines, Scitation hosts nearly one million articles published by AIP Publishing and AIP Member Societies
-   <div class="row">
-    {{> PublisherList}}
+     Including journals, conference proceedings, and magazines, Scitation hosts nearly one million articles published by AIP Publishing and AIP Member Societies
+     <div class="row">
+            Alphabet sort here?
+    </div>
+     <div class="row">
+        <div id="menu" class="col-sm-3 col-md-2">
+            <h2>
+            </h2>
+            Filter Here?
+        </div>
+        <div id="subcontent" class="col-sm-9 col-md-10">
+            {{> PublisherList}}
+        </div>
+    </div>
 </div>
-</div>
+
 </template>
+
 
 
 <template name="PublisherList">
@@ -23,9 +35,9 @@
 
 <template name="SinglePublisher">
     <div class="row">
-     <h3>{{name}}</h3>
- </div>
- <div class="row">
-     {{description}}
- </div>
+       <h3>{{name}}</h3>
+   </div>
+   <div class="row">
+       {{description}}
+   </div>
 </template>
