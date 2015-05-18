@@ -11,11 +11,11 @@ var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.detail
 var zonelessRoutes = ["topics", "publishers", "publications"];
 
 var roleMap = [
-{ route: "admin",	roles: ["admin"] },
-{ route: "admin.users",	roles: ["admin"] },
-{ route: "admin.users.details",	roles: ["admin"] },
+{ route: "admin",	roles: ["admin","orgadmin"] },
+{ route: "admin.users",	roles: ["admin","orgadmin"] },
+{ route: "admin.users.details",	roles: ["admin","orgadmin"] },
 { route: "admin.users.insert",	roles: ["admin"] },
-{ route: "admin.users.edit",	roles: ["admin"] },
+{ route: "admin.users.edit",	roles: ["admin","orgadmin"] },
 { route: "user_settings",	roles: ["user","admin"] },
 { route: "user_settings.profile",	roles: ["user","admin"] },
 { route: "user_settings.change_pass",	roles: ["user","admin"] }
@@ -138,6 +138,7 @@ Router.map(function () {
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
 	this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
 	this.route("admin", {path: "/admin", controller: "AdminController"});
+	this.route("admin.publishers", {path: "/admin/publishers", controller: "AdminPublishersController"});
 	this.route("admin.users", {path: "/admin/users", controller: "AdminUsersController"});
 	this.route("admin.users.details", {path: "/admin/users/details/:userId", controller: "AdminUsersDetailsController"});
 	this.route("admin.users.insert", {path: "/admin/users/insert", controller: "AdminUsersInsertController"});
