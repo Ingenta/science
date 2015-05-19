@@ -5,8 +5,6 @@ Meteor.startup(function() {
 			process.env[variableName] = Meteor.settings.env[variableName];
 		}
 	}
-
-
 });
 
 Meteor.methods({

@@ -1,5 +1,28 @@
 <template name="Publications">
     <div class="page-container container">
-        Test this for jinglong
+
+        {{#if currentUser}}
+        <div class="row">
+            Hello {{currentUser.profile.name}}
+            You have the following roles: {{currentUser.roles}}
+        </div>
+        {{#if isAdmin }}
+        <div class="row">
+            You are an Admin
+        </div>
+        {{/if}}
+        {{#if isUserInRole "editor,publisher" }}
+        <div class="row">
+            You are an editor
+        </div>
+        {{/if}}
+
+        {{#if isUserInRole "publisher" }}
+        <div class="row">
+            You are an publisher
+        </div>
+        {{/if}}
+        {{/if}}
     </div>
+
 </template>

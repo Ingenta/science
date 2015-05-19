@@ -82,6 +82,12 @@
 					</div>
 					<div class="radio">
 						<label>
+							<input type="checkbox" value="publisher" name="roles" data-type="array" {{itemIsChecked admin_user.roles "publisher"}}>
+							Publisher
+						</label>
+					</div>
+					<div class="radio">
+						<label>
 							<input type="checkbox" value="blocked" name="roles" data-type="array" {{itemIsChecked admin_user.roles "blocked"}}>
 							Blocked
 						</label>
