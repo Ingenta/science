@@ -4,7 +4,13 @@
          <h2>Add New Publisher</h2>
      </div>
      <div class="row">
-    Form goes here
+     {{> flashMessages}}
+    {{> insertPublisher}}
      </div>
+
  </div>
+</template>
+
+<template name="insertPublisher">
+  {{> quickForm collection="Publishers" id="insertPublisherForm" type="insert"}}
 </template>

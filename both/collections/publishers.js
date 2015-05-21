@@ -2,13 +2,11 @@ this.Publishers = new Meteor.Collection("publishers");
 this.Publishers.attachSchema(new SimpleSchema({
     name: {
         type: String,
-        label: "Name",
-        max: 10
+        min: 10
     },
     description: {
         type: String,
-        label: "Name",
-        max: 10
+        min: 10
     }
 }
 ));
