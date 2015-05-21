@@ -1,16 +1,15 @@
 <template name="PublishersInsert">
   <div class="page-container container">
-       <div class="row">
-         <h2>Add New Publisher</h2>
-     </div>
      <div class="row">
-     {{> flashMessages}}
-    {{> insertPublisher}}
-     </div>
+       <h2>Add New Publisher</h2>
+   </div>
+   <div class="row">
+       {{> flashMessages}}
+       <!-- {{> insertPublisher}} -->
 
- </div>
+   </div>
+
+</div>
 </template>
 
-<template name="insertPublisher">
-  {{> quickForm collection="Publishers" id="insertPublisherForm" type="insert"}}
-</template>
+

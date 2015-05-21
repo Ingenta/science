@@ -6,9 +6,9 @@
 </head>
 <template name="layout">
 	{{#if currentUser}}
-		{{> PrivateLayout}}
+	{{> PrivateLayout}}
 	{{else}}
-		{{> PublicLayout}}
+	{{> PublicLayout}}
 	{{/if}}
 </template>
 
@@ -40,6 +40,7 @@
 		<div class="navbar-spacer">
 		</div>
 		{{> yield}}
+
 	</div>
 	<div id="footer">
 		<div class="footer-container container">
@@ -50,7 +51,7 @@
 	</div>
 </template>
 <template name="LeftMenu">
-<ul id="menu-items" class="nav navbar-nav">
+	<ul id="menu-items" class="nav navbar-nav">
 		<li id="menu-item-simple" class="{{menuItemClass 'publishers'}}">
 			<a href="{{pathFor 'publishers'}}">
 				{{_ "Nav.Publishers"}}

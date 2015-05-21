@@ -1,20 +1,22 @@
 <template name="Publishers">
     <div class="page-container container">
-       <div class="row">
-         <h2>Publishers
-            {{#if isAdmin }}
-            - <a href="/publishers/insert">Add New</a>
-            {{/if}}
-        </h2>
-    </div>
-    <div class="row">
-     Introductory text
- </div>
- <div class="row">
+     <div class="row">
+       <h2>Publishers
+        {{#if isAdmin }}
+         {{> modalForm}}
+        {{/if}}
+
+    </h2>
+</div>
+<div class="row">
+   Introductory text
+</div>
+<div class="row">
     {{> PublisherList}}
 </div>
 </div>
 
+       {{> autoformModals}}
 </template>
 
 
@@ -32,6 +34,12 @@
         <h3><a href="/publishers/{{urlname}}">{{name}}</a></h3>
     </div>
     <div class="row">
-       {{description}}
-   </div>
+     {{description}}
+ </div>
+</template>
+<template name="modalForm">
+    {{#afModal class="btn btn-primary" collection="Publishers"  operation="insert"}}
+    Add a new publisher
+    {{/afModal}}
+
 </template>
