@@ -35,6 +35,7 @@
         <h3><a href="/publishers/{{urlname}}">{{name}}</a>
             {{#if isAdmin }}
             {{> updateModalForm}}
+            {{> deleteModalForm}}
             {{/if}}
         </h3>
     </div>
@@ -51,4 +52,8 @@
 <template name="updateModalForm">
     {{#afModal class="fa fa-pencil" title="Update" collection="Publishers" doc=_id operation="update"}}
     {{/afModal}}
+</template>
+<template name="deleteModalForm">
+{{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id}}
+{{/afModal}}
 </template>

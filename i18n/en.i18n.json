@@ -27,5 +27,21 @@
     },
     "AdminPage":{
         "Users": "Users"
+    },
+    "schemas": {
+    "publishers": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter a title for your post"
+      },
+      "urlname": {
+        "label": "Url Name",
+        "placeholder": "Enter a url for the publisher"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter a description"
+      }
     }
+  }
 }
