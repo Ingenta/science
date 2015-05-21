@@ -1,6 +1,6 @@
 Template.layout.rendered = function() {
 	// scroll to anchor
-	$('body').on('click', 'a', function(e) { 
+	$('body').on('click', 'a', function(e) {
 		var href = $(this).attr("href");
 		if(!href) {
 			return;
@@ -21,7 +21,7 @@ Template.layout.rendered = function() {
 				$('html,body').scrollTop(0);
 			}
 		}
-	}); 
+	});
 	/*TEMPLATE_RENDERED_CODE*/
 };
 
@@ -38,15 +38,15 @@ Template.PublicLayoutLeftMenu.rendered = function() {
 		});
 	});
 
-	
+
 };
 
 Template.PublicLayoutLeftMenu.events({
-	
+
 });
 
 Template.PublicLayoutLeftMenu.helpers({
-	
+
 });
 
 Template.PublicLayoutRightMenu.rendered = function() {
@@ -61,15 +61,15 @@ Template.PublicLayoutRightMenu.rendered = function() {
 		});
 	});
 
-	
+
 };
 
 Template.PublicLayoutRightMenu.events({
-	
+
 });
 
 Template.PublicLayoutRightMenu.helpers({
-	
+
 });
 
 
@@ -85,15 +85,15 @@ Template.PrivateLayoutLeftMenu.rendered = function() {
 		});
 	});
 
-	
+
 };
 
 Template.PrivateLayoutLeftMenu.events({
-	
+
 });
 
 Template.PrivateLayoutLeftMenu.helpers({
-	
+
 });
 
 Template.PrivateLayoutRightMenu.rendered = function() {
@@ -108,13 +108,13 @@ Template.PrivateLayoutRightMenu.rendered = function() {
 		});
 	});
 
-	
+
 };
 
 Template.PrivateLayoutRightMenu.events({
-	
+
 });
 
 Template.PrivateLayoutRightMenu.helpers({
-	
+
 });
