@@ -41,9 +41,9 @@
             You are an Admin
         </div>
         {{/if}}
-        {{#if isUserInRole "editor,publisher" }}
+        {{#if isUserInRoles "editor" "publisher" }}
         <div class="row">
-            You are an editor
+            You are an editor or publisher
         </div>
         {{/if}}
 

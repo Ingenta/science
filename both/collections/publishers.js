@@ -4,6 +4,10 @@ this.Publishers.attachSchema(new SimpleSchema({
         type: String,
         unique: true
     },
+    urlname: {
+        type: String,
+        unique: true
+    },
     description: {
         type: String,
         min: 5

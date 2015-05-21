@@ -134,8 +134,8 @@ Router.map(function () {
 	this.route("topics");
 	this.route("publishers");
 	this.route("publishers/insert");
-	this.route('/publishers/:name', function () {
-					  var item = Publishers.findOne({name: this.params.name});
+	this.route('/publishers/:urlname', function () {
+					  var item = Publishers.findOne({urlname: this.params.urlname});
 					  this.render('ShowPublisher', {data: item});
 					});
 
