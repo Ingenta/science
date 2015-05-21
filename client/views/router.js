@@ -134,6 +134,11 @@ Router.map(function () {
 	this.route("topics");
 	this.route("publishers");
 	this.route("publishers/insert");
+	this.route('/publishers/:name', function () {
+					  var item = Publishers.findOne({name: this.params.name});
+					  this.render('ShowPublisher', {data: item});
+					});
+
 	this.route("publications");
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});

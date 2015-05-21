@@ -1,5 +1,35 @@
 <template name="Publications">
     <div class="page-container container">
+     <div class="row">
+       <h2>Publications
+        {{#if isAdmin }}
+        - <a href="/publications/insert">Add New</a>
+        {{/if}}
+    </h2>
+</div>
+<div class="row">
+   Introductory text
+
+</div>
+<div class="row pull-right">
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+</div>
+<div class="row">
+    <div id="menu" class="col-sm-3 col-md-2">
+        <h2>
+            Filter
+        </h2>
+        Filter Here?
+    </div>
+    <div id="subcontent" class="col-sm-9 col-md-10">
+        {{> permissionsexample}}
+    </div>
+</div>
+</div>
+
+</template>
+<template name="permissionsexample">
+    <div class="page-container container">
 
         {{#if currentUser}}
         <div class="row">
@@ -19,9 +49,10 @@
 
         {{#if isUserInRole "publisher" }}
         <div class="row">
-            You are an publisher
+            You are a publisher
         </div>
         {{/if}}
+
         {{/if}}
     </div>
 
