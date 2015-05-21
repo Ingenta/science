@@ -133,12 +133,14 @@ Router.map(function () {
 	this.route("register", {path: "/register", controller: "RegisterController"});
 	this.route("topics");
 	this.route("publishers");
+	this.route("publishers/insert");
 	this.route("publications");
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
 	this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
 	this.route("admin", {path: "/admin", controller: "AdminController"});
-	this.route("admin.publishers", {path: "/admin/publishers", controller: "AdminPublishersController"});
+	this.route("admin.roles", {path: "/admin/roles", controller: "AdminRolesController"});
+	this.route("admin.roles.insert", {path: "/admin/roles/insert", controller: "AdminRolesInsertController"});
 	this.route("admin.users", {path: "/admin/users", controller: "AdminUsersController"});
 	this.route("admin.users.details", {path: "/admin/users/details/:userId", controller: "AdminUsersDetailsController"});
 	this.route("admin.users.insert", {path: "/admin/users/insert", controller: "AdminUsersInsertController"});

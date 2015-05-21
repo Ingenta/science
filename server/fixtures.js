@@ -7,4 +7,11 @@
         });
       };
     }
+    if (Roles.find().count() === 0) {
+      for (var i = 0; i <= 10; i++) {
+        Roles.insert({
+          name: Fake.word()
+        });
+      };
+    }
   });

@@ -1,9 +1,9 @@
-this.AdminPublishersController = RouteController.extend({
+this.AdminRolesInsertController = RouteController.extend({
 	template: "Admin",
 
 
 	yieldTemplates: {
-		'AdminPublishers': { to: 'AdminSubcontent'}
+		'AdminRolesInsert': { to: 'AdminSubcontent'}
 
 	},
 
@@ -21,7 +21,6 @@ this.AdminPublishersController = RouteController.extend({
 
 
 		var subs = [
-			Meteor.subscribe("admin_users")
 		];
 		var ready = true;
 		_.each(subs, function(sub) {
@@ -36,7 +35,7 @@ this.AdminPublishersController = RouteController.extend({
 
 		return {
 			params: this.params || {},
-			admin_users: Users.find({}, {})
+			users_null: Roles.findOne({_id:null}, {})
 		};
 		/*DATA_FUNCTION*/
 	},

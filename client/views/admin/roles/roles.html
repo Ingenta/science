@@ -1,4 +1,4 @@
-<template name="AdminPublishers">
+<template name="AdminRoles">
     <div class="page-container container" id="content">
         <div class="row" id="title_row">
             <div class="col-md-12">
@@ -6,15 +6,15 @@
                 </div>
             </div>
         </div>
-        {{> AdminPublishersView}}
+        {{> AdminRolesView}}
     </div>
 </template>
 
 
-<template name="AdminPublishersView">
+<template name="AdminRolesView">
     <div id="data_view" class="">
         <h2 id="component-title">
-            {{_ "AdminPage.Publishers"}}
+            {{_ "AdminPage.Roles"}}
         </h2>
         <form id="dataview-controls" class="form-inline">
             <div id="dataview-controls-insert" class="form-group ">
@@ -51,7 +51,7 @@
         {{/if}}
         {{else}}
         <div class="alert alert-info">
-            No publishers yet
+            No roles yet
         </div>
         {{/if}}
     </div>
