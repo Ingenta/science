@@ -133,7 +133,6 @@ Router.map(function () {
 	this.route("register", {path: "/register", controller: "RegisterController"});
 	this.route("topics");
 	this.route("publishers");
-	this.route("publishers/insert");
 	this.route('/publishers/:urlname', function () {
 					  var item = Publishers.findOne({urlname: this.params.urlname});
 					  this.render('ShowPublisher', {data: item});
