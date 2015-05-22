@@ -4,15 +4,8 @@
 		SCP-prototype
 	</title>
 </head>
-<template name="layout">
-	{{#if currentUser}}
-	{{> PrivateLayout}}
-	{{else}}
-	{{> PublicLayout}}
-	{{/if}}
-</template>
 
-<template name="PublicLayout">
+<template name="layout">
 	<div id="wrap">
 		<div class="navbar navbar-fixed-top navbar-default" role="navigation">
 			<div class="navbar-container container">
@@ -33,15 +26,33 @@
 					</a>
 				</div>
 				<div id="menu" class="collapse navbar-collapse">
-					{{> PublicLayoutLeftMenu}}{{> PublicLayoutRightMenu}}
+					{{> LeftMenu}}
+					{{#if currentUser}}
+					{{> PrivateLayoutRightMenu}}
+					{{else}}
+					{{> PublicLayoutRightMenu}}
+					{{/if}}
 				</div>
 			</div>
 		</div>
 		<div class="navbar-spacer">
 		</div>
-		{{> flashMessages}}
-		{{> yield}}
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+					<div id="content">
+						{{> flashMessages}}
+						{{> yield}}
 
+					</div>
+				</div>
+				<div class="col-sm-3 col-sm-offset-1">
+					<div class="sidebar-module">
+						{{> LayoutSideBar}}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="footer">
 		<div class="footer-container container">
@@ -50,6 +61,13 @@
 			</p>
 		</div>
 	</div>
+</template>
+<template name="LayoutSideBar">
+	<br/>
+	<ul class="list-unstyled">
+		<li><a href="#">{{_ "ScholarOne"}}</a></li>
+		<li><a href="#">{{_ "ChineseScholarOne"}}</a></li>
+	</ul>
 </template>
 <template name="LeftMenu">
 	<ul id="menu-items" class="nav navbar-nav">
@@ -80,9 +98,6 @@
 		</li>
 	</ul>
 </template>
-<template name="PublicLayoutLeftMenu">
-	{{> LeftMenu}}
-</template>
 
 <template name="PublicLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
@@ -100,50 +115,6 @@
 			</a>
 		</li>
 	</ul>
-</template>
-
-<template name="PrivateLayout">
-	<div id="wrap">
-		<div class="navbar navbar-fixed-top navbar-default" role="navigation">
-			<div class="navbar-container container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">
-							Toggle navigation
-						</span>
-						<span class="icon-bar">
-						</span>
-						<span class="icon-bar">
-						</span>
-						<span class="icon-bar">
-						</span>
-					</button>
-					<a class="navbar-brand" href="#">
-						SCP-prototype
-					</a>
-				</div>
-				<div id="menu" class="collapse navbar-collapse">
-					{{> PrivateLayoutLeftMenu}}{{> PrivateLayoutRightMenu}}
-				</div>
-			</div>
-		</div>
-		<div class="navbar-spacer">
-
-		</div>
-		{{> flashMessages}}
-		{{> yield}}
-	</div>
-	<div id="footer">
-		<div class="footer-container container">
-			<p class="text-muted">
-				Prototype by Jack
-			</p>
-		</div>
-	</div>
-</template>
-
-<template name="PrivateLayoutLeftMenu">
-	{{> LeftMenu}}
 </template>
 
 <template name="PrivateLayoutRightMenu">
