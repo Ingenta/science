@@ -13,15 +13,15 @@
 <template name="UserSettingsProfileEditForm">
 	<div class="">
 		<h2 id="component-title">
-			Edit your profile
+			{{_ "Edit your profile"}}
 		</h2>
 		<form id="form" role="form">
 			{{#if errorMessage}}
 			<div class="alert alert-warning">
 				{{errorMessage}}
 			</div>
-			{{/if}}				
-				
+			{{/if}}
+
 			{{#if infoMessage}}
 			<div class="alert alert-success">
 				{{infoMessage}}
@@ -29,7 +29,7 @@
 			{{/if}}
 			<div class="form-group  field-profile-name">
 				<label for="profile.name">
-					Name
+					{{_ "Name"}}
 				</label>
 				<div class="input-div">
 					<input type="text" name="profile.name" value="{{current_user_data.profile.name}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
@@ -41,58 +41,10 @@
 			</div>
 			<div class="form-group  field-profile-email">
 				<label for="profile.email">
-					E-mail
+					{{_ "E-mail"}}
 				</label>
 				<div class="input-div">
 					<input type="text" name="profile.email" value="{{current_user_data.profile.email}}" class="form-control" required="required" data-type="email">
-					<span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-				</div>
-			</div>
-			<div class="form-group  field-profile-facebook">
-				<label for="profile.facebook">
-					Facebook URL
-				</label>
-				<div class="input-div">
-					<input type="text" name="profile.facebook" value="{{current_user_data.profile.facebook}}" class="form-control" data-type="string">
-					<span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-				</div>
-			</div>
-			<div class="form-group  field-profile-google">
-				<label for="profile.google">
-					Google+ URL
-				</label>
-				<div class="input-div">
-					<input type="text" name="profile.google" value="{{current_user_data.profile.google}}" class="form-control" data-type="string">
-					<span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-				</div>
-			</div>
-			<div class="form-group  field-profile-twitter">
-				<label for="profile.twitter">
-					Twitter ID
-				</label>
-				<div class="input-div">
-					<input type="text" name="profile.twitter" value="{{current_user_data.profile.twitter}}" class="form-control" data-type="string">
-					<span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-				</div>
-			</div>
-			<div class="form-group  field-profile-website">
-				<label for="profile.website">
-					Website URL
-				</label>
-				<div class="input-div">
-					<input type="text" name="profile.website" value="{{current_user_data.profile.website}}" class="form-control" data-type="string">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
