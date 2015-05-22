@@ -20,6 +20,8 @@
         "Login": "登绿",
         "Log Out": "注销",
         "Settings": "设置",
+        "Users": "用户",
+        "Add new": "管理员",
         "LoginPage": {
             "PleaseSignIn": "登绿",
             "SignIn": "登绿",
@@ -32,8 +34,5 @@
                 "SignUp": "注册",
                 "AlreadyAMember": "注册过了吗?",
                 "SignInHere": "登绿"
-                },
-                "AdminPage":{
-                    "Users": "用户"
-                }
             }
+        }
