@@ -18,8 +18,8 @@
         "Reader Centre": "作者中心",
         "Register": "注册",
         "Login": "登绿",
-        "Logout": "Log Out",
-        "Settings": "Settings",
+        "Log Out": "注销",
+        "Settings": "设置",
         "LoginPage": {
             "PleaseSignIn": "登绿",
             "SignIn": "登绿",
