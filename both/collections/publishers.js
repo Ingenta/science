@@ -1,6 +1,6 @@
 this.Publishers = new Meteor.Collection("publishers");
 
-PublishersSchema = new SimpleSchema({
+Schema  = new SimpleSchema({
     name: {
         type: String,
         unique: true
@@ -11,10 +11,16 @@ PublishersSchema = new SimpleSchema({
     },
     description: {
         type: String,
-        min: 5
+        min: 5,
+        autoform: {
+            rows: 3
+        }
     }
 });
-Publishers.attachSchema(PublishersSchema);
+Meteor.startup(function() {
+    Schema .i18n("schemas.publishers");
+    Publishers.attachSchema(Schema );
+});
 this.Publishers.userCanInsert = function(userId, doc) {
     return true;
 }

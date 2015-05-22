@@ -1,47 +1,28 @@
 {
-    "PleaseWait": "Please wait...",
-    "Email": "E-mail",
-    "Nav": {
-        "Publishers": "Publishers",
-        "Publications": "Publications",
-        "Topics": "Topics",
-        "Collections": "Collections",
-        "Reader Centre": "Reader Centre",
-        "Register": "Register",
-        "Login": "Login",
-        "Logout": "Log Out",
-        "Settings": "Settings"
-    },
-    "LoginPage": {
-        "PleaseSignIn": "Please sign in",
-        "SignIn": "Sign in",
-        "NotAMember": "Not a member?",
-        "ForgotPassword": "Forgot password?",
-        "SignUpHere": "Sign up here"
-    },
-    "RegisterPage":{
-        "PleaseSignUp": "Please sign up",
-        "SignUp": "Sign up",
-        "AlreadyAMember": "Already a member?",
-        "SignInHere": "Sign in here"
-    },
-    "AdminPage":{
-        "Users": "Users"
-    },
     "schemas": {
-    "publishers": {
-      "name": {
-        "label": "Name",
-        "placeholder": "Enter a title for your post"
-      },
-      "urlname": {
-        "label": "Url Name",
-        "placeholder": "Enter a url for the publisher"
-      },
-      "description": {
-        "label": "Description",
-        "placeholder": "Enter a description"
-      }
-    }
-  }
-}
+        "publishers":{
+            "name" : {
+                "label": "Publisher Name"
+            }
+        }
+        },
+        "PleaseWait": "Please wait...",
+        "Email": "E-mail",
+        "LoginPage": {
+            "PleaseSignIn": "Please sign in",
+            "SignIn": "Sign in",
+            "NotAMember": "Not a member?",
+            "ForgotPassword": "Forgot password?",
+            "SignUpHere": "Sign up here"
+            },
+            "RegisterPage":{
+                "PleaseSignUp": "Please sign up",
+                "SignUp": "Sign up",
+                "AlreadyAMember": "Already a member?",
+                "SignInHere": "Sign in here"
+                },
+                "AdminPage":{
+                    "Users": "Users"
+                }
+            }
+

@@ -1,10 +1,16 @@
 {
-    "Click Here": "点击",
-    "PleaseWait": "等一点...",
-    "Search": "搜索",
-    "Name" : "名字",
-    "Email" : "邮件地址",
-    "Nav": {
+    "schemas": {
+        "publishers":{
+            "name" : {
+                "label": "名字"
+            }
+        }
+        },
+        "Click Here": "点击",
+        "PleaseWait": "等一点...",
+        "Search": "搜索",
+        "Name" : "名字",
+        "Email" : "邮件地址",
         "Publishers": "出版时",
         "Publications": "出版物",
         "Topics": "主题",
@@ -13,22 +19,21 @@
         "Register": "注册",
         "Login": "登绿",
         "Logout": "Log Out",
-        "Settings": "Settings"
-    },
-    "LoginPage": {
-        "PleaseSignIn": "登绿",
-        "SignIn": "登绿",
-        "NotAMember": "没有用户?",
-        "ForgotPassword": "忘记密码?",
-        "SignUpHere": "注册"
-    },
-    "RegisterPage":{
-        "PleaseSignUp": "新用户注册",
-        "SignUp": "注册",
-        "AlreadyAMember": "注册过了吗?",
-        "SignInHere": "登绿"
-    },
-    "AdminPage":{
-        "Users": "用户"
-    }
-}
+        "Settings": "Settings",
+        "LoginPage": {
+            "PleaseSignIn": "登绿",
+            "SignIn": "登绿",
+            "NotAMember": "没有用户?",
+            "ForgotPassword": "忘记密码?",
+            "SignUpHere": "注册"
+            },
+            "RegisterPage":{
+                "PleaseSignUp": "新用户注册",
+                "SignUp": "注册",
+                "AlreadyAMember": "注册过了吗?",
+                "SignInHere": "登绿"
+                },
+                "AdminPage":{
+                    "Users": "用户"
+                }
+            }
