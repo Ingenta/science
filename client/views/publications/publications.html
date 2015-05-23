@@ -1,27 +1,26 @@
 <template name="Publications">
     <div class="page-container container">
+       <div class="row">
+         <h2>{{_ "Publications"}}
+         </h2>
+     </div>
      <div class="row">
-       <h2>{{_ "Publications"}}
-    </h2>
-</div>
-<div class="row">
-   Introductory text
-
-</div>
-<div class="row pull-right">
-    ABCDEFGHIJKLMNOPQRSTUVWXYZ
-</div>
-<div class="row">
-    <div id="menu" class="col-sm-3 col-md-2">
-        <h2>
-            Filter
-        </h2>
-        Filter Here?
+        <p>Introductory text</p>
     </div>
-    <div id="subcontent" class="col-sm-9 col-md-10">
-        {{> permissionsexample}}
+    <div class="row pull-right">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ
     </div>
-</div>
+    <div class="row">
+        <div id="menu" class="col-sm-3 col-md-2">
+            <h2>
+                Filter
+            </h2>
+            Filter Here?
+        </div>
+        <div id="subcontent" class="col-sm-9 col-md-10">
+            {{> permissionsexample}}
+        </div>
+    </div>
 </div>
 
 </template>

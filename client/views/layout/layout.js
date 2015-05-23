@@ -26,7 +26,7 @@ Template.layout.rendered = function() {
 };
 
 
-Template.PublicLayoutLeftMenu.rendered = function() {
+Template.LeftMenu.rendered = function() {
 	$(".menu-item-collapse .dropdown-toggle").each(function() {
 		if($(this).find("li.active")) {
 			$(this).removeClass("collapsed");
@@ -41,11 +41,11 @@ Template.PublicLayoutLeftMenu.rendered = function() {
 
 };
 
-Template.PublicLayoutLeftMenu.events({
+Template.LeftMenu.events({
 
 });
 
-Template.PublicLayoutLeftMenu.helpers({
+Template.LeftMenu.helpers({
 
 });
 
@@ -69,30 +69,6 @@ Template.PublicLayoutRightMenu.events({
 });
 
 Template.PublicLayoutRightMenu.helpers({
-
-});
-
-
-Template.PrivateLayoutLeftMenu.rendered = function() {
-	$(".menu-item-collapse .dropdown-toggle").each(function() {
-		if($(this).find("li.active")) {
-			$(this).removeClass("collapsed");
-		}
-		$(this).parent().find(".collapse").each(function() {
-			if($(this).find("li.active").length) {
-				$(this).addClass("in");
-			}
-		});
-	});
-
-
-};
-
-Template.PrivateLayoutLeftMenu.events({
-
-});
-
-Template.PrivateLayoutLeftMenu.helpers({
 
 });
 

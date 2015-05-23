@@ -1,4 +1,6 @@
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
 		SCP-prototype
@@ -7,40 +9,12 @@
 
 <template name="layout">
 	<div id="wrap">
-		<div class="navbar navbar-fixed-top navbar-default" role="navigation">
-			<div class="navbar-container container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">
-							Toggle navigation
-						</span>
-						<span class="icon-bar">
-						</span>
-						<span class="icon-bar">
-						</span>
-						<span class="icon-bar">
-						</span>
-					</button>
-					<a class="navbar-brand" href="#">
-						SCP-prototype
-					</a>
-				</div>
-				<div id="menu" class="collapse navbar-collapse">
-					{{> LeftMenu}}
-					{{#if currentUser}}
-					{{> PrivateLayoutRightMenu}}
-					{{else}}
-					{{> PublicLayoutRightMenu}}
-					{{/if}}
-				</div>
-			</div>
-		</div>
+		{{> navigation}}
 		<div class="navbar-spacer">
 		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-8">
-
+				<div class="col-md-9 col-xs-9">
 					{{> breadcrumb}}
 					<div id="content">
 						{{> flashMessages}}
@@ -48,7 +22,7 @@
 
 					</div>
 				</div>
-				<div class="col-sm-3 col-sm-offset-1">
+				<div class="col-md-2 col-md-offset-1">
 					<div class="sidebar-module">
 						{{> LayoutSideBar}}
 					</div>
@@ -64,6 +38,33 @@
 		</div>
 	</div>
 </template>
+
+<template name="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">
+					SCP
+				</a>
+			</div>
+			<div id="menu" class="collapse navbar-collapse">
+				{{> LeftMenu}}
+				{{#if currentUser}}
+				{{> PrivateLayoutRightMenu}}
+				{{else}}
+				{{> PublicLayoutRightMenu}}
+				{{/if}}
+			</div>
+		</div>
+	</nav>
+</template>
+
 <template name="LayoutSideBar">
 	<br/>
 	<ul class="list-unstyled">
@@ -104,7 +105,6 @@
 
 <template name="PublicLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
-
 		<li id="menu-item-simple" class="{{menuItemClass 'register'}}">
 			<a href="{{pathFor 'register'}}">
 				{{_ "Register"}}
@@ -120,11 +120,6 @@
 
 <template name="PrivateLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
-		<li id="menu-item-simple" class="{{menuItemClass 'admin'}}">
-			<a href="{{pathFor 'admin'}}">
-				{{_ "Admin"}}
-			</a>
-		</li>
 		<li id="menu-item-dropdown" class="dropdown ">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				{{userEmail}}
@@ -132,6 +127,13 @@
 				</b>
 			</a>
 			<ul id="menu-items" class="dropdown-menu">
+				{{#if isAdmin}}
+				<li class="{{menuItemClass 'admin'}}">
+					<a href="{{pathFor 'admin'}}">
+						{{_ "Admin"}}
+					</a>
+				</li>
+				{{/if}}
 				<li class="{{menuItemClass 'user_settings'}}">
 					<a href="{{pathFor 'user_settings'}}">
 						{{_ "Settings"}}
