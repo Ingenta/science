@@ -157,7 +157,9 @@ Router.map(function () {
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
-		title: ":urlname" //TODO fix title bug
+		title: function(){
+			return ":urlname";
+		},//TODO fix title bug
 	});
 
 	this.route("publications");

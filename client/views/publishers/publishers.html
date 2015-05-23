@@ -32,7 +32,7 @@
 
 <template name="SinglePublisher">
     <div class="row">
-        <h3><a href="/publishers/{{urlname}}">{{name}}</a>
+        <h3><a class="text" href="/publishers/{{urlname}}">{{name}}</a>
             {{#if isAdmin }}
             {{> updatePublisherModalForm}}
             {{> deletePublisherModalForm}}

@@ -9,6 +9,12 @@ PublishersSchema  = new SimpleSchema({
         type: String,
         unique: true
     },
+    website: {
+        type: String,
+        unique: true,
+        optional: true,
+        regEx: SimpleSchema.RegEx.Url
+    },
     description: {
         type: String,
         min: 7,
@@ -21,14 +27,3 @@ Meteor.startup(function() {
     PublishersSchema.i18n("schemas.publishers");
     Publishers.attachSchema(PublishersSchema);
 });
-// this.Publishers.userCanInsert = function(userId, doc) {
-//     return true;
-// }
-
-// this.Publishers.userCanUpdate = function(userId, doc) {
-//     return true;
-// }
-
-// this.Publishers.userCanRemove = function(userId, doc) {
-//     return true;
-// }
