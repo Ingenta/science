@@ -2,39 +2,44 @@
     "schemas": {
         "publishers":{
             "name" : {
-                "label": "名字"
+                "label": "出版时名字"
             }
-        }
-        },
-        "Page not found": "找不到网页",
-        "Click Here": "点击",
-        "PleaseWait": "等一点...",
-        "Search": "搜索",
-        "Name" : "名字",
-        "E-mail" : "邮件地址",
-        "Publishers": "出版时",
-        "Publications": "出版物",
-        "Topics": "主题",
-        "Collections": "虚拟产品包",
-        "Reader Centre": "作者中心",
-        "Register": "注册",
-        "Login": "登绿",
-        "Log Out": "注销",
-        "Settings": "设置",
-        "Users": "用户",
-        "Add new": "加薪",
-        "Admin": "管理员",
-        "LoginPage": {
-            "PleaseSignIn": "登绿",
-            "SignIn": "登绿",
-            "NotAMember": "没有用户?",
-            "ForgotPassword": "忘记密码?",
-            "SignUpHere": "注册"
             },
-            "RegisterPage":{
-                "PleaseSignUp": "新用户注册",
-                "SignUp": "注册",
-                "AlreadyAMember": "注册过了吗?",
-                "SignInHere": "登绿"
+            "publications":{
+                "title" : {
+                    "label": "出版物名字"
+                }
             }
-        }
+            },
+            "Page not found": "找不到网页",
+            "Click Here": "点击",
+            "PleaseWait": "等一点...",
+            "Search": "搜索",
+            "Name" : "名字",
+            "E-mail" : "邮件地址",
+            "Publishers": "出版时",
+            "Publications": "出版物",
+            "Topics": "主题",
+            "Collections": "虚拟产品包",
+            "Reader Centre": "作者中心",
+            "Register": "注册",
+            "Login": "登绿",
+            "Log Out": "注销",
+            "Settings": "设置",
+            "Users": "用户",
+            "Add new": "加薪",
+            "Admin": "管理员",
+            "LoginPage": {
+                "PleaseSignIn": "登绿",
+                "SignIn": "登绿",
+                "NotAMember": "没有用户?",
+                "ForgotPassword": "忘记密码?",
+                "SignUpHere": "注册"
+                },
+                "RegisterPage":{
+                    "PleaseSignUp": "新用户注册",
+                    "SignUp": "注册",
+                    "AlreadyAMember": "注册过了吗?",
+                    "SignInHere": "登绿"
+                }
+            }

@@ -9,7 +9,7 @@
      </div>
      <div class="row">
       {{#if isAdmin }}
-      {{> modalForm}}
+      {{> addPublisherModalForm}}
       {{/if}}
   </div>
   <div class="row">
@@ -34,8 +34,8 @@
     <div class="row">
         <h3><a href="/publishers/{{urlname}}">{{name}}</a>
             {{#if isAdmin }}
-            {{> updateModalForm}}
-            {{> deleteModalForm}}
+            {{> updatePublisherModalForm}}
+            {{> deletePublisherModalForm}}
             {{/if}}
         </h3>
     </div>
@@ -43,17 +43,16 @@
         {{description}}
     </div>
 </template>
-<template name="modalForm">
+<template name="addPublisherModalForm">
     {{#afModal class="fa fa-plus btn btn-success" collection="Publishers"  operation="insert"}}
     {{_ "Add new"}}
     {{/afModal}}
-
 </template>
-<template name="updateModalForm">
+<template name="updatePublisherModalForm">
     {{#afModal class="fa fa-pencil" title="Update" collection="Publishers" doc=_id operation="update"}}
     {{/afModal}}
 </template>
-<template name="deleteModalForm">
+<template name="deletePublisherModalForm">
     {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id}}
     {{/afModal}}
 </template>

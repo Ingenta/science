@@ -1,10 +1,7 @@
 Template.PublisherList.helpers({
     publishers: function () {
       return Publishers.find();
-    },
-    selectedPublisherDoc: function () {
-    return Publishers.findOne();
-  }
+    }
   });
 
 Template.Publishers.rendered = function() {

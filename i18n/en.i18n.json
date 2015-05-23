@@ -4,21 +4,26 @@
             "name" : {
                 "label": "Publisher Name"
             }
-        }
-        },
-        "PleaseWait": "Please wait...",
-        "LoginPage": {
-            "PleaseSignIn": "Please sign in",
-            "SignIn": "Sign in",
-            "NotAMember": "Not a member?",
-            "ForgotPassword": "Forgot password?",
-            "SignUpHere": "Sign up here"
             },
-            "RegisterPage":{
-                "PleaseSignUp": "Please sign up",
-                "SignUp": "Sign up",
-                "AlreadyAMember": "Already a member?",
-                "SignInHere": "Sign in here"
+            "publications":{
+                "title" : {
+                    "label": "Publication Name"
+                }
+            }
+            },
+            "PleaseWait": "Please wait...",
+            "LoginPage": {
+                "PleaseSignIn": "Please sign in",
+                "SignIn": "Sign in",
+                "NotAMember": "Not a member?",
+                "ForgotPassword": "Forgot password?",
+                "SignUpHere": "Sign up here"
+                },
+                "RegisterPage":{
+                    "PleaseSignUp": "Please sign up",
+                    "SignUp": "Sign up",
+                    "AlreadyAMember": "Already a member?",
+                    "SignInHere": "Sign in here"
                 }
             }
 

@@ -1,6 +1,6 @@
 this.Publishers = new Meteor.Collection("publishers");
 
-Schema  = new SimpleSchema({
+PublishersSchema  = new SimpleSchema({
     name: {
         type: String,
         unique: true
@@ -18,17 +18,17 @@ Schema  = new SimpleSchema({
     }
 });
 Meteor.startup(function() {
-    Schema .i18n("schemas.publishers");
-    Publishers.attachSchema(Schema );
+    PublishersSchema.i18n("schemas.publishers");
+    Publishers.attachSchema(PublishersSchema);
 });
-this.Publishers.userCanInsert = function(userId, doc) {
-    return true;
-}
+// this.Publishers.userCanInsert = function(userId, doc) {
+//     return true;
+// }
 
-this.Publishers.userCanUpdate = function(userId, doc) {
-    return true;
-}
+// this.Publishers.userCanUpdate = function(userId, doc) {
+//     return true;
+// }
 
-this.Publishers.userCanRemove = function(userId, doc) {
-    return true;
-}
+// this.Publishers.userCanRemove = function(userId, doc) {
+//     return true;
+// }

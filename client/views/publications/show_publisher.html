@@ -1,0 +1,45 @@
+<template name="ShowPublisher">
+    <div class="page-container container">
+     <div class="row">
+       <h2>{{name}}
+       </h2>
+   </div>
+   <p>{{description}}</p>
+   <p>TODO: Link to this publishers Homepage</p>
+   <p>TODO: Publications and collections tabs</p>
+   <div class="row">
+      {{#if isAdmin }}
+      {{> addPublicationModalForm}}
+      {{/if}}
+  </div>
+  <div class="row">
+    {{> PublicationList}}
+</div>
+</div>
+{{> autoformModals}}
+</template>
+<template name="PublicationList">
+    {{#each publications}}
+    {{> SinglePublication}}
+    {{else}}
+    No publications found!
+    {{/each}}
+</template>
+<template name="addPublicationModalForm">
+    {{#afModal class="fa fa-plus btn btn-success" collection="Publications"  operation="insert"}}
+    {{_ "Add new"}}
+    {{/afModal}}
+</template>
+<template name="SinglePublication">
+    <div class="row">
+        <h3>{{title}}
+            {{#if isAdmin }}
+<!--             {{> updatePublicationModalForm}}
+            {{> deletePublicationModalForm}} -->
+            {{/if}}
+        </h3>
+    </div>
+    <div class="row">
+        {{description}}
+    </div>
+</template>

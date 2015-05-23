@@ -125,6 +125,8 @@ Meteor.subscribe("current_user_data");
 
 Meteor.subscribe("publishers");
 
+Meteor.subscribe("publications");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
