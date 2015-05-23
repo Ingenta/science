@@ -52,6 +52,7 @@ minimongo@1.0.8
 mizzao:bootboxjs@4.4.0
 mobile-status-bar@1.0.3
 momentjs:moment@2.9.0
+monbro:iron-router-breadcrumb@1.0.7
 mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
@@ -61,6 +62,7 @@ natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 ordered-dict@1.0.3
+ostrio:iron-router-title@0.1.1
 perak:user-roles@1.0.10
 raix:handlebar-helpers@0.2.4
 rajit:bootstrap3-datepicker@1.4.1

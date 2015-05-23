@@ -40,6 +40,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-8">
+
+					{{> breadcrumb}}
 					<div id="content">
 						{{> flashMessages}}
 						{{> yield}}
@@ -65,7 +67,7 @@
 <template name="LayoutSideBar">
 	<br/>
 	<ul class="list-unstyled">
-	<li>{{> i18n_buttons}}</li>
+		<li>{{> i18n_buttons}}</li>
 		<li><a href="#">{{_ "ScholarOne"}}</a></li>
 		<li><a href="#">{{_ "ChineseScholarOne"}}</a></li>
 	</ul>

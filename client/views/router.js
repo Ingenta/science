@@ -109,9 +109,6 @@ Router.ensureNotLogged = function() {
 	}
 };
 
-Meteor.subscribe("current_user_data");
-
-Meteor.subscribe("publishers");
 
 Router.onBeforeAction(function() {
 	// loading indicator here
@@ -123,34 +120,99 @@ Router.onBeforeAction(function() {
 	}
 });
 
+
+Meteor.subscribe("current_user_data");
+
+Meteor.subscribe("publishers");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
 Router.map(function () {
 
-	this.route("home_public", {path: "/", controller: "HomePublicController"});
-	this.route("login", {path: "/login", controller: "LoginController"});
-	this.route("register", {path: "/register", controller: "RegisterController"});
+	this.route("home_public", {
+		path: "/",
+		controller: "HomePublicController",
+		title: "Home"
+	});
+	this.route("login", {
+		path: "/login",
+		controller: "LoginController"
+	});
+	this.route("register", {
+		path: "/register",
+		controller: "RegisterController"
+	});
 	this.route("topics");
-	this.route("publishers");
-	this.route('/publishers/:urlname', function () {
-					  var item = Publishers.findOne({urlname: this.params.urlname});
-					  this.render('ShowPublisher', {data: item});
-					});
+	this.route("publishers", {
+		title: function () {
+			return TAPi18n.__("Publishers");
+		}
+	});
+	this.route('/publishers/:urlname', {
+		data: function(){
+			return Publishers.findOne({urlname: this.params.urlname});
+		},
+		template: "ShowPublisher",
+		parent: "publishers",
+		title: ":urlname"
+	});
 
 	this.route("publications");
-	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
-	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
-	this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
-	this.route("admin", {path: "/admin", controller: "AdminController"});
-	this.route("admin.roles", {path: "/admin/roles", controller: "AdminRolesController"});
-	this.route("admin.roles.insert", {path: "/admin/roles/insert", controller: "AdminRolesInsertController"});
-	this.route("admin.users", {path: "/admin/users", controller: "AdminUsersController"});
-	this.route("admin.users.details", {path: "/admin/users/details/:userId", controller: "AdminUsersDetailsController"});
-	this.route("admin.users.insert", {path: "/admin/users/insert", controller: "AdminUsersInsertController"});
-	this.route("admin.users.edit", {path: "/admin/users/edit/:userId", controller: "AdminUsersEditController"});
-	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
-	this.route("user_settings.profile", {path: "/user_settings/profile", controller: "UserSettingsProfileController"});
-	this.route("user_settings.change_pass", {path: "/user_settings/change_pass", controller: "UserSettingsChangePassController"});
-	this.route("logout", {path: "/logout", controller: "LogoutController"});
+	this.route("forgot_password", {
+		path: "/forgot_password",
+		controller: "ForgotPasswordController"
+	});
+	this.route("reset_password", {
+		path: "/reset_password/:resetPasswordToken",
+		controller: "ResetPasswordController"
+	});
+	this.route("home_private", {
+		path: "/home_private",
+		controller: "HomePrivateController"
+	});
+	this.route("admin", {
+		path: "/admin",
+		controller: "AdminController"
+	});
+	this.route("admin.roles", {
+		path: "/admin/roles",
+		controller: "AdminRolesController"
+	});
+	this.route("admin.roles.insert", {
+		path: "/admin/roles/insert",
+		controller: "AdminRolesInsertController"
+	});
+	this.route("admin.users", {
+		path: "/admin/users",
+		controller: "AdminUsersController"
+	});
+	this.route("admin.users.details", {
+		path: "/admin/users/details/:userId",
+		controller: "AdminUsersDetailsController"
+	});
+	this.route("admin.users.insert", {
+		path: "/admin/users/insert",
+		controller: "AdminUsersInsertController"
+	});
+	this.route("admin.users.edit", {
+		path: "/admin/users/edit/:userId",
+		controller: "AdminUsersEditController"
+	});
+	this.route("user_settings", {
+		path: "/user_settings",
+		controller: "UserSettingsController"
+	});
+	this.route("user_settings.profile", {
+		path: "/user_settings/profile",
+		controller: "UserSettingsProfileController"
+	});
+	this.route("user_settings.change_pass", {
+		path: "/user_settings/change_pass",
+		controller: "UserSettingsChangePassController"
+	});
+	this.route("logout", {
+		path: "/logout",
+		controller: "LogoutController"
+	});
 });
