@@ -11,7 +11,7 @@ Schema  = new SimpleSchema({
     },
     description: {
         type: String,
-        min: 5,
+        min: 7,
         autoform: {
             rows: 3
         }

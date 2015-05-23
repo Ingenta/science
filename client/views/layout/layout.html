@@ -65,6 +65,7 @@
 <template name="LayoutSideBar">
 	<br/>
 	<ul class="list-unstyled">
+	<li>{{> i18n_buttons}}</li>
 		<li><a href="#">{{_ "ScholarOne"}}</a></li>
 		<li><a href="#">{{_ "ChineseScholarOne"}}</a></li>
 	</ul>
@@ -101,9 +102,7 @@
 
 <template name="PublicLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
-		<li id="menu-item-simple">
-			{{> i18n_buttons}}
-		</li>
+
 		<li id="menu-item-simple" class="{{menuItemClass 'register'}}">
 			<a href="{{pathFor 'register'}}">
 				{{_ "Register"}}
@@ -119,9 +118,6 @@
 
 <template name="PrivateLayoutRightMenu">
 	<ul id="menu-items" class="nav navbar-nav navbar-right">
-		<li id="menu-item-simple">
-			{{> i18n_buttons}}
-		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'admin'}}">
 			<a href="{{pathFor 'admin'}}">
 				{{_ "Admin"}}
