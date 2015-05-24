@@ -1,69 +1,81 @@
 <template name="ShowPublisher">
-    <div class="page-container container">
-       <div class="row">
-         <h2>{{name}}</h2>
-     </div>
-     <div class="row">
-     {{description}}
-     </div>
-     <div class="row">
-     {{> PublisherWebsite}}
-     </div>
-
-     <p>TODO: Publications and collections tabs</p>
-     <div class="row">
-      {{#if isAdmin }}
-      {{> addPublicationModalForm}}
-      {{/if}}
-  </div>
-  <hr>
-  <div class="row">
-    {{> PublicationList}}
+  <div class="page-container container">
+   <div class="row">
+   <div class="col-xs-2">
+      <img src="http://scitation.aip.org/docserver/fulltext/aippublogo_103px.jpg"/>
+    </div>
+    <div class="col-xs-10">
+     <h2>{{name}}</h2>
+   </div>
+ </div>
+ <br/>
+ <div class="row">
+   {{description}}
+ </div>
+ <br/>
+ <div class="row">
+   {{> PublisherWebsite}}
+ </div>
+ <br/>
+ <div class="row">
+  {{#if isAdmin }}
+  {{> addPublicationModalForm}}
+  {{/if}}
+</div>
+<hr>
+<div class="row">
+  {{> PublicationList}}
 </div>
 </div>
 {{> autoformModals}}
 </template>
 
 <template name="PublisherWebsite">
-    <p>TODO: 1.Link publisher to publication in the db</p>
-    {{#if website}}
-    <a href="{{website}}">Home page for {{name}}</a>
-    {{/if}}
+  {{#if website}}
+  <a href="{{website}}">Home page for {{name}}</a>
+  {{/if}}
 </template>
 
 <template name="PublicationList">
-    {{#each publications}}
-    {{> SinglePublication}}
-    {{else}}
-    No publications found!
-    {{/each}}
+  {{#each publications}}
+  {{> SinglePublication}}
+  {{else}}
+  No publications found!
+  {{/each}}
 </template>
 
 <template name="SinglePublication">
-    <div class="row">
+  <div class="row">
+    <div class="col-xs-4">
+      <img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg"/>
+    </div>
+    <div class="col-xs-8">
+      <div class="row">
         <h3>{{title}}
-            {{#if isAdmin }}
-            {{> updatePublicationModalForm}}
-            {{> deletePublicationModalForm}}
-            {{/if}}
+          {{#if isAdmin }}
+          {{> updatePublicationModalForm}}
+          {{> deletePublicationModalForm}}
+          {{/if}}
         </h3>
-    </div>
-    <div class="row">
+      </div>
+      <div class="row">
         {{description}}
+      </div>
     </div>
-    <hr>
+  </div>
+  <hr>
 </template>
 
 <template name="addPublicationModalForm">
-    {{#afModal class="fa fa-plus btn btn-success" collection="Publications"  operation="insert"}}
-    {{_ "Add new"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-plus btn btn-success" collection="Publications"  operation="insert"}}
+  {{_ "Add new"}}
+  {{/afModal}}
 </template>
 <template name="updatePublicationModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"}}
+  {{/afModal}}
 </template>
 <template name="deletePublicationModalForm">
-    {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id}}
-    {{/afModal}}
+  {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id}}
+  {{/afModal}}
 </template>
