@@ -1,29 +1,30 @@
 {
+    "PleaseWait": "Please wait...",
     "schemas": {
-        "publishers":{
-            "name" : {
+        "publications": {
+            "description": {
+                "label": "Description"
+            },
+            "title": {
+                "label": "Publication Name"
+            },
+            "urlname": {
+                "label": "Abbreviation"
+            }
+        },
+        "publishers": {
+            "description": {
+                "label": "Description"
+            },
+            "name": {
                 "label": "Publisher Name"
-            }
             },
-            "publications":{
-                "title" : {
-                    "label": "Publication Name"
-                }
-            }
+            "urlname": {
+                "label": "Abbreviation"
             },
-            "PleaseWait": "Please wait...",
-            "LoginPage": {
-                "PleaseSignIn": "Please sign in",
-                "SignIn": "Sign in",
-                "NotAMember": "Not a member?",
-                "ForgotPassword": "Forgot password?",
-                "SignUpHere": "Sign up here"
-                },
-                "RegisterPage":{
-                    "PleaseSignUp": "Please sign up",
-                    "SignUp": "Sign up",
-                    "AlreadyAMember": "Already a member?",
-                    "SignInHere": "Sign in here"
-                }
+            "website": {
+                "label": "Website"
             }
-
+        }
+    }
+}

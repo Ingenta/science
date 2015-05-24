@@ -2,7 +2,7 @@
 	<div class="container">
 		<form id="register_form" class="account-form" role="form">
 			<h2>
-				{{_ "RegisterPage.PleaseSignUp"}}
+				{{_ "Please sign up"}}
 			</h2>
 			{{#if errorMessage}}
 			<div class="alert alert-warning">
@@ -13,12 +13,12 @@
 			<input id="register_email" type="text" class="form-control" placeholder="Email address" required>
 			<input id="register_password" type="password" class="form-control" placeholder="Password" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="{{_ 'PleaseWait'}}">
-				{{_ "RegisterPage.SignUp"}}
+				{{_ "Sign up"}}
 			</button>
 			<p class="account-form-text-after">
-				{{_ "RegisterPage.AlreadyAMember"}}
+				{{_ "Already a member?"}}
 				<a href="{{pathFor 'login'}}">
-					{{_ "RegisterPage.SignInHere"}}
+					{{_ "Sign in here"}}
 				</a>
 			</p>
 		</form>

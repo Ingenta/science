@@ -1,45 +1,58 @@
 {
+    "Page not found": "找不到网页",
+    "Click Here": "点击",
+    "PleaseWait": "等一点...",
+    "Search": "搜索",
+    "Name" : "名字",
+    "E-mail" : "邮件地址",
+    "Publishers": "出版社",
+    "Publications": "出版物",
+    "Topics": "主题",
+    "Collections": "虚拟产品包",
+    "Reader Centre": "作者中心",
+    "Register": "注册",
+    "Login": "登绿",
+    "Log Out": "注销",
+    "Settings": "设置",
+    "Users": "用户",
+    "Add new": "添加",
+    "Admin": "管理员",
+
+    "Please sign in": "登绿",
+    "Sign in": "登绿",
+    "Not a member?": "没有用户?",
+    "Forgot password": "忘记密码?",
+
+    "Sign up here": "注册",
+    "Please sign up": "新用户注册",
+    "Sign up": "注册",
+    "Already a member?": "注册过了吗?",
+    "Sign in here": "登绿",
     "schemas": {
-        "publishers":{
-            "name" : {
-                "label": "出版时名字"
-            }
+        "publications": {
+            "description": {
+                "label": "描述"
             },
-            "publications":{
-                "title" : {
-                    "label": "出版物名字"
-                }
-            }
+            "title": {
+                "label": "出版物名字"
             },
-            "Page not found": "找不到网页",
-            "Click Here": "点击",
-            "PleaseWait": "等一点...",
-            "Search": "搜索",
-            "Name" : "名字",
-            "E-mail" : "邮件地址",
-            "Publishers": "出版时",
-            "Publications": "出版物",
-            "Topics": "主题",
-            "Collections": "虚拟产品包",
-            "Reader Centre": "作者中心",
-            "Register": "注册",
-            "Login": "登绿",
-            "Log Out": "注销",
-            "Settings": "设置",
-            "Users": "用户",
-            "Add new": "加薪",
-            "Admin": "管理员",
-            "LoginPage": {
-                "PleaseSignIn": "登绿",
-                "SignIn": "登绿",
-                "NotAMember": "没有用户?",
-                "ForgotPassword": "忘记密码?",
-                "SignUpHere": "注册"
-                },
-                "RegisterPage":{
-                    "PleaseSignUp": "新用户注册",
-                    "SignUp": "注册",
-                    "AlreadyAMember": "注册过了吗?",
-                    "SignInHere": "登绿"
-                }
+            "urlname": {
+                "label": "简称"
             }
+        },
+        "publishers": {
+            "description": {
+                "label": "描述"
+            },
+            "name": {
+                "label": "出版社名字"
+            },
+            "urlname": {
+                "label": "简称"
+            },
+            "website": {
+                "label": "网站"
+            }
+        }
+    }
+}
