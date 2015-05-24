@@ -1,20 +1,21 @@
 <template name="Publishers">
 
-    <div class="page-container container">
-        <div class="row">
-           <h2>{{_"Publishers"}}</h2>
-       </div>
-       <div class="row">
-        <p>Introductory text</p>
-     </div>
-     <div class="row">
-      {{#if isAdmin }}
-      {{> addPublisherModalForm}}
-      {{/if}}
+  <div class="page-container container">
+    <div class="row">
+     <h2>{{_"Publishers"}}</h2>
+   </div>
+   <div class="row">
+    <p>Introductory text</p>
   </div>
   <div class="row">
+    {{#if isAdmin }}
+    {{> addPublisherModalForm}}
+    {{/if}}
+  </div>
+  <hr>
+  <div class="row">
     {{> PublisherList}}
-</div>
+  </div>
 </div>
 
 {{> autoformModals}}
@@ -23,36 +24,44 @@
 
 
 <template name="PublisherList">
-    {{#each publishers}}
-    {{> SinglePublisher}}
-    {{else}}
-    No publishers found!
-    {{/each}}
+  {{#each publishers}}
+  {{> SinglePublisher}}
+  {{else}}
+  No publishers found!
+  {{/each}}
 </template>
 
 <template name="SinglePublisher">
-    <div class="row">
+  <div class="row">
+  <div class="col-xs-3">
+      <img src="http://scitation.aip.org/docserver/fulltext/aippublogo_103px.jpg"/>
+    </div>
+    <div class="col-xs-9">
+      <div class="row">
         <h3><a class="text" href="/publishers/{{urlname}}">{{name}}</a>
-            {{#if isAdmin }}
-            {{> updatePublisherModalForm}}
-            {{> deletePublisherModalForm}}
-            {{/if}}
+          {{#if isAdmin }}
+          {{> updatePublisherModalForm}}
+          {{> deletePublisherModalForm}}
+          {{/if}}
         </h3>
-    </div>
-    <div class="row">
+      </div>
+      <div class="row">
         {{description}}
+      </div>
     </div>
+  </div>
+  <hr>
 </template>
 <template name="addPublisherModalForm">
-    {{#afModal class="fa fa-plus btn btn-success" collection="Publishers"  operation="insert"}}
-    {{_ "Add new"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-plus btn btn-success" collection="Publishers"  operation="insert"}}
+  {{_ "Add new"}}
+  {{/afModal}}
 </template>
 <template name="updatePublisherModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publishers" doc=_id operation="update"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publishers" doc=_id operation="update"}}
+  {{/afModal}}
 </template>
 <template name="deletePublisherModalForm">
-    {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id}}
-    {{/afModal}}
+  {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id}}
+  {{/afModal}}
 </template>

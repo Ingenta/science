@@ -1,17 +1,22 @@
 <template name="ShowPublisher">
     <div class="page-container container">
        <div class="row">
-         <h2>{{name}}
-         </h2>
+         <h2>{{name}}</h2>
      </div>
-     <p>{{description}}</p>
+     <div class="row">
+     {{description}}
+     </div>
+     <div class="row">
      {{> PublisherWebsite}}
+     </div>
+
      <p>TODO: Publications and collections tabs</p>
      <div class="row">
       {{#if isAdmin }}
       {{> addPublicationModalForm}}
       {{/if}}
   </div>
+  <hr>
   <div class="row">
     {{> PublicationList}}
 </div>
