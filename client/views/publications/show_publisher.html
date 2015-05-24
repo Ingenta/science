@@ -1,13 +1,13 @@
 <template name="ShowPublisher">
     <div class="page-container container">
+       <div class="row">
+         <h2>{{name}}
+         </h2>
+     </div>
+     <p>{{description}}</p>
+     {{> PublisherWebsite}}
+     <p>TODO: Publications and collections tabs</p>
      <div class="row">
-       <h2>{{name}}
-       </h2>
-   </div>
-   <p>{{description}}</p>
-   {{> PublisherWebsite}}
-   <p>TODO: Publications and collections tabs</p>
-   <div class="row">
       {{#if isAdmin }}
       {{> addPublicationModalForm}}
       {{/if}}
@@ -18,11 +18,14 @@
 </div>
 {{> autoformModals}}
 </template>
+
 <template name="PublisherWebsite">
     <p>TODO: 1.Link publisher to publication in the db</p>
-    <p>TODO: 2.Link to this publishers Homepage</p>
-    <a href="#">Home page for {{thisPublisher}}</a>
+    {{#if website}}
+    <a href="{{website}}">Home page for {{name}}</a>
+    {{/if}}
 </template>
+
 <template name="PublicationList">
     {{#each publications}}
     {{> SinglePublication}}
@@ -30,6 +33,7 @@
     No publications found!
     {{/each}}
 </template>
+
 <template name="SinglePublication">
     <div class="row">
         <h3>{{title}}
@@ -44,6 +48,7 @@
     </div>
     <hr>
 </template>
+
 <template name="addPublicationModalForm">
     {{#afModal class="fa fa-plus btn btn-success" collection="Publications"  operation="insert"}}
     {{_ "Add new"}}
