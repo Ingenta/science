@@ -23,7 +23,8 @@
                 "label": "Abbreviation"
             },
             "website": {
-                "label": "Website"
+                "label": "Website",
+                "placeholder": "http://www.scitation.aip.org"
             }
         }
     }
