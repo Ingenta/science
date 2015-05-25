@@ -1,4 +1,5 @@
 {
+    "PleaseEmail": "Please enter valid e-mail address.",
     "PleaseWait": "Please wait...",
     "schemas": {
         "publications": {
