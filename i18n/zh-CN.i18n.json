@@ -11,15 +11,15 @@
     "Collections": "虚拟产品包",
     "Reader Centre": "作者中心",
     "Register": "注册",
-    "Login": "登绿",
+    "Login": "登录",
     "Log Out": "注销",
     "Settings": "设置",
     "Users": "用户",
     "Add new": "添加",
     "Admin": "管理员",
 
-    "Please sign in": "登绿",
-    "Sign in": "登绿",
+    "Please sign in": "登录",
+    "Sign in": "登录",
     "Not a member?": "没有用户?",
     "Forgot password": "忘记密码?",
 
@@ -27,7 +27,7 @@
     "Please sign up": "新用户注册",
     "Sign up": "注册",
     "Already a member?": "注册过了吗?",
-    "Sign in here": "登绿",
+    "Sign in here": "登录",
     "schemas": {
         "publications": {
             "description": {

@@ -8,7 +8,7 @@ Router.configure({
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
 var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
-var zonelessRoutes = ["topics", "publishers", "publications"];
+var zonelessRoutes = ["topics", "publishers", "publications", "collections"];
 
 var roleMap = [
 { route: "admin",	roles: ["admin","orgadmin"] },
@@ -146,6 +146,7 @@ Router.map(function () {
 		controller: "RegisterController"
 	});
 	this.route("topics");
+	this.route("collections");
 	this.route("publishers", {
 		title: function () {
 			return TAPi18n.__("Publishers");
