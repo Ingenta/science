@@ -6,13 +6,25 @@
             "description": {
                 "label": "Description"
             },
+             "chinesedescription": {
+                "label": "Chinesedescription"
+            },
+            "firstletter": {
+                "label": "Firstletter"
+            },
+            "chinesefirstletter": {
+                "label": "Chinesefirstletter"
+            },
             "title": {
                 "label": "Publication Name"
+            },
+             "chinesetitle": {
+                "label": "chinesetitle"
             },
             "urlname": {
                 "label": "Abbreviation"
             },
-	    "accessKey": {
+	       "accessKey": {
                 "label": "Choose a Access Key"
             }
         },
