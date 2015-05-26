@@ -32,7 +32,7 @@ Template.Register.events({
 		// check email
 		if(!isValidEmail(register_email))
 		{
-			pageSession.set("errorMessage", "Please enter valid e-mail address.");
+			pageSession.set("errorMessage", TAPi18n.__("PleaseEmail"));
 			t.find('#register_email').focus();
 			return false;			
 		}
