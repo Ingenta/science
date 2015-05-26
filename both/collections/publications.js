@@ -17,7 +17,7 @@ PublicationsSchema  = new SimpleSchema({
         type: String,
         min: 7,
         autoform: {
-            rows: 2
+            rows: 3
         }
     },
     chinesedescription: {
@@ -32,21 +32,20 @@ PublicationsSchema  = new SimpleSchema({
     },
     chinesefirstletter:{
         type: String
-    }
+    },
+    choose: {
+      type: String,
+      allowedValues: [
+      "Free Content",
+      "Open Access Content",
+      "Subscribed Content",
+      "Free Trial Content",
+      ],
+      optional: false,
+      label: "Choose a content type"
+  }
 });
 Meteor.startup(function() {
     PublicationsSchema .i18n("schemas.publications");
     Publications.attachSchema(PublicationsSchema);
 });
-
-this.Publications.userCanInsert = function(userId, doc) {
-	return true;
-}
-
-this.Publications.userCanUpdate = function(userId, doc) {
-	return true;
-}
-
-this.Publications.userCanRemove = function(userId, doc) {
-	return true;
-}
