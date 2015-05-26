@@ -6,6 +6,7 @@ TopicsSchema  = new SimpleSchema({
         unique: true
     }
 });
+
 Meteor.startup(function() {
     TopicsSchema.i18n("schemas.topics");
     Topics.attachSchema(TopicsSchema);
