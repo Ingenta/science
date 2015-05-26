@@ -46,13 +46,25 @@
             "description": {
                 "label": "描述"
             },
+             "chinesedescription": {
+                "label": "中文描述"
+            },
             "title": {
                 "label": "出版物名字"
+            },
+            "chinesetitle": {
+                "label": "出版物中文名字"
+            },
+            "firstletter": {
+                "label": "首字母"
+            },
+            "chinesefirstletter": {
+                "label": "中文首字母"
             },
             "urlname": {
                 "label": "简称"
             },
-	    "accessKey": {
+	       "accessKey": {
                 "label": "请选择一个资源标签"
             }
         },
