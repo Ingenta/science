@@ -17,8 +17,14 @@
             "description": {
                 "label": "Description"
             },
+           "chinesedescription": {
+                "label": "Chinesedescription"
+            },
             "name": {
                 "label": "Publisher Name"
+            },
+            "chinesename": {
+                "label": "Chinesename"
             },
             "urlname": {
                 "label": "Abbreviation"

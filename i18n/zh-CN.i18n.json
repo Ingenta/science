@@ -51,9 +51,15 @@
         "publishers": {
             "description": {
                 "label": "描述"
+            }, 
+             "chinesedescription": {
+                "label": "中文描述"
             },
             "name": {
                 "label": "出版社名字"
+            },
+            "chinesename": {
+                "label": "出版社中文名字"
             },
             "urlname": {
                 "label": "简称"
