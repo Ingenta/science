@@ -1,11 +1,38 @@
 <template name="Topics">
 
-    <div class="page-container container">
-       <div class="row">
-         <h2>{{_ "Topics"}}
+  <div class="page-container container">
+   <div class="row">
+     <h2>{{_ "Topics"}}</h2>
+   </div>
+   <div class="row">
+    {{#if isAdmin }}
+    {{> addTopicModalForm}}
+    {{/if}}
+  </div>
+  <hr>
+  <div class="row">
+    {{> TopicList}}
+  </div>
+  <div id="topicTree"></div>
+</div>
 
-        </h2>
-    </div>
-        <div id="topicTree"></div>
-    </div>
+{{> autoformModals}}
+</template>
+
+<template name="TopicList">
+  {{#each topics}}
+  {{> SingleTopic}}
+  {{else}}
+  No topics found!
+  {{/each}}
+</template>
+
+<template name="SingleTopic">
+  {{name}}
+</template>
+
+<template name="addTopicModalForm">
+  {{#afModal class="fa fa-plus btn btn-success" collection="Topics"  operation="insert"}}
+  {{_ "Add new"}}
+  {{/afModal}}
 </template>

@@ -21,3 +21,8 @@ $('#topicTree').tree({
 });
 };
 
+Template.TopicList.helpers({
+    topics: function () {
+      return Topics.find();
+    }
+  });
