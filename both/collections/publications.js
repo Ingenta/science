@@ -15,7 +15,18 @@ PublicationsSchema  = new SimpleSchema({
         autoform: {
             rows: 3
         }
-    }
+    },
+	choose: {
+      type: String,
+      allowedValues: [
+         "Free Content",
+         "Open Access Content",
+         "Subscribed Content",
+	     "Free Trial Content",
+      ],
+      optional: false,
+      label: "Choose a content type"
+	}
 });
 Meteor.startup(function() {
     PublicationsSchema .i18n("schemas.publications");
