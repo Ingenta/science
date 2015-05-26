@@ -33,19 +33,30 @@ PublicationsSchema  = new SimpleSchema({
     chinesefirstletter:{
         type: String
     },
-    choose: {
+	accessKey: {
       type: String,
       allowedValues: [
-      "Free Content",
-      "Open Access Content",
-      "Subscribed Content",
-      "Free Trial Content",
+         "Free Content",
+         "Open Access Content",
+         "Subscribed Content",
+	     "Free Trial Content",
       ],
-      optional: false,
-      label: "Choose a content type"
-  }
+      optional: true,
+	}
 });
 Meteor.startup(function() {
     PublicationsSchema .i18n("schemas.publications");
     Publications.attachSchema(PublicationsSchema);
 });
+
+this.Publications.userCanInsert = function(userId, doc) {
+	return true;
+}
+
+this.Publications.userCanUpdate = function(userId, doc) {
+	return true;
+}
+
+this.Publications.userCanRemove = function(userId, doc) {
+	return true;
+}
