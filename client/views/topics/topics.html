@@ -13,7 +13,7 @@
   <div class="row">
     {{> TopicList}}
   </div>
-  <div id="topicTree"></div>
+  <!-- <div id="topicTree"></div> -->
 </div>
 
 </template>
@@ -22,7 +22,7 @@
   {{#each topics}}
   {{> SingleTopic}}
   {{else}}
-  No topics found!
+  {{_ "No topics found!"}}
   {{/each}}
 </template>
 
