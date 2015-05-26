@@ -33,7 +33,7 @@ PublicationsSchema  = new SimpleSchema({
     chinesefirstletter:{
         type: String
     },
-	choose: {
+	accessKey: {
       type: String,
       allowedValues: [
          "Free Content",
@@ -41,8 +41,7 @@ PublicationsSchema  = new SimpleSchema({
          "Subscribed Content",
 	     "Free Trial Content",
       ],
-      optional: false,
-      label: "Choose a content type"
+      optional: true,
 	}
 });
 Meteor.startup(function() {

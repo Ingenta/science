@@ -11,6 +11,9 @@
             },
             "urlname": {
                 "label": "Abbreviation"
+            },
+	    "accessKey": {
+                "label": "Choose a Access Key"
             }
         },
         "publishers": {

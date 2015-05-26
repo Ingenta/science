@@ -1,4 +1,9 @@
 {
+    "Access Key": "资源标签",
+    "Free Content": "免费",
+    "Open Access Content": "开源",
+    "Subscribed Content": "订阅",
+    "Free Trial Content": "免费试用",
     "PleaseEmail": "请输入正确的邮箱地址",
     "Welcome Message": "欢迎杰克",
     "Your full name": "你的全名",
@@ -41,6 +46,9 @@
             },
             "urlname": {
                 "label": "简称"
+            },
+	    "accessKey": {
+                "label": "请选择一个资源标签"
             }
         },
         "publishers": {
