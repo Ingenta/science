@@ -5,6 +5,10 @@ PublishersSchema  = new SimpleSchema({
         type: String,
         unique: true
     },
+    chinesename: {
+        type: String,
+        unique: true
+    },
     urlname: {
         type: String,
         unique: true
@@ -17,9 +21,16 @@ PublishersSchema  = new SimpleSchema({
     },
     description: {
         type: String,
-        min: 7,
+        min: 4,
         autoform: {
-            rows: 3
+            rows: 2
+        }
+    },
+    chinesedescription: {
+        type: String,
+        min: 4,
+        autoform: {
+            rows: 2
         }
     }
 });

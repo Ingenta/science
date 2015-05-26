@@ -5,6 +5,10 @@ PublicationsSchema  = new SimpleSchema({
         type: String,
         unique: true
     },
+    chinesetitle: {
+        type: String,
+        unique: true
+    },
     urlname: {
         type: String,
         unique: true
@@ -13,8 +17,21 @@ PublicationsSchema  = new SimpleSchema({
         type: String,
         min: 7,
         autoform: {
-            rows: 3
+            rows: 2
         }
+    },
+    chinesedescription: {
+        type: String,
+        min: 7,
+        autoform: {
+            rows: 2
+        }
+    },
+    firstletter:{
+        type: String
+    },
+    chinesefirstletter:{
+        type: String
     }
 });
 Meteor.startup(function() {
