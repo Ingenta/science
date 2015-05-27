@@ -19,5 +19,5 @@ TopicsSchema = new SimpleSchema({
 
 Meteor.startup(function () {
 //    TopicsSchema.i18n("schemas.topics");
-    Topics.attachSchema(TopicsSchema);
+//    Topics.attachSchema(TopicsSchema);
 });

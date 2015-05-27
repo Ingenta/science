@@ -27,6 +27,7 @@
   {{> PublicationList}}
 </div>
 </div>
+{{setCurrentPublisher urlname}}
 </template>
 
 <template name="PublisherWebsite">
@@ -66,12 +67,12 @@
 </template>
 
 <template name="addPublicationModalForm">
-  {{#afModal class="fa fa-plus btn btn-success" collection="Publications"  operation="insert"}}
+  {{#afModal formId="addPublicationForm" class="fa fa-plus btn btn-success" collection="Publications"  operation="insert" omitFields="publisher"}}
   {{_ "Add new"}}
   {{/afModal}}
 </template>
 <template name="updatePublicationModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update" omitFields="publisher"}}
   {{/afModal}}
 </template>
 <template name="deletePublicationModalForm">

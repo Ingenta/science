@@ -23,7 +23,12 @@
 
 Template.TopicList.helpers({
     topics: function () {
-        return Topics.find();
+        return  Topics.find({"parentName" : null});
+    }
+});
+Template.SingleTopic.helpers({
+    subTopics: function (parentName) {
+        return  Topics.find({"parentName" : parentName});
     }
 });
 Template.addSubtopic.helpers({
