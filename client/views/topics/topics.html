@@ -30,13 +30,16 @@
 
 <template name="SingleTopic">
     <li>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{removeSpaces name}}" aria-expanded="false" aria-controls="{{removeSpaces name}}">+</button>
         {{name}}
     </li>
-    {{#each subTopics name}}
-    <ul>
-        {{> SingleTopic}}
-    </ul>
-    {{/each}}
+    <div class="collapse" id="{{removeSpaces name}}">
+        {{#each subTopics name}}
+        <ul>
+            {{> SingleTopic}}
+        </ul>
+        {{/each}}
+    </div>
 </template>
 
 <template name="addTopicModalForm">

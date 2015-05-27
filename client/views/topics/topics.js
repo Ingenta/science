@@ -27,6 +27,9 @@ Template.TopicList.helpers({
     }
 });
 Template.SingleTopic.helpers({
+    removeSpaces: function (name) {
+        return  replaceSubstrings(name, ' ', '');
+    },
     subTopics: function (parentName) {
         return  Topics.find({"parentName" : parentName});
     }
