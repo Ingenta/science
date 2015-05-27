@@ -15,20 +15,19 @@ PublishersSchema  = new SimpleSchema({
     },
     website: {
         type: String,
-        unique: true,
         optional: true,
         regEx: SimpleSchema.RegEx.Url
     },
     description: {
         type: String,
-        min: 4,
+        optional: true,
         autoform: {
             rows: 2
         }
     },
     chinesedescription: {
         type: String,
-        min: 4,
+        optional: true,
         autoform: {
             rows: 2
         }

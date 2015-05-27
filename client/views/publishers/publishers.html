@@ -5,7 +5,7 @@
      <h2>{{_"Publishers"}}</h2>
    </div>
    <div class="row">
-    <p>Introductory text</p>
+    <p>{{_"Introductory text"}}</p>
   </div>
   <div class="row">
     {{#if isAdmin }}
@@ -17,8 +17,6 @@
     {{> PublisherList}}
   </div>
 </div>
-
-{{> autoformModals}}
 </template>
 
 
@@ -27,7 +25,7 @@
   {{#each publishers}}
   {{> SinglePublisher}}
   {{else}}
-  No publishers found!
+  {{_"No publishers found!"}}
   {{/each}}
 </template>
 

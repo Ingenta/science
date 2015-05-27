@@ -5,11 +5,16 @@
     "Subscribed Content": "订阅",
     "Free Trial Content": "免费试用",
     "PleaseEmail": "请输入正确的邮箱地址",
+    "Are you sure?": "确定删除？",
+    "Filter": "过滤",
+    "Filter Here?": "在这里过滤？",
+    "Introductory text": "文字介绍",
+    "No publishers found!": "没有找到出版社！",
     "Welcome Message": "欢迎杰克",
     "Your full name": "你的全名",
     "Page not found": "找不到网页",
-    "Click Here": "点击",
-    "PleaseWait": "等一点...",
+    "Click Here": "点击这里",
+    "PleaseWait": "请等一会...",
     "Search": "搜索",
     "Name" : "名字",
     "E-mail" : "邮件地址",
@@ -41,22 +46,40 @@
             "description": {
                 "label": "描述"
             },
+             "chinesedescription": {
+                "label": "中文描述"
+            },
             "title": {
                 "label": "出版物名字"
+            },
+            "chinesetitle": {
+                "label": "出版物中文名字"
+            },
+            "firstletter": {
+                "label": "首字母"
+            },
+            "chinesefirstletter": {
+                "label": "中文首字母"
             },
             "urlname": {
                 "label": "简称"
             },
-	    "accessKey": {
+	       "accessKey": {
                 "label": "请选择一个资源标签"
             }
         },
         "publishers": {
             "description": {
                 "label": "描述"
+            }, 
+             "chinesedescription": {
+                "label": "中文描述"
             },
             "name": {
                 "label": "出版社名字"
+            },
+            "chinesename": {
+                "label": "出版社中文名字"
             },
             "urlname": {
                 "label": "简称"
