@@ -64,8 +64,14 @@
             "urlname": {
                 "label": "简称"
             },
-	       "accessKey": {
-                "label": "请选择一个资源标签"
+	     "accessKey": {
+                "label": "请选择一个资源标签",
+		"options": {
+		    "1": "免费",
+		    "2": "开源",
+		    "3": "订阅",
+                    "4": "免费试用"
+		}
             }
         },
         "publishers": {

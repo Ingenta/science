@@ -5,3 +5,7 @@ Template.PublicationList.helpers({
 });
 Template.PublisherWebsite.rendered = function() {
 };
+
+Template.imageName.accessKeyIs = function (accessKey) {
+  return this.accessKey === accessKey;
+};

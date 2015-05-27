@@ -50,7 +50,7 @@
     </div>
     <div class="col-xs-8">
       <div class="row">
-        <h3>{{title}}
+        <h3>{{> imageName}}&nbsp;&nbsp;{{title}}
           {{#if isAdmin }}
           {{> updatePublicationModalForm}}
           {{> deletePublicationModalForm}}
@@ -77,4 +77,18 @@
 <template name="deletePublicationModalForm">
   {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id}}
   {{/afModal}}
+</template>
+<template name="imageName">
+	{{#if accessKeyIs "1"}}
+      <img src="/icon_access_fc.gif">
+    {{/if}}
+	{{#if accessKeyIs "2"}}
+      <img src="/icon_access_oa.gif">
+    {{/if}}
+    {{#if accessKeyIs "3"}}
+      <img src="/icon_access_sc.gif">
+    {{/if}}
+	{{#if accessKeyIs "4"}}
+      <img src="/icon_access_ft.gif">
+    {{/if}}
 </template>

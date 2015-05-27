@@ -37,14 +37,7 @@ PublicationsSchema  = new SimpleSchema({
     },
     accessKey: {
       type: String,
-      allowedValues: [
-      "Free Content",
-      "Open Access Content",
-      "Subscribed Content",
-      "Free Trial Content",
-      ],
-      optional: true,
-  }
+    }
 });
 Meteor.startup(function() {
     PublicationsSchema .i18n("schemas.publications");
