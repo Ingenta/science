@@ -3,6 +3,7 @@ Template.PublisherList.helpers({
       return Publishers.find();
     }
   });
+
 Template.deletePublisherModalForm.helpers({
     getPrompt: function () {
       return TAPi18n.__("Are you sure?");

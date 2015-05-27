@@ -17,7 +17,7 @@
 				<h5>{{_ "FILTER BY Publisher"}}:</h5>
 			<hr>
 	    </ul>
-		   {{> PublishersList}}
+		   {{> SimplePublisherList}}
         </div>
         <div id="subcontent" class="col-sm-9 col-md-10">
             {{> PublicationsList}}
@@ -27,15 +27,24 @@
 
 </template>
 <template name="PublicationsList">
-    <div class="page-container container">
-           <img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="80"/>{{title}}
+    <div class="page-container container">  
 		<div class="row">
-            
-        </div>
-        
+            {{#each publications}}
+               <div class="col-xs-2">
+                    <img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="87"/>
+               </div>
+			   <div class="row">
+                  <h3>{{> imageName}}&nbsp;<a href="">{{title}}</a></h3>
+				  <h5><a href="">Browse&nbsp;&nbsp;{{urlname}}</a></h5>
+                  <h5>{{description}}</h5>
+			   </div>
+            {{else}}
+            {{_"No publications found!"}}
+            {{/each}}
+        </div>  
     </div>
 </template>
-<template name="PublishersList">
+<template name="SimplePublisherList">
   {{#each publishers}}
    <h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">(2)</a></h6>
   {{else}}

@@ -4,13 +4,9 @@ Template.PublicationsList.helpers({
   }
 });
 
-Template.PublishersList.helpers({
+Template.SimplePublisherList.helpers({
     publishers: function () {
-		console.log(this);
+		//console.log(this);
       return Publishers.find();
     }
-  });
-
-  Template.imageName.accessKeyIs = function (accessKey) {
-  return this.accessKey === accessKey;
-};
+});
