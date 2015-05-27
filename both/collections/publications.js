@@ -37,6 +37,10 @@ PublicationsSchema  = new SimpleSchema({
     },
     accessKey: {
       type: String,
+    },
+    publisher:
+    {
+        type: String
     }
 });
 Meteor.startup(function() {
