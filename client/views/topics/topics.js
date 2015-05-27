@@ -23,6 +23,11 @@
 
 Template.TopicList.helpers({
     topics: function () {
-      return Topics.find();
+        return Topics.find();
     }
-  });
+});
+Template.addSubtopic.helpers({
+    exampleDoc: function () {
+        return Topics.findOne();
+    }
+});
