@@ -15,23 +15,25 @@ PublicationsSchema  = new SimpleSchema({
     },
     description: {
         type: String,
-        min: 7,
+        optional: true,
         autoform: {
-            rows: 3
+            rows: 2
         }
     },
     chinesedescription: {
         type: String,
-        min: 7,
+        optional: true,
         autoform: {
             rows: 2
         }
     },
     firstletter:{
-        type: String
+        type: String,
+        max: 1
     },
     chinesefirstletter:{
-        type: String
+        type: String,
+        max: 1
     },
     accessKey: {
       type: String,
