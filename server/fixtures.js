@@ -1,4 +1,4 @@
-  Meteor.startup(function () {
+Meteor.startup(function () {
     // if (Publishers.find().count() === 0) {
     //   for (var i = 0; i <= 3; i++) {
     //     Publishers.insert({
@@ -14,4 +14,21 @@
     //     });
     //   };
     // }
-  });
+    if (Topics.find().count() === 0) {
+        var names = ["Ada Lovelace", "Grace Hopper", "Marie Curie",
+            "Carl Friedrich Gauss", "Nikola Tesla", "Claude Shannon"];
+        _.each(names, function (name) {
+            Topics.insert({
+                name: name
+            });
+        });
+        for (var i = 0; i <= 3; i++) {
+            _.each(names, function (name) {
+                Topics.insert({
+                    name: Fake.word(),
+                    parentName: name
+                });
+            });
+        }
+    }
+});

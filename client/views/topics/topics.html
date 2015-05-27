@@ -19,26 +19,24 @@
 </template>
 
 <template name="TopicList">
-    {{#each topics}}
-    {{> SingleTopic}}
-    {{else}}
-    {{_ "No topics found!"}}
-    {{/each}}
+    <ul>
+        {{#each topics}}
+        {{> SingleTopic}}
+        {{else}}
+        {{_ "No topics found!"}}
+        {{/each}}
+    </ul>
 </template>
 
 <template name="SingleTopic">
-    <div class="row">
+    <li>
         {{name}}
-        <div class="pull-right">
-            {{> addSubtopic}}
-        </div>
-        {{#each contacts}}
-        {{name}}
-        {{else}}
-        {{_ "No subtopics found!"}}
-        {{/each}}
-    </div>
-
+    </li>
+    {{#each subTopics name}}
+    <ul>
+        {{> SingleTopic}}
+    </ul>
+    {{/each}}
 </template>
 
 <template name="addTopicModalForm">
@@ -48,7 +46,8 @@
 </template>
 
 <template name="addSubtopic">
-    {{#afModal class="fa fa-plus btn btn-success" type="update-pushArray" collection="Topics" doc=exampleDoc scope="contacts"}}
+    {{#afModal class="fa fa-plus btn btn-success" type="update-pushArray" collection="Topics" doc=exampleDoc
+    scope="contacts"}}
     {{_ "Add new"}}
     {{/afModal}}
 </template>
