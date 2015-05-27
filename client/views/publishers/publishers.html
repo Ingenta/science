@@ -60,6 +60,6 @@
   {{/afModal}}
 </template>
 <template name="deletePublisherModalForm">
-  {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id}}
+  {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id prompt=getPrompt}}
   {{/afModal}}
 </template>
