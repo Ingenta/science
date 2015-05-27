@@ -8,48 +8,37 @@
         <p>{{_ "Introductory text"}}</p>
     </div>
     <div class="row pull-right">
-        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        <p ><a href="">A</a>&nbsp;<a href="">B</a>&nbsp;<a href="">C</a>&nbsp;<a href="">D</a>&nbsp;<a href="">E</a>&nbsp;<a href="">F</a>&nbsp;<a href="">G</a>&nbsp;<a href="">H</a>&nbsp;<a href="">I</a>&nbsp;<a href="">J</a>&nbsp;<a href="">K</a>&nbsp;<a href="">L</a>&nbsp;<a href="">M</a>&nbsp;<a href="">N</a>&nbsp;<a href="">O</a>&nbsp;<a href="">P</a>&nbsp;<a href="">Q</a>&nbsp;<a href="">R</a>&nbsp;<a href="">S</a>&nbsp;<a href="">T</a>&nbsp;<a href="">U</a>&nbsp;<a href="">V</a>&nbsp;<a href="">W</a>&nbsp;<a href="">X</a>&nbsp;<a href="">Y</a>&nbsp;<a href="">Z</a></p>
     </div>
     <div class="row">
         <div id="menu" class="col-sm-3 col-md-2">
-            <h2>
-            {{_ "Filter"}}    
-            </h2>
-            {{_ "Filter Here?"}}   
+		<ul class="list-unstyled">
+			<hr>
+				<h5>{{_ "FILTER BY Publisher"}}:</h5>
+			<hr>
+	    </ul>
+		   {{> PublishersList}}
         </div>
         <div id="subcontent" class="col-sm-9 col-md-10">
-            {{> permissionsexample}}
+            {{> PublicationsList}}
         </div>
     </div>
 </div>
 
 </template>
-<template name="permissionsexample">
+<template name="PublicationsList">
     <div class="page-container container">
-
-        {{#if currentUser}}
-        <div class="row">
-            Hello {{currentUser.profile.name}}
-            You have the following roles: {{currentUser.roles}}
+           <img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="80"/>{{title}}
+		<div class="row">
+            
         </div>
-        {{#if isAdmin }}
-        <div class="row">
-            You are an Admin
-        </div>
-        {{/if}}
-        {{#if isUserInRoles "editor" "publisher" }}
-        <div class="row">
-            You are an editor or publisher
-        </div>
-        {{/if}}
-
-        {{#if isUserInRole "publisher" }}
-        <div class="row">
-            You are a publisher
-        </div>
-        {{/if}}
-
-        {{/if}}
+        
     </div>
-
+</template>
+<template name="PublishersList">
+  {{#each publishers}}
+   <h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">(2)</a></h6>
+  {{else}}
+  {{_"No publishers found!"}}
+  {{/each}}
 </template>
