@@ -21,9 +21,10 @@
 // });
 // };
 Template.SingleTopic.events({
-   'click .fa': function (event, template) {
-       template.$(event.target).toggleClass("fa-plus");
-       template.$(event.target).toggleClass("fa-minus");
+   'click .fa': function (event) {
+       console.log($(event.target).attr("aria-controls"));
+       $(event.target).toggleClass("fa-plus");
+       $(event.target).toggleClass("fa-minus");
    }
 });
 
@@ -41,10 +42,5 @@ Template.SingleTopic.helpers({
     },
     subTopics: function (parentName) {
         return  Topics.find({"parentName" : parentName});
-    }
-});
-Template.addSubtopic.helpers({
-    exampleDoc: function () {
-        return Topics.findOne();
     }
 });

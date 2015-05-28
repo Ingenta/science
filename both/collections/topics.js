@@ -5,19 +5,12 @@ TopicsSchema = new SimpleSchema({
         type: String,
         unique: true
     },
-    contacts: {
-        type: Array,
-        optional: true
-    },
-    'contacts.$': {
-        type: Object
-    },
-    'contacts.$.name': {
+    parentName: {
         type: String
     }
 });
 
 Meteor.startup(function () {
-//    TopicsSchema.i18n("schemas.topics");
-//    Topics.attachSchema(TopicsSchema);
+    TopicsSchema.i18n("schemas.topics");
+    Topics.attachSchema(TopicsSchema);
 });

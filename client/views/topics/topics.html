@@ -46,15 +46,7 @@
 </template>
 
 <template name="addTopicModalForm">
-    {{#afModal class="fa fa-plus btn btn-success" collection="Topics" operation="insert" fields="name"}}
+    {{#afModal class="fa fa-plus btn btn-success" collection="Topics" operation="insert"}}
     {{_ "Add new"}}
     {{/afModal}}
 </template>
-
-<template name="addSubtopic">
-    {{#afModal class="fa fa-plus btn btn-success" type="update-pushArray" collection="Topics" doc=exampleDoc
-    scope="contacts"}}
-    {{_ "Add new"}}
-    {{/afModal}}
-</template>
-
