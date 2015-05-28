@@ -27,7 +27,18 @@ PublishersSchema  = new SimpleSchema({
         autoform: {
             rows: 2
         }
-    }
+    },
+    picture: {
+        type: String,
+        optional: true,
+        autoform: {
+          afFieldInput: {
+            type: 'fileUpload',
+            collection: 'Images'
+        }
+    },
+    label: 'Choose file'
+}
 });
 Meteor.startup(function() {
     PublishersSchema.i18n("schemas.publishers");

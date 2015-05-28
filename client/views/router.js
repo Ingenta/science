@@ -129,6 +129,7 @@ Meteor.subscribe("publications");
 
 Meteor.subscribe("topics");
 
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
