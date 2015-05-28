@@ -6,7 +6,8 @@ TopicsSchema = new SimpleSchema({
         unique: true
     },
     parentName: {
-        type: String
+        type: String,
+        optional: true
     }
 });
 
