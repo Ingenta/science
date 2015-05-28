@@ -1,15 +1,21 @@
 <template name="ShowPublisher">
   <div class="page-container container">
    <div class="row">
-   <div class="col-xs-2">
+     <div class="col-xs-2">
       <img src="{{getImage picture}}" width="105" />
     </div>
     <div class="col-xs-10">
-     <h2>{{name}}</h2>
-   </div>
- </div>
- <br/>
- <div class="row">
+      <h2>
+        {{#if isChinese languageTag}}
+        {{chinesename}}
+        {{else}}
+        {{name}}
+        {{/if}}
+      </h2>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
    {{description}}
  </div>
  <br/>
@@ -81,15 +87,15 @@
 </template>
 <template name="imageName">
 	{{#if accessKeyIs "1"}}
-      <img src="/icon_access_fc.gif">
-    {{/if}}
-	{{#if accessKeyIs "2"}}
-      <img src="/icon_access_oa.gif">
-    {{/if}}
-    {{#if accessKeyIs "3"}}
-      <img src="/icon_access_sc.gif">
-    {{/if}}
-	{{#if accessKeyIs "4"}}
-      <img src="/icon_access_ft.gif">
-    {{/if}}
+  <img src="/icon_access_fc.gif">
+  {{/if}}
+  {{#if accessKeyIs "2"}}
+  <img src="/icon_access_oa.gif">
+  {{/if}}
+  {{#if accessKeyIs "3"}}
+  <img src="/icon_access_sc.gif">
+  {{/if}}
+  {{#if accessKeyIs "4"}}
+  <img src="/icon_access_ft.gif">
+  {{/if}}
 </template>

@@ -22,6 +22,11 @@ Template.ShowPublisher.helpers({
     if(pictureId===undefined)
       return noPicture;
     return Images.findOne({_id: pictureId}).url();
+  },
+  isChinese: function(l){
+    if(l==="zh-CN")
+      return true;
+    return false;
   }
 });
 
