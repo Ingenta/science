@@ -1,9 +1,9 @@
 {
     "Are you sure?": "你确定吗？",
     "Access Key": "资源标签",
-    "Free Content": "免费",
-    "Open Access Content": "开源",
-    "Subscribed Content": "订阅",
+    "Free Content": "免费获取",
+    "Open Access Content": "开源获取",
+    "Subscribed Content": "订阅获取",
     "Free Trial Content": "免费试用",
     "PleaseEmail": "请输入正确的邮箱地址",
     "Are you sure?": "确定删除？",
@@ -25,7 +25,7 @@
     "Reader Centre": "作者中心",
     "Register": "注册",
     "Login": "登录",
-    "Log Out": "注销",
+    "Log Out": "退出",
     "Settings": "设置",
     "Users": "用户",
     "Add new": "添加",
@@ -50,7 +50,7 @@
                 "label": "中文描述"
             },
             "title": {
-                "label": "出版物英文名字"
+                "label": "出版物名字"
             },
             "chinesetitle": {
                 "label": "出版物中文名字"

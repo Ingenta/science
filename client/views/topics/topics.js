@@ -20,6 +20,13 @@
 //     autoEscape: false
 // });
 // };
+Template.SingleTopic.events({
+   'click .fa': function (event) {
+       console.log($(event.target).attr("aria-controls"));
+       $(event.target).toggleClass("fa-plus");
+       $(event.target).toggleClass("fa-minus");
+   }
+});
 
 Template.TopicList.helpers({
     topics: function () {
@@ -35,10 +42,5 @@ Template.SingleTopic.helpers({
     },
     subTopics: function (parentName) {
         return  Topics.find({"parentName" : parentName});
-    }
-});
-Template.addSubtopic.helpers({
-    exampleDoc: function () {
-        return Topics.findOne();
     }
 });
