@@ -1,5 +1,7 @@
 this.Publishers = new Meteor.Collection("publishers");
-
+this.Images = new FS.Collection("images", {
+  stores: [new FS.Store.FileSystem("images", {path: "C:/uploads"})]
+});
 PublishersSchema  = new SimpleSchema({
     name: {
         type: String,
@@ -43,4 +45,12 @@ PublishersSchema  = new SimpleSchema({
 Meteor.startup(function() {
     PublishersSchema.i18n("schemas.publishers");
     Publishers.attachSchema(PublishersSchema);
+});
+Images.allow({
+    insert: function (userId, doc) {
+        return true;
+    },
+    download: function (userId) {
+        return true;
+    }
 });
