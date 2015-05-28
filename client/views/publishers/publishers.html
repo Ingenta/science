@@ -80,7 +80,6 @@
 
 
 <template name="addPublisherForm">
-
   <div class="modal fade" id="addPublisherModal" tabindex="-1" role="dialog" aria-labelledby="addPublisherModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -98,13 +97,10 @@
           {{> afQuickField name="picture"}}
         </div>
         <div class="modal-footer">
-         <button type="submit" class="btn btn-primary">Create</button>
+         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
        </div>
        {{/autoForm}}
-
      </div>
    </div>
  </div>
-
-
 </template>

@@ -27,6 +27,7 @@ Template.SinglePublisher.helpers({
 AutoForm.addHooks(['addPublisherModalForm'], {
   onSuccess: function () {
     $("#addPublisherModal").modal('hide');
+    FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
   }
 }, true);
 
