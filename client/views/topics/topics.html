@@ -19,7 +19,7 @@
 </template>
 
 <template name="TopicList">
-    <ul>
+    <ul class="list-unstyled">
         {{#each topics}}
         {{> SingleTopic}}
         {{else}}
@@ -29,10 +29,13 @@
 </template>
 
 <template name="SingleTopic">
-    <li>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{removeSpaces name}}" aria-expanded="false" aria-controls="{{removeSpaces name}}">+</button>
+    <li style="list-style-type:none;">
+        {{#if subTopicCount name}}
+            <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#{{removeSpaces name}}" aria-expanded="false" aria-controls="{{removeSpaces name}}"></i>
+        {{/if}}
         {{name}}
     </li>
+    <hr style="margin-bottom: 5px; margin-top: 5px">
     <div class="collapse" id="{{removeSpaces name}}">
         {{#each subTopics name}}
         <ul>

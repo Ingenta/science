@@ -30,6 +30,9 @@ Template.SingleTopic.helpers({
     removeSpaces: function (name) {
         return  replaceSubstrings(name, ' ', '');
     },
+    subTopicCount: function (parentName) {
+        return  Topics.find({"parentName" : parentName}).count();
+    },
     subTopics: function (parentName) {
         return  Topics.find({"parentName" : parentName});
     }
