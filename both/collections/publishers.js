@@ -1,6 +1,6 @@
 this.Publishers = new Meteor.Collection("publishers");
 this.Images = new FS.Collection("images", {
-  stores: [new FS.Store.FileSystem("images", {path: "C:/uploads"})]
+  stores: [new FS.Store.GridFS("images", {})]
 });
 PublishersSchema  = new SimpleSchema({
     name: {
