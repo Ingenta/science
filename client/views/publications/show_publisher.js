@@ -1,6 +1,6 @@
 Template.PublicationList.helpers({
   publications: function () {
-    return Publications.find({publisher:this.urlname});
+    return Publications.find({publisher:this._id});
   }
 });
 

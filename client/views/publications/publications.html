@@ -24,7 +24,6 @@
         </div>
     </div>
 </div>
-
 </template>
 <template name="PublicationsList">
     <div class="page-container container">  
@@ -46,7 +45,7 @@
 </template>
 <template name="SimplePublisherList">
   {{#each publishers}}
-   <h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">(2)</a></h6>
+   <h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
   {{else}}
   {{_"No publishers found!"}}
   {{/each}}
