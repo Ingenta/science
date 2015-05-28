@@ -5,6 +5,13 @@ TopicsSchema = new SimpleSchema({
         type: String,
         unique: true
     },
+    code:{
+        type: String,
+        unique: true
+    },
+    level:{
+        type: String
+    },
     parentName: {
         type: String,
         optional: true
