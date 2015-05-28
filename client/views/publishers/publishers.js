@@ -17,8 +17,8 @@ Template.SinglePublisher.helpers({
       return noPicture;
     return Images.findOne({_id: pictureId}).url();
   },
-  isChinese: function(l){
-    if(l==="zh-CN")
+  isChinese: function(language){
+    if(language==="zh-CN")
       return true;
     return false;
   }
