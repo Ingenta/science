@@ -20,6 +20,12 @@
 //     autoEscape: false
 // });
 // };
+Template.SingleTopic.events({
+   'click .fa': function (event, template) {
+       template.$(event.target).toggleClass("fa-plus");
+       template.$(event.target).toggleClass("fa-minus");
+   }
+});
 
 Template.TopicList.helpers({
     topics: function () {
