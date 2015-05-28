@@ -154,14 +154,14 @@ Router.map(function () {
 			return TAPi18n.__("Publishers");
 		}
 	});
-	this.route('/publishers/:urlname', {
+	this.route('/publishers/:name', {
 		data: function(){
-			return Publishers.findOne({urlname: this.params.urlname});
+			return Publishers.findOne({name: this.params.name});
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
 		title: function(){
-			return ":urlname";
+			return ":name";
 		},//TODO fix title bug
 	});
 

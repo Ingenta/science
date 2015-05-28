@@ -11,8 +11,8 @@ Template.imageName.helpers({
 });
 
 Template.ShowPublisher.helpers({
-  setCurrentPublisher: function (urlname) {
-    Session.set('currentPublisher', urlname);
+  setCurrentPublisher: function (id) {
+    Session.set('currentPublisher', id);
   }
 });
 

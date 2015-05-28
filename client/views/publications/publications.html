@@ -26,7 +26,7 @@
 </div>
 </template>
 <template name="PublicationsList">
-    <div class="page-container container">  
+    <div class="page-container container">
 		<div class="row">
             {{#each publications}}
                <div class="col-xs-2">
@@ -34,13 +34,13 @@
                </div>
 			   <div class="row">
                   <h3>{{> imageName}}&nbsp;<a href="">{{title}}</a></h3>
-				  <h5><a href="">Browse&nbsp;&nbsp;{{urlname}}</a></h5>
+				  <h5><a href="">Browse&nbsp;&nbsp;{{name}}</a></h5>
                   <h5>{{description}}</h5>
 			   </div>
             {{else}}
             {{_"No publications found!"}}
             {{/each}}
-        </div>  
+        </div>
     </div>
 </template>
 <template name="SimplePublisherList">

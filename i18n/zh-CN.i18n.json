@@ -50,7 +50,7 @@
                 "label": "中文描述"
             },
             "title": {
-                "label": "出版物名字"
+                "label": "出版物英文名字"
             },
             "chinesetitle": {
                 "label": "出版物中文名字"
@@ -82,7 +82,7 @@
                 "label": "中文描述"
             },
             "name": {
-                "label": "出版社名字"
+                "label": "出版社英文名字"
             },
             "chinesename": {
                 "label": "出版社中文名字"

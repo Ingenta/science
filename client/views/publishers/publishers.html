@@ -29,11 +29,11 @@
 <template name="SinglePublisher">
   <div class="row">
     <div class="col-xs-3">
-      <a href="/publishers/{{urlname}}"><img src="http://scitation.aip.org/docserver/fulltext/aippublogo_103px.jpg" /></a>
+      <a href="/publishers/{{name}}"><img src="http://scitation.aip.org/docserver/fulltext/aippublogo_103px.jpg" /></a>
     </div>
     <div class="col-xs-9">
       <div class="row">
-        <h3><a class="text" href="/publishers/{{urlname}}">{{name}}</a>
+        <h3><a class="text" href="/publishers/{{name}}">{{name}}</a>
           {{#if isAdmin }}
           {{> updatePublisherModalForm}}
           {{> deletePublisherModalForm}}

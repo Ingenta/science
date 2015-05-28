@@ -5,10 +5,6 @@ PublicationsSchema  = new SimpleSchema({
         type: String,
         unique: true
     },
-    urlname: {
-        type: String,
-        unique: true
-    },
     description: {
         type: String,
         optional: true,
