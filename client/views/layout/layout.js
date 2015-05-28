@@ -1,4 +1,7 @@
 Template.layout.rendered = function() {
+	$('[data-toggle="offcanvas"]').click(function () {
+		$('.row-offcanvas').toggleClass('active')
+	});
 	// scroll to anchor
 	$('body').on('click', 'a', function(e) {
 		var href = $(this).attr("href");
@@ -24,7 +27,11 @@ Template.layout.rendered = function() {
 	});
 	/*TEMPLATE_RENDERED_CODE*/
 };
-
+// Template.layout.onRendered({
+// 	'click .btn-xs' :function(){
+// 		$('.row-offcanvas').toggleClass('active');
+// 	}
+// });
 
 Template.LeftMenu.rendered = function() {
 	$(".menu-item-collapse .dropdown-toggle").each(function() {

@@ -13,8 +13,11 @@
 		<div class="navbar-spacer">
 		</div>
 		<div class="container">
-			<div class="row">
+			<div class="row row-offcanvas row-offcanvas-right">
 				<div class="col-xs-12 col-sm-9">
+					<p class="pull-right visible-xs">
+						<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+					</p>
 					{{> breadcrumb}}
 					<div id="content">
 						{{> flashMessages}}
@@ -22,10 +25,8 @@
 						{{> autoformModals}}
 					</div>
 				</div>
-				<div class="col-xs-6 col-sm-3 sidebar-offcanvas">
-					<div id="sidebar">
-						{{> LayoutSideBar}}
-					</div>
+				<div  id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
+					{{> LayoutSideBar}}
 				</div>
 			</div>
 		</div>
@@ -72,11 +73,11 @@
 		<li><a href="#">{{_ "ScholarOne"}}</a></li>
 		<li><a href="#">{{_ "ChineseScholarOne"}}</a></li>
 		<hr>
-			<h4>{{_ "Access Key"}}&nbsp;:</h4>
-			<li><img src="/icon_access_fc.gif">&nbsp;&nbsp;{{_ "Free Content"}}</li>
-			<li><img src="/icon_access_oa.gif">&nbsp;&nbsp;{{_ "Open Access Content"}}</li>
-			<li><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
-			<li><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
+		<h4>{{_ "Access Key"}}&nbsp;:</h4>
+		<li><img src="/icon_access_fc.gif">&nbsp;&nbsp;{{_ "Free Content"}}</li>
+		<li><img src="/icon_access_oa.gif">&nbsp;&nbsp;{{_ "Open Access Content"}}</li>
+		<li><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
+		<li><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
 		<hr>
 	</ul>
 </template>
