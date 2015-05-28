@@ -29,20 +29,26 @@
 </template>
 
 <template name="SingleTopic">
-    <li style="list-style-type:none;">
+    <li style="list-style-type:none;cursor:pointer">
         {{#if subTopicCount name}}
-            <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#{{removeSpaces name}}" aria-expanded="false" aria-controls="{{removeSpaces name}}"></i>
+            {{#if isExpand name}}
+                <i class="fa fa-minus" type="button"></i>
+            {{else}}
+                <i class="fa fa-plus" type="button"></i>
+            {{/if}}
         {{/if}}
         {{name}}
     </li>
     <hr style="margin-bottom: 5px; margin-top: 5px">
-    <div class="collapse" id="{{removeSpaces name}}">
-        {{#each subTopics name}}
-        <ul>
-            {{> SingleTopic}}
-        </ul>
-        {{/each}}
-    </div>
+    {{#if isExpand name}}
+        <div>
+            {{#each subTopics name}}
+            <ul>
+                {{> SingleTopic}}
+            </ul>
+            {{/each}}
+        </div>
+    {{/if}}
 </template>
 
 <template name="addTopicModalForm">
