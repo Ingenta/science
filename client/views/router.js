@@ -144,6 +144,7 @@ Router.map(function () {
 		}
 	});
 	this.route("login", {
+		parent: "home_private",
 		path: "/login",
 		controller: "LoginController",
 		title: function () {
@@ -151,6 +152,7 @@ Router.map(function () {
 		}
 	});
 	this.route("register", {
+		parent: "home_private",
 		path: "/register",
 		controller: "RegisterController",
 		title: function () {
@@ -158,26 +160,31 @@ Router.map(function () {
 		}
 	});
 	this.route("topics",{
+		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Topics");
 		}
 	});
 	this.route("author",{
+		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Author");
 		}
 	});
 	this.route("collections",{
+		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Collections");
 		}
 	});
 	this.route("publications",{
+		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Publications");
 		}
 	});
 	this.route("publishers", {
+		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Publishers");
 		}
@@ -220,7 +227,11 @@ Router.map(function () {
 	});
 	this.route("admin", {
 		path: "/admin",
-		controller: "AdminController"
+		controller: "AdminController",
+		title: function () {
+			return TAPi18n.__("Admin");
+		},
+		parent: "home_private"
 	});
 	this.route("admin.roles", {
 		path: "/admin/roles",
@@ -232,7 +243,11 @@ Router.map(function () {
 	});
 	this.route("admin.users", {
 		path: "/admin/users",
-		controller: "AdminUsersController"
+		controller: "AdminUsersController",
+		title: function () {
+			return TAPi18n.__("Users");
+		},
+		parent: "admin"
 	});
 	this.route("admin.users.details", {
 		path: "/admin/users/details/:userId",
