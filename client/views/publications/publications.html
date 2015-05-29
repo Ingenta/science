@@ -24,7 +24,7 @@
 		<hr>
 	</ul>
 	  {{#each publishers}}
-		<h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
+		<h6><a class="filterButton" href="">{{name}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a><a class="filterId" style="visibility:hidden">{{_id}}</a></h6>
 	  {{else}}
 	  {{_"No publishers found!"}}
 	  {{/each}}
@@ -32,9 +32,9 @@
 	<div id="subcontent" class="col-sm-9 col-md-10">
 		<div class="page-container container">
 		<div class="row">
-		{{#each publications}}
+		{{#each filteredPublications}}
 		   <div class="col-xs-2">
-				<img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="87"/>
+				<img src="{{getImage picture}}" width="87" />
 		   </div>
 		   <div class="row">
 			  <h4>{{> imageName}}&nbsp;<a href="">{{title}}</a></h4>
