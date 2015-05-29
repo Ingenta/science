@@ -24,7 +24,7 @@
 		<hr>
 	</ul>
 	  {{#each publishers}}
-		<h6><a class="filterButton" href="">{{name}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a><a class="filterId" style="visibility:hidden">{{_id}}</a></h6>
+		<h6><a class="filterButton" href="">{{name}}<p class="filterId" style="visibility:hidden">{{_id}}</p></a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
 	  {{else}}
 	  {{_"No publishers found!"}}
 	  {{/each}}
@@ -32,7 +32,7 @@
 	<div id="subcontent" class="col-sm-9 col-md-10">
 		<div class="page-container container">
 		<div class="row">
-		{{#each filteredPublications}}
+		{{#each publications}}
 		   <div class="col-xs-2">
 				<img src="{{getImage picture}}" width="87" />
 		   </div>
