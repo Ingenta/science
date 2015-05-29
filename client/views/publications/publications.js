@@ -24,12 +24,12 @@ Template.FilterList.helpers({
 	}
 
 });
-  Template.FilterList.events({
-    'click .filterButton': function (event) {
+Template.FilterList.events({
+	'click .filterButton': function (event) {
 		var f = $(event.currentTarget).find('.filterId').html();
-      Session.set('filterPublisher', f);
-    }
-  });
+	  Session.set('filterPublisher', f);
+	}
+});
 Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
 });
