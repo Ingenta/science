@@ -2,11 +2,11 @@
   <div class="page-container container">
    <div class="row">
      <div class="col-xs-3">
-      <img src="{{getImage picture}}" width="105" />
+      <img src="{{PT.getImage picture}}" width="105" />
     </div>
     <div class="col-xs-9">
       <h2>
-        {{#if isChinese languageTag}}
+        {{#if PT.isChinese languageTag}}
         {{chinesename}}
         {{else}}
         {{name}}
@@ -56,7 +56,7 @@
 <template name="SinglePublication">
   <div class="row">
     <div class="col-xs-4">
-      <img src="{{getImage picture}}" width="105" />
+      <img src="{{PT.getImage picture}}" width="105" />
     </div>
     <div class="col-xs-8">
       <div class="row">
