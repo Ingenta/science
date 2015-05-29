@@ -1,30 +1,10 @@
-// var data = [
-//     {
-//         label: '<a href="test">Acoustics</a>', id: 1,
-//         children: [
-//             { label: '<a href="test">Acoustic instrumentation</a>', id: 2 },
-//             { label: '<a href="test"> Acoustic modeling</a>', id: 3 }
-//         ]
-//     },
-//     {
-//         label: '<a href="test">Astronomy and astrophysics</a>', id: 4,
-//         children: [
-//             { label: '<a href="test">Astrophysics</a>', id: 5 }
-//         ]
-//     }
-// ];
-// Template.Topics.rendered = function () {
-// $('#topicTree').tree({
-//     data: data,
-//     autoOpen: false,
-//     autoEscape: false
-// });
-// };
 Template.SingleTopic.events({
-   'click .fa': function (event) {
-       console.log($(event.target).attr("aria-controls"));
-       $(event.target).toggleClass("fa-plus");
-       $(event.target).toggleClass("fa-minus");
+   'click li': function (event) {
+       var k=event.currentTarget.textContent.trim();
+       var es=Session.get("expandStatus"+k);
+       Session.set("expandStatus"+k,!es);
+       //阻止事件继续传播
+       event.stopPropagation();
    }
 });
 
@@ -42,5 +22,8 @@ Template.SingleTopic.helpers({
     },
     subTopics: function (parentName) {
         return  Topics.find({"parentName" : parentName});
+    },
+    isExpand: function(name){
+        return Session.get("expandStatus"+name) || false;
     }
 });

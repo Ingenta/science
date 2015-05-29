@@ -8,7 +8,9 @@
   </div>
   <div class="row">
     {{#if isAdmin }}
-    {{> addPublisherModalForm}}
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublisherModal">
+      {{_ "Add New"}}
+    </button>
     {{/if}}
   </div>
   <hr>
@@ -16,6 +18,7 @@
     {{> PublisherList}}
   </div>
 </div>
+{{> addPublisherForm}}
 </template>
 
 <template name="PublisherList">
@@ -26,32 +29,46 @@
   {{/each}}
 </template>
 
+<template name="showImage">
+  <img src="{{getImage picture}}" />
+</template>
+
 <template name="SinglePublisher">
   <div class="row">
     <div class="col-xs-3">
-      <a href="/publishers/{{name}}"><img src="http://scitation.aip.org/docserver/fulltext/aippublogo_103px.jpg" /></a>
+      <a href="/publishers/{{name}}">
+        <img src="{{getImage picture}}" width="105" />
+      </a>
     </div>
     <div class="col-xs-9">
       <div class="row">
-        <h3><a class="text" href="/publishers/{{name}}">{{name}}</a>
+        <div class="pull-right">
           {{#if isAdmin }}
           {{> updatePublisherModalForm}}
           {{> deletePublisherModalForm}}
           {{/if}}
-        </h3>
-      </div>
-      <div class="row">
-        {{description}}
-      </div>
+        </div>
+        <h3><a class="text" href="/publishers/{{name}}">
+          {{#if isChinese languageTag}}
+          {{chinesename}}
+          {{else}}
+          {{name}}
+          {{/if}}
+        </a>
+      </h3>
+    </div>
+    <div class="row">
+      {{description}}
     </div>
   </div>
-  <hr>
+</div>
+<hr>
 </template>
-<template name="addPublisherModalForm">
+<!-- <template name="addPublisherModalForm">
   {{#afModal class="fa fa-plus btn btn-success" collection="Publishers"  operation="insert"}}
   {{_ "Add new"}}
   {{/afModal}}
-</template>
+</template> -->
 <template name="updatePublisherModalForm">
   {{#afModal class="fa fa-pencil" title="Update" collection="Publishers" doc=_id operation="update"}}
   {{/afModal}}
@@ -59,4 +76,31 @@
 <template name="deletePublisherModalForm">
   {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id prompt=getPrompt}}
   {{/afModal}}
+</template>
+
+
+<template name="addPublisherForm">
+  <div class="modal fade" id="addPublisherModal" tabindex="-1" role="dialog" aria-labelledby="addPublisherModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addPublisherModalLabel">Modal title</h4>
+        </div>
+        {{#autoForm id="addPublisherModalForm" collection="Publishers" type="insert"}}
+        <div class="modal-body">
+          {{> afQuickField name="name"}}
+          {{> afQuickField name="chinesename"}}
+          {{> afQuickField name="website"}}
+          {{> afQuickField name="description"}}
+          {{> afQuickField name="chinesedescription"}}
+          {{> afQuickField name="picture"}}
+        </div>
+        <div class="modal-footer">
+         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+       </div>
+       {{/autoForm}}
+     </div>
+   </div>
+ </div>
 </template>

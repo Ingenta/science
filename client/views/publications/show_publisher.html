@@ -1,15 +1,21 @@
 <template name="ShowPublisher">
   <div class="page-container container">
    <div class="row">
-   <div class="col-xs-2">
-      <img src="http://scitation.aip.org/docserver/fulltext/aippublogo_103px.jpg"/>
+     <div class="col-xs-3">
+      <img src="{{getImage picture}}" width="105" />
     </div>
-    <div class="col-xs-10">
-     <h2>{{name}}</h2>
-   </div>
- </div>
- <br/>
- <div class="row">
+    <div class="col-xs-9">
+      <h2>
+        {{#if isChinese languageTag}}
+        {{chinesename}}
+        {{else}}
+        {{name}}
+        {{/if}}
+      </h2>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
    {{description}}
  </div>
  <br/>
@@ -19,7 +25,9 @@
  <br/>
  <div class="row">
   {{#if isAdmin }}
-  {{> addPublicationModalForm}}
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
+    {{_ "Add New"}}
+  </button>
   {{/if}}
 </div>
 <hr>
@@ -28,6 +36,7 @@
 </div>
 </div>
 {{setCurrentPublisher _id}}
+{{> addPublicationForm}}
 </template>
 
 <template name="PublisherWebsite">
@@ -47,7 +56,7 @@
 <template name="SinglePublication">
   <div class="row">
     <div class="col-xs-4">
-      <img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="87"/>
+      <img src="{{getImage picture}}" width="105" />
     </div>
     <div class="col-xs-8">
       <div class="row">
@@ -66,11 +75,11 @@
   <hr>
 </template>
 
-<template name="addPublicationModalForm">
+<!-- <template name="addPublicationModalForm">
   {{#afModal formId="addPublicationForm" class="fa fa-plus btn btn-success" collection="Publications"  operation="insert" omitFields="publisher"}}
   {{_ "Add new"}}
   {{/afModal}}
-</template>
+</template> -->
 <template name="updatePublicationModalForm">
   {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update" omitFields="publisher"}}
   {{/afModal}}
@@ -81,15 +90,40 @@
 </template>
 <template name="imageName">
 	{{#if accessKeyIs "1"}}
-      <img src="/icon_access_fc.gif">
-    {{/if}}
-	{{#if accessKeyIs "2"}}
-      <img src="/icon_access_oa.gif">
-    {{/if}}
-    {{#if accessKeyIs "3"}}
-      <img src="/icon_access_sc.gif">
-    {{/if}}
-	{{#if accessKeyIs "4"}}
-      <img src="/icon_access_ft.gif">
-    {{/if}}
+  <img src="/icon_access_fc.gif">
+  {{/if}}
+  {{#if accessKeyIs "2"}}
+  <img src="/icon_access_oa.gif">
+  {{/if}}
+  {{#if accessKeyIs "3"}}
+  <img src="/icon_access_sc.gif">
+  {{/if}}
+  {{#if accessKeyIs "4"}}
+  <img src="/icon_access_ft.gif">
+  {{/if}}
+</template>
+
+<template name="addPublicationForm">
+  <div class="modal fade" id="addPublicationModal" tabindex="-1" role="dialog" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addPublicationModalLabel">Modal title</h4>
+        </div>
+        {{#autoForm id="addPublicationModalForm" collection="Publications" type="insert"}}
+        <div class="modal-body">
+          {{> afQuickField name="title"}}
+          {{> afQuickField name="description"}}
+          {{> afQuickField name="firstletter"}}
+          {{> afQuickField name="accessKey"}}
+          {{> afQuickField name="picture"}}
+        </div>
+        <div class="modal-footer">
+         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+       </div>
+       {{/autoForm}}
+     </div>
+   </div>
+ </div>
 </template>

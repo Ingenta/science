@@ -14,7 +14,7 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-9 col-xs-9">
+				<div class="col-xs-12 col-sm-9">
 					{{> breadcrumb}}
 					<div id="content">
 						{{> flashMessages}}
@@ -22,8 +22,8 @@
 						{{> autoformModals}}
 					</div>
 				</div>
-				<div class="col-md-2 col-md-offset-1">
-					<div class="sidebar-module">
+				<div class="col-xs-6 col-sm-3 sidebar-offcanvas">
+					<div id="sidebar">
 						{{> LayoutSideBar}}
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 	<div id="footer">
 		<div class="footer-container container">
 			<p class="text-muted">
-				Prototype by Jack
+				PT 北京 - 中国科学的团队 - 杰克，蒋凯，杨冬冬，崔显，刘奇，李楠，黄新华
 			</p>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 					SCP
 				</a>
 			</div>
-			<div id="menu" class="collapse navbar-collapse">
+			<div id="navbar" class="collapse navbar-collapse">
 				{{> LeftMenu}}
 				{{#if currentUser}}
 				{{> PrivateLayoutRightMenu}}

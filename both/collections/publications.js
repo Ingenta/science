@@ -18,11 +18,22 @@ PublicationsSchema  = new SimpleSchema({
     },
     accessKey: {
       type: String,
-    },
-    publisher:
-    {
-        type: String
+  },
+  publisher:
+  {
+    type: String
+},
+picture: {
+    type: String,
+    optional: true,
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images'
     }
+},
+label: 'Choose file'
+}
 });
 Meteor.startup(function() {
     PublicationsSchema .i18n("schemas.publications");

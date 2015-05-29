@@ -11,42 +11,39 @@
         <p ><a href="">A</a>&nbsp;<a href="">B</a>&nbsp;<a href="">C</a>&nbsp;<a href="">D</a>&nbsp;<a href="">E</a>&nbsp;<a href="">F</a>&nbsp;<a href="">G</a>&nbsp;<a href="">H</a>&nbsp;<a href="">I</a>&nbsp;<a href="">J</a>&nbsp;<a href="">K</a>&nbsp;<a href="">L</a>&nbsp;<a href="">M</a>&nbsp;<a href="">N</a>&nbsp;<a href="">O</a>&nbsp;<a href="">P</a>&nbsp;<a href="">Q</a>&nbsp;<a href="">R</a>&nbsp;<a href="">S</a>&nbsp;<a href="">T</a>&nbsp;<a href="">U</a>&nbsp;<a href="">V</a>&nbsp;<a href="">W</a>&nbsp;<a href="">X</a>&nbsp;<a href="">Y</a>&nbsp;<a href="">Z</a></p>
     </div>
     <div class="row">
-        <div id="menu" class="col-sm-3 col-md-2">
-		<ul class="list-unstyled">
-			<hr>
-				<h5>{{_ "FILTER BY Publisher"}}:</h5>
-			<hr>
-	    </ul>
-		   {{> SimplePublisherList}}
-        </div>
-        <div id="subcontent" class="col-sm-9 col-md-10">
-            {{> PublicationsList}}
-        </div>
+        {{> FilterList}}
     </div>
 </div>
 </template>
-<template name="PublicationsList">
-    <div class="page-container container">
+
+<template name="FilterList">
+    <div id="menu" class="col-sm-3 col-md-2">
+	<ul class="list-unstyled">
+		<hr>
+			<h5>{{_ "FILTER BY Publisher"}}:</h5>
+		<hr>
+	</ul>
+	  {{#each publishers}}
+		<h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
+	  {{else}}
+	  {{_"No publishers found!"}}
+	  {{/each}}
+	</div>
+	<div id="subcontent" class="col-sm-9 col-md-10">
+		<div class="page-container container">
 		<div class="row">
-            {{#each publications}}
-               <div class="col-xs-2">
-                    <img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="87"/>
-               </div>
-			   <div class="row">
-                  <h3>{{> imageName}}&nbsp;<a href="">{{title}}</a></h3>
-				  <h5><a href="">Browse&nbsp;&nbsp;{{name}}</a></h5>
-                  <h5>{{description}}</h5>
-			   </div>
-            {{else}}
-            {{_"No publications found!"}}
-            {{/each}}
+		{{#each publications}}
+		   <div class="col-xs-2">
+				<img src="http://scitation.aip.org/docserver/fulltext/aaidbi_cover.jpg" width="87"/>
+		   </div>
+		   <div class="row">
+			  <h4>{{> imageName}}&nbsp;<a href="">{{title}}</a></h4>
+			  <h5>{{description}}</h5>
+		   </div>
+		{{else}}
+		{{_"No publications found!"}}
+		{{/each}}
         </div>
     </div>
-</template>
-<template name="SimplePublisherList">
-  {{#each publishers}}
-   <h6><a href="">{{name}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
-  {{else}}
-  {{_"No publishers found!"}}
-  {{/each}}
+	</div>
 </template>
