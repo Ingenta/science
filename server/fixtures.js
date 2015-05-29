@@ -10,7 +10,7 @@ Meteor.startup(function () {
     }
 
 
-    if (Topics.find().count() === 0) {
+/*    if (Topics.find().count() === 0) {
         var names = [
         "Acoustics",
         "Astronomy and astrophysics",
@@ -46,5 +46,5 @@ Meteor.startup(function () {
                 });
             });
         }
-    }
+    }*/
 });
