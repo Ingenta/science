@@ -10,7 +10,6 @@ Meteor.startup(function () {
     // }
 
 
-<<<<<<< HEAD
 /*    if (Topics.find().count() === 0) {
         var names = [
         "Acoustics",
@@ -48,7 +47,7 @@ Meteor.startup(function () {
             });
         }
     }*/
-=======
+
     // if (Topics.find().count() === 0) {
     //     var names = [
     //     "Acoustics",
@@ -86,5 +85,5 @@ Meteor.startup(function () {
     //         });
     //     }
     // }
->>>>>>> 6da16df65636c0535f1be422505fd8cfc72c43a8
+
 });
