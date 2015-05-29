@@ -139,18 +139,44 @@ Router.map(function () {
 	this.route("home_public", {
 		path: "/",
 		controller: "HomePublicController",
-		title: "Home"
+		title: function () {
+			return TAPi18n.__("Home");
+		}
 	});
 	this.route("login", {
 		path: "/login",
-		controller: "LoginController"
+		controller: "LoginController",
+		title: function () {
+			return TAPi18n.__("Login");
+		}
 	});
 	this.route("register", {
 		path: "/register",
-		controller: "RegisterController"
+		controller: "RegisterController",
+		title: function () {
+			return TAPi18n.__("Register");
+		}
 	});
-	this.route("topics");
-	this.route("collections");
+	this.route("topics",{
+		title: function () {
+			return TAPi18n.__("Topics");
+		}
+	});
+	this.route("author",{
+		title: function () {
+			return TAPi18n.__("Author");
+		}
+	});
+	this.route("collections",{
+		title: function () {
+			return TAPi18n.__("Collections");
+		}
+	});
+	this.route("publications",{
+		title: function () {
+			return TAPi18n.__("Publications");
+		}
+	});
 	this.route("publishers", {
 		title: function () {
 			return TAPi18n.__("Publishers");
@@ -164,10 +190,19 @@ Router.map(function () {
 		parent: "publishers",
 		title: function(){
 			return ":name";
-		},//TODO fix title bug
+		}
 	});
 
-	this.route("publications");
+	// this.route('/publishers/:name/:title', {
+	// 	data: function(){
+	// 		return Publications.findOne({title: this.params.title});
+	// 	},
+	// 	template: "ShowPublication",
+	// 	parent: this.params.name,
+	// 	title: function(){
+	// 		return ":title";
+	// 	}
+	// });
 	this.route("forgot_password", {
 		path: "/forgot_password",
 		controller: "ForgotPasswordController"
@@ -178,7 +213,10 @@ Router.map(function () {
 	});
 	this.route("home_private", {
 		path: "/home_private",
-		controller: "HomePrivateController"
+		controller: "HomePrivateController",
+		title: function () {
+			return TAPi18n.__("Home");
+		}
 	});
 	this.route("admin", {
 		path: "/admin",

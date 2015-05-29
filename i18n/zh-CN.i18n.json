@@ -1,4 +1,5 @@
 {
+    "Home" : "首页",
     "Create" : "确定",
     "OK" : "确定",
     "Edit your profile" : "编辑您的资料",
@@ -33,8 +34,8 @@
     "Publishers": "出版社",
     "Publications": "出版物",
     "Topics": "主题",
-    "Collections": "虚拟产品包",
-    "Reader Centre": "作者中心",
+    "Collections": "文章集",
+    "Author": "作者中心",
     "Register": "注册",
     "Login": "登录",
     "Log Out": "退出",
