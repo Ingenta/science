@@ -1,7 +1,7 @@
 Template.FilterList.helpers({
 		publishers: function () {
 		  return Publishers.find();
-		}, 
+		},
 		publications: function () {
 		  return Publications.find();
 		},
@@ -25,8 +25,7 @@ Template.FilterList.helpers({
 });
   Template.FilterList.events({
     'click .filterButton': function (event) {
-		var f = $(event.currentTarget).find('.filterId').html();
-		console.log(f);
-      Session.set('filterPublisher', f);
+		var publisherId = $(event.currentTarget).parent().find('.filterId').html();
+                        Session.set('filterPublisher', publisherId);
     }
   });
