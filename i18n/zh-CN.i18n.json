@@ -1,4 +1,16 @@
 {
+    "Create" : "确定",
+    "OK" : "确定",
+    "Edit your profile" : "编辑您的资料",
+    "Change password" : "修改密码",
+    "Profile" : "个人资料",
+    "Add new" : "添加",
+    "Cancel" : "关闭",
+    "Save" : "保存",
+    "Password" : "密码",
+    "Add new user" : "添加新用户",
+    "Role" : "角色",
+    "Roles" : "角色",
     "Are you sure?": "你确定吗？",
     "Access Key": "资源标签",
     "Free Content": "免费获取",
@@ -44,19 +56,19 @@
     "schemas": {
         "publications": {
             "description": {
-                "label": "描述"
+                "label": "英文描述"
             },
              "chinesedescription": {
                 "label": "中文描述"
             },
             "title": {
-                "label": "出版物名字"
+                "label": "出版物英文名字"
             },
             "chinesetitle": {
                 "label": "出版物中文名字"
             },
             "firstletter": {
-                "label": "首字母"
+                "label": "英文首字母"
             },
             "chinesefirstletter": {
                 "label": "中文首字母"
@@ -76,7 +88,7 @@
         },
         "publishers": {
             "description": {
-                "label": "描述"
+                "label": "英文描述"
             },
              "chinesedescription": {
                 "label": "中文描述"
@@ -93,6 +105,9 @@
             "website": {
                 "label": "网站",
                 "placeholder": "http://www.scitation.aip.org"
+            },
+             "picture": {
+                "label": "选择图片"
             }
         }
     }

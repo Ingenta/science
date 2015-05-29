@@ -53,6 +53,9 @@
             "website": {
                 "label": "Website",
                 "placeholder": "http://www.scitation.aip.org"
+            },
+             "picture": {
+                "label": "Choose file"
             }
         }
     }
