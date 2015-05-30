@@ -36,7 +36,8 @@ PublishersSchema  = new SimpleSchema({
         autoform: {
           afFieldInput: {
             type: 'fileUpload',
-            collection: 'Images'
+            collection: 'Images',
+            accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
         }
     },
     label: 'Choose file'
