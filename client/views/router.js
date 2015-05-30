@@ -131,6 +131,8 @@ Meteor.subscribe("topics");
 
 Meteor.subscribe("images");
 
+Meteor.subscribe("PTi18n")
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 

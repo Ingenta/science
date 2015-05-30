@@ -3,20 +3,11 @@
  */
 this.PTi18n = new Meteor.Collection("PTi18n");
 
-PTi18nSchema = new SimpleSchema({
-    code: {
-        type: String,
-        unique: true
+Meteor.methods({
+    inserti18n:function(i18n){
+        PTi18n.insert(i18n);
     },
-    en: {
-        type: String
-    },
-    cn:{
-        type: String
+    updatei18n:function(i18n){
+        PTi18n.update({_id:i18n._id},{$set:{en:i18n.en,cn:i18n.cn}});
     }
-});
-
-Meteor.startup(function () {
-    //TopicsSchema.i18n("schemas.topics");
-    PTi18n.attachSchema(PTi18nSchema);
-});
+})
