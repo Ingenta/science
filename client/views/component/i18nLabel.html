@@ -1,0 +1,16 @@
+<template name="i18nLabel">
+    {{#with label}}
+        {{#if PT.isChinese languageTag}}
+            {{cn}}
+        {{else}}
+            {{en}}
+        {{/if}}
+    {{#if isAdmin }}
+        {{> i18nModalForm}}
+    {{/if}}
+    {{/with}}
+</template>
+<template name="i18nModalForm">
+    {{#afModal class="fa fa-pencil" collection="PTi18n" doc="_id" operation="upsert"}}
+    {{/afModal}}
+</template>
