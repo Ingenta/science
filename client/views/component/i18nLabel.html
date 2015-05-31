@@ -6,12 +6,11 @@
             {{en}}
         {{/if}}
     {{#if isAdmin }}
-        <i class="fa fa-pencil btn btn-primary btn-xs labelModify"></i>
-        <div class="modifyDiv" style="position:absolute;background-color: white;display:none">
-            <span>Cn</span><input class="cn" style="width:50px" value="{{cn}}"/>&nbsp;
-            <span>En</span><input class="en" style="width:50px" value="{{en}}"/>&nbsp;
-            <i data-iden="{{_id}}" data-code="{{code}}" class="btn-submit fa fa-check btn btn-primary btn-xs"></i>
-        </div>
+        {{> i18nModalForm}}
     {{/if}}
     {{/with}}
+</template>
+<template name="i18nModalForm">
+    {{#afModal class="fa fa-pencil" collection="PTi18n" doc="_id" operation="upsert"}}
+    {{/afModal}}
 </template>
