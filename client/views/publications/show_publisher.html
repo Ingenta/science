@@ -26,7 +26,7 @@
  <div class="row">
   {{#if isAdmin }}
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
-    {{_ "Add New"}}
+    {{_ "Add new"}}
   </button>
   {{/if}}
 </div>
@@ -60,7 +60,7 @@
     </div>
     <div class="col-xs-8">
       <div class="row">
-        <h3>{{> imageName}}&nbsp;&nbsp;{{title}}
+      <h3>{{> imageName}}&nbsp;&nbsp;<a href="{{getJournalUrlById _id}}">{{title}}</a>
           {{#if isAdmin }}
           {{> updatePublicationModalForm}}
           {{> deletePublicationModalForm}}
