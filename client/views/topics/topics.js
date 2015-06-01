@@ -1,29 +1,47 @@
 Template.SingleTopic.events({
    'click li': function (event) {
-       var k=event.currentTarget.textContent.trim();
-       var es=Session.get("expandStatus"+k);
-       Session.set("expandStatus"+k,!es);
-       //阻止事件继续传播
+       var id=$(event.currentTarget).attr('id');
+       var es=Session.get("expandStatus"+id);
+       Session.set("expandStatus"+id,!es);
+       Session.set("parentId", id);
        event.stopPropagation();
    }
 });
 
 Template.TopicList.helpers({
     topics: function () {
-        return  Topics.find({"parentName" : null});
+        return  Topics.find({"parentId" : null});
     }
 });
 Template.SingleTopic.helpers({
-    removeSpaces: function (name) {
-        return  replaceSubstrings(name, ' ', '');
+    subTopicCount: function (parentId) {
+        return  Topics.find({"parentId" : parentId}).count();
     },
-    subTopicCount: function (parentName) {
-        return  Topics.find({"parentName" : parentName}).count();
+    subTopics: function (parentId) {
+        return  Topics.find({"parentId" : parentId});
     },
-    subTopics: function (parentName) {
-        return  Topics.find({"parentName" : parentName});
-    },
-    isExpand: function(name){
-        return Session.get("expandStatus"+name) || false;
+    isExpand: function(id){
+        return Session.get("expandStatus"+id) || false;
     }
 });
+
+Template.deleteTopicModalForm.helpers({
+    getPrompt: function () {
+        return TAPi18n.__("Are you sure?");
+    }
+});
+
+
+AutoForm.addHooks(['addSubTopicModalForm'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
+    },
+    before:{
+        insert:  function(doc){
+            console.log(doc);
+            doc.parentId = Session.get('parentId');
+            console.log(doc);
+            return doc;
+        }
+    }
+}, true);
