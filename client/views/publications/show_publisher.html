@@ -32,11 +32,28 @@
 </div>
 <hr>
 <div class="row">
-  {{> PublicationList}}
+{{> myTemplate}}
+
 </div>
 </div>
 {{setCurrentPublisher _id}}
 {{> addPublicationForm}}
+</template>
+
+<template name="myTemplate">
+
+  {{#basicTabs name="" tabs=tabs}}
+
+    {{#tabContent slug="journals"}}
+        {{> PublicationList}}
+    {{/tabContent}}
+
+    {{#tabContent slug="collections"}}
+      No collections found!
+    {{/tabContent}}
+
+  {{/basicTabs}}
+
 </template>
 
 <template name="PublisherWebsite">
