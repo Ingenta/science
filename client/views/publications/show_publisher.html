@@ -58,15 +58,20 @@
 <template name="SinglePublication">
   <div class="row">
     <div class="col-xs-4">
-      <img src="{{PT.getImage picture}}" width="105" />
+      <img src="{{getImage picture}}" width="105" />
     </div>
     <div class="col-xs-8">
       <div class="row">
-        <h3>{{> imageName}}&nbsp;&nbsp;{{title}}
+        <div class="pull-right">
           {{#if isAdmin }}
           {{> updatePublicationModalForm}}
           {{> deletePublicationModalForm}}
           {{/if}}
+        </div>
+        <h3>{{> imageName}}&nbsp;&nbsp;
+          <a href="/publishers/{{getPublisherNameById publisher}}/journals/{{title}}">
+            {{title}}
+          </a>
         </h3>
       </div>
       <div class="row">

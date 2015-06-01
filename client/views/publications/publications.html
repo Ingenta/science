@@ -1,49 +1,49 @@
 <template name="Publications">
   <div class="page-container container">
-   <div class="row">
-     <h2>{{_ "Publications"}}
-     </h2>
+     <div class="row">
+       <h2>{{_ "Publications"}}
+       </h2>
    </div>
    <div class="row">
     <p>{{_ "Introductory text"}}</p>
-  </div>
-  <div class="row pull-right">
+</div>
+<div class="row pull-right">
     <p ><a href="">A</a>&nbsp;<a href="">B</a>&nbsp;<a href="">C</a>&nbsp;<a href="">D</a>&nbsp;<a href="">E</a>&nbsp;<a href="">F</a>&nbsp;<a href="">G</a>&nbsp;<a href="">H</a>&nbsp;<a href="">I</a>&nbsp;<a href="">J</a>&nbsp;<a href="">K</a>&nbsp;<a href="">L</a>&nbsp;<a href="">M</a>&nbsp;<a href="">N</a>&nbsp;<a href="">O</a>&nbsp;<a href="">P</a>&nbsp;<a href="">Q</a>&nbsp;<a href="">R</a>&nbsp;<a href="">S</a>&nbsp;<a href="">T</a>&nbsp;<a href="">U</a>&nbsp;<a href="">V</a>&nbsp;<a href="">W</a>&nbsp;<a href="">X</a>&nbsp;<a href="">Y</a>&nbsp;<a href="">Z</a></p>
-  </div>
-  <div class="row">
+</div>
+<div class="row">
     {{> FilterList}}
-  </div>
+</div>
 </div>
 </template>
 
 <template name="FilterList">
     <div id="menu" class="col-sm-3 col-md-2">
-	<ul class="list-unstyled">
-		<hr>
-			<h5>{{_ "FILTER BY Publisher"}}:</h5>
-		<hr>
-	</ul>
-	  {{#each publishers}}
-		<h6><a class="filterButton" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}<p class="filterId" style="visibility:hidden">{{_id}}</p></a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
-	  {{else}}
-	  {{_"No publishers found!"}}
-	  {{/each}}
-	</div>
-	<div id="subcontent" class="col-sm-9 col-md-10">
-		<div class="page-container container">
-		<div class="row">
-		{{#each publications}}
-		   <div class="col-xs-2">
-				<img src="{{getImage picture}}" width="87" height="118"/>
-		   </div>
-		   <div class="row">
-			  <h4>{{> imageName}}&nbsp;<a href="">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a></h4>
-			  <h5>{{description}}</h5>
-		   </div>
-		{{else}}
-		{{_"No publications found!"}}
-		{{/each}}
-        </div>
-    </div>
-	</div>
+       <ul class="list-unstyled">
+          <hr>
+          <h5>{{_ "FILTER BY Publisher"}}:</h5>
+          <hr>
+      </ul>
+      {{#each publishers}}
+      <h6><a class="filterButton" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}<p class="filterId" style="visibility:hidden">{{_id}}</p></a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
+      {{else}}
+      {{_"No publishers found!"}}
+      {{/each}}
+  </div>
+  <div id="subcontent" class="col-sm-9 col-md-10">
+      <div class="page-container container">
+          <div class="row">
+              {{#each publications}}
+              <div class="col-xs-2">
+                <img src="{{getImage picture}}" width="87" height="118"/>
+            </div>
+            <div class="row">
+               <h4>{{> imageName}}&nbsp;<a href="">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a></h4>
+               <h5>{{description}}</h5>
+           </div>
+           {{else}}
+           {{_"No publications found!"}}
+           {{/each}}
+       </div>
+   </div>
+</div>
 </template>

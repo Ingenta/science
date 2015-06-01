@@ -200,16 +200,13 @@ Router.map(function () {
 		}
 	});
 
-	// this.route('/publishers/:name/:title', {
-	// 	data: function(){
-	// 		return Publications.findOne({title: this.params.title});
-	// 	},
-	// 	template: "ShowPublication",
-	// 	parent: this.params.name,
-	// 	title: function(){
-	// 		return ":title";
-	// 	}
-	// });
+	this.route('/publishers/:name/journals/:title', {
+		data: function(){
+			return Publications.findOne({title: this.params.title});
+		},
+		template: "ShowJournal"
+	});
+
 	this.route("forgot_password", {
 		path: "/forgot_password",
 		controller: "ForgotPasswordController"
