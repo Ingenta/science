@@ -70,7 +70,7 @@
         </div>
         <h3>{{> imageName}}&nbsp;&nbsp;
           <a href="/publishers/{{getPublisherNameById publisher}}/journals/{{title}}">
-            {{title}}
+            {{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}
           </a>
         </h3>
       </div>
