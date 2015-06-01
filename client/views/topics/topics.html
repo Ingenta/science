@@ -37,25 +37,11 @@
         {{else}}
         <i class="fa fa-plus" type="button"></i>
         {{/if}}
-        {{name}}
-        <div class="pull-right">
-            {{#if isAdmin }}
-            {{> addSubTopicModalForm}}
-            {{> updateTopicModalForm}}
-            {{> deleteTopicModalForm}}
-            {{/if}}
-        </div>
+        {{> TopicButtons}}
     </li>
     {{else}}
     <li style="list-style-type:none;" id="{{_id}}">
-        {{name}}
-        <div class="pull-right">
-            {{#if isAdmin }}
-            {{> addSubTopicModalForm}}
-            {{> updateTopicModalForm}}
-            {{> deleteTopicModalForm}}
-            {{/if}}
-        </div>
+        {{> TopicButtons}}
     </li>
     {{/if}}
 
@@ -72,7 +58,8 @@
 </template>
 
 <template name="updateTopicModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Topics" doc=_id operation="update" omitFields="parentId"}}
+    {{#afModal class="fa fa-pencil" title="Update" collection="Topics" doc=_id operation="update"
+    omitFields="parentId"}}
     {{/afModal}}
 </template>
 
@@ -88,6 +75,20 @@
 </template>
 
 <template name="addSubTopicModalForm">
-    {{#afModal formId="addSubTopicModalForm" class="fa fa-plus" collection="Topics" operation="insert" omitFields="parentId"}}
+    {{#afModal formId="addSubTopicModalForm" class="fa fa-plus" collection="Topics" operation="insert"
+    omitFields="parentId"}}
     {{/afModal}}
+</template>
+
+<template name="TopicButtons">
+    {{name}}
+    <div class="pull-right">
+        {{#if isAdmin }}
+        {{> addSubTopicModalForm}}
+        {{> updateTopicModalForm}}
+        {{#if hasSubTopic _id}}
+        {{> deleteTopicModalForm}}
+        {{/if}}
+        {{/if}}
+    </div>
 </template>

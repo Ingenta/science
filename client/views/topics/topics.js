@@ -13,6 +13,11 @@ Template.TopicList.helpers({
         return  Topics.find({"parentId" : null});
     }
 });
+Template.TopicButtons.helpers({
+    hasSubTopic: function (parentId) {
+        return  Topics.find({"parentId": parentId}).count()===0;
+    }
+});
 Template.SingleTopic.helpers({
     subTopicCount: function (parentId) {
         return  Topics.find({"parentId" : parentId}).count();
