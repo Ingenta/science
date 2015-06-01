@@ -13,7 +13,7 @@ Template.myTemplate.helpers({
     // Every tab object MUST have a name and a slug!
     return [
       { name: 'Overview', slug: 'overview' },
-      { name: 'about', slug: 'about' },
+      { name: 'About', slug: 'about' },
  /*     { name: 'Things', slug: 'things', onRender: function(template) {
         // This callback runs every time this specific tab's content renders.
         // As with `onChange`, the `template` instance is unique per block helper.
