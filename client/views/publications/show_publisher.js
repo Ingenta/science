@@ -16,22 +16,6 @@ Template.ShowPublisher.helpers({
   }
 });
 
-ReactiveTabs.createInterface({
-  template: 'basicTabs'
-});
-
-Template.myTemplate.helpers({
-  tabs: function () {
-    return [
-      { name: 'Journals', slug: 'journals',},
-      { name: 'Collections', slug: 'collections',}
-    ];
-  },
-  activeTab: function () {
-    return Session.get('activeTab');
-  }
-});
-
 AutoForm.addHooks(['addPublicationModalForm'], {
   onSuccess: function () {
     $("#addPublicationModal").modal('hide');
