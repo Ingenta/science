@@ -1,5 +1,9 @@
 <template name="Publications">
-  <div class="page-container container">
+  {{> FilterList}}
+</template>
+
+<template name="FilterList">
+<div class="page-container container">
      <div class="row">
        <h2>{{_ "Publications"}}
        </h2>
@@ -8,15 +12,9 @@
     <p>{{_ "Introductory text"}}</p>
 </div>
 <div class="row pull-right">
-    <p ><a href="">A</a>&nbsp;<a href="">B</a>&nbsp;<a href="">C</a>&nbsp;<a href="">D</a>&nbsp;<a href="">E</a>&nbsp;<a href="">F</a>&nbsp;<a href="">G</a>&nbsp;<a href="">H</a>&nbsp;<a href="">I</a>&nbsp;<a href="">J</a>&nbsp;<a href="">K</a>&nbsp;<a href="">L</a>&nbsp;<a href="">M</a>&nbsp;<a href="">N</a>&nbsp;<a href="">O</a>&nbsp;<a href="">P</a>&nbsp;<a href="">Q</a>&nbsp;<a href="">R</a>&nbsp;<a href="">S</a>&nbsp;<a href="">T</a>&nbsp;<a href="">U</a>&nbsp;<a href="">V</a>&nbsp;<a href="">W</a>&nbsp;<a href="">X</a>&nbsp;<a href="">Y</a>&nbsp;<a href="">Z</a></p>
+    <p ><a class="numberButton" href="">A</a>&nbsp;<a class="numberButton" href="">B</a>&nbsp;<a class="numberButton" href="">C</a>&nbsp;<a class="numberButton" href="">D</a>&nbsp;<a class="numberButton" href="">E</a>&nbsp;<a class="numberButton" href="">F</a>&nbsp;<a class="numberButton" href="">G</a>&nbsp;<a class="numberButton" href="">H</a>&nbsp;<a class="numberButton" href="">I</a>&nbsp;<a class="numberButton" href="">J</a>&nbsp;<a class="numberButton" href="">K</a>&nbsp;<a class="numberButton" href="">L</a>&nbsp;<a class="numberButton" href="">M</a>&nbsp;<a class="numberButton" href="">N</a>&nbsp;<a class="numberButton" href="">O</a>&nbsp;<a class="numberButton" href="">P</a>&nbsp;<a class="numberButton" href="">Q</a>&nbsp;<a class="numberButton" href="">R</a>&nbsp;<a class="numberButton" href="">S</a>&nbsp;<a class="numberButton" href="">T</a>&nbsp;<a class="numberButton" href="">U</a>&nbsp;<a class="numberButton" href="">V</a>&nbsp;<a class="numberButton" href="">W</a>&nbsp;<a class="numberButton" href="">X</a>&nbsp;<a class="numberButton" href="">Y</a>&nbsp;<a class="numberButton" href="">Z</a></p>
 </div>
 <div class="row">
-    {{> FilterList}}
-</div>
-</div>
-</template>
-
-<template name="FilterList">
     <div id="menu" class="col-sm-3 col-md-2">
        <ul class="list-unstyled">
           <hr>
@@ -24,19 +22,19 @@
           <hr>
       </ul>
       {{#each publishers}}
-      <h6><a class="filterButton" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}<p class="filterId" style="visibility:hidden">{{_id}}</p></a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
-      {{else}}
-      {{_"No publishers found!"}}
+           <h6><a class="filterButton" data-pubid="{{_id}}" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
+           {{else}}
+           {{_"No publishers found!"}}
       {{/each}}
   </div>
   <div id="subcontent" class="col-sm-9 col-md-10">
       <div class="page-container container">
           <div class="row">
-              {{#each publications}}
-              <div class="col-xs-2">
+           {{#each publications}}
+           <div class="col-xs-2">
                 <img src="{{getImage picture}}" width="87" height="118"/>
-            </div>
-            <div class="row">
+           </div>
+           <div class="row">
                <h4>{{> imageName}}&nbsp;<a href="">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a></h4>
                <h5>{{description}}</h5>
            </div>
@@ -45,5 +43,7 @@
            {{/each}}
        </div>
    </div>
+</div>
+</div>
 </div>
 </template>
