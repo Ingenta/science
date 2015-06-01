@@ -6,6 +6,11 @@ TopicsSchema = new SimpleSchema({
         unique: true,
         max: 32
     },
+    englishName: {
+        type: String,
+        unique: true,
+        max: 64
+    },
     parentId: {
         type: String,
         optional: true

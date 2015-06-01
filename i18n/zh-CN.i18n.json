@@ -114,7 +114,10 @@
         },
         "topics": {
             "name": {
-                "label": "名称"
+                "label": "中文名称"
+            },
+            "englishName": {
+                "label": "英文名称"
             }
         }
     }

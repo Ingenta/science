@@ -60,7 +60,10 @@
         },
         "topics": {
             "name": {
-                "label": "Name"
+                "label": "Chinese Name"
+            },
+            "englishName": {
+                "label": "English Name"
             }
         }
     }

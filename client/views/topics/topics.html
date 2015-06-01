@@ -81,7 +81,11 @@
 </template>
 
 <template name="TopicButtons">
+    {{#if PT.isChinese languageTag}}
     {{name}}
+    {{else}}
+    {{englishName}}
+    {{/if}}
     <div class="pull-right">
         {{#if isAdmin }}
         {{> addSubTopicModalForm}}
