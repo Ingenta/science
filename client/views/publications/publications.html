@@ -24,7 +24,7 @@
 		<hr>
 	</ul>
 	  {{#each publishers}}
-		<h6><a class="filterButton" href="">{{name}}<p class="filterId" style="visibility:hidden">{{_id}}</p></a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
+		<h6><a class="filterButton" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}<p class="filterId" style="visibility:hidden">{{_id}}</p></a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
 	  {{else}}
 	  {{_"No publishers found!"}}
 	  {{/each}}
@@ -37,7 +37,7 @@
 				<img src="{{getImage picture}}" width="87" height="118"/>
 		   </div>
 		   <div class="row">
-			  <h4>{{> imageName}}&nbsp;<a href="">{{title}}</a></h4>
+			  <h4>{{> imageName}}&nbsp;<a href="">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a></h4>
 			  <h5>{{description}}</h5>
 		   </div>
 		{{else}}
