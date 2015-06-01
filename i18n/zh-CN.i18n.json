@@ -111,6 +111,11 @@
              "picture": {
                 "label": "选择图片"
             }
+        },
+        "topics": {
+            "name": {
+                "label": "名称"
+            }
         }
     }
 }

@@ -57,6 +57,11 @@
              "picture": {
                 "label": "Choose file"
             }
+        },
+        "topics": {
+            "name": {
+                "label": "Name"
+            }
         }
     }
 }

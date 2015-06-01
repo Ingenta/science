@@ -3,7 +3,8 @@ this.Topics = new Meteor.Collection("topics");
 TopicsSchema = new SimpleSchema({
     name: {
         type: String,
-        unique: true
+        unique: true,
+        max: 32
     },
     parentId: {
         type: String,
