@@ -195,16 +195,16 @@ Router.map(function () {
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
-		title: function(){
-			return ":name";
-		}
+		title: ":name"
 	});
 
 	this.route('/publishers/:name/journals/:title', {
 		data: function(){
 			return Publications.findOne({title: this.params.title});
 		},
-		template: "ShowJournal"
+		template: "ShowJournal",
+		title: ":title",
+		parent: "publishers"
 	});
 
 	this.route("forgot_password", {
