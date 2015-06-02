@@ -19,8 +19,8 @@ ReactiveTabs.createInterface({
 
 Template.myTemplate.helpers({
   context: function () {
-    console.log(Router.current().route.path(this));
-    return Publications.findOne();
+    var currentTitle = Router.current().params.title;
+    return Publications.findOne({title: currentTitle});
   }
 });
 
