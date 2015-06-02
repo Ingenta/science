@@ -1,4 +1,5 @@
 {
+    "Any Publisher" : "出版社",
     "Editors" : "编辑",
     "Executive Editors" : "行政主编",
     "Academic Editors" : "学术主编",
@@ -33,7 +34,7 @@
     "Introductory text": "文字介绍",
     "No publications found!": "没有找到出版物！",
     "No publishers found!": "没有找到出版社！",
-    "Welcome Message": "欢迎杰克",
+    "Welcome Message": "欢迎",
     "Your full name": "你的全名",
     "Page not found": "找不到网页",
     "Click Here": "点击这里",

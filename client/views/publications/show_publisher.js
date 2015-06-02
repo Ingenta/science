@@ -33,10 +33,10 @@ AutoForm.addHooks(['addPublicationModalForm'], {
   },
   before:{
     insert:  function(doc){
-      console.log(doc);
       doc.publisher = Session.get('currentPublisher');
-      console.log(doc);
+      doc.firstletter=doc.firstletter.toUpperCase();
       return doc;
+      //TODO: fix update bug not setting uppercase
     }
   }
 }, true);

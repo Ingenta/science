@@ -195,7 +195,8 @@ Router.map(function () {
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
-		title: ":name"
+		title: ":name",
+		name: "publisher.name"
 	});
 
 	this.route('/publisher/:name/journal/:title', {
@@ -204,7 +205,7 @@ Router.map(function () {
 		},
 		template: "ShowJournal",
 		title: ":title",
-		parent: "publishers"
+		parent: "publisher.name"
 	});
 
 	this.route('/publisher/:name/journal/:title/article/:articleName', {

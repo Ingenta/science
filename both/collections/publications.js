@@ -5,13 +5,6 @@ PublicationsSchema  = new SimpleSchema({
         type: String,
         unique: true
     },
-    description: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 2
-        }
-    },
     firstletter:{
         type: String,
         max: 1
@@ -19,8 +12,15 @@ PublicationsSchema  = new SimpleSchema({
     accessKey: {
       type: String,
   },
-  publisher:
-  {
+  description: {
+    type: String,
+    optional: true,
+    autoform: {
+        rows: 4
+    }
+},
+publisher:
+{
     type: String
 },
 picture: {
