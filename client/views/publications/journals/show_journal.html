@@ -25,8 +25,8 @@
             About us
         </div>
         <div class="col-xs-9">
-        <h2>About us</h2>
-        Physics Today, the flagship publication of the American Institute of Physics, is the most influential and closely followed physics magazine in the world. With authoritative features, full news coverage and analysis, and fresh perspectives on technological advances and ground-breaking research, Physics Today informs readers about science and its role in society.
+            <h2>About us</h2>
+            Physics Today, the flagship publication of the American Institute of Physics, is the most influential and closely followed physics magazine in the world. With authoritative features, full news coverage and analysis, and fresh perspectives on technological advances and ground-breaking research, Physics Today informs readers about science and its role in society.
         </div>
     </div>
     {{/tabContent}}
@@ -40,7 +40,7 @@
   <div class="journalTabs-container">
 
     {{#if activeTab}}
-      {{trackActiveTab activeTab}}
+    {{trackActiveTab activeTab}}
     {{/if}}
 
     {{trackTabs tabs}}
@@ -49,15 +49,15 @@
       {{#each tabs}}
       <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a></li>
       {{/each}}
-    </ul>
+  </ul>
 
-    <div class="tabs-content-container">
+  <div class="tabs-content-container">
       {{> UI.contentBlock
-          context=__context__
-      }}
-    </div>
+      context=__context__
+  }}
+</div>
 
-  </div>
+</div>
 
 </template>
 
@@ -68,6 +68,9 @@
             <img src="{{getImageHelper picture}}" width="105" />
         </div>
         <div class="col-xs-8">
+        <div class="row pull-right">
+                {{> updatePublicationDescriptionModalForm}}
+            </div>
             <div class="row">
                 {{description}}
             </div>
@@ -75,4 +78,8 @@
     </div>
     <hr>
 
+</template>
+<template name="updatePublicationDescriptionModalForm">
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
+  {{/afModal}}
 </template>
