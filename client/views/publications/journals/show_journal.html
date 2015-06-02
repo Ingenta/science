@@ -19,7 +19,30 @@
      {{/tabContent}}
 
      {{#tabContent slug="about"}}
-     <h2>About Page</h2>
+	 <div class="row">
+		 <div id="menu" class="col-sm-3 col-md-2">
+		    <ul class="list-unstyled" style="float: left;line-height: 2.0;width: 180%;">
+			   <li><a href="">{{_ "Executive Editors"}}:</a></li>
+			   <li><a href="">{{_ "Academic Editors"}}:</a></li>
+			   <li><a href="">{{_ "Editorial Policies"}}:</a></li>
+			   <li><a href="">{{_ "Readers"}}:</a></li>
+			   <li><a href="">{{_ "Contact"}}:</a></li>
+		    </ul>
+	     </div>
+	     <div id="subcontent" class="col-sm-9 col-md-10">
+		      <div class="page-container container">
+			       <div class="row">
+			           <h3>{{_ "Editors"}}</h3>
+		           </div>
+				   <div class="row">
+			           <h4>{{_ "Executive Editors"}}</h4>
+		           </div>
+				   <div class="row">
+			           <h6>Content</h6>
+		           </div>
+		      </div>
+		 </div>
+	 </div>
      {{/tabContent}}
 
      {{/basicTabs}}

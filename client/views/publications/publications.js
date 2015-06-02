@@ -22,8 +22,10 @@ Template.FilterList.helpers({
 	  if(pictureId===undefined)
 	  return noPicture;
 	  return Images.findOne({_id: pictureId}).url();
-	}
-
+	},
+	getPublisherNameById: function (id) {
+    return Publishers.findOne({_id:id}).name;
+  }
 });
 Template.FilterList.events({
 	'click .filterButton': function (event) {
