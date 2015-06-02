@@ -36,7 +36,7 @@
 <template name="SinglePublisher">
   <div class="row">
     <div class="col-xs-3">
-      <a href="/publishers/{{name}}">
+      <a href="/publisher/{{name}}">
         <img src="{{getImage picture}}" width="105" />
       </a>
     </div>
@@ -48,7 +48,7 @@
           {{> deletePublisherModalForm}}
           {{/if}}
         </div>
-        <h3><a class="text" href="/publishers/{{name}}">
+        <h3><a class="text" href="/publisher/{{name}}">
           {{#if PT.isChinese languageTag }}
           {{chinesename}}
           {{else}}

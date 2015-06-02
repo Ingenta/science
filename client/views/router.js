@@ -189,7 +189,7 @@ Router.map(function () {
 			return TAPi18n.__("Publishers");
 		}
 	});
-	this.route('/publishers/:name', {
+	this.route('/publisher/:name', {
 		data: function(){
 			return Publishers.findOne({name: this.params.name});
 		},
@@ -198,7 +198,7 @@ Router.map(function () {
 		title: ":name"
 	});
 
-	this.route('/publishers/:name/journals/:title', {
+	this.route('/publisher/:name/journal/:title', {
 		data: function(){
 			return Publications.findOne({title: this.params.title});
 		},
