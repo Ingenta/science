@@ -23,42 +23,46 @@
       {{#each publishers}}
       <li><a class="filterButton" data-pubid="{{_id}}" href="">
 
-      {{translateThis languageTag chinesename name}}
+        {{translateThis languageTag chinesename name}}
 
-      &nbsp;&nbsp;({{count _id}})</a></li>
-      {{else}}
-      {{_"No publishers found!"}}
-      {{/each}}
-      {{/unless}}
-      {{#if selectedPublisher}}
+        &nbsp;&nbsp;({{count _id}})</a></li>
+        {{else}}
+        {{_"No publishers found!"}}
+        {{/each}}
+        {{/unless}}
+        {{#if selectedPublisher}}
 
-      <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
-      {{#each publishers}}
-      <li style="color: #CCC;">
-      {{translateThis languageTag chinesename name}}
-      &nbsp;&nbsp;({{count _id}})</li>
-      {{/each}}
-      {{/if}}
-    </ul>
-  </div>
-  <div id="subcontent" class="col-sm-9 col-md-10">
-    <div class="page-container container">
-      <div class="row">
-       {{#each publications}}
-       <div class="col-xs-2">
-        <img src="{{getImageHelper picture}}" width="58" height="82"/>
+        <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+        {{#each publishers}}
+        <li style="color: #CCC;">
+          {{translateThis languageTag chinesename name}}
+          &nbsp;&nbsp;({{count _id}})</li>
+          {{/each}}
+          {{/if}}
+        </ul>
       </div>
-      <div class="row">
-       <h5>{{> imageName}}&nbsp;{{title}}</h5>
-       <h6>{{description}}</h6>
-     </div>
-     <hr>
-     {{else}}
-     {{_"No publications found!"}}
-     {{/each}}
-   </div>
- </div>
-</div>
-</div>
+      <div id="subcontent" class="col-sm-9 col-md-10">
+        <div class="page-container container">
+          <div class="row">
+           {{#each publications}}
+           <div class="col-xs-2">
+            <img src="{{getImageHelper picture}}" width="58" height="82"/>
+          </div>
+          <div class="row">
+            <h5>{{> imageName}}&nbsp;
+              <a href="/publisher/{{getPublisherNameById publisher}}/journal/{{title}}">
+                {{title}}
+              </a>
+            </h5>
+            <h6>{{description}}</h6>
+          </div>
+          <hr>
+          {{else}}
+          {{_"No publications found!"}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
