@@ -18,15 +18,20 @@
   <div class="row">
     <div id="menu" class="col-sm-3 col-md-2">
      <ul class="list-unstyled">
-      <h3 style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 11px;font-weight: bold;margin: 5px 0 0;padding: 2px 0;text-transform: uppercase;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
-
+      <h3 style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 12px;font-weight: bold;margin: 5px 0 0;padding: 2px 0;text-transform: uppercase;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
+      {{#unless selectedPublisher}}
       {{#each publishers}}
       <li><a class="filterButton" data-pubid="{{_id}}" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}&nbsp;&nbsp;({{count _id}})</a></li>
       {{else}}
       {{_"No publishers found!"}}
       {{/each}}
+      {{/unless}}
       {{#if selectedPublisher}}
-      <li><a href="#" class="clearPublisher"> &lt; Any Publisher</a></li>
+
+      <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+      {{#each publishers}}
+      <li style="color: #CCC;">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}&nbsp;&nbsp;({{count _id}})</li>
+      {{/each}}
       {{/if}}
     </ul>
   </div>
