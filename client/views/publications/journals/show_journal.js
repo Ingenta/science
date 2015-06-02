@@ -1,10 +1,26 @@
 ReactiveTabs.createInterface({
-  template: 'basicTabs',
-  onChange: function (slug, template) {
-    // This callback runs every time a tab changes.
-    // The `template` instance is unique per {{#basicTabs}} block.
-    console.log('[tabs] Tab has changed! Current tab:', slug);
-    console.log('[tabs] Template instance calling onChange:', template);
+  template: 'basicTabs'
+});
+
+// Template.OverviewTemplate.helpers({
+//   getJournalUrl: function () {
+//     return "/publishers/abc/journals/banana";
+//   },
+//   getImage: function (pictureId) {
+//     var noPicture ="http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg"
+//     if(pictureId===undefined)
+//     return noPicture;
+//     return Images.findOne({_id: pictureId}).url();
+//   },
+//   getPublisherNameById: function (id) {
+//     return Publishers.findOne({_id:id}).name;
+//   },
+// });
+
+Template.myTemplate.helpers({
+  context: function () {
+    console.log(Router.current().route.path(this));
+    return Publications.findOne();
   }
 });
 
@@ -12,16 +28,17 @@ Template.myTemplate.helpers({
   tabs: function () {
     // Every tab object MUST have a name and a slug!
     return [
-      { name: 'Overview', slug: 'overview' },
-      { name: 'About', slug: 'about' },
+    { name: 'Overview', slug: 'overview' },
+    { name: 'Browse', slug: 'browse' },
+    { name: 'About', slug: 'about' },
  /*     { name: 'Things', slug: 'things', onRender: function(template) {
         // This callback runs every time this specific tab's content renders.
         // As with `onChange`, the `template` instance is unique per block helper.
         alert("[tabs] Things has been rendered!");
       }}*/
-    ];
-  },
-  activeTab: function () {
+      ];
+    },
+    activeTab: function () {
     // Use this optional helper to reactively set the active tab.
     // All you have to do is return the slug of the tab.
 
