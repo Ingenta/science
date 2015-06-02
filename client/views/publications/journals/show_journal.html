@@ -19,18 +19,32 @@
     <a href="/publisher/abc/journal/banana/article/test" ><h2>Browse Page</h2></a>
     {{/tabContent}}
 
-    {{#tabContent slug="about"}}
-    <div class="row">
-        <div class="col-xs-3">
-            About us
-        </div>
-        <div class="col-xs-9">
-            <h2>About us</h2>
-            Physics Today, the flagship publication of the American Institute of Physics, is the most influential and closely followed physics magazine in the world. With authoritative features, full news coverage and analysis, and fresh perspectives on technological advances and ground-breaking research, Physics Today informs readers about science and its role in society.
-        </div>
-    </div>
-    {{/tabContent}}
-
+     {{#tabContent slug="about"}}
+	 <div class="row">
+		 <div id="menu" class="col-sm-3 col-md-2">
+		    <ul class="list-unstyled" style="float: left;line-height: 2.0;width: 180%;">
+			   <li><a href="">{{_ "Executive Editors"}}:</a></li>
+			   <li><a href="">{{_ "Academic Editors"}}:</a></li>
+			   <li><a href="">{{_ "Editorial Policies"}}:</a></li>
+			   <li><a href="">{{_ "Readers"}}:</a></li>
+			   <li><a href="">{{_ "Contact"}}:</a></li>
+		    </ul>
+	     </div>
+	     <div id="subcontent" class="col-sm-9 col-md-10">
+		      <div class="page-container container">
+			       <div class="row">
+			           <h3>{{_ "Editors"}}</h3>
+		           </div>
+				   <div class="row">
+			           <h4>{{_ "Executive Editors"}}</h4>
+		           </div>
+				   <div class="row">
+			           <h6>Content</h6>
+		           </div>
+		      </div>
+		 </div>
+	 </div>
+     {{/tabContent}}
     {{/journalTabs}}
 
 </template>

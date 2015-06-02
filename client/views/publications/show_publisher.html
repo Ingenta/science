@@ -69,9 +69,7 @@
           {{/if}}
         </div>
         <h3>{{> imageName}}&nbsp;&nbsp;
-          <a href="/publisher/{{getPublisherNameById publisher}}/journal/{{title}}">
-            {{title}}
-          </a>
+          <a href="/publishers/{{getPublisherNameById publisher}}/journals/{{title}}">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a>
         </h3>
       </div>
       <div class="row">

@@ -10,7 +10,7 @@
             {{/if}}
         </div>
         <hr>
-        <div class="row">
+        <div class="row topics">
             {{> TopicList}}
         </div>
     </div>
@@ -29,7 +29,7 @@
 
 <template name="SingleTopic">
     {{#if subTopicCount _id}}
-    <li style="list-style-type:none;cursor:pointer" id="{{_id}}">
+    <li id="{{_id}}">
         {{#if isExpand _id}}
         <i class="fa fa-minus" type="button"></i>
         {{else}}
@@ -38,12 +38,12 @@
         {{> TopicButtons}}
     </li>
     {{else}}
-    <li style="list-style-type:none;" id="{{_id}}">
+    <li id="{{_id}}">
         {{> TopicButtons}}
     </li>
     {{/if}}
 
-    <hr style="margin-bottom: 5px; margin-top: 5px">
+    <hr>
     {{#if isExpand _id}}
     <div>
         {{#each subTopics _id}}
