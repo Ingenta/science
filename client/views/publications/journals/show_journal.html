@@ -1,46 +1,46 @@
 <template name="ShowJournal">
-journal page
-{{title}}
-{{firstletter}}
-{{> myTemplate}}
+    <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
+	{{> myTemplate}}
 
 </template>
 
 <template name="myTemplate">
 
-  <!-- Use `name` to add a custom class to the outer container -->
-  {{#basicTabs name="" tabs=tabs}}
-    <!--
-      There are two ways to define content for your tabs:
+	{{#basicTabs name="" tabs=tabs}}
 
-      1. Wrap each tabbed section in a blank `<div></div>`.
-         Sections must correspond with the order of the tabs you specified.
+     {{#tabContent slug="overview"}}
 
-      2. Wrap each tabbed section in the provided block helper (RECOMMENDED!).
-         `{{#tabContent slug="nameOfSlug"}} ... {{/tabContent}}`
-         These can be defined in any order you like.
-    -->
-    {{#tabContent slug="overview"}}
-      <h2>People</h2>
-      <button class="add-people">
-        Add People
-      </button>
-    {{/tabContent}}
+     {{#with context}}
+     {{> OverviewTemplate}}
+     {{/with}}
 
-    {{#tabContent slug="about"}}
-      <h2>Places</h2>
-      <button class="add-places">
-        Add Places
-      </button>
-    {{/tabContent}}
 
-  <!--   {{#tabContent slug="things"}}
-      <h2>Things</h2>
-      <button class="add-things">
-        Add Things
-      </button>
-    {{/tabContent}} -->
+     {{/tabContent}}
 
-  {{/basicTabs}}
+     {{#tabContent slug="about"}}
+     <h2>Places</h2>
+     <button class="add-places">
+     	Add Places
+     </button>
+     {{/tabContent}}
+
+     {{/basicTabs}}
+
+</template>
+
+<template name="OverviewTemplate">
+
+	<div class="row">
+		<div class="col-xs-4">
+			<img src="{{PT.getImage picture}}" width="105" />
+			<!-- <img src="{{getImage picture}}" width="105" /> -->
+		</div>
+		<div class="col-xs-8">
+			<div class="row">
+				{{description}}
+			</div>
+		</div>
+	</div>
+	<hr>
 
 </template>
