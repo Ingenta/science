@@ -207,6 +207,10 @@ Router.map(function () {
 		parent: "publishers"
 	});
 
+	this.route('/publisher/:name/journal/:title/article/:articleName', {
+		template: "ShowArticle"
+	});
+
 	this.route("forgot_password", {
 		path: "/forgot_password",
 		controller: "ForgotPasswordController"
