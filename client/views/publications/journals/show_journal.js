@@ -1,11 +1,5 @@
 ReactiveTabs.createInterface({
-  template: 'basicTabs',
-  onChange: function (slug, template) {
-    // This callback runs every time a tab changes.
-    // The `template` instance is unique per {{#basicTabs}} block.
-    console.log('[tabs] Tab has changed! Current tab:', slug);
-    console.log('[tabs] Template instance calling onChange:', template);
-  }
+  template: 'basicTabs'
 });
 
 // Template.OverviewTemplate.helpers({
@@ -35,6 +29,7 @@ Template.myTemplate.helpers({
     // Every tab object MUST have a name and a slug!
     return [
     { name: 'Overview', slug: 'overview' },
+    { name: 'Browse', slug: 'browse' },
     { name: 'About', slug: 'about' },
  /*     { name: 'Things', slug: 'things', onRender: function(template) {
         // This callback runs every time this specific tab's content renders.

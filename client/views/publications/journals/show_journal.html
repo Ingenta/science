@@ -1,7 +1,7 @@
 <template name="ShowJournal">
     <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
 	{{> myTemplate}}
-
+    <hr>
 </template>
 
 <template name="myTemplate">
@@ -9,19 +9,17 @@
 	{{#basicTabs name="" tabs=tabs}}
 
      {{#tabContent slug="overview"}}
-
      {{#with context}}
      {{> OverviewTemplate}}
      {{/with}}
+     {{/tabContent}}
 
-
+     {{#tabContent slug="browse"}}
+     <h2>Browse Page</h2>
      {{/tabContent}}
 
      {{#tabContent slug="about"}}
-     <h2>Places</h2>
-     <button class="add-places">
-     	Add Places
-     </button>
+     <h2>About Page</h2>
      {{/tabContent}}
 
      {{/basicTabs}}
