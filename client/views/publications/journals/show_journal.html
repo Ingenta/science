@@ -1,12 +1,13 @@
 <template name="ShowJournal">
     <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
-    {{> myTemplate}}
+    <br>
+    {{> journalOptions}}
     <hr>
 </template>
 
-<template name="myTemplate">
+<template name="journalOptions">
 
-    {{#basicTabs name="" tabs=tabs}}
+    {{#journalTabs name="" tabs=tabs}}
 
     {{#tabContent slug="overview"}}
     {{#with context}}
@@ -30,23 +31,49 @@
     </div>
     {{/tabContent}}
 
-    {{/basicTabs}}
+    {{/journalTabs}}
+
+</template>
+
+<template name="journalTabs">
+
+  <div class="journalTabs-container">
+
+    {{#if activeTab}}
+      {{trackActiveTab activeTab}}
+    {{/if}}
+
+    {{trackTabs tabs}}
+
+    <ul class="nav nav-tabs" role="tablist" >
+      {{#each tabs}}
+      <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a></li>
+      {{/each}}
+    </ul>
+
+    <div class="tabs-content-container">
+      {{> UI.contentBlock
+          context=__context__
+      }}
+    </div>
+
+  </div>
 
 </template>
 
 <template name="OverviewTemplate">
 
-	<div class="row">
-		<div class="col-xs-4">
-			<img src="{{PT.getImage picture}}" width="105" />
-			<!-- <img src="{{getImage picture}}" width="105" /> -->
-		</div>
-		<div class="col-xs-8">
-			<div class="row">
-				{{description}}
-			</div>
-		</div>
-	</div>
-	<hr>
+    <div class="row">
+        <div class="col-xs-4">
+            <img src="{{PT.getImage picture}}" width="105" />
+            <!-- <img src="{{getImage picture}}" width="105" /> -->
+        </div>
+        <div class="col-xs-8">
+            <div class="row">
+                {{description}}
+            </div>
+        </div>
+    </div>
+    <hr>
 
 </template>
