@@ -49,11 +49,7 @@
           {{/if}}
         </div>
         <h3><a class="text" href="/publisher/{{name}}">
-          {{#if PT.isChinese languageTag }}
-          {{chinesename}}
-          {{else}}
-          {{name}}
-          {{/if}}
+        {{translateThis languageTag chinesename name}}
         </a>
       </h3>
     </div>
