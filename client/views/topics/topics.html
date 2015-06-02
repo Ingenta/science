@@ -30,33 +30,69 @@
 </template>
 
 <template name="SingleTopic">
-        {{#if subTopicCount name}}
-        <li style="list-style-type:none;cursor:pointer">
-            {{#if isExpand name}}
-                <i class="fa fa-minus" type="button"></i>
-            {{else}}
-                <i class="fa fa-plus" type="button"></i>
-            {{/if}}
-            {{name}}
-        </li>
-            {{else}}
-        <li style="list-style-type:none;">{{name}}</li>
+    {{#if subTopicCount _id}}
+    <li style="list-style-type:none;cursor:pointer" id="{{_id}}">
+        {{#if isExpand _id}}
+        <i class="fa fa-minus" type="button"></i>
+        {{else}}
+        <i class="fa fa-plus" type="button"></i>
         {{/if}}
+        {{> TopicButtons}}
+    </li>
+    {{else}}
+    <li style="list-style-type:none;" id="{{_id}}">
+        {{> TopicButtons}}
+    </li>
+    {{/if}}
 
     <hr style="margin-bottom: 5px; margin-top: 5px">
-    {{#if isExpand name}}
-        <div>
-            {{#each subTopics name}}
-            <ul>
-                {{> SingleTopic}}
-            </ul>
-            {{/each}}
-        </div>
+    {{#if isExpand _id}}
+    <div>
+        {{#each subTopics _id}}
+        <ul>
+            {{> SingleTopic}}
+        </ul>
+        {{/each}}
+    </div>
     {{/if}}
 </template>
 
+<template name="updateTopicModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="Topics" doc=_id operation="update"
+    omitFields="parentId"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteTopicModalForm">
+    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
+</template>
+
 <template name="addTopicModalForm">
-    {{#afModal class="fa fa-plus btn btn-success" collection="Topics" operation="insert"}}
+    {{#afModal class="fa fa-plus btn btn-success" collection="Topics" operation="insert" omitFields="parentId"}}
     {{_ "Add new"}}
     {{/afModal}}
+</template>
+
+<template name="addSubTopicModalForm">
+    {{#afModal formId="addSubTopicModalForm" class="fa fa-plus" collection="Topics" operation="insert"
+    omitFields="parentId"}}
+    {{/afModal}}
+</template>
+
+<template name="TopicButtons">
+    {{#if PT.isChinese languageTag}}
+    {{name}}
+    {{else}}
+    {{englishName}}
+    {{/if}}
+    <div class="pull-right">
+        {{#if isAdmin }}
+        {{> addSubTopicModalForm}}
+        {{> updateTopicModalForm}}
+        {{#if hasSubTopic _id}}
+        {{> deleteTopicModalForm}}
+        {{/if}}
+        {{/if}}
+    </div>
 </template>

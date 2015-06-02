@@ -1,0 +1,101 @@
+<template name="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/home_private">
+                    SCP
+                </a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                {{> LeftMenu}}
+                {{#if currentUser}}
+                {{> PrivateLayoutRightMenu}}
+                {{else}}
+                {{> PublicLayoutRightMenu}}
+                {{/if}}
+            </div>
+        </div>
+    </nav>
+</template>
+
+<template name="LeftMenu">
+    <ul id="menu-items" class="nav navbar-nav">
+        <li id="menu-item-simple" class="{{menuItemClass 'publishers'}}">
+            <a href="{{pathFor 'publishers'}}">
+                {{_ "Publishers"}}
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'publications'}}">
+            <a href="{{pathFor 'publications'}}">
+                {{_ "Publications"}}
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'topics'}}">
+            <a href="{{pathFor 'topics'}}">
+                {{_ "Topics"}}
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'collections'}}">
+            <a href="{{pathFor 'collections'}}">
+                {{_ "Collections"}}
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'author'}}">
+            <a href="{{pathFor 'author'}}">
+                {{_ "Author"}}
+            </a>
+        </li>
+    </ul>
+</template>
+
+<template name="PublicLayoutRightMenu">
+    <ul id="menu-items" class="nav navbar-nav navbar-right">
+        <li id="menu-item-simple" class="{{menuItemClass 'register'}}">
+            <a href="{{pathFor 'register'}}">
+                {{_ "Register"}}
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'login'}}">
+            <a href="{{pathFor 'login'}}">
+                {{_ "Login"}}
+            </a>
+        </li>
+    </ul>
+</template>
+
+<template name="PrivateLayoutRightMenu">
+    <ul id="menu-items" class="nav navbar-nav navbar-right">
+        <li id="menu-item-dropdown" class="dropdown ">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{userEmail}}
+                <b class="caret">
+                </b>
+            </a>
+            <ul id="menu-items" class="dropdown-menu">
+                {{#if isAdmin}}
+                <li class="{{menuItemClass 'admin'}}">
+                    <a href="{{pathFor 'admin'}}">
+                        {{_ "Admin"}}
+                    </a>
+                </li>
+                {{/if}}
+                <li class="{{menuItemClass 'user_settings'}}">
+                    <a href="{{pathFor 'user_settings'}}">
+                        {{_ "Settings"}}
+                    </a>
+                </li>
+                <li class="{{menuItemClass 'logout'}}">
+                    <a href="{{pathFor 'logout'}}">
+                        {{_ "Log Out"}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>

@@ -2,4 +2,45 @@
 journal page
 {{title}}
 {{firstletter}}
+{{> myTemplate}}
+
+</template>
+
+<template name="myTemplate">
+
+  <!-- Use `name` to add a custom class to the outer container -->
+  {{#basicTabs name="" tabs=tabs}}
+    <!--
+      There are two ways to define content for your tabs:
+
+      1. Wrap each tabbed section in a blank `<div></div>`.
+         Sections must correspond with the order of the tabs you specified.
+
+      2. Wrap each tabbed section in the provided block helper (RECOMMENDED!).
+         `{{#tabContent slug="nameOfSlug"}} ... {{/tabContent}}`
+         These can be defined in any order you like.
+    -->
+    {{#tabContent slug="overview"}}
+      <h2>People</h2>
+      <button class="add-people">
+        Add People
+      </button>
+    {{/tabContent}}
+
+    {{#tabContent slug="about"}}
+      <h2>Places</h2>
+      <button class="add-places">
+        Add Places
+      </button>
+    {{/tabContent}}
+
+  <!--   {{#tabContent slug="things"}}
+      <h2>Things</h2>
+      <button class="add-things">
+        Add Things
+      </button>
+    {{/tabContent}} -->
+
+  {{/basicTabs}}
+
 </template>
