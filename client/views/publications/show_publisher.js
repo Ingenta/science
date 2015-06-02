@@ -23,7 +23,7 @@ Template.SinglePublication.helpers({
   },
   getPublisherNameById: function (id) {
     return Publishers.findOne({_id:id}).name;
-  },
+  }
 });
 
 AutoForm.addHooks(['addPublicationModalForm'], {
