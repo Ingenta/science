@@ -111,6 +111,14 @@
              "picture": {
                 "label": "选择图片"
             }
+        },
+        "topics": {
+            "name": {
+                "label": "中文名称"
+            },
+            "englishName": {
+                "label": "英文名称"
+            }
         }
     }
 }

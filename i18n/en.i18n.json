@@ -57,6 +57,14 @@
              "picture": {
                 "label": "Choose file"
             }
+        },
+        "topics": {
+            "name": {
+                "label": "Chinese Name"
+            },
+            "englishName": {
+                "label": "English Name"
+            }
         }
     }
 }
