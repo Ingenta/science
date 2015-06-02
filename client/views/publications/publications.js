@@ -25,7 +25,11 @@ Template.FilterList.helpers({
 	},
 	getPublisherNameById: function (id) {
 		return Publishers.findOne({_id:id}).name;
+	},
+	letterInTheAlphabet: function () {
+		 return "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(',');
 	}
+
 });
 Template.FilterList.events({
 	'click .filterButton': function (event) {

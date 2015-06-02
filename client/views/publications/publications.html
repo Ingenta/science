@@ -13,7 +13,11 @@
   </div>
   <hr style="border-bottom: 2px solid #d7d7d7;">
   <div class="row pull-right">
-    <a class="numberButton" href="">A</a>&nbsp;<a class="numberButton" href="">B</a>&nbsp;<a class="numberButton" href="">C</a>&nbsp;<a class="numberButton" href="">D</a>&nbsp;<a class="numberButton" href="">E</a>&nbsp;<a class="numberButton" href="">F</a>&nbsp;<a class="numberButton" href="">G</a>&nbsp;<a class="numberButton" href="">H</a>&nbsp;<a class="numberButton" href="">I</a>&nbsp;<a class="numberButton" href="">J</a>&nbsp;<a class="numberButton" href="">K</a>&nbsp;<a class="numberButton" href="">L</a>&nbsp;<a class="numberButton" href="">M</a>&nbsp;<a class="numberButton" href="">N</a>&nbsp;<a class="numberButton" href="">O</a>&nbsp;<a class="numberButton" href="">P</a>&nbsp;<a class="numberButton" href="">Q</a>&nbsp;<a class="numberButton" href="">R</a>&nbsp;<a class="numberButton" href="">S</a>&nbsp;<a class="numberButton" href="">T</a>&nbsp;<a class="numberButton" href="">U</a>&nbsp;<a class="numberButton" href="">V</a>&nbsp;<a class="numberButton" href="">W</a>&nbsp;<a class="numberButton" href="">X</a>&nbsp;<a class="numberButton" href="">Y</a>&nbsp;<a class="numberButton" href="">Z</a>
+
+    {{#each letterInTheAlphabet}}
+    <a class="numberButton" href="">{{this}}</a>&nbsp;
+    {{/each}}
+
   </div>
   <div class="row">
     <div id="menu" class="col-sm-3 col-md-2">
