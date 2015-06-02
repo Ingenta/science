@@ -4,7 +4,7 @@ Template.FilterList.helpers({
 		if(pubId===undefined){
 			return Publishers.find();
 		}
-	  return Publishers.find({_id:pubId});
+		return Publishers.find({_id:pubId});
 	},
 	publications: function () {
 		var pubId = Session.get('filterPublisher');
@@ -12,20 +12,17 @@ Template.FilterList.helpers({
 		var q={};
 		pubId && (q.publisher=pubId);
 		firstletter && (q.firstletter=firstletter);
-	  return Publications.find(q);
+		return Publications.find(q);
 	},
 	count: function (id) {
-	  return Publications.find({publisher:id}).count();
+		return Publications.find({publisher:id}).count();
 	},
-	getImage: function (pictureId) {
-	  var noPicture ="http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg"
-	  if(pictureId===undefined)
-	  return noPicture;
-	  return Images.findOne({_id: pictureId}).url();
+	selectedPublisher: function(){
+		return Session.get('filterPublisher');
 	},
 	getPublisherNameById: function (id) {
-      return Publishers.findOne({_id:id}).name;
-    }
+		return Publishers.findOne({_id:id}).name;
+	}
 });
 Template.FilterList.events({
 	'click .filterButton': function (event) {
@@ -36,9 +33,12 @@ Template.FilterList.events({
 	},
 	'click .numberButton': function (event) {
 		var num = $(event.target).text();
-	  Session.set('firstletter', num);
-	  Session.set('filterPublisher', undefined);
-	}
+		Session.set('firstletter', num);
+		Session.set('filterPublisher', undefined);
+	},
+	'click .clearPublisher': function (event) {
+		Session.set('filterPublisher', undefined);
+	},
 });
 Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
