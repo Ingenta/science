@@ -1,5 +1,5 @@
 Template.FilterList.helpers({
-	publishers: function () {	
+	publishers: function () {
 		var pubId = Session.get('filterPublisher');
 		if(pubId===undefined){
 			return Publishers.find();
@@ -16,12 +16,6 @@ Template.FilterList.helpers({
 	},
 	count: function (id) {
 	  return Publications.find({publisher:id}).count();
-	},
-	getImage: function (pictureId) {
-	  var noPicture ="http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg"
-	  if(pictureId===undefined)
-	  return noPicture;
-	  return Images.findOne({_id: pictureId}).url();
 	}
 
 });
