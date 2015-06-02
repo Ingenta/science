@@ -30,14 +30,14 @@
 </template>
 
 <template name="showImage">
-  <img src="{{getImage picture}}" />
+  <img src="{{getImageHelper picture}}" />
 </template>
 
 <template name="SinglePublisher">
   <div class="row">
     <div class="col-xs-3">
-      <a href="/publishers/{{name}}">
-        <img src="{{getImage picture}}" width="105" />
+      <a href="/publisher/{{name}}">
+        <img src="{{getImageHelper picture}}" width="105" />
       </a>
     </div>
     <div class="col-xs-9">
@@ -48,7 +48,7 @@
           {{> deletePublisherModalForm}}
           {{/if}}
         </div>
-        <h3><a class="text" href="/publishers/{{name}}">
+        <h3><a class="text" href="/publisher/{{name}}">
           {{#if PT.isChinese languageTag }}
           {{chinesename}}
           {{else}}

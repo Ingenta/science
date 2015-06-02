@@ -1,5 +1,5 @@
 Template.FilterList.helpers({
-	publishers: function () {	
+	publishers: function () {
 		var pubId = Session.get('filterPublisher');
 		if(pubId===undefined){
 			return Publishers.find();
@@ -24,8 +24,8 @@ Template.FilterList.helpers({
 	  return Images.findOne({_id: pictureId}).url();
 	},
 	getPublisherNameById: function (id) {
-    return Publishers.findOne({_id:id}).name;
-  }
+      return Publishers.findOne({_id:id}).name;
+    }
 });
 Template.FilterList.events({
 	'click .filterButton': function (event) {

@@ -1,0 +1,8 @@
+div.topics hr {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+div.topics li {
+    list-style-type:none;
+    /*cursor:pointer;*/
+}
