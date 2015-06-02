@@ -11,15 +11,14 @@
    <div class="row">
     <p>{{_ "Introductory text"}}</p>
 </div>
+<hr style="border-bottom: 2px solid #d7d7d7;">
 <div class="row pull-right">
-    <p ><a class="numberButton" href="">A</a>&nbsp;<a class="numberButton" href="">B</a>&nbsp;<a class="numberButton" href="">C</a>&nbsp;<a class="numberButton" href="">D</a>&nbsp;<a class="numberButton" href="">E</a>&nbsp;<a class="numberButton" href="">F</a>&nbsp;<a class="numberButton" href="">G</a>&nbsp;<a class="numberButton" href="">H</a>&nbsp;<a class="numberButton" href="">I</a>&nbsp;<a class="numberButton" href="">J</a>&nbsp;<a class="numberButton" href="">K</a>&nbsp;<a class="numberButton" href="">L</a>&nbsp;<a class="numberButton" href="">M</a>&nbsp;<a class="numberButton" href="">N</a>&nbsp;<a class="numberButton" href="">O</a>&nbsp;<a class="numberButton" href="">P</a>&nbsp;<a class="numberButton" href="">Q</a>&nbsp;<a class="numberButton" href="">R</a>&nbsp;<a class="numberButton" href="">S</a>&nbsp;<a class="numberButton" href="">T</a>&nbsp;<a class="numberButton" href="">U</a>&nbsp;<a class="numberButton" href="">V</a>&nbsp;<a class="numberButton" href="">W</a>&nbsp;<a class="numberButton" href="">X</a>&nbsp;<a class="numberButton" href="">Y</a>&nbsp;<a class="numberButton" href="">Z</a></p>
+    <a class="numberButton" href="">A</a>&nbsp;<a class="numberButton" href="">B</a>&nbsp;<a class="numberButton" href="">C</a>&nbsp;<a class="numberButton" href="">D</a>&nbsp;<a class="numberButton" href="">E</a>&nbsp;<a class="numberButton" href="">F</a>&nbsp;<a class="numberButton" href="">G</a>&nbsp;<a class="numberButton" href="">H</a>&nbsp;<a class="numberButton" href="">I</a>&nbsp;<a class="numberButton" href="">J</a>&nbsp;<a class="numberButton" href="">K</a>&nbsp;<a class="numberButton" href="">L</a>&nbsp;<a class="numberButton" href="">M</a>&nbsp;<a class="numberButton" href="">N</a>&nbsp;<a class="numberButton" href="">O</a>&nbsp;<a class="numberButton" href="">P</a>&nbsp;<a class="numberButton" href="">Q</a>&nbsp;<a class="numberButton" href="">R</a>&nbsp;<a class="numberButton" href="">S</a>&nbsp;<a class="numberButton" href="">T</a>&nbsp;<a class="numberButton" href="">U</a>&nbsp;<a class="numberButton" href="">V</a>&nbsp;<a class="numberButton" href="">W</a>&nbsp;<a class="numberButton" href="">X</a>&nbsp;<a class="numberButton" href="">Y</a>&nbsp;<a class="numberButton" href="">Z</a>
 </div>
 <div class="row">
     <div id="menu" class="col-sm-3 col-md-2">
        <ul class="list-unstyled">
-          <hr>
-          <h5>{{_ "FILTER BY Publisher"}}:</h5>
-          <hr>
+          <h3 style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 11px;font-weight: bold;margin: 5px 0 0;padding: 2px 0;text-transform: uppercase;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
       </ul>
       {{#each publishers}}
            <h6><a class="filterButton" data-pubid="{{_id}}" href="">{{#if PT.isChinese languageTag}}{{chinesename}}{{else}}{{name}}{{/if}}</a>&nbsp;&nbsp;<a href="">({{count _id}})</a></h6>
@@ -32,12 +31,13 @@
           <div class="row">
            {{#each publications}}
            <div class="col-xs-2">
-                <img src="{{getImage picture}}" width="87" height="118"/>
+                <img src="{{getImage picture}}" width="58" height="82"/>
            </div>
            <div class="row">
-               <h4>{{> imageName}}&nbsp;<a href="">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a></h4>
-               <h5>{{description}}</h5>
+               <h5>{{> imageName}}&nbsp;<a href="">{{#if PT.isChinese languageTag}}{{chinesetitle}}{{else}}{{title}}{{/if}}</a></h5>
+               <h6>{{description}}</h6>
            </div>
+           <hr>
            {{else}}
            {{_"No publications found!"}}
            {{/each}}
