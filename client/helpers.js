@@ -15,8 +15,27 @@ Template.registerHelper('translateThis', function(language,chinese,english){
     return english;
 });
 
-UI.registerHelper('getUrlToJournal', function(id,title){
+Template.registerHelper('getUrlToJournal', function(id,title){
     var name =Publishers.findOne({_id:id}).name
     return "/publisher/"+name+"/journal/"+title;
 });
 
+
+pluralize = function(n, thing, options) {
+  var plural = thing;
+  if (_.isUndefined(n)) {
+    return thing;
+  } else if (n !== 1) {
+    if (thing.slice(-1) === 's')
+      plural = thing + 'es';
+    else
+      plural = thing + 's';
+  }
+
+  if (options && options.hash && options.hash.wordOnly)
+    return plural;
+  else
+    return n + ' ' + plural;
+}
+
+Template.registerHelper('pluralize', pluralize);

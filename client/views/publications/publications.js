@@ -12,7 +12,12 @@ Template.FilterList.helpers({
 		var q={};
 		pubId && (q.publisher=pubId);
 		firstletter && (q.firstletter=firstletter);
+		Session.set("totalPublicationResults", Publications.find(q).count());
 		return Publications.find(q);
+	},
+	totalPublicationResults: function () {
+		var total= Session.get('totalPublicationResults');
+    		return pluralize(total, 'result');
 	},
 	count: function (id) {
 		var first = Session.get('firstletter');
