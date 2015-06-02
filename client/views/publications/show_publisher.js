@@ -36,6 +36,7 @@ AutoForm.addHooks(['addPublicationModalForm'], {
       doc.publisher = Session.get('currentPublisher');
       doc.firstletter=doc.firstletter.toUpperCase();
       return doc;
+      //TODO: fix update bug not setting uppercase
     }
   }
 }, true);
