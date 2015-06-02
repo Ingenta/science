@@ -15,7 +15,10 @@ Template.FilterList.helpers({
 		return Publications.find(q);
 	},
 	count: function (id) {
-		return Publications.find({publisher:id}).count();
+		var first = Session.get('firstletter');
+		if(first===undefined)
+			return Publications.find({publisher:id}).count();
+		return Publications.find({publisher:id,firstletter:first}).count();
 	},
 	selectedPublisher: function(){
 		return Session.get('filterPublisher');
