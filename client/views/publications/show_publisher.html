@@ -2,15 +2,11 @@
   <div class="page-container container">
    <div class="row">
      <div class="col-xs-3">
-      <img src="{{PT.getImage picture}}" width="105" />
+      <img src="{{getImageHelper picture}}" width="105" />
     </div>
     <div class="col-xs-9">
       <h2>
-        {{#if PT.isChinese languageTag}}
-        {{chinesename}}
-        {{else}}
-        {{name}}
-        {{/if}}
+      {{translateThis languageTag chinesename name}}
       </h2>
     </div>
   </div>
@@ -58,7 +54,7 @@
 <template name="SinglePublication">
   <div class="row">
     <div class="col-xs-4">
-      <img src="{{getImage picture}}" width="105" />
+      <img src="{{getImageHelper picture}}" width="105" />
     </div>
     <div class="col-xs-8">
       <div class="row">
@@ -69,8 +65,8 @@
           {{/if}}
         </div>
         <h3>{{> imageName}}&nbsp;&nbsp;
-          <a href="/publisher/{{getPublisherNameById publisher}}/journal/{{title}}">
-            {{title}}
+          <a href="{{getUrlToJournal publisher title}}">
+          {{title}}
           </a>
         </h3>
       </div>
