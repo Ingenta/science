@@ -50,3 +50,4 @@ Template.myTemplate.helpers({
     return Session.get('activeTab'); // Returns "people", "places", or "things".
   }
 });
+
