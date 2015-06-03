@@ -60,3 +60,6 @@ Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
 	Session.set('firstletter', undefined);
 });
+TAPi18n._afterUILanguageChange(function(){
+	alert("hello");
+});
