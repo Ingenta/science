@@ -11,8 +11,8 @@ Template.deletePublisherModalForm.helpers({
 });
 
 Template.SinglePublisher.helpers({
-    hasPublisher: function (parentId) {
-        return  Publications.find({"publisher": parentId}).count()===0;
+    hasPublisher: function (id) {
+        return  Publications.find({"publisher": id}).count()===0;
     }
 });
 
