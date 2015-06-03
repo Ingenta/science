@@ -16,6 +16,10 @@ Template.FilterList.helpers({
 		return Publications.find(q);
 	},
 	totalPublicationResults: function () {
+		return Session.get('totalPublicationResults');
+
+	},
+	totalPluralPublicationResults: function () {
 		var total= Session.get('totalPublicationResults');
     		return pluralize(total, 'result');
 	},

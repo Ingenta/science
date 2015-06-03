@@ -14,7 +14,11 @@
   <hr style="border-bottom: 2px solid #d7d7d7;">
   <div class="row" style="background: rgb(204, 204, 204) none repeat scroll 0% 0%;">
     <div class="col-xs-3">
-      {{totalPublicationResults}}
+      {{#if isChinese languageTag}}
+          命中 {{totalPublicationResults}} 结果
+      {{else}}
+      {{totalPluralPublicationResults}}
+      {{/if}}
     </div>
     <div class="pull-right">
       {{#each letterInTheAlphabet}}
@@ -31,7 +35,7 @@
       {{#each publishers}}
       <li><a class="filterButton" data-pubid="{{_id}}" href="">
 
-        {{translateThis languageTag chinesename name}}
+        {{translateThis chinesename name}}
 
         &nbsp;&nbsp;({{count _id}})</a></li>
         {{else}}
