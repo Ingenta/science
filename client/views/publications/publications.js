@@ -21,7 +21,7 @@ Template.FilterList.helpers({
 	},
 	totalPluralPublicationResults: function () {
 		var total= Session.get('totalPublicationResults');
-    		return pluralize(total, 'result');
+		return pluralize(total, 'result');
 	},
 	count: function (id) {
 		var first = Session.get('firstletter');
@@ -36,16 +36,14 @@ Template.FilterList.helpers({
 		return Publishers.findOne({_id:id}).name;
 	},
 	letterInTheAlphabet: function () {
-		 return "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(',');
+		return "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(',');
 	}
 
 });
 Template.FilterList.events({
 	'click .filterButton': function (event) {
 		var f = $(event.target).data().pubid;
-	  //console.log(f);
-	  //debugger
-	  Session.set('filterPublisher', f);
+		Session.set('filterPublisher', f);
 	},
 	'click .numberButton': function (event) {
 		var num = $(event.target).text();
