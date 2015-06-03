@@ -28,30 +28,23 @@
 </template>
 
 <template name="SingleTopic">
-    {{#if subTopicCount _id}}
     <li id="{{_id}}">
+        {{#if subTopicCount _id}}
         {{#if isExpand _id}}
         <i class="fa fa-minus" type="button"></i>
         {{else}}
         <i class="fa fa-plus" type="button"></i>
         {{/if}}
+        {{/if}}
         {{> TopicButtons}}
     </li>
-    {{else}}
-    <li id="{{_id}}">
-        {{> TopicButtons}}
-    </li>
-    {{/if}}
-
     <hr>
     {{#if isExpand _id}}
-    <div>
-        {{#each subTopics _id}}
-        <ul>
-            {{> SingleTopic}}
-        </ul>
-        {{/each}}
-    </div>
+    {{#each subTopics _id}}
+    <ul>
+        {{> SingleTopic}}
+    </ul>
+    {{/each}}
     {{/if}}
 </template>
 
@@ -79,7 +72,7 @@
 </template>
 
 <template name="TopicButtons">
-{{translateThis name englishName}}
+    {{translateThis name englishName}}
     <div class="pull-right">
         {{#if isAdmin }}
         {{> addSubTopicModalForm}}
