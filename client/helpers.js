@@ -9,8 +9,8 @@ Template.registerHelper('isChinese', function(language){
     return false;
 });
 
-Template.registerHelper('translateThis', function(language,chinese,english){
-    if(language==="zh-CN")
+Template.registerHelper('translateThis', function(chinese,english){
+    if(TAPi18n.getLanguage()==="zh-CN")
         return chinese;
     return english;
 });
