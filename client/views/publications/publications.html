@@ -15,7 +15,7 @@
   <div class="row" style="background: rgb(204, 204, 204) none repeat scroll 0% 0%;">
     <div class="col-xs-3">
       {{#if isChinese languageTag}}
-          命中 {{totalPublicationResults}} 结果
+          命中 {{totalPublicationResults}} 个结果
       {{else}}
       {{totalPluralPublicationResults}}
       {{/if}}
@@ -63,7 +63,7 @@
           <div class="row">
             <h5>{{> imageName}}&nbsp;
               <a href="{{getUrlToJournal publisher title}}">
-                {{title}}
+                {{translateThis chinesetitle title}}
               </a>
             </h5>
             <h6>{{description}}</h6>
