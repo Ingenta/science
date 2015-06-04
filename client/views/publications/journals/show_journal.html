@@ -1,49 +1,52 @@
 <template name="ShowJournal">
-    <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
-    <br>
-    {{> journalOptions}}
-    <hr>
+  <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
+  <br>
+  {{> journalOptions}}
+  <hr>
 </template>
 
 <template name="journalOptions">
 
-    {{#journalTabs name="" tabs=tabs}}
+  {{#journalTabs name="" tabs=tabs}}
 
-    {{#tabContent slug="overview"}}
-    {{#with context}}
-    {{> OverviewTemplate}}
-    {{/with}}
-    {{/tabContent}}
+  {{#tabContent slug="overview"}}
+  {{#with context}}
+  {{> OverviewTemplate}}
+  {{/with}}
+  {{/tabContent}}
 
-    {{#tabContent slug="browse"}}
-    <a href="/publisher/abc/journal/banana/article/test" ><h2>Browse Page</h2></a>
-    {{/tabContent}}
+  {{#tabContent slug="browse"}}
+  <a href="/publisher/abc/journal/banana/article/test" ><h2>Browse Page</h2></a>
+  {{/tabContent}}
 
-    {{#tabContent slug="about"}}
-    <div class="row">
-     <div id="menu" class="col-sm-3 col-md-2">
-      <ul class="list-unstyled" style="float: left;line-height: 2.0;width: 180%;">
-          <li><a href="">{{_ "Editorial Policies"}}:</a></li>
-          <li><a href="">{{_ "Readers"}}:</a></li>
-          <li><a href="">{{_ "Contact"}}:</a></li>
-      </ul>
-  </div>
-  <div id="subcontent" class="col-sm-9 col-md-10">
-    <div class="page-container container">
-      <div class="row">
-          <h3>{{_ "Editorial Policies"}}</h3>
-      </div>
-      <div class="row">
-          <h4>{{_ "Executive Editors"}}</h4>
-      </div>
-      <div class="row">
-          <h6>Content</h6>
-      </div>
-  </div>
-</div>
-</div>
-{{/tabContent}}
-{{/journalTabs}}
+  {{#tabContent slug="about"}}
+  <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="list-group">
+          <a href="#" class="list-group-item active">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+        </div>
+      </div><!--/span-->
+      <div class="col-xs-12 col-sm-9 content">
+        <div class="text-center">
+          <h1>Bootstrap forms</h1>
+          <p class="lead">Example of a form with 3 columns and labels aligned to the left of the
+            fields at &gt; 1200px (large) screen sizes, 2 columns and labels aligned to the left of the
+            fields at &gt;992px (medium) screen sizes, 2 columns labels above fields at &gt; 768px (small), and single
+            column at &lt; 768px (Extra small).
+          </p>
+          </div>
+        <p>Note: label text will occupy as much space as the text takes regardless of the
+          column size, so be sure to validate your spacing.
+        </p>
+      </div><!--/span-->
+    </div><!--/row-->
+  </div><!-- /.container -->
+  {{/tabContent}}
+  {{/journalTabs}}
 
 </template>
 
@@ -61,13 +64,13 @@
       {{#each tabs}}
       <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a></li>
       {{/each}}
-  </ul>
+    </ul>
 
-  <div class="tabs-content-container">
+    <div class="tabs-content-container">
       {{> UI.contentBlock
       context=__context__
-  }}
-</div>
+    }}
+  </div>
 
 </div>
 
@@ -75,20 +78,20 @@
 
 <template name="OverviewTemplate">
 
-    <div class="row">
-        <div class="col-xs-4">
-            <img src="{{getImageHelper picture}}" width="105" />
+  <div class="row">
+    <div class="col-xs-4">
+      <img src="{{getImageHelper picture}}" width="105" />
+    </div>
+    <div class="col-xs-8">
+      <div class="row">
+        <div class="pull-right">
+          {{#if isAdmin }}
+          {{> updatePublicationDescriptionModalForm}}
+          {{/if}}
         </div>
-        <div class="col-xs-8">
-            <div class="row">
-                <div class="pull-right">
-                  {{#if isAdmin }}
-                  {{> updatePublicationDescriptionModalForm}}
-                  {{/if}}
-              </div>
-              {{description}}
-          </div>
+        {{description}}
       </div>
+    </div>
   </div>
   <hr>
 </template>
