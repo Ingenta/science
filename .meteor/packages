@@ -13,7 +13,6 @@ spiderable
 iron:router
 natestrauser:font-awesome
 matb33:collection-hooks
-copleykj:livestamp
 reactive-dict
 accounts-password
 mizzao:bootboxjs
@@ -22,8 +21,6 @@ rajit:bootstrap3-datepicker
 tap:i18n
 tap:i18n-ui
 aldeed:autoform
-aramk:jqtree
-anti:fake
 perak:user-roles
 aldeed:collection2
 mrt:flash-messages
@@ -38,4 +35,6 @@ yogiben:autoform-file
 aldeed:simple-schema
 cfs:gridfs
 templates:tabs
-mpowaga:autoform-summernote
+science-topics
+monbro:last-software-release-date
+rzymek:moment-locale-zh-cn

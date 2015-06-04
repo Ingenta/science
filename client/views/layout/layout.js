@@ -1,4 +1,5 @@
 Template.layout.rendered = function() {
+	moment.locale(navigator.language);
 	// scroll to anchor
 	$('body').on('click', 'a', function(e) {
 		var href = $(this).attr("href");

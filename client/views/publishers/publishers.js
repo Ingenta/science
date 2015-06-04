@@ -10,6 +10,12 @@ Template.deletePublisherModalForm.helpers({
   }
 });
 
+Template.SinglePublisher.helpers({
+    hasPublisher: function (id) {
+        return  Publications.find({"publisher": id}).count()===0;
+    }
+});
+
 AutoForm.addHooks(['addPublisherModalForm'], {
   onSuccess: function () {
     $("#addPublisherModal").modal('hide');
