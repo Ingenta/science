@@ -20,59 +20,47 @@
   {{/tabContent}}
 
   {{#tabContent slug="about"}}
-  <div class="container-fluid">
-    <div class="row row-offcanvas row-offcanvas-left">
-      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-        <div class="list-group">
-          <a href="#" class="list-group-item active">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-        </div>
-      </div><!--/span-->
-      <div class="col-xs-12 col-sm-9 content">
-        <div class="text-center">
-          <h1>Bootstrap forms</h1>
-          <p class="lead">Example of a form with 3 columns and labels aligned to the left of the
-            fields at &gt; 1200px (large) screen sizes, 2 columns and labels aligned to the left of the
-            fields at &gt;992px (medium) screen sizes, 2 columns labels above fields at &gt; 768px (small), and single
-            column at &lt; 768px (Extra small).
-          </p>
-          </div>
-        <p>Note: label text will occupy as much space as the text takes regardless of the
-          column size, so be sure to validate your spacing.
-        </p>
-      </div><!--/span-->
-    </div><!--/row-->
-  </div><!-- /.container -->
-  {{/tabContent}}
-  {{/journalTabs}}
-
-</template>
-
-<template name="journalTabs">
-
-  <div class="journalTabs-container">
-
-    {{#if activeTab}}
-    {{trackActiveTab activeTab}}
-    {{/if}}
-
-    {{trackTabs tabs}}
-
-    <ul class="nav nav-tabs" role="tablist" >
-      {{#each tabs}}
-      <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a></li>
-      {{/each}}
+  <div class="tabbable">
+    <ul class="nav nav-pills nav-stacked col-md-3">
+      <li><a href="#a" data-toggle="tab">One</a></li>
+      <li class="active"><a href="#b" data-toggle="tab">Two</a></li>
+      <li><a href="#c" data-toggle="tab">Twee</a></li>
     </ul>
+    <div class="tab-content col-md-9">
+      <div class="tab-pane active" id="a">Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</div>
+      <div class="tab-pane" id="b">Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+      <div class="tab-pane" id="c">Thirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum auctor accumsan. Duis pharetra
+        varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae. </div>
+      </div>
+    </div>
+    {{/tabContent}}
+    {{/journalTabs}}
 
-    <div class="tabs-content-container">
-      {{> UI.contentBlock
-      context=__context__
-    }}
+  </template>
+
+  <template name="journalTabs">
+
+    <div class="journalTabs-container">
+
+      {{#if activeTab}}
+      {{trackActiveTab activeTab}}
+      {{/if}}
+
+      {{trackTabs tabs}}
+
+      <ul class="nav nav-tabs" role="tablist" >
+        {{#each tabs}}
+        <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a></li>
+        {{/each}}
+      </ul>
+
+      <div class="tabs-content-container">
+        {{> UI.contentBlock
+        context=__context__
+      }}
+    </div>
+
   </div>
-
-</div>
 
 </template>
 
