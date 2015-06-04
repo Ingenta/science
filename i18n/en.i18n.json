@@ -6,7 +6,7 @@
             "description": {
                 "label": "Description"
             },
-             "chinesedescription": {
+            "chinesedescription": {
                 "label": "Chinesedescription"
             },
             "firstletter": {
@@ -18,27 +18,27 @@
             "title": {
                 "label": "Publication Name"
             },
-             "chinesetitle": {
+            "chinesetitle": {
                 "label": "chinesetitle"
             },
             "urlname": {
                 "label": "Abbreviation"
             },
-	     "accessKey": {
+            "accessKey": {
                 "label": "Choose a Access Key",
-		"options":{
-		    "1": "Free Content",
-		    "2": "Open Access Content",
-		    "3": "Subscribed Content",
-                    "4": "Free Trial Content"
-		}
+                "options": {
+                    "1": "Free Content",
+                    "2": "Open Access Content"
+//                    "3": "Subscribed Content",
+//                    "4": "Free Trial Content"
+                }
             }
         },
         "publishers": {
             "description": {
                 "label": "Description"
             },
-           "chinesedescription": {
+            "chinesedescription": {
                 "label": "Chinesedescription"
             },
             "name": {
@@ -54,7 +54,7 @@
                 "label": "Website",
                 "placeholder": "http://www.scitation.aip.org"
             },
-             "picture": {
+            "picture": {
                 "label": "Choose file"
             }
         },
