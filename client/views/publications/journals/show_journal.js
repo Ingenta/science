@@ -11,15 +11,14 @@ Template.journalOptions.helpers({
 
 Template.journalOptions.helpers({
   tabs: function () {
-    // Every tab object MUST have a name and a slug!
     return [
-    { name: 'Overview', slug: 'overview' },
-    { name: 'Browse', slug: 'browse' },
-    { name: 'About', slug: 'about' },
+    { name: TAPi18n.__("Overview"), slug: 'overview' },
+    { name:  TAPi18n.__("Browse"), slug: 'browse' },
+    { name:  TAPi18n.__("About"), slug: 'about' },
     ];
   },
   activeTab: function () {
-      return Session.get('activeTab');
+    return Session.get('activeTab');
   }
 });
 
