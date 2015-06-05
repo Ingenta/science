@@ -1,36 +1,36 @@
 <template name="navigation">
-    <nav class="navbar navbar-default ">
-        <div class="container-fluid">
-            <div id="navbar">
-                <form class="navbar-form navbar-right form-inline" role="search" name="search" action="search" method="post">
+    <div class="col-xs-2">
+        <a class="navbar-brand" href="/home_private">
+            <img src="/logo_scp_transparent.png" alt="SCP" width="150">
+        </a>
+    </div>
+    <div class="col-xs-10">
+        <nav class="">
+            <div class="container-fluid">
+                <form class="navbar-form navbar-right" role="search" name="search" action="search" method="post">
                    <div class="input-group">
                        <input type="text" class="form-control" placeholder='{{_ "Search"}}'>
                        <span class="input-group-btn">
-                       <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
+                           <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                           </button>
+                       </span>
+                   </div>
+               </form>
+           </div>
+       </nav>
+       <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div id="navbar">
+                {{> LeftMenu}}
+                {{#if currentUser}}
+                {{> PrivateLayoutRightMenu}}
+                {{else}}
+                {{> PublicLayoutRightMenu}}
+                {{/if}}
+            </div>
         </div>
-    </div>
-</nav>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/home_private">
-                <img src="/logo_scp_transparent.png" alt="SCP" width="50">
-            </a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            {{> LeftMenu}}
-            {{#if currentUser}}
-            {{> PrivateLayoutRightMenu}}
-            {{else}}
-            {{> PublicLayoutRightMenu}}
-            {{/if}}
-        </div>
-    </div>
-</nav>
+    </nav>
+</div>
 </template>
 
 <template name="LeftMenu">
