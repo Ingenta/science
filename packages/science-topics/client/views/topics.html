@@ -2,7 +2,7 @@
 
     <div class="page-container container">
         <div class="row">
-            <h2>{{_ "Topics"}}</h2>
+            <h3>{{_ "Topics"}}</h3>
         </div>
         <div class="row">
             {{#if isAdmin }}
@@ -77,9 +77,9 @@
         {{#if isAdmin }}
         {{> addSubTopicModalForm}}
         {{> updateTopicModalForm}}
-        {{#if hasSubTopic _id}}
+    <!--     {{#if hasSubTopic _id}} -->
         {{> deleteTopicModalForm}}
-        {{/if}}
+     <!--    {{/if}} -->
         {{/if}}
     </div>
 </template>
