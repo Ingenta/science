@@ -31,8 +31,18 @@ PublicationsSchema = new SimpleSchema({
                 collection: 'Images',
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
-        },
-        label: 'Choose file'
+        }
+    },
+    banner: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
+            }
+        }
     }
 });
 Meteor.startup(function () {
