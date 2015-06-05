@@ -1,0 +1,18 @@
+<template name="languageBar">
+    <div id="LanguageBar" class="navbar-fixed-top">
+        <div class="container">
+            <div class="pull-right">
+                {{> i18n_switch}}
+            </div>
+        </div>
+    </div>
+</template>
+<template name="i18n_switch">
+    <span class="tap-i18n-buttons">
+        {{#if i18n_enabled}}
+        <a id="zh-CN">中文</a>
+        |
+        <a id="en">English</a>
+        {{/if}}
+    </span>
+</template>

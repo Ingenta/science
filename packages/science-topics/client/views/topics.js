@@ -43,9 +43,7 @@ AutoForm.addHooks(['addSubTopicModalForm'], {
     },
     before:{
         insert:  function(doc){
-            console.log(doc);
             doc.parentId = Session.get('parentId');
-            console.log(doc);
             return doc;
         }
     }

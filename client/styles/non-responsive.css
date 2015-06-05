@@ -6,8 +6,8 @@
 
 /* Account for fixed navbar */
 body {
-  padding-top: 70px;
-  padding-bottom: 30px;
+  padding-top: 30px;
+  /*padding-bottom: 30px;*/
 }
 
 body,
