@@ -1,6 +1,6 @@
 Template.SingleTopic.events({
-   'click li': function (event) {
-       var id=$(event.currentTarget).attr('id');
+   'click .fa': function (event) {
+       var id=$(event.currentTarget).parent().attr('id');
        var es=Session.get("expandStatus"+id);
        Session.set("expandStatus"+id,!es);
        Session.set("parentId", id);
