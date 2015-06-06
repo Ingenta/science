@@ -10,21 +10,19 @@
 <template name="layout">
 	{{> languageBar}}
 	<div class="container">
-		{{> navigation}}
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-9">
-					{{> breadcrumb}}
-					<div id="content">
-						{{> flashMessages}}
-						{{> yield}}
-						{{> autoformModals}}
-					</div>
-				</div>
-				<div class="col-xs-3">
-					<div id="sidebar">
-						{{> LayoutSideBar}}
-					</div>
+		<div class="row">
+			{{> navigation}}
+		</div>
+		<div class="row" id="content">
+			<div class="col-xs-9">
+				<!-- {{> breadcrumb}} -->
+				{{> flashMessages}}
+				{{> yield}}
+				{{> autoformModals}}
+			</div>
+			<div class="col-xs-3">
+				<div id="sidebar">
+					{{> LayoutSideBar}}
 				</div>
 			</div>
 		</div>
@@ -36,11 +34,12 @@
 					<div class="col-xs-8">PT 北京 - 中国科学的团队 - 杰克，蒋凯，杨冬冬，崔显，刘奇，李楠，黄新华
 					</div>
 					<div class="col-xs-4">
-						{{_ "Last release was"}} {{>deployDate}}</div>
+						{{_ "Last release was"}} {{>deployDate}}
 					</div>
-				</p>
-			</div>
+				</div>
+			</p>
 		</div>
-	</template>
+	</div>
+</template>
 
 

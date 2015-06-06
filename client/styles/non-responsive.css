@@ -40,18 +40,18 @@ body,
 .container {
   width: 970px;
   max-width: none !important;
-  border: 3px solid #ddd;
+  /*border: 3px solid #ddd;*/
 }
 
 /* Demonstrate the grids */
-.breadcrumb {
+/*.breadcrumb {
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #eee;
   background-color: rgba(86,61,124,.15);
   border: 1px solid #ddd;
   border: 1px solid rgba(86,61,124,.2);
-}
+}*/
 
 .container .navbar-header,
 .container .navbar-collapse {
