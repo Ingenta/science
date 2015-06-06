@@ -13,3 +13,6 @@ body{
     background-repeat: repeat-x;
     background-color: #FFF;
 }
+.breadcrumb {
+  background-color: #fff;
+}

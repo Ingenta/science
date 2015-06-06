@@ -7,18 +7,18 @@
     <div class="col-xs-10">
         <nav>
             <div class="container-fluid">
-            <form class="navbar-form pull-right" role="search" name="search" action="search" method="post">
-                   <div class="input-group">
-                       <input type="text" class="form-control" placeholder='{{_ "Search"}}'>
-                       <span class="input-group-btn">
-                           <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                           </button>
-                       </span>
-                   </div>
-               </form>
-           </div>
-       </nav>
-       <nav class="navbar navbar-default">
+                <form class="navbar-form pull-right" role="search" name="search" action="search" method="post">
+                 <div class="input-group">
+                     <input type="text" class="form-control" placeholder='{{_ "Search"}}'>
+                     <span class="input-group-btn">
+                         <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                         </button>
+                     </span>
+                 </div>
+             </form>
+         </div>
+     </nav>
+     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div id="navbar">
                 {{> LeftMenu}}
@@ -35,11 +35,30 @@
 
 <template name="LeftMenu">
     <ul id="menu-items" class="nav navbar-nav">
+        {{#if hasPublishers}}
+        <li id="menu-item-dropdown" class="dropdown ">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{_ "Publishers"}}
+                <b class="caret">
+                </b>
+            </a>
+            <ul id="menu-items" class="dropdown-menu">
+            {{#each publishers}}
+                <li>
+                    <a href="/publisher/{{name}}">
+                        {{translateThis chinesename name}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{else}}
         <li id="menu-item-simple" class="{{menuItemClass 'publishers'}}">
             <a href="{{pathFor 'publishers'}}">
                 {{_ "Publishers"}}
             </a>
         </li>
+        {{/if}}
         <li id="menu-item-simple" class="{{menuItemClass 'publications'}}">
             <a href="{{pathFor 'publications'}}">
                 {{_ "Publications"}}
