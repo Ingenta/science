@@ -8,25 +8,21 @@
         <nav>
             <div class="container-fluid">
                 <form class="navbar-form pull-right" role="search" name="search" action="search" method="post">
-                 <div class="input-group">
-                     <input type="text" class="form-control" placeholder='{{_ "Search"}}'>
-                     <span class="input-group-btn">
-                         <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                         </button>
-                     </span>
-                 </div>
-             </form>
-         </div>
-     </nav>
-     <nav class="navbar navbar-default">
+                   <div class="input-group">
+                       <input type="text" class="form-control" placeholder='{{_ "Search"}}'>
+                       <span class="input-group-btn">
+                           <button class="btn btn-primary" type="button"><i class="fa fa-search"></i>
+                           </button>
+                       </span>
+                   </div>
+               </form>
+           </div>
+       </nav>
+       <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div id="navbar">
                 {{> LeftMenu}}
-                {{#if currentUser}}
-                {{> PrivateLayoutRightMenu}}
-                {{else}}
                 {{> PublicLayoutRightMenu}}
-                {{/if}}
             </div>
         </div>
     </nav>
@@ -43,7 +39,7 @@
                 </b>
             </a>
             <ul id="menu-items" class="dropdown-menu">
-            {{#each publishers}}
+                {{#each publishers}}
                 <li>
                     <a href="/publisher/{{name}}">
                         {{translateThis chinesename name}}
@@ -84,46 +80,16 @@
 
 <template name="PublicLayoutRightMenu">
     <ul id="menu-items" class="nav navbar-nav navbar-right">
-        <li id="menu-item-simple" class="{{menuItemClass 'register'}}">
-            <a href="{{pathFor 'register'}}">
-                {{_ "Register"}}
+        <li id="menu-item-simple">
+            <a href="#">
+                <i class="fa fa-search-plus"></i> {{_ "Quick Search"}}
             </a>
         </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'login'}}">
-            <a href="{{pathFor 'login'}}">
-                {{_ "Login"}}
+        <li id="menu-item-simple">
+        <a href="#">
+                <i class="fa fa-windows"></i> {{_ "Advanced Search"}}
             </a>
         </li>
     </ul>
 </template>
 
-<template name="PrivateLayoutRightMenu">
-    <ul id="menu-items" class="nav navbar-nav navbar-right">
-        <li id="menu-item-dropdown" class="dropdown ">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{userEmail}}
-                <b class="caret">
-                </b>
-            </a>
-            <ul id="menu-items" class="dropdown-menu">
-                {{#if isAdmin}}
-                <li class="{{menuItemClass 'admin'}}">
-                    <a href="{{pathFor 'admin'}}">
-                        {{_ "Admin"}}
-                    </a>
-                </li>
-                {{/if}}
-                <li class="{{menuItemClass 'user_settings'}}">
-                    <a href="{{pathFor 'user_settings'}}">
-                        {{_ "Settings"}}
-                    </a>
-                </li>
-                <li class="{{menuItemClass 'logout'}}">
-                    <a href="{{pathFor 'logout'}}">
-                        {{_ "Log Out"}}
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</template>
