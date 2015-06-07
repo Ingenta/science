@@ -71,6 +71,11 @@
             "englishName": {
                 "label": "English Name"
             }
+        },
+        "articles":{
+          "title":{
+            "label": "Title"
+          }
         }
     }
 }

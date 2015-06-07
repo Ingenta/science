@@ -1,3 +1,21 @@
-    <template name="ShowArticle">
-    test article
-    </template>
+<template name="showArticle">
+test
+
+</template>
+<template name="articleTab">
+    {{#basicTabs name="" tabs=tabs}}
+        {{#tabContent slug="overview"}}
+            <h2>People</h2>
+            <button class="add-people">
+                Add People
+            </button>
+        {{/tabContent}}
+        {{#tabContent slug="about"}}
+            <h2>Places</h2>
+            <button class="add-places">
+                Add Places
+            </button>
+        {{/tabContent}}
+    {{/basicTabs}}
+</template>
+

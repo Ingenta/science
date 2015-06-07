@@ -21,4 +21,3 @@ Template.journalOptions.helpers({
     return Session.get('activeTab');
   }
 });
-

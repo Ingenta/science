@@ -136,6 +136,11 @@
             "englishName": {
                 "label": "英文名称"
             }
+        },
+        "articles":{
+            "title":{
+                "label": "标题"
+            }
         }
     }
 }
