@@ -5,6 +5,12 @@ ArticlesSchema  = new SimpleSchema({
         type: String,
         unique: true
     },
+    authors:{
+        type: String
+    },
+    publisher:{
+        type: String
+    },
     volume:{
         type: String
     },
@@ -12,12 +18,10 @@ ArticlesSchema  = new SimpleSchema({
         type: String
     },
     journalId: {
-        type: String,
-        optional:true
+        type: String
     },
     issueId: {
-        type: String,
-        optional:true
+        type: String
     },
     year:{
         type: String

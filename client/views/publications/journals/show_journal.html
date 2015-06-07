@@ -2,6 +2,8 @@
     <img src="{{getImageHelper banner}}" width="710" height="94" alt="{{title}}">
     {{#if isAdmin }}
     {{> updatePublicationBannerModalForm}}
+    <br>
+    {{> addArticleButton}}
     {{/if}}
     <br>
     {{> journalOptions}}
@@ -20,6 +22,9 @@
 
     {{#tabContent slug="browse"}}
     <a href="/publisher/abc/journal/banana/article/test"><h2>Browse Page</h2></a>
+        {{#with context}}
+            {{> articleList}}
+        {{/with}}
     {{/tabContent}}
 
     {{#tabContent slug="about"}}

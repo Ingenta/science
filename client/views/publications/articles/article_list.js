@@ -40,14 +40,14 @@ Template.articleListTree.events({
 });
 
 Template.addArticleButton.helpers({
-    initPage:function(id){
+    initPage:function(id,publisher){
         Session.set('currentJournalId',id);
+        Session.set('currPublisher',publisher);
     }
 });
 
 Template.articleListRight.helpers({
     articles:function(){
-        debugger
         var curIssue=Session.get("currIssue");
         return curIssue? Articles.find({issueId:curIssue},{sort:{title:1}}):null;
     }
@@ -62,6 +62,7 @@ AutoForm.addHooks(['addArticleModalForm'], {
     before:{
         insert:  function(doc){
             doc.journalId = Session.get('currentJournalId');
+            doc.publisher=Session.get('currPublisher');
             //此处自动生成issue记录
             if(doc.journalId){
                 var issue=Issues.findOne({journalId:doc.journalId,volume:doc.volume,issue:doc.issue});
