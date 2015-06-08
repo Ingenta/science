@@ -4,8 +4,8 @@
   margin-top:25px;
   margin-right:10px;
 }
-
-#menu-item-simple-left .active {
+/*
+#menu-item-simple-left > .active > a  { doesnt work
   background: #06a4d1;
   background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0272b2 100%);
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0272b2));
@@ -14,9 +14,8 @@
   background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
   background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
-
-  border-radius: 7px
-}
+  border-radius: 7px;
+}*/
 #menu-item-simple-left  > a:hover, #menu-item-simple-left > a:focus{
   background: #06a4d1;
   background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0272b2 100%);
@@ -26,7 +25,7 @@
   background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
   background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
-  border-radius: 7px
+  border-radius: 7px;
 }
 
 #menu-item-simple-left > .active > a, #menu-item-simple-left > .active > a:hover, #menu-item-simple-left > .active > a:focus {
@@ -39,7 +38,7 @@
   background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
 
-  border-radius: 7px
+  border-radius: 7px;
 }
 #menu-item-simple-left > .open > a, #menu-item-simple-left > .open > a:hover, #menu-item-simple-left > .open > a:focus {
   background: #06a4d1;
@@ -50,7 +49,7 @@
   background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
   background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
-  border-radius: 7px
+  border-radius: 7px;
 }
 /*right menu style*/
 
