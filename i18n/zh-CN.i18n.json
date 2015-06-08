@@ -142,5 +142,13 @@
                 "label": "标题"
             }
         }
+    },
+    "about": {
+        "title": {
+	    "label": "标题"
+        },
+        "chinesetitle": {
+	    "label": "中文标题"
+        }
     }
 }

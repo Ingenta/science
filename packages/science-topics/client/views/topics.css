@@ -6,3 +6,14 @@ div.topics li {
     list-style-type:none;
     /*cursor:pointer;*/
 }
+div.topics a.fa-plus {
+	color: green;
+}
+div.topics a.fa-pencil {
+	color: orange;
+}
+div.topics a.fa-trash {
+	color: red;
+}
+
+
