@@ -135,6 +135,8 @@ Meteor.subscribe("articles");
 
 Meteor.subscribe("issues");
 
+Meteor.subscribe("about");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
