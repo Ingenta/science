@@ -1,13 +1,17 @@
 <template name="ShowJournal">
-    <img src="{{getImageHelper banner}}" width="710" height="94" alt="{{title}}">
-    {{#if isAdmin }}
-    {{> updatePublicationBannerModalForm}}
-    <br>
-    {{> addArticleButton}}
-    {{/if}}
-    <br>
-    {{> journalOptions}}
-    <hr>
+  <div class="pull-right">
+   {{#if isAdmin }}
+   {{> updatePublicationBannerModalForm}}
+   {{/if}}
+ </div>
+ <img src="{{getImageHelper banner}}" width="710" height="94" alt="{{title}}">
+ <br>
+ {{#if isAdmin }}
+ {{> addArticleButton}}
+ {{/if}}
+ <br>
+ {{> journalOptions}}
+ <hr>
 </template>
 
 <template name="journalOptions">
@@ -21,108 +25,110 @@
   {{/tabContent}}
 
   {{#tabContent slug="browse"}}
-    <a href="/publisher/abc/journal/banana/article/test"><h2>Browse Page</h2></a>
-        {{#with context}}
-            {{> articleList}}
-        {{/with}}
+  <a href="/publisher/abc/journal/banana/article/test"><h2>Browse Page</h2></a>
+  {{#with context}}
+  {{> articleList}}
+  {{/with}}
   {{/tabContent}}
 
   {{#tabContent slug="about"}}
   <div class="tabbable">
-  {{#with context}}
+    {{#with context}}
     {{setCurrentPublication _id}}
     {{> AboutTitle}}
-  {{/with}}
+    {{/with}}
     <div class="tab-content col-md-9">
       <div class="tab-pane active" id="a"><h3>{{_ "Editorial Policies"}}</h3><hr><h4>The Review Process</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</h6><br><h4>Retraction and Correction Policies</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</h6></div>
       <div class="tab-pane" id="b"><h3>{{_ "Readers"}}</h3><hr><h4>Ratings Guidelines</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</h6></div>
       <div class="tab-pane" id="c"><h3>{{_ "Contact"}}</h3><hr><h4>Editorial Office</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum auctor accumsan. Duis pharetravarius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae. </h6></div>
-      </div>
     </div>
-    {{/tabContent}}
-    {{/journalTabs}}
+  </div>
+  {{/tabContent}}
+  {{/journalTabs}}
 
 </template>
 
 <template name="journalTabs">
 
-    <div class="journalTabs-container">
+  <div class="journalTabs-container">
 
-        {{#if activeTab}}
-        {{trackActiveTab activeTab}}
-        {{/if}}
+    {{#if activeTab}}
+    {{trackActiveTab activeTab}}
+    {{/if}}
 
-        {{trackTabs tabs}}
+    {{trackTabs tabs}}
 
-        <ul class="nav nav-tabs" role="tablist">
-            {{#each tabs}}
-            <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
-            </li>
-            {{/each}}
-        </ul>
+    <ul class="nav nav-tabs" role="tablist">
+      {{#each tabs}}
+      <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
+      </li>
+      {{/each}}
+    </ul>
 
-        <div class="tabs-content-container">
-            {{> UI.contentBlock
-            context=__context__
-            }}
-        </div>
+    <div class="tabs-content-container">
+      {{> UI.contentBlock
+      context=__context__
+    }}
   </div>
+</div>
 </template>
 
 <template name="OverviewTemplate">
 
-    <div class="row">
-        <div class="col-xs-3">
-            <img src="{{getImageHelper picture}}" width="100" height="142"/>
-            {{#if isAdmin }}
-            {{> updatePublicationPictureModalForm}}
-            {{/if}}
-        </div>
-        <div class="col-xs-9">
-            <div class="row">
-                <div class="pull-right">
-                    {{#if isAdmin }}
-                    {{> updatePublicationDescriptionModalForm}}
-                    {{/if}}
-                </div>
-                {{description}}
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="pull-right">
+        {{#if isAdmin }}
+        {{> updatePublicationPictureModalForm}}
+        {{/if}}
+      </div>
+      <img src="{{getImageHelper picture}}" width="100" height="142"/>
     </div>
-    <hr>
+    <div class="col-xs-9">
+      <div class="row">
+        <div class="pull-right">
+          {{#if isAdmin }}
+          {{> updatePublicationDescriptionModalForm}}
+          {{/if}}
+        </div>
+        {{description}}
+      </div>
+    </div>
+  </div>
+  <hr>
 </template>
 
 <template name="updatePublicationDescriptionModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
+  {{/afModal}}
 </template>
 
 <template name="updatePublicationPictureModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="picture"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="picture"}}
+  {{/afModal}}
 </template>
 
 <template name="updatePublicationBannerModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="banner"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="banner"}}
+  {{/afModal}}
 </template>
 
 <template name="AboutTitle">
-    <ul class="nav nav-pills nav-stacked col-md-3">
-		{{#if isAdmin }}
-		  {{> addAboutTitleModalForm}}
-		{{/if}}
-		{{> AboutList}}
-    </ul>
+  <ul class="nav nav-pills nav-stacked col-md-3">
+    {{#if isAdmin }}
+    {{> addAboutTitleModalForm}}
+    {{/if}}
+    {{> AboutList}}
+  </ul>
 </template>
 <template name="addAboutTitleModalForm">
-  {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus btn btn-success" collection="About" operation="insert" omitFields="publications"}}
-    {{_ "Add new"}}
-    {{/afModal}}
+  {{#afModal formId="addAboutTitleModalForm" class="btn btn-success" collection="About" operation="insert" omitFields="publications"}}
+  {{_ "Add new"}}
+  {{/afModal}}
 </template>
 <template name="AboutList">
   {{#each about}}
-  <li><a class="active" href="#a" data-toggle="tab">{{title}}</a></li> 
+  <li><a class="active" href="#a" data-toggle="tab">{{title}}</a></li>
   {{else}}
   {{_"No about found!"}}
   {{/each}}
