@@ -1,28 +1,28 @@
 {
     "Last release was": "最后更新于",
-    "Any Publisher" : "+ 更多",
-    "Editors" : "编辑",
-    "Executive Editors" : "行政主编",
-    "Academic Editors" : "学术主编",
-    "Editorial Policies" : "编辑政策",
-    "Readers" : "读者须知",
-    "Contact" : "联系我们",
-    "Overview" : "期刊概述",
-    "Browse" : "出版目录",
-    "About" : "关于我们",
-    "Home" : "首页",
-    "Create" : "确定",
-    "OK" : "确定",
-    "Edit your profile" : "编辑您的资料",
-    "Change password" : "修改密码",
-    "Profile" : "个人资料",
-    "Add new" : "添加",
-    "Cancel" : "关闭",
-    "Save" : "保存",
-    "Password" : "密码",
-    "Add new user" : "添加新用户",
-    "Role" : "角色",
-    "Roles" : "角色",
+    "Any Publisher": "+ 更多",
+    "Editors": "编辑",
+    "Executive Editors": "行政主编",
+    "Academic Editors": "学术主编",
+    "Editorial Policies": "编辑政策",
+    "Readers": "读者须知",
+    "Contact": "联系我们",
+    "Overview": "期刊概述",
+    "Browse": "出版目录",
+    "About": "关于我们",
+    "Home": "首页",
+    "Create": "确定",
+    "OK": "确定",
+    "Edit your profile": "编辑您的资料",
+    "Change password": "修改密码",
+    "Profile": "个人资料",
+    "Add new": "添加",
+    "Cancel": "关闭",
+    "Save": "保存",
+    "Password": "密码",
+    "Add new user": "添加新用户",
+    "Role": "角色",
+    "Roles": "角色",
     "Are you sure?": "你确定吗？",
     "Access Key": "资源标签",
     "Free Content": "免费获取",
@@ -41,8 +41,8 @@
     "Click Here": "点击这里",
     "PleaseWait": "请等一会...",
     "Search": "搜索",
-    "Name" : "名字",
-    "E-mail" : "邮件地址",
+    "Name": "名字",
+    "E-mail": "邮件地址",
     "Publishers": "出版社",
     "Publications": "出版物",
     "Topics": "主题",
@@ -71,11 +71,11 @@
             "description": {
                 "label": "英文描述"
             },
-             "chinesedescription": {
+            "chinesedescription": {
                 "label": "中文描述"
             },
             "title": {
-                "label": "出版物英文名字"
+                "label": "出版物名字"
             },
             "chinesetitle": {
                 "label": "出版物中文名字"
@@ -89,21 +89,21 @@
             "urlname": {
                 "label": "简称"
             },
-	     "accessKey": {
+            "accessKey": {
                 "label": "请选择一个资源标签",
-		"options": {
-		    "1": "免费",
-		    "2": "开源",
-		    "3": "订阅",
-                    "4": "免费试用"
-		}
+                "options": {
+                    "1": "免费",
+                    "2": "开源"
+//                    "3": "订阅",
+//                    "4": "免费试用"
+                }
             }
         },
         "publishers": {
             "description": {
                 "label": "英文描述"
             },
-             "chinesedescription": {
+            "chinesedescription": {
                 "label": "中文描述"
             },
             "name": {
@@ -119,7 +119,7 @@
                 "label": "网站",
                 "placeholder": "http://www.scitation.aip.org"
             },
-             "picture": {
+            "picture": {
                 "label": "选择图片"
             }
         },
