@@ -48,7 +48,8 @@ Template.addArticleButton.helpers({
 Template.articleListRight.helpers({
     articles:function(){
         var curIssue=Session.get("currIssue");
-        return curIssue? Articles.find({issueId:curIssue},{sort:{title:1}}):Articles.find({},{sort:{title:1}});
+        return Articles.find({},{sort:{title:1}}); //simplified temporarily
+        //return curIssue? Articles.find({issueId:curIssue},{sort:{title:1}}):null;
     }
 
 });
