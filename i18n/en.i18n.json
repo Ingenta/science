@@ -66,5 +66,13 @@
                 "label": "English Name"
             }
         }
+    },
+    "about": {
+        "title": {
+	    "label": "title"
+        },
+        "chinesetitle": {
+	    "label": "chinesetitle"
+        }
     }
 }

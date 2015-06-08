@@ -22,3 +22,22 @@ Template.journalOptions.helpers({
   }
 });
 
+Template.ShowPublisher.helpers({
+  setCurrentPublisher: function (id) {
+    Session.set('currentPublisher', id);
+  }
+});
+
+AutoForm.addHooks(['editAboutTitleModalForm'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
+    },
+    before:{
+        insert:  function(doc){
+            console.log(doc);
+            doc.publications = Session.get('publications');
+            console.log(doc);
+            return doc;
+        }
+    }
+}, true);
