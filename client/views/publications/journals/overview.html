@@ -1,0 +1,23 @@
+<template name="JournalOverview">
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="pull-right">
+        {{#if isAdmin }}
+        {{> updatePublicationPictureModalForm}}
+        {{/if}}
+      </div>
+      <img src="{{getImageHelper picture}}" width="100" height="142"/>
+    </div>
+    <div class="col-xs-9">
+      <div class="row">
+        <div class="pull-right">
+          {{#if isAdmin }}
+          {{> updatePublicationDescriptionModalForm}}
+          {{/if}}
+        </div>
+        {{description}}
+      </div>
+    </div>
+  </div>
+  <hr>
+</template>
