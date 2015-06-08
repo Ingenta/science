@@ -12,12 +12,12 @@
 <template name="articleListTree">
     <ul class="list-unstyled">
         {{#each volumeList _id}}
-            <li class="volume"><span>+</span>第{{volume}}卷</li>
-            <div class="issues">
-                {{#each issueList journalId volume}}
-                    <div class="issue" data-value="{{_id}}">第{{issue}}期（{{year}},{{month}}）</div>
-                {{/each}}
-            </div>
+        <li class="volume"><span>+</span>第{{volume}}卷</li>
+        <div class="issues">
+            {{#each issueList journalId volume}}
+            <div class="issue" data-value="{{_id}}">第{{issue}}期（{{year}},{{month}}）</div>
+            {{/each}}
+        </div>
         {{/each}}
     </ul>
 </template>
@@ -34,14 +34,16 @@
     <li>
         <ul class="list-unstyled">
             <li>
-                <img src="/icon_access_fc.gif"/>
-                <span>{{title}}</span>
+            <a href="{{urlToArticle title}}">
+                    <img src="/icon_access_fc.gif"/>
+                    <span>{{title}}</span>
+                </a>
             </li>
             <li>
                 <span>{{authors}}</span>
             </li>
             <li>
-                <span>{{publisher}}</span>
+                <span>{{getPublisherName publisher}}</span>
             </li>
         </ul>
     </li>
@@ -52,7 +54,7 @@
     {{> addArticleModalForm }}
 </template>
 <template name="addArticleModalForm">
-    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,issueId,publisher"}}
-        {{_ "Add new"}}
+    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,volumeId,issueId,publisher"}}
+    {{_ "Add new"}}
     {{/afModal}}
 </template>

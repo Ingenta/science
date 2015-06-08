@@ -20,6 +20,9 @@ ArticlesSchema  = new SimpleSchema({
     journalId: {
         type: String
     },
+    volumeId:{
+        type: String
+    },
     issueId: {
         type: String
     },

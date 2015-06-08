@@ -1,0 +1,1 @@
+this.Volumes= new Meteor.Collection("volumes");

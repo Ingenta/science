@@ -4,7 +4,7 @@ ReactiveTabs.createInterface({
 
 Template.journalOptions.helpers({
   context: function () {
-    var currentTitle = Router.current().params.title;
+    var currentTitle = Router.current().params.journalTitle;
     return Publications.findOne({title: currentTitle});
   },
   setCurrentPublication: function (id) {
