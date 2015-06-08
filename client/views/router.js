@@ -197,31 +197,34 @@ Router.map(function () {
 			return TAPi18n.__("Publishers");
 		}
 	});
-	this.route('/publisher/:name', {
+	this.route('/publisher/:publisherName', {
 		data: function(){
-			return Publishers.findOne({name: this.params.name});
+			return Publishers.findOne({name: this.params.publisherName});
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
-		title: ":name",
+		title: ":publisherName",
 		name: "publisher.name"
 	});
 
-	this.route('/publisher/:name/journal/:title', {
+	this.route('/publisher/:publisherName/journal/:journalTitle', {
 		data: function(){
-			return Publications.findOne({title: this.params.title});
+			return Publications.findOne({title: this.params.journalTitle});
 		},
 		template: "ShowJournal",
-		title: ":title",
-		parent: "publisher.name"
+		title: ":journalTitle",
+		parent: "publisher.name",
+        name: "journal.name"
 	});
 
-	this.route('/publisher/:name/journal/:title/article/:articleName', {
-		template: "showArticle",
+	this.route('/publisher/:publisherName/journal/:journalTitle/article/:articleName', {
 		data: function(){
 			return Articles.findOne({title: this.params.articleName});
-		}
-	});
+		},
+        template: "showArticle",
+        title: ":articleName",
+        parent: "journal.name"
+    });
 
 	this.route("forgot_password", {
 		path: "/forgot_password",
