@@ -32,6 +32,12 @@
 //                    "3": "Subscribed Content",
 //                    "4": "Free Trial Content"
                 }
+            },
+            "picture": {
+                "label": "Choose Image for Cover"
+            },
+            "banner": {
+                "label": "Choose Image for Banner"
             }
         },
         "publishers": {
@@ -65,6 +71,11 @@
             "englishName": {
                 "label": "English Name"
             }
+        },
+        "articles":{
+          "title":{
+            "label": "Title"
+          }
         }
     },
     "about": {

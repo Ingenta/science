@@ -97,6 +97,12 @@
 //                    "3": "订阅",
 //                    "4": "免费试用"
                 }
+            },
+            "picture": {
+                "label": "选择封面图片"
+            },
+            "banner": {
+                "label": "选择横幅图片"
             }
         },
         "publishers": {
@@ -129,6 +135,11 @@
             },
             "englishName": {
                 "label": "英文名称"
+            }
+        },
+        "articles":{
+            "title":{
+                "label": "标题"
             }
         }
     },

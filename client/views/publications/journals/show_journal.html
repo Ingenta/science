@@ -1,8 +1,13 @@
 <template name="ShowJournal">
-  <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
-  <br>
-  {{> journalOptions}}
-  <hr>
+    <img src="{{getImageHelper banner}}" width="710" height="94" alt="{{title}}">
+    {{#if isAdmin }}
+    {{> updatePublicationBannerModalForm}}
+    <br>
+    {{> addArticleButton}}
+    {{/if}}
+    <br>
+    {{> journalOptions}}
+    <hr>
 </template>
 
 <template name="journalOptions">
@@ -16,7 +21,10 @@
   {{/tabContent}}
 
   {{#tabContent slug="browse"}}
-  <a href="/publisher/abc/journal/banana/article/test" ><h2>Browse Page</h2></a>
+    <a href="/publisher/abc/journal/banana/article/test"><h2>Browse Page</h2></a>
+        {{#with context}}
+            {{> articleList}}
+        {{/with}}
   {{/tabContent}}
 
   {{#tabContent slug="about"}}
@@ -32,54 +40,69 @@
     {{/tabContent}}
     {{/journalTabs}}
 
-  </template>
+</template>
 
-  <template name="journalTabs">
+<template name="journalTabs">
 
     <div class="journalTabs-container">
 
-      {{#if activeTab}}
-      {{trackActiveTab activeTab}}
-      {{/if}}
+        {{#if activeTab}}
+        {{trackActiveTab activeTab}}
+        {{/if}}
 
-      {{trackTabs tabs}}
+        {{trackTabs tabs}}
 
-      <ul class="nav nav-tabs" role="tablist" >
-        {{#each tabs}}
-        <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a></li>
-        {{/each}}
-      </ul>
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+            <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
+            </li>
+            {{/each}}
+        </ul>
 
-      <div class="tabs-content-container">
-        {{> UI.contentBlock
-        context=__context__
-      }}
-    </div>
-
+        <div class="tabs-content-container">
+            {{> UI.contentBlock
+            context=__context__
+            }}
+        </div>
   </div>
 </template>
 
 <template name="OverviewTemplate">
-  <div class="row">
-    <div class="col-xs-4">
-      <img src="{{getImageHelper picture}}" width="105" />
-    </div>
-    <div class="col-xs-8">
-      <div class="row">
-        <div class="pull-right">
-          {{#if isAdmin }}
-          {{> updatePublicationDescriptionModalForm}}
-          {{/if}}
+
+    <div class="row">
+        <div class="col-xs-3">
+            <img src="{{getImageHelper picture}}" width="100" height="142"/>
+            {{#if isAdmin }}
+            {{> updatePublicationPictureModalForm}}
+            {{/if}}
         </div>
-        {{description}}
-      </div>
+        <div class="col-xs-9">
+            <div class="row">
+                <div class="pull-right">
+                    {{#if isAdmin }}
+                    {{> updatePublicationDescriptionModalForm}}
+                    {{/if}}
+                </div>
+                {{description}}
+            </div>
+        </div>
     </div>
-  </div>
-  <hr>
+    <hr>
 </template>
+
 <template name="updatePublicationDescriptionModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
-  {{/afModal}}
+    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
+    {{/afModal}}
+</template>
+
+<template name="updatePublicationPictureModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="picture"}}
+    {{/afModal}}
+</template>
+
+<template name="updatePublicationBannerModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="banner"}}
+    {{/afModal}}
 </template>
 
 <template name="AboutTitle">

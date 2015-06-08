@@ -3,7 +3,7 @@
 </template>
 
 <template name="FilterList">
-  <div class="page-container container">
+  <div class="container-fluid">
    <div class="row">
      <h2>{{_ "Publications"}}
      </h2>
@@ -28,7 +28,7 @@
     <br>
   </div>
   <div class="row">
-    <div id="menu" class="col-sm-3 col-md-2">
+    <div id="menu" class="col-xs-3">
      <ul class="list-unstyled">
       <h3 class="text-uppercase" style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 12px;font-weight: bold;padding: 2px 0;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
       {{#unless selectedPublisher}}
@@ -53,8 +53,8 @@
           {{/if}}
         </ul>
       </div>
-      <div id="subcontent" class="col-sm-9 col-md-10">
-      <div class="container">
+      <div id="subcontent" class="col-xs-9">
+      <div class="container-fluid">
           <div class="row" style="margin-top: 20px;">
            {{#each publications}}
            <div class="col-xs-2">

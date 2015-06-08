@@ -1,9 +1,9 @@
 <template name="Admin">
-	<div class="page-container container">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12" id="content">
+			<div class="col-xs-12" id="content">
 				<div class="row" id="title_row">
-					<div class="col-md-12">
+					<div class="col-xs-12">
 						<div id="page_menu" class="pull-right">
 						</div>
 					</div>
@@ -11,12 +11,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="menu" class="col-sm-3 col-md-2">
+			<div id="menu" class="col-xs-3">
 				<h2>
 				</h2>
 				{{> AdminSideMenu}}
 			</div>
-			<div id="subcontent" class="col-sm-9 col-md-10">
+			<div id="subcontent" class="col-xs-9">
 				{{> yield region='AdminSubcontent'}}
 			</div>
 		</div>
