@@ -39,15 +39,28 @@ Template.addArticleButton.helpers({
 
 Template.articleListRight.helpers({
     articles:function(){
-        var curIssue=Session.get("currIssue");
-        return Articles.find({},{sort:{title:1}}); //simplified temporarily
-        //return curIssue? Articles.find({issueId:curIssue},{sort:{title:1}}):null;
+        if(Config.isDevMode){
+            q={};
+        }else{
+            var curIssue=Session.get("currIssue");
+            if(!curIssue){
+                var journalId=Session.get('currentJournalId');
+                var lastIssue=Issues.findOne({'journalId':journalId},{sort:{'volume':-1,'issue':-1}});
+                lastIssue && Session.set("currIssue",lastIssue._id) && (curIssue=lastIssue._id);
+            }
+            var q=curIssue?{issueId:curIssue}:{};
+        }
+        return Articles.find(q,{sort:{title:1}});
     }
 
 });
 Template.singleArticleInlist.helpers({
     urlToArticle:function(title){
          return Router.current().url+"/article/"+title;
+         return Router.current()+"/article/"+title;
+    },
+    getPublisherName:function(id){
+        return Publishers.findOne({_id:id}).name;
     }
 });
 
