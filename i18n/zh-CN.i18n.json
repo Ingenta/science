@@ -150,5 +150,19 @@
         "chinesetitle": {
 	    "label": "中文标题"
         }
+    },
+    "aboutArticles": {
+        "title": {
+	    "label": "标题"
+        },
+        "chinesetitle": {
+	    "label": "中文标题"
+        },
+	"description": {
+            "label": "英文描述"
+	},
+	"chinesedescription": {
+	    "label": "中文描述"
+	}
     }
 }

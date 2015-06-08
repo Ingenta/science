@@ -118,18 +118,15 @@
     {{#if isAdmin }}
     {{> addAboutTitleModalForm}}
     {{/if}}
-    {{> AboutList}}
+    {{#each about}}
+    <li><a class="active" href="#{{_id}}" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
+    {{else}}
+    {{_"No publishers found!"}}
+    {{/each}}
   </ul>
 </template>
 <template name="addAboutTitleModalForm">
   {{#afModal formId="addAboutTitleModalForm" class="btn btn-success" collection="About" operation="insert" omitFields="publications"}}
   {{_ "Add new"}}
   {{/afModal}}
-</template>
-<template name="AboutList">
-  {{#each about}}
-  <li><a class="active" href="#a" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
-  {{else}}
-  {{_"No publishers found!"}}
-  {{/each}}
 </template>
