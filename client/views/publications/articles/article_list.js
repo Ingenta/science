@@ -47,7 +47,7 @@ Template.articleListRight.helpers({
 });
 Template.singleArticleInlist.helpers({
     urlToArticle:function(title){
-         return Router.current()+"/article/"+title;
+         return Router.current().url+"/article/"+title;
     }
 });
 
