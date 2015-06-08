@@ -29,8 +29,10 @@
 
   {{#tabContent slug="about"}}
   <div class="tabbable">
-    {{setPublication _id}}
+  {{#with context}}
+    {{setCurrentPublication _id}}
     {{> AboutTitle}}
+  {{/with}}
     <div class="tab-content col-md-9">
       <div class="tab-pane active" id="a"><h3>{{_ "Editorial Policies"}}</h3><hr><h4>The Review Process</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</h6><br><h4>Retraction and Correction Policies</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</h6></div>
       <div class="tab-pane" id="b"><h3>{{_ "Readers"}}</h3><hr><h4>Ratings Guidelines</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</h6></div>
@@ -107,13 +109,21 @@
 
 <template name="AboutTitle">
     <ul class="nav nav-pills nav-stacked col-md-3">
-	  {{#if isAdmin }}
-      <li><a class="active" href="#a" data-toggle="tab">{{> editAboutTitleModalForm}}</a></li>
-	  {{/if}}
+		{{#if isAdmin }}
+		  {{> addAboutTitleModalForm}}
+		{{/if}}
+		{{> AboutList}}
     </ul>
 </template>
-<template name="editAboutTitleModalForm">
-  {{#afModal formId="editAboutTitleModalForm" class="fa fa-plus btn btn-success" collection="About" operation="insert" omitFields="publications"}}
+<template name="addAboutTitleModalForm">
+  {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus btn btn-success" collection="About" operation="insert" omitFields="publications"}}
     {{_ "Add new"}}
     {{/afModal}}
+</template>
+<template name="AboutList">
+  {{#each about}}
+  <li><a class="active" href="#a" data-toggle="tab">{{title}}</a></li> 
+  {{else}}
+  {{_"No about found!"}}
+  {{/each}}
 </template>
