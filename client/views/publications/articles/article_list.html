@@ -54,6 +54,8 @@
     {{> addArticleModalForm }}
 </template>
 <template name="addArticleModalForm">
+    {{#afModal formId="addArticleModalForm" class="fa fa-plus btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,volumeId,issueId,publisher"}}
+        添加文章 / Add article
     {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,issueId,publisher"}}
     {{_ "Add new"}}
     {{/afModal}}
