@@ -131,6 +131,10 @@ Meteor.subscribe("topics");
 
 Meteor.subscribe("images");
 
+Meteor.subscribe("articles");
+
+Meteor.subscribe("issues");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
@@ -209,7 +213,7 @@ Router.map(function () {
 	});
 
 	this.route('/publisher/:name/journal/:title/article/:articleName', {
-		template: "ShowArticle"
+		template: "showArticle"
 	});
 
 	this.route("forgot_password", {

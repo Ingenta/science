@@ -1,0 +1,58 @@
+<template name="articleList">
+    <div class="row">
+        <div class="col-xs-4">
+            {{> articleListTree}}
+        </div>
+        <div class="col-xs-8">
+            {{> articleListRight}}
+        </div>
+    </div>
+</template>
+
+<template name="articleListTree">
+    <ul class="list-unstyled">
+        {{#each volumeList _id}}
+            <li class="volume"><span>+</span>第{{volume}}卷</li>
+            <div class="issues">
+                {{#each issueList journalId volume}}
+                    <div class="issue" data-value="{{_id}}">第{{issue}}期（{{year}},{{month}}）</div>
+                {{/each}}
+            </div>
+        {{/each}}
+    </ul>
+</template>
+
+<template name="articleListRight">
+    <ul class="article-list list-unstyled">
+        {{#each articles}}
+        {{> singleArticleInlist}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="singleArticleInlist">
+    <li>
+        <ul class="list-unstyled">
+            <li>
+                <img src="/icon_access_fc.gif"/>
+                <span>{{title}}</span>
+            </li>
+            <li>
+                <span>{{authors}}</span>
+            </li>
+            <li>
+                <span>{{publisher}}</span>
+            </li>
+        </ul>
+    </li>
+</template>
+
+<template name="addArticleButton">
+    {{ initPage _id publisher}}
+    {{> addArticleModalForm }}
+</template>
+<template name="addArticleModalForm">
+    {{#afModal formId="addArticleModalForm" class="fa fa-plus btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,issueId,publisher"}}
+        添加文章 / Add article
+    {{/afModal}}
+</template>

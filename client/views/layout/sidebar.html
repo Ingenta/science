@@ -1,7 +1,22 @@
 <template name="LayoutSideBar">
     <br/>
     <ul class="list-unstyled">
-        <li>{{> i18n_buttons}}</li>
+        {{#if currentUser}}
+        <li><a href="{{pathFor 'user_settings'}}">{{userEmail}}</a></li>
+        {{#if isAdmin}}
+        <li>
+            <a href="{{pathFor 'admin'}}">
+                {{_ "Admin"}}
+            </a>
+        </li>
+        {{/if}}
+        <li><a href="{{pathFor 'logout'}}">{{_ "Log Out"}}</a></li>
+        {{else}}
+        <li>
+            <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
+        </li>
+        <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
+        {{/if}}
         <hr>
         <li><a href="#">{{_ "ScholarOne"}}</a></li>
         <li><a href="#">{{_ "ChineseScholarOne"}}</a></li>
