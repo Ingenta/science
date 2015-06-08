@@ -53,6 +53,12 @@ Template.articleListRight.helpers({
     }
 
 });
+Template.singleArticleInlist.helpers({
+    urlToArticle:function(title){
+         return Router.current()+"/article/"+title;
+    }
+});
+
 
 AutoForm.addHooks(['addArticleModalForm'], {
 

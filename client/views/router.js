@@ -213,7 +213,10 @@ Router.map(function () {
 	});
 
 	this.route('/publisher/:name/journal/:title/article/:articleName', {
-		template: "showArticle"
+		template: "showArticle",
+		data: function(){
+			return Articles.findOne({title: this.params.articleName});
+		}
 	});
 
 	this.route("forgot_password", {
