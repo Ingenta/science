@@ -10,7 +10,6 @@ Template.articleListTree.helpers({
                         volList[i]={volume:item.toString(),journalId:journalId};
                     })
                     Session.set('volumeList',volList);
-                    console.log(volList);
                 }
             }
         });
@@ -49,7 +48,7 @@ Template.addArticleButton.helpers({
 Template.articleListRight.helpers({
     articles:function(){
         var curIssue=Session.get("currIssue");
-        return curIssue? Articles.find({issueId:curIssue},{sort:{title:1}}):null;
+        return curIssue? Articles.find({issueId:curIssue},{sort:{title:1}}):Articles.find({},{sort:{title:1}});
     }
 
 });
