@@ -16,3 +16,12 @@ body{
 .breadcrumb {
   background-color: #fff;
 }
+a.fa-plus {
+    color: green;
+}
+a.fa-pencil {
+    color: orange;
+}
+a.fa-trash {
+    color: red;
+}

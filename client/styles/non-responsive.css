@@ -113,7 +113,7 @@ body,
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
           box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 */}
-.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+/*.navbar-default .navbar-nav .open .dropdown-menu > li > a {
   color: #333;
 }
 .navbar .navbar-nav .open .dropdown-menu > li > a:hover,
@@ -129,7 +129,7 @@ body,
 .navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
   color: #999 !important;
   background-color: transparent !important;
-}
+}*/
 
 /* Undo form expansion */
 .navbar-form {
