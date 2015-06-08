@@ -122,8 +122,8 @@
 </template>
 <template name="AboutList">
   {{#each about}}
-  <li><a class="active" href="#a" data-toggle="tab">{{title}}</a></li> 
+  <li><a class="active" href="#a" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
   {{else}}
-  {{_"No about found!"}}
+  {{_"No publishers found!"}}
   {{/each}}
 </template>
