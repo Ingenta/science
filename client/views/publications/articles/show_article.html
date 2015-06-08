@@ -1,22 +1,73 @@
 <template name="showArticle">
-test
-{{title}}
-{{volume}}
+    test
+    {{title}}
+    {{volume}}
+    {{> articleOptions}}
 </template>
-<template name="articleTab">
-    {{#basicTabs name="" tabs=tabs}}
-        {{#tabContent slug="overview"}}
-            <h2>People</h2>
-            <button class="add-people">
-                Add People
-            </button>
-        {{/tabContent}}
-        {{#tabContent slug="about"}}
-            <h2>Places</h2>
-            <button class="add-places">
-                Add Places
-            </button>
-        {{/tabContent}}
-    {{/basicTabs}}
+
+
+<template name="articleOptions">
+
+    {{#articleTabs name="" tabs=tabs}}
+
+    {{#tabContent slug="abstract"}}
+    asdfsdfasd
+    <!--{{#with context}}-->
+    <!--{{> OverviewTemplate}}-->
+    <!--{{/with}}-->
+    {{/tabContent}}
+
+    {{/articleTabs}}
+
 </template>
+
+<template name="articleTabs">
+
+    <div class="articleTabs-container">
+
+        {{#if activeTab}}
+        {{trackActiveTab activeTab}}
+        {{/if}}
+
+        {{trackTabs tabs}}
+
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+            <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+
+        <div class="tabs-content-container">
+            {{> UI.contentBlock
+            context=__context__
+            }}
+        </div>
+    </div>
+</template>
+
+<!--<template name="OverviewTemplate">-->
+
+    <!--<div class="row">-->
+        <!--<div class="col-xs-3">-->
+            <!--<div class="pull-right">-->
+                <!--{{#if isAdmin }}-->
+                <!--{{> updatePublicationPictureModalForm}}-->
+                <!--{{/if}}-->
+            <!--</div>-->
+            <!--<img src="{{getImageHelper picture}}" width="100" height="142"/>-->
+        <!--</div>-->
+        <!--<div class="col-xs-9">-->
+            <!--<div class="row">-->
+                <!--<div class="pull-right">-->
+                    <!--{{#if isAdmin }}-->
+                    <!--{{> updatePublicationDescriptionModalForm}}-->
+                    <!--{{/if}}-->
+                <!--</div>-->
+                <!--{{description}}-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<hr>-->
+<!--</template>-->
 
