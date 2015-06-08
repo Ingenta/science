@@ -32,7 +32,7 @@
 <template name="LeftMenu">
     <ul id="menu-items" class="nav navbar-nav">
         {{#if hasPublishers}}
-        <li id="menu-item-dropdown" class="dropdown ">
+        <li id="menu-item-dropdown" class="dropdown navbar-left-button">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {{_ "Publishers"}}
                 <b class="caret">
@@ -49,28 +49,28 @@
             </ul>
         </li>
         {{else}}
-        <li id="menu-item-simple-left" class="{{menuItemClass 'publishers'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'publishers'}}">
             <a href="{{pathFor 'publishers'}}">
                 {{_ "Publishers"}}
             </a>
         </li>
         {{/if}}
-        <li id="menu-item-simple-left" class="{{menuItemClass 'publications'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'publications'}}">
             <a href="{{pathFor 'publications'}}">
                 {{_ "Publications"}}
             </a>
         </li>
-        <li id="menu-item-simple-left" class="{{menuItemClass 'topics'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'topics'}}">
             <a href="{{pathFor 'topics'}}">
                 {{_ "Topics"}}
             </a>
         </li>
-        <li id="menu-item-simple-left" class="{{menuItemClass 'collections'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'collections'}}">
             <a href="{{pathFor 'collections'}}">
                 {{_ "Collections"}}
             </a>
         </li>
-        <li id="menu-item-simple-left" class="{{menuItemClass 'author'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'author'}}">
             <a href="{{pathFor 'author'}}">
                 {{_ "Author"}}
             </a>
@@ -80,12 +80,12 @@
 
 <template name="PublicLayoutRightMenu">
     <ul id="menu-items" class="nav navbar-nav navbar-right">
-        <li id="menu-item-simple-right">
+        <li id="menu-item-simple-right" class="navbar-right-button">
             <a href="#">
                 <i class="fa fa-search-plus"></i> {{_ "Quick Search"}}
             </a>
         </li>
-        <li id="menu-item-simple-right">
+        <li id="menu-item-simple-right" class="navbar-right-button">
         <a href="#">
                 <i class="fa fa-windows"></i> {{_ "Advanced Search"}}
             </a>

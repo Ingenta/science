@@ -4,56 +4,57 @@
   margin-top:25px;
   margin-right:10px;
 }
-/*
-#menu-item-simple-left > .active > a  { doesnt work
+
+/*#menu-item-simple-left > .active > a:link, a:visited  {
   background: #06a4d1;
-  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0272b2 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0272b2));
-  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
+  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0370B1 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0370B1));
+  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: radial-gradient(ellipse at center, #06a4d1 0%,#0370B1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0370B1',GradientType=1 );
   border-radius: 7px;
 }*/
-#menu-item-simple-left  > a:hover, #menu-item-simple-left > a:focus{
+.navbar-left-button  > a:hover, #menu-item-simple-left > a:focus{
   background: #06a4d1;
-  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0272b2 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0272b2));
-  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
+  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0370B1 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0370B1));
+  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: radial-gradient(ellipse at center, #06a4d1 0%,#0370B1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0370B1',GradientType=1 );
   border-radius: 7px;
+
 }
 
-#menu-item-simple-left > .active > a, #menu-item-simple-left > .active > a:hover, #menu-item-simple-left > .active > a:focus {
+.navbar-left-button > .active > a, #menu-item-simple-left > .active > a:hover, #menu-item-simple-left > .active > a:focus {
   background: #06a4d1;
-  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0272b2 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0272b2));
-  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
+  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0370B1 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0370B1));
+  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: radial-gradient(ellipse at center, #06a4d1 0%,#0370B1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0370B1',GradientType=1 );
 
   border-radius: 7px;
 }
-#menu-item-simple-left > .open > a, #menu-item-simple-left > .open > a:hover, #menu-item-simple-left > .open > a:focus {
+.navbar-left-button > .open > a, #menu-item-simple-left > .open > a:hover, #menu-item-simple-left > .open > a:focus {
   background: #06a4d1;
-  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0272b2 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0272b2));
-  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0272b2 100%);
-  background: radial-gradient(ellipse at center, #06a4d1 0%,#0272b2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0272b2',GradientType=1 );
+  background: -moz-radial-gradient(center, ellipse cover, #06a4d1 0%, #0370B1 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#06a4d1), color-stop(100%,#0370B1));
+  background: -webkit-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -o-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #06a4d1 0%,#0370B1 100%);
+  background: radial-gradient(ellipse at center, #06a4d1 0%,#0370B1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#06a4d1', endColorstr='#0370B1',GradientType=1 );
   border-radius: 7px;
 }
 /*right menu style*/
 
-#menu-item-simple-right  > a:hover, #menu-item-simple-right > a:focus{
+.navbar-right-button  > a:hover, #menu-item-simple-right > a:focus{
   background-color: hsl(136, 73%, 42%) !important;
   background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0299C8", endColorstr="#0272B2");
   background-image: -khtml-gradient(linear, left top, left bottom, from(#0299C8), to(#0272B2));
@@ -67,10 +68,9 @@
   color: #fff !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85); -webkit-font-smoothing: antialiased;
   border-radius: 7px;
-  border: 0px solid #046DAF !important;
 }
 
-#menu-item-simple-right > .active > a, #menu-item-simple-right > .active > a:hover, #menu-item-simple-right > .active > a:focus {
+.navbar-right-button > .active > a, #menu-item-simple-right > .active > a:hover, #menu-item-simple-right > .active > a:focus {
   background-color: hsl(136, 73%, 42%) !important;
   background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0299C8", endColorstr="#0272B2");
   background-image: -khtml-gradient(linear, left top, left bottom, from(#0299C8), to(#0272B2));
@@ -84,9 +84,8 @@
   color: #fff !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85); -webkit-font-smoothing: antialiased;
   border-radius: 7px;
-  border: 0px solid #046DAF !important;
 }
-#menu-item-simple-right > .open > a, #menu-item-simple-right > .open > a:hover, #menu-item-simple-right > .open > a:focus {
+.navbar-right-button > .open > a, #menu-item-simple-right > .open > a:hover, #menu-item-simple-right > .open > a:focus {
   background-color: hsl(136, 73%, 42%) !important;
   background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0299C8", endColorstr="#0272B2");
   background-image: -khtml-gradient(linear, left top, left bottom, from(#0299C8), to(#0272B2));
