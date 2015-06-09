@@ -32,7 +32,7 @@
 <template name="LeftMenu">
     <ul id="menu-items" class="nav navbar-nav">
         {{#if hasPublishers}}
-        <li id="menu-item-dropdown" class="dropdown navbar-left-button">
+        <li id="menu-item-dropdown" class="dropdown navbar-left-button {{menuItemClass 'publishers'}}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {{_ "Publishers"}}
                 <b class="caret">
@@ -41,7 +41,7 @@
             <ul id="dropdown-menu-items" class="dropdown-menu">
                 {{#each publishers}}
                 <li>
-                    <a href="/publisher/{{name}}">
+                    <a href="/publisher/{{name}}" >
                         {{translateThis chinesename name}}
                     </a>
                 </li>
