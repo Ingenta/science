@@ -3,7 +3,8 @@ ReactiveTabs.createInterface({
 });
 Template.journalBanner.helpers({
   getBannerImage: function(pictureId){
-      return Images.findOne({_id: pictureId}).url();
+      if(pictureId!==undefined)
+        return Images.findOne({_id: pictureId}).url();
   }
 });
 Template.journalOptions.helpers({
