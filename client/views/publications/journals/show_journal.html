@@ -8,24 +8,25 @@
  <br>
  {{#if isAdmin }}
  {{> addArticleButton}}
+ {{> uploadArticleButton}}
  {{/if}}
  <br>
  {{> journalOptions}}
  <hr>
 </template>
-
+  <template name="uploadArticleButton">
+    Upload
+  </template>
 <template name="journalOptions">
-
   {{#journalTabs name="" tabs=tabs}}
 
   {{#tabContent slug="overview"}}
   {{#with context}}
-  {{> OverviewTemplate}}
+  {{> JournalOverview}}
   {{/with}}
   {{/tabContent}}
 
   {{#tabContent slug="browse"}}
-  <a href="/publisher/abc/journal/banana/article/test"><h2>Browse Page</h2></a>
   {{#with context}}
   {{> articleList}}
   {{/with}}
@@ -73,30 +74,6 @@
 </div>
 </template>
 
-<template name="OverviewTemplate">
-
-  <div class="row">
-    <div class="col-xs-3">
-      <div class="pull-right">
-        {{#if isAdmin }}
-        {{> updatePublicationPictureModalForm}}
-        {{/if}}
-      </div>
-      <img src="{{getImageHelper picture}}" width="100" height="142"/>
-    </div>
-    <div class="col-xs-9">
-      <div class="row">
-        <div class="pull-right">
-          {{#if isAdmin }}
-          {{> updatePublicationDescriptionModalForm}}
-          {{/if}}
-        </div>
-        {{description}}
-      </div>
-    </div>
-  </div>
-  <hr>
-</template>
 
 <template name="updatePublicationDescriptionModalForm">
   {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
@@ -118,18 +95,15 @@
     {{#if isAdmin }}
     {{> addAboutTitleModalForm}}
     {{/if}}
-    {{> AboutList}}
+    {{#each about}}
+    <li><a class="active" href="#{{_id}}" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
+    {{else}}
+    {{_"No publishers found!"}}
+    {{/each}}
   </ul>
 </template>
 <template name="addAboutTitleModalForm">
   {{#afModal formId="addAboutTitleModalForm" class="btn btn-success" collection="About" operation="insert" omitFields="publications"}}
   {{_ "Add new"}}
   {{/afModal}}
-</template>
-<template name="AboutList">
-  {{#each about}}
-  <li><a class="active" href="#a" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
-  {{else}}
-  {{_"No publishers found!"}}
-  {{/each}}
 </template>

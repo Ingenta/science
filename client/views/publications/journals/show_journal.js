@@ -37,7 +37,7 @@ AutoForm.addHooks(['addAboutTitleModalForm'], {
     }
 }, true);
 
-Template.AboutList.helpers({
+Template.AboutTitle.helpers({
   about: function () {
     return About.find();
   }

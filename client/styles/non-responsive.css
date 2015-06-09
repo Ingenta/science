@@ -93,7 +93,7 @@ body,
   float: left;
 }
 .navbar-nav > li > a {
-  padding: 15px;
+  /*padding: 15px;*/
 }
 
 /* Redeclare since we override the float above */

@@ -15,10 +15,6 @@ Template.registerHelper('translateThis', function(chinese,english){
     return english;
 });
 
-Template.registerHelper('getUrlToJournal', function(id,title){
-    var name =Publishers.findOne({_id:id}).name
-    return "/publisher/"+name+"/journal/"+title;
-});
 
 
 pluralize = function(n, thing, options) {

@@ -37,9 +37,14 @@ Template.FilterList.helpers({
 	},
 	letterInTheAlphabet: function () {
 		return "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(',');
+	},
+	getUrlToJournal: function (id, title) {
+		var name =Publishers.findOne({_id:id}).name
+		return "/publisher/"+name+"/journal/"+title;
 	}
 
 });
+
 Template.FilterList.events({
 	'click .filterButton': function (event) {
 		var f = $(event.target).data().pubid;
