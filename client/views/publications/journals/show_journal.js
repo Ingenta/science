@@ -44,6 +44,7 @@ AutoForm.addHooks(['addAboutTitleModalForm'], {
 
 Template.AboutTitle.helpers({
   about: function () {
-    return About.find();
+	var publicationsId = Session.get('currPublication');
+    return About.find({publications:publicationsId});
   }
 });
