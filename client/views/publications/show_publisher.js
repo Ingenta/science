@@ -34,7 +34,8 @@ AutoForm.addHooks(['addPublicationModalForm'], {
   before:{
     insert:  function(doc){
       doc.publisher = Session.get('currentPublisher');
-      doc.firstletter=doc.firstletter.toUpperCase();
+      if(doc.firstletter!==undefined)
+        doc.firstletter=doc.firstletter.toUpperCase();
       return doc;
       //TODO: fix update bug not setting uppercase
     }
