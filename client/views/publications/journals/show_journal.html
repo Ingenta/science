@@ -15,8 +15,6 @@
  <hr>
 </template>
 
-
-
 <template name="journalBanner">
   <h2><img src="{{getBannerImage banner}}" width="710" height="94" alt="{{title}}"></h2>
 </template>
@@ -50,11 +48,9 @@
   </div>
   {{/tabContent}}
   {{/journalTabs}}
-
 </template>
 
 <template name="journalTabs">
-
   <div class="journalTabs-container">
 
     {{#if activeTab}}
@@ -78,7 +74,6 @@
 </div>
 </template>
 
-
 <template name="updatePublicationDescriptionModalForm">
   {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
   {{/afModal}}
@@ -101,13 +96,28 @@
     {{/if}}
     {{#each about}}
     <li><a class="active" href="#{{_id}}" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
+	{{#if isAdmin }}
+    {{> updateAboutTitleModalForm}}
+	{{> deleteAboutTitleModalForm}}
+    {{/if}}
     {{else}}
     {{_"No publishers found!"}}
     {{/each}}
   </ul>
 </template>
+
 <template name="addAboutTitleModalForm">
   {{#afModal formId="addAboutTitleModalForm" class="btn btn-success" collection="About" operation="insert" omitFields="publications"}}
   {{_ "Add new"}}
   {{/afModal}}
+</template>
+
+<template name="updateAboutTitleModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="About" doc=_id operation="update" omitFields="publications"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteAboutTitleModalForm">
+    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
 </template>
