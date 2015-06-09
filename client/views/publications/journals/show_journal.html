@@ -4,7 +4,7 @@
    {{> updatePublicationBannerModalForm}}
    {{/if}}
  </div>
- <img src="{{getImageHelper banner}}" width="710" height="94" alt="{{title}}">
+ {{> journalBanner}}
  <br>
  {{#if isAdmin }}
  {{> addArticleButton}}
@@ -14,9 +14,15 @@
  {{> journalOptions}}
  <hr>
 </template>
-  <template name="uploadArticleButton">
-    Upload
-  </template>
+
+<template name="uploadArticleButton">
+  Upload
+</template>
+
+<template name="journalBanner">
+  <h2><img src="{{getBannerImage banner}}" width="710" height="94" alt="{{title}}"></h2>
+</template>
+
 <template name="journalOptions">
   {{#journalTabs name="" tabs=tabs}}
 

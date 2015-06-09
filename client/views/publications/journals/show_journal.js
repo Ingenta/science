@@ -1,7 +1,11 @@
 ReactiveTabs.createInterface({
   template: 'journalTabs'
 });
-
+Template.journalBanner.helpers({
+  getBannerImage: function(pictureId){
+      return Images.findOne({_id: pictureId}).url();
+  }
+});
 Template.journalOptions.helpers({
   context: function () {
     var currentTitle = Router.current().params.journalTitle;
