@@ -25,3 +25,7 @@ a.fa-pencil {
 a.fa-trash {
     color: red;
 }
+#iron-router-progress {
+    background-color : #06a4d1;
+    /*box-shadow       : 0 0 1px #0370B1;*/
+}
