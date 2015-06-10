@@ -22,7 +22,7 @@ AboutArticlesSchema = new SimpleSchema({
             rows: 4
         }
     },
-    publications: {
+    about: {
         type: String
     }
 });
