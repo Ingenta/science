@@ -143,6 +143,8 @@ Meteor.subscribe("about");
 
 Meteor.subscribe("volumes");
 
+Meteor.subscribe("about_articles");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
