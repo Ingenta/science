@@ -52,7 +52,7 @@
         <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
         {{#each publishers}}
         <li style="color: #CCC;">
-          {{translateThis languageTag chinesename name}}
+          {{translateThis chinesename name}}
           &nbsp;&nbsp;({{count _id}})</li>
           {{/each}}
           {{/if}}
@@ -68,7 +68,7 @@
           <div class="row">
             <h5>{{> imageName}}&nbsp;
               <a href="{{getUrlToJournal publisher title}}">
-                {{title}}
+                {{translateThis chinesetitle title}}
               </a>
             </h5>
             <h6>{{description}}</h6>
