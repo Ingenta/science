@@ -15,10 +15,6 @@
  <hr>
 </template>
 
-<template name="uploadArticleButton">
-  Upload
-</template>
-
 <template name="journalBanner">
   <h2><img src="{{getBannerImage banner}}" width="710" height="94" alt="{{title}}"></h2>
 </template>
@@ -45,18 +41,14 @@
     {{> AboutTitle}}
     {{/with}}
     <div class="tab-content col-md-9">
-      <div class="tab-pane active" id="a"><h3>{{_ "Editorial Policies"}}</h3><hr><h4>The Review Process</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</h6><br><h4>Retraction and Correction Policies</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, charetra varius rci quis tortor imperdiet venenatis quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.</h6></div>
-      <div class="tab-pane" id="b"><h3>{{_ "Readers"}}</h3><hr><h4>Ratings Guidelines</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</h6></div>
-      <div class="tab-pane" id="c"><h3>{{_ "Contact"}}</h3><hr><h4>Editorial Office</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum auctor accumsan. Duis pharetravarius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae. </h6></div>
+      <div class="tab-pane active">{{> aboutArticlesList}}</div>
     </div>
   </div>
   {{/tabContent}}
   {{/journalTabs}}
-
 </template>
 
 <template name="journalTabs">
-
   <div class="journalTabs-container">
 
     {{#if activeTab}}
@@ -80,7 +72,6 @@
 </div>
 </template>
 
-
 <template name="updatePublicationDescriptionModalForm">
   {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
   {{/afModal}}
@@ -102,14 +93,58 @@
     {{> addAboutTitleModalForm}}
     {{/if}}
     {{#each about}}
-    <li><a class="active" href="#{{_id}}" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
+    <li><a class="activeButton" data-aboutid="{{_id}}" href="" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
+	{{#if isAdmin }}
+    {{> updateAboutTitleModalForm}}
+	{{> deleteAboutTitleModalForm}}
+    {{/if}}
     {{else}}
-    {{_"No publishers found!"}}
+    {{_"No About found!"}}
     {{/each}}
   </ul>
 </template>
+
+<template name="aboutArticlesList">
+    {{#each about}}
+    <h3>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> addAboutArticlesModalForm}}{{/if}}</h3><hr>
+    {{else}}
+    {{_"No About found!"}}
+    {{/each}}
+	{{#each aboutarticle}}
+    <h4>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> updateAboutArticlesModalForm}}&nbsp;&nbsp;{{> deleteAboutArticlesModalForm}}{{/if}}</h4><br><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis chinesedescription description}}</h6><br>
+    {{else}}
+    {{_"No AboutArticle found!"}}
+    {{/each}}
+</template>
+
 <template name="addAboutTitleModalForm">
   {{#afModal formId="addAboutTitleModalForm" class="btn btn-success" collection="About" operation="insert" omitFields="publications"}}
   {{_ "Add new"}}
   {{/afModal}}
+</template>
+
+<template name="updateAboutTitleModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="About" doc=_id operation="update" omitFields="publications"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteAboutTitleModalForm">
+    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
+</template>
+
+<template name="addAboutArticlesModalForm">
+  {{#afModal formId="addAboutArticlesModalForm" class="btn btn-success" collection="AboutArticles" operation="insert" omitFields="about"}}
+  {{_ "Add new"}}
+  {{/afModal}}
+</template>
+
+<template name="updateAboutArticlesModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="AboutArticles" doc=_id operation="update" omitFields="about"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteAboutArticlesModalForm">
+    {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
 </template>

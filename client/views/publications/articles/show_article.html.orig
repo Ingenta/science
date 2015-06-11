@@ -1,4 +1,9 @@
 <template name="showArticle">
+<<<<<<< HEAD
+    test
+    {{title}}
+    {{volume}}
+=======
     <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
 
     <div class="row">
@@ -55,6 +60,7 @@
             </div>
         </div>
     </div>
+>>>>>>> 20bfcd37e60d54b352a0a711c22c7907bd73f5f1
     {{> articleOptions}}
     <hr>
     <div class="row">

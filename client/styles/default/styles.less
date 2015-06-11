@@ -6,7 +6,7 @@
 
 // variables
 
-@footer_height: 60px;
+@footer_height: 30px;
 
 
 // **** LAYOUT ****
@@ -40,11 +40,8 @@ body {
 }
 
 #footer .text-muted {
-  margin: 19px 0;
-}
-
-#content .container, #subcontent .container {
-	max-width: 100%;
+  margin: 9px 0;
+  font-size: 10px;
 }
 
 p {
@@ -118,7 +115,7 @@ p {
 }
 
 .menu-item-collapse div.collapse li a {
-	padding-right: 5px;	
+	padding-right: 5px;
 }
 
 // **** ACCOUNT ****
@@ -144,7 +141,7 @@ p {
 .accounts-info-box {
 	max-width: 400px;
 	padding: 15px;
-	margin: 0 auto;	
+	margin: 0 auto;
 }
 
 /* ------------------ */
@@ -163,7 +160,7 @@ p {
 }
 
 .th-sortable {
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 .table-hover tr {
@@ -197,15 +194,15 @@ ul.object-tree li a {
 }
 
 ul.object-tree {
-	padding-left: 10px;	
+	padding-left: 10px;
 }
 
 ul.object-tree ul.object-tree {
-	padding-left: 20px;	
+	padding-left: 20px;
 }
 
 li.collapsed ul {
-	display: none;	
+	display: none;
 }
 
 li.active > a > span.text-muted {
@@ -275,9 +272,9 @@ ul.tree-view ul.tree-view {
 .loading {
 	display: relative;
 	vertical-align: middle;
-	padding: 50px 0; // to avoid seeing it top when loading main pages
+	padding: 2px 0; // to avoid seeing it top when loading main pages
 	text-align: center;
 	i {
-		color: @gray-lighter;
+		color: @brand-primary;
 	}
 }
