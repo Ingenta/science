@@ -30,15 +30,15 @@
 </template>
 
 <template name="LeftMenu">
-    <ul id="menu-items" class="nav navbar-nav">
+    <ul id="nav-items" class="nav navbar-nav">
         {{#if hasPublishers}}
-        <li id="menu-item-dropdown" class="dropdown navbar-left-button {{menuItemClass 'publishers'}}">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <li id="nav-item-dropdown" class="dropdown navbar-left-button {{menuItemClass 'publishers'}}">
+        <a href="/publishers" class="dropdown-toggle">
                 {{_ "Publishers"}}
                 <b class="caret">
                 </b>
             </a>
-            <ul id="dropdown-menu-items" class="dropdown-menu">
+            <ul id="dropdown-nav-items" class="dropdown-menu">
                 {{#each publishers}}
                 <li>
                     <a href="/publisher/{{name}}" >
@@ -79,7 +79,7 @@
 </template>
 
 <template name="PublicLayoutRightMenu">
-    <ul id="menu-items" class="nav navbar-nav navbar-right">
+    <ul id="nav-items" class="nav navbar-nav navbar-right">
         <li id="menu-item-simple-right" class="navbar-right-button">
             <a href="#">
                 <i class="fa fa-search-plus"></i> {{_ "Quick Search"}}

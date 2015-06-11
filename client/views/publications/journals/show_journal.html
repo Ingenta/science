@@ -8,7 +8,10 @@
  <br>
  {{#if isAdmin }}
  {{> addArticleButton}}
- {{> uploadArticleButton}}
+ <!-- {{> uploadArticleButton}} -->
+ <div class="pull-right">
+   {{> updateJournalTabsModalForm}}
+ </div>
  {{/if}}
  <br>
  {{> journalOptions}}
@@ -16,7 +19,7 @@
 </template>
 
 <template name="journalBanner">
-  <h2><img src="{{getBannerImage banner}}" width="710" height="94" alt="{{title}}"></h2>
+  <h2><img src="{{getBannerImage banner}}" width="650" height="94" alt="{{title}}"></h2>
 </template>
 
 <template name="journalOptions">
@@ -74,17 +77,22 @@
 </template>
 
 <template name="updatePublicationDescriptionModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="description"}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications"  doc=_id operation="update" fields="description"}}
   {{/afModal}}
 </template>
 
 <template name="updatePublicationPictureModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="picture"}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications"  doc=_id operation="update" fields="picture"}}
   {{/afModal}}
 </template>
 
 <template name="updatePublicationBannerModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" schema="" doc=_id operation="update" fields="banner"}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications"  doc=_id operation="update" fields="banner"}}
+  {{/afModal}}
+</template>
+
+<template name="updateJournalTabsModalForm">
+  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update" fields="tabSelections"}}
   {{/afModal}}
 </template>
 
@@ -95,9 +103,9 @@
     {{/if}}
     {{#each about}}
     <li><a class="activeButton" data-aboutid="{{_id}}" href="" data-toggle="tab">{{translateThis chinesetitle title}}</a></li>
-	{{#if isAdmin }}
+    {{#if isAdmin }}
     {{> updateAboutTitleModalForm}}
-	{{> deleteAboutTitleModalForm}}
+    {{> deleteAboutTitleModalForm}}
     {{/if}}
     {{else}}
     {{_"No About found!"}}
@@ -106,16 +114,16 @@
 </template>
 
 <template name="aboutArticlesList">
-    {{#each about}}
-    <h3>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> addAboutArticlesModalForm}}{{/if}}</h3><hr>
-    {{else}}
-    {{_"No About found!"}}
-    {{/each}}
-	{{#each aboutarticle}}
-    <h4>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> updateAboutArticlesModalForm}}&nbsp;&nbsp;{{> deleteAboutArticlesModalForm}}{{/if}}</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis chinesedescription description}}</h6><br>
-    {{else}}
-    {{_"No AboutArticle found!"}}
-    {{/each}}
+  {{#each about}}
+  <h3>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> addAboutArticlesModalForm}}{{/if}}</h3><hr>
+  {{else}}
+  {{_"No About found!"}}
+  {{/each}}
+  {{#each aboutarticle}}
+  <h4>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> updateAboutArticlesModalForm}}&nbsp;&nbsp;{{> deleteAboutArticlesModalForm}}{{/if}}</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis chinesedescription description}}</h6><br>
+  {{else}}
+  {{_"No AboutArticle found!"}}
+  {{/each}}
 </template>
 
 <template name="addAboutTitleModalForm">
@@ -125,13 +133,13 @@
 </template>
 
 <template name="updateAboutTitleModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="About" doc=_id operation="update" omitFields="publications"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="About" doc=_id operation="update" omitFields="publications"}}
+  {{/afModal}}
 </template>
 
 <template name="deleteAboutTitleModalForm">
-    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}
-    {{/afModal}}
+  {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}
+  {{/afModal}}
 </template>
 
 <template name="addAboutArticlesModalForm">
@@ -141,11 +149,11 @@
 </template>
 
 <template name="updateAboutArticlesModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="AboutArticles" doc=_id operation="update" omitFields="about"}}
-    {{/afModal}}
+  {{#afModal class="fa fa-pencil" title="Update" collection="AboutArticles" doc=_id operation="update" omitFields="about"}}
+  {{/afModal}}
 </template>
 
 <template name="deleteAboutArticlesModalForm">
-    {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}
-    {{/afModal}}
+  {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}
+  {{/afModal}}
 </template>
