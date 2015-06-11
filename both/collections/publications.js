@@ -43,6 +43,19 @@ PublicationsSchema = new SimpleSchema({
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
         }
+    },
+    tabSelections: {
+        type: [String],
+        autoform: {
+            type: "select-checkbox-inline",
+            options: function () {
+                return [
+                    {label : "Overview",  value: "Overview"},
+                    {label : "Browse", value: "Browse"},
+                    {label : "About", value: "About"}
+                ];
+            }
+        }
     }
 });
 Meteor.startup(function () {

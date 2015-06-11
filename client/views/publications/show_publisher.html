@@ -64,7 +64,7 @@
         </div>
         <h3>{{> imageName}}&nbsp;&nbsp;
           <a href="{{getJournalUrl title}}">
-            {{title}}
+            {{translateThis chinesetitle title}}
           </a>
         </h3>
       </div>
@@ -120,6 +120,7 @@
           {{> afQuickField name="accessKey"}}
           {{> afQuickField name="picture"}}
           {{> afQuickField name="banner"}}
+          {{> afFieldInput name="tabSelections"}}
         </div>
         <div class="modal-footer">
          <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
