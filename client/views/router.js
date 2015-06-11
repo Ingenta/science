@@ -4,6 +4,7 @@ Router.configure({
 	layoutTemplate: "layout",
 	notFoundTemplate: "notFound",
 	loadingTemplate: "loading",
+	progressDelay : 100,
 	waitOn: function () {
 		return Meteor.subscribe('images');
 	}
