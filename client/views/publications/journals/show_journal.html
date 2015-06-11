@@ -22,19 +22,19 @@
 <template name="journalOptions">
   {{#journalTabs name="" tabs=tabs}}
 
-  {{#tabContent slug="overview"}}
+  {{#tabContent slug="Overview"}}
   {{#with context}}
   {{> JournalOverview}}
   {{/with}}
   {{/tabContent}}
 
-  {{#tabContent slug="browse"}}
+  {{#tabContent slug="Browse"}}
   {{#with context}}
   {{> articleList}}
   {{/with}}
   {{/tabContent}}
 
-  {{#tabContent slug="about"}}
+  {{#tabContent slug="About"}}
   <div class="tabbable">
     {{#with context}}
     {{setCurrentPublication _id}}
@@ -47,6 +47,7 @@
     </div>
   </div>
   {{/tabContent}}
+
   {{/journalTabs}}
 </template>
 
