@@ -28,9 +28,9 @@
                 "label": "Choose a Access Key",
                 "options": {
                     "1": "Free Content",
-                    "2": "Open Access Content"
-//                    "3": "Subscribed Content",
-//                    "4": "Free Trial Content"
+                    "2": "Open Access Content",
+                    "3": "Subscribed Content",
+                    "4": "Free Trial Content"
                 }
             },
             "picture": {
@@ -38,6 +38,22 @@
             },
             "banner": {
                 "label": "Choose Image for Banner"
+            },
+            "tabSelections": {
+                "options": {
+                    "Overview": "Overview",
+                    "Browse": "Browse",
+                    "About": "About",
+                    "Editorial Board": "Editorial Board",
+                    "News": "News",
+                    "Media": "Media",
+                    "Special Topics": "Special Topics",
+                    "Collections": "Collections",
+                    "Accepted": "Accepted",
+                    "Online First": "Online First",
+                    "MOOP": "MOOP",
+                    "Author": "Author"
+                }
             }
         },
         "publishers": {

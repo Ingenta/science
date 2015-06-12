@@ -23,7 +23,6 @@ Template.journalOptions.helpers({
 //            { name: TAPi18n.__("Overview"), slug: 'overview' },
 //            { name: TAPi18n.__("Browse"), slug: 'browse' },
 //            { name: TAPi18n.__("About"), slug: 'about' }
-//        ];
         var currentTitle = Router.current().params.journalTitle;
         var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {

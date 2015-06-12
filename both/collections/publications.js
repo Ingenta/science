@@ -47,14 +47,7 @@ PublicationsSchema = new SimpleSchema({
     tabSelections: {
         type: [String],
         autoform: {
-            type: "select-checkbox-inline",
-            options: function () {
-                return [
-                    {label : "Overview",  value: "Overview"},
-                    {label : "Browse", value: "Browse"},
-                    {label : "About", value: "About"}
-                ];
-            }
+            type: "select-checkbox-inline"
         }
     }
 });
