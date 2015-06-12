@@ -183,7 +183,7 @@ Router.map(function () {
 	this.route('/topic/:topicQuery', {
 		template: "SearchResults",
 		parent: "topics",
-		title: "Topic Search"
+		title: ":topicQuery"
 	});
 
 	this.route("author",{
