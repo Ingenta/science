@@ -1,0 +1,25 @@
+<template name="SearchBar">
+    <form class="navbar-form pull-right" role="search" name="search">
+       <div class="input-group">
+           <input id="searchInput" type="text" class="form-control" placeholder='{{_ "Search"}}'>
+           <span class="input-group-btn">
+               <button class="btn btn-primary" type="button"><i class="fa fa-search"></i>
+               </button>
+           </span>
+       </div>
+   </form>
+</template>
+
+<template name="SearchResults">
+
+    {{#each results}}
+    <ul>
+        <li>
+            <h3>{{title}}</h3>
+            {{authors}}
+        </li>
+    </ul>
+    {{else}}
+    No results found!
+    {{/each}}
+</template>

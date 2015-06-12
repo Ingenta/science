@@ -206,6 +206,13 @@ Router.map(function () {
 			return TAPi18n.__("Publishers");
 		}
 	});
+
+	this.route('/s/:searchQuery', {
+		template: "SearchResults",
+		parent: "home_private",
+		title: "Search"
+	});
+
 	this.route('/publisher/:publisherName', {
 		data: function(){
 			return Publishers.findOne({name: this.params.publisherName});
