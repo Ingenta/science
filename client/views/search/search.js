@@ -16,7 +16,12 @@ Template.SearchResults.helpers({
             return Articles.find({ $or: mongoDbArr});
         }
         var t = Router.current().params.topicQuery;
-        return Articles.find({ topic: t});
+        if(t)
+        {
+            return Articles.find({ topic: t});
+        }
+        var a = Router.current().params.authorQuery;
+        return  Articles.find({ authors: a});
     },
     urlToArticle:function(title){
         var article =Articles.findOne({title:title});

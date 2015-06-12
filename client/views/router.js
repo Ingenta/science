@@ -192,6 +192,13 @@ Router.map(function () {
 			return TAPi18n.__("Author");
 		}
 	});
+
+	this.route('/author/:authorQuery', {
+		template: "SearchResults",
+		parent: "home_private",
+		title: ":authorQuery"
+	});
+
 	this.route("collections",{
 		parent: "home_private",
 		title: function () {
