@@ -179,6 +179,13 @@ Router.map(function () {
 			return TAPi18n.__("Topics");
 		}
 	});
+
+	this.route('/topic/:topicQuery', {
+		template: "SearchResults",
+		parent: "topics",
+		title: "Topic Search"
+	});
+
 	this.route("author",{
 		parent: "home_private",
 		title: function () {
@@ -212,6 +219,7 @@ Router.map(function () {
 		parent: "home_private",
 		title: "Search"
 	});
+
 
 	this.route('/publisher/:publisherName', {
 		data: function(){

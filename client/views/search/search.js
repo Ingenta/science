@@ -8,15 +8,20 @@ Template.SearchBar.events({
 Template.SearchResults.helpers({
     'results': function(){
         var q = Router.current().params.searchQuery;
-        var mongoDbArr = [];
-        mongoDbArr.push({title: { $regex : q, $options:"i" } });
-        mongoDbArr.push({authors: { $regex : q, $options:"i" } });
-        return Articles.find({ $or: mongoDbArr});
+        if(q)
+        {
+            var mongoDbArr = [];
+            mongoDbArr.push({title: { $regex : q, $options:"i" } });
+            mongoDbArr.push({authors: { $regex : q, $options:"i" } });
+            return Articles.find({ $or: mongoDbArr});
+        }
+        var t = Router.current().params.topicQuery;
+        return Articles.find({ topic: t});
     },
     urlToArticle:function(title){
         var article =Articles.findOne({title:title});
         var publisherName = Publishers.findOne({_id:article.publisher}).name;
         var journalName = Publications.findOne({_id:article.journalId}).title;
         return "/publisher/"+publisherName+"/journal/"+journalName+"/article/"+title;
-   }
+    }
 });
