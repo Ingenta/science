@@ -1,22 +1,261 @@
 <template name="showArticle">
-test
-{{title}}
-{{volume}}
-</template>
-<template name="articleTab">
-    {{#basicTabs name="" tabs=tabs}}
-        {{#tabContent slug="overview"}}
-            <h2>People</h2>
-            <button class="add-people">
-                Add People
-            </button>
+    <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
+
+    <div class="row">
+        <div class="col-xs-9">
+            <h3><img src="/icon_access_fc.gif"/> {{title}}</h3>
+            <ul>
+                <p>黄乐①, 徐慧龙①a）, 张志勇①*b), 彭练矛①②</p>
+
+                <p>
+                    <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#authorAddress"
+                    aria-expanded="false" aria-controls="authorAddress"></i>
+                    作者地址: </p>
+
+                    <div class="collapse pull-right" id="authorAddress">
+                        <ol>
+                            <li>北京大学纳米电子器件物理与化学教育部重点实验室, 电子学系, 北京 100871</li>
+                            <li>北京大学纳米电子器件物理与化学教育部重点实验室, 电子学系, 北京 100871</li>
+                        </ol>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">作者电子邮箱:</div>
+                        <div class="col-xs-9">
+                            <ul class="list-unstyled">mattmcc@wsu.edasdu</ul>
+                            <ul class="list-unstyled">mattmcc@wsu.edu</ul>
+                        </div>
+                    </div>
+                    <p>2014, 59(32): 3109-3119 http://dx.doi.org/10.1063/1.3693970</p>
+
+                    <p>语种类型：中文</p>
+                </ul>
+            </div>
+            <div class="col-xs-3">
+                <br>
+
+                <div class="container-fluid gray-background">
+                    <div class="row">
+                        <li class="pdf">
+                            <a rel=""
+                            class="pdf" target="" title=""
+                            href="#">Download
+                            <span class="pdfText">PDF</span></a>
+
+                            <div class="fulltextsize">
+                                0.00MB
+                            </div>
+                        </li>
+                    </div>
+                    <div class="row"><img src="http://crossmark.crossref.org//images/logos/cm_sbs_024_plain.png"></div>
+                </div>
+                <br>
+
+                <div class="container-fluid gray-background">
+                    <div class="row">share</div>
+                </div>
+            </div>
+        </div>
+        {{> articleOptions}}
+        <hr>
+        <div class="row">
+            <div class="col-xs-5"><h3>最近阅读</h3>
+                <ul class="list-unstyled">《孔隙尺度模拟与解释》</ul>
+                <ul class="list-unstyled">《111》</ul>
+                <ul class="list-unstyled">《222》</ul>
+                <ul class="list-unstyled">《孔隙尺度模拟与解释》</ul>
+                <ul class="list-unstyled">《222》</ul>
+            </div>
+            <div class="col-xs-5"><h3>最近检索</h3>
+                <ul class="list-unstyled">AIP</ul>
+                <ul class="list-unstyled">111</ul>
+                <ul class="list-unstyled">222</ul>
+                <ul class="list-unstyled">333</ul>
+                <ul class="list-unstyled">444</ul>
+            </div>
+        </div>
+    </template>
+
+
+    <template name="articleOptions">
+
+        {{#articleTabs name="" tabs=tabs}}
+
+        {{#tabContent slug="abstract"}}
+        {{> AbstractTemplate}}
+        <!--{{#with context}}-->
+        <!--{{> OverviewTemplate}}-->
+        <!--{{/with}}-->
         {{/tabContent}}
-        {{#tabContent slug="about"}}
-            <h2>Places</h2>
-            <button class="add-places">
-                Add Places
-            </button>
+
+        {{#tabContent slug="full text"}}
+        {{> FullTextTemplate}}
         {{/tabContent}}
-    {{/basicTabs}}
+
+        {{#tabContent slug="references"}}
+        {{> ReferencesTemplate}}
+        {{/tabContent}}
+
+        {{#tabContent slug="cited by"}}
+        {{> CitedByTemplate}}
+        {{/tabContent}}
+
+        {{#tabContent slug="data media"}}
+        {{> DataMediaTemplate}}
+        {{/tabContent}}
+
+        {{#tabContent slug="metrics"}}
+        {{> MetricsTemplate}}
+        {{/tabContent}}
+
+        {{#tabContent slug="related"}}
+        {{> RelatedTemplate}}
+        {{/tabContent}}
+
+        {{/articleTabs}}
+
+    </template>
+
+    <template name="articleTabs">
+
+        <div class="articleTabs-container">
+
+            {{#if activeTab}}
+            {{trackActiveTab activeTab}}
+            {{/if}}
+
+            {{trackTabs tabs}}
+
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each tabs}}
+                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
+                </li>
+                {{/each}}
+            </ul>
+
+            <div class="tabs-content-container">
+                {{> UI.contentBlock
+                context=__context__
+            }}
+        </div>
+    </div>
 </template>
+<template name="AbstractTemplate">
+    <div class="row">
+        <div class="col-xs-8">
+            随着电子器件的便携化发展, 柔性电子器件越来越引起人们的关注. 透明导电薄膜同时具有良好的导电性和光学透过性, 已作为电极被广泛应用于光电功能器件领域. 然而, 目前普遍使用的透明导电材料氧化铟锡(ITO)由于含有储量有限的铟元素而存在成本高的问题, 并且由于氧化物本身的脆性, 其所制薄膜的柔性也不理想, 并不能完全满足目前柔性电子器件的发展要求. 因而, 对于可替代ITO的其他廉价、可大量制备、具有优异性能的柔性透明导电薄膜的研究近年来受到研究者的广泛关注. 碳纳米材料因同时具备高的电子传输率、透光率以及良好的机械柔性可以满足目前柔性电子器件的应用需求, 此外, 碳纳米材料更具备来源广泛、制备方式灵活多样等特有优势, 可以降低材料和生产成本, 因而更具有实用价值. 本文简要综述了近几年基于碳纳米材料(以碳纳米管和石墨烯为主)的柔性透明导电膜的研究工作, 结合材料制备和性能调控以及薄膜制备(特别是连续化制备)的方法, 阐述了该领域最近的研究成果及应用, 最后简要讨论了基于碳纳米材料的柔性透明导电薄膜目前存在的问题及可能的发展方向。
+        </div>
+        <div class="col-xs-4">
+            fdsfdafasdfasdfafasfdsafdas
+        </div>
+    </div>
+</template>
+
+<template name="FullTextTemplate">
+    <div>
+     <div class="col-xs-8">
+        随着电子器件的便携化发展, 柔性电子器件越来越引起人们的关注. 透明导电薄膜同时具有良好的导电性和光学透过性, 已作为电极被广泛应用于光电功能器件领域. 然而, 目前普遍使用的透明导电材料氧化铟锡(ITO)由于含有储量有限的铟元素而存在成本高的问题, 并且由于氧化物本身的脆性, 其所制薄膜的柔性也不理想, 并不能完全满足目前柔性电子器件的发展要求. 因而, 对于可替代ITO的其他廉价、可大量制备、具有优异性能的柔性透明导电薄膜的研究近年来受到研究者的广泛关注. 碳纳米材料因同时具备高的电子传输率、透光率以及良好的机械柔性可以满足目前柔性电子器件的应用需求, 此外, 碳纳米材料更具备来源广泛、制备方式灵活多样等特有优势, 可以降低材料和生产成本, 因而更具有实用价值. 本文简要综述了近几年基于碳纳米材料(以碳纳米管和石墨烯为主)的柔性透明导电膜的研究工作, 结合材料制备和性能调控以及薄膜制备(特别是连续化制备)的方法, 阐述了该领域最近的研究成果及应用, 最后简要讨论了基于碳纳米材料的柔性透明导电薄膜目前存在的问题及可能的发展方向。
+    </div>
+    <div class="col-xs-4">
+        fdsfdafasdfasdfafasfdsafdas
+    </div>
+    <hr>
+    关键词
+</div>
+</template>
+
+<template name="ReferencesTemplate">
+    <div>
+        <p style="margin-bottom"> 
+          1 蓝强. 表面活性物质与纳米颗粒协同稳定的Pickering 乳液. 博士学位论文. 济南: 山东大学, 2007http://dx.doi.org/10.1063/1.1412588
+      </p>
+      <p style="margin-bottom"> 
+          2 Binks B P, Fletcher P D. Particles adsorbed at the oil-water Interface: A theoretical comparison between spheres of uniform wettability and “Janus” particles. Langmuir, 2001, 17: 4708–4710 http://dx.doi.org/10.1063/1.1412588 
+      </p>
+      <p style="margin-bottom"> 
+          3 Glaser N, Adams D J, Krausch G, et al. Janus particles at liquid-liquid interfaces. Langmuir, 2006, 22: 5227–5229
+          http://dx.doi.org/10.1063/1.1412588 
+      </p>
+      <p style="margin-bottom"> 
+          4 Ruiz M P, Faria J, Resasco D E, et al. Nanostructured carbon-metal oxide hybrids as amphiphilic emulsion catalysts. 
+          ChemSusChem, 2011, 4:964–974   http://dx.doi.org/10.1063/1.1412588 
+      </p>
+      <p style="margin-bottom"> 
+          5 樊丽曼, 于畅, 邱介山, 等. CNT-TiO2 复合物的制备及其乳液催化苯甲醇选择氧化. 新型碳材料, 2013, 28: 289–294
+          http://dx.doi.org/10.1063/1.1412588 
+      </p>
+      <p style="margin-bottom"> 
+          6 Yu C, Fan L M, Qiu J S, et al. Phase-reversal emulsion catalysis with CNT–TiO2 nanohybrids for the selective oxidation of benzyl alcohol. Chem Eur J, 2013, 19: 16192–16195  htt
+          org/10.1063/1.1412588
+      </p>
+  </div>
+</template>
+
+<template name="CitedByTemplate">
+    <div>
+
+       <p style="margin-bottom"> 
+        1. 《纳米炭/环氧树脂复合材料黏弹阻尼性能》作者：曾尤, 王函  
+        http://dx.doi.org/10.1016/j.mseb.2013.08.002
+    </p>
+    <p style="margin-bottom"> 
+        2.  气相刻蚀选择性制备单一导电属性单壁碳纳米管》     作者：侯鹏翔, 刘畅, 成会明  
+        <a href="http://dx.doi.org/10.1016/j.mseb.2013.08.002"></a>
+    </p>
+</div>
+</template>
+
+<template name="DataMediaTemplate">
+    <div class="row">
+        <div class="col-xs-6">
+            图片
+        </div>
+        <div class="col-xs-6">
+            说明
+        </div>
+    </div>
+</template>
+
+<template name="MetricsTemplate">
+    <div>
+        阅读行为统计图：（按月统计）
+
+    </div>
+</template>
+
+<template name="RelatedTemplate">
+    <div>
+        <span>
+            《页岩压裂中压裂液返排率低的孔隙尺度模拟与解释》
+            鞠杨, 郑泽民, 卢晋波, 毛灵涛, 高峰, 彭瑞东 
+            张龙，
+            2014, 59(32): 3109-3119
+            语种类型：中文
+            概述
+        </span>
+    </div>
+</template>
+<!--<template name="OverviewTemplate">-->
+
+<!--<div class="row">-->
+<!--<div class="col-xs-3">-->
+<!--<div class="pull-right">-->
+<!--{{#if isAdmin }}-->
+<!--{{> updatePublicationPictureModalForm}}-->
+<!--{{/if}}-->
+<!--</div>-->
+<!--<img src="{{getImageHelper picture}}" width="100" height="142"/>-->
+<!--</div>-->
+<!--<div class="col-xs-9">-->
+<!--<div class="row">-->
+<!--<div class="pull-right">-->
+<!--{{#if isAdmin }}-->
+<!--{{> updatePublicationDescriptionModalForm}}-->
+<!--{{/if}}-->
+<!--</div>-->
+<!--{{description}}-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<hr>-->
+<!--</template>-->
 

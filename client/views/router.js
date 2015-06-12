@@ -3,7 +3,11 @@ Router.configure({
 	routeControllerNameConverter: "upperCamelCase",
 	layoutTemplate: "layout",
 	notFoundTemplate: "notFound",
-	loadingTemplate: "loading"
+	loadingTemplate: "loading",
+	progressDelay : 100,
+	waitOn: function () {
+		return Meteor.subscribe('images');
+	}
 });
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
@@ -139,6 +143,8 @@ Meteor.subscribe("about");
 
 Meteor.subscribe("volumes");
 
+Meteor.subscribe("about_articles");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
@@ -189,6 +195,9 @@ Router.map(function () {
 		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Publications");
+		},
+		waitOn: function () {
+			return Meteor.subscribe('publishers');
 		}
 	});
 	this.route("publishers", {
@@ -214,17 +223,17 @@ Router.map(function () {
 		template: "ShowJournal",
 		title: ":journalTitle",
 		parent: "publisher.name",
-        name: "journal.name"
+		name: "journal.name"
 	});
 
 	this.route('/publisher/:publisherName/journal/:journalTitle/article/:articleName', {
 		data: function(){
 			return Articles.findOne({title: this.params.articleName});
 		},
-        template: "showArticle",
-        title: ":articleName",
-        parent: "journal.name"
-    });
+		template: "showArticle",
+		title: ":articleName",
+		parent: "journal.name"
+	});
 
 	this.route("forgot_password", {
 		path: "/forgot_password",

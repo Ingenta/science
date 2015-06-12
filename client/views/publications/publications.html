@@ -8,6 +8,11 @@
      <h2>{{_ "Publications"}}
      </h2>
    </div>
+        TODO:
+        <ul>
+        <li>pagination</li>
+        <li>reset alphabet filter</li>
+        </ul>
    <div class="row">
     <p>{{_ "Introductory text"}}</p>
   </div>
@@ -47,7 +52,7 @@
         <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
         {{#each publishers}}
         <li style="color: #CCC;">
-          {{translateThis languageTag chinesename name}}
+          {{translateThis chinesename name}}
           &nbsp;&nbsp;({{count _id}})</li>
           {{/each}}
           {{/if}}
@@ -66,8 +71,7 @@
                 {{title}}
               </a>
             </h5>
-            <h6><a href="">{{urlname}}</a></h6>
-            <h6><a href="">{{description}}</a></h6>
+            <h6>{{description}}</h6>
           </div>
           <hr>
           {{else}}

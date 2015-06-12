@@ -2,7 +2,25 @@
 // Bootswatch
 // -----------------------------------------------------
 
-
+.css-gradient(@from: #20416A, @to: #3D69A5) {
+    background-color: @to;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(@from),  to(@to));
+    background-image: -webkit-linear-gradient(top, @from, @to);
+    background-image: -moz-linear-gradient(top, @from, @to);
+    background-image: -o-linear-gradient(top, @from, @to);
+    background-image: -ms-linear-gradient(top, @from, @to);
+    background-image: linear-gradient(top, @from, @to);
+}
+.css-radial-gradient(@from: #20416A, @to: #3D69A5) {
+    background-color: @to;
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@from), color-stop(100%,@to));
+    background: -webkit-radial-gradient(center, ellipse cover, @from 0%,@to 100%);
+    background: -moz-radial-gradient(center, ellipse cover, @from, @to);
+    background: -o-radial-gradient(center, ellipse cover, @from 0%,@to 100%);
+    background: -ms-radial-gradient(center, ellipse cover, @from 0%,@to 100%);
+    background: radial-gradient(ellipse at center, @from 0%,@to 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@from', endColorstr='@to',GradientType=1 );
+}
 .btn-shadow(@color) {
   #gradient > .vertical-three-colors(lighten(@color, 15%), @color, 50%, darken(@color, 4%));
   filter: none;
@@ -11,7 +29,40 @@
 
 // Navbar =====================================================================
 
+
+//Custom Start ============
+.navbar-right-button > a {
+  &:hover {
+      .css-gradient(#06a4d1,#0370B1);
+  }
+  &:focus {
+      .css-gradient(#06a4d1,#0370B1);
+  }
+}
+
+.navbar-left-button > a {
+  &:hover {
+      .css-radial-gradient(#06a4d1,#0370B1);
+  }
+  &:focus {
+      .css-radial-gradient(#06a4d1,#0370B1);
+  }
+}
+
 .navbar {
+
+  &-default {
+  .navbar-nav > .active > a{
+      .css-radial-gradient(#06a4d1,#0370B1);
+    }
+  }
+  &-nav > li > a,
+  &-nav > li > a:hover {
+      border-radius: @border-radius-base;
+      .transition(color ease-in-out .2s);
+  }
+//Custom End ============
+
 
   .btn-shadow(@navbar-default-bg);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -30,12 +81,7 @@
     text-shadow: none;
   }
 
-  &-nav > li > a,
-  &-nav > li > a:hover {
-    padding-top: @navbar-padding-vertical + 2px;
-    padding-bottom: @navbar-padding-vertical - 2px;
-    .transition(color ease-in-out .2s);
-  }
+
 
   &-brand,
   &-brand:hover {
@@ -121,6 +167,8 @@
 // Forms ======================================================================
 
 // Navs =======================================================================
+
+
 
 // Indicators =================================================================
 

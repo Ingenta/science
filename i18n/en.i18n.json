@@ -28,9 +28,9 @@
                 "label": "Choose a Access Key",
                 "options": {
                     "1": "Free Content",
-                    "2": "Open Access Content"
-//                    "3": "Subscribed Content",
-//                    "4": "Free Trial Content"
+                    "2": "Open Access Content",
+                    "3": "Subscribed Content",
+                    "4": "Free Trial Content"
                 }
             },
             "picture": {
@@ -80,10 +80,24 @@
     },
     "about": {
         "title": {
-	    "label": "title"
+	    "label": "English Title"
         },
         "chinesetitle": {
-	    "label": "chinesetitle"
+	    "label": "Chinese Title"
         }
+    },
+    "aboutArticles": {
+        "title": {
+	    "label": "English Title"
+        },
+        "chinesetitle": {
+	    "label": "Chinese Title"
+        },
+	"description": {
+            "label": "English Description"
+	},
+	"chinesedescription": {
+	    "label": "Chinese Description"
+	}
     }
 }

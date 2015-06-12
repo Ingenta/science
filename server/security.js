@@ -5,4 +5,5 @@ About.permit(['insert', 'update', 'remove']).apply();
 Articles.permit(['insert', 'update', 'remove']).apply();
 Volumes.permit(['insert', 'update', 'remove']).apply();
 Issues.permit(['insert', 'update', 'remove']).apply();
+AboutArticles.permit(['insert', 'update', 'remove']).apply();
 //Images.permit(['insert', 'download']).apply();

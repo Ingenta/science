@@ -63,7 +63,7 @@
           {{/if}}
         </div>
         <h3>{{> imageName}}&nbsp;&nbsp;
-          <a href="{{getUrlToJournal publisher title}}">
+          <a href="{{getJournalUrl title}}">
             {{title}}
           </a>
         </h3>
@@ -90,7 +90,7 @@
   {{/afModal}}
 </template>
 <template name="imageName">
-	{{#if accessKeyIs "1"}}
+  {{#if accessKeyIs "1"}}
   <img src="/icon_access_fc.gif">
   {{/if}}
   {{#if accessKeyIs "2"}}
@@ -120,6 +120,7 @@
           {{> afQuickField name="accessKey"}}
           {{> afQuickField name="picture"}}
           {{> afQuickField name="banner"}}
+          {{> afFieldInput name="tabSelections"}}
         </div>
         <div class="modal-footer">
          <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>

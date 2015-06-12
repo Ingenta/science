@@ -1,4 +1,16 @@
 {
+    "Overview": "期刊概述",
+    "Browse": "出版目录",
+    "About": "关于我们",
+    "Editorial Board": "编委会",
+    "News": "新闻",
+    "Media": "多媒体",
+    "Special Topics": "专题",
+    "Collections": "文章集",
+    "Accepted": "预出版",
+    "Online First": "优先出版",
+    "MOOP": "MOOP",
+    "Author": "作者中心",
     "Last release was": "最后更新于",
     "Any Publisher": "+ 更多",
     "Editors": "编辑",
@@ -7,9 +19,13 @@
     "Editorial Policies": "编辑政策",
     "Readers": "读者须知",
     "Contact": "联系我们",
-    "Overview": "期刊概述",
-    "Browse": "出版目录",
-    "About": "关于我们",
+    "Abstract": "摘要",
+    "Full Text": "全文",
+    "References": "参考文献",
+    "Cited By": "被引用",
+    "Data & Media": "数据&媒体",
+    "Metrics": "阅读行为统计",
+    "Related": "相关文章",
     "Home": "首页",
     "Create": "确定",
     "OK": "确定",
@@ -35,6 +51,8 @@
     "Introductory text": "文字介绍",
     "No publications found!": "没有找到出版物！",
     "No publishers found!": "没有找到出版社！",
+    "No About found!": "没有找到主题！",
+    "No AboutArticle found!": "没有找到关于我们的信息！",
     "Welcome Message": "欢迎",
     "Your full name": "你的全名",
     "Page not found": "找不到网页",
@@ -43,7 +61,7 @@
     "Search": "搜索",
     "Name": "名字",
     "E-mail": "邮件地址",
-    "Publishers": "出版社",
+    "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
     "Collections": "文章集",
@@ -93,9 +111,9 @@
                 "label": "请选择一个资源标签",
                 "options": {
                     "1": "免费",
-                    "2": "开源"
-//                    "3": "订阅",
-//                    "4": "免费试用"
+                    "2": "开源",
+                    "3": "订阅",
+                    "4": "免费试用"
                 }
             },
             "picture": {
@@ -150,5 +168,19 @@
         "chinesetitle": {
 	    "label": "中文标题"
         }
+    },
+    "aboutArticles": {
+        "title": {
+	    "label": "标题"
+        },
+        "chinesetitle": {
+	    "label": "中文标题"
+        },
+	"description": {
+            "label": "英文描述"
+	},
+	"chinesedescription": {
+	    "label": "中文描述"
+	}
     }
 }

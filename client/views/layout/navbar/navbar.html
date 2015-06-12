@@ -30,18 +30,18 @@
 </template>
 
 <template name="LeftMenu">
-    <ul id="menu-items" class="nav navbar-nav">
+    <ul id="nav-items" class="nav navbar-nav">
         {{#if hasPublishers}}
-        <li id="menu-item-dropdown" class="dropdown ">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <li id="nav-item-dropdown" class="dropdown navbar-left-button {{menuItemClass 'publishers'}}">
+        <a href="/publishers" class="dropdown-toggle">
                 {{_ "Publishers"}}
                 <b class="caret">
                 </b>
             </a>
-            <ul id="menu-items" class="dropdown-menu">
+            <ul id="dropdown-nav-items" class="dropdown-menu">
                 {{#each publishers}}
                 <li>
-                    <a href="/publisher/{{name}}">
+                    <a href="/publisher/{{name}}" >
                         {{translateThis chinesename name}}
                     </a>
                 </li>
@@ -49,28 +49,28 @@
             </ul>
         </li>
         {{else}}
-        <li id="menu-item-simple" class="{{menuItemClass 'publishers'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'publishers'}}">
             <a href="{{pathFor 'publishers'}}">
                 {{_ "Publishers"}}
             </a>
         </li>
         {{/if}}
-        <li id="menu-item-simple" class="{{menuItemClass 'publications'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'publications'}}">
             <a href="{{pathFor 'publications'}}">
                 {{_ "Publications"}}
             </a>
         </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'topics'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'topics'}}">
             <a href="{{pathFor 'topics'}}">
                 {{_ "Topics"}}
             </a>
         </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'collections'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'collections'}}">
             <a href="{{pathFor 'collections'}}">
                 {{_ "Collections"}}
             </a>
         </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'author'}}">
+        <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'author'}}">
             <a href="{{pathFor 'author'}}">
                 {{_ "Author"}}
             </a>
@@ -79,13 +79,13 @@
 </template>
 
 <template name="PublicLayoutRightMenu">
-    <ul id="menu-items" class="nav navbar-nav navbar-right">
-        <li id="menu-item-simple">
+    <ul id="nav-items" class="nav navbar-nav navbar-right">
+        <li id="menu-item-simple-right" class="navbar-right-button">
             <a href="#">
                 <i class="fa fa-search-plus"></i> {{_ "Quick Search"}}
             </a>
         </li>
-        <li id="menu-item-simple">
+        <li id="menu-item-simple-right" class="navbar-right-button">
         <a href="#">
                 <i class="fa fa-windows"></i> {{_ "Advanced Search"}}
             </a>
