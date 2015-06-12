@@ -12,5 +12,11 @@ Template.SearchResults.helpers({
         mongoDbArr.push({title: { $regex : q, $options:"i" } });
         mongoDbArr.push({authors: { $regex : q, $options:"i" } });
         return Articles.find({ $or: mongoDbArr});
-    }
+    },
+    urlToArticle:function(title){
+        var article =Articles.findOne({title:title});
+        var publisherName = Publishers.findOne({_id:article.publisher}).name;
+        var journalName = Publications.findOne({_id:article.journalId}).title;
+        return "/publisher/"+publisherName+"/journal/"+journalName+"/article/"+title;
+   }
 });
