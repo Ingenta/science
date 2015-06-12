@@ -11,25 +11,28 @@ ArticlesSchema  = new SimpleSchema({
     publisher:{
         type: String
     },
-    volume:{
-        type: String
-    },
-    issue:{
-        type: String
-    },
+    // volume:{
+    //     type: String
+    // },
+    // issue:{
+    //     type: String
+    // },
     journalId: {
         type: String
     },
-    volumeId:{
-        type: String
-    },
-    issueId: {
-        type: String
-    },
-    year:{
-        type: String
-    },
-    month:{
+    // volumeId:{
+    //     type: String
+    // },
+    // issueId: {
+    //     type: String
+    // },
+    // year:{
+    //     type: String
+    // },
+    // month:{
+    //     type: String
+    // },
+    topic:{
         type: String
     }
 });

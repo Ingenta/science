@@ -1,7 +1,7 @@
 <template name="articleList">
     <div class="row">
         <div class="col-xs-4">
-            {{> articleListTree}}
+            <!-- {{> articleListTree}} -->
         </div>
         <div class="col-xs-8">
             {{> articleListRight}}
@@ -54,7 +54,7 @@
     {{> addArticleModalForm }}
 </template>
 <template name="addArticleModalForm">
-    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,volumeId,issueId,publisher"}}
+    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,publisher"}}
     {{_ "Add new"}}
     {{/afModal}}
 </template>
