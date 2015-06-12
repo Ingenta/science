@@ -8,6 +8,15 @@ Template.SingleTopic.events({
    }
 });
 
+Template.addSubTopicModalForm.events({
+    'click .fa': function (event) {
+        var id=$(event.currentTarget).parent().parent().attr('id');
+        console.log(id);
+        Session.set("parentId", id);
+        event.stopPropagation();
+    }
+});
+
 Template.TopicList.helpers({
     topics: function () {
         return  Topics.find({"parentId" : null});
