@@ -8,9 +8,87 @@
 				</div>
 			</div>
 		</div> -->
-		{{> HomePublicHomeJumbotron}}
+		<!-- {{> HomePublicHomeJumbotron}} -->
+		<div class="row">
+			{{#if isAdmin }}
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
+				{{_ "Add new"}}
+			</button>
+			{{/if}}
+		</div>
+		<hr>
+		{{> addNewsForm}}
+		<div class="row">
+			{{> NewsList}}
+		</div>
 		<br/>
 		{{> HomePublicContent}}
 	</div>
 </template>
 
+<template name="NewsList">
+	{{#each news}}
+	{{> SingleNews}}
+	{{else}}
+	{{_"No news found!"}}
+	{{/each}}
+</template>
+
+<template name="SingleNews">
+	<div class="row">
+		<div class="col-xs-5">		
+			<img src="{{getImageHelper picture}}" width="105" />
+		</div>
+		<div class="col-xs-7">
+			<div class="row">
+				<div class="pull-right">
+					{{#if isAdmin }}
+					{{> updateNewsModalForm}}
+					{{#if hasNews _id}}
+					{{> deleteNewsModalForm}}
+					{{/if}}
+					{{/if}}
+				</div>
+				<div class="row">
+					{{title}}
+				</div>
+			</div>
+			<div class="row">
+				{{description}}
+			</div>
+		</div>
+	</div>
+	<!-- <hr> -->
+</template>
+
+<template name="updateNewsModalForm">
+	{{#afModal class="fa fa-pencil" title="Update" collection="News" doc=_id operation="update"}}
+	{{/afModal}}
+</template>
+<template name="deleteNewsModalForm">
+	{{#afModal class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}
+	{{/afModal}}
+</template>
+
+<template name="addNewsForm">
+	<div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="addNewsModalLabel">{{_ "Add new"}}</h4>
+				</div>
+				{{#autoForm id="addNewsModalForm" collection="News" type="insert"}}
+				<div class="modal-body">
+					{{> afQuickField name="title"}}
+					{{> afQuickField name="description"}}
+					{{> afQuickField name="picture"}}
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+				</div>
+				{{/autoForm}}
+			</div>
+		</div>
+	</div>
+</template>

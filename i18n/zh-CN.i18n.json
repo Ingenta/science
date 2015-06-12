@@ -198,5 +198,16 @@
 	"chinesedescription": {
 	    "label": "中文描述"
 	}
-    }
+    },
+     "news": {
+             "title": {
+                "label": "标题"
+            },
+            "description": {
+                "label": "描述"
+            },
+            "picture": {
+                "label": "选择图片"
+            }
+        }
 }

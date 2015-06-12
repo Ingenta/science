@@ -115,5 +115,16 @@
 	"chinesedescription": {
 	    "label": "Chinese Description"
 	}
-    }
+    },
+     "news": {
+             "title": {
+                "label": "Title"
+            },
+            "description": {
+                "label": "Description"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
+        }
 }
