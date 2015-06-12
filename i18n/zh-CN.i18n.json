@@ -50,7 +50,7 @@
     "FILTER BY Publisher": "按出版商过滤浏览",
     "Introductory text": "文字介绍",
     "No publications found!": "没有找到出版物！",
-    "No publishers found!": "没有找到出版社！",
+    "No publishers found!": "没有找到出版商！",
     "No About found!": "没有找到主题！",
     "No AboutArticle found!": "没有找到关于我们的信息！",
     "Welcome Message": "欢迎",
@@ -147,10 +147,10 @@
                 "label": "中文描述"
             },
             "name": {
-                "label": "出版社英文名字"
+                "label": "出版商英文名字"
             },
             "chinesename": {
-                "label": "出版社中文名字"
+                "label": "出版商中文名字"
             },
             "urlname": {
                 "label": "简称"
