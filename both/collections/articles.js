@@ -34,6 +34,14 @@ ArticlesSchema  = new SimpleSchema({
     // },
     topic:{
         type: String
+    },
+    abstract:{
+        type: String,
+        min: 20,
+        max: 1000,
+        autoform: {
+            rows: 5
+        }
     }
 });
 Meteor.startup(function() {
