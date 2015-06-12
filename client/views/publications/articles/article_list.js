@@ -10,7 +10,6 @@ Template.articleListTree.helpers({
     issueList:function(journalId,volume){
         if(journalId && volume){
             var i= Issues.find({'journalId':journalId,'volume':volume},{sort:{'issue':-1}});
-            console.log('journalId:'+journalId+',volume:'+volume);
             return i;
         }else{
             throw new Error("Lack of query conditions， 缺少查询条件!journalId:'+journalId+',volume:'+volume");
