@@ -5,11 +5,7 @@ Template.SearchBar.events({
             Router.go('/s/'+query);
     }
 });
-Template.SearchResults.events({
-    'click .onup': function(event){
-        $(event.target).next("ul").toggle();
-    }
-});
+
 Template.SearchResults.helpers({
     'results': function(){
         var q = Router.current().params.searchQuery;
@@ -27,12 +23,6 @@ Template.SearchResults.helpers({
         }
         var a = Router.current().params.authorQuery;
         return  Articles.find({ authors: a});
-    },
-    urlToArticle:function(title){
-        var article =Articles.findOne({title:title});
-        var publisherName = Publishers.findOne({_id:article.publisher}).name;
-        var journalName = Publications.findOne({_id:article.journalId}).title;
-        return "/publisher/"+publisherName+"/journal/"+journalName+"/article/"+title;
     },
     'filters':function(){
         return [{

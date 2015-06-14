@@ -52,18 +52,9 @@ Template.articleListRight.helpers({
     }
 
 });
-Template.singleArticleInlist.helpers({
-    urlToArticle:function(title){
-       return Router.current().url+"/article/"+title;
-   },
-   getPublisherName:function(id){
-    return Publishers.findOne({_id:id}).name;
-}
-});
 
 
 AutoForm.addHooks(['addArticleModalForm'], {
-
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
     },

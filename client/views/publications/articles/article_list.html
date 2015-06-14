@@ -25,30 +25,9 @@
 <template name="articleListRight">
     <ul class="article-list list-unstyled">
         {{#each articles}}
-        {{> singleArticleInlist}}
+                  {{>oneArticle}}
         {{/each}}
     </ul>
-</template>
-
-<template name="singleArticleInlist">
-    <li>
-        <ul class="list-unstyled">
-            <li>
-            <a href="{{urlToArticle title}}">
-                    <img src="/icon_access_fc.gif"/>
-                    <span>{{title}}</span>
-                </a>
-            </li>
-            <li>
-            <a href="/author/{{authors}}">
-                <span>{{authors}}</span>
-            </a>
-            </li>
-            <li>
-                <span>{{getPublisherName publisher}}</span>
-            </li>
-        </ul>
-    </li>
 </template>
 
 <template name="addArticleButton">
