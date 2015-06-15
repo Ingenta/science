@@ -23,17 +23,18 @@
 </template>
 
 <template name="TopicList">
-    <ul class="list-unstyled">
+    <input class="refineSearch" placeholder="{{_ 'Search'}}">
+    <ul class="list-unstyled parentTopicList">
         {{#each topics}}
-        {{> SingleTopic}}
+            {{> SingleTopic}}
         {{else}}
-        {{_ "No topics found!"}}
+            {{_ "No topics found!"}}
         {{/each}}
     </ul>
 </template>
 
 <template name="SingleTopic">
-    <li id="{{_id}}">
+    <li id="{{_id}}" class="topic-li">
         {{#if subTopicCount _id}}
         {{#if isExpand _id}}
         <i class="fa fa-minus" type="button"></i>
@@ -42,15 +43,15 @@
         {{/if}}
         {{/if}}
         {{> TopicButtons}}
+        <hr>
+
+            {{#each subTopics _id}}
+                <ul style="display:{{#if isParentExpand _id}}block;{{else}}none;{{/if}}">
+                    {{> SingleTopic}}
+                </ul>
+            {{/each}}
+
     </li>
-    <hr>
-    {{#if isExpand _id}}
-    {{#each subTopics _id}}
-    <ul>
-        {{> SingleTopic}}
-    </ul>
-    {{/each}}
-    {{/if}}
 </template>
 
 <template name="updateTopicModalForm">
