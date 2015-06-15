@@ -5,3 +5,7 @@ Template.i18n_switch.events({
         return TAPi18n.setLanguageAmplify(id)
     }
 });
+TAPi18n._afterUILanguageChange = function(){
+//triggers on language switch
+//alert(TAPi18n.getLanguage());
+};

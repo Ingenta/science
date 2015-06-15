@@ -1,4 +1,7 @@
 {
+    "Quick Search": "快速查找",
+    "Advanced Search": "高级查找",
+    "Home page for": "",
     "Overview": "期刊概述",
     "Browse": "出版目录",
     "About": "关于我们",
@@ -61,6 +64,7 @@
     "Search": "搜索",
     "Name": "名字",
     "E-mail": "邮件地址",
+    "Email address": "邮件地址",
     "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
