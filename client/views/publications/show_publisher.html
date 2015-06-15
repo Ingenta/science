@@ -12,10 +12,16 @@
   </div>
   <br/>
   <div class="row">
-   {{description}}
- </div>
- <br/>
- <div class="row">
+
+    {{#if i18n_isCurrentLanguage 'en'}}
+    {{description}}
+    {{else}}
+    {{chinesedescription}}
+    {{/if}}
+
+  </div>
+  <br/>
+  <div class="row">
    {{> PublisherWebsite}}
  </div>
  <br/>
