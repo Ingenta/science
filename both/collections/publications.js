@@ -46,6 +46,7 @@ PublicationsSchema = new SimpleSchema({
     },
     tabSelections: {
         type: [String],
+        optional: true,
         autoform: {
             type: "select-checkbox-inline"
         }
