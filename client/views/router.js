@@ -330,4 +330,13 @@ Router.map(function () {
 		path: "/logout",
 		controller: "LogoutController"
 	});
+	this.route("testTemplate", {
+		path: "/testTemplate"
+	});
+	this.route("editseaTemp", {
+		path: "/editseaTemp"
+	});
+	this.route("searchResult", {
+		path: "/searchResult"
+	});
 });
