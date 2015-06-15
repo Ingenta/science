@@ -79,7 +79,13 @@
           {{/each}}
         </div>
       </div>
+	  {{> nextPage}}
     </div>
   </div>
 </div>
+</template>
+
+<template name="nextPage">
+    {{> pages}}
+    {{> pagesNav}}
 </template>
