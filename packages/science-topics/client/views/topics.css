@@ -15,5 +15,7 @@ div.topics a.fa-pencil {
 div.topics a.fa-trash {
 	color: red;
 }
-
+.parentTopicList{
+    margin-top:20px
+}
 
