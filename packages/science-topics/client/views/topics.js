@@ -9,14 +9,13 @@ Template.SingleTopic.events({
 });
 Template.TopicList.events({
     'keyup .refineSearch': function(event) {
-        $(".parentTopicList li,.parentTopicList hr").hide();
+        $(".parentTopicList li").hide();
         var term = $(event.currentTarget).val();
         _.each($(".parentTopicList li"), function (item) {
             var eachTopic = item.textContent.trim().toLowerCase();
             if (eachTopic && eachTopic.indexOf(term.toLowerCase().trim()) > -1) {
                 recursionLi(item);
                 $(item).show();
-                $(item).next("hr").show();
             }
         });
         function recursionLi(li){
@@ -24,7 +23,6 @@ Template.TopicList.events({
             console.log(parentLi);
             if(parentLi && parentLi.length && !parentLi.visibility){
                 $(parentLi).show();
-                $(parentLi).next("hr").show();
                 recursionLi(parentLi);
             }
         }
