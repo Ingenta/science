@@ -12,6 +12,10 @@ NewsSchema = new SimpleSchema({
 			rows: 4
 		}
 	},
+    url: {
+        type: String,
+        optional: true
+    },
 	picture: {
 		type: String,
 		optional: true,
