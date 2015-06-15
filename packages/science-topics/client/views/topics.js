@@ -21,7 +21,6 @@ Template.TopicList.events({
         });
         function recursionLi(li){
             var parentLi = $(li).parent().parent();
-            console.log(parentLi);
             if(parentLi && parentLi.length && !parentLi.visibility){
                 $(parentLi).show();
                 recursionLi(parentLi);
