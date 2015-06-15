@@ -12,10 +12,16 @@
   </div>
   <br/>
   <div class="row">
-   {{description}}
- </div>
- <br/>
- <div class="row">
+
+    {{#if i18n_isCurrentLanguage 'en'}}
+    {{description}}
+    {{else}}
+    {{chinesedescription}}
+    {{/if}}
+
+  </div>
+  <br/>
+  <div class="row">
    {{> PublisherWebsite}}
  </div>
  <br/>
@@ -37,7 +43,10 @@
 
 <template name="PublisherWebsite">
   {{#if website}}
-  <a href="{{website}}">{{_ "Home page for"}} {{name}} <i class="fa fa-external-link"></i></a>
+  <a href="{{website}}">
+  {{_ "Home page for"}}
+  {{translateThis chinesename name}}
+ <i class="fa fa-external-link"></i></a>
   {{/if}}
 </template>
 
