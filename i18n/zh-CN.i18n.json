@@ -1,4 +1,7 @@
 {
+    "Quick Search": "快速查找",
+    "Advanced Search": "高级查找",
+    "Home page for": "",
     "Overview": "期刊概述",
     "Browse": "出版目录",
     "About": "关于我们",
@@ -50,7 +53,7 @@
     "FILTER BY Publisher": "按出版商过滤浏览",
     "Introductory text": "文字介绍",
     "No publications found!": "没有找到出版物！",
-    "No publishers found!": "没有找到出版社！",
+    "No publishers found!": "没有找到出版商！",
     "No About found!": "没有找到主题！",
     "No AboutArticle found!": "没有找到关于我们的信息！",
     "Welcome Message": "欢迎",
@@ -61,6 +64,7 @@
     "Search": "搜索",
     "Name": "名字",
     "E-mail": "邮件地址",
+    "Email address": "邮件地址",
     "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
@@ -121,6 +125,22 @@
             },
             "banner": {
                 "label": "选择横幅图片"
+            },
+            "tabSelections": {
+                "options": {
+                    "Overview": "期刊概述",
+                    "Browse": "出版目录",
+                    "About": "关于我们",
+                    "Editorial Board": "编委会",
+                    "News": "新闻",
+                    "Media": "多媒体",
+                    "Special Topics": "专题",
+                    "Collections": "文章集",
+                    "Accepted": "预出版",
+                    "Online First": "优先出版",
+                    "MOOP": "MOOP",
+                    "Author": "作者中心"
+                }
             }
         },
         "publishers": {
@@ -131,10 +151,10 @@
                 "label": "中文描述"
             },
             "name": {
-                "label": "出版社英文名字"
+                "label": "出版商英文名字"
             },
             "chinesename": {
-                "label": "出版社中文名字"
+                "label": "出版商中文名字"
             },
             "urlname": {
                 "label": "简称"
@@ -182,5 +202,16 @@
 	"chinesedescription": {
 	    "label": "中文描述"
 	}
-    }
+    },
+     "news": {
+             "title": {
+                "label": "标题"
+            },
+            "description": {
+                "label": "描述"
+            },
+            "picture": {
+                "label": "选择图片"
+            }
+        }
 }

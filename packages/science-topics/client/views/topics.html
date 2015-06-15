@@ -6,8 +6,7 @@
         </div>
         TODO:
         <ul>
-        <li>link to topic sub page</li>
-        <li>search</li>
+            <li>search</li>
         </ul>
         <div class="row">
             {{#if isAdmin }}
@@ -78,7 +77,9 @@
 </template>
 
 <template name="TopicButtons">
-    {{translateThis name englishName}}
+    <a href="/topic/{{englishName}}">
+        {{translateThis name englishName}}
+    </a>
     <div class="pull-right">
         {{#if isAdmin }}
         {{> addSubTopicModalForm}}

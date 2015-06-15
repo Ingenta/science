@@ -145,6 +145,8 @@ Meteor.subscribe("volumes");
 
 Meteor.subscribe("about_articles");
 
+Meteor.subscribe("news");
+
 Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 
@@ -179,12 +181,26 @@ Router.map(function () {
 			return TAPi18n.__("Topics");
 		}
 	});
+
+	this.route('/topic/:topicQuery', {
+		template: "SearchResults",
+		parent: "topics",
+		title: ":topicQuery"
+	});
+
 	this.route("author",{
 		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Author");
 		}
 	});
+
+	this.route('/author/:authorQuery', {
+		template: "SearchResults",
+		parent: "home_private",
+		title: ":authorQuery"
+	});
+
 	this.route("collections",{
 		parent: "home_private",
 		title: function () {
@@ -206,13 +222,25 @@ Router.map(function () {
 			return TAPi18n.__("Publishers");
 		}
 	});
+
+	this.route('/s/:searchQuery', {
+		template: "SearchResults",
+		parent: "home_private",
+		title: "Search"
+	});
+
+
 	this.route('/publisher/:publisherName', {
 		data: function(){
 			return Publishers.findOne({name: this.params.publisherName});
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
-		title: ":publisherName",
+		title: function(){
+			if(TAPi18n.getLanguage() === "en") return ":publisherName";
+			var id =Session.get('currentPublisher');
+			return Publishers.findOne({_id:id}).chinesename;
+		},
 		name: "publisher.name"
 	});
 
@@ -301,5 +329,14 @@ Router.map(function () {
 	this.route("logout", {
 		path: "/logout",
 		controller: "LogoutController"
+	});
+	this.route("testTemplate", {
+		path: "/testTemplate"
+	});
+	this.route("editseaTemp", {
+		path: "/editseaTemp"
+	});
+	this.route("searchResult", {
+		path: "/searchResult"
 	});
 });

@@ -46,24 +46,9 @@ PublicationsSchema = new SimpleSchema({
     },
     tabSelections: {
         type: [String],
+        optional: true,
         autoform: {
-            type: "select-checkbox-inline",
-            options: function () {
-                return [
-                    {label : "Overview",  value: "Overview"},
-                    {label : "Browse", value: "Browse"},
-                    {label : "About", value: "About"},
-                    {label : "Editorial Board",  value: "Editorial Board"},
-                    {label : "News", value: "News"},
-                    {label : "Media", value: "Media"},
-                    {label : "Special Topics",  value: "Special Topics"},
-                    {label : "Collections", value: "Collections"},
-                    {label : "Accepted", value: "Accepted"},
-                    {label : "Online First",  value: "Online First"},
-                    {label : "MOOP", value: "MOOP"},
-                    {label : "Author", value: "Author"}
-                ];
-            }
+            type: "select-checkbox-inline"
         }
     }
 });

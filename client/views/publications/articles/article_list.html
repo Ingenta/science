@@ -1,7 +1,7 @@
 <template name="articleList">
     <div class="row">
         <div class="col-xs-4">
-            {{> articleListTree}}
+            <!-- {{> articleListTree}} -->
         </div>
         <div class="col-xs-8">
             {{> articleListRight}}
@@ -26,28 +26,9 @@
 <template name="articleListRight">
     <ul class="article-list list-unstyled">
         {{#each articles}}
-        {{> singleArticleInlist}}
+                  {{>oneArticle}}
         {{/each}}
     </ul>
-</template>
-
-<template name="singleArticleInlist">
-    <li>
-        <ul class="list-unstyled">
-            <li>
-            <a href="{{urlToArticle title}}">
-                    <img src="/icon_access_fc.gif"/>
-                    <span>{{title}}</span>
-                </a>
-            </li>
-            <li>
-                <span>{{authors}}</span>
-            </li>
-            <li>
-                <span>{{getPublisherName publisher}}</span>
-            </li>
-        </ul>
-    </li>
 </template>
 
 <template name="addArticleButton">
@@ -55,7 +36,7 @@
     {{> addArticleModalForm }}
 </template>
 <template name="addArticleModalForm">
-    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,volumeId,issueId,publisher"}}
+    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,publisher"}}
     {{_ "Add new"}}
     {{/afModal}}
 </template>

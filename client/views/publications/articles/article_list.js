@@ -10,12 +10,10 @@ Template.articleListTree.helpers({
     issueList:function(journalId,volume){
         if(journalId && volume){
             var i= Issues.find({'journalId':journalId,'volume':volume},{sort:{'issue':-1}});
-            console.log('journalId:'+journalId+',volume:'+volume);
             return i;
         }else{
-            throw new Error("Lack of query conditions， 缺少查询条件!journalId:'+journalId+',volume:'+volume");
+            throw new Error("Lack of query conditions， 缺少查询条件!journalId:'"+journalId+"',volume:'"+volume);
         }
-
     }
 });
 
@@ -54,19 +52,9 @@ Template.articleListRight.helpers({
     }
 
 });
-Template.singleArticleInlist.helpers({
-    urlToArticle:function(title){
-         return Router.current().url+"/article/"+title;
-         return Router.current()+"/article/"+title;
-    },
-    getPublisherName:function(id){
-        return Publishers.findOne({_id:id}).name;
-    }
-});
 
 
 AutoForm.addHooks(['addArticleModalForm'], {
-
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
     },
@@ -74,7 +62,8 @@ AutoForm.addHooks(['addArticleModalForm'], {
         insert:  function(doc){
             doc.journalId = Session.get('currentJournalId');
             doc.publisher=Session.get('currPublisher');
-
+            return doc;
+            //simplify this
             if(doc.journalId){
                 //此处自动生成volume记录
                 var volume=Volumes.findOne({journalId:doc.journalId,volume:doc.volume});

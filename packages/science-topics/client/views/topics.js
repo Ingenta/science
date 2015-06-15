@@ -7,6 +7,7 @@ Template.SingleTopic.events({
        event.stopPropagation();
     }
 });
+
 Template.TopicList.events({
     'keyup .refineSearch': function(event) {
         $(".parentTopicList li").hide();
@@ -28,16 +29,27 @@ Template.TopicList.events({
         }
     }
 });
+
+Template.addSubTopicModalForm.events({
+    'click .fa': function (event) {
+        var id=$(event.currentTarget).parent().parent().attr('id');
+        Session.set("parentId", id);
+        event.stopPropagation();
+    }
+});
+
 Template.TopicList.helpers({
     topics: function () {
         return  Topics.find({"parentId" : null});
     }
 });
+
 Template.TopicButtons.helpers({
     hasSubTopic: function (parentId) {
         return  Topics.find({"parentId": parentId}).count()===0;
     }
 });
+
 Template.SingleTopic.helpers({
     subTopicCount: function (parentId) {
         return  Topics.find({"parentId" : parentId}).count();
@@ -59,7 +71,6 @@ Template.deleteTopicModalForm.helpers({
         return TAPi18n.__("Are you sure?");
     }
 });
-
 
 AutoForm.addHooks(['addSubTopicModalForm'], {
     onSuccess: function () {

@@ -1,0 +1,20 @@
+<template name="editseaTemp">
+    <h4 class="dotted">本平台内编辑推荐文章查看</h4>
+    <div class="dotted">
+        <label>结果排序：</label>
+        <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 直接相关
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 最早出版
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 最新出版
+        </label>
+    </div>
+    <div class="dotted">
+        {{#each books}}
+            {{>oneArticle}}
+        {{/each}}
+    </div>
+</template>
