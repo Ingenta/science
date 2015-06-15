@@ -27,7 +27,7 @@
     </div>
     <div class="pull-right">
       {{#each letterInTheAlphabet}}
-      <a class="numberButton" href="">{{this}}</a>&nbsp;
+      <a class="numberButton">{{this}}</a>&nbsp;
       {{/each}}
     </div>
     <br>
@@ -38,7 +38,7 @@
       <h3 class="text-uppercase" style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 12px;font-weight: bold;padding: 2px 0;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
       {{#unless selectedPublisher}}
       {{#each publishers}}
-      <li><a class="filterButton" data-pubid="{{_id}}" href="">
+      <li><a class="filterButton" data-pubid="{{_id}}">
 
         {{translateThis chinesename name}}
 
@@ -49,7 +49,7 @@
         {{/unless}}
         {{#if selectedPublisher}}
 
-        <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+        <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
         {{#each publishers}}
         <li style="color: #CCC;">
           {{translateThis chinesename name}}
