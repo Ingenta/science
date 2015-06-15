@@ -236,7 +236,11 @@ Router.map(function () {
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
-		title: ":publisherName",
+		title: function(){
+			if(TAPi18n.getLanguage() === "en") return ":publisherName";
+			var id =Session.get('currentPublisher');
+			return Publishers.findOne({_id:id}).chinesename;
+		},
 		name: "publisher.name"
 	});
 
