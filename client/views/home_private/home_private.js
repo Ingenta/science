@@ -3,7 +3,10 @@ Template.HomePrivate.rendered = function() {
 };
 
 Template.HomePrivate.events({
-
+    'mouseenter .index':function(event){
+        var index = $(event.currentTarget).attr('index');
+        $('#myCarousel').carousel(parseInt(index))
+    }
 });
 
 Template.HomePrivate.helpers({
@@ -12,9 +15,9 @@ Template.HomePrivate.helpers({
 
 
 Template.NewsList.helpers({
-  news: function () {
-    return News.find();
-  }
+    news: function () {
+        return News.find();
+    }
 });
 
 Template.deleteNewsModalForm.helpers({
