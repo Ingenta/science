@@ -72,15 +72,10 @@
           {{else}}
           {{_"No publications found!"}}
           {{/each}}
+          {{> Paginator_UI publications}}
         </div>
       </div>
-	  {{> nextPage}}
     </div>
   </div>
 </div>
-</template>
-
-<template name="nextPage">
-    {{> pages}}
-    {{> pagesNav}}
 </template>

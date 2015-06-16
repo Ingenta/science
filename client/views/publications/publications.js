@@ -7,13 +7,16 @@ Template.FilterList.helpers({
 		return Publishers.find({_id:pubId});
 	},
 	publications: function () {
+
 		var pubId = Session.get('filterPublisher');
 		var firstletter = Session.get('firstletter');
 		var q={};
 		pubId && (q.publisher=pubId);
 		firstletter && (q.firstletter=firstletter);
 		Session.set("totalPublicationResults", Publications.find(q).count());
-		return Publications.find(q);
+		var pubs=myPubPagination.find({}, {itemsPerPage:10});
+		console.log(pubs);
+		return pubs;
 	},
 	totalPublicationResults: function () {
 		return Session.get('totalPublicationResults');
@@ -63,5 +66,3 @@ Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
 	Session.set('firstletter', undefined);
 });
-
-this.Pages = new Meteor.Pagination("Publications");
