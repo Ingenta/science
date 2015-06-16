@@ -17,11 +17,11 @@
                 {{/each}}
             </div>
             <div class="col-xs-8">
-                <h4>搜索文章查看：</h4>
+                <h4>{{_ "Search results"}}</h4>
                 {{#each results}}
                   {{> oneArticle}}
                 {{else}}
-                No results found!
+                {{_ "No results found!"}}
                 {{/each}}
             </div>
 </template>

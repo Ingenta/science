@@ -11,8 +11,7 @@
    <div class="row">
     <p>{{_ "Introductory text"}}</p>
   </div>
-  <hr style="border-bottom: 2px solid #d7d7d7;">
-  <div class="row">
+  <div class="row bg-eee">
     <div class="col-xs-3">
       {{#if isChinese languageTag}}
       命中 {{totalPublicationResults}} 个结果
@@ -77,6 +76,7 @@
           {{_"No publications found!"}}
           {{/each}}
           {{> Paginator_UI publications}}
+          <br>
         </div>
       </div>
     </div>
