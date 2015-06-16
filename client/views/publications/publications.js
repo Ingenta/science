@@ -14,7 +14,7 @@ Template.FilterList.helpers({
 		pubId && (q.publisher=pubId);
 		firstletter && (q.firstletter=firstletter);
 		Session.set("totalPublicationResults", Publications.find(q).count());
-		var pubs=myPubPagination.find({}, {itemsPerPage:10});
+		var pubs=myPubPagination.find(q, {itemsPerPage:10});
 		console.log(pubs);
 		return pubs;
 	},
