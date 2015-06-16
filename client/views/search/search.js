@@ -3,6 +3,11 @@ Template.SearchBar.events({
         var query = $('#searchInput').val();
         if(query)
             Router.go('/s/'+query);
+    },
+    'change input': function(){
+        var query = $('#searchInput').val();
+        if(query)
+            Router.go('/s/'+query);
     }
 });
 
