@@ -15,7 +15,7 @@
   <div class="row" style="background: rgb(204, 204, 204) none repeat scroll 0% 0%;">
     <div class="col-xs-3">
       {{#if isChinese languageTag}}
-      命中 {{totalPublicationResults}} 个结果
+          命中 {{totalPublicationResults}} 个结果
       {{else}}
       {{totalPluralPublicationResults}}
       {{/if}}
@@ -54,7 +54,7 @@
         </ul>
       </div>
       <div id="subcontent" class="col-xs-9">
-        <div class="container-fluid">
+      <div class="container-fluid">
           <div class="row" style="margin-top: 20px;">
            {{#each publications}}
            <div class="col-xs-2">
@@ -66,15 +66,13 @@
                 {{title}}
               </a>
             </h5>
-            <a href="#" class="onup"><b class="caret"></b>{{_ "Details"}}</a>
-            <ul class="list-unstyled detail-ul">
-              <li>{{description}}</li>
-            </ul>
+            <h6>{{description}}</h6>
           </div>
           <hr>
           {{else}}
           {{_"No publications found!"}}
           {{/each}}
+          {{> Paginator_UI publications}}
         </div>
       </div>
     </div>
