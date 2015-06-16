@@ -1,4 +1,5 @@
 {
+    "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
     "PleaseEmail": "Please enter valid e-mail address.",
     "PleaseWait": "Please wait...",
     "schemas": {

@@ -274,11 +274,19 @@ Router.map(function () {
 
 	this.route("forgot_password", {
 		path: "/forgot_password",
-		controller: "ForgotPasswordController"
+		controller: "ForgotPasswordController",
+		parent: "home_private",
+		title: function () {
+			return TAPi18n.__("Forgot password");
+		}
 	});
 	this.route("reset_password", {
 		path: "/reset_password/:resetPasswordToken",
-		controller: "ResetPasswordController"
+		controller: "ResetPasswordController",
+		parent: "home_private",
+		title: function () {
+			return TAPi18n.__("Reset password");
+		}
 	});
 	this.route("home_private", {
 		path: "/home_private",
