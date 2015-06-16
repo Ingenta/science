@@ -2,7 +2,7 @@ Template.HomePrivate.rendered = function() {
 
 };
 
-Template.HomePrivate.events({
+Template.NewsList.events({
     'mouseenter .index':function(event){
         var index = $(event.currentTarget).attr('index');
         $('#myCarousel').carousel(parseInt(index))
