@@ -15,7 +15,6 @@ Template.FilterList.helpers({
 		firstletter && (q.firstletter=firstletter);
 		Session.set("totalPublicationResults", Publications.find(q).count());
 		var pubs=myPubPagination.find(q, {itemsPerPage:10});
-		console.log(pubs);
 		return pubs;
 	},
 	totalPublicationResults: function () {
