@@ -15,10 +15,10 @@
 				{{infoMessage}}
 			</div>
 			{{/if}}
-			<input id="old_password" type="password" class="form-control" placeholder="Your old password" required autofocus>
-			<input id="new_password" type="password" class="form-control" placeholder="New password" required>
-			<input id="confirm_pass" type="password" class="form-control" placeholder="Repeat new password" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">
+			<input id="old_password" type="password" class="form-control" placeholder="{{_ 'Your old password'}}" required autofocus>
+			<input id="new_password" type="password" class="form-control" placeholder="{{_ 'New password'}}" required>
+			<input id="confirm_pass" type="password" class="form-control" placeholder="{{_ 'Repeat new password'}}" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="{{_ 'PleaseWait'}}">
 				{{_ "OK"}}
 			</button>
 		</form>
