@@ -63,5 +63,3 @@ Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
 	Session.set('firstletter', undefined);
 });
-
-this.Pages = new Meteor.Pagination("Publications");
