@@ -8,26 +8,21 @@
      <h2>{{_ "Publications"}}
      </h2>
    </div>
-        TODO:
-        <ul>
-        <li>pagination</li>
-        <li>reset alphabet filter</li>
-        </ul>
    <div class="row">
     <p>{{_ "Introductory text"}}</p>
   </div>
   <hr style="border-bottom: 2px solid #d7d7d7;">
-  <div class="row" style="background: rgb(204, 204, 204) none repeat scroll 0% 0%;">
+  <div class="row">
     <div class="col-xs-3">
       {{#if isChinese languageTag}}
-          命中 {{totalPublicationResults}} 个结果
+      命中 {{totalPublicationResults}} 个结果
       {{else}}
       {{totalPluralPublicationResults}}
       {{/if}}
     </div>
     <div class="pull-right">
       {{#each letterInTheAlphabet}}
-      <a class="numberButton" href="">{{this}}</a>&nbsp;
+      <a class="numberButton">{{this}}</a>&nbsp;
       {{/each}}
     </div>
     <br>
@@ -38,7 +33,7 @@
       <h3 class="text-uppercase" style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 12px;font-weight: bold;padding: 2px 0;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
       {{#unless selectedPublisher}}
       {{#each publishers}}
-      <li><a class="filterButton" data-pubid="{{_id}}" href="">
+      <li><a class="filterButton" data-pubid="{{_id}}">
 
         {{translateThis chinesename name}}
 
@@ -49,7 +44,7 @@
         {{/unless}}
         {{#if selectedPublisher}}
 
-        <li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+        <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
         {{#each publishers}}
         <li style="color: #CCC;">
           {{translateThis chinesename name}}
@@ -59,24 +54,29 @@
         </ul>
       </div>
       <div id="subcontent" class="col-xs-9">
-      <div class="container-fluid">
+        <div class="container-fluid">
           <div class="row" style="margin-top: 20px;">
            {{#each publications}}
            <div class="col-xs-2">
             <img src="{{getImageHelper picture}}" width="58" height="82"/>
           </div>
           <div class="row">
-            <h5>{{> imageName}}&nbsp;
-              <a href="{{getUrlToJournal publisher title}}">
+            <a href="{{getUrlToJournal publisher title}}">
+              <p>{{> imageName}}&nbsp;
                 {{title}}
-              </a>
-            </h5>
-            <h6>{{description}}</h6>
+              </p>
+              <p>{{_ "Browse journal"}}</p>
+            </a>
+            <a href="#" class="onup"><b class="caret"></b>{{_ "Details"}}</a>
+            <ul class="list-unstyled detail-ul">
+              <li>{{description}}</li>
+            </ul>
           </div>
           <hr>
           {{else}}
           {{_"No publications found!"}}
           {{/each}}
+          {{> Paginator_UI publications}}
         </div>
       </div>
     </div>

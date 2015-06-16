@@ -11,28 +11,24 @@ Template.journalOptions.helpers({
     context: function () {
         var currentTitle = Router.current().params.journalTitle;
         return Publications.findOne({title: currentTitle});
-    },
-    setCurrentPublication: function (id) {
-        Session.set('currPublication', id);
     }
 });
-
 Template.journalOptions.helpers({
     tabs: function () {
         var tabList =[];
 //            { name: TAPi18n.__("Overview"), slug: 'overview' },
 //            { name: TAPi18n.__("Browse"), slug: 'browse' },
 //            { name: TAPi18n.__("About"), slug: 'about' }
-        var currentTitle = Router.current().params.journalTitle;
-        var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
-        _.each(journalTabSelections, function (t) {
-            tabList.push({ name: TAPi18n.__(t), slug: t });
-        });
-        return tabList;
-    },
-    activeTab: function () {
-        return Session.get('activeTab');
-    }
+var currentTitle = Router.current().params.journalTitle;
+var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
+_.each(journalTabSelections, function (t) {
+    tabList.push({ name: TAPi18n.__(t), slug: t });
+});
+return tabList;
+},
+activeTab: function () {
+    return Session.get('activeTab');
+}
 });
 
 AutoForm.addHooks(['addAboutTitleModalForm'], {
@@ -75,11 +71,11 @@ AutoForm.addHooks(['addAboutArticlesModalForm'], {
 
 Template.aboutArticlesList.helpers({
   about: function () {
-	var aboutId = Session.get('tabAbout');
-    return About.find({_id:aboutId});
-  },
-  aboutarticle: function () {
+   var aboutId = Session.get('tabAbout');
+   return About.find({_id:aboutId});
+},
+aboutarticle: function () {
 	var aboutId = Session.get('tabAbout');
     return AboutArticles.find({about:aboutId});
-  }
+}
 });

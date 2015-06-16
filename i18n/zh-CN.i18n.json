@@ -1,4 +1,7 @@
 {
+    "Browse journal": "出版目录浏览",
+    "Details": "详情",
+    "User details":"用户明细",
     "Quick Search": "快速查找",
     "Advanced Search": "高级查找",
     "Home page for": "",
@@ -75,6 +78,9 @@
     "Log Out": "退出",
     "Settings": "设置",
     "Users": "用户",
+    "User": "用户",
+    "Edit user": "用户权限",
+    "Blocked": "没有权限",
     "Add new": "添加",
     "Admin": "管理员",
 

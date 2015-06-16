@@ -7,13 +7,16 @@ Template.FilterList.helpers({
 		return Publishers.find({_id:pubId});
 	},
 	publications: function () {
+
 		var pubId = Session.get('filterPublisher');
 		var firstletter = Session.get('firstletter');
 		var q={};
 		pubId && (q.publisher=pubId);
 		firstletter && (q.firstletter=firstletter);
 		Session.set("totalPublicationResults", Publications.find(q).count());
-		return Publications.find(q);
+		var pubs=myPubPagination.find(q, {itemsPerPage:10});
+		console.log(pubs);
+		return pubs;
 	},
 	totalPublicationResults: function () {
 		return Session.get('totalPublicationResults');
@@ -58,6 +61,9 @@ Template.FilterList.events({
 	'click .clearPublisher': function (event) {
 		Session.set('filterPublisher', undefined);
 	},
+	'click .onup': function(event){
+		$(event.target).next("ul").toggle();
+	}
 });
 Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);

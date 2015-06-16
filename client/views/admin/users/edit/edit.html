@@ -13,7 +13,7 @@
 <template name="AdminUsersEditEditForm">
 	<div class="">
 		<h2 id="component-title">
-			Edit user
+			{{_ "Edit user"}}
 		</h2>
 		<form id="form" role="form">
 			{{#if errorMessage}}
@@ -29,7 +29,7 @@
 			{{/if}}
 			<div class="form-group  field-profile-name">
 				<label for="profile.name">
-					Name
+					{{_ "Name"}}
 				</label>
 				<div class="input-div">
 					<input type="text" name="profile.name" value="{{admin_user.profile.name}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
@@ -41,7 +41,7 @@
 			</div>
 			<div class="form-group  field-profile-email">
 				<label for="profile.email">
-					E-mail
+					{{_ "E-mail"}}
 				</label>
 				<div class="input-div">
 					<input type="text" name="profile.email" value="{{admin_user.profile.email}}" class="form-control" required="required" data-type="email">
@@ -53,43 +53,25 @@
 			</div>
 			<div class="form-group  field-roles">
 				<label for="roles">
-					Role
+					{{_ "Role"}}
 				</label>
 				<div class="input-div">
 					<div class="radio">
 						<label>
 							<input type="checkbox" value="user" name="roles" data-type="array" {{itemIsChecked admin_user.roles "user"}}>
-							User
+							{{_ "User"}}
 						</label>
 					</div>
 					<div class="radio">
 						<label>
 							<input type="checkbox" value="admin" name="roles" data-type="array" {{itemIsChecked admin_user.roles "admin"}}>
-							Admin
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="checkbox" value="editor" name="roles" data-type="array" {{itemIsChecked admin_user.roles "editor"}}>
-							Editor
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="checkbox" value="orgadmin" name="roles" data-type="array" {{itemIsChecked admin_user.roles "orgadmin"}}>
-							Organisation Admin
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="checkbox" value="publisher" name="roles" data-type="array" {{itemIsChecked admin_user.roles "publisher"}}>
-							Publisher
+							{{_ "Admin"}}
 						</label>
 					</div>
 					<div class="radio">
 						<label>
 							<input type="checkbox" value="blocked" name="roles" data-type="array" {{itemIsChecked admin_user.roles "blocked"}}>
-							Blocked
+							{{_ "Blocked"}}
 						</label>
 					</div>
 					<span id="help-text" class="help-block">
@@ -103,10 +85,10 @@
 					<button id="form-submit-button" class="btn btn-success" type="submit">
 						<span class="fa fa-check">
 						</span>
-						Save
+						{{_ "Save"}}
 					</button>
 					<a href="#" id="form-cancel-button" class="btn btn-default">
-						Cancel
+						{{_ "Cancel"}}
 					</a>
 				</div>
 			</div>
