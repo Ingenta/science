@@ -8,24 +8,24 @@
         <nav>
             <div class="container-fluid">
                 {{>SearchBar}}
-           </div>
-       </nav>
-       <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div id="navbar">
-                {{> LeftMenu}}
-                {{> PublicLayoutRightMenu}}
             </div>
-        </div>
-    </nav>
-</div>
+        </nav>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div id="navbar">
+                    {{> LeftMenu}}
+                    {{> PublicLayoutRightMenu}}
+                </div>
+            </div>
+        </nav>
+    </div>
 </template>
 
 <template name="LeftMenu">
     <ul id="nav-items" class="nav navbar-nav">
         {{#if hasPublishers}}
         <li id="nav-item-dropdown" class="dropdown navbar-left-button {{menuItemClass 'publishers'}}">
-        <a href="/publishers" class="dropdown-toggle">
+            <a href="/publishers" class="dropdown-toggle">
                 {{_ "Publishers"}}
                 <b class="caret">
                 </b>
@@ -58,12 +58,14 @@
             </a>
         </li>
         <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'collections'}}">
-            <a href="{{pathFor 'collections'}}">
+            <!-- <a href="{{pathFor 'collections'}}"> -->
+            <a href="#" >
                 {{_ "Collections"}}
             </a>
         </li>
         <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'author'}}">
-            <a href="{{pathFor 'author'}}">
+            <!-- <a href="{{pathFor 'author'}}"> -->
+            <a href="#" >
                 {{_ "Author"}}
             </a>
         </li>
@@ -78,7 +80,7 @@
             </a>
         </li>
         <li id="menu-item-simple-right" class="navbar-right-button">
-        <a href="#">
+            <a href="#">
                 <i class="fa fa-windows"></i> {{_ "Advanced Search"}}
             </a>
         </li>
