@@ -61,6 +61,9 @@ Template.FilterList.events({
 	'click .clearPublisher': function (event) {
 		Session.set('filterPublisher', undefined);
 	},
+	'click .onup': function(event){
+		$(event.target).next("ul").toggle();
+	}
 });
 Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
