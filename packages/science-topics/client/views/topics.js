@@ -82,3 +82,5 @@ AutoForm.addHooks(['addSubTopicModalForm'], {
         }
     }
 }, true);
+
+Meteor.isClient
