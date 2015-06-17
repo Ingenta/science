@@ -4,7 +4,8 @@ Router.configure({
 	layoutTemplate: "layout",
 	notFoundTemplate: "notFound",
 	loadingTemplate: "loading",
-	progressDelay : 100
+	progressDelay : 100,
+	progressSpinner : false
 });
 
 Meteor.subscribe("current_user_data");
