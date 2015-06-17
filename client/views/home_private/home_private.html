@@ -47,20 +47,17 @@
 
 <template name="SingleNews">
     <div class="row index" index="{{index}}">
-        <div class="pull-left">
+        <div class="pull-right">
             {{#if isAdmin }}
             {{> updateNewsModalForm}}
-            <!-- {{#if hasNews _id}}
-            {{> deleteNewsModalForm}}
-            {{/if}} -->
             {{/if}}
         </div>
         <div class="row">
             <h5><a href={{url}}>{{title}}</a></h5>
         </div>
-        <p>
+        <small>
             {{description}}
-        </p>
+        </small>
     </div>
     <!-- <hr> -->
 </template>
