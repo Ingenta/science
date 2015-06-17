@@ -45,9 +45,9 @@
         <div class="pull-right">
           {{#if isAdmin }}
           {{> updatePublisherModalForm}}
-          {{#if hasPublisher _id}}
+          {{#unless hasNoJournals _id}}
           {{> deletePublisherModalForm}}
-          {{/if}}
+          {{/unless}}
           {{/if}}
         </div>
         <h3>

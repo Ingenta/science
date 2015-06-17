@@ -254,7 +254,8 @@ Router.map(function () {
 		waitOn: function () {
 			return [
 			Meteor.subscribe('images'),
-			Meteor.subscribe('publishers')
+			Meteor.subscribe('publishers'),
+			Meteor.subscribe('publications')
 			]
 		}
 	});
