@@ -57,7 +57,11 @@
         </h3>
       </div>
       <div class="row">
-        {{description}}
+          {{#if i18n_isCurrentLanguage 'en'}}
+          {{description}}
+          {{else}}
+          {{chinesedescription}}
+          {{/if}}
       </div>
     </div>
   </div>
