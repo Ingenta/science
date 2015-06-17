@@ -26,7 +26,6 @@ aldeed:collection2
 mrt:flash-messages
 gwendall:autoform-i18n
 yogiben:autoform-modals
-gwendall:simple-schema-i18n
 monbro:iron-router-breadcrumb
 ongoworks:security
 cfs:filesystem
@@ -41,3 +40,4 @@ rzymek:moment-locale-zh-cn
 monbro:mongodb-mapreduce-aggregation
 multiply:iron-router-progress
 test:paginator
+arthuryyx:simple-schema-i18n
