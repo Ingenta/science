@@ -235,8 +235,11 @@ Router.map(function () {
 	this.route('/publisher/:publisherName', {
 		data: function(){
 			var pub = Publishers.findOne({name: this.params.publisherName});
-			Session.set('currentPublisher',pub._id);
-			return pub;
+			if(pub){
+				Session.set('currentPublisher',pub._id);
+				return pub;
+			}
+
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
@@ -250,10 +253,13 @@ Router.map(function () {
 
 	this.route('/publisher/:publisherName/journal/:journalTitle', {
 		data: function(){
+			var pub = Publishers.findOne({name: this.params.publisherName});
 			var journal = Publications.findOne({title: this.params.journalTitle});
-			Session.set('currPublication',journal._id);
-			Session.set('currentPublisher',Publishers.findOne({name: this.params.publisherName})._id);
-			return journal;
+			if(journal){
+				Session.set('currPublication',journal._id);
+				Session.set('currentPublisher',pub._id);
+				return journal;
+			}
 		},
 		template: "ShowJournal",
 		title: ":journalTitle",
@@ -263,9 +269,13 @@ Router.map(function () {
 
 	this.route('/publisher/:publisherName/journal/:journalTitle/article/:articleName', {
 		data: function(){
-			Session.set('currPublication',Publications.findOne({title: this.params.journalTitle})._id);
-			Session.set('currentPublisher',Publishers.findOne({name: this.params.publisherName})._id);
-			return Articles.findOne({title: this.params.articleName});
+			var pub = Publishers.findOne({name: this.params.publisherName});
+			var journal = Publications.findOne({title: this.params.journalTitle});
+			if(pub){
+				Session.set('currPublication',pub._id);
+				Session.set('currentPublisher',journal._id);
+				return Articles.findOne({title: this.params.articleName});
+			}
 		},
 		template: "showArticle",
 		title: ":articleName",
