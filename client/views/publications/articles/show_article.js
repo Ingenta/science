@@ -6,9 +6,6 @@ Template.articleOptions.helpers({
     context: function () {
         var currentTitle = Router.current().params.articleName;
         return Articles.findOne({title: currentTitle});
-    },
-    setCurrentPublication: function (id) {
-        Session.set('currPublication', id);
     }
 });
 

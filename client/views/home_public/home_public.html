@@ -1,15 +1,11 @@
 <template name="HomePublic">
-	<div class="container-fluid" id="content">
-		<div class="row" id="title_row">
-			<div class="col-xs-12">
-				<div id="page_menu" class="pull-right">
-				</div>
-			</div>
-		</div>
-		{{> HomePublicHomeJumbotron}}
-		<br/>
-		{{> HomePublicContent}}
-	</div>
+    <div class="container-fluid" id="content">
+        <hr>
+        {{> addNewsForm}}
+        {{> NewsList}}
+        <br/>
+        {{> HomePublicContent}}
+    </div>
 </template>
 
 <template name="HomePublicHomeJumbotron">
