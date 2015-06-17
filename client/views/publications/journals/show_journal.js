@@ -15,17 +15,28 @@ Template.journalOptions.helpers({
 });
 Template.journalOptions.helpers({
     tabs: function () {
-        var tabList = [
-            { name: TAPi18n.__("Browse"), slug: 'browse' }
-        ];
-//            { name: TAPi18n.__("Overview"), slug: 'overview' },
-//            { name: TAPi18n.__("Browse"), slug: 'browse' },
-//            { name: TAPi18n.__("About"), slug: 'about' }
+        var tabList = [];
+//            { name: TAPi18n.__("Overview"), slug: 'Overview' },
+//            { name: TAPi18n.__("Browse"), slug: 'Browse' },
+//            { name: TAPi18n.__("About"), slug: 'About' }
         var currentTitle = Router.current().params.journalTitle;
         var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {
-            tabList.push({ name: TAPi18n.__(t), slug: t });
+//            tabList.push({ name: TAPi18n.__(t), slug: t });
+            if(t==="Overview"){
+                tabList.push({ name: TAPi18n.__("Overview"), slug: 'Overview' });
+                tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
+            } else if(tabList.length==0){
+                tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
+                tabList.push({ name: TAPi18n.__("About"), slug: 'About' });
+            } else{
+                tabList.push({ name: TAPi18n.__("About"), slug: 'About' });
+            }
         });
+        if(tabList.length==0){
+            tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
+        }
+
         return tabList;
     },
     activeTab: function () {
