@@ -50,25 +50,23 @@
 </template>
 
 <template name="updateTopicModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Topics" doc=_id operation="update"
-    omitFields="parentId"}}
+    {{#afModal class="fa fa-pencil" collection="Topics" doc=_id operation="update" omitFields="parentId" buttonContent=getUpdateButtonContent title=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="deleteTopicModalForm">
-    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=_id prompt=getPrompt}}
+    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent title=getDeleteButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="addTopicModalForm">
-    {{#afModal class="btn btn-success" collection="Topics" operation="insert" omitFields="parentId"}}
+    {{#afModal class="btn btn-success" collection="Topics" operation="insert" omitFields="parentId" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
     {{_ "Add new"}}
     {{/afModal}}
 </template>
 
 <template name="addSubTopicModalForm">
-    {{#afModal formId="addSubTopicModalForm" class="fa fa-plus" collection="Topics" operation="insert"
-    omitFields="parentId"}}
+    {{#afModal formId="addSubTopicModalForm" class="fa fa-plus" collection="Topics" operation="insert" omitFields="parentId" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
     {{/afModal}}
 </template>
 
