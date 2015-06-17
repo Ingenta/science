@@ -4,34 +4,10 @@ Router.configure({
 	layoutTemplate: "layout",
 	notFoundTemplate: "notFound",
 	loadingTemplate: "loading",
-	progressDelay : 100,
-	waitOn: function () {
-		return [
-		 Meteor.subscribe('images'),
-		 Meteor.subscribe('publishers'),
-		// Meteor.subscribe('publications'),
-		// Meteor.subscribe('topics'),
-		// Meteor.subscribe('articles'),
-		// Meteor.subscribe('issues'),
-		// Meteor.subscribe('volumes'),
-		// Meteor.subscribe('about_articles'),
-		// Meteor.subscribe('about'),
-		// Meteor.subscribe("current_user_data")
-		]
-	}
+	progressDelay : 100
 });
 
 Meteor.subscribe("current_user_data");
-
-Meteor.subscribe("publishers");
-
-Meteor.subscribe("publications");
-
-Meteor.subscribe("topics");
-
-Meteor.subscribe("images");
-
-Meteor.subscribe("articles");
 
 Meteor.subscribe("issues");
 
@@ -41,7 +17,6 @@ Meteor.subscribe("volumes");
 
 Meteor.subscribe("about_articles");
 
-Meteor.subscribe("news");
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
 var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
@@ -170,6 +145,25 @@ Router.map(function () {
 		controller: "HomePublicController",
 		title: function () {
 			return TAPi18n.__("Home");
+		},
+		waitOn: function () {
+			return [
+			Meteor.subscribe('images'),
+			Meteor.subscribe('news')
+			]
+		}
+	});
+	this.route("home_private", {
+		path: "/home_private",
+		controller: "HomePrivateController",
+		title: function () {
+			return TAPi18n.__("Home");
+		},
+		waitOn: function () {
+			return [
+			Meteor.subscribe('images'),
+			Meteor.subscribe('news')
+			]
 		}
 	});
 	this.route("login", {
@@ -192,13 +186,25 @@ Router.map(function () {
 		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Topics");
+		},
+		waitOn: function () {
+			return [
+			Meteor.subscribe('topics')
+			]
 		}
 	});
 
 	this.route('/topic/:topicQuery', {
 		template: "SearchResults",
 		parent: "topics",
-		title: ":topicQuery"
+		title: ":topicQuery",
+		waitOn: function () {
+			return [
+			Meteor.subscribe('publishers'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('articles')
+			]
+		}
 	});
 
 	this.route("author",{
@@ -211,7 +217,14 @@ Router.map(function () {
 	this.route('/author/:authorQuery', {
 		template: "SearchResults",
 		parent: "home_private",
-		title: ":authorQuery"
+		title: ":authorQuery",
+		waitOn: function () {
+			return [
+			Meteor.subscribe('publishers'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('articles')
+			]
+		}
 	});
 
 	this.route("collections",{
@@ -226,13 +239,23 @@ Router.map(function () {
 			return TAPi18n.__("Publications");
 		},
 		waitOn: function () {
-			return Meteor.subscribe('publishers');
+			return [
+			Meteor.subscribe('images'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('publishers')
+			]
 		}
 	});
 	this.route("publishers", {
 		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Publishers");
+		},
+		waitOn: function () {
+			return [
+			Meteor.subscribe('images'),
+			Meteor.subscribe('publishers')
+			]
 		}
 	});
 
@@ -241,6 +264,13 @@ Router.map(function () {
 		parent: "home_private",
 		title: function () {
 			return TAPi18n.__("Search");
+		},
+		waitOn: function () {
+			return [
+			Meteor.subscribe('publishers'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('articles')
+			]
 		}
 	});
 
@@ -261,7 +291,14 @@ Router.map(function () {
 			var id =Session.get('currentPublisher');
 			return Publishers.findOne({_id:id}).chinesename;
 		},
-		name: "publisher.name"
+		name: "publisher.name",
+		waitOn: function () {
+			return [
+			Meteor.subscribe('images'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('publishers')
+			]
+		}
 	});
 
 	this.route('/publisher/:publisherName/journal/:journalTitle', {
@@ -282,7 +319,10 @@ Router.map(function () {
 			return [
 			Meteor.subscribe('images'),
 			Meteor.subscribe('publishers'),
-			Meteor.subscribe('publications')
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('articles'),
+			Meteor.subscribe('about'),
+			Meteor.subscribe('about_articles')
 			]
 		}
 
@@ -300,7 +340,15 @@ Router.map(function () {
 		},
 		template: "showArticle",
 		title: ":articleName",
-		parent: "journal.name"
+		parent: "journal.name",
+		waitOn: function () {
+			return [
+			Meteor.subscribe('images'),
+			Meteor.subscribe('publishers'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('articles')
+			]
+		}
 	});
 
 	this.route("forgot_password", {
@@ -319,13 +367,7 @@ Router.map(function () {
 			return TAPi18n.__("Reset password");
 		}
 	});
-	this.route("home_private", {
-		path: "/home_private",
-		controller: "HomePrivateController",
-		title: function () {
-			return TAPi18n.__("Home");
-		}
-	});
+
 	this.route("admin", {
 		path: "/admin",
 		controller: "AdminController",
