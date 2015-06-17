@@ -10,6 +10,12 @@ Template.deletePublisherModalForm.helpers({
   }
 });
 
+Template.updatePublisherModalForm.helpers({
+  getTitle: function () {
+    return TAPi18n.__("Update");
+  }
+});
+
 Template.SinglePublisher.helpers({
     hasPublisher: function (id) {
         return  Publications.find({"publisher": id}).count()===0;

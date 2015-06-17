@@ -10,6 +10,16 @@ Template.imageName.helpers({
   }
 });
 
+Template.updatePublicationModalForm.helpers({
+  getTitle: function () {
+    return TAPi18n.__("Update");
+  }
+});
+Template.deletePublicationModalForm.helpers({
+  getPrompt: function () {
+    return TAPi18n.__("Are you sure?");
+  }
+});
 
 
 Template.SinglePublication.helpers({

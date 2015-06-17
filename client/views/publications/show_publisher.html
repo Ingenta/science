@@ -84,17 +84,13 @@
   <hr>
 </template>
 
-<!-- <template name="addPublicationModalForm">
-  {{#afModal formId="addPublicationForm" class="fa fa-plus btn btn-success" collection="Publications"  operation="insert" omitFields="publisher"}}
-  {{_ "Add new"}}
-  {{/afModal}}
-</template> -->
+
 <template name="updatePublicationModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update" omitFields="publisher"}}
+  {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher"}}
   {{/afModal}}
 </template>
 <template name="deletePublicationModalForm">
-  {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id}}
+  {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id prompt=getPrompt}}
   {{/afModal}}
 </template>
 <template name="imageName">

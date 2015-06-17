@@ -67,13 +67,10 @@
   </div>
   <hr>
 </template>
-<!-- <template name="addPublisherModalForm">
-  {{#afModal class="fa fa-plus btn btn-success" collection="Publishers"  operation="insert"}}
-  {{_ "Add new"}}
-  {{/afModal}}
-</template> -->
+
+
 <template name="updatePublisherModalForm">
-  {{#afModal class="fa fa-pencil" title="Update" collection="Publishers" doc=_id operation="update"}}
+  {{#afModal class="fa fa-pencil" title=getTitle collection="Publishers" doc=_id operation="update"}}
   {{/afModal}}
 </template>
 <template name="deletePublisherModalForm">
