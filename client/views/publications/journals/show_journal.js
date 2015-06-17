@@ -15,20 +15,22 @@ Template.journalOptions.helpers({
 });
 Template.journalOptions.helpers({
     tabs: function () {
-        var tabList =[];
+        var tabList = [
+            { name: TAPi18n.__("Browse"), slug: 'browse' }
+        ];
 //            { name: TAPi18n.__("Overview"), slug: 'overview' },
 //            { name: TAPi18n.__("Browse"), slug: 'browse' },
 //            { name: TAPi18n.__("About"), slug: 'about' }
-var currentTitle = Router.current().params.journalTitle;
-var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
-_.each(journalTabSelections, function (t) {
-    tabList.push({ name: TAPi18n.__(t), slug: t });
-});
-return tabList;
-},
-activeTab: function () {
-    return Session.get('activeTab');
-}
+        var currentTitle = Router.current().params.journalTitle;
+        var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
+        _.each(journalTabSelections, function (t) {
+            tabList.push({ name: TAPi18n.__(t), slug: t });
+        });
+        return tabList;
+    },
+    activeTab: function () {
+        return Session.get('activeTab');
+    }
 });
 
 AutoForm.addHooks(['addAboutTitleModalForm'], {
@@ -51,18 +53,18 @@ Template.AboutTitle.helpers({
 });
 
 Template.AboutTitle.events({
-	'click .activeButton': function (event) {
-		var aboutValue = $(event.target).data().aboutid;
-		Session.set('tabAbout', aboutValue);
-	}
+    'click .activeButton': function (event) {
+        var aboutValue = $(event.target).data().aboutid;
+        Session.set('tabAbout', aboutValue);
+    }
 });
 
 AutoForm.addHooks(['addAboutArticlesModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
     },
-    before:{
-        insert:  function(doc){
+    before: {
+        insert: function (doc) {
             doc.about = Session.get('tabAbout');
             return doc;
         }
@@ -70,12 +72,12 @@ AutoForm.addHooks(['addAboutArticlesModalForm'], {
 }, true);
 
 Template.aboutArticlesList.helpers({
-  about: function () {
-   var aboutId = Session.get('tabAbout');
-   return About.find({_id:aboutId});
-},
-aboutarticle: function () {
-	var aboutId = Session.get('tabAbout');
-    return AboutArticles.find({about:aboutId});
-}
+    about: function () {
+        var aboutId = Session.get('tabAbout');
+        return About.find({_id: aboutId});
+    },
+    aboutarticle: function () {
+        var aboutId = Session.get('tabAbout');
+        return AboutArticles.find({about: aboutId});
+    }
 });
