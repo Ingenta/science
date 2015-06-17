@@ -52,14 +52,13 @@
             {{> updateNewsModalForm}}
             {{/if}}
         </div>
-        <div class="row">
+        <div class="container-fluid">
             <h5><a href={{url}}>{{title}}</a></h5>
+            <small>
+                {{description}}
+            </small>
         </div>
-        <small>
-            {{description}}
-        </small>
     </div>
-    <!-- <hr> -->
 </template>
 
 <template name="updateNewsModalForm">
@@ -73,12 +72,12 @@
 
 <template name="addNewsForm">
     <div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="addNewsModalLabel">{{_ "Add new"}}</h4>
                 </div>
                 {{#autoForm id="addNewsModalForm" collection="News" type="insert"}}
