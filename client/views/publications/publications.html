@@ -11,6 +11,47 @@
    <div class="row">
     <p>{{_ "Introductory text"}}</p>
   </div>
+  {{> PublicationsAlphabetBar}}
+  <div class="row">
+    <div id="menu" class="col-xs-3">
+     <ul class="list-unstyled">
+      <h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
+      {{#if selectedPublisher}}
+      <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+      {{#each publishers}}
+      <li style="color: #CCC;">
+       {{> onePublisherInFilterList}}
+     </li>
+     {{/each}}
+     {{else}}
+     {{#each publishers}}
+     <li>
+      <a class="filterButton" data-pubid="{{_id}}">
+       {{> onePublisherInFilterList}}
+     </a>
+   </li>
+   {{/each}}
+   {{/if}}
+ </ul>
+</div>
+<div id="subcontent" class="col-xs-9">
+  <div class="container-fluid">
+    <div class="row" style="margin-top: 20px;">
+     {{#each publications}}
+     {{> onePublication}}
+     {{else}}
+     {{_"No publications found!"}}
+     {{/each}}
+     {{> Paginator_UI publications}}
+     <br>
+   </div>
+ </div>
+</div>
+</div>
+</div>
+</template>
+
+<template name="PublicationsAlphabetBar">
   <div class="row bg-eee">
     <div class="col-xs-3">
       {{#if isChinese languageTag}}
@@ -20,65 +61,38 @@
       {{/if}}
     </div>
     <div class="pull-right">
+      <a class="resetAlphabetFilter">{{_"All"}}</a>&nbsp;
       {{#each letterInTheAlphabet}}
       <a class="numberButton">{{this}}</a>&nbsp;
       {{/each}}
     </div>
     <br>
   </div>
-  <div class="row">
-    <div id="menu" class="col-xs-3">
-     <ul class="list-unstyled">
-      <h3 class="text-uppercase" style="border-bottom: 2px solid #d7d7d7;border-top: 2px solid #d7d7d7;font-size: 12px;font-weight: bold;padding: 2px 0;width: 140px;">{{_ "FILTER BY Publisher"}}:</h3>
-      {{#unless selectedPublisher}}
-      {{#each publishers}}
-      <li><a class="filterButton" data-pubid="{{_id}}">
+</template>
 
-        {{translateThis chinesename name}}
+<template name="onePublisherInFilterList">
+ {{translateThis chinesename name}} ({{count _id}})
+</template>
 
-        &nbsp;&nbsp;({{count _id}})</a></li>
-        {{else}}
-        {{_"No publishers found!"}}
-        {{/each}}
-        {{/unless}}
-        {{#if selectedPublisher}}
-
-        <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
-        {{#each publishers}}
-        <li style="color: #CCC;">
-          {{translateThis chinesename name}}
-          &nbsp;&nbsp;({{count _id}})</li>
-          {{/each}}
-          {{/if}}
-        </ul>
-      </div>
-      <div id="subcontent" class="col-xs-9">
-        <div class="container-fluid">
-          <div class="row" style="margin-top: 20px;">
-           {{#each publications}}
-           <div class="col-xs-2">
-            <img src="{{getImageHelper picture}}" width="58" height="82"/>
-          </div>
-          <div class="col-xs-10">
-            <a href="{{getUrlToJournal publisher title}}">
-              <p>{{> imageName}}&nbsp;
-                {{title}}
-              </p>
-              <p>{{_ "Browse journal"}}</p>
-            </a>
-            <a href="#" class="onup"><b class="caret"></b>{{_ "Details"}}</a>
-            <ul class="list-unstyled detail-ul">
-              <li>{{description}}</li>
-            </ul>
-          </div>
-          {{else}}
-          {{_"No publications found!"}}
-          {{/each}}
-          {{> Paginator_UI publications}}
-          <br>
-        </div>
-      </div>
+<template name="onePublication">
+  <div class="row dotted-publication-item">
+    <div class="col-xs-2">
+      <img src="{{getImageHelper picture}}" width="58" height="82"/>
+    </div>
+    <div class="col-xs-10">
+      <ul class="list-unstyled">
+        <li>
+          <a href="{{getUrlToJournal publisher title}}">
+            {{> imageName}} {{title}}
+          </a>
+        </li>
+      </ul>
+      {{#if description}}
+      <a href="#" class="onup"><b class="caret"></b>{{_ "Details"}}</a>
+      <ul class="list-unstyled detail-ul">
+        <li>{{description}}</li>
+      </ul>
+      {{/if}}
     </div>
   </div>
-</div>
 </template>
