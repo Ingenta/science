@@ -10,11 +10,6 @@ Template.imageName.helpers({
   }
 });
 
-Template.ShowPublisher.helpers({
-  setCurrentPublisher: function (id) {
-    Session.set('currentPublisher', id);
-  }
-});
 
 
 Template.SinglePublication.helpers({

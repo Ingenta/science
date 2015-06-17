@@ -226,13 +226,17 @@ Router.map(function () {
 	this.route('/s/:searchQuery', {
 		template: "SearchResults",
 		parent: "home_private",
-		title: "Search"
+		title: function () {
+			return TAPi18n.__("Search");
+		}
 	});
 
 
 	this.route('/publisher/:publisherName', {
 		data: function(){
-			return Publishers.findOne({name: this.params.publisherName});
+			var pub = Publishers.findOne({name: this.params.publisherName});
+			Session.set('currentPublisher',pub._id);
+			return pub;
 		},
 		template: "ShowPublisher",
 		parent: "publishers",
@@ -246,7 +250,10 @@ Router.map(function () {
 
 	this.route('/publisher/:publisherName/journal/:journalTitle', {
 		data: function(){
-			return Publications.findOne({title: this.params.journalTitle});
+			var journal = Publications.findOne({title: this.params.journalTitle});
+			Session.set('currPublication',journal._id);
+			Session.set('currentPublisher',Publishers.findOne({name: this.params.publisherName})._id);
+			return journal;
 		},
 		template: "ShowJournal",
 		title: ":journalTitle",
@@ -256,6 +263,8 @@ Router.map(function () {
 
 	this.route('/publisher/:publisherName/journal/:journalTitle/article/:articleName', {
 		data: function(){
+			Session.set('currPublication',Publications.findOne({title: this.params.journalTitle})._id);
+			Session.set('currentPublisher',Publishers.findOne({name: this.params.publisherName})._id);
 			return Articles.findOne({title: this.params.articleName});
 		},
 		template: "showArticle",
@@ -265,11 +274,19 @@ Router.map(function () {
 
 	this.route("forgot_password", {
 		path: "/forgot_password",
-		controller: "ForgotPasswordController"
+		controller: "ForgotPasswordController",
+		parent: "home_private",
+		title: function () {
+			return TAPi18n.__("Forgot password");
+		}
 	});
 	this.route("reset_password", {
 		path: "/reset_password/:resetPasswordToken",
-		controller: "ResetPasswordController"
+		controller: "ResetPasswordController",
+		parent: "home_private",
+		title: function () {
+			return TAPi18n.__("Reset password");
+		}
 	});
 	this.route("home_private", {
 		path: "/home_private",

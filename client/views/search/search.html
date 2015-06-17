@@ -1,13 +1,12 @@
 <template name="SearchBar">
-    <form class="navbar-form pull-right" role="search" name="search">
+    <div class="navbar-form pull-right" role="search" name="search">
        <div class="input-group">
            <input id="searchInput" type="text" class="form-control" placeholder='{{_ "Search"}}'>
            <span class="input-group-btn">
-               <button class="btn btn-primary" type="button"><i class="fa fa-search"></i>
-               </button>
+               <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
            </span>
        </div>
-   </form>
+   </div>
 </template>
 
 <template name="SearchResults">
@@ -17,11 +16,11 @@
                 {{/each}}
             </div>
             <div class="col-xs-8">
-                <h4>搜索文章查看：</h4>
+                <h4>{{_ "Search results"}}</h4>
                 {{#each results}}
                   {{> oneArticle}}
                 {{else}}
-                No results found!
+                {{_ "No results found!"}}
                 {{/each}}
             </div>
 </template>
