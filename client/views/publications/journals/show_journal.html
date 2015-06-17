@@ -124,26 +124,22 @@
 </template>
 
 <template name="updatePublicationDescriptionModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"
-    fields="description"}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="description" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="updatePublicationPictureModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"
-    fields="picture"}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="picture" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="updatePublicationBannerModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"
-    fields="banner"}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="banner" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="updateJournalTabsModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="Publications" doc=_id operation="update"
-    fields="tabSelections"}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="tabSelections" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 
@@ -195,7 +191,7 @@
 </template>
 
 <template name="updateAboutTitleModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="About" doc=_id operation="update"
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update"
     omitFields="publications"}}
     {{/afModal}}
 </template>
@@ -213,7 +209,7 @@
 </template>
 
 <template name="updateAboutArticlesModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="AboutArticles" doc=_id operation="update"
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AboutArticles" doc=_id operation="update"
     omitFields="about"}}
     {{/afModal}}
 </template>

@@ -15,7 +15,17 @@ Template.registerHelper('translateThis', function(chinese,english){
     return english;
 });
 
+Template.registerHelper('getCreateButtonContent', function(){
+    return TAPi18n.__("Create");
+});
 
+Template.registerHelper('getUpdateButtonContent', function(){
+    return TAPi18n.__("Update");
+});
+
+Template.registerHelper('getDeleteButtonContent', function(){
+    return TAPi18n.__("Delete");
+});
 
 pluralize = function(n, thing, options) {
   var plural = thing;
