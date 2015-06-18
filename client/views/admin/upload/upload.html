@@ -1,11 +1,12 @@
 <template name="AdminUpload">
-    <div class="container-fluid" id="content">
-        <div class="row" id="title_row">
-            <div class="col-xs-12">
-                <div id="page_menu" class="pull-right">
-                </div>
-            </div>
-        </div>
-        test
-    </div>
+    {{> uploadForm}}
+    {{#each uploadHistory}}
+    <a href="{{this.url}}">{{name}}</a>
+    {{/each}}
+</template>
+
+<template name="uploadForm">
+  <form method="post">
+    <input type="file" class="myFileInput" multiple />
+</form>
 </template>
