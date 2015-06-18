@@ -386,6 +386,14 @@ Router.map(function () {
 		path: "/admin/roles/insert",
 		controller: "AdminRolesInsertController"
 	});
+	this.route("admin.upload", {
+		path: "/admin/upload",
+		title: function () {
+			return TAPi18n.__("Upload");
+		},
+		parent: "admin"
+	});
+
 	this.route("admin.users", {
 		path: "/admin/users",
 		controller: "AdminUsersController",
