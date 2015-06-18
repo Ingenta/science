@@ -27,6 +27,8 @@
     <ul class="article-list list-unstyled">
         {{#each articles}}
                   {{>oneArticle}}
+                  {{else}}
+                  {{_ "No articles found!"}}
         {{/each}}
     </ul>
 </template>

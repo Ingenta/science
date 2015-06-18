@@ -86,11 +86,11 @@
 
 
 <template name="updatePublicationModalForm">
-  {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher"}}
+  {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher" buttonContent=getUpdateButtonContent}}
   {{/afModal}}
 </template>
 <template name="deletePublicationModalForm">
-  {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id prompt=getPrompt}}
+  {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
   {{/afModal}}
 </template>
 <template name="imageName">

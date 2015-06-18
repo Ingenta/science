@@ -17,8 +17,8 @@ Template.updatePublisherModalForm.helpers({
 });
 
 Template.SinglePublisher.helpers({
-    hasPublisher: function (id) {
-        return  Publications.find({"publisher": id}).count()===0;
+    hasNoJournals: function (id) {
+        return  Publications.find({"publisher": id}).count() !== 0;
     }
 });
 

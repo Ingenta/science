@@ -1,0 +1,44 @@
+<template name="AdminUpload">
+    {{> uploadForm}}
+
+    <table id="dataview-table" class="table table-striped table-hover">
+        <thead id="dataview-table-header">
+            <tr id="dataview-table-header-row">
+                <th>
+                    {{_ "Name"}}
+                </th>
+                <th>
+                    {{_ "Date"}}
+                </th>
+                <th>
+                    {{_ "Status"}}
+                </th>
+            </tr>
+        </thead>
+        <tbody id="dataview-table-items">
+            {{#each uploadHistory}}
+            {{> uploadTableRow}}
+            {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="uploadForm">
+  <form method="post">
+    <input type="file" class="myFileInput" multiple />
+</form>
+</template>
+
+<template name="uploadTableRow">
+    <tr id="dataview-table-items-row">
+        <td>
+            <a href="{{this.url}}">{{name}}</a>
+        </td>
+        <td>
+            {{uploadedAt}}
+        </td>
+        <td>
+            {{_ "Pending"}}
+        </td>
+    </tr>
+</template>

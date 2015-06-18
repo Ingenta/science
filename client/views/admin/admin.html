@@ -11,12 +11,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="menu" class="col-xs-3">
+			<div id="menu" class="col-xs-2">
 				<h2>
 				</h2>
 				{{> AdminSideMenu}}
 			</div>
-			<div id="subcontent" class="col-xs-9">
+			<div id="subcontent" class="col-xs-10">
 				{{> yield region='AdminSubcontent'}}
 			</div>
 		</div>
@@ -29,7 +29,13 @@
 			<a href="{{pathFor 'admin.users'}}">
 				{{_ "Users"}}
 			</a>
-		</li><!--
+		</li>
+		<li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
+			<a href="{{pathFor 'admin.upload'}}">
+				{{_ "Upload"}}
+			</a>
+		</li>
+		<!--
 		<li id="menu-item-simple" class="{{menuItemClass 'admin.roles'}}">
 			<a href="{{pathFor 'admin.roles'}}">
 				{{_ "Roles"}}

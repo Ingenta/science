@@ -33,7 +33,7 @@ Template.SearchResults.helpers({
     },
     'filters':function(){
         return [{
-            filterTitle:'按出版商过滤浏览',
+            filterTitle:TAPi18n.__("FILTER BY Publisher"),
             filterOptions:[{
                 name:'科学出版社',
                 count:'121'
@@ -45,7 +45,7 @@ Template.SearchResults.helpers({
                 count:'141'
             }]
         },{
-            filterTitle:'按出版物过滤浏览',
+            filterTitle:TAPi18n.__("FILTER BY Publications"),
             filterOptions:[{
                 name:'《科学出版社》',
                 count:'21'
@@ -57,7 +57,7 @@ Template.SearchResults.helpers({
                 count:'151'
             }]
         },{
-            filterTitle:'按内容属性过滤浏览',
+            filterTitle:TAPi18n.__("FILTER BY Content Properties"),
             filterOptions:[{
                 name:'论文',
                 count:'121'
@@ -69,7 +69,7 @@ Template.SearchResults.helpers({
                 count:'141'
             }]
         },{
-            filterTitle:'按作者过滤浏览',
+            filterTitle:TAPi18n.__("FILTER BY Author"),
             filterOptions:[{
                 name:'谢和平',
                 count:'121'
@@ -81,7 +81,7 @@ Template.SearchResults.helpers({
                 count:'141'
             }]
         },{
-            filterTitle:'按出版日期过滤浏览',
+            filterTitle:TAPi18n.__("FILTER BY Release Data"),
             filterOptions:[{
                 name:'2014年',
                 count:'121'
