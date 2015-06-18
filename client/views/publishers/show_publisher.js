@@ -1,6 +1,6 @@
 Template.PublicationList.helpers({
   publications: function () {
-    return Publications.find({publisher:this._id});
+    return myPubPagination.find({publisher:this._id}, {itemsPerPage:10});
   }
 });
 
