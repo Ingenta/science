@@ -16,8 +16,29 @@ Template.uploadForm.events({
     }
 });
 
+Template.uploadTableRow.events({
+  'click .status' : function(event) {
+     // $(event.target).attr('id'),
+     console.log("test");
+     $('#UploadModal').modal('show')  
+  }
+});
+
 Template.AdminUpload.helpers({
     uploadHistory: function () {
         return UploadLog.find();
     }
 });
+
+AutoForm.addHooks(['ModalForm'], {
+  onSuccess: function () {
+    $("#Modal").modal('hide');
+    FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
+  }
+}, true);
+
+AutoForm.addHooks(['cmForm'], {
+  onSuccess: function () {
+    FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
+  }
+}, true);
