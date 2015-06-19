@@ -1,9 +1,9 @@
-this.UserSettingsProfileController = RouteController.extend({
+this.UserSettingsUpdateInformationController = RouteController.extend({
 	template: "UserSettings",
 	
 
 	yieldTemplates: {
-		'UserSettingsProfile': { to: 'UserSettingsSubcontent'}
+		'UserSettingsUpdateInformation': { to: 'UserSettingsSubcontent'}
 		
 	},
 

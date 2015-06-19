@@ -1,22 +1,22 @@
 var pageSession = new ReactiveDict();
 
-Template.UserSettingsProfile.rendered = function() {
+Template.UserSettingsUpdateInformation.rendered = function() {
 	
 };
 
-Template.UserSettingsProfile.events({
+Template.UserSettingsUpdateInformation.events({
 	
 });
 
-Template.UserSettingsProfile.helpers({
+Template.UserSettingsUpdateInformation.helpers({
 	
 });
 
-Template.UserSettingsProfileEditForm.rendered = function() {
+Template.UserSettingsUpdateInformationForm.rendered = function() {
 	
 
-	pageSession.set("userSettingsProfileEditFormInfoMessage", "");
-	pageSession.set("userSettingsProfileEditFormErrorMessage", "");
+	pageSession.set("userSettingsUpdateInformationFormInfoMessage", "");
+	pageSession.set("userSettingsUpdateInformationFormErrorMessage", "");
 
 	$(".input-group.date").each(function() {
 		var format = $(this).find("input[type='text']").attr("data-format");
@@ -41,11 +41,11 @@ Template.UserSettingsProfileEditForm.rendered = function() {
 	$("input[autofocus]").focus();
 };
 
-Template.UserSettingsProfileEditForm.events({
+Template.UserSettingsUpdateInformationForm.events({
 	"submit": function(e, t) {
 		e.preventDefault();
-		pageSession.set("userSettingsProfileEditFormInfoMessage", "");
-		pageSession.set("userSettingsProfileEditFormErrorMessage", "");
+		pageSession.set("userSettingsUpdateInformationFormInfoMessage", "");
+		pageSession.set("userSettingsUpdateInformationFormErrorMessage", "");
 		
 		var self = this;
 
@@ -59,7 +59,7 @@ Template.UserSettingsProfileEditForm.events({
 
 					case "update": {
 						var message = msg || "Saved.";
-						pageSession.set("userSettingsProfileEditFormInfoMessage", message);
+						pageSession.set("userSettingsUpdateInformationFormInfoMessage", message);
 					}; break;
 				}
 			}
@@ -69,7 +69,7 @@ Template.UserSettingsProfileEditForm.events({
 
 		function errorAction(msg) {
 			var message = msg || "Error.";
-			pageSession.set("userSettingsProfileEditFormErrorMessage", message);
+			pageSession.set("userSettingsUpdateInformationFormErrorMessage", message);
 		}
 
 		validateForm(
@@ -110,12 +110,12 @@ Template.UserSettingsProfileEditForm.events({
 	
 });
 
-Template.UserSettingsProfileEditForm.helpers({
+Template.UserSettingsUpdateInformationForm.helpers({
 	"infoMessage": function() {
-		return pageSession.get("userSettingsProfileEditFormInfoMessage");
+		return pageSession.get("userSettingsUpdateInformationFormInfoMessage");
 	},
 	"errorMessage": function() {
-		return pageSession.get("userSettingsProfileEditFormErrorMessage");
+		return pageSession.get("userSettingsUpdateInformationFormErrorMessage");
 	}
 	
 });
