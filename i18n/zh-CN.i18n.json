@@ -1,4 +1,8 @@
 {
+    "Success": "成功",
+    "Failed": "失败",
+    "File type mismatch!": "文件格式不对！",
+
     "Date": "日期",
     "Status": "状态",
     "Pending": "未决定",
@@ -132,6 +136,7 @@
     "Sign up": "注册",
     "Already a member?": "注册过了吗?",
     "Sign in here": "登录",
+
     "schemas": {
         "publications": {
             "description": {
