@@ -9,20 +9,25 @@ Template.uploadForm.events({
                 status = "Failed";
                 errors.push("File type mismatch!")
             }
+            var fileId;
             ArticleXml.insert(file, function (err, fileObj) {
+                console.log("inside");
+                console.log(fileObj._id);
+                fileId = fileObj._id;
                 UploadLog.insert({fileId: fileObj._id, name: fileObj.name(), uploadedAt: new Date(), errors: errors, status: status});
             });
-
+            //need to wait here for upload to finish to get fileid so we can get the path
             //get url
             var path = ArticleXml.findOne().url();
             //call parse and put results in session
             Meteor.call('parseXml', path, function(error, result) {
-               if(error){
-                 console.log(error)
-             }else{
-                 console.log(result)
-             }
-         });
+             if(error){
+               console.log(error)
+           }else{
+                //add article object to session
+               console.log(result)
+           }
+       });
         });
     }
 });
