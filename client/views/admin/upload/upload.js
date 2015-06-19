@@ -12,6 +12,17 @@ Template.uploadForm.events({
             ArticleXml.insert(file, function (err, fileObj) {
                 UploadLog.insert({fileId: fileObj._id, name: fileObj.name(), uploadedAt: new Date(), errors: errors, status: status});
             });
+
+            //get url
+            var path = ArticleXml.findOne().url();
+            //call parse and put results in session
+            Meteor.call('parseXml', path, function(error, result) {
+               if(error){
+                 console.log(error)
+             }else{
+                 console.log(result)
+             }
+         });
         });
     }
 });
