@@ -16,7 +16,9 @@ Template.uploadForm.events({
                 fileId = fileObj._id;
                 UploadLog.insert({fileId: fileObj._id, name: fileObj.name(), uploadedAt: new Date(), errors: errors, status: status});
             });
+
             //need to wait here for upload to finish to get fileid so we can get the path
+
             //get url
             var path = ArticleXml.findOne().url();
             //call parse and put results in session
@@ -25,11 +27,12 @@ Template.uploadForm.events({
                console.log(error)
            }else{
                 //add article object to session
-               console.log(result)
-           }
-       });
+                console.log(result)
+                Session.set("title", result);
+            }
         });
-    }
+        });
+}
 });
 
 Template.AdminUpload.helpers({
@@ -37,3 +40,4 @@ Template.AdminUpload.helpers({
         return UploadLog.find();
     }
 });
+
