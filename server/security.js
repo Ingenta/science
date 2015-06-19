@@ -7,4 +7,4 @@ Volumes.permit(['insert', 'update', 'remove']).apply();
 Issues.permit(['insert', 'update', 'remove']).apply();
 AboutArticles.permit(['insert', 'update', 'remove']).apply();
 News.permit(['insert', 'update', 'remove']).apply();
-//Images.permit(['insert', 'download']).apply();
+UploadLog.permit(['insert', 'update', 'remove']).apply();

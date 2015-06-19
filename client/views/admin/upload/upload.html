@@ -32,13 +32,13 @@
 <template name="uploadTableRow">
     <tr id="dataview-table-items-row">
         <td>
-            <a href="{{this.url}}">{{name}}</a>
+            {{name}}
         </td>
         <td>
             {{uploadedAt}}
         </td>
         <td>
-            {{_ "Pending"}}
+            {{status}}
         </td>
     </tr>
 </template>

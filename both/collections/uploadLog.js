@@ -1,0 +1,1 @@
+this.UploadLog = new Meteor.Collection("uploadLog");

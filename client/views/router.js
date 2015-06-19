@@ -18,7 +18,9 @@ Meteor.subscribe("volumes");
 
 Meteor.subscribe("about_articles");
 
-Meteor.subscribe('articleXml')
+Meteor.subscribe('articleXml');
+
+Meteor.subscribe('uploadLog')
 
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
