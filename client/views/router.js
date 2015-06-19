@@ -24,7 +24,7 @@ Meteor.subscribe('uploadLog')
 
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
-var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
+var privateRoutes = ["home_private", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "user_settings.update_information", "logout"];
 var zonelessRoutes = ["topics", "publishers", "publications", "collections"];
 
 var roleMap = [
@@ -35,7 +35,8 @@ var roleMap = [
 { route: "admin.users.edit",	roles: ["admin","orgadmin"] },
 { route: "user_settings",	roles: ["user","admin"] },
 { route: "user_settings.profile",	roles: ["user","admin"] },
-{ route: "user_settings.change_pass",	roles: ["user","admin"] }
+{ route: "user_settings.change_pass",	roles: ["user","admin"] },
+{ route: "user_settings.update_information",	roles: ["user","admin"] }
 ];
 
 this.firstGrantedRoute = function() {
@@ -429,6 +430,10 @@ Router.map(function () {
 	this.route("user_settings.change_pass", {
 		path: "/user_settings/change_pass",
 		controller: "UserSettingsChangePassController"
+	});
+	this.route("user_settings.update_information", {
+		path: "/user_settings/update_information",
+		controller: "UserSettingsUpdateInformationController"
 	});
 	this.route("logout", {
 		path: "/logout",
