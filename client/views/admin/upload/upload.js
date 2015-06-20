@@ -35,6 +35,23 @@ Template.uploadForm.events({
 }
 });
 
+Template.UploadLogModal.helpers({
+    results : function(){
+        return Session.get("title");
+    }
+});
+Template.uploadTableRow.events({
+    "click .btn" : function(e){
+        var button = $(e.target) // Button that triggered the modal
+        var uploadLogId = button.data('uploadLogId') // Extract info from data-* attributes
+        //go get the parse results for this id if sucess or errors if failed
+        // if(button.html()==="Failed"){
+        //     $('modal-body').html("hello")
+        // }
+        // var errors = UploadLog.findOne({_id:uploadLogId}).errors;
+    }
+});
+
 Template.AdminUpload.helpers({
     uploadHistory: function () {
         return UploadLog.find();
