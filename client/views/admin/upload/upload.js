@@ -20,17 +20,17 @@ Template.uploadForm.events({
             //need to wait here for upload to finish to get fileid so we can get the path
 
             //get url
-            var path = ArticleXml.findOne().url();
-            //call parse and put results in session
-            Meteor.call('parseXml', path, function(error, result) {
-             if(error){
-               console.log(error)
-           }else{
-                //add article object to session
-                console.log(result)
-                Session.set("title", result);
-            }
-        });
+        //     var path = ArticleXml.findOne().url();
+        //     //call parse and put results in session
+        //     Meteor.call('parseXml', path, function(error, result) {
+        //      if(error){
+        //        console.log(error)
+        //    }else{
+        //         //add article object to session
+        //         console.log(result)
+        //         Session.set("title", result);
+        //     }
+        // });
         });
 }
 });
@@ -43,7 +43,20 @@ Template.UploadLogModal.helpers({
 Template.uploadTableRow.events({
     "click .btn" : function(e){
         var button = $(e.target) // Button that triggered the modal
-        var uploadLogId = button.data('uploadLogId') // Extract info from data-* attributes
+        var uploadLogId = button.data('logid') // Extract info from data-* attributes
+
+        var id = UploadLog.findOne({_id:uploadLogId}).fileId;
+        var path = ArticleXml.findOne({_id:id}).url();
+            //call parse and put results in session
+            Meteor.call('parseXml', path, function(error, result) {
+             if(error){
+               console.log(error)
+           }else{
+                //add article object to session
+                console.log(result)
+                Session.set("title", result);
+            }
+        });
         //go get the parse results for this id if sucess or errors if failed
         // if(button.html()==="Failed"){
         //     $('modal-body').html("hello")
