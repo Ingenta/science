@@ -1,6 +1,11 @@
-var getLocationAsync = function (path, cb){
-    cb && cb(null, HTTP.get(path).content);
-};
+
+
+if (Meteor.isServer) {
+    var getLocationAsync = function (path, cb){
+        cb && cb(null, HTTP.get(path).content);
+    };
+}
+
 
 Meteor.methods({
     'parseXml':function(path){
