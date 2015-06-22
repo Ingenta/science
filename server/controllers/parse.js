@@ -13,7 +13,7 @@ Meteor.methods({
         //Step 3: Read the xpaths
         var nodes = xpath.select("//title", doc);
         //Step 4: Return the article object
-        result = nodes[0].firstChild.data;
+        var result = nodes[0].firstChild.data;
         //Step 5: if anything went wrong add an errors object to the article
 
         return result;

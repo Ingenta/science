@@ -56,7 +56,11 @@
             <h4 class="modal-title" id="exampleModalLabel">{{_ "Status"}}</h4>
         </div>
         <div class="modal-body">
-            {{results}}
+        <ul>
+            <li>Errors: {{errors}}</li>
+
+            <li>Results: {{results}}</li>
+        </ul>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
