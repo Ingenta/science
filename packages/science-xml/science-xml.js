@@ -20,28 +20,33 @@ Meteor.methods({
         //Step 5: Return the article object
 
         var results = {};
-
+        results.errors = [];
         var titleNodes = xpath.select("//article-title", doc);
-        if (titleNodes[0] === undefined) results.errors = ["No title found"];
+        if (titleNodes[0] === undefined) results.errors.push("No title found");
         else results.title = titleNodes[0].firstChild.data;
 
         var volumeNode = xpath.select("//volume", doc)[0];
-        if (volumeNode === undefined) results.errors = ["No volume found"];
+        if (volumeNode === undefined) results.errors.push("No volume found");
         else results.volume = volumeNode.firstChild.data;
 
         var issueNode = xpath.select("//issue", doc)[0];
-        if (issueNode === undefined) results.errors = ["No issue found"];
+        if (issueNode === undefined) results.errors.push("No issue found");
         else results.issue = issueNode.firstChild.data;
+
+        //var abstractNode = xpath.select("//abstract", doc)[0];
+        //console.log(abstractNode.data);
+        //if (abstractNode === undefined) results.errors = ["No abstract found"];
+        //else results.abstract = abstractNode.firstChild.data;
 
         //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "¶¬¶¬"£¬ surname:"Ñî"}}
 
         var authorGivenNodes = xpath.select("//contrib/name/given-names", doc);
-        if (authorGivenNodes[0] === undefined) results.errors = ["No author given name found"];
+        if (authorGivenNodes[0] === undefined) results.errors.push("No given name found");
         if (authorGivenNodes[0] !== undefined)
             results.authorGiven = authorGivenNodes[0].firstChild.data;
 
         var authorNodes = xpath.select("//contrib/name/surname", doc);
-        if (authorNodes[0] === undefined) results.errors = ["No author surname found"];
+        if (authorNodes[0] === undefined) results.errors.push("No surname found");
         if (authorNodes[0] !== undefined)
             results.author = authorNodes[0].firstChild.data;
 

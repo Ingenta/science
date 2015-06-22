@@ -66,7 +66,7 @@ Template.uploadTableRow.events({
                 //add article object to session
                 //console.log(result)
                 if (result.errors)
-                    log.errors.push(result.errors)
+                    log.errors = result.errors;
                 Session.set('errors', log.errors);
                 Session.set("title", result);
                 if (log.errors.length) {
