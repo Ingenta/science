@@ -33,10 +33,10 @@ Meteor.methods({
         if (issueNode === undefined) results.errors.push("No issue found");
         else results.issue = issueNode.firstChild.data;
 
-        //var abstractNode = xpath.select("//abstract", doc)[0];
-        //console.log(abstractNode.data);
-        //if (abstractNode === undefined) results.errors = ["No abstract found"];
-        //else results.abstract = abstractNode.firstChild.data;
+        var abstractNode = xpath.select("//abstract/p", doc)[0];
+        console.log(abstractNode);
+        if (abstractNode === undefined)  results.errors.push("No abstract found");
+        else results.abstract = abstractNode.firstChild.data;
 
         //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "¶¬¶¬"£¬ surname:"Ñî"}}
 
@@ -49,7 +49,6 @@ Meteor.methods({
         if (authorNodes[0] === undefined) results.errors.push("No surname found");
         if (authorNodes[0] !== undefined)
             results.author = authorNodes[0].firstChild.data;
-
 
 
         return results;
