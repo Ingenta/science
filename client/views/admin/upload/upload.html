@@ -56,11 +56,11 @@
             <h4 class="modal-title" id="exampleModalLabel">{{_ "Status"}}</h4>
         </div>
         <div class="modal-body">
-            <ul>
+            <ul class="list-unstyled">
                 <li>Title: {{results.title}}</li>
                 <li>Author: {{results.author}}</li>
                 {{#each errors}}
-                <li>Errors: {{this}}</li>
+                <li class="bg-danger">Errors: {{this}}</li>
                 {{else}}
                 <li>No errors</li>
                 {{/each}}

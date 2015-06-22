@@ -37,7 +37,7 @@ Template.uploadTableRow.events({
 
         //get failed state
         var log = UploadLog.findOne({_id:uploadLogId});
-        if(log.errors.length){
+        if(log.errors.length){ //if file is not xml guard then return
             console.log(log.errors.length)
             Session.set('errors', log.errors);
             Session.set("title", log.name);

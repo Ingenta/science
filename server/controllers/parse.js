@@ -22,7 +22,8 @@ Meteor.methods({
             results.author = authorNodes[0].firstChild.data;
 
         //Step 5: if anything went wrong add an errors object to the article
-        if(authorNodes[0]===undefined) results.errors=["no author here"]
+        if(titleNodes[0]===undefined) results.errors=["No title found"];
+        if(authorNodes[0]===undefined) results.errors=["No author found"];
         return results;
     }
 });
