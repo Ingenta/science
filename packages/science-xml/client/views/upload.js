@@ -44,22 +44,20 @@ Template.uploadTableRow.events({
         //get failed state
         var log = UploadLog.findOne({_id: uploadLogId});
         if (log.errors.length) { //if file is not xml guard then return
-            console.log(log.errors.length)
+            //console.log(log.errors.length)
             Session.set('errors', log.errors);
-            Session.set("title", log.name);
+            Session.set("title", undefined);
             return;
         }
 
-        //Session.set('errors', errors);
-        $('#exampleModalLabel').html(log.state);
         var id = log.fileId;
         var path = ArticleXml.findOne({_id: id}).url();
         //call parse and put results in session
         Meteor.call('parseXml', path, function (error, result) {
             if (error) {
+                console.log(error);
                 log.errors.push(error);
                 Session.set('errors', log.errors);
-                //console.log(log.errors[0]);
                 Session.set("title", undefined);
                 UploadLog.update({_id: uploadLogId}, {$set: {status: "Failed"}});
             } else {

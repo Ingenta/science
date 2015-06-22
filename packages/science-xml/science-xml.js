@@ -11,16 +11,17 @@ if (Meteor.isServer) {
 
 Meteor.methods({
     'parseXml': function (path) {
+        var results = {};
+        results.errors = [];
+
         //Step 1: get the file
         var xml = getXmlFromPath(path);
-        //Step 2: Parse the file
+        //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
         var doc = new dom().parseFromString(xml);
         //Step 3: Read the xpaths FOREACH:
         //Step 4: if anything went wrong add an errors object to the article
         //Step 5: Return the article object
 
-        var results = {};
-        results.errors = [];
         var titleNodes = xpath.select("//article-title", doc);
         if (titleNodes[0] === undefined) results.errors.push("No title found");
         else results.title = titleNodes[0].firstChild.data;
