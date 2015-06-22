@@ -33,6 +33,8 @@ Meteor.methods({
         if (issueNode === undefined) results.errors.push("No issue found");
         else results.issue = issueNode.firstChild.data;
 
+        //TODO: figure out how to get abstract when html is inside the node, perhaps encode.
+
         var abstractNode = xpath.select("//abstract/p", doc)[0];
         console.log(abstractNode);
         if (abstractNode === undefined)  results.errors.push("No abstract found");
