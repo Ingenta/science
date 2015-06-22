@@ -11,12 +11,19 @@ Meteor.methods({
         //Step 2: Parse the file
         var doc = new dom().parseFromString(xml);
         //Step 3: Read the xpaths
-        var nodes = xpath.select("//title", doc);
+        var titleNodes = xpath.select("//title", doc);
+        var authorNodes = xpath.select("//author", doc);
         //Step 4: Return the article object
-        var result = nodes[0].firstChild.data;
+        var results = {};
+        if(titleNodes[0]!==undefined)
+            results.title= titleNodes[0].firstChild.data;
+
+        if(authorNodes[0]!==undefined)
+            results.author = authorNodes[0].firstChild.data;
+
         //Step 5: if anything went wrong add an errors object to the article
 
-        return result;
+        return results;
     }
 });
 

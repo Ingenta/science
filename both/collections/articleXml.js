@@ -7,5 +7,8 @@ ArticleXml.allow({
     },
     download: function (userId) {
         return true;
+    },
+    update: function (userId) {
+        return true;
     }
 });

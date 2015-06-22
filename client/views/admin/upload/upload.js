@@ -50,15 +50,16 @@ Template.uploadTableRow.events({
         var path = ArticleXml.findOne({_id:id}).url();
             //call parse and put results in session
             Meteor.call('parseXml', path, function(error, result) {
-             if(error){
-               log.errors.push(error);
-               Session.set('errors', log.errors);
-               console.log(log.errors);
-                Session.set("title", undefined);
-                UploadLog.update({_id:uploadLogId},{$set: {status:"Failed"}});
-           }else{
+               if(error){
+                 log.errors.push(error);
+                 Session.set('errors', log.errors);
+                 console.log(log.errors[0]);
+                 Session.set("title", undefined);
+                 UploadLog.update({_id:uploadLogId},{$set: {status:"Failed"}});
+             }else{
                 //add article object to session
                 console.log(result)
+                console.log(log.errors[0]);
                 Session.set('errors', log.errors);
                 Session.set("title", result);
                 UploadLog.update({_id:uploadLogId},{$set: {status:"Success"}});
