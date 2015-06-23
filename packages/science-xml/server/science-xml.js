@@ -35,6 +35,14 @@ Meteor.methods({
         if (issueNode === undefined) results.errors.push("No issue found");
         else results.issue = issueNode.firstChild.data;
 
+        var monthNode = xpath.select("//pub-date/month/text()", doc)[0];
+        if (monthNode === undefined) results.errors.push("No month found");
+        else results.month = monthNode.data;
+
+        var yearNode = xpath.select("//pub-date/year/text()", doc)[0];
+        if (yearNode === undefined) results.errors.push("No year found");
+        else results.year = yearNode.data;
+
         //TODO: figure out how to get abstract when html is inside the node, perhaps encode.
 
         var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
