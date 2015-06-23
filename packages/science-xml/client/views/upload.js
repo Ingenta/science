@@ -64,20 +64,29 @@ var importXmlByLogId= function(logId){
             log.errors.push(error);
             Session.set('errors', log.errors);
             Session.set("title", undefined);
-            UploadLog.update({_id: uploadLogId}, {$set: {status: "Failed"}});
+            UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
         } else {
             //add article object to session
             //console.log(result)
+
             if (result.errors)
                 log.errors = result.errors;
             Session.set('errors', log.errors);
             Session.set("title", result);
             if (log.errors.length) {
                 //console.log(log.errors.length);
-                UploadLog.update({_id: uploadLogId}, {$set: {status: "Failed"}});
+                UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
                 return;
             }
-            UploadLog.update({_id: uploadLogId}, {$set: {status: "Success"}});
+            //if doi is not already found then add to articles collection
+            var existingArticle = Articles.findOne({doi:result.doi});
+            console.log(existingArticle);
+
+            if(existingArticle===undefined) {
+                Articles.insert({doi: result.doi, title: result.title, abstract: result.abstract});
+                UploadLog.update({_id: logId}, {$set: {status: "Success"}});
+            }
+
         }
     });
 }
