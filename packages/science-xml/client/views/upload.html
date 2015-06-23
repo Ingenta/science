@@ -62,7 +62,13 @@
                         {{#if results}}
                             <li>{{_ "DOI"}}: {{results.doi}}</li>
                             <li>{{_ "Title"}}: {{results.title}}</li>
-                            <li>{{_ "Author"}}: {{results.author}}, {{results.authorGiven}}</li>
+                            <li>{{_ "Author"}}:
+                                {{#each results.authors}}
+                                    {{_ this.surname}}.{{_ this.given}},
+                                {{else}}
+                                    {{_ "No authors"}}
+                                {{/each}}
+                            </li>
                             <li>{{_ "Volume"}}: {{results.volume}}</li>
                             <li>{{_ "Issue"}}: {{results.issue}}</li>
                             <li>{{_ "Abstract"}}: {{results.abstract}}</li>
