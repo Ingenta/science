@@ -1,7 +1,7 @@
 if (Meteor.isServer) {
     var getLocationAsync = function (path, cb) {
         cb && cb(null, HTTP.get(path).content);
-    };
+    }
     var getXmlFromPath = function (path) {
         var getLocationSync = Meteor.wrapAsync(getLocationAsync)
         return getLocationSync(Meteor.absoluteUrl(path));
@@ -17,7 +17,21 @@ Meteor.methods({
         //Step 1: get the file
         var xml = getXmlFromPath(path);
         //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
-        var doc = new dom().parseFromString(xml);
+        var xmlErrors = [];
+        var xmlDom = new dom({
+            errorHandler: function(msg){
+                xmlErrors.push(msg)
+            }
+        });
+        var doc = xmlDom.parseFromString(xml);
+        if(xmlErrors.length)
+        {
+            for (i = 0; i < xmlErrors.length; i++) {
+                results.errors.push(xmlErrors[i]);
+            }
+            return results;
+        }
+
         //Step 3: Read the xpaths FOREACH:
         //Step 4: if anything went wrong add an errors object to the article
         //Step 5: Return the article object

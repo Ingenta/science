@@ -68,9 +68,7 @@
                             <li>{{_ "Abstract"}}: {{results.abstract}}</li>
                         {{/if}}
                         {{#each errors}}
-                            <li class="bg-danger">{{_ this}}</li>
-                        {{else}}
-                            <li>{{_ "No errors"}}</li>
+                            <li class="bg-danger">{{this}}</li>
                         {{/each}}
                     </ul>
                 </div>
