@@ -82,8 +82,16 @@ var importXmlByLogId = function (logId) {
             var existingArticle = Articles.findOne({doi: result.doi});
             console.log(existingArticle);
 
-            Articles.insert({doi: result.doi, title: result.title, abstract: result.abstract});
-            UploadLog.update({_id: logId}, {$set: {status: "Success"}});
+            Articles.insert({
+                doi: result.doi,
+                title: result.title,
+                authors:result.authors,
+                abstract: result.abstract
+            });
+            UploadLog.update(
+                {_id: logId},
+                {$set: {status: "Success"}}
+            );
         }
     });
 }
