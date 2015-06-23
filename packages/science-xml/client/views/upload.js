@@ -21,8 +21,7 @@ Template.uploadForm.events({
                 });
             });
 
-            //need to wait here for upload to finish to get fileid so we can get the path
-            //parse file on upload
+            //TODO: need to wait here for upload to finish to get fileid so we can get the path to parse
         });
     }
 });
@@ -41,43 +40,53 @@ Template.uploadTableRow.events({
         var button = $(e.target) // Button that triggered the modal
         var uploadLogId = button.data('logid') // Extract info from data-* attributes
 
-        //get failed state
-        var log = UploadLog.findOne({_id: uploadLogId});
-        if (log.errors.length) { //if file is not xml guard then return
-            //console.log(log.errors.length)
-            Session.set('errors', log.errors);
-            Session.set("title", undefined);
-            return;
-        }
-
-        var id = log.fileId;
-        var path = ArticleXml.findOne({_id: id}).url();
-        //call parse and put results in session
-        Meteor.call('parseXml', path, function (error, result) {
-            if (error) {
-                console.log(error);
-                log.errors.push(error);
-                Session.set('errors', log.errors);
-                Session.set("title", undefined);
-                UploadLog.update({_id: uploadLogId}, {$set: {status: "Failed"}});
-            } else {
-                //add article object to session
-                //console.log(result)
-                if (result.errors)
-                    log.errors = result.errors;
-                Session.set('errors', log.errors);
-                Session.set("title", result);
-                if (log.errors.length) {
-                    //console.log(log.errors.length);
-                    UploadLog.update({_id: uploadLogId}, {$set: {status: "Failed"}});
-                    return;
-                }
-                UploadLog.update({_id: uploadLogId}, {$set: {status: "Success"}});
-            }
-        });
-
+        importXmlByLogId(uploadLogId);
     }
 });
+
+var importXmlByLogId = function (logId) {
+
+    //get failed state
+    var log = UploadLog.findOne({_id: logId});
+    if (log.errors.length) { //if file is not xml guard then return
+        //console.log(log.errors.length)
+        Session.set('errors', log.errors);
+        Session.set("title", undefined);
+        return;
+    }
+
+    var id = log.fileId;
+    var path = ArticleXml.findOne({_id: id}).url();
+    //call parse and put results in session
+    Meteor.call('parseXml', path, function (error, result) {
+        if (error) {
+            console.log(error);
+            log.errors.push(error);
+            Session.set('errors', log.errors);
+            Session.set("title", undefined);
+            UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
+        } else {
+            //add article object to session
+            //console.log(result)
+
+            if (result.errors)
+                log.errors = result.errors;
+            Session.set('errors', log.errors);
+            Session.set("title", result);
+            if (log.errors.length) {
+                //console.log(log.errors.length);
+                UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
+                return;
+            }
+            //if doi is not already found then add to articles collection
+            var existingArticle = Articles.findOne({doi: result.doi});
+            console.log(existingArticle);
+
+            Articles.insert({doi: result.doi, title: result.title, abstract: result.abstract});
+            UploadLog.update({_id: logId}, {$set: {status: "Success"}});
+        }
+    });
+}
 
 Template.AdminUpload.helpers({
     uploadHistory: function () {

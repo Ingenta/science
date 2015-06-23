@@ -5,7 +5,7 @@ Package.describe({
     git: '',
     documentation: 'README.md'
 });
-
+both = ['client','server']
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use(
@@ -14,7 +14,8 @@ Package.onUse(function (api) {
             'jackkav:xpath'
         ],
         both);
-    api.addFiles('science-xml.js', 'server');
+    api.addFiles('both/uploadLog.js', both);
+    api.addFiles('server/science-xml.js', 'server');
     api.addFiles('client/views/upload.html', 'client');
     api.addFiles('client/views/upload.js', 'client');
 });
