@@ -54,6 +54,8 @@ Meteor.methods({
             results.author = authorNodes[0].firstChild.data;
 
 
+
+
         return results;
     }
 });

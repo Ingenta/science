@@ -1,7 +1,18 @@
 {
+
+    "Title": "标题",
+    "Volume": "卷",
+    "Issue": "期",
     "Success": "成功",
     "Failed": "失败",
     "File type mismatch!": "文件格式不对！",
+    "No errors": "没有错",
+    "No title found": "没找到标题",
+    "No volume found": "没找到卷",
+    "No issue found": "没找到期",
+    "No abstract found": "没找到摘要",
+    "No author found": "没找到作者",
+
 
     "Date": "日期",
     "Status": "状态",
@@ -99,7 +110,7 @@
     "Publications": "出版物",
     "Topics": "主题",
     "Collections": "文章集",
-    "Author": "作者中心",
+    "Author": "作者",
     "Register": "注册",
     "Login": "登录",
     "Log Out": "退出",
