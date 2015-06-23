@@ -34,12 +34,20 @@ Meteor.methods({
         if (issueNode === undefined) results.errors.push("No issue found");
         else results.issue = issueNode.firstChild.data;
 
-        //TODO: figure out how to get abstract when html is inside the node, perhaps encode.
+        var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
+        if (doiNode === undefined) results.errors.push("No doi found");
+        else results.doi = doiNode.data;
 
-        var abstractNode = xpath.select("//abstract/p", doc)[0];
-        console.log(abstractNode);
-        if (abstractNode === undefined)  results.errors.push("No abstract found");
-        else results.abstract = abstractNode.firstChild.data;
+        var abstractNode = xpath.select("//abstract/p/text()", doc);
+
+        if (abstractNode[0] === undefined)  results.errors.push("No abstract found");
+        else {
+            var abstractText="";
+            for (i = 0; i < abstractNode.length; i++) {
+                abstractText += abstractNode[i].data;
+            }
+            results.abstract = abstractText;
+        }
 
         //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "¶¬¶¬"£¬ surname:"Ñî"}}
 
