@@ -67,6 +67,9 @@ Meteor.methods({
                 results.authors.push(fullName);
             }
         });
+        if(results.authors.length == 0){
+            results.errors.push("No author found");
+        }
         return results;
     }
 });
