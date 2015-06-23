@@ -13,6 +13,7 @@ Meteor.methods({
     'parseXml': function (path) {
         var results = {};
         results.errors = [];
+        results.authors = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
@@ -37,25 +38,24 @@ Meteor.methods({
         //TODO: figure out how to get abstract when html is inside the node, perhaps encode.
 
         var abstractNode = xpath.select("//abstract/p", doc)[0];
-        console.log(abstractNode);
         if (abstractNode === undefined)  results.errors.push("No abstract found");
         else results.abstract = abstractNode.firstChild.data;
 
-        //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "¶¬¶¬"£¬ surname:"Ñî"}}
+        //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "ï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½ surname:"ï¿½ï¿½"}}
 
-        var authorGivenNodes = xpath.select("//contrib/name/given-names", doc);
-        if (authorGivenNodes[0] === undefined) results.errors.push("No given name found");
-        if (authorGivenNodes[0] !== undefined)
-            results.authorGiven = authorGivenNodes[0].firstChild.data;
-
-        var authorNodes = xpath.select("//contrib/name/surname", doc);
-        if (authorNodes[0] === undefined) results.errors.push("No surname found");
-        if (authorNodes[0] !== undefined)
-            results.author = authorNodes[0].firstChild.data;
-
-
-
-
+        var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
+        authorNodes.forEach(function (author) {
+            var surname = xpath.select("child::surname/text()", author).toString();
+            var given = xpath.select("child::given-names/text()", author).toString();
+            if(surname === undefined){
+                results.errors.push("No surname found");
+            } else if(given === undefined){
+                results.errors.push("No given name found");
+            } else{
+                var fullName ={given: given, surname: surname};
+                results.authors.push(fullName);
+            }
+        });
         return results;
     }
 });
