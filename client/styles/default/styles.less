@@ -45,7 +45,7 @@ body {
 }
 
 p {
-	font-size: 16px;
+	font-size: 12px;
 }
 
 #jumbotron-image {
@@ -85,7 +85,7 @@ p {
 }
 
 .form-horizontal .control-label {
-	text-align: left;
+	text-align:left;
 }
 
 .modal-body #component-title {
@@ -278,12 +278,10 @@ ul.tree-view ul.tree-view {
 		color: @brand-primary;
 	}
 }
-
-
-// **** SEARCH *****
-.dotted{
+.dotted,.noImgDotted{
   border-bottom:1px #ccc dotted;
   padding-bottom:15px;
+  overflow:hidden;
 }
 .dotted img{
   margin-right:10px;
@@ -291,7 +289,7 @@ ul.tree-view ul.tree-view {
 .dotted ul{
   margin-left:28px;
 }
-.detail-ul{
+.dotted .det-ul{
   margin-left:10px;
   display: none;
 }
@@ -309,29 +307,43 @@ ul.tree-view ul.tree-view {
 .ml15{
   margin-left:15px;
 }
-
-// **** AUTHOR POPUP ****
-
-.author-pop hr{
-  margin:1px;
-}
-.author-pop-name{
-  font-size: 18px;
-  font-weight:bold;
-}
-
-// **** PUBLICATIONS ****
-.filterButton{
-    cursor: pointer;
-}
-.numberButton{
-    cursor: pointer;
-}
-.resetAlphabetFilter{
-    cursor: pointer;
-}
-.dotted-publication-item{
-  border-bottom:1px #ccc dotted;
+.db-solid{
+  border-bottom:3px solid #bfbfbf;
   padding-bottom:5px;
-  padding-top:5px;
+}
+.user-agree h5{
+  color:#036cb0;
+}
+.user-agree p{
+  text-indent: 24px;
+  font-size: 12px;
+}
+.user-agree li{
+  font-size: 12px;
+}
+.oh{
+  overflow: hidden;
+}
+.part{
+  padding:10px;
+  background:#f1f1f1;
+  overflow: hidden;
+  margin-top:10px;
+  margin-bottom:10px;
+  font-size:12px;
+}
+.part img{
+  float:left;
+  margin-right:10px;
+}
+.bgBlue{
+  background:#036cb0;
+  padding:10px;
+  color:#fff;
+}
+.h100{
+  height:100px;
+}
+.h220{
+  height:220px;
 }

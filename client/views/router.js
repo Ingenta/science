@@ -351,4 +351,19 @@ Router.map(function () {
 	this.route("searchResult", {
 		path: "/searchResult"
 	});
+	this.route("loginNew", {
+		path: "/loginNew"
+	});
+	this.route("userAgreement", {
+		path: "/userAgreement"
+	});
+	this.route("publishCont", {
+		path: "/publishCont"
+	});
+	this.route("publishRecommed", {
+		path: "/publishRecommed"
+	});
+	this.route("publishAuthor", {
+		path: "/publishAuthor"
+	});
 });
