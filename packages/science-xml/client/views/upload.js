@@ -44,7 +44,7 @@ Template.uploadTableRow.events({
     }
 });
 
-var importXmlByLogId= function(logId){
+var importXmlByLogId = function (logId) {
 
     //get failed state
     var log = UploadLog.findOne({_id: logId});
@@ -79,14 +79,11 @@ var importXmlByLogId= function(logId){
                 return;
             }
             //if doi is not already found then add to articles collection
-            var existingArticle = Articles.findOne({doi:result.doi});
+            var existingArticle = Articles.findOne({doi: result.doi});
             console.log(existingArticle);
 
-            if(existingArticle===undefined) {
-                Articles.insert({doi: result.doi, title: result.title, abstract: result.abstract});
-                UploadLog.update({_id: logId}, {$set: {status: "Success"}});
-            }
-
+            Articles.insert({doi: result.doi, title: result.title, abstract: result.abstract});
+            UploadLog.update({_id: logId}, {$set: {status: "Success"}});
         }
     });
 }
