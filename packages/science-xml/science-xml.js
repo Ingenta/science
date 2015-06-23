@@ -36,10 +36,16 @@ Meteor.methods({
 
         //TODO: figure out how to get abstract when html is inside the node, perhaps encode.
 
-        var abstractNode = xpath.select("//abstract/p", doc)[0];
-        console.log(abstractNode);
+        var abstractNode = xpath.select("//abstract/p/text()", doc);
+
         if (abstractNode === undefined)  results.errors.push("No abstract found");
-        else results.abstract = abstractNode.firstChild.data;
+        else {
+            var abstractText="";
+            for (i = 0; i < abstractNode.length; i++) {
+                abstractText += abstractNode[i].data;
+            }
+            results.abstract = abstractText;
+        }
 
         //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "¶¬¶¬"£¬ surname:"Ñî"}}
 
