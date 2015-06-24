@@ -172,22 +172,6 @@ Router.map(function () {
 			]
 		}
 	});
-	this.route("login", {
-		parent: "home_private",
-		path: "/login",
-		controller: "LoginController",
-		title: function () {
-			return TAPi18n.__("Login");
-		}
-	});
-	this.route("register", {
-		parent: "home_private",
-		path: "/register",
-		controller: "RegisterController",
-		title: function () {
-			return TAPi18n.__("Register");
-		}
-	});
 	this.route("topics",{
 		parent: "home_private",
 		title: function () {
@@ -358,87 +342,6 @@ Router.map(function () {
 		}
 	});
 
-	this.route("forgot_password", {
-		path: "/forgot_password",
-		controller: "ForgotPasswordController",
-		parent: "home_private",
-		title: function () {
-			return TAPi18n.__("Forgot password");
-		}
-	});
-	this.route("reset_password", {
-		path: "/reset_password/:resetPasswordToken",
-		controller: "ResetPasswordController",
-		parent: "home_private",
-		title: function () {
-			return TAPi18n.__("Reset password");
-		}
-	});
-
-	this.route("admin", {
-		path: "/admin",
-		controller: "AdminController",
-		title: function () {
-			return TAPi18n.__("Admin");
-		},
-		parent: "home_private"
-	});
-	this.route("admin.roles", {
-		path: "/admin/roles",
-		controller: "AdminRolesController"
-	});
-	this.route("admin.roles.insert", {
-		path: "/admin/roles/insert",
-		controller: "AdminRolesInsertController"
-	});
-	this.route("admin.upload", {
-		path: "/admin/upload",
-		title: function () {
-			return TAPi18n.__("Upload");
-		},
-		parent: "admin"
-	});
-
-	this.route("admin.users", {
-		path: "/admin/users",
-		controller: "AdminUsersController",
-		title: function () {
-			return TAPi18n.__("Users");
-		},
-		parent: "admin"
-	});
-	this.route("admin.users.details", {
-		path: "/admin/users/details/:userId",
-		controller: "AdminUsersDetailsController"
-	});
-	this.route("admin.users.insert", {
-		path: "/admin/users/insert",
-		controller: "AdminUsersInsertController"
-	});
-	this.route("admin.users.edit", {
-		path: "/admin/users/edit/:userId",
-		controller: "AdminUsersEditController"
-	});
-	this.route("user_settings", {
-		path: "/user_settings",
-		controller: "UserSettingsController"
-	});
-	this.route("user_settings.profile", {
-		path: "/user_settings/profile",
-		controller: "UserSettingsProfileController"
-	});
-	this.route("user_settings.change_pass", {
-		path: "/user_settings/change_pass",
-		controller: "UserSettingsChangePassController"
-	});
-	this.route("user_settings.update_information", {
-		path: "/user_settings/update_information",
-		controller: "UserSettingsUpdateInformationController"
-	});
-	this.route("logout", {
-		path: "/logout",
-		controller: "LogoutController"
-	});
 	this.route("testTemplate", {
 		path: "/testTemplate"
 	});
@@ -447,5 +350,20 @@ Router.map(function () {
 	});
 	this.route("searchResult", {
 		path: "/searchResult"
+	});
+	this.route("loginNew", {
+		path: "/loginNew"
+	});
+	this.route("userAgreement", {
+		path: "/userAgreement"
+	});
+	this.route("publishCont", {
+		path: "/publishCont"
+	});
+	this.route("publishRecommed", {
+		path: "/publishRecommed"
+	});
+	this.route("publishAuthor", {
+		path: "/publishAuthor"
 	});
 });

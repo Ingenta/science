@@ -4,8 +4,8 @@ pageSession.set("errorMessage", "");
 pageSession.set("resetPasswordSent", "");
 
 Template.ForgotPassword.rendered = function() {
-	
-	$("input[autofocus]").focus();
+
+	//$("input[autofocus]").focus();
 };
 
 Template.ForgotPassword.events({
