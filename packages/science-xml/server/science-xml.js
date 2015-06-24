@@ -62,6 +62,13 @@ Meteor.methods({
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
 
+        var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
+        if(affNode[0] !== undefined) {
+            results.affiliations = "";
+            affNode.forEach(function (affiliation) {
+                results.affiliations += affiliation.data;
+            });
+        }
 
         var issnNode = xpath.select("//issn[@pub-type='ppub']/text()", doc)[0];
         if(issnNode !== undefined) results.issn = issnNode.data;
