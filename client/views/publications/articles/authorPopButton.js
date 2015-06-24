@@ -4,7 +4,7 @@ Template.authorPopButton.events({
         var name=Template.currentData().name;
         ele.text(name);
         var html="<div class='author-pop'>";
-        html+="<div><a href='/author/"+ name +"'>"+TAPi18n.__("inStation")+"</a></div>";
+        html+="<div><a href='/author/"+ name +"'>"+TAPi18n.__("Go to author page")+"</a></div>";
         html+="<hr>";
         html+="<div><a target='_blank' href='http://www.ncbi.nlm.nih.gov/pubmed?term="+name+"[Author]'>PubMed</a></div>";
         html+="<hr>";

@@ -78,9 +78,8 @@ var importXmlByLogId = function (logId) {
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
                 return;
             }
-            //if doi is not already found then add to articles collection
+            //TODO: if doi is not already found then add to articles collection
             var existingArticle = Articles.findOne({doi: result.doi});
-            console.log(existingArticle);
 
             Articles.insert({
                 doi: result.doi,
@@ -88,7 +87,8 @@ var importXmlByLogId = function (logId) {
                 authors:result.authors,
                 abstract: result.abstract,
                 journalId:result.journalId,
-                publisher:result.publisher
+                publisher:result.publisher,
+                affiliations: result.affiliations
             });
             UploadLog.update(
                 {_id: logId},

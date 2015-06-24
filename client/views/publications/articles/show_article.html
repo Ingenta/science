@@ -12,14 +12,13 @@
                     {{/each}}
                 </p>
                 <p>
-                    <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#authorAddress"
-                    aria-expanded="false" aria-controls="authorAddress"></i>
-                    作者地址: </p>
+                    <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#authorAffiliations"
+                    aria-expanded="false" aria-controls="authorAffiliations"></i>
+                    {{_ "Affiliations"}}: </p>
 
-                    <div class="collapse pull-right" id="authorAddress">
+                    <div class="collapse pull-right" id="authorAffiliations">
                         <ol>
-                            <li>北京大学纳米电子器件物理与化学教育部重点实验室, 电子学系, 北京 100871</li>
-                            <li>北京大学纳米电子器件物理与化学教育部重点实验室, 电子学系, 北京 100871</li>
+                            <li>{{affiliations}}</li>
                         </ol>
                     </div>
                     <div class="row">
@@ -31,7 +30,7 @@
                     </div>
                     <p>2014, 59(32): 3109-3119 <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a></p>
 
-                    <p>语种类型：中文</p>
+                    <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
                 </ul>
             </div>
             <div class="col-xs-3">
