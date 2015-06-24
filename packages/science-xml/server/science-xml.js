@@ -61,6 +61,15 @@ Meteor.methods({
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
 
+
+        var issnNode = xpath.select("//issn[@pub-type='ppub']/text()", doc)[0];
+        if (issnNode === undefined) results.errors.push("No issn found");
+        else results.issn = issnNode.data;
+
+        var essnNode = xpath.select("//issn[@pub-type='epub']/text()", doc)[0];
+        if (essnNode === undefined) results.errors.push("No essn found");
+        else results.essn = essnNode.data;
+
         var journalTitleNode = xpath.select("//journal-title/text()", doc)[0];
         if (journalTitleNode === undefined) results.errors.push("No journal title found");
         else results.journalTitle = journalTitleNode.data;
@@ -69,6 +78,15 @@ Meteor.methods({
         if(journal===undefined)
             results.errors.push("No journal title found in the system with the name: "+results.journalTitle);
         else results.journalId = journal._id;
+
+        var publisherNameNode = xpath.select("//publisher-name/text()", doc)[0];
+        if (publisherNameNode === undefined) results.errors.push("No publisher name found");
+        else results.publisherName = publisherNameNode.data;
+
+        var publisher = Publishers.findOne({name:results.publisherName});
+        if(publisher===undefined)
+            results.errors.push("No publisher found in the system with the name: "+results.publisherName);
+        else results.publisher = publisher._id;
 
         var abstractNode = xpath.select("//abstract/p/text()", doc);
 
