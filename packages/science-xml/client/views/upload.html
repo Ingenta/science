@@ -73,12 +73,12 @@
                             <li>{{_ "Issue"}}: {{results.issue}}</li>
                             <li> {{_ "Month"}} : {{results.month}} </li>
                             <li> {{_ "Year"}} : {{results.year}} </li>
+                            <li>{{_ "Journal"}}: {{results.journalTitle}}</li>
+                            <li>{{_ "Publisher"}}: {{results.publisherName}}</li>
                             <li>{{_ "Abstract"}}: {{results.abstract}}</li>
                         {{/if}}
                         {{#each errors}}
-                            <li class="bg-danger">{{_ this}}</li>
-                        <!--{{else}}-->
-                            <!--<li>{{_ "No errors"}}</li>-->
+                            <li class="bg-danger">{{this}}</li>
                         {{/each}}
                     </ul>
                 </div>
