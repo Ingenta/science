@@ -26,6 +26,12 @@ Template.deleteNewsModalForm.helpers({
   }
 });
 
+Template.newestUpload.helpers({
+     newarticle: function () {
+     return Articles.find()
+  }
+});
+
 Template.SingleNews.helpers({
     hasNews: function (id) {
         return  News.find({"news": id}).count()===0;
