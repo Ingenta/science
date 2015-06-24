@@ -63,8 +63,7 @@ Meteor.methods({
 
 
         var issnNode = xpath.select("//issn[@pub-type='ppub']/text()", doc)[0];
-        if (issnNode === undefined) results.errors.push("No issn found");
-        else results.issn = issnNode.data;
+        if(issnNode !== undefined) results.issn = issnNode.data;
 
         var essnNode = xpath.select("//issn[@pub-type='epub']/text()", doc)[0];
         if (essnNode === undefined) results.errors.push("No essn found");
