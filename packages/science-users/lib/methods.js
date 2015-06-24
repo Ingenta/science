@@ -55,11 +55,5 @@ Meteor.methods({
         if(password) {
             Accounts.setPassword(userId, password);
         }
-    },
-
-    "sendMail": function(options) {
-        this.unblock();
-
-        Email.send(options);
     }
 });

@@ -154,6 +154,7 @@ Router.map(function () {
 		},
 		waitOn: function () {
 			return [
+			Meteor.subscribe('articles'),
 			Meteor.subscribe('images'),
 			Meteor.subscribe('news')
 			]
@@ -167,6 +168,7 @@ Router.map(function () {
 		},
 		waitOn: function () {
 			return [
+			Meteor.subscribe('articles'),
 			Meteor.subscribe('images'),
 			Meteor.subscribe('news')
 			]
