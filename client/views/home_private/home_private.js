@@ -3,10 +3,10 @@ Template.HomePrivate.rendered = function() {
 };
 
 Template.NewsList.events({
-    'mouseenter .index':function(event){
-        var index = $(event.currentTarget).attr('index');
-        $('#myCarousel').carousel(parseInt(index))
-    }
+  'mouseenter .index':function(event){
+    var index = $(event.currentTarget).attr('index');
+    $('#myCarousel').carousel(parseInt(index))
+  }
 });
 
 Template.HomePrivate.helpers({
@@ -15,9 +15,9 @@ Template.HomePrivate.helpers({
 
 
 Template.NewsList.helpers({
-    news: function () {
-        return News.find();
-    }
+  news: function () {
+    return News.find();
+  }
 });
 
 Template.deleteNewsModalForm.helpers({
@@ -27,15 +27,15 @@ Template.deleteNewsModalForm.helpers({
 });
 
 Template.newestUpload.helpers({
-     newarticle: function () {
-     return Articles.find()
-  }
+ newarticle: function () {
+   return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
+ }
 });
 
 Template.SingleNews.helpers({
-    hasNews: function (id) {
-        return  News.find({"news": id}).count()===0;
-    }
+  hasNews: function (id) {
+    return  News.find({"news": id}).count()===0;
+  }
 });
 
 AutoForm.addHooks(['addNewsModalForm'], {
