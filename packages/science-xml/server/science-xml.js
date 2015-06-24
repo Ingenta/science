@@ -61,6 +61,15 @@ Meteor.methods({
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
 
+
+        var issnNode = xpath.select("//issn[@pub-type='ppub']/text()", doc)[0];
+        if (issnNode === undefined) results.errors.push("No issn found");
+        else results.issn = issnNode.data;
+
+        var essnNode = xpath.select("//issn[@pub-type='epub']/text()", doc)[0];
+        if (essnNode === undefined) results.errors.push("No essn found");
+        else results.essn = essnNode.data;
+
         var journalTitleNode = xpath.select("//journal-title/text()", doc)[0];
         if (journalTitleNode === undefined) results.errors.push("No journal title found");
         else results.journalTitle = journalTitleNode.data;
