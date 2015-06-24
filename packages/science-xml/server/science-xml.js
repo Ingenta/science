@@ -57,11 +57,11 @@ Meteor.methods({
         if (yearNode === undefined) results.errors.push("No year found");
         else results.year = yearNode.data;
 
-        //TODO: figure out how to get abstract when html is inside the node, perhaps encode.
-
         var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
+
+
 
         var abstractNode = xpath.select("//abstract/p/text()", doc);
 
@@ -74,7 +74,7 @@ Meteor.methods({
             results.abstract = abstractText;
         }
 
-        //TODO: figure out how to get each in this list, object should look like this authors: {{given: "Jack", surname: "Kavanagh},{given: "����"�� surname:"��"}}
+
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
         authorNodes.forEach(function (author) {
@@ -89,9 +89,11 @@ Meteor.methods({
                 results.authors.push(fullName);
             }
         });
-        if(results.authors.length == 0){
+        if(results.authors.length === 0){
             results.errors.push("No author found");
         }
+
+        
         return results;
     }
 });
