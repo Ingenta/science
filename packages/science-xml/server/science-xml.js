@@ -4,7 +4,9 @@ if (Meteor.isServer) {
     }
     var getXmlFromPath = function (path) {
         var getLocationSync = Meteor.wrapAsync(getLocationAsync);
-        var fullPath = Meteor.absoluteUrl(path)
+        //remove first / from path because meteor absolute url includes it
+        var fullPath = Meteor.absoluteUrl(path.substring(1));
+        console.log(fullPath);
         return getLocationSync(fullPath);
     }
 }
@@ -19,6 +21,8 @@ Meteor.methods({
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
+
+        console.log(xml);
         //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
         var xmlErrors = [];
         var xmlDom = new dom({
