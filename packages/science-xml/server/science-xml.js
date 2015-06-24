@@ -70,6 +70,15 @@ Meteor.methods({
             results.errors.push("No journal title found in the system with the name: "+results.journalTitle);
         else results.journalId = journal._id;
 
+        var publisherNameNode = xpath.select("//publisher-name/text()", doc)[0];
+        if (publisherNameNode === undefined) results.errors.push("No publisher name found");
+        else results.publisherName = publisherNameNode.data;
+
+        var publisher = Publishers.findOne({name:results.publisherName});
+        if(publisher===undefined)
+            results.errors.push("No publisher found in the system with the name: "+results.publisherName);
+        else results.publisher = publisher._id;
+
         var abstractNode = xpath.select("//abstract/p/text()", doc);
 
         if (abstractNode[0] === undefined)  results.errors.push("No abstract found");
