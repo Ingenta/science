@@ -61,7 +61,14 @@ Meteor.methods({
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
 
+        var journalTitleNode = xpath.select("//journal-title/text()", doc)[0];
+        if (journalTitleNode === undefined) results.errors.push("No journal title found");
+        else results.journalTitle = journalTitleNode.data;
 
+        var journal = Publications.findOne({title:results.journalTitle});
+        if(journal===undefined)
+            results.errors.push("No journal title found in the system with the name: "+results.journalTitle);
+        else results.journalId = journal._id;
 
         var abstractNode = xpath.select("//abstract/p/text()", doc);
 
@@ -93,7 +100,7 @@ Meteor.methods({
             results.errors.push("No author found");
         }
 
-        
+
         return results;
     }
 });
