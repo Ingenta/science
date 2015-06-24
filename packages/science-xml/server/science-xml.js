@@ -14,6 +14,7 @@ Meteor.methods({
         var results = {};
         results.errors = [];
         results.authors = [];
+        results.references = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
@@ -109,6 +110,13 @@ Meteor.methods({
             results.errors.push("No author found");
         }
 
+        var refNodes = xpath.select("//ref", doc);
+        refNodes.forEach(function (ref) {
+            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
+            var text =  xpath.select("descendant::text()", ref).toString();
+//            console.log(text);
+            results.references.push(text);
+        });
 
         return results;
     }
