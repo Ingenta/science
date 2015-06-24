@@ -326,8 +326,8 @@ Router.map(function () {
 			var pub = Publishers.findOne({name: this.params.publisherName});
 			var journal = Publications.findOne({title: this.params.journalTitle});
 			if(pub){
-				Session.set('currPublication',pub._id);
-				Session.set('currentPublisher',journal._id);
+				Session.set('currPublication',journal._id);
+				Session.set('currentPublisher',pub._id);
 				return Articles.findOne({title: this.params.articleName});
 			}
 		},
