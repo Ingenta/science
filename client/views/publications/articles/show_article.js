@@ -2,6 +2,12 @@ ReactiveTabs.createInterface({
     template: 'articleTabs'
 });
 
+Template.showArticle.helpers({
+    getFullName:function(){
+        return this.surname + ' ' + this.given;
+    }
+});
+
 Template.articleOptions.helpers({
     context: function () {
         var currentTitle = Router.current().params.articleName;
