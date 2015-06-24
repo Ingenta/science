@@ -2,8 +2,9 @@
     <div class="container-fluid" id="content">
         <hr>
         {{> addNewsForm}}
-        {{> NewsList}}
+        {{> NewsList}} 
         <br/>
+        {{> newestUpload}}
         {{> HomePublicContent}}
     </div>
 </template>
@@ -92,6 +93,24 @@
                 </div>
                 {{/autoForm}}
             </div>
+        </div>
+    </div>
+</template>
+
+<template name="newestUpload">
+    <div class="row">
+        <div class="col-xs-6">
+            <h4>{{_ "Most recent articles"}}</h4>
+            {{#each newarticle}}
+            <h5><a href={{url}}>{{title}}</a></h5>
+            {{else}}
+            {{_"No articles found!"}}
+            {{/each}}
+            <br/>
+
+        </div>
+        <div class="col-xs-6">
+
         </div>
     </div>
 </template>

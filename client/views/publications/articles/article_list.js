@@ -38,7 +38,8 @@ Template.addArticleButton.helpers({
 Template.articleListRight.helpers({
     articles:function(){
         if(Config.isDevMode){
-            q={};
+            var journalId=Session.get('currentJournalId');
+            q={journalId:journalId};
         }else{
             var curIssue=Session.get("currIssue");
             if(!curIssue){
