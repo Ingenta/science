@@ -92,3 +92,9 @@ Template.aboutArticlesList.helpers({
         return AboutArticles.find({about: aboutId});
     }
 });
+
+Template.latestArticles.helpers({
+ lateArticles: function () {
+   return Articles.find({}, {sort: {createdAt: -1}, limit: 3}); 
+ }
+});
