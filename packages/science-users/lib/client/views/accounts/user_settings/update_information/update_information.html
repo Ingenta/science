@@ -70,11 +70,42 @@
 					{{_ "In the name of the journal concerned"}}:
 				</label>
 				<div class="input-div">
-					<input type="text" name="profile.journal" value="{{current_user_data.profile.journal}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
+					<input data-toggle="modal" value='{{_ "Please select more journal name"}}' data-target="#Modal1" style="width:100%;background-color: #dddddd;">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
+				</div>
+				<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   <div class="modal-dialog">
+					  <div class="modal-content">
+						 <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h2 class="modal-title" id="myModalLabel">
+							   {{_ "Journal name"}}
+							</h2>
+						 </div>
+						 <div class="modal-body">
+							<h4>
+								<input type="checkbox">&nbsp;&nbsp;{{_ "All the options"}}<hr>
+								{{#each publicationList}}
+								<input type="checkbox" name="{{_id}}">&nbsp;&nbsp;{{title}}<br>
+								{{else}}
+								{{_"No publications found!"}}
+								{{/each}}
+							</h4>
+						 </div>
+						 <div class="modal-footer">
+							<button type="button" class="btn btn-default" 
+							   data-dismiss="modal">
+							   {{_ "Cancel"}}
+							</button>
+							<button type="button" class="btn btn-primary">
+							   {{_ "OK"}}
+							</button>
+						 </div>
+					  </div>
+				   </div>
 				</div>
 			</div>
 			<div class="form-group  field-profile-subject">
@@ -82,11 +113,42 @@
 					{{_ "Please select a subject type"}}:
 				</label>
 				<div class="input-div">
-					<input type="text" name="profile.subject" value="{{current_user_data.profile.subject}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
+					<input data-toggle="modal" value='{{_ "Please select a subject matter (level 1)"}}' data-target="#Modal2" style="width:100%;background-color: #dddddd;">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
+				</div>
+				<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   <div class="modal-dialog">
+					  <div class="modal-content">
+						 <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h2 class="modal-title" id="myModalLabel">
+							   {{_ "The topic name"}}
+							</h2>
+						 </div>
+						 <div class="modal-body">
+							<h4>
+								<input type="checkbox">&nbsp;&nbsp;{{_ "All the options"}}<hr>
+								{{#each topicList}}
+								<input type="checkbox" name="{{_id}}">&nbsp;&nbsp;{{name}}<br>
+								{{else}}
+								{{_ "No topics found!"}}
+								{{/each}}
+							</h4>
+						 </div>
+						 <div class="modal-footer">
+							<button type="button" class="btn btn-default" 
+							   data-dismiss="modal">
+							   {{_ "Cancel"}}
+							</button>
+							<button type="button" class="btn btn-primary">
+							   {{_ "OK"}}
+							</button>
+						 </div>
+					  </div>
+				   </div>
 				</div>
 			</div>
 			<div class="form-group  field-profile-phone">

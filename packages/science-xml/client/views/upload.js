@@ -90,6 +90,7 @@ var importXmlByLogId = function (logId) {
                 references:result.references,
                 affiliations: result.affiliations,
                 articleMetaStr: result.articleMetaStr,
+                authorNotes: result.authorNotes,
                 issue: result.issue,
                 volume: result.volume
             });

@@ -17,6 +17,7 @@ Meteor.methods({
         var results = {};
         results.errors = [];
         results.authors = [];
+        results.authorNotes = [];
         results.references = [];
 
         //Step 1: get the file
@@ -118,16 +119,20 @@ Meteor.methods({
         var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
         results.articleMetaStr = results.journalTitle + ' <b>' + pubVolume + '</b>, '+ elocationId + '('+pubYear+')';
 
-        var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
+        var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
-            var surname = xpath.select("child::surname/text()", author).toString();
-            var given = xpath.select("child::given-names/text()", author).toString();
+            var surname = xpath.select("child::name/surname/text()", author).toString();
+            var given = xpath.select("child::name/given-names/text()", author).toString();
+            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
             if(surname === undefined){
                 results.errors.push("No surname found");
             } else if(given === undefined){
                 results.errors.push("No given name found");
-            } else{
+            } else if(emailRef == false){
                 var fullName ={given: given, surname: surname};
+                results.authors.push(fullName);
+            } else{
+                var fullName ={emailRef: emailRef,given: given, surname: surname};
                 results.authors.push(fullName);
             }
         });
@@ -149,6 +154,20 @@ Meteor.methods({
                 results.references.push({ref: text, doi: doi});
             } else{
                 results.references.push({ref: text});
+            }
+        });
+
+        var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
+        authorNotesNodes.forEach(function (note) {
+            var noteLabel = xpath.select("child::label/text()", note).toString();
+            var email = xpath.select("descendant::ext-link/text()", note).toString();
+            if(noteLabel === undefined){
+                results.errors.push("No noteLabel found");
+            } else if(email === undefined){
+                results.errors.push("No email found");
+            } else{
+                var enrty ={label: noteLabel, email: email};
+                results.authorNotes.push(enrty);
             }
         });
 
