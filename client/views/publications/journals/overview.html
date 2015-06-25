@@ -20,18 +20,19 @@
     </div>
   </div>
   <hr>
+  {{> latestArticles}}
 </template>
 
 <template name="latestArticles">
-    <div class="row">
-        <div class="col-xs-12">
-            <h4>{{_ "Latest Articles"}}</h4>
-            {{#each lateArticles}}
-            <h5><a href={{url}}>{{title}}</a></h5>
-            {{else}}
-            {{_"No articles found!"}}
-            {{/each}}
-            <br/>
-        </div>   
-    </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>{{_ "Latest Articles"}}</h4>
+      {{#each lateArticles}}
+      <h5><a href={{urlToArticle title}}>{{title}}</a></h5>
+      {{else}}
+      {{_"No articles found!"}}
+      {{/each}}
+      <br/>
+    </div>   
+  </div>
 </template>
