@@ -54,7 +54,6 @@ var importXmlByLogId = function (logId) {
     //get failed state
     var log = UploadLog.findOne({_id: logId});
     if (log.errors.length) { //if file is not xml guard then return
-        //console.log(log.errors.length)
         Session.set('errors', log.errors);
         Session.set("result", undefined);
         return;
@@ -77,12 +76,9 @@ var importXmlByLogId = function (logId) {
             Session.set('errors', log.errors);
             Session.set("result", result);
             if (log.errors.length) {
-                //console.log(log.errors.length);
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
                 return;
             }
-            //TODO: if doi is not already found then add to articles collection
-            var existingArticle = Articles.findOne({doi: result.doi});
 
             Articles.insert({
                 doi: result.doi,
@@ -93,7 +89,9 @@ var importXmlByLogId = function (logId) {
                 publisher:result.publisher,
                 references:result.references,
                 affiliations: result.affiliations,
-                articleMetaStr: result.articleMetaStr
+                articleMetaStr: result.articleMetaStr,
+                issue: result.issue,
+                volume: result.volume
             });
             UploadLog.update(
                 {_id: logId},

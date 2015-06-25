@@ -59,6 +59,11 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-unstyled">
+                        {{#each errors}}
+                            <li class="bg-danger">{{this}}</li>
+                        {{else}}
+                            {{_ "Xml Import Successful!"}}
+                        {{/each}}
                         {{#if results}}
                             <li>{{_ "DOI"}}: {{results.doi}}</li>
                             <li>{{_ "Title"}}: {{results.title}}</li>
@@ -80,9 +85,6 @@
                             <li>{{_ "Publisher"}}: {{results.publisherName}}</li>
                             <li>{{_ "Abstract"}}: {{results.abstract}}</li>
                         {{/if}}
-                        {{#each errors}}
-                            <li class="bg-danger">{{this}}</li>
-                        {{/each}}
                     </ul>
                 </div>
                 <div class="modal-footer">
