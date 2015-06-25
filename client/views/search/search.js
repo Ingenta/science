@@ -29,7 +29,7 @@ Template.SearchResults.helpers({
             return Articles.find({ topic: t});
         }
         var a = Router.current().params.authorQuery;
-        return  Articles.find({ authors: a});//TODO: fix this
+            return  Articles.find({"authors.given" : a.split(" ")[1],"authors.surname" : a.split(" ")[0]});
     },
     'filters':function(){
         return [{
