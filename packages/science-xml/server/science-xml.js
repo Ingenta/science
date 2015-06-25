@@ -131,9 +131,15 @@ Meteor.methods({
 
         var refNodes = xpath.select("//ref", doc);
         refNodes.forEach(function (ref) {
-            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-            var text =  xpath.select("descendant::text()", ref).toString();
-//            console.log(text);
+
+            var refNodes = xpath.select("descendant::text()", ref);
+            var text = "";
+            if(refNodes[0]) {
+                refNodes.forEach(function (reference) {
+                    text += reference.data;
+                });
+            }
+//            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
             results.references.push(text);
         });
 

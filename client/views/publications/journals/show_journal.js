@@ -94,3 +94,4 @@ Template.aboutArticlesList.helpers({
         return AboutArticles.find({about: aboutId});
     }
 });
+
