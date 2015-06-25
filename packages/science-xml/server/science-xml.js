@@ -119,10 +119,11 @@ Meteor.methods({
         var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
         results.articleMetaStr = results.journalTitle + ' <b>' + pubVolume + '</b>, '+ elocationId + '('+pubYear+')';
 
-        var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
+        var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
-            var surname = xpath.select("child::surname/text()", author).toString();
-            var given = xpath.select("child::given-names/text()", author).toString();
+            var surname = xpath.select("child::name/surname/text()", author).toString();
+            var given = xpath.select("child::name/given-names/text()", author).toString();
+            var lablel = xpath.select("child::given-names/text()", author).toString();
             if(surname === undefined){
                 results.errors.push("No surname found");
             } else if(given === undefined){
