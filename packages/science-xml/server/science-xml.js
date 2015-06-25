@@ -3,8 +3,11 @@ if (Meteor.isServer) {
         cb && cb(null, HTTP.get(path).content);
     }
     var getXmlFromPath = function (path) {
-        var getLocationSync = Meteor.wrapAsync(getLocationAsync)
-        return getLocationSync(Meteor.absoluteUrl(path));
+        var getLocationSync = Meteor.wrapAsync(getLocationAsync);
+        //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+        if(path===undefined)return;
+        var fullPath = Meteor.absoluteUrl(path.substring(1));
+        return getLocationSync(fullPath);
     }
 }
 
@@ -18,7 +21,8 @@ Meteor.methods({
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
-        //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
+
+        //Step 2: Parse the file
         var xmlErrors = [];
         var xmlDom = new dom({
             errorHandler: function(msg){
@@ -127,10 +131,19 @@ Meteor.methods({
 
         var refNodes = xpath.select("//ref", doc);
         refNodes.forEach(function (ref) {
+            var refNodes = xpath.select("descendant::text()", ref);
+            var text = "";
+            if(refNodes[0]) {
+                refNodes.forEach(function (reference) {
+                    text += reference.data;
+                });
+            }
             var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-            var text =  xpath.select("descendant::text()", ref).toString();
-//            console.log(text);
-            results.references.push(text);
+            if(doi){
+                results.references.push({ref: text, doi: doi});
+            } else{
+                results.references.push({ref: text});
+            }
         });
 
         return results;

@@ -12,13 +12,6 @@
                     {{/each}}
                 </p>
                 {{> affiliation}}
-                <div class="row">
-                    <div class="col-xs-3">作者电子邮箱:</div>
-                    <div class="col-xs-9">
-                        <ul class="list-unstyled">mattmcc@wsu.edasdu</ul>
-                        <ul class="list-unstyled">mattmcc@wsu.edu</ul>
-                    </div>
-                </div>
                 <p>2014, 59(32): 3109-3119 <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
                         class="fa fa-external-link"></i></a></p>
 
@@ -86,7 +79,9 @@
         {{/tabContent}}
 
         {{#tabContent slug="references"}}
-            {{> ReferencesTemplate}}
+            {{#with context}}
+                {{> ReferencesTemplate}}
+            {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="cited by"}}
@@ -121,8 +116,7 @@
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab"
-                                                                                 data-toggle="tab">{{name}}</a>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
                 </li>
             {{/each}}
         </ul>
@@ -134,6 +128,7 @@
         </div>
     </div>
 </template>
+
 <template name="AbstractTemplate">
     <div class="row">
         <div class="col-xs-9">
@@ -164,38 +159,14 @@
 
 <template name="ReferencesTemplate">
     <div>
-        <p style="margin-bottom">
-            1 蓝强. 表面活性物质与纳米颗粒协同稳定的Pickering 乳液. 博士学位论文. 济南: 山东大学, 2007http://dx.doi.org/10.1063/1.1412588
-        </p>
-
-        <p style="margin-bottom">
-            2 Binks B P, Fletcher P D. Particles adsorbed at the oil-water Interface: A theoretical comparison between
-            spheres of uniform wettability and “Janus” particles. Langmuir, 2001, 17: 4708–4710
-            http://dx.doi.org/10.1063/1.1412588
-        </p>
-
-        <p style="margin-bottom">
-            3 Glaser N, Adams D J, Krausch G, et al. Janus particles at liquid-liquid interfaces. Langmuir, 2006, 22:
-            5227–5229
-            http://dx.doi.org/10.1063/1.1412588
-        </p>
-
-        <p style="margin-bottom">
-            4 Ruiz M P, Faria J, Resasco D E, et al. Nanostructured carbon-metal oxide hybrids as amphiphilic emulsion
-            catalysts.
-            ChemSusChem, 2011, 4:964–974 http://dx.doi.org/10.1063/1.1412588
-        </p>
-
-        <p style="margin-bottom">
-            5 樊丽曼, 于畅, 邱介山, 等. CNT-TiO2 复合物的制备及其乳液催化苯甲醇选择氧化. 新型碳材料, 2013, 28: 289–294
-            http://dx.doi.org/10.1063/1.1412588
-        </p>
-
-        <p style="margin-bottom">
-            6 Yu C, Fan L M, Qiu J S, et al. Phase-reversal emulsion catalysis with CNT–TiO2 nanohybrids for the
-            selective oxidation of benzyl alcohol. Chem Eur J, 2013, 19: 16192–16195 htt
-            org/10.1063/1.1412588
-        </p>
+        {{#each references}}
+            <p>
+                {{this.ref}}
+                {{#if this.doi}}
+                    <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i class="fa fa-external-link"></i></a>
+                {{/if}}
+            </p>
+        {{/each}}
     </div>
 </template>
 
