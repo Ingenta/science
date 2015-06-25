@@ -26,6 +26,11 @@ Template.uploadForm.events({
     }
 });
 
+Template.AdminUpload.helpers({
+    uploadHistory: function () {
+        return UploadLog.find({},{sort: {'uploadedAt': -1}});
+    }
+});
 Template.UploadLogModal.helpers({
     results: function () {
         return Session.get("result");
@@ -98,9 +103,4 @@ var importXmlByLogId = function (logId) {
     });
 }
 
-Template.AdminUpload.helpers({
-    uploadHistory: function () {
-        return UploadLog.find();
-    }
-});
 
