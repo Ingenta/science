@@ -28,7 +28,7 @@ Template.uploadForm.events({
 
 Template.UploadLogModal.helpers({
     results: function () {
-        return Session.get("title");
+        return Session.get("result");
     },
     errors: function () {
         return Session.get("errors");
@@ -51,7 +51,7 @@ var importXmlByLogId = function (logId) {
     if (log.errors.length) { //if file is not xml guard then return
         //console.log(log.errors.length)
         Session.set('errors', log.errors);
-        Session.set("title", undefined);
+        Session.set("result", undefined);
         return;
     }
 
@@ -63,16 +63,14 @@ var importXmlByLogId = function (logId) {
             console.log(error);
             log.errors.push(error);
             Session.set('errors', log.errors);
-            Session.set("title", undefined);
+            Session.set("result", undefined);
             UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
         } else {
             //add article object to session
-            //console.log(result)
-
             if (result.errors)
                 log.errors = result.errors;
             Session.set('errors', log.errors);
-            Session.set("title", result);
+            Session.set("result", result);
             if (log.errors.length) {
                 //console.log(log.errors.length);
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
@@ -89,7 +87,8 @@ var importXmlByLogId = function (logId) {
                 journalId:result.journalId,
                 publisher:result.publisher,
                 references:result.references,
-                affiliations: result.affiliations
+                affiliations: result.affiliations,
+                articleMetaStr: result.articleMetaStr
             });
             UploadLog.update(
                 {_id: logId},

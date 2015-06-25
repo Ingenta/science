@@ -4,7 +4,8 @@ if (Meteor.isServer) {
     }
     var getXmlFromPath = function (path) {
         var getLocationSync = Meteor.wrapAsync(getLocationAsync);
-        //remove first / from path because meteor absolute url includes it
+        //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+        if(path===undefined)return;
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
@@ -21,7 +22,7 @@ Meteor.methods({
         //Step 1: get the file
         var xml = getXmlFromPath(path);
 
-        //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
+        //Step 2: Parse the file
         var xmlErrors = [];
         var xmlDom = new dom({
             errorHandler: function(msg){
@@ -64,6 +65,9 @@ Meteor.methods({
         var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
+        //TODO: if doi is already found then add to articles collection
+        //var existingArticle = Articles.findOne({doi: results.doi});
+        //if(existingArticle!==undefined)results.errors.push("Article found matching this DOI: "+results.doi);
 
         var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
         if(affNode[0] !== undefined) {
@@ -109,7 +113,10 @@ Meteor.methods({
             results.abstract = abstractText;
         }
 
-
+        var pubYear = xpath.select("//pub-date/year/text()", doc).toString();
+        var pubVolume = xpath.select("//article-meta/volume/text()", doc).toString();
+        var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
+        results.articleMetaStr = results.journalTitle + ' <b>' + pubVolume + '</b>, '+ elocationId + '('+pubYear+')';
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
         authorNodes.forEach(function (author) {
@@ -130,7 +137,6 @@ Meteor.methods({
 
         var refNodes = xpath.select("//ref", doc);
         refNodes.forEach(function (ref) {
-
             var refNodes = xpath.select("descendant::text()", ref);
             var text = "";
             if(refNodes[0]) {
@@ -138,8 +144,12 @@ Meteor.methods({
                     text += reference.data;
                 });
             }
-//            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-            results.references.push(text);
+            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
+            if(doi){
+                results.references.push({ref: text, doi: doi});
+            } else{
+                results.references.push({ref: text});
+            }
         });
 
         return results;
