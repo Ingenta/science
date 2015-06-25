@@ -88,6 +88,7 @@ var importXmlByLogId = function (logId) {
                 abstract: result.abstract,
                 journalId:result.journalId,
                 publisher:result.publisher,
+                references:result.references,
                 affiliations: result.affiliations
             });
             UploadLog.update(
