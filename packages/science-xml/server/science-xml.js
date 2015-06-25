@@ -67,8 +67,8 @@ Meteor.methods({
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
         //TODO: if doi is already found then add to articles collection
-        //var existingArticle = Articles.findOne({doi: results.doi});
-        //if(existingArticle!==undefined)results.errors.push("Article found matching this DOI: "+results.doi);
+        var existingArticle = Articles.findOne({doi: results.doi});
+        if(existingArticle!==undefined)results.errors.push("Article found matching this DOI: "+results.doi);
 
         var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
         if(affNode[0] !== undefined) {
