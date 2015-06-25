@@ -25,10 +25,7 @@ Template.deletePublicationModalForm.helpers({
 Template.SinglePublication.helpers({
   getJournalUrl: function (title) {
    return Router.current().url+"/journal/"+title;
- },
- getPublisherNameById: function (id) {
-  return Publishers.findOne({_id:id}).name;
-}
+ }
 });
 
 AutoForm.addHooks(['addPublicationModalForm'], {

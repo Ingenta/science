@@ -45,9 +45,6 @@ Template.FilterList.helpers({
 	},
 	selectedPublisher: function(){
 		return Session.get('filterPublisher');
-	},
-	getPublisherNameById: function (id) {
-		return Publishers.findOne({_id:id}).name;
 	}
 
 });
