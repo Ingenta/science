@@ -96,6 +96,12 @@ Template.UserSettingsUpdateInformationForm.helpers({
 	},
 	"errorMessage": function() {
 		return pageSession.get("userSettingsUpdateInformationFormErrorMessage");
-	}
-	
+	},
+	publicationList: function () {
+		//alert(Publications.find());
+		return Publications.find().fetch();
+    },
+	topicList: function () {
+        return  Topics.find({"parentId" : null});
+    }
 });

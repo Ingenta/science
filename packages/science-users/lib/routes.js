@@ -91,7 +91,13 @@ Meteor.startup(function(){
     });
     Router.route("user_settings.update_information", {
         path: "/user_settings/update_information",
-        controller: "UserSettingsUpdateInformationController"
+        controller: "UserSettingsUpdateInformationController",
+		waitOn:function () {
+            return [
+                Meteor.subscribe('topics'),
+                Meteor.subscribe('publications')
+            ]
+        }
     });
     Router.route("logout", {
         path: "/logout",
