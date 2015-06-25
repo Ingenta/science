@@ -4,7 +4,9 @@ if (Meteor.isServer) {
     }
     var getXmlFromPath = function (path) {
         var getLocationSync = Meteor.wrapAsync(getLocationAsync);
-        //remove first / from path because meteor absolute url includes it
+        //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+        if(path===undefined)return;
+        //if(_.startsWith())
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
@@ -21,7 +23,7 @@ Meteor.methods({
         //Step 1: get the file
         var xml = getXmlFromPath(path);
 
-        //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
+        //Step 2: Parse the file
         var xmlErrors = [];
         var xmlDom = new dom({
             errorHandler: function(msg){
