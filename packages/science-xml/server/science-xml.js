@@ -17,6 +17,7 @@ Meteor.methods({
         var results = {};
         results.errors = [];
         results.authors = [];
+        results.authorNotes = [];
         results.references = [];
 
         //Step 1: get the file
@@ -149,6 +150,20 @@ Meteor.methods({
                 results.references.push({ref: text, doi: doi});
             } else{
                 results.references.push({ref: text});
+            }
+        });
+
+        var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
+        authorNotesNodes.forEach(function (note) {
+            var noteLabel = xpath.select("child::label/text()", note).toString();
+            var email = xpath.select("descendant::ext-link/text()", note).toString();
+            if(noteLabel === undefined){
+                results.errors.push("No noteLabel found");
+            } else if(email === undefined){
+                results.errors.push("No email found");
+            } else{
+                var enrty ={label: noteLabel, email: email};
+                results.authorNotes.push(enrty);
             }
         });
 

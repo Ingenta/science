@@ -12,8 +12,14 @@
                     {{/each}}
                 </p>
                 {{> affiliation}}
-                <p>{{{articleMetaStr}}}; <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
-                        class="fa fa-external-link"></i></a></p>
+
+                <p>
+                    {{#each authorNotes}}
+                        <i>{{label}} <a target="xrefwindow" href="mailto:{{email}}">{{email}}</a></i>
+                    {{/each}}
+                </p>
+
+                <p>{{{articleMetaStr}}}; <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a></p>
 
                 <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
             </ul>
