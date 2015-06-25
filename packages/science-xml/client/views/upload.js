@@ -55,9 +55,10 @@ var importXmlByLogId = function (logId) {
         return;
     }
 
-    var path = ArticleXml.findOne({_id: log.fileId}).url();
+    var id = log.fileId;
+    var path = ArticleXml.findOne({_id: id}).url();
     //call parse and put results in session
-    Meteor.call('parseXml', path, function (error, results) {
+    Meteor.call('parseXml', path, function (error, result) {
         if (error) {
             console.log(error);
             log.errors.push(error);
@@ -66,24 +67,28 @@ var importXmlByLogId = function (logId) {
             UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
         } else {
             //add article object to session
-            if (results.errors)
-                log.errors = results.errors;
+            if (result.errors)
+                log.errors = result.errors;
             Session.set('errors', log.errors);
-            Session.set("result", results);
+            Session.set("result", result);
             if (log.errors.length) {
+                //console.log(log.errors.length);
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
                 return;
             }
+            //TODO: if doi is not already found then add to articles collection
+            var existingArticle = Articles.findOne({doi: result.doi});
 
             Articles.insert({
-                doi: results.doi,
-                title: results.title,
-                authors:results.authors,
-                abstract: results.abstract,
-                journalId:results.journalId,
-                publisher:results.publisher,
-                references:results.references,
-                affiliations: results.affiliations
+                doi: result.doi,
+                title: result.title,
+                authors:result.authors,
+                abstract: result.abstract,
+                journalId:result.journalId,
+                publisher:result.publisher,
+                references:result.references,
+                affiliations: result.affiliations,
+                articleMetaStr: result.articleMetaStr
             });
             UploadLog.update(
                 {_id: logId},
