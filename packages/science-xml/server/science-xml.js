@@ -134,7 +134,6 @@ Meteor.methods({
 
         var refNodes = xpath.select("//ref", doc);
         refNodes.forEach(function (ref) {
-
             var refNodes = xpath.select("descendant::text()", ref);
             var text = "";
             if(refNodes[0]) {
@@ -142,8 +141,12 @@ Meteor.methods({
                     text += reference.data;
                 });
             }
-//            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-            results.references.push(text);
+            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
+            if(doi){
+                results.references.push({ref: text, doi: doi});
+            } else{
+                results.references.push({ref: text});
+            }
         });
 
         return results;
