@@ -93,17 +93,8 @@
         </div>
     </div>
 </template>
-<template name="journalDescription">
-    {{#if description}}
-        <p>
-            <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#journalDescShow{{_id}}"
-               aria-expanded="false" aria-controls="journalDescShow{{_id}}"></i>
-            {{_ "Details"}}: </p>
 
-        <div class="collapse" id="journalDescShow{{_id}}">
-            <ul class="list-unstyled">
-                <li>{{description}}</li>
-            </ul>
-        </div>
-    {{/if}}
+<template name="journalDescription">
+    {{> toggleField field=description _id=_id}}
 </template>
+

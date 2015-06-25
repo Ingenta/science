@@ -21,14 +21,5 @@
 </template>
 
 <template name="abstractDetails">
-    <p>
-        <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#articleDetailShow{{_id}}"
-           aria-expanded="false" aria-controls="articleDetailShow{{_id}}"></i>
-        {{_ "Details"}}: </p>
-
-    <div class="collapse pull-right" id="articleDetailShow{{_id}}">
-        <ul class="list-unstyled">
-            <li>{{abstract}}</li>
-        </ul>
-    </div>
+    {{> toggleField field=abstract _id=_id}}
 </template>
