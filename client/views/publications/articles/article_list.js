@@ -28,17 +28,13 @@ Template.articleListTree.events({
     }
 });
 
-Template.addArticleButton.helpers({
-    initPage:function(id,publisher){
-        Session.set('currentJournalId',id);
-        Session.set('currPublisher',publisher);
-    }
-});
+
 
 Template.articleListRight.helpers({
     articles:function(){
         if(Config.isDevMode){
-            q={};
+            var journalId=Session.get('currentJournalId');
+            q={journalId:journalId};
         }else{
             var curIssue=Session.get("currIssue");
             if(!curIssue){

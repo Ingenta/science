@@ -1,4 +1,5 @@
 <template name="ShowJournal">
+    {{ initPage _id publisher}}
     <div class="pull-right">
         {{#if isAdmin }}
         {{> updatePublicationBannerModalForm}}
@@ -7,8 +8,6 @@
     {{> journalBanner}}
     <br>
     {{#if isAdmin }}
-    {{> addArticleButton}}
-    <!-- {{> uploadArticleButton}} -->
     <div class="pull-right">
         {{> updateJournalTabsModalForm}}
     </div>
@@ -29,6 +28,7 @@
     {{#with context}}
     {{> JournalOverview}}
     {{/with}}
+    {{> latestArticles}}
     {{/tabContent}}
 
     {{#tabContent slug="Browse"}}

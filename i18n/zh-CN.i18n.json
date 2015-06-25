@@ -1,4 +1,6 @@
 {
+    "Latest Articles" : "最新文章", 
+    "Most recent articles" : "最新阅读资源",
     "Month" : "月",
     "Year" : "年",
     "Title": "标题",
@@ -14,13 +16,13 @@
     "No abstract found": "没找到摘要",
     "No author found": "没找到作者",
 
-
+    "Article Language" : "语种类型",
     "Date": "日期",
     "Status": "状态",
     "Pending": "未决定",
     "Upload": "上传",
     "moreContentBy":"作者其他文章",
-    "inStation":"本平台",
+    "Go to author page" :"本平台",
     "PasswordResetInstructions":"密码重置邮件已发到您的邮箱",
     "Submit": "提交",
     "Search results": "搜索文章查看",

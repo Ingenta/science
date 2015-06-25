@@ -3,22 +3,28 @@
         <li>
             <h4><img src="/icon_access_oa.gif"><a href="{{urlToArticle title}}">{{title}}</a></h4>
             <ul class="list-unstyled">
-              <li>
-                  {{#each authors}}
-                    {{> authorPopButton name=getFullName}},
-                  {{/each}}
-              </li>
-              <li>
-                  <a href="{{urlToJournal title}}">{{journalName journalId}}</a>
-                  2014, 59(32): 3109-3119 http://dx.doi.org/10.1063/1.3693970
-              </li>
-              <li>{{_ "Language"}} : {{_ "Chinese"}}</li>
-              <li><a href="#" class="onup"><b class="caret"></b>{{_ "Details"}}</a>
-                <ul class="list-unstyled detail-ul">
-                    <li>{{abstract}}</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
+                <li>
+                    {{#each authors}}
+                        {{> authorPopButton name=getFullName}}
+                    {{/each}}
+                </li>
+                <li>
+                    <a href="{{urlToJournal title}}">{{journalName journalId}}</a>
+                    2014, 59(32): 3109-3119 <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
+                        class="fa fa-external-link"></i></a>
+                </li>
+                <li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+                <p>
+                    <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#articleDetailShow"
+                       aria-expanded="false" aria-controls="articleDetailShow"></i>
+                    {{_ "Details"}}: </p>
+
+                <div class="collapse pull-right" id="articleDetailShow">
+                    <ol>
+                        <li>{{abstract}}</li>
+                    </ol>
+                </div>
+            </ul>
+        </li>
+    </ul>
 </template>

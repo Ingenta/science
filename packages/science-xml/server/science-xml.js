@@ -3,8 +3,10 @@ if (Meteor.isServer) {
         cb && cb(null, HTTP.get(path).content);
     }
     var getXmlFromPath = function (path) {
-        var getLocationSync = Meteor.wrapAsync(getLocationAsync)
-        return getLocationSync(Meteor.absoluteUrl(path));
+        var getLocationSync = Meteor.wrapAsync(getLocationAsync);
+        //remove first / from path because meteor absolute url includes it
+        var fullPath = Meteor.absoluteUrl(path.substring(1));
+        return getLocationSync(fullPath);
     }
 }
 
@@ -14,9 +16,11 @@ Meteor.methods({
         var results = {};
         results.errors = [];
         results.authors = [];
+        results.references = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
+
         //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
         var xmlErrors = [];
         var xmlDom = new dom({
@@ -61,10 +65,16 @@ Meteor.methods({
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
 
+        var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
+        if(affNode[0] !== undefined) {
+            results.affiliations = "";
+            affNode.forEach(function (affiliation) {
+                results.affiliations += affiliation.data;
+            });
+        }
 
         var issnNode = xpath.select("//issn[@pub-type='ppub']/text()", doc)[0];
-        if (issnNode === undefined) results.errors.push("No issn found");
-        else results.issn = issnNode.data;
+        if(issnNode !== undefined) results.issn = issnNode.data;
 
         var essnNode = xpath.select("//issn[@pub-type='epub']/text()", doc)[0];
         if (essnNode === undefined) results.errors.push("No essn found");
@@ -118,6 +128,13 @@ Meteor.methods({
             results.errors.push("No author found");
         }
 
+        var refNodes = xpath.select("//ref", doc);
+        refNodes.forEach(function (ref) {
+            var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
+            var text =  xpath.select("descendant::text()", ref).toString();
+//            console.log(text);
+            results.references.push(text);
+        });
 
         return results;
     }

@@ -13,16 +13,18 @@ Template.journalOptions.helpers({
         return Publications.findOne({title: currentTitle});
     }
 });
+Template.ShowJournal.helpers({
+    initPage:function(id,publisher){
+        Session.set('currentJournalId',id);
+        Session.set('currPublisher',publisher);
+    }
+});
 Template.journalOptions.helpers({
     tabs: function () {
         var tabList = [];
-//            { name: TAPi18n.__("Overview"), slug: 'Overview' },
-//            { name: TAPi18n.__("Browse"), slug: 'Browse' },
-//            { name: TAPi18n.__("About"), slug: 'About' }
         var currentTitle = Router.current().params.journalTitle;
         var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {
-//            tabList.push({ name: TAPi18n.__(t), slug: t });
             if(t==="Overview"){
                 tabList.push({ name: TAPi18n.__("Overview"), slug: 'Overview' });
                 tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
@@ -91,4 +93,10 @@ Template.aboutArticlesList.helpers({
         var aboutId = Session.get('tabAbout');
         return AboutArticles.find({about: aboutId});
     }
+});
+
+Template.latestArticles.helpers({
+ lateArticles: function () {
+   return Articles.find({}, {sort: {createdAt: -1}, limit: 3}); 
+ }
 });
