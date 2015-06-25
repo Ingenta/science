@@ -325,7 +325,7 @@ Router.map(function () {
 
     });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle/article/:articleName', {
+    this.route('/publisher/:publisherName/journal/:journalTitle/article/:volume/:issue/:articleName', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             var journal = Publications.findOne({title: this.params.journalTitle});

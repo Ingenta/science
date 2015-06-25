@@ -3,7 +3,8 @@ Meteor.startup(function () {
     Topics.remove({})
     if (Topics.find().count() === 0) {
         var names = [
-            {e: "Science", c: "科学", sub: [
+            {
+                e: "Science", c: "科学", sub: [
                 {e: "Mathematics", c: "数理科学"},
                 {e: "Chemistry", c: "化学"},
                 {e: "Biology", c: "生物学"},
@@ -12,8 +13,10 @@ Meteor.startup(function () {
                 {e: "Archaeology and history of science and technology", c: "考古学与科技史"},
                 {e: "Economics | Management Science | Law", c: "经济学 | 管理学 | 法学"},
                 {e: "Popularization of science", c: "科普"}
-            ]},
-            {e: "Technology", c: "技术", sub: [
+            ]
+            },
+            {
+                e: "Technology", c: "技术", sub: [
                 {e: "Engineering basic science", c: "工程基础科学"},
                 {e: "Electronics | Communications | Electro-optical technology", c: "电子 | 通信 | 光电技术"},
                 {e: "Computer and information technology", c: "计算机与信息技术"},
@@ -26,8 +29,10 @@ Meteor.startup(function () {
                 {e: "Machinery |  Light industry  | Food industry", c: "机械 | 轻工 | 食品"},
                 {e: "Agroforestry technology", c: "农林技术"},
                 {e: "General engineering technology", c: "总论工程技术"}
-            ]},
-            {e: "Medicine", c: "医学", sub: [
+            ]
+            },
+            {
+                e: "Medicine", c: "医学", sub: [
                 {e: "General practice | Anthology | Reference", c: "总论 | 文集 | 工具书"},
                 {e: "Clinical medicine", c: "临床医学"},
                 {e: "Preclinical medicine", c: "基础医学"},
@@ -38,8 +43,10 @@ Meteor.startup(function () {
                 {e: "Medical textbook", c: "医学教材"},
                 {e: "Medical exams | Exercise books", c: "医学考试 | 教辅"},
                 {e: "Related subjects", c: "医药相关学科"}
-            ]},
-            {e: "Education", c: "教育", sub: [
+            ]
+            },
+            {
+                e: "Education", c: "教育", sub: [
                 {e: "Science", c: "理科类"},
                 {e: "Engineering", c: "工科类"},
                 {e: "Agriculture and forestry", c: "农林类"},
@@ -47,7 +54,8 @@ Meteor.startup(function () {
                 {e: "Economic management method", c: "经管法"},
                 {e: "Language  |  Literature  |  Art", c: "语言  |  文学  |  艺术类"},
                 {e: "Pedagogy", c: "师范类"}
-            ]}
+            ]
+            }
         ];
         _.each(names, function (name) {
             Topics.insert({

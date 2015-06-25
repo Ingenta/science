@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             {{#if isAdmin }}
-            {{> addTopicModalForm}}
+                {{> addTopicModalForm}}
             {{/if}}
         </div>
         <hr>
@@ -31,20 +31,20 @@
 <template name="SingleTopic">
     <li id="{{_id}}" class="topic-li">
         {{#if subTopicCount _id}}
-        {{#if isExpand _id}}
-        <i class="fa fa-minus" type="button"></i>
-        {{else}}
-        <i class="fa fa-plus" type="button"></i>
-        {{/if}}
+            {{#if isExpand _id}}
+                <i class="fa fa-minus" type="button"></i>
+            {{else}}
+                <i class="fa fa-plus" type="button"></i>
+            {{/if}}
         {{/if}}
         {{> TopicButtons}}
         <hr>
 
-            {{#each subTopics _id}}
-                <ul style="display:{{#if isParentExpand _id}}block;{{else}}none;{{/if}}">
-                    {{> SingleTopic}}
-                </ul>
-            {{/each}}
+        {{#each subTopics _id}}
+            <ul style="display:{{#if isParentExpand _id}}block;{{else}}none;{{/if}}">
+                {{> SingleTopic}}
+            </ul>
+        {{/each}}
 
     </li>
 </template>
@@ -61,7 +61,7 @@
 
 <template name="addTopicModalForm">
     {{#afModal class="btn btn-success" collection="Topics" operation="insert" omitFields="parentId" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
-    {{_ "Add new"}}
+        {{_ "Add new"}}
     {{/afModal}}
 </template>
 
@@ -74,13 +74,14 @@
     <a href="/topic/{{englishName}}">
         {{translateThis name englishName}}
     </a>
+
     <div class="pull-right">
         {{#if isAdmin }}
-        {{> addSubTopicModalForm}}
-        {{> updateTopicModalForm}}
-        {{#if hasSubTopic _id}}
-        {{> deleteTopicModalForm}}
-        {{/if}}
+            {{> addSubTopicModalForm}}
+            {{> updateTopicModalForm}}
+            {{#if hasSubTopic _id}}
+                {{> deleteTopicModalForm}}
+            {{/if}}
         {{/if}}
     </div>
 </template>

@@ -19,7 +19,8 @@
                     {{/each}}
                 </p>
 
-                <p>{{{articleMetaStr}}}; <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a></p>
+                <p>{{{articleMetaStr}}}; <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
+                        class="fa fa-external-link"></i></a></p>
 
                 <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
             </ul>
@@ -122,7 +123,8 @@
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab"
+                                                                                 data-toggle="tab">{{name}}</a>
                 </li>
             {{/each}}
         </ul>
@@ -169,7 +171,8 @@
             <p>
                 {{this.ref}}
                 {{#if this.doi}}
-                    <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i class="fa fa-external-link"></i></a>
+                    <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i
+                            class="fa fa-external-link"></i></a>
                 {{/if}}
             </p>
         {{/each}}
