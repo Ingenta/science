@@ -95,8 +95,3 @@ Template.aboutArticlesList.helpers({
     }
 });
 
-Template.latestArticles.helpers({
- lateArticles: function () {
-   return Articles.find({}, {sort: {createdAt: -1}, limit: 3}); 
- }
-});

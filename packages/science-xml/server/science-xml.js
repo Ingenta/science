@@ -4,7 +4,8 @@ if (Meteor.isServer) {
     }
     var getXmlFromPath = function (path) {
         var getLocationSync = Meteor.wrapAsync(getLocationAsync);
-        //remove first / from path because meteor absolute url includes it
+        //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+        if(path===undefined)return;
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
@@ -16,12 +17,13 @@ Meteor.methods({
         var results = {};
         results.errors = [];
         results.authors = [];
+        results.authorNotes = [];
         results.references = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
 
-        //Step 2: Parse the file TODO: figure out a way to get any namespace errors or validation and push them into the results object.
+        //Step 2: Parse the file
         var xmlErrors = [];
         var xmlDom = new dom({
             errorHandler: function(msg){
@@ -64,6 +66,9 @@ Meteor.methods({
         var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
+        //TODO: if doi is already found then add to articles collection
+        //var existingArticle = Articles.findOne({doi: results.doi});
+        //if(existingArticle!==undefined)results.errors.push("Article found matching this DOI: "+results.doi);
 
         var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
         if(affNode[0] !== undefined) {
@@ -109,18 +114,25 @@ Meteor.methods({
             results.abstract = abstractText;
         }
 
+        var pubYear = xpath.select("//pub-date/year/text()", doc).toString();
+        var pubVolume = xpath.select("//article-meta/volume/text()", doc).toString();
+        var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
+        results.articleMetaStr = results.journalTitle + ' <b>' + pubVolume + '</b>, '+ elocationId + '('+pubYear+')';
 
-
-        var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
+        var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
-            var surname = xpath.select("child::surname/text()", author).toString();
-            var given = xpath.select("child::given-names/text()", author).toString();
+            var surname = xpath.select("child::name/surname/text()", author).toString();
+            var given = xpath.select("child::name/given-names/text()", author).toString();
+            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
             if(surname === undefined){
                 results.errors.push("No surname found");
             } else if(given === undefined){
                 results.errors.push("No given name found");
-            } else{
+            } else if(emailRef == false){
                 var fullName ={given: given, surname: surname};
+                results.authors.push(fullName);
+            } else{
+                var fullName ={emailRef: emailRef,given: given, surname: surname};
                 results.authors.push(fullName);
             }
         });
@@ -130,10 +142,33 @@ Meteor.methods({
 
         var refNodes = xpath.select("//ref", doc);
         refNodes.forEach(function (ref) {
+            var refNodes = xpath.select("descendant::text()", ref);
+            var text = "";
+            if(refNodes[0]) {
+                refNodes.forEach(function (reference) {
+                    text += reference.data;
+                });
+            }
             var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-            var text =  xpath.select("descendant::text()", ref).toString();
-//            console.log(text);
-            results.references.push(text);
+            if(doi){
+                results.references.push({ref: text, doi: doi});
+            } else{
+                results.references.push({ref: text});
+            }
+        });
+
+        var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
+        authorNotesNodes.forEach(function (note) {
+            var noteLabel = xpath.select("child::label/text()", note).toString();
+            var email = xpath.select("descendant::ext-link/text()", note).toString();
+            if(noteLabel === undefined){
+                results.errors.push("No noteLabel found");
+            } else if(email === undefined){
+                results.errors.push("No email found");
+            } else{
+                var enrty ={label: noteLabel, email: email};
+                results.authorNotes.push(enrty);
+            }
         });
 
         return results;

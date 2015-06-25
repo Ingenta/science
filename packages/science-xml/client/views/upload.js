@@ -26,9 +26,14 @@ Template.uploadForm.events({
     }
 });
 
+Template.AdminUpload.helpers({
+    uploadHistory: function () {
+        return UploadLog.find({},{sort: {'uploadedAt': -1}});
+    }
+});
 Template.UploadLogModal.helpers({
     results: function () {
-        return Session.get("title");
+        return Session.get("result");
     },
     errors: function () {
         return Session.get("errors");
@@ -49,9 +54,8 @@ var importXmlByLogId = function (logId) {
     //get failed state
     var log = UploadLog.findOne({_id: logId});
     if (log.errors.length) { //if file is not xml guard then return
-        //console.log(log.errors.length)
         Session.set('errors', log.errors);
-        Session.set("title", undefined);
+        Session.set("result", undefined);
         return;
     }
 
@@ -63,23 +67,18 @@ var importXmlByLogId = function (logId) {
             console.log(error);
             log.errors.push(error);
             Session.set('errors', log.errors);
-            Session.set("title", undefined);
+            Session.set("result", undefined);
             UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
         } else {
             //add article object to session
-            //console.log(result)
-
             if (result.errors)
                 log.errors = result.errors;
             Session.set('errors', log.errors);
-            Session.set("title", result);
+            Session.set("result", result);
             if (log.errors.length) {
-                //console.log(log.errors.length);
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
                 return;
             }
-            //TODO: if doi is not already found then add to articles collection
-            var existingArticle = Articles.findOne({doi: result.doi});
 
             Articles.insert({
                 doi: result.doi,
@@ -88,7 +87,12 @@ var importXmlByLogId = function (logId) {
                 abstract: result.abstract,
                 journalId:result.journalId,
                 publisher:result.publisher,
-                affiliations: result.affiliations
+                references:result.references,
+                affiliations: result.affiliations,
+                articleMetaStr: result.articleMetaStr,
+                authorNotes: result.authorNotes,
+                issue: result.issue,
+                volume: result.volume
             });
             UploadLog.update(
                 {_id: logId},
@@ -98,9 +102,4 @@ var importXmlByLogId = function (logId) {
     });
 }
 
-Template.AdminUpload.helpers({
-    uploadHistory: function () {
-        return UploadLog.find();
-    }
-});
 

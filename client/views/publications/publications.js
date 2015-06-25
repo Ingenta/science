@@ -65,9 +65,6 @@ Template.FilterList.events({
 	'click .clearPublisher': function (event) {
 		Session.set('filterPublisher', undefined);
 	},
-	'click .onup': function(event){
-		$(event.target).next("ul").toggle();
-	},
 	'click .resetAlphabetFilter': function(event){
 		Session.set('firstletter', undefined);
 	}
