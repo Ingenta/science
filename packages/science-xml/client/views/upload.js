@@ -67,8 +67,6 @@ var importXmlByLogId = function (logId) {
             UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
         } else {
             //add article object to session
-            //console.log(result)
-
             if (result.errors)
                 log.errors = result.errors;
             Session.set('errors', log.errors);
