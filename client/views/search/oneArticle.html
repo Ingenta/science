@@ -14,17 +14,21 @@
                         class="fa fa-external-link"></i></a>
                 </li>
                 <li>{{_ "Language"}} : {{_ "Chinese"}}</li>
-                <p>
-                    <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#articleDetailShow"
-                       aria-expanded="false" aria-controls="articleDetailShow"></i>
-                    {{_ "Details"}}: </p>
-
-                <div class="collapse pull-right" id="articleDetailShow">
-                    <ol>
-                        <li>{{abstract}}</li>
-                    </ol>
-                </div>
+                {{> abstractDetails}}
             </ul>
         </li>
     </ul>
+</template>
+
+<template name="abstractDetails">
+    <p>
+        <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#articleDetailShow{{_id}}"
+           aria-expanded="false" aria-controls="articleDetailShow{{_id}}"></i>
+        {{_ "Details"}}: </p>
+
+    <div class="collapse pull-right" id="articleDetailShow{{_id}}">
+        <ul class="list-unstyled">
+            <li>{{abstract}}</li>
+        </ul>
+    </div>
 </template>

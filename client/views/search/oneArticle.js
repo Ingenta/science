@@ -1,8 +1,3 @@
-Template.oneArticle.events({
-    'click .onup': function(event){
-        $(event.target).next("ul").toggle();
-    }
-});
 Template.oneArticle.helpers({
     urlToArticle:function(title){
         var article =Articles.findOne({title:title});
