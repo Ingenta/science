@@ -123,13 +123,16 @@ Meteor.methods({
         authorNodes.forEach(function (author) {
             var surname = xpath.select("child::name/surname/text()", author).toString();
             var given = xpath.select("child::name/given-names/text()", author).toString();
-            var lablel = xpath.select("child::given-names/text()", author).toString();
+            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
             if(surname === undefined){
                 results.errors.push("No surname found");
             } else if(given === undefined){
                 results.errors.push("No given name found");
-            } else{
+            } else if(emailRef == false){
                 var fullName ={given: given, surname: surname};
+                results.authors.push(fullName);
+            } else{
+                var fullName ={emailRef: emailRef,given: given, surname: surname};
                 results.authors.push(fullName);
             }
         });
