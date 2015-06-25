@@ -27,7 +27,6 @@ mrt:flash-messages
 gwendall:autoform-i18n
 yogiben:autoform-modals
 monbro:iron-router-breadcrumb
-ongoworks:security
 cfs:filesystem
 cfs:standard-packages
 yogiben:autoform-file
@@ -46,3 +45,4 @@ http
 science-xml
 science-lib
 science-users
+ongoworks:security@1.1.0
