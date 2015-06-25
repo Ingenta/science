@@ -8,26 +8,14 @@
             "description": {
                 "label": "Description"
             },
-            "chinesedescription": {
-                "label": "Chinesedescription"
-            },
-            "firstletter": {
-                "label": "Firstletter"
-            },
-            "chinesefirstletter": {
-                "label": "Chinesefirstletter"
+            "shortTitle": {
+                "label": "Short Title"
             },
             "title": {
                 "label": "Publication Name"
             },
-            "chinesetitle": {
-                "label": "chinesetitle"
-            },
-            "urlname": {
-                "label": "Abbreviation"
-            },
             "accessKey": {
-                "label": "Choose a Access Key",
+                "label": "Choose an Access Key",
                 "options": {
                     "1": "Free Content",
                     "2": "Open Access Content",

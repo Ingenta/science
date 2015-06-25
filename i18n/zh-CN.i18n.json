@@ -156,22 +156,10 @@
             "description": {
                 "label": "英文描述"
             },
-            "chinesedescription": {
-                "label": "中文描述"
-            },
             "title": {
                 "label": "出版物名字"
             },
-            "chinesetitle": {
-                "label": "出版物中文名字"
-            },
-            "firstletter": {
-                "label": "英文首字母"
-            },
-            "chinesefirstletter": {
-                "label": "中文首字母"
-            },
-            "urlname": {
+            "shortTitle": {
                 "label": "简称"
             },
             "accessKey": {
@@ -190,6 +178,7 @@
                 "label": "选择横幅图片"
             },
             "tabSelections": {
+                "label": "选择标签页",
                 "options": {
                     "Overview": "期刊概述",
 //                    "Browse": "出版目录",

@@ -6,10 +6,10 @@ Template.onePublication.helpers({
 });
 Template.onePublisherInFilterList.helpers({
 	count: function (id) {
-		var first = Session.get('firstletter');
+		var first = Session.get('firstLetter');
 		if(first===undefined)
 			return Publications.find({publisher:id}).count();
-		return Publications.find({publisher:id,firstletter:first}).count();
+		return Publications.find({publisher:id,shortTitle:{ $regex : "^"+first, $options:"i" }}).count();
 	}
 });
 Template.PublicationsAlphabetBar.helpers({
@@ -35,10 +35,10 @@ Template.FilterList.helpers({
 	},
 	publications: function () {
 		var pubId = Session.get('filterPublisher');
-		var firstletter = Session.get('firstletter');
+		var first = Session.get('firstLetter');
 		var q={};
 		pubId && (q.publisher=pubId);
-		firstletter && (q.firstletter=firstletter);
+		first && (q.shortTitle={ $regex : "^"+first, $options:"i" });
 		Session.set("totalPublicationResults", Publications.find(q).count());
 		var pubs=myPubPagination.find(q, {itemsPerPage:10});
 		return pubs;
@@ -54,19 +54,19 @@ Template.FilterList.events({
 		var f = $(event.target).data().pubid;
 		Session.set('filterPublisher', f);
 	},
-	'click .numberButton': function (event) {
+	'click .letterFilter': function (event) {
 		var num = $(event.target).text();
-		Session.set('firstletter', num);
+		Session.set('firstLetter', num);
 		Session.set('filterPublisher', undefined);
 	},
 	'click .clearPublisher': function (event) {
 		Session.set('filterPublisher', undefined);
 	},
 	'click .resetAlphabetFilter': function(event){
-		Session.set('firstletter', undefined);
+		Session.set('firstLetter', undefined);
 	}
 });
 Template.FilterList.onRendered(function () {
 	Session.set('filterPublisher', undefined);
-	Session.set('firstletter', undefined);
+	Session.set('firstLetter', undefined);
 });
