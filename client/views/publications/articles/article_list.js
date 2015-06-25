@@ -28,12 +28,7 @@ Template.articleListTree.events({
     }
 });
 
-Template.addArticleButton.helpers({
-    initPage:function(id,publisher){
-        Session.set('currentJournalId',id);
-        Session.set('currPublisher',publisher);
-    }
-});
+
 
 Template.articleListRight.helpers({
     articles:function(){

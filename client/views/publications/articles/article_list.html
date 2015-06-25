@@ -32,13 +32,3 @@
         {{/each}}
     </ul>
 </template>
-
-<template name="addArticleButton">
-    {{ initPage _id publisher}}
-    {{> addArticleModalForm }}
-</template>
-<template name="addArticleModalForm">
-    {{#afModal formId="addArticleModalForm" class="btn btn-success" title="Add" collection="Articles" operation="insert" omitFields="journalId,publisher"}}
-    {{_ "Add new"}}
-    {{/afModal}}
-</template>

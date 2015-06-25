@@ -4,7 +4,7 @@
         {{> addNewsForm}}
         {{> NewsList}} 
         <br/>
-        {{> newestUpload}}
+        {{> mostRecentUpload}}
         {{> HomePublicContent}}
     </div>
 </template>
@@ -97,12 +97,12 @@
     </div>
 </template>
 
-<template name="newestUpload">
+<template name="mostRecentUpload">
     <div class="row">
         <div class="col-xs-6">
             <h4>{{_ "Most recent articles"}}</h4>
-            {{#each newarticle}}
-            <h5><a href={{url}}>{{title}}</a></h5>
+            {{#each newArticle}}
+            <h5><a href={{urlToArticle title}}>{{title}}</a></h5>
             {{else}}
             {{_"No articles found!"}}
             {{/each}}
