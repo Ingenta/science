@@ -110,7 +110,10 @@ Meteor.methods({
             results.abstract = abstractText;
         }
 
-
+        var pubYear = xpath.select("//pub-date/year/text()", doc).toString();
+        var pubVolume = xpath.select("//article-meta/volume/text()", doc).toString();
+        var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
+        results.articleMetaStr = results.journalTitle + ' <b>' + pubVolume + '</b>, '+ elocationId + '('+pubYear+')';
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']/name", doc);
         authorNodes.forEach(function (author) {
