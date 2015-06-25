@@ -55,5 +55,11 @@ Meteor.methods({
         if(password) {
             Accounts.setPassword(userId, password);
         }
+    },
+    "createRole":function(role){
+        check(role,Match.ObjectIncluding({name: String}));
+        if(Meteor.isServer)
+          return Roles.createRole(role);
+        return null;
     }
 });
