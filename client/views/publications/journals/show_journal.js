@@ -94,3 +94,15 @@ Template.aboutArticlesList.helpers({
         return AboutArticles.find({about: aboutId});
     }
 });
+
+Template.latestArticles.helpers({
+    lateArticles: function () {
+        return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
+    },
+    urlToArticle: function (title) {
+        var article = Articles.findOne({title: title});
+        var publisherName = Publishers.findOne({_id: article.publisher}).name;
+        var journalName = Publications.findOne({_id: article.journalId}).title;
+        return "/publisher/" + publisherName + "/journal/" + journalName + "/article/" + title;
+    },
+});

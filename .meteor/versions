@@ -39,7 +39,6 @@ deps@1.0.7
 ejson@1.0.6
 email@1.0.6
 fastclick@1.0.3
-fortawesome:fontawesome@4.3.0
 geojson-utils@1.0.3
 gwendall:autoform-i18n@0.1.9_1
 html-tools@1.0.4
@@ -68,7 +67,6 @@ meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:async@1.0.0
 meteorhacks:npm@1.2.2
-meteorspark:util@0.2.0
 minifiers@1.1.5
 minimongo@1.0.8
 mizzao:bootboxjs@4.4.0
@@ -86,7 +84,7 @@ multiply:iron-router-progress@1.0.1
 natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
-ongoworks:security@1.2.0
+ongoworks:security@1.1.0
 ordered-dict@1.0.3
 perak:user-roles@1.0.10
 raix:eventemitter@0.1.2
@@ -111,7 +109,7 @@ spacebars-compiler@1.0.6
 spiderable@1.0.7
 srp@1.0.3
 standard-app-packages@1.0.5
-tap:i18n@1.5.0
+tap:i18n@1.4.1
 tap:i18n-ui@0.7.0
 templates:tabs@2.1.5
 templating@1.1.1
@@ -122,5 +120,5 @@ underscore@1.0.3
 url@1.0.4
 webapp@1.2.0
 webapp-hashing@1.0.3
-yogiben:autoform-file@0.2.7
+yogiben:autoform-file@0.2.5
 yogiben:autoform-modals@0.3.5
