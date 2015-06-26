@@ -27,7 +27,12 @@ Meteor.methods({
         var xmlErrors = [];
         var xmlDom = new dom({
             errorHandler: function (msg) {
-                xmlErrors.push(msg)
+                xmlErrors.push(msg);
+            }
+        });
+        var XMLserializer = new serializer({
+            errorHandler: function (msg) {
+                xmlErrors.push(msg);
             }
         });
         var doc = xmlDom.parseFromString(xml);
@@ -42,9 +47,9 @@ Meteor.methods({
         //Step 4: if anything went wrong add an errors object to the article
         //Step 5: Return the article object
 
-        var titleNodes = xpath.select("//article-title", doc);
-        if (titleNodes[0] === undefined) results.errors.push("No title found");
-        else results.title = titleNodes[0].firstChild.data;
+        var titleNodes = xpath.select("//article-title", doc)[0];
+        if (titleNodes === undefined) results.errors.push("No title found");
+        else results.title = titleNodes.firstChild.data;
 
         var volumeNode = xpath.select("//volume", doc)[0];
         if (volumeNode === undefined) results.errors.push("No volume found");
@@ -168,6 +173,10 @@ Meteor.methods({
             }
         });
 
+        //var bodyNodes = xpath.select("//body/sec[@id='s1']", doc)[0];
+        //
+        //var bodyString = XMLserializer.serializeToString(bodyNodes);
+        //console.log(bodyString);
         return results;
     }
 });
