@@ -19,7 +19,9 @@
                     {{/each}}
                 </p>
 
-                <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a></p>
+                <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
+                        href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
+                        class="fa fa-external-link"></i></a></p>
 
                 <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
             </ul>
@@ -82,7 +84,7 @@
 
         {{#tabContent slug="full text"}}
             {{#with context}}
-            {{> FullTextTemplate}}
+                {{> FullTextTemplate}}
             {{/with}}
         {{/tabContent}}
 
@@ -152,7 +154,10 @@
 <template name="FullTextTemplate">
     <div>
         <div class="col-xs-9">
-            {{{body}}}
+            {{#each sections}}
+                {{title}}
+                {{{body}}}
+            {{/each}}
         </div>
         <div class="col-xs-3">
             <h4>{{_ "Key Topics"}}</h4>

@@ -118,20 +118,20 @@ Meteor.methods({
 
 
         var sectionNodes = xpath.select("//body/sec[@id]", doc);
-        console.log("sectionNodes"+sectionNodes.length);
+        console.log("sectionNodes" + sectionNodes.length);
         sectionNodes.forEach(function (section) {
-            console.log("section"+section.length);
+            console.log("section" + section.length);
             var tempBody = [];
+            var title = xpath.select("child::title/text()", section)[0].data;
             var paragraphNodes = xpath.select("child::p", section);
-            console.log("p"+paragraphNodes.length);
+            console.log("p" + paragraphNodes.length);
             paragraphNodes.forEach(function (paragraph) {
-                console.log("p"+paragraph.length);
+                console.log("p" + paragraph.length);
 
                 tempBody.push(XMLserializer.serializeToString(paragraph));
             });
-            results.sections.push({body:tempBody});
+            results.sections.push({body: tempBody, title: title});
         });
-
 
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
