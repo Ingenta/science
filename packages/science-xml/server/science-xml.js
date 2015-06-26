@@ -19,7 +19,7 @@ Meteor.methods({
         results.authors = [];
         results.authorNotes = [];
         results.references = [];
-        results.body = [];
+        results.sections = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
@@ -117,12 +117,20 @@ Meteor.methods({
         else results.abstract = XMLserializer.serializeToString(abstractNode);
 
 
-        var paragraphNodes = xpath.select("//body/sec[@id='s1']/p", doc);
+        var sectionNodes = xpath.select("//body/sec[@id]", doc);
+        console.log("sectionNodes"+sectionNodes.length);
+        sectionNodes.forEach(function (section) {
+            console.log("section"+section.length);
+            var tempBody = [];
+            var paragraphNodes = xpath.select("child::p", section);
+            console.log("p"+paragraphNodes.length);
+            paragraphNodes.forEach(function (paragraph) {
+                console.log("p"+paragraph.length);
 
-        paragraphNodes.forEach(function (paragraph) {
-            results.body.push(XMLserializer.serializeToString(paragraph));
+                tempBody.push(XMLserializer.serializeToString(paragraph));
+            });
+            results.sections.push({body:tempBody});
         });
-
 
 
 

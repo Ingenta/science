@@ -116,7 +116,7 @@ var importXmlByLogId = function (logId) {
                 volume: result.volume,
                 issueId: result.issueId,
                 volumeId: result.volumeId,
-                body: result.body
+                sections: result.sections
             });
 
 
