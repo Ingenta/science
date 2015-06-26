@@ -111,16 +111,10 @@ Meteor.methods({
             results.errors.push("No publisher found in the system with the name: " + results.publisherName);
         else results.publisher = publisher._id;
 
-        var abstractNode = xpath.select("//abstract/p/text()", doc);
+        var abstractNode = xpath.select("//abstract/p", doc)[0];
+        if (abstractNode === undefined)  results.errors.push("No abstract found");
+        else results.abstract = XMLserializer.serializeToString(abstractNode);
 
-        if (abstractNode[0] === undefined)  results.errors.push("No abstract found");
-        else {
-            var abstractText = "";
-            for (i = 0; i < abstractNode.length; i++) {
-                abstractText += abstractNode[i].data;
-            }
-            results.abstract = abstractText;
-        }
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
