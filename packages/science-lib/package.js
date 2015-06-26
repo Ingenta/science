@@ -28,9 +28,9 @@ Package.onUse(function(api) {
 
   api.addFiles('lib/core.js',['server','client']);
 
-  api.export([
+  api.export(
       'Science'
-  ])
+  )
 });
 
 Package.onTest(function(api) {
