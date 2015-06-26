@@ -27,6 +27,7 @@ Package.onUse(function(api) {
   api.imply(packages);
 
   api.addFiles('lib/core.js',['server','client']);
+  api.addFiles('lib/string_utils.js',['server','client']);
 
   api.export(
       'Science'

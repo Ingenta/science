@@ -131,7 +131,14 @@ Meteor.methods({
 
         var abstractNode = xpath.select("//abstract/p", doc)[0];
         if (abstractNode === undefined)  results.errors.push("No abstract found");
-        else results.abstract = XMLserializer.serializeToString(abstractNode);
+        else {
+            var abstract = XMLserializer.serializeToString(abstractNode);
+            abstract = Science.replaceSubstrings(abstract,"<italic>","<i>");
+            abstract = Science.replaceSubstrings(abstract,"</italic>","</i>");
+            //abstract= abstract.replaceSubstrings("<italic>","<i>");
+            //abstract= abstract.replaceSubstrings("</italic>","<i>");
+            results.abstract = abstract;
+        }
 
 
         //foreach if has subsections, call get all subsections function
@@ -154,7 +161,6 @@ Meteor.methods({
             else
                 results.sections.push(getOneSectionHtml(section, XMLserializer));
         });
-        console.log(results.sections);
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
