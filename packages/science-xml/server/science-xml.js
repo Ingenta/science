@@ -18,12 +18,13 @@ if (Meteor.isServer) {
     }
     var getOneSectionHtml = function (section, mySerializer) {
         var tempBody = [];
-        var title = xpath.select("child::title/text()", section)[0].data;
+        var title = xpath.select("child::title/descendant::text()", section)[0].data;
+        var label = xpath.select("child::label/descendant::text()", section)[0].data;
         var paragraphNodes = xpath.select("child::p", section);
         paragraphNodes.forEach(function (paragraph) {
             tempBody.push(mySerializer.serializeToString(paragraph));
         });
-        return {body: tempBody, title: title};
+        return {label: label, title: title, body: tempBody};
     }
 }
 
@@ -144,6 +145,7 @@ Meteor.methods({
             if (childSectionNodes.length) {
                 var thisSection = getOneSectionHtml(section, XMLserializer);
                 results.sections.push({
+                    label: thisSection.label,
                     title: thisSection.title,
                     body: thisSection.body,
                     sections: getSubSection(childSectionNodes, XMLserializer)

@@ -155,11 +155,11 @@
     <div>
         <div class="col-xs-9">
             {{#each sections}}
-                {{title}}
+                <h4>{{label}} {{title}}</h4>
                 {{{body}}}
-            <br>
+                <br>
                 {{#each sections}}
-                    {{title}}
+                    <h5>{{label}} {{title}}</h5>
                     {{{body}}}
                 {{/each}}
             {{/each}}
