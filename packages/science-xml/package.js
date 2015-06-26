@@ -11,7 +11,8 @@ Package.onUse(function (api) {
     api.use(
         [
             'templating',
-            'jackkav:xpath'
+            'jackkav:xpath',
+            'science-lib'
         ],
         both);
     api.addFiles('both/uploadLog.js', both);

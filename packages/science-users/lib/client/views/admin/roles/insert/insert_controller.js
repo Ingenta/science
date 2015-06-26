@@ -32,12 +32,6 @@ this.AdminRolesInsertController = RouteController.extend({
 
 	data: function() {
 
-
-		return {
-			params: this.params || {},
-			users_null: Roles.findOne({_id:null}, {})
-		};
-		/*DATA_FUNCTION*/
 	},
 
 	onAfterAction: function() {

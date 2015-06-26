@@ -9,6 +9,23 @@ if (Meteor.isServer) {
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
+    var getSubSection = function (subSectionNodes, mySerializer) {
+        var thisSubSection = [];
+        subSectionNodes.forEach(function (subSection) {
+            thisSubSection.push(getOneSectionHtml(subSection, mySerializer));
+        });
+        return thisSubSection;
+    }
+    var getOneSectionHtml = function (section, mySerializer) {
+        var tempBody = [];
+        var title = xpath.select("child::title/descendant::text()", section)[0].data;
+        var label = xpath.select("child::label/descendant::text()", section)[0].data;
+        var paragraphNodes = xpath.select("child::p", section);
+        paragraphNodes.forEach(function (paragraph) {
+            tempBody.push(mySerializer.serializeToString(paragraph));
+        });
+        return {label: label, title: title, body: tempBody};
+    }
 }
 
 
@@ -19,6 +36,7 @@ Meteor.methods({
         results.authors = [];
         results.authorNotes = [];
         results.references = [];
+        results.sections = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
@@ -27,7 +45,12 @@ Meteor.methods({
         var xmlErrors = [];
         var xmlDom = new dom({
             errorHandler: function (msg) {
-                xmlErrors.push(msg)
+                xmlErrors.push(msg);
+            }
+        });
+        var XMLserializer = new serializer({
+            errorHandler: function (msg) {
+                xmlErrors.push(msg);
             }
         });
         var doc = xmlDom.parseFromString(xml);
@@ -42,9 +65,9 @@ Meteor.methods({
         //Step 4: if anything went wrong add an errors object to the article
         //Step 5: Return the article object
 
-        var titleNodes = xpath.select("//article-title", doc);
-        if (titleNodes[0] === undefined) results.errors.push("No title found");
-        else results.title = titleNodes[0].firstChild.data;
+        var titleNodes = xpath.select("//article-title", doc)[0];
+        if (titleNodes === undefined) results.errors.push("No title found");
+        else results.title = titleNodes.firstChild.data;
 
         var volumeNode = xpath.select("//volume", doc)[0];
         if (volumeNode === undefined) results.errors.push("No volume found");
@@ -61,6 +84,10 @@ Meteor.methods({
         var yearNode = xpath.select("//pub-date/year/text()", doc)[0];
         if (yearNode === undefined) results.errors.push("No year found");
         else results.year = yearNode.data;
+
+        var elocationIdNode = xpath.select("//article-meta/elocation-id/text()", doc)[0];
+        if (elocationIdNode === undefined) results.errors.push("No elocation id found");
+        else results.elocationId = elocationIdNode.data;
 
         var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
         if (doiNode === undefined) results.errors.push("No doi found");
@@ -102,19 +129,38 @@ Meteor.methods({
             results.errors.push("No publisher found in the system with the name: " + results.publisherName);
         else results.publisher = publisher._id;
 
-        var abstractNode = xpath.select("//abstract/p/text()", doc);
-
-        if (abstractNode[0] === undefined)  results.errors.push("No abstract found");
+        var abstractNode = xpath.select("//abstract/p", doc)[0];
+        if (abstractNode === undefined)  results.errors.push("No abstract found");
         else {
-            var abstractText = "";
-            for (i = 0; i < abstractNode.length; i++) {
-                abstractText += abstractNode[i].data;
-            }
-            results.abstract = abstractText;
+            var abstract = XMLserializer.serializeToString(abstractNode);
+            abstract = Science.replaceSubstrings(abstract,"<italic>","<i>");
+            abstract = Science.replaceSubstrings(abstract,"</italic>","</i>");
+            //abstract= abstract.replaceSubstrings("<italic>","<i>");
+            //abstract= abstract.replaceSubstrings("</italic>","<i>");
+            results.abstract = abstract;
         }
 
-        var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
-        results.articleMetaStr = results.journalTitle + ' <b>' + results.volume + '</b>, ' + elocationId + '(' + results.year + ')';
+
+        //foreach if has subsections, call get all subsections function
+        //foreach subsection get all the ps and title
+
+
+        var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+
+        sectionNodes.forEach(function (section) {
+            var childSectionNodes = xpath.select("child::sec[@id]", section);
+            if (childSectionNodes.length) {
+                var thisSection = getOneSectionHtml(section, XMLserializer);
+                results.sections.push({
+                    label: thisSection.label,
+                    title: thisSection.title,
+                    body: thisSection.body,
+                    sections: getSubSection(childSectionNodes, XMLserializer)
+                });
+            }
+            else
+                results.sections.push(getOneSectionHtml(section, XMLserializer));
+        });
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
@@ -167,6 +213,7 @@ Meteor.methods({
                 results.authorNotes.push(enrty);
             }
         });
+
 
         return results;
     }

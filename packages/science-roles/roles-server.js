@@ -1,4 +1,4 @@
-Roles={}
+
 //TODO: 创建角色
 var onCreateRoleHook = null;
 var validateNewRoleHooks= [];
@@ -33,7 +33,7 @@ Roles.createRole = function(role){
  */
 Roles.validateNewRole = function(func){
     validateNewRoleHooks.push(func);
-}
+};
 /**
  * 检查角色名称是否合法
  */
@@ -46,9 +46,33 @@ Roles.validateNewRole(function(role){
     if(isRoleNameExists)
         return false;//角色名称已存在
     return true;
-})
+});
+
+
 //TODO: 角色列表
+
+Meteor.publish('roles',function(){
+    return Meteor.roles.find();
+});
+
 //TODO: 修改用户的角色信息
+
 //TODO: 修改角色名称
+Roles.updateRole=function(id,role){
+
+    if(role.updateAt){
+        role.updateAt=new Date();
+    }else{
+        _.extend({"updateAt":new Date()},role);
+    }
+
+
+    try{
+        Meteor.roles.update({_id:id},{$set:{'name':role.name}});
+    }catch(e){
+        throw e;
+    }
+    return true;
+}
 //TODO: 删除角色
 //TODO: 查询角色下所有用户

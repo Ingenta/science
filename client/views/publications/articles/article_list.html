@@ -1,7 +1,7 @@
 <template name="articleList">
     <div class="row">
         <div class="col-xs-4">
-            <!--{{> articleListTree}}-->
+            {{> articleListTree}}
         </div>
         <div class="col-xs-8">
             {{> articleListRight}}
@@ -25,7 +25,7 @@
 <template name="articleListRight">
     <ul class="article-list list-unstyled">
         {{#each articles}}
-            {{>oneArticle}}
+            {{> oneArticle}}
         {{else}}
             {{_ "No articles found!"}}
         {{/each}}
