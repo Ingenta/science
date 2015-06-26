@@ -67,6 +67,10 @@ Meteor.methods({
         if (yearNode === undefined) results.errors.push("No year found");
         else results.year = yearNode.data;
 
+        var elocationIdNode = xpath.select("//article-meta/elocation-id/text()", doc)[0];
+        if (elocationIdNode === undefined) results.errors.push("No elocation id found");
+        else results.elocationId = elocationIdNode.data;
+
         var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
         if (doiNode === undefined) results.errors.push("No doi found");
         else results.doi = doiNode.data;
@@ -117,9 +121,6 @@ Meteor.methods({
             }
             results.abstract = abstractText;
         }
-
-        var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
-        results.articleMetaStr = '<b>' + results.volume + '</b>, ' + elocationId + ' (' + results.year + ')';
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
