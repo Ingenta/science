@@ -19,6 +19,7 @@ Meteor.methods({
         results.authors = [];
         results.authorNotes = [];
         results.references = [];
+        results.body = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
@@ -116,6 +117,15 @@ Meteor.methods({
         else results.abstract = XMLserializer.serializeToString(abstractNode);
 
 
+        var paragraphNodes = xpath.select("//body/sec[@id='s1']/p", doc);
+
+        paragraphNodes.forEach(function (paragraph) {
+            results.body.push(XMLserializer.serializeToString(paragraph));
+        });
+
+
+
+
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
             var surname = xpath.select("child::name/surname/text()", author).toString();
@@ -168,9 +178,6 @@ Meteor.methods({
             }
         });
 
-        var bodyNodes = xpath.select("//body/sec[@id='s1']/p", doc)[0];
-        if (bodyNodes === undefined) results.errors.push("No body found");
-        else results.body = XMLserializer.serializeToString(bodyNodes);
 
         return results;
     }
