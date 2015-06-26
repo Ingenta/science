@@ -116,5 +116,8 @@
     "picture": {
       "label": "Choose file"
     }
-  }
+  },
+  "roleName":"Role name",
+  "add new role":"Add new role",
+  "edit role":"Edit role"
 }

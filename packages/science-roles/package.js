@@ -17,9 +17,11 @@ Package.onUse(function(api) {
     "underscore",
     "accounts-base"
   ]);
+  api.addFiles([
+    'roles-common.js'
+  ],['client','server']);
 
   api.addFiles([
-    'schema.js',
     'roles-server.js'
   ],['server']);
 
@@ -27,9 +29,7 @@ Package.onUse(function(api) {
     'roles-client.js'
   ],['client']);
 
-  api.addFiles([
-    'roles-common.js'
-  ],['client','server']);
+
 
   api.export([
     'Roles'
