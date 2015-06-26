@@ -114,7 +114,7 @@ Meteor.methods({
         }
 
         var elocationId = xpath.select("//article-meta/elocation-id/text()", doc).toString();
-        results.articleMetaStr = results.journalTitle + ' <b>' + results.volume + '</b>, ' + elocationId + '(' + results.year + ')';
+        results.articleMetaStr = '<b>' + results.volume + '</b>, ' + elocationId + ' (' + results.year + ')';
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
