@@ -9,6 +9,22 @@ if (Meteor.isServer) {
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
+    var getSubSection = function (subSectionNodes, mySerializer) {
+        var thisSubSection = [];
+        subSectionNodes.forEach(function (subSection) {
+            thisSubSection.push(getOneSectionHtml(subSection, mySerializer));
+        });
+        return thisSubSection;
+    }
+    var getOneSectionHtml = function (section, mySerializer) {
+        var tempBody = [];
+        var title = xpath.select("child::title/text()", section)[0].data;
+        var paragraphNodes = xpath.select("child::p", section);
+        paragraphNodes.forEach(function (paragraph) {
+            tempBody.push(mySerializer.serializeToString(paragraph));
+        });
+        return {body: tempBody, title: title};
+    }
 }
 
 
@@ -117,22 +133,26 @@ Meteor.methods({
         else results.abstract = XMLserializer.serializeToString(abstractNode);
 
 
-        var sectionNodes = xpath.select("//body/sec[@id]", doc);
-        console.log("sectionNodes" + sectionNodes.length);
+        //foreach if has subsections, call get all subsections function
+        //foreach subsection get all the ps and title
+
+
+        var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+
         sectionNodes.forEach(function (section) {
-            console.log("section" + section.length);
-            var tempBody = [];
-            var title = xpath.select("child::title/text()", section)[0].data;
-            var paragraphNodes = xpath.select("child::p", section);
-            console.log("p" + paragraphNodes.length);
-            paragraphNodes.forEach(function (paragraph) {
-                console.log("p" + paragraph.length);
-
-                tempBody.push(XMLserializer.serializeToString(paragraph));
-            });
-            results.sections.push({body: tempBody, title: title});
+            var childSectionNodes = xpath.select("child::sec[@id]", section);
+            if (childSectionNodes.length) {
+                var thisSection = getOneSectionHtml(section, XMLserializer);
+                results.sections.push({
+                    title: thisSection.title,
+                    body: thisSection.body,
+                    sections: getSubSection(childSectionNodes, XMLserializer)
+                });
+            }
+            else
+                results.sections.push(getOneSectionHtml(section, XMLserializer));
         });
-
+        console.log(results.sections);
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
