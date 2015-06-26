@@ -1,1 +1,2 @@
-Roles={};
+Meteor.subscribe("roles");
+

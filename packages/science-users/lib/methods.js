@@ -61,5 +61,12 @@ Meteor.methods({
         if(Meteor.isServer)
           return Roles.createRole(role);
         return null;
+    },
+    "updateRole":function(id,role){
+        check(id,String);
+        check(role,Match.ObjectIncluding({name: String}));
+        if(Meteor.isServer)
+            return Roles.updateRole(id,role);
+        return false;
     }
 });

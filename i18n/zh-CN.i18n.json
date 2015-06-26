@@ -265,5 +265,8 @@
     "picture": {
       "label": "选择图片"
     }
-  }
+  },
+  "roleName":"角色名称",
+  "add new role":"新建角色",
+  "edit role":"修改角色"
 }

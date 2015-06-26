@@ -12,11 +12,11 @@ Template.AdminRolesInsert.helpers({
 
 });
 
-Template.AdminRolesInsertInsertForm.rendered = function() {
+Template.AdminRolesInsertForm.rendered = function() {
 
 
-	pageSession.set("adminRolesInsertInsertFormInfoMessage", "");
-	pageSession.set("adminRolesInsertInsertFormErrorMessage", "");
+	pageSession.set("adminRolesInsertFormInfoMessage", "");
+	pageSession.set("adminRolesInsertFormErrorMessage", "");
 
 	$(".input-group.date").each(function() {
 		var format = $(this).find("input[type='text']").attr("data-format");
@@ -41,35 +41,35 @@ Template.AdminRolesInsertInsertForm.rendered = function() {
 	$("input[autofocus]").focus();
 };
 
-Template.AdminRolesInsertInsertForm.events({
+Template.AdminRolesInsertForm.events({
 	"submit": function(e, t) {
 		e.preventDefault();
-		pageSession.set("adminRolesInsertInsertFormInfoMessage", "");
-		pageSession.set("adminRolesInsertInsertFormErrorMessage", "");
+		pageSession.set("adminRolesInsertFormInfoMessage", "");
+		pageSession.set("adminRolesInsertFormErrorMessage", "");
 
 		var self = this;
 
 		function submitAction(msg) {
-			var adminRolesInsertInsertFormMode = "insert";
+			var adminRolesInsertFormMode = "insert";
 			if(!t.find("#form-cancel-button")) {
-				switch(adminRolesInsertInsertFormMode) {
+				switch(adminRolesInsertFormMode) {
 					case "insert": {
 						$(e.target)[0].reset();
 					}; break;
 
 					case "update": {
 						var message = msg || "Saved.";
-						pageSession.set("adminRolesInsertInsertFormInfoMessage", message);
+						pageSession.set("adminRolesInsertFormInfoMessage", message);
 					}; break;
 				}
 			}
 
-			Router.go("admin.users", {});
+			Router.go("admin.roles", {});
 		}
 
 		function errorAction(msg) {
 			var message = msg || "Error.";
-			pageSession.set("adminRolesInsertInsertFormErrorMessage", message);
+			pageSession.set("adminRolesInsertFormErrorMessage", message);
 		}
 
 		validateForm(
@@ -83,7 +83,7 @@ Template.AdminRolesInsertInsertForm.events({
 			function(values) {
 
 
-				Meteor.call("createUserAccount", values, function(e) { if(e) errorAction(e.message); else submitAction(); });
+				Meteor.call("createRole", values, function(e) { if(e) errorAction(e.message); else submitAction(); });
 			}
 		);
 
@@ -94,7 +94,7 @@ Template.AdminRolesInsertInsertForm.events({
 
 
 
-		Router.go("admin.users", {});
+		Router.go("admin.roles", {});
 	},
 	"click #form-close-button": function(e, t) {
 		e.preventDefault();
@@ -110,12 +110,12 @@ Template.AdminRolesInsertInsertForm.events({
 
 });
 
-Template.AdminRolesInsertInsertForm.helpers({
+Template.AdminRolesInsertForm.helpers({
 	"infoMessage": function() {
-		return pageSession.get("adminRolesInsertInsertFormInfoMessage");
+		return pageSession.get("adminRolesInsertFormInfoMessage");
 	},
 	"errorMessage": function() {
-		return pageSession.get("adminRolesInsertInsertFormErrorMessage");
+		return pageSession.get("adminRolesInsertFormErrorMessage");
 	}
 
 });
