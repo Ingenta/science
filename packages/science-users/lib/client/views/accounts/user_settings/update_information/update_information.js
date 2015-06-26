@@ -85,9 +85,13 @@ Template.UserSettingsUpdateInformationForm.events({
 		e.preventDefault();
 
 		/*BACK_REDIRECT*/
+	},
+   "click #checkAll1": function() {
+		$("input[name='subBox1']").prop("checked",$("#checkAll1").is(":checked"));
+	},
+	"click #checkAll2": function() {
+		$("input[name='subBox2']").prop("checked",$("#checkAll2").is(":checked"));
 	}
-
-	
 });
 
 Template.UserSettingsUpdateInformationForm.helpers({

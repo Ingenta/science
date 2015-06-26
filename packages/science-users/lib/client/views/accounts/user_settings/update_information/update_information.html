@@ -81,19 +81,19 @@
 					  <div class="modal-content">
 						 <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h2 class="modal-title" id="myModalLabel">
+							<h3 class="modal-title" id="myModalLabel">
 							   {{_ "Journal name"}}
-							</h2>
+							</h3>
 						 </div>
 						 <div class="modal-body">
-							<h4>
-								<input type="checkbox">&nbsp;&nbsp;{{_ "All the options"}}<hr>
+						    <h5>
+								<input id="checkAll1" type="checkbox"/>&nbsp;&nbsp;{{_ "All the options"}}<hr>
 								{{#each publicationList}}
-								<input type="checkbox" name="{{_id}}">&nbsp;&nbsp;{{title}}<br>
+								<input type="checkbox" name="subBox1" value="{{_id}}">&nbsp;&nbsp;{{title}}<br>
 								{{else}}
 								{{_"No publications found!"}}
 								{{/each}}
-							</h4>
+							</h5>
 						 </div>
 						 <div class="modal-footer">
 							<button type="button" class="btn btn-default" 
@@ -124,19 +124,19 @@
 					  <div class="modal-content">
 						 <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h2 class="modal-title" id="myModalLabel">
+							<h3 class="modal-title" id="myModalLabel">
 							   {{_ "The topic name"}}
-							</h2>
+							</h3>
 						 </div>
 						 <div class="modal-body">
-							<h4>
-								<input type="checkbox">&nbsp;&nbsp;{{_ "All the options"}}<hr>
+							<h5>
+								<input id="checkAll2" type="checkbox" />&nbsp;&nbsp;{{_ "All the options"}}<hr>
 								{{#each topicList}}
-								<input type="checkbox" name="{{_id}}">&nbsp;&nbsp;{{name}}<br>
+								<input type="checkbox" name="subBox2" value="{{_id}}">&nbsp;&nbsp;{{name}}<br>
 								{{else}}
 								{{_ "No topics found!"}}
 								{{/each}}
-							</h4>
+							</h5>
 						 </div>
 						 <div class="modal-footer">
 							<button type="button" class="btn btn-default" 
