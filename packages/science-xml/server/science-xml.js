@@ -174,10 +174,17 @@ Meteor.methods({
             }
         });
 
-        //var bodyNodes = xpath.select("//body/sec[@id='s1']", doc)[0];
-        //
-        //var bodyString = XMLserializer.serializeToString(bodyNodes);
-        //console.log(bodyString);
+
+        var bodyNodes = xpath.select("//body/sec[@id='s1']/title", doc)[0];
+        if (bodyNodes === undefined) results.errors.push("No body found");
+        else {
+            //prepare full text for viewing
+            //remove bad nodes
+            //convert to string
+            var bodyString = XMLserializer.serializeToString(bodyNodes);
+            results.body = bodyString;
+            console.log(bodyString);
+        }
         return results;
     }
 });
