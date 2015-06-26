@@ -14,9 +14,9 @@ Template.journalOptions.helpers({
     }
 });
 Template.ShowJournal.helpers({
-    initPage:function(id,publisher){
-        Session.set('currentJournalId',id);
-        Session.set('currPublisher',publisher);
+    initPage: function (id, publisher) {
+        Session.set('currentJournalId', id);
+        Session.set('currPublisher', publisher);
     }
 });
 Template.journalOptions.helpers({
@@ -25,18 +25,18 @@ Template.journalOptions.helpers({
         var currentTitle = Router.current().params.journalTitle;
         var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {
-            if(t==="Overview"){
-                tabList.push({ name: TAPi18n.__("Overview"), slug: 'Overview' });
-                tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
-            } else if(tabList.length==0){
-                tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
-                tabList.push({ name: TAPi18n.__("About"), slug: 'About' });
-            } else{
-                tabList.push({ name: TAPi18n.__("About"), slug: 'About' });
+            if (t === "Overview") {
+                tabList.push({name: TAPi18n.__("Overview"), slug: 'Overview'});
+                tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
+            } else if (tabList.length == 0) {
+                tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
+                tabList.push({name: TAPi18n.__("About"), slug: 'About'});
+            } else {
+                tabList.push({name: TAPi18n.__("About"), slug: 'About'});
             }
         });
-        if(tabList.length==0){
-            tabList.push({ name: TAPi18n.__("Browse"), slug: 'Browse' });
+        if (tabList.length == 0) {
+            tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
         }
 
         return tabList;
@@ -48,7 +48,7 @@ Template.journalOptions.helpers({
 
 AutoForm.addHooks(['addAboutTitleModalForm'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {
         insert: function (doc) {
@@ -74,7 +74,7 @@ Template.AboutTitle.events({
 
 AutoForm.addHooks(['addAboutArticlesModalForm'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {
         insert: function (doc) {

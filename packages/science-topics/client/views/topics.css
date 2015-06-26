@@ -2,20 +2,25 @@ div.topics hr {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+
 div.topics li {
-    list-style-type:none;
+    list-style-type: none;
     /*cursor:pointer;*/
 }
+
 div.topics a.fa-plus {
-	color: green;
+    color: green;
 }
+
 div.topics a.fa-pencil {
-	color: orange;
+    color: orange;
 }
+
 div.topics a.fa-trash {
-	color: red;
+    color: red;
 }
-.parentTopicList{
-    margin-top:20px
+
+.parentTopicList {
+    margin-top: 20px
 }
 

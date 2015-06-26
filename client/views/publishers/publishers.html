@@ -1,106 +1,108 @@
 <template name="Publishers">
-  <div class="container-fluid">
-    <div class="row">
-     <h2>{{_"Publishers"}}</h2>
-   </div>
-   <div class="row">
-    <p>{{_"Introductory text"}}</p>
-  </div>
-  <div class="row">
-    {{#if isAdmin }}
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublisherModal">
-      {{_ "Add new"}}
-    </button>
-    {{/if}}
-  </div>
-  <hr>
-  <div class="row">
-    {{> PublisherList}}
-  </div>
-</div>
-{{> addPublisherForm}}
+    <div class="container-fluid">
+        <div class="row">
+            <h2>{{_"Publishers"}}</h2>
+        </div>
+        <div class="row">
+            <p>{{_"Introductory text"}}</p>
+        </div>
+        <div class="row">
+            {{#if isAdmin }}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublisherModal">
+                    {{_ "Add new"}}
+                </button>
+            {{/if}}
+        </div>
+        <hr>
+        <div class="row">
+            {{> PublisherList}}
+        </div>
+    </div>
+    {{> addPublisherForm}}
 </template>
 
 <template name="PublisherList">
-  {{#each publishers}}
-  {{> SinglePublisher}}
-  {{else}}
-  {{_"No publishers found!"}}
-  {{/each}}
+    {{#each publishers}}
+        {{> SinglePublisher}}
+    {{else}}
+        {{_"No publishers found!"}}
+    {{/each}}
 </template>
 
 <template name="showImage">
-  <img src="{{getImageHelper picture}}" />
+    <img src="{{getImageHelper picture}}"/>
 </template>
 
 <template name="SinglePublisher">
-  <div class="row">
-    <div class="col-xs-3">
-      <a href="/publisher/{{name}}">
-        <img src="{{getImageHelper picture}}" width="105" />
-      </a>
-    </div>
-    <div class="col-xs-9">
-      <div class="row">
-        <div class="pull-right">
-          {{#if isAdmin }}
-          {{> updatePublisherModalForm}}
-          {{#unless hasNoJournals _id}}
-          {{> deletePublisherModalForm}}
-          {{/unless}}
-          {{/if}}
+    <div class="row">
+        <div class="col-xs-3">
+            <a href="/publisher/{{name}}">
+                <img src="{{getImageHelper picture}}" width="105"/>
+            </a>
         </div>
-        <h3>
-          <a class="text" href="/publisher/{{name}}">
-            {{translateThis chinesename name}}
-          </a>
-        </h3>
-      </div>
-      <div class="row">
-          {{#if i18n_isCurrentLanguage 'en'}}
-          {{description}}
-          {{else}}
-          {{chinesedescription}}
-          {{/if}}
-      </div>
+        <div class="col-xs-9">
+            <div class="row">
+                <div class="pull-right">
+                    {{#if isAdmin }}
+                        {{> updatePublisherModalForm}}
+                        {{#unless hasNoJournals _id}}
+                            {{> deletePublisherModalForm}}
+                        {{/unless}}
+                    {{/if}}
+                </div>
+                <h3>
+                    <a class="text" href="/publisher/{{name}}">
+                        {{translateThis chinesename name}}
+                    </a>
+                </h3>
+            </div>
+            <div class="row">
+                {{#if i18n_isCurrentLanguage 'en'}}
+                    {{description}}
+                {{else}}
+                    {{chinesedescription}}
+                {{/if}}
+            </div>
+        </div>
     </div>
-  </div>
-  <hr>
+    <hr>
 </template>
 
 
 <template name="updatePublisherModalForm">
-  {{#afModal class="fa fa-pencil" title=getTitle collection="Publishers" doc=_id operation="update" buttonContent=getUpdateButtonContent}}
-  {{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getTitle collection="Publishers" doc=_id operation="update" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
 </template>
 <template name="deletePublisherModalForm">
-  {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
-  {{/afModal}}
+    {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
+    {{/afModal}}
 </template>
 
 
 <template name="addPublisherForm">
-  <div class="modal fade" id="addPublisherModal" tabindex="-1" role="dialog" aria-labelledby="addPublisherModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="addPublisherModalLabel">{{_ "Add new"}}</h4>
+    <div class="modal fade" id="addPublisherModal" tabindex="-1" role="dialog" aria-labelledby="addPublisherModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addPublisherModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addPublisherModalForm" collection="Publishers" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="name"}}
+                        {{> afQuickField name="chinesename"}}
+                        {{> afQuickField name="website"}}
+                        {{> afQuickField name="description"}}
+                        {{> afQuickField name="chinesedescription"}}
+                        {{> afQuickField name="picture"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
         </div>
-        {{#autoForm id="addPublisherModalForm" collection="Publishers" type="insert"}}
-        <div class="modal-body">
-          {{> afQuickField name="name"}}
-          {{> afQuickField name="chinesename"}}
-          {{> afQuickField name="website"}}
-          {{> afQuickField name="description"}}
-          {{> afQuickField name="chinesedescription"}}
-          {{> afQuickField name="picture"}}
-        </div>
-        <div class="modal-footer">
-         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-       </div>
-       {{/autoForm}}
-     </div>
-   </div>
- </div>
+    </div>
 </template>

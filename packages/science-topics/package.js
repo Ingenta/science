@@ -1,35 +1,35 @@
 Package.describe({
-  name: 'science-topics',
-  version: '0.0.1',
-  // Brief, one-line summary of the package.
-  summary: 'a page of editable topics and subtopics derived from the database',
-  // URL to the Git repository containing the source code for this package.
-  git: 'https://github.com/jackkav/science',
-  // By default, Meteor will default to using README.md for documentation.
-  // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
+    name: 'science-topics',
+    version: '0.0.1',
+    // Brief, one-line summary of the package.
+    summary: 'a page of editable topics and subtopics derived from the database',
+    // URL to the Git repository containing the source code for this package.
+    git: 'https://github.com/jackkav/science',
+    // By default, Meteor will default to using README.md for documentation.
+    // To avoid submitting documentation, set this field to null.
+    documentation: 'README.md'
 });
 
-both = ['client','server']
+both = ['client', 'server']
 
-Package.onUse(function(api) {
-  api.versionsFrom('1.1.0.2');
+Package.onUse(function (api) {
+    api.versionsFrom('1.1.0.2');
     api.use(
-    [
-      'templating',
+        [
+            'templating',
 
-      'aldeed:autoform'
+            'aldeed:autoform'
 
-    ],
-    both);
+        ],
+        both);
 
-  api.addFiles('topics.js', both);
-  api.addFiles('client/views/topics.html', 'client');
-  api.addFiles('client/views/topics.js', 'client');
-  api.addFiles('client/views/topics.css', 'client');
+    api.addFiles('topics.js', both);
+    api.addFiles('client/views/topics.html', 'client');
+    api.addFiles('client/views/topics.js', 'client');
+    api.addFiles('client/views/topics.css', 'client');
 });
 
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.addFiles('science-topics-tests.js');
+Package.onTest(function (api) {
+    api.use('tinytest');
+    api.addFiles('science-topics-tests.js');
 });

@@ -8,14 +8,14 @@ AboutArticlesSchema = new SimpleSchema({
     chinesetitle: {
         type: String,
     },
-	description: {
+    description: {
         type: String,
         optional: true,
         autoform: {
             rows: 4
         }
     },
-	chinesedescription: {
+    chinesedescription: {
         type: String,
         optional: true,
         autoform: {

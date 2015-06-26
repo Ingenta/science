@@ -5,9 +5,9 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         unique: true
     },
-    firstletter: {
+    shortTitle: {
         type: String,
-        max: 1
+        max: 10
     },
     accessKey: {
         type: String
@@ -56,6 +56,6 @@ Meteor.startup(function () {
     PublicationsSchema.i18n("schemas.publications");
     Publications.attachSchema(PublicationsSchema);
 });
-if(Meteor.isClient){
+if (Meteor.isClient) {
     myPubPagination = new Paginator(Publications);
 }

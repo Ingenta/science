@@ -1,100 +1,101 @@
 <template name="Publications">
-  {{> FilterList}}
+    {{> FilterList}}
 </template>
 
 <template name="FilterList">
-  <div class="container-fluid">
-   <div class="row">
-     <h2>{{_ "Publications"}}
-     </h2>
-   </div>
-   <div class="row">
-    <p>{{_ "Introductory text"}}</p>
-  </div>
-  {{> PublicationsAlphabetBar}}
-  <div class="row">
-    <div id="menu" class="col-xs-3">
-     <ul class="list-unstyled">
-      <h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
-      {{#if selectedPublisher}}
-      <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
-      {{#each publishers}}
-      <li style="color: #CCC;">
-       {{> onePublisherInFilterList}}
-     </li>
-     {{/each}}
-     {{else}}
-     {{#each publishers}}
-     <li>
-      <a class="filterButton" data-pubid="{{_id}}">
-       {{> onePublisherInFilterList}}
-     </a>
-   </li>
-   {{/each}}
-   {{/if}}
- </ul>
-</div>
-<div id="subcontent" class="col-xs-9">
-  <div class="container-fluid">
-    <div class="row" style="margin-top: 20px;">
-     {{#each publications}}
-     {{> onePublication}}
-     {{else}}
-     {{_"No publications found!"}}
-     {{/each}}
-     {{> Paginator_UI publications}}
-     <br>
-   </div>
- </div>
-</div>
-</div>
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <h2>{{_ "Publications"}}
+            </h2>
+        </div>
+        <div class="row">
+            <p>{{_ "Introductory text"}}</p>
+        </div>
+        {{> PublicationsAlphabetBar}}
+        <div class="row">
+            <div id="menu" class="col-xs-3">
+                <ul class="list-unstyled">
+                    <h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
+                    {{#if selectedPublisher}}
+                        <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+                        {{#each publishers}}
+                            <li style="color: #CCC;">
+                                {{> onePublisherInFilterList}}
+                            </li>
+                        {{/each}}
+                    {{else}}
+                        {{#each publishers}}
+                            <li>
+                                <a class="filterButton" data-pubid="{{_id}}">
+                                    {{> onePublisherInFilterList}}
+                                </a>
+                            </li>
+                        {{/each}}
+                    {{/if}}
+                </ul>
+            </div>
+            <div id="subcontent" class="col-xs-9">
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 20px;">
+                        {{#each publications}}
+                            {{> onePublication}}
+                        {{else}}
+                            {{_"No publications found!"}}
+                        {{/each}}
+                        {{> Paginator_UI publications}}
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="PublicationsAlphabetBar">
-  <div class="row bg-eee">
-    <div class="col-xs-3">
-      {{#if isChinese languageTag}}
-      命中 {{totalPublicationResults}} 个结果
-      {{else}}
-      {{totalPluralPublicationResults}}
-      {{/if}}
+    <div class="row bg-eee">
+        <div class="col-xs-3">
+            {{#if isChinese languageTag}}
+                命中 {{totalPublicationResults}} 个结果
+            {{else}}
+                {{totalPluralPublicationResults}}
+            {{/if}}
+        </div>
+        <div class="pull-right">
+            <a class="resetAlphabetFilter">{{_"All"}}</a>&nbsp;
+            {{#each letterInTheAlphabet}}
+                <a class="letterFilter">{{this}}</a>&nbsp;
+            {{/each}}
+        </div>
+        <br>
     </div>
-    <div class="pull-right">
-      <a class="resetAlphabetFilter">{{_"All"}}</a>&nbsp;
-      {{#each letterInTheAlphabet}}
-      <a class="numberButton">{{this}}</a>&nbsp;
-      {{/each}}
-    </div>
-    <br>
-  </div>
 </template>
 
 <template name="onePublisherInFilterList">
- {{translateThis chinesename name}} ({{count _id}})
+    {{translateThis chinesename name}} ({{count _id}})
 </template>
 
 <template name="onePublication">
-  <div class="row dotted-publication-item">
-    <div class="col-xs-2">
-      <img src="{{getImageHelper picture}}" width="58" height="82"/>
+    <div class="row dotted-publication-item">
+        <div class="col-xs-2">
+            <img src="{{getImageHelper picture}}" width="58" height="82"/>
+        </div>
+        <div class="col-xs-10">
+            <ul class="list-unstyled">
+                <li>
+                    <h4>
+                        <a href="{{getUrlToJournal publisher title}}">
+                            {{> imageName}} {{title}}
+                        </a>
+                    </h4>
+                </li>
+            </ul>
+            {{> journalDescription}}
+        </div>
     </div>
-    <div class="col-xs-10">
-      <ul class="list-unstyled">
-        <li>
-          <h4>
-            <a href="{{getUrlToJournal publisher title}}">
-              {{> imageName}} {{title}}
-            </a>
-          </h4>
-        </li>
-      </ul>
-      {{#if description}}
-      <a href="#" class="onup"><b class="caret"></b>{{_ "Details"}}</a>
-      <ul class="list-unstyled detail-ul">
-        <li>{{description}}</li>
-      </ul>
-      {{/if}}
-    </div>
-  </div>
+    <hr>
 </template>
+
+<template name="journalDescription">
+    {{> toggleField field=description _id=_id}}
+</template>
+

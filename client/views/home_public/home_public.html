@@ -4,21 +4,24 @@
         {{> addNewsForm}}
         {{> NewsList}}
         <br/>
+        {{> mostRecentUpload}}
         {{> HomePublicContent}}
     </div>
 </template>
 
 <template name="HomePublicHomeJumbotron">
-	<div class="jumbotron ">
-		<div id="content" class="container-fluid">
-			<h1 id="component-title">
-				{{_ "Welcome Message"}}
-			</h1>
-			<p id="jumbotron-text">
-				<b>This is an test message.</b><br />It demonstrates simple application with user account system and admin panel.
-			</p>
-		</div>
-	</div>
+    <div class="jumbotron ">
+        <div id="content" class="container-fluid">
+            <h1 id="component-title">
+                {{_ "Welcome Message"}}
+            </h1>
+
+            <p id="jumbotron-text">
+                <b>This is an test message.</b><br/>It demonstrates simple application with user account system and
+                admin panel.
+            </p>
+        </div>
+    </div>
 </template>
 <template name="HomePublicContent">
 

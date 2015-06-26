@@ -1,7 +1,7 @@
 <template name="articleList">
     <div class="row">
         <div class="col-xs-4">
-            <!-- {{> articleListTree}} -->
+            <!--{{> articleListTree}}-->
         </div>
         <div class="col-xs-8">
             {{> articleListRight}}
@@ -11,14 +11,13 @@
 
 <template name="articleListTree">
     <ul class="list-unstyled">
-
         {{#each volumeList _id}}
-        <li class="volume"><span>+</span>第{{volume}}卷</li>
-        <div class="issues">
-            {{#each issueList journalId volume}}
-            <div class="issue" data-value="{{_id}}">第{{issue}}期（{{year}},{{month}}）</div>
-            {{/each}}
-        </div>
+            <li class="volume"><span>+</span>第{{volume}}卷</li>
+            <div class="issues">
+                {{#each issueList journalId volume}}
+                    <div class="issue" data-value="{{_id}}">第{{issue}}期（{{year}},{{month}}）</div>
+                {{/each}}
+            </div>
         {{/each}}
     </ul>
 </template>
@@ -26,9 +25,9 @@
 <template name="articleListRight">
     <ul class="article-list list-unstyled">
         {{#each articles}}
-                  {{>oneArticle}}
-                  {{else}}
-                  {{_ "No articles found!"}}
+            {{>oneArticle}}
+        {{else}}
+            {{_ "No articles found!"}}
         {{/each}}
     </ul>
 </template>

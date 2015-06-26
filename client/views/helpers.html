@@ -1,0 +1,14 @@
+<template name="toggleField">
+    {{#if field}}
+        <p>
+            <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
+               aria-expanded="false" aria-controls="toggle{{_id}}"></i>
+            {{_ "Details"}}: </p>
+
+        <div class="collapse" id="toggle{{_id}}">
+            <ul class="list-unstyled">
+                <li>{{field}}</li>
+            </ul>
+        </div>
+    {{/if}}
+</template>

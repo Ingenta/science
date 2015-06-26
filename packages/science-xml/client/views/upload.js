@@ -26,6 +26,11 @@ Template.uploadForm.events({
     }
 });
 
+Template.AdminUpload.helpers({
+    uploadHistory: function () {
+        return UploadLog.find({},{sort: {'uploadedAt': -1}});
+    }
+});
 Template.UploadLogModal.helpers({
     results: function () {
         return Session.get("result");
@@ -49,7 +54,6 @@ var importXmlByLogId = function (logId) {
     //get failed state
     var log = UploadLog.findOne({_id: logId});
     if (log.errors.length) { //if file is not xml guard then return
-        //console.log(log.errors.length)
         Session.set('errors', log.errors);
         Session.set("result", undefined);
         return;
@@ -72,12 +76,9 @@ var importXmlByLogId = function (logId) {
             Session.set('errors', log.errors);
             Session.set("result", result);
             if (log.errors.length) {
-                //console.log(log.errors.length);
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
                 return;
             }
-            //TODO: if doi is not already found then add to articles collection
-            var existingArticle = Articles.findOne({doi: result.doi});
 
             Articles.insert({
                 doi: result.doi,
@@ -87,7 +88,11 @@ var importXmlByLogId = function (logId) {
                 journalId:result.journalId,
                 publisher:result.publisher,
                 references:result.references,
-                affiliations: result.affiliations
+                affiliations: result.affiliations,
+                articleMetaStr: result.articleMetaStr,
+                authorNotes: result.authorNotes,
+                issue: result.issue,
+                volume: result.volume
             });
             UploadLog.update(
                 {_id: logId},
@@ -97,9 +102,4 @@ var importXmlByLogId = function (logId) {
     });
 }
 
-Template.AdminUpload.helpers({
-    uploadHistory: function () {
-        return UploadLog.find();
-    }
-});
 

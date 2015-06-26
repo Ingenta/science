@@ -59,17 +59,14 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-unstyled">
+                        {{#each errors}}
+                            <li class="bg-danger">{{this}}</li>
+                        {{else}}
+                        <li class="bg-success">{{_ "Xml Import Successful!"}}</li>
+                        {{/each}}
                         {{#if results}}
                             <li>{{_ "DOI"}}: {{results.doi}}</li>
                             <li>{{_ "Title"}}: {{results.title}}</li>
-                            <li>{{_ "Author"}}:
-                                {{#each results.authors}}
-                                    {{_ this.surname}}.{{_ this.given}},
-                                {{else}}
-                                    {{_ "No author found"}}
-                                {{/each}}
-                            </li>
-                            <li>{{_ "Affiliations"}}: {{results.affiliations}}</li>
                             <li>{{_ "Volume"}}: {{results.volume}}</li>
                             <li>{{_ "Issue"}}: {{results.issue}}</li>
                             <li> {{_ "Month"}} : {{results.month}} </li>
@@ -78,11 +75,16 @@
                             <li> ESSN : {{results.essn}} </li>
                             <li>{{_ "Journal"}}: {{results.journalTitle}}</li>
                             <li>{{_ "Publisher"}}: {{results.publisherName}}</li>
+                            <li>{{_ "Author"}}:
+                                {{#each results.authors}}
+                                    {{_ this.surname}}.{{_ this.given}},
+                                {{else}}
+                                    {{_ "No author found"}}
+                                {{/each}}
+                            </li>
+                            <li>{{_ "Affiliations"}}: {{results.affiliations}}</li>
                             <li>{{_ "Abstract"}}: {{results.abstract}}</li>
                         {{/if}}
-                        {{#each errors}}
-                            <li class="bg-danger">{{this}}</li>
-                        {{/each}}
                     </ul>
                 </div>
                 <div class="modal-footer">

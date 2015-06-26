@@ -1,48 +1,42 @@
 Template.PublicationList.helpers({
-  publications: function () {
-    return myPubPagination.find({publisher:this._id}, {itemsPerPage:10});
-  }
+    publications: function () {
+        return myPubPagination.find({publisher: this._id}, {itemsPerPage: 10});
+    }
 });
 
 Template.imageName.helpers({
-  accessKeyIs: function (accessKey) {
-    return this.accessKey === accessKey;
-  }
+    accessKeyIs: function (accessKey) {
+        return this.accessKey === accessKey;
+    }
 });
 
 Template.updatePublicationModalForm.helpers({
-  getTitle: function () {
-    return TAPi18n.__("Update");
-  }
+    getTitle: function () {
+        return TAPi18n.__("Update");
+    }
 });
 Template.deletePublicationModalForm.helpers({
-  getPrompt: function () {
-    return TAPi18n.__("Are you sure?");
-  }
+    getPrompt: function () {
+        return TAPi18n.__("Are you sure?");
+    }
 });
 
 
 Template.SinglePublication.helpers({
-  getJournalUrl: function (title) {
-   return Router.current().url+"/journal/"+title;
- },
- getPublisherNameById: function (id) {
-  return Publishers.findOne({_id:id}).name;
-}
+    getJournalUrl: function (title) {
+        return Router.current().url + "/journal/" + title;
+    }
 });
 
 AutoForm.addHooks(['addPublicationModalForm'], {
-  onSuccess: function () {
-    $("#addPublicationModal").modal('hide');
-    FlashMessages.sendSuccess("Success!", { hideDelay: 5000 });
-  },
-  before:{
-    insert:  function(doc){
-      doc.publisher = Session.get('currentPublisher');
-      if(doc.firstletter!==undefined)
-        doc.firstletter=doc.firstletter.toUpperCase();
-      return doc;
-      //TODO: fix update bug not setting uppercase
+    onSuccess: function () {
+        $("#addPublicationModal").modal('hide');
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            doc.publisher = Session.get('currentPublisher');
+            return doc;
+        }
     }
-  }
 }, true);
