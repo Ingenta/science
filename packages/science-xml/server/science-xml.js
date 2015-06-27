@@ -9,6 +9,23 @@ if (Meteor.isServer) {
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
+    var getSubSection = function (subSectionNodes, mySerializer) {
+        var thisSubSection = [];
+        subSectionNodes.forEach(function (subSection) {
+            thisSubSection.push(getOneSectionHtml(subSection, mySerializer));
+        });
+        return thisSubSection;
+    }
+    var getOneSectionHtml = function (section, mySerializer) {
+        var tempBody = [];
+        var title = xpath.select("child::title/descendant::text()", section)[0].data;
+        var label = xpath.select("child::label/descendant::text()", section)[0].data;
+        var paragraphNodes = xpath.select("child::p", section);
+        paragraphNodes.forEach(function (paragraph) {
+            tempBody.push(mySerializer.serializeToString(paragraph));
+        });
+        return {label: label, title: title, body: tempBody};
+    }
 }
 
 
@@ -19,6 +36,7 @@ Meteor.methods({
         results.authors = [];
         results.authorNotes = [];
         results.references = [];
+        results.sections = [];
 
         //Step 1: get the file
         var xml = getXmlFromPath(path);
@@ -111,16 +129,38 @@ Meteor.methods({
             results.errors.push("No publisher found in the system with the name: " + results.publisherName);
         else results.publisher = publisher._id;
 
-        var abstractNode = xpath.select("//abstract/p/text()", doc);
-
-        if (abstractNode[0] === undefined)  results.errors.push("No abstract found");
+        var abstractNode = xpath.select("//abstract/p", doc)[0];
+        if (abstractNode === undefined)  results.errors.push("No abstract found");
         else {
-            var abstractText = "";
-            for (i = 0; i < abstractNode.length; i++) {
-                abstractText += abstractNode[i].data;
-            }
-            results.abstract = abstractText;
+            var abstract = XMLserializer.serializeToString(abstractNode);
+            abstract = Science.replaceSubstrings(abstract,"<italic>","<i>");
+            abstract = Science.replaceSubstrings(abstract,"</italic>","</i>");
+            //abstract= abstract.replaceSubstrings("<italic>","<i>");
+            //abstract= abstract.replaceSubstrings("</italic>","<i>");
+            results.abstract = abstract;
         }
+
+
+        //foreach if has subsections, call get all subsections function
+        //foreach subsection get all the ps and title
+
+
+        var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+
+        sectionNodes.forEach(function (section) {
+            var childSectionNodes = xpath.select("child::sec[@id]", section);
+            if (childSectionNodes.length) {
+                var thisSection = getOneSectionHtml(section, XMLserializer);
+                results.sections.push({
+                    label: thisSection.label,
+                    title: thisSection.title,
+                    body: thisSection.body,
+                    sections: getSubSection(childSectionNodes, XMLserializer)
+                });
+            }
+            else
+                results.sections.push(getOneSectionHtml(section, XMLserializer));
+        });
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
@@ -174,10 +214,7 @@ Meteor.methods({
             }
         });
 
-        //var bodyNodes = xpath.select("//body/sec[@id='s1']", doc)[0];
-        //
-        //var bodyString = XMLserializer.serializeToString(bodyNodes);
-        //console.log(bodyString);
+
         return results;
     }
 });

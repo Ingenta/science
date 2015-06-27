@@ -19,7 +19,9 @@
                     {{/each}}
                 </p>
 
-                <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a></p>
+                <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
+                        href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
+                        class="fa fa-external-link"></i></a></p>
 
                 <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
             </ul>
@@ -81,7 +83,9 @@
         {{/tabContent}}
 
         {{#tabContent slug="full text"}}
-            {{> FullTextTemplate}}
+            {{#with context}}
+                {{> FullTextTemplate}}
+            {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="references"}}
@@ -139,7 +143,7 @@
 <template name="AbstractTemplate">
     <div class="row">
         <div class="col-xs-9">
-            {{abstract}}
+            {{{abstract}}}
         </div>
         <div class="col-xs-3">
             <h4>{{_ "Key Topics"}}</h4>
@@ -150,11 +154,15 @@
 <template name="FullTextTemplate">
     <div>
         <div class="col-xs-9">
-            随着电子器件的便携化发展, 柔性电子器件越来越引起人们的关注. 透明导电薄膜同时具有良好的导电性和光学透过性, 已作为电极被广泛应用于光电功能器件领域. 然而,
-            目前普遍使用的透明导电材料氧化铟锡(ITO)由于含有储量有限的铟元素而存在成本高的问题, 并且由于氧化物本身的脆性, 其所制薄膜的柔性也不理想, 并不能完全满足目前柔性电子器件的发展要求. 因而,
-            对于可替代ITO的其他廉价、可大量制备、具有优异性能的柔性透明导电薄膜的研究近年来受到研究者的广泛关注. 碳纳米材料因同时具备高的电子传输率、透光率以及良好的机械柔性可以满足目前柔性电子器件的应用需求, 此外,
-            碳纳米材料更具备来源广泛、制备方式灵活多样等特有优势, 可以降低材料和生产成本, 因而更具有实用价值. 本文简要综述了近几年基于碳纳米材料(以碳纳米管和石墨烯为主)的柔性透明导电膜的研究工作,
-            结合材料制备和性能调控以及薄膜制备(特别是连续化制备)的方法, 阐述了该领域最近的研究成果及应用, 最后简要讨论了基于碳纳米材料的柔性透明导电薄膜目前存在的问题及可能的发展方向。
+            {{#each sections}}
+                <h4>{{label}} {{title}}</h4>
+                {{{body}}}
+                <br>
+                {{#each sections}}
+                    <h5>{{label}} {{title}}</h5>
+                    {{{body}}}
+                {{/each}}
+            {{/each}}
         </div>
         <div class="col-xs-3">
             <h4>{{_ "Key Topics"}}</h4>

@@ -1,12 +1,12 @@
-this.escapeRegEx = function (string) {
+Science.escapeRegEx = function (string) {
 	return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
-this.replaceSubstrings = function(string, find, replace) {
-	return string.replace(new RegExp(escapeRegEx(find), 'g'), replace);
+Science.replaceSubstrings = function(string, find, replace) {
+	return string.replace(new RegExp(Science.escapeRegEx(find), 'g'), replace);
 };
 
-this.joinStrings = function(stringArray, join) {
+Science.joinStrings = function(stringArray, join) {
 	var sep = join || ", ";
 	var res = "";
 	_.each(stringArray, function(str) {
