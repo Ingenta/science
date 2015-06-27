@@ -117,29 +117,31 @@ Meteor.methods({
         //Step 5: Return the article object
         results = ScienceXML.getTitle(results, doc);
 
-        var volumeNode = xpath.select("//volume", doc)[0];
-        if (volumeNode === undefined) results.errors.push("No volume found");
-        else results.volume = volumeNode.firstChild.data;
+        var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
+        if (volume === undefined) results.errors.push("No volume found");
+        else results.volume = volume;
 
-        var issueNode = xpath.select("//issue", doc)[0];
-        if (issueNode === undefined) results.errors.push("No issue found");
-        else results.issue = issueNode.firstChild.data;
+        var issue = ScienceXML.getSimpleValueByXPath("//issue", doc);
+        if (issue === undefined) results.errors.push("No issue found");
+        else results.issue = issue;
 
-        var monthNode = xpath.select("//pub-date/month/text()", doc)[0];
-        if (monthNode === undefined) results.errors.push("No month found");
-        else results.month = monthNode.data;
+        var month = ScienceXML.getSimpleValueByXPath("//pub-date/month", doc);
+        if (month === undefined) results.errors.push("No month found");
+        else results.month = month;
 
-        var yearNode = xpath.select("//pub-date/year/text()", doc)[0];
-        if (yearNode === undefined) results.errors.push("No year found");
-        else results.year = yearNode.data;
+        var year = ScienceXML.getSimpleValueByXPath("//pub-date/year", doc);
+        if (year === undefined) results.errors.push("No year found");
+        else results.year = year;
 
-        var elocationIdNode = xpath.select("//article-meta/elocation-id/text()", doc)[0];
-        if (elocationIdNode === undefined) results.errors.push("No elocation id found");
-        else results.elocationId = elocationIdNode.data;
+        var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
+        if (elocationId === undefined) results.errors.push("No elocation id found");
+        else results.elocationId = elocationId
 
-        var doiNode = xpath.select("//article-id[@pub-id-type='doi']/text()", doc)[0];
-        if (doiNode === undefined) results.errors.push("No doi found");
-        else results.doi = doiNode.data;
+        var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
+        if (doi === undefined) results.errors.push("No doi found");
+        else results.doi = doi;
+
+
         //TODO: if doi is already found then add to articles collection
         var existingArticle = Articles.findOne({doi: results.doi});
         if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
@@ -157,7 +159,7 @@ Meteor.methods({
 
         var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
         if (essn !== undefined) results.essn = essn;
-        
+
 
         var journalTitleNode = xpath.select("//journal-title/text()", doc)[0];
         if (journalTitleNode === undefined) results.errors.push("No journal title found");
