@@ -30,11 +30,25 @@ if (Meteor.isServer) {
     ScienceXML.getTitle = function (results, doc) {
         if (!results.errors)
             results.errors = [];
-        var titleNodes = xpath.select("//article-title", doc)[0];
-        if (titleNodes === undefined) results.errors.push("No title found");
-        else results.title = titleNodes.firstChild.data;
+        var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
+        if (title === undefined) results.errors.push("No title found");
+        else results.title = title;
         return results;
     }
+    ScienceXML.getSimpleValueByXPath = function (xp, doc) {
+        var titleNodes = xpath.select(xp, doc)[0];
+        if (!titleNodes)return;
+        return titleNodes.firstChild.data;
+    }
+    ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
+        var nodes = xpath.select(xp + "/descendant::text()", doc);
+        var text = "";
+        nodes.forEach(function (part) {
+            text += part.data;
+        });
+        return text;
+    }
+
 }
 
 
