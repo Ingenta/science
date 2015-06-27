@@ -31,15 +31,6 @@ if (Meteor.isServer) {
         return {label: label, title: title, body: tempBody};
     }
 
-    ScienceXML.getTitle = function (results, doc) {
-        if (!results.errors)
-            results.errors = [];
-        var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
-        if (title === undefined) results.errors.push("No title found");
-        else results.title = title;
-        return results;
-    }
-
     ScienceXML.getAbstract = function (results, doc) {
         if (!results.errors)
             results.errors = [];
@@ -124,7 +115,9 @@ if (Meteor.isServer) {
             var existingArticle = Articles.findOne({doi: results.doi});
             if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
 
-            results = ScienceXML.getTitle(results, doc);
+            var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
+            if (title === undefined) results.errors.push("No title found");
+            else results.title = title;
 
             var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
             if (volume === undefined) results.errors.push("No volume found");
