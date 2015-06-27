@@ -40,7 +40,7 @@ if (Meteor.isServer) {
         return results;
     }
 
-    ScienceXML.getAbstract = function (results,doc) {
+    ScienceXML.getAbstract = function (results, doc) {
         if (!results.errors)
             results.errors = [];
         var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc)
@@ -152,12 +152,12 @@ Meteor.methods({
             });
         }
 
-        var issnNode = xpath.select("//issn[@pub-type='ppub']/text()", doc)[0];
-        if (issnNode !== undefined) results.issn = issnNode.data;
+        var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
+        if (issn !== undefined) results.issn = issn;
 
-        var essnNode = xpath.select("//issn[@pub-type='epub']/text()", doc)[0];
-        if (essnNode === undefined) results.errors.push("No essn found");
-        else results.essn = essnNode.data;
+        var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
+        if (essn !== undefined) results.essn = essn;
+        
 
         var journalTitleNode = xpath.select("//journal-title/text()", doc)[0];
         if (journalTitleNode === undefined) results.errors.push("No journal title found");
@@ -178,7 +178,6 @@ Meteor.methods({
         else results.publisher = publisher._id;
 
         results = ScienceXML.getAbstract(results, doc);
-
 
 
         //foreach if has subsections, call get all subsections function
