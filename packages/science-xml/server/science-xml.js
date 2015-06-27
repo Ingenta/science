@@ -13,7 +13,7 @@ if (Meteor.isServer) {
     ScienceXML.getSubSection = function (subSectionNodes, mySerializer) {
         var thisSubSection = [];
         subSectionNodes.forEach(function (subSection) {
-            thisSubSection.push(getOneSectionHtml(subSection, mySerializer));
+            thisSubSection.push(ScienceXML.getOneSectionHtml(subSection, mySerializer));
         });
         return thisSubSection;
     }
@@ -28,6 +28,8 @@ if (Meteor.isServer) {
         return {label: label, title: title, body: tempBody};
     }
     ScienceXML.getTitle = function (results, doc) {
+        if (!results.errors)
+            results.errors = [];
         var titleNodes = xpath.select("//article-title", doc)[0];
         if (titleNodes === undefined) results.errors.push("No title found");
         else results.title = titleNodes.firstChild.data;
