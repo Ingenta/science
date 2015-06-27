@@ -19,10 +19,12 @@ Package.onUse(function (api) {
     api.addFiles('server/science-xml.js', 'server');
     api.addFiles('client/views/upload.html', 'client');
     api.addFiles('client/views/upload.js', 'client');
+    api.export('ScienceXML');
 });
 
 Package.onTest(function (api) {
     api.use('tinytest');
-    api.use('science-xml');
-    api.addFiles('science-xml-tests.js');
+    api.use('science-xml', 'server');
+    api.use('jackkav:xpath', 'server');
+    api.addFiles('science-xml-tests.js', 'server');
 });

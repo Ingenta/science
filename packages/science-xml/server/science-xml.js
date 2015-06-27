@@ -1,4 +1,5 @@
 if (Meteor.isServer) {
+    ScienceXML = {};
     var getLocationAsync = function (path, cb) {
         cb && cb(null, HTTP.get(path).content);
     }
@@ -9,14 +10,14 @@ if (Meteor.isServer) {
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
-    var getSubSection = function (subSectionNodes, mySerializer) {
+    ScienceXML.getSubSection = function (subSectionNodes, mySerializer) {
         var thisSubSection = [];
         subSectionNodes.forEach(function (subSection) {
             thisSubSection.push(getOneSectionHtml(subSection, mySerializer));
         });
         return thisSubSection;
     }
-    var getOneSectionHtml = function (section, mySerializer) {
+    ScienceXML.getOneSectionHtml = function (section, mySerializer) {
         var tempBody = [];
         var title = xpath.select("child::title/descendant::text()", section)[0].data;
         var label = xpath.select("child::label/descendant::text()", section)[0].data;
@@ -25,6 +26,12 @@ if (Meteor.isServer) {
             tempBody.push(mySerializer.serializeToString(paragraph));
         });
         return {label: label, title: title, body: tempBody};
+    }
+    ScienceXML.getTitle = function (results, doc) {
+        var titleNodes = xpath.select("//article-title", doc)[0];
+        if (titleNodes === undefined) results.errors.push("No title found");
+        else results.title = titleNodes.firstChild.data;
+        return results;
     }
 }
 
@@ -64,10 +71,8 @@ Meteor.methods({
         //Step 3: Read the xpaths FOREACH:
         //Step 4: if anything went wrong add an errors object to the article
         //Step 5: Return the article object
+        results = ScienceXML.getTitle(results, doc);
 
-        var titleNodes = xpath.select("//article-title", doc)[0];
-        if (titleNodes === undefined) results.errors.push("No title found");
-        else results.title = titleNodes.firstChild.data;
 
         var volumeNode = xpath.select("//volume", doc)[0];
         if (volumeNode === undefined) results.errors.push("No volume found");
@@ -133,10 +138,8 @@ Meteor.methods({
         if (abstractNode === undefined)  results.errors.push("No abstract found");
         else {
             var abstract = XMLserializer.serializeToString(abstractNode);
-            abstract = Science.replaceSubstrings(abstract,"<italic>","<i>");
-            abstract = Science.replaceSubstrings(abstract,"</italic>","</i>");
-            //abstract= abstract.replaceSubstrings("<italic>","<i>");
-            //abstract= abstract.replaceSubstrings("</italic>","<i>");
+            abstract = Science.replaceSubstrings(abstract, "<italic>", "<i>");
+            abstract = Science.replaceSubstrings(abstract, "</italic>", "</i>");
             results.abstract = abstract;
         }
 
@@ -150,16 +153,16 @@ Meteor.methods({
         sectionNodes.forEach(function (section) {
             var childSectionNodes = xpath.select("child::sec[@id]", section);
             if (childSectionNodes.length) {
-                var thisSection = getOneSectionHtml(section, XMLserializer);
+                var thisSection = ScienceXML.getOneSectionHtml(section, XMLserializer);
                 results.sections.push({
                     label: thisSection.label,
                     title: thisSection.title,
                     body: thisSection.body,
-                    sections: getSubSection(childSectionNodes, XMLserializer)
+                    sections: ScienceXML.getSubSection(childSectionNodes, XMLserializer)
                 });
             }
             else
-                results.sections.push(getOneSectionHtml(section, XMLserializer));
+                results.sections.push(ScienceXML.getOneSectionHtml(section, XMLserializer));
         });
 
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
