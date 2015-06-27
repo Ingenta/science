@@ -3,6 +3,7 @@ if (Meteor.isServer) {
     var getLocationAsync = function (path, cb) {
         cb && cb(null, HTTP.get(path).content);
     }
+
     var getXmlFromPath = function (path) {
         var getLocationSync = Meteor.wrapAsync(getLocationAsync);
         //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
@@ -10,6 +11,7 @@ if (Meteor.isServer) {
         var fullPath = Meteor.absoluteUrl(path.substring(1));
         return getLocationSync(fullPath);
     }
+
     ScienceXML.getSubSection = function (subSectionNodes, mySerializer) {
         var thisSubSection = [];
         subSectionNodes.forEach(function (subSection) {
@@ -17,6 +19,7 @@ if (Meteor.isServer) {
         });
         return thisSubSection;
     }
+
     ScienceXML.getOneSectionHtml = function (section, mySerializer) {
         var tempBody = [];
         var title = xpath.select("child::title/descendant::text()", section)[0].data;
@@ -27,6 +30,7 @@ if (Meteor.isServer) {
         });
         return {label: label, title: title, body: tempBody};
     }
+
     ScienceXML.getTitle = function (results, doc) {
         if (!results.errors)
             results.errors = [];
@@ -35,11 +39,13 @@ if (Meteor.isServer) {
         else results.title = title;
         return results;
     }
+
     ScienceXML.getSimpleValueByXPath = function (xp, doc) {
         var titleNodes = xpath.select(xp, doc)[0];
         if (!titleNodes)return;
         return titleNodes.firstChild.data;
     }
+
     ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
         var nodes = xpath.select(xp + "/descendant::text()", doc);
         var text = "";
@@ -49,6 +55,14 @@ if (Meteor.isServer) {
         return text;
     }
 
+    ScienceXML.getValueByXPathIncludingXml = function (xp, doc) {
+        var nodes = xpath.select(xp, doc)[0];
+        var text = new serializer().serializeToString(nodes);
+        var firstTagLength = text.indexOf(">") + 1;
+        text = text.substr(firstTagLength);
+        text = text.substr(0, text.length - firstTagLength - 1);
+        return text;
+    }
 }
 
 

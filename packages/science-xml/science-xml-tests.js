@@ -31,11 +31,19 @@ Tinytest.add('Given valid xml, and xpath, When author is not missing and has xml
     var title = ScienceXML.getValueByXPathIgnoringXml("//author", doc);
     test.equal("Terry Pratchettesq.", title);
 })
-//
-//Tinytest.add('Given valid xml, and xpath, When author is not missing and has xml inside, Should return author with xml', function (test) {
-//    var testXml = "<book><author>Terry Pratchett<sub>esq.</sub></author><article-title>Witches abroad</article-title></book>";
-//    var xmlDom = new dom();
-//    var doc = xmlDom.parseFromString(testXml);
-//    var title = ScienceXML.getValueByXPathIncludingXml("//author", doc);
-//    test.equal("Terry Pratchett<sub>esq.</sub>.", title);
-//});
+
+Tinytest.add('Given valid xml, and xpath, When author is not missing and has xml inside, Should return author with xml', function (test) {
+    var testXml = "<book><author>Terry Pratchett<sub>esq.</sub></author><article-title>Witches abroad</article-title></book>";
+    var xmlDom = new dom();
+    var doc = xmlDom.parseFromString(testXml);
+    var title = ScienceXML.getValueByXPathIncludingXml("//author", doc);
+    test.equal("Terry Pratchett<sub>esq.</sub>", title);
+});
+
+Tinytest.add('Given valid xml, and xpath, When title is not missing and has xml inside, Should return title with xml', function (test) {
+    var testXml = "<book><author>Terry Pratchett<sub>esq.</sub></author><title>Witches abroad<sup>1</sup></title></book>";
+    var xmlDom = new dom();
+    var doc = xmlDom.parseFromString(testXml);
+    var title = ScienceXML.getValueByXPathIncludingXml("//title", doc);
+    test.equal("Witches abroad<sup>1</sup>", title);
+});
