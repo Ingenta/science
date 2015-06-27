@@ -40,6 +40,19 @@ if (Meteor.isServer) {
         return results;
     }
 
+    ScienceXML.getAbstract = function (results,doc) {
+        if (!results.errors)
+            results.errors = [];
+        var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc)
+        if (!abstract)  results.errors.push("No abstract found");
+        else {
+            abstract = Science.replaceSubstrings(abstract, "<italic>", "<i>");
+            abstract = Science.replaceSubstrings(abstract, "</italic>", "</i>");
+            results.abstract = abstract;
+        }
+        return results;
+    }
+
     ScienceXML.getSimpleValueByXPath = function (xp, doc) {
         var titleNodes = xpath.select(xp, doc)[0];
         if (!titleNodes)return;
@@ -58,9 +71,10 @@ if (Meteor.isServer) {
     ScienceXML.getValueByXPathIncludingXml = function (xp, doc) {
         var nodes = xpath.select(xp, doc)[0];
         var text = new serializer().serializeToString(nodes);
+        //trim parent tags
         var firstTagLength = text.indexOf(">") + 1;
         text = text.substr(firstTagLength);
-        text = text.substr(0, text.length - firstTagLength - 1);
+        text = text.substr(0, text.lastIndexOf("<"));
         return text;
     }
 }
@@ -102,7 +116,6 @@ Meteor.methods({
         //Step 4: if anything went wrong add an errors object to the article
         //Step 5: Return the article object
         results = ScienceXML.getTitle(results, doc);
-
 
         var volumeNode = xpath.select("//volume", doc)[0];
         if (volumeNode === undefined) results.errors.push("No volume found");
@@ -164,14 +177,8 @@ Meteor.methods({
             results.errors.push("No publisher found in the system with the name: " + results.publisherName);
         else results.publisher = publisher._id;
 
-        var abstractNode = xpath.select("//abstract/p", doc)[0];
-        if (abstractNode === undefined)  results.errors.push("No abstract found");
-        else {
-            var abstract = XMLserializer.serializeToString(abstractNode);
-            abstract = Science.replaceSubstrings(abstract, "<italic>", "<i>");
-            abstract = Science.replaceSubstrings(abstract, "</italic>", "</i>");
-            results.abstract = abstract;
-        }
+        results = ScienceXML.getAbstract(results, doc);
+
 
 
         //foreach if has subsections, call get all subsections function
