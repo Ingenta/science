@@ -113,6 +113,7 @@ Router.ensureLogged = function () {
             this.next();
         }
     }
+    this.next();
 };
 
 Router.ensureNotLogged = function () {
@@ -124,9 +125,8 @@ Router.ensureNotLogged = function () {
         var redirectRoute = firstGrantedRoute();
         this.redirect(redirectRoute);
     }
-    else {
-        this.next();
-    }
+    this.next();
+
 };
 
 
@@ -136,8 +136,8 @@ Router.onBeforeAction(function () {
         $("body").addClass("wait");
     } else {
         $("body").removeClass("wait");
-        this.next();
     }
+    this.next();
 });
 
 

@@ -68,5 +68,19 @@ Meteor.methods({
         if(Meteor.isServer)
             return Roles.updateRole(id,role);
         return false;
+    },
+    "deleteRole":function(id){
+        check(id,String);
+        if(Meteor.isServer){
+            return Roles.deleteById(id);
+        }
+        return false;
+    },
+    "isRoleHasUser":function(roleId){
+        check(roleId,String);
+        if(Meteor.isServer){
+            return Roles.listUsers(roleId);
+        }
+        return false;
     }
 });

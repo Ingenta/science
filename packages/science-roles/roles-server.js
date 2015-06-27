@@ -75,4 +75,19 @@ Roles.updateRole=function(id,role){
     return true;
 }
 //TODO: 删除角色
+Roles.deleteById=function(id){
+    try{
+        Meteor.roles.remove({_id:id});
+    }catch(e){
+        throw e;
+    }
+    return true;
+}
 //TODO: 查询角色下所有用户
+Roles.listUsers=function(roleId){
+    if(!roleId)
+        return false;
+    if(!Meteor.users)
+        return false;
+    return Meteor.users.find({roles:roleId})
+}
