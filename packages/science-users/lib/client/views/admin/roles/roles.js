@@ -21,5 +21,13 @@ Template.RolesViewTableItems.events({
     "click .fa-pencil":function(e){
         e.preventDefault();
         Router.go("admin.roles.update",{"roleId":this._id});
+    },
+    "click .fa-trash":function(e){
+        e.preventDefault();
+        Meteor.call('deleteRole',this._id,function(e){
+            if(e){
+                console.log(e)
+            }
+        })
     }
 })
