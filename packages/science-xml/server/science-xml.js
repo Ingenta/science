@@ -112,9 +112,14 @@ Meteor.methods({
             return results;
         }
 
-        //Step 3: Read the xpaths FOREACH:
-        //Step 4: if anything went wrong add an errors object to the article
-        //Step 5: Return the article object
+        var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
+        if (doi === undefined) results.errors.push("No doi found");
+        else results.doi = doi;
+
+        //TODO: if doi is already found then add to articles collection
+        var existingArticle = Articles.findOne({doi: results.doi});
+        if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
+
         results = ScienceXML.getTitle(results, doc);
 
         var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
@@ -137,15 +142,6 @@ Meteor.methods({
         if (elocationId === undefined) results.errors.push("No elocation id found");
         else results.elocationId = elocationId
 
-        var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
-        if (doi === undefined) results.errors.push("No doi found");
-        else results.doi = doi;
-
-
-        //TODO: if doi is already found then add to articles collection
-        var existingArticle = Articles.findOne({doi: results.doi});
-        if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
-
         var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
         if (affNode[0] !== undefined) {
             results.affiliations = "";
@@ -160,24 +156,24 @@ Meteor.methods({
         var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
         if (essn !== undefined) results.essn = essn;
 
+        var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-title", doc);
+        if (journalTitle === undefined) results.errors.push("No journal title found");
+        else {
+            results.journalTitle = journalTitle;
+            var journal = Publications.findOne({title: results.journalTitle});
+            if (journal === undefined) results.errors.push("No journal title found in the system with the name: " + results.journalTitle);
+            else results.journalId = journal._id;
+        }
 
-        var journalTitleNode = xpath.select("//journal-title/text()", doc)[0];
-        if (journalTitleNode === undefined) results.errors.push("No journal title found");
-        else results.journalTitle = journalTitleNode.data;
+        var publisherName = ScienceXML.getSimpleValueByXPath("//publisher-name", doc);
+        if (publisherName === undefined) results.errors.push("No publisher name found");
+        else {
+            results.publisherName = publisherName;
+            var publisher = Publishers.findOne({name: results.publisherName});
+            if (publisher === undefined) results.errors.push("No publisher found in the system with the name: " + results.publisherName);
+            else results.publisher = publisher._id;
+        }
 
-        var journal = Publications.findOne({title: results.journalTitle});
-        if (journal === undefined)
-            results.errors.push("No journal title found in the system with the name: " + results.journalTitle);
-        else results.journalId = journal._id;
-
-        var publisherNameNode = xpath.select("//publisher-name/text()", doc)[0];
-        if (publisherNameNode === undefined) results.errors.push("No publisher name found");
-        else results.publisherName = publisherNameNode.data;
-
-        var publisher = Publishers.findOne({name: results.publisherName});
-        if (publisher === undefined)
-            results.errors.push("No publisher found in the system with the name: " + results.publisherName);
-        else results.publisher = publisher._id;
 
         results = ScienceXML.getAbstract(results, doc);
 
