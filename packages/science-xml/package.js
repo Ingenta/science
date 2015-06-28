@@ -17,6 +17,7 @@ Package.onUse(function (api) {
         both);
     api.addFiles('both/uploadLog.js', both);
     api.addFiles('server/science-xml.js', 'server');
+    api.addFiles('server/xml-lib.js', 'server');
     api.addFiles('client/views/upload.html', 'client');
     api.addFiles('client/views/upload.js', 'client');
     api.export('ScienceXML');
