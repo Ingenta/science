@@ -12,21 +12,21 @@ if (Meteor.isServer) {
         return getLocationSync(fullPath);
     }
 
-    ScienceXML.getSubSection = function (subSectionNodes, mySerializer) {
+    ScienceXML.getSubSection = function (subSectionNodes) {
         var thisSubSection = [];
         subSectionNodes.forEach(function (subSection) {
-            thisSubSection.push(ScienceXML.getOneSectionHtml(subSection, mySerializer));
+            thisSubSection.push(ScienceXML.getOneSectionHtml(subSection));
         });
         return thisSubSection;
     }
 
-    ScienceXML.getOneSectionHtml = function (section, mySerializer) {
+    ScienceXML.getOneSectionHtml = function (section) {
         var tempBody = [];
         var title = xpath.select("child::title/descendant::text()", section)[0].data;
         var label = xpath.select("child::label/descendant::text()", section)[0].data;
         var paragraphNodes = xpath.select("child::p", section);
         paragraphNodes.forEach(function (paragraph) {
-            tempBody.push(mySerializer.serializeToString(paragraph));
+            tempBody.push(new serializer().serializeToString(paragraph));
         });
         return {label: label, title: title, body: tempBody};
     }
@@ -72,13 +72,22 @@ if (Meteor.isServer) {
     ScienceXML.xmlStringToXmlDoc = function (xml) {
         return new dom().parseFromString(xml);
     }
+    ScienceXML.validateXml = function (xml) {
+        var xmlErrors = [];
+        var xmlDom = new dom({
+            errorHandler: function (msg) {
+                xmlErrors.push(msg);
+            }
+        });
+        var doc = xmlDom.parseFromString(xml);
+        return xmlErrors;
+    }
 }
 
 
     Meteor.methods({
         'parseXml': function (path) {
             var results = {};
-            results.errors = [];
             results.authors = [];
             results.authorNotes = [];
             results.references = [];
@@ -88,24 +97,13 @@ if (Meteor.isServer) {
             var xml = getXmlFromPath(path);
 
             //Step 2: Parse the file
-            var xmlErrors = [];
-            var xmlDom = new dom({
-                errorHandler: function (msg) {
-                    xmlErrors.push(msg);
-                }
-            });
-            var XMLserializer = new serializer({
-                errorHandler: function (msg) {
-                    xmlErrors.push(msg);
-                }
-            });
-            var doc = xmlDom.parseFromString(xml);
-            if (xmlErrors.length) {
-                for (i = 0; i < xmlErrors.length; i++) {
-                    results.errors.push(xmlErrors[i]);
-                }
+            results.errors = ScienceXML.validateXml(xml);
+            if (results.errors.length) {
                 return results;
             }
+
+            var doc = new dom().parseFromString(xml);
+
 
             var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
             if (doi === undefined) results.errors.push("No doi found");
@@ -114,6 +112,8 @@ if (Meteor.isServer) {
             //TODO: if doi is already found then add to articles collection
             var existingArticle = Articles.findOne({doi: results.doi});
             if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
+
+
 
             var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
             if (title === undefined) results.errors.push("No title found");
@@ -184,16 +184,16 @@ if (Meteor.isServer) {
             sectionNodes.forEach(function (section) {
                 var childSectionNodes = xpath.select("child::sec[@id]", section);
                 if (childSectionNodes.length) {
-                    var thisSection = ScienceXML.getOneSectionHtml(section, XMLserializer);
+                    var thisSection = ScienceXML.getOneSectionHtml(section);
                     results.sections.push({
                         label: thisSection.label,
                         title: thisSection.title,
                         body: thisSection.body,
-                        sections: ScienceXML.getSubSection(childSectionNodes, XMLserializer)
+                        sections: ScienceXML.getSubSection(childSectionNodes)
                     });
                 }
                 else
-                    results.sections.push(ScienceXML.getOneSectionHtml(section, XMLserializer));
+                    results.sections.push(ScienceXML.getOneSectionHtml(section));
             });
 
             var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
