@@ -25,22 +25,24 @@ ScienceXML.getOneSectionHtml = function (section) {
     var label = xpath.select("child::label/descendant::text()", section)[0].data;
     var paragraphNodes = xpath.select("child::p", section);
     paragraphNodes.forEach(function (paragraph) {
-        tempBody.push(new serializer().serializeToString(paragraph));
+        var sectionText = new serializer().serializeToString(paragraph)
+        tempBody.push(ScienceXML.replaceItalics(sectionText));
     });
     return {label: label, title: title, body: tempBody};
 }
 
 ScienceXML.getAbstract = function (results, doc) {
-    if (!results.errors)
-        results.errors = [];
+    if (!results.errors) results.errors = [];
     var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc)
     if (!abstract)  results.errors.push("No abstract found");
-    else {
-        abstract = Science.replaceSubstrings(abstract, "<italic>", "<i>");
-        abstract = Science.replaceSubstrings(abstract, "</italic>", "</i>");
-        results.abstract = abstract;
-    }
+    else results.abstract = ScienceXML.replaceItalics(abstract);
     return results;
+}
+
+ScienceXML.replaceItalics = function (input) {
+    input = Science.replaceSubstrings(input, "<italic>", "<i>");
+    input = Science.replaceSubstrings(input, "</italic>", "</i>");
+    return input;
 }
 
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {

@@ -37,11 +37,13 @@
             </div>
         </div>
         <div class="col-xs-6">
+            <div class="container-fluid">
             {{#each news}}
             {{> SingleNews}}
             {{else}}
             {{_"No news found!"}}
             {{/each}}
+            </div>
         </div>
     </div>
 </template>
