@@ -96,22 +96,9 @@ Meteor.methods({
         results.sections = [];
         results = ScienceXML.getAbstract(results, doc);
 
-        var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+        results = ScienceXML.getFullText(results, doc);
 
-        sectionNodes.forEach(function (section) {
-            var childSectionNodes = xpath.select("child::sec[@id]", section);
-            if (childSectionNodes.length) {
-                var thisSection = ScienceXML.getOneSectionHtml(section);
-                results.sections.push({
-                    label: thisSection.label,
-                    title: thisSection.title,
-                    body: thisSection.body,
-                    sections: ScienceXML.getSubSection(childSectionNodes)
-                });
-            }
-            else
-                results.sections.push(ScienceXML.getOneSectionHtml(section));
-        });
+
 
 
         //          GET AUTHORS, NOTES AND AFFILIATIONS

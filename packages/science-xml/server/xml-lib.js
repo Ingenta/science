@@ -20,30 +20,51 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 }
 
 ScienceXML.getOneSectionHtml = function (section) {
-    var tempBody = [];
-    var title = xpath.select("child::title/descendant::text()", section)[0].data;
-    var label = xpath.select("child::label/descendant::text()", section)[0].data;
+    var tempBody = "";
+    var title = ScienceXML.getValueByXPathIncludingXml("child::title", section);
+    var label = ScienceXML.getValueByXPathIncludingXml("child::label", section);
     var paragraphNodes = xpath.select("child::p", section);
     paragraphNodes.forEach(function (paragraph) {
         var sectionText = new serializer().serializeToString(paragraph)
-        tempBody.push(ScienceXML.replaceItalics(sectionText));
+        tempBody += ScienceXML.replaceItalics(sectionText);
     });
     return {label: label, title: title, body: tempBody};
+}
+
+ScienceXML.getFullText = function (results, doc) {
+    var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+    sectionNodes.forEach(function (section) {
+        var childSectionNodes = xpath.select("child::sec[@id]", section);
+        if (childSectionNodes.length) {
+            var thisSection = ScienceXML.getOneSectionHtml(section);
+            results.sections.push({
+                label: thisSection.label,
+                title: thisSection.title,
+                body: thisSection.body,
+                sections: ScienceXML.getSubSection(childSectionNodes)
+            });
+        }
+        else
+            results.sections.push(ScienceXML.getOneSectionHtml(section));
+    });
+    return results;
 }
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
     var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc)
     if (!abstract)  results.errors.push("No abstract found");
-    else results.abstract = ScienceXML.replaceItalics(abstract);
+    else results.abstract = abstract;
     return results;
 }
+
 
 ScienceXML.replaceItalics = function (input) {
     input = Science.replaceSubstrings(input, "<italic>", "<i>");
     input = Science.replaceSubstrings(input, "</italic>", "</i>");
     return input;
 }
+
 
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {
     var titleNodes = xpath.select(xp, doc)[0];
@@ -67,7 +88,7 @@ ScienceXML.getValueByXPathIncludingXml = function (xp, doc) {
     var firstTagLength = text.indexOf(">") + 1;
     text = text.substr(firstTagLength);
     text = text.substr(0, text.lastIndexOf("<"));
-    return text;
+    return ScienceXML.replaceItalics(text);
 }
 
 ScienceXML.xmlStringToXmlDoc = function (xml) {
