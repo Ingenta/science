@@ -1,0 +1,18 @@
+<template name="FullTextTemplate">
+    <div>
+        <div class="col-xs-9">
+            {{#each sections}}
+                <h4>{{label}} {{{title}}}</h4>
+                {{{body}}}
+                <br>
+                {{#each sections}}
+                    <h5>{{label}} {{{title}}}</h5>
+                    {{{body}}}
+                {{/each}}
+            {{/each}}
+        </div>
+        <div class="col-xs-3">
+            <h4>{{_ "Key Topics"}}</h4>
+        </div>
+    </div>
+</template>

@@ -28,7 +28,6 @@
         </div>
         <div class="col-xs-3">
             <br>
-
             <div class="container-fluid gray-background">
                 <div class="row">
                     <li class="pdf">
@@ -140,64 +139,12 @@
     </div>
 </template>
 
-<template name="AbstractTemplate">
-    <div class="row">
-        <div class="col-xs-9">
-            {{{abstract}}}
-        </div>
-        <div class="col-xs-3">
-            <h4>{{_ "Key Topics"}}</h4>
-        </div>
-    </div>
-</template>
 
-<template name="FullTextTemplate">
-    <div>
-        <div class="col-xs-9">
-            {{#each sections}}
-                <h4>{{label}} {{title}}</h4>
-                {{{body}}}
-                <br>
-                {{#each sections}}
-                    <h5>{{label}} {{title}}</h5>
-                    {{{body}}}
-                {{/each}}
-            {{/each}}
-        </div>
-        <div class="col-xs-3">
-            <h4>{{_ "Key Topics"}}</h4>
-        </div>
-    </div>
-</template>
 
-<template name="ReferencesTemplate">
-    <div>
-        {{#each references}}
-            <p>
-                {{this.ref}}
-                {{#if this.doi}}
-                    <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i
-                            class="fa fa-external-link"></i></a>
-                {{/if}}
-            </p>
-        {{/each}}
-    </div>
-</template>
 
-<template name="CitedByTemplate">
-    <div>
 
-        <p style="margin-bottom">
-            1. 《纳米炭/环氧树脂复合材料黏弹阻尼性能》作者：曾尤, 王函
-            http://dx.doi.org/10.1016/j.mseb.2013.08.002
-        </p>
 
-        <p style="margin-bottom">
-            2. 气相刻蚀选择性制备单一导电属性单壁碳纳米管》 作者：侯鹏翔, 刘畅, 成会明
-            <a href="http://dx.doi.org/10.1016/j.mseb.2013.08.002"></a>
-        </p>
-    </div>
-</template>
+
 
 <template name="DataMediaTemplate">
     <div class="row">
@@ -229,28 +176,4 @@
         </span>
     </div>
 </template>
-<!--<template name="OverviewTemplate">-->
-
-<!--<div class="row">-->
-<!--<div class="col-xs-3">-->
-<!--<div class="pull-right">-->
-        <!--{{#if isAdmin }}-->
-<!--{{> updatePublicationPictureModalForm}}-->
-        <!--{{/if}}-->
-<!--</div>-->
-<!--<img src="{{getImageHelper picture}}" width="100" height="142"/>-->
-<!--</div>-->
-<!--<div class="col-xs-9">-->
-<!--<div class="row">-->
-<!--<div class="pull-right">-->
-        <!--{{#if isAdmin }}-->
-<!--{{> updatePublicationDescriptionModalForm}}-->
-        <!--{{/if}}-->
-<!--</div>-->
-<!--{{description}}-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<hr>-->
-<!--</template>-->
 

@@ -1,7 +1,39 @@
 chai.should();
 if (!(typeof MochaWeb === 'undefined')) {
     MochaWeb.testOnly(function () {
-        describe("XML Parsing", function () {
+        describe("XML", function () {
+            //describe("When parsing a section of full text with subsections", function () {
+            //    it("should get sub section title", function () {
+            //        var testXml = "<book><body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p><sec id='s1a'><title>Guards! Guards!<title></sec></sec></body></book>";
+            //        var result = {};
+            //        var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+            //        var result = ScienceXML.getFullText(result, doc);
+            //        result.sections.title.should.equal("Guards! Guards!");
+            //    });
+            //});
+            describe("When parsing a section of full text with no subsections", function () {
+                it("should get title", function () {
+                    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
+                    var result = {};
+                    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+                    var result = ScienceXML.getFullText(result, doc);
+                    result.sections.title.should.equal("abc");
+                });
+                //it("should get label", function () {
+                //    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
+                //    var result = {};
+                //    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+                //    var result = ScienceXML.getFullText(result, doc);
+                //    result.sections.label.should.equal("def");
+                //});
+                //it("should get paragraphs", function () {
+                //    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
+                //    var result = {};
+                //    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+                //    var result = ScienceXML.getFullText(result, doc);
+                //    result.sections.body.should.equal("<p>123</p><p>456</p><p>789</p>");
+                //});
+            });
             describe("When validating an bad xml string", function () {
                 it("should return errors", function () {
                     var testXml = "<book><author></articbook>";
@@ -43,7 +75,7 @@ if (!(typeof MochaWeb === 'undefined')) {
                 it("should replace the italic tag with the html i tag", function () {
                     var abstractContent = "<p>Dana-Farber and Scripps Florida scientists have <italic>identified</italic> an alternative mechanism by which PPAR<sub>&#x3B3;</sub> agonists could exert their antidiabetic effects. The findings provide a rationale for a renewed look at compounds previously dismissed due to poor agonist activity but that now may offer therapeutic benefits with the potential for fewer side effects than marketed PPAR<sub>&#x3B3;</sub> agonists.</p>";
                     var abstractResult = "<p>Dana-Farber and Scripps Florida scientists have <i>identified</i> an alternative mechanism by which PPAR<sub>γ</sub> agonists could exert their antidiabetic effects. The findings provide a rationale for a renewed look at compounds previously dismissed due to poor agonist activity but that now may offer therapeutic benefits with the potential for fewer side effects than marketed PPAR<sub>γ</sub> agonists.</p>";
-                    var testXml = "<book><author>Terry Pratchett<sub>esq.</sub></author><title>Witches abroad<sup>1</sup></title><abstract abstract-type='editor'>"+abstractContent+"</abstract></book>";
+                    var testXml = "<book><author>Terry Pratchett<sub>esq.</sub></author><title>Witches abroad<sup>1</sup></title><abstract abstract-type='editor'>" + abstractContent + "</abstract></book>";
                     var doc = ScienceXML.xmlStringToXmlDoc(testXml);
                     var results = {};
                     var result = ScienceXML.getAbstract(results, doc);

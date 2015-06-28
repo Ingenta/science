@@ -1,0 +1,13 @@
+<template name="ReferencesTemplate">
+    <div>
+        {{#each references}}
+            <p>
+                {{this.ref}}
+                {{#if this.doi}}
+                    <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i
+                            class="fa fa-external-link"></i></a>
+                {{/if}}
+            </p>
+        {{/each}}
+    </div>
+</template>
