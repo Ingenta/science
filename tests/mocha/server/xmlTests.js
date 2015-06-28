@@ -11,14 +11,14 @@ if (!(typeof MochaWeb === 'undefined')) {
             //        result.sections.title.should.equal("Guards! Guards!");
             //    });
             //});
-            describe("When parsing a section of full text with no subsections", function () {
-                it("should get title", function () {
-                    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
-                    var result = {};
-                    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
-                    var result = ScienceXML.getFullText(result, doc);
-                    result.sections.title.should.equal("abc");
-                });
+            //describe("When parsing a section of full text with no subsections", function () {
+            //    it("should get title", function () {
+            //        var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
+            //        var result = {};
+            //        var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+            //        var result = ScienceXML.getFullText(result, doc);
+            //        result.sections.title.should.equal("abc");
+            //    });
                 //it("should get label", function () {
                 //    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
                 //    var result = {};
