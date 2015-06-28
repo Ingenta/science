@@ -104,16 +104,11 @@ if (Meteor.isServer) {
 
             var doc = new dom().parseFromString(xml);
 
+            // GET DOI, TITLE, VOLUME, ISSUE, MONTH, YEAR, ISSN, ESSN
 
             var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
             if (doi === undefined) results.errors.push("No doi found");
             else results.doi = doi;
-
-            //TODO: if doi is already found then add to articles collection
-            var existingArticle = Articles.findOne({doi: results.doi});
-            if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
-
-
 
             var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
             if (title === undefined) results.errors.push("No title found");
@@ -139,20 +134,18 @@ if (Meteor.isServer) {
             if (elocationId === undefined) results.errors.push("No elocation id found");
             else results.elocationId = elocationId
 
-            var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
-            if (affNode[0] !== undefined) {
-                results.affiliations = "";
-                affNode.forEach(function (affiliation) {
-                    results.affiliations += affiliation.data;
-                });
-            }
-
             var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
             if (issn !== undefined) results.issn = issn;
 
             var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
             if (essn !== undefined) results.essn = essn;
 
+
+            //    CHECK IF EXISTING ARTICLE
+            var existingArticle = Articles.findOne({doi: results.doi});
+            if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
+
+            //    GET JOURNAL AND PUBLISHER BY NAME (consider changing journal to find my doi)
             var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-title", doc);
             if (journalTitle === undefined) results.errors.push("No journal title found");
             else {
@@ -171,13 +164,26 @@ if (Meteor.isServer) {
                 else results.publisher = publisher._id;
             }
 
+            //      GET REFERENCES
+            var refNodes = xpath.select("//ref", doc);
+            refNodes.forEach(function (ref) {
+                var refNodes = xpath.select("descendant::text()", ref);
+                var text = "";
+                if (refNodes[0]) {
+                    refNodes.forEach(function (reference) {
+                        text += reference.data;
+                    });
+                }
+                var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
+                if (doi) {
+                    results.references.push({ref: text, doi: doi});
+                } else {
+                    results.references.push({ref: text});
+                }
+            });
 
+            //      GET ABSTRACT AND FULL TEXT
             results = ScienceXML.getAbstract(results, doc);
-
-
-            //foreach if has subsections, call get all subsections function
-            //foreach subsection get all the ps and title
-
 
             var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
 
@@ -196,6 +202,8 @@ if (Meteor.isServer) {
                     results.sections.push(ScienceXML.getOneSectionHtml(section));
             });
 
+
+            //          GET AUTHORS, NOTES AND AFFILIATIONS
             var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
             authorNodes.forEach(function (author) {
                 var surname = xpath.select("child::name/surname/text()", author).toString();
@@ -217,23 +225,6 @@ if (Meteor.isServer) {
                 results.errors.push("No author found");
             }
 
-            var refNodes = xpath.select("//ref", doc);
-            refNodes.forEach(function (ref) {
-                var refNodes = xpath.select("descendant::text()", ref);
-                var text = "";
-                if (refNodes[0]) {
-                    refNodes.forEach(function (reference) {
-                        text += reference.data;
-                    });
-                }
-                var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-                if (doi) {
-                    results.references.push({ref: text, doi: doi});
-                } else {
-                    results.references.push({ref: text});
-                }
-            });
-
             var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
             authorNotesNodes.forEach(function (note) {
                 var noteLabel = xpath.select("child::label/text()", note).toString();
@@ -247,6 +238,14 @@ if (Meteor.isServer) {
                     results.authorNotes.push(enrty);
                 }
             });
+
+            var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
+            if (affNode[0] !== undefined) {
+                results.affiliations = "";
+                affNode.forEach(function (affiliation) {
+                    results.affiliations += affiliation.data;
+                });
+            }
 
 
             return results;
