@@ -8,6 +8,11 @@
                 {{#each sections}}
                     <h5>{{label}} {{{title}}}</h5>
                     {{{body}}}
+                    <br>
+                    {{#each sections}}
+                        <h6>{{label}} {{{title}}}</h6>
+                        {{{body}}}
+                    {{/each}}
                 {{/each}}
             {{/each}}
         </div>

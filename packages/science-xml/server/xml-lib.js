@@ -14,29 +14,45 @@ ScienceXML.getXmlFromPath = function (path) {
 ScienceXML.getSubSection = function (subSectionNodes) {
     var thisSubSection = [];
     subSectionNodes.forEach(function (subSection) {
-        thisSubSection.push(ScienceXML.getOneSectionHtml(subSection));
+        var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(subSection);
+        var childSectionNodes = xpath.select("child::sec[@id]", subSection);
+        if (!childSectionNodes.length)thisSubSection.push(thisSection);
+        else{
+            thisSubSection.push({
+                label: thisSection.label,
+                title: thisSection.title,
+                body: thisSection.body,
+                sections: ScienceXML.getSubSection(childSectionNodes)
+            });
+        }
     });
     return thisSubSection;
 }
 
-ScienceXML.getOneSectionHtml = function (section) {
-    var tempBody = "";
-    var title = ScienceXML.getValueByXPathIncludingXml("child::title", section);
-    var label = ScienceXML.getValueByXPathIncludingXml("child::label", section);
+ScienceXML.getParagraphsFromASectionNode = function (section) {
     var paragraphNodes = xpath.select("child::p", section);
+    var paragraphs = "";
     paragraphNodes.forEach(function (paragraph) {
         var sectionText = new serializer().serializeToString(paragraph)
-        tempBody += ScienceXML.replaceItalics(sectionText);
+        paragraphs += ScienceXML.replaceItalics(sectionText);
     });
-    return {label: label, title: title, body: tempBody};
+    return paragraphs;
+}
+
+ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
+    var title = ScienceXML.getValueByXPathIncludingXml("child::title", section);
+    var label = ScienceXML.getValueByXPathIncludingXml("child::label", section);
+    var paragraphs = ScienceXML.getParagraphsFromASectionNode(section);
+    return {label: label, title: title, body: paragraphs};
 }
 
 ScienceXML.getFullText = function (results, doc) {
     var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
-    sectionNodes.forEach(function (section) {
-        var childSectionNodes = xpath.select("child::sec[@id]", section);
-        if (childSectionNodes.length) {
-            var thisSection = ScienceXML.getOneSectionHtml(section);
+    sectionNodes.forEach(function (section) {     //for each parent section
+        var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(section); // get the section label title and body
+        var childSectionNodes = xpath.select("child::sec[@id]", section); //get any children
+        if (!childSectionNodes.length) results.sections.push(thisSection);  //if there are no children push this section into the result object
+        else { //if there are any children push this one and create a new section for its children
             results.sections.push({
                 label: thisSection.label,
                 title: thisSection.title,
@@ -44,8 +60,6 @@ ScienceXML.getFullText = function (results, doc) {
                 sections: ScienceXML.getSubSection(childSectionNodes)
             });
         }
-        else
-            results.sections.push(ScienceXML.getOneSectionHtml(section));
     });
     return results;
 }
