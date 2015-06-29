@@ -2,41 +2,18 @@ chai.should();
 if (!(typeof MochaWeb === 'undefined')) {
     MochaWeb.testOnly(function () {
         describe("XML", function () {
-            //describe("When parsing a section of full text with subsections", function () {
-            //    it("should get sub section title", function () {
-            //        var testXml = "<book><body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p><sec id='s1a'><title>Guards! Guards!<title></sec></sec></body></book>";
+            //describe("When collecting the labels and titles for each section", function () {
+            //    it("should get title", function () {
+            //        var testXml = "<article><body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body></article>";
             //        var result = {};
             //        var doc = ScienceXML.xmlStringToXmlDoc(testXml);
             //        var result = ScienceXML.getFullText(result, doc);
-            //        result.sections.title.should.equal("Guards! Guards!");
+            //        result.sections.title.should.equal("abc");
             //    });
             //});
-            describe("When parsing a section of full text with no subsections", function () {
-                it("should get title", function () {
-                    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
-                    var result = {};
-                    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
-                    var result = ScienceXML.getFullText(result, doc);
-                    result.sections.title.should.equal("abc");
-                });
-                //it("should get label", function () {
-                //    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
-                //    var result = {};
-                //    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
-                //    var result = ScienceXML.getFullText(result, doc);
-                //    result.sections.label.should.equal("def");
-                //});
-                //it("should get paragraphs", function () {
-                //    var testXml = "<body><sec id='s1'><title>abc<title><label>def<label><p>123</p><p>456</p><p>789</p></sec></body>";
-                //    var result = {};
-                //    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
-                //    var result = ScienceXML.getFullText(result, doc);
-                //    result.sections.body.should.equal("<p>123</p><p>456</p><p>789</p>");
-                //});
-            });
             describe("When validating an bad xml string", function () {
                 it("should return errors", function () {
-                    var testXml = "<book><author></articbook>";
+                    var testXml = "<book><a/uth/or></art/icbook>";
                     var errors = ScienceXML.validateXml(testXml);
                     errors.length.should.not.equal(0);
                 });
