@@ -25,6 +25,8 @@ Meteor.subscribe('uploadLog');
 Meteor.subscribe('pages')
 
 
+Meteor.subscribe('countArticle')
+
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
 var privateRoutes = ["home_private", "admin", "admin.upload", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "user_settings.update_information", "logout"];
 var zonelessRoutes = ["topics", "publishers", "publications", "collections"];
