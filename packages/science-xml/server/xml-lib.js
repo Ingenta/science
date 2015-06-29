@@ -48,19 +48,7 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
 
 ScienceXML.getFullText = function (results, doc) {
     var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
-    sectionNodes.forEach(function (section) {     //for each parent section
-        var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(section); // get the section label title and body
-        var childSectionNodes = xpath.select("child::sec[@id]", section); //get any children
-        if (!childSectionNodes.length) results.sections.push(thisSection);  //if there are no children push this section into the result object
-        else { //if there are any children push this one and create a new section for its children
-            results.sections.push({
-                label: thisSection.label,
-                title: thisSection.title,
-                body: thisSection.body,
-                sections: ScienceXML.getSubSection(childSectionNodes)
-            });
-        }
-    });
+    results.sections = ScienceXML.getSubSection(sectionNodes);
     return results;
 }
 

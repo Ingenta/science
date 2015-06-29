@@ -99,8 +99,6 @@ Meteor.methods({
         results = ScienceXML.getFullText(results, doc);
 
 
-
-
         //          GET AUTHORS, NOTES AND AFFILIATIONS
         results.authors = [];
         results.authorNotes = [];
