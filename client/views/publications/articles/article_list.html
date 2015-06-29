@@ -23,6 +23,7 @@
 </template>
 
 <template name="articleListRight">
+    {{resetArticlesFilter}}
     <ul class="article-list list-unstyled">
         {{#each articles}}
             {{> oneArticle}}
