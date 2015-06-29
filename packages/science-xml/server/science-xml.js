@@ -145,9 +145,7 @@ Meteor.methods({
                 results.affiliations.push(ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation));
             });
         }
-
-
-        return results;
+         return results;
     }
 });
 
