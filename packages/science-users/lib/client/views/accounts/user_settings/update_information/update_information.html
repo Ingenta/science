@@ -89,7 +89,7 @@
 						    <h5>
 								<input id="checkAll1" type="checkbox"/>&nbsp;&nbsp;{{_ "All the options"}}<hr>
 								{{#each publicationList}}
-								<input type="checkbox" name="subBox1" value="{{_id}}">&nbsp;&nbsp;{{title}}<br>
+								<input type="checkbox" name="profile.publications" value="{{_id}}">&nbsp;&nbsp;{{title}}<br>
 								{{else}}
 								{{_"No publications found!"}}
 								{{/each}}
@@ -132,7 +132,7 @@
 							<h5>
 								<input id="checkAll2" type="checkbox" />&nbsp;&nbsp;{{_ "All the options"}}<hr>
 								{{#each topicList}}
-								<input type="checkbox" name="subBox2" value="{{_id}}">&nbsp;&nbsp;{{name}}<br>
+								<input type="checkbox" name="profile.topics" value="{{_id}}">&nbsp;&nbsp;{{name}}<br>
 								{{else}}
 								{{_ "No topics found!"}}
 								{{/each}}

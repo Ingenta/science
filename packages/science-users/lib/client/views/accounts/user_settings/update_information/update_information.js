@@ -61,8 +61,8 @@ Template.UserSettingsUpdateInformationForm.events({
 
 			},
 			function(values) {
-				
 
+				//console.log(values);
 				Meteor.call("updateUserAccount", t.data.current_user_data._id, values, function(e) { if(e) errorAction(e.message); else submitAction(); });
 			}
 		);
@@ -87,10 +87,25 @@ Template.UserSettingsUpdateInformationForm.events({
 		/*BACK_REDIRECT*/
 	},
    "click #checkAll1": function() {
-		$("input[name='subBox1']").prop("checked",$("#checkAll1").is(":checked"));
+		$("input[name='profile.publications']").prop("checked",$("#checkAll1").is(":checked"));
 	},
 	"click #checkAll2": function() {
-		$("input[name='subBox2']").prop("checked",$("#checkAll2").is(":checked"));
+		$("input[name='profile.topics']").prop("checked",$("#checkAll2").is(":checked"));
+	},
+	'click .btn-primary': function (e) {
+		var str=document.getElementsByName("profile.publications");
+		var ids="";
+		for (i=0;i<str.length;i++) {
+			if(str[i].checked)
+			{
+				ids+=str[i].value+",";
+			}
+		}
+		if(!ids) {
+			alert("请选择！");
+		} else {
+			$(e.target).prev().click();
+		}
 	}
 });
 
@@ -103,7 +118,7 @@ Template.UserSettingsUpdateInformationForm.helpers({
 	},
 	publicationList: function () {
 		//alert(Publications.find());
-		return Publications.find().fetch();
+		return Publications.find();
     },
 	topicList: function () {
         return  Topics.find({"parentId" : null});
