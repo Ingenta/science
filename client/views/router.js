@@ -117,7 +117,6 @@ Router.ensureLogged = function () {
             this.next();
         }
     }
-    this.next();
 };
 
 Router.ensureNotLogged = function () {
