@@ -102,6 +102,7 @@ Meteor.methods({
         //          GET AUTHORS, NOTES AND AFFILIATIONS
         results.authors = [];
         results.authorNotes = [];
+
         var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
         authorNodes.forEach(function (author) {
             var surname = xpath.select("child::name/surname/text()", author).toString();
@@ -137,11 +138,11 @@ Meteor.methods({
             }
         });
 
-        var affNode = xpath.select("//contrib-group/aff/descendant::text()", doc);
-        if (affNode[0] !== undefined) {
-            results.affiliations = "";
+        var affNode = xpath.select("//contrib-group", doc);
+        if (affNode !== undefined) {
+            results.affiliations = [];
             affNode.forEach(function (affiliation) {
-                results.affiliations += affiliation.data;
+                results.affiliations.push(ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation));
             });
         }
 
