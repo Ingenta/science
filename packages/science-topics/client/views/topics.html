@@ -1,8 +1,6 @@
 <template name="Topics">
     <div class="container-fluid">
-        <div class="row">
-            <h2>{{_ "Topics"}}</h2>
-        </div>
+        {{> pageElement key="topic"}}
         <div class="row">
             {{#if isAdmin }}
                 {{> addTopicModalForm}}

@@ -1,0 +1,18 @@
+<template name="pageElement">
+    <div class="row">
+        <h2>{{getPageTitle key}}</h2>
+        <div class="pull-right">
+            {{#if isAdmin }}
+            {{> updatePagesModalForm}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="row">
+        <p>{{getPageDescription key}}</p>
+    </div>
+</template>
+
+<template name="updatePagesModalForm">
+    {{#afModal class="fa fa-pencil" collection="Pages" operation="update" doc=getPageId prompt=getPrompt buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
+</template>

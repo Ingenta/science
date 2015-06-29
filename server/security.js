@@ -8,3 +8,4 @@ Issues.permit(['insert', 'update', 'remove']).apply();
 AboutArticles.permit(['insert', 'update', 'remove']).apply();
 News.permit(['insert', 'update', 'remove']).apply();
 UploadLog.permit(['insert', 'update', 'remove']).apply();
+Pages.permit(['insert', 'update', 'remove']).apply();
