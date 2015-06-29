@@ -7,7 +7,11 @@
 
         <div class="collapse pull-right" id="authorAffiliations">
             <ol>
-                <li>{{affiliations}}</li>
+                {{# each affiliations}}
+                   <li>
+                     {{this}}
+                   </li>
+                     {{/each}}
             </ol>
         </div>
     {{/if}}
