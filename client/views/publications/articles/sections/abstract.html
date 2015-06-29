@@ -13,21 +13,23 @@
         <div class="col-xs-3">{{_ "Published online"}}</div>
     </div>
     <div class="row articleOutline">
-        <h4>Article Outline:</h4>
-        <ul>
-           {{#each sections}}
-           <li> {{label}} {{{title}}}</li>
-                <ul>
+        <div class="container-fluid">
+            <h4>Article Outline:</h4>
+            <ul>
                 {{#each sections}}
-                    <li>{{label}} {{{title}}}</li>
+                    <li> {{label}} {{{title}}}</li>
                     <ul>
                         {{#each sections}}
                             <li>{{label}} {{{title}}}</li>
+                            <ul>
+                                {{#each sections}}
+                                    <li>{{label}} {{{title}}}</li>
+                                {{/each}}
+                            </ul>
                         {{/each}}
                     </ul>
                 {{/each}}
             </ul>
-        {{/each}}
-        </ul>
+        </div>
     </div>
 </template>
