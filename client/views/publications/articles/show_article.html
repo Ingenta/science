@@ -1,7 +1,5 @@
 <template name="showArticle">
-
     <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
-
     <div class="row">
         <div class="col-xs-9">
             <h3><img src="/icon_access_fc.gif"/> {{title}}</h3>
@@ -50,22 +48,25 @@
             </div>
         </div>
     </div>
+    <!--<div class="row">-->
+        <!--<div class="container-fluid">-->
+            <!--<span class="rating">-->
+                <!--<span class="star"></span>-->
+                <!--<span class="star"></span>-->
+                <!--<span class="star"></span>-->
+                <!--<span class="star"></span>-->
+                <!--<span class="star"></span>-->
+            <!--</span>-->
+        <!--</div>-->
+    <!--</div>-->
     {{> articleOptions}}
     <hr>
     <div class="row">
-        <div class="col-xs-5"><h3>最近阅读</h3>
-            <ul class="list-unstyled">《孔隙尺度模拟与解释》</ul>
-            <ul class="list-unstyled">《111》</ul>
-            <ul class="list-unstyled">《222》</ul>
-            <ul class="list-unstyled">《孔隙尺度模拟与解释》</ul>
-            <ul class="list-unstyled">《222》</ul>
+        <div class="col-xs-5">
+            <h4>{{_ "Most Read"}}</h4>
         </div>
-        <div class="col-xs-5"><h3>最近检索</h3>
-            <ul class="list-unstyled">AIP</ul>
-            <ul class="list-unstyled">111</ul>
-            <ul class="list-unstyled">222</ul>
-            <ul class="list-unstyled">333</ul>
-            <ul class="list-unstyled">444</ul>
+        <div class="col-xs-5">
+            <h4>{{_ "Most Cited"}}</h4>
         </div>
     </div>
 </template>
@@ -125,25 +126,17 @@
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab"
-                                                                                 data-toggle="tab">{{name}}</a>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab">{{name}}</a>
                 </li>
             {{/each}}
         </ul>
 
         <div class="tabs-content-container">
-            {{> UI.contentBlock
-            context=__context__
-            }}
+            {{> UI.contentBlock context=__context__ }}
         </div>
     </div>
 </template>
-
-
-
-
-
-
 
 
 <template name="DataMediaTemplate">
@@ -160,7 +153,6 @@
 <template name="MetricsTemplate">
     <div>
         阅读行为统计图：（按月统计）
-
     </div>
 </template>
 

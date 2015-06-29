@@ -1,6 +1,10 @@
 Template.PublicationList.helpers({
     publications: function () {
-        return myPubPagination.find({publisher: this._id}, {itemsPerPage: 10});
+        var numPerPage = Session.get('PerPage');
+        if(numPerPage === undefined){
+            var numPerPage = 10;
+        }
+        return myPubPagination.find({publisher: this._id}, {itemsPerPage: numPerPage});
     }
 });
 
@@ -21,6 +25,12 @@ Template.deletePublicationModalForm.helpers({
     }
 });
 
+Template.PublicationList.events({
+    'click .perPage': function (event) {
+        var pageNum = $(event.currentTarget).data().pagenum;
+        Session.set('PerPage', pageNum);
+    }
+});
 
 Template.SinglePublication.helpers({
     getJournalUrl: function (title) {

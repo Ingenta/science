@@ -36,11 +36,15 @@ Template.FilterList.helpers({
     publications: function () {
         var pubId = Session.get('filterPublisher');
         var first = Session.get('firstLetter');
+        var numPerPage = Session.get('PerPage');
+        if(numPerPage === undefined){
+            var numPerPage = 10;
+        }
         var q = {};
         pubId && (q.publisher = pubId);
         first && (q.shortTitle = {$regex: "^" + first, $options: "i"});
         Session.set("totalPublicationResults", Publications.find(q).count());
-        var pubs = myPubPagination.find(q, {itemsPerPage: 10});
+        var pubs = myPubPagination.find(q, {itemsPerPage: numPerPage});
         return pubs;
     },
     selectedPublisher: function () {
@@ -64,6 +68,10 @@ Template.FilterList.events({
     },
     'click .resetAlphabetFilter': function (event) {
         Session.set('firstLetter', undefined);
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.currentTarget).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 Template.FilterList.onRendered(function () {
