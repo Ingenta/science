@@ -1,9 +1,18 @@
 Meteor.methods({
+    'getXmlFromZip': function (path) {
+        console.log('works!!!!')
+        var content = ScienceXML.getFileContentsFromPath(path);
+
+        var zip = new JSZip();
+        zip.load(content);
+
+        return zip.file("test.txt").asText();
+    },
     'parseXml': function (path) {
         var results = {};
 
         //Step 1: get the file
-        var xml = ScienceXML.getXmlFromPath(path);
+        var xml = ScienceXML.getFileContentsFromPath(path);
 
         //Step 2: Validate and parse the file
         results.errors = ScienceXML.validateXml(xml);

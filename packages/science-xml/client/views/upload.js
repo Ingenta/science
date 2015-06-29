@@ -3,8 +3,11 @@ Template.uploadForm.events({
         FS.Utility.eachFile(event, function (file) {
             var errors = [];
             var status;
+            console.log(file.type)
             if (file.type === "text/xml") {
                 status = "Pending";
+            } else if (file.type.contains("zip")) {
+                status = "Opening Zip...";
             } else {
                 status = "Failed";
                 errors.push("File type mismatch!")
@@ -28,7 +31,7 @@ Template.uploadForm.events({
 
 Template.AdminUpload.helpers({
     uploadHistory: function () {
-        return UploadLog.find({},{sort: {'uploadedAt': -1}});
+        return UploadLog.find({}, {sort: {'uploadedAt': -1}});
     }
 });
 Template.UploadLogModal.helpers({
@@ -42,10 +45,33 @@ Template.UploadLogModal.helpers({
 Template.uploadTableRow.events({
     "click .btn": function (e) {
         //get this item in the table
+        Session.set('errors', undefined);
+        Session.set("result", undefined);
         var button = $(e.target) // Button that triggered the modal
         var uploadLogId = button.data('logid') // Extract info from data-* attributes
+        var log = UploadLog.findOne({_id: uploadLogId});
+        var path = ArticleXml.findOne({_id: log.fileId}).url();
+        if (log.errors.length) { //if file is not xml guard then return
+            Session.set('errors', log.errors);
+            Session.set("result", undefined);
+            return;
+        }
+        if (log.name.contains(".zip")) {
+            //open from path
+//            console.log(Meteor.absoluteUrl(path.substring(1)));
+//            console.log(ScienceXML.getFileContentsFromPath(path));
+            Meteor.call('getXmlFromZip', path, function (error, result) {
+                if (error) {
+                    console.log(error);
+                }
+                else{
+                    console.log(result);
+                }
+            });
 
-        importXmlByLogId(uploadLogId);
+        } else
+            importXmlByLogId(uploadLogId);
+
     }
 });
 
@@ -53,14 +79,7 @@ var importXmlByLogId = function (logId) {
 
     //get failed state
     var log = UploadLog.findOne({_id: logId});
-    if (log.errors.length) { //if file is not xml guard then return
-        Session.set('errors', log.errors);
-        Session.set("result", undefined);
-        return;
-    }
-
-    var id = log.fileId;
-    var path = ArticleXml.findOne({_id: id}).url();
+    var path = ArticleXml.findOne({_id: log.fileId}).url();
     //call parse and put results in session
     Meteor.call('parseXml', path, function (error, result) {
         if (error) {
@@ -102,11 +121,11 @@ var importXmlByLogId = function (logId) {
             Articles.insert({
                 doi: result.doi,
                 title: result.title,
-                authors:result.authors,
+                authors: result.authors,
                 abstract: result.abstract,
-                journalId:result.journalId,
-                publisher:result.publisher,
-                references:result.references,
+                journalId: result.journalId,
+                publisher: result.publisher,
+                references: result.references,
                 affiliations: result.affiliations,
                 elocationId: result.elocationId,
                 authorNotes: result.authorNotes,
