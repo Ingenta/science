@@ -17,7 +17,8 @@ Template.articleListTree.helpers({
 
 Template.articleListTree.events({
     "click .volume": function (event) {
-        $(event.target).find("span").text($(event.target).next("div").is(':visible') ? '+' : '-');
+        var nextValue = $(event.target).next("div").is(':visible') ? '+' : '-';
+        $(event.target).find("span").text(nextValue);
         $(event.target).next("div").toggle(200);
     },
     "click .issue": function (event) {

@@ -12,10 +12,10 @@
 <template name="articleListTree">
     <ul class="list-unstyled">
         {{#each volumeList _id}}
-            <li class="volume"><span>+</span>第{{volume}}卷</li>
+            <li class="volume"><span>+</span>{{_ "volumeItem" volume }}</li>
             <div class="issues">
                 {{#each issueList journalId volume}}
-                    <div class="issue" data-value="{{_id}}">第{{issue}}期（{{year}},{{month}}）</div>
+                    <div class="issue" data-value="{{_id}}">{{_ "issueItem" issue }}（{{year}}, {{month}}）</div>
                 {{/each}}
             </div>
         {{/each}}

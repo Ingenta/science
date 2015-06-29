@@ -1,4 +1,7 @@
 {
+  "volumeItem": "第%s卷",
+  "issueItem": "第%s期",
+
   "Latest Articles": "最新文章",
   "Most recent articles": "最新阅读资源",
   "Month": "月",
