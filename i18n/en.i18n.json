@@ -1,7 +1,9 @@
 {
   "volumeItem": "Volume %s",
   "issueItem": "Issue %s",
-
+  "Abstract Views": "阅读摘要",
+  "Full text Views": "阅读全文",
+  "PDF Downloads": "下载",
   "moreContentBy": "More content by",
   "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
   "PleaseEmail": "Please enter valid e-mail address.",
@@ -120,7 +122,7 @@
       "label": "Choose file"
     }
   },
-  "roleName":"Role name",
-  "add new role":"Add new role",
-  "edit role":"Edit role"
+  "roleName": "Role name",
+  "add new role": "Add new role",
+  "edit role": "Edit role"
 }
