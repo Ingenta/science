@@ -44,7 +44,7 @@ Template.UserSettingsUpdateInformationForm.events({
                 }
             }
 
-            Router.go("user_settings.profile", {});
+            Router.go("user_settings.update_information", {});
         }
 
         function errorAction(msg) {
