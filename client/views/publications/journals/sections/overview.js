@@ -7,18 +7,22 @@ Template.latestArticles.helpers({
 
 Template.recentlyViewedArticles.helpers({
     recentArticles: function () {
-        //distinct article views by this user, from today: TODO only today
-        var distinctEntries = _.uniq(ArticleViews.find({userId: Meteor.userId()}, {
-            sort: {when: 1}, fields: {articleId: true}
+        //distinct article views by this user, from today: TODO orderby
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        var distinctArticleIds = _.uniq(ArticleViews.find({
+            userId: Meteor.userId(),
+            when: {$gt: yesterday}},
+            {sort: {when: 1}, fields: {articleId: true}
         }).fetch().map(function (x) {
             return x.articleId;
         }), true);
 
-        if (!distinctEntries.length)return;
+        if (!distinctArticleIds.length)return;
 
         var mongoDbArr = [];
-        distinctEntries.forEach(function (entry) {
-            mongoDbArr.push({_id: entry});
+        distinctArticleIds.forEach(function (id) {
+            mongoDbArr.push({_id: id});
         });
 
         return Articles.find({$or: mongoDbArr}, {sort: {createdAt: -1}, limit: 3});
