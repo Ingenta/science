@@ -2,7 +2,7 @@ Template.PublicationList.helpers({
     publications: function () {
         var numPerPage = Session.get('PerPage');
         if(numPerPage === undefined){
-            var numPerPage = 10;
+            numPerPage = 10;
         }
         return myPubPagination.find({publisher: this._id}, {itemsPerPage: numPerPage});
     }
