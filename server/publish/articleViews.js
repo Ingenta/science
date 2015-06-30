@@ -1,3 +1,3 @@
 Meteor.publish('countArticle', function() {
-    return CountArticle.find();
+    return ArticleViews.find();
 });
