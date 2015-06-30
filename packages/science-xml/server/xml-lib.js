@@ -106,3 +106,11 @@ ScienceXML.validateXml = function (xml) {
     var doc = xmlDom.parseFromString(xml);
     return xmlErrors;
 }
+
+
+ScienceXML.getDateFromHistory = function (type, doc) {
+    var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
+    var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
+    var year  = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
+    return {day: day, month: month, year: year};
+}

@@ -135,7 +135,10 @@ var importXmlByLogId = function (logId) {
                 volume: result.volume,
                 issueId: result.issueId,
                 volumeId: result.volumeId,
-                sections: result.sections
+                sections: result.sections,
+                received: result.received,
+                accepted: result.accepted,
+                published: result.published
             });
 
 

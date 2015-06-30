@@ -154,6 +154,10 @@ Meteor.methods({
                 results.affiliations.push(ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation));
             });
         }
+        results.received = ScienceXML.getDateFromHistory("received", doc);
+        results.accepted = ScienceXML.getDateFromHistory("accepted", doc);
+        results.published = ScienceXML.getDateFromHistory("published", doc);
+
          return results;
     }
 });

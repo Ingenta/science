@@ -1,5 +1,22 @@
 ReactiveTabs.createInterface({
-    template: 'articleTabs'
+    template: 'articleTabs',
+    onChange: function (slug, template) {
+        if(slug==='abstract'){
+            CountArticle.insert({
+                articleId: this._id,
+                userId: Meteor.userId(),
+                when: new Date(),
+                action: "abstract"
+            })
+        }else if(slug === 'full text'){
+            CountArticle.insert({
+                articleId: this._id,
+                userId: Meteor.userId(),
+                when: new Date(),
+                action: "fulltext"
+            })
+        }
+    }
 });
 
 Template.showArticle.helpers({
@@ -34,3 +51,14 @@ Template.articleOptions.helpers({
         return Session.get('activeTab');
     }
 });
+Template.showArticle.events({
+    'click .pdfDownload': function(){
+        console.log(111);
+        CountArticle.insert({
+            articleId: this._id,
+            userId: Meteor.userId(),
+            when: new Date(),
+            action: "pdfDownload"
+        })
+    }
+})

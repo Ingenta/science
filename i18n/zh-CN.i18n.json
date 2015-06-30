@@ -1,4 +1,5 @@
 {
+  "Total views over time" : "阅读行为统计",
   "Abstract views over time" : "摘要浏览时间统计",
   "volumeItem": "第%s卷",
   "issueItem": "第%s期",
@@ -43,7 +44,9 @@
   "Media": "多媒体",
   "Special Topics": "专题",
   "Collections": "文章集",
-  "Accepted": "预出版",
+  "Received ": "稿件接收时间",
+  "Accepted": "稿件收录时间",
+  "Published online": "网络发布时间",
   "Online First": "优先出版",
   "MOOP": "MOOP",
   "Author": "作者中心",

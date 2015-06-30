@@ -1,6 +1,8 @@
 <template name="MetricsTemplate">
       <h4>
-          {{_ "Abstract views over time"}}
+          {{_ "Total views over time"}}
       </h4>
+    {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
     {{number}}
 </template>
+

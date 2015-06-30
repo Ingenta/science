@@ -29,8 +29,7 @@
             <div class="container-fluid gray-background">
                 <div class="row">
                     <li class="pdf">
-                        <a rel=""
-                           class="pdf" target="" title=""
+                        <a class="pdfDownload"
                            href="#">Download
                             <span class="pdfText">PDF</span></a>
 
@@ -75,7 +74,6 @@
 <template name="articleOptions">
 
     {{#articleTabs name="" tabs=tabs}}
-
         {{#tabContent slug="abstract"}}
             {{#with context}}
                 {{> AbstractTemplate}}
