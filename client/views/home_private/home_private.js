@@ -24,14 +24,11 @@ Template.deleteNewsModalForm.helpers({
     }
 });
 
-Template.mostRecentUpload.helpers({
-    newArticle: function () {
+Template.recentArticles.helpers({
+    newestArticle: function () {
         return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
-    }
-});
-
-Template.SingleNews.helpers({
-    hasNews: function (id) {
-        return News.find({"news": id}).count() === 0;
+    },
+    mostReadArticles: function () {
+        return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
     }
 });
