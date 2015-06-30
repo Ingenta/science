@@ -5,13 +5,13 @@
                aria-expanded="false" aria-controls="authorAffiliations"></i>
             {{_ "Affiliations"}}: </p>
 
-        <div class="collapse pull-right" id="authorAffiliations">
+        <div class="collapse" id="authorAffiliations">
             <ol>
                 {{# each affiliations}}
-                   <li>
-                     {{this}}
-                   </li>
-                     {{/each}}
+                    <li>
+                        {{this}}
+                    </li>
+                {{/each}}
             </ol>
         </div>
     {{/if}}

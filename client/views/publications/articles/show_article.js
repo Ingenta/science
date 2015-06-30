@@ -1,16 +1,20 @@
 ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
-        if(slug==='abstract'){
-            CountArticle.insert({
-                articleId: this._id,
+        if (slug === 'abstract') {
+            var currentTitle = Router.current().params.articleName;
+            var articleId = Articles.findOne({title: currentTitle})._id;
+            ArticleViews.insert({
+                articleId: articleId,
                 userId: Meteor.userId(),
                 when: new Date(),
                 action: "abstract"
             })
-        }else if(slug === 'full text'){
-            CountArticle.insert({
-                articleId: this._id,
+        } else if (slug === 'full text') {
+            var currentTitle = Router.current().params.articleName;
+            var articleId = Articles.findOne({title: currentTitle})._id;
+            ArticleViews.insert({
+                articleId: articleId,
                 userId: Meteor.userId(),
                 when: new Date(),
                 action: "fulltext"
@@ -52,9 +56,8 @@ Template.articleOptions.helpers({
     }
 });
 Template.showArticle.events({
-    'click .pdfDownload': function(){
-        console.log(111);
-        CountArticle.insert({
+    'click .pdfDownload': function () {
+        ArticleViews.insert({
             articleId: this._id,
             userId: Meteor.userId(),
             when: new Date(),

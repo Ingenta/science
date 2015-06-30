@@ -1,31 +1,40 @@
 <template name="showArticle">
     <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
-    <div class="row">
+
+    <div class="row articleHeading">
         <div class="col-xs-9">
             <h3><img src="/icon_access_fc.gif"/> {{title}}</h3>
             <ul>
-                <p>
-                    {{#each authors}}
-                        {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
-                    {{/each}}
-                </p>
-                {{> affiliation}}
-
-                <p>
-                    {{#each authorNotes}}
-                        <i>{{label}} <a target="xrefwindow" href="mailto:{{email}}">{{email}}</a></i>
-                    {{/each}}
-                </p>
-
-                <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
-                        href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
-                        class="fa fa-external-link"></i></a></p>
-
-                <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
+                <li>
+                    <p>
+                        {{#each authors}}
+                            {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
+                        {{/each}}
+                    </p>
+                </li>
+                <li>
+                    <p>{{> affiliation}}</p>
+                </li>
+                <li>
+                    <p>
+                        {{#each authorNotes}}
+                            <i>{{label}} <a href="mailto:{{email}}">{{email}}</a></i>
+                        {{/each}}
+                    </p>
+                </li>
+                <li>
+                    <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
+                            href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
+                            class="fa fa-external-link"></i></a></p>
+                </li>
+                <li>
+                    <p>{{_ "Article language"}}：{{_ "Chinese"}}</p>
+                </li>
             </ul>
         </div>
         <div class="col-xs-3">
             <br>
+
             <div class="container-fluid gray-background">
                 <div class="row">
                     <li class="pdf">
@@ -48,26 +57,26 @@
         </div>
     </div>
     <!--<div class="row">-->
-        <!--<div class="container-fluid">-->
-            <!--<span class="rating">-->
-                <!--<span class="star"></span>-->
-                <!--<span class="star"></span>-->
-                <!--<span class="star"></span>-->
-                <!--<span class="star"></span>-->
-                <!--<span class="star"></span>-->
-            <!--</span>-->
-        <!--</div>-->
+    <!--<div class="container-fluid">-->
+    <!--<span class="rating">-->
+    <!--<span class="star"></span>-->
+    <!--<span class="star"></span>-->
+    <!--<span class="star"></span>-->
+    <!--<span class="star"></span>-->
+    <!--<span class="star"></span>-->
+    <!--</span>-->
+    <!--</div>-->
     <!--</div>-->
     {{> articleOptions}}
-    <hr>
-    <div class="row">
-        <div class="col-xs-5">
-            <h4>{{_ "Most Read"}}</h4>
-        </div>
-        <div class="col-xs-5">
-            <h4>{{_ "Most Cited"}}</h4>
-        </div>
-    </div>
+    <!--<hr>-->
+    <!--<div class="row">-->
+    <!--<div class="col-xs-5">-->
+    <!--<h4>{{_ "Most Read"}}</h4>-->
+    <!--</div>-->
+    <!--<div class="col-xs-5">-->
+    <!--<h4>{{_ "Most Cited"}}</h4>-->
+    <!--</div>-->
+    <!--</div>-->
 </template>
 
 

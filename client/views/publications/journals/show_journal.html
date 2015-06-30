@@ -2,15 +2,15 @@
     {{ initPage _id publisher}}
     <div class="pull-right">
         {{#if isAdmin }}
-        {{> updatePublicationBannerModalForm}}
+            {{> updatePublicationBannerModalForm}}
         {{/if}}
     </div>
     {{> journalBanner}}
     <br>
     {{#if isAdmin }}
-    <div class="pull-right">
-        {{> updateJournalTabsModalForm}}
-    </div>
+        <div class="pull-right">
+            {{> updateJournalTabsModalForm}}
+        </div>
     {{/if}}
     <br>
     {{> journalOptions}}
@@ -24,77 +24,77 @@
 <template name="journalOptions">
     {{#journalTabs name="" tabs=tabs}}
 
-    {{#tabContent slug="Overview"}}
-    {{#with context}}
-    {{> JournalOverview}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="Overview"}}
+            {{#with context}}
+                {{> JournalOverview}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Browse"}}
-    {{#with context}}
-    {{> articleList}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="Browse"}}
+            {{#with context}}
+                {{> articleList}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="About"}}
-    {{#with context}}
-    {{> AboutTitle}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="About"}}
+            {{#with context}}
+                {{> AboutTitle}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Editorial Board"}}
-    {{#with context}}
+        {{#tabContent slug="Editorial Board"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="News"}}
-    {{#with context}}
+        {{#tabContent slug="News"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Media"}}
-    {{#with context}}
+        {{#tabContent slug="Media"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Special Topics"}}
-    {{#with context}}
+        {{#tabContent slug="Special Topics"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Collections"}}
-    {{#with context}}
+        {{#tabContent slug="Collections"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Accepted"}}
-    {{#with context}}
+        {{#tabContent slug="Accepted"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Online First"}}
-    {{#with context}}
+        {{#tabContent slug="Online First"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="MOOP"}}
-    {{#with context}}
+        {{#tabContent slug="MOOP"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="Author"}}
-    {{#with context}}
+        {{#tabContent slug="Author"}}
+            {{#with context}}
 
-    {{/with}}
-    {{/tabContent}}
+            {{/with}}
+        {{/tabContent}}
     {{/journalTabs}}
 </template>
 
@@ -102,15 +102,16 @@
     <div class="journalTabs-container">
 
         {{#if activeTab}}
-        {{trackActiveTab activeTab}}
+            {{trackActiveTab activeTab}}
         {{/if}}
 
         {{trackTabs tabs}}
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-            <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab" data-toggle="tab">{{name}}</a>
-            </li>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab"
+                                                                                 data-toggle="tab">{{name}}</a>
+                </li>
             {{/each}}
         </ul>
 
