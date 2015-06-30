@@ -151,14 +151,18 @@ Meteor.methods({
         if (affNode !== undefined) {
             results.affiliations = [];
             affNode.forEach(function (affiliation) {
-                results.affiliations.push(ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation));
+                var affText = ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation);
+                if (affText)results.affiliations.push(affText);
             });
         }
-        results.received = ScienceXML.getDateFromHistory("received", doc);
-        results.accepted = ScienceXML.getDateFromHistory("accepted", doc);
-        results.published = ScienceXML.getDateFromHistory("published", doc);
+        var received = ScienceXML.getDateFromHistory("received", doc);
+        if(received) results.received = received
+        var accepted = ScienceXML.getDateFromHistory("accepted", doc);
+        if(accepted) results.accepted = accepted
+        var published = ScienceXML.getDateFromHistory("published", doc);
+        if(published) results.published = published
 
-         return results;
+        return results;
     }
 });
 

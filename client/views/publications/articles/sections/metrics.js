@@ -13,6 +13,7 @@ var chart;
 var buildPieChart = function () {
     var currentTitle = Router.current().params.articleName;
     var article = Articles.findOne({title: currentTitle});
+    if (!article)return;
     var articleId = article._id;
     if (!articleId)return;
     var data = new Array();

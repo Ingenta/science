@@ -9,41 +9,60 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            © 2013 American Institute of Physics
-        </div>
+        <!--<div class="row">-->
+        <!--© 2013 American Institute of Physics-->
+        <!--</div>-->
         <br>
+
         <div class="row">
-            <div class="col-xs-3"><small><strong>{{_ "Received"}} </strong>{{received.year}}/{{received.month}}/{{received.day}}</small></div>
-            <div class="col-xs-3"><small><strong>{{_ "Accepted"}} </strong>{{received.year}}/{{received.month}}/{{received.day}}</small></div>
-            <div class="col-xs-3"><small><strong>{{_ "Published online"}} </strong>{{received.year}}/{{received.month}}/{{received.day}}</small></div>
+            <div class="col-xs-3">
+                {{#if received}}
+                    <small><strong>{{_ "Received"}} </strong>
+                        {{received.year}}/{{received.month}}/{{received.day}}
+                    </small>
+                {{/if}}
+            </div>
+            <div class="col-xs-3">
+                {{#if accepted}}
+                    <small><strong>{{_ "Accepted"}} </strong>
+                        {{accepted.year}}/{{accepted.month}}/{{accepted.day}}
+                    </small>
+                {{/if}}
+            </div>
+            <div class="col-xs-3">
+                {{#if published}}
+                    <small><strong>{{_ "Published online"}} </strong>
+                        {{published.year}}/{{published.month}}/{{published.day}}
+                    </small>
+                {{/if}}
+            </div>
         </div>
-        <div class="row">
-            <h6>{{_ "Acknowledgments"}}:</h6>
-            This study was supported by the National Development Programming of Key Fundamental Researches of China
-            (Grant
-            No. 2010CB227004), the National Natural Science Foundation of China (Grant No. 20906024), and the
-            Fundamental
-            Research Funds for the Central Universities (Grant No. WB1014022). Especially, we add our thanks to the
-            anonymous reviewers for their helpful suggestions on the quality improvement of our paper.
-        </div>
-        <div class="row articleOutline">
-            <h6>Article Outline:</h6>
-            <ul>
-                {{#each sections}}
-                    <li> {{label}} {{{title}}}</li>
-                    <ul>
-                        {{#each sections}}
-                            <li>{{label}} {{{title}}}</li>
-                            <ul>
-                                {{#each sections}}
-                                    <li>{{label}} {{{title}}}</li>
-                                {{/each}}
-                            </ul>
-                        {{/each}}
-                    </ul>
-                {{/each}}
-            </ul>
-        </div>
+        <!--<div class="row">-->
+        <!--<h6>{{_ "Acknowledgments"}}:</h6>-->
+        <!--This study was supported by the National Development Programming of Key Fundamental Researches of China-->
+        <!--(Grant-->
+        <!--No. 2010CB227004), the National Natural Science Foundation of China (Grant No. 20906024), and the-->
+        <!--Fundamental-->
+        <!--Research Funds for the Central Universities (Grant No. WB1014022). Especially, we add our thanks to the-->
+        <!--anonymous reviewers for their helpful suggestions on the quality improvement of our paper.-->
+        <!--</div>-->
+        <!--<div class="row articleOutline">-->
+        <!--<h6>Article Outline:</h6>-->
+        <!--<ul>-->
+            <!--{{#each sections}}-->
+        <!--<li> {{label}} {{{title}}}</li>-->
+        <!--<ul>-->
+            <!--{{#each sections}}-->
+            <!--<li>{{label}} {{{title}}}</li>-->
+            <!--<ul>-->
+                <!--{{#each sections}}-->
+                <!--<li>{{label}} {{{title}}}</li>-->
+                    <!--{{/each}}-->
+            <!--</ul>-->
+                <!--{{/each}}-->
+        <!--</ul>-->
+            <!--{{/each}}-->
+        <!--</ul>-->
+        <!--</div>-->
     </div>
 </template>

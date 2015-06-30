@@ -17,7 +17,7 @@ ScienceXML.getSubSection = function (subSectionNodes) {
         var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(subSection);
         var childSectionNodes = xpath.select("child::sec[@id]", subSection);
         if (!childSectionNodes.length)thisSubSection.push(thisSection);
-        else{
+        else {
             thisSubSection.push({
                 label: thisSection.label,
                 title: thisSection.title,
@@ -76,6 +76,7 @@ ScienceXML.getSimpleValueByXPath = function (xp, doc) {
 
 ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
     var nodes = xpath.select(xp + "/descendant::text()", doc);
+    if (nodes === undefined)return;
     var text = "";
     nodes.forEach(function (part) {
         text += part.data;
@@ -85,6 +86,7 @@ ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
 
 ScienceXML.getValueByXPathIncludingXml = function (xp, doc) {
     var nodes = xpath.select(xp, doc)[0];
+    if (nodes === undefined)return;
     var text = new serializer().serializeToString(nodes);
     //trim parent tags
     var firstTagLength = text.indexOf(">") + 1;
@@ -111,6 +113,7 @@ ScienceXML.validateXml = function (xml) {
 ScienceXML.getDateFromHistory = function (type, doc) {
     var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
     var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
-    var year  = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
+    var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
+    if (!day || !month || !year)return;
     return {day: day, month: month, year: year};
 }
