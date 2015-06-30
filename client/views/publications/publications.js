@@ -70,7 +70,7 @@ Template.FilterList.events({
         Session.set('firstLetter', undefined);
     },
     'click .perPage': function (event) {
-        var pageNum = $(event.currentTarget).data().pagenum;
+        var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
     }
 });

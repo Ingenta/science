@@ -27,7 +27,7 @@ Template.deletePublicationModalForm.helpers({
 
 Template.PublicationList.events({
     'click .perPage': function (event) {
-        var pageNum = $(event.currentTarget).data().pagenum;
+        var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
     }
 });
