@@ -49,8 +49,8 @@ Meteor.methods({
         else results.year = year;
 
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
-        if (elocationId === undefined) results.errors.push("No elocation id found");
-        else results.elocationId = elocationId
+        if (elocationId !== undefined) results.elocationId = elocationId
+
 
         var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
         if (issn !== undefined) results.issn = issn;
