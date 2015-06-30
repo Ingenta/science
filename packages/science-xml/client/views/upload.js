@@ -103,7 +103,7 @@ var importXmlByLogId = function (logId) {
             if (!volume) {
                 volume = Volumes.insert({journalId: result.journalId, volume: result.volume});
             }
-            result.volumeId = volume.id || volume;
+            result.volumeId = volume._id || volume;
 
             var issue = Issues.findOne({journalId: result.journalId, volume: result.volume, issue: result.issue});
             if (!issue) {
@@ -116,7 +116,7 @@ var importXmlByLogId = function (logId) {
                 });
             }
             //确保article有一个关联的issue
-            result.issueId = issue.id || issue;
+            result.issueId = issue._id || issue;
 
             Articles.insert({
                 doi: result.doi,
@@ -135,7 +135,10 @@ var importXmlByLogId = function (logId) {
                 volume: result.volume,
                 issueId: result.issueId,
                 volumeId: result.volumeId,
-                sections: result.sections
+                sections: result.sections,
+                received: result.received,
+                accepted: result.accepted,
+                published: result.published
             });
 
 
