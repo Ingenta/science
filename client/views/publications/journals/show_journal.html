@@ -5,7 +5,7 @@
             {{> updatePublicationBannerModalForm}}
         {{/if}}
     </div>
-    {{> journalBanner}}
+    {{> journalBanner journal=_id}}
     <br>
     {{#if isAdmin }}
         <div class="pull-right">
@@ -18,7 +18,7 @@
 </template>
 
 <template name="journalBanner">
-    <h2><img src="{{getBannerImage banner}}" width="650" height="94" alt="{{title}}"></h2>
+    <h2><img src="{{getJournalBannerById journal}}" width="650" height="94" alt="{{title}}"></h2>
 </template>
 
 <template name="journalOptions">

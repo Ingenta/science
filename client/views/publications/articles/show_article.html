@@ -1,6 +1,5 @@
 <template name="showArticle">
-    <img src="http://scitation.aip.org/docserver/fulltext/aipadv_png8.png" alt="{{title}}">
-
+    {{> journalBanner journal=journalId}}
     <div class="row articleHeading">
         <div class="col-xs-9">
             <h3><img src="/icon_access_fc.gif"/> {{title}}</h3>

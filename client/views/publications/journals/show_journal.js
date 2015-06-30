@@ -2,9 +2,12 @@ ReactiveTabs.createInterface({
     template: 'journalTabs'
 });
 Template.journalBanner.helpers({
-    getBannerImage: function (pictureId) {
-        if (pictureId !== undefined)
-            return Images.findOne({_id: pictureId}).url();
+    getJournalBannerById: function (journalId) {
+        if (journalId===undefined)return;
+        var journal = Publications.findOne({_id: journalId});
+        if (journal===undefined) return;
+        if (journal.banner===undefined) return;
+        return Images.findOne({_id: journal.banner}).url();
     }
 });
 Template.journalOptions.helpers({
