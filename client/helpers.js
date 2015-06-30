@@ -3,6 +3,21 @@ Template.registerHelper('getImageHelper', function (pictureId) {
     return (Images && pictureId && Images.findOne({_id: pictureId}).url()) || noPicture;
 });
 
+Template.registerHelper('urlToArticle', function (title) {
+    var article = Articles.findOne({title: title});
+    var publisherName = Publishers.findOne({_id: article.publisher}).name;
+    var journalName = Publications.findOne({_id: article.journalId}).title;
+    return "/publisher/" + publisherName + "/journal/" + journalName + "/article/" + title;
+});
+
+
+Template.registerHelper('urlToJournal', function (title) {
+    var article = Articles.findOne({title: title});
+    var publisherName = Publishers.findOne({_id: article.publisher}).name;
+    var journalName = Publications.findOne({_id: article.journalId}).title;
+    return "/publisher/" + publisherName + "/journal/" + journalName;
+});
+
 Template.registerHelper('isChinese', function (language) {
     if (language === "zh-CN")
         return true;
