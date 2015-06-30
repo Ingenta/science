@@ -22,6 +22,9 @@ Meteor.subscribe('articleXml');
 
 Meteor.subscribe('uploadLog');
 
+Meteor.subscribe('pages')
+
+
 Meteor.subscribe('countArticle')
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
@@ -114,7 +117,6 @@ Router.ensureLogged = function () {
             this.next();
         }
     }
-    this.next();
 };
 
 Router.ensureNotLogged = function () {

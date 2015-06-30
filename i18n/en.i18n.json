@@ -1,4 +1,7 @@
 {
+  "volumeItem": "Volume %s",
+  "issueItem": "Issue %s",
+
   "moreContentBy": "More content by",
   "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
   "PleaseEmail": "Please enter valid e-mail address.",

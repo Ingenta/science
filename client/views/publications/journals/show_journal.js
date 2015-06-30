@@ -23,6 +23,7 @@ Template.journalOptions.helpers({
     tabs: function () {
         var tabList = [];
         var currentTitle = Router.current().params.journalTitle;
+        if (!currentTitle)return;
         var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {
             if (t === "Overview") {

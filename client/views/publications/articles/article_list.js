@@ -17,7 +17,8 @@ Template.articleListTree.helpers({
 
 Template.articleListTree.events({
     "click .volume": function (event) {
-        $(event.target).find("span").text($(event.target).next("div").is(':visible') ? '+' : '-');
+        var nextValue = $(event.target).next("div").is(':visible') ? '+' : '-';
+        $(event.target).find("span").text(nextValue);
         $(event.target).next("div").toggle(200);
     },
     "click .issue": function (event) {
@@ -28,21 +29,19 @@ Template.articleListTree.events({
 
 
 Template.articleListRight.helpers({
+    resetArticlesFilter: function () {
+      Session.set("currIssue", undefined);
+    },
     articles: function () {
-        if (Config.isDevMode) {
-            var journalId = Session.get('currentJournalId');
-            q = {journalId: journalId};
+        var curIssue = Session.get("currIssue");
+        if (curIssue) {
+            return Articles.find({issueId: curIssue}, {sort: {title: 1}});
         } else {
-            var curIssue = Session.get("currIssue");
-            if (!curIssue) {
-                var journalId = Session.get('currentJournalId');
-                var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
-                lastIssue && Session.set("currIssue", lastIssue._id) && (curIssue = lastIssue._id);
-            }
-            var q = curIssue ? {issueId: curIssue} : {};
+            var journalId = Session.get('currentJournalId');
+            return Articles.find({journalId: journalId}, {sort: {issue: -1}});
+            //var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
+            //lastIssue && Session.set("currIssue", lastIssue._id) && (curIssue = lastIssue._id);
         }
-        return Articles.find(q, {sort: {title: 1}});
     }
-
 });
 

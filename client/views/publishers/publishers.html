@@ -1,11 +1,6 @@
 <template name="Publishers">
     <div class="container-fluid">
-        <div class="row">
-            <h2>{{_"Publishers"}}</h2>
-        </div>
-        <div class="row">
-            <p>{{_"Introductory text"}}</p>
-        </div>
+        {{> pageElement key="publisher"}}
         <div class="row">
             {{#if isAdmin }}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublisherModal">
@@ -73,11 +68,11 @@
     {{#afModal class="fa fa-pencil" title=getTitle collection="Publishers" doc=_id operation="update" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
+
 <template name="deletePublisherModalForm">
     {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
     {{/afModal}}
 </template>
-
 
 <template name="addPublisherForm">
     <div class="modal fade" id="addPublisherModal" tabindex="-1" role="dialog" aria-labelledby="addPublisherModalLabel"

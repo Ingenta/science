@@ -87,4 +87,20 @@ Meteor.startup(function () {
 //        }
 //    }
 
+    Pages.remove({})
+    if (Pages.find().count() === 0) {
+        var names = [
+                {key: "publisher", e: "Publisher", c: "出版商"},
+                {key: "publication", e: "Publication", c: "出版物"},
+                {key: "topic", e: "Topic", c: "主题"}
+            ];
+        _.each(names, function (name) {
+            Pages.insert({
+                key: name.key,
+                titleCN: name.c,
+                titleEN: name.e
+            });
+        });
+    }
+
 });
