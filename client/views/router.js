@@ -22,10 +22,9 @@ Meteor.subscribe('articleXml');
 
 Meteor.subscribe('uploadLog');
 
-Meteor.subscribe('pages')
+Meteor.subscribe('pages');
 
-
-Meteor.subscribe('countArticle')
+//Meteor.subscribe('articleViews');
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
 var privateRoutes = ["home_private", "admin", "admin.upload", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "user_settings.update_information", "logout"];
@@ -160,6 +159,7 @@ Router.map(function () {
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
+                Meteor.subscribe('articleViews'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news')
             ]
@@ -176,6 +176,7 @@ Router.map(function () {
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
+                Meteor.subscribe('articleViews'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news')
             ]
@@ -346,6 +347,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
+                Meteor.subscribe('articleViews'),
                 Meteor.subscribe('articles')
             ]
         }
