@@ -1,3 +1,3 @@
-Meteor.publish('countArticle', function() {
+Meteor.publish('articleViews', function() {
     return ArticleViews.find();
 });
