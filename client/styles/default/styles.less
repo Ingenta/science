@@ -46,6 +46,7 @@ body {
 
 p {
 	font-size: 12px;
+    line-height:24px;
 }
 
 #jumbotron-image {
@@ -310,6 +311,7 @@ ul.tree-view ul.tree-view {
 .db-solid{
   border-bottom:3px solid #bfbfbf;
   padding-bottom:5px;
+  overflow: hidden;
 }
 .user-agree h5{
   color:#036cb0;
@@ -330,7 +332,7 @@ ul.tree-view ul.tree-view {
   overflow: hidden;
   margin-top:10px;
   margin-bottom:10px;
-  font-size:12px;
+  font-size:14px;
 }
 .part img{
   float:left;
@@ -347,3 +349,52 @@ ul.tree-view ul.tree-view {
 .h220{
   height:220px;
 }
+.dotMenu{
+  height:280px;
+  overflow-y:scroll;
+  overflow-x: hidden;
+  border:1px solid #ccc;
+  margin-bottom: 20px;
+  padding:10px;
+}
+.dotMenu ul{
+  list-style: none;
+  padding:0;
+}
+.dotMenu ul li{
+  margin-bottom:10px;
+}
+.dotMenu li ul li{
+  font-size: 12px;
+  margin-left:15px;
+}
+.indetP P{
+  margin-left:32px;
+}
+.onDown p{
+  line-height:24px;
+  text-indent:24px;
+}
+.onDown{
+  display: none;
+}
+.table{
+  font-size: 12px;
+}
+.menu-ul{
+  list-style: none;
+  padding:0;
+}
+.menu-ul li{
+  padding:10px 0;
+  text-align: center;
+  background:#f1f1f1;
+  margin-top:10px;
+}
+.menu-ul .active{
+  background:#036cb0;
+}
+.menu-ul .active a{
+  color:#fff;
+}
+.carousel-indicators{bottom:-60px;}
