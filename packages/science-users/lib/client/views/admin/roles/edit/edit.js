@@ -82,7 +82,25 @@ Template.AdminRolesEditForm.events({
 
             },
             function(values) {
-                Meteor.call("updateRole", t.data.admin_role._id, values, function(e) { if(e) errorAction(e.message); else submitAction(); });
+                var roleName=values.name;
+                if(roleName && roleName.trim()){
+                    Permissions.undefineCustomRole(values.pastName,function(err){
+                        if(err){
+                            errorAction(err);
+                            return;
+                        }
+                        Permissions.defineCustomRole(Permissions.space2dash(values.name),[],{en:{name:roleName.trim(),summay:values.summay}},function(err,id){
+                            if(err){
+                                errorAction(err);
+                            }else{
+                                submitAction("success")
+                            }
+                        });
+                    });
+
+                }else{
+                    errorAction('请填写角色名称');
+                }
             }
         );
 

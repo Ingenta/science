@@ -32,11 +32,12 @@ this.AdminRolesEditController = RouteController.extend({
     },
 
     data: function() {
+        console.log(this.params.roleName);
 
 
         return {
             params: this.params || {},
-            admin_role: Meteor.roles.findOne({_id:this.params.roleId}, {})
+            curr_role: _.findWhere(Permissions.getCustomRoles(),{name:this.params.roleName})
         };
         /*DATA_FUNCTION*/
     },

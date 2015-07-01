@@ -88,6 +88,7 @@ natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 ongoworks:security@1.2.0
+orbit:permissions@0.1.1
 ordered-dict@1.0.3
 perak:user-roles@1.0.10
 raix:eventemitter@0.1.2
@@ -101,6 +102,7 @@ retry@1.0.3
 routepolicy@1.0.5
 rzymek:moment-locale-zh-cn@2.9.0
 science-lib@0.0.1
+science-permissions@0.0.1
 science-roles@0.0.1
 science-topics@0.0.1
 science-users@0.0.1

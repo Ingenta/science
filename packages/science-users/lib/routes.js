@@ -50,7 +50,7 @@ Meteor.startup(function(){
         controller: "AdminRolesInsertController"
     });
     Router.route("admin.roles.update", {
-        path: "/admin/roles/update/:roleId",
+        path: "/admin/roles/update/:roleName",
         controller: "AdminRolesEditController"
     });
     Router.route("admin.upload", {

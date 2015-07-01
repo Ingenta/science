@@ -25,15 +25,9 @@
                 </button>
             </div>
         </form>
-        {{#if isNotEmpty}}
         <div id="dataview-data">
             {{> RolesViewTable}}
         </div>
-        {{else}}
-        <div class="alert alert-info">
-            No roles yet
-        </div>
-        {{/if}}
     </div>
 </template>
 
@@ -41,31 +35,54 @@
     <table id="dataview-table" class="table table-striped table-hover">
         <thead id="dataview-table-header">
         <tr id="dataview-table-header-row">
-            <th class="th-sortable" data-sort="profile.name">
+            <th>
                 {{_ "Name"}}
             </th>
+	        <th>
+		        summay
+	        </th>
             <th>
                 &nbsp;
             </th>
         </tr>
         </thead>
         <tbody id="dataview-table-items">
-        {{#each tableItems}} {{> RolesViewTableItems}} {{/each}}
+        {{#each rolesKeys "permissions:"}}
+	        {{> DefinedRolesView}}
+        {{/each}}
+        {{#each pkgRolesKeys}}
+	        {{> DefinedRolesView}}
+        {{/each}}
+
+        {{> CustomRoleView}}
+
         </tbody>
     </table>
 </template>
 
-<template name="RolesViewTableItems">
+<template name="DefinedRolesView">
     <tr id="dataview-table-items-row">
-        <td>
-            {{name}}
-        </td>
-        <td class="td-icon">
+	    {{#with rolesDescription this}}
+	    <td>{{name}}</td>
+	    <td>{{summay}}</td>
+	    {{/with}}
+        <td class="td-icon"></td>
+    </tr>
+</template>
+
+<template name="CustomRoleView">
+	{{#each customRolesInfo}}
+	<tr id="dataview-table-items-row">
+		{{#with desc}}
+		<td>{{name}}</td>
+		<td>{{summay}}</td>
+		{{/with}}
+		<td class="td-icon">
 			<span class="fa fa-pencil " title="Edit">
 			</span>
             <span class="fa fa-trash " title="delete">
             </span>
-        </td>
-    </tr>
+		</td>
+	</tr>
+	{{/each}}
 </template>
-
