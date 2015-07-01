@@ -73,6 +73,8 @@ meteorspark:util@0.2.0
 minifiers@1.1.5
 minimongo@1.0.8
 mizzao:bootboxjs@4.4.0
+mizzao:timesync@0.3.1
+mizzao:user-status@0.6.4
 mobile-status-bar@1.0.3
 momentjs:moment@2.9.0
 monbro:iron-router-breadcrumb@1.0.7
