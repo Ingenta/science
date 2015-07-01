@@ -23,6 +23,26 @@ ReactiveTabs.createInterface({
     }
 });
 
+Template.showArticle.onRendered(function () {
+    var rva = Session.get("recentViewedArticles");
+    if (!rva){
+        rva = [];
+    } else if(_.findWhere(rva,{_id:this.data._id})){
+//        var temp = [];
+//        rva.forEach(function(oneId){
+//            if(oneId != this.data._id){
+//                temp.push({_id: this.data._id});
+//            }
+//        });
+//        rva = temp;
+        return;
+    } else if(rva.length == 3){
+        rva.shift();
+    }
+    rva.push({_id: this.data._id});
+    Session.set("recentViewedArticles", rva);
+});
+
 Template.showArticle.helpers({
     journalName: function (id) {
         return Publications.findOne({_id: id}).title;
