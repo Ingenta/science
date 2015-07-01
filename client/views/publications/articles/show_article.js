@@ -2,26 +2,34 @@ ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
         if (slug === 'abstract') {
-            var currentTitle = Router.current().params.articleName;
-            var articleId = Articles.findOne({title: currentTitle})._id;
-            ArticleViews.insert({
-                articleId: articleId,
-                userId: Meteor.userId(),
-                when: new Date(),
-                action: "abstract"
-            })
-        } else if (slug === 'full text') {
-            var currentTitle = Router.current().params.articleName;
-            var articleId = Articles.findOne({title: currentTitle})._id;
-            ArticleViews.insert({
-                articleId: articleId,
-                userId: Meteor.userId(),
-                when: new Date(),
-                action: "fulltext"
-            })
-        }
-    }
-});
+            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+                var currentTitle = Router.current().params.articleName;
+                var articleId = Articles.findOne({title: currentTitle})._id;
+                ArticleViews.insert({
+                    articleId: articleId,
+                    userId: Meteor.userId(),
+                    when: new Date(),
+                    action: "abstract",
+                    ip: session
+            });
+        });
+    } else if (slug === 'full text')
+{
+    Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+    var currentTitle = Router.current().params.articleName;
+    var articleId = Articles.findOne({title: currentTitle})._id;
+    ArticleViews.insert({
+        articleId: articleId,
+        userId: Meteor.userId(),
+        when: new Date(),
+        action: "fulltext",
+        ip: session
+      });
+    });
+}
+}
+})
+;
 
 Template.showArticle.helpers({
     journalName: function (id) {
