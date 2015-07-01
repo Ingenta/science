@@ -52,6 +52,8 @@ Package.onUse(function(api) {
     'lib/client/views/accounts/user_settings/profile/profile.html',
     'lib/client/views/accounts/user_settings/profile/profile.js',
     'lib/client/views/accounts/user_settings/profile/profile_controller.js',
+    'lib/client/views/admin/roles/choose/permissions.html',
+    'lib/client/views/admin/roles/choose/permissions.js',
     'lib/client/views/admin/admin.html',
     'lib/client/views/admin/admin.js',
     'lib/client/views/admin/admin_controller.js',

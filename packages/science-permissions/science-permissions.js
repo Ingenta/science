@@ -17,7 +17,7 @@ if(Meteor.isClient){
 		getCustomRoles:function(){
 			var customSymbol="project-custom:";
 			var keys = Object.keys(Permissions.getRoles());
-			var descs = Permissions.getRolesDescriptions();
+			var descs = Permissions.getRolesDescriptions();//服务端没有这个方法。
 			keys= _.filter(keys,function(str){
 				return str.indexOf(customSymbol) == 0;
 			});

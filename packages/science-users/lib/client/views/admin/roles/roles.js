@@ -46,6 +46,9 @@ Template.CustomRoleView.events({
                 alert(e);
             }
         });
+    },
+    "click .fa-plus" : function(e){
+        Router.go("admin.roles.choose.permissions",{"roleName": this.name});
     }
 });
 
