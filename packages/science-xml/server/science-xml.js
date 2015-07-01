@@ -1,12 +1,12 @@
 Meteor.methods({
     'getXmlFromZip': function (path) {
         console.log('works!!!!')
-        var content = ScienceXML.getFileContentsFromPath(path);
+        //var content = ScienceXML.getFileContentsFromPath(path);
 
-        var zip = new JSZip();
-        zip.load(content);
-
-        return zip.file("test.txt").asText();
+        //var zip = new JSZip();
+        //zip.load(content);
+        //
+        //return zip.file("test.txt").asText();
     },
     'parseXml': function (path) {
         var results = {};
