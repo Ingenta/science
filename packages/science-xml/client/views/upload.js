@@ -45,6 +45,7 @@ Template.UploadLogModal.helpers({
 Template.uploadTableRow.events({
     "click .btn": function (e) {
         //get this item in the table
+//        debugger;
         Session.set('errors', undefined);
         Session.set("result", undefined);
         var button = $(e.target) // Button that triggered the modal
@@ -56,20 +57,20 @@ Template.uploadTableRow.events({
             Session.set("result", undefined);
             return;
         }
-        if (log.name.contains(".zip")) {
-            //open from path
-//            console.log(Meteor.absoluteUrl(path.substring(1)));
-//            console.log(ScienceXML.getFileContentsFromPath(path));
-            Meteor.call('getXmlFromZip', path, function (error, result) {
-                if (error) {
-                    console.log(error);
-                }
-                else{
-                    console.log(result);
-                }
-            });
-
-        } else
+//        if (log.name.contains(".zip")) {
+//            //open from path
+////            console.log(Meteor.absoluteUrl(path.substring(1)));
+////            console.log(ScienceXML.getFileContentsFromPath(path));
+//            Meteor.call('getXmlFromZip', path, function (error, result) {
+//                if (error) {
+//                    console.log(error);
+//                }
+//                else{
+//                    console.log(result);
+//                }
+//            });
+//
+//        } else
             importXmlByLogId(uploadLogId);
 
     }
