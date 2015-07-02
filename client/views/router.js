@@ -290,7 +290,9 @@ Router.map(function () {
         title: function () {
             if (TAPi18n.getLanguage() === "en") return ":publisherName";
             var id = Session.get('currentPublisher');
-            return Publishers.findOne({_id: id}).chinesename;
+            var p =Publishers.findOne({_id: id});
+            if(!p) return p.name;
+            return p.chinesename;
         },
         name: "publisher.name",
         waitOn: function () {

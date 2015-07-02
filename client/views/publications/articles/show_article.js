@@ -36,18 +36,18 @@ Template.showArticle.onRendered(function () {
     if (!rva){
         rva = [];
     } else if(_.findWhere(rva,{_id:this.data._id})){
-//        var temp = [];
-//        rva.forEach(function(oneId){
-//            if(oneId != this.data._id){
-//                temp.push({_id: this.data._id});
-//            }
-//        });
-//        rva = temp;
-        return;
+        var temp = [];
+        while(rva.length){
+            var oneId = rva.shift();
+            if(oneId._id != this.data._id){
+                temp.push(oneId);
+            }
+        }
+        rva = temp;
     } else if(rva.length == 3){
-        rva.shift();
+        rva.pop();
     }
-    rva.push({_id: this.data._id});
+    rva.unshift({_id: this.data._id});
     Session.set("recentViewedArticles", rva);
 });
 
