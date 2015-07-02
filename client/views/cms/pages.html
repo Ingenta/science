@@ -13,6 +13,6 @@
 </template>
 
 <template name="updatePagesModalForm">
-    {{#afModal class="fa fa-pencil" collection="Pages" operation="update" doc=getPageId prompt=getPrompt buttonContent=getUpdateButtonContent}}
+    {{#afModal class="fa fa-pencil" collection="Pages" operation="update" doc=getPageId prompt=getPrompt buttonContent=getUpdateButtonContent omitFields="key"}}
     {{/afModal}}
 </template>
