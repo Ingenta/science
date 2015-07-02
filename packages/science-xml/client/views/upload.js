@@ -56,20 +56,20 @@ Template.uploadTableRow.events({
             Session.set("result", undefined);
             return;
         }
-        if (log.name.contains(".zip")) {
-            //open from path
-//            console.log(Meteor.absoluteUrl(path.substring(1)));
-//            console.log(ScienceXML.getFileContentsFromPath(path));
-            Meteor.call('getXmlFromZip', path, function (error, result) {
-                if (error) {
-                    console.log(error);
-                }
-                else{
-                    console.log(result);
-                }
-            });
-
-        } else
+//        if (log.name.contains(".zip")) {
+//            //open from path
+////            console.log(Meteor.absoluteUrl(path.substring(1)));
+////            console.log(ScienceXML.getFileContentsFromPath(path));
+//            Meteor.call('getXmlFromZip', path, function (error, result) {
+//                if (error) {
+//                    console.log(error);
+//                }
+//                else{
+//                    console.log(result);
+//                }
+//            });
+//
+//        } else
             importXmlByLogId(uploadLogId);
 
     }

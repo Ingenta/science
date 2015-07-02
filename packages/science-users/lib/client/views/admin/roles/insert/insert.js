@@ -81,9 +81,18 @@ Template.AdminRolesInsertForm.events({
 
 			},
 			function(values) {
-
-
-				Meteor.call("createRole", values, function(e) { if(e) errorAction(e.message); else submitAction(); });
+				var roleName=values.name;
+				if(roleName && roleName.trim()){
+					Permissions.defineCustomRole(Permissions.space2dash(values.name),[],{en:{name:roleName.trim(),summay:"you can see roles table"}},function(err,id){
+						if(err){
+							errorAction(err);
+						}else{
+							submitAction("success")
+						}
+					});
+				}else{
+					errorAction('请填写角色名称');
+				}
 			}
 		);
 

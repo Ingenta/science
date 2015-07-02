@@ -2,25 +2,53 @@ ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
         if (slug === 'abstract') {
-            var currentTitle = Router.current().params.articleName;
-            var articleId = Articles.findOne({title: currentTitle})._id;
-            ArticleViews.insert({
-                articleId: articleId,
-                userId: Meteor.userId(),
-                when: new Date(),
-                action: "abstract"
-            })
-        } else if (slug === 'full text') {
-            var currentTitle = Router.current().params.articleName;
-            var articleId = Articles.findOne({title: currentTitle})._id;
-            ArticleViews.insert({
-                articleId: articleId,
-                userId: Meteor.userId(),
-                when: new Date(),
-                action: "fulltext"
-            })
-        }
+            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+                var currentTitle = Router.current().params.articleName;
+                var articleId = Articles.findOne({title: currentTitle})._id;
+                ArticleViews.insert({
+                    articleId: articleId,
+                    userId: Meteor.userId(),
+                    when: new Date(),
+                    action: "abstract",
+                    ip: session
+            });
+        });
+    } else if (slug === 'full text')
+{
+    Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+    var currentTitle = Router.current().params.articleName;
+    var articleId = Articles.findOne({title: currentTitle})._id;
+    ArticleViews.insert({
+        articleId: articleId,
+        userId: Meteor.userId(),
+        when: new Date(),
+        action: "fulltext",
+        ip: session
+      });
+    });
+}
+}
+})
+;
+
+Template.showArticle.onRendered(function () {
+    var rva = Session.get("recentViewedArticles");
+    if (!rva){
+        rva = [];
+    } else if(_.findWhere(rva,{_id:this.data._id})){
+//        var temp = [];
+//        rva.forEach(function(oneId){
+//            if(oneId != this.data._id){
+//                temp.push({_id: this.data._id});
+//            }
+//        });
+//        rva = temp;
+        return;
+    } else if(rva.length == 3){
+        rva.shift();
     }
+    rva.push({_id: this.data._id});
+    Session.set("recentViewedArticles", rva);
 });
 
 Template.showArticle.helpers({
