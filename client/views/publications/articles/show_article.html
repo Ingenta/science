@@ -55,6 +55,7 @@
             </div>
         </div>
     </div>
+    {{> articlePage}}
     <!--<div class="row">-->
     <!--<div class="container-fluid">-->
     <!--<span class="rating">-->
@@ -78,6 +79,16 @@
     <!--</div>-->
 </template>
 
+<template name="articlePage">
+    <hr>
+    <div class="clear articlenav std-display">
+        <ul class="flat navigate-resources bobby">
+            <span><a href="{{doi}}"><img src="/icons_leftarrow.png">Previous Article</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{doi}}">Table of Contents</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{doi}}">Next Article<img src="/rightarrow.gif"></a></span>
+        </ul>
+        <div class="socialMediaCommenting">
+        </div>
+    </div><br>
+</template>
 
 <template name="articleOptions">
 
