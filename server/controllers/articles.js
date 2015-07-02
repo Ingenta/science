@@ -4,10 +4,10 @@ Meteor.methods({
         console.dir(result);
         return result;
     },
-//        var geo = ScienceXML.getFileContentsFromFullPath("http://freegeoip.net/json/"+"175.144.126.252");
-//        console.log(geo);
+    'grabSessions': function(id){
+        var c = UserStatus.connections.findOne({userId:id});
         return c.ipAddr;
-    },
+},
     'getMostRead': function () {
         var a = ArticleViews.aggregate([{
             $group: {
