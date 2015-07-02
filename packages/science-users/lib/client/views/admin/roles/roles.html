@@ -39,7 +39,7 @@
                 {{_ "Name"}}
             </th>
 	        <th>
-		        summay
+		        summary
 	        </th>
             <th>
                 &nbsp;
@@ -64,7 +64,7 @@
     <tr id="dataview-table-items-row">
 	    {{#with rolesDescription this}}
 	    <td>{{name}}</td>
-	    <td>{{summay}}</td>
+	    <td>{{summary}}</td>
 	    {{/with}}
         <td class="td-icon"></td>
     </tr>
@@ -73,12 +73,11 @@
 <template name="CustomRoleView">
 	{{#each customRolesInfo}}
 	<tr id="dataview-table-items-row">
-		{{#with desc}}
+
 		<td>{{name}}</td>
-		<td>{{summay}}</td>
-		{{/with}}
+		<td>{{summary}}</td>
 		<td class="td-icon">
-			<span class="fa fa-pencil " title="Edit"></span>
+			<!--<span class="fa fa-pencil " title="Edit"></span>-->
 			<span class="fa fa-plus" title="Choose"></span>
             <span class="fa fa-trash " title="Delete"></span>
 		</td>

@@ -43,22 +43,33 @@ Meteor.startup(function(){
     });
     Router.route("admin.roles", {
         path: "/admin/roles",
-        controller: "AdminRolesController"
+        controller: "AdminRolesController",
+        title:function(){return "roles"},
+        parent: "home_private"
     });
     Router.route("admin.roles.insert", {
         path: "/admin/roles/insert",
-        controller: "AdminRolesInsertController"
+        controller: "AdminRolesInsertController",
+        title:function(){return "insert"},
+        parent: "admin.roles"
     });
     Router.route("admin.roles.update", {
-        path: "/admin/roles/update/:roleName",
-        controller: "AdminRolesEditController"
+        path: "/admin/roles/update/:roleId",
+        title:function(){return "update"},
+        parent:"admin.roles",
+        template: "Admin",
+        yieldTemplates: {
+            'AdminRoleEdit': { to: 'AdminSubcontent'}
+        }
     });
     Router.route("admin.roles.choose.permissions",{
-        path:"/admin/roles/:roleName/choose",
+        path:"/admin/roles/:roleId/choose",
         template:"Admin",
         yieldTemplates: {
             'AdminChoosePermissions': { to: 'AdminSubcontent'}
-        }
+        },
+        title:function(){return "choose"},
+        parent:"admin.roles"
     });
     Router.route("admin.upload", {
         path: "/admin/upload",
