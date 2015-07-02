@@ -29,6 +29,17 @@ Template.recentArticles.helpers({
         return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
     },
     mostReadArticles: function () {
-        return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
+        Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
+            Session.set("mostRead", result);
+        });
+
+        var most = Session.get("mostRead");
+        if (!most)return;
+
+        var resultArray = [];
+        most.forEach(function (id) { //TODO: figure out a better way to do this instead of calling the db for each id in the list
+            resultArray.push(Articles.findOne({_id: id._id.articleId}));
+        });
+        return resultArray;
     }
 });

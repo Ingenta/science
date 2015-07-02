@@ -11,43 +11,42 @@ ReactiveTabs.createInterface({
                     when: new Date(),
                     action: "abstract",
                     ip: session
+                });
             });
-        });
-    } else if (slug === 'full text')
-{
-    Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-    var currentTitle = Router.current().params.articleName;
-    var articleId = Articles.findOne({title: currentTitle})._id;
-    ArticleViews.insert({
-        articleId: articleId,
-        userId: Meteor.userId(),
-        when: new Date(),
-        action: "fulltext",
-        ip: session
-      });
-    });
-}
-}
+        } else if (slug === 'full text') {
+            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+                var currentTitle = Router.current().params.articleName;
+                var articleId = Articles.findOne({title: currentTitle})._id;
+                ArticleViews.insert({
+                    articleId: articleId,
+                    userId: Meteor.userId(),
+                    when: new Date(),
+                    action: "fulltext",
+                    ip: session
+                });
+            });
+        }
+    }
 })
 ;
 
 Template.showArticle.onRendered(function () {
     var rva = Session.get("recentViewedArticles");
-    if (!rva){
+    if (!rva) {
         rva = [];
-    } else if(_.findWhere(rva,{_id:this.data._id})){
-//        var temp = [];
-//        rva.forEach(function(oneId){
-//            if(oneId != this.data._id){
-//                temp.push({_id: this.data._id});
-//            }
-//        });
-//        rva = temp;
-        return;
-    } else if(rva.length == 3){
-        rva.shift();
+    } else if (_.findWhere(rva, {_id: this.data._id})) {
+        var temp = [];
+        while (rva.length) {
+            var oneId = rva.shift();
+            if (oneId._id != this.data._id) {
+                temp.push(oneId);
+            }
+        }
+        rva = temp;
+    } else if (rva.length == 3) {
+        rva.pop();
     }
-    rva.push({_id: this.data._id});
+    rva.unshift({_id: this.data._id});
     Session.set("recentViewedArticles", rva);
 });
 
