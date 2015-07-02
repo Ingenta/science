@@ -72,7 +72,9 @@ maazalik:highcharts@0.2.4
 matb33:collection-hooks@0.7.13
 meteor@1.1.6
 meteor-platform@1.2.2
+meteorhacks:aggregate@1.2.1
 meteorhacks:async@1.0.0
+meteorhacks:collection-utils@1.2.0
 meteorhacks:npm@1.2.2
 meteorspark:util@0.2.0
 meteortoys:toykit@0.8.1
@@ -130,7 +132,6 @@ templates:tabs@2.1.5
 templating@1.1.1
 test:paginator@0.2.0
 tracker@1.0.7
-udondan:jszip@2.4.0_1
 ui@1.0.6
 underscore@1.0.3
 url@1.0.4
