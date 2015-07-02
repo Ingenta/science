@@ -19,7 +19,6 @@ Template.SearchResults.helpers({
         if (q) {
             var mongoDbArr = [];
             mongoDbArr.push({title: {$regex: q, $options: "i"}});
-            mongoDbArr.push({authors: {$regex: q, $options: "i"}});
             return Articles.find({$or: mongoDbArr});
         }
         var t = Router.current().params.topicQuery;

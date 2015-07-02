@@ -1,0 +1,66 @@
+<template name="AdminChoosePermissions">
+	<div class="container-fluid" id="content">
+		<div class="row" id="title_row">
+			<div class="col-xs-12">
+				<div id="page_menu" class="pull-right">
+				</div>
+			</div>
+		</div>
+		{{> AdminRolesChooseForm}}
+	</div>
+</template>
+
+
+<template name="AdminRolesChooseForm">
+	<div class="">
+		<h2 id="component-title">
+			Choose permissions
+		</h2>
+		<form id="form" role="form">
+			<div class="form-group">
+				<hr>
+				<ul>
+					<li>
+						<input type="checkbox" name="permiss" class="perm-li" value="permissions:get-users-roles"/> 查看角色列表
+					</li>
+					<li>
+						<input type="checkbox" name="permiss" class="perm-li" value="permissions:edit-custom-roles"/> 编辑自定义角色
+					</li>
+					<li>
+						<input type="checkbox" name="permiss" class="perm-li" value="permissions:delegate-and-revoke"/> 权限设置
+					</li>
+				</ul>
+
+				{{#each pkgPermissionsGroupPrefixs}}
+					{{> singleGroup}}
+				{{/each}}
+				<hr>
+			</div>
+
+
+			<div class="form-group">
+				<div class="submit-div">
+					<button id="form-submit-button" class="btn btn-success" type="submit">
+						<span class="fa fa-check">
+						</span>
+						{{_ "Save"}}
+					</button>
+					<a href="#" id="form-cancel-button" class="btn btn-default">
+						{{_ "Cancel"}}
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+
+<template name="singleGroup">
+	<hr>
+	<ul>
+		{{#each pkgPermissionsGroup}}
+			<li>
+				<input type="checkbox" name="permiss" class="perm-li" value="{{this}}"/> {{this}}
+			</li>
+		{{/each}}
+	</ul>
+</template>

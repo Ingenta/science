@@ -115,7 +115,7 @@
         <div class="col-xs-6">
             <h4>{{_ "Most read articles"}}</h4>
             {{#each mostReadArticles}}
-                <h5><a href={{urlToArticle title}}>{{title}}</a></h5>
+                <h5><a href="{{urlToArticle title}}">{{title}}</a></h5>
             {{else}}
                 {{_"No articles found!"}}
             {{/each}}

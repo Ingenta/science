@@ -1,3 +1,34 @@
+【2015年7月1日】
+蒋凯      增加了角色管理功能、权限设置页面
+
+【2015年6月30日】
+Jack     修复了卷期列表中的一个BUG。
+Jack     重构了url与期刊和文章的映射方法。
+崔显      修复了更新用户信息中的一个bug
+刘奇      增加了阅读统计功能
+Jack     重构了最新文章、最近阅读文章栏目
+Jack     updated article page banner to match journal
+
+【2015年6月29日】
+Jack     移除了单元测试模块。
+崔显      增加了用户资料修改功能。
+刘奇      增加了引用文献显示功能。
+杨冬冬    first effort at zip reading
+崔显      增加了分页条可选每页显示条数功能
+Jack     修复了一个控制台的警告信息。fixed this.next issue causing console errors
+
+【2015年6月28日】
+jack     增加了全文内容显示Tab页中的章节功能。
+Jack     增加了收稿日期、录用日期、出版日期三个字段的显示。
+
+【2015年6月27日】
+Jack     增加了摘要中对斜体的支持。
+Jack     can get abstract with html and allowing for attributes
+Jack     重构了部分xml解析功能。
+Jack     增加了单元测试模块
+
+---------------------------------------------------------------------------------------------------------
+
 【2015年6月26日】
 蒋凯      增加了角色列表、增加、修改的功能。
 Jack      增加了对xml中全文信息、摘要信息的解析与显示。

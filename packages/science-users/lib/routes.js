@@ -50,8 +50,15 @@ Meteor.startup(function(){
         controller: "AdminRolesInsertController"
     });
     Router.route("admin.roles.update", {
-        path: "/admin/roles/update/:roleId",
+        path: "/admin/roles/update/:roleName",
         controller: "AdminRolesEditController"
+    });
+    Router.route("admin.roles.choose.permissions",{
+        path:"/admin/roles/:roleName/choose",
+        template:"Admin",
+        yieldTemplates: {
+            'AdminChoosePermissions': { to: 'AdminSubcontent'}
+        }
     });
     Router.route("admin.upload", {
         path: "/admin/upload",
