@@ -13,11 +13,14 @@
             "description": {
                 "label": "Description"
             },
+            "title": {
+                "label": "Publication Name"
+            },
             "shortTitle": {
                 "label": "Short Title"
             },
-            "title": {
-                "label": "Publication Name"
+            "issn": {
+                "label": "ISSN"
             },
             "accessKey": {
                 "label": "Choose an Access Key",
