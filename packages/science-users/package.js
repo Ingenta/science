@@ -65,7 +65,6 @@ Package.onUse(function(api) {
     'lib/client/views/admin/roles/insert/insert_controller.js',
     'lib/client/views/admin/roles/edit/edit.html',
     'lib/client/views/admin/roles/edit/edit.js',
-    'lib/client/views/admin/roles/edit/edit_controller.js',
     'lib/client/views/admin/users/users.html',
     'lib/client/views/admin/users/users.js',
     'lib/client/views/admin/users/users_controller.js',

@@ -99,7 +99,7 @@ Meteor.methods({
             }
             var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
             if (doi) {
-                results.references.push({ref: text, doi: doi});
+                results.references.push({ref: text.substr(0, text.indexOf(doi)), doi: doi});
             } else {
                 results.references.push({ref: text});
             }

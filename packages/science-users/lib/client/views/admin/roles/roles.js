@@ -38,22 +38,30 @@ Template.DefinedRolesView.helpers({
 
 Template.CustomRoleView.events({
     "click .fa-pencil": function (e) {
-        Router.go("admin.roles.update", {"roleName": this.name});
+        Router.go("admin.roles.update", {"roleId": this._id});
     },
     "click .fa-trash" : function (e) {
-        Permissions.undefineCustomRole(this.shortName,function(e){
-            if(e){
-                alert(e);
-            }
-        });
+        if(confirm("are you sure to delete the Role \"" + this.description.en.name + "\" ?")){
+            Permissions.undefineCustomRole(this._id,function(e){
+                if(e){
+                    alert(e);
+                }
+            });
+        }
     },
     "click .fa-plus" : function(e){
-        Router.go("admin.roles.choose.permissions",{"roleName": this.name});
+        Router.go("admin.roles.choose.permissions",{"roleId": this._id});
     }
 });
 
 Template.CustomRoleView.helpers({
     "customRolesInfo":function(){
-        return Permissions.getCustomRoles();
+        return Permissions.getCustomRoles2();
+    },
+    "name":function(){
+        return this.description.en.name;
+    },
+    "summary":function(){
+        return this.description.en.summary;
     }
 });

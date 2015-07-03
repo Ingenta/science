@@ -15,36 +15,39 @@
 		<h2 id="component-title">
 			{{_ "add new role"}}
 		</h2>
+
 		<form id="form" role="form">
 			{{#if errorMessage}}
-			<div class="alert alert-warning">
-				{{errorMessage}}
-			</div>
+				<div class="alert alert-warning">
+					{{errorMessage}}
+				</div>
 			{{/if}}
 
 			{{#if infoMessage}}
-			<div class="alert alert-success">
-				{{infoMessage}}
-			</div>
+				<div class="alert alert-success">
+					{{infoMessage}}
+				</div>
 			{{/if}}
-            <div class="form-group  field-name">
-                <label for="name">
-                    {{_ "roleName"}}
-                </label>
-                <div class="input-div">
-                    <input type="text" name="name" value="" class="form-control" required="required">
+			<div class="form-group  field-name">
+				<label for="name">
+					{{_ "roleName"}}
+				</label>
+
+				<div class="input-div">
+					<input type="text" name="name" value="" class="form-control" required="required">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
-                </div>
-            </div>
+				</div>
+			</div>
 			<div class="form-group  field-name">
-				<label for="summay">
-					summay
+				<label for="summary">
+					summary
 				</label>
+
 				<div class="input-div">
-					<input type="text" name="summay" value="" class="form-control" required="required">
+					<input type="text" name="summary" value="" class="form-control" required="required">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
@@ -56,10 +59,10 @@
 					<button id="form-submit-button" class="btn btn-success" type="submit">
 						<span class="fa fa-check">
 						</span>
-                        {{_ "Save"}}
+						{{_ "Save"}}
 					</button>
 					<a href="#" id="form-cancel-button" class="btn btn-default">
-                        {{_ "Cancel"}}
+						{{_ "Cancel"}}
 					</a>
 				</div>
 			</div>
