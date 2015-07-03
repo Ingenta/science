@@ -22,7 +22,7 @@ Meteor.methods({
 
         var doc = new dom().parseFromString(xml);
 
-        // GET DOI, TITLE, VOLUME, ISSUE, MONTH, YEAR, ISSN, ESSN
+        // GET DOI, TITLE, VOLUME, ISSUE, MONTH, YEAR, ISSN, ESSN, TOPIC
 
         var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
         if (doi === undefined) results.errors.push("No doi found");
@@ -47,6 +47,10 @@ Meteor.methods({
         var year = ScienceXML.getSimpleValueByXPath("//pub-date/year", doc);
         if (year === undefined) results.errors.push("No year found");
         else results.year = year;
+
+        var topic = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subj-group/subject", doc);
+        if (topic === undefined) results.errors.push("No subject found");
+        else results.topic = topic;
 
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
         if (elocationId !== undefined) results.elocationId = elocationId
