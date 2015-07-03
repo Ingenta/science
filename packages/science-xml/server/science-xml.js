@@ -51,13 +51,8 @@ Meteor.methods({
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
         if (elocationId !== undefined) results.elocationId = elocationId
 
-
-        var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
-        if (issn !== undefined) results.issn = issn;
-
         var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
         if (essn !== undefined) results.essn = essn;
-
 
         //    CHECK IF EXISTING ARTICLE
         var existingArticle = Articles.findOne({doi: results.doi});
@@ -68,9 +63,18 @@ Meteor.methods({
         if (journalTitle === undefined) results.errors.push("No journal title found");
         else {
             results.journalTitle = journalTitle;
-            var journal = Publications.findOne({title: results.journalTitle});
-            if (journal === undefined) results.errors.push("No journal title found in the system with the name: " + results.journalTitle);
-            else results.journalId = journal._id;
+        }
+
+        var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
+        if (issn === undefined) {
+            results.errors.push("No issn found in xml");
+        } else {
+            results.issn = issn;
+            var journal = Publications.findOne({issn: issn});
+            if (journal === undefined) results.errors.push("No such issn found in journal collection: " + issn);
+            else {
+                results.journalId = journal._id;
+            }
         }
 
         var publisherName = ScienceXML.getSimpleValueByXPath("//publisher-name", doc);
