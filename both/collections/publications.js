@@ -9,6 +9,11 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         max: 10
     },
+    issn: {
+        type: String,
+        unique: true,
+        max: 9
+    },
     accessKey: {
         type: String
     },

@@ -170,6 +170,9 @@
             "shortTitle": {
                 "label": "简称"
             },
+            "issn": {
+                "label": "ISSN"
+            },
             "accessKey": {
                 "label": "请选择一个资源标签",
                 "options": {
