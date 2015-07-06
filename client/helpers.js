@@ -11,6 +11,14 @@ Template.registerHelper('urlToArticle', function (title) {
     return "/publisher/" + publisherName + "/journal/" + journalName + "/"+issue.volume+"/"+issue.issue+"/" + title;
 });
 
+Template.registerHelper('urlToTOC', function (title) {
+    var article = Articles.findOne({title: title});
+    var publisherName = Publishers.findOne({_id: article.publisher}).name;
+    var journalName = Publications.findOne({_id: article.journalId}).title;
+    var issue = Issues.findOne({_id:article.issueId});
+    return "/publisher/" + publisherName + "/journal/" + journalName + "/"+issue.volume+"/"+issue.issue;
+});
+
 
 Template.registerHelper('urlToJournal', function (title) {
     var article = Articles.findOne({title: title});
