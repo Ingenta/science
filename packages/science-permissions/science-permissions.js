@@ -15,7 +15,13 @@ _.extend(Permissions, {
 	},
 	space2dash  : function (str) {
 		str = str.trim();
-		return str.replace(/\s+/g, '-')
+		return str.replace(/\s+/g, '-').toLowerCase();
+	},
+	getPermissionsByCode : function(code){
+		return Permissions.getPermissionsDescriptions()[code];
+	},
+	getRoleDescByCode:function(code){
+		return Permissions.getRolesDescriptions()[code];
 	}
 });
 
