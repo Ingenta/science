@@ -43,17 +43,14 @@ Template.articleListRight.helpers({
             var journalId = Session.get('currentJournalId');
             //return Articles.find({journalId: journalId}, {sort: {issue: -1}}); this shows all articles, uncomment for testing, below only shows latest issue as AIP
             var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
-            if(lastIssue) Session.set("currIssue", lastIssue._id);
+            if (lastIssue) Session.set("currIssue", lastIssue._id);
         }
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currIssue");
-        if (!curIssue) {
-            return "latest issue";
-        }
-        else {
+        if (curIssue) {
             var i = Issues.findOne({_id: curIssue});
-            var title = "Volume " + i.volume + ", Issue " + i.issue + ", " + i.year + "/" + i.month;
+            var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;
             return title;
         }
 

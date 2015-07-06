@@ -353,7 +353,9 @@ Router.map(function () {
         template: "ShowJournal",
         name: "journal.name.volume",
         parent: "journal.name",
-        //title: "Volume " + this.params.volume + " Issue " + this.params.issue,
+        title: function () {
+            return TAPi18n.__("volumeItem", 1) + ", " + TAPi18n.__("issueItem", 1)
+        },
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
@@ -380,7 +382,7 @@ Router.map(function () {
         },
         template: "showArticle",
         title: ":articleName",
-        parent: "journal.name",
+        parent: "journal.name.volume",
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
