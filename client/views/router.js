@@ -370,18 +370,20 @@ Router.map(function () {
 
     });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue/:articleName', {
+    this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue/:publisherDoi/:articleDoi', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             var journal = Publications.findOne({title: this.params.journalTitle});
             if (pub) {
                 Session.set('currPublication', journal._id);
                 Session.set('currentPublisher', pub._id);
-                return Articles.findOne({title: this.params.articleName});
+                return Articles.findOne({doi: this.params.publisherDoi+"/"+this.params.articleDoi});
             }
         },
         template: "showArticle",
-        title: ":articleName",
+        title: function () {
+            return TAPi18n.__("Article");
+        },
         parent: "journal.name.volume",
         waitOn: function () {
             return [
@@ -389,10 +391,12 @@ Router.map(function () {
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articleViews'),
+                Meteor.subscribe('issues'),
                 Meteor.subscribe('articles')
             ]
         }
     });
+
 
     this.route("testTemplate", {
         path: "/testTemplate"
