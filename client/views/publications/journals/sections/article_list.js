@@ -30,6 +30,7 @@ Template.articleListTree.events({
 
 Template.articleListRight.helpers({
     resetArticlesFilter: function () {
+        //Only reset session if volume and issue aren't set
         if (!Router.current().params.volume)
             if (!Router.current().params.issue)
                 Session.set("currIssue", undefined);
@@ -40,9 +41,9 @@ Template.articleListRight.helpers({
             return Articles.find({issueId: curIssue}, {sort: {title: 1}});
         } else {
             var journalId = Session.get('currentJournalId');
-            return Articles.find({journalId: journalId}, {sort: {issue: -1}});
-            //var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
-            //lastIssue && Session.set("currIssue", lastIssue._id) && (curIssue = lastIssue._id);
+            //return Articles.find({journalId: journalId}, {sort: {issue: -1}}); this shows all articles, uncomment for testing, below only shows latest issue as AIP
+            var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
+            if(lastIssue) Session.set("currIssue", lastIssue._id);
         }
     },
     getIssueTitle: function () {
