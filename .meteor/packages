@@ -21,7 +21,6 @@ rajit:bootstrap3-datepicker
 tap:i18n
 tap:i18n-ui
 aldeed:autoform
-perak:user-roles
 aldeed:collection2
 mrt:flash-messages
 gwendall:autoform-i18n
@@ -52,3 +51,4 @@ mizzao:user-status
 msavin:mongol
 science-permissions
 meteorhacks:aggregate
+orbit:permissions

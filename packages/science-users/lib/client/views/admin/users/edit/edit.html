@@ -56,24 +56,7 @@
 					{{_ "Role"}}
 				</label>
 				<div class="input-div">
-					<div class="radio">
-						<label>
-							<input type="checkbox" value="user" name="roles" data-type="array" {{itemIsChecked admin_user.roles "user"}}>
-							{{_ "User"}}
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="checkbox" value="admin" name="roles" data-type="array" {{itemIsChecked admin_user.roles "admin"}}>
-							{{_ "Admin"}}
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="checkbox" value="blocked" name="roles" data-type="array" {{itemIsChecked admin_user.roles "blocked"}}>
-							{{_ "Blocked"}}
-						</label>
-					</div>
+					{{> userEditRoles}}
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
@@ -96,3 +79,13 @@
 	</div>
 </template>
 
+<template name="userEditRoles">
+	{{#each usersRoles}}
+		<div class="radio">
+			<label>
+				<input type="checkbox" value="{{this}}" name="roles" data-type="array" {{itemIsChecked}}>
+				{{this}}
+			</label>
+		</div>
+	{{/each}}
+</template>
