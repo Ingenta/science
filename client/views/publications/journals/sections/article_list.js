@@ -30,7 +30,9 @@ Template.articleListTree.events({
 
 Template.articleListRight.helpers({
     resetArticlesFilter: function () {
-        Session.set("currIssue", undefined);
+        if (!Router.current().params.volume)
+            if (!Router.current().params.issue)
+                Session.set("currIssue", undefined);
     },
     articles: function () {
         var curIssue = Session.get("currIssue");
