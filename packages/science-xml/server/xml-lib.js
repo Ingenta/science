@@ -120,5 +120,5 @@ ScienceXML.getDateFromHistory = function (type, doc) {
     var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
     var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
     if (!day || !month || !year)return;
-    return {day: day, month: month, year: year};
+    return new Date(Date.parse(year + '/ ' +month + '/'+day));
 }
