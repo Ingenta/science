@@ -136,5 +136,8 @@ Template.userEditRoles.helpers({
 			return cu.indexOf(this.toString()) > -1 ? "checked" : "";
 		}
 		return "";
+	},
+	"i18nName":function(){
+		return Permissions.getRoleDescByCode(this).name;
 	}
 });

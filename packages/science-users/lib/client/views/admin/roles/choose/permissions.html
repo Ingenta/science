@@ -14,7 +14,7 @@
 <template name="AdminRolesChooseForm">
 	<div class="">
 		<h2 id="component-title">
-			Choose permissions
+			{{_ 'choosePermissions'}}
 		</h2>
 		{{#with currRole}}
 			<form id="form" role="form">
@@ -23,15 +23,15 @@
 					<ul class="list-unstyled">
 						<li>
 							<input type="checkbox" name="permiss" value="permissions:get-users-roles"
-							       class="perm-li" {{isUserHasThisPerm "permissions:get-users-roles"}}/> 查看角色列表
+							       class="perm-li" {{isUserHasThisPerm "permissions:get-users-roles"}}/> {{_ "permissions-get-users-roles"}}
 						</li>
 						<li>
 							<input type="checkbox" name="permiss" value="permissions:edit-custom-roles"
-							       class="perm-li" {{isUserHasThisPerm "permissions:edit-custom-roles"}}/> 编辑自定义角色
+							       class="perm-li" {{isUserHasThisPerm "permissions:edit-custom-roles"}}/> {{_ "permissions-edit-custom-roles"}}
 						</li>
 						<li>
 							<input type="checkbox" name="permiss" value="permissions:delegate-and-revoke"
-							       class="perm-li" {{isUserHasThisPerm "permissions:delegate-and-revoke"}}/> 权限设置
+							       class="perm-li" {{isUserHasThisPerm "permissions:delegate-and-revoke"}}/> {{_ "permissions-delegate-and-revoke"}}
 						</li>
 					</ul>
 
@@ -65,7 +65,7 @@
 		{{#each pkgPermissionsGroup}}
 			<li>
 				<input type="checkbox" name="permiss" class="perm-li"
-				       value="{{this}}" {{isUserHasThisPerm this}}/> {{this}}
+				       value="{{this}}" {{isUserHasThisPerm this}}/> {{geti18nName this}}
 			</li>
 		{{/each}}
 	</ul>

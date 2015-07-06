@@ -44,13 +44,17 @@ Meteor.startup(function(){
     Router.route("admin.roles", {
         path: "/admin/roles",
         controller: "AdminRolesController",
-        title:function(){return "roles"},
+        title:function(){
+            return TAPi18n.__("roles");
+        },
         parent: "home_private"
     });
     Router.route("admin.roles.insert", {
         path: "/admin/roles/insert",
         controller: "AdminRolesInsertController",
-        title:function(){return "insert"},
+        title:function(){
+            return TAPi18n.__("newRole");
+        },
         parent: "admin.roles"
     });
     Router.route("admin.roles.update", {
@@ -68,7 +72,9 @@ Meteor.startup(function(){
         yieldTemplates: {
             'AdminChoosePermissions': { to: 'AdminSubcontent'}
         },
-        title:function(){return "choose"},
+        title:function(){
+            return TAPi18n.__("choosePermissions");
+        },
         parent:"admin.roles"
     });
     Router.route("admin.upload", {
