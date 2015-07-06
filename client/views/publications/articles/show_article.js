@@ -91,4 +91,12 @@ Template.showArticle.events({
             action: "pdfDownload"
         })
     }
-})
+});
+
+Template.articlePage.helpers({
+    dois: function () {
+        var currentTitle = Router.current().params.articleName;
+        console.info();
+        return Articles.findOne({title: currentTitle});
+    }
+});
