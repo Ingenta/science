@@ -26,6 +26,8 @@ Meteor.subscribe('pages');
 
 Meteor.subscribe('news');
 
+Meteor.subscribe('images');
+
 //Meteor.subscribe('articleViews');
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
