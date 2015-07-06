@@ -3,32 +3,35 @@ ReactiveTabs.createInterface({
     onChange: function (slug, template) {
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                var currentTitle = Router.current().params.articleName;
-                var articleId = Articles.findOne({title: currentTitle})._id;
-                ArticleViews.insert({
-                    articleId: articleId,
-                    userId: Meteor.userId(),
-                    when: new Date(),
-                    action: "abstract",
-                    ip: session
-                });
+                var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+                var article = Articles.findOne({doi: currentDoi});
+                if (article) {
+                    ArticleViews.insert({
+                        articleId: article._id,
+                        userId: Meteor.userId(),
+                        when: new Date(),
+                        action: "abstract",
+                        ip: session
+                    });
+                }
             });
         } else if (slug === 'full text') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                var currentTitle = Router.current().params.articleName;
-                var articleId = Articles.findOne({title: currentTitle})._id;
-                ArticleViews.insert({
-                    articleId: articleId,
-                    userId: Meteor.userId(),
-                    when: new Date(),
-                    action: "fulltext",
-                    ip: session
-                });
+                var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+                var article = Articles.findOne({doi: currentDoi});
+                if (!article) {
+                    ArticleViews.insert({
+                        articleId: article._id,
+                        userId: Meteor.userId(),
+                        when: new Date(),
+                        action: "fulltext",
+                        ip: session
+                    });
+                }
             });
         }
     }
-})
-;
+});
 
 Template.showArticle.onRendered(function () {
     var rva = Session.get("recentViewedArticles");
@@ -61,8 +64,8 @@ Template.showArticle.helpers({
 
 Template.articleOptions.helpers({
     context: function () {
-        var currentTitle = Router.current().params.articleName;
-        return Articles.findOne({title: currentTitle});
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        return Articles.findOne({doi: currentDoi});
     }
 });
 
