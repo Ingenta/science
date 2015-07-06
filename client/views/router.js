@@ -284,7 +284,7 @@ Router.map(function () {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             if (pub) {
-                Session.set('currentPublisher', pub._id);
+                Session.set('currentPublisherId', pub._id);
                 return pub;
             }
 
@@ -293,7 +293,7 @@ Router.map(function () {
         parent: "publishers",
         title: function () {
             if (TAPi18n.getLanguage() === "en") return ":publisherName";
-            var id = Session.get('currentPublisher');
+            var id = Session.get('currentPublisherId');
             var p = Publishers.findOne({_id: id});
             if (!p) return p.name;
             return p.chinesename;
@@ -313,8 +313,8 @@ Router.map(function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             var journal = Publications.findOne({title: this.params.journalTitle});
             if (journal) {
-                Session.set('currPublication', journal._id);
-                Session.set('currentPublisher', pub._id);
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
                 return journal;
             }
         },
@@ -345,8 +345,8 @@ Router.map(function () {
                 if (i !== undefined) {
                     Session.set("currIssue", i._id);
                 }
-                Session.set('currPublication', journal._id);
-                Session.set('currentPublisher', pub._id);
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
                 return journal;
             }
         },
@@ -375,9 +375,9 @@ Router.map(function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             var journal = Publications.findOne({title: this.params.journalTitle});
             if (pub) {
-                Session.set('currPublication', journal._id);
-                Session.set('currentPublisher', pub._id);
-                return Articles.findOne({doi: this.params.publisherDoi+"/"+this.params.articleDoi});
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
             }
         },
         template: "showArticle",

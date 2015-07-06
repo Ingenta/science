@@ -5,7 +5,7 @@ AutoForm.addHooks(['addAboutTitleModalForm'], {
     },
     before: {
         insert: function (doc) {
-            doc.publications = Session.get('currPublication');
+            doc.publications = Session.get('currentJournalId');
             return doc;
         }
     }
@@ -13,7 +13,7 @@ AutoForm.addHooks(['addAboutTitleModalForm'], {
 
 Template.AboutTitle.helpers({
     about: function () {
-        var publicationsId = Session.get('currPublication');
+        var publicationsId = Session.get('currentJournalId');
         return About.find({publications: publicationsId});
     }
 });
