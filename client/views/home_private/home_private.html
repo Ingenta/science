@@ -3,6 +3,11 @@
         <hr>
         {{> addNewsForm}}
         {{> NewsList}}
+            {{#if isAdmin }}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
+                    {{_ "Add new"}}
+                </button>
+            {{/if}}
         <br/>
         {{> recentArticles}}
         {{> HomePublicContent}}
@@ -23,15 +28,9 @@
                 <!-- 轮播（Carousel）项目 -->
                 <div class="carousel-inner">
                     {{#each news}}
-                    {{#unless index}}
-                    <div class="item active">
-                        <img src="{{getImageHelper picture}}" width="330">
-                    </div>
-                    {{else}}
                     <div class="item">
                         <img src="{{getImageHelper picture}}" width="330">
                     </div>
-                    {{/unless}}
                     {{/each}}
                 </div>
             </div>
@@ -49,11 +48,13 @@
 </template>
 
 <template name="SingleNews">
-    <div class="row index" index="{{index}}">
+    <div class="row index index-num" index="{{index}}">
         <div class="pull-right">
             {{#if isAdmin }}
             {{> updateNewsModalForm}}
-            {{> deleteNewsModalForm}}
+            {{#if hasMoreThanOneNews}}
+              {{> deleteNewsModalForm}}
+            {{/if}}
             {{/if}}
         </div>
         <div class="row">
@@ -89,6 +90,7 @@
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="description"}}
+                    {{> afQuickField name="url"}}
                     {{> afQuickField name="picture"}}
                 </div>
                 <div class="modal-footer">

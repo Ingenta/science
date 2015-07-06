@@ -24,6 +24,8 @@ Meteor.subscribe('uploadLog');
 
 Meteor.subscribe('pages');
 
+Meteor.subscribe('news');
+
 //Meteor.subscribe('articleViews');
 
 var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
