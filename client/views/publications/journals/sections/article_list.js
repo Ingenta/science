@@ -23,7 +23,7 @@ Template.articleListTree.events({
     },
     "click .issue": function (event) {
         var issue = $(event.target).data().value;
-        issue && Session.set("currIssue", issue);
+        issue && Session.set("currentIssueId", issue);
     }
 });
 
@@ -33,21 +33,21 @@ Template.articleListRight.helpers({
         //Only reset session if volume and issue aren't set
         if (!Router.current().params.volume)
             if (!Router.current().params.issue)
-                Session.set("currIssue", undefined);
+                Session.set("currentIssueId", undefined);
     },
     articles: function () {
-        var curIssue = Session.get("currIssue");
+        var curIssue = Session.get("currentIssueId");
         if (curIssue) {
             return Articles.find({issueId: curIssue}, {sort: {title: 1}});
         } else {
             var journalId = Session.get('currentJournalId');
             //return Articles.find({journalId: journalId}, {sort: {issue: -1}}); this shows all articles, uncomment for testing, below only shows latest issue as AIP
             var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
-            if (lastIssue) Session.set("currIssue", lastIssue._id);
+            if (lastIssue) Session.set("currentIssueId", lastIssue._id);
         }
     },
     getIssueTitle: function () {
-        var curIssue = Session.get("currIssue");
+        var curIssue = Session.get("currentIssueId");
         if (curIssue) {
             var i = Issues.findOne({_id: curIssue});
             var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;

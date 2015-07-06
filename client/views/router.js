@@ -343,7 +343,7 @@ Router.map(function () {
             if (journal) {
                 var i = Issues.findOne({journalId: journal._id, volume: this.params.volume, issue: this.params.issue});
                 if (i !== undefined) {
-                    Session.set("currIssue", i._id);
+                    Session.set("currentIssueId", i._id);
                 }
                 Session.set('currentJournalId', journal._id);
                 Session.set('currentPublisherId', pub._id);
