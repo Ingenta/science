@@ -1,7 +1,7 @@
 <template name="JournalOverview">
     {{> journalSummary}}
     <hr>
-    {{> latestArticles}}
+    {{> latestUploadedArticles}}
     {{> recentlyViewedArticles}}
 </template>
 
@@ -14,6 +14,7 @@
                 {{/if}}
             </div>
             <img src="{{getImageHelper picture}}" width="100" height="142"/>
+
             <p>ISSN: {{issn}}</p>
         </div>
         <div class="col-xs-9">
@@ -29,11 +30,11 @@
     </div>
 </template>
 
-<template name="latestArticles">
+<template name="latestUploadedArticles">
     <div class="row">
         <div class="col-xs-12">
             <h4>{{_ "Latest Articles"}}</h4>
-            {{#each newestArticles}}
+            {{#each latestArticles}}
                 <h5><a href={{urlToArticle title}}>{{title}}</a></h5>
             {{else}}
                 {{_ "No articles found!"}}
@@ -44,15 +45,17 @@
 </template>
 
 <template name="recentlyViewedArticles">
-    <div class="row">
-        <div class="col-xs-12">
-            <h4>{{_ "Recently Viewed Articles"}}</h4>
-            {{#each recentArticles}}
-                <h5><a href={{urlToArticle title}}>{{title}}</a></h5>
-            {{else}}
-                {{_ "No articles found!"}}
-            {{/each}}
-            <br/>
+    {{#if recentArticles}}
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>{{_ "Recently Viewed Articles"}}</h4>
+                {{#each recentArticles}}
+                    <h5><a href={{urlToArticle title}}>{{title}}</a></h5>
+                {{else}}
+                    {{_ "No articles found!"}}
+                {{/each}}
+                <br/>
+            </div>
         </div>
-    </div>
+    {{/if}}
 </template>
