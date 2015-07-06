@@ -3,7 +3,6 @@
  */
 Template.i18nLabel.helpers({
     label: function () {
-        debugger
         var i18n=PTi18n.findOne({code:Template.currentData().code}) || {code:Template.currentData().code,en:'not found',cn:'未设置'};
 
         return i18n;

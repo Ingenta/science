@@ -14,6 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use('underscore');
   api.use('orbit:permissions');
+  api.addFiles('publication.js',['server']);
   api.addFiles('science-permissions.js',['server','client']);
   api.addFiles('group/user.js',['server','client']);
 

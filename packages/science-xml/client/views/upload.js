@@ -45,6 +45,7 @@ Template.UploadLogModal.helpers({
 Template.uploadTableRow.events({
     "click .btn": function (e) {
         //get this item in the table
+//        debugger;
         Session.set('errors', undefined);
         Session.set("result", undefined);
         var button = $(e.target) // Button that triggered the modal

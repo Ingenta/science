@@ -2,7 +2,12 @@ ScienceXML = {};
 ScienceXML.getLocationAsync = function (path, cb) {
     cb && cb(null, HTTP.get(path).content);
 }
-
+ScienceXML.getFileContentsFromFullPath = function (path) {
+    var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
+    //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+    if (path === undefined)return;
+    return getLocationSync(path);
+}
 ScienceXML.getFileContentsFromPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
     //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
