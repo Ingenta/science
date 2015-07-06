@@ -81,9 +81,11 @@ Template.AdminUsersEditEditForm.events({
 
 			},
 			function(values) {
-				
-
+				var roles=values.roles;
+				delete values.roles;
 				Meteor.call("updateUserAccount", t.data.admin_user._id, values, function(e) { if(e) errorAction(e.message); else submitAction(); });
+				Permissions.revoke(t.data.admin_user._id,Object.keys(Permissions.getRoles()));
+				Permissions.delegate(t.data.admin_user._id,roles,function(err){if(err){console.log(err);}});
 			}
 		);
 
@@ -118,4 +120,21 @@ Template.AdminUsersEditEditForm.helpers({
 		return pageSession.get("adminUsersEditEditFormErrorMessage");
 	}
 	
+});
+
+Template.userEditRoles.helpers({
+	"usersRoles"   : function () {
+		var user = Meteor.users.findOne({_id: Router.current().params.userId});
+		Session.set("curUser", user);
+		var pr   = Permissions.getRoles();
+		return Object.keys(pr);
+	},
+	"itemIsChecked": function () {
+		var cu = Session.get("curUser").orbit_roles;
+
+		if (cu) {
+			return cu.indexOf(this.toString()) > -1 ? "checked" : "";
+		}
+		return "";
+	}
 });
