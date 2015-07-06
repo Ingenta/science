@@ -1,4 +1,11 @@
 <template name="JournalOverview">
+    {{> journalSummary}}
+    <hr>
+    {{> latestArticles}}
+    {{> recentlyViewedArticles}}
+</template>
+
+<template name="journalSummary">
     <div class="row">
         <div class="col-xs-3">
             <div class="pull-right">
@@ -19,9 +26,6 @@
             </div>
         </div>
     </div>
-    <hr>
-    {{> latestArticles}}
-    {{> recentlyViewedArticles}}
 </template>
 
 <template name="latestArticles">
