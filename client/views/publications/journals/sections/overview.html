@@ -13,8 +13,25 @@
                     {{> updatePublicationPictureModalForm}}
                 {{/if}}
             </div>
+<template name="JournalOverview">
+    {{> journalSummary}}
+    <hr>
+    {{> latestUploadedArticles}}
+    {{> recentlyViewedArticles}}
+</template>
+
+<template name="journalSummary">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="pull-right">
+                {{#if isAdmin }}
+                    {{> updatePublicationPictureModalForm}}
+                {{/if}}
+            </div>
+
             <p><img src="{{getImageHelper picture}}" width="137" height="200"/></p>
-            <p>ISSN: {{issn}}</p>
+
+            <p>ISSN: {{issnFormat issn}}</p>
             <p>CN: 11-1784/N</p>
             <p>E-ISSN: 2095-9419</p>
         </div>

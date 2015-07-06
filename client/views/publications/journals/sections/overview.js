@@ -20,3 +20,11 @@ Template.recentlyViewedArticles.helpers({
         return recentViewedArticles;
     }
 });
+
+Template.journalSummary.helpers({
+   issnFormat: function (issn) {
+       if(!issn) return;
+       if(issn.length !== 8) return issn;
+       return issn.substr(0,4) + "-" + issn.substr(4,4);
+   }
+});
