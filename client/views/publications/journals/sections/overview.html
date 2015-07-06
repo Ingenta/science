@@ -13,12 +13,29 @@
                     {{> updatePublicationPictureModalForm}}
                 {{/if}}
             </div>
-            <img src="{{getImageHelper picture}}" width="100" height="142"/>
-
+            <p><img src="{{getImageHelper picture}}" width="137" height="200"/></p>
             <p>ISSN: {{issn}}</p>
+            <p>CN: 11-1784/N</p>
+            <p>E-ISSN: 2095-9419</p>
         </div>
         <div class="col-xs-9">
             <div class="row">
+                <h4>{{title}}</h4>
+                <div class="dotted">
+                    <div class="col-xs-6">
+                        <p>{{_ "Manager"}}:</p>
+                        <p>{{_ "Publisher"}}:</p>
+                        <p>{{_ "Period"}}: {{_ "Fortnightly"}}</p>
+                        <p>{{_ "Editor"}}:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p>{{_ "Co-ordinator"}}:</p>
+                        <p>{{_ "Classification"}}:</p>
+                        <p>{{_ "Language"}}: {{_ "English"}}</p>
+                        <p>{{_ "Release Date"}}: 2014-11-12</p>
+                    </div>
+                </div>
+                <h5>{{_ "Description"}}</h5>
                 <div class="pull-right">
                     {{#if isAdmin }}
                         {{> updatePublicationDescriptionModalForm}}
