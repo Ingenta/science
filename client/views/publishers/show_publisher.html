@@ -91,7 +91,7 @@
 
 
 <template name="updatePublicationModalForm">
-    {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher" buttonContent=getUpdateButtonContent}}
+    {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher, issn" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 <template name="deletePublicationModalForm">
@@ -126,8 +126,9 @@
                 {{#autoForm id="addPublicationModalForm" collection="Publications" type="insert"}}
                     <div class="modal-body">
                         {{> afQuickField name="title"}}
-                        {{> afQuickField name="description"}}
                         {{> afQuickField name="shortTitle"}}
+                        {{> afQuickField name="issn"}}
+                        {{> afQuickField name="description"}}
                         {{> afQuickField name="accessKey"}}
                         {{> afQuickField name="picture"}}
                         {{> afQuickField name="banner"}}
