@@ -255,3 +255,12 @@ Template.AdminUsersViewTableItems.events({
 		return false;
 	}
 });
+
+Template.AdminUsersViewTableItems.helpers({
+	"geti18nName":function(code){
+		if(!code){
+			return "";
+		}
+		return Permissions.getRoleDescByCode(code).name;
+	}
+})

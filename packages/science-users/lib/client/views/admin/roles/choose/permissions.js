@@ -28,6 +28,9 @@ Template.singleGroup.helpers({
 	},
 	"isUserHasThisPerm"  : function (permName) {
 		return Session.get("currRole").permissions.indexOf(permName) > -1 ? "checked" : "";
+	},
+	"geti18nName":  function(permCode){
+		return Permissions.getPermissionsByCode(permCode).name;
 	}
 });
 

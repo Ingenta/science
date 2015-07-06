@@ -59,9 +59,17 @@ Template.CustomRoleView.helpers({
         return Permissions.getCustomRoles2();
     },
     "name":function(){
-        return this.description.en.name;
+        if (TAPi18n.getLanguage() === "zh-CN"){
+            return this.description.cn.name;
+        }else{
+            return this.description.en.name;
+        }
     },
     "summary":function(){
-        return this.description.en.summary;
+        if (TAPi18n.getLanguage() === "zh-CN"){
+            return this.description.cn.summary;
+        }else{
+            return this.description.en.summary;
+        }
     }
 });

@@ -292,8 +292,19 @@
             }
         }
     },
-
-    "roleName": "角色名称",
-    "add new role": "新建角色",
-    "edit role": "修改角色"
+    "roles": "角色",
+    "roleName": "角色名",
+    "roleSummary": "描述",
+    "choosePermissions": "设置权限",
+    "newRole": "增加角色",
+    "deleteRole": "删除角色",
+    "roleNameEN": "英文名称",
+    "roleSummaryEN": "英文描述",
+    "roleNameCN": "中文名称",
+    "roleSummaryCN": "中文描述",
+    "addNewRole": "增加角色",
+    "editRole": "编辑角色",
+    "permissions-get-users-roles": "查看角色列表",
+    "permissions-edit-custom-roles": "设置自定义角色",
+    "permissions-delegate-and-revoke": "设置用户角色"
 }
