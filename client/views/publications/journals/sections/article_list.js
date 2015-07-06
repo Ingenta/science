@@ -30,7 +30,7 @@ Template.articleListTree.events({
 
 Template.articleListRight.helpers({
     resetArticlesFilter: function () {
-      Session.set("currIssue", undefined);
+        Session.set("currIssue", undefined);
     },
     articles: function () {
         var curIssue = Session.get("currIssue");
@@ -42,6 +42,18 @@ Template.articleListRight.helpers({
             //var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
             //lastIssue && Session.set("currIssue", lastIssue._id) && (curIssue = lastIssue._id);
         }
+    },
+    getIssueTitle: function () {
+        var curIssue = Session.get("currIssue");
+        if (!curIssue) {
+            return "latest issue";
+        }
+        else {
+            var i = Issues.findOne({_id: curIssue});
+            var title = "Volume " + i.volume + ", Issue " + i.issue + ", " + i.year + "/" + i.month;
+            return title;
+        }
+
     }
 });
 
