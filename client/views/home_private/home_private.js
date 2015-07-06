@@ -14,9 +14,27 @@ Template.HomePrivate.helpers({});
 
 Template.NewsList.helpers({
     news: function () {
-        return News.find();
+        return News.find({}, {limit: 3});
     }
 });
+
+Template.NewsList.onRendered(function(){
+    var nums =  $(".index-num");
+    _.each(nums,function(item,index){
+        $(item).attr('index',index);
+    });
+    var item = $(".carousel-inner .item");
+    if(item && item.length){
+        $(item[0]).addClass('active');
+    }
+});
+
+Template.SingleNews.helpers({
+    hasMoreThanOneNews: function () {
+        return News.find().count() > 1;
+    }
+});
+
 
 Template.deleteNewsModalForm.helpers({
     getPrompt: function () {
@@ -43,3 +61,16 @@ Template.recentArticles.helpers({
         return resultArray;
     }
 });
+
+AutoForm.addHooks(['addNewsModalForm'], {
+    onSuccess: function () {
+        $("#addNewsModal").modal('hide');
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    }
+}, true);
+
+AutoForm.addHooks(['cmForm'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    }
+}, true);

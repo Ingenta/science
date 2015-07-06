@@ -24,7 +24,9 @@ Meteor.subscribe('uploadLog');
 
 Meteor.subscribe('pages');
 
-Meteor.subscribe('images')
+Meteor.subscribe('news');
+
+Meteor.subscribe('images');
 
 //Meteor.subscribe('articleViews');
 
