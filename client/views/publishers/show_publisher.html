@@ -59,6 +59,7 @@
         {{_"No publications found!"}}
     {{/each}}
     {{> Paginator_UI publications}}
+    <span style="float:right">{{_"Show perPage"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
 </template>
 
 <template name="SinglePublication">
@@ -90,7 +91,7 @@
 
 
 <template name="updatePublicationModalForm">
-    {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher" buttonContent=getUpdateButtonContent}}
+    {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher, issn" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 <template name="deletePublicationModalForm">
@@ -125,8 +126,9 @@
                 {{#autoForm id="addPublicationModalForm" collection="Publications" type="insert"}}
                     <div class="modal-body">
                         {{> afQuickField name="title"}}
-                        {{> afQuickField name="description"}}
                         {{> afQuickField name="shortTitle"}}
+                        {{> afQuickField name="issn"}}
+                        {{> afQuickField name="description"}}
                         {{> afQuickField name="accessKey"}}
                         {{> afQuickField name="picture"}}
                         {{> afQuickField name="banner"}}

@@ -1,128 +1,147 @@
 {
-  "volumeItem": "Volume %s",
-  "issueItem": "Issue %s",
-  "Abstract Views": "阅读摘要",
-  "Full text Views": "阅读全文",
-  "PDF Downloads": "下载",
-  "moreContentBy": "More content by",
-  "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
-  "PleaseEmail": "Please enter valid e-mail address.",
-  "PleaseWait": "Please wait...",
-  "schemas": {
-    "publications": {
-      "description": {
-        "label": "Description"
-      },
-      "shortTitle": {
-        "label": "Short Title"
-      },
-      "title": {
-        "label": "Publication Name"
-      },
-      "accessKey": {
-        "label": "Choose an Access Key",
-        "options": {
-          "1": "Free Content",
-          "2": "Open Access Content",
-          "3": "Subscribed Content",
-          "4": "Free Trial Content"
+    "volumeItem": "Volume %s",
+    "issueItem": "Issue %s",
+    "Abstract Views": "阅读摘要",
+    "Full text Views": "阅读全文",
+    "PDF Downloads": "下载",
+    "moreContentBy": "More content by",
+    "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
+    "PleaseEmail": "Please enter valid e-mail address.",
+    "PleaseWait": "Please wait...",
+    "schemas": {
+        "publications": {
+            "description": {
+                "label": "Description"
+            },
+            "title": {
+                "label": "Publication Name"
+            },
+            "shortTitle": {
+                "label": "Short Title"
+            },
+            "issn": {
+                "label": "ISSN"
+            },
+            "accessKey": {
+                "label": "Choose an Access Key",
+                "options": {
+                    "1": "Free Content",
+                    "2": "Open Access Content",
+                    "3": "Subscribed Content",
+                    "4": "Free Trial Content"
+                }
+            },
+            "picture": {
+                "label": "Choose Image for Cover"
+            },
+            "banner": {
+                "label": "Choose Image for Banner"
+            },
+            "tabSelections": {
+                "label": "Choose tabs",
+                "options": {
+                    "Overview": "Overview",
+                    //                    "Browse": "Browse",
+                    "About": "About"
+                    //                    "Editorial Board": "Editorial Board",
+                    //                    "News": "News",
+                    //                    "Media": "Media",
+                    //                    "Special Topics": "Special Topics",
+                    //                    "Collections": "Collections",
+                    //                    "Accepted": "Accepted",
+                    //                    "Online First": "Online First",
+                    //                    "MOOP": "MOOP",
+                    //                    "Author": "Author"
+                }
+            }
+        },
+        "publishers": {
+            "description": {
+                "label": "Description"
+            },
+            "chinesedescription": {
+                "label": "Chinesedescription"
+            },
+            "name": {
+                "label": "Publisher Name"
+            },
+            "chinesename": {
+                "label": "Chinese Publisher Name"
+            },
+            "urlname": {
+                "label": "Abbreviation"
+            },
+            "website": {
+                "label": "Website",
+                "placeholder": "http://www.scitation.aip.org"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
+        },
+        "topics": {
+            "name": {
+                "label": "Chinese Name"
+            },
+            "englishName": {
+                "label": "English Name"
+            }
+        },
+        "articles": {
+            "title": {
+                "label": "Title"
+            }
+        },
+        "about": {
+            "title": {
+                "label": "English Title"
+            },
+            "chinesetitle": {
+                "label": "Chinese Title"
+            }
+        },
+        "aboutArticles": {
+            "title": {
+                "label": "English Title"
+            },
+            "chinesetitle": {
+                "label": "Chinese Title"
+            },
+            "description": {
+                "label": "English Description"
+            },
+            "chinesedescription": {
+                "label": "Chinese Description"
+            }
+        },
+        "news": {
+            "title": {
+                "label": "Title"
+            },
+            "description": {
+                "label": "Description"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
+        },
+        "pages": {
+            "titleCN": {
+                "label": "Chinese Title"
+            },
+            "descriptionCN": {
+                "label": "Chinese Description"
+            },
+            "titleEN": {
+                "label": "English Title"
+            },
+            "descriptionEN": {
+                "label": "English Description"
+            }
         }
-      },
-      "picture": {
-        "label": "Choose Image for Cover"
-      },
-      "banner": {
-        "label": "Choose Image for Banner"
-      },
-      "tabSelections": {
-        "options": {
-          "Overview": "Overview",
-          //                    "Browse": "Browse",
-          "About": "About"
-          //                    "Editorial Board": "Editorial Board",
-          //                    "News": "News",
-          //                    "Media": "Media",
-          //                    "Special Topics": "Special Topics",
-          //                    "Collections": "Collections",
-          //                    "Accepted": "Accepted",
-          //                    "Online First": "Online First",
-          //                    "MOOP": "MOOP",
-          //                    "Author": "Author"
-        }
-      }
     },
-    "publishers": {
-      "description": {
-        "label": "Description"
-      },
-      "chinesedescription": {
-        "label": "Chinesedescription"
-      },
-      "name": {
-        "label": "Publisher Name"
-      },
-      "chinesename": {
-        "label": "Chinese Publisher Name"
-      },
-      "urlname": {
-        "label": "Abbreviation"
-      },
-      "website": {
-        "label": "Website",
-        "placeholder": "http://www.scitation.aip.org"
-      },
-      "picture": {
-        "label": "Choose file"
-      }
-    },
-    "topics": {
-      "name": {
-        "label": "Chinese Name"
-      },
-      "englishName": {
-        "label": "English Name"
-      }
-    },
-    "articles": {
-      "title": {
-        "label": "Title"
-      }
-    }
-  },
-  "about": {
-    "title": {
-      "label": "English Title"
-    },
-    "chinesetitle": {
-      "label": "Chinese Title"
-    }
-  },
-  "aboutArticles": {
-    "title": {
-      "label": "English Title"
-    },
-    "chinesetitle": {
-      "label": "Chinese Title"
-    },
-    "description": {
-      "label": "English Description"
-    },
-    "chinesedescription": {
-      "label": "Chinese Description"
-    }
-  },
-  "news": {
-    "title": {
-      "label": "Title"
-    },
-    "description": {
-      "label": "Description"
-    },
-    "picture": {
-      "label": "Choose file"
-    }
-  },
-  "roleName": "Role name",
-  "add new role": "Add new role",
-  "edit role": "Edit role"
+
+    "roleName": "Role name",
+    "add new role": "Add new role",
+    "edit role": "Edit role"
 }

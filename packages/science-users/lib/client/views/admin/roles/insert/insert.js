@@ -1,27 +1,23 @@
 var pageSession = new ReactiveDict();
 
-Template.AdminRolesInsert.rendered = function() {
+Template.AdminRolesInsert.rendered = function () {
 
 };
 
-Template.AdminRolesInsert.events({
+Template.AdminRolesInsert.events({});
 
-});
+Template.AdminRolesInsert.helpers({});
 
-Template.AdminRolesInsert.helpers({
-
-});
-
-Template.AdminRolesInsertForm.rendered = function() {
+Template.AdminRolesInsertForm.rendered = function () {
 
 
 	pageSession.set("adminRolesInsertFormInfoMessage", "");
 	pageSession.set("adminRolesInsertFormErrorMessage", "");
 
-	$(".input-group.date").each(function() {
+	$(".input-group.date").each(function () {
 		var format = $(this).find("input[type='text']").attr("data-format");
 
-		if(format) {
+		if (format) {
 			format = format.toLowerCase();
 		}
 		else {
@@ -29,12 +25,12 @@ Template.AdminRolesInsertForm.rendered = function() {
 		}
 
 		$(this).datepicker({
-			autoclose: true,
-			todayHighlight: true,
-			todayBtn: true,
-			forceParse: false,
+			autoclose         : true,
+			todayHighlight    : true,
+			todayBtn          : true,
+			forceParse        : false,
 			keyboardNavigation: false,
-			format: format
+			format            : format
 		});
 	});
 
@@ -42,7 +38,7 @@ Template.AdminRolesInsertForm.rendered = function() {
 };
 
 Template.AdminRolesInsertForm.events({
-	"submit": function(e, t) {
+	"submit"                   : function (e, t) {
 		e.preventDefault();
 		pageSession.set("adminRolesInsertFormInfoMessage", "");
 		pageSession.set("adminRolesInsertFormErrorMessage", "");
@@ -51,16 +47,22 @@ Template.AdminRolesInsertForm.events({
 
 		function submitAction(msg) {
 			var adminRolesInsertFormMode = "insert";
-			if(!t.find("#form-cancel-button")) {
-				switch(adminRolesInsertFormMode) {
-					case "insert": {
+			if (!t.find("#form-cancel-button")) {
+				switch (adminRolesInsertFormMode) {
+					case "insert":
+					{
 						$(e.target)[0].reset();
-					}; break;
+					}
+						;
+						break;
 
-					case "update": {
+					case "update":
+					{
 						var message = msg || "Saved.";
 						pageSession.set("adminRolesInsertFormInfoMessage", message);
-					}; break;
+					}
+						;
+						break;
 				}
 			}
 
@@ -74,23 +76,28 @@ Template.AdminRolesInsertForm.events({
 
 		validateForm(
 			$(e.target),
-			function(fieldName, fieldValue) {
+			function (fieldName, fieldValue) {
 
 			},
-			function(msg) {
+			function (msg) {
 
 			},
-			function(values) {
-				var roleName=values.name;
-				if(roleName && roleName.trim()){
-					Permissions.defineCustomRole(Permissions.space2dash(values.name),[],{en:{name:roleName.trim(),summay:"you can see roles table"}},function(err,id){
-						if(err){
+			function (values) {
+				var roleName = values.name;
+				if (roleName && roleName.trim()) {
+					Permissions.defineCustomRole(Permissions.space2dash(values.name), [], {
+						en: {
+							name   : roleName.trim(),
+							summary: "you can see roles table"
+						}
+					}, function (err, id) {
+						if (err) {
 							errorAction(err);
-						}else{
+						} else {
 							submitAction("success")
 						}
 					});
-				}else{
+				} else {
 					errorAction('请填写角色名称');
 				}
 			}
@@ -98,19 +105,18 @@ Template.AdminRolesInsertForm.events({
 
 		return false;
 	},
-	"click #form-cancel-button": function(e, t) {
+	"click #form-cancel-button": function (e, t) {
 		e.preventDefault();
-
 
 
 		Router.go("admin.roles", {});
 	},
-	"click #form-close-button": function(e, t) {
+	"click #form-close-button" : function (e, t) {
 		e.preventDefault();
 
 		/*CLOSE_REDIRECT*/
 	},
-	"click #form-back-button": function(e, t) {
+	"click #form-back-button"  : function (e, t) {
 		e.preventDefault();
 
 		/*BACK_REDIRECT*/
@@ -120,10 +126,10 @@ Template.AdminRolesInsertForm.events({
 });
 
 Template.AdminRolesInsertForm.helpers({
-	"infoMessage": function() {
+	"infoMessage" : function () {
 		return pageSession.get("adminRolesInsertFormInfoMessage");
 	},
-	"errorMessage": function() {
+	"errorMessage": function () {
 		return pageSession.get("adminRolesInsertFormErrorMessage");
 	}
 

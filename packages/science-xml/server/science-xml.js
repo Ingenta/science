@@ -22,7 +22,7 @@ Meteor.methods({
 
         var doc = new dom().parseFromString(xml);
 
-        // GET DOI, TITLE, VOLUME, ISSUE, MONTH, YEAR, ISSN, ESSN
+        // GET DOI, TITLE, VOLUME, ISSUE, MONTH, YEAR, ISSN, ESSN, TOPIC
 
         var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
         if (doi === undefined) results.errors.push("No doi found");
@@ -48,16 +48,15 @@ Meteor.methods({
         if (year === undefined) results.errors.push("No year found");
         else results.year = year;
 
+        var topic = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subj-group/subject", doc);
+        if (topic === undefined) results.errors.push("No subject found");
+        else results.topic = topic;
+
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
         if (elocationId !== undefined) results.elocationId = elocationId
 
-
-        var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
-        if (issn !== undefined) results.issn = issn;
-
         var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
         if (essn !== undefined) results.essn = essn;
-
 
         //    CHECK IF EXISTING ARTICLE
         var existingArticle = Articles.findOne({doi: results.doi});
@@ -68,9 +67,18 @@ Meteor.methods({
         if (journalTitle === undefined) results.errors.push("No journal title found");
         else {
             results.journalTitle = journalTitle;
-            var journal = Publications.findOne({title: results.journalTitle});
-            if (journal === undefined) results.errors.push("No journal title found in the system with the name: " + results.journalTitle);
-            else results.journalId = journal._id;
+        }
+
+        var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
+        if (issn === undefined) {
+            results.errors.push("No issn found in xml");
+        } else {
+            results.issn = issn;
+            var journal = Publications.findOne({issn: issn});
+            if (journal === undefined) results.errors.push("No such issn found in journal collection: " + issn);
+            else {
+                results.journalId = journal._id;
+            }
         }
 
         var publisherName = ScienceXML.getSimpleValueByXPath("//publisher-name", doc);
@@ -95,7 +103,7 @@ Meteor.methods({
             }
             var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
             if (doi) {
-                results.references.push({ref: text, doi: doi});
+                results.references.push({ref: text.substr(0, text.indexOf(doi)), doi: doi});
             } else {
                 results.references.push({ref: text});
             }

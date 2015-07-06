@@ -255,9 +255,3 @@ Template.AdminUsersViewTableItems.events({
 		return false;
 	}
 });
-
-Template.AdminUsersViewTableItems.helpers({
-	
-
-	
-});
