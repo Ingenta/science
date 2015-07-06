@@ -294,8 +294,8 @@ Router.map(function () {
         title: function () {
             if (TAPi18n.getLanguage() === "en") return ":publisherName";
             var id = Session.get('currentPublisher');
-            var p =Publishers.findOne({_id: id});
-            if(!p) return p.name;
+            var p = Publishers.findOne({_id: id});
+            if (!p) return p.name;
             return p.chinesename;
         },
         name: "publisher.name",
@@ -335,7 +335,42 @@ Router.map(function () {
 
     });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle/article/:articleName', {
+    this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({title: this.params.journalTitle});
+            Session.set("activeTab", "Browse");
+            if (journal) {
+                var i = Issues.findOne({journalId: journal._id, volume: this.params.volume, issue: this.params.issue});
+                if (i !== undefined) {
+                    Session.set("currIssue", i._id);
+                }
+                Session.set('currPublication', journal._id);
+                Session.set('currentPublisher', pub._id);
+                return journal;
+            }
+        },
+        template: "ShowJournal",
+        name: "journal.name.volume",
+        parent: "journal.name",
+        title: function () {
+            return TAPi18n.__("volumeItem", 1) + ", " + TAPi18n.__("issueItem", 1)
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('about'),
+                Meteor.subscribe('about_articles')
+            ]
+        }
+
+    });
+
+    this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue/:articleName', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             var journal = Publications.findOne({title: this.params.journalTitle});
@@ -347,7 +382,7 @@ Router.map(function () {
         },
         template: "showArticle",
         title: ":articleName",
-        parent: "journal.name",
+        parent: "journal.name.volume",
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),

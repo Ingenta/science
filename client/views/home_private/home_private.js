@@ -9,12 +9,24 @@ Template.NewsList.events({
     }
 });
 
-Template.HomePrivate.helpers({});
+Template.HomePrivate.helpers({
+    hasMostThreeNews: function () {
+        return News.find().count() < 3;
+    }
+});
 
 
 Template.NewsList.helpers({
     news: function () {
-        return News.find({}, {limit: 3});
+        return News.find({}, {limit: 3}).map(function(newsItem, index) {
+            newsItem.index = index;
+            return newsItem;
+        });
+    },
+    addActiveClass: function(index) {
+        if(!index){
+            return "active";
+        }
     }
 });
 

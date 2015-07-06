@@ -4,9 +4,11 @@
         {{> addNewsForm}}
         {{> NewsList}}
             {{#if isAdmin }}
+            {{#if hasMostThreeNews}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
                     {{_ "Add new"}}
                 </button>
+            {{/if}}
             {{/if}}
         <br/>
         {{> recentArticles}}
@@ -21,9 +23,9 @@
             <div id="myCarousel" class="carousel slide">
                 <!-- 轮播（Carousel）指标 -->
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    {{#each news}}
+                    <li data-target="#myCarousel" data-slide-to="{{index}}" class="{{addActiveClass index}}"></li>
+                    {{/each}}
                 </ol>
                 <!-- 轮播（Carousel）项目 -->
                 <div class="carousel-inner">
