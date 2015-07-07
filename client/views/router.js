@@ -42,25 +42,8 @@ Router.onBeforeAction(function () {
 
 Router.map(function () {
 
-    this.route("home_public", {
-        path: "/",
-        controller: "HomePublicController",
-        title: function () {
-            return TAPi18n.__("Home");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
-                Meteor.subscribe('articleViews'),
-                Meteor.subscribe('images'),
-                Meteor.subscribe('news')
-            ]
-        }
-    });
-    this.route("home_private", {
-        path: "/home_private",
+    this.route("home", {
+        path: "/home",
         controller: "HomePrivateController",
         title: function () {
             return TAPi18n.__("Home");
@@ -77,7 +60,7 @@ Router.map(function () {
         }
     });
     this.route("topics", {
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Topics");
         },
@@ -102,7 +85,7 @@ Router.map(function () {
     });
 
     this.route("author", {
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Author");
         }
@@ -110,7 +93,7 @@ Router.map(function () {
 
     this.route('/author/:authorQuery', {
         template: "SearchResults",
-        parent: "home_private",
+        parent: "home",
         title: ":authorQuery",
         waitOn: function () {
             return [
@@ -122,13 +105,13 @@ Router.map(function () {
     });
 
     this.route("collections", {
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Collections");
         }
     });
     this.route("publications", {
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Publications");
         },
@@ -141,7 +124,7 @@ Router.map(function () {
         }
     });
     this.route("publishers", {
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Publishers");
         },
@@ -156,7 +139,7 @@ Router.map(function () {
 
     this.route('/s/:searchQuery', {
         template: "SearchResults",
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Search");
         },
