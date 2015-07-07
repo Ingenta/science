@@ -27,6 +27,20 @@ Meteor.startup(function () {
 });
 
 
+
+Users.before.insert(function(userId, doc) {
+    if(doc.emails && doc.emails[0] && doc.emails[0].address) {
+        doc.profile = doc.profile || {};
+        doc.profile.email = doc.emails[0].address;
+    }
+});
+
+Users.before.update(function(userId, doc, fieldNames, modifier, options) {
+    if(modifier.$set && modifier.$set.emails && modifier.$set.emails.length && modifier.$set.emails[0].address) {
+        modifier.$set.profile.email = modifier.$set.emails[0].address;
+    }
+});
+
 Accounts.urls.resetPassword = function (token) {
     return Meteor.absoluteUrl('reset_password/' + token);
 };
