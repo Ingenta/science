@@ -8,6 +8,7 @@ this.AdminUsersEditController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
+		Permissions.throwIfUserCant("modify-user","user",Meteor.userId());
 		/*BEFORE_FUNCTION*/
 		this.next();
 	},

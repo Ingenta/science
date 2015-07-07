@@ -32,6 +32,15 @@ if (Meteor.isClient) {
 				return Permissions.custom_roles.findOne({_id:id});
 			}
 			return Permissions.custom_roles.find();
+		},
+		updateRolesPermissions:function(roleName,perms){
+			try{
+				debugger
+				Permissions.custom_roles.update({_id:roleName},{$set:{permissions:perms}});
+				return true;
+			}catch(e){
+				throw e;
+			}
 		}
 	})
 }

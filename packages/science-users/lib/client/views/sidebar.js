@@ -1,5 +1,5 @@
 Template.LayoutSideBar.helpers({
 	canUseAdminPanel:function(){
-		return !!Permissions.getUserRoles();
+		return !!Permissions.getUserRoles().length;
 	}
 })
