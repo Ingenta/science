@@ -30,23 +30,27 @@ ReactiveTabs.createInterface({
 })
 ;
 
+var removeArticleFromArray = function (array,articleId) {
+    var temp = [];
+    while (array.length) {
+        var oneId = array.shift();
+        if (oneId._id != articleId) {
+            temp.push(oneId);
+        }
+    }
+    return temp;
+};
+
 Template.showArticle.onRendered(function () {
     var rva = Session.get("recentViewedArticles");
     if (!rva) {
         rva = [];
     } else if (_.findWhere(rva, {_id: this.data._id})) {
-        var temp = [];
-        while (rva.length) {
-            var oneId = rva.shift();
-            if (oneId._id != this.data._id) {
-                temp.push(oneId);
-            }
-        }
-        rva = temp;
+        rva = removeArticleFromArray(rva, this.data._id);
     } else if (rva.length == 3) {
         rva.pop();
     }
-    rva.unshift({_id: this.data._id});
+    rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
 });
 
