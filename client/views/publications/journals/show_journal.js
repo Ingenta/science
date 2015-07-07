@@ -19,7 +19,7 @@ Template.journalOptions.helpers({
 Template.ShowJournal.helpers({
     initPage: function (id, publisher) {
         Session.set('currentJournalId', id);
-        Session.set('currPublisher', publisher);
+        Session.set('currentPublisherId', publisher);
     }
 });
 Template.journalOptions.helpers({
