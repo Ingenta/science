@@ -16,6 +16,7 @@ Package.onUse(function(api) {
   api.use('orbit:permissions');
   api.addFiles('publication.js',['server']);
   api.addFiles('science-permissions.js',['server','client']);
+  api.addFiles('group/system.js',['server','client']);
   api.addFiles('group/user.js',['server','client']);
 
   api.export(["Permissions"]);

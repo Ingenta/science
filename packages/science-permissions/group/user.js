@@ -12,4 +12,4 @@ userPermissions
 // 定义预定义角色及其权限
 // registrar.defineRole(role_name, permissions, description) [anywhere]
 userPermissions
-	.defineRole("add-only-manager",["add-user"],{en:{name:"add user ",summary:"have add user permission only"},cn:{name:"添加用户",summary:"你能添加用户"}});
+	.defineRole("user-manager",["add-user","modify-user","delete-user","list-user","sys:admin-panel"],{en:{name:"user manager",summary:"manager for user"},cn:{name:"用户管理",summary:"可以增删改查用户的角色"}});
