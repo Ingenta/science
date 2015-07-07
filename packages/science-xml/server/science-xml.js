@@ -73,8 +73,8 @@ Meteor.methods({
         if (issn === undefined) {
             results.errors.push("No issn found in xml");
         } else {
-            results.issn = issn;
-            var journal = Publications.findOne({issn: issn});
+            results.issn = issn.replace("-","");
+            var journal = Publications.findOne({issn: results.issn});
             if (journal === undefined) results.errors.push("No such issn found in journal collection: " + issn);
             else {
                 results.journalId = journal._id;

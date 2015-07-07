@@ -1,0 +1,38 @@
+<template name="articleList">
+    {{> journalSummary}}
+    <hr>
+    <div class="row">
+        <div class="col-xs-4">
+            {{> articleListTree}}
+        </div>
+        <div class="col-xs-8">
+            {{> articleListRight}}
+        </div>
+    </div>
+</template>
+
+<template name="articleListTree">
+    <ul class="list-unstyled">
+        {{#each volumeList _id}}
+            <li class="volume"><span>+</span> {{_ "volumeItem" volume }}</li>
+            <div class="issues">
+                {{#each issueList journalId volume}}
+                    <div class="issue" data-value="{{_id}}">{{_ "issueItem" issue }}（{{year}}, {{month}}）</div>
+                {{/each}}
+            </div>
+        {{/each}}
+    </ul>
+</template>
+
+<template name="articleListRight">
+    <h4>{{getIssueTitle}}</h4>
+    <hr>
+    {{resetArticlesFilter}}
+    <ul class="article-list list-unstyled">
+        {{#each articles}}
+            {{> oneArticle}}
+        {{else}}
+            {{_ "No articles found!"}}
+        {{/each}}
+    </ul>
+</template>

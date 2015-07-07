@@ -4,10 +4,10 @@ Meteor.methods({
         console.dir(result);
         return result;
     },
-    'grabSessions': function (id) {
-        var c = UserStatus.connections.findOne({userId: id});
+    'grabSessions': function(id){
+        var c = UserStatus.connections.findOne({userId:id});
         return c.ipAddr;
-    },
+},
     'getMostRead': function () {
         var a = ArticleViews.aggregate([{
             $group: {

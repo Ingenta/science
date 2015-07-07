@@ -2,8 +2,7 @@ this.Publications = new Meteor.Collection("publications");
 
 PublicationsSchema = new SimpleSchema({
     title: {
-        type: String,
-        unique: true
+        type: String
     },
     shortTitle: {
         type: String,
@@ -11,7 +10,6 @@ PublicationsSchema = new SimpleSchema({
     },
     issn: {
         type: String,
-        unique: true,
         max: 9
     },
     accessKey: {

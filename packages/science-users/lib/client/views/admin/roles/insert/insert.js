@@ -83,12 +83,15 @@ Template.AdminRolesInsertForm.events({
 
 			},
 			function (values) {
-				var roleName = values.name;
-				if (roleName && roleName.trim()) {
-					Permissions.defineCustomRole(Permissions.space2dash(values.name), [], {
+				if (values.nameCN && values.nameCN.trim() && values.nameEN && values.nameEN.trim()) {
+					Permissions.defineCustomRole(Permissions.space2dash(values.nameEN), [], {
 						en: {
-							name   : roleName.trim(),
-							summary: "you can see roles table"
+							name   : values.nameEN.trim(),
+							summary: values.summaryEN
+						},
+						cn: {
+							name   : values.nameCN.trim(),
+							summary: values.summaryCN
 						}
 					}, function (err, id) {
 						if (err) {

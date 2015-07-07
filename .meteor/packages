@@ -21,7 +21,6 @@ rajit:bootstrap3-datepicker
 tap:i18n
 tap:i18n-ui
 aldeed:autoform
-perak:user-roles
 aldeed:collection2
 mrt:flash-messages
 gwendall:autoform-i18n
@@ -38,17 +37,17 @@ monbro:last-software-release-date
 rzymek:moment-locale-zh-cn
 monbro:mongodb-mapreduce-aggregation
 multiply:iron-router-progress
-test:paginator
+hitchcott:paginator
 arthuryyx:simple-schema-i18n
 lbee:moment-helpers
 http
 science-xml
 science-lib
 science-users
-science-roles
 ongoworks:security@1.1.0
 maazalik:highcharts
 mizzao:user-status
 msavin:mongol
 science-permissions
 meteorhacks:aggregate
+orbit:permissions

@@ -31,7 +31,7 @@ var AdminUsersViewItems = function(cursor) {
 	} else {
 		searchString = searchString.replace(".", "\\.");
 		var regEx = new RegExp(searchString, "i");
-		var searchFields = ["profile.name", "profile.email", "roles"];
+		var searchFields = ["profile.name", "profile.email", "orbit_roles"];
 		filtered = _.filter(raw, function(item) {
 			var match = false;
 			_.each(searchFields, function(field) {
@@ -255,3 +255,12 @@ Template.AdminUsersViewTableItems.events({
 		return false;
 	}
 });
+
+Template.AdminUsersViewTableItems.helpers({
+	"geti18nName":function(code){
+		if(!code){
+			return "";
+		}
+		return Permissions.getRoleDescByCode(code).name;
+	}
+})
