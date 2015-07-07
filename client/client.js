@@ -11,9 +11,9 @@ App.logout = function () {
 };
 
 this.menuItemClass = function (routeName) {
-    if (!routeGranted(routeName)) {
-        return "hidden";
-    }
+    //if (!routeGranted(routeName)) {
+    //    return "hidden";
+    //}
 
     if (!Router.current() || !Router.current().route) {
         return "";

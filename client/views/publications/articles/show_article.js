@@ -97,9 +97,28 @@ Template.showArticle.events({
 });
 
 Template.articlePage.helpers({
-    dois: function () {
+    previous: function () {
         var currentTitle = Router.current().params.articleName;
-        console.info();
-        return Articles.findOne({title: currentTitle});
+        var doi = Articles.findOne({title: currentTitle}).doi;
+        var str = doi.substring(doi.lastIndexOf("/") + 1);
+        var issueIds = Articles.findOne({title: currentTitle}).issueId;
+        var num = Articles.findOne({issueId: issueIds}).doi;
+        var str1 = num.substring(num.lastIndexOf("/") + 1);
+        if(str>str1){
+            return num;
+        }
+    },
+    next: function () {
+        var currentTitle = Router.current().params.articleName;
+        var doi = Articles.findOne({title: currentTitle}).doi;
+        var str = doi.substring(doi.lastIndexOf("/") + 1);
+        var issueIds = Articles.findOne({title: currentTitle}).issueId;
+        var num = Articles.findOne({issueId: issueIds}).doi;
+        console.info(issueIds);
+        console.info(num);
+        var str1 = num.substring(num.lastIndexOf("/") + 1);
+        if(str<str1){
+            return num;
+        }
     }
 });
