@@ -34,7 +34,6 @@ Meteor.methods({
         if(options.profile) userOptions.profile = options.profile;
 
         if(options.profile && options.profile.email) userOptions.email = options.profile.email;
-        if(options.roles) userOptions.roles = options.roles;
 
         if(userOptions.email) {
             var email = userOptions.email;
@@ -55,32 +54,5 @@ Meteor.methods({
         if(password) {
             Accounts.setPassword(userId, password);
         }
-    },
-    "createRole":function(role){
-        check(role,Match.ObjectIncluding({name: String}));
-        if(Meteor.isServer)
-          return Roles.createRole(role);
-        return null;
-    },
-    "updateRole":function(id,role){
-        check(id,String);
-        check(role,Match.ObjectIncluding({name: String}));
-        if(Meteor.isServer)
-            return Roles.updateRole(id,role);
-        return false;
-    },
-    "deleteRole":function(id){
-        check(id,String);
-        if(Meteor.isServer){
-            return Roles.deleteById(id);
-        }
-        return false;
-    },
-    "isRoleHasUser":function(roleId){
-        check(roleId,String);
-        if(Meteor.isServer){
-            return Roles.listUsers(roleId);
-        }
-        return false;
     }
 });
