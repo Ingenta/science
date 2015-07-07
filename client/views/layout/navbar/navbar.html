@@ -33,7 +33,7 @@
             <ul id="dropdown-nav-items" class="dropdown-menu">
                 {{#each publishers}}
                 <li>
-                    <a href="/publisher/{{name}}" >
+                    <a href="{{pathFor 'publisher.name' publisherName=name}}" >
                         {{translateThis chinesename name}}
                     </a>
                 </li>

@@ -258,6 +258,7 @@ Router.map(function () {
             return TAPi18n.__("Article");
         },
         parent: "journal.name.volume",
+        name: "article.show",
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
