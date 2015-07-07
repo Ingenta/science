@@ -31,7 +31,7 @@
 <template name="SinglePublisher">
     <div class="row">
         <div class="col-xs-3">
-            <a href="/publisher/{{name}}">
+            <a href="{{pathFor 'publisher.name' publisherName=name}}">
                 <img src="{{getImageHelper picture}}" width="105"/>
             </a>
         </div>
@@ -46,7 +46,7 @@
                     {{/if}}
                 </div>
                 <h3>
-                    <a class="text" href="/publisher/{{name}}">
+                    <a class="text" href="{{pathFor 'publisher.name' publisherName=name}}">
                         {{translateThis chinesename name}}
                     </a>
                 </h3>
