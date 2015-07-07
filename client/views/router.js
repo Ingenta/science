@@ -43,7 +43,7 @@ Router.onBeforeAction(function () {
 Router.map(function () {
 
     this.route("home", {
-        path: "/home",
+        path: "/",
         controller: "HomePrivateController",
         title: function () {
             return TAPi18n.__("Home");
