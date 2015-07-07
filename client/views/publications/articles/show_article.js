@@ -94,28 +94,18 @@ Template.showArticle.events({
 });
 
 Template.articlePage.helpers({
-    previous: function () {
-        var currentTitle = Router.current().params.articleName;
-        var doi = Articles.findOne({title: currentTitle}).doi;
-        var str = doi.substring(doi.lastIndexOf("/") + 1);
-        var issueIds = Articles.findOne({title: currentTitle}).issueId;
-        var num = Articles.findOne({issueId: issueIds}).doi;
-        var str1 = num.substring(num.lastIndexOf("/") + 1);
-        if(str>str1){
-            return num;
+    preTitle: function () {
+        var previousValue= Articles.findOne({doi:{$lt:this.doi}},{$sort:{doi:-1}});
+        if(previousValue){
+            return previousValue.title;
         }
+        return false;
     },
-    next: function () {
-        var currentTitle = Router.current().params.articleName;
-        var doi = Articles.findOne({title: currentTitle}).doi;
-        var str = doi.substring(doi.lastIndexOf("/") + 1);
-        var issueIds = Articles.findOne({title: currentTitle}).issueId;
-        var num = Articles.findOne({issueId: issueIds}).doi;
-        console.info(issueIds);
-        console.info(num);
-        var str1 = num.substring(num.lastIndexOf("/") + 1);
-        if(str<str1){
-            return num;
+    nextTitle: function () {
+        var nextValue= Articles.findOne({doi:{$gt:this.doi}},{$sort:{doi:-1}});
+        if(nextValue){
+            return nextValue.title;
         }
+        return false;
     }
 });
