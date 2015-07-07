@@ -82,22 +82,24 @@
     <div class="clear articlenav std-display">
         <ul class="flat navigate-resources bobby">
             <h6><span style="color: darkgray">
-                <img src="/icons_leftarrow.png">{{#if preTitle}}
-                <a href="{{preTitle}}">
+                <img src="/icons_leftarrow.png">
+                {{#if preValue}}
+                <a href="{{preValue}}">
                     <b>Previous Article</b>
                 </a>
                 {{else}}
                     <b>Previous Article</b>
                 {{/if}}
                 &nbsp;&nbsp;&Iota;&nbsp;&nbsp;
-                <a href="./"><b>Table of Contents</b></a>&nbsp;&nbsp;&Iota;&nbsp;&nbsp;
-                {{#if nextTitle}}
-                <a href="{{nextTitle}}">
+                <a href="../"><b>Table of Contents</b></a>&nbsp;&nbsp;&Iota;&nbsp;&nbsp;
+                {{#if nextValue}}
+                <a href="{{nextValue}}">
                     <b>Next Article</b>
                 </a>
                 {{else}}
                    <b>Next Article</b>
-                {{/if}}<img src="/rightarrow.gif">
+                {{/if}}
+                <img src="/rightarrow.gif">
             </span></h6>
         </ul>
         <div class="socialMediaCommenting">

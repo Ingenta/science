@@ -101,17 +101,19 @@ Template.showArticle.events({
 });
 
 Template.articlePage.helpers({
-    preTitle: function () {
+    preValue: function () {
         var previousValue= Articles.findOne({doi:{$lt:this.doi}},{$sort:{doi:-1}});
         if(previousValue){
-            return previousValue.title;
+            var preVal = previousValue.doi.substring(previousValue.doi.lastIndexOf("/") + 1);
+            return preVal;
         }
         return false;
     },
-    nextTitle: function () {
+    nextValue: function () {
         var nextValue= Articles.findOne({doi:{$gt:this.doi}},{$sort:{doi:-1}});
         if(nextValue){
-            return nextValue.title;
+            var nextVal = nextValue.doi.substring(nextValue.doi.lastIndexOf("/") + 1);
+            return nextVal;
         }
         return false;
     }
