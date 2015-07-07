@@ -1,6 +1,6 @@
 <template name="navigation">
     <div class="col-xs-2">
-        <a href="/home_private">
+        <a href="/">
             <img src="/logo_scp_transparent.png" alt="SCP" width="150">
         </a>
     </div>
@@ -33,7 +33,7 @@
             <ul id="dropdown-nav-items" class="dropdown-menu">
                 {{#each publishers}}
                 <li>
-                    <a href="/publisher/{{name}}" >
+                    <a href="{{pathFor 'publisher.name' publisherName=name}}" >
                         {{translateThis chinesename name}}
                     </a>
                 </li>

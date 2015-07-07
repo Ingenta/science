@@ -44,8 +44,10 @@ Template.Login.events({
 				pageSession.set("errorMessage", err.message);
 				return false;
 			}
-			else
+			else{
 				pageSession.set("errorMessage", "");
+				Router.go("home",{});
+			}
 		});
 		return false; 
 	}

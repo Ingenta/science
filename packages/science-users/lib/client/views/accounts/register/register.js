@@ -51,8 +51,10 @@ Template.Register.events({
 			submit_button.button("reset");
 			if(err)
 				pageSession.set("errorMessage", err.message);
-			else
+			else{
 				pageSession.set("errorMessage", "");
+				Router.go("home",{});
+			}
 		});
 		return false;
 	}

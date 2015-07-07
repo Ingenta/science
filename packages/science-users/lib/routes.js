@@ -1,6 +1,6 @@
 Meteor.startup(function(){
     Router.route("login", {
-        parent: "home_private",
+        parent: "home",
         path: "/login",
         controller: "LoginController",
         title: function () {
@@ -8,7 +8,7 @@ Meteor.startup(function(){
         }
     });
     Router.route("register", {
-        parent: "home_private",
+        parent: "home",
         path: "/register",
         controller: "RegisterController",
         title: function () {
@@ -19,7 +19,7 @@ Meteor.startup(function(){
     Router.route("forgot_password", {
         path: "/forgot_password",
         controller: "ForgotPasswordController",
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Forgot password");
         }
@@ -27,7 +27,7 @@ Meteor.startup(function(){
     Router.route("reset_password", {
         path: "/reset_password/:resetPasswordToken",
         controller: "ResetPasswordController",
-        parent: "home_private",
+        parent: "home",
         title: function () {
             return TAPi18n.__("Reset password");
         }
@@ -39,7 +39,7 @@ Meteor.startup(function(){
         title: function () {
             return TAPi18n.__("Admin");
         },
-        parent: "home_private"
+        parent: "home"
     });
     Router.route("admin.roles", {
         path: "/admin/roles",
@@ -47,7 +47,7 @@ Meteor.startup(function(){
         title:function(){
             return TAPi18n.__("roles");
         },
-        parent: "home_private"
+        parent: "home"
     });
     Router.route("admin.roles.insert", {
         path: "/admin/roles/insert",
