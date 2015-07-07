@@ -13,7 +13,7 @@ this.LogoutController = RouteController.extend({
 
 	action: function() {
 		App.logout();
-		this.redirect("/home_private");
+		this.redirect("/home");
 		/*ACTION_FUNCTION*/
 	},
 
