@@ -19,7 +19,7 @@ ReactiveTabs.createInterface({
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
                 var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
                 var article = Articles.findOne({doi: currentDoi});
-                if (!article) {
+                if (article) {
                     ArticleViews.insert({
                         articleId: article._id,
                         userId: Meteor.userId(),
