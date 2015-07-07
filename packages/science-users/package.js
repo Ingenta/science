@@ -82,9 +82,6 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'lib/namespace.js',
-    'lib/roles.js',
-    'lib/permissions.js',
-    'lib/methods.js',
     'lib/routes.js'
   ], ['client', 'server']);
 

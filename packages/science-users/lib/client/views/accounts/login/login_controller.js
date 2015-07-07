@@ -1,6 +1,6 @@
 this.LoginController = RouteController.extend({
 	template: "Login",
-	
+
 
 	yieldTemplates: {
 		/*YIELD_TEMPLATES*/
@@ -17,7 +17,7 @@ this.LoginController = RouteController.extend({
 	},
 
 	isReady: function() {
-		
+
 
 		var subs = [
 		];
@@ -30,7 +30,7 @@ this.LoginController = RouteController.extend({
 	},
 
 	data: function() {
-		
+
 
 		return {
 			params: this.params || {}

@@ -11,9 +11,6 @@ App.logout = function () {
 };
 
 this.menuItemClass = function (routeName) {
-    //if (!routeGranted(routeName)) {
-    //    return "hidden";
-    //}
 
     if (!Router.current() || !Router.current().route) {
         return "";
@@ -39,16 +36,18 @@ Helpers.menuItemClass = function (routeName) {
 
 Helpers.userFullName = function () {
     var name = "";
-    if (Meteor.user() && Meteor.user().profile)
-        name = Meteor.user().profile.name;
+    if (Meteor.user())
+        name = Meteor.user().name;
     return name;
 };
 
 Helpers.userEmail = function () {
-    var email = "";
-    if (Meteor.user() && Meteor.user().profile)
-        email = Meteor.user().profile.email;
-    return email;
+    var emails = [];
+    if (Meteor.user())
+        _.each(Meteor.user().emails,function(item){
+            emails.push(item.address);
+        });
+    return emails;
 };
 
 Helpers.randomString = function (strLen) {
