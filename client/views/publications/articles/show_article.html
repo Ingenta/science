@@ -34,25 +34,23 @@
         <div class="col-xs-3">
             <br>
 
-            <div class="container-fluid gray-background">
+            <div class="container-fluid">
                 <div class="row">
                     <li class="pdf">
-                        <a class="pdfDownload"
-                           href="#">Download
-                            <span class="pdfText">PDF</span></a>
-
-                        <div class="fulltextsize">
-                            0.00MB
-                        </div>
+                        <a class="pdfDownload" href="#">{{_ "Download"}} PDF</a>
                     </li>
                 </div>
-                <div class="row"><img src="http://crossmark.crossref.org//images/logos/cm_sbs_024_plain.png"></div>
+                <div class="row"><img src="/crossmark.jpg"></div>
             </div>
             <br>
 
-            <div class="container-fluid gray-background">
-                <div class="row">share</div>
-            </div>
+            <!--<div class="container-fluid">-->
+                <!--<div class="row">{{_ "Share"}}</div>-->
+                <!--<div class="row">-->
+                    <!--<i class="fa fa-weibo"></i>-->
+                    <!--<i class="fa fa-weixin"></i>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
     {{> articlePage}}
@@ -83,7 +81,26 @@
     <hr>
     <div class="clear articlenav std-display">
         <ul class="flat navigate-resources bobby">
-            <h6><span><a href="{{previous}}"><img src="/icons_leftarrow.png"><b>Previous Article</b></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{doi}}"><b>Table of Contents</b></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{next}}"><b>Next Article</b><img src="/rightarrow.gif"></a></span></h6>
+            <h6><span style="color: darkgray">
+                <img src="/icons_leftarrow.png">
+                {{#if preValue}}
+                <a href="{{preValue}}">
+                    <b>{{_ "Previous Article"}}</b>
+                </a>
+                {{else}}
+                    <b>{{_ "Previous Article"}}</b>
+                {{/if}}
+                &nbsp;&nbsp;&Iota;&nbsp;&nbsp;
+                <a href="../"><b>{{_ "Table of Contents"}}</b></a>&nbsp;&nbsp;&Iota;&nbsp;&nbsp;
+                {{#if nextValue}}
+                <a href="{{nextValue}}">
+                    <b>{{_ "Next Article"}}</b>
+                </a>
+                {{else}}
+                   <b>{{_ "Next Article"}}</b>
+                {{/if}}
+                <img src="/rightarrow.gif">
+            </span></h6>
         </ul>
         <div class="socialMediaCommenting">
         </div>

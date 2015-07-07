@@ -19,7 +19,7 @@ ReactiveTabs.createInterface({
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
                 var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
                 var article = Articles.findOne({doi: currentDoi});
-                if (!article) {
+                if (article) {
                     ArticleViews.insert({
                         articleId: article._id,
                         userId: Meteor.userId(),
@@ -33,23 +33,27 @@ ReactiveTabs.createInterface({
     }
 });
 
+var removeArticleFromArray = function (array,articleId) {
+    var temp = [];
+    while (array.length) {
+        var oneId = array.shift();
+        if (oneId._id != articleId) {
+            temp.push(oneId);
+        }
+    }
+    return temp;
+};
+
 Template.showArticle.onRendered(function () {
     var rva = Session.get("recentViewedArticles");
     if (!rva) {
         rva = [];
     } else if (_.findWhere(rva, {_id: this.data._id})) {
-        var temp = [];
-        while (rva.length) {
-            var oneId = rva.shift();
-            if (oneId._id != this.data._id) {
-                temp.push(oneId);
-            }
-        }
-        rva = temp;
+        rva = removeArticleFromArray(rva, this.data._id);
     } else if (rva.length == 3) {
         rva.pop();
     }
-    rva.unshift({_id: this.data._id});
+    rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
 });
 
@@ -97,26 +101,20 @@ Template.showArticle.events({
 });
 
 Template.articlePage.helpers({
-    previous: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-        var str = Router.current().params.articleDoi;
-        var issueIds = Articles.findOne({doi: currentDoi}).issueId;
-        var num = Articles.findOne({issueId: issueIds}).doi;
-        var str1 = num.substring(num.lastIndexOf("/") + 1);
-        if(str>str1){
-            return num;
+    preValue: function () {
+        var previousValue= Articles.findOne({doi:{$lt:this.doi}},{$sort:{doi:-1}});
+        if(previousValue){
+            var preVal = previousValue.doi.substring(previousValue.doi.lastIndexOf("/") + 1);
+            return preVal;
         }
+        return false;
     },
-    next: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-        var str = Router.current().params.articleDoi
-        var issueIds = Articles.findOne({doi: currentDoi}).issueId;
-        var num = Articles.findOne({issueId: issueIds}).doi;
-        console.info(issueIds);
-        console.info(num);
-        var str1 = num.substring(num.lastIndexOf("/") + 1);
-        if(str<str1){
-            return num;
+    nextValue: function () {
+        var nextValue= Articles.findOne({doi:{$gt:this.doi}},{$sort:{doi:-1}});
+        if(nextValue){
+            var nextVal = nextValue.doi.substring(nextValue.doi.lastIndexOf("/") + 1);
+            return nextVal;
         }
+        return false;
     }
 });

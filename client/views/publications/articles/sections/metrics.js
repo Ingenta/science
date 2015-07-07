@@ -11,8 +11,8 @@ Template.MetricsTemplate.rendered = function () {
 
 var chart;
 var buildPieChart = function () {
-    var currentTitle = Router.current().params.articleName;
-    var article = Articles.findOne({title: currentTitle});
+    var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+    var article = Articles.findOne({doi: currentDoi});
     if (!article)return;
     var articleId = article._id;
     if (!articleId)return;
