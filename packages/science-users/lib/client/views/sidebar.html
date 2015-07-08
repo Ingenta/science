@@ -3,7 +3,7 @@
     <ul class="list-unstyled">
         {{#if currentUser}}
         <li><a href="{{pathFor 'user_settings'}}">{{userEmail}}</a></li>
-        {{#if can "admin" "permissions"}}
+        {{#if canUseAdminPanel}}
         <li>
             <a href="{{pathFor 'admin'}}">
                 {{_ "Admin"}}

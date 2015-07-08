@@ -101,26 +101,20 @@ Template.showArticle.events({
 });
 
 Template.articlePage.helpers({
-    previous: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-        var str = Router.current().params.articleDoi;
-        var issueIds = Articles.findOne({doi: currentDoi}).issueId;
-        var num = Articles.findOne({issueId: issueIds}).doi;
-        var str1 = num.substring(num.lastIndexOf("/") + 1);
-        if(str>str1){
-            return num;
+    preValue: function () {
+        var previousValue= Articles.findOne({doi:{$lt:this.doi}},{$sort:{doi:-1}});
+        if(previousValue){
+            var preVal = previousValue.doi.substring(previousValue.doi.lastIndexOf("/") + 1);
+            return preVal;
         }
+        return false;
     },
-    next: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-        var str = Router.current().params.articleDoi
-        var issueIds = Articles.findOne({doi: currentDoi}).issueId;
-        var num = Articles.findOne({issueId: issueIds}).doi;
-        console.info(issueIds);
-        console.info(num);
-        var str1 = num.substring(num.lastIndexOf("/") + 1);
-        if(str<str1){
-            return num;
+    nextValue: function () {
+        var nextValue= Articles.findOne({doi:{$gt:this.doi}},{$sort:{doi:-1}});
+        if(nextValue){
+            var nextVal = nextValue.doi.substring(nextValue.doi.lastIndexOf("/") + 1);
+            return nextVal;
         }
+        return false;
     }
 });
