@@ -34,12 +34,6 @@ Template.SearchResults.helpers({
             filterOptions: [{
                 name: '科学出版社',
                 count: '121'
-            }, {
-                name: '科学出版社',
-                count: '113'
-            }, {
-                name: '科学出版社',
-                count: '141'
             }]
         }, {
             filterTitle: TAPi18n.__("FILTER BY Publications"),

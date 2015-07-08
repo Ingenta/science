@@ -20,7 +20,6 @@ Template.NewsList.helpers({
     news: function (type) {
         var n = News.find({}, {limit: 3});
         if(type=='extend'){
-            console.log("run");
             n = n.map(function(newsItem, index) {
                 newsItem.index = index;
                 newsItem.class= index==0?"active":"";
