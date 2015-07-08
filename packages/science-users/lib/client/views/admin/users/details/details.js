@@ -1,40 +1,36 @@
 var pageSession = new ReactiveDict();
 
-Template.AdminUsersDetails.rendered = function() {
-	
+Template.AdminUsersDetails.rendered = function () {
+
 };
 
-Template.AdminUsersDetails.events({
-	
-});
+Template.AdminUsersDetails.events({});
 
-Template.AdminUsersDetails.helpers({
-	
-});
+Template.AdminUsersDetails.helpers({});
 
-Template.AdminUsersDetailsDetailsForm.rendered = function() {
-	
+Template.AdminUsersDetailsDetailsForm.rendered = function () {
+
 
 	pageSession.set("adminUsersDetailsDetailsFormInfoMessage", "");
 	pageSession.set("adminUsersDetailsDetailsFormErrorMessage", "");
 
-	$(".input-group.date").each(function() {
+	$(".input-group.date").each(function () {
 		var format = $(this).find("input[type='text']").attr("data-format");
 
-		if(format) {
-			format = format.toLowerCase();			
+		if (format) {
+			format = format.toLowerCase();
 		}
 		else {
 			format = "mm/dd/yyyy";
 		}
 
 		$(this).datepicker({
-			autoclose: true,
-			todayHighlight: true,
-			todayBtn: true,
-			forceParse: false,
+			autoclose         : true,
+			todayHighlight    : true,
+			todayBtn          : true,
+			forceParse        : false,
 			keyboardNavigation: false,
-			format: format
+			format            : format
 		});
 	});
 
@@ -42,25 +38,31 @@ Template.AdminUsersDetailsDetailsForm.rendered = function() {
 };
 
 Template.AdminUsersDetailsDetailsForm.events({
-	"submit": function(e, t) {
+	"submit"                   : function (e, t) {
 		e.preventDefault();
 		pageSession.set("adminUsersDetailsDetailsFormInfoMessage", "");
 		pageSession.set("adminUsersDetailsDetailsFormErrorMessage", "");
-		
+
 		var self = this;
 
 		function submitAction(msg) {
 			var adminUsersDetailsDetailsFormMode = "read_only";
-			if(!t.find("#form-cancel-button")) {
-				switch(adminUsersDetailsDetailsFormMode) {
-					case "insert": {
+			if (!t.find("#form-cancel-button")) {
+				switch (adminUsersDetailsDetailsFormMode) {
+					case "insert":
+					{
 						$(e.target)[0].reset();
-					}; break;
+					}
+						;
+						break;
 
-					case "update": {
+					case "update":
+					{
 						var message = msg || "Saved.";
 						pageSession.set("adminUsersDetailsDetailsFormInfoMessage", message);
-					}; break;
+					}
+						;
+						break;
 				}
 			}
 
@@ -74,48 +76,58 @@ Template.AdminUsersDetailsDetailsForm.events({
 
 		validateForm(
 			$(e.target),
-			function(fieldName, fieldValue) {
+			function (fieldName, fieldValue) {
 
 			},
-			function(msg) {
+			function (msg) {
 
 			},
-			function(values) {
-				
+			function (values) {
 
-				
+
 			}
 		);
 
 		return false;
 	},
-	"click #form-cancel-button": function(e, t) {
+	"click #form-cancel-button": function (e, t) {
 		e.preventDefault();
 
-		
 
 		/*CANCEL_REDIRECT*/
 	},
-	"click #form-close-button": function(e, t) {
+	"click #form-close-button" : function (e, t) {
 		e.preventDefault();
 
 		Router.go("admin.users", {});
 	},
-	"click #form-back-button": function(e, t) {
+	"click #form-back-button"  : function (e, t) {
 		e.preventDefault();
 
 		Router.go("admin.users", {});
 	}
 
-	
+
 });
 
 Template.AdminUsersDetailsDetailsForm.helpers({
-	"infoMessage": function() {
+	"infoMessage" : function () {
 		return pageSession.get("adminUsersDetailsDetailsFormInfoMessage");
 	},
-	"errorMessage": function() {
+	"errorMessage": function () {
 		return pageSession.get("adminUsersDetailsDetailsFormErrorMessage");
 	}
-	
+
 });
+
+Template.userRoles.helpers({
+	"usersRoles": function () {
+		var ur = Meteor.users.findOne({_id: Router.current().params.userId},{fields:{orbit_roles:1}});
+		return ur && ur.orbit_roles;
+	},
+	"rolesDescription":function(key){
+		if(key){
+			return Permissions.getRolesDescriptions()[key];
+		}
+	}
+})

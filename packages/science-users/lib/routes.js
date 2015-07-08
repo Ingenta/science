@@ -95,7 +95,11 @@ Meteor.startup(function(){
     });
     Router.route("admin.users.details", {
         path: "/admin/users/details/:userId",
-        controller: "AdminUsersDetailsController"
+        controller: "AdminUsersDetailsController",
+        title: function () {
+            return TAPi18n.__("User details");
+        },
+        parent: "admin.users"
     });
     Router.route("admin.users.insert", {
         path: "/admin/users/insert",
