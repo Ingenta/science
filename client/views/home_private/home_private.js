@@ -17,28 +17,37 @@ Template.HomePrivate.helpers({
 
 
 Template.NewsList.helpers({
-    news: function () {
-        return News.find({}, {limit: 3}).map(function(newsItem, index) {
-            newsItem.index = index;
-            return newsItem;
-        });
-    },
-    addActiveClass: function(index) {
-        if(!index){
-            return "active";
+    news: function (type) {
+        var n = News.find({}, {limit: 3});
+        if(type=='extend'){
+            console.log("run");
+            n = n.map(function(newsItem, index) {
+                newsItem.index = index;
+                newsItem.class= index==0?"active":"";
+                return newsItem;
+            });
+            if(Session.get("renderd")){
+                var nums =  $(".index-num");
+                _.each(nums,function(item,index){
+                    $(item).attr('index',index);
+                });
+                $(".carousel-inner .item").removeClass("next").removeClass("left");
+                var item = $(".carousel-inner .item");
+                if(item && item.length){
+                    $(item[0]).addClass('active');
+                }
+                var indicators = $(".carousel-indicators li");
+                if(indicators && indicators.length){
+                    $(indicators[0]).addClass('active');
+                }
+            }
         }
+        return n;
     }
 });
 
 Template.NewsList.onRendered(function(){
-    var nums =  $(".index-num");
-    _.each(nums,function(item,index){
-        $(item).attr('index',index);
-    });
-    var item = $(".carousel-inner .item");
-    if(item && item.length){
-        $(item[0]).addClass('active');
-    }
+    Session.set("renderd",true);
 });
 
 Template.SingleNews.helpers({
@@ -86,3 +95,9 @@ AutoForm.addHooks(['cmForm'], {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     }
 }, true);
+//
+//AutoForm.addHooks(['deleteNewsForm'], {
+//    onSuccess: function () {
+//        reRender();
+//    }
+//}, true);
