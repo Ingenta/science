@@ -1,21 +1,30 @@
 <template name="AboutTitle">
     <div class="tabbable">
-        <ul class="nav nav-pills nav-stacked col-md-3">
-            {{#if isAdmin }}
-                {{> addAboutTitleModalForm}}
-            {{/if}}
-            {{#each about}}
-                <li><a class="activeButton" data-aboutid="{{_id}}" href="" data-toggle="tab">{{translateThis chinesetitle
-                title}}</a></li>
-                {{#if isAdmin }}
-                    {{> updateAboutTitleModalForm}}
-                    {{> deleteAboutTitleModalForm}}
-                {{/if}}
-            {{else}}
-                {{_"No About found!"}}
-            {{/each}}
-        </ul>
-        <div class="tab-content col-md-9">
+        <div class="col-xs-3">
+            <ul class="nav nav-pills nav-stacked aboutNavTabs">
+                {{#each about}}
+                        {{#if isAdmin }}
+                        <div class="pull-right row aboutEditButtons">
+                            {{> updateAboutTitleModalForm}}
+                            {{> deleteAboutTitleModalForm}}
+                        </div>
+                        {{/if}}
+                    <li class="{{isActive _id}}">
+                        <a class="activeButton" data-aboutid="{{_id}}" data-toggle="tab">
+                            {{translateThis chinesetitle title}}
+                        </a>
+                    </li>
+                {{else}}
+                    {{_"No About found!"}}
+                {{/each}}
+                <div class="pull-right">
+                    {{#if isAdmin }}
+                        {{> addAboutTitleModalForm}}
+                    {{/if}}
+                </div>
+            </ul>
+        </div>
+        <div class="tab-content col-xs-9">
             <div class="tab-pane active">{{> aboutArticlesList}}</div>
         </div>
     </div>
@@ -23,25 +32,39 @@
 
 <template name="aboutArticlesList">
     {{#each about}}
-        <h3>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{>
-        addAboutArticlesModalForm}}{{/if}}</h3>
-        <hr>
+        <div class="part">{{translateThis chinesetitle title}}
+            <div class="pull-right">
+                {{#if isAdmin }}
+                    {{> addAboutArticlesModalForm}}
+                {{/if}}
+            </div>
+        </div>
     {{else}}
         {{_"No About found!"}}
     {{/each}}
     {{#each aboutarticle}}
-        <h4>{{translateThis chinesetitle title}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if isAdmin }}{{> updateAboutArticlesModalForm}}&nbsp;&nbsp;{{>
-        deleteAboutArticlesModalForm}}{{/if}}</h4><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis
-    chinesedescription description}}</h6><br>
+        <div class="part"><p>
+            <strong>{{translateThis chinesetitle title}}</strong>
+
+            <div class="pull-right">
+                {{#if isAdmin }}
+                    {{> updateAboutArticlesModalForm}}
+                    {{> deleteAboutArticlesModalForm}}
+                {{/if}}
+            </div>
+            </p>
+            <p>
+                {{translateThis chinesedescription description}}
+            </p>
+        </div>
     {{else}}
         {{_"No AboutArticle found!"}}
     {{/each}}
 </template>
 
 <template name="addAboutTitleModalForm">
-    {{#afModal formId="addAboutTitleModalForm" class="btn btn-success" collection="About" operation="insert"
-    omitFields="publications"}}
-        {{_ "Add new"}}
+    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert"
+    omitFields="publications" title=getCreateButtonContent}}
     {{/afModal}}
 </template>
 
@@ -57,9 +80,8 @@
 </template>
 
 <template name="addAboutArticlesModalForm">
-    {{#afModal formId="addAboutArticlesModalForm" class="btn btn-success" collection="AboutArticles" operation="insert"
-    omitFields="about"}}
-        {{_ "Add new"}}
+    {{#afModal formId="addAboutArticlesModalForm" class="fa fa-plus" collection="AboutArticles" operation="insert"
+    omitFields="about" title=getCreateButtonContent}}
     {{/afModal}}
 </template>
 
