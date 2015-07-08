@@ -1,3 +1,8 @@
 Config={
-    isDevMode:true  //开发模式
+    isDevMode:true,  //开发模式
+    "defaultAdmin":{
+        "username":"admin",
+        "password":"123123",
+        "email":"admin@scp.com"
+    }
 }

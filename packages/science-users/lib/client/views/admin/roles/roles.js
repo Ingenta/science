@@ -42,7 +42,7 @@ Template.CustomRoleView.events({
     },
     "click .fa-trash" : function (e) {
         if(confirm("are you sure to delete the Role \"" + this.description.en.name + "\" ?")){
-            Permissions.undefineCustomRole(this._id,function(e){
+            Permissions.undefineCustomRoleAndRevoke(this._id,function(e){
                 if(e){
                     alert(e);
                 }

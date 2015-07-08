@@ -8,7 +8,7 @@ this.AdminUsersInsertController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
-		Permissions.throwIfUserCant("add-user","user",Meteor.userId());
+		Permissions.check("add-user","user");
 		/*BEFORE_FUNCTION*/
 		this.next();
 	},

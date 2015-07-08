@@ -83,7 +83,7 @@ Template.AdminUsersEditEditForm.events({
 
 			},
 			function (values) {
-				Permissions.throwIfUserCant("modify-user","user",Meteor.userId());
+				Permissions.check("modify-user","user");
 				var roles       = values.roles;
 				delete values.roles;
 				Meteor.call("updateUserAccount", t.data.admin_user._id, values, function (e) {

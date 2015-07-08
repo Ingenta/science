@@ -57,17 +57,21 @@ Template.FilterList.events({
     'click .filterButton': function (event) {
         var f = $(event.target).data().pubid;
         Session.set('filterPublisher', f);
+        Session.set('PerPage', 10);
     },
     'click .letterFilter': function (event) {
         var num = $(event.target).text();
         Session.set('firstLetter', num);
         Session.set('filterPublisher', undefined);
+        Session.set('PerPage', 10);
     },
     'click .clearPublisher': function (event) {
         Session.set('filterPublisher', undefined);
+        Session.set('PerPage', 10);
     },
     'click .resetAlphabetFilter': function (event) {
         Session.set('firstLetter', undefined);
+        Session.set('PerPage', 10);
     },
     'click .perPage': function (event) {
         var pageNum = $(event.target).data().pagenum;
@@ -77,4 +81,5 @@ Template.FilterList.events({
 Template.FilterList.onRendered(function () {
     Session.set('filterPublisher', undefined);
     Session.set('firstLetter', undefined);
+    Session.set('PerPage', 10);
 });
