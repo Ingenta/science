@@ -25,16 +25,20 @@
 
 <template name="AdminSideMenu">
 	<ul id="menu-items" class="nav nav-stacked nav-pills">
+		{{#if can "list-user" "user"}}
 		<li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
 			<a href="{{pathFor 'admin.users'}}">
 				{{_ "Users"}}
 			</a>
 		</li>
+		{{/if}}
+		{{#if can "get-users-roles" "permissions"}}
         <li id="menu-item-simple" class="{{menuItemClass 'admin.roles'}}">
             <a href="{{pathFor 'admin.roles'}}">
                 {{_ "Roles"}}
             </a>
         </li>
+		{{/if}}
 		<li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
 			<a href="{{pathFor 'admin.upload'}}">
 				{{_ "Upload"}}

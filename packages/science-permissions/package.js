@@ -17,6 +17,9 @@ Package.onUse(function(api) {
   api.addFiles('publication.js',['server']);
   api.addFiles('science-permissions.js',['server','client']);
   api.addFiles('group/user.js',['server','client']);
+  api.addFiles('group/publisher.js',['server','client']);
+  api.addFiles('group/resource.js',['server','client']);
+  api.addFiles('group/topic.js',['server','client']);
 
   api.export(["Permissions"]);
 });

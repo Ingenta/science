@@ -1,40 +1,36 @@
 var pageSession = new ReactiveDict();
 
-Template.AdminUsersEdit.rendered = function() {
-	
+Template.AdminUsersEdit.rendered = function () {
+
 };
 
-Template.AdminUsersEdit.events({
-	
-});
+Template.AdminUsersEdit.events({});
 
-Template.AdminUsersEdit.helpers({
-	
-});
+Template.AdminUsersEdit.helpers({});
 
-Template.AdminUsersEditEditForm.rendered = function() {
-	
+Template.AdminUsersEditEditForm.rendered = function () {
+
 
 	pageSession.set("adminUsersEditEditFormInfoMessage", "");
 	pageSession.set("adminUsersEditEditFormErrorMessage", "");
 
-	$(".input-group.date").each(function() {
+	$(".input-group.date").each(function () {
 		var format = $(this).find("input[type='text']").attr("data-format");
 
-		if(format) {
-			format = format.toLowerCase();			
+		if (format) {
+			format = format.toLowerCase();
 		}
 		else {
 			format = "mm/dd/yyyy";
 		}
 
 		$(this).datepicker({
-			autoclose: true,
-			todayHighlight: true,
-			todayBtn: true,
-			forceParse: false,
+			autoclose         : true,
+			todayHighlight    : true,
+			todayBtn          : true,
+			forceParse        : false,
 			keyboardNavigation: false,
-			format: format
+			format            : format
 		});
 	});
 
@@ -42,25 +38,31 @@ Template.AdminUsersEditEditForm.rendered = function() {
 };
 
 Template.AdminUsersEditEditForm.events({
-	"submit": function(e, t) {
+	"submit"                   : function (e, t) {
 		e.preventDefault();
 		pageSession.set("adminUsersEditEditFormInfoMessage", "");
 		pageSession.set("adminUsersEditEditFormErrorMessage", "");
-		
+
 		var self = this;
 
 		function submitAction(msg) {
 			var adminUsersEditEditFormMode = "update";
-			if(!t.find("#form-cancel-button")) {
-				switch(adminUsersEditEditFormMode) {
-					case "insert": {
+			if (!t.find("#form-cancel-button")) {
+				switch (adminUsersEditEditFormMode) {
+					case "insert":
+					{
 						$(e.target)[0].reset();
-					}; break;
+					}
+						;
+						break;
 
-					case "update": {
+					case "update":
+					{
 						var message = msg || "Saved.";
 						pageSession.set("adminUsersEditEditFormInfoMessage", message);
-					}; break;
+					}
+						;
+						break;
 				}
 			}
 
@@ -74,62 +76,70 @@ Template.AdminUsersEditEditForm.events({
 
 		validateForm(
 			$(e.target),
-			function(fieldName, fieldValue) {
+			function (fieldName, fieldValue) {
 
 			},
-			function(msg) {
+			function (msg) {
 
 			},
-			function(values) {
-				var roles=values.roles;
+			function (values) {
+				Permissions.throwIfUserCant("modify-user","user",Meteor.userId());
+				var roles       = values.roles;
 				delete values.roles;
-				Meteor.call("updateUserAccount", t.data.admin_user._id, values, function(e) { if(e) errorAction(e.message); else submitAction(); });
-				Permissions.revoke(t.data.admin_user._id,Object.keys(Permissions.getRoles()));
-				Permissions.delegate(t.data.admin_user._id,roles,function(err){if(err){console.log(err);}});
+				Meteor.call("updateUserAccount", t.data.admin_user._id, values, function (e) {
+					if (e) errorAction(e.message); else submitAction();
+				});
+				var allRoles    = Object.keys(Permissions.getRoles());
+				var revokeRoles = _.difference(allRoles, roles);//从所有角色中去掉需要设置的角色，即为需要取消的角色
+				Permissions.revoke(t.data.admin_user._id, revokeRoles);
+				Permissions.delegate(t.data.admin_user._id, roles, function (err) {
+					if (err) {
+						console.log(err);
+					}
+				});
 			}
 		);
 
 		return false;
 	},
-	"click #form-cancel-button": function(e, t) {
+	"click #form-cancel-button": function (e, t) {
 		e.preventDefault();
 
-		
 
 		Router.go("admin.users", {});
 	},
-	"click #form-close-button": function(e, t) {
+	"click #form-close-button" : function (e, t) {
 		e.preventDefault();
 
 		/*CLOSE_REDIRECT*/
 	},
-	"click #form-back-button": function(e, t) {
+	"click #form-back-button"  : function (e, t) {
 		e.preventDefault();
 
 		/*BACK_REDIRECT*/
 	}
 
-	
+
 });
 
 Template.AdminUsersEditEditForm.helpers({
-	"infoMessage": function() {
+	"infoMessage" : function () {
 		return pageSession.get("adminUsersEditEditFormInfoMessage");
 	},
-	"errorMessage": function() {
+	"errorMessage": function () {
 		return pageSession.get("adminUsersEditEditFormErrorMessage");
 	}
-	
+
 });
 
 Template.userEditRoles.helpers({
-	"usersRoles"   : function () {
+	"usersRoles"    : function () {
 		var user = Meteor.users.findOne({_id: Router.current().params.userId});
 		Session.set("curUser", user);
 		var pr   = Permissions.getRoles();
 		return Object.keys(pr);
 	},
-	"itemIsChecked": function () {
+	"itemIsChecked" : function () {
 		var cu = Session.get("curUser").orbit_roles;
 
 		if (cu) {
@@ -137,7 +147,10 @@ Template.userEditRoles.helpers({
 		}
 		return "";
 	},
-	"i18nName":function(){
+	"i18nName"      : function () {
 		return Permissions.getRoleDescByCode(this).name;
+	},
+	"itemIsDisabled": function () {
+		return Permissions.userCan("delegate-and-revoke", "permissions", Meteor.userId()) ? "" : "disabled";
 	}
 });
