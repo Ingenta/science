@@ -83,7 +83,8 @@ Template.AdminUsersEditEditForm.events({
 
 			},
 			function (values) {
-				Permissions.check("modify-user","user");
+				Permissions.check("modify-user", "user");
+				console.log(values.disable);
 				var roles       = values.roles;
 				delete values.roles;
 				Meteor.call("updateUserAccount", t.data.admin_user._id, values, function (e) {
@@ -123,13 +124,15 @@ Template.AdminUsersEditEditForm.events({
 });
 
 Template.AdminUsersEditEditForm.helpers({
-	"infoMessage" : function () {
+	"infoMessage"  : function () {
 		return pageSession.get("adminUsersEditEditFormInfoMessage");
 	},
-	"errorMessage": function () {
+	"errorMessage" : function () {
 		return pageSession.get("adminUsersEditEditFormErrorMessage");
+	},
+	"disableStatus": function () {
+		return this.admin_user.disable?"checked":"";
 	}
-
 });
 
 Template.userEditRoles.helpers({

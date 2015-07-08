@@ -19,7 +19,7 @@ this.AdminUsersController = RouteController.extend({
 	},
 
 	isReady: function() {
-		
+
 
 		var subs = [
 			Meteor.subscribe("admin_users")

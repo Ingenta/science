@@ -321,5 +321,8 @@
     "editRole": "编辑角色",
     "permissions-get-users-roles": "查看角色列表",
     "permissions-edit-custom-roles": "设置自定义角色",
-    "permissions-delegate-and-revoke": "设置用户角色"
+    "permissions-delegate-and-revoke": "设置用户角色",
+    "Status": "状态",
+    "Enable": "启用",
+    "Disable": "禁用"
 }

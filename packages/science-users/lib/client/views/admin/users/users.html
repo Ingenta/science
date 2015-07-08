@@ -69,8 +69,11 @@
 			<th class="th-sortable" data-sort="profile.email">
 				{{_ "E-mail"}}
 			</th>
-			<th class="th-sortable" data-sort="roles">
+			<th class="th-sortable">
 				{{_ "Role"}}
+			</th>
+			<th class="th-sortable">
+				{{_ "Status"}}
 			</th>
 			<th>
 				&nbsp;
@@ -95,6 +98,9 @@
 			{{#each orbit_roles}}
 				<span>[ {{geti18nName this}} ]</span>
 			{{/each}}
+		</td>
+		<td>
+			{{#if disable}}{{_ "Disable"}}{{else}}{{_ "Enable"}}{{/if}}
 		</td>
 		<td class="td-icon">
 			{{#if can "user-modify" "user"}}

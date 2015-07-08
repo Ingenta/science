@@ -250,7 +250,7 @@ Template.AdminUsersViewTableItems.events({
 		});
 		return false;
 	},
-	"click #edit-button": function(e, t) {
+	"click #edit-button": function(e) {
 		e.preventDefault();
 		Router.go("admin.users.edit", {userId: this._id});
 		return false;
@@ -264,4 +264,4 @@ Template.AdminUsersViewTableItems.helpers({
 		}
 		return Permissions.getRoleDescByCode(code).name;
 	}
-})
+});

@@ -26,13 +26,26 @@ Meteor.startup(function () {
 
 });
 
-
+//override defualt publish
+Meteor.publish(null, function() {
+    if (this.userId) {
+        var query = {};
+        var fields = {profile: 1, username: 1, emails: 1,disable: 1,orbit_roles:1};
+        if(!Permissions.userCan("user","list-user",this.userId)){
+            query._id=this.userId;
+        }
+        return Meteor.users.find(query,{fields: fields});
+    } else {
+        return null;
+    }
+});
 
 Users.before.insert(function(userId, doc) {
     if(doc.emails && doc.emails[0] && doc.emails[0].address) {
         doc.profile = doc.profile || {};
         doc.profile.email = doc.emails[0].address;
     }
+    doc.disable = true;
 });
 
 Users.before.update(function(userId, doc, fieldNames, modifier, options) {

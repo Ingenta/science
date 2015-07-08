@@ -154,5 +154,8 @@
     "editRole": "Edit role",
     "permissions-get-users-roles": "Get All Roles",
     "permissions-edit-custom-roles": "Edit Custom Roles",
-    "permissions-delegate-and-revoke": "Delegate And Revoke"
+    "permissions-delegate-and-revoke": "Delegate And Revoke",
+    "Status": "Status",
+    "Enable": "Enable",
+    "Disable": "Disable"
 }
