@@ -116,26 +116,30 @@ function builtArea() {
      });
 
     $('#container-area').highcharts({
+        chart: {
+            type: 'line'
+        },
         title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
+            text: ''
         },
         subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
+            text: ''
         },
+
+        credits: {
+            enabled: false
+        },
+
         xAxis: {
             categories: m
         },
-        yAxis: {
-            title: {
-                text: ''
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
         },
         tooltip: {
             valueSuffix: ''
