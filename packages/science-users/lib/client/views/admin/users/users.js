@@ -228,7 +228,7 @@ Template.AdminUsersViewTableItems.events({
 
 	"click #delete-button": function(e, t) {
 		e.preventDefault();
-		Permissions.throwIfUserCant("delete-user","user",Meteor.userId());
+		Permissions.check("delete-user","user");
 		var me = this;
 		bootbox.dialog({
 			message: "Delete? Are you sure?",

@@ -13,7 +13,7 @@ userPermissions
 		cn: {name: "编辑用户", summary: "可以编辑用户信息"}
 	})
 	.definePermission("delete-user", {
-		en: {name: "delte user", summary: "can delte user"},
+		en: {name: "delete user", summary: "can delete user"},
 		cn: {name: "删除用户", summary: "您可以删除用户信息"}
 	})
 	.definePermission("list-user", {

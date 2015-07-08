@@ -81,7 +81,7 @@ Template.AdminUsersInsertInsertForm.events({
 
 			},
 			function(values) {
-				Permissions.throwIfUserCant("add-user","user",Meteor.userId());
+				Permissions.check("add-user","user");
 				Meteor.call("createUserAccount", values, function(e) { if(e) errorAction(e.message); else submitAction(); });
 			}
 		);

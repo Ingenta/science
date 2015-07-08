@@ -22,6 +22,25 @@ _.extend(Permissions, {
 	},
 	getRoleDescByCode:function(code){
 		return Permissions.getRolesDescriptions()[code];
+	},
+	check : function(perm,pkg){
+		if(!Meteor.user()){
+			Router.go("login");
+		}
+		Permissions.throwIfUserCant(perm,pkg);
+	},undefineCustomRoleAndRevoke:function(role,callback){
+		try{
+			Permissions.undefineCustomRole(role,function(err){
+				if(err){
+					throw err;
+				}
+			});
+			Meteor.users.update({},{$pull:role}, {multi: true});
+		}catch(e){
+			if(callback)
+				callback(e);
+		}
+
 	}
 });
 
@@ -46,16 +65,16 @@ if (Meteor.isClient) {
 }
 
 Meteor.startup(function(){
-	if(Meteor.isServer && Meteor.settings.defaultAdmin){
-		var da= _.clone(Meteor.settings.defaultAdmin);
+	if(Meteor.isServer && Config && Config.defaultAdmin){
+		var da= _.clone(Config.defaultAdmin);
 		_.extend(da,{
 			profile:{
 				name:da.username
 			}
 		});
 		var queryArr = [];
-		queryArr.push({emails:{$elemMatch:{address:da.email}}});
-		queryArr.push({profile:{name:da.username}});
+		queryArr.push({'emails.address':da.email});
+		queryArr.push({'profile.name':da.username});
 		if(!Users.findOne({$or:queryArr})){
 			console.info("create default user '"+da.username+"'");
 			Meteor.call('createUserAccount',da,function(err,userId){
