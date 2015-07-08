@@ -30,12 +30,16 @@ _.extend(Permissions, {
 		Permissions.throwIfUserCant(perm,pkg);
 	},undefineCustomRoleAndRevoke:function(role,callback){
 		try{
-			Permissions.undefineCustomRole(role,function(err){
+			Meteor.call("batchRevoke","project-custom:"+role,function(err,result){
 				if(err){
 					throw err;
 				}
+				Permissions.undefineCustomRole(role,function(err){
+					if(err){
+						throw err;
+					}
+				});
 			});
-			Meteor.users.update({},{$pull:role}, {multi: true});
 		}catch(e){
 			if(callback)
 				callback(e);
@@ -54,7 +58,6 @@ if (Meteor.isClient) {
 		},
 		updateRolesPermissions:function(roleName,perms){
 			try{
-				debugger
 				Permissions.custom_roles.update({_id:roleName},{$set:{permissions:perms}});
 				return true;
 			}catch(e){

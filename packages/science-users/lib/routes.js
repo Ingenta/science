@@ -47,7 +47,7 @@ Meteor.startup(function(){
         title:function(){
             return TAPi18n.__("roles");
         },
-        parent: "home"
+        parent: "admin"
     });
     Router.route("admin.roles.insert", {
         path: "/admin/roles/insert",
