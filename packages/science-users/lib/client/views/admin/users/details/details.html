@@ -55,11 +55,7 @@
 				<label for="roles">
 					{{_ "Role"}}
 				</label>
-				<div class="input-div">
-					<p class="form-control-static">
-						{{admin_user.roles}}
-					</p>
-				</div>
+				{{> userRoles}}
 			</div>
 			<div class="form-group">
 				<div class="submit-div">
@@ -72,3 +68,32 @@
 	</div>
 </template>
 
+<template name="userRoles">
+
+	<table id="dataview-table" class="table table-striped table-hover">
+		<thead id="dataview-table-header">
+		<tr id="dataview-table-header-row">
+			<th>
+				{{_ "roleName"}}
+			</th>
+			<th>
+				{{_ "roleSummary"}}
+			</th>
+			<th>
+				&nbsp;
+			</th>
+		</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+		{{#each usersRoles}}
+		<tr id="dataview-table-items-row">
+			{{#with rolesDescription this}}
+				<td>{{name}}</td>
+				<td>{{summary}}</td>
+			{{/with}}
+			<td class="td-icon"></td>
+		</tr>
+		{{/each}}
+		</tbody>
+	</table>
+</template>

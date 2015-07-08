@@ -47,7 +47,7 @@ Meteor.startup(function(){
         title:function(){
             return TAPi18n.__("roles");
         },
-        parent: "home"
+        parent: "admin"
     });
     Router.route("admin.roles.insert", {
         path: "/admin/roles/insert",
@@ -95,15 +95,27 @@ Meteor.startup(function(){
     });
     Router.route("admin.users.details", {
         path: "/admin/users/details/:userId",
-        controller: "AdminUsersDetailsController"
+        controller: "AdminUsersDetailsController",
+        title: function () {
+            return TAPi18n.__("User details");
+        },
+        parent: "admin.users"
     });
     Router.route("admin.users.insert", {
         path: "/admin/users/insert",
-        controller: "AdminUsersInsertController"
+        controller: "AdminUsersInsertController",
+        title: function () {
+            return TAPi18n.__("Add new user");
+        },
+        parent: "admin.users"
     });
     Router.route("admin.users.edit", {
         path: "/admin/users/edit/:userId",
-        controller: "AdminUsersEditController"
+        controller: "AdminUsersEditController",
+        title: function () {
+            return TAPi18n.__("Edit user");
+        },
+        parent: "admin.users"
     });
     Router.route("user_settings", {
         path: "/user_settings",
