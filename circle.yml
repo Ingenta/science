@@ -34,7 +34,7 @@ test:
   override:
 
     # Test the app with Chrome and ensure all artifacts can be traced back to the chrome run
-    - meteor --test:
+    - meteor --test
     #    environment:
     #      CUCUMBER_SCREENSHOTS_DIR: "$CIRCLE_ARTIFACTS/screenshots/chrome"
     #      CUCUMBER_JSON_OUTPUT: "$CIRCLE_TEST_REPORTS/chrome.cucumber"
