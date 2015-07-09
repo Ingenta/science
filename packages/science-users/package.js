@@ -79,7 +79,7 @@ Package.onUse(function(api) {
     'lib/client/views/admin/users/insert/insert_controller.js',
     'lib/client/views/sidebar.html',
     'lib/client/views/sidebar.js'
-  ],['client']);//最好写上第二个参数，否则可能会出现  Template is not defined
+  ],['client']);//必须写上第二个参数，否则可能会出现  Template is not defined 因为server side是没有templating包的
 
   api.addFiles([
     'lib/namespace.js',

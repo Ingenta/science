@@ -21,13 +21,17 @@ Template.Login.events({
 		var login_password = t.find('#login_password').value;
 
 		// check email
-		if(!isValidEmail(login_email))
-		{
-			pageSession.set("errorMessage", "Please enter your e-mail address.");
+		//if(!isValidEmail(login_email))
+		//{
+		//	pageSession.set("errorMessage", "Please enter your e-mail address.");
+		//	t.find('#login_email').focus();
+		//	return false;
+		//}
+		if(login_email == ""){
+			pageSession.set("errorMessage", "Please enter your e-mail address or username.");
 			t.find('#login_email').focus();
 			return false;
 		}
-
 		// check password
 		if(login_password == "")
 		{
