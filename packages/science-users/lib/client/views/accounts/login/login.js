@@ -61,11 +61,18 @@ Template.Login.events({
 Template.Login.helpers({
 	errorMessage: function() {
 		var em = pageSession.get("errorMessage");
-		if(em instanceof Object){
-			var i18msg = TAPi18n.__(em.reason);
-			if(i18msg && i18msg  !== em.reason){
-				return i18msg + " [" + em.error + "]";
+		if(em instanceof Object) {
+			console.log(em);
+			if (em.error == 401) {
+				var i18msg = TAPi18n.__(em.reason);
+				if (i18msg && i18msg !== em.reason) {
+					return i18msg + " [" + em.error + "]";
+				}
+			} else if (em.error == 423) {
+				var reason = $.parseJSON(em.reason);
+				return TAPi18n.__("Lock message",reason.duration);
 			}
+
 			return em.message;
 		}
 		return pageSession.get("errorMessage");

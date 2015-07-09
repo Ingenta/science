@@ -327,5 +327,6 @@
     "Disable": "禁用",
     "email_not_verified" : "邮箱未验证",
     "user_blocked":"用户被禁用",
-    "Email address or username": "邮箱或用户名"
+    "Email address or username": "邮箱或用户名",
+    "Lock message":"您的账号被锁定。剩余%s秒"
 }
