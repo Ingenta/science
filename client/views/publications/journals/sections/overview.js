@@ -21,7 +21,7 @@ Template.recentlyViewedArticles.helpers({
     }
 });
 
-Template.journalSummary.helpers({
+Template.journalCoverSummary.helpers({
    issnFormat: function (issn) {
        if(!issn) return;
        if(issn.length !== 8) return issn;
