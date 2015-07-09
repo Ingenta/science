@@ -1,5 +1,17 @@
 this.Publications = new Meteor.Collection("publications");
 
+this.Publications.allow({
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-journal", "resource", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-journal", "resource", userId);
+    },
+    remove: function(userId,doc){
+        return Permissions.userCan("delete-journal","resource",userId);
+    }
+});
+
 PublicationsSchema = new SimpleSchema({
     title: {
         type: String

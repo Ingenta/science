@@ -10,18 +10,22 @@ Package.describe({
   documentation: 'README.md'
 });
 
+both = ['server','client'];
+
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use('underscore');
   api.use('orbit:permissions');
   api.addFiles('publication.js',['server']);
-  api.addFiles('method.js',['server','client']);
+  api.addFiles('method.js',both);
 
-  api.addFiles('science-permissions.js',['server','client']);
-  api.addFiles('group/user.js',['server','client']);
-  api.addFiles('group/publisher.js',['server','client']);
-  api.addFiles('group/resource.js',['server','client']);
-  api.addFiles('group/topic.js',['server','client']);
+  api.addFiles('science-permissions.js',both);
+  api.addFiles('group/user.js',both);
+  api.addFiles('group/publisher.js',both);
+  api.addFiles('group/resource.js',both);
+  api.addFiles('group/topic.js',both);
+  api.addFiles('group/news.js',both);
+  api.addFiles('group/platform.js',both);
 
   api.export(["Permissions"]);
 });
