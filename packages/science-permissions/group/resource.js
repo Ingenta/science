@@ -10,7 +10,7 @@ resourcePermissions
 		cn: {name: "编辑期刊", summary: "可以编辑期刊信息"}
 	})
 	.definePermission("delete-journal", {
-		en: {name: "delte journal", summary: "can delete journal"},
+		en: {name: "delete journal", summary: "can delete journal"},
 		cn: {name: "删除期刊", summary: "您可以删除期刊信息"}
 	});
 
