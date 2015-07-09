@@ -24,9 +24,13 @@ _.extend(Permissions, {
 		return Permissions.getRolesDescriptions()[code];
 	},
 	check : function(perm,pkg){
+		if(Meteor.user() && Meteor.user().disable){
+			Meteor.logout();
+		}
 		if(!Meteor.user()){
 			Router.go("login");
 		}
+
 		Permissions.throwIfUserCant(perm,pkg);
 	},undefineCustomRoleAndRevoke:function(role,callback){
 		try{

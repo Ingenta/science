@@ -2,7 +2,7 @@
     <div class="container-fluid">
         {{> pageElement key="topic"}}
         <div class="row">
-            {{#if isAdmin }}
+            {{#if can "add-topic" "topic"}}
                 {{> addTopicModalForm}}
             {{/if}}
         </div>
@@ -72,12 +72,12 @@
     </a>
 
     <div class="pull-right">
-        {{#if isAdmin }}
-            {{> addSubTopicModalForm}}
-            {{> updateTopicModalForm}}
+        {{#if can "add-topic" "topic" }}{{> addSubTopicModalForm}}{{/if}}
+		{{#if can "modify-topic" "topic" }}{{> updateTopicModalForm}}{{/if}}
+		{{#if can "delte-topic" "topic" }}
             {{#if hasSubTopic _id}}
                 {{> deleteTopicModalForm}}
             {{/if}}
-        {{/if}}
+		{{/if}}
     </div>
 </template>
