@@ -74,7 +74,7 @@
     <div class="pull-right">
         {{#if can "add-topic" "topic" }}{{> addSubTopicModalForm}}{{/if}}
 		{{#if can "modify-topic" "topic" }}{{> updateTopicModalForm}}{{/if}}
-		{{#if can "delte-topic" "topic" }}
+		{{#if can "delete-topic" "topic" }}
             {{#if hasSubTopic _id}}
                 {{> deleteTopicModalForm}}
             {{/if}}
