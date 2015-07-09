@@ -137,8 +137,7 @@ function builtArea() {
             line: {
                 dataLabels: {
                     enabled: true
-                },
-                enableMouseTracking: false
+                }
             }
         },
         tooltip: {
