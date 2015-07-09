@@ -324,5 +324,7 @@
     "permissions-delegate-and-revoke": "设置用户角色",
     "Status": "状态",
     "Enable": "启用",
-    "Disable": "禁用"
+    "Disable": "禁用",
+    "email_not_verified" : "邮箱未验证",
+    "user_blocked":"用户被禁用"
 }

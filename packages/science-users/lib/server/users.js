@@ -57,3 +57,20 @@ Users.before.update(function(userId, doc, fieldNames, modifier, options) {
 Accounts.urls.resetPassword = function (token) {
     return Meteor.absoluteUrl('reset_password/' + token);
 };
+
+Accounts.validateLoginAttempt(function(attempt){
+    if(Config && Config.isDevMode)//开发模式不检查邮箱是否已验证
+        return true;
+    if(attempt.user && attempt.user.emails && !attempt.user.emails[0].verified){
+        throw new Meteor.Error(403,'email_not_verified');
+    }
+    return true;
+});
+
+
+Accounts.validateLoginAttempt(function(attempt){
+    if(attempt.user && attempt.user.disable){
+        throw new Meteor.Error(403,'user_blocked');
+    }
+    return true;
+});

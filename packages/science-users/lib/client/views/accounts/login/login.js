@@ -41,7 +41,7 @@ Template.Login.events({
 			submit_button.button("reset");
 			if (err)
 			{
-				pageSession.set("errorMessage", err.message);
+				pageSession.set("errorMessage", err);
 				return false;
 			}
 			else{
@@ -56,6 +56,14 @@ Template.Login.events({
 
 Template.Login.helpers({
 	errorMessage: function() {
+		var em = pageSession.get("errorMessage");
+		if(em instanceof Object){
+			var i18msg = TAPi18n.__(em.reason);
+			if(i18msg && i18msg  !== em.reason){
+				return i18msg + " [" + em.error + "]";
+			}
+			return em.message;
+		}
 		return pageSession.get("errorMessage");
 	}
 	

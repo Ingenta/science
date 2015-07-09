@@ -157,5 +157,7 @@
     "permissions-delegate-and-revoke": "Delegate And Revoke",
     "Status": "Status",
     "Enable": "Enable",
-    "Disable": "Disable"
+    "Disable": "Disable",
+    "email_not_verified" : "email not verified",
+    "user_blocked":"user blocked"
 }
