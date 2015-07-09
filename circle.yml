@@ -1,13 +1,13 @@
 # Based on https://github.com/xolvio/Letterpress/blob/master/circle.yml
-machine:
+#machine:
 
-  java:
-    version: oraclejdk8
+  #java:
+   # version: oraclejdk8
 
-  environment:
-    VELOCITY_CI: true
+  #environment:
+    #VELOCITY_CI: true
     # Enable this to debug builds
-    VELOCITY_DEBUG: true
+    #VELOCITY_DEBUG: true
 
 dependencies:
 
