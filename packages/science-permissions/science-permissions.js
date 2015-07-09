@@ -30,7 +30,6 @@ _.extend(Permissions, {
 		if(!Meteor.user()){
 			Router.go("login");
 		}
-
 		Permissions.throwIfUserCant(perm,pkg);
 	},undefineCustomRoleAndRevoke:function(role,callback){
 		try{

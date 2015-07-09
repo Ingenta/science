@@ -34,10 +34,10 @@
                         {{#each publications}}
                             {{> onePublication}}
                         {{else}}
-                            {{_"No publications found!"}}
+                            {{_ "No publications found!"}}
                         {{/each}}
                         {{> Paginator_UI publications}}
-                        <span style="float:right">{{_"Display per page"}}:
+                        <span style="float:right">{{_ "Display per page"}}:
                             <a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
                         <br>
                     </div>
@@ -57,7 +57,7 @@
             {{/if}}
         </div>
         <div class="pull-right">
-            <a class="resetAlphabetFilter">{{_"All"}}</a>&nbsp;
+            <a class="resetAlphabetFilter">{{_ "All"}}</a>&nbsp;
             {{#each letterInTheAlphabet}}
                 <a class="letterFilter">{{this}}</a>&nbsp;
             {{/each}}
