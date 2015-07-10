@@ -10,7 +10,7 @@ publisherPermissions
 		cn: {name: "编辑出版社", summary: "可以编辑出版社信息"}
 	})
 	.definePermission("delete-publisher", {
-		en: {name: "delte publisher", summary: "can delte publisher"},
+		en: {name: "delete publisher", summary: "can delete publisher"},
 		cn: {name: "删除出版社", summary: "您可以删除出版社信息"}
 	});
 

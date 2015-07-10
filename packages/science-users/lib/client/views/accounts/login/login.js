@@ -21,13 +21,17 @@ Template.Login.events({
 		var login_password = t.find('#login_password').value;
 
 		// check email
-		if(!isValidEmail(login_email))
-		{
-			pageSession.set("errorMessage", "Please enter your e-mail address.");
+		//if(!isValidEmail(login_email))
+		//{
+		//	pageSession.set("errorMessage", "Please enter your e-mail address.");
+		//	t.find('#login_email').focus();
+		//	return false;
+		//}
+		if(login_email == ""){
+			pageSession.set("errorMessage", "Please enter your e-mail address or username.");
 			t.find('#login_email').focus();
 			return false;
 		}
-
 		// check password
 		if(login_password == "")
 		{
@@ -41,7 +45,7 @@ Template.Login.events({
 			submit_button.button("reset");
 			if (err)
 			{
-				pageSession.set("errorMessage", err.message);
+				pageSession.set("errorMessage", err);
 				return false;
 			}
 			else{
@@ -56,6 +60,22 @@ Template.Login.events({
 
 Template.Login.helpers({
 	errorMessage: function() {
+		var em = pageSession.get("errorMessage");
+		if(em instanceof Object) {
+			console.log(em);
+			if (em.error == 401) {
+				var i18msg = TAPi18n.__(em.reason);
+				if (i18msg && i18msg !== em.reason) {
+					return i18msg + " [" + em.error + "]";
+				}
+			} else if (em.error == 423) {
+				var reason = $.parseJSON(em.reason);
+				//sweetAlert && sweetAlert({title:"Account locked",text:TAPi18n.__("Lock message",reason.duration)});
+				return TAPi18n.__("Lock message",reason.duration);
+			}
+
+			return em.message;
+		}
 		return pageSession.get("errorMessage");
 	}
 	

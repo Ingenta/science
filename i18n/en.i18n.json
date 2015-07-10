@@ -138,6 +138,20 @@
             "descriptionEN": {
                 "label": "English Description"
             }
+        },
+        "configure": {
+            "ftpName": {
+                "label": "Ftp Name"
+            },
+            "userName": {
+                "label": "User Name"
+            },
+            "password": {
+                "label": "Password"
+            },
+            "filePath": {
+                "label": "File Path"
+            }
         }
     },
     "roles": "Roles",
@@ -157,5 +171,9 @@
     "permissions-delegate-and-revoke": "Delegate And Revoke",
     "Status": "Status",
     "Enable": "Enable",
-    "Disable": "Disable"
+    "Disable": "Disable",
+    "email_not_verified" : "email not verified",
+    "user_blocked":"user blocked",
+    "Email address or username":"Email or username",
+    "Lock message":"The account is locked. Also remaining %s seconds"
 }

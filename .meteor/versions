@@ -5,6 +5,7 @@ aldeed:collection2@2.3.3
 aldeed:simple-schema@1.3.3
 aldeed:template-extension@3.4.3
 amplify@1.0.0
+arthuryyx:ftp@0.3.10
 arthuryyx:simple-schema-i18n@0.1.9
 autoupdate@1.2.1
 babrahams:editable-json@0.4.3
@@ -40,6 +41,7 @@ dburles:mongo-collection-instances@0.3.3
 ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
+eluck:accounts-lockout@0.9.0
 email@1.0.6
 fastclick@1.0.3
 fortawesome:fontawesome@4.3.0
@@ -62,6 +64,7 @@ iron:url@1.0.9
 jackkav:xpath@0.0.10
 jquery@1.11.3_2
 json@1.0.3
+kevohagan:sweetalert@1.0.0
 lai:collection-extensions@0.1.3
 launch-screen@1.0.2
 lbee:moment-helpers@1.0.0

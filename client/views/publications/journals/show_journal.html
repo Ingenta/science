@@ -1,13 +1,13 @@
 <template name="ShowJournal">
     {{ initPage _id publisher}}
     <div class="pull-right">
-        {{#if isAdmin }}
+        {{#if can "modify-journal" "resource" }}
             {{> updatePublicationBannerModalForm}}
         {{/if}}
     </div>
     {{> journalBanner journal=_id}}
     <br>
-    {{#if isAdmin }}
+    {{#if can "modify-journal" "resource"  }}
         <div class="pull-right">
             {{> updateJournalTabsModalForm}}
         </div>
@@ -109,16 +109,14 @@
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-                <li role="presentation" class="tab-item {{isActiveTab slug}}"><a role="tab"
-                                                                                 data-toggle="tab">{{name}}</a>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+	                <a role="tab" data-toggle="tab">{{name}}</a>
                 </li>
             {{/each}}
         </ul>
 
         <div class="tabs-content-container">
-            {{> UI.contentBlock
-            context=__context__
-            }}
+            {{> UI.contentBlock context=__context__ }}
         </div>
     </div>
 </template>

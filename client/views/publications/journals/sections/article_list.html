@@ -1,11 +1,10 @@
 <template name="articleList">
-    {{> journalSummary}}
-    <hr>
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-3">
+            {{> journalCoverSummary}}
             {{> articleListTree}}
         </div>
-        <div class="col-xs-8">
+        <div class="col-xs-9">
             {{> articleListRight}}
         </div>
     </div>

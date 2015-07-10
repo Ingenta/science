@@ -40,7 +40,7 @@
             {{#each news}}
             {{> SingleNews}}
             {{else}}
-            {{_"No news found!"}}
+            {{_ "No news found!"}}
             {{/each}}
             </div>
         </div>
@@ -50,11 +50,11 @@
 <template name="SingleNews">
     <div class="row index index-num" index="{{index}}">
         <div class="pull-right">
-            {{#if isAdmin }}
-            {{> updateNewsModalForm}}
-            {{#if hasMoreThanOneNews}}
-              {{> deleteNewsModalForm}}
-            {{/if}}
+            {{#if can "manager-homepage" "news" }}
+	            {{> updateNewsModalForm}}
+	            {{#if hasMoreThanOneNews}}
+	                {{> deleteNewsModalForm}}
+	            {{/if}}
             {{/if}}
         </div>
         <div class="row">

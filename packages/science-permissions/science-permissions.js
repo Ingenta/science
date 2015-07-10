@@ -24,10 +24,14 @@ _.extend(Permissions, {
 		return Permissions.getRolesDescriptions()[code];
 	},
 	check : function(perm,pkg){
+		if(Meteor.user() && Meteor.user().disable){
+			Meteor.logout();
+		}
 		if(!Meteor.user()){
 			Router.go("login");
 		}
-		Permissions.throwIfUserCant(perm,pkg);
+		if(perm && pkg)
+			Permissions.throwIfUserCant(perm,pkg);
 	},undefineCustomRoleAndRevoke:function(role,callback){
 		try{
 			Meteor.call("batchRevoke","project-custom:"+role,function(err,result){
