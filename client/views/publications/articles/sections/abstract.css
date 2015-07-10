@@ -1,3 +1,55 @@
 div.articleOutline li {
     list-style-type: none;
 }
+/*div#section-index {*/
+    /*position:fixed;*/
+/*}*/
+
+#sidebar.affix {
+    top: 20px;
+}
+
+#section-index .nav>li>a {
+    color: #999;
+    border-left: 2px solid transparent;
+    padding: 4px 20px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#section-index .nav .nav>li>a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+}
+
+#section-index .nav>.active>a,
+#section-index .nav>li>a:hover,
+#section-index .nav>li>a:focus {
+    color: #563d7c;
+    text-decoration: none;
+    background-color: transparent;
+    border-left-color: #563d7c;
+}
+/* all active links */
+#section-index .nav>.active>a,
+#section-index .nav>.active:hover>a,
+#section-index .nav>.active:focus>a {
+    font-weight: 700;
+}
+/* nested active links */
+#section-index .nav .nav>.active>a,
+#section-index .nav .nav>.active:hover>a,
+#section-index .nav .nav>.active:focus>a {
+    font-weight: 500;
+}
+
+/* hide inactive nested list */
+#section-index .nav ul.nav {
+    display: none;
+}
+/* show active nested list */
+#section-index .nav>.active>ul.nav {
+    display: block;
+}

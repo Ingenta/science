@@ -2,15 +2,21 @@
     <div>
         <div class="col-xs-9">
             {{#each sections}}
-                <h3>{{label}} {{{title}}}</h3>
+	            <div>
+                    <h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
+	            </div>
                 {{{body}}}
                 <br>
                 {{#each sections}}
-                    <h4>{{label}} {{{title}}}</h4>
+	                <div>
+		                <h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+	                </div>
                     {{{body}}}
-                    <br>
+                    <br >
                     {{#each sections}}
-                        <h5>{{label}} {{{title}}}</h5>
+	                    <div>
+		                    <h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+	                    </div>
                         {{{body}}}
                     {{/each}}
                 {{/each}}
@@ -18,6 +24,34 @@
         </div>
         <div class="col-xs-3">
             <h4>{{_ "Key Topics"}}</h4>
+	        {{> sectionSelector sections=sections}}
         </div>
     </div>
+</template>
+
+<template name="sectionSelector">
+	<nav id="section-index">
+		<ul id="sidebar" class="nav nav-stacked">
+			<span>{{_ "section_selector_button"}}</span>
+			{{#each sections}}
+				<li>
+					<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+					<ul class="nav nav-stacked">
+					{{#each sections}}
+						<li>
+							<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+							<ul class="nav nav-stacked">
+							{{#each sections}}
+								<li>
+									<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+								</li>
+							{{/each}}
+							</ul>
+						</li>
+					{{/each}}
+					</ul>
+				</li>
+			{{/each}}
+		</ul>
+	</nav>
 </template>
