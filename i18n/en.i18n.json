@@ -176,5 +176,5 @@
     "user_blocked":"user blocked",
     "Email address or username":"Email or username",
     "Lock message":"The account is locked. Also remaining %s seconds",
-    "section_selector_button":"GO TO SECTION..."
+    "section_selector_button":"Section index"
 }

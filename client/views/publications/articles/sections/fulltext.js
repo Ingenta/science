@@ -5,7 +5,10 @@ Template.FullTextTemplate.onRendered(function(){
 	});
 	$("#sidebar").affix({
 		offset: {
-			top: 700
+			top: function(){
+				$("#sidebar").css({"width":$("#section-index").width()});
+				return $("#section-index").offset().top - 20;
+			}
 		}
 	});
 });
