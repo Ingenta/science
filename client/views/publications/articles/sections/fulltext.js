@@ -1,12 +1,11 @@
-Template.FullTextTemplate.onRendered(function(){
+Template.FullTextTemplate.onRendered(function () {
 	$('body').scrollspy({
-		target: '#section-index',
-		offset: 0
+		target: '#section-index'
 	});
 	$("#sidebar").affix({
 		offset: {
-			top: function(){
-				$("#sidebar").css({"width":$("#section-index").width()});
+			top: function () {
+				$("#sidebar").css({"width": $("#section-index").width()});
 				return $("#section-index").offset().top - 20;
 			}
 		}

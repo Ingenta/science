@@ -1,54 +1,54 @@
 <template name="FullTextTemplate">
-    <div>
-        <div class="col-xs-9">
-            {{#each sections}}
-	            <div>
-                    <h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
-	            </div>
-                {{{body}}}
-                <br>
-                {{#each sections}}
-	                <div>
-		                <h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
-	                </div>
-                    {{{body}}}
-                    <br >
-                    {{#each sections}}
-	                    <div>
-		                    <h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
-	                    </div>
-                        {{{body}}}
-                    {{/each}}
-                {{/each}}
-            {{/each}}
-        </div>
-        <div class="col-xs-3">
-            <h4>{{_ "Key Topics"}}</h4>
-	        {{> sectionSelector sections=sections}}
-        </div>
-    </div>
+	<div>
+		<div class="col-xs-9">
+			{{#each sections}}
+				<div>
+					<h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
+				</div>
+				{{{body}}}
+				<br>
+				{{#each sections}}
+					<div>
+						<h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+					</div>
+					{{{body}}}
+					<br>
+					{{#each sections}}
+						<div>
+							<h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+						</div>
+						{{{body}}}
+					{{/each}}
+				{{/each}}
+			{{/each}}
+		</div>
+		<div class="col-xs-3">
+			<h4>{{_ "Key Topics"}}</h4>
+			{{> sectionSelector sections=sections}}
+		</div>
+	</div>
 </template>
 
 <template name="sectionSelector">
+	<h4>{{_ "section_selector_button"}}</h4>
 	<nav id="section-index">
 		<ul id="sidebar" class="nav nav-stacked">
-			<h4>{{_ "section_selector_button"}}</h4>
 			{{#each sections}}
 				<li>
 					<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
 					<ul class="nav nav-stacked">
-					{{#each sections}}
-						<li>
-							<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-							<ul class="nav nav-stacked">
-							{{#each sections}}
-								<li>
-									<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-								</li>
-							{{/each}}
-							</ul>
-						</li>
-					{{/each}}
+						{{#each sections}}
+							<li>
+								<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+								<ul class="nav nav-stacked">
+									{{#each sections}}
+										<li>
+											<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+										</li>
+									{{/each}}
+								</ul>
+							</li>
+						{{/each}}
 					</ul>
 				</li>
 			{{/each}}
