@@ -29,7 +29,7 @@
         <br/>
 
         <div class="row">
-            {{#if isAdmin }}
+            {{#if can "add-journal" "resource" }}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
                     {{_ "Add new"}}
                 </button>
@@ -70,8 +70,10 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="pull-right">
-                    {{#if isAdmin }}
+                    {{#if can "modify-journal" "resource" }}
                         {{> updatePublicationModalForm}}
+                    {{/if}}
+	                {{#if can "delete-journal" "resource" }}
                         {{> deletePublicationModalForm}}
                     {{/if}}
                 </div>

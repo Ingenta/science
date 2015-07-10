@@ -1,5 +1,18 @@
 this.Articles = new Meteor.Collection("articles");
 
+
+this.Articles.allow({
+	insert: function (userId, doc) {
+		return Permissions.userCan("add-article", "resource", userId);
+	},
+	update: function (userId, doc) {
+		return Permissions.userCan("modify-article", "resource", userId);
+	},
+	remove: function (userId, doc) {
+		return Permissions.userCan("delete-article", "resource", userId);
+	}
+});
+
 //ArticlesSchema  = new SimpleSchema({
 //    title: {
 //        type: String,

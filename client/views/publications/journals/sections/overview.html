@@ -6,7 +6,7 @@
 </template>
 <template name="journalCoverSummary">
     <div class="pull-right">
-        {{#if isAdmin }}
+        {{#if can "modify-journal" "resource"  }}
             {{> updatePublicationPictureModalForm}}
         {{/if}}
     </div>
@@ -39,7 +39,7 @@
                 </div>
                 <h5>{{_ "Description"}}</h5>
                 <div class="pull-right">
-                    {{#if isAdmin }}
+                    {{#if can "modify-journal" "resource"  }}
                         {{> updatePublicationDescriptionModalForm}}
                     {{/if}}
                 </div>

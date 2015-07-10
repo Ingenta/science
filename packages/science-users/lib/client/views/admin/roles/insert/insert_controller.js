@@ -8,6 +8,7 @@ this.AdminRolesInsertController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
+		Permissions.check("edit-custom-roles","permissions");
 		/*BEFORE_FUNCTION*/
 		this.next();
 	},
