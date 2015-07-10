@@ -69,3 +69,7 @@ pluralize = function (n, thing, options) {
 }
 
 Template.registerHelper('pluralize', pluralize);
+
+Template.registerHelper("highlight",function(keyword, str){
+    return str.split(keyword).join("<span class='highlight'>"+keyword+"</span>")
+});
