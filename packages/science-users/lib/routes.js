@@ -85,14 +85,6 @@ Meteor.startup(function(){
             this.next();
         }
     });
-    Router.route("admin.upload", {
-        path: "/admin/upload",
-        title: function () {
-            return TAPi18n.__("Upload");
-        },
-        parent: "admin"
-    });
-
     Router.route("admin.users", {
         path: "/admin/users",
         controller: "AdminUsersController",

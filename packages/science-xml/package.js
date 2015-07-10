@@ -15,6 +15,7 @@ Package.onUse(function (api) {
             'science-lib'
         ],
         both);
+    api.addFiles('both/routes.js',both);
     api.addFiles('both/uploadLog.js', both);
     api.addFiles('server/science-xml.js', 'server');
     api.addFiles('server/xml-lib.js', 'server');
