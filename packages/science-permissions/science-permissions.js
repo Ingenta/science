@@ -30,7 +30,8 @@ _.extend(Permissions, {
 		if(!Meteor.user()){
 			Router.go("login");
 		}
-		Permissions.throwIfUserCant(perm,pkg);
+		if(perm && pkg)
+			Permissions.throwIfUserCant(perm,pkg);
 	},undefineCustomRoleAndRevoke:function(role,callback){
 		try{
 			Meteor.call("batchRevoke","project-custom:"+role,function(err,result){

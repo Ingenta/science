@@ -64,6 +64,10 @@ Meteor.startup(function(){
         template: "Admin",
         yieldTemplates: {
             'AdminRoleEdit': { to: 'AdminSubcontent'}
+        },
+        onBeforeAction: function() {
+            Permissions.check("edit-custom-roles","permissions");
+            this.next();
         }
     });
     Router.route("admin.roles.choose.permissions",{
@@ -75,7 +79,11 @@ Meteor.startup(function(){
         title:function(){
             return TAPi18n.__("choosePermissions");
         },
-        parent:"admin.roles"
+        parent:"admin.roles",
+        onBeforeAction: function() {
+            Permissions.check("edit-custom-roles","permissions");
+            this.next();
+        }
     });
     Router.route("admin.upload", {
         path: "/admin/upload",
