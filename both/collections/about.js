@@ -6,7 +6,7 @@ AboutSchema = new SimpleSchema({
         unique: true
     },
     chinesetitle: {
-        type: String,
+        type: String
     },
     publications: {
         type: String
