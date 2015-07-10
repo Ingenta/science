@@ -138,6 +138,20 @@
             "descriptionEN": {
                 "label": "English Description"
             }
+        },
+        "configure": {
+            "ftpName": {
+                "label": "Ftp Name"
+            },
+            "userName": {
+                "label": "User Name"
+            },
+            "password": {
+                "label": "Password"
+            },
+            "filePath": {
+                "label": "File Path"
+            }
         }
     },
     "roles": "Roles",

@@ -8,6 +8,7 @@ this.AdminRolesController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
+		Permissions.check("get-users-roles","permissions");
 		/*BEFORE_FUNCTION*/
 		this.next();
 	},
