@@ -29,6 +29,14 @@ Template.SearchResults.helpers({
         return Articles.find({"authors.given": a.split(" ")[1], "authors.surname": a.split(" ")[0]});
     },
     'filters': function () {
+
+//        Meteor.call("getFilter",filtername,query,function(err,result){
+//            if(!err){
+//                Session.set(filtername,result);
+//            }
+//
+//        });
+//        return Session.get(filtername);
         return [{
             filterTitle: TAPi18n.__("FILTER BY Publisher"),
             filterOptions: [{

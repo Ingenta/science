@@ -70,7 +70,12 @@ pluralize = function (n, thing, options) {
 
 Template.registerHelper('pluralize', pluralize);
 
+
 Template.registerHelper('clearStr',function(str){
     str = str.replace(/(<\/?[^>]+?>|\.)/g,'');
     return str.replace(/\s/g,'-');
-})
+});
+
+Template.registerHelper("highlight",function(keyword, str){
+    return str.split(keyword).join("<span class='highlight'>"+keyword+"</span>")
+});
