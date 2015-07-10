@@ -70,6 +70,7 @@ Template.Login.helpers({
 				}
 			} else if (em.error == 423) {
 				var reason = $.parseJSON(em.reason);
+				//sweetAlert && sweetAlert({title:"Account locked",text:TAPi18n.__("Lock message",reason.duration)});
 				return TAPi18n.__("Lock message",reason.duration);
 			}
 

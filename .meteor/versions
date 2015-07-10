@@ -63,6 +63,7 @@ iron:url@1.0.9
 jackkav:xpath@0.0.10
 jquery@1.11.3_2
 json@1.0.3
+kevohagan:sweetalert@1.0.0
 lai:collection-extensions@0.1.3
 launch-screen@1.0.2
 lbee:moment-helpers@1.0.0
