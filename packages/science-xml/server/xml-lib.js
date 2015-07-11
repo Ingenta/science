@@ -38,7 +38,8 @@ ScienceXML.getParagraphsFromASectionNode = function (section) {
     var paragraphNodes = xpath.select("child::p", section);
     var paragraphs = "";
     paragraphNodes.forEach(function (paragraph) {
-        var sectionText = new serializer().serializeToString(paragraph)
+        var parseResult = ScienceXML.handlePara(paragraph);
+        var sectionText = new serializer().serializeToString(parseResult.paraNode);
         paragraphs += ScienceXML.replaceItalics(sectionText);
     });
     return paragraphs;
@@ -49,7 +50,7 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
     var label = ScienceXML.getValueByXPathIncludingXml("child::label", section);
     var paragraphs = ScienceXML.getParagraphsFromASectionNode(section);
     return {label: label, title: title, body: paragraphs};
-}
+};
 
 ScienceXML.getFullText = function (results, doc) {
     var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
@@ -59,7 +60,7 @@ ScienceXML.getFullText = function (results, doc) {
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc)
+    var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc);
     if (!abstract)  results.errors.push("No abstract found");
     else results.abstract = abstract;
     return results;
@@ -122,3 +123,38 @@ ScienceXML.getDateFromHistory = function (type, doc) {
     if (!day || !month || !year)return;
     return new Date(Date.parse(year + '/ ' +month + '/'+day));
 }
+
+ScienceXML.handlePara = function(paragraph){
+    var handled = {paraNode:paragraph};
+
+    //检查是否含有公式
+    var formulaNodes = xpath.select("child::disp-formula", paragraph);
+    if(formulaNodes && formulaNodes.length){
+        handled.formulas = [];
+        formulaNodes.forEach(function(fnode){
+            var formula = {};
+            var label = xpath.select("child::label",fnode);
+            if(label && label.length){
+                formula.label = label[0].textContent;
+            }
+            var tex = xpath.select("child::alternatives/tex-math",fnode);
+            if(tex && tex.length){
+                if(tex[0].childNodes[2].nodeName=='#cdata-section'){
+                    formula.tex = tex[0].childNodes[2].data;
+                }
+
+            }
+            var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
+            var mathml =mmlSelect('child::alternatives/mml:math', fnode);
+            if(mathml && mathml.length){
+                formula.mathml=mathml[0];
+            }
+            handled.formulas.push(formula);
+            while(fnode.firstChild)
+                fnode.removeChild(fnode.firstChild);
+        });
+    }
+
+    return handled;
+
+};
