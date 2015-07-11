@@ -1,27 +1,31 @@
 <template name="FullTextTemplate">
-	<div>
+	<div id="fulltext-viewer">
+		{{#mathjax}}
 		<div class="col-xs-9">
+
 			{{#each sections}}
 				<div>
 					<h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
 				</div>
-				{{{body}}}
+				{{{body.html}}}
 				<br>
 				{{#each sections}}
 					<div>
 						<h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
 					</div>
-					{{{body}}}
+					{{{body.html}}}
 					<br>
 					{{#each sections}}
 						<div>
 							<h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
 						</div>
-						{{{body}}}
+						{{{body.html}}}
 					{{/each}}
 				{{/each}}
 			{{/each}}
+
 		</div>
+		{{/mathjax}}
 		<div class="col-xs-3">
 			<h4>{{_ "Key Topics"}}</h4>
 			<ul class="list-unstyled">

@@ -36,11 +36,14 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 
 ScienceXML.getParagraphsFromASectionNode = function (section) {
     var paragraphNodes = xpath.select("child::p", section);
-    var paragraphs = "";
+    var paragraphs = {html:"",tex:[]};
     paragraphNodes.forEach(function (paragraph) {
         var parseResult = ScienceXML.handlePara(paragraph);
         var sectionText = new serializer().serializeToString(parseResult.paraNode);
-        paragraphs += ScienceXML.replaceItalics(sectionText);
+        paragraphs.html += ScienceXML.replaceItalics(sectionText);
+        if(parseResult.formulas && parseResult.formulas.length){
+            paragraphs.tex = _.union(paragraphs.tex,parseResult.formulas);
+        }
     });
     return paragraphs;
 }
@@ -133,6 +136,10 @@ ScienceXML.handlePara = function(paragraph){
         handled.formulas = [];
         formulaNodes.forEach(function(fnode){
             var formula = {};
+            var id = xpath.select("./@id",fnode);
+            if(id && id.length){
+                formula.id=id[0].value;
+            }
             var label = xpath.select("child::label",fnode);
             if(label && label.length){
                 formula.label = label[0].textContent;
@@ -147,11 +154,19 @@ ScienceXML.handlePara = function(paragraph){
             var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
             var mathml =mmlSelect('child::alternatives/mml:math', fnode);
             if(mathml && mathml.length){
-                formula.mathml=mathml[0];
+                formula.mathml=mathml[0].toString().replace(/<mml:/g,'<').replace(/<\/mml:/g,'</');
             }
             handled.formulas.push(formula);
             while(fnode.firstChild)
                 fnode.removeChild(fnode.firstChild);
+
+            if(formula.mathml){
+                var nd = ScienceXML.xmlStringToXmlDoc(formula.mathml);
+                fnode.appendChild(nd.documentElement);
+            }else if(formula.tex){
+                fnode.appendChild(ScienceXML.xmlStringToXmlDoc("<p>"+formula.tex + "</p>").documentElement);
+            }
+
         });
     }
 
