@@ -185,6 +185,10 @@ Meteor.methods({
                 if(position && position.length){
                     figure.position = position[0].value;
                 }
+                var label = xpath.select("child::label/text()",fig);
+                if(label && label.length){
+                    figure.label=label[0].toString();
+                }
                 var caption = xpath.select("child::caption/p",fig);
                 if(caption && caption.length){
                     figure.caption=caption[0].toString();
