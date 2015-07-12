@@ -7,19 +7,25 @@
 					<div>
 						<h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
 					</div>
-					{{{body.html}}}
+					<p>
+						{{{body.html}}}
+					</p>
 					<br>
 					{{#each sections}}
 						<div>
 							<h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
 						</div>
-						{{{body.html}}}
+						<p>
+							{{{body.html}}}
+						</p>
 						<br>
 						{{#each sections}}
 							<div>
 								<h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
 							</div>
-							{{{body.html}}}
+							<p>
+								{{{body.html}}}
+							</p>
 						{{/each}}
 					{{/each}}
 				{{/each}}
@@ -96,6 +102,7 @@
 						<img style="width:100%" src="/test/{{img}}"/>
 					</div>
 					<h5>Caption</h5>
+
 					<p>
 						{{{caption}}}
 					</p>
@@ -105,5 +112,17 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</template>
+
+<template name="figure">
+	<div class="figure" id="fig-{{id}}">
+		<div class="figure-image">
+			<img src="/test/{{img}}" border="0" alt="">
+			<span>{{label}}</span>
+		</div>
+		<div class="figure-caption">
+			<b>Caption:</b>&nbsp;&nbsp;{{{caption}}}</div>
+		<div style="clear:both;"></div>
 	</div>
 </template>

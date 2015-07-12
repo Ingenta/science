@@ -77,9 +77,27 @@ div.articleOutline li {
     display: block;
 }
 
-
 xref[ref-type='fig'] {
-    cursor:pointer;
-    text-decoration:underline;
-    color:blue;
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+.figure {
+    padding: 20px 0px
+}
+.figure-image {
+    width: 35%;
+    float: left;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+.figure-caption {
+    width: 65%;
+    float: left;
+}
+
+.figure-image > img {
+    width: 100%;
 }

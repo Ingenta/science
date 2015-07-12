@@ -10,6 +10,17 @@ Template.FullTextTemplate.onRendered(function () {
 			}
 		}
 	});
+
+	var figs = _.clone(Template.currentData().figures);
+	_.each(figs,function(fig){
+		var refs = $("xref[ref-type='fig'][rid='"+fig.id+"']");
+		if(!refs || !refs.length){
+			refs = $("xref[ref-type='fig'][rid='"+fig.links[0]+"']");
+		}
+		if(refs && refs.length){
+			Blaze.renderWithData(Template.figure,fig,$(refs[0]).closest("p")[0]);
+		}
+	});
 });
 
 Template.FullTextTemplate.events({
@@ -49,3 +60,12 @@ Template.figModal.helpers({
 		return grap.href;
 	}
 });
+
+Template.figure.helpers({
+	"img":function(){
+		var grap = _.find(this.graphics,function(g){
+			return g.use == 'online';
+		});
+		return grap.href;
+	}
+})
