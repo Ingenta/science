@@ -171,60 +171,9 @@ Meteor.methods({
         if(published) results.published = published
 
 
+        results.figures = ScienceXML.getFigures(doc);
 
-        results.figures = [];
-        var figNodes = xpath.select("//floats-group/fig", doc);
-        if(figNodes && figNodes.length){
-            figNodes.forEach(function (fig) {
-                var figure ={};
-                var id = xpath.select("./@id", fig);
-                if(id && id.length){
-                    figure.id=id[0].value;
-                }
-                var position = xpath.select("./@position",fig);
-                if(position && position.length){
-                    figure.position = position[0].value;
-                }
-                var label = xpath.select("child::label/text()",fig);
-                if(label && label.length){
-                    figure.label=label[0].toString();
-                }
-                var caption = xpath.select("child::caption/p",fig);
-                if(caption && caption.length){
-                    figure.caption=caption[0].toString();
-                }
-                var graphicLinks = xpath.select("child::graphic",fig);
-                if(graphicLinks && graphicLinks.length){
-                    figure.links=[];
-                    graphicLinks.forEach(function(gl){
-                        var glId = xpath.select("./@id", gl);
-                        if(glId && glId.length){
-                            figure.links.push(glId[0].value);
-                        }
-                    })
-                }
-
-                var graphics = xpath.select("child::alternatives/graphic",fig);
-                if(graphics && graphics.length){
-                    figure.graphics = [];
-                    var xlinkSelect = xpath.useNamespaces({"xlink": "http://www.w3.org/1999/xlink"});
-                    graphics.forEach(function(grap){
-                        var g = {};
-                        var suse = xpath.select("./@specific-use", grap);
-                        if(suse && suse.length){
-                            g.use=suse[0].value;
-                        }
-                        var href =xlinkSelect('@xlink:href', grap);
-                        if(href && href.length){
-                            g.href = href[0].value;
-                        }
-                        figure.graphics.push(g);
-                    })
-                }
-
-                results.figures.push(figure);
-            });
-        }
+        results.tables = ScienceXML.getTables(doc);
 
 
         return results;
