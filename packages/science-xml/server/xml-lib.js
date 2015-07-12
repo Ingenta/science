@@ -203,7 +203,7 @@ ScienceXML.getTables =function(doc){
             if(label && label.length){
                 table.label=label[0].toString();
             }
-            var caption = xpath.select("child::caption/p",tb);
+            var caption = xpath.select("child::caption/p/text()",tb);
             if(caption && caption.length){
                 table.caption=caption[0].toString();
             }

@@ -21,6 +21,14 @@ Template.FullTextTemplate.onRendered(function () {
 			Blaze.renderWithData(Template.figure,fig,$(refs[0]).closest("p")[0]);
 		}
 	});
+
+	var tbs = _.clone(Template.currentData().tables);
+	_.each(tbs,function(tb){
+		var refs = $("xref[ref-type='table'][rid='"+tb.id+"']");
+		if(refs && refs.length){
+			Blaze.renderWithData(Template.atttable,tb,$(refs[0]).closest("p")[0]);
+		}
+	});
 });
 
 Template.FullTextTemplate.events({
@@ -33,10 +41,8 @@ Template.FullTextTemplate.events({
 			if(fig){
 				Session.set("fig",fig);
 			}
-
 			$(".bs-example-modal-md").modal('show');
 		}
-
 	}
 });
 
@@ -68,4 +74,4 @@ Template.figure.helpers({
 		});
 		return grap.href;
 	}
-})
+});

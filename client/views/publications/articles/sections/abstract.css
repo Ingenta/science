@@ -96,8 +96,13 @@ xref[ref-type='fig'] {
 .figure-caption {
     width: 65%;
     float: left;
+    padding-right:20px;
 }
 
 .figure-image > img {
     width: 100%;
+}
+
+.att-table{
+    width:100%;
 }
