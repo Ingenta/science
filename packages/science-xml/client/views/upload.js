@@ -144,7 +144,8 @@ var importXmlByLogId = function (logId) {
                 received: result.received,
                 accepted: result.accepted,
                 published: result.published,
-                topic: result.topic
+                topic: result.topic,
+                figures:result.figures
             });
 
 

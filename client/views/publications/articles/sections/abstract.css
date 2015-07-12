@@ -76,3 +76,10 @@ div.articleOutline li {
 #section-index .nav > .active > ul.nav {
     display: block;
 }
+
+
+xref[ref-type='fig'] {
+    cursor:pointer;
+    text-decoration:underline;
+    color:blue;
+}
