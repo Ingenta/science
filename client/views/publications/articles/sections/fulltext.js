@@ -53,7 +53,19 @@ Template.FullTextTemplate.events({
 			if(fig){
 				Session.set("fig",fig);
 			}
-			$(".bs-example-modal-md").modal('show');
+			$(".figure-modal").modal('show');
+		}
+	},
+	"click xref[ref-type='table']":function(e){
+		var rid=($(e.target).attr("rid"));
+		if(rid){
+			var table = _.find(Template.currentData().tables,function(table){
+				return table.id==rid;
+			});
+			if(table){
+				Session.set("table",table);
+			}
+			$(".table-modal").modal('show');
 		}
 	},
 	"click #resetFulltext":function(){
@@ -62,10 +74,10 @@ Template.FullTextTemplate.events({
 });
 
 Template.figModal.helpers({
-	"title":function(){
+	"label":function(){
 		if(!Session.get("fig"))
 			return "";
-		return "fig."+Session.get("fig").id;
+		return Session.get("fig").label;
 	},
 	"caption":function(){
 		if(!Session.get("fig"))
@@ -88,5 +100,23 @@ Template.figure.helpers({
 			return g.use == 'online';
 		});
 		return grap.href;
+	}
+});
+
+Template.tableModal.helpers({
+	"label":function(){
+		if(!Session.get("table"))
+			return "";
+		return Session.get("table").label;
+	},
+	"caption":function(){
+		if(!Session.get("table"))
+			return;
+		return Session.get("table").caption;
+	},
+	"table":function(){
+		if(!Session.get("table"))
+			return;
+		return Session.get("table").table;
 	}
 });

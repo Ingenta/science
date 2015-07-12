@@ -83,6 +83,12 @@ xref[ref-type='fig'] {
     color: blue;
 }
 
+xref[ref-type='table'] {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
 .figure {
     padding: 20px 0px
 }

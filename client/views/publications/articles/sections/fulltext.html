@@ -58,6 +58,7 @@
 			{{> sectionSelector sections=sections}}
 		</div>
 		{{> figModal figures}}
+		{{> tableModal tables}}
 	</div>
 </template>
 
@@ -90,13 +91,13 @@
 
 
 <template name="figModal">
-	<div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal fade figure-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 							aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="gridSystemModalLabel">{{title}}</h4>
+					<h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
 				</div>
 				<div class="modal-body">
 					<div>
@@ -107,6 +108,33 @@
 					<p>
 						{{{caption}}}
 					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="tableModal">
+	<div class="modal fade table-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="att-table">
+						<div>
+							{{{table}}}
+						</div>
+						<div>
+							<b>{{label}} {{{caption}}}</b>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
