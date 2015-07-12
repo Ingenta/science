@@ -8,7 +8,6 @@ Template.i18n_switch.events({
 TAPi18n._afterUILanguageChange = function () {
 //triggers on language switch
     mo.setLocale(TAPi18n.getLanguage());
-    debugger
     if(TAPi18n.afterChangeHook){
         _.map(TAPi18n.afterChangeHook,function(hook,key){
             hook && hook();

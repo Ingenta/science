@@ -1,4 +1,4 @@
-Template.FullTextTemplate.onRendered(function () {
+var initFulltext=function(){
 	$('body').scrollspy({
 		target: '#section-index'
 	});
@@ -11,7 +11,7 @@ Template.FullTextTemplate.onRendered(function () {
 		}
 	});
 
-	var figs = _.clone(Template.currentData().figures);
+	var figs = Router.current().data().figures;
 	_.each(figs,function(fig){
 		var refs = $("xref[ref-type='fig'][rid='"+fig.id+"']");
 		if(!refs || !refs.length){
@@ -22,11 +22,23 @@ Template.FullTextTemplate.onRendered(function () {
 		}
 	});
 
-	var tbs = _.clone(Template.currentData().tables);
+	var tbs = Router.current().data().tables;
 	_.each(tbs,function(tb){
 		var refs = $("xref[ref-type='table'][rid='"+tb.id+"']");
 		if(refs && refs.length){
 			Blaze.renderWithData(Template.atttable,tb,$(refs[0]).closest("p")[0]);
+		}
+	});
+};
+
+Template.FullTextTemplate.onRendered(function () {
+	initFulltext();
+});
+
+Meteor.startup(function(){
+	TAPi18n.addChangeHook("fullTextInit",function(){
+		if(Router.current().route.getName()=='article.show'){
+			Meteor.setTimeout(initFulltext,1000);
 		}
 	});
 });
@@ -43,6 +55,9 @@ Template.FullTextTemplate.events({
 			}
 			$(".bs-example-modal-md").modal('show');
 		}
+	},
+	"click #resetFulltext":function(){
+		initFulltext();
 	}
 });
 
