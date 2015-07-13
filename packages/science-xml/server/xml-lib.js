@@ -11,7 +11,7 @@ ScienceXML.getFileContentsFromFullPath = function (path) {
 ScienceXML.getFileContentsFromPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
     //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
-    if (path === undefined)return;
+    if (!path)return;
     var fullPath = Meteor.absoluteUrl(path.substring(1));
     return getLocationSync(fullPath);
 }
