@@ -305,6 +305,23 @@
             "descriptionEN": {
                 "label": "英文描述"
             }
+        },
+        "configure": {
+            "ftpName": {
+                "label": "Ftp名称"
+            },
+            "port": {
+                "label": "端口"
+            },
+            "userName": {
+                "label": "用户名"
+            },
+            "password": {
+                "label": "密码"
+            },
+            "filePath": {
+                "label": "文件路径"
+            }
         }
     },
     "roles": "角色",
