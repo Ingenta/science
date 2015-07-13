@@ -7,5 +7,11 @@ Router.route("admin.upload", {
 	template:"Admin",
 	yieldTemplates: {
 		'AdminUpload': { to: 'AdminSubcontent'}
+	},
+	waitOn:function () {
+		return [
+			Meteor.subscribe('uploadLog'),
+			Meteor.subscribe('uploadTasks')
+		]
 	}
 });
