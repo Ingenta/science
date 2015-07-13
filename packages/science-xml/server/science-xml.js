@@ -170,6 +170,12 @@ Meteor.methods({
         var published = ScienceXML.getDateFromHistory("published", doc);
         if(published) results.published = published
 
+
+        results.figures = ScienceXML.getFigures(doc);
+
+        results.tables = ScienceXML.getTables(doc);
+
+
         return results;
     }
 });

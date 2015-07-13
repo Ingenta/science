@@ -15,16 +15,15 @@ Template.uploadForm.events({
             var fileId;
             ArticleXml.insert(file, function (err, fileObj) {
                 fileId = fileObj._id;
-                UploadLog.insert({
+                var logId=UploadLog.insert({
                     fileId: fileObj._id,
                     name: fileObj.name(),
                     uploadedAt: new Date(),
                     errors: errors,
                     status: status
                 });
+                logId && importXmlByLogId(logId);
             });
-
-            //TODO: need to wait here for upload to finish to get fileid so we can get the path to parse
         });
     }
 });
@@ -42,6 +41,12 @@ Template.UploadLogModal.helpers({
         return Session.get("errors");
     }
 });
+Template.uploadTableRow.onRendered(function(){
+    //console.log(this);
+    //console.log($("button[data-logid='"+this.data._id+"']"));
+    //$("button[data-logid='"+this.data._id+"']").click();
+});
+
 Template.uploadTableRow.events({
     "click .btn": function (e) {
         //get this item in the table
@@ -77,7 +82,6 @@ Template.uploadTableRow.events({
 });
 
 var importXmlByLogId = function (logId) {
-
     //get failed state
     var log = UploadLog.findOne({_id: logId});
     var path = ArticleXml.findOne({_id: log.fileId}).url();
@@ -140,7 +144,9 @@ var importXmlByLogId = function (logId) {
                 received: result.received,
                 accepted: result.accepted,
                 published: result.published,
-                topic: result.topic
+                topic: result.topic,
+                figures:result.figures,
+                tables:result.tables
             });
 
 

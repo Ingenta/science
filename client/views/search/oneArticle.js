@@ -4,5 +4,8 @@ Template.oneArticle.helpers({
     },
     getFullName: function () {
         return this.surname + ' ' + this.given;
+    },
+    query:function(){
+        return Router.current().params.searchQuery;
     }
 });

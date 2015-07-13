@@ -1,8 +1,9 @@
 #LanguageBar {
   height: 22px;
   background: lightgrey;
-  cursor:pointer;
+  cursor: pointer;
   font-size: 10px;
-  padding-top: 3px;
-
+  padding-top: 4px;
+  margin-bottom: 7px;
+  position:static;
 }

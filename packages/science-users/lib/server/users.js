@@ -45,7 +45,7 @@ Users.before.insert(function(userId, doc) {
         doc.profile = doc.profile || {};
         doc.profile.email = doc.emails[0].address;
     }
-    doc.disable = true;
+    doc.disable = false;
 });
 
 Users.before.update(function(userId, doc, fieldNames, modifier, options) {

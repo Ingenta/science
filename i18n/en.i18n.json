@@ -178,5 +178,6 @@
     "email_not_verified" : "email not verified",
     "user_blocked":"user blocked",
     "Email address or username":"Email or username",
-    "Lock message":"The account is locked. Also remaining %s seconds"
+    "Lock message":"The account is locked. Also remaining %s seconds",
+    "section_selector_button":"Section index"
 }
