@@ -28,6 +28,8 @@ Meteor.subscribe('news');
 
 Meteor.subscribe('images');
 
+Meteor.subscribe('configure');
+
 //Meteor.subscribe('articleViews');
 
 Router.onBeforeAction(function () {

@@ -143,6 +143,9 @@
             "ftpName": {
                 "label": "Ftp Name"
             },
+            "port": {
+                "label": "Port"
+            },
             "userName": {
                 "label": "User Name"
             },
