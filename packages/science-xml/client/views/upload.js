@@ -50,6 +50,7 @@ Template.UploadLogModal.helpers({
 
 Template.uploadTableRow.events({
     "click .btn": function (e) {
+        Session.set('errors', undefined);
         var button = $(e.target) // Button that triggered the modal
         var uploadLogId = button.data('logid') // Extract info from data-* attributes
         Session.set('uploadLogId', uploadLogId);
@@ -86,6 +87,8 @@ var importXmlByLogId = function (logId) {
             }
 
             if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Success"}});
+
+            //ARTICLE INSERT
             var volume = Volumes.findOne({journalId: result.journalId, volume: result.volume});
             if (!volume) {
                 volume = Volumes.insert({journalId: result.journalId, volume: result.volume});
