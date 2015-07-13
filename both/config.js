@@ -9,5 +9,4 @@ Config={
         tmpDir: '/Users/jiangkai/Temp/uploads/tmp',
         uploadDir:'/Users/jiangkai/Temp/uploads'
     }
-
-}
+};

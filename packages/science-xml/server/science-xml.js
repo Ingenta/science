@@ -2,7 +2,14 @@ Meteor.startup(function () {
     UploadServer.init({
         tmpDir: Config.uploadXmlDir.tmpDir,
         uploadDir: Config.uploadXmlDir.uploadDir,
-        checkCreateDirectories: true //create the directories for you
+        checkCreateDirectories: true, //create the directories for you
+        finished:function(fileInfo, formFields){
+            Zips.insert({
+                filePath:Config.uploadXmlDir.uploadDir + fileInfo.path,
+                status:'ready',
+                createOn:new Date()
+            })
+        }
     })
 });
 
