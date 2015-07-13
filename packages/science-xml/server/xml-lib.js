@@ -237,7 +237,7 @@ ScienceXML.handlePara = function(paragraph){
             }
             var tex = xpath.select("child::alternatives/tex-math",fnode);
             if(tex && tex.length){
-                if(tex[0].childNodes[2].nodeName=='#cdata-section'){
+                if(tex[0].childNodes[2] && tex[0].childNodes[2].nodeName=='#cdata-section'){
                     formula.tex = tex[0].childNodes[2].data;
                 }
 

@@ -120,3 +120,9 @@ Template.tableModal.helpers({
 		return Session.get("table").table;
 	}
 });
+
+Template.DataMediaTemplate.helpers({
+	getFigures:function(){
+		return Template.currentData().figures;
+	}
+})

@@ -172,12 +172,9 @@
 
 <template name="DataMediaTemplate">
     <div class="row">
-        <div class="col-xs-6">
-            图片
-        </div>
-        <div class="col-xs-6">
-            说明
-        </div>
+        {{#each getFigures}}
+			{{> figure}}
+        {{/each}}
     </div>
 </template>
 
