@@ -134,6 +134,7 @@ tap:i18n@1.5.0
 tap:i18n-ui@0.7.0
 templates:tabs@2.1.5
 templating@1.1.1
+tomi:upload-jquery@2.1.7
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
