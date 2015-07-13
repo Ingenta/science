@@ -24,6 +24,12 @@
 </template>
 
 <template name="articleListRight">
+    {{#with issueContext}}
+        <div class="pull-right">
+            {{> updateIssueDescriptionModalForm}}
+        </div>
+        {{description}}
+    {{/with}}
     <h4>{{getIssueTitle}}</h4>
     <hr>
     {{resetArticlesFilter}}

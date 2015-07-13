@@ -54,6 +54,12 @@ Template.articleListRight.helpers({
             return title;
         }
 
+    },
+    issueContext: function () {
+        var curIssue = Session.get("currentIssueId");
+        if (curIssue) {
+            return Issues.findOne({_id: curIssue});
+        }
     }
 });
 
