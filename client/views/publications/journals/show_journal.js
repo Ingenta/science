@@ -11,7 +11,7 @@ Template.journalBanner.helpers({
     }
 });
 Template.journalOptions.helpers({
-    context: function () {
+    journalContext: function () {
         var currentTitle = Router.current().params.journalTitle;
         return Publications.findOne({title: currentTitle});
     }
