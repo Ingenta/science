@@ -3,26 +3,31 @@ Template.uploadForm.events({
         FS.Utility.eachFile(event, function (file) {
             var errors = [];
             var status;
-            console.log(file.type)
             if (file.type === "text/xml") {
                 status = "Pending";
-            } else if (file.type.contains("zip")) {
-                status = "Opening Zip...";
             } else {
                 status = "Failed";
                 errors.push("File type mismatch!")
             }
             var fileId;
+            //upload
             ArticleXml.insert(file, function (err, fileObj) {
                 fileId = fileObj._id;
-                var logId=UploadLog.insert({
+                var logId = UploadLog.insert({
                     fileId: fileObj._id,
                     name: fileObj.name(),
                     uploadedAt: new Date(),
                     errors: errors,
                     status: status
                 });
-                logId && importXmlByLogId(logId);
+                //parse
+                UploadTasks.insert({
+                    action: "Parse",
+                    started: new Date(),
+                    status: "Started",
+                    logId: logId
+                });
+                //logId && importXmlByLogId(logId);
             });
         });
     }
@@ -34,57 +39,31 @@ Template.AdminUpload.helpers({
     }
 });
 Template.UploadLogModal.helpers({
-    results: function () {
-        return Session.get("result");
+    uploadTasks: function () {
+        var logId = Session.get('uploadLogId')
+        return UploadTasks.find({logId: logId}, {sort: {'started': -1}});
     },
     errors: function () {
         return Session.get("errors");
     }
 });
-Template.uploadTableRow.onRendered(function(){
-    //console.log(this);
-    //console.log($("button[data-logid='"+this.data._id+"']"));
-    //$("button[data-logid='"+this.data._id+"']").click();
-});
 
 Template.uploadTableRow.events({
     "click .btn": function (e) {
-        //get this item in the table
-//        debugger;
         Session.set('errors', undefined);
-        Session.set("result", undefined);
         var button = $(e.target) // Button that triggered the modal
         var uploadLogId = button.data('logid') // Extract info from data-* attributes
-        var log = UploadLog.findOne({_id: uploadLogId});
-        var path = ArticleXml.findOne({_id: log.fileId}).url();
-        if (log.errors.length) { //if file is not xml guard then return
-            Session.set('errors', log.errors);
-            Session.set("result", undefined);
-            return;
-        }
-//        if (log.name.contains(".zip")) {
-//            //open from path
-////            console.log(Meteor.absoluteUrl(path.substring(1)));
-////            console.log(ScienceXML.getFileContentsFromPath(path));
-//            Meteor.call('getXmlFromZip', path, function (error, result) {
-//                if (error) {
-//                    console.log(error);
-//                }
-//                else{
-//                    console.log(result);
-//                }
-//            });
-//
-//        } else
-            importXmlByLogId(uploadLogId);
-
+        Session.set('uploadLogId', uploadLogId);
+        importXmlByLogId(uploadLogId);
     }
 });
 
 var importXmlByLogId = function (logId) {
     //get failed state
     var log = UploadLog.findOne({_id: logId});
+    if(log.status==="Success")return;
     var path = ArticleXml.findOne({_id: log.fileId}).url();
+    var thisTask = UploadTasks.findOne({action: "Parse", logId: logId});
     //call parse and put results in session
     Meteor.call('parseXml', path, function (error, result) {
         if (error) {
@@ -93,7 +72,9 @@ var importXmlByLogId = function (logId) {
             Session.set('errors', log.errors);
             Session.set("result", undefined);
             UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
-        } else {
+            if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Failed"}});
+        }
+        else {
             //add article object to session
             if (result.errors)
                 log.errors = result.errors;
@@ -101,9 +82,13 @@ var importXmlByLogId = function (logId) {
             Session.set("result", result);
             if (log.errors.length) {
                 UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
+                if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Failed"}});
                 return;
             }
 
+            if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Success"}});
+
+            //ARTICLE INSERT
             var volume = Volumes.findOne({journalId: result.journalId, volume: result.volume});
             if (!volume) {
                 volume = Volumes.insert({journalId: result.journalId, volume: result.volume});
@@ -145,8 +130,8 @@ var importXmlByLogId = function (logId) {
                 accepted: result.accepted,
                 published: result.published,
                 topic: result.topic,
-                figures:result.figures,
-                tables:result.tables
+                figures: result.figures,
+                tables: result.tables
             });
 
 

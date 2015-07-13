@@ -10,7 +10,6 @@ Meteor.methods({
     },
     'parseXml': function (path) {
         var results = {};
-
         //Step 1: get the file
         var xml = ScienceXML.getFileContentsFromPath(path);
 

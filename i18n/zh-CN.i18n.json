@@ -322,6 +322,11 @@
             "filePath": {
                 "label": "文件路径"
             }
+        },
+        "issues": {
+            "description": {
+                "label": "描述"
+            }
         }
     },
     "roles": "角色",

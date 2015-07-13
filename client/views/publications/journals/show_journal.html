@@ -25,73 +25,73 @@
     {{#journalTabs name="" tabs=tabs activeTab=activeTab}}
 
         {{#tabContent slug="Overview"}}
-            {{#with context}}
+            {{#with journalContext}}
                 {{> JournalOverview}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Browse"}}
-            {{#with context}}
+            {{#with journalContext}}
                 {{> articleList}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="About"}}
-            {{#with context}}
+            {{#with journalContext}}
                 {{> AboutTitle}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Editorial Board"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="News"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Media"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Special Topics"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Collections"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Accepted"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Online First"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="MOOP"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Author"}}
-            {{#with context}}
+            {{#with journalContext}}
 
             {{/with}}
         {{/tabContent}}
@@ -141,4 +141,9 @@
     {{/afModal}}
 </template>
 
+
+<template name="updateIssueDescriptionModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="description" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
+</template>
 
