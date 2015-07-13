@@ -130,7 +130,9 @@
         {{/tabContent}}
 
         {{#tabContent slug="data media"}}
-            {{> DataMediaTemplate}}
+	        {{#with context}}
+                {{> DataMediaTemplate}}
+	        {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="metrics"}}
@@ -172,9 +174,12 @@
 
 <template name="DataMediaTemplate">
     <div class="row">
-        {{#each getFigures}}
+        {{#each figures}}
 			{{> figure}}
         {{/each}}
+	    {{#each tables}}
+		    {{> atttable}}
+	    {{/each}}
     </div>
 </template>
 
