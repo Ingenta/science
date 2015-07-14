@@ -165,7 +165,7 @@
         },
         "issues": {
             "description": {
-                "label": "Description"
+                "label": "Cover Description"
             }
         }
     },

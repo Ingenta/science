@@ -118,3 +118,25 @@ Template.articlePage.helpers({
         return false;
     }
 });
+
+
+Template.figModal.helpers({
+    "label":function(){
+        if(!Session.get("fig"))
+            return "";
+        return Session.get("fig").label;
+    },
+    "caption":function(){
+        if(!Session.get("fig"))
+            return;
+        return Session.get("fig").caption;
+    },
+    "img":function(){
+        if(!Session.get("fig"))
+            return;
+        var grap = _.find(Session.get("fig").graphics,function(g){
+            return g.use == 'online';
+        });
+        return grap.href;
+    }
+});

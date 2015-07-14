@@ -2,8 +2,15 @@ Router.route("test",{
 	path:"/test"
 });
 
+Template.test.onRendered(function(){
+	if(Meteor.isClient){
+		onMathJaxReady(function(){alert('a');});
+	}
+});
+
 Template.test.helpers({
 	tex:function(){
+
 		//return "\\begin{align*}"+
 		//"\\frac{\\rm d}{{\\rm d}t}\\hat{q}=\\;&\\frac{\\hat{p}}{m}, \\tag 4\\\\"+
 		//"\\frac{{\\rm d}}{{\\rm d}t}\\hat{p}=\\;&-\\hbar\\omega_c^\\prime(\\hat{q})\\hat{a}^\\dag\\hat{a}-m\\omega_m^2(\\hat{q}-q_s)-\\gamma\\hat{p}+\\hat{\\eta}, \\tag 5\\\\"+
