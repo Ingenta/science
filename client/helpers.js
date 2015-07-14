@@ -1,38 +1,40 @@
-Template.registerHelper('getImageHelper', function (pictureId) {
-    var noPicture = "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
-    return (Images && pictureId && Images.findOne({_id: pictureId}).url()) || noPicture;
-});
+var urlToArticleByArticleObject = function (article) {
+    return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
+}
+var getJournalComponentByArticle = function (article) {
+    var publisherName = Publishers.findOne({_id: article.publisher}).name;
+    var journalName = Publications.findOne({_id: article.journalId}).title;
+    return "/publisher/" + publisherName + "/journal/" + journalName;
+}
+var getIssueComponentByArticle = function (article) {
+    var issue = Issues.findOne({_id: article.issueId});
+    return "/" + issue.volume + "/" + issue.issue;
+}
 
 Template.registerHelper('urlToArticle', function (title) {
     var article = Articles.findOne({title: title});
-    var publisherName = Publishers.findOne({_id: article.publisher}).name;
-    var journalName = Publications.findOne({_id: article.journalId}).title;
-    var issue = Issues.findOne({_id:article.issueId});
-    return "/publisher/" + publisherName + "/journal/" + journalName + "/"+issue.volume+"/"+issue.issue+"/" + article.doi;
+    return urlToArticleByArticleObject(article);
 });
 
 Template.registerHelper('urlToArticleById', function (id) {
     var article = Articles.findOne({_id: id});
-    var publisherName = Publishers.findOne({_id: article.publisher}).name;
-    var journalName = Publications.findOne({_id: article.journalId}).title;
-    var issue = Issues.findOne({_id:article.issueId});
-    return "/publisher/" + publisherName + "/journal/" + journalName + "/"+issue.volume+"/"+issue.issue+"/" + article.doi;
+    return urlToArticleByArticleObject(article);
 });
 
 Template.registerHelper('urlToTOC', function (title) {
     var article = Articles.findOne({title: title});
-    var publisherName = Publishers.findOne({_id: article.publisher}).name;
-    var journalName = Publications.findOne({_id: article.journalId}).title;
-    var issue = Issues.findOne({_id:article.issueId});
-    return "/publisher/" + publisherName + "/journal/" + journalName + "/"+issue.volume+"/"+issue.issue;
+    return getJournalComponentByArticle(article) + getIssueComponentByArticle(article);
 });
-
 
 Template.registerHelper('urlToJournal', function (title) {
     var article = Articles.findOne({title: title});
-    var publisherName = Publishers.findOne({_id: article.publisher}).name;
-    var journalName = Publications.findOne({_id: article.journalId}).title;
-    return "/publisher/" + publisherName + "/journal/" + journalName;
+    return getJournalComponentByArticle(article);
+});
+
+
+Template.registerHelper('getImageHelper', function (pictureId) {
+    var noPicture = "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
+    return (Images && pictureId && Images.findOne({_id: pictureId}).url()) || noPicture;
 });
 
 Template.registerHelper('isChinese', function (language) {
@@ -79,11 +81,11 @@ pluralize = function (n, thing, options) {
 Template.registerHelper('pluralize', pluralize);
 
 
-Template.registerHelper('clearStr',function(str){
-    str = str.replace(/(<\/?[^>]+?>|\.)/g,'');
-    return str.replace(/\s/g,'-');
+Template.registerHelper('clearStr', function (str) {
+    str = str.replace(/(<\/?[^>]+?>|\.)/g, '');
+    return str.replace(/\s/g, '-');
 });
 
-Template.registerHelper("highlight",function(keyword, str){
-    return str.split(keyword).join("<span class='highlight'>"+keyword+"</span>")
+Template.registerHelper("highlight", function (keyword, str) {
+    return str.split(keyword).join("<span class='highlight'>" + keyword + "</span>")
 });
