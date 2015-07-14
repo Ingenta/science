@@ -22,7 +22,7 @@ Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
                     //TODO: test this condition
                     return;
                 }
-                //set extract task to success and start next task
+                //set extract task to success, cleanup and start next task
                 UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                 //get target xml filename TODO: make this better
                 FSE.readdir(targetPath,
@@ -48,7 +48,13 @@ Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
 
                             var targetXml = targetPath + "/" + doi + ".xml";
                             var targetPdf = targetPath + "/" + doi + ".pdf";
-                            UploadLog.update({_id: logId}, {$set: {xml: targetXml, pdf: targetPdf}});
+                            UploadLog.update({_id: logId}, {
+                                $set: {
+                                    xml: targetXml,
+                                    pdf: targetPdf,
+                                    extractTo: targetPath
+                                }
+                            });
                             Tasks.parseTaskStart(logId, targetXml);
 
                         }));
@@ -94,7 +100,7 @@ Tasks.insertArticlePdf = function (logId, result) {
         Tasks.insertArticleTask(logId, result);
         return;
     }
-    UploadTasks.insert({
+    var taskId = UploadTasks.insert({
         action: "InsertPdf",
         started: new Date(),
         status: "Started",
@@ -127,6 +133,11 @@ Tasks.insertArticleTask = function (logId, result) {
         hadError = true;
     }
     if (!hadError) {
+        //cleanup and set log and tasks to done
+        var log = UploadLog.findOne({_id: logId});
+        ScienceXML.RemoveFile(log.filePath);
+        if (log.extractTo)
+            ScienceXML.RemoveFile(log.extractTo);
         UploadTasks.update(
             {_id: taskId},
             {$set: {status: "Success"}});

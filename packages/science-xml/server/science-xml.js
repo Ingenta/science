@@ -14,16 +14,16 @@ Meteor.startup(function () {
         uploadDir: Config.uploadXmlDir.uploadDir,
         checkCreateDirectories: true, //create the directories for you
         finished: function (fileInfo, formFields) {
-            //console.log(fileInfo)
-            //create extract task
+
+            var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
             var logId = UploadLog.insert({
                 name: fileInfo.name,
                 uploadedAt: new Date(),
                 status: "Pending",
+                filePath: pathToFile,
                 errors: []
             });
 
-            var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
 
             if (fileInfo.type === "text/xml") {
                 //parsexml
