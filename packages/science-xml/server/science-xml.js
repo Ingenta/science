@@ -1,79 +1,105 @@
+String.prototype.startWith = function (str) {
+    var reg = new RegExp("^" + str);
+    return reg.test(this);
+}
+
+String.prototype.endWith = function (str) {
+    var reg = new RegExp(str + "$");
+    return reg.test(this);
+}
+
 Meteor.startup(function () {
     UploadServer.init({
         tmpDir: Config.uploadXmlDir.tmpDir,
         uploadDir: Config.uploadXmlDir.uploadDir,
         checkCreateDirectories: true, //create the directories for you
         finished: function (fileInfo, formFields) {
+            //console.log(fileInfo)
             //create extract task
             var logId = UploadLog.insert({
                 name: fileInfo.name,
                 uploadedAt: new Date(),
-                status: "Pending",
-                path: Config.uploadXmlDir.uploadDir + fileInfo.path
+                status: "Pending"
             });
 
-            if (fileInfo.type === "application/zip") {
-                var taskId = UploadTasks.insert({
-                    action: "Extract",
-                    started: new Date(),
-                    status: "Started",
-                    logId: logId
-                });
-
-                console.log(fileInfo)
-                //do extract
-                var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
-                var targetPath = Config.uploadXmlDir.uploadDir + "/extracted";
-                //extract
-                extractZip(pathToFile, targetPath, true, function (error) {
-                    if (error) {
-                        console.log("Error extracting ZIP file: " + error);//report error
-                        UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
-                        UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
-                        //delete folder
-
-                        throw  error;
-                    }
-
-                    //UploadLog.update({_id: logId}, {$set: {status: "Success"}});
-                    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                    //delete folder
-                    console.log("remove this folder:" + targetPath)
-                    //FSE.remove(targetPath, function(error){
-                    //    if(error)console.log(error);
-                    //});
-                });
-                var doi = fileInfo.name.substr(0, fileInfo.name.length - 4);
-                console.log(doi);
-                var targetXml = targetPath + "/" + doi + ".xml";
-                console.log(targetXml);
-            }
+            var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
 
             if (fileInfo.type === "text/xml") {
                 //parsexml
-                UploadTasks.insert({
-                    action: "Parse",
-                    started: new Date(),
-                    status: "Started",
-                    logId: logId
-                });
-                importXmlByLogId(logId);
+                parseTaskStart(logId, pathToFile);
+                return;
             }
 
+            if (fileInfo.type === "application/zip") {
+                //extract to a folder with the same name inside extracted folder
+                var zipName = fileInfo.path.substr(0, fileInfo.path.lastIndexOf("."));
+                var targetPath = Config.uploadXmlDir.uploadDir + "/extracted" + zipName;
+                extractTaskStart(logId, pathToFile, targetPath);
+            }
         }
     })
 });
 
-var importXmlByLogId = function (logId) {
+var extractTaskStart = function (logId, pathToFile, targetPath) {
+    var taskId = UploadTasks.insert({
+        action: "Extract",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
+
+    extractZip(pathToFile, targetPath, true,
+        Meteor.bindEnvironment(
+            function (error) {
+                if (error) {
+                    //console.log("Error extracting ZIP file: " + error);//report error
+                    UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
+                    var e = [];
+                    e.push(error.toString());
+                    UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: e}});
+                    return;
+                }
+                UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                FSE.readdir(targetPath,
+                    Meteor.bindEnvironment(
+                        function (err, file) {
+                            if (err) {
+                                console.log(err);
+                                return;
+                            }
+                            file.forEach(function (f) {
+                                if (f.endWith('.xml') && f !== "readme.xml") {
+                                    var targetXml = targetPath + "/" + f;
+                                    parseTaskStart(logId, targetXml);
+                                }
+                            });
+                        }));
+            }));
+}
+
+var parseTaskStart = function (logId, pathToXml) {
+    UploadTasks.insert({
+        action: "Parse",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
+    importXmlByLogId(logId, pathToXml);
+}
+
+var importXmlByLogId = function (logId, pathToXml) {
     //get failed state
     var log = UploadLog.findOne({_id: logId});
     if (log.status === "Success")return;
     var thisTask = UploadTasks.findOne({action: "Parse", logId: logId});
     //call parse and put results in session
-    Meteor.call('parseXml', log.path, function (error, result) {
+    Meteor.call('parseXml', pathToXml, function (error, result) {
         if (error) {
             //console.log(error);
-            log.errors.push(error);
+            //console.log(error.toString());
+            //console.log(JSON.stringify(error));
+            if (log.errors === undefined)log.errors = [];
+            log.errors.push(error.toString());
             UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: log.errors}});
             if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Failed"}});
         }
