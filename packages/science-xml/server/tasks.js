@@ -33,12 +33,24 @@ Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
                                 //TODO: test this condition
                                 return;
                             }
+                            var doi = "";
                             file.forEach(function (f) {
                                 if (f.endWith('.xml') && f !== "readme.xml") {
-                                    var targetXml = targetPath + "/" + f;
-                                    Tasks.parseTaskStart(logId, targetXml);
+                                    doi = f.substr(0, f.lastIndexOf(".xml"));
                                 }
                             });
+                            if (!doi) {
+                                var e = [];
+                                e.push("xml not found inside zip file");
+                                Tasks.fail(taskId, logId, e);
+                                return;
+                            }
+
+                            var targetXml = targetPath + "/" + doi + ".xml";
+                            var targetPdf = targetPath + "/" + doi + ".pdf";
+                            UploadLog.update({_id: logId}, {$set: {xml: targetXml, pdf: targetPdf}});
+                            Tasks.parseTaskStart(logId, targetXml);
+
                         }));
             }));
 }
@@ -64,10 +76,41 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
         }
         //set parse task to success and start next task
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-        Tasks.insertArticleTask(logId, result);
+
+        //start import pdf task
+        Tasks.insertArticlePdf(logId, result);
+
+
     });
 }
 
+
+Tasks.insertArticlePdf = function (logId, result) {
+    //insert into images collection
+
+    var log = UploadLog.findOne({_id: logId});
+    var file = ScienceXML.getFileContentsFromLocalPath(log.pdf);
+    if(!file)
+    {
+        console.log("pdf missing");
+        Tasks.insertArticleTask(logId, result);
+        return;
+    }
+    ArticleXml.insert(log.pdf, function (err, fileObj) {
+        console.log(fileObj);
+        UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
+        UploadTasks.insert({
+            action: "InsertPdf",
+            started: new Date(),
+            status: "Started",
+            logId: logId
+        });
+        result.pdfId = fileObj._id;
+        Tasks.insertArticleTask(logId, result);
+    });
+    //set article object to contain path or id
+
+}
 
 Tasks.insertArticleTask = function (logId, result) {
     var taskId = UploadTasks.insert({
@@ -143,6 +186,7 @@ var insertArticle = function (a) {
         published: a.published,
         topic: a.topic,
         figures: a.figures,
-        tables: a.tables
+        tables: a.tables,
+        pdfId: a.pdfId
     });
 }

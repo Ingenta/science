@@ -3,10 +3,10 @@ ReactiveTabs.createInterface({
 });
 Template.journalBanner.helpers({
     getJournalBannerById: function (journalId) {
-        if (journalId===undefined)return;
+        if (!journalId)return;
         var journal = Publications.findOne({_id: journalId});
-        if (journal===undefined) return;
-        if (journal.banner===undefined) return;
+        if (!journal) return;
+        if (!journal.banner) return;
         return Images.findOne({_id: journal.banner}).url();
     }
 });
