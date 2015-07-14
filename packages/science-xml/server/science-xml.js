@@ -2,24 +2,156 @@ Meteor.startup(function () {
     UploadServer.init({
         tmpDir: Config.uploadXmlDir.tmpDir,
         uploadDir: Config.uploadXmlDir.uploadDir,
-        checkCreateDirectories: true //create the directories for you
+        checkCreateDirectories: true, //create the directories for you
+        finished: function (fileInfo, formFields) {
+            //create extract task
+            var logId = UploadLog.insert({
+                name: fileInfo.name,
+                uploadedAt: new Date(),
+                status: "Pending",
+                path: Config.uploadXmlDir.uploadDir + fileInfo.path
+            });
+
+            if (fileInfo.type === "application/zip") {
+                var taskId = UploadTasks.insert({
+                    action: "Extract",
+                    started: new Date(),
+                    status: "Started",
+                    logId: logId
+                });
+
+                console.log(fileInfo)
+                //do extract
+                var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
+                var targetPath = Config.uploadXmlDir.uploadDir + "/extracted";
+                //extract
+                extractZip(pathToFile, targetPath, true, function (error) {
+                    if (error) {
+                        console.log("Error extracting ZIP file: " + error);//report error
+                        UploadLog.update({_id: logId}, {$set: {status: "Failed"}});
+                        UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
+                        //delete folder
+
+                        throw  error;
+                    }
+
+                    //UploadLog.update({_id: logId}, {$set: {status: "Success"}});
+                    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                    //delete folder
+                    console.log("remove this folder:" + targetPath)
+                    //FSE.remove(targetPath, function(error){
+                    //    if(error)console.log(error);
+                    //});
+                });
+                var doi = fileInfo.name.substr(0, fileInfo.name.length - 4);
+                console.log(doi);
+                var targetXml = targetPath + "/" + doi + ".xml";
+                console.log(targetXml);
+            }
+
+            if (fileInfo.type === "text/xml") {
+                //parsexml
+                UploadTasks.insert({
+                    action: "Parse",
+                    started: new Date(),
+                    status: "Started",
+                    logId: logId
+                });
+                importXmlByLogId(logId);
+            }
+
+        }
     })
 });
 
-Meteor.methods({
-    'getXmlFromZip': function (path) {
-        console.log('works!!!!')
-        //var content = ScienceXML.getFileContentsFromPath(path);
+var importXmlByLogId = function (logId) {
+    //get failed state
+    var log = UploadLog.findOne({_id: logId});
+    if (log.status === "Success")return;
+    var thisTask = UploadTasks.findOne({action: "Parse", logId: logId});
+    //call parse and put results in session
+    Meteor.call('parseXml', log.path, function (error, result) {
+        if (error) {
+            //console.log(error);
+            log.errors.push(error);
+            UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: log.errors}});
+            if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Failed"}});
+        }
+        else {
+            if (result.errors) {
+                log.errors = result.errors;
+                if (log.errors.length) {
+                    UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: log.errors}});
+                    if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Failed"}});
+                    return;
+                }
 
-        //var zip = new JSZip();
-        //zip.load(content);
-        //
-        //return zip.file("test.txt").asText();
-    },
+                if (thisTask) UploadTasks.update({_id: thisTask._id}, {$set: {status: "Success"}});
+
+                InsertArticle(result);
+
+                UploadLog.update(
+                    {_id: logId},
+                    {$set: {status: "Success"}}
+                );
+            }
+        }
+    });
+}
+
+var InsertArticle = function (result) {
+    //ARTICLE INSERT
+    var volume = Volumes.findOne({journalId: result.journalId, volume: result.volume});
+    if (!volume) {
+        volume = Volumes.insert({journalId: result.journalId, volume: result.volume});
+    }
+    result.volumeId = volume._id || volume;
+
+    var issue = Issues.findOne({journalId: result.journalId, volume: result.volume, issue: result.issue});
+    if (!issue) {
+        issue = Issues.insert({
+            journalId: result.journalId,
+            volume: result.volume,
+            issue: result.issue,
+            year: result.year,
+            month: result.month
+        });
+    }
+    //确保article有一个关联的issue
+    result.issueId = issue._id || issue;
+
+    Articles.insert({
+        doi: result.doi,
+        title: result.title,
+        authors: result.authors,
+        abstract: result.abstract,
+        journalId: result.journalId,
+        publisher: result.publisher,
+        references: result.references,
+        affiliations: result.affiliations,
+        elocationId: result.elocationId,
+        authorNotes: result.authorNotes,
+        year: result.year,
+        month: result.month,
+        issue: result.issue,
+        volume: result.volume,
+        issueId: result.issueId,
+        volumeId: result.volumeId,
+        sections: result.sections,
+        received: result.received,
+        accepted: result.accepted,
+        published: result.published,
+        topic: result.topic,
+        figures: result.figures,
+        tables: result.tables
+    });
+}
+
+Meteor.methods({
     'parseXml': function (path) {
         var results = {};
         //Step 1: get the file
-        var xml = ScienceXML.getFileContentsFromPath(path);
+        var xml = ScienceXML.getFileContentsFromLocalPath(path);
 
         //Step 2: Validate and parse the file
         results.errors = ScienceXML.validateXml(xml);
@@ -80,7 +212,7 @@ Meteor.methods({
         if (issn === undefined) {
             results.errors.push("No issn found in xml");
         } else {
-            results.issn = issn.replace("-","");
+            results.issn = issn.replace("-", "");
             var journal = Publications.findOne({issn: results.issn});
             if (journal === undefined) results.errors.push("No such issn found in journal collection: " + issn);
             else {
@@ -171,11 +303,11 @@ Meteor.methods({
             });
         }
         var received = ScienceXML.getDateFromHistory("received", doc);
-        if(received) results.received = received
+        if (received) results.received = received
         var accepted = ScienceXML.getDateFromHistory("accepted", doc);
-        if(accepted) results.accepted = accepted
+        if (accepted) results.accepted = accepted
         var published = ScienceXML.getDateFromHistory("published", doc);
-        if(published) results.published = published
+        if (published) results.published = published
 
 
         results.figures = ScienceXML.getFigures(doc);

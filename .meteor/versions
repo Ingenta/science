@@ -40,6 +40,7 @@ dburles:collection-helpers@1.0.3
 dburles:mongo-collection-instances@0.3.3
 ddp@1.1.0
 deps@1.0.7
+didstopia:admzip@0.0.6
 ejson@1.0.6
 eluck:accounts-lockout@0.9.0
 email@1.0.6
