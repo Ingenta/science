@@ -74,6 +74,7 @@ localstorage@1.0.3
 logging@1.0.7
 maazalik:highcharts@0.2.4
 matb33:collection-hooks@0.7.13
+mathjax@0.0.1
 meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:aggregate@1.2.1
@@ -96,7 +97,6 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.0
-mrt:mathjax@0.6.3
 mrt:moment@2.8.1
 msavin:mongol@1.0.98
 multiply:iron-router-progress@1.0.1
