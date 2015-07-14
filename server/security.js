@@ -12,4 +12,3 @@ UploadTasks.permit(['insert', 'update', 'remove']).apply();
 ArticleViews.permit(['insert', 'update', 'remove']).apply();
 Pages.permit(['insert', 'update', 'remove']).apply();
 Configure.permit(['insert', 'update', 'remove']).apply();
-Zips.permit(['insert', 'update', 'remove']).apply();
