@@ -75,6 +75,7 @@ localstorage@1.0.3
 logging@1.0.7
 maazalik:highcharts@0.2.4
 matb33:collection-hooks@0.7.13
+mathjax@0.0.1
 meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:aggregate@1.2.1
