@@ -15,6 +15,13 @@ Router.route('/api', function () {
         }
         res.write(item + ":" + req.body[item] + "\n");
     });
+    //Configure.insert({
+    //    ftpName: 1,
+    //    port: 21,
+    //    userName: 1,
+    //    password: 1,
+    //    filePath: 1
+    //});
     res.end('Success\n');
     
     callFtp('ftp.itjls.com', "ftpuser", "scp2015",'1.4788933.zip','C:\\xml\\1.4788933.zip');

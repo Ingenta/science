@@ -14,6 +14,12 @@ Template.imageName.helpers({
     }
 });
 
+Template.displayPublicationModalForm.helpers({
+    visibleIs: function (visible) {
+        return this.visible === visible;
+    }
+});
+
 Template.updatePublicationModalForm.helpers({
     getTitle: function () {
         return TAPi18n.__("Update");

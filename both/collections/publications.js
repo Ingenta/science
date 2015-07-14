@@ -27,6 +27,9 @@ PublicationsSchema = new SimpleSchema({
     accessKey: {
         type: String
     },
+    visible: {
+        type: String
+    },
     description: {
         type: String,
         optional: true,
