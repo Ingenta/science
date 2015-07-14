@@ -19,7 +19,8 @@ Meteor.startup(function () {
             var logId = UploadLog.insert({
                 name: fileInfo.name,
                 uploadedAt: new Date(),
-                status: "Pending"
+                status: "Pending",
+                errors: []
             });
 
             var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
