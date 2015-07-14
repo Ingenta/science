@@ -25,17 +25,19 @@
 
 <template name="articleListRight">
     <h4>{{getIssueTitle}}</h4>
-    <hr>
     {{#with issueContext}}
-        <div class="pull-right">
-            {{> updateIssueDescriptionModalForm}}
-        </div>
+        {{#if can "modify-journal" "resource" }}
+            <div class="pull-right">
+                {{> updateIssueDescriptionModalForm}}
+            </div>
+        {{/if}}
         {{#if description}}
-            <h5>{{_ "Cover Description"}}:</h5>
             {{description}}
-            <hr>
+        {{else}}
+            {{_ "No Cover Description"}}
         {{/if}}
     {{/with}}
+    <hr>
     {{resetArticlesFilter}}
     <ul class="article-list list-unstyled">
         {{#each articles}}

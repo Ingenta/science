@@ -14,7 +14,7 @@ Template.imageName.helpers({
     }
 });
 
-Template.displayPublicationModalForm.helpers({
+Template.displayPublication.helpers({
     visibleIs: function (visible) {
         return this.visible === visible;
     }
@@ -57,3 +57,14 @@ AutoForm.addHooks(['addPublicationModalForm'], {
         }
     }
 }, true);
+
+Template.displayPublication.events({
+    'click .fa-eye': function (event) {
+        debugger
+        Publications.update({_id:this._id},{$set:{visible:2}});
+    },
+    'click .fa-eye-slash': function (event) {
+        debugger
+        Publications.update({_id:this._id},{$set:{visible:1}});
+    }
+});
