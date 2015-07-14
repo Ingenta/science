@@ -37,7 +37,11 @@ Meteor.startup(function () {
                 var zipName = fileInfo.path.substr(0, fileInfo.path.lastIndexOf("."));
                 var targetPath = Config.uploadXmlDir.uploadDir + "/extracted" + zipName;
                 Tasks.extractTaskStart(logId, pathToFile, targetPath);
+                return;
             }
+            var errors = [];
+            errors.push("File is not suitable");
+            Tasks.fail(undefined, logId, errors);
         }
     })
 });

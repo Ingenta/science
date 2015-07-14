@@ -1,8 +1,9 @@
 Tasks = {};
 
 Tasks.fail = function (taskId, logId, errors) {
+    if(taskId)
+        UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
     UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: errors}});
-    UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
 
     var log = UploadLog.findOne({_id: logId});
     ScienceXML.RemoveFile(log.filePath);
