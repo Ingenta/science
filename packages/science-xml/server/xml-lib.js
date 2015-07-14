@@ -1,5 +1,6 @@
 ScienceXML = {};
-ScienceXML.FileExists = function(path){
+ScienceXML.FileExists = function (path) {
+    if (!path)return false;
     if (FSE.existsSync(path)) {
         return true;
     }

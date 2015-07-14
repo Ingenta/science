@@ -89,7 +89,7 @@ Tasks.insertArticlePdf = function (logId, result) {
     //insert into images collection
 
     var log = UploadLog.findOne({_id: logId});
-    if (!log.pdf || !ScienceXML.FileExists(log.pdf)) {
+    if (!ScienceXML.FileExists(log.pdf)) {
         console.log("pdf missing");
         Tasks.insertArticleTask(logId, result);
         return;
