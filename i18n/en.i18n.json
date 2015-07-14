@@ -162,6 +162,11 @@
             "filePath": {
                 "label": "File Path"
             }
+        },
+        "issues": {
+            "description": {
+                "label": "Description"
+            }
         }
     },
     "roles": "Roles",

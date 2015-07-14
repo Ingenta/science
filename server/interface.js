@@ -8,6 +8,7 @@ Router.route('/api', function () {
     });
     res.write("form:\n");
     var keyArray = Object.keys(req.body);
+    //if(!keyArray.length) return res.end('Failed\n');
     _.each(keyArray, function (item) {
         if (!req.body[item]) {
             return res.end('Failed\n');
@@ -22,33 +23,33 @@ Router.route('/api', function () {
     //    filePath: 1
     //});
     res.end('Success\n');
-    callFtp();
+    
+    callFtp('ftp.itjls.com', "ftpuser", "scp2015",'1.4788933.zip','C:\\xml\\1.4788933.zip');
 }, {where: 'server'});
 
-var callFtp = function () {
+var callFtp = function (host, user, password, sourcePath, targetPath) {
     var fs = FSE;
     var c = new FTP();
 
     c.on('ready', function () {
-        c.size('1.4788933.zip', function (err, res) {
+        c.size(sourcePath, function (err, res) {
             if (err) throw err;
             var originalSize = res;
-            c.get('1.4788933.zip', function (err, stream) {
+            c.get(sourcePath, function (err, stream) {
                 if (err) throw err;
                 stream.on('close', function () {
-//                    console.log('request finished downloading file');
                     c.end();
-                    var downloadedSize = fs.statSync('E:\\xml\\1.4788933.zip').size;
+                    var downloadedSize = fs.statSync(targetPath).size;
                     console.log(originalSize);
                     console.log(downloadedSize)
-                    if (originalSize === downloadedSize)console.log("its not fucked");
-                    if (originalSize !== downloadedSize)console.log("its fucked");
+                    if (originalSize === downloadedSize)console.log("its ok");
+                    if (originalSize !== downloadedSize)console.log("its broken do not continue");
                 });
                 stream.on('error', function (err) {
                     console.log(err);
                     throw  err;
                 });
-                stream.pipe(fs.createWriteStream('E:\\xml\\1.4788933.zip'));
+                stream.pipe(fs.createWriteStream(targetPath));
             });
         });
 
@@ -56,8 +57,9 @@ var callFtp = function () {
 
     c.connect(
         {
-            user: "Ingenta",
-            password: "123"
+            host: 'ftp.itjls.com',
+            user: "ftpuser",
+            password: "scp2015"
         }
     );
 };

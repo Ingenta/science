@@ -20,8 +20,6 @@ Meteor.subscribe("about_articles");
 
 Meteor.subscribe('articleXml');
 
-Meteor.subscribe('uploadLog');
-
 Meteor.subscribe('pages');
 
 Meteor.subscribe('news');
