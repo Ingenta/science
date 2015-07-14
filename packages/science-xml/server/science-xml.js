@@ -1,3 +1,11 @@
+Meteor.startup(function () {
+    UploadServer.init({
+        tmpDir: Config.uploadXmlDir.tmpDir,
+        uploadDir: Config.uploadXmlDir.uploadDir,
+        checkCreateDirectories: true //create the directories for you
+    })
+});
+
 Meteor.methods({
     'getXmlFromZip': function (path) {
         console.log('works!!!!')
