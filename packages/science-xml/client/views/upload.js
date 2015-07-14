@@ -6,7 +6,7 @@ Template.AdminUpload.helpers({
 Template.UploadLogModal.helpers({
     uploadTasks: function () {
         var logId = Session.get('uploadLogId')
-        return UploadTasks.find({logId: logId}, {sort: {'started': -1}});
+        return UploadTasks.find({logId: logId}, {sort: {'started': 1}});
     },
     errors: function () {
         var logId = Session.get('uploadLogId')
