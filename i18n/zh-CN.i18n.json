@@ -179,7 +179,7 @@
     "Sign up": "注册",
     "Already a member?": "注册过了吗?",
     "Sign in here": "登录",
-    "Cover Description": "封面描述",
+    "No Cover Description": "无封面描述",
     "schemas": {
         "publications": {
             "description": {
