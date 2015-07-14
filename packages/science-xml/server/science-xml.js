@@ -13,6 +13,7 @@ Meteor.startup(function () {
         tmpDir: Config.uploadXmlDir.tmpDir,
         uploadDir: Config.uploadXmlDir.uploadDir,
         checkCreateDirectories: true, //create the directories for you
+        maxFileSize:20000000, //20MB
         finished: function (fileInfo, formFields) {
 
             var pathToFile = Config.uploadXmlDir.uploadDir + fileInfo.path;
