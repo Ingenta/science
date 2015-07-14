@@ -140,6 +140,7 @@
     "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
+    "Topic": "主题",
     "Collections": "文章集",
     "Author": "作者",
     "Register": "注册",
@@ -200,6 +201,13 @@
                     "2": "开源",
                     "3": "订阅",
                     "4": "免费试用"
+                }
+            },
+            "visible": {
+                "label": "是否可见",
+                "options": {
+                    "1": "可见",
+                    "2": "不可见"
                 }
             },
             "picture": {

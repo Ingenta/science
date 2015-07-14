@@ -6,8 +6,8 @@ Config={
         "email":"admin@scp.com"
     },
     uploadXmlDir:{
-        tmpDir: '/Users/jiangkai/Temp/uploads/tmp',
-        uploadDir:'/Users/jiangkai/Temp/uploads'
+        tmpDir: '/tmp/uploads/tmp',
+        uploadDir:'/tmp/uploads'
     }
 
 }

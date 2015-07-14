@@ -40,6 +40,7 @@ dburles:collection-helpers@1.0.3
 dburles:mongo-collection-instances@0.3.3
 ddp@1.1.0
 deps@1.0.7
+didstopia:admzip@0.0.6
 ejson@1.0.6
 eluck:accounts-lockout@0.9.0
 email@1.0.6
@@ -97,6 +98,7 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.0
+mrt:mathjax@0.6.3
 mrt:moment@2.8.1
 msavin:mongol@1.0.98
 multiply:iron-router-progress@1.0.1
