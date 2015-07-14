@@ -94,20 +94,18 @@ Tasks.insertArticlePdf = function (logId, result) {
         Tasks.insertArticleTask(logId, result);
         return;
     }
+    UploadTasks.insert({
+        action: "InsertPdf",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
     ArticleXml.insert(log.pdf, function (err, fileObj) {
-        console.log(fileObj);
-        UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
-        UploadTasks.insert({
-            action: "InsertPdf",
-            started: new Date(),
-            status: "Started",
-            logId: logId
-        });
         result.pdfId = fileObj._id;
+        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+        UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
         Tasks.insertArticleTask(logId, result);
     });
-    //set article object to contain path or id
-
 }
 
 Tasks.insertArticleTask = function (logId, result) {
@@ -118,8 +116,9 @@ Tasks.insertArticleTask = function (logId, result) {
         logId: logId
     });
     var hadError = false;
+    var articleId;
     try {
-        insertArticle(result);
+        articleId = insertArticle(result);
     }
     catch (ex) {
         var e = [];
@@ -133,7 +132,7 @@ Tasks.insertArticleTask = function (logId, result) {
             {$set: {status: "Success"}});
         UploadLog.update(
             {_id: logId},
-            {$set: {status: "Success"}}
+            {$set: {status: "Success", articleId: articleId}}
         );
     }
 }
@@ -161,7 +160,7 @@ var insertArticle = function (a) {
     //确保article有一个关联的issue
     a.issueId = issue._id || issue;
 
-    Articles.insert({
+    var id = Articles.insert({
         doi: a.doi,
         title: a.title,
         authors: a.authors,
@@ -187,4 +186,5 @@ var insertArticle = function (a) {
         tables: a.tables,
         pdfId: a.pdfId
     });
+    return id;
 }
