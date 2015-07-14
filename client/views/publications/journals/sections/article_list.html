@@ -25,7 +25,6 @@
 
 <template name="articleListRight">
     <h4>{{getIssueTitle}}</h4>
-    <hr>
     {{#with issueContext}}
         <div class="pull-right">
             {{> updateIssueDescriptionModalForm}}
@@ -33,9 +32,9 @@
         {{#if description}}
             <h5>{{_ "Cover Description"}}:</h5>
             {{description}}
-            <hr>
         {{/if}}
     {{/with}}
+    <hr>
     {{resetArticlesFilter}}
     <ul class="article-list list-unstyled">
         {{#each articles}}

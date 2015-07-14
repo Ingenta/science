@@ -337,7 +337,7 @@
         },
         "issues": {
             "description": {
-                "label": "描述"
+                "label": "封面描述"
             }
         }
     },
