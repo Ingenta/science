@@ -14,7 +14,7 @@ Meteor.startup(function () {
         uploadDir: Config.uploadXmlDir.uploadDir,
         checkCreateDirectories: true, //create the directories for you
         finished: function (fileInfo, formFields) {
-            console.log(fileInfo)
+            //console.log(fileInfo)
             //create extract task
             var logId = UploadLog.insert({
                 name: fileInfo.name,
@@ -31,7 +31,9 @@ Meteor.startup(function () {
             }
 
             if (fileInfo.type === "application/zip") {
-                var targetPath = Config.uploadXmlDir.uploadDir + "/extracted";
+                //extract to a folder with the same name inside extracted folder
+                var zipName = fileInfo.path.substr(0, fileInfo.path.lastIndexOf("."));
+                var targetPath = Config.uploadXmlDir.uploadDir + "/extracted" + zipName;
                 extractTaskStart(logId, pathToFile, targetPath);
             }
         }
@@ -58,18 +60,20 @@ var extractTaskStart = function (logId, pathToFile, targetPath) {
                     return;
                 }
                 UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                FSE.readdir(targetPath, function (err, file) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
-                    file.forEach(function (f) {
-                        if (f.endWith('.xml') && f !== "readme.xml") {
-                            var targetXml = targetPath + "/" + f;
-                            parseTaskStart(logId, targetXml);
-                        }
-                    });
-                });
+                FSE.readdir(targetPath,
+                    Meteor.bindEnvironment(
+                        function (err, file) {
+                            if (err) {
+                                console.log(err);
+                                return;
+                            }
+                            file.forEach(function (f) {
+                                if (f.endWith('.xml') && f !== "readme.xml") {
+                                    var targetXml = targetPath + "/" + f;
+                                    parseTaskStart(logId, targetXml);
+                                }
+                            });
+                        }));
             }));
 }
 
