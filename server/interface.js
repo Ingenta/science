@@ -14,6 +14,13 @@ Router.route('/api', function () {
         }
         res.write(item + ":" + req.body[item] + "\n");
     });
+    //Configure.insert({
+    //    ftpName: 1,
+    //    port: 21,
+    //    userName: 1,
+    //    password: 1,
+    //    filePath: 1
+    //});
     res.end('Success\n');
     callFtp();
 }, {where: 'server'});
