@@ -1,4 +1,10 @@
 ScienceXML = {};
+ScienceXML.FileExists = function(path){
+    if (FSE.existsSync(path)) {
+        return true;
+    }
+    return false;
+}
 ScienceXML.getLocationAsync = function (path, cb) {
     cb && cb(null, HTTP.get(path).content);
 }
