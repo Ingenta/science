@@ -75,6 +75,7 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
         status: "Started",
         logId: logId
     });
+    //TODO: refactor this after solving, unhandled error, [TypeError: Cannot read property 'localNSMap' of undefined]
     Meteor.call('parseXml', pathToXml, function (error, result) {
         if (error) {
             log.errors.push(error.toString());
@@ -89,7 +90,9 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
         //set parse task to success and start next task
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
-        //start import pdf task
+        //start import tasks
+        
+        //Tasks.insertArticleTask(logId, result);
         Tasks.insertArticlePdf(logId, result);
     });
 }
