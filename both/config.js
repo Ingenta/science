@@ -8,6 +8,9 @@ Config={
     uploadXmlDir:{
         tmpDir: '/tmp/uploads/tmp',
         uploadDir:'/tmp/uploads'
+    },
+    ftp:{
+        downloadDir:"tmp/downloads"
     }
 
 }
