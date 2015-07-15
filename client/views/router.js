@@ -168,8 +168,9 @@ Router.map(function () {
             if (TAPi18n.getLanguage() === "en") return ":publisherName";
             var id = Session.get('currentPublisherId');
             var p = Publishers.findOne({_id: id});
-            if (!p) return p.name;
-            return p.chinesename;
+            if (p)
+                return p.name || p.chinesename;
+            return 'NotFound';
         },
         name: "publisher.name",
         waitOn: function () {

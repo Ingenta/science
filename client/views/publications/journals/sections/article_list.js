@@ -17,9 +17,10 @@ Template.articleListTree.helpers({
 
 Template.articleListTree.events({
     "click .volume": function (event) {
-        var nextValue = $(event.target).next("div").is(':visible') ? '+' : '-';
-        $(event.target).find("span").text(nextValue);
-        $(event.target).next("div").toggle(200);
+        var toggleOption=["fa-plus","fa-minus"];
+        var remove = $(event.currentTarget).find("span.fa-plus").length?0:1;
+        $(event.currentTarget).find("span").removeClass(toggleOption[remove]).addClass(toggleOption[1-remove]);
+        $(event.currentTarget).next("div").toggle(200);
     },
     "click .issue": function (event) {
         var issue = $(event.target).data().value;

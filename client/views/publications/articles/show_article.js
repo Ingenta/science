@@ -33,7 +33,7 @@ ReactiveTabs.createInterface({
     }
 });
 
-var removeArticleFromArray = function (array,articleId) {
+var removeArticleFromArray = function (array, articleId) {
     var temp = [];
     while (array.length) {
         var oneId = array.shift();
@@ -63,6 +63,9 @@ Template.showArticle.helpers({
     },
     getFullName: function () {
         return this.surname + ' ' + this.given;
+    },
+    getPdfById: function (id) {
+        return ArticleXml.findOne({_id: id}).url();
     }
 });
 
@@ -102,16 +105,16 @@ Template.showArticle.events({
 
 Template.articlePage.helpers({
     preValue: function () {
-        var previousValue= Articles.findOne({doi:{$lt:this.doi}},{$sort:{doi:-1}});
-        if(previousValue){
+        var previousValue = Articles.findOne({doi: {$lt: this.doi}}, {$sort: {doi: -1}});
+        if (previousValue) {
             var preVal = previousValue.doi.substring(previousValue.doi.lastIndexOf("/") + 1);
             return preVal;
         }
         return false;
     },
     nextValue: function () {
-        var nextValue= Articles.findOne({doi:{$gt:this.doi}},{$sort:{doi:-1}});
-        if(nextValue){
+        var nextValue = Articles.findOne({doi: {$gt: this.doi}}, {$sort: {doi: -1}});
+        if (nextValue) {
             var nextVal = nextValue.doi.substring(nextValue.doi.lastIndexOf("/") + 1);
             return nextVal;
         }
@@ -121,20 +124,20 @@ Template.articlePage.helpers({
 
 
 Template.figModal.helpers({
-    "label":function(){
-        if(!Session.get("fig"))
+    "label": function () {
+        if (!Session.get("fig"))
             return "";
         return Session.get("fig").label;
     },
-    "caption":function(){
-        if(!Session.get("fig"))
+    "caption": function () {
+        if (!Session.get("fig"))
             return;
         return Session.get("fig").caption;
     },
-    "img":function(){
-        if(!Session.get("fig"))
+    "img": function () {
+        if (!Session.get("fig"))
             return;
-        var grap = _.find(Session.get("fig").graphics,function(g){
+        var grap = _.find(Session.get("fig").graphics, function (g) {
             return g.use == 'online';
         });
         return grap.href;
