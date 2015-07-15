@@ -74,11 +74,8 @@ Template.FullTextTemplate.events({
 });
 
 Template.figure.helpers({
-	"img":function(){
-		var grap = _.find(this.graphics,function(g){
-			return g.use == 'online';
-		});
-		return grap.href;
+	getFigById: function (id) {
+		return ArticleXml.findOne({_id: id}).url();
 	}
 });
 

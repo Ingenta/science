@@ -1,7 +1,7 @@
 <template name="showArticle">
     {{> journalBanner journal=journalId}}
-	{{> figModal figures}}
-	{{> tableModal tables}}
+    {{> figModal figures}}
+    {{> tableModal tables}}
     <div class="row articleHeading">
         <div class="col-xs-9">
             <h3><img src="/icon_access_fc.gif"/> {{title}}</h3>
@@ -35,9 +35,11 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <li class="pdf">
-                        <a class="pdfDownload" href="#">{{_ "Download"}} PDF</a>
-                    </li>
+                    {{#if pdfId}}
+                        <li class="pdf">
+                            <a class="pdfDownload" href="{{getPdfById pdfId}}">{{_ "Download"}} PDF</a>
+                        </li>
+                    {{/if}}
                 </div>
                 <div class="row"><img src="/crossmark.jpg"></div>
             </div>
@@ -83,7 +85,7 @@
     <div class="clear articlenav std-display">
         <ul class="flat navigate-resources bobby">
             <h6><span style="color: darkgray">
-                <img src="/icons_leftarrow.png">
+                <i class="fa fa-chevron-left"></i>
                 {{#if preValue}}
                     <a href="{{preValue}}">
                         <b>{{_ "Previous Article"}}</b>
@@ -100,7 +102,7 @@
                 {{else}}
                     <b>{{_ "Next Article"}}</b>
                 {{/if}}
-                <img src="/rightarrow.gif">
+                <i class="fa fa-chevron-right"></i>
             </span></h6>
         </ul>
         <div class="socialMediaCommenting">

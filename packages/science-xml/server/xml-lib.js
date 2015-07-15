@@ -1,4 +1,19 @@
 ScienceXML = {};
+ScienceXML.FileExists = function (path) {
+    if (!path)return false;
+    if (FSE.existsSync(path)) {
+        return true;
+    }
+    return false;
+}
+ScienceXML.RemoveFile = function (path) {
+    if (!path)return false;
+    FSE.remove(path, function (err) {
+        if (err) return console.error(err)
+        console.log('success! deleted:'+path)
+    });
+    return true;
+}
 ScienceXML.getLocationAsync = function (path, cb) {
     cb && cb(null, HTTP.get(path).content);
 }

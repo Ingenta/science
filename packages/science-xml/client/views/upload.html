@@ -1,33 +1,32 @@
 <template name="AdminUpload">
     {{> uploadForm}}
-
-    <table id="dataview-table" class="table table-striped table-hover">
-        <thead id="dataview-table-header">
-        <tr id="dataview-table-header-row">
-            <th>
-                {{_ "Name"}}
-            </th>
-            <th>
-                {{_ "Date"}}
-            </th>
-            <th style="width:30px">
-                {{_ "Status"}}
-            </th>
-        </tr>
-        </thead>
-        <tbody id="dataview-table-items">
-        {{#each uploadHistory}}
-            {{> uploadTableRow}}
-        {{/each}}
-        </tbody>
-    </table>
+    {{#if uploadHistory}}
+        <table id="dataview-table" class="table table-striped table-hover">
+            <thead id="dataview-table-header">
+            <tr id="dataview-table-header-row">
+                <th>
+                    {{_ "Name"}}
+                </th>
+                <th>
+                    {{_ "Date"}}
+                </th>
+                <th style="width:30px">
+                    {{_ "Status"}}
+                </th>
+            </tr>
+            </thead>
+            <tbody id="dataview-table-items">
+            {{#each uploadHistory}}
+                {{> uploadTableRow}}
+            {{/each}}
+            </tbody>
+        </table>
+    {{/if}}
     {{> UploadLogModal}}
-
-
 </template>
 
 <template name="uploadForm">
-    {{> upload_bootstrap multiple=true}}
+    {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true}}
 </template>
 
 <template name="uploadTableRow">
@@ -39,8 +38,13 @@
             {{moFormat uploadedAt}}
         </td>
         <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadLogModal"
-                    data-logid="{{_id}}">{{_ status}}</button>
+            {{#if articleId}}
+                <a class="btn btn-success"
+                        href="{{urlToArticleById articleId}}">{{_ "Success"}}</a>
+            {{else}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadLogModal"
+                        data-logid="{{_id}}">{{_ status}}</button>
+            {{/if}}
         </td>
     </tr>
 </template>
@@ -80,7 +84,7 @@
                     <ul class="list-unstyled">
                         {{#each errors}}
                             <li class="bg-danger">{{this}}</li>
-                            {{else}}
+                        {{else}}
                             <li class="bg-success">{{_ "Success"}}</li>
                         {{/each}}
                     </ul>
