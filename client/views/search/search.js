@@ -19,11 +19,16 @@ Template.SearchResults.helpers({
         if (q) {
             var mongoDbArr = [];
             mongoDbArr.push({title: {$regex: q, $options: "i"}});
+            mongoDbArr.push({keywords: {$regex: q, $options: "i"}});
             return Articles.find({$or: mongoDbArr});
         }
         var t = Router.current().params.topicQuery;
         if (t) {
             return Articles.find({topic: t});
+        }
+        var k = Router.current().params.keywordsQuery;
+        if (k) {
+            return Articles.find({keywords: k});
         }
         var a = Router.current().params.authorQuery;
         return Articles.find({"authors.given": a.split(" ")[1], "authors.surname": a.split(" ")[0]});

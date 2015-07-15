@@ -84,6 +84,19 @@ Router.map(function () {
         }
     });
 
+    this.route('/keywords/:keywordsQuery', {
+        template: "SearchResults",
+        parent: "keywords",
+        title: ":keywordsQuery",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles')
+            ]
+        }
+    });
+
     this.route("author", {
         parent: "home",
         title: function () {

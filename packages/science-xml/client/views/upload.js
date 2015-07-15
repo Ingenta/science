@@ -131,7 +131,8 @@ var importXmlByLogId = function (logId) {
                 published: result.published,
                 topic: result.topic,
                 figures: result.figures,
-                tables: result.tables
+                tables: result.tables,
+                keywords: result.keywords
             });
 
 

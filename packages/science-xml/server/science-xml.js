@@ -51,6 +51,11 @@ Meteor.methods({
         if (topic === undefined) results.errors.push("No subject found");
         else results.topic = topic;
 
+        var keywords = xpath.select("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc).toString();
+        keywords = keywords.split(',');
+        if (keywords === undefined) results.errors.push("No keywords found");
+        else results.keywords = keywords;
+
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
         if (elocationId !== undefined) results.elocationId = elocationId
 
