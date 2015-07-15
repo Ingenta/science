@@ -8,22 +8,14 @@ Router.route('/api', function () {
     });
     res.write("form:\n");
     var keyArray = Object.keys(req.body);
-    //if(!keyArray.length) return res.end('Failed\n');
     _.each(keyArray, function (item) {
         if (!req.body[item]) {
-            return res.end('Failed\n');
+            return res.end();
         }
         res.write(item + ":" + req.body[item] + "\n");
     });
-    //Configure.insert({
-    //    ftpName: 1,
-    //    port: 21,
-    //    userName: 1,
-    //    password: 1,
-    //    filePath: 1
-    //});
-    res.end('Success\n');
-    
+    //Configure.insert({ftpName:1},{port:21},{userName:1},{password:1},{filePath:1});
+    res.end();
     callFtp('ftp.itjls.com', "ftpuser", "scp2015",'1.4788933.zip','C:\\xml\\1.4788933.zip');
 }, {where: 'server'});
 
