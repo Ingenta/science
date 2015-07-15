@@ -73,35 +73,18 @@ Template.FullTextTemplate.events({
 	}
 });
 
-Template.figModal.helpers({
-	"label":function(){
-		if(!Session.get("fig"))
-			return "";
-		return Session.get("fig").label;
-	},
-	"caption":function(){
-		if(!Session.get("fig"))
-			return;
-		return Session.get("fig").caption;
-	},
-	"img":function(){
-		if(!Session.get("fig"))
-			return;
-		var grap = _.find(Session.get("fig").graphics,function(g){
-			return g.use == 'online';
-		});
-		return grap.href;
+Template.figure.helpers({
+	getFigById: function (id) {
+		return ArticleXml.findOne({_id: id}).url();
 	}
 });
 
-Template.figure.helpers({
-	"img":function(){
-		var grap = _.find(this.graphics,function(g){
-			return g.use == 'online';
-		});
-		return grap.href;
+Template.figure.events({
+	"click .figure-image":function(){
+		Session.set("fig",this);
+		$(".figure-modal").modal('show');
 	}
-});
+})
 
 Template.tableModal.helpers({
 	"label":function(){

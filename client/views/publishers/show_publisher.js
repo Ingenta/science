@@ -14,6 +14,12 @@ Template.imageName.helpers({
     }
 });
 
+Template.displayPublication.helpers({
+    visibleIs: function (visible) {
+        return this.visible === visible;
+    }
+});
+
 Template.updatePublicationModalForm.helpers({
     getTitle: function () {
         return TAPi18n.__("Update");
@@ -51,3 +57,12 @@ AutoForm.addHooks(['addPublicationModalForm'], {
         }
     }
 }, true);
+
+Template.displayPublication.events({
+    'click .fa-eye': function (event) {
+        Publications.update({_id:this._id},{$set:{visible:2}});
+    },
+    'click .fa-eye-slash': function (event) {
+        Publications.update({_id:this._id},{$set:{visible:1}});
+    }
+});

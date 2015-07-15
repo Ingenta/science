@@ -71,6 +71,7 @@
             <div class="row">
                 <div class="pull-right">
                     {{#if can "modify-journal" "resource" }}
+                        {{> displayPublication}}
                         {{> updatePublicationModalForm}}
                     {{/if}}
 	                {{#if can "delete-journal" "resource" }}
@@ -91,15 +92,25 @@
     <hr>
 </template>
 
+<template name="displayPublication">
+    {{#if visibleIs "1"}}
+        <span class="fa fa-eye" style="color: blue"></span>
+    {{/if}}
+    {{#if visibleIs "2"}}
+        <span class="fa fa-eye-slash"></span>
+    {{/if}}
+</template>
 
 <template name="updatePublicationModalForm">
     {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher, issn" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
+
 <template name="deletePublicationModalForm">
     {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
     {{/afModal}}
 </template>
+
 <template name="imageName">
     {{#if accessKeyIs "1"}}
         <img src="/icon_access_fc.gif">
@@ -132,6 +143,7 @@
                         {{> afQuickField name="issn"}}
                         {{> afQuickField name="description"}}
                         {{> afQuickField name="accessKey"}}
+                        {{> afQuickField name="visible"}}
                         {{> afQuickField name="picture"}}
                         {{> afQuickField name="banner"}}
                         {{> afFieldInput name="tabSelections"}}

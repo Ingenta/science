@@ -13,8 +13,10 @@
 <template name="articleListTree">
     <ul class="list-unstyled">
         {{#each volumeList _id}}
-            <li class="volume"><span>+</span> {{_ "volumeItem" volume }}</li>
-            <div class="issues">
+            <li class="volume">
+	            <span class="fa fa-plus"> {{_ "volumeItem" volume }}</span>
+            </li>
+            <div id="vol_{{_id}}" class="issues">
                 {{#each issueList journalId volume}}
                     <div class="issue" data-value="{{_id}}">{{_ "issueItem" issue }}（{{year}}, {{month}}）</div>
                 {{/each}}
@@ -24,13 +26,19 @@
 </template>
 
 <template name="articleListRight">
-    {{#with issueContext}}
-        <div class="pull-right">
-            {{> updateIssueDescriptionModalForm}}
-        </div>
-        {{description}}
-    {{/with}}
     <h4>{{getIssueTitle}}</h4>
+    {{#with issueContext}}
+        {{#if can "modify-journal" "resource" }}
+            <div class="pull-right">
+                {{> updateIssueDescriptionModalForm}}
+            </div>
+        {{/if}}
+        {{#if description}}
+            {{description}}
+        {{else}}
+            {{_ "No Cover Description"}}
+        {{/if}}
+    {{/with}}
     <hr>
     {{resetArticlesFilter}}
     <ul class="article-list list-unstyled">

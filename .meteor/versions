@@ -40,6 +40,7 @@ dburles:collection-helpers@1.0.3
 dburles:mongo-collection-instances@0.3.3
 ddp@1.1.0
 deps@1.0.7
+didstopia:admzip@0.0.6
 ejson@1.0.6
 eluck:accounts-lockout@0.9.0
 email@1.0.6
@@ -74,6 +75,7 @@ localstorage@1.0.3
 logging@1.0.7
 maazalik:highcharts@0.2.4
 matb33:collection-hooks@0.7.13
+mathjax@0.0.1
 meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:aggregate@1.2.1
@@ -134,6 +136,8 @@ tap:i18n@1.5.0
 tap:i18n-ui@0.7.0
 templates:tabs@2.1.5
 templating@1.1.1
+tomi:upload-jquery@2.1.7
+tomi:upload-server@1.2.5
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
