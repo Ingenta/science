@@ -1,7 +1,7 @@
 Tasks = {};
 
 Tasks.fail = function (taskId, logId, errors) {
-    if(taskId)
+    if (taskId)
         UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
     UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: errors}});
 
@@ -91,15 +91,11 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
 
         //start import pdf task
         Tasks.insertArticlePdf(logId, result);
-
-
     });
 }
 
 
 Tasks.insertArticlePdf = function (logId, result) {
-    //insert into images collection
-
     var log = UploadLog.findOne({_id: logId});
     if (!ScienceXML.FileExists(log.pdf)) {
         console.log("pdf missing");
@@ -107,7 +103,7 @@ Tasks.insertArticlePdf = function (logId, result) {
         return;
     }
     var taskId = UploadTasks.insert({
-        action: "InsertPdf",
+        action: "Insert PDF",
         started: new Date(),
         status: "Started",
         logId: logId
@@ -116,9 +112,39 @@ Tasks.insertArticlePdf = function (logId, result) {
         result.pdfId = fileObj._id;
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
         UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
-        Tasks.insertArticleTask(logId, result);
+        Tasks.insertArticleImages(logId, result);
     });
 }
+
+Tasks.insertArticleImages = function (logId, result) {
+    var taskId = UploadTasks.insert({
+        action: "Insert Images",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
+
+    var log = UploadLog.findOne({_id: logId});
+    result.figures.forEach(function (fig) {
+        var figName = _.findWhere(fig.graphics, {use: "online"}).href;
+        var figLocation = log.extractTo + "/" + figName;
+        console.log(figLocation);
+        if (!ScienceXML.FileExists(figLocation)) {
+            console.log("image missing: " + figName);
+            return;
+        }
+        else{
+            ArticleXml.insert(figLocation, function (err, fileObj) {
+                //TODO: need to wait for all of these to complete before inserting article?
+                fig.imageId = fileObj._id;
+                UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+            });
+        }
+    });
+
+    Tasks.insertArticleTask(logId, result);
+}
+
 
 Tasks.insertArticleTask = function (logId, result) {
     var taskId = UploadTasks.insert({
