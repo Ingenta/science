@@ -27,6 +27,10 @@ ReactiveTabs.createInterface({
                         action: "fulltext",
                         ip: session
                     });
+                    article.keywords.forEach(function(k){
+                        var id = Keywords.findOne({"name":k})._id;
+                        Keywords.update({_id:id},{$inc:{"score":2}})
+                    })
                 }
             });
         }

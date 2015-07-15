@@ -156,6 +156,7 @@ Tasks.insertArticleTask = function (logId, result) {
     var hadError = false;
     var articleId;
     try {
+        inertKeywords(result.keywords);
         articleId = insertArticle(result);
     }
     catch (ex) {
@@ -178,6 +179,16 @@ Tasks.insertArticleTask = function (logId, result) {
             {$set: {status: "Success", articleId: articleId}}
         );
     }
+}
+var inertKeywords = function(a){
+    a.forEach(function(name){
+        if (!Keywords.findOne({name: name})) {
+                Keywords.insert({
+                name: name,
+                score: 0
+            });
+        }
+    })
 }
 
 var insertArticle = function (a) {
@@ -227,7 +238,8 @@ var insertArticle = function (a) {
         topic: a.topic,
         figures: a.figures,
         tables: a.tables,
-        pdfId: a.pdfId
+        pdfId: a.pdfId,
+        keywords: a.keywords
     });
     return id;
 }
