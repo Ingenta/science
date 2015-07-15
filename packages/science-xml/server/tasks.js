@@ -131,7 +131,6 @@ Tasks.insertArticleImages = function (logId, result) {
     result.figures.forEach(function (fig) {
         var figName = _.findWhere(fig.graphics, {use: "online"}).href;
         var figLocation = log.extractTo + "/" + figName;
-        console.log(figLocation);
         if (!ScienceXML.FileExists(figLocation)) {
             console.log("image missing: " + figName);
             return;
