@@ -39,15 +39,15 @@ Helpers.menuItemClass = function (routeName) {
 
 Helpers.userFullName = function () {
     var name = "";
-    if (Meteor.user() && Meteor.user().profile)
-        name = Meteor.user().profile.name;
+    if (Meteor.user())
+        name = Meteor.user().username;
     return name;
 };
 
 Helpers.userEmail = function () {
     var email = "";
-    if (Meteor.user() && Meteor.user().profile)
-        email = Meteor.user().profile.email;
+    if (Meteor.user())
+        email = Meteor.user().emails[0].address;
     return email;
 };
 

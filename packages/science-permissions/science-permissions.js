@@ -81,15 +81,12 @@ Meteor.startup(function(){
 		});
 		var queryArr = [];
 		queryArr.push({'emails.address':da.email});
-		queryArr.push({'profile.name':da.username});
+		queryArr.push({'username':da.username});
 		if(!Users.findOne({$or:queryArr})){
 			console.info("create default user '"+da.username+"'");
-			Meteor.call('createUserAccount',da,function(err,userId){
-				if(!err && userId){
-					console.info("set admin role for user '"+da.username+"'");
-					Permissions.delegate(userId,["permissions:admin"]);
-				}
-			})
+			var userId = Accounts.createUser(da)
+			console.info("set admin role for user '"+da.username+"'");
+			Permissions.delegate(userId,["permissions:admin"]);
 		}
 	}
 });

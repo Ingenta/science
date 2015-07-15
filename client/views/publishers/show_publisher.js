@@ -60,11 +60,9 @@ AutoForm.addHooks(['addPublicationModalForm'], {
 
 Template.displayPublication.events({
     'click .fa-eye': function (event) {
-        debugger
         Publications.update({_id:this._id},{$set:{visible:2}});
     },
     'click .fa-eye-slash': function (event) {
-        debugger
         Publications.update({_id:this._id},{$set:{visible:1}});
     }
 });

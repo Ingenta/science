@@ -131,6 +131,9 @@ Template.AdminUsersEditEditForm.helpers({
 	},
 	"disableStatus": function () {
 		return this.admin_user.disable?"checked":"";
+	},
+	"emailAddress": function(){
+		return this.admin_user.emails[0].address;
 	}
 });
 

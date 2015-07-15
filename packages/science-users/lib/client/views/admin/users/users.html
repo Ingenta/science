@@ -63,10 +63,10 @@
 	<table id="dataview-table" class="table table-striped table-hover">
 		<thead id="dataview-table-header">
 		<tr id="dataview-table-header-row">
-			<th class="th-sortable" data-sort="profile.name">
+			<th class="th-sortable" data-sort="username">
 				{{_ "Name"}}
 			</th>
-			<th class="th-sortable" data-sort="profile.email">
+			<th class="th-sortable">
 				{{_ "E-mail"}}
 			</th>
 			<th class="th-sortable">
@@ -89,10 +89,12 @@
 <template name="AdminUsersViewTableItems">
 	<tr id="dataview-table-items-row">
 		<td>
-			{{profile.name}}
+			{{username}}
 		</td>
 		<td>
-			{{profile.email}}
+			{{#each emails}}
+				{{address}}
+			{{/each}}
 		</td>
 		<td>
 			{{#each orbit_roles}}

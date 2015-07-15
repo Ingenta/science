@@ -116,8 +116,10 @@ Template.AdminUsersDetailsDetailsForm.helpers({
 	},
 	"errorMessage": function () {
 		return pageSession.get("adminUsersDetailsDetailsFormErrorMessage");
+	},
+	"emailAddress": function(){
+		return this.admin_user.emails[0].address;
 	}
-
 });
 
 Template.userRoles.helpers({
