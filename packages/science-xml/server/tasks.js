@@ -10,6 +10,14 @@ Tasks.fail = function (taskId, logId, errors) {
     if (log.extractTo)
         ScienceXML.RemoveFile(log.extractTo);
 }
+Tasks.hasExistingArticle = function (taskId, logId, doi) {
+    var existingArticle = Articles.findOne({doi: doi});
+    if (!existingArticle)return false;
+    var e = [];
+    e.push("Article found matching this DOI: " + doi);
+    Tasks.fail(taskId, logId, e);
+    return true;
+}
 
 Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
     var taskId = UploadTasks.insert({
@@ -91,7 +99,7 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
         //start import tasks
-        
+
         //Tasks.insertArticleTask(logId, result);
         Tasks.insertArticlePdf(logId, result);
     });
@@ -99,6 +107,8 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
 
 
 Tasks.insertArticlePdf = function (logId, result) {
+    if (Tasks.hasExistingArticle(taskId, logId, result.doi))
+        return;
     var log = UploadLog.findOne({_id: logId});
     if (!ScienceXML.FileExists(log.pdf)) {
         console.log("pdf missing");
@@ -111,6 +121,7 @@ Tasks.insertArticlePdf = function (logId, result) {
         status: "Started",
         logId: logId
     });
+
     ArticleXml.insert(log.pdf, function (err, fileObj) {
         result.pdfId = fileObj._id;
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
@@ -120,6 +131,8 @@ Tasks.insertArticlePdf = function (logId, result) {
 }
 
 Tasks.insertArticleImages = function (logId, result) {
+    if (Tasks.hasExistingArticle(taskId, logId, result.doi))
+        return;
     var taskId = UploadTasks.insert({
         action: "Insert Images",
         started: new Date(),
@@ -135,7 +148,7 @@ Tasks.insertArticleImages = function (logId, result) {
             console.log("image missing: " + figName);
             return;
         }
-        else{
+        else {
             ArticleXml.insert(figLocation, function (err, fileObj) {
                 //TODO: need to wait for all of these to complete before inserting article?
                 fig.imageId = fileObj._id;
@@ -149,12 +162,15 @@ Tasks.insertArticleImages = function (logId, result) {
 
 
 Tasks.insertArticleTask = function (logId, result) {
+    if (Tasks.hasExistingArticle(taskId, logId, result.doi))
+        return;
     var taskId = UploadTasks.insert({
         action: "Insert",
         started: new Date(),
         status: "Started",
         logId: logId
     });
+
     var hadError = false;
     var articleId;
     try {
