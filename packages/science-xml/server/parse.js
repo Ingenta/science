@@ -19,6 +19,11 @@ Meteor.methods({
         if (doi === undefined) results.errors.push("No doi found");
         else results.doi = doi;
 
+        //    CHECK IF EXISTING ARTICLE
+        var existingArticle = Articles.findOne({doi: results.doi});
+        if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
+
+
         var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
         if (title === undefined) results.errors.push("No title found");
         else results.title = title;
@@ -53,10 +58,6 @@ Meteor.methods({
 
         var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
         if (essn !== undefined) results.essn = essn;
-
-        //    CHECK IF EXISTING ARTICLE
-        var existingArticle = Articles.findOne({doi: results.doi});
-        if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
 
         //    GET JOURNAL AND PUBLISHER BY NAME (consider changing journal to find my doi)
         var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-title", doc);
@@ -146,8 +147,8 @@ Meteor.methods({
             } else if (email === undefined) {
                 results.errors.push("No email found");
             } else {
-                var enrty = {label: noteLabel, email: email};
-                results.authorNotes.push(enrty);
+                var entry = {label: noteLabel, email: email};
+                results.authorNotes.push(entry);
             }
         });
 

@@ -35,7 +35,7 @@
                 "label": "Whether Or Not Visible ",
                 "options": {
                     "1": "Visible",
-                    "2": "Invisible"
+                    "0": "Invisible"
                 }
             },
             "picture": {
