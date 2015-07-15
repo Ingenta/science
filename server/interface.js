@@ -1,57 +1,35 @@
 Router.route('/api', function () {
-    var req = this.request;
-    var res = this.response;
-    res.write("query:\n");
-    //req.query["aa"]
-    _.each(req.query, function (item) {
-        res.write(item + "\n");
-    });
-    res.write("form:\n");
-    var keyArray = Object.keys(req.body);
-    _.each(keyArray, function (item) {
-        if (!req.body[item]) {
-            return res.end();
-        }
-        res.write(item + ":" + req.body[item] + "\n");
-    });
-    //Configure.insert({ftpName:1},{port:21},{userName:1},{password:1},{filePath:1});
-    res.end();
-    callFtp('ftp.itjls.com', "ftpuser", "scp2015",'1.4788933.zip','C:\\xml\\1.4788933.zip');
+	var req            = this.request;
+	var res            = this.response;
+	var NonEmptyString = Match.Where(function (x) {
+		check(x, String);
+		return x.length > 0;
+	});
+	check(req.body, {
+		user      : NonEmptyString,
+		password  : NonEmptyString,
+		host      : NonEmptyString,
+		sourcePath: NonEmptyString
+	});
+	var slashLoc       = req.body.sourcePath.lastIndexOf("/")+1;
+	var filename       = slashLoc == 0 ? req.body.sourcePath : req.body.sourcePath.substr(slashLoc);
+	var targetPath     = Config.ftp.downloadDir + "/" + filename;
+	console.log("download:"+targetPath);
+
+	(new FTP()).getSingleFile(req.body, targetPath, function(err){
+		res.writeHead(200,{
+			'Content-Type': 'applications/json'
+		});
+		var result = {};
+		if(err){
+			result.result="failed";
+			result.message=err.message;
+		}else{
+			result.result="success";
+		}
+		res.write(JSON.stringify(result));
+
+		res.end();
+	});
+
 }, {where: 'server'});
-
-var callFtp = function (host, user, password, sourcePath, targetPath) {
-    var fs = FSE;
-    var c = new FTP();
-
-    c.on('ready', function () {
-        c.size(sourcePath, function (err, res) {
-            if (err) throw err;
-            var originalSize = res;
-            c.get(sourcePath, function (err, stream) {
-                if (err) throw err;
-                stream.on('close', function () {
-                    c.end();
-                    var downloadedSize = fs.statSync(targetPath).size;
-                    console.log(originalSize);
-                    console.log(downloadedSize)
-                    if (originalSize === downloadedSize)console.log("its ok");
-                    if (originalSize !== downloadedSize)console.log("its broken do not continue");
-                });
-                stream.on('error', function (err) {
-                    console.log(err);
-                    throw  err;
-                });
-                stream.pipe(fs.createWriteStream(targetPath));
-            });
-        });
-
-    });
-
-    c.connect(
-        {
-            host: 'ftp.itjls.com',
-            user: "ftpuser",
-            password: "scp2015"
-        }
-    );
-};

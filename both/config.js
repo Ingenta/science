@@ -10,7 +10,7 @@ Config={
         uploadDir:'/tmp/uploads'
     },
     ftp:{
-        downloadDir:"tmp/downloads"
+        downloadDir:"/tmp/downloads"
     }
 
 }
