@@ -1,5 +1,34 @@
 Tasks = {};
 
+Tasks.startJob = function(pathToFile,fileName,fileType){
+
+    var logId = UploadLog.insert({
+        name: fileName,
+        uploadedAt: new Date(),
+        status: "Pending",
+        filePath: pathToFile,
+        errors: []
+    });
+
+
+    if (fileType === "text/xml") {
+        //parsexml
+        Tasks.parseTaskStart(logId, pathToFile);
+        return;
+    }
+
+    if (fileType === "application/zip") {
+        //extract to a folder with the same name inside extracted folder
+        var zipName = pathToFile.substr(0, fileName.lastIndexOf("."));
+        var targetPath = Config.uploadXmlDir.uploadDir + "/extracted" + zipName;
+        Tasks.extractTaskStart(logId, pathToFile, targetPath);
+        return;
+    }
+    var errors = [];
+    errors.push("File is not suitable");
+    Tasks.fail(undefined, logId, errors);
+};
+
 Tasks.fail = function (taskId, logId, errors) {
     if (taskId)
         UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
