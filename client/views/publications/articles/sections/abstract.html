@@ -6,11 +6,13 @@
             </div>
             <div class="col-xs-3">
                 <h4>{{_ "Key Topics"}}</h4>
-                {{#each keywords}}
+                <!--<input id="totalScore" type="hidden" value="{{totals keywords}}">-->
+                {{#each getKeywords}}
                 <p class="title_style">
-                    <span class="name_style"><a href="/keywords/{{this}}">{{this}}</a></span>
+                    <span class="name_style"><a href="/keywords/{{word}}">{{word}}</a></span>
                 </p>
-                <p class="data">
+                <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
+
                 </p>
                {{/each}}
             </div>
