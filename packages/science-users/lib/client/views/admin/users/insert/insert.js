@@ -91,7 +91,7 @@ Template.AdminUsersInsertInsertForm.events({
 	"click #form-cancel-button": function(e, t) {
 		e.preventDefault();
 
-		
+
 
 		Router.go("admin.users", {});
 	},

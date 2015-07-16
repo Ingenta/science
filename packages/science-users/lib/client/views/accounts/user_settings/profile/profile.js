@@ -81,8 +81,6 @@ Template.UserSettingsProfileEditForm.events({
 
 			},
 			function(values) {
-				
-
 				Meteor.call("updateUserAccount", t.data.current_user_data._id, values, function(e) { if(e) errorAction(e.message); else submitAction(); });
 			}
 		);
@@ -116,6 +114,9 @@ Template.UserSettingsProfileEditForm.helpers({
 	},
 	"errorMessage": function() {
 		return pageSession.get("userSettingsProfileEditFormErrorMessage");
+	},
+	"emailAddress": function(){
+		return this.current_user_data.emails[0].address;
 	}
 	
 });

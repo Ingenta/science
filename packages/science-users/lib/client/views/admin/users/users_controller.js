@@ -20,16 +20,7 @@ this.AdminUsersController = RouteController.extend({
 
 	isReady: function() {
 
-
-		var subs = [
-			Meteor.subscribe("admin_users")
-		];
-		var ready = true;
-		_.each(subs, function(sub) {
-			if(!sub.ready())
-				ready = false;
-		});
-		return ready;
+		return true;
 	},
 
 	data: function() {

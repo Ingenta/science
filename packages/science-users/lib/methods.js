@@ -1,13 +1,6 @@
 Meteor.methods({
     "createUserAccount": function(options) {
-        var userOptions = {};
-        if(options.username) userOptions.username = options.username;
-        if(options.email) userOptions.email = options.email;
-        if(options.password) userOptions.password = options.password;
-        if(options.profile) userOptions.profile = options.profile;
-        if(options.profile && options.profile.email) userOptions.email = options.profile.email;
-
-        return Accounts.createUser(userOptions);
+        return Accounts.createUser(options);
     },
     "updateUserAccount": function(userId, options) {
         //// only admin or users own profile
@@ -25,18 +18,14 @@ Meteor.methods({
 
         var userOptions = {};
         if(options.username) userOptions.username = options.username;
-        if(options.email) userOptions.email = options.email;
+        if(options.email) {
+            var emails = Meteor.users.findOne({_id:userId}).emails;
+            emails[0].address=options.email;
+            userOptions.emails = emails;
+        }
         if(options.password) userOptions.password = options.password;
         if(typeof(options.disable) !== "undefined") userOptions.disable = options.disable;
         if(options.profile) userOptions.profile = options.profile;
-
-        if(options.profile && options.profile.email) userOptions.email = options.profile.email;
-
-        if(userOptions.email) {
-            var email = userOptions.email;
-            delete userOptions.email;
-            userOptions.emails = [{ address: email }];
-        }
 
         var password = "";
         if(userOptions.password) {

@@ -32,9 +32,7 @@
 					{{_ "Your real name"}}:
 				</label>
 				<div class="input-div">
-				    <input type="hidden" name="profile.name" value="{{current_user_data.profile.name}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
-					<input type="hidden" name="profile.email" value="{{current_user_data.profile.email}}" class="form-control" required="required" data-type="email">
-					<input type="text" name="profile.surname" value="{{current_user_data.profile.surname}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
+					<input type="text" name="profile.realname" value="{{current_user_data.profile.realname}}" class="form-control" autofocus="autofocus" required="required" data-type="string">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
@@ -91,7 +89,7 @@
 								{{#each publicationList}}
 								<input type="checkbox" name="profile.publications" value="{{_id}}">&nbsp;&nbsp;{{title}}<br>
 								{{else}}
-								{{_"No publications found!"}}
+								{{_ "No publications found!"}}
 								{{/each}}
 							</h5>
 						 </div>
