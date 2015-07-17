@@ -21,9 +21,11 @@ Package.onUse(function (api) {
     api.addFiles('server/parse.js', 'server');
     api.addFiles('server/tasks.js', 'server');
     api.addFiles('server/xml-lib.js', 'server');
+    api.addFiles('server/interface.js', 'server');
     api.addFiles('client/views/upload.html', 'client');
     api.addFiles('client/views/upload.js', 'client');
     api.export('ScienceXML');
+    api.export('Tasks');
 });
 
 Package.onTest(function (api) {

@@ -16,7 +16,7 @@ Router.route('/api', function () {
 	var targetPath     = Config.ftp.downloadDir + "/" + filename;
 	console.log("download:"+targetPath);
 
-	(new FTP()).getSingleFile(req.body, targetPath, function(err){
+	var downloadCallback = function(err){
 		res.writeHead(200,{
 			'Content-Type': 'applications/json'
 		});
@@ -29,7 +29,11 @@ Router.route('/api', function () {
 		}
 		res.write(JSON.stringify(result));
 
+
+		Tasks.startJob(targetPath,filename,"application/zip");
 		res.end();
-	});
+	};
+
+	(new FTP()).getSingleFile(req.body, targetPath, Meteor.bindEnvironment(downloadCallback));
 
 }, {where: 'server'});
