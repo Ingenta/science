@@ -1,13 +1,24 @@
-this.Collections = new Meteor.Collection("collections");
+this.ArticleCollections = new Meteor.Collection("articleCollections");
 
-CollectionsSchema = new SimpleSchema({
+ArticleCollections.allow({
+	insert: function (userId, doc) {
+		return Permissions.userCan("add-publisher-collection", "collections", userId);
+	},
+	update: function (userId, doc) {
+		return Permissions.userCan("modify-publisher-collection", "collections", userId);
+	},
+	remove: function(userId,doc){
+		return Permissions.userCan("delete-publisher-collection", "collections", userId);
+	}
+});
+
+ArticleCollectionsSchema = new SimpleSchema({
 	title: {
 		type: String,
 		unique: true
 	},
 	chinesetitle:{
-		type: String,
-		unique: true
+		type: String
 	},
 	description:{
 		type: String
@@ -17,6 +28,6 @@ CollectionsSchema = new SimpleSchema({
 	}
 });
 Meteor.startup(function () {
-	CollectionsSchema.i18n("schemas.collections");
-	Collections.attachSchema(CollectionsSchema);
+	ArticleCollectionsSchema.i18n("schemas.collections");
+	ArticleCollections.attachSchema(ArticleCollectionsSchema);
 });
