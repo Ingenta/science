@@ -33,6 +33,14 @@
 			</div>
 		{{/mathjax}}
 		<div class="col-xs-3">
+                {{#each getKeywords}}
+                <p class="title_style">
+                    <a href="/keywords/{{word}}">{{word}}</a>
+                </p>
+                <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
+
+                </p>
+                {{/each}}
 			{{> keywordsPanel}}
 			{{> sectionSelector sections=sections}}
 		</div>
