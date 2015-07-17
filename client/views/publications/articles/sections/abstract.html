@@ -5,15 +5,7 @@
                 {{{abstract}}}
             </div>
             <div class="col-xs-3">
-                <h4>{{_ "Key Topics"}}</h4>
-                {{#each getKeywords}}
-                <p class="title_style">
-                    <span class="name_style"><a href="/keywords/{{word}}">{{word}}</a></span>
-                </p>
-                <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
-
-                </p>
-               {{/each}}
+                {{> keywordsPanel}}
             </div>
         </div>
         <br>

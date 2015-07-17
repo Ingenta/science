@@ -1,6 +1,5 @@
 <template name="FullTextTemplate">
 	<div id="fulltext-viewer">
-		<a id="resetFulltext">reset</a>
 		{{#mathjax}}
 			<div class="col-xs-9">
 
@@ -34,15 +33,7 @@
 			</div>
 		{{/mathjax}}
 		<div class="col-xs-3">
-			<h4>{{_ "Key Topics"}}</h4>
-                {{#each getKeywords}}
-                <p class="title_style">
-                    <span class="name_style"><a href="/keywords/{{word}}">{{word}}</a></span>
-                </p>
-                <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
-
-                </p>
-                {{/each}}
+			{{> keywordsPanel}}
 			{{> sectionSelector sections=sections}}
 		</div>
 	</div>
