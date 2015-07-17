@@ -14,7 +14,7 @@
     <ul class="list-unstyled">
         {{#each volumeList _id}}
             <li class="volume">
-	            <span class="fa fa-plus"> {{_ "volumeItem" volume }}</span>
+                <span class="fa fa-plus"> {{_ "volumeItem" volume }}</span>
             </li>
             <div id="vol_{{_id}}" class="issues">
                 {{#each issueList journalId volume}}
@@ -36,7 +36,9 @@
         {{#if description}}
             {{description}}
         {{else}}
-            {{_ "No Cover Description"}}
+            {{#if can "modify-journal" "resource" }}
+                {{_ "No Cover Description"}}
+            {{/if}}
         {{/if}}
     {{/with}}
     <hr>
