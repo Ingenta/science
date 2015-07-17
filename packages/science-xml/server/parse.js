@@ -1,4 +1,10 @@
-
+var getArticleDoiFromFullDOI = function (fullDOI) {
+    if (!fullDOI) return "";
+    if (fullDOI.indexOf("/") === -1) return fullDOI;
+    var articleDOI = fullDOI.split("/")[1];
+    if (!articleDOI) return fullDOI;
+    return articleDOI;
+}
 Meteor.methods({
     'parseXml': function (path) {
         var results = {};
@@ -17,7 +23,10 @@ Meteor.methods({
 
         var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
         if (doi === undefined) results.errors.push("No doi found");
-        else results.doi = doi;
+        else {
+            results.doi = doi;
+            results.articledoi = getArticleDoiFromFullDOI(doi);
+        }
 
         //    CHECK IF EXISTING ARTICLE
         var existingArticle = Articles.findOne({doi: results.doi});
