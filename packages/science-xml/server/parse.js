@@ -37,6 +37,10 @@ Meteor.methods({
         if (title === undefined) results.errors.push("No title found");
         else results.title = title;
 
+        var contentType = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subject", doc);
+        if (contentType === undefined) results.errors.push("No content type found");
+        else results.contentType = contentType;
+
         var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
         if (volume === undefined) results.errors.push("No volume found");
         else results.volume = volume;
