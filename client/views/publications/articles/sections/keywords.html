@@ -1,0 +1,13 @@
+<template name="keywordsPanel">
+<div>
+	<h4>{{_ "Keywords"}}</h4>
+	{{#each getKeywords}}
+		<p class="title_style">
+			<span class="name_style"><a href="/keywords/{{word}}">{{word}}</a></span>
+		</p>
+		<p class="data" style="width:{{ percent }}%">
+
+		</p>
+	{{/each}}
+</div>
+</template>

@@ -191,5 +191,11 @@
     "user_blocked":"user blocked",
     "Email address or username":"Email or username",
     "Lock message":"The account is locked. Also remaining %s seconds",
-    "section_selector_button":"Section index"
+    "section_selector_button":"Section index",
+    "Keywords":"Keywords",
+    "Warning":"Warning",
+    "Confirm_delete":"You will not be able to recover this operation!",
+    "Do_it":"Yes, delete it!",
+    "Operation_success":"Your operation has been successful.",
+    "Deleted":"Deleted!"
 }

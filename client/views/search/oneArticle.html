@@ -1,9 +1,14 @@
 <template name="oneArticle">
     <ul class="dotted list-unstyled">
         <li>
+
             <!--<h6>{{_ "Topic"}}: {{_ topic}}</h6>-->
+	        {{#if can "delete-article" "resource"}}
+	        <a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>
+	        {{/if}}
             <h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticle title}}">{{{highlight query title}}}</a></div></h4>
-            <ul class="list-unstyled">
+
+	        <ul class="list-unstyled">
                 <li>
                     {{#each authors}}
                         {{> authorPopButton name=getFullName}}

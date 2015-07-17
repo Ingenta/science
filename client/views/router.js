@@ -117,12 +117,6 @@ Router.map(function () {
         }
     });
 
-    this.route("collections", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Collections");
-        }
-    });
     this.route("publications", {
         parent: "home",
         title: function () {
