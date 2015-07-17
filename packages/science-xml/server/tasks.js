@@ -1,32 +1,37 @@
 Tasks = {};
 
-Tasks.startJob = function(pathToFile,fileName,fileType){
+Tasks.startJob = function (pathToFile, fileName, fileType) {
 
+    if (!pathToFile || !fileName || !fileType)return;
+    var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
     var logId = UploadLog.insert({
         name: fileName,
         uploadedAt: new Date(),
-        status: "Pending",
+        status: "Started",
         filePath: pathToFile,
+        filename: fileNameWithoutExtension,
         errors: []
     });
+    if (Tasks.inProgress(undefined, logId, fileNameWithoutExtension)) {
+        return;
+    }
+    if (Tasks.hasExistingArticleByArticleDoi(undefined, logId, fileNameWithoutExtension)) {
+        return;
+    }
 
 
     if (fileType === "text/xml") {
-        //parsexml
-        Tasks.parseTaskStart(logId, pathToFile);
+        Tasks.parse(logId, pathToFile);
         return;
     }
 
     if (fileType === "application/zip") {
         //extract to a folder with the same name inside extracted folder
-        var zipName = pathToFile.substr(0, fileName.lastIndexOf("."));
-        var targetPath = Config.uploadXmlDir.uploadDir + "/extracted" + zipName;
-        Tasks.extractTaskStart(logId, pathToFile, targetPath);
+        var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
+        Tasks.extract(logId, pathToFile, targetPath);
         return;
     }
-    var errors = [];
-    errors.push("File is not suitable");
-    Tasks.fail(undefined, logId, errors);
+    Tasks.failSimple(taskId, logId, "File is not suitable");
 };
 
 Tasks.fail = function (taskId, logId, errors) {
@@ -39,16 +44,39 @@ Tasks.fail = function (taskId, logId, errors) {
     if (log.extractTo)
         ScienceXML.RemoveFile(log.extractTo);
 }
-Tasks.hasExistingArticle = function (taskId, logId, doi) {
+
+Tasks.failSimple = function (taskId, logId, errorMessage) {
+    var e = [];
+    e.push(errorMessage);
+    Tasks.fail(taskId, logId, e);
+}
+
+Tasks.hasExistingArticleByFullDoi = function (taskId, logId, doi) {
     var existingArticle = Articles.findOne({doi: doi});
     if (!existingArticle)return false;
-    var e = [];
-    e.push("Article found matching this DOI: " + doi);
-    Tasks.fail(taskId, logId, e);
+    Tasks.failSimple(taskId, logId, "Article found matching this DOI: " + doi);
     return true;
 }
 
-Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
+Tasks.hasExistingArticleByArticleDoi = function (taskId, logId, articledoi) {
+    var existingArticle = Articles.findOne({articledoi: articledoi});
+    if (!existingArticle)return false;
+    Tasks.failSimple(taskId, logId, "Article found matching this article DOI: " + articledoi);
+    return true;
+}
+
+Tasks.inProgress = function (taskId, logId, filename) {
+    var existingLog = UploadLog.findOne({filename: filename, status: "Pending"});
+    if (!existingLog) {
+        //set to in progress(pending)
+        UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
+        return false;
+    }
+    Tasks.failSimple(taskId, logId, "Import in progress matching this DOI: " + doi);
+    return true;
+}
+
+Tasks.extract = function (logId, pathToFile, targetPath) {
     var taskId = UploadTasks.insert({
         action: "Extract",
         started: new Date(),
@@ -83,12 +111,15 @@ Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
                                 }
                             });
                             if (!doi) {
-                                var e = [];
-                                e.push("xml not found inside zip file");
-                                Tasks.fail(taskId, logId, e);
+                                Tasks.failSimple(taskId, logId, "xml not found inside zip file");
                                 return;
                             }
 
+                            var log = UploadLog.findOne({_id: logId});
+                            if (log.doi !== doi) {
+                                Tasks.failSimple(taskId, logId, "xml file found inside zip does not match filename doi");
+                                return;
+                            }
                             var targetXml = targetPath + "/" + doi + ".xml";
                             var targetPdf = targetPath + "/" + doi + ".pdf";
                             UploadLog.update({_id: logId}, {
@@ -98,13 +129,13 @@ Tasks.extractTaskStart = function (logId, pathToFile, targetPath) {
                                     extractTo: targetPath
                                 }
                             });
-                            Tasks.parseTaskStart(logId, targetXml);
+                            Tasks.parse(logId, targetXml);
 
                         }));
             }));
 }
 
-Tasks.parseTaskStart = function (logId, pathToXml) {
+Tasks.parse = function (logId, pathToXml) {
     var log = UploadLog.findOne({_id: logId});
     var taskId = UploadTasks.insert({
         action: "Parse",
@@ -124,24 +155,25 @@ Tasks.parseTaskStart = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
+        //DOI in xml doesnt match filename
+        if (result.articledoi !== log.filename) {
+            Tasks.failSimple(taskId, logId, "doi in article xml does not match filename");
+            return;
+        }
         //set parse task to success and start next task
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
         //start import tasks
-
-        //Tasks.insertArticleTask(logId, result);
         Tasks.insertArticlePdf(logId, result);
     });
 }
 
 
 Tasks.insertArticlePdf = function (logId, result) {
-    if (Tasks.hasExistingArticle(taskId, logId, result.doi))
-        return;
     var log = UploadLog.findOne({_id: logId});
     if (!ScienceXML.FileExists(log.pdf)) {
         console.log("pdf missing");
-        Tasks.insertArticleTask(logId, result);
+        Tasks.insertArticleImages(logId, result);
         return;
     }
     var taskId = UploadTasks.insert({
@@ -160,8 +192,6 @@ Tasks.insertArticlePdf = function (logId, result) {
 }
 
 Tasks.insertArticleImages = function (logId, result) {
-    if (Tasks.hasExistingArticle(taskId, logId, result.doi))
-        return;
     var taskId = UploadTasks.insert({
         action: "Insert Images",
         started: new Date(),
@@ -175,13 +205,15 @@ Tasks.insertArticleImages = function (logId, result) {
         var figLocation = log.extractTo + "/" + figName;
         if (!ScienceXML.FileExists(figLocation)) {
             console.log("image missing: " + figName);
-            return;
         }
         else {
             ArticleXml.insert(figLocation, function (err, fileObj) {
                 //TODO: need to wait for all of these to complete before inserting article?
                 fig.imageId = fileObj._id;
                 UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                if (_.last(result.figures) === fig) {
+                    Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
+                }
             });
         }
     });
@@ -191,8 +223,6 @@ Tasks.insertArticleImages = function (logId, result) {
 
 
 Tasks.insertArticleTask = function (logId, result) {
-    if (Tasks.hasExistingArticle(taskId, logId, result.doi))
-        return;
     var taskId = UploadTasks.insert({
         action: "Insert",
         started: new Date(),
@@ -207,17 +237,13 @@ Tasks.insertArticleTask = function (logId, result) {
         articleId = insertArticle(result);
     }
     catch (ex) {
-        var e = [];
-        e.push(ex.message);
-        Tasks.fail(taskId, logId, e);
+        Tasks.failSimple(taskId, logId, ex.message);
         hadError = true;
     }
     if (!hadError) {
         //cleanup and set log and tasks to done
         var log = UploadLog.findOne({_id: logId});
         ScienceXML.RemoveFile(log.filePath);
-        if (log.extractTo)
-            ScienceXML.RemoveFile(log.extractTo);
         UploadTasks.update(
             {_id: taskId},
             {$set: {status: "Success"}});
@@ -227,10 +253,10 @@ Tasks.insertArticleTask = function (logId, result) {
         );
     }
 }
-var inertKeywords = function(a){
-    a.forEach(function(name){
+var inertKeywords = function (a) {
+    a.forEach(function (name) {
         if (!Keywords.findOne({name: name})) {
-                Keywords.insert({
+            Keywords.insert({
                 name: name,
                 score: 0
             });
@@ -263,6 +289,7 @@ var insertArticle = function (a) {
 
     var id = Articles.insert({
         doi: a.doi,
+        articledoi: a.articledoi,
         title: a.title,
         authors: a.authors,
         abstract: a.abstract,
