@@ -313,7 +313,8 @@ var insertArticle = function (a) {
         figures: a.figures,
         tables: a.tables,
         pdfId: a.pdfId,
-        keywords: a.keywords
+        keywords: a.keywords,
+        contentType: a.contentType
     });
     return id;
 }
