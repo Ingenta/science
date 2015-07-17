@@ -14,7 +14,7 @@ Template.oneArticle.events({
 	"click .btn-delete-article": function () {
 		var articleId = this._id;
 		sweetAlert({
-			title             : TAPi18n.__("Keywords"),
+			title             : TAPi18n.__("Warning"),
 			text              : TAPi18n.__("Confirm_delete"),
 			type              : "warning",
 			showCancelButton  : true,
