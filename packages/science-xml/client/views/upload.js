@@ -15,10 +15,8 @@ Template.UploadLogModal.helpers({
 });
 
 Template.uploadTableRow.events({
-    "click .btn": function (e) {
-        var button = $(e.target) // Button that triggered the modal
-        var uploadLogId = button.data('logid') // Extract info from data-* attributes
-        Session.set('uploadLogId', uploadLogId);
+    "click .task-detail": function (e) {
+        Session.set('uploadLogId', this._id);
     }
 });
 

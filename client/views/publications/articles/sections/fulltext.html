@@ -1,6 +1,5 @@
 <template name="FullTextTemplate">
 	<div id="fulltext-viewer">
-		<a id="resetFulltext">reset</a>
 		{{#mathjax}}
 			<div class="col-xs-9">
 
@@ -43,6 +42,7 @@
 
                 </p>
                 {{/each}}
+			{{> keywordsPanel}}
 			{{> sectionSelector sections=sections}}
 		</div>
 	</div>
