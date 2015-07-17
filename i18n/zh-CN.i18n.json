@@ -103,7 +103,7 @@
     "The topic name": "主题名称",
     "All the options": "全部",
     "Add new": "添加",
-    "Cancel": "关闭",
+    "Cancel": "取消",
     "Save": "保存",
     "Password": "密码",
     "Add new user": "添加新用户",
@@ -364,5 +364,10 @@
     "Email address or username": "邮箱或用户名",
     "Lock message":"您的账号被锁定。剩余%s秒",
     "section_selector_button":"章节列表",
-    "Keywords":"关键词"
+    "Keywords":"关键词",
+    "Warning":"警告",
+    "Confirm_delete":"请注意！您将无法撤销此删除操作！",
+    "Do_it":"好的，删除它",
+    "Operation_success":"操作成功！",
+    "Deleted":"已删除"
 }
