@@ -92,8 +92,8 @@ Meteor.methods({
         else {
             results.publisherName = publisherName;
             var publisher = Publishers.findOne({name: results.publisherName});
-            if (publisher === undefined) results.errors.push("No publisher found in the system with the name: " + results.publisherName);
-            else results.publisher = publisher._id;
+            if (publisher !== undefined)
+                results.publisher = publisher._id;
         }
 
         //      GET REFERENCES
