@@ -339,6 +339,20 @@
             "description": {
                 "label": "封面描述"
             }
+        },
+        "collections":{
+            "title": {
+                "label": "英文标题"
+            },
+            "chinesetitle": {
+                "label": "中文标题"
+            },
+            "description": {
+                "label": "英文简介"
+            },
+            "chinesedescription": {
+                "label": "中文简介"
+            }
         }
     },
     "roles": "角色",
