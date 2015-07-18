@@ -32,8 +32,12 @@ Package.onUse(function(api) {
       'client/view/collections.js',
       'client/view/list.html',
       'client/view/list.js',
-      'client/view/filters.html',
-      'client/view/filters.js'
+      'client/view/filters/collAlphabetBar.html',
+      'client/view/filters/collAlphabetBar.js',
+      'client/view/filters/collLeftFilters.html',
+      'client/view/filters/collLeftFilters.js',
+      'client/view/filters/collPublishersFilter.html',
+      'client/view/filters/collPublishersFilter.js'
   ],'client')
 });
 
