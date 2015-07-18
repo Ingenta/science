@@ -1,7 +1,11 @@
 <template name="collectionsList">
-	{{#each collections}}
-		{{> oneCollection}}
-	{{/each}}
+	<div class="container-fluid">
+		<div class="row" style="margin-top: 20px;">
+			{{#each collections}}
+				{{> oneCollection}}
+			{{/each}}
+		</div>
+	</div>
 </template>
 
 <template name="oneCollection">

@@ -1,6 +1,7 @@
 <template name="collections">
 	<div class="container-fluid">
 		{{> pageElement key="collections"}}
+		{{> collectionsAlphabetBar}}
 		<div class="row">
 			{{#if can "add-pulisher-collections" "collections" }}
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
@@ -8,9 +9,13 @@
 				</button>
 			{{/if}}
 		</div>
-		<hr>
 		<div class="row">
-			{{> collectionsList}}
+			<div id="menu" class="col-xs-3">
+				{{> collLeftFilters}}
+			</div>
+			<div id="subcontent" class="col-xs-9">
+				{{> collectionsList}}
+			</div>
 		</div>
 	</div>
 	{{> addCollectionForm}}

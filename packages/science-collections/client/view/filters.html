@@ -1,0 +1,40 @@
+<template name="collectionsAlphabetBar">
+	<div class="row bg-eee">
+		<div class="col-xs-3">
+		</div>
+		<div class="pull-right">
+			<a class="resetAlphabetFilter">{{_ "All"}}</a>&nbsp;
+			{{#each letterInTheAlphabet}}
+				<a href="#" class="letterFilter">{{this}}</a>&nbsp;
+			{{/each}}
+		</div>
+		<br>
+	</div>
+</template>
+
+<template name="collLeftFilters">
+	<ul class="list-unstyled">
+		{{> collPublishersFilter}}
+		{{!-- other filters --}}
+	</ul>
+</template>
+
+<template name="collPublishersFilter">
+	<h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
+	{{#if selectedPublisher}}
+		<li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+		{{#each publishers}}
+			<li style="color: #CCC;">
+				{{> onePublisherInFilterList}}
+			</li>
+		{{/each}}
+	{{else}}
+		{{#each publishers}}
+			<li>
+				<a class="filterButton" data-pubid="{{_id}}">
+					{{> onePublisherInFilterList}}
+				</a>
+			</li>
+		{{/each}}
+	{{/if}}
+</template>

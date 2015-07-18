@@ -31,7 +31,9 @@ Package.onUse(function(api) {
       'client/view/collections.html',
       'client/view/collections.js',
       'client/view/list.html',
-      'client/view/list.js'
+      'client/view/list.js',
+      'client/view/filters.html',
+      'client/view/filters.js'
   ],'client')
 });
 
