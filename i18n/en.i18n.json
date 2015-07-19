@@ -167,6 +167,20 @@
             "description": {
                 "label": "Cover Description"
             }
+        },
+        "collections":{
+            "title": {
+                "label": "English Title"
+            },
+            "chinesetitle": {
+                "label": "Chinese Title"
+            },
+            "description": {
+                "label": "English Description"
+            },
+            "chinesedescription": {
+                "label": "Chinese Description"
+            }
         }
     },
     "roles": "Roles",

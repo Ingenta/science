@@ -1,3 +1,32 @@
-<template name="collections">
-	collections
+<template name="collectionsList">
+	<div class="container-fluid">
+		<div class="row" style="margin-top: 20px;">
+			{{#each collections}}
+				{{> oneCollection}}
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="oneCollection">
+	<div class="row dotted-publication-item">
+		<div class="col-xs-2">
+			<img src="#" width="58" height="82"/>
+		</div>
+		<div class="col-xs-10">
+			<ul class="list-unstyled">
+				<li>
+					<h4>
+						{{title}}
+					</h4>
+				</li>
+			</ul>
+			{{> collectionDesc}}
+		</div>
+	</div>
+	<hr>
+</template>
+
+<template name="collectionDesc">
+	{{> toggleField field=description _id=_id}}
 </template>

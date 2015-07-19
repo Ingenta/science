@@ -1,3 +1,5 @@
-/**
- * Created by jiangkai on 15/7/17.
- */
+Template.collectionsList.helpers({
+	collections:function(){
+		return ArticleCollections.find();
+	}
+})

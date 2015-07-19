@@ -17,14 +17,23 @@ Package.onUse(function(api) {
   api.use([
       'templating',
       'iron:router',
-      'science-lib'
+      'aldeed:simple-schema',
+      'aldeed:autoform',
+      'science-lib',
+      'science-permissions'
   ],both);
+
   api.addFiles('both/collection.js',both);
-  api.addFiles('both/router.js',both);
+  api.addFiles('server/publish.js','server');
 
   api.addFiles([
+      'client/router.js',
+      'client/view/collections.html',
+      'client/view/collections.js',
       'client/view/list.html',
-      'client/view/list.js'
+      'client/view/list.js',
+      'client/view/filters.html',
+      'client/view/filters.js'
   ],'client')
 });
 
