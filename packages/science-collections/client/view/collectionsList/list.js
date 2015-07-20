@@ -9,6 +9,6 @@ Template.collectionsList.helpers({
 		var q = {};
 		pubId && (q.publisherId = pubId);
 		first && (q.title = {$regex: "^" + first, $options: "i"});
-		return collPaginator.find(q);
+		return collPaginator.find(q,{itemsPerPage:numPerPage});
 	}
 });

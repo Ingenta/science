@@ -383,5 +383,6 @@
     "Confirm_delete":"请注意！您将无法撤销此删除操作！",
     "Do_it":"好的，删除它",
     "Operation_success":"操作成功！",
-    "Deleted":"已删除"
+    "Deleted":"已删除",
+    "addArticleToCollection":"选择文章"
 }

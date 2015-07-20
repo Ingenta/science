@@ -1,0 +1,56 @@
+<template name="addArticleForCollection">
+	{{#with collInfo}}
+		{{translateThis chinesetitle title}}
+		{{> searchArticleForAddToCollection}}
+		<hr>
+		{{> searchResultForAddToCollection}}
+	{{/with}}
+</template>
+
+<template name="searchArticleForAddToCollection">
+	<ul class="list-unstyled">
+		<li class="condition">
+			<label for="journalName">期刊名称</label>
+			<input type="text" name="journalName" placeholder="Journal name"/>
+		</li>
+		<li class="condition">
+			<label for="pubDate">出版日期</label>
+			<input type="text" name="pubDate" placeholder="Publish date"/>
+		</li>
+		<li class="condition">
+			<label for="articleName">文章名称</label>
+			<input type="text" name="articleName" placeholder="Article name"/>
+		</li>
+		<li class="search-btn">
+			<button class="btn btn-primary">搜索</button>
+		</li>
+		<li class="condition-clear">
+		</li>
+	</ul>
+</template>
+
+<template name="searchResultForAddToCollection">
+	<div>
+		<button id="addSelectedArtcileToCollection">将选中的文章加入文章集</button>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>title</th>
+					<th>author</th>
+					<th>DOI</th>
+					<th>volume</th>
+					<th>issue</th>
+					<th>pubdate</th>
+					<th>topic</th>
+					<th>Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+
+			</tr>
+			</tbody>
+
+		</table>
+	</div>
+</template>

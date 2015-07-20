@@ -31,18 +31,21 @@ Package.onUse(function(api) {
   api.addFiles('server/publish.js','server');
 
   api.addFiles([
+      'client/stylesheet/collection.css',
       'client/paginator.js',
       'client/router.js',
-      'client/view/collections.html',
-      'client/view/collections.js',
-      'client/view/list.html',
-      'client/view/list.js',
-      'client/view/filters/collAlphabetBar.html',
-      'client/view/filters/collAlphabetBar.js',
-      'client/view/filters/collLeftFilters.html',
-      'client/view/filters/collLeftFilters.js',
-      'client/view/filters/collPublishersFilter.html',
-      'client/view/filters/collPublishersFilter.js'
+      'client/view/collectionsList/collections.html',
+      'client/view/collectionsList/collections.js',
+      'client/view/collectionsList/list.html',
+      'client/view/collectionsList/list.js',
+      'client/view/collectionsList/filters/collAlphabetBar.html',
+      'client/view/collectionsList/filters/collAlphabetBar.js',
+      'client/view/collectionsList/filters/collLeftFilters.html',
+      'client/view/collectionsList/filters/collLeftFilters.js',
+      'client/view/collectionsList/filters/collPublishersFilter.html',
+      'client/view/collectionsList/filters/collPublishersFilter.js',
+      'client/view/articleSelector/addArticle.html',
+      'client/view/articleSelector/addArticle.js'
   ],'client')
 });
 

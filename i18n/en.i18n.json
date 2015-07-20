@@ -211,5 +211,6 @@
     "Confirm_delete":"You will not be able to recover this operation!",
     "Do_it":"Yes, delete it!",
     "Operation_success":"Your operation has been successful.",
-    "Deleted":"Deleted!"
+    "Deleted":"Deleted!",
+    "addArticleToCollection":"Select articles"
 }

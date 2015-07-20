@@ -1,0 +1,13 @@
+li.condition {
+    float: left;
+    width: 230px;
+}
+li.search-btn {
+    float:left;
+}
+li.condition-clear {
+    clear: both;
+}
+li.condition input{
+    width:90%
+}
