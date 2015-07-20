@@ -40,19 +40,32 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
     var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
     authorNodes.forEach(function (author) {
-        var surname = xpath.select("child::name/surname/text()", author).toString();
-        var given = xpath.select("child::name/given-names/text()", author).toString();
-        var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
-        if (surname === undefined) {
-            results.errors.push("No surname found");
-        } else if (given === undefined) {
-            results.errors.push("No given name found");
-        } else if (emailRef == false) {
-            var fullName = {given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
-            results.authors.push(fullName);
-        } else {
-            var fullName = {emailRef: emailRef, given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
-            results.authors.push(fullName);
+        var hasAlternatives = xpath.select("child::name-alternatives/name/surname/text()", author);
+        if (!hasAlternatives) {
+            var surname = xpath.select("child::name/surname/text()", author).toString();
+            var given = xpath.select("child::name/given-names/text()", author).toString();
+            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
+            if (!emailRef) {
+                var fullName = {given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
+                results.authors.push(fullName);
+            } else {
+                var fullName = {emailRef: emailRef, given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
+                results.authors.push(fullName);
+            }
+        }
+        else{
+            var surnameEn = xpath.select("child::name-alternatives/name[@lang='en']/surname/text()", author).toString();
+            var givenEn = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
+            var surnameCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
+            var givenCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
+            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
+            if (!emailRef) {
+                var fullName = {given: {en: givenEn, cn: givenCn}, surname: {en: surnameEn, cn: surnameCn}};
+                results.authors.push(fullName);
+            } else {
+                var fullName = {emailRef: emailRef, given: {en: givenEn, cn: givenCn}, surname: {en: surnameEn, cn: surnameCn}};
+                results.authors.push(fullName);
+            }
         }
     });
     if (results.authors.length === 0) {
