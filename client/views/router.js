@@ -275,7 +275,8 @@ Router.map(function () {
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('articles'),
-                Meteor.subscribe('keywords')
+                Meteor.subscribe('keywords'),
+                Meteor.subscribe('articleXml')
             ]
         }
     });

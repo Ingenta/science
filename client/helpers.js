@@ -48,6 +48,10 @@ Template.registerHelper('getCreateButtonContent', function () {
     return TAPi18n.__("Create");
 });
 
+//Template.registerHelper('getFigById', function (id) {
+//    return ArticleXml.findOne({_id: id}).url();
+//})
+
 Template.registerHelper('getUpdateButtonContent', function () {
     return TAPi18n.__("Update");
 });

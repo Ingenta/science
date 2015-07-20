@@ -1,153 +1,154 @@
 <template name="FullTextTemplate">
-	<div id="fulltext-viewer">
-		{{#mathjax}}
-			<div class="col-xs-9">
+    <div id="fulltext-viewer">
+        {{#mathjax}}
+            <div class="col-xs-9">
 
-				{{#each sections}}
-					<div>
-						<h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
-					</div>
-					<p>
-						{{{body.html}}}
-					</p>
-					<br>
-					{{#each sections}}
-						<div>
-							<h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
-						</div>
-						<p>
-							{{{body.html}}}
-						</p>
-						<br>
-						{{#each sections}}
-							<div>
-								<h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
-							</div>
-							<p>
-								{{{body.html}}}
-							</p>
-						{{/each}}
-					{{/each}}
-				{{/each}}
+                {{#each sections}}
+                    <div>
+                        <h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
+                    </div>
+                    <p>
+                        {{{body.html}}}
+                    </p>
+                    <br>
+                    {{#each sections}}
+                        <div>
+                            <h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+                        </div>
+                        <p>
+                            {{{body.html}}}
+                        </p>
+                        <br>
+                        {{#each sections}}
+                            <div>
+                                <h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+                            </div>
+                            <p>
+                                {{{body.html}}}
+                            </p>
+                        {{/each}}
+                    {{/each}}
+                {{/each}}
 
-			</div>
-		{{/mathjax}}
-		<div class="col-xs-3">
-                {{#each getKeywords}}
+            </div>
+        {{/mathjax}}
+        <div class="col-xs-3">
+            {{#each getKeywords}}
                 <p class="title_style">
                     <a href="/keywords/{{word}}">{{word}}</a>
                 </p>
+
                 <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
 
                 </p>
-                {{/each}}
-			{{> keywordsPanel}}
-			{{> sectionSelector sections=sections}}
-		</div>
-	</div>
+            {{/each}}
+            {{> keywordsPanel}}
+            {{> sectionSelector sections=sections}}
+        </div>
+    </div>
 </template>
 
 <template name="sectionSelector">
-	<h4>{{_ "section_selector_button"}}</h4>
-	<nav id="section-index">
-		<ul id="sidebar" class="nav nav-stacked">
-			{{#each sections}}
-				<li>
-					<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-					<ul class="nav nav-stacked">
-						{{#each sections}}
-							<li>
-								<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-								<ul class="nav nav-stacked">
-									{{#each sections}}
-										<li>
-											<a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-										</li>
-									{{/each}}
-								</ul>
-							</li>
-						{{/each}}
-					</ul>
-				</li>
-			{{/each}}
-		</ul>
-	</nav>
+    <h4>{{_ "section_selector_button"}}</h4>
+    <nav id="section-index">
+        <ul id="sidebar" class="nav nav-stacked">
+            {{#each sections}}
+                <li>
+                    <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+                    <ul class="nav nav-stacked">
+                        {{#each sections}}
+                            <li>
+                                <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+                                <ul class="nav nav-stacked">
+                                    {{#each sections}}
+                                        <li>
+                                            <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li>
+            {{/each}}
+        </ul>
+    </nav>
 </template>
 
 
 <template name="figModal">
-	<div class="modal fade figure-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width:100%" src="/test/{{img}}"/>
-					</div>
-					<h5>Caption</h5>
+    <div class="modal fade figure-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <img style="width:100%" src="{{getFigFromSession}}"/>
+                    </div>
+                    <h5>{{_ "Caption"}}</h5>
 
-					<p>
-						{{{caption}}}
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <p>
+                        {{{caption}}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="tableModal">
-	<div class="modal fade table-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
-				</div>
-				<div class="modal-body">
-					<div class="att-table">
-						<div>
-							{{{table}}}
-						</div>
-						<div>
-							<b>{{label}} {{{caption}}}</b>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal fade table-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="att-table">
+                        <div>
+                            {{{table}}}
+                        </div>
+                        <div>
+                            <b>{{label}} {{{caption}}}</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="figure">
-	<div class="figure" id="fig-{{id}}">
-		<div class="figure-image">
-			<img src="{{getFigById imageId}}" border="0" alt="">
-			<span>{{label}}</span>
-		</div>
-		<div class="figure-caption">
-			<b>Caption:</b>&nbsp;&nbsp;{{{caption}}}</div>
-		<div style="clear:both;"></div>
-	</div>
+    <div class="figure" id="fig-{{id}}">
+        <div class="figure-image">
+            <img src="{{getFigById imageId}}" border="0" alt="">
+            <span>{{label}}</span>
+        </div>
+        <div class="figure-caption">
+            <b>{{_ "Caption"}}</b>&nbsp;&nbsp;{{{caption}}}</div>
+        <div style="clear:both;"></div>
+    </div>
 </template>
 
 <template name="atttable">
-	<div class="att-table">
-		<div>
-			{{{table}}}
-		</div>
-		<div>
-			<b>{{label}} {{{caption}}}</b>
-		</div>
-	</div>
+    <div class="att-table">
+        <div>
+            {{{table}}}
+        </div>
+        <div>
+            <b>{{label}} {{{caption}}}</b>
+        </div>
+    </div>
 </template>
