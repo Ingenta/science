@@ -92,7 +92,9 @@ Meteor.startup(function () {
         var names = [
                 {key: "publisher", e: "Publisher", c: "出版商"},
                 {key: "publication", e: "Publication", c: "出版物"},
-                {key: "topic", e: "Topic", c: "主题"}
+                {key: "topic", e: "Topic", c: "主题"},
+                {key: "collections", e: "Collections", c: "文章集"},
+                {key: "authors", e: "Authors", c: "作者中心"}
             ];
         _.each(names, function (name) {
             Pages.insert({

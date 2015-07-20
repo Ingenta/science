@@ -58,6 +58,10 @@ Meteor.methods({
             }
         }
 
+        var contentType = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subject", doc);
+        if (contentType === undefined) results.errors.push("No content type found");
+        else results.contentType = contentType;
+
         var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
         if (volume === undefined) results.errors.push("No volume found");
         else results.volume = volume;
@@ -113,8 +117,8 @@ Meteor.methods({
         else {
             results.publisherName = publisherName;
             var publisher = Publishers.findOne({name: results.publisherName});
-            if (publisher === undefined) results.errors.push("No publisher found in the system with the name: " + results.publisherName);
-            else results.publisher = publisher._id;
+            if (publisher !== undefined)
+                results.publisher = publisher._id;
         }
 
         //      GET REFERENCES
@@ -142,54 +146,9 @@ Meteor.methods({
 
         results = ScienceXML.getFullText(results, doc);
 
-
         //          GET AUTHORS, NOTES AND AFFILIATIONS
-        results.authors = [];
-        results.authorNotes = [];
+        ScienceXML.getAuthorInfo(results, doc);
 
-        var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
-        authorNodes.forEach(function (author) {
-            var surname = xpath.select("child::name/surname/text()", author).toString();
-            var given = xpath.select("child::name/given-names/text()", author).toString();
-            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
-            if (surname === undefined) {
-                results.errors.push("No surname found");
-            } else if (given === undefined) {
-                results.errors.push("No given name found");
-            } else if (emailRef == false) {
-                var fullName = {given: given, surname: surname};
-                results.authors.push(fullName);
-            } else {
-                var fullName = {emailRef: emailRef, given: given, surname: surname};
-                results.authors.push(fullName);
-            }
-        });
-        if (results.authors.length === 0) {
-            results.errors.push("No author found");
-        }
-
-        var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
-        authorNotesNodes.forEach(function (note) {
-            var noteLabel = xpath.select("child::label/text()", note).toString();
-            var email = xpath.select("descendant::ext-link/text()", note).toString();
-            if (noteLabel === undefined) {
-                results.errors.push("No noteLabel found");
-            } else if (email === undefined) {
-                results.errors.push("No email found");
-            } else {
-                var entry = {label: noteLabel, email: email};
-                results.authorNotes.push(entry);
-            }
-        });
-
-        var affNode = xpath.select("//contrib-group", doc);
-        if (affNode !== undefined) {
-            results.affiliations = [];
-            affNode.forEach(function (affiliation) {
-                var affText = ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation);
-                if (affText)results.affiliations.push(affText);
-            });
-        }
         var received = ScienceXML.getDateFromHistory("received", doc);
         if (received) results.received = received
         var accepted = ScienceXML.getDateFromHistory("accepted", doc);

@@ -1,0 +1,19 @@
+<template name="collPublishersFilter">
+	<h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
+	{{#if selectedPublisher}}
+		<li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+		{{#each publishers}}
+			<li style="color: #CCC;">
+				{{> onePublisherInFilterList}}
+			</li>
+		{{/each}}
+	{{else}}
+		{{#each publishers}}
+			<li>
+				<a class="filterButton" data-pubid="{{_id}}">
+					{{> onePublisherInFilterList}}
+				</a>
+			</li>
+		{{/each}}
+	{{/if}}
+</template>

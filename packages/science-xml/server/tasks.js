@@ -9,7 +9,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType) {
         uploadedAt: new Date(),
         status: "Started",
         filePath: pathToFile,
-        doi: fileNameWithoutExtension,
+        filename: fileNameWithoutExtension,
         errors: []
     });
     if (Tasks.inProgress(undefined, logId, fileNameWithoutExtension)) {
@@ -65,9 +65,9 @@ Tasks.hasExistingArticleByArticleDoi = function (taskId, logId, articledoi) {
     return true;
 }
 
-Tasks.inProgress = function (taskId, logId, doi) {
-    var existingLog = UploadLog.findOne({doi: doi, status: "Pending"});
-    if (!existingLog){
+Tasks.inProgress = function (taskId, logId, filename) {
+    var existingLog = UploadLog.findOne({filename: filename, status: "Pending"});
+    if (!existingLog) {
         //set to in progress(pending)
         UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
         return false;
@@ -104,24 +104,25 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 //TODO: test this condition
                                 return;
                             }
-                            var doi = "";
+                            var xmlFileName = "";
                             file.forEach(function (f) {
                                 if (f.endWith('.xml') && f !== "readme.xml") {
-                                    doi = f.substr(0, f.lastIndexOf(".xml"));
+                                    xmlFileName = f.substr(0, f.lastIndexOf(".xml"));
+                                    //TODO: should break here, or better yet find a better means of finding the xml
                                 }
                             });
-                            if (!doi) {
+                            if (!xmlFileName) {
                                 Tasks.failSimple(taskId, logId, "xml not found inside zip file");
                                 return;
                             }
 
                             var log = UploadLog.findOne({_id: logId});
-                            if (log.doi !== doi) {
+                            if (log.filename !== xmlFileName) {
                                 Tasks.failSimple(taskId, logId, "xml file found inside zip does not match filename doi");
                                 return;
                             }
-                            var targetXml = targetPath + "/" + doi + ".xml";
-                            var targetPdf = targetPath + "/" + doi + ".pdf";
+                            var targetXml = targetPath + "/" + xmlFileName + ".xml";
+                            var targetPdf = targetPath + "/" + xmlFileName + ".pdf";
                             UploadLog.update({_id: logId}, {
                                 $set: {
                                     xml: targetXml,
@@ -153,6 +154,11 @@ Tasks.parse = function (logId, pathToXml) {
         log.errors = result.errors;
         if (log.errors.length) {
             Tasks.fail(taskId, logId, log.errors);
+            return;
+        }
+        //DOI in xml doesn't match filename
+        if (result.articledoi !== log.filename) {
+            Tasks.failSimple(taskId, logId, "doi in article xml does not match filename");
             return;
         }
         //set parse task to success and start next task
@@ -206,8 +212,8 @@ Tasks.insertArticleImages = function (logId, result) {
                 //TODO: need to wait for all of these to complete before inserting article?
                 fig.imageId = fileObj._id;
                 UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                if(_.last(result.figures)===fig){
-                    Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo),20000)
+                if (_.last(result.figures) === fig) {
+                    Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
                 }
             });
         }
@@ -308,7 +314,8 @@ var insertArticle = function (a) {
         figures: a.figures,
         tables: a.tables,
         pdfId: a.pdfId,
-        keywords: a.keywords
+        keywords: a.keywords,
+        contentType: a.contentType
     });
     return id;
 }
