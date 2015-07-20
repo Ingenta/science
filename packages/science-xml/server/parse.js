@@ -32,10 +32,31 @@ Meteor.methods({
         var existingArticle = Articles.findOne({doi: results.doi});
         if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
 
-
-        var title = ScienceXML.getSimpleValueByXPath("//article-title", doc);
-        if (title === undefined) results.errors.push("No title found");
-        else results.title = title;
+        var primaryTitle = ScienceXML.getSimpleValueByXPath("//article-title", doc);
+        if (primaryTitle === undefined) results.errors.push("No title found");
+        else {
+            debugger;
+            results.title = {};
+            var primaryLang = xpath.select("//article-title/attribute::lang", doc);
+            if (primaryLang[0] === undefined) {
+                results.title.en = primaryTitle;
+                results.title.cn = primaryTitle;
+            }
+            else {
+                primaryLang = primaryLang[0].value;
+                var secondaryTitle = ScienceXML.getSimpleValueByXPath("//trans-title-group/trans-title", doc);
+                if (primaryLang === 'en') {
+                    results.title.en = primaryTitle;
+                    if(secondaryTitle === undefined) results.title.cn = primaryTitle;
+                    else results.title.cn = secondaryTitle;
+                }
+                else if (primaryLang === 'zh-Hans') {
+                    results.title.cn = primaryTitle;
+                    if(secondaryTitle === undefined) results.title.en = primaryTitle;
+                    else results.title.en = secondaryTitle;
+                }
+            }
+        }
 
         var contentType = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subject", doc);
         if (contentType === undefined) results.errors.push("No content type found");
