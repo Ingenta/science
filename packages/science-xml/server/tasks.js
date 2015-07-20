@@ -104,24 +104,24 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 //TODO: test this condition
                                 return;
                             }
-                            var doi = "";
+                            var xmlFileName = "";
                             file.forEach(function (f) {
                                 if (f.endWith('.xml') && f !== "readme.xml") {
-                                    doi = f.substr(0, f.lastIndexOf(".xml"));
+                                    xmlFileName = f.substr(0, f.lastIndexOf(".xml"));
                                 }
                             });
-                            if (!doi) {
+                            if (!xmlFileName) {
                                 Tasks.failSimple(taskId, logId, "xml not found inside zip file");
                                 return;
                             }
 
                             var log = UploadLog.findOne({_id: logId});
-                            if (log.doi !== doi) {
+                            if (log.filename !== xmlFileName) {
                                 Tasks.failSimple(taskId, logId, "xml file found inside zip does not match filename doi");
                                 return;
                             }
-                            var targetXml = targetPath + "/" + doi + ".xml";
-                            var targetPdf = targetPath + "/" + doi + ".pdf";
+                            var targetXml = targetPath + "/" + xmlFileName + ".xml";
+                            var targetPdf = targetPath + "/" + xmlFileName + ".pdf";
                             UploadLog.update({_id: logId}, {
                                 $set: {
                                     xml: targetXml,
