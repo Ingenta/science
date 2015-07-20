@@ -1,7 +1,7 @@
 <template name="collections">
 	<div class="container-fluid">
 		{{> pageElement key="collections"}}
-		{{> collectionsAlphabetBar}}
+		{{> collAlphabetBar}}
 		<div class="row">
 			{{#if can "add-pulisher-collections" "collections" }}
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
