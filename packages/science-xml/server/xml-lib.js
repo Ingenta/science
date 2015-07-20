@@ -37,39 +37,36 @@ ScienceXML.getFileContentsFromLocalPath = function (path) {
 ScienceXML.getAuthorInfo = function (results, doc) {
     results.authors = [];
     results.authorNotes = [];
+    var fullName = {};
     var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
     authorNodes.forEach(function (author) {
+        var surnamePart = {};
+        var givenPart = {};
+        var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
+        //var authorAffNodes = xpath.select("child::xref[@ref-type='aff']/text()", author);
+        //authorAffNodes.forEach(function (aff) {
+        //    var rid = xpath.select("attribute::rid", aff)[0];
+        //});
         var hasAlternatives = xpath.select("child::name-alternatives", author);
         if (!hasAlternatives || !hasAlternatives.length) {
             var surname = xpath.select("child::name/surname/text()", author).toString();
             var given = xpath.select("child::name/given-names/text()", author).toString();
-            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
-            if (!emailRef) {
-                var fullName = {given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
-                results.authors.push(fullName);
-            } else {
-                var fullName = {emailRef: emailRef, given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
-                results.authors.push(fullName);
-            }
+            surnamePart = {en: surname, cn: surname};
+            givenPart = {en: given, cn: given};
         }
         else {
             var surnameEn = xpath.select("child::name-alternatives/name[@lang='en']/surname/text()", author).toString();
             var givenEn = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
             var surnameCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
             var givenCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
-            var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
-            if (!emailRef) {
-                var fullName = {given: {en: givenEn, cn: givenCn}, surname: {en: surnameEn, cn: surnameCn}};
-                results.authors.push(fullName);
-            } else {
-                var fullName = {
-                    emailRef: emailRef,
-                    given: {en: givenEn, cn: givenCn},
-                    surname: {en: surnameEn, cn: surnameCn}
-                };
-                results.authors.push(fullName);
-            }
+            surnamePart = {en: surnameEn, cn: surnameCn};
+            givenPart = {en: givenEn, cn: givenCn};
         }
+
+        fullName = {emailRef: emailRef, given: givenPart, surname: surnamePart};
+
+
+        results.authors.push(fullName);
     });
     if (results.authors.length === 0) {
         results.errors.push("No author found");
@@ -99,7 +96,14 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             affNode.forEach(function (affiliation) {
                 var affTextEn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='en']", affiliation);
                 var affTextCn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='zh-Hans']", affiliation);
-                if (affTextEn && affTextCn)results.affiliations.push({en: affTextEn, cn: affTextCn});
+                var id = xpath.select("attribute::id", affiliation)[0];
+                //if one doesn't exist copy the other one.
+                var oneAffiliation = {};
+                if (!affTextCn)affTextCn = affTextEn;
+                if (!affTextEn)affTextEn = affTextCn;
+                if (!id) oneAffiliation = {en: affTextEn, cn: affTextCn};
+                else oneAffiliation = {id: id.value, en: affTextEn, cn: affTextCn}
+                results.affiliations.push(oneAffiliation);
             });
         }
     }

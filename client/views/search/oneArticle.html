@@ -6,7 +6,7 @@
 	        {{#if can "delete-article" "resource"}}
 	        <a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>
 	        {{/if}}
-            <h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticle title}}">{{{highlight query title}}}</a></div></h4>
+            <h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></div></h4>
 
 	        <ul class="list-unstyled">
                 <li>
@@ -15,7 +15,7 @@
                     {{/each}}
                 </li>
                 <li>
-                    <a href="{{urlToJournal title}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                    <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
                     <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
                 </li>
                 <li>{{_ "Language"}} : {{_ "Chinese"}}</li>
