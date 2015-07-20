@@ -24,7 +24,8 @@ Template.SearchResults.helpers({
         var q = Router.current().params.searchQuery;
         if (q) {
             var mongoDbArr = [];
-            mongoDbArr.push({title: {$regex: q, $options: "i"}});
+            mongoDbArr.push({'title.en': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'title.cn': {$regex: q, $options: "i"}});
             mongoDbArr.push({keywords: {$regex: q, $options: "i"}});
             return Articles.find({$or: mongoDbArr});
         }
