@@ -27,9 +27,9 @@ ReactiveTabs.createInterface({
                         action: "fulltext",
                         ip: session
                     });
-                    article.keywords.forEach(function(k){
-                        var id = Keywords.findOne({"name":k})._id;
-                        Keywords.update({_id:id},{$inc:{"score":2}})
+                    article.keywords.forEach(function (k) {
+                        var id = Keywords.findOne({"name": k})._id;
+                        Keywords.update({_id: id}, {$inc: {"score": 2}})
                     })
                 }
             });
@@ -66,7 +66,9 @@ Template.showArticle.helpers({
         return Publications.findOne({_id: id}).title;
     },
     getFullName: function () {
-        return this.surname + ' ' + this.given;
+        if (TAPi18n.getLanguage() === "zh-CN")
+            return this.surname.cn + ' ' + this.given.cn;
+        return this.surname.en + ' ' + this.given.en;
     },
     getPdfById: function (id) {
         return ArticleXml.findOne({_id: id}).url();

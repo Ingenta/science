@@ -108,6 +108,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                             file.forEach(function (f) {
                                 if (f.endWith('.xml') && f !== "readme.xml") {
                                     xmlFileName = f.substr(0, f.lastIndexOf(".xml"));
+                                    //TODO: should break here, or better yet find a better means of finding the xml
                                 }
                             });
                             if (!xmlFileName) {
@@ -155,7 +156,7 @@ Tasks.parse = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        //DOI in xml doesnt match filename
+        //DOI in xml doesn't match filename
         if (result.articledoi !== log.filename) {
             Tasks.failSimple(taskId, logId, "doi in article xml does not match filename");
             return;

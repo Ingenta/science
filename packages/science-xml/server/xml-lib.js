@@ -34,6 +34,56 @@ ScienceXML.getFileContentsFromLocalPath = function (path) {
     return FSE.readFileSync(path, "utf8");
 }
 
+ScienceXML.getAuthorInfo = function (results, doc) {
+    results.authors = [];
+    results.authorNotes = [];
+
+    var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
+    authorNodes.forEach(function (author) {
+        var surname = xpath.select("child::name/surname/text()", author).toString();
+        var given = xpath.select("child::name/given-names/text()", author).toString();
+        var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
+        if (surname === undefined) {
+            results.errors.push("No surname found");
+        } else if (given === undefined) {
+            results.errors.push("No given name found");
+        } else if (emailRef == false) {
+            var fullName = {given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
+            results.authors.push(fullName);
+        } else {
+            var fullName = {emailRef: emailRef, given: {en: given, cn: given}, surname: {en: surname, cn: surname}};
+            results.authors.push(fullName);
+        }
+    });
+    if (results.authors.length === 0) {
+        results.errors.push("No author found");
+    }
+
+    var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
+    authorNotesNodes.forEach(function (note) {
+        var noteLabel = xpath.select("child::label/text()", note).toString();
+        var email = xpath.select("descendant::ext-link/text()", note).toString();
+        if (noteLabel === undefined) {
+            results.errors.push("No noteLabel found");
+        } else if (email === undefined) {
+            results.errors.push("No email found");
+        } else {
+            var entry = {label: noteLabel, email: email};
+            results.authorNotes.push(entry);
+        }
+    });
+
+    var affNode = xpath.select("//contrib-group", doc);
+    if (affNode !== undefined) {
+        results.affiliations = [];
+        affNode.forEach(function (affiliation) {
+            var affText = ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation);
+            if (affText)results.affiliations.push(affText);
+        });
+    }
+    return results;
+}
+
 ScienceXML.getSubSection = function (subSectionNodes) {
     var thisSubSection = [];
     subSectionNodes.forEach(function (subSection) {
