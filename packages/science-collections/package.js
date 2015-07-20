@@ -24,6 +24,9 @@ Package.onUse(function(api) {
   ],both);
 
   api.addFiles('both/collection.js',both);
+  api.addFiles('both/methods.js',both);
+
+
   api.addFiles('server/publish.js','server');
 
   api.addFiles([
