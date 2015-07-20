@@ -30,7 +30,8 @@ Router.route("/collections/:collId/articles", {
 	waitOn        : function () {
 		return [
 			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('articles')
+			Meteor.subscribe('articles'),
+			Meteor.subscribe('publications')
 		]
 	}
 });
