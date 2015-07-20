@@ -1,8 +1,6 @@
 Template.addCollectionForm.helpers({
-	getpublishers:function(options){
-		debugger;
+	getpublishers:function(){
 		var iscn=TAPi18n.getLanguage()==='zh-CN';
-		var query = {};
 		var pubs = Publishers.find({},{chinesename:1,name:1}).fetch();
 		var result = [];
 		_.each(pubs,function(item){

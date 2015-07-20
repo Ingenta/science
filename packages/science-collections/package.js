@@ -19,6 +19,7 @@ Package.onUse(function(api) {
       'iron:router',
       'aldeed:simple-schema',
       'aldeed:autoform',
+      'hitchcott:paginator',
       'science-lib',
       'science-permissions'
   ],both);
@@ -30,6 +31,7 @@ Package.onUse(function(api) {
   api.addFiles('server/publish.js','server');
 
   api.addFiles([
+      'client/paginator.js',
       'client/router.js',
       'client/view/collections.html',
       'client/view/collections.js',

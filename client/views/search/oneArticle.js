@@ -3,7 +3,9 @@ Template.oneArticle.helpers({
 		return Publications.findOne({_id: id}).title;
 	},
 	getFullName: function () {
-		return this.surname + ' ' + this.given;
+		if (TAPi18n.getLanguage() === "zh-CN")
+			return this.surname.cn + ' ' + this.given.cn;
+		return this.surname.en + ' ' + this.given.en;
 	},
 	query      : function () {
 		return Router.current().params.searchQuery;

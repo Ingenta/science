@@ -21,10 +21,16 @@ ArticleCollectionsSchema = new SimpleSchema({
 		type: String
 	},
 	description:{
-		type: String
+		type: String,
+		autoform: {
+			rows: 2
+		}
 	},
 	chinesedescription: {
-		type: String
+		type: String,
+		autoform: {
+			rows: 2
+		}
 	},
 	picture: {
 		type: String,
@@ -40,7 +46,6 @@ ArticleCollectionsSchema = new SimpleSchema({
 	},
 	publisherId: {
 		type: String,
-		optional: true,
 		autoform: {
 			type: "universe-select"
 		}

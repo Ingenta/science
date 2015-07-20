@@ -38,7 +38,12 @@ Template.SearchResults.helpers({
             return Articles.find({keywords: k});
         }
         var a = Router.current().params.authorQuery;
-        return Articles.find({"authors.given": a.split(" ")[1], "authors.surname": a.split(" ")[0]});
+        if (a) {
+            var mongoDbArr = [];
+            mongoDbArr.push({"authors.given.en": a.split(" ")[1], "authors.surname.en": a.split(" ")[0]});
+            mongoDbArr.push({"authors.given.cn": a.split(" ")[1], "authors.surname.cn": a.split(" ")[0]});
+            return Articles.find({$or: mongoDbArr});
+        }
     },
     'filters': function () {
 
