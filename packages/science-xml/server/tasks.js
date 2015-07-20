@@ -72,7 +72,7 @@ Tasks.inProgress = function (taskId, logId, filename) {
         UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
         return false;
     }
-    Tasks.failSimple(taskId, logId, "Import in progress matching this DOI: " + doi);
+    Tasks.failSimple(taskId, logId, "Import in progress matching this filename: " + filename);
     return true;
 }
 
@@ -293,13 +293,13 @@ var insertArticle = function (a) {
         articledoi: a.articledoi,
         title: a.title,
         authors: a.authors,
+        authorNotes: a.authorNotes,
+        affiliations: a.affiliations,
         abstract: a.abstract,
         journalId: a.journalId,
         publisher: a.publisher,
         references: a.references,
-        affiliations: a.affiliations,
         elocationId: a.elocationId,
-        authorNotes: a.authorNotes,
         year: a.year,
         month: a.month,
         issue: a.issue,

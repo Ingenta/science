@@ -37,11 +37,10 @@ ScienceXML.getFileContentsFromLocalPath = function (path) {
 ScienceXML.getAuthorInfo = function (results, doc) {
     results.authors = [];
     results.authorNotes = [];
-
     var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
     authorNodes.forEach(function (author) {
-        var hasAlternatives = xpath.select("child::name-alternatives/name/surname/text()", author);
-        if (!hasAlternatives) {
+        var hasAlternatives = xpath.select("child::name-alternatives", author);
+        if (!hasAlternatives || !hasAlternatives.length) {
             var surname = xpath.select("child::name/surname/text()", author).toString();
             var given = xpath.select("child::name/given-names/text()", author).toString();
             var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
@@ -53,7 +52,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 results.authors.push(fullName);
             }
         }
-        else{
+        else {
             var surnameEn = xpath.select("child::name-alternatives/name[@lang='en']/surname/text()", author).toString();
             var givenEn = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
             var surnameCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
@@ -63,7 +62,11 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 var fullName = {given: {en: givenEn, cn: givenCn}, surname: {en: surnameEn, cn: surnameCn}};
                 results.authors.push(fullName);
             } else {
-                var fullName = {emailRef: emailRef, given: {en: givenEn, cn: givenCn}, surname: {en: surnameEn, cn: surnameCn}};
+                var fullName = {
+                    emailRef: emailRef,
+                    given: {en: givenEn, cn: givenCn},
+                    surname: {en: surnameEn, cn: surnameCn}
+                };
                 results.authors.push(fullName);
             }
         }
@@ -85,15 +88,23 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.authorNotes.push(entry);
         }
     });
-
-    var affNode = xpath.select("//contrib-group", doc);
-    if (affNode !== undefined) {
-        results.affiliations = [];
-        affNode.forEach(function (affiliation) {
-            var affText = ScienceXML.getValueByXPathIgnoringXml("child::aff", affiliation);
-            if (affText)results.affiliations.push(affText);
-        });
+    results.affiliations = [];
+    var hasAlternatives = xpath.select("//contrib-group/aff-alternatives", doc);
+    if (!hasAlternatives || !hasAlternatives.length) {
+        var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
+        if (affText)results.affiliations.push({en: affText, cn: affText});
+    } else {
+        var affNode = xpath.select("//contrib-group/aff-alternatives", doc);
+        if (affNode !== undefined) {
+            affNode.forEach(function (affiliation) {
+                var affTextEn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='en']", affiliation);
+                var affTextCn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='zh-Hans']", affiliation);
+                if (affTextEn && affTextCn)results.affiliations.push({en: affTextEn, cn: affTextCn});
+            });
+        }
     }
+
+
     return results;
 }
 
