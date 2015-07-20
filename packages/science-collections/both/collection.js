@@ -39,10 +39,10 @@ ArticleCollectionsSchema = new SimpleSchema({
 		label: 'Choose file'
 	},
 	publisherId: {
-		type: [String],
+		type: String,
 		optional: true,
 		autoform: {
-			type: "select-checkbox-inline"
+			type: "universe-select"
 		}
 	}
 });
