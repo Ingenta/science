@@ -13,13 +13,33 @@ Template.collPublishersFilter.helpers({
 });
 
 Template.collPublishersFilter.events({
-	'click .filterButton': function (event) {
-		var f = $(event.target).data().pubid;
-		Session.set('filterPublisher', f);
-		Session.set('PerPage', 10);
-	},
 	'click .clearPublisher': function (event) {
 		Session.set('filterPublisher', undefined);
 		Session.set('PerPage', 10);
+	}
+});
+
+Template.onePublisherInCollFilterList.events({
+	'click .filterButton': function (event) {
+		Session.set('filterPublisher', this._id);
+		Session.set('PerPage', 10);
+	}
+});
+
+Template.onePublisherInCollFilterList.helpers({
+	count: function () {
+		var first = Session.get('firstLetter');
+		if (first === undefined)
+			return ArticleCollections.find({publisherId: this._id}).count();
+		return ArticleCollections.find({publisherId: this._id, title: {$regex: "^" + first, $options: "i"}}).count();
+	}
+});
+
+Template.onePublisherInCollFilterListGray.helpers({
+	count: function () {
+		var first = Session.get('firstLetter');
+		if (first === undefined)
+			return ArticleCollections.find({publisherId: this._id}).count();
+		return ArticleCollections.find({publisherId: this._id, title: {$regex: "^" + first, $options: "i"}}).count();
 	}
 });

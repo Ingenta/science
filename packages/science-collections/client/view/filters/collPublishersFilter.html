@@ -1,19 +1,27 @@
 <template name="collPublishersFilter">
 	<h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
 	{{#if selectedPublisher}}
-		<li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+		<li><a href="#" class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
 		{{#each publishers}}
-			<li style="color: #CCC;">
-				{{> onePublisherInFilterList}}
-			</li>
+			{{> onePublisherInCollFilterListGray}}
 		{{/each}}
 	{{else}}
 		{{#each publishers}}
-			<li>
-				<a class="filterButton" data-pubid="{{_id}}">
-					{{> onePublisherInFilterList}}
-				</a>
-			</li>
+			{{> onePublisherInCollFilterList}}
 		{{/each}}
 	{{/if}}
+</template>
+
+<template name="onePublisherInCollFilterList">
+	<li>
+		<a href="#" class="filterButton">
+			{{translateThis chinesename name}} ({{count}})
+		</a>
+	</li>
+</template>
+
+<template name="onePublisherInCollFilterListGray">
+	<li style="color: #CCC;">
+		{{translateThis chinesename name}} ({{count}})
+	</li>
 </template>
