@@ -35,7 +35,6 @@ Meteor.methods({
         var primaryTitle = ScienceXML.getSimpleValueByXPath("//article-title", doc);
         if (primaryTitle === undefined) results.errors.push("No title found");
         else {
-            debugger;
             results.title = {};
             var primaryLang = xpath.select("//article-title/attribute::lang", doc);
             if (primaryLang[0] === undefined) {

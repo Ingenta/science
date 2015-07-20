@@ -235,7 +235,7 @@ Router.map(function () {
         name: "journal.name.volume",
         parent: "journal.name",
         title: function () {
-            return TAPi18n.__("volumeItem", 1) + ", " + TAPi18n.__("issueItem", 1)
+            return TAPi18n.__("volumeItem", Router.current().params.volume) + ", " + TAPi18n.__("issueItem", Router.current().params.issue)
         },
         waitOn: function () {
             return [
@@ -275,7 +275,8 @@ Router.map(function () {
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('articles'),
-                Meteor.subscribe('keywords')
+                Meteor.subscribe('keywords'),
+                Meteor.subscribe('articleXml')
             ]
         }
     });

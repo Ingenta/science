@@ -12,7 +12,7 @@ var getIssueComponentByArticle = function (article) {
 }
 
 Template.registerHelper('urlToArticle', function (title) {
-    var article = Articles.findOne({title: title});
+    var article = Articles.findOne({'title.en': title});
     return urlToArticleByArticleObject(article);
 });
 
@@ -21,13 +21,8 @@ Template.registerHelper('urlToArticleById', function (id) {
     return urlToArticleByArticleObject(article);
 });
 
-Template.registerHelper('urlToTOC', function (title) {
-    var article = Articles.findOne({title: title});
-    return getJournalComponentByArticle(article) + getIssueComponentByArticle(article);
-});
-
 Template.registerHelper('urlToJournal', function (title) {
-    var article = Articles.findOne({title: title});
+    var article = Articles.findOne({'title.en': title});
     return getJournalComponentByArticle(article);
 });
 
@@ -52,6 +47,10 @@ Template.registerHelper('translateThis', function (chinese, english) {
 Template.registerHelper('getCreateButtonContent', function () {
     return TAPi18n.__("Create");
 });
+
+//Template.registerHelper('getFigById', function (id) {
+//    return ArticleXml.findOne({_id: id}).url();
+//})
 
 Template.registerHelper('getUpdateButtonContent', function () {
     return TAPi18n.__("Update");
