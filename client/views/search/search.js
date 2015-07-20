@@ -12,7 +12,13 @@ Template.SearchBar.events({
         }
     }
 });
-
+Template.SearchResults.onRendered(function () {
+    var k = Router.current().params.keywordsQuery;
+    if (k) {
+        var id = Keywords.findOne({"name": k})._id;
+        Keywords.update({_id: id}, {$inc: {"score": 3}})
+    }
+})
 Template.SearchResults.helpers({
     'results': function () {
         var q = Router.current().params.searchQuery;
