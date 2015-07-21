@@ -9,8 +9,9 @@ Template.UploadLogModal.helpers({
         return UploadTasks.find({logId: logId}, {sort: {'started': 1}});
     },
     errors: function () {
-        var logId = Session.get('uploadLogId')
-        return UploadLog.findOne({_id: logId}).errors;
+        var logId = Session.get('uploadLogId');
+        if (logId)
+            return UploadLog.findOne({_id: logId}).errors;
     }
 });
 
