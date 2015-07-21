@@ -1,12 +1,17 @@
 var urlToArticleByArticleObject = function (article) {
+    if (!article)return;
     return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
 }
 var getJournalComponentByArticle = function (article) {
-    var publisherName = Publishers.findOne({_id: article.publisher}).name;
-    var journalName = Publications.findOne({_id: article.journalId}).title;
-    return "/publisher/" + publisherName + "/journal/" + journalName;
+    if (!article)return;
+    var pub = Publishers.findOne({_id: article.publisher});
+    if (!pub)return;
+    var journal = Publications.findOne({_id: article.journalId});
+    if (!journal)return;
+    return "/publisher/" + pub.name + "/journal/" + journal.title;
 }
 var getIssueComponentByArticle = function (article) {
+    if (!article)return;
     var issue = Issues.findOne({_id: article.issueId});
     return "/" + issue.volume + "/" + issue.issue;
 }
