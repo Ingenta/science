@@ -133,17 +133,11 @@
             }
         },
         "pages": {
-            "titleCN": {
-                "label": "Chinese Title"
+            "title": {
+                "label": "Title"
             },
-            "descriptionCN": {
-                "label": "Chinese Description"
-            },
-            "titleEN": {
-                "label": "English Title"
-            },
-            "descriptionEN": {
-                "label": "English Description"
+            "description": {
+                "label": "Description"
             }
         },
         "configure": {

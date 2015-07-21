@@ -1,12 +1,17 @@
 var urlToArticleByArticleObject = function (article) {
+    if (!article)return;
     return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
 }
 var getJournalComponentByArticle = function (article) {
-    var publisherName = Publishers.findOne({_id: article.publisher}).name;
-    var journalName = Publications.findOne({_id: article.journalId}).title;
-    return "/publisher/" + publisherName + "/journal/" + journalName;
+    if (!article)return;
+    var pub = Publishers.findOne({_id: article.publisher});
+    if (!pub)return;
+    var journal = Publications.findOne({_id: article.journalId});
+    if (!journal)return;
+    return "/publisher/" + pub.name + "/journal/" + journal.title;
 }
 var getIssueComponentByArticle = function (article) {
+    if (!article)return;
     var issue = Issues.findOne({_id: article.issueId});
     return "/" + issue.volume + "/" + issue.issue;
 }
@@ -39,18 +44,17 @@ Template.registerHelper('isChinese', function (language) {
 });
 
 Template.registerHelper('translateThis', function (chinese, english) {
-    if (TAPi18n.getLanguage() === "zh-CN")
+    if (TAPi18n.getLanguage() === "zh-CN") {
+        if (!chinese)return english;
         return chinese;
+    }
+    if (!english)return chinese;
     return english;
 });
 
 Template.registerHelper('getCreateButtonContent', function () {
     return TAPi18n.__("Create");
 });
-
-//Template.registerHelper('getFigById', function (id) {
-//    return ArticleXml.findOne({_id: id}).url();
-//})
 
 Template.registerHelper('getUpdateButtonContent', function () {
     return TAPi18n.__("Update");
