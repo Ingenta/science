@@ -21,7 +21,8 @@ Package.onUse(function (api) {
 		'aldeed:autoform',
 		'hitchcott:paginator',
 		'science-lib',
-		'science-permissions'
+		'science-permissions',
+		'templates:tabs'
 	], both);
 
 	api.addFiles('both/collection.js', both);
@@ -45,8 +46,16 @@ Package.onUse(function (api) {
 		'client/view/collectionsList/filters/collLeftFilters.js',
 		'client/view/collectionsList/filters/collPublishersFilter.html',
 		'client/view/collectionsList/filters/collPublishersFilter.js',
+		'client/view/articleSelector/tabs.html',
+		'client/view/articleSelector/tabs.js',
 		'client/view/articleSelector/addArticle.html',
-		'client/view/articleSelector/addArticle.js'
+		'client/view/articleSelector/addArticle.js',
+		'client/view/articleSelector/select/query.html',
+		'client/view/articleSelector/select/query.js',
+		'client/view/articleSelector/select/result.html',
+		'client/view/articleSelector/select/result.js',
+		'client/view/articleSelector/inside/list.html',
+		'client/view/articleSelector/inside/list.js'
 	], 'client')
 });
 

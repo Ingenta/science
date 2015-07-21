@@ -1,0 +1,39 @@
+<template name="addArticleTabsTemp">
+	{{#addArticleTabs tabs=tabs}}
+
+		{{#tabContent slug="add"}}
+			{{> searchArticleForAddToCollection}}
+			<hr>
+			{{> searchResultForAddToCollection}}
+		{{/tabContent}}
+
+		{{#tabContent slug="inside"}}
+			inside
+		{{/tabContent}}
+
+	{{/addArticleTabs}}
+</template>
+
+
+<template name="addArticleTabs">
+	<div>
+
+		{{#if activeTab}}
+			{{trackActiveTab activeTab}}
+		{{/if}}
+
+		{{trackTabs tabs}}
+
+		<ul class="nav nav-tabs" role="tablist">
+			{{#each tabs}}
+				<li role="presentation" class="tab-item {{isActiveTab slug}}">
+					<a role="tab" data-toggle="tab">{{name}}</a>
+				</li>
+			{{/each}}
+		</ul>
+
+		<div class="tabs-content-container">
+			{{> UI.contentBlock context=__context__ }}
+		</div>
+	</div>
+</template>
