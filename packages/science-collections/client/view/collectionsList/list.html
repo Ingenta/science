@@ -20,12 +20,17 @@
 			<img src="{{getImageHelper picture}}" width="58" height="82"/>
 		</div>
 		<div class="col-xs-10">
+			<div class="pull-right">
+				<a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
+				{{> updateCollectionForm}}
+				<a href="#" class="fa fa-trash" collId="{{_id}}"></a>
+			</div>
 			<ul class="list-unstyled">
 				<li>
 					<h4>
 						{{translateThis chinesetitle title}}
 					</h4>
-					<a href="{{pathFor 'collections.selectArticles' collId=_id}}">+</a>
+
 				</li>
 			</ul>
 			{{> collectionDesc}}
@@ -36,4 +41,10 @@
 
 <template name="collectionDesc">
 	{{> toggleField field=description _id=_id}}
+</template>
+
+<template name="updateCollectionForm">
+	{{#afModal class="fa fa-pencil" title=getTitle collection="ArticleCollections" doc=_id operation="update"
+	buttonContent=getUpdateButtonContent omitFields="articles,publisherId"}}
+	{{/afModal}}
 </template>

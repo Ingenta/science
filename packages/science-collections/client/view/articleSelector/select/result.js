@@ -6,7 +6,6 @@ Template.searchResultForAddToCollection.helpers({
 		if(aa && aa.length){
 			query._id={$nin:aa};
 		}
-		console.log(query);
 		return Articles.find(query);
 	}
 });

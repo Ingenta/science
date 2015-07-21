@@ -1,6 +1,7 @@
 Template.addArticleForCollection.events({
 	"click .search-btn": function () {
 		var qf = $(".queryField");
+		var q = {};
 		_.each(qf, function (item) {
 			var val = $(item).val();
 			if (val) {
