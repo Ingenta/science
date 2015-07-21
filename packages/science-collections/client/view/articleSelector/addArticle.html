@@ -1,9 +1,22 @@
 <template name="addArticleForCollection">
 	{{#with collInfo}}
 		<h4>{{translateThis chinesetitle title}}</h4>
-		<hr>
-		{{>addArticleTabsTemp}}
+		<div class="row">
+			<div class="col-xs-2">
+				<img width="58" height="82" src="{{getImageHelper picture}}"/>
+			</div>
+			<div class="col-xs-6">
+				<ul class="list-unstyled">
+					<li>来源:{{publisherName}}</li>
+					<li>创建时间:{{moFormat createdAt}}</li>
+					<li>文章总数: {{articleCount}}</li>
+				</ul>
+
+			</div>
+		</div>
 	{{/with}}
+	<hr>
+	{{>addArticleTabsTemp}}
 </template>
 
 

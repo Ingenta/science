@@ -1,0 +1,44 @@
+<template name="articlesInCollection">
+	<h5>文章列表</h5>
+	<ul class="list-unstyled">
+		{{#each articles}}
+			{{> singleArticleInColl}}
+		{{/each}}
+	</ul>
+</template>
+
+<template name="singleArticleInColl">
+	<li>
+		<div class="row">
+			<ul class="dotted list-unstyled">
+				<li style="float:left;clip:rect(0,0,0,0);align-content: center">
+					<button class="btn btn-danger">移出</button>
+				</li>
+				<li style="float:left">
+					<h4>
+						<div class="resultsList"><img src="/icon_access_oa.gif">
+							<a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a>
+						</div>
+					</h4>
+
+					<ul class="list-unstyled">
+						<li>
+							{{#each authors}}
+								{{> authorPopButton name=getFullName}}
+							{{/each}}
+						</li>
+						<li>
+							<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}}
+							({{year}})
+							<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+									class="fa fa-external-link"></i></a>
+						</li>
+						<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+						{{> abstractDetails}}
+					</ul>
+				</li>
+				<li style="clear:both"></li>
+			</ul>
+		</div>
+	</li>
+</template>
