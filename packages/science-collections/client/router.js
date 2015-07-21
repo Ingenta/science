@@ -31,7 +31,8 @@ Router.route("/collections/:collId/articles", {
 		return [
 			Meteor.subscribe('allCollections'),
 			Meteor.subscribe('articles'),
-			Meteor.subscribe('publications')
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('publishers')
 		]
 	}
 });

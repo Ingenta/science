@@ -24,7 +24,7 @@
 		</li>
 		<li class="condition">
 			<label for="articleName">文章名称</label>
-			<input data-queryField="title" type="text" class="queryField" placeholder="Article name"/>
+			<input data-queryField="title.en" type="text" class="queryField" placeholder="Article name"/>
 		</li>
 		<li class="search-btn">
 			<button class="btn btn-primary">搜索</button>
@@ -36,39 +36,54 @@
 
 <template name="searchResultForAddToCollection">
 	<div>
-		<button id="addSelectedArtcileToCollection">将选中的文章加入文章集</button>
-		<ul class="article-list list-unstyled">
-			{{#each articles}}
-				{{> oneArticle}}
-			{{else}}
-				{{_ "No articles found!"}}
-			{{/each}}
-		</ul>
+		<div class="row">
+			<button class="addSelectedArtcileToCollection">将选中的文章加入文章集</button>
+		</div>
+		<div class="btn-group" data-toggle="buttons">
+			<ul class="article-list list-unstyled">
+				{{#each articles}}
+					{{> oneArticleOfResult}}
+				{{else}}
+					{{_ "No articles found!"}}
+				{{/each}}
+			</ul>
+		</div>
 	</div>
 </template>
 
 
-<!--<template name="oneArticleOfResult">-->
-	<!--<ul class="dotted list-unstyled">-->
-		<!--<li>-->
-			<!--{{#if can "delete-article" "resource"}}-->
-				<!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
-			<!--{{/if}}-->
-			<!--<h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></div></h4>-->
+<template name="oneArticleOfResult">
+	<div class="row">
+		<ul class="dotted list-unstyled">
+			<li style="float:left;clip:rect(0,0,0,0);align-content: center">
+				<label class="btn btn-primary">
+					<input value="{{_id}}" class="articleCkd" style="position:absolute;clip:rect(0,0,0,0);" type="checkbox" autocomplete="false">选择
+				</label>
+			</li>
+			<li style="float:left">
+				<h4>
+					<div class="resultsList"><img src="/icon_access_oa.gif">
+						<a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a>
+					</div>
+				</h4>
 
-			<!--<ul class="list-unstyled">-->
-				<!--<li>-->
-					<!--{{#each authors}}-->
-						<!--{{> authorPopButton name=getFullName}}-->
-					<!--{{/each}}-->
-				<!--</li>-->
-				<!--<li>-->
-					<!--<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})-->
-					<!--<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>-->
-				<!--</li>-->
-				<!--<li>{{_ "Language"}} : {{_ "Chinese"}}</li>-->
-				<!--{{> abstractDetails}}-->
-			<!--</ul>-->
-		<!--</li>-->
-	<!--</ul>-->
-<!--</template>-->
+				<ul class="list-unstyled">
+					<li>
+						{{#each authors}}
+							{{> authorPopButton name=getFullName}}
+						{{/each}}
+					</li>
+					<li>
+						<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}}
+						({{year}})
+						<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+								class="fa fa-external-link"></i></a>
+					</li>
+					<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+					{{> abstractDetails}}
+				</ul>
+			</li>
+			<li style="clear:both"></li>
+		</ul>
+	</div>
+</template>

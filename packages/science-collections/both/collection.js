@@ -49,6 +49,10 @@ ArticleCollectionsSchema = new SimpleSchema({
 		autoform: {
 			type: "universe-select"
 		}
+	},
+	articles: {
+		type: [String],
+		optional: true
 	}
 });
 Meteor.startup(function () {
