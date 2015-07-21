@@ -14,8 +14,8 @@ Router.route('/api', function () {
 	var slashLoc       = req.body.sourcePath.lastIndexOf("/")+1;
 	var filename       = slashLoc == 0 ? req.body.sourcePath : req.body.sourcePath.substr(slashLoc);
 	var targetPath     = Config.ftp.downloadDir + "/" + filename;
-	console.log("download:"+targetPath);
-
+	//console.log("download:"+targetPath);
+	ScienceXML.FolderExists(Config.ftp.downloadDir);
 	var downloadCallback = function(err){
 		res.writeHead(200,{
 			'Content-Type': 'applications/json'
