@@ -11,9 +11,11 @@
 	<li>
 		<div class="row">
 			<ul class="dotted list-unstyled">
+				{{#if can "delete-pulisher-collections" "collections" }}
 				<li style="float:left;clip:rect(0,0,0,0);align-content: center">
 					<button class="btn btn-danger">移出</button>
 				</li>
+				{{/if}}
 				<li style="float:left">
 					<h4>
 						<div class="resultsList"><img src="/icon_access_oa.gif">

@@ -55,7 +55,9 @@ Package.onUse(function (api) {
 		'client/view/articleSelector/select/result.html',
 		'client/view/articleSelector/select/result.js',
 		'client/view/articleSelector/inside/list.html',
-		'client/view/articleSelector/inside/list.js'
+		'client/view/articleSelector/inside/list.js',
+		'client/view/collectionDetail/detail.html',
+		'client/view/collectionDetail/detail.js'
 	], 'client')
 });
 

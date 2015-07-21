@@ -21,9 +21,13 @@
 		</div>
 		<div class="col-xs-10">
 			<div class="pull-right">
+				{{#if can "modify-pulisher-collections" "collections" }}
 				<a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
 				{{> updateCollectionForm}}
+				{{/if}}
+				{{#if can "delete-pulisher-collections" "collections" }}
 				<a href="#" class="fa fa-trash" collId="{{_id}}"></a>
+				{{/if}}
 			</div>
 			<ul class="list-unstyled">
 				<li>
