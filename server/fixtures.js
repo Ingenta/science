@@ -90,17 +90,16 @@ Meteor.startup(function () {
     Pages.remove({})
     if (Pages.find().count() === 0) {
         var names = [
-                {key: "publisher", e: "Publisher", c: "出版商"},
-                {key: "publication", e: "Publication", c: "出版物"},
-                {key: "topic", e: "Topic", c: "主题"},
-                {key: "collections", e: "Collections", c: "文章集"},
-                {key: "authors", e: "Authors", c: "作者中心"}
-            ];
+            {key: "publisher", e: "Publishers", c: "出版商"},
+            {key: "publication", e: "Publications", c: "出版物"},
+            {key: "topic", e: "Topics", c: "主题"},
+            {key: "collections", e: "Collections", c: "文章集"},
+            {key: "authors", e: "Authors", c: "作者中心"}
+        ];
         _.each(names, function (name) {
             Pages.insert({
                 key: name.key,
-                titleCN: name.c,
-                titleEN: name.e
+                title: {cn: name.c, en: name.e}
             });
         });
     }

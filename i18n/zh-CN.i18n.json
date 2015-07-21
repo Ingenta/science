@@ -306,17 +306,11 @@
             }
         },
         "pages": {
-            "titleCN": {
-                "label": "中文标题"
+            "title": {
+                "label": "标题"
             },
-            "descriptionCN": {
-                "label": "中文描述"
-            },
-            "titleEN": {
-                "label": "英文标题"
-            },
-            "descriptionEN": {
-                "label": "英文描述"
+            "description": {
+                "label": "描述"
             }
         },
         "configure": {
