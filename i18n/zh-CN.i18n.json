@@ -306,17 +306,11 @@
             }
         },
         "pages": {
-            "titleCN": {
-                "label": "中文标题"
+            "title": {
+                "label": "标题"
             },
-            "descriptionCN": {
-                "label": "中文描述"
-            },
-            "titleEN": {
-                "label": "英文标题"
-            },
-            "descriptionEN": {
-                "label": "英文描述"
+            "description": {
+                "label": "描述"
             }
         },
         "configure": {
@@ -353,6 +347,9 @@
             },
             "chinesedescription": {
                 "label": "中文简介"
+            },
+            "picture": {
+                "label": "选择图片"
             }
         }
     },
@@ -385,5 +382,17 @@
     "Do_it":"好的，删除它",
     "Operation_success":"操作成功！",
     "Deleted":"已删除",
-    "addArticleToCollection":"选择文章"
+    "addArticleToCollection":"选择文章",
+    "collectionDetail":"文章列表",
+    "remove":"移除",
+    "select journal":"选择期刊",
+    "article title":"文章标题",
+    "search":"搜索",
+    "publisher":"出版社",
+    "createAt":"创建时间",
+    "articlesCount":"文章总数",
+    "add article":"添加文章",
+    "added articles":"已添加的文章",
+    "select":"选择",
+    "add article to collection":"将选中的文章加入文章集"
 }

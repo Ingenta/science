@@ -6,11 +6,18 @@ ScienceXML.FileExists = function (path) {
     }
     return false;
 }
+ScienceXML.FolderExists = function (path) {
+    if (!path)return false;
+    if (FSE.ensureDirSync(path)) {
+        return true;
+    }
+    return false;
+}
 ScienceXML.RemoveFile = function (path) {
     if (path) {
         FSE.remove(path, function (err) {
             if (err) return console.error(err)
-            console.log('successfully deleted:' + path)
+            //console.log('successfully deleted:' + path)
         });
     }
 }

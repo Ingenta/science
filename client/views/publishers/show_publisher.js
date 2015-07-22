@@ -52,7 +52,7 @@ AutoForm.addHooks(['addPublicationModalForm'], {
     before: {
         insert: function (doc) {
             doc.publisher = Session.get('currentPublisherId');
-            if(doc.issn) doc.issn = doc.issn.replace("-","");
+            if(doc.issn) doc.issn = doc.issn.trim().replace("-","");
             return doc;
         }
     }

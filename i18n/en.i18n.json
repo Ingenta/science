@@ -133,17 +133,11 @@
             }
         },
         "pages": {
-            "titleCN": {
-                "label": "Chinese Title"
+            "title": {
+                "label": "Title"
             },
-            "descriptionCN": {
-                "label": "Chinese Description"
-            },
-            "titleEN": {
-                "label": "English Title"
-            },
-            "descriptionEN": {
-                "label": "English Description"
+            "description": {
+                "label": "Description"
             }
         },
         "configure": {
@@ -212,5 +206,17 @@
     "Do_it":"Yes, delete it!",
     "Operation_success":"Your operation has been successful.",
     "Deleted":"Deleted!",
-    "addArticleToCollection":"Select articles"
+    "addArticleToCollection":"Select articles",
+    "collectionDetail":"Detail",
+    "remove":"remove",
+    "select journal":"select journal",
+    "article title":"title of article",
+    "search":"Search",
+    "publisher":"Publisher",
+    "createAt":"Create At",
+    "articlesCount":"Count of articles",
+    "add article":"Add",
+    "added articles":"Already in collection",
+    "select":"select",
+    "add article to collection":"add article to collection"
 }

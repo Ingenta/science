@@ -88,8 +88,9 @@ Template.figure.events({
 Template.figModal.helpers({
     getFigFromSession: function () {
         var fig = Session.get("fig");
+        if (!fig || !fig.imageId)return;
         var a = ArticleXml.findOne({_id: fig.imageId});
-        if (!a)return "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
+        if (!a)return;
         return a.url();
     }
 });

@@ -20,7 +20,24 @@ Router.route("/collections/", {
 	}
 });
 
-Router.route("/collections/:collId/articles", {
+Router.route("/collections/:collId/", {
+	template      : "collDetail",
+	name          : "collections.detail",
+	parent        : "collections",
+	title         : function () {
+		return TAPi18n.__("collectionDetail");
+	},
+	waitOn        : function () {
+		return [
+			Meteor.subscribe('allCollections'),
+			Meteor.subscribe('articles'),
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('publishers')
+		]
+	}
+});
+
+Router.route("/collections/:collId/articles/", {
 	template      : "addArticleForCollection",
 	name          : "collections.selectArticles",
 	parent        : "collections",
@@ -31,7 +48,9 @@ Router.route("/collections/:collId/articles", {
 		return [
 			Meteor.subscribe('allCollections'),
 			Meteor.subscribe('articles'),
-			Meteor.subscribe('publications')
+			Meteor.subscribe('publications'),
+			Meteor.subscribe('publishers')
 		]
 	}
 });
+
