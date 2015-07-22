@@ -1,5 +1,5 @@
 <template name="articlesInCollection">
-	<h5>文章列表</h5>
+	<h5>{{_ "collectionDetail"}}</h5>
 	<ul class="list-unstyled">
 		{{#each articles}}
 			{{> singleArticleInColl}}
@@ -12,8 +12,8 @@
 		<div class="row">
 			<ul class="dotted list-unstyled">
 				{{#if can "delete-pulisher-collections" "collections" }}
-				<li style="float:left;clip:rect(0,0,0,0);align-content: center">
-					<button class="btn btn-danger">移出</button>
+				<li class="manage-btn">
+					<button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
 				</li>
 				{{/if}}
 				<li style="float:left">

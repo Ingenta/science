@@ -1,9 +1,9 @@
 <template name="searchArticleForAddToCollection">
 	<ul class="list-unstyled">
 		<li class="condition">
-			<label for="journalName">期刊名称</label>
+			<label for="journalName">{{_ "Journal name"}}</label>
 			<select data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
-				<option value="">未选择</option>
+				<option value="">{{_ "select journal"}}</option>
 				{{#each journals}}
 					<option value="{{_id}}">{{title}}</option>
 				{{/each}}
@@ -14,11 +14,11 @@
 			<input data-queryField="doi" type="text" class="queryField" placeholder="DOI"/>
 		</li>
 		<li class="condition">
-			<label for="articleName">文章名称</label>
+			<label for="articleName">{{_ "article title"}}</label>
 			<input data-queryField="title.en" type="text" class="queryField" placeholder="Article name"/>
 		</li>
 		<li class="search-btn">
-			<button class="btn btn-primary">搜索</button>
+			<button class="btn btn-primary">{{_ "search"}}</button>
 		</li>
 		<li class="condition-clear">
 		</li>

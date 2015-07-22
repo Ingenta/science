@@ -11,8 +11,8 @@ ReactiveTabs.createInterface({
 Template.addArticleTabsTemp.helpers({
 	tabs:function(){
 		return [
-			{name:'add',slug:'add'},
-			{name:'inside',slug:'inside'}
+			{name:TAPi18n.__("add article"),slug:'add'},
+			{name:TAPi18n.__("added articles"),slug:'inside'}
 		]
 	},
 	activeTab: function () {
