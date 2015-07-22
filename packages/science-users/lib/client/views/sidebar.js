@@ -8,6 +8,7 @@ Template.LayoutSideBar.helpers({
 				//arr.reverse().forEach(function (a, index) {
 				//	currentUserIPNumber += (a*(Math.pow(256,index)));
 				//})
+				console.log(ip);
 				currentUserIPNumber = ip;
 				Session.set("currentUserIPNumber", currentUserIPNumber);
 			});
