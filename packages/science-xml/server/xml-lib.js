@@ -17,7 +17,7 @@ ScienceXML.RemoveFile = function (path) {
     if (path) {
         FSE.remove(path, function (err) {
             if (err) return console.error(err)
-            console.log('successfully deleted:' + path)
+            //console.log('successfully deleted:' + path)
         });
     }
 }
