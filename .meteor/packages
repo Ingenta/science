@@ -43,7 +43,6 @@ lbee:moment-helpers
 http
 science-xml
 science-lib
-science-users
 ongoworks:security@1.1.0
 maazalik:highcharts
 mizzao:user-status
@@ -61,3 +60,5 @@ didstopia:admzip
 mathjax
 science-collections
 vazco:universe-autoform-select
+science-users
+science-reports
