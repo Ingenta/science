@@ -1,9 +1,10 @@
 <template name="pageElement">
     <div class="row">
         <h2>{{getPageTitle key}}</h2>
+
         <div class="pull-right">
-            {{#if isAdmin }}
-            {{> updatePagesModalForm}}
+            {{#if can "add-publisher" "publisher" }}
+                {{> updatePagesModalForm}}
             {{/if}}
         </div>
     </div>

@@ -5,17 +5,17 @@ PagesSchema = new SimpleSchema({
         type: String,
         unique: true
     },
-    titleCN: {
+    "title.cn": {
         type: String
     },
-    descriptionCN: {
+    "description.cn": {
         type: String,
         optional: true
     },
-    titleEN: {
+    "title.en": {
         type: String
     },
-    descriptionEN: {
+    "description.en": {
         type: String,
         optional: true
     }

@@ -1,74 +1,22 @@
 <template name="addArticleForCollection">
 	{{#with collInfo}}
-		{{translateThis chinesetitle title}}
-		{{> searchArticleForAddToCollection}}
-		<hr>
-		{{> searchResultForAddToCollection}}
+		<h4>{{translateThis chinesetitle title}}</h4>
+		<div class="row">
+			<div class="col-xs-2">
+				<img width="58" height="82" src="{{getImageHelper picture}}"/>
+			</div>
+			<div class="col-xs-6">
+				<ul class="list-unstyled">
+					<li>来源:{{publisherName}}</li>
+					<li>创建时间:{{moFormat createdAt}}</li>
+					<li>文章总数: {{articleCount}}</li>
+				</ul>
+
+			</div>
+		</div>
 	{{/with}}
-</template>
-
-<template name="searchArticleForAddToCollection">
-	<ul class="list-unstyled">
-		<li class="condition">
-			<label for="journalName">期刊名称</label>
-			<select data-queryField="journalId" class="queryField" placeholder="Journal name">
-				<option value="">未选择</option>
-				{{#each journals}}
-					<option value="{{_id}}">{{title}}</option>
-				{{/each}}
-			</select>
-		</li>
-		<li class="condition">
-			<label for="doi">DOI</label>
-			<input data-queryField="doi" type="text" class="queryField" placeholder="DOI"/>
-		</li>
-		<li class="condition">
-			<label for="articleName">文章名称</label>
-			<input data-queryField="title" type="text" class="queryField" placeholder="Article name"/>
-		</li>
-		<li class="search-btn">
-			<button class="btn btn-primary">搜索</button>
-		</li>
-		<li class="condition-clear">
-		</li>
-	</ul>
-</template>
-
-<template name="searchResultForAddToCollection">
-	<div>
-		<button id="addSelectedArtcileToCollection">将选中的文章加入文章集</button>
-		<ul class="article-list list-unstyled">
-			{{#each articles}}
-				{{> oneArticle}}
-			{{else}}
-				{{_ "No articles found!"}}
-			{{/each}}
-		</ul>
-	</div>
+	<hr>
+	{{>addArticleTabsTemp}}
 </template>
 
 
-<!--<template name="oneArticleOfResult">-->
-	<!--<ul class="dotted list-unstyled">-->
-		<!--<li>-->
-			<!--{{#if can "delete-article" "resource"}}-->
-				<!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
-			<!--{{/if}}-->
-			<!--<h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></div></h4>-->
-
-			<!--<ul class="list-unstyled">-->
-				<!--<li>-->
-					<!--{{#each authors}}-->
-						<!--{{> authorPopButton name=getFullName}}-->
-					<!--{{/each}}-->
-				<!--</li>-->
-				<!--<li>-->
-					<!--<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})-->
-					<!--<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>-->
-				<!--</li>-->
-				<!--<li>{{_ "Language"}} : {{_ "Chinese"}}</li>-->
-				<!--{{> abstractDetails}}-->
-			<!--</ul>-->
-		<!--</li>-->
-	<!--</ul>-->
-<!--</template>-->

@@ -1,0 +1,26 @@
+<template name="searchArticleForAddToCollection">
+	<ul class="list-unstyled">
+		<li class="condition">
+			<label for="journalName">期刊名称</label>
+			<select data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
+				<option value="">未选择</option>
+				{{#each journals}}
+					<option value="{{_id}}">{{title}}</option>
+				{{/each}}
+			</select>
+		</li>
+		<li class="condition">
+			<label for="doi">DOI</label>
+			<input data-queryField="doi" type="text" class="queryField" placeholder="DOI"/>
+		</li>
+		<li class="condition">
+			<label for="articleName">文章名称</label>
+			<input data-queryField="title.en" type="text" class="queryField" placeholder="Article name"/>
+		</li>
+		<li class="search-btn">
+			<button class="btn btn-primary">搜索</button>
+		</li>
+		<li class="condition-clear">
+		</li>
+	</ul>
+</template>
