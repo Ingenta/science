@@ -1,3 +1,24 @@
+<template name="collDetailHeader">
+	{{#with collInfo}}
+		<h4>{{translateThis chinesetitle title}}</h4>
+		<div class="row">
+			<div class="col-xs-2">
+				<img width="58" height="82" src="{{getImageHelper picture}}"/>
+			</div>
+			<div class="col-xs-6">
+				<ul class="list-unstyled">
+					<li>{{_ "publisher"}}: {{publisherName}}</li>
+					<li>{{_ "createAt"}}: {{moFormat createdAt}}</li>
+					<li>{{_ "articlesCount"}}: {{articleCount}}</li>
+				</ul>
+
+			</div>
+		</div>
+	{{/with}}
+</template>
+
 <template name="collDetail">
+	{{> collDetailHeader}}
+	<hr>
 	{{> articlesInCollection}}
 </template>

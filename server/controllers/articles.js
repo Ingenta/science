@@ -7,7 +7,10 @@ Meteor.methods({
     'grabSessions': function(id){
         var c = UserStatus.connections.findOne({userId:id});
         return c.ipAddr;
-},
+    },
+    'getClientIP': function(){
+        return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
+    },
     'getMostRead': function () {
         var a = ArticleViews.aggregate([{
             $group: {

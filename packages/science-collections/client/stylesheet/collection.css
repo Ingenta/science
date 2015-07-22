@@ -2,12 +2,23 @@ li.condition {
     float: left;
     width: 230px;
 }
+
 li.search-btn {
-    float:left;
+    float: left;
 }
+
 li.condition-clear {
     clear: both;
 }
-li.condition input{
-    width:90%
+
+li.condition input {
+    width: 90%
+}
+
+li.manage-btn {
+    margin-top: 40px;
+    margin-left: 10px;
+    float: left;
+    clip: rect(0, 0, 0, 0);
+    align-content: center
 }

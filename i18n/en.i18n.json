@@ -1,204 +1,215 @@
 {
-    "volumeItem": "Volume %s",
-    "issueItem": "Issue %s",
-    "Abstract Views": "阅读摘要",
-    "Full text Views": "阅读全文",
-    "PDF Downloads": "下载",
-    "moreContentBy": "More content by",
-    "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
-    "PleaseEmail": "Please enter valid e-mail address.",
-    "PleaseWait": "Please wait...",
-    "schemas": {
-        "publications": {
-            "description": {
-                "label": "Description"
-            },
-            "title": {
-                "label": "Publication Name"
-            },
-            "shortTitle": {
-                "label": "Short Title"
-            },
-            "issn": {
-                "label": "ISSN"
-            },
-            "accessKey": {
-                "label": "Choose an Access Key",
-                "options": {
-                    "1": "Free Content",
-                    "2": "Open Access Content",
-                    "3": "Subscribed Content",
-                    "4": "Free Trial Content"
-                }
-            },
-            "visible": {
-                "label": "Whether Or Not Visible ",
-                "options": {
-                    "1": "Visible",
-                    "0": "Invisible"
-                }
-            },
-            "picture": {
-                "label": "Choose Image for Cover"
-            },
-            "banner": {
-                "label": "Choose Image for Banner"
-            },
-            "tabSelections": {
-                "label": "Choose tabs",
-                "options": {
-                    "Overview": "Overview",
-                    //                    "Browse": "Browse",
-                    "About": "About"
-                    //                    "Editorial Board": "Editorial Board",
-                    //                    "News": "News",
-                    //                    "Media": "Media",
-                    //                    "Special Topics": "Special Topics",
-                    //                    "Collections": "Collections",
-                    //                    "Accepted": "Accepted",
-                    //                    "Online First": "Online First",
-                    //                    "MOOP": "MOOP",
-                    //                    "Author": "Author"
-                }
-            }
-        },
-        "publishers": {
-            "description": {
-                "label": "Description"
-            },
-            "chinesedescription": {
-                "label": "Chinesedescription"
-            },
-            "name": {
-                "label": "Publisher Name"
-            },
-            "chinesename": {
-                "label": "Chinese Publisher Name"
-            },
-            "urlname": {
-                "label": "Abbreviation"
-            },
-            "website": {
-                "label": "Website",
-                "placeholder": "http://www.scitation.aip.org"
-            },
-            "picture": {
-                "label": "Choose file"
-            }
-        },
-        "topics": {
-            "name": {
-                "label": "Chinese Name"
-            },
-            "englishName": {
-                "label": "English Name"
-            }
-        },
-        "articles": {
-            "title": {
-                "label": "Title"
-            }
-        },
-        "about": {
-            "title": {
-                "label": "English Title"
-            },
-            "chinesetitle": {
-                "label": "Chinese Title"
-            }
-        },
-        "aboutArticles": {
-            "title": {
-                "label": "English Title"
-            },
-            "chinesetitle": {
-                "label": "Chinese Title"
-            },
-            "description": {
-                "label": "English Description"
-            },
-            "chinesedescription": {
-                "label": "Chinese Description"
-            }
-        },
-        "news": {
-            "title": {
-                "label": "Title"
-            },
-            "description": {
-                "label": "Description"
-            },
-            "picture": {
-                "label": "Choose file"
-            }
-        },
-        "pages": {
-            "title": {
-                "label": "Title"
-            },
-            "description": {
-                "label": "Description"
-            }
-        },
-        "advertisement": {
-            "title": {
-                "label": "Picture description"
-            },
-            "link": {
-                "label": "Link"
-            },
-            "picture": {
-                "label": "Choose file"
-            }
-        },
-        "issues": {
-            "description": {
-                "label": "Cover Description"
-            }
-        },
-        "collections":{
-            "title": {
-                "label": "English Title"
-            },
-            "chinesetitle": {
-                "label": "Chinese Title"
-            },
-            "description": {
-                "label": "English Description"
-            },
-            "chinesedescription": {
-                "label": "Chinese Description"
-            }
+  "volumeItem": "Volume %s",
+  "issueItem": "Issue %s",
+  "Abstract Views": "阅读摘要",
+  "Full text Views": "阅读全文",
+  "PDF Downloads": "下载",
+  "moreContentBy": "More content by",
+  "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
+  "PleaseEmail": "Please enter valid e-mail address.",
+  "PleaseWait": "Please wait...",
+  "schemas": {
+    "publications": {
+      "description": {
+        "label": "Description"
+      },
+      "title": {
+        "label": "Publication Name"
+      },
+      "shortTitle": {
+        "label": "Short Title"
+      },
+      "issn": {
+        "label": "ISSN"
+      },
+      "accessKey": {
+        "label": "Choose an Access Key",
+        "options": {
+          "1": "Free Content",
+          "2": "Open Access Content",
+          "3": "Subscribed Content",
+          "4": "Free Trial Content"
         }
+      },
+      "visible": {
+        "label": "Whether Or Not Visible ",
+        "options": {
+          "1": "Visible",
+          "0": "Invisible"
+        }
+      },
+      "picture": {
+        "label": "Choose Image for Cover"
+      },
+      "banner": {
+        "label": "Choose Image for Banner"
+      },
+      "tabSelections": {
+        "label": "Choose tabs",
+        "options": {
+          "Overview": "Overview",
+          //                    "Browse": "Browse",
+          "About": "About"
+          //                    "Editorial Board": "Editorial Board",
+          //                    "News": "News",
+          //                    "Media": "Media",
+          //                    "Special Topics": "Special Topics",
+          //                    "Collections": "Collections",
+          //                    "Accepted": "Accepted",
+          //                    "Online First": "Online First",
+          //                    "MOOP": "MOOP",
+          //                    "Author": "Author"
+        }
+      }
     },
-    "roles": "Roles",
-    "roleName": "Role Name",
-    "roleSummary": "Role Summary",
-    "choosePermissions": "Set Permissions",
-    "newRole": "New Role",
-    "deleteRole": "Delete this Role",
-    "roleNameEN": "English Role Name",
-    "roleSummaryEN": "summary",
-    "roleNameCN": "Chinese Role Name",
-    "roleSummaryCN": "Chinese Role Summary",
-    "addNewRole": "Add new role",
-    "editRole": "Edit role",
-    "permissions-get-users-roles": "Get All Roles",
-    "permissions-edit-custom-roles": "Edit Custom Roles",
-    "permissions-delegate-and-revoke": "Delegate And Revoke",
-    "Status": "Status",
-    "Enable": "Enable",
-    "Disable": "Disable",
-    "email_not_verified" : "email not verified",
-    "user_blocked":"user blocked",
-    "Email address or username":"Email or username",
-    "Lock message":"The account is locked. Also remaining %s seconds",
-    "section_selector_button":"Section index",
-    "Keywords":"Key Words",
-    "Warning":"Warning",
-    "Confirm_delete":"You will not be able to recover this operation!",
-    "Do_it":"Yes, delete it!",
-    "Operation_success":"Your operation has been successful.",
-    "Deleted":"Deleted!",
-    "addArticleToCollection":"Select articles"
+    "publishers": {
+      "description": {
+        "label": "Description"
+      },
+      "chinesedescription": {
+        "label": "Chinesedescription"
+      },
+      "name": {
+        "label": "Publisher Name"
+      },
+      "chinesename": {
+        "label": "Chinese Publisher Name"
+      },
+      "urlname": {
+        "label": "Abbreviation"
+      },
+      "website": {
+        "label": "Website",
+        "placeholder": "http://www.scitation.aip.org"
+      },
+      "picture": {
+        "label": "Choose file"
+      }
+    },
+    "topics": {
+      "name": {
+        "label": "Chinese Name"
+      },
+      "englishName": {
+        "label": "English Name"
+      }
+    },
+    "articles": {
+      "title": {
+        "label": "Title"
+      }
+    },
+    "about": {
+      "title": {
+        "label": "English Title"
+      },
+      "chinesetitle": {
+        "label": "Chinese Title"
+      }
+    },
+    "aboutArticles": {
+      "title": {
+        "label": "English Title"
+      },
+      "chinesetitle": {
+        "label": "Chinese Title"
+      },
+      "description": {
+        "label": "English Description"
+      },
+      "chinesedescription": {
+        "label": "Chinese Description"
+      }
+    },
+    "news": {
+      "title": {
+        "label": "Title"
+      },
+      "description": {
+        "label": "Description"
+      },
+      "picture": {
+        "label": "Choose file"
+      }
+    },
+    "pages": {
+      "title": {
+        "label": "Title"
+      },
+      "description": {
+        "label": "Description"
+      }
+    },
+    "advertisement": {
+      "title": {
+        "label": "Picture description"
+      },
+      "link": {
+        "label": "Link"
+      },
+      "picture": {
+        "label": "Choose file"
+      }
+    },
+    "issues": {
+      "description": {
+        "label": "Cover Description"
+      }
+    },
+    "collections": {
+      "title": {
+        "label": "English Title"
+      },
+      "chinesetitle": {
+        "label": "Chinese Title"
+      },
+      "description": {
+        "label": "English Description"
+      },
+      "chinesedescription": {
+        "label": "Chinese Description"
+      }
+    }
+  },
+  "roles": "Roles",
+  "roleName": "Role Name",
+  "roleSummary": "Role Summary",
+  "choosePermissions": "Set Permissions",
+  "newRole": "New Role",
+  "deleteRole": "Delete this Role",
+  "roleNameEN": "English Role Name",
+  "roleSummaryEN": "summary",
+  "roleNameCN": "Chinese Role Name",
+  "roleSummaryCN": "Chinese Role Summary",
+  "addNewRole": "Add new role",
+  "editRole": "Edit role",
+  "permissions-get-users-roles": "Get All Roles",
+  "permissions-edit-custom-roles": "Edit Custom Roles",
+  "permissions-delegate-and-revoke": "Delegate And Revoke",
+  "Status": "Status",
+  "Enable": "Enable",
+  "Disable": "Disable",
+  "email_not_verified": "email not verified",
+  "user_blocked": "user blocked",
+  "Email address or username": "Email or username",
+  "Lock message": "The account is locked. Also remaining %s seconds",
+  "section_selector_button": "Section index",
+  "Keywords": "Key Words",
+  "Warning": "Warning",
+  "Confirm_delete": "You will not be able to recover this operation!",
+  "Do_it": "Yes, delete it!",
+  "Operation_success": "Your operation has been successful.",
+  "Deleted": "Deleted!",
+  "addArticleToCollection": "Select articles",
+  "collectionDetail": "Detail",
+  "remove": "remove",
+  "select journal": "select journal",
+  "article title": "title of article",
+  "search": "Search",
+  "publisher": "Publisher",
+  "createAt": "Created on",
+  "articlesCount": "Number of articles",
+  "add article": "Add",
+  "added articles": "Already in collection",
+  "select": "select"
 }
