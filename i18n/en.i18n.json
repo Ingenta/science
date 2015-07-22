@@ -213,10 +213,9 @@
     "article title":"title of article",
     "search":"Search",
     "publisher":"Publisher",
-    "createAt":"Create At",
-    "articlesCount":"Count of articles",
+    "createAt":"Created on",
+    "articlesCount":"Number of articles",
     "add article":"Add",
     "added articles":"Already in collection",
-    "select":"select",
-    "add article to collection":"add article to collection"
+    "select":"select"
 }
