@@ -1,7 +1,7 @@
 <template name="searchResultForAddToCollection">
 	<div>
-		<div class="row">
-			<button class="btn btn-success addSelectedArtcileToCollection">{{_ "add article to collection"}}</button>
+		<div class="row pull-right">
+			<button class="btn btn-success addSelectedArticleToCollection">{{_ "Add articles to collection"}}</button>
 		</div>
 		<div class="btn-group" data-toggle="buttons">
 			<ul class="article-list list-unstyled">
@@ -43,8 +43,6 @@
 						<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
 								class="fa fa-external-link"></i></a>
 					</li>
-					<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
-					{{> abstractDetails}}
 				</ul>
 			</li>
 			<li style="clear:both"></li>

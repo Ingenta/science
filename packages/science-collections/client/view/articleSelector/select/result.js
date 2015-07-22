@@ -12,7 +12,7 @@ Template.searchResultForAddToCollection.helpers({
 
 
 Template.searchResultForAddToCollection.events({
-	"click .addSelectedArtcileToCollection": function (e) {
+	"click .addSelectedArticleToCollection": function (e) {
 		e.preventDefault();
 		var newest      = [];
 		$("input.articleCkd:checked").each(function (index, item) {
