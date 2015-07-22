@@ -4,12 +4,10 @@ Template.LayoutSideBar.helpers({
 		if(currentUserIPNumber === undefined){
 			currentUserIPNumber = 0;
 			Meteor.call("getClientIP", function (err, ip) {
-				//var arr = ip.split('.');
-				//arr.reverse().forEach(function (a, index) {
-				//	currentUserIPNumber += (a*(Math.pow(256,index)));
-				//})
-				console.log(ip);
-				currentUserIPNumber = ip;
+				var arr = ip.split('.');
+				arr.reverse().forEach(function (a, index) {
+					currentUserIPNumber += (a*(Math.pow(256,index)));
+				});
 				Session.set("currentUserIPNumber", currentUserIPNumber);
 			});
 		}
