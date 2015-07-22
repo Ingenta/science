@@ -313,21 +313,15 @@
                 "label": "描述"
             }
         },
-        "configure": {
-            "ftpName": {
-                "label": "Ftp名称"
+        "advertisement": {
+            "title": {
+                "label": "描述"
             },
-            "port": {
-                "label": "端口"
+            "link": {
+                "label": "链接"
             },
-            "userName": {
-                "label": "用户名"
-            },
-            "password": {
-                "label": "密码"
-            },
-            "filePath": {
-                "label": "文件路径"
+            "picture": {
+                "label": "选择图片"
             }
         },
         "issues": {

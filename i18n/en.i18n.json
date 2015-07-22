@@ -140,21 +140,15 @@
                 "label": "Description"
             }
         },
-        "configure": {
-            "ftpName": {
-                "label": "Ftp Name"
+        "advertisement": {
+            "title": {
+                "label": "Picture description"
             },
-            "port": {
-                "label": "Port"
+            "link": {
+                "label": "Link"
             },
-            "userName": {
-                "label": "User Name"
-            },
-            "password": {
-                "label": "Password"
-            },
-            "filePath": {
-                "label": "File Path"
+            "picture": {
+                "label": "Choose file"
             }
         },
         "issues": {
