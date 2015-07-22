@@ -1,8 +1,9 @@
 <template name="articlesInCollection">
-	<h5>{{_ "collectionDetail"}}</h5>
 	<ul class="list-unstyled">
 		{{#each articles}}
 			{{> singleArticleInColl}}
+			{{else}}
+			{{_ "No articles found!"}}
 		{{/each}}
 	</ul>
 </template>
