@@ -17,7 +17,8 @@ Package.onUse(function(api) {
     "science-lib",
     "accounts-base",
     "accounts-password",
-    "perak:user-roles"
+    "perak:user-roles",
+    "science-reports"
   ],['server','client']);
 
   api.addFiles([

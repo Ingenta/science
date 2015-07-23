@@ -11,5 +11,5 @@ UploadLog.permit(['insert', 'update', 'remove']).apply();
 UploadTasks.permit(['insert', 'update', 'remove']).apply();
 ArticleViews.permit(['insert', 'update', 'remove']).apply();
 Pages.permit(['insert', 'update', 'remove']).apply();
-Configure.permit(['insert', 'update', 'remove']).apply();
+Advertisement.permit(['insert', 'update', 'remove']).apply();
 Keywords.permit(['insert', 'update', 'remove']).apply();
