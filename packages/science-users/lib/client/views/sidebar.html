@@ -28,5 +28,31 @@
         <li style="font-size: 78%"><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
         <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
         <hr>
+        {{#each advertisement}}
+        {{#if can "modify-journal" "resource"  }}
+            {{> updateAdvertisementModalForm}}
+            {{> deleteAdvertisementModalForm}}
+        {{/if}}
+        <li><a herf="{{link}}"><img src="{{getImageHelper picture}}" width="132" height="152"></a></li>
+        {{else}}
+        {{/each}}
+        {{#if can "modify-journal" "resource"  }}
+        {{> addAdvertisementModalForm}}
+        {{/if}}
     </ul>
+</template>
+
+<template name="addAdvertisementModalForm">
+    {{#afModal class="fa fa-plus" collection="Advertisement" operation="insert" title=getCreateButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="updateAdvertisementModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteAdvertisementModalForm">
+    {{#afModal class="fa fa-trash" collection="Advertisement" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
 </template>
