@@ -17,6 +17,6 @@ Template.LayoutSideBar.helpers({
 		return !!Permissions.getUserRoles().length;
 	},
 	advertisement: function () {
-		return Advertisement.find();
+		return Advertisement.find({types: "1"});
 	}
-})
+});
