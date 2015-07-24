@@ -108,6 +108,7 @@ Meteor.methods({
             if (journal === undefined) results.errors.push("No such issn found in journal collection: " + issn);
             else {
                 results.journalId = journal._id;
+                results.publisher = journal.publisher;
             }
         }
 
@@ -115,9 +116,6 @@ Meteor.methods({
         if (publisherName === undefined) results.errors.push("No publisher name found");
         else {
             results.publisherName = publisherName;
-            var publisher = Publishers.findOne({name: results.publisherName});
-            if (publisher !== undefined)
-                results.publisher = publisher._id;
         }
 
         //      GET REFERENCES

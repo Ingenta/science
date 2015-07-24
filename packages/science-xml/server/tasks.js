@@ -201,23 +201,27 @@ Tasks.insertArticleImages = function (logId, result) {
     });
 
     var log = UploadLog.findOne({_id: logId});
-    result.figures.forEach(function (fig) {
-        var figName = _.findWhere(fig.graphics, {use: "online"}).href;
-        var figLocation = log.extractTo + "/" + figName;
-        if (!ScienceXML.FileExists(figLocation)) {
-            console.log("image missing: " + figName);
-        }
-        else {
-            ArticleXml.insert(figLocation, function (err, fileObj) {
-                //TODO: need to wait for all of these to complete before inserting article?
-                fig.imageId = fileObj._id;
-                UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                if (_.last(result.figures) === fig) {
-                    Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
-                }
-            });
-        }
-    });
+    if (!result.figures)
+        if(log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
+    else {
+        result.figures.forEach(function (fig) {
+            var figName = _.findWhere(fig.graphics, {use: "online"}).href;
+            var figLocation = log.extractTo + "/" + figName;
+            if (!ScienceXML.FileExists(figLocation)) {
+                console.log("image missing: " + figName);
+            }
+            else {
+                ArticleXml.insert(figLocation, function (err, fileObj) {
+                    //TODO: need to wait for all of these to complete before inserting article?
+                    fig.imageId = fileObj._id;
+                    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                    if (_.last(result.figures) === fig) {
+                        Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
+                    }
+                });
+            }
+        });
+    }
 
     Tasks.insertArticleTask(logId, result);
 }
