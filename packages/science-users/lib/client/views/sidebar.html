@@ -29,14 +29,16 @@
         <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
         <hr>
         {{#each advertisement}}
-        {{#if can "modify-journal" "resource"  }}
-            {{> updateAdvertisementModalForm}}
-            {{> deleteAdvertisementModalForm}}
-        {{/if}}
-        <li><a herf="{{link}}"><img src="{{getImageHelper picture}}" width="132" height="152"></a></li>
+            {{#if can "modify-advertisement" "resource"  }}
+                {{> updateAdvertisementModalForm}}
+            {{/if}}
+            {{#if can "delete-advertisement" "resource"  }}
+                {{> deleteAdvertisementModalForm}}
+            {{/if}}
+            <li><a href="{{link}}"><img src="{{getImageHelper picture}}" width="135" height="142"></a></li>
         {{else}}
         {{/each}}
-        {{#if can "modify-journal" "resource"  }}
+        {{#if can "add-advertisement" "resource"  }}
         {{> addAdvertisementModalForm}}
         {{/if}}
     </ul>
