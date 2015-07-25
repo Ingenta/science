@@ -201,8 +201,9 @@ Tasks.insertArticleImages = function (logId, result) {
     });
 
     var log = UploadLog.findOne({_id: logId});
-    if (!result.figures)
-        if(log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
+    if (!result.figures) {
+        if (log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
+    }
     else {
         result.figures.forEach(function (fig) {
             var figName = _.findWhere(fig.graphics, {use: "online"}).href;
@@ -212,7 +213,6 @@ Tasks.insertArticleImages = function (logId, result) {
             }
             else {
                 ArticleXml.insert(figLocation, function (err, fileObj) {
-                    //TODO: need to wait for all of these to complete before inserting article?
                     fig.imageId = fileObj._id;
                     UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                     if (_.last(result.figures) === fig) {

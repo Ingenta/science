@@ -159,7 +159,7 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
 };
 
 ScienceXML.getFullText = function (results, doc) {
-    var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+    var sectionNodes = xpath.select("//body/sec", doc); //get all parent sections
     results.sections = ScienceXML.getSubSection(sectionNodes);
     return results;
 }
