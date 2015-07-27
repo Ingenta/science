@@ -57,9 +57,9 @@ Meteor.methods({
             }
         }
 
-        var contentType = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subject", doc);
-        if (contentType === undefined) results.errors.push("No content type found");
-        else results.contentType = contentType;
+        //var contentType = xpath.select("//article/attribute::article-type", doc)[0];
+        //if (contentType === undefined) results.errors.push("No content type found");
+        //else results.contentType = contentType;
 
         var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
         if (volume === undefined) results.errors.push("No volume found");
@@ -77,7 +77,7 @@ Meteor.methods({
         if (year === undefined) results.errors.push("No year found");
         else results.year = year;
 
-        var topic = ScienceXML.getSimpleValueByXPath("//article-categories/subj-group/subj-group/subject", doc);
+        var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
         if (topic === undefined) results.errors.push("No subject found");
         else results.topic = topic;
 
@@ -87,7 +87,7 @@ Meteor.methods({
         else results.keywords = keywords;
 
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
-        if (elocationId !== undefined) results.elocationId = elocationId
+        if (elocationId !== undefined) results.elocationId = elocationId;
 
         var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
         if (essn !== undefined) results.essn = essn;
@@ -95,9 +95,8 @@ Meteor.methods({
         //    GET JOURNAL AND PUBLISHER BY NAME (consider changing journal to find my doi)
         var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-title", doc);
         if (journalTitle === undefined) results.errors.push("No journal title found");
-        else {
-            results.journalTitle = journalTitle;
-        }
+        else results.journalTitle = journalTitle;
+
 
         var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
         if (issn === undefined) {
