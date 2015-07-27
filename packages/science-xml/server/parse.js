@@ -61,6 +61,10 @@ Meteor.methods({
         //if (contentType === undefined) results.errors.push("No content type found");
         //else results.contentType = contentType;
 
+
+        var ack = ScienceXML.getValueByXPathIncludingXml("//back/ack", doc);
+        if (ack !== undefined) results.ack = ack;
+
         var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
         if (volume === undefined) results.errors.push("No volume found");
         else results.volume = volume;

@@ -296,13 +296,9 @@ var insertArticle = function (a) {
         doi: a.doi,
         articledoi: a.articledoi,
         title: a.title,
-        authors: a.authors,
-        authorNotes: a.authorNotes,
-        affiliations: a.affiliations,
         abstract: a.abstract,
         journalId: a.journalId,
         publisher: a.publisher,
-        references: a.references,
         elocationId: a.elocationId,
         year: a.year,
         month: a.month,
@@ -310,16 +306,21 @@ var insertArticle = function (a) {
         volume: a.volume,
         issueId: a.issueId,
         volumeId: a.volumeId,
-        sections: a.sections,
         received: a.received,
         accepted: a.accepted,
         published: a.published,
         topic: a.topic,
+        acknowledgements: a.ack,
+        pdfId: a.pdfId,
+        authors: a.authors,
+        authorNotes: a.authorNotes,
+        affiliations: a.affiliations,
+        sections: a.sections,
         figures: a.figures,
         tables: a.tables,
-        pdfId: a.pdfId,
         keywords: a.keywords,
-        contentType: a.contentType
+        contentType: a.contentType,
+        references: a.references
     });
     return id;
 }
