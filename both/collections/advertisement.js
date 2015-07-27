@@ -24,7 +24,7 @@ AdvertisementSchema = new SimpleSchema({
     types: {
         type: String
     },
-    picture: {
+    pictures: {
         type: String,
         optional: true,
         autoform: {
@@ -34,6 +34,10 @@ AdvertisementSchema = new SimpleSchema({
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
         }
+    },
+    publications: {
+        type: String,
+        optional: true
     }
 });
 Meteor.startup(function () {

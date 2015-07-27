@@ -35,22 +35,22 @@
             {{#if can "delete-advertisement" "resource"  }}
                 {{> deleteAdvertisementModalForm}}
             {{/if}}
-            <li><a href="{{link}}"><img src="{{getImageHelper picture}}" width="135" height="142"></a></li><br>
+            <li><a href="{{link}}"><img src="{{getImageHelper pictures}}" width="135" height="142"></a></li><br>
         {{else}}
         {{/each}}
         {{#if can "add-advertisement" "resource"  }}
-        {{> addAdvertisementModalForm}}
+            {{> addAdvertisementModalForm}}
         {{/if}}
     </ul>
 </template>
 
 <template name="addAdvertisementModalForm">
-    {{#afModal formId="addAdvertisementModalForm" class="fa fa-plus" collection="Advertisement" operation="insert" title=getCreateButtonContent}}
+    {{#afModal formId="addAdvertisementModalForm" class="fa fa-plus" collection="Advertisement" operation="insert" omitFields="publications" title=getCreateButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="updateAdvertisementModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update"}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update" omitFields="publications"}}
     {{/afModal}}
 </template>
 
