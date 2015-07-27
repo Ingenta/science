@@ -177,6 +177,17 @@
       "chinesedescription": {
         "label": "Chinese Description"
       }
+    },
+    "institutions": {
+      "name": {
+        "label": "Institution Name"
+      },
+      "logo": {
+        "label": "Logo"
+      },
+      "ipRange": {
+        "label": "IP Range"
+      }
     }
   },
   "roles": "Roles",

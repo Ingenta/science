@@ -27,6 +27,7 @@ Package.onUse(function(api) {
   api.addFiles('group/news.js',both);
   api.addFiles('group/platform.js',both);
   api.addFiles('group/collections.js',both);
+  api.addFiles('group/institution.js',both);
 
   api.export(["Permissions"]);
 });
