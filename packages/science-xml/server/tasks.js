@@ -201,23 +201,27 @@ Tasks.insertArticleImages = function (logId, result) {
     });
 
     var log = UploadLog.findOne({_id: logId});
-    result.figures.forEach(function (fig) {
-        var figName = _.findWhere(fig.graphics, {use: "online"}).href;
-        var figLocation = log.extractTo + "/" + figName;
-        if (!ScienceXML.FileExists(figLocation)) {
-            console.log("image missing: " + figName);
-        }
-        else {
-            ArticleXml.insert(figLocation, function (err, fileObj) {
-                //TODO: need to wait for all of these to complete before inserting article?
-                fig.imageId = fileObj._id;
-                UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                if (_.last(result.figures) === fig) {
-                    Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
-                }
-            });
-        }
-    });
+    if (!result.figures) {
+        if (log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
+    }
+    else {
+        result.figures.forEach(function (fig) {
+            var figName = _.findWhere(fig.graphics, {use: "online"}).href;
+            var figLocation = log.extractTo + "/" + figName;
+            if (!ScienceXML.FileExists(figLocation)) {
+                console.log("image missing: " + figName);
+            }
+            else {
+                ArticleXml.insert(figLocation, function (err, fileObj) {
+                    fig.imageId = fileObj._id;
+                    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                    if (_.last(result.figures) === fig) {
+                        Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
+                    }
+                });
+            }
+        });
+    }
 
     Tasks.insertArticleTask(logId, result);
 }
@@ -292,13 +296,9 @@ var insertArticle = function (a) {
         doi: a.doi,
         articledoi: a.articledoi,
         title: a.title,
-        authors: a.authors,
-        authorNotes: a.authorNotes,
-        affiliations: a.affiliations,
         abstract: a.abstract,
         journalId: a.journalId,
         publisher: a.publisher,
-        references: a.references,
         elocationId: a.elocationId,
         year: a.year,
         month: a.month,
@@ -306,16 +306,21 @@ var insertArticle = function (a) {
         volume: a.volume,
         issueId: a.issueId,
         volumeId: a.volumeId,
-        sections: a.sections,
         received: a.received,
         accepted: a.accepted,
         published: a.published,
         topic: a.topic,
+        contentType: a.contentType,
+        acknowledgements: a.ack,
+        pdfId: a.pdfId,
+        authors: a.authors,
+        authorNotes: a.authorNotes,
+        affiliations: a.affiliations,
+        sections: a.sections,
         figures: a.figures,
         tables: a.tables,
-        pdfId: a.pdfId,
         keywords: a.keywords,
-        contentType: a.contentType
+        references: a.references
     });
     return id;
 }

@@ -140,21 +140,23 @@
         "label": "Description"
       }
     },
-    "configure": {
-      "ftpName": {
-        "label": "Ftp Name"
+    "advertisement": {
+      "title": {
+        "label": "Picture description"
       },
-      "port": {
-        "label": "Port"
+      "link": {
+        "label": "Link"
       },
-      "userName": {
-        "label": "User Name"
+      "types": {
+        "label": "Please select AD position",
+        "options": {
+          "1": "Home page",
+          "2": "The journal page",
+          "3": "Mail page"
+        }
       },
-      "password": {
-        "label": "Password"
-      },
-      "filePath": {
-        "label": "File Path"
+      "picture": {
+        "label": "Choose file"
       }
     },
     "issues": {

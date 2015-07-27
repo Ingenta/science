@@ -75,7 +75,10 @@ Template.FullTextTemplate.events({
 
 Template.figure.helpers({
     getFigById: function (id) {
-        return ArticleXml.findOne({_id: id}).url();
+        if (!id)return;
+        var fig = ArticleXml.findOne({_id: id});
+        if (!fig)return;
+        return fig.url();
     }
 });
 

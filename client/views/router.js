@@ -26,7 +26,7 @@ Meteor.subscribe('news');
 
 Meteor.subscribe('images');
 
-Meteor.subscribe('configure');
+Meteor.subscribe('advertisement');
 
 //Meteor.subscribe('articleViews');
 
