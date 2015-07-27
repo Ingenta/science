@@ -310,6 +310,7 @@ var insertArticle = function (a) {
         accepted: a.accepted,
         published: a.published,
         topic: a.topic,
+        contentType: a.contentType,
         acknowledgements: a.ack,
         pdfId: a.pdfId,
         authors: a.authors,
@@ -319,7 +320,6 @@ var insertArticle = function (a) {
         figures: a.figures,
         tables: a.tables,
         keywords: a.keywords,
-        contentType: a.contentType,
         references: a.references
     });
     return id;

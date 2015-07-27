@@ -57,10 +57,7 @@ Meteor.methods({
             }
         }
 
-        //var contentType = xpath.select("//article/attribute::article-type", doc)[0];
-        //if (contentType === undefined) results.errors.push("No content type found");
-        //else results.contentType = contentType;
-
+        ScienceXML.getContentType(results, doc);
 
         var ack = ScienceXML.getValueByXPathIncludingXml("//back/ack", doc);
         if (ack !== undefined) results.ack = ack;
