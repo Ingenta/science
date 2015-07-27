@@ -1,0 +1,53 @@
+<template name="AdminInstitutionsList">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 20px;">
+            {{#each institutions}}
+                {{> oneInstitution}}
+            {{/each}}
+            {{> Paginator_UI institutions}}
+            <span style="float:right">{{_ "Display per page"}}:
+                    <a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;
+					<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;
+					<a class="perPage" data-pagenum="50">50</a>
+				</span>
+        </div>
+    </div>
+</template>
+
+<template name="oneInstitution">
+    <div class="row dotted-publication-item">
+        <div class="col-xs-2">
+            <img src="{{getImageHelper logo}}" width="58" height="82"/>
+        </div>
+        <div class="col-xs-10">
+            <div class="pull-right">
+                {{#if can "modify-institution" "institution" }}
+                    {{> updateInstitutionForm}}
+                {{/if}}
+                {{#if can "delete-institution" "institution" }}
+                    <a href="#" class="fa fa-trash"></a>
+                {{/if}}
+            </div>
+            <ul class="list-unstyled">
+                <li>
+                    <h4>
+                        {{name}}
+                        {{!--<a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis chinesetitle title}}</a>--}}
+                    </h4>
+
+                </li>
+            </ul>
+            {{> institutionDesc}}
+        </div>
+    </div>
+    <hr>
+</template>
+
+<template name="institutionDesc">
+    {{> toggleField field=description _id=_id}}
+</template>
+
+<template name="updateInstitutionForm">
+    {{#afModal class="fa fa-pencil" title=getTitle collection="Institutions" doc=_id operation="update" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
+</template>

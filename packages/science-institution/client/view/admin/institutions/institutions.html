@@ -1,0 +1,20 @@
+<template name="AdminInstitution">
+    <div class="container-fluid">
+        {{> pageElement key="institutions"}}
+        <div class="row">
+            {{#if can "add-institution" "institution"}}
+                {{> addInstitutionModalForm}}
+            {{/if}}
+        </div>
+        <hr>
+        <div class="row">
+            {{> AdminInstitutionsList}}
+        </div>
+    </div>
+</template>
+
+<template name="addInstitutionModalForm">
+    {{#afModal class="btn btn-success" collection="Institutions" operation="insert" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
+        {{_ "Add new"}}
+    {{/afModal}}
+</template>

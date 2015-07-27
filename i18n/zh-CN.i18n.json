@@ -43,6 +43,7 @@
   "Status": "状态",
   "Pending": "未决定",
   "Upload": "上传",
+  "Institution": "机构",
   "Parse": " 解析",
   "Extract": "解压",
   "moreContentBy": "作者其他文章",
@@ -350,6 +351,17 @@
       },
       "picture": {
         "label": "选择图片"
+      }
+    },
+    "institutions": {
+      "name": {
+        "label": "机构名称"
+      },
+      "logo": {
+        "label": "Logo"
+      },
+      "ipRange": {
+        "label": "IP范围"
       }
     }
   },
