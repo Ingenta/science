@@ -1,5 +1,5 @@
 Template.LayoutSideBar.helpers({
-	orgLogo: function () {
+	institutionLogo: function () {
 		var currentUserIPNumber = Session.get("currentUserIPNumber");
 		if(currentUserIPNumber === undefined){
 			currentUserIPNumber = 0;
@@ -8,10 +8,10 @@ Template.LayoutSideBar.helpers({
 				arr.reverse().forEach(function (a, index) {
 					currentUserIPNumber += (a*(Math.pow(256,index)));
 				});
-				Session.set("currentUserIPNumber", ip + ' = ' + currentUserIPNumber);
+				Session.set("currentUserIPNumber", currentUserIPNumber);
 			});
 		}
-		return Session.get("currentUserIPNumber");
+		return currentUserIPNumber;
 	},
 	canUseAdminPanel:function(){
 		return !!Permissions.getUserRoles().length;

@@ -20,6 +20,10 @@ Meteor.methods({
         }, {$sort: {count: -1}}]);
         if (!a)return;
         return a;
+    },
+    'countSession': function(){
+        var c = UserStatus.connections.find().count();
+        return c;
     }
 });
 

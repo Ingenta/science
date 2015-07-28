@@ -1,31 +1,33 @@
 Package.describe({
-  name: 'science-users',
-  version: '0.0.1',
-  // Brief, one-line summary of the package.
-  summary: '',
-  // URL to the Git repository containing the source code for this package.
-  git: '',
-  // By default, Meteor will default to using README.md for documentation.
-  // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
+    name: 'science-users',
+    version: '0.0.1',
+    // Brief, one-line summary of the package.
+    summary: '',
+    // URL to the Git repository containing the source code for this package.
+    git: '',
+    // By default, Meteor will default to using README.md for documentation.
+    // To avoid submitting documentation, set this field to null.
+    documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
-  api.versionsFrom('1.1.0.2');
+Package.onUse(function (api) {
+    api.versionsFrom('1.1.0.2');
 
-  api.use([
-    "science-lib",
-    "accounts-base",
-    "accounts-password",
-    "perak:user-roles",
-    "science-reports"
-  ],['server','client']);
+    api.use([
+        "science-lib",
+        "accounts-base",
+        "accounts-password",
+        "perak:user-roles",
+        "science-institution",
+        "science-reports"
+    ], ['server', 'client']);
+
+    api.addFiles([
+        'lib/server/users.js'
+    ], ['server']);
 
   api.addFiles([
-    'lib/server/users.js'
-  ], ['server']);
-
-  api.addFiles([
+    'lib/client/connection.js',
     'lib/client/views/accounts/forgot_password/forgot_password.html',
     'lib/client/views/accounts/forgot_password/forgot_password.js',
     'lib/client/views/accounts/forgot_password/forgot_password_controller.js',
@@ -82,18 +84,18 @@ Package.onUse(function(api) {
     'lib/client/views/sidebar.js'
   ],['client']);//必须写上第二个参数，否则可能会出现  Template is not defined 因为server side是没有templating包的
 
-  api.addFiles([
-    'lib/namespace.js',
-    'lib/methods.js',
-    'lib/routes.js'
-  ], ['client', 'server']);
+    api.addFiles([
+        'lib/namespace.js',
+        'lib/methods.js',
+        'lib/routes.js'
+    ], ['client', 'server']);
 
-  api.export('Users');
+    api.export('Users');
 
 });
 
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('science-users');
-  api.addFiles('science-users-tests.js');
+Package.onTest(function (api) {
+    api.use('tinytest');
+    api.use('science-users');
+    api.addFiles('science-users-tests.js');
 });

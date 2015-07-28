@@ -1,54 +1,61 @@
 <template name="Admin">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-12" id="content">
-				<div class="row" id="title_row">
-					<div class="col-xs-12">
-						<div id="page_menu" class="pull-right">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div id="menu" class="col-xs-2">
-				<h2>
-				</h2>
-				{{> AdminSideMenu}}
-			</div>
-			<div id="subcontent" class="col-xs-10">
-				{{> yield region='AdminSubcontent'}}
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12" id="content">
+                <div class="row" id="title_row">
+                    <div class="col-xs-12">
+                        <div id="page_menu" class="pull-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="menu" class="col-xs-2">
+                <h2>
+                </h2>
+                {{> AdminSideMenu}}
+            </div>
+            <div id="subcontent" class="col-xs-10">
+                {{> yield region='AdminSubcontent'}}
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="AdminSideMenu">
-	<ul id="menu-items" class="nav nav-stacked nav-pills">
-		{{#if can "list-user" "user"}}
-		<li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
-			<a href="{{pathFor 'admin.users'}}">
-				{{_ "Users"}}
-			</a>
-		</li>
-		{{/if}}
-		{{#if can "get-users-roles" "permissions"}}
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.roles'}}">
-            <a href="{{pathFor 'admin.roles'}}">
-                {{_ "Roles"}}
+    <ul id="menu-items" class="nav nav-stacked nav-pills">
+        {{#if can "list-user" "user"}}
+            <li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
+                <a href="{{pathFor 'admin.users'}}">
+                    {{_ "Users"}}
+                </a>
+            </li>
+        {{/if}}
+        {{#if can "get-users-roles" "permissions"}}
+            <li id="menu-item-simple" class="{{menuItemClass 'admin.roles'}}">
+                <a href="{{pathFor 'admin.roles'}}">
+                    {{_ "Roles"}}
+                </a>
+            </li>
+        {{/if}}
+        <li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
+            <a href="{{pathFor 'admin.upload'}}">
+                {{_ "Upload"}}
             </a>
         </li>
-		{{/if}}
-		<li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
-			<a href="{{pathFor 'admin.upload'}}">
-				{{_ "Upload"}}
-			</a>
-		</li>
+        {{#if can "add-institution" "institution"}}
+            <li id="menu-item-simple" class="{{menuItemClass 'admin.institutions'}}">
+                <a href="{{pathFor 'admin.institutions'}}">
+                    {{_ "Institution"}}
+                </a>
+            </li>
+        {{/if}}
         <li id="menu-item-simple" class="{{menuItemClass 'admin.reports'}}">
             <a href="{{pathFor 'admin.reports'}}">
                 {{_ "Reports"}}
             </a>
         </li>
-	</ul>
+    </ul>
 </template>
 
