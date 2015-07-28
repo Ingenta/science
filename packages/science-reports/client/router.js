@@ -1,15 +1,16 @@
 Router.route("/reports/", {
-    template      : "reports",
+    template      : "Admin",
     name          : "admin.reports",
     parent        : "admin",
+    yieldTemplates: {
+        'reports': { to: 'AdminSubcontent'}
+    },
     title         : function () {
-        return "fdf";
+        return TAPi18n.__("Reports");
+    },
+    waitOn        : function () {
+        return [
+            Meteor.subscribe('allconnections')
+        ]
     }
-//    waitOn        : function () {
-//        return [
-//            Meteor.subscribe('allCollections'),
-//            Meteor.subscribe('images'),
-//            Meteor.subscribe('publishers')
-//        ]
-//    }
 });
