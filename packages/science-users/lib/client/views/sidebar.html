@@ -28,18 +28,34 @@
         <li style="font-size: 78%"><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
         <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
         <hr>
-        {{#each advertisement}}
+        {{#if journalId}}
+            {{#each advertisement}}
             {{#if can "modify-advertisement" "resource"  }}
-                {{> updateAdvertisementModalForm}}
+            {{> updateAdvertisementModalForm}}
             {{/if}}
             {{#if can "delete-advertisement" "resource"  }}
-                {{> deleteAdvertisementModalForm}}
+            {{> deleteAdvertisementModalForm}}
             {{/if}}
             <li><a href="{{link}}"><img src="{{getImageHelper pictures}}" width="135" height="142"></a></li><br>
-        {{else}}
-        {{/each}}
-        {{#if can "add-advertisement" "resource"  }}
+            {{else}}
+            {{/each}}
+            {{#if can "add-advertisement" "resource"  }}
             {{> addAdvertisementModalForm}}
+            {{/if}}
+        {{else}}
+            {{#each advertisements}}
+            {{#if can "modify-advertisement" "resource"  }}
+            {{> updateAdvertisementModalForm}}
+            {{/if}}
+            {{#if can "delete-advertisement" "resource"  }}
+            {{> deleteAdvertisementModalForm}}
+            {{/if}}
+            <li><a href="{{link}}"><img src="{{getImageHelper pictures}}" width="135" height="142"></a></li><br>
+            {{else}}
+            {{/each}}
+            {{#if can "add-advertisement" "resource"  }}
+            {{> addAdvertisementModalForm}}
+            {{/if}}
         {{/if}}
     </ul>
 </template>
