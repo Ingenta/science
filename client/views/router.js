@@ -9,26 +9,19 @@ Router.configure({
 });
 
 Meteor.subscribe("current_user_data");
-
 Meteor.subscribe("issues");
-
 Meteor.subscribe("about");
-
 Meteor.subscribe("volumes");
-
 Meteor.subscribe("about_articles");
-
 Meteor.subscribe('articleXml');
-
 Meteor.subscribe('pages');
-
 Meteor.subscribe('news');
-
 Meteor.subscribe('images');
-
 Meteor.subscribe('advertisement');
-
-//Meteor.subscribe('articleViews');
+Meteor.subscribe('publishers');
+Meteor.subscribe('publications');
+Meteor.subscribe('articles');
+Meteor.subscribe('articleViews');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -175,9 +168,8 @@ Router.map(function () {
             if (TAPi18n.getLanguage() === "en") return ":publisherName";
             var id = Session.get('currentPublisherId');
             var p = Publishers.findOne({_id: id});
-            if (p)
-                return p.name || p.chinesename;
-            return 'NotFound';
+            if (p) return p.chinesename || p.name;
+            return ":publisherName";
         },
         name: "publisher.name",
         waitOn: function () {
