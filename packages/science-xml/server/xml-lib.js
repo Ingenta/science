@@ -108,14 +108,13 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 var oneAffiliation = {};
                 if (!affTextCn)affTextCn = affTextEn;
                 if (!affTextEn)affTextEn = affTextCn;
+
                 if (!id) oneAffiliation = {en: affTextEn, cn: affTextCn};
                 else oneAffiliation = {id: id.value, en: affTextEn, cn: affTextCn}
                 results.affiliations.push(oneAffiliation);
             });
         }
     }
-
-
     return results;
 }
 
@@ -159,7 +158,7 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
 };
 
 ScienceXML.getFullText = function (results, doc) {
-    var sectionNodes = xpath.select("//body/sec[@id]", doc); //get all parent sections
+    var sectionNodes = xpath.select("//body/sec", doc); //get all parent sections
     results.sections = ScienceXML.getSubSection(sectionNodes);
     return results;
 }
@@ -172,6 +171,13 @@ ScienceXML.getAbstract = function (results, doc) {
     return results;
 }
 
+ScienceXML.getContentType = function (results, doc) {
+    if (!results.errors) results.errors = [];
+    var contentType = xpath.select("//article/@article-type", doc);
+    if (contentType[0].value === undefined) results.errors.push("No content type found");
+    else results.contentType = contentType[0].value.trim().toLowerCase();
+    return results;
+}
 
 ScienceXML.replaceItalics = function (input) {
     input = Science.replaceSubstrings(input, "<italic>", "<i>");

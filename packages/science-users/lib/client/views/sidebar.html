@@ -1,7 +1,7 @@
 <template name="LayoutSideBar">
     <br/>
     <ul class="list-unstyled">
-        <li>{{orgLogo}}</li>
+        <li>{{institutionLogo}}</li>
         {{#if currentUser}}
             <li><a href="{{pathFor 'user_settings'}}">{{userEmail}}</a></li>
             {{#if canUseAdminPanel}}
@@ -29,26 +29,28 @@
         <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
         <hr>
         {{#each advertisement}}
-        {{#if can "modify-journal" "resource"  }}
-            {{> updateAdvertisementModalForm}}
-            {{> deleteAdvertisementModalForm}}
-        {{/if}}
-        <li><a herf="{{link}}"><img src="{{getImageHelper picture}}" width="132" height="152"></a></li>
+            {{#if can "modify-advertisement" "resource"  }}
+                {{> updateAdvertisementModalForm}}
+            {{/if}}
+            {{#if can "delete-advertisement" "resource"  }}
+                {{> deleteAdvertisementModalForm}}
+            {{/if}}
+            <li><a href="{{link}}"><img src="{{getImageHelper pictures}}" width="135" height="142"></a></li><br>
         {{else}}
         {{/each}}
-        {{#if can "modify-journal" "resource"  }}
-        {{> addAdvertisementModalForm}}
+        {{#if can "add-advertisement" "resource"  }}
+            {{> addAdvertisementModalForm}}
         {{/if}}
     </ul>
 </template>
 
 <template name="addAdvertisementModalForm">
-    {{#afModal class="fa fa-plus" collection="Advertisement" operation="insert" title=getCreateButtonContent}}
+    {{#afModal formId="addAdvertisementModalForm" class="fa fa-plus" collection="Advertisement" operation="insert" omitFields="publications" title=getCreateButtonContent}}
     {{/afModal}}
 </template>
 
 <template name="updateAdvertisementModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update"}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update" omitFields="publications"}}
     {{/afModal}}
 </template>
 

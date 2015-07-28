@@ -148,7 +148,15 @@
       "link": {
         "label": "Link"
       },
-      "picture": {
+      "types": {
+        "label": "Please select AD position",
+        "options": {
+          "1": "Home page",
+          "2": "The journal page",
+          "3": "Mail page"
+        }
+      },
+      "pictures": {
         "label": "Choose file"
       }
     },
@@ -169,6 +177,17 @@
       },
       "chinesedescription": {
         "label": "Chinese Description"
+      }
+    },
+    "institutions": {
+      "name": {
+        "label": "Institution Name"
+      },
+      "logo": {
+        "label": "Logo"
+      },
+      "ipRange": {
+        "label": "IP Range"
       }
     }
   },

@@ -2,13 +2,13 @@ this.Advertisement = new Meteor.Collection("advertisement");
 
 this.Advertisement.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-article", "resource", userId);
+        return Permissions.userCan("add-advertisement", "resource", userId);
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-article", "resource", userId);
+        return Permissions.userCan("modify-advertisement", "resource", userId);
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-article", "resource", userId);
+        return Permissions.userCan("delete-advertisement", "resource", userId);
     }
 });
 
@@ -21,7 +21,10 @@ AdvertisementSchema = new SimpleSchema({
         type: String,
         optional: true
     },
-    picture: {
+    types: {
+        type: String
+    },
+    pictures: {
         type: String,
         optional: true,
         autoform: {
@@ -31,6 +34,10 @@ AdvertisementSchema = new SimpleSchema({
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
         }
+    },
+    publications: {
+        type: String,
+        optional: true
     }
 });
 Meteor.startup(function () {
