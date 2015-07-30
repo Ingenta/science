@@ -177,6 +177,12 @@
       },
       "chinesedescription": {
         "label": "Chinese Description"
+      },
+      "picture": {
+        "label": "Choose file"
+      },
+      "publisherId": {
+        "label": "Publisher"
       }
     },
     "institutions": {
@@ -229,7 +235,9 @@
   "publisher": "Publisher",
   "createAt": "Created on",
   "articlesCount": "Number of articles",
-  "add article": "Add",
+  "add article": "Add Article",
   "added articles": "Already in collection",
-  "select": "select"
+  "select": "select",
+  "Add articles to collection": "Add to collection"
+
 }
