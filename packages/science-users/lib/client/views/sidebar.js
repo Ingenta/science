@@ -16,7 +16,10 @@ Template.LayoutSideBar.helpers({
 	canUseAdminPanel:function(){
 		return !!Permissions.getUserRoles().length;
 	},
-	advertisement: function () {
+	advertisements: function () {
 		return Advertisement.find({types: "1"});
+	},
+	advertisement: function () {
+		return Advertisement.find({types: "2"});
 	}
-});
+})
