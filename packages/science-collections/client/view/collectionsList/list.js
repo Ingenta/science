@@ -34,7 +34,12 @@ Template.oneCollection.events({
 			closeOnConfirm    : false
 		}, function () {
 			ArticleCollections.remove({_id: collId});
-			sweetAlert( TAPi18n.__("Deleted"),TAPi18n.__("Operation_success"), "success");
+			sweetAlert({
+				title:TAPi18n.__("Deleted"),
+				text:TAPi18n.__("Operation_success"),
+				type:"success",
+				timer:2000
+			});
 		});
 	}
 })
