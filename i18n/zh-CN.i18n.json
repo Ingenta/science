@@ -1,4 +1,5 @@
 {
+  "Reports": "统计",
   "Caption": "解说词",
   "Share": "在线分享",
   "Previous Article": "上一篇",
@@ -99,6 +100,7 @@
   "Please select a subject type": "请选择关注的学科类型",
   "Contact way": "联系方式",
   "Contact address": "通讯地址",
+  "WeChat": "微信号",
   "Please select more journal name": "请选择期刊名称",
   "Journal name": "期刊名称",
   "Please select a subject matter (level 1)": "请选择学科主题（一级）",
@@ -350,6 +352,12 @@
       },
       "chinesedescription": {
         "label": "中文简介"
+      },
+      "picture": {
+        "label": "选择图片"
+      },
+      "publisherId": {
+        "label": "出版商"
       }
     },
     "institutions": {
@@ -393,5 +401,17 @@
   "Do_it": "好的，删除它",
   "Operation_success": "操作成功！",
   "Deleted": "已删除",
-  "addArticleToCollection": "选择文章"
+  "addArticleToCollection": "选择文章",
+  "collectionDetail": "文章集详情",
+  "remove": "移除",
+  "select journal": "选择期刊",
+  "article title": "文章标题",
+  "search": "搜索",
+  "publisher": "出版商",
+  "createAt": "创建时间",
+  "articlesCount": "文章数",
+  "add article": "添加文章",
+  "added articles": "已选文章",
+  "select": "选择",
+  "Add articles to collection": "添加到文章集"
 }
