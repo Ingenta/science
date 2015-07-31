@@ -9,7 +9,8 @@ Router.route("/collections/", {
 		return [
 			Meteor.subscribe('allCollections'),
 			Meteor.subscribe('images'),
-			Meteor.subscribe('publishers')
+			Meteor.subscribe('publishers'),
+			Meteor.subscribe('advertisement')
 		]
 	},
 	onBeforeAction: function () {
