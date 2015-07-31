@@ -1,0 +1,30 @@
+<template name="sidebarAd">
+    {{#if isADPage}}
+        {{#each advertisement}}
+            {{#if can "modify-advertisement" "resource"  }}{{> updateAdvertisementModalForm}}{{/if}}
+            {{#if can "delete-advertisement" "resource"  }}{{> deleteAdvertisementModalForm}}{{/if}}
+            <li><a href="{{link}}"><img src="{{getImageHelper pictures}}" width="135" height="142"></a></li><br>
+        {{/each}}
+        {{#if AdCount}}
+        {{#if can "add-advertisement" "resource"  }}
+            {{> addAdvertisementModalForm}}
+        {{/if}}
+        {{/if}}
+    {{/if}}
+</template>
+
+<template name="addAdvertisementModalForm">
+    {{#afModal formId="addAdvertisementModalForm" class="fa fa-plus" collection="Advertisement" operation="insert" omitFields="types, publications" title=getCreateButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="updateAdvertisementModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update" omitFields="types, publications"}}
+    {{/afModal}}
+</template>
+
+
+<template name="deleteAdvertisementModalForm">
+    {{#afModal class="fa fa-trash" collection="Advertisement" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
+</template>

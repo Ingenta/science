@@ -17,7 +17,7 @@ Meteor.subscribe('articleXml');
 Meteor.subscribe('pages');
 Meteor.subscribe('news');
 Meteor.subscribe('images');
-//Meteor.subscribe('advertisement');
+Meteor.subscribe('advertisement');
 Meteor.subscribe('publishers');
 Meteor.subscribe('publications');
 Meteor.subscribe('articles');
@@ -48,8 +48,7 @@ Router.map(function () {
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('images'),
-                Meteor.subscribe('news'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('news')
             ]
         }
     });
@@ -60,8 +59,7 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                Meteor.subscribe('topics'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('topics')
             ]
         }
     });
@@ -96,11 +94,6 @@ Router.map(function () {
         parent: "home",
         title: function () {
             return TAPi18n.__("Author");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('advertisement')
-            ]
         }
     });
 
@@ -126,8 +119,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('publishers')
             ]
         }
     });
@@ -140,8 +132,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('publications')
             ]
         }
     });
@@ -211,8 +202,7 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('about'),
-                Meteor.subscribe('about_articles'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('about_articles')
             ]
         }
 
@@ -247,8 +237,7 @@ Router.map(function () {
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('about'),
-                Meteor.subscribe('about_articles'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('about_articles')
             ]
         }
 
@@ -279,8 +268,7 @@ Router.map(function () {
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('keywords'),
-                Meteor.subscribe('articleXml'),
-                Meteor.subscribe('advertisement')
+                Meteor.subscribe('articleXml')
             ]
         }
     });

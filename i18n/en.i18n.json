@@ -148,14 +148,6 @@
       "link": {
         "label": "Link"
       },
-      "types": {
-        "label": "Please select AD position",
-        "options": {
-          "1": "Home page",
-          "2": "The journal page",
-          "3": "Mail page"
-        }
-      },
       "pictures": {
         "label": "Choose file"
       }
