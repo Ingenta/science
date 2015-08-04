@@ -22,6 +22,7 @@ Meteor.subscribe('publishers');
 Meteor.subscribe('publications');
 Meteor.subscribe('articles');
 Meteor.subscribe('articleViews');
+Meteor.subscribe('recommend');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -202,7 +203,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('about'),
-                Meteor.subscribe('about_articles')
+                Meteor.subscribe('about_articles'),
+                Meteor.subscribe('allCollections')
             ]
         }
 

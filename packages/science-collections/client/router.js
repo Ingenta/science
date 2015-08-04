@@ -16,6 +16,8 @@ Router.route("/collections/", {
 		Session.set('filterPublisher', undefined);
 		Session.set('firstLetter', undefined);
 		Session.set('PerPage', 10);
+        Session.set('journalId', undefined);
+        Session.set('currentJournalId', undefined);
 		this.next();
 	}
 });

@@ -95,7 +95,8 @@ Template.articleOptions.helpers({
         ];
     },
     activeTab: function () {
-        return Session.get('activeTab');
+
+//        return Session.get('activeTab');
     }
 });
 Template.showArticle.events({

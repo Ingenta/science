@@ -1,5 +1,5 @@
 {
-  "Reports": "统计",
+  "Reports": "Statistics",
   "volumeItem": "Volume %s",
   "issueItem": "Issue %s",
   "Abstract Views": "阅读摘要",
@@ -50,12 +50,13 @@
         "options": {
           "Overview": "Overview",
           //                    "Browse": "Browse",
+          "Collections": "Collections",
           "About": "About"
           //                    "Editorial Board": "Editorial Board",
           //                    "News": "News",
           //                    "Media": "Media",
           //                    "Special Topics": "Special Topics",
-          //                    "Collections": "Collections",
+
           //                    "Accepted": "Accepted",
           //                    "Online First": "Online First",
           //                    "MOOP": "MOOP",
@@ -148,14 +149,6 @@
       "link": {
         "label": "Link"
       },
-      "types": {
-        "label": "Please select AD position",
-        "options": {
-          "1": "Home page",
-          "2": "The journal page",
-          "3": "Mail page"
-        }
-      },
       "pictures": {
         "label": "Choose file"
       }
@@ -194,6 +187,20 @@
       },
       "ipRange": {
         "label": "IP Range"
+      }
+    },
+    "recommend": {
+      "title": {
+        "label": "English Title"
+      },
+      "chineseTitle": {
+        "label": "Chinese Title"
+      },
+      "behalfPicture": {
+        "label": "Choose file"
+      },
+      "defaultPicture": {
+        "label": "Choose the default file"
       }
     }
   },

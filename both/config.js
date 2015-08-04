@@ -11,6 +11,20 @@ Config={
     },
     ftp:{
         downloadDir:"/tmp/downloads"
+    },
+    ADPages: {
+        journal: [
+            'journal.name.volume',
+            'article.show',
+            'journal.name'
+        ],
+        global:[
+            'home',
+            'topics',
+            'author',
+            'publishers',
+            'publications',
+            'collections'
+        ]
     }
-
 }

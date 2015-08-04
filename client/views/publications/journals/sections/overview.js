@@ -28,3 +28,22 @@ Template.journalCoverSummary.helpers({
        return issn.substr(0,4) + "-" + issn.substr(4,4);
    }
 });
+
+Template.recommendArticles.helpers({
+    recommendArticles: function () {
+        var journalId = Session.get('currentJournalId');
+        return Recommend.find({publications:journalId});
+    }
+});
+
+AutoForm.addHooks(['addRecommendModalForm'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            doc.publications = Session.get('currentJournalId');
+            return doc;
+        }
+    }
+}, true);

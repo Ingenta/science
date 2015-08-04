@@ -1,19 +1,35 @@
 <template name="searchArticleForAddToCollection">
 	<ul class="list-unstyled">
+        {{#unless journalId}}
 		<li class="condition">
 			<label for="journalName">{{_ "Journal name"}}</label>
-			<select data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
+			<select id="journalSelect" data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
 				<option value="">{{_ "select journal"}}</option>
 				{{#each journals}}
 					<option value="{{_id}}">{{title}}</option>
 				{{/each}}
 			</select>
 		</li>
-		<li class="condition">
-			<label for="doi">DOI</label>
-			<input data-queryField="doi" type="text" class="queryField" placeholder="DOI"/>
-		</li>
-		<li class="condition">
+        {{/unless}}
+        <li class="condition">
+            <label for="volumeName">{{_ "Volume name"}}</label>
+            <select id="volumesSelect" data-queryField="volume" class="queryField" placeholder="Volume name" style="width: 90%;">
+                <option value="">{{_ "select volume"}}</option>
+                {{#each volumes}}
+                <option value="{{volume}}">{{volume}}</option>
+                {{/each}}
+            </select>
+        </li>
+        <li class="condition">
+            <label for="issueName">{{_ "Issue name"}}</label>
+            <select data-queryField="issue" class="queryField" placeholder="Issue name" style="width: 90%;">
+                <option value="">{{_ "select issue"}}</option>
+                {{#each issues}}
+                <option value="{{issue}}">{{issue}}</option>
+                {{/each}}
+            </select>
+        </li>
+		<li class="condition" style="width: 95%;">
 			<label for="articleName">{{_ "article title"}}</label>
 			<input data-queryField="title.en" type="text" class="queryField" placeholder="Article name"/>
 		</li>

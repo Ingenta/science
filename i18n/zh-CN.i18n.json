@@ -1,4 +1,5 @@
 {
+  "Reports": "统计",
   "Caption": "解说词",
   "Share": "在线分享",
   "Previous Article": "上一篇",
@@ -21,6 +22,7 @@
   "Most read articles": "热读文章",
   "volumeItem": "第%s卷",
   "issueItem": "第%s期",
+  "Editors Recommend": "编辑推荐",
   "Latest Articles": "最新文章",
   "Most recent articles": "最新资源",
   "Month": "月",
@@ -102,10 +104,13 @@
   "WeChat": "微信号",
   "Please select more journal name": "请选择期刊名称",
   "Journal name": "期刊名称",
+  "Volume name": "卷名",
+  "Issue name": "期名",
   "Please select a subject matter (level 1)": "请选择学科主题（一级）",
   "The topic name": "主题名称",
   "All the options": "全部",
   "Add new": "添加",
+  "Delete selected": "选中删除",
   "Cancel": "取消",
   "Save": "保存",
   "Password": "密码",
@@ -322,14 +327,6 @@
       "link": {
         "label": "链接"
       },
-      "types": {
-        "label": "请选择广告上传位置",
-        "options": {
-          "1": "首页",
-          "2": "期刊页",
-          "3": "邮件页"
-        }
-      },
       "pictures": {
         "label": "选择图片"
       }
@@ -369,6 +366,20 @@
       "ipRange": {
         "label": "IP范围"
       }
+    },
+    "recommend": {
+      "title": {
+        "label": "英文标题"
+      },
+      "chineseTitle": {
+        "label": "中文标题"
+      },
+      "behalfPicture": {
+        "label": "选择代表图片"
+      },
+      "defaultPicture": {
+        "label": "选择默认图片"
+      }
     }
   },
   "roles": "角色",
@@ -404,6 +415,8 @@
   "collectionDetail": "文章集详情",
   "remove": "移除",
   "select journal": "选择期刊",
+  "select volume": "选择卷",
+  "select issue": "选择期",
   "article title": "文章标题",
   "search": "搜索",
   "publisher": "出版商",
