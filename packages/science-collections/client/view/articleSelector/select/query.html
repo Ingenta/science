@@ -1,5 +1,6 @@
 <template name="searchArticleForAddToCollection">
 	<ul class="list-unstyled">
+        {{#unless journalId}}
 		<li class="condition">
 			<label for="journalName">{{_ "Journal name"}}</label>
 			<select id="journalSelect" data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
@@ -9,6 +10,7 @@
 				{{/each}}
 			</select>
 		</li>
+        {{/unless}}
         <li class="condition">
             <label for="volumeName">{{_ "Volume name"}}</label>
             <select id="volumesSelect" data-queryField="volume" class="queryField" placeholder="Volume name" style="width: 90%;">

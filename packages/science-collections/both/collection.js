@@ -52,7 +52,11 @@ ArticleCollectionsSchema = new SimpleSchema({
 	articles: {
 		type: [String],
 		optional: true
-	}
+    },
+    journalId:{
+        type: String,
+        optional: true
+    }
 });
 Meteor.startup(function () {
 	ArticleCollectionsSchema.i18n("schemas.collections");
