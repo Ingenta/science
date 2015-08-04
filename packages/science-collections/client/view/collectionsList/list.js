@@ -11,8 +11,6 @@ Template.collectionsList.helpers({
 		pubId && (q.publisherId = pubId);
         journalId &&(q.journalId = journalId);
 		first && (q.title = {$regex: "^" + first, $options: "i"});
-        console.log(q);
-        debugger
 		return collPaginator.find(q,{itemsPerPage:numPerPage});
 	}
 });

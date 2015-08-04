@@ -26,7 +26,6 @@ Template.searchArticleForAddToCollection.helpers({
     },
     issues: function () {
         if(Session.get("volume"))
-        console.log();
              return Issues.find({volume: Session.get("volume"),journalId: Session.get("journalId")});
     },
     journalId : function(){
