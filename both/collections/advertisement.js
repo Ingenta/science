@@ -22,7 +22,8 @@ AdvertisementSchema = new SimpleSchema({
         optional: true
     },
     types: {
-        type: String
+        type: String,
+        optional: true
     },
     pictures: {
         type: String,

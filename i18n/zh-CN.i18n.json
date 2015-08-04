@@ -22,6 +22,7 @@
   "Most read articles": "热读文章",
   "volumeItem": "第%s卷",
   "issueItem": "第%s期",
+  "Editors Recommend": "编辑推荐",
   "Latest Articles": "最新文章",
   "Most recent articles": "最新资源",
   "Month": "月",
@@ -323,14 +324,6 @@
       "link": {
         "label": "链接"
       },
-      "types": {
-        "label": "请选择广告上传位置",
-        "options": {
-          "1": "首页",
-          "2": "期刊页",
-          "3": "邮件页"
-        }
-      },
       "pictures": {
         "label": "选择图片"
       }
@@ -369,6 +362,20 @@
       },
       "ipRange": {
         "label": "IP范围"
+      }
+    },
+    "recommend": {
+      "title": {
+        "label": "英文标题"
+      },
+      "chineseTitle": {
+        "label": "中文标题"
+      },
+      "behalfPicture": {
+        "label": "选择代表图片"
+      },
+      "defaultPicture": {
+        "label": "选择默认图片"
       }
     }
   },

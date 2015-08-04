@@ -13,3 +13,4 @@ ArticleViews.permit(['insert', 'update', 'remove']).apply();
 Pages.permit(['insert', 'update', 'remove']).apply();
 Advertisement.permit(['insert', 'update', 'remove']).apply();
 Keywords.permit(['insert', 'update', 'remove']).apply();
+Recommend.permit(['insert', 'update', 'remove']).apply();
