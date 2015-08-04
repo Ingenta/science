@@ -15,5 +15,16 @@ Template.LayoutSideBar.helpers({
 	},
 	canUseAdminPanel:function(){
 		return !!Permissions.getUserRoles().length;
+	},
+	showAccessKey:function(){
+		return true;
+	},
+	showEmailThis:function(){
+		return !!Router.current().params.articleDoi;
+	}
+});
+Template.LayoutSideBar.events({
+	'click .emailThis': function(){
+		console.log("Hi, I want to share this article with you. "+Router.current().url);
 	}
 });
