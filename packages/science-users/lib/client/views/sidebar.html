@@ -3,7 +3,7 @@
     <ul class="list-unstyled">
         <li>{{institutionLogo}}</li>
         {{#if currentUser}}
-            <li><a href="{{pathFor 'user_settings'}}">{{userEmail}}</a></li>
+            <li><a href="{{pathFor 'user_settings'}}">{{currentUser.username}}</a></li>
             {{#if canUseAdminPanel}}
                 <li>
                     <a href="{{pathFor 'admin'}}">
