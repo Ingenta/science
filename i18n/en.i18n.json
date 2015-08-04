@@ -50,12 +50,12 @@
         "options": {
           "Overview": "Overview",
           //                    "Browse": "Browse",
-          "About": "About"
+          "About": "About",
           //                    "Editorial Board": "Editorial Board",
           //                    "News": "News",
           //                    "Media": "Media",
           //                    "Special Topics": "Special Topics",
-          //                    "Collections": "Collections",
+          "Collections": "Collections"
           //                    "Accepted": "Accepted",
           //                    "Online First": "Online First",
           //                    "MOOP": "MOOP",
