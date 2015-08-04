@@ -49,19 +49,10 @@
     </div>
 </template>
 
-<template name="recommendArticles">
-    <div class="row">
-        <div class="col-xs-12">
-            <h4>{{_ "Editors Recommend"}}</h4>
-            111111111111111111111111111
-            <br/>
-        </div>
-    </div>
-</template>
-
 <template name="latestUploadedArticles">
     <div class="row">
         <div class="col-xs-12">
+            {{> recommendArticles}}
             <h4>{{_ "Latest Articles"}}</h4>
             {{#each latestArticles}}
                 <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
@@ -87,4 +78,30 @@
             </div>
         </div>
     {{/if}}
+</template>
+
+<template name="recommendArticles">
+    <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;{{#if can "add-recommend" "resource"}}{{> addRecommendModalForm}}{{/if}}&nbsp;<span style="color: #ff0906">{{_ "Add new"}}</span>&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}{{> deleteRecommendModalForm}}{{/if}}&nbsp;<span style="color: #ff0906">{{_ "Delete selected"}}</span></h4>
+    {{#each recommendArticles}}
+    <h5><a href=""><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>{{title}}</a>{{#if can "modify-recommend" "resource"  }}{{> updateRecommendModalForm}}{{/if}}</h5>
+    {{else}}
+    {{_ "No articles found!"}}
+    {{/each}}
+    <hr>
+</template>
+
+<template name="addRecommendModalForm">
+    {{#afModal formId="addRecommendModalForm" class="fa fa-plus" collection="Recommend" operation="insert" omitFields="publications" title=getCreateButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="updateRecommendModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Recommend" doc=_id operation="update" omitFields="publications"}}
+    {{/afModal}}
+</template>
+
+
+<template name="deleteRecommendModalForm">
+    {{#afModal class="fa fa-trash" collection="Recommend" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
 </template>

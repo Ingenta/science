@@ -1,5 +1,17 @@
 this.Recommend = new Meteor.Collection("recommend");
 
+this.Recommend.allow({
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-recommend", "resource", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-recommend", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-recommend", "resource", userId);
+    }
+});
+
 RecommendSchema = new SimpleSchema({
     title: {
         type: String,
