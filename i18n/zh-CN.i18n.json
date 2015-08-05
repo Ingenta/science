@@ -362,6 +362,12 @@
       },
       "ipRange": {
         "label": "IP范围"
+      },
+      "ipRange.$.startIP": {
+        "label": "起始 IP"
+      },
+      "ipRange.$.endIP": {
+        "label": "结束 IP"
       }
     },
     "recommend": {

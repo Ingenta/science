@@ -19,3 +19,12 @@ Science.joinStrings = function (stringArray, join) {
     });
     return res;
 };
+
+Science.ipToNumber = function(ip){
+    var sum = 0;
+    var arr = ip.split('.');
+    arr.reverse().forEach(function (a, index) {
+        sum += (a*(Math.pow(256,index)));
+    });
+    return sum;
+}

@@ -48,6 +48,6 @@
 </template>
 
 <template name="updateInstitutionForm">
-    {{#afModal class="fa fa-pencil" title=getTitle collection="Institutions" doc=_id operation="update" buttonContent=getUpdateButtonContent}}
+    {{#afModal formId="updateInstitutionModalForm" class="fa fa-pencil" title=getTitle collection="Institutions" doc=_id operation="update" omitFields="ipRange.$.startNum, ipRange.$.endNum" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
