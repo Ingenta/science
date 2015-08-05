@@ -8,7 +8,10 @@ Template.addCollectionForm.helpers({
 			result.push({label:name,value:item._id});
 		});
 		return result;
-	}
+	},
+    journalId : function(){
+        return Session.get("currentJournalId");
+    }
 });
 
 
@@ -16,5 +19,11 @@ AutoForm.addHooks(['addCollectionModalForm'], {
 	onSuccess: function () {
 		$("#addCollectionModal").modal('hide');
 		FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
-	}
+	},
+    before: {
+        insert: function (doc) {
+            doc.journalId = Session.get('currentJournalId');
+            return doc;
+        }
+    }
 }, true);

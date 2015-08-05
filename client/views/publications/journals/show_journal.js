@@ -34,9 +34,9 @@ Template.journalOptions.helpers({
                 tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
             } else if (tabList.length == 0) {
                 tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
-                tabList.push({name: TAPi18n.__("About"), slug: 'About'});
+                tabList.push({name: TAPi18n.__(t), slug: t});
             } else {
-                tabList.push({name: TAPi18n.__("About"), slug: 'About'});
+                tabList.push({name: TAPi18n.__(t), slug: t});
             }
         });
         if (tabList.length == 0) {

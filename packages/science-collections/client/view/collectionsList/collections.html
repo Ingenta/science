@@ -1,6 +1,8 @@
 <template name="collections">
 	<div class="container-fluid">
-		{{> pageElement key="collections"}}
+	{{#unless journalId}}
+        {{> pageElement key="collections"}}
+     {{/unless}}
 		{{> collAlphabetBar}}
 		<div class="row">
 			{{#if can "add-pulisher-collections" "collections" }}
@@ -11,7 +13,9 @@
 		</div>
 		<div class="row">
 			<div id="menu" class="col-xs-3">
-				{{> collLeftFilters}}
+                {{#unless journalId}}
+                     {{> collLeftFilters}}
+                {{/unless}}
 			</div>
 			<div id="subcontent" class="col-xs-9">
 				{{> collectionsList}}
@@ -39,7 +43,9 @@
 						{{> afQuickField name="description"}}
 						{{> afQuickField name="chinesedescription"}}
 						{{> afQuickField name="picture"}}
-						{{> afQuickField name="publisherId" type="universe-select" options=getpublishers }}
+                        {{#unless journalId}}
+						    {{> afQuickField name="publisherId" type="universe-select" options=getpublishers }}
+                        {{/unless}}
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
