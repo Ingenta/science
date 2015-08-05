@@ -1,7 +1,7 @@
 <template name="LayoutSideBar">
     <br/>
     <ul class="list-unstyled">
-        <li>{{institutionLogo}}</li>
+        <li>{{{institutionLogo}}}</li>
         {{#if currentUser}}
             <li><a href="{{pathFor 'user_settings'}}">{{currentUser.username}}</a></li>
             {{#if canUseAdminPanel}}

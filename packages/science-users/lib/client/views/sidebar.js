@@ -1,19 +1,21 @@
 Template.LayoutSideBar.helpers({
-	institutionLogo: function () {
-		var currentUserIPNumber = Session.get("currentUserIPNumber");
-		if(currentUserIPNumber === undefined){
-			currentUserIPNumber = 0;
-			Meteor.call("getClientIP", function (err, ip) {
-				var arr = ip.split('.');
-				arr.reverse().forEach(function (a, index) {
-					currentUserIPNumber += (a*(Math.pow(256,index)));
-				});
-				Session.set("currentUserIPNumber", currentUserIPNumber);
-			});
-		}
-		return currentUserIPNumber;
-	},
-	canUseAdminPanel:function(){
-		return !!Permissions.getUserRoles().length;
-	}
+    institutionLogo: function () {
+        var currentUserIPNumber = Session.get("currentUserIPNumber");
+        if (currentUserIPNumber === undefined) {
+            Meteor.call("getClientIP", function (err, ip) {
+                currentUserIPNumber = Science.ipToNumber(ip);
+                Session.set("currentUserIPNumber", currentUserIPNumber);
+            });
+        }
+        var logo = undefined;
+        var institutuion = Institutions.findOne({ipRange: {$elemMatch: {startNum: {$lte: currentUserIPNumber}, endNum: {$gte: currentUserIPNumber}}}});
+        if (institutuion) {
+            logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo}).url();
+        }
+        if (logo) return '<img src="' + logo + '" width="58" height="82"/>';
+        else return;
+    },
+    canUseAdminPanel: function () {
+        return !!Permissions.getUserRoles().length;
+    }
 });
