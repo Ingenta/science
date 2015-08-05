@@ -29,7 +29,26 @@ InstitutionsSchema = new SimpleSchema({
         }
     },
     ipRange: {
-        type: String
+        type: [Object],
+        minCount: 1
+    },
+    "ipRange.$.startIP": {
+        type: String,
+        regEx: SimpleSchema.RegEx.IPv4
+    },
+    "ipRange.$.endIP": {
+        type: String,
+        regEx: SimpleSchema.RegEx.IPv4
+    },
+    "ipRange.$.startNum": {
+        type: Number,
+        max: 4294967295,
+        min: 0
+    },
+    "ipRange.$.endNum": {
+        type: Number,
+        max: 4294967295,
+        min: 0
     }
 });
 Meteor.startup(function () {

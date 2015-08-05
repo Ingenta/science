@@ -187,6 +187,12 @@
       },
       "ipRange": {
         "label": "IP Range"
+      },
+      "ipRange.$.startIP": {
+        "label": "Start IP"
+      },
+      "ipRange.$.endIP": {
+        "label": "End IP"
       }
     },
     "recommend": {
