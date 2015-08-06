@@ -365,14 +365,20 @@
       },
       "ipRange": {
         "label": "IP范围"
+      },
+      "ipRange.$.startIP": {
+        "label": "起始 IP"
+      },
+      "ipRange.$.endIP": {
+        "label": "结束 IP"
       }
     },
     "recommend": {
-      "title": {
-        "label": "英文标题"
-      },
       "chineseTitle": {
         "label": "中文标题"
+      },
+      "title": {
+        "label": "英文标题"
       },
       "behalfPicture": {
         "label": "选择代表图片"

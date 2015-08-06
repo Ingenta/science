@@ -10,7 +10,7 @@ Router.route("/admin/institutions/", {
 	},
 	waitOn        : function () {
 		return [
-			Meteor.subscribe('institutions')
+			//Meteor.subscribe('institutions')
 		]
 	}
 });
