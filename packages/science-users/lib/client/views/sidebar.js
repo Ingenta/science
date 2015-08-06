@@ -12,7 +12,7 @@ Template.LayoutSideBar.helpers({
         if (institutuion) {
             logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo}).url();
         }
-        if (logo) return '<img src="' + logo + '" width="58" height="82"/>';
+        if (logo) return '<img src="' + logo + '" width="100%" height="auto"/>';
         else return;
     },
     canUseAdminPanel: function () {
