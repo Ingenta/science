@@ -196,11 +196,8 @@
       }
     },
     "recommend": {
-      "chineseTitle": {
-        "label": "Chinese Title"
-      },
-      "title": {
-        "label": "English Title"
+      "ArticlesId": {
+        "label": "Title"
       },
       "behalfPicture": {
         "label": "Choose file"
