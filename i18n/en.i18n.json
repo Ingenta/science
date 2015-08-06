@@ -210,11 +210,11 @@
       }
     },
     "recommend": {
-      "title": {
-        "label": "English Title"
-      },
       "chineseTitle": {
         "label": "Chinese Title"
+      },
+      "title": {
+        "label": "English Title"
       },
       "behalfPicture": {
         "label": "Choose file"

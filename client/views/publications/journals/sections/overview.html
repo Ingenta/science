@@ -81,7 +81,7 @@
 </template>
 
 <template name="recommendArticles">
-    <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;{{#if can "add-recommend" "resource"}}{{> addRecommendModalForm}}{{/if}}&nbsp;<span style="color: #ff0906">{{_ "Add new"}}</span>&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}{{> deleteRecommendModalForm}}{{/if}}&nbsp;<span style="color: #ff0906">{{_ "Delete selected"}}</span></h4>
+    <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;&nbsp;{{#if can "add-recommend" "resource"}}{{> addRecommendModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}{{> deleteRecommendModalForm}}{{/if}}</h4>
     {{#each recommendArticles}}
     <h5><a href=""><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>{{title}}</a>{{#if can "modify-recommend" "resource"  }}{{> updateRecommendModalForm}}{{/if}}</h5>
     {{else}}
