@@ -375,10 +375,10 @@
     },
     "recommend": {
       "title": {
-        "label": "英文标题"
+        "label": "中文标题"
       },
       "chineseTitle": {
-        "label": "中文标题"
+        "label": "英文标题"
       },
       "behalfPicture": {
         "label": "选择代表图片"
