@@ -374,10 +374,10 @@
       }
     },
     "recommend": {
-      "title": {
+      "chineseTitle": {
         "label": "中文标题"
       },
-      "chineseTitle": {
+      "title": {
         "label": "英文标题"
       },
       "behalfPicture": {

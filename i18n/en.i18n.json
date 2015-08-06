@@ -196,10 +196,10 @@
       }
     },
     "recommend": {
-      "title": {
+      "chineseTitle": {
         "label": "Chinese Title"
       },
-      "chineseTitle": {
+      "title": {
         "label": "English Title"
       },
       "behalfPicture": {
