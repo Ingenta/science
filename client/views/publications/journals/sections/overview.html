@@ -81,9 +81,9 @@
 </template>
 
 <template name="recommendArticles">
-    <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;{{#if can "add-recommend" "resource"}}{{> addRecommendModalForm}}&nbsp;<span style="color: #ff0906">{{_ "Add new"}}</span>{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}{{> deleteRecommendModalForm}}&nbsp;<span style="color: #ff0906">{{_ "Delete selected"}}</span>{{/if}}</h4>
+    <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;&nbsp;{{> addRecommendModalForm}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}{{> deleteRecommendModalForm}}{{/if}}</h4>
     {{#each recommendArticles}}
-    <h5><a href=""><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>{{title}}</a>{{#if can "modify-recommend" "resource"  }}{{> updateRecommendModalForm}}{{/if}}</h5>
+    <h5><a href=""><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>{{title ArticlesId}}</a>{{#if can "modify-recommend" "resource"  }}{{> updateRecommendModalForm}}{{/if}}</h5>
     {{else}}
     {{_ "No articles found!"}}
     {{/each}}
@@ -91,8 +91,29 @@
 </template>
 
 <template name="addRecommendModalForm">
-    {{#afModal formId="addRecommendModalForm" class="fa fa-plus" collection="Recommend" operation="insert" omitFields="publications" title=getCreateButtonContent}}
-    {{/afModal}}
+    <div class="modal fade" id="addRecommendModalForm" tabindex="-1" role="dialog"
+         aria-labelledby="addRecommendModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addRecommendModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addRecommendModalForm" collection="Recommend" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="ArticlesId" type="universe-select" options=getArticles }}
+                    {{> afQuickField name="behalfPicture"}}
+                    {{> afQuickField name="defaultPicture"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="updateRecommendModalForm">

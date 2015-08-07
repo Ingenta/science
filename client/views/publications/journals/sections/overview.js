@@ -47,3 +47,17 @@ AutoForm.addHooks(['addRecommendModalForm'], {
         }
     }
 }, true);
+
+Template.addRecommendModalForm.helpers({
+    getArticles:function(){
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var journalId = Session.get('currentJournalId');
+        var articles = Articles.find({journalId:journalId}).fetch();
+        var result = [];
+        _.each(articles,function(item){
+            var name = iscn?item.title.cn:item.title.en;
+            result.push({label:name,value:item._id});
+        });
+        return result;
+    }
+});
