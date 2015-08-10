@@ -10,13 +10,20 @@ Package.describe({
   documentation: 'README.md'
 });
 
+
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
-  api.addFiles('science-search.js');
+
+  api.use([
+    'templating',
+    'iron:router',
+    'science-lib',
+    'http'
+  ]);
+
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('science-search');
-  api.addFiles('science-search-tests.js');
 });
