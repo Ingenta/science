@@ -23,6 +23,8 @@ AutoForm.addHooks(['addCollectionModalForm'], {
     before: {
         insert: function (doc) {
             doc.journalId = Session.get('currentJournalId');
+            var a = Publications.findOne({"_id" : Session.get('currentJournalId')});
+            doc.publisherId = a.publisher;
             return doc;
         }
     }

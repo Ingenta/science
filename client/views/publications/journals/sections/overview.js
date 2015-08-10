@@ -33,11 +33,25 @@ Template.recommendArticles.helpers({
     recommendArticles: function () {
         var journalId = Session.get('currentJournalId');
         return Recommend.find({publications:journalId});
+    },
+    titles: function (Aid) {
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var article = Articles.findOne({_id:Aid});
+        var title = iscn?article.title.cn:article.title.en;
+        return title;
+    },
+    ArticleUrl: function (Arid) {
+        var journalId = Session.get('currentJournalId');
+        var title = Publications.findOne({_id:journalId}).title;
+        var article = Articles.findOne({_id:Arid});
+        var urls = title+"/"+article.volume+"/"+article.issue+"/"+article.doi;
+        return urls;
     }
 });
 
 AutoForm.addHooks(['addRecommendModalForm'], {
     onSuccess: function () {
+        $("#addRecommendModal").modal('hide');
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {
