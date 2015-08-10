@@ -5,7 +5,8 @@ Meteor.startup(function () {
         checkCreateDirectories: true, //create the directories for you
         maxFileSize:20000000, //20MB
         finished: function (fileInfo, formFields) {
-            Tasks.startJob(Config.uploadXmlDir.uploadDir+fileInfo.path,fileInfo.name,fileInfo.type);
+            console.log(formFields);
+            Tasks.startJob(Config.uploadXmlDir.uploadDir+fileInfo.path,fileInfo.name,fileInfo.type,formFields);
         }
     })
 });
