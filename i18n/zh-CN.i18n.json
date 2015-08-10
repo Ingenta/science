@@ -327,8 +327,17 @@
       "link": {
         "label": "链接"
       },
+      "defaultLink": {
+        "label": "默认链接"
+      },
+      "endDate": {
+        "label": "截止日期"
+      },
       "pictures": {
         "label": "选择图片"
+      },
+      "defaultPictures": {
+        "label": "选择默认图片"
       }
     },
     "issues": {

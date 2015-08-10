@@ -3,7 +3,7 @@
         {{#each advertisement}}
             {{#if can "modify-advertisement" "resource"  }}{{> updateAdvertisementModalForm}}{{/if}}
             {{#if can "delete-advertisement" "resource"  }}{{> deleteAdvertisementModalForm}}{{/if}}
-            <li><a href="{{link}}"><img src="{{getImageHelper pictures}}" width="135" height="142"></a></li><br>
+            <li><a href="{{whichLink}}"><img src="{{getImageHelper whichPictures}}" width="135" height="142"></a></li><br>
         {{/each}}
         {{#if AdCount}}
         {{#if can "add-advertisement" "resource"  }}

@@ -21,11 +21,35 @@ AdvertisementSchema = new SimpleSchema({
         type: String,
         optional: true
     },
+    defaultLink: {
+        type: String,
+        optional: true
+    },
     types: {
         type: String,
         optional: true
     },
+    endDate: {
+        type: Date,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
     pictures: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
+            }
+        }
+    },
+    defaultPictures: {
         type: String,
         optional: true,
         autoform: {
