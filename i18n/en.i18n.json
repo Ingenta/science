@@ -182,6 +182,20 @@
       "name": {
         "label": "Institution Name"
       },
+      "number": {
+        "label": "Institution No."
+      },
+      "type": {
+        "label": "Institution Type",
+        "options": {
+          "1": "Librarian",
+          "2": "Publisher",
+          "3": "Editorial Board",
+          "4": "University",
+          "5": "Institution",
+          "6": "Others"
+        }
+      },
       "logo": {
         "label": "Logo"
       },
@@ -196,11 +210,8 @@
       }
     },
     "recommend": {
-      "chineseTitle": {
-        "label": "Chinese Title"
-      },
-      "title": {
-        "label": "English Title"
+      "ArticlesId": {
+        "label": "Title"
       },
       "behalfPicture": {
         "label": "Choose file"

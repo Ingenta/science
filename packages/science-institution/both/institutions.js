@@ -17,6 +17,14 @@ InstitutionsSchema = new SimpleSchema({
         type: String
         //unique: true
     },
+    number: {
+        type: String
+        //unique: true
+    },
+    type: {
+        type: String,
+        optional: true
+    },
     logo: {
         type: String,
         optional: true,

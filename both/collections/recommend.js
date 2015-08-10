@@ -13,13 +13,7 @@ this.Recommend.allow({
 });
 
 RecommendSchema = new SimpleSchema({
-    chineseTitle: {
-        type: String,
-        autoform: {
-                type: 'universe-select'
-        }
-    },
-    title: {
+    ArticlesId: {
         type: String,
         autoform: {
                 type: 'universe-select'
