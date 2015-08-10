@@ -21,16 +21,3 @@ Template.uploadTableRow.events({
         Session.set('uploadLogId', this._id);
     }
 });
-
-Template.uploadForm.events({
-    "click radio":function(e){
-        var ps = $("input[name='pubStatus']:checked").val();
-        return ps;
-    }
-})
-
-Template.uploadForm.helpers({
-    "formData":function(){
-        return// {aa:"aa"};
-    }
-})
