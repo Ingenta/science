@@ -10,7 +10,13 @@ Template.collectionsList.helpers({
 		var q = {};
 		pubId && (q.publisherId = pubId);
         journalId &&(q.journalId = journalId);
-		first && (q.title = {$regex: "^" + first, $options: "i"});
+        var reg;
+        if(first && first == "other"){
+            reg="[^A-Z]"
+        }else{
+            reg = "^" + first;
+        }
+		first && (q.title = {$regex:reg, $options: "i"});
 		return collPaginator.find(q,{itemsPerPage:numPerPage});
 	}
 });

@@ -11,8 +11,13 @@ Template.collAlphabetBar.events({
 		Session.set('filterPublisher', undefined);
 		Session.set('PerPage', 10);
 	},
-	'click .resetAlphabetFilter': function (event) {
+	'click .resetAlphabetFilter': function () {
 		Session.set('firstLetter', undefined);
 		Session.set('PerPage', 10);
-	}
+	},
+    'click .resetOtherFilter': function () {
+        Session.set('firstLetter',"other");
+        Session.set('filterPublisher', undefined);
+        Session.set('PerPage', 10);
+    }
 });
