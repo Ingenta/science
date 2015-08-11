@@ -16,7 +16,7 @@
   'use strict';
   // Added by me so that it compiles with velocity
   if (!window) {
-    window = {};
+    //window = {};
   }
   if (typeof define === 'function' && define.amd) {
     // Register as an anonymous AMD module:
