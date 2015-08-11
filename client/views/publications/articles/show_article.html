@@ -4,7 +4,7 @@
     {{> tableModal tables}}
     <div class="row articleHeading">
         <div class="col-xs-9">
-            <h3><img src="/icon_access_fc.gif"/> {{translateThis title.cn title.en}}</h3>
+            <h3><img src="/icon_access_fc.gif"/> {{translateThis title.cn title.en}}{{updateArticleTitleModalForm}}</h3>
             <ul>
                 <li>
                     <p>
@@ -201,5 +201,10 @@
             概述
         </span>
     </div>
+</template>
+
+<template name="updateArticleTitleModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Articles" doc=_id operation="update" fields="title.en" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
 </template>
 
