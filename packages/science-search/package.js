@@ -18,9 +18,22 @@ Package.onUse(function(api) {
     'templating',
     'iron:router',
     'science-lib',
-    'http'
+    'jackjiang:solr'
   ]);
 
+  api.addFiles([
+    'server/solr.js',
+    'server/methods.js'
+  ],'server')
+
+  api.addFiles([
+    'client/router.js',
+    'client/view/search.html',
+    'client/view/search.js'
+  ],'client')
+
+  //api.addFiles([
+  //],['server','client'])
 });
 
 Package.onTest(function(api) {

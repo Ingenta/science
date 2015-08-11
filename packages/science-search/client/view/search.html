@@ -1,4 +1,4 @@
-<template name="SearchBar">
+<template name="SolrSearchBar">
     <div class="navbar-form pull-right" role="search" name="search">
         <div class="input-group">
             <input id="searchInput" type="text" class="form-control" placeholder='{{_ "Search"}}'>
@@ -9,10 +9,10 @@
     </div>
 </template>
 
-<template name="SearchResults">
+<template name="SolrSearchResults">
     <div class="col-xs-4">
         {{#each filters}}
-            {{>filterItem}}
+            {{> solrFilterItem}}
         {{/each}}
     </div>
     <div class="col-xs-8">
@@ -25,7 +25,7 @@
     </div>
 </template>
 
-<template name="filterItem">
+<template name="solrFilterItem">
     <h5 class="bg-eee">{{filterTitle}}</h5>
     <ul class="list-unstyled list-ul">
         {{#each filterOptions}}

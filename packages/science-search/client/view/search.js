@@ -1,49 +1,31 @@
-Template.SearchBar.events({
+Template.SolrSearchBar.events({
     'click .btn': function () {
-        var query = $('#searchInput').val();
-        if (query)
-            Router.go('/s/' + query);
+        var sword = $('#searchInput').val();
+        if (sword){
+            var query="title.cn:" + sw + " OR title.en:"+ sw ;
+            Router.go('/search?q=' + query);
+        }
     },
     'keydown input': function (event) {
         if (event.keyCode === 13) {
-            var query = $('#searchInput').val();
-            if (query)
-                Router.go('/s/' + query);
+            var sword = $('#searchInput').val();
+            if (sword){
+                var query="title.cn:" + sword + " OR title.en:"+ sword ;
+                Router.go('/search?q=' + query);
+            }
         }
     }
 });
-Template.SearchResults.onRendered(function () {
-    var k = Router.current().params.keywordsQuery;
-    if (k) {
-        var id = Keywords.findOne({"name": k})._id;
-        Keywords.update({_id: id}, {$inc: {"score": 3}})
-    }
-})
-Template.SearchResults.helpers({
+
+Template.SolrSearchResults.helpers({
     'results': function () {
-        var q = Router.current().params.searchQuery;
+        var q = Router.current().params.query.q;
         if (q) {
-            var mongoDbArr = [];
-            mongoDbArr.push({'title.en': {$regex: q, $options: "i"}});
-            mongoDbArr.push({'title.cn': {$regex: q, $options: "i"}});
-            mongoDbArr.push({keywords: {$regex: q, $options: "i"}});
-            return Articles.find({$or: mongoDbArr});
+            Meteor.call("search",q,function(err,result){
+                console.log(result);
+            })
         }
-        var t = Router.current().params.topicQuery;
-        if (t) {
-            return Articles.find({topic: t});
-        }
-        var k = Router.current().params.keywordsQuery;
-        if (k) {
-            return Articles.find({keywords: k});
-        }
-        var a = Router.current().params.authorQuery;
-        if (a) {
-            var mongoDbArr = [];
-            mongoDbArr.push({"authors.given.en": a.split(" ")[1], "authors.surname.en": a.split(" ")[0]});
-            mongoDbArr.push({"authors.given.cn": a.split(" ")[1], "authors.surname.cn": a.split(" ")[0]});
-            return Articles.find({$or: mongoDbArr});
-        }
+
     },
     'filters': function () {
 
