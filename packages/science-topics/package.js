@@ -16,14 +16,35 @@ Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use(
         [
-            'templating',
+//            'templating',
+//
+//            'aldeed:autoform'
 
-            'aldeed:autoform'
+            'templating',
+            'iron:router',
+            'aldeed:simple-schema',
+            'aldeed:autoform',
+            'hitchcott:paginator',
+            'science-lib',
+            'science-permissions',
+            'templates:tabs'
 
         ],
         both);
 
     api.addFiles('topics.js', both);
+    api.addFiles('client/router.js','client');
+    api.addFiles('client/views/addArticlesForTopics.html', 'client');
+    api.addFiles('client/views/topicsDetail/detail.html', 'client');
+    api.addFiles('client/views/topicsDetail/detail.js', 'client');
+    api.addFiles('client/views/tabs.html', 'client');
+    api.addFiles('client/views/tabs.js', 'client');
+    api.addFiles('client/views/inside/list.html', 'client');
+    api.addFiles('client/views/inside/list.js', 'client');
+    api.addFiles('client/views/select/query.html', 'client');
+    api.addFiles('client/views/select/query.js', 'client');
+    api.addFiles('client/views/select/result.html', 'client');
+    api.addFiles('client/views/select/result.js', 'client');
     api.addFiles('client/views/topics.html', 'client');
     api.addFiles('client/views/topics.js', 'client');
     api.addFiles('client/views/topics.css', 'client');

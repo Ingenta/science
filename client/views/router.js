@@ -54,30 +54,6 @@ Router.map(function () {
             ]
         }
     });
-    this.route("topics", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Topics");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('topics')
-            ]
-        }
-    });
-
-    this.route('/topic/:topicQuery', {
-        template: "SearchResults",
-        parent: "topics",
-        title: ":topicQuery",
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
-            ]
-        }
-    });
 
     this.route('/keywords/:keywordsQuery', {
         template: "SearchResults",
