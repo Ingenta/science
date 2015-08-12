@@ -13,6 +13,7 @@ Meteor.subscribe("issues");
 Meteor.subscribe("about");
 Meteor.subscribe("volumes");
 Meteor.subscribe("about_articles");
+Meteor.subscribe("editorial_member");
 Meteor.subscribe('articleXml');
 Meteor.subscribe('pages');
 Meteor.subscribe('news');
@@ -51,30 +52,6 @@ Router.map(function () {
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news')
-            ]
-        }
-    });
-    this.route("topics", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Topics");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('topics')
-            ]
-        }
-    });
-
-    this.route('/topic/:topicQuery', {
-        template: "SearchResults",
-        parent: "topics",
-        title: ":topicQuery",
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
             ]
         }
     });
