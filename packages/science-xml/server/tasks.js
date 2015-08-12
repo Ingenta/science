@@ -316,7 +316,7 @@ var insertArticle = function (a) {
         received: a.received,
         accepted: a.accepted,
         published: a.published,
-        topic: a.topic,
+        topic: [a.topic],
         contentType: a.contentType,
         acknowledgements: a.ack,
         pdfId: a.pdfId,

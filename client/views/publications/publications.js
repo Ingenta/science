@@ -42,7 +42,13 @@ Template.FilterList.helpers({
         }
         var q = {};
         pubId && (q.publisher = pubId);
-        first && (q.shortTitle = {$regex: "^" + first, $options: "i"});
+        var reg;
+        if(first && first == "other"){
+            reg="[^A-Z]"
+        }else{
+            reg = "^" + first;
+        }
+        first && (q.shortTitle = {$regex:reg, $options: "i"});
         Session.set("totalPublicationResults", Publications.find(q).count());
         var pubs = myPubPagination.find(q, {itemsPerPage: numPerPage});
         return pubs;
@@ -62,6 +68,11 @@ Template.FilterList.events({
     'click .letterFilter': function (event) {
         var num = $(event.target).text();
         Session.set('firstLetter', num);
+        Session.set('filterPublisher', undefined);
+        Session.set('PerPage', 10);
+    },
+    'click .resetOtherFilter': function () {
+        Session.set('firstLetter',"other");
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
     },

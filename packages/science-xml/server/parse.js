@@ -78,9 +78,17 @@ Meteor.methods({
         if (year === undefined) results.errors.push("No year found");
         else results.year = year;
 
-        var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
-        if (topic === undefined) results.errors.push("No subject found");
-        else results.topic = topic;
+        var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subj-group/subject", doc);
+        if (topic === undefined)
+            results.errors.push("No subject found");
+        else{
+            var topicEneity = Topics.findOne({"englishName": topic});
+            if(topicEneity)
+                results.topic = topicEneity._id;
+            else{
+                results.errors.push("No subject match:" + topic);
+            }
+        }
 
         var keywords = xpath.select("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc).toString();
         keywords = keywords.split(',');

@@ -12,7 +12,8 @@ Package.onUse(function (api) {
         [
             'templating',
             'jackkav:xpath',
-            'science-lib'
+            'science-lib',
+            'science-topics'
         ],
         both);
     api.addFiles('both/routes.js',both);

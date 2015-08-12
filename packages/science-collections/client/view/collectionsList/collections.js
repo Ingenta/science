@@ -24,6 +24,7 @@ AutoForm.addHooks(['addCollectionModalForm'], {
         insert: function (doc) {
             doc.journalId = Session.get('currentJournalId');
             var a = Publications.findOne({"_id" : Session.get('currentJournalId')});
+            if(a)
             doc.publisherId = a.publisher;
             return doc;
         }
