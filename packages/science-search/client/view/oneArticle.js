@@ -1,4 +1,4 @@
-Template.oneArticle.helpers({
+Template.oneSolrArticle.helpers({
 	journalName: function (id) {
 		return Publications.findOne({_id: id}).title;
 	},
@@ -9,10 +9,13 @@ Template.oneArticle.helpers({
 	},
 	query      : function () {
 		return Router.current().params.searchQuery;
+	},
+	article:function(){
+		return Articles.findOne({_id:this._id});
 	}
 });
 
-Template.oneArticle.events({
+Template.oneSolrArticle.events({
 	"click .btn-delete-article": function () {
 		var articleId = this._id;
 		sweetAlert({

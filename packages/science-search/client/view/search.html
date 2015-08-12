@@ -17,11 +17,14 @@
     </div>
     <div class="col-xs-8">
         <h4>{{_ "Search results"}}</h4>
-        {{#each results}}
-            {{> oneArticle}}
+        {{#if statusOK}}
+	        {{#each articles}}
+		        {{> oneSolrArticle}}
+	        {{/each}}
         {{else}}
-            {{_ "No results found!"}}
-        {{/each}}
+	        {{_ "No results found!"}}
+        {{/if}}
+
     </div>
 </template>
 

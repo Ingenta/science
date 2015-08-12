@@ -1,8 +1,14 @@
+Future = Npm.require('fibers/future');
+
 Meteor.methods({
 	"search":function(query){
-		SolrClient.query(query,function(err,response){
+		var myFuture = new Future();
+		SolrClient.query(query,{facet:true,"facet.field":"publisher"},function(err,response){
 			if(!err)
-				return response;
-		})
+				return myFuture.return(JSON.parse(response));
+			myFuture.throw(err);
+		});
+		return myFuture.wait();
+
 	}
 })

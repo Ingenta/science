@@ -1,8 +1,10 @@
+var pageSession = new ReactiveDict();
+
 Template.SolrSearchBar.events({
     'click .btn': function () {
         var sword = $('#searchInput').val();
         if (sword){
-            var query="title.cn:" + sw + " OR title.en:"+ sw ;
+            var query="title.cn:" + sword + " OR title.en:"+ sword ;
             Router.go('/search?q=' + query);
         }
     },
@@ -17,83 +19,54 @@ Template.SolrSearchBar.events({
     }
 });
 
-Template.SolrSearchResults.helpers({
-    'results': function () {
-        var q = Router.current().params.query.q;
-        if (q) {
-            Meteor.call("search",q,function(err,result){
-                console.log(result);
-            })
-        }
+Template.SolrSearchResults.onRendered(function(){
+    var q = Router.current().params.query.q;
+    if (q) {
+        Meteor.call("search",q,function(err,result){
+            var ok = err?false:result.responseHeader.status==0;
+            pageSession.set("ok",ok);
+            if(ok){
+                //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
+                if(result.response){
+                    pageSession.set("numFound",result.response.numFound);
+                    pageSession.set("start",result.response.start);
+                    pageSession.set("docs",result.response.docs);
+                }
+                if(result.facet_counts){
+                    pageSession.set("facets",result.facet_counts.facet_fields);
+                }
+            }
+        })
+    }
+})
 
+Template.SolrSearchResults.helpers({
+    'articles': function () {
+        return pageSession.get("docs");
+    },
+    'statusOK':function(){
+        return pageSession.get("ok");
     },
     'filters': function () {
-
-//        Meteor.call("getFilter",filtername,query,function(err,result){
-//            if(!err){
-//                Session.set(filtername,result);
-//            }
-//
-//        });
-//        return Session.get(filtername);
-        return [{
-            filterTitle: TAPi18n.__("FILTER BY Publisher"),
-            filterOptions: [{
-                name: '科学出版社',
-                count: '121'
-            }]
-        }, {
-            filterTitle: TAPi18n.__("FILTER BY Publications"),
-            filterOptions: [{
-                name: '《科学出版社》',
-                count: '21'
-            }, {
-                name: '《科学》',
-                count: '15'
-            }, {
-                name: '《出版社》',
-                count: '151'
-            }]
-        }, {
-            filterTitle: TAPi18n.__("FILTER BY Content Properties"),
-            filterOptions: [{
-                name: '论文',
-                count: '121'
-            }, {
-                name: '评述',
-                count: '113'
-            }, {
-                name: '快讯',
-                count: '141'
-            }]
-        }, {
-            filterTitle: TAPi18n.__("FILTER BY Author"),
-            filterOptions: [{
-                name: '谢和平',
-                count: '121'
-            }, {
-                name: '郑泽民',
-                count: '113'
-            }, {
-                name: '张龙',
-                count: '141'
-            }]
-        }, {
-            filterTitle: TAPi18n.__("FILTER BY Release Data"),
-            filterOptions: [{
-                name: '2014年',
-                count: '121'
-            }, {
-                name: '2013年',
-                count: '113'
-            }, {
-                name: '2011年',
-                count: '141'
-            }, {
-                name: '2010年',
-                count: '141'
-            }]
-        }]
+        debugger
+        var facets = pageSession.get("facets");
+        if(facets && facets.length){
+            var fields = Object.keys(facets);
+            var results = [];
+            for(var i=0;i<fields.length;i++){
+                var filter = {filterOptions:[]};
+                if(fields[i]=='publisher'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Publisher");
+                    for(var j=0;i<fields[i].length;j+=2){
+                        var publisher= Publishers.findOne({_id:fields[i][j]});
+                        filter.filterOptions.push({name:publisher.name,cname:publisher.chinesename,count:fields[i][j+1]})
+                    }
+                    results.push(filter);
+                }
+            }
+            console.log(results);
+            return results;
+        }
     }
 });
 
