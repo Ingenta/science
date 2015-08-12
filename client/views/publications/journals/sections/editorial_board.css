@@ -1,0 +1,27 @@
+.aboutNavTabs > li > a {
+    /*padding:0 !important;*/
+    margin-top: 20px !important;
+}
+
+.aboutNavTabs {
+    list-style: none;
+    padding: 0;
+}
+
+.aboutNavTabs li {
+    text-align: center;
+    background: #f1f1f1;
+    margin-top: 10px;
+}
+
+.aboutNavTabs .active {
+    background: #036cb0;
+}
+
+.aboutNavTabs .active a {
+    color: #fff;
+}
+
+.aboutEditButtons {
+    padding-right: 15px;
+}
