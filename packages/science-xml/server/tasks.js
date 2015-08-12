@@ -1,11 +1,15 @@
 Tasks = {};
 
-Tasks.startJob = function (pathToFile, fileName, fileType) {
+Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
 
     if (!pathToFile || !fileName || !fileType)return;
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
+    //文章的出版状态(默认是正式出版)
+    var pubstatus = formFields ? formFields.pubStatus : "normal";
+
     var logId = UploadLog.insert({
         name: fileName,
+        pubStatus: pubstatus,
         uploadedAt: new Date(),
         status: "Started",
         filePath: pathToFile,
@@ -237,6 +241,10 @@ Tasks.insertArticleTask = function (logId, result) {
 
     var hadError = false;
     var articleId;
+
+    var log = UploadLog.findOne({_id: logId});
+    result.pubStatus = log.pubStatus;//设置文章的出版状态和上传时选择的出版状态一致。
+
     try {
         inertKeywords(result.keywords);
         articleId = insertArticle(result);
@@ -247,7 +255,6 @@ Tasks.insertArticleTask = function (logId, result) {
     }
     if (!hadError) {
         //cleanup and set log and tasks to done
-        var log = UploadLog.findOne({_id: logId});
         ScienceXML.RemoveFile(log.filePath);
         UploadTasks.update(
             {_id: taskId},
@@ -320,7 +327,8 @@ var insertArticle = function (a) {
         figures: a.figures,
         tables: a.tables,
         keywords: a.keywords,
-        references: a.references
+        references: a.references,
+        pubStatus: a.pubStatus //出版状态
     });
     return id;
 }

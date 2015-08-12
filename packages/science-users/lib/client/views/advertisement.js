@@ -1,4 +1,12 @@
 Template.sidebarAd.helpers({
+    whichLink: function() {
+        if(this.endDate >new Date()) return this.link;
+        return this.defaultLink;
+    },
+    whichPictures: function() {
+        if(this.endDate >new Date()) return this.pictures;
+        return this.defaultPictures;
+    },
     advertisement: function () {
         //判断当前路径是不是期刊或者期刊下属的页面
         var isJournalPage=_.contains(Config.ADPages.journal,Router.current().route.getName());

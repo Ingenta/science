@@ -26,7 +26,12 @@
 </template>
 
 <template name="uploadForm">
-    {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true}}
+	<p>
+		<input type="radio" name="pubStatus" value="normal" checked="checked"/>正常文章
+		<input type="radio" name="pubStatus" value="online_frist"/>优先出版
+		<input type="radio" name="pubStatus" value="preset"/>预出版
+	</p>
+    {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true dynamicField='pubStatus'}}
 </template>
 
 <template name="uploadTableRow">

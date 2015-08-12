@@ -149,8 +149,17 @@
       "link": {
         "label": "Link"
       },
+      "defaultLink": {
+        "label": "The default link"
+      },
+      "endDate": {
+        "label": "Expiration date"
+      },
       "pictures": {
         "label": "Choose file"
+      },
+      "defaultPictures": {
+        "label": "Choose the default file"
       }
     },
     "issues": {
