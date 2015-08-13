@@ -2,28 +2,28 @@ var pageSession = new ReactiveDict();
 
 
 Meteor.startup(function(){
-    Tracker.autorun(function(){
-        var query = pageSession.get("query");
-        Meteor.call("search",query,function(err,result){
-            var ok = err?false:result.responseHeader.status==0;
-            pageSession.set("ok",ok);
-            if(ok){
-                //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
-                if(result.response){
-                    pageSession.set("numFound",result.response.numFound);
-                    pageSession.set("start",result.response.start);
-                    pageSession.set("docs",undefined);
-                    pageSession.set("docs",result.response.docs);
-                }
-                if(result.facet_counts){
-                    pageSession.set("facets",result.facet_counts.facet_fields);
-                }
-                if(result.highlighting){
-                    pageSession.set("highlight",result.highlighting);
-                }
-            }
-        })
-    });
+//    Tracker.autorun(function(){
+//        var query = pageSession.get("query");
+//        Meteor.call("search",query,function(err,result){
+//            var ok = err?false:result.responseHeader.status==0;
+//            pageSession.set("ok",ok);
+//            if(ok){
+//                //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
+//                if(result.response){
+//                    pageSession.set("numFound",result.response.numFound);
+//                    pageSession.set("start",result.response.start);
+//                    pageSession.set("docs",undefined);
+//                    pageSession.set("docs",result.response.docs);
+//                }
+//                if(result.facet_counts){
+//                    pageSession.set("facets",result.facet_counts.facet_fields);
+//                }
+//                if(result.highlighting){
+//                    pageSession.set("highlight",result.highlighting);
+//                }
+//            }
+//        })
+//    });
 })
 
 Template.SolrSearchBar.events({
