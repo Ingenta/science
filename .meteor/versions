@@ -120,6 +120,7 @@ retry@1.0.3
 routepolicy@1.0.5
 rzymek:moment-locale-zh-cn@2.9.0
 science-collections@0.0.1
+science-emails@0.0.1
 science-institution@0.0.1
 science-lib@0.0.1
 science-permissions@0.0.1
@@ -149,5 +150,6 @@ url@1.0.4
 vazco:universe-autoform-select@0.1.5
 webapp@1.2.0
 webapp-hashing@1.0.3
+wylio:mandrill@1.0.1
 yogiben:autoform-file@0.2.7
 yogiben:autoform-modals@0.3.6
