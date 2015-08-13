@@ -22,8 +22,8 @@ Template.editorialMemberList.helpers({
     contactId: function () {
         var aboutId = Session.get('tabAbout');
         var publicationId = Session.get('currentJournalId');
-        var contents =  AboutArticles.find({about: aboutId},{publications:publicationId});
-        if(contents===undefined){
+        var contents =  AboutArticles.find({about: aboutId},{publications:publicationId}).count();
+        if(0<contents){
             return false;
         }
         return true;
@@ -43,7 +43,6 @@ AutoForm.addHooks(['addAboutArticlesModal'], {
         insert: function (doc) {
             doc.about = Session.get('tabAbout');
             doc.publications = Session.get('currentJournalId');
-            debugger
             return doc;
         }
     }

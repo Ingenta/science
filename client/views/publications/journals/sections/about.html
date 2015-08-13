@@ -24,7 +24,7 @@
 <template name="aboutArticlesList">
     {{#each aboutArticle}}
         <div class="part"><p>
-            <strong>{{translateThis titleCn titleEn}}</strong>
+            <strong>{{translateThis titleCn titleEn}}&nbsp;：</strong>
 
             <div class="pull-right">
                 {{#if can "modify-about-articles" "resource"  }}
@@ -36,7 +36,7 @@
             </div>
             </p>
             <p>
-                {{translateThis descriptionCn descriptionEn}}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis descriptionCn descriptionEn}}
             </p>
         </div>
     {{else}}
@@ -45,34 +45,35 @@
 </template>
 
 <template name="editorialMemberList">
-    <p>
-        {{#each aboutArticles}}
-        {{translateThis descriptionCn descriptionEn}}
-        {{else}}
-        {{_ "No AboutArticle found!"}}
-        {{/each}}
-        {{#if contactId}}
-        {{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}
-        {{else}}
-        {{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
-        {{/if}}
-    </p>
-    <div class="part"><p>
-            <strong>编辑部成员简介</strong>
+    <div class="part">
+        <p>
+            {{#each aboutArticles}}
+            {{translateThis descriptionCn descriptionEn}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
+            {{else}}
+            {{_ "No AboutArticle found!"}}
+            {{/each}}
+            {{#if contactId}}
+                {{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}
+            {{/if}}
 
+        </p>
+    </div>
+        <p>
+            <strong>编辑部成员简介</strong>
             <div class="pull-right">
             {{#if can "modify-editorial-member" "resource"  }}{{> addEditorialMemberModalForm}}{{/if}}
             </div>
         </p>
-        <p>
-            {{#each members}}
-            <img src="{{getImageHelper picture}}" width="89" height="89"/>{{translateThis nameCn nameEn}}&nbsp;：&nbsp;&nbsp;{{translateThis abstractCn abstractEn}}&nbsp;&nbsp;E-mail:{{email}}&nbsp;&nbsp;Tel:{{phone}}<br>
-            {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
-            {{else}}
-            {{_ "No AboutArticle found!"}}
-            {{/each}}
-        </p>
-    </div>
+        {{#each members}}
+        <div class="part">
+            <p>
+                <img src="{{getImageHelper picture}}" width="89" height="89"/>{{translateThis nameCn nameEn}}&nbsp;：&nbsp;{{translateThis abstractCn abstractEn}}<br>E-mail:{{email}}；&nbsp;Tel:{{phone}}
+                {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
+            </p>
+        </div>
+        {{else}}
+        {{_ "No results found!"}}
+        {{/each}}
 </template>
 
 <template name="addAboutArticlesModalForm">
