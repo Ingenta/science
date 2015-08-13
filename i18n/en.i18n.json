@@ -235,17 +235,35 @@
             "nameCn": {
                 "label": "Chinese name"
             },
-            "abstractEn": {
-                "label": "English introduction"
+            "position": {
+                "label": "Job title"
             },
-            "abstractCn": {
-                "label": "Chinese Introduction"
+            "workUnitEn": {
+                "label": "English Work units"
+            },
+            "workUnitCn": {
+                "label": "Chinese Work units"
             },
             "email": {
                 "label": "Email"
             },
             "phone": {
                 "label": "Contact"
+            },
+            "fax": {
+                "label": "fax"
+            },
+            "directionEn": {
+                "label": "English research area"
+            },
+            "directionCn": {
+                "label": "Chinese research area"
+            },
+            "abstractEn": {
+                "label": "English introduction"
+            },
+            "abstractCn": {
+                "label": "Chinese Introduction"
             },
             "picture": {
                 "label": "Choose file"

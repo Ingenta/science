@@ -19,6 +19,44 @@ EditorialMemberSchema = new SimpleSchema({
     nameCn: {
         type: String
     },
+    position: {
+        type: String
+    },
+    workUnitEn: {
+        type: String
+    },
+    workUnitCn: {
+        type: String
+    },
+    email: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: "email"
+            }
+        }
+    },
+    phone: {
+        type: String
+    },
+    fax: {
+        type: String
+    },
+    directionEn: {
+        type: String,
+        optional: true,
+        autoform: {
+            rows: 2
+        }
+    },
+    directionCn: {
+        type: String,
+        optional: true,
+        autoform: {
+            rows: 2
+        }
+    },
     abstractEn: {
         type: String,
         optional: true,
@@ -32,18 +70,6 @@ EditorialMemberSchema = new SimpleSchema({
         autoform: {
             rows: 5
         }
-    },
-    email: {
-        type: String,
-        optional: true,
-        autoform: {
-            afFieldInput: {
-                type: "email"
-            }
-        }
-    },
-    phone: {
-        type: String
     },
     picture: {
         type: String,

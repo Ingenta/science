@@ -412,22 +412,40 @@
         },
         "editorialMember": {
             "nameEn": {
-                "label": "英文名"
+                "label": "*英文名"
             },
             "nameCn": {
-                "label": "中文名"
+                "label": "*中文名"
+            },
+            "position": {
+                "label": "职称"
+            },
+            "workUnitEn": {
+                "label": "英文单位"
+            },
+            "workUnitCn": {
+                "label": "中文单位"
+            },
+            "email": {
+                "label": "邮箱"
+            },
+            "phone": {
+                "label": "电话"
+            },
+            "fax": {
+                "label": "传真"
+            },
+            "directionEn": {
+                "label": "英文研究方向"
+            },
+            "directionCn": {
+                "label": "中文研究方向"
             },
             "abstractEn": {
                 "label": "英文简介"
             },
             "abstractCn": {
                 "label": "中文简介"
-            },
-            "email": {
-                "label": "邮箱"
-            },
-            "phone": {
-                "label": "电话/手机"
             },
             "picture": {
                 "label": "选择图片"
