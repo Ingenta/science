@@ -16,14 +16,14 @@ Template.AboutTitle.events({
     }
 });
 
-Template.aboutArticlesList.onRendered(function () {
+Template.EditorialBoardList.onRendered(function () {
     if (!Session.get('tabAbout')) {
         var a = About.findOne();
         if (a)Session.set('tabAbout', a._id);
     }
 });
 
-Template.aboutArticlesList.helpers({
+Template.EditorialBoardList.helpers({
     about: function () {
         var aboutId = Session.get('tabAbout');
         return About.find({_id: aboutId});
@@ -34,7 +34,7 @@ Template.aboutArticlesList.helpers({
     }
 });
 
-AutoForm.addHooks(['addAboutArticlesModalForm'], {
+AutoForm.addHooks(['addModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
