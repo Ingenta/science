@@ -36,3 +36,38 @@
         {{/each}}
     </ul>
 </template>
+
+
+<template name="oneSolrArticle">
+
+	<ul class="dotted list-unstyled">
+		<li>
+
+			<!--<h6>{{_ "Topic"}}: {{_ topic}}</h6>-->
+			{{#if can "delete-article" "resource"}}
+				<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>
+			{{/if}}
+			{{#with article}}
+				<h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticleById _id}}">{{{showTitle}}}</a></div></h4>
+
+				<ul class="list-unstyled">
+					<li>
+						{{#each authors}}
+							{{> authorPopButton name=getFullName}}
+						{{/each}}
+					</li>
+					<li>
+						<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+						<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+					</li>
+					<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+					{{> abstractDetails}}
+				</ul>
+			{{/with}}
+		</li>
+	</ul>
+</template>
+
+<template name="solrAbstractDetails">
+	{{> toggleFieldBrowse field=abstract _id=_id}}
+</template>
