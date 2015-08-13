@@ -1,11 +1,11 @@
 this.About = new Meteor.Collection("about");
 
 AboutSchema = new SimpleSchema({
-    title: {
+    titleEn: {
         type: String,
         unique: true
     },
-    chinesetitle: {
+    titleCn: {
         type: String
     },
     publications: {

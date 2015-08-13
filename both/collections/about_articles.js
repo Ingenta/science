@@ -1,21 +1,33 @@
 this.AboutArticles = new Meteor.Collection("about_articles");
 
+this.AboutArticles.allow({
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-about-articles", "resource", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-about-articles", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-about-articles", "resource", userId);
+    }
+});
+
 AboutArticlesSchema = new SimpleSchema({
-    title: {
+    titleEn: {
         type: String,
         unique: true
     },
-    chinesetitle: {
+    titleCn: {
         type: String
     },
-    description: {
+    descriptionEn: {
         type: String,
         optional: true,
         autoform: {
             rows: 4
         }
     },
-    chinesedescription: {
+    descriptionCn: {
         type: String,
         optional: true,
         autoform: {
@@ -23,6 +35,9 @@ AboutArticlesSchema = new SimpleSchema({
         }
     },
     about: {
+        type: String
+    },
+    publications: {
         type: String
     }
 });

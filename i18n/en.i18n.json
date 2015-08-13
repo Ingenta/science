@@ -101,24 +101,24 @@
             }
         },
         "about": {
-            "title": {
+            "titleEn": {
                 "label": "English Title"
             },
-            "chinesetitle": {
+            "titleCn": {
                 "label": "Chinese Title"
             }
         },
         "aboutArticles": {
-            "title": {
+            "titleEn": {
                 "label": "English Title"
             },
-            "chinesetitle": {
+            "titleCn": {
                 "label": "Chinese Title"
             },
-            "description": {
+            "descriptionEn": {
                 "label": "English Description"
             },
-            "chinesedescription": {
+            "descriptionCn": {
                 "label": "Chinese Description"
             }
         },
@@ -226,6 +226,29 @@
             },
             "defaultPicture": {
                 "label": "Choose the default file"
+            }
+        },
+        "editorialMember": {
+            "nameEn": {
+                "label": "English name"
+            },
+            "nameCn": {
+                "label": "Chinese name"
+            },
+            "abstractEn": {
+                "label": "English introduction"
+            },
+            "abstractCn": {
+                "label": "Chinese Introduction"
+            },
+            "email": {
+                "label": "Email"
+            },
+            "phone": {
+                "label": "Contact"
+            },
+            "picture": {
+                "label": "Choose file"
             }
         }
     },

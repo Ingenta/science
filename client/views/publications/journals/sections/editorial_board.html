@@ -1,0 +1,97 @@
+<template name="EditorialBoard">
+    <div class="tabbable">
+        <div class="col-xs-3">
+            <ul class="nav nav-pills nav-stacked aboutNavTabs">
+                {{#each about}}
+                {{#if can "modify-journal" "resource"  }}
+                <div class="pull-right row aboutEditButtons">
+                    {{> updateAboutTitleModalForm}}
+                    {{> deleteAboutTitleModalForm}}
+                </div>
+                {{/if}}
+                <li class="{{isActive _id}}">
+                    <a class="activeButton" data-aboutid="{{_id}}" data-toggle="tab">
+                        {{translateThis chinesetitle title}}
+                    </a>
+                </li>
+                {{else}}
+                {{_ "No About found!"}}
+                {{/each}}
+                <div class="pull-right">
+                    {{#if can "modify-journal" "resource"  }}
+                    {{> addAboutTitleModalForm}}
+                    {{/if}}
+                </div>
+            </ul>
+        </div>
+        <div class="tab-content col-xs-9">
+            <div class="tab-pane active">{{> aboutArticlesList}}</div>
+        </div>
+    </div>
+</template>
+
+<template name="EditorialBoardList">
+    {{#each about}}
+    <div class="part">{{translateThis chinesetitle title}}
+        <div class="pull-right">
+            {{#if can "modify-journal" "resource"  }}
+            {{> addAboutArticlesModalForm}}
+            {{/if}}
+        </div>
+    </div>
+    {{else}}
+    {{_ "No About found!"}}
+    {{/each}}
+    {{#each aboutarticle}}
+    <div class="part"><p>
+        <strong>{{translateThis chinesetitle title}}</strong>
+
+        <div class="pull-right">
+            {{#if can "modify-journal" "resource"  }}
+            {{> updateAboutArticlesModalForm}}
+            {{> deleteAboutArticlesModalForm}}
+            {{/if}}
+        </div>
+        </p>
+        <p>
+            {{translateThis chinesedescription description}}
+        </p>
+    </div>
+    {{else}}
+    {{_ "No AboutArticle found!"}}
+    {{/each}}
+</template>
+
+<template name="addAboutTitleModalForm">
+    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert"
+    omitFields="publications" title=getCreateButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="updateAboutTitleModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update"
+    omitFields="publications"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteAboutTitleModalForm">
+    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
+</template>
+
+<template name="addAboutArticlesModalForm">
+    {{#afModal formId="addAboutArticlesModalForm" class="fa fa-plus" collection="AboutArticles" operation="insert"
+    omitFields="about" title=getCreateButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="updateAboutArticlesModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AboutArticles" doc=_id operation="update"
+    omitFields="about"}}
+    {{/afModal}}
+</template>
+
+<template name="deleteAboutArticlesModalForm">
+    {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}
+    {{/afModal}}
+</template>
