@@ -15,7 +15,7 @@
                 {{> aboutArticlesList}}
             </div>
             <div class="tab-pane" id="c"><h3>{{_ "Contact"}}</h3><hr>
-                <!--{{> editorialMemberList}}-->
+                {{> editorialMemberList}}
             </div>
         </div>
     </div>
@@ -66,12 +66,11 @@
         </p>
         <p>
             {{#each members}}
-            <img src="{{getImageHelper picture}}" width="89" height="89"/>{{translateThis nameCn nameEn}}&nbsp;：&nbsp;&nbsp;{{translateThis abstractCn abstractEn}}&nbsp;&nbsp;E-mail:{{email}}&nbsp;&nbsp;Tel:{{phone}}
+            <img src="{{getImageHelper picture}}" width="89" height="89"/>{{translateThis nameCn nameEn}}&nbsp;：&nbsp;&nbsp;{{translateThis abstractCn abstractEn}}&nbsp;&nbsp;E-mail:{{email}}&nbsp;&nbsp;Tel:{{phone}}<br>
+            {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
             {{else}}
             {{_ "No AboutArticle found!"}}
             {{/each}}
-            <br>
-            {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
         </p>
     </div>
 </template>

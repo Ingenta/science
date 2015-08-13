@@ -43,6 +43,7 @@ AutoForm.addHooks(['addAboutArticlesModal'], {
         insert: function (doc) {
             doc.about = Session.get('tabAbout');
             doc.publications = Session.get('currentJournalId');
+            debugger
             return doc;
         }
     }
