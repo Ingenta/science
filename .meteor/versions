@@ -98,6 +98,7 @@ monbro:last-software-release-date@1.0.1
 monbro:mongodb-mapreduce-aggregation@1.0.1
 mongo@1.1.0
 mongo-livedata@1.0.8
+mpowaga:autoform-summernote@0.4.2
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.1
 mrt:mathjax@0.6.3
@@ -138,6 +139,7 @@ spacebars-compiler@1.0.6
 spiderable@1.0.7
 srp@1.0.3
 standard-app-packages@1.0.5
+summernote:standalone@0.6.15
 tap:i18n@1.5.1
 tap:i18n-ui@0.7.0
 templates:tabs@2.2.0

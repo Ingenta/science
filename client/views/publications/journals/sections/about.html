@@ -1,20 +1,20 @@
-<template name="AboutTitle">
+<template name="aboutTopics">
     <div class="tabbable">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
-                <li><a class="activeButton" data-aboutid="a" href="#a"  data-toggle="tab">{{_ "Editorial Policies"}}</a></li>
+                <li class="active"><a class="activeButton" data-aboutid="a" href="#a"  data-toggle="tab">{{_ "Editorial Policies"}}</a></li>
                 <li><a class="activeButton" data-aboutid="b" href="#b"  data-toggle="tab">{{_ "Readers"}}</a></li>
                 <li><a class="activeButton" data-aboutid="c" href="#c"  data-toggle="tab">{{_ "Contact"}}</a></li>
             </ul>
         </div>
         <div class="tab-content col-xs-9">
-            <div class="tab-pane active" id="a"><h3>{{_ "Editorial Policies"}}&nbsp;&nbsp;{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</h3><hr>
+            <div class="tab-pane active" id="a"><div class="part"><strong>{{_ "Editorial Policies"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
                 {{> aboutArticlesList}}
             </div>
-            <div class="tab-pane" id="b"><h3>{{_ "Readers"}}&nbsp;&nbsp;{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</h3><hr>
+            <div class="tab-pane" id="b"><div class="part"><strong>{{_ "Readers"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
                 {{> aboutArticlesList}}
             </div>
-            <div class="tab-pane" id="c"><h3>{{_ "Contact"}}</h3><hr>
+            <div class="tab-pane" id="c"><div class="part"><strong>{{_ "Contact"}}</strong></div><hr>
                 {{> editorialMemberList}}
             </div>
         </div>
@@ -36,7 +36,7 @@
             </div>
             </p>
             <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis descriptionCn descriptionEn}}
+                {{{translateThis descriptionCn descriptionEn}}}
             </p>
         </div>
     {{else}}
@@ -48,9 +48,9 @@
     <div class="part">
         <p>
             {{#each aboutArticles}}
-            {{translateThis descriptionCn descriptionEn}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
-            {{else}}
-            {{_ "No AboutArticle found!"}}
+                {{{translateThis descriptionCn descriptionEn}}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
+                {{else}}
+                {{_ "No AboutArticle found!"}}
             {{/each}}
             {{#if contactId}}
                 {{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}
@@ -60,27 +60,22 @@
         <p>
             <strong>编辑部成员简介</strong>
             <div class="pull-right">
-            {{#if can "modify-editorial-member" "resource"  }}{{> addEditorialMemberModalForm}}{{/if}}
+                {{#if can "modify-editorial-member" "resource"  }}{{> addEditorialMemberModalForm}}{{/if}}
             </div>
         </p>
         {{#each members}}
-        <div class="part">
-            <p>
-                <img src="{{getImageHelper picture}}" width="89" height="89"/>{{translateThis nameCn nameEn}}&nbsp;：&nbsp;{{translateThis abstractCn abstractEn}}<br>E-mail:{{email}}；&nbsp;Tel:{{phone}}
-                {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
-            </p>
-        </div>
-        {{else}}
-        {{_ "No results found!"}}
+            <div class="part">
+                <p>
+                    <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstractCn abstractEn}}}{{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
+                </p>
+            </div>
+            {{else}}
+            {{_ "No results found!"}}
         {{/each}}
 </template>
 
 <template name="addAboutArticlesModalForm">
     {{#afModal formId="addAboutArticlesModal" class="fa fa-plus" collection="AboutArticles" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
-</template>
-
-<template name="addEditorialMemberModalForm">
-    {{#afModal formId="addEditorialMemberModal" class="fa fa-plus" collection="EditorialMember" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateAboutArticlesModalForm">
@@ -89,6 +84,11 @@
 
 <template name="deleteAboutArticlesModalForm">
     {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+</template>
+
+
+<template name="addEditorialMemberModalForm">
+    {{#afModal formId="addEditorialMemberModal" class="fa fa-plus" collection="EditorialMember" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateEditorialMemberModalForm">
