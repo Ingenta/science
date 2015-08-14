@@ -1,7 +1,13 @@
-Template.AboutTitle.events({
+Template.aboutTopics.events({
     'click .activeButton': function (event) {
         var aboutValue = $(event.target).data().aboutid;
         Session.set('tabAbout', aboutValue);
+    }
+});
+
+Template.aboutArticlesList.onRendered(function () {
+    if (Session.get('tabAbout')===undefined) {
+        Session.set('tabAbout', "a");
     }
 });
 

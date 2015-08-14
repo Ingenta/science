@@ -238,27 +238,6 @@
             "position": {
                 "label": "Job title"
             },
-            "workUnitEn": {
-                "label": "English Work units"
-            },
-            "workUnitCn": {
-                "label": "Chinese Work units"
-            },
-            "email": {
-                "label": "Email"
-            },
-            "phone": {
-                "label": "Contact"
-            },
-            "fax": {
-                "label": "fax"
-            },
-            "directionEn": {
-                "label": "English research area"
-            },
-            "directionCn": {
-                "label": "Chinese research area"
-            },
             "abstractEn": {
                 "label": "English introduction"
             },
