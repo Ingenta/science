@@ -48,9 +48,9 @@
     <div class="part">
         <p>
             {{#each aboutArticles}}
-            {{{translateThis descriptionCn descriptionEn}}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
-            {{else}}
-            {{_ "No AboutArticle found!"}}
+                {{{translateThis descriptionCn descriptionEn}}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
+                {{else}}
+                {{_ "No AboutArticle found!"}}
             {{/each}}
             {{#if contactId}}
                 {{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}
@@ -60,18 +60,17 @@
         <p>
             <strong>编辑部成员简介</strong>
             <div class="pull-right">
-            {{#if can "modify-editorial-member" "resource"  }}{{> addEditorialMemberModalForm}}{{/if}}
+                {{#if can "modify-editorial-member" "resource"  }}{{> addEditorialMemberModalForm}}{{/if}}
             </div>
         </p>
         {{#each members}}
-        <div class="part">
-            <p>
-                <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstractCn abstractEn}}}
-                {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
-            </p>
-        </div>
-        {{else}}
-        {{_ "No results found!"}}
+            <div class="part">
+                <p>
+                    <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstractCn abstractEn}}}{{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
+                </p>
+            </div>
+            {{else}}
+            {{_ "No results found!"}}
         {{/each}}
 </template>
 
