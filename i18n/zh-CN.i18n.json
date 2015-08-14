@@ -146,7 +146,12 @@
     "PleaseWait": "请等一会...",
     "Search": "搜索",
     "Name": "名字",
-    "E-mail": "邮件地址",
+    "Company name": "单位",
+    "Phone": "电话",
+    "Fax": "传真",
+    "E-mail": "邮箱",
+    "Research Area": "研究方向",
+    "Introduction": "简介",
     "Email address": "邮件地址",
     "Publishers": "出版商",
     "Publications": "出版物",
@@ -204,6 +209,21 @@
             },
             "issn": {
                 "label": "ISSN"
+            },
+            "email": {
+                "label": "邮箱"
+            },
+            "addressEn": {
+                "label": "英文地址"
+            },
+            "addressCn": {
+                "label": "中文地址"
+            },
+            "phone": {
+                "label": "电话"
+            },
+            "fax": {
+                "label": "传真"
             },
             "accessKey": {
                 "label": "请选择一个资源标签",
@@ -411,14 +431,46 @@
             }
         },
         "editorialMember": {
+            "abstractEn": {
+                "label": "英文简介"
+            },
+            "abstractCn": {
+                "label": "中文简介"
+            },
+            "picture": {
+                "label": "选择图片"
+            }
+        },
+        "editorialBoard": {
             "nameEn": {
-                "label": "英文名"
+                "label": "英文姓名"
             },
             "nameCn": {
-                "label": "中文名"
+                "label": "中文姓名"
             },
             "position": {
                 "label": "职称"
+            },
+            "WorkUnitsEn": {
+                "label": "英文单位名称"
+            },
+            "WorkUnitsCn": {
+                "label": "中文单位名称"
+            },
+            "phone": {
+                "label": "电话"
+            },
+            "fax": {
+                "label": "传真"
+            },
+            "email": {
+                "label": "邮箱"
+            },
+            "researchAreaEn": {
+                "label": "英文研究方向"
+            },
+            "researchAreaCn": {
+                "label": "中文研究方向"
             },
             "abstractEn": {
                 "label": "英文简介"

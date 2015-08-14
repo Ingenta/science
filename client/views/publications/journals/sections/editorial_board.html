@@ -39,13 +39,32 @@
         {{/each}}
     {{#each editorialBoards}}
         <div class="part">
-            <p>
-                <img src="{{getImageHelper picture}}" width="133" height="180"/>{{{translateThis abstractCn abstractEn}}}<br>{{translateThis nameCn nameEn}}&nbsp;&nbsp;{{position}}
-            </p>
             <div class="pull-right">
                 {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialBoardModalForm}}{{/if}}
                 {{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialBoardModalForm}}{{/if}}
             </div>
+            <p>
+                <img src="{{getImageHelper picture}}" width="133" height="180"/>
+                {{#if WorkUnits}}
+                    {{_"Company name"}}：&nbsp;{{translateThis WorkUnitsCn WorkUnitsEn}}<br>
+                {{/if}}
+                {{#if phone}}
+                    {{_"Phone"}}：&nbsp;{{phone}}<br>
+                {{/if}}
+                {{#if fax}}
+                    {{_"Fax"}}：&nbsp;{{fax}}<br>
+                {{/if}}
+                {{#if email}}
+                    {{_"E-mail"}}：&nbsp;{{email}}<br>
+                {{/if}}
+                {{#if researchArea}}
+                    {{_"Research Area"}}：&nbsp;{{translateThis researchAreaCn researchAreaEn}}<br>
+                {{/if}}
+                {{#if abstract}}
+                    {{_"Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstractCn abstractEn}}<br>
+                {{/if}}
+                {{translateThis nameCn nameEn}}&nbsp;&nbsp;{{position}}
+            </p>
         </div>
         {{else}}
         {{_ "No results found!"}}
@@ -66,13 +85,13 @@
 
 
 <template name="addEditorialBoardModalForm">
-    {{#afModal formId="addEditorialBoardModalForm" class="fa fa-plus" collection="EditorialMember" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
+    {{#afModal formId="addEditorialBoardModalForm" class="fa fa-plus" collection="EditorialBoard" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateEditorialBoardModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialMember" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialBoard" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
 </template>
 
 <template name="deleteEditorialBoardModalForm">
-    {{#afModal class="fa fa-trash" collection="EditorialMember" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+    {{#afModal class="fa fa-trash" collection="EditorialBoard" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>

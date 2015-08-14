@@ -31,7 +31,25 @@ Template.EditorialBoardList.helpers({
     editorialBoards: function () {
         var aboutId = Session.get('tabBoard');
         var publicationId = Session.get('currentJournalId');
-        return EditorialMember.find({about: aboutId},{publications:publicationId});
+        return EditorialBoard.find({about: aboutId},{publications:publicationId});
+    },
+    WorkUnits: function () {
+        if(this.WorkUnitsEn||this.WorkUnitsCn){
+            return true;
+        }
+        return false;
+    },
+    researchArea: function () {
+        if(this.researchAreaEn||this.researchAreaCn){
+            return true;
+        }
+        return false;
+    },
+    abstract: function () {
+        if(this.researchAreaCn||this.abstractCn){
+            return true;
+        }
+        return false;
     }
 });
 

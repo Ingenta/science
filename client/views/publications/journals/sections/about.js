@@ -25,19 +25,9 @@ Template.editorialMemberList.helpers({
         var publicationId = Session.get('currentJournalId');
         return EditorialMember.find({about: aboutId},{publications:publicationId});
     },
-    contactId: function () {
-        var aboutId = Session.get('tabAbout');
+    publications: function () {
         var publicationId = Session.get('currentJournalId');
-        var contents =  AboutArticles.find({about: aboutId},{publications:publicationId}).count();
-        if(0<contents){
-            return false;
-        }
-        return true;
-    },
-    aboutArticles: function () {
-        var aboutId = Session.get('tabAbout');
-        var publicationId = Session.get('currentJournalId');
-        return AboutArticles.find({about: aboutId},{publications:publicationId});
+        return Publications.find({_id:publicationId});
     }
 });
 

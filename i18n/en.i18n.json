@@ -23,6 +23,21 @@
             "issn": {
                 "label": "ISSN"
             },
+            "email": {
+                "label": "E_Mail"
+            },
+            "addressEn": {
+                "label": "English Address"
+            },
+            "addressCn": {
+                "label": "Chinese Address"
+            },
+            "phone": {
+                "label": "Phone"
+            },
+            "fax": {
+                "label": "faxes"
+            },
             "accessKey": {
                 "label": "Choose an Access Key",
                 "options": {
@@ -229,20 +244,52 @@
             }
         },
         "editorialMember": {
-            "nameEn": {
-                "label": "English name"
-            },
-            "nameCn": {
-                "label": "Chinese name"
-            },
-            "position": {
-                "label": "Job title"
-            },
             "abstractEn": {
                 "label": "English introduction"
             },
             "abstractCn": {
                 "label": "Chinese Introduction"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
+        },
+        "editorialBoard": {
+            "nameEn": {
+                "label": "English Name"
+            },
+            "nameCn": {
+                "label": "Chinese Name"
+            },
+            "position": {
+                "label": "Job Title"
+            },
+            "WorkUnitsEn": {
+                "label": "English company name"
+            },
+            "WorkUnitsCn": {
+                "label": "Chinese company name"
+            },
+            "phone": {
+                "label": "phone"
+            },
+            "fax": {
+                "label": "fax"
+            },
+            "email": {
+                "label": "E_Mail"
+            },
+            "researchAreaEn": {
+                "label": "English Research area"
+            },
+            "researchAreaCn": {
+                "label": "Chinese Research area"
+            },
+            "abstractEn": {
+                "label": "English introduction"
+            },
+            "abstractCn": {
+                "label": "Chinese introduction"
             },
             "picture": {
                 "label": "Choose file"

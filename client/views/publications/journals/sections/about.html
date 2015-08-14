@@ -47,14 +47,11 @@
 <template name="editorialMemberList">
     <div class="part">
         <p>
-            {{#each aboutArticles}}
-                {{{translateThis descriptionCn descriptionEn}}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
+            {{#each publications}}
+                {{title}}<br>投稿问题及查询事宜<br> E-mail：{{email}}<br>地址：{{translateThis addressCn addressEn}}<br>电话：{{phone}}<br>传真：{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}
                 {{else}}
-                {{_ "No AboutArticle found!"}}
+                {{_ "No publications found!"}}
             {{/each}}
-            {{#if contactId}}
-                {{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}
-            {{/if}}
         </p>
     </div>
         <p>
@@ -97,4 +94,10 @@
 
 <template name="deleteEditorialMemberModalForm">
     {{#afModal class="fa fa-trash" collection="EditorialMember" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+</template>
+
+
+<template name="updatePublicationEmailModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="email,addressEn,addressCn,phone,fax" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
 </template>

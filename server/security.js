@@ -15,3 +15,4 @@ Advertisement.permit(['insert', 'update', 'remove']).apply();
 Keywords.permit(['insert', 'update', 'remove']).apply();
 Recommend.permit(['insert', 'update', 'remove']).apply();
 EditorialMember.permit(['insert', 'update', 'remove']).apply();
+EditorialBoard.permit(['insert', 'update', 'remove']).apply();

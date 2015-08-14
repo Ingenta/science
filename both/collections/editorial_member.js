@@ -13,16 +13,6 @@ this.EditorialMember.allow({
 });
 
 EditorialMemberSchema = new SimpleSchema({
-    nameEn: {
-        type: String
-    },
-    nameCn: {
-        type: String
-    },
-    position: {
-        type: String,
-        optional: true
-    },
     abstractEn: {
         type: String,
         autoform: {
