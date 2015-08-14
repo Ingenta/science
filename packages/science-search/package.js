@@ -16,9 +16,12 @@ Package.onUse(function(api) {
   api.use([
     'templating',
     'iron:router',
-    'science-lib',
-    'jackjiang:solr'
+    'science-lib'
   ]);
+
+  api.use('jackjiang:solr','server')
+
+
 
   api.addFiles([
     'server/solr.js',
