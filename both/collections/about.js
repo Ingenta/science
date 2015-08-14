@@ -20,6 +20,10 @@ AboutSchema = new SimpleSchema({
     titleCn: {
         type: String
     },
+    agree: {
+        type: Boolean,
+        defaultValue: false
+    },
     publications: {
         type: String
     }

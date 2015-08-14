@@ -121,6 +121,9 @@
             },
             "titleCn": {
                 "label": "Chinese Title"
+            },
+            "agree": {
+                "label": "Do you agree to create a list?"
             }
         },
         "aboutArticles": {

@@ -6,6 +6,10 @@ Template.aboutTitle.helpers({
     isActive: function (id) {
         var aboutId = Session.get('tabBoard');
         if (aboutId === id)return "active";
+    },
+    boardMember: function () {
+        var aboutId = Session.get('tabBoard');
+        return About.findOne({_id: aboutId}).agree;
     }
 });
 
@@ -24,6 +28,43 @@ Template.EditorialBoardList.onRendered(function () {
 });
 
 Template.EditorialBoardList.helpers({
+    about: function () {
+        var aboutId = Session.get('tabBoard');
+        return About.find({_id: aboutId});
+    },
+    editorialBoards: function () {
+        var aboutId = Session.get('tabBoard');
+        var publicationId = Session.get('currentJournalId');
+        return EditorialBoard.find({about: aboutId},{publications:publicationId});
+    },
+    WorkUnits: function () {
+        if(this.WorkUnitsEn||this.WorkUnitsCn){
+            return true;
+        }
+        return false;
+    },
+    researchArea: function () {
+        if(this.researchAreaEn||this.researchAreaCn){
+            return true;
+        }
+        return false;
+    },
+    abstract: function () {
+        if(this.researchAreaCn||this.abstractCn){
+            return true;
+        }
+        return false;
+    }
+});
+
+Template.EditorialBoardMembersList.onRendered(function () {
+    if (!Session.get('tabBoard')) {
+        var a = About.findOne();
+        if (a)Session.set('tabBoard', a._id);
+    }
+});
+
+Template.EditorialBoardMembersList.helpers({
     about: function () {
         var aboutId = Session.get('tabBoard');
         return About.find({_id: aboutId});

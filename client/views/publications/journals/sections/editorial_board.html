@@ -22,9 +22,66 @@
             </ul>
         </div>
         <div class="tab-content col-xs-9">
-            <div class="tab-pane active">{{> EditorialBoardList}}</div>
+            {{#if boardMember}}
+                <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
+            {{else}}
+                <div class="tab-pane active">{{> EditorialBoardList}}</div>
+            {{/if}}
         </div>
     </div>
+</template>
+
+<template name="EditorialBoardMembersList">
+    {{#each about}}
+    <div class="part"><strong>编委会——{{translateThis titleCn titleEn}}</strong>
+        <div class="pull-right">
+            {{#if can "add-editorial-member" "resource"  }}{{> addEditorialBoardModalForm}}{{/if}}
+        </div>
+    </div><hr>
+    {{else}}
+    {{_ "No About found!"}}
+    {{/each}}
+    <div class="part">
+        <p>
+            {{#each editorialBoards}}
+                <span style="border:1px double #000"><a href="#{{_id}}">{{translateThis nameCn nameEn}}</a></span>
+                {{else}}
+                {{_ "No results found!"}}
+            {{/each}}
+        </p>
+    </div>
+    {{#each editorialBoards}}
+    <div class="part" id="{{_id}}">
+        <div class="pull-right">
+            {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialBoardModalForm}}{{/if}}
+            {{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialBoardModalForm}}{{/if}}
+        </div>
+        <p>
+            <img src="{{getImageHelper picture}}" width="133" height="180"/>
+            {{#if WorkUnits}}
+            {{_"Company name"}}：&nbsp;{{translateThis WorkUnitsCn WorkUnitsEn}}<br>
+            {{/if}}
+            {{#if phone}}
+            {{_"Phone"}}：&nbsp;{{phone}}<br>
+            {{/if}}
+            {{#if fax}}
+            {{_"Fax"}}：&nbsp;{{fax}}<br>
+            {{/if}}
+            {{#if email}}
+            {{_"E-mail"}}：&nbsp;{{email}}<br>
+            {{/if}}
+            {{#if researchArea}}
+            {{_"Research Area"}}：&nbsp;{{translateThis researchAreaCn researchAreaEn}}<br>
+            {{/if}}
+            {{#if abstract}}
+            {{_"Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstractCn abstractEn}}<br>
+            {{/if}}
+            {{translateThis nameCn nameEn}}&nbsp;&nbsp;{{position}}
+        </p>
+    </div>
+    {{else}}
+    {{_ "No results found!"}}
+    {{/each}}
 </template>
 
 <template name="EditorialBoardList">
