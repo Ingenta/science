@@ -5,6 +5,12 @@ Template.aboutTopics.events({
     }
 });
 
+Template.aboutArticlesList.onRendered(function () {
+    if (Session.get('tabAbout')===undefined) {
+        Session.set('tabAbout', "a");
+    }
+});
+
 Template.aboutArticlesList.helpers({
     aboutArticle: function () {
         var aboutId = Session.get('tabAbout');
