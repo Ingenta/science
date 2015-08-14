@@ -107,8 +107,8 @@
     "Please select more journal name": "请选择期刊名称",
     "Publisher name": "出版商名称",
     "Journal name": "期刊名称",
-    "Volume name": "卷名",
-    "Issue name": "期名",
+    "Volume name": "卷号",
+    "Issue name": "期号",
     "Please select a subject matter (level 1)": "请选择学科主题（一级）",
     "The topic name": "主题名称",
     "All the options": "全部",
@@ -530,5 +530,6 @@
     "add article": "添加文章",
     "added articles": "已选文章",
     "select": "选择",
-    "Add articles to collection": "添加到文章集"
+    "Add articles to collection": "添加到文章集",
+    "Add articles to topics": "添加到主题"
 }
