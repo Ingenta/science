@@ -22,16 +22,20 @@ AboutArticlesSchema = new SimpleSchema({
     },
     descriptionEn: {
         type: String,
-        optional: true,
         autoform: {
-            rows: 4
+            afFieldInput: {
+                type: 'summernote',
+                class: 'editor'
+            }
         }
     },
     descriptionCn: {
         type: String,
-        optional: true,
         autoform: {
-            rows: 4
+            afFieldInput: {
+                type: 'summernote',
+                class: 'editor'
+            }
         }
     },
     about: {

@@ -1,4 +1,4 @@
-<template name="EditorialBoard">
+<template name="aboutTitle">
     <div class="tabbable">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
@@ -11,7 +11,7 @@
                 {{/if}}
                 <li class="{{isActive _id}}">
                     <a class="activeButton" data-aboutid="{{_id}}" data-toggle="tab">
-                        {{translateThis chinesetitle title}}
+                        {{translateThis titleCn titleEn}}
                     </a>
                 </li>
                 {{else}}
@@ -24,74 +24,20 @@
                 </div>
             </ul>
         </div>
-        <div class="tab-content col-xs-9">
-            <div class="tab-pane active">{{> EditorialBoardList}}</div>
-        </div>
+        <!--<div class="tab-content col-xs-9">-->
+            <!--<div class="tab-pane active">{{> EditorialBoardList}}</div>-->
+        <!--</div>-->
     </div>
-</template>
-
-<template name="EditorialBoardList">
-    {{#each about}}
-    <div class="part">{{translateThis chinesetitle title}}
-        <div class="pull-right">
-            {{#if can "modify-journal" "resource"  }}
-            {{> addModalForm}}
-            {{/if}}
-        </div>
-    </div>
-    {{else}}
-    {{_ "No About found!"}}
-    {{/each}}
-    {{#each aboutarticle}}
-    <div class="part"><p>
-        <strong>{{translateThis chinesetitle title}}</strong>
-
-        <div class="pull-right">
-            {{#if can "modify-journal" "resource"  }}
-            {{> updateModalForm}}
-            {{> updateModalForm}}
-            {{/if}}
-        </div>
-        </p>
-        <p>
-            {{translateThis chinesedescription description}}
-        </p>
-    </div>
-    {{else}}
-    {{_ "No AboutArticle found!"}}
-    {{/each}}
 </template>
 
 <template name="addAboutTitleModalForm">
-    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert"
-    omitFields="publications" title=getCreateButtonContent}}
-    {{/afModal}}
+    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert" omitFields="publications" title=getCreateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateAboutTitleModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update"
-    omitFields="publications"}}
-    {{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update" omitFields="publications"}}{{/afModal}}
 </template>
 
 <template name="deleteAboutTitleModalForm">
-    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}
-    {{/afModal}}
-</template>
-
-<template name="addModalForm">
-    {{#afModal formId="addModalForm" class="fa fa-plus" collection="AboutArticles" operation="insert"
-    omitFields="about" title=getCreateButtonContent}}
-    {{/afModal}}
-</template>
-
-<template name="updateModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AboutArticles" doc=_id operation="update"
-    omitFields="about"}}
-    {{/afModal}}
-</template>
-
-<template name="deleteModalForm">
-    {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}
-    {{/afModal}}
+    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>

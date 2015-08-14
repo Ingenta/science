@@ -1,4 +1,4 @@
-<template name="AboutTitle">
+<template name="aboutTopics">
     <div class="tabbable">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
@@ -36,7 +36,7 @@
             </div>
             </p>
             <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis descriptionCn descriptionEn}}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{{translateThis descriptionCn descriptionEn}}}
             </p>
         </div>
     {{else}}
@@ -48,7 +48,7 @@
     <div class="part">
         <p>
             {{#each aboutArticles}}
-            {{translateThis descriptionCn descriptionEn}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
+            {{{translateThis descriptionCn descriptionEn}}}{{#if can "modify-about-articles" "resource"  }}{{> updateAboutArticlesModalForm}}{{/if}}
             {{else}}
             {{_ "No AboutArticle found!"}}
             {{/each}}
@@ -66,7 +66,7 @@
         {{#each members}}
         <div class="part">
             <p>
-                <img src="{{getImageHelper picture}}" width="89" height="89"/>{{translateThis nameCn nameEn}}&nbsp;：&nbsp;{{translateThis abstractCn abstractEn}}<br>E-mail:{{email}}；&nbsp;Tel:{{phone}}
+                <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstractCn abstractEn}}}
                 {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
             </p>
         </div>
