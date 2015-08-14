@@ -1,1 +1,0 @@
-Solr = Npm.require('solr');
