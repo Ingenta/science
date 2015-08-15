@@ -299,15 +299,13 @@
         },
         "articles": {
             "title": {
-                "label": "标题"
-            }
-        },
-        "MultiLangSchema":{
-            "cn":{
-                "label": "中文"
-            },
-            "en":{
-                "label": "英文"
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             }
         },
         "about": {

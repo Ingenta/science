@@ -112,15 +112,13 @@
         },
         "articles": {
             "title": {
-                "label": "Title"
-            }
-        },
-        "MultiLangSchema":{
-            "cn":{
-                "label": "Chinese"
-            },
-            "en":{
-                "label": "English"
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             }
         },
         "about": {
