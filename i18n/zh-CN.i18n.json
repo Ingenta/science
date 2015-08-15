@@ -302,6 +302,14 @@
                 "label": "标题"
             }
         },
+        "MultiLangSchema":{
+            "cn":{
+                "label": "中文"
+            },
+            "en":{
+                "label": "英文"
+            }
+        },
         "about": {
             "titleEn": {
                 "label": "英文标题"

@@ -12,7 +12,28 @@ this.Articles.allow({
 		return Permissions.userCan("delete-article", "resource", userId);
 	}
 });
-
+MultiLangSchema = new SimpleSchema({
+	en:{
+		type: String,
+		label: "english",
+		max:100
+	},
+	cn:{
+		type: String,
+		label: "chinese",
+		max:100
+	}
+})
+onlyTitle= new SimpleSchema({
+	title:{
+		label: "title",
+		type: MultiLangSchema
+	}
+})
+Meteor.startup(function(){
+	MultiLangSchema.i18n("schemas.MultiLangSchema");
+	onlyTitle.i18n("schemas.article");
+})
 //ArticlesSchema  = new SimpleSchema({
 //    title: {
 //        type: String,

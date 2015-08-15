@@ -115,6 +115,14 @@
                 "label": "Title"
             }
         },
+        "MultiLangSchema":{
+            "cn":{
+                "label": "Chinese"
+            },
+            "en":{
+                "label": "English"
+            }
+        },
         "about": {
             "titleEn": {
                 "label": "English Title"
