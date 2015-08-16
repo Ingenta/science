@@ -5,9 +5,9 @@
 	<div class="row articleHeading">
 		<div class="col-xs-9">
 			<h3><img src="/icon_access_fc.gif"/> {{translateThis title.cn title.en}}
-				&nbsp;&nbsp;{{#if can "modify-article" "resource"  }}
-					<a class="fa fa-pencil" data-toggle="modal" data-target="#updateTitle"></a>
-					{{> updateArticleTitleModalForm}}
+				&nbsp;&nbsp;
+				{{#if can "modify-article" "resource"  }}
+					{{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
 				{{/if}}</h3>
 			<ul>
 				<li>
@@ -208,19 +208,8 @@
 </template>
 
 <template name="updateArticleTitleModalForm">
-	<div class="modal fade" id="updateTitle" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
-				</div>
-				{{#autoForm schema="onlyTitle" collection="Articles" id="updateArticleTitleForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-					{{> afObjectField name="title"}}
-					<button type="submit" class="btn btn-primary">update</button>
-				{{/autoForm}}
-			</div>
-		</div>
-	</div>
+	{{#autoForm schema="onlyTitle" collection="Articles" id="updateArticleTitleForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+		{{> afObjectField name="title"}}
+		<button type="submit" class="btn btn-primary">update</button>
+	{{/autoForm}}
 </template>
-

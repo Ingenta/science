@@ -150,10 +150,3 @@ Template.figModal.helpers({
         return grap.href;
     }
 });
-
-AutoForm.addHooks(['updateArticleTitleForm'], {
-    onSuccess: function () {
-        $("#updateTitle").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
-    }
-}, true);

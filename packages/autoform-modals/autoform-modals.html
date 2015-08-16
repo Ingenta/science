@@ -1,0 +1,21 @@
+<template name="jkafModal">
+	<a href="#jkafModal" class="{{class}}">
+		{{> UI.contentBlock}}
+	</a>
+</template>
+
+<template name="jkautoformModals">
+	<div class="modal fade" id="jkafModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">test</h4>
+				</div>
+				<div class="modal-body">
+					{{> Template.dynamic template=template data=doc}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
