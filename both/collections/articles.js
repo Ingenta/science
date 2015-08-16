@@ -12,22 +12,24 @@ this.Articles.allow({
 		return Permissions.userCan("delete-article", "resource", userId);
 	}
 });
-MultiLangSchema = new SimpleSchema({
-	en:{
-		type: String
-	},
-	cn:{
-		type: String
+
+ArticleTitleSchema= new SimpleSchema({
+	title:{
+		type: Science.schemas.MultiLangSchema
 	}
 });
-onlyTitle= new SimpleSchema({
-	title:{
-		type: MultiLangSchema
+ArticleAbstractSchema=new SimpleSchema({
+	abstract:{
+		type: String,
+        min: 20,
+        max: 1000,
+        autoform: {
+            rows: 5
+        }
 	}
 });
 Meteor.startup(function(){
-	onlyTitle.i18n("schemas.articles");
-	MultiLangSchema.i18n("schemas.MultiLangSchema");
+	ArticleTitleSchema.i18n("schemas.articles");
 });
 //ArticlesSchema  = new SimpleSchema({
 //    title: {

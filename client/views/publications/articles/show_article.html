@@ -208,7 +208,7 @@
 </template>
 
 <template name="updateArticleTitleModalForm">
-	{{#autoForm schema="onlyTitle" collection="Articles" id="updateArticleTitleForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+	{{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
 		{{> afObjectField name="title"}}
 		<button type="submit" class="btn btn-primary">update</button>
 	{{/autoForm}}

@@ -1,12 +1,8 @@
-Science.schemas={};
-
 Science.schemas.MultiLangSchema = new SimpleSchema({
 	en:{
-		type: String,
-		label: "english"
+		type: String
 	},
 	cn:{
-		type: String,
-		label: "chinese"
+		type: String
 	}
 })
