@@ -306,6 +306,9 @@
                 "en":{
                     "label": "英文"
                 }
+            },
+            "abstract":{
+                "label": "摘要"
             }
         },
         "about": {

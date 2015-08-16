@@ -119,6 +119,9 @@
                 "en":{
                     "label": "English"
                 }
+            },
+            "abstract":{
+                "label": "abstract"
             }
         },
         "about": {

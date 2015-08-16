@@ -21,15 +21,17 @@ ArticleTitleSchema= new SimpleSchema({
 ArticleAbstractSchema=new SimpleSchema({
 	abstract:{
 		type: String,
-        min: 20,
-        max: 1000,
-        autoform: {
-            rows: 5
-        }
+		autoform: {
+			afFieldInput: {
+				type: 'summernote'
+			}
+		}
 	}
+
 });
 Meteor.startup(function(){
 	ArticleTitleSchema.i18n("schemas.articles");
+	ArticleAbstractSchema.i18n("schemas.articles");
 });
 //ArticlesSchema  = new SimpleSchema({
 //    title: {
