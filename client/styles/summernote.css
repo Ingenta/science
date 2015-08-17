@@ -1,0 +1,67 @@
+ .note-editor .btn-default {
+     color: #333;
+     background-color: #fff;
+     border-color: #ccc;
+     background-image:none;
+ }
+ .note-editor .btn-default:focus,
+ .note-editor .btn-default.focus {
+     color: #333;
+     background-color: #e6e6e6;
+     border-color: #8c8c8c;
+ }
+ .note-editor .btn-default:hover {
+     color: #333;
+     background-color: #e6e6e6;
+     border-color: #adadad;
+ }
+ .note-editor .btn-default:active,
+ .note-editor .btn-default.active,
+ .open > .dropdown-toggle.note-editor .btn-default {
+     color: #333;
+     background-color: #e6e6e6;
+     border-color: #adadad;
+ }
+ .note-editor .btn-default:active:hover,
+ .note-editor .btn-default.active:hover,
+ .open > .dropdown-toggle.note-editor .btn-default:hover,
+ .note-editor .btn-default:active:focus,
+ .note-editor .btn-default.active:focus,
+ .open > .dropdown-toggle.note-editor .btn-default:focus,
+ .note-editor .btn-default:active.focus,
+ .note-editor .btn-default.active.focus,
+ .open > .dropdown-toggle.note-editor .btn-default.focus {
+     color: #333;
+     background-color: #d4d4d4;
+     border-color: #8c8c8c;
+ }
+ .note-editor .btn-default:active,
+ .note-editor .btn-default.active,
+ .open > .dropdown-toggle.note-editor .btn-default {
+     background-image: none;
+ }
+ .note-editor .btn-default.disabled,
+ .note-editor .btn-default[disabled],
+ fieldset[disabled] .note-editor .btn-default,
+ .note-editor .btn-default.disabled:hover,
+ .note-editor .btn-default[disabled]:hover,
+ fieldset[disabled] .note-editor .btn-default:hover,
+ .note-editor .btn-default.disabled:focus,
+ .note-editor .btn-default[disabled]:focus,
+ fieldset[disabled] .note-editor .btn-default:focus,
+ .note-editor .btn-default.disabled.focus,
+ .note-editor .btn-default[disabled].focus,
+ fieldset[disabled] .note-editor .btn-default.focus,
+ .note-editor .btn-default.disabled:active,
+ .note-editor .btn-default[disabled]:active,
+ fieldset[disabled] .note-editor .btn-default:active,
+ .note-editor .btn-default.disabled.active,
+ .note-editor .btn-default[disabled].active,
+ fieldset[disabled] .note-editor .btn-default.active {
+     background-color: #fff;
+     border-color: #ccc;
+ }
+ .note-editor .btn-default .badge {
+     color: #fff;
+     background-color: #333;
+ }
