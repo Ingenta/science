@@ -540,5 +540,10 @@
     "added articles": "已选文章",
     "select": "选择",
     "Add articles to collection": "添加到文章集",
-    "Add articles to topics": "添加到主题"
+    "Add articles to topics": "添加到主题",
+    "pubStatus":{
+        "normal":"正常",
+        "onlineFirst":"优先出版",
+        "preset":"预出版"
+    }
 }

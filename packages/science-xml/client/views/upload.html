@@ -27,9 +27,17 @@
 
 <template name="uploadForm">
 	<p>
-		<input type="radio" name="pubStatus" value="normal" checked="checked"/>正常文章
-		<input type="radio" name="pubStatus" value="online_frist"/>优先出版
-		<input type="radio" name="pubStatus" value="preset"/>预出版
+		<div class="btn-group" data-toggle="buttons">
+			<label class="btn btn-primary active">
+				<input type="radio" name="pubStatus" value="normal" autocomplete="off" checked> {{_ "pubStatus.normal" }}
+			</label>
+			<label class="btn btn-primary">
+				<input type="radio" name="pubStatus" value="online_frist" autocomplete="off"> {{_ "pubStatus.onlineFirst" }}
+			</label>
+			<label class="btn btn-primary">
+				<input type="radio" name="pubStatus" value="preset" autocomplete="off"> {{_ "pubStatus.preset" }}
+			</label>
+		</div>
 	</p>
     {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true dynamicField='pubStatus'}}
 </template>

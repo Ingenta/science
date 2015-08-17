@@ -350,6 +350,10 @@
     "added articles": "Already in collection",
     "select": "select",
     "Add articles to collection": "Add to collection",
-    "Accepted Date": "Accepted"
-
+    "Accepted Date": "Accepted",
+    "pubStatus":{
+        "normal":"normal",
+        "onlineFirst":"online first",
+        "preset":"preset"
+    }
 }
