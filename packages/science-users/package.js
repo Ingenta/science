@@ -22,6 +22,7 @@ Package.onUse(function (api) {
         "science-reports",
         'aldeed:simple-schema',
         'aldeed:autoform',
+        "vazco:universe-autoform-select"
     ], ['server', 'client']);
 
     api.addFiles([
@@ -82,16 +83,18 @@ Package.onUse(function (api) {
     'lib/client/views/admin/users/insert/insert.html',
     'lib/client/views/admin/users/insert/insert.js',
     'lib/client/views/admin/users/insert/insert_controller.js',
-      'lib/client/views/sidebar.html',
-      'lib/client/views/sidebar.js',
-      'lib/client/views/advertisement.html',
-      'lib/client/views/advertisement.js'
+    'lib/client/views/sidebar.html',
+    'lib/client/views/sidebar.js',
+    'lib/client/views/advertisement.html',
+    'lib/client/views/advertisement.js'
   ],['client']);//必须写上第二个参数，否则可能会出现  Template is not defined 因为server side是没有templating包的
 
     api.addFiles([
         'lib/namespace.js',
         'lib/methods.js',
-        'lib/routes.js'
+        'lib/routes.js',
+        'lib/both/schemas/profile.js',
+        'lib/both/schemas/user.js'
     ], ['client', 'server']);
 
     api.export('Users');

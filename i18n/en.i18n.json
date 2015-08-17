@@ -306,6 +306,34 @@
             "picture": {
                 "label": "Choose file"
             }
+        },
+        "users":{
+            "profile":{
+                "realname":{
+                    "label":"Real name"
+                },
+                "institution":{
+                    "label":"Institution"
+                },
+                "fieldOfResearch":{
+                    "label":"Field of research"
+                },
+                "interestedOfJournals":{
+                    "label":"Interested of journals"
+                },
+                "interestedOfTopics":{
+                    "label":"Interested of topics"
+                },
+                "phone":{
+                    "label":"Phone"
+                },
+                "address":{
+                    "label":"Address"
+                },
+                "weChat":{
+                    "label":"Wechat"
+                }
+            }
         }
     },
     "roles": "Roles",

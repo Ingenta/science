@@ -96,14 +96,6 @@
     "Profile": "个人资料",
     "Update information": "更新注册资料",
     "Please update your registered information (optional)": "请填写您的注册资料（选填）",
-    "Your real name": "您的真实姓名",
-    "Institutional": "机构单位",
-    "Your field of study": "您的研究领域",
-    "In the name of the journal concerned": "关注的期刊名称",
-    "Please select a subject type": "请选择关注的学科类型",
-    "Contact way": "联系方式",
-    "Contact address": "通讯地址",
-    "WeChat": "微信号",
     "Please select more journal name": "请选择期刊名称",
     "Publisher name": "出版商名称",
     "Journal name": "期刊名称",
@@ -492,6 +484,34 @@
             },
             "picture": {
                 "label": "选择图片"
+            }
+        },
+        "users":{
+            "profile":{
+                "realname":{
+                    "label":"您的真实姓名"
+                },
+                "institution":{
+                    "label":"机构单位"
+                },
+                "fieldOfResearch":{
+                    "label":"您的研究领域"
+                },
+                "interestedOfJournals":{
+                    "label":"您关注的期刊名称"
+                },
+                "interestedOfTopics":{
+                    "label":"您关注的学科"
+                },
+                "phone":{
+                    "label":"联系电话"
+                },
+                "address":{
+                    "label":"通讯地址"
+                },
+                "weChat":{
+                    "label":"微信号"
+                }
             }
         }
     },

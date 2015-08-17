@@ -113,9 +113,24 @@ Template.UserSettingsUpdateInformationForm.helpers({
         return pageSession.get("userSettingsUpdateInformationFormErrorMessage");
     },
     publicationList: function () {
-        return Publications.find();
+        var pubs = Publications.find({},{title:1}).fetch();
+        var result = [];
+        _.each(pubs,function(item){
+            result.push({label:item.title,value:item._id});
+        });
+        return result;
     },
     topicList: function () {
-        return Topics.find({"parentId": null});
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var topics = Topics.find({parentId:undefined},{name:1,englishName:1}).fetch();
+        var result = [];
+        _.each(topics,function(item){
+            var name = iscn?item.name:item.englishName;
+            result.push({label:name,value:item._id});
+        });
+        return result;
+    },
+    getUserProfileSchema:function(){
+        return userSchema;
     }
 });
