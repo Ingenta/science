@@ -15,7 +15,7 @@ Template.aboutArticlesList.helpers({
     aboutArticle: function () {
         var aboutId = Session.get('tabAbout');
         var publicationId = Session.get('currentJournalId');
-        return AboutArticles.find({about: aboutId},{publications:publicationId});
+        return AboutArticles.find({about: aboutId,publications:publicationId});
     }
 });
 
@@ -23,7 +23,7 @@ Template.editorialMemberList.helpers({
     members: function () {
         var aboutId = Session.get('tabAbout');
         var publicationId = Session.get('currentJournalId');
-        return EditorialMember.find({about: aboutId},{publications:publicationId});
+        return EditorialMember.find({about: aboutId,publications:publicationId});
     },
     publications: function () {
         var publicationId = Session.get('currentJournalId');
