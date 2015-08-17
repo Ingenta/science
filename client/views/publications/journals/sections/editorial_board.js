@@ -24,16 +24,17 @@ Template.aboutTitle.events({
 });
 
 Template.EditorialBoardList.onRendered(function () {
-    if (!Session.get('tabBoard')) {
-        var a = About.findOne();
-        if (a)Session.set('tabBoard', a._id);
-    }
+    alert(Session.get('tabBoard'));
+    var publicationsId = Session.get('currentJournalId');
+    var a = About.findOne({publications: publicationsId});
+    if (a)Session.set('tabBoard', a._id);
 });
 
 Template.EditorialBoardList.helpers({
     about: function () {
         var aboutId = Session.get('tabBoard');
-        return About.find({_id: aboutId});
+        var publicationId = Session.get('currentJournalId');
+        return About.find({_id: aboutId,publications:publicationId});
     },
     editorialBoards: function () {
         var aboutId = Session.get('tabBoard');
@@ -70,7 +71,8 @@ Template.EditorialBoardMembersList.onRendered(function () {
 Template.EditorialBoardMembersList.helpers({
     about: function () {
         var aboutId = Session.get('tabBoard');
-        return About.find({_id: aboutId});
+        var publicationId = Session.get('currentJournalId');
+        return About.find({_id: aboutId,publications:publicationId});
     },
     editorialBoards: function () {
         var aboutId = Session.get('tabBoard');
