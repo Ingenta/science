@@ -10,17 +10,34 @@ Package.describe({
   documentation: 'README.md'
 });
 
-
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
   api.use([
     'templating',
     'iron:router',
-    'science-lib',
-    'http'
+    'science-lib'
   ]);
 
+  api.use('jackjiang:solr','server')
+
+
+
+  api.addFiles([
+    'server/solr.js',
+    'server/methods.js'
+  ],'server');
+
+  api.addFiles([
+    'client/router.js',
+    'client/view/search.html',
+    'client/view/search.js',
+    'client/view/oneArticle.html',
+    'client/view/oneArticle.js'
+  ],'client');
+
+  //api.addFiles([
+  //],['server','client'])
 });
 
 Package.onTest(function(api) {

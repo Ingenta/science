@@ -13,6 +13,26 @@ this.Articles.allow({
 	}
 });
 
+ArticleTitleSchema= new SimpleSchema({
+	title:{
+		type: Science.schemas.MultiLangSchema
+	}
+});
+ArticleAbstractSchema=new SimpleSchema({
+	abstract:{
+		type: String,
+		autoform: {
+			afFieldInput: {
+				type: 'summernote'
+			}
+		}
+	}
+
+});
+Meteor.startup(function(){
+	ArticleTitleSchema.i18n("schemas.articles");
+	ArticleAbstractSchema.i18n("schemas.articles");
+});
 //ArticlesSchema  = new SimpleSchema({
 //    title: {
 //        type: String,

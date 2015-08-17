@@ -13,3 +13,7 @@ Users.getUser = function (userOrUserId) {
         return userOrUserId;
     }
 };
+
+Meteor.startup(function(){
+    userSchema.i18n("schemas.users");
+});

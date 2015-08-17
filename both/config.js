@@ -26,5 +26,11 @@ Config={
             'publications',
             'collections'
         ]
+    },
+    solrCore: {
+        host:"192.168.99.100",
+        port:"8983",
+        core:"/articles",
+        path:"/solr"
     }
 }

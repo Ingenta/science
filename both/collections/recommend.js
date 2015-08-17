@@ -15,6 +15,7 @@ this.Recommend.allow({
 RecommendSchema = new SimpleSchema({
     ArticlesId: {
         type: String,
+        unique: true,
         autoform: {
                 type: 'universe-select'
         }

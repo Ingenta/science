@@ -38,13 +38,13 @@
 
         {{#tabContent slug="About"}}
             {{#with journalContext}}
-                {{> AboutTitle}}
+                {{> aboutTopics}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Editorial Board"}}
             {{#with journalContext}}
-
+                {{> aboutTitle}}
             {{/with}}
         {{/tabContent}}
 
@@ -74,13 +74,13 @@
 
         {{#tabContent slug="Accepted"}}
             {{#with journalContext}}
-
+                {{> articleList}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Online First"}}
             {{#with journalContext}}
-
+                {{> articleList}}
             {{/with}}
         {{/tabContent}}
 

@@ -63,6 +63,8 @@ iron:location@1.0.9
 iron:middleware-stack@1.0.9
 iron:router@1.0.9
 iron:url@1.0.9
+jackjiang:autoform-modals@0.0.3
+jackjiang:solr@0.0.1
 jackkav:xpath@0.0.11
 jquery@1.11.3_2
 json@1.0.3
@@ -97,6 +99,7 @@ monbro:last-software-release-date@1.0.1
 monbro:mongodb-mapreduce-aggregation@1.0.1
 mongo@1.1.0
 mongo-livedata@1.0.8
+mpowaga:autoform-summernote@0.4.2
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.1
 mrt:mathjax@0.6.3
@@ -120,6 +123,7 @@ retry@1.0.3
 routepolicy@1.0.5
 rzymek:moment-locale-zh-cn@2.9.0
 science-collections@0.0.1
+science-emails@0.0.1
 science-institution@0.0.1
 science-lib@0.0.1
 science-permissions@0.0.1
@@ -136,6 +140,7 @@ spacebars-compiler@1.0.6
 spiderable@1.0.7
 srp@1.0.3
 standard-app-packages@1.0.5
+summernote:standalone@0.6.15
 tap:i18n@1.5.1
 tap:i18n-ui@0.7.0
 templates:tabs@2.2.0
@@ -149,5 +154,6 @@ url@1.0.4
 vazco:universe-autoform-select@0.1.5
 webapp@1.2.0
 webapp-hashing@1.0.3
+wylio:mandrill@1.0.1
 yogiben:autoform-file@0.2.7
 yogiben:autoform-modals@0.3.6

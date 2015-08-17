@@ -24,6 +24,26 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         max: 9
     },
+    email: {
+        type: String,
+        optional: true
+    },
+    addressEn: {
+        type: String,
+        optional: true
+    },
+    addressCn: {
+        type: String,
+        optional: true
+    },
+    phone: {
+        type: String,
+        optional: true
+    },
+    fax: {
+        type: String,
+        optional: true
+    },
     accessKey: {
         type: String
     },

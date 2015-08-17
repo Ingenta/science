@@ -3,7 +3,10 @@
         <div class="row">
             <div class="col-xs-9">
                 {{{abstract}}}
-            </div>{{#if can "modify-article" "resource"  }}{{> updateArticleAbstractModalForm}}{{/if}}
+            </div>
+	        {{#if can "modify-article" "resource"  }}
+	            {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
+            {{/if}}
             <div class="col-xs-3">
                 {{#each getKeywords}}
                 <p class="title_style">
@@ -32,7 +35,7 @@
             </div>
             <div class="col-xs-3">
                 {{#if accepted}}
-                    <small><strong>{{_ "Accepted"}} </strong>
+                    <small><strong>{{_ "Accepted Date"}} </strong>
                         {{moFormat accepted 'll'}}
                     </small>
                 {{/if}}
@@ -76,5 +79,8 @@
 </template>
 
 <template name="updateArticleAbstractModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Articles" doc=_id operation="update" fields="abstract" buttonContent=getUpdateButtonContent}}{{/afModal}}
+	{{#autoForm schema="ArticleAbstractSchema" collection="Articles" id="updateArticleAbstractForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+		{{> afFieldInput name="abstract"}}
+		<button type="submit" class="btn btn-primary">update</button>
+	{{/autoForm}}
 </template>

@@ -20,14 +20,20 @@ Package.onUse(function(api) {
     'dburles:collection-helpers@1.0.3',
     'reactive-dict',
     'iron:router@1.0.9',
-    'matb33:collection-hooks@0.7.11'
+    'matb33:collection-hooks@0.7.11',
+    'aldeed:simple-schema@1.1.0',
+    'underscore'
   ];
   api.use(packages);
 
   api.imply(packages);
 
-  api.addFiles('lib/core.js',['server','client']);
-  api.addFiles('lib/string_utils.js',['server','client']);
+  api.addFiles([
+    'lib/core.js',
+    'lib/string_utils.js',
+    'lib/schema.js',
+    'both/schema/multiLang.js'
+  ],['server','client']);
 
   api.export(
       'Science'

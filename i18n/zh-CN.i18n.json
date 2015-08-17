@@ -70,8 +70,9 @@
     "Special Topics": "专题",
     "Collections": "文章集",
     "Received": "稿件接收时间",
-    "Accepted": "稿件收录时间",
+    "Accepted Date": "稿件收录时间",
     "Published online": "网络发布时间",
+    "Accepted" : "预出版",
     "Online First": "优先出版",
     "MOOP": "MOOP",
     "Author": "作者中心",
@@ -95,19 +96,11 @@
     "Profile": "个人资料",
     "Update information": "更新注册资料",
     "Please update your registered information (optional)": "请填写您的注册资料（选填）",
-    "Your real name": "您的真实姓名",
-    "Institutional": "机构单位",
-    "Your field of study": "您的研究领域",
-    "In the name of the journal concerned": "关注的期刊名称",
-    "Please select a subject type": "请选择关注的学科类型",
-    "Contact way": "联系方式",
-    "Contact address": "通讯地址",
-    "WeChat": "微信号",
     "Please select more journal name": "请选择期刊名称",
     "Publisher name": "出版商名称",
     "Journal name": "期刊名称",
-    "Volume name": "卷名",
-    "Issue name": "期名",
+    "Volume name": "卷号",
+    "Issue name": "期号",
     "Please select a subject matter (level 1)": "请选择学科主题（一级）",
     "The topic name": "主题名称",
     "All the options": "全部",
@@ -145,7 +138,12 @@
     "PleaseWait": "请等一会...",
     "Search": "搜索",
     "Name": "名字",
-    "E-mail": "邮件地址",
+    "Company name": "单位",
+    "Phone": "电话",
+    "Fax": "传真",
+    "E-mail": "邮箱",
+    "Research Area": "研究方向",
+    "Introduction": "简介",
     "Email address": "邮件地址",
     "Publishers": "出版商",
     "Publications": "出版物",
@@ -203,6 +201,21 @@
             },
             "issn": {
                 "label": "ISSN"
+            },
+            "email": {
+                "label": "邮箱"
+            },
+            "addressEn": {
+                "label": "英文地址"
+            },
+            "addressCn": {
+                "label": "中文地址"
+            },
+            "phone": {
+                "label": "电话"
+            },
+            "fax": {
+                "label": "传真"
             },
             "accessKey": {
                 "label": "请选择一个资源标签",
@@ -278,28 +291,40 @@
         },
         "articles": {
             "title": {
-                "label": "标题"
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "abstract":{
+                "label": "摘要"
             }
         },
         "about": {
-            "title": {
-                "label": "标题"
+            "titleEn": {
+                "label": "英文标题"
             },
-            "chinesetitle": {
+            "titleCn": {
                 "label": "中文标题"
+            },
+            "agree": {
+                "label": "是否同意创建列表?"
             }
         },
         "aboutArticles": {
-            "title": {
-                "label": "标题"
+            "titleEn": {
+                "label": "英文标题"
             },
-            "chinesetitle": {
+            "titleCn": {
                 "label": "中文标题"
             },
-            "description": {
+            "descriptionEn": {
                 "label": "英文描述"
             },
-            "chinesedescription": {
+            "descriptionCn": {
                 "label": "中文描述"
             }
         },
@@ -408,6 +433,86 @@
             "defaultPicture": {
                 "label": "选择默认图片"
             }
+        },
+        "editorialMember": {
+            "abstractEn": {
+                "label": "英文简介"
+            },
+            "abstractCn": {
+                "label": "中文简介"
+            },
+            "picture": {
+                "label": "选择图片"
+            }
+        },
+        "editorialBoard": {
+            "nameEn": {
+                "label": "英文姓名"
+            },
+            "nameCn": {
+                "label": "中文姓名"
+            },
+            "position": {
+                "label": "职称"
+            },
+            "WorkUnitsEn": {
+                "label": "英文单位名称"
+            },
+            "WorkUnitsCn": {
+                "label": "中文单位名称"
+            },
+            "phone": {
+                "label": "电话"
+            },
+            "fax": {
+                "label": "传真"
+            },
+            "email": {
+                "label": "邮箱"
+            },
+            "researchAreaEn": {
+                "label": "英文研究方向"
+            },
+            "researchAreaCn": {
+                "label": "中文研究方向"
+            },
+            "abstractEn": {
+                "label": "英文简介"
+            },
+            "abstractCn": {
+                "label": "中文简介"
+            },
+            "picture": {
+                "label": "选择图片"
+            }
+        },
+        "users":{
+            "profile":{
+                "realname":{
+                    "label":"您的真实姓名"
+                },
+                "institution":{
+                    "label":"机构单位"
+                },
+                "fieldOfResearch":{
+                    "label":"您的研究领域"
+                },
+                "interestedOfJournals":{
+                    "label":"您关注的期刊名称"
+                },
+                "interestedOfTopics":{
+                    "label":"您关注的学科"
+                },
+                "phone":{
+                    "label":"联系电话"
+                },
+                "address":{
+                    "label":"通讯地址"
+                },
+                "weChat":{
+                    "label":"微信号"
+                }
+            }
         }
     },
     "roles": "角色",
@@ -454,5 +559,11 @@
     "add article": "添加文章",
     "added articles": "已选文章",
     "select": "选择",
-    "Add articles to collection": "添加到文章集"
+    "Add articles to collection": "添加到文章集",
+    "Add articles to topics": "添加到主题",
+    "pubStatus":{
+        "normal":"正常",
+        "onlineFirst":"优先出版",
+        "preset":"预出版"
+    }
 }
