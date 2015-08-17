@@ -243,13 +243,13 @@
                 "label": "选择标签页",
                 "options": {
                     "Overview": "期刊概述",
-                    //                    "Browse": "出版目录",
-                    "Collections": "文章集",
-                    "About": "关于我们",
                     "Editorial Board": "编委会",
+                    "Browse": "出版目录",
+                    "About": "关于我们",
                     "News": "新闻",
                     "Media": "多媒体",
                     "Special Topics": "专题",
+                    "Collections": "文章集",
                     "Accepted": "预出版",
                     "Online First": "优先出版",
                     "MOOP": "MOOP",
@@ -311,7 +311,7 @@
                 "label": "中文标题"
             },
             "agree": {
-                "label": "是否同意创建列表?"
+                "label": "是否同意创建编委列表?"
             }
         },
         "aboutArticles": {

@@ -72,7 +72,7 @@
                 <div class="pull-right">
                     {{#if can "modify-journal" "resource" }}
                         {{> displayPublication}}
-                        {{> updatePublicationModalForm}}
+                    {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
                     {{/if}}
 	                {{#if can "delete-journal" "resource" }}
                         {{> deletePublicationModalForm}}
@@ -102,8 +102,19 @@
 </template>
 
 <template name="updatePublicationModalForm">
-    {{#afModal class="fa fa-pencil" title=getTitle collection="Publications" doc=_id operation="update" omitFields="publisher, issn" buttonContent=getUpdateButtonContent}}
-    {{/afModal}}
+    {{#autoForm doc=this collection="Publications" id="updatePublicationsModal" type="update" buttonContent=getUpdateButtonContent}}
+    <fieldset>
+        {{> afQuickField name="title"}}
+        {{> afQuickField name="shortTitle"}}
+        {{> afQuickField name="description"}}
+        {{> afQuickField name="accessKey"}}
+        {{> afQuickField name="visible"}}
+        {{> afQuickField name="picture"}}
+        {{> afQuickField name="banner"}}
+        {{> afFieldInput name="tabSelections"}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
 
 <template name="deletePublicationModalForm">
@@ -141,11 +152,6 @@
                         {{> afQuickField name="title"}}
                         {{> afQuickField name="shortTitle"}}
                         {{> afQuickField name="issn"}}
-                        {{> afQuickField name="email"}}
-                        {{> afQuickField name="addressEn"}}
-                        {{> afQuickField name="addressCn"}}
-                        {{> afQuickField name="phone"}}
-                        {{> afQuickField name="fax"}}
                         {{> afQuickField name="description"}}
                         {{> afQuickField name="accessKey"}}
                         {{> afQuickField name="visible"}}
