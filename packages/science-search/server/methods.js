@@ -5,7 +5,7 @@ Meteor.methods({
 		var myFuture = new Future();
 		var options= {
 			"facet":true,
-			"facet.field":"publisher",
+			"facet.field":["publisher","all_topics","facet_all_authors_cn","facet_all_authors_en","year","journalId"],
 			"hl":true,
 			"hl.fl":"title.en,title.cn",
 			"hl.simple.pre":"<span class='highlight'>",

@@ -1,4 +1,10 @@
 {
+    "FILTER BY Publisher": "Filter by publisher",
+    "FILTER BY Publications": "Filter by Journal",
+    "FILTER BY Content Properties": "Filter by Content Properties",
+    "FILTER BY Author": "Filter by author",
+    "FILTER BY Release Date": "Filter by Date",
+    "FILTER BY Topic":"Filter by topic",
     "Reports": "Statistics",
     "volumeItem": "Volume %s",
     "issueItem": "Issue %s",
