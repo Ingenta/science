@@ -1,7 +1,7 @@
 Future = Npm.require('fibers/future');
 
 Meteor.methods({
-	"search":function(query){
+	"search":function(query,filterQuery){
 		var myFuture = new Future();
 		var options= {
 			"facet":true,
@@ -10,8 +10,10 @@ Meteor.methods({
 			"hl.fl":"title.en,title.cn",
 			"hl.simple.pre":"<span class='highlight'>",
 			"hl.simple.post":"</span>",
-			"wt":"json"
 		};
+		if(filterQuery){
+			options.fq=filterQuery;
+		}
 		SolrClient.query(query,options,function(err,response){
 			if(!err)
 				return myFuture.return(JSON.parse(response));
