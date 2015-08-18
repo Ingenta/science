@@ -150,6 +150,20 @@ Template.SolrSearchResults.helpers({
                         }
                     }
                     results.push(filter);
+                }else if(fields[i]=='year'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Release Date");
+                    var facetYear = facets[fields[i]];
+                    for(var j=0;j<facetYear.length;j+=2){
+                        if(facetYear[j+1]>0){
+                            filter.filterOptions.push({
+                                name:facetYear[j],
+                                cname:facetYear[j],
+                                count:facetYear[j+1],
+                                fq:fields[i]+":"+facetYear[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
                 }
             }
             return results;
