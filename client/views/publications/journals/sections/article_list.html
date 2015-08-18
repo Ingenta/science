@@ -5,7 +5,7 @@
             {{> articleListTree}}
         </div>
         <div class="col-xs-9">
-            {{> articleListRight}}
+            {{> articleListRight pubStatus="normal"}}
         </div>
     </div>
 </template>
@@ -26,6 +26,7 @@
 </template>
 
 <template name="articleListRight">
+    {{#if normal}}
     <h4>{{getIssueTitle}}</h4>
     {{#with issueContext}}
         {{#if can "modify-journal" "resource" }}
@@ -43,6 +44,7 @@
     {{/with}}
     <hr>
     {{resetArticlesFilter}}
+    {{/if}}
     <ul class="article-list list-unstyled">
         {{#each articles}}
             {{> oneArticle}}
