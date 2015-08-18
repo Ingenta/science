@@ -85,11 +85,12 @@
     "Last release was": "最后更新于",
     "Any Publisher": "+ 更多",
     "Editors": "编辑",
-    "Executive Editors": "行政主编",
-    "Academic Editors": "学术主编",
     "Editorial Policies": "编辑政策",
     "Readers": "读者须知",
     "Contact": "联系我们",
+    "News Center": "新闻中心",
+    "Publishing Dynamic": "出版动态",
+    "Meeting Information": "会议信息",
     "Abstract": "摘要",
     "Full Text": "全文",
     "References": "参考文献",
@@ -305,28 +306,37 @@
             }
         },
         "about": {
-            "titleEn": {
-                "label": "英文标题"
-            },
-            "titleCn": {
-                "label": "中文标题"
+            "title": {
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "agree": {
                 "label": "是否同意创建编委列表?"
             }
         },
         "aboutArticles": {
-            "titleEn": {
-                "label": "英文标题"
+            "title": {
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
-            "titleCn": {
-                "label": "中文标题"
-            },
-            "descriptionEn": {
-                "label": "英文描述"
-            },
-            "descriptionCn": {
-                "label": "中文描述"
+            "description": {
+                "label": "描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             }
         },
         "news": {
@@ -436,31 +446,40 @@
             }
         },
         "editorialMember": {
-            "abstractEn": {
-                "label": "英文简介"
-            },
-            "abstractCn": {
-                "label": "中文简介"
+            "abstract": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "picture": {
                 "label": "选择图片"
             }
         },
         "editorialBoard": {
-            "nameEn": {
-                "label": "英文姓名"
-            },
-            "nameCn": {
-                "label": "中文姓名"
+            "name": {
+                "label": "姓名",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "position": {
                 "label": "职称"
             },
-            "WorkUnitsEn": {
-                "label": "英文单位名称"
-            },
-            "WorkUnitsCn": {
-                "label": "中文单位名称"
+            "workUnits": {
+                "label": "单位",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "phone": {
                 "label": "电话"
@@ -471,17 +490,23 @@
             "email": {
                 "label": "邮箱"
             },
-            "researchAreaEn": {
-                "label": "英文研究方向"
+            "researchArea": {
+                "label": "研究方向",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
-            "researchAreaCn": {
-                "label": "中文研究方向"
-            },
-            "abstractEn": {
-                "label": "英文简介"
-            },
-            "abstractCn": {
-                "label": "中文简介"
+            "abstract": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "picture": {
                 "label": "选择图片"

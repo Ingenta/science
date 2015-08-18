@@ -13,12 +13,8 @@ this.About.allow({
 });
 
 AboutSchema = new SimpleSchema({
-    titleEn: {
-        type: String,
-        unique: true
-    },
-    titleCn: {
-        type: String
+    title: {
+        type: Science.schemas.MultiLangSchema
     },
     agree: {
         type: Boolean,

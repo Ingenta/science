@@ -1,0 +1,22 @@
+<template name="newContent">
+    <div class="tabbable">
+        <div class="col-xs-3">
+            <ul class="nav nav-pills nav-stacked aboutNavTabs">
+                <li class="active"><a class="activeButton" data-topicstid="a1" href="#a1"  data-toggle="tab">{{_ "News Center"}}</a></li>
+                <li><a class="activeButton" data-topicstid="b1" href="#b1"  data-toggle="tab">{{_ "Publishing Dynamic"}}</a></li>
+                <li><a class="activeButton" data-topicstid="c1" href="#c1"  data-toggle="tab">{{_ "Meeting Information"}}</a></li>
+            </ul>
+        </div>
+        <div class="tab-content col-xs-9">
+            <div class="tab-pane active" id="a1"><div class="part"><strong>{{_ "News Center"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
+
+            </div>
+            <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
+
+            </div>
+            <div class="tab-pane" id="c1"><div class="part"><strong>{{_ "Meeting Information"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
+
+            </div>
+        </div>
+    </div>
+</template>

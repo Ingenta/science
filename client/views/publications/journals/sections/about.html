@@ -24,7 +24,7 @@
 <template name="aboutArticlesList">
     {{#each aboutArticle}}
         <div class="part"><p>
-            <strong>{{translateThis titleCn titleEn}}&nbsp;：</strong>
+            <strong>{{translateThis title.cn title.en}}&nbsp;：</strong>
 
             <div class="pull-right">
                 {{#if can "modify-about-articles" "resource"  }}
@@ -36,7 +36,7 @@
             </div>
             </p>
             <p>
-                {{{translateThis descriptionCn descriptionEn}}}
+                {{{translateThis description.cn description.en}}}
             </p>
         </div>
     {{else}}
@@ -63,7 +63,8 @@
         {{#each members}}
             <div class="part">
                 <p>
-                    <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstractCn abstractEn}}}{{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
+                    <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstract.cn abstract.en}}}
+                    {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
                 </p>
             </div>
             {{else}}
