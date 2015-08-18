@@ -41,19 +41,19 @@ Template.EditorialBoardList.helpers({
         return EditorialBoard.find({about: aboutId,publications:publicationId});
     },
     WorkUnits: function () {
-        if(this.WorkUnitsEn||this.WorkUnitsCn){
+        if(this.workUnits.en||this.workUnits.cn){
             return true;
         }
         return false;
     },
-    researchArea: function () {
-        if(this.researchAreaEn||this.researchAreaCn){
+    ResearchArea: function () {
+        if(this.researchArea.en||this.researchArea.cn){
             return true;
         }
         return false;
     },
-    abstract: function () {
-        if(this.researchAreaCn||this.abstractCn){
+    Abstract: function () {
+        if(this.abstract.en||this.abstract.cn){
             return true;
         }
         return false;
@@ -79,19 +79,19 @@ Template.EditorialBoardMembersList.helpers({
         return EditorialBoard.find({about: aboutId,publications:publicationId});
     },
     WorkUnits: function () {
-        if(this.WorkUnitsEn||this.WorkUnitsCn){
+        if(this.workUnits.en||this.workUnits.cn){
             return true;
         }
         return false;
     },
-    researchArea: function () {
-        if(this.researchAreaEn||this.researchAreaCn){
+    ResearchArea: function () {
+        if(this.researchArea.en||this.researchArea.cn){
             return true;
         }
         return false;
     },
-    abstract: function () {
-        if(this.researchAreaCn||this.abstractCn){
+    Abstract: function () {
+        if(this.abstract.en||this.abstract.cn){
             return true;
         }
         return false;

@@ -125,28 +125,37 @@
             }
         },
         "about": {
-            "titleEn": {
-                "label": "English Title"
-            },
-            "titleCn": {
-                "label": "Chinese Title"
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "agree": {
                 "label": "Do you agree to create a list?"
             }
         },
         "aboutArticles": {
-            "titleEn": {
-                "label": "English Title"
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
-            "titleCn": {
-                "label": "Chinese Title"
-            },
-            "descriptionEn": {
-                "label": "English Description"
-            },
-            "descriptionCn": {
-                "label": "Chinese Description"
+            "description": {
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             }
         },
         "news": {
@@ -256,31 +265,40 @@
             }
         },
         "editorialMember": {
-            "abstractEn": {
-                "label": "English introduction"
-            },
-            "abstractCn": {
-                "label": "Chinese Introduction"
+            "abstract": {
+                "label": "Introduction",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "picture": {
                 "label": "Choose file"
             }
         },
         "editorialBoard": {
-            "nameEn": {
-                "label": "English Name"
-            },
-            "nameCn": {
-                "label": "Chinese Name"
+            "name": {
+                "label": "Name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "position": {
                 "label": "Job Title"
             },
-            "WorkUnitsEn": {
-                "label": "English company name"
-            },
-            "WorkUnitsCn": {
-                "label": "Chinese company name"
+            "workUnits": {
+                "label": "The Company name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "phone": {
                 "label": "phone"
@@ -291,17 +309,23 @@
             "email": {
                 "label": "E_Mail"
             },
-            "researchAreaEn": {
-                "label": "English Research area"
+            "researchArea": {
+                "label": "Research area",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
-            "researchAreaCn": {
-                "label": "Chinese Research area"
-            },
-            "abstractEn": {
-                "label": "English introduction"
-            },
-            "abstractCn": {
-                "label": "Chinese introduction"
+            "abstract": {
+                "label": "Introduction",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "picture": {
                 "label": "Choose file"

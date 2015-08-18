@@ -13,23 +13,15 @@ this.EditorialBoard.allow({
 });
 
 EditorialBoardSchema = new SimpleSchema({
-    nameEn: {
-        type: String
-    },
-    nameCn: {
-        type: String
+    name: {
+        type: Science.schemas.MultiplePersonNameSchema
     },
     position: {
         type: String,
         optional: true
     },
-    WorkUnitsEn: {
-        type: String,
-        optional: true
-    },
-    WorkUnitsCn: {
-        type: String,
-        optional: true
+    workUnits: {
+        type: Science.schemas.MultipleTextSchema
     },
     phone: {
         type: String,
@@ -43,27 +35,11 @@ EditorialBoardSchema = new SimpleSchema({
         type: String,
         optional: true
     },
-    researchAreaEn: {
-        type: String,
-        optional: true
+    researchArea: {
+        type: Science.schemas.MultipleTextSchema
     },
-    researchAreaCn: {
-        type: String,
-        optional: true
-    },
-    abstractEn: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 4
-        }
-    },
-    abstractCn: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 4
-        }
+    abstract: {
+        type: Science.schemas.MultipleAreaSchema
     },
     picture: {
         type: String,

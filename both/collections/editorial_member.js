@@ -13,23 +13,8 @@ this.EditorialMember.allow({
 });
 
 EditorialMemberSchema = new SimpleSchema({
-    abstractEn: {
-        type: String,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
-    },
-    abstractCn: {
-        type: String,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
+    abstract: {
+        type:Science.schemas.MultipleTextAreaSchema
     },
     picture: {
         type: String,

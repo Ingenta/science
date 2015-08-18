@@ -13,29 +13,11 @@ this.AboutArticles.allow({
 });
 
 AboutArticlesSchema = new SimpleSchema({
-    titleEn: {
-        type: String
+    title: {
+        type: Science.schemas.MultiLangSchema
     },
-    titleCn: {
-        type: String
-    },
-    descriptionEn: {
-        type: String,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
-    },
-    descriptionCn: {
-        type: String,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
+    description: {
+        type:Science.schemas.MultipleTextAreaSchema
     },
     about: {
         type: String
