@@ -24,7 +24,6 @@ Template.aboutTitle.events({
 });
 
 Template.EditorialBoardList.onRendered(function () {
-    alert(Session.get('tabBoard'));
     var publicationsId = Session.get('currentJournalId');
     var a = About.findOne({publications: publicationsId});
     if (a)Session.set('tabBoard', a._id);
