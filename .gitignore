@@ -1,2 +1,5 @@
 .meteor/local
 .idea
+packages/solr/.npm/package/.gitignore
+packages/solr/.npm/package/README
+packages/solr/.npm/package/npm-shrinkwrap.json
