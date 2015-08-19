@@ -8,15 +8,89 @@
             </ul>
         </div>
         <div class="tab-content col-xs-9">
-            <div class="tab-pane active" id="a1"><div class="part"><strong>{{_ "News Center"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
+            <div class="tab-pane active" id="a1"><div class="part"><strong>{{_ "News Center"}}</strong><div class="pull-right">{{#if can "add-news" "resource"  }}{{> addNewsCenterModalForm}}{{/if}}</div></div><hr>
+                {{> newsCenterList}}
+            </div>
+            <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong><div class="pull-right">{{#if can "add-news" "resource"  }}{{> addNewsCenterModalForm}}{{/if}}</div></div><hr>
 
             </div>
-            <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
-
-            </div>
-            <div class="tab-pane" id="c1"><div class="part"><strong>{{_ "Meeting Information"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
-
+            <div class="tab-pane" id="c1"><div class="part"><strong>{{_ "Meeting Information"}}</strong><div class="pull-right">{{#if can "add-meeting-info" "resource"  }}{{> addMeetingInfoModalForm}}{{/if}}</div></div><hr>
+                {{> meetingInfoList}}
             </div>
         </div>
     </div>
+</template>
+
+<template name="newsCenterList">
+    {{#each newsContent}}
+    <div class="part"><p>
+        <a href="{{whichUrl}}"><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
+
+        <div class="pull-right">
+            {{#if can "modify-news" "resource"  }}{{> updateNewsCenterModalForm}}{{/if}}
+            {{#if can "delete-news" "resource"  }}{{> deleteNewsCenterModalForm}}{{/if}}
+        </div>
+        </p>
+        <p>
+            {{translateThis abstract.cn abstract.en}}
+        </p>
+    </div>
+    {{else}}
+    {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="meetingInfoList">
+    {{#each meetingContent}}
+    <div class="part"><p>
+        <a href={{url}}><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
+
+        <div class="pull-right">
+            {{#if can "modify-meeting-info" "resource"  }}{{> updateMeetingInfoModalForm}}{{/if}}
+            {{#if can "delete-meeting-info" "resource"  }}{{> deleteMeetingInfoModalForm}}{{/if}}
+        </div>
+        </p>
+        <p>
+            {{#if startDate}}
+                {{_"Meeting Time"}}：&nbsp;{{startDate}}&nbsp;&nbsp;&nbsp;&nbsp;
+            {{/if}}
+            {{#if phone}}
+                {{_"Contact Way"}}：&nbsp;{{phone}}<br>
+            {{/if}}
+            {{#if Address}}
+                {{_"Meeting Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>
+            {{/if}}
+            {{#if Theme}}
+                {{_"Conference Theme"}}：&nbsp;{{{translateThis theme.cn theme.en}}}
+            {{/if}}
+        </p>
+    </div>
+    {{else}}
+    {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="addNewsCenterModalForm">
+    {{#afModal formId="addNewsCenterModal" class="fa fa-plus" collection="News" operation="insert" omitFields="createDate,types,about,publications" title=getCreateButtonContent}}{{/afModal}}
+</template>
+
+<template name="updateNewsCenterModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" omitFields="createDate,types,about,publications"}}{{/afModal}}
+</template>
+
+<template name="deleteNewsCenterModalForm">
+    {{#afModal class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+</template>
+
+
+<template name="addMeetingInfoModalForm">
+    {{#afModal formId="addMeetingInfoModal" class="fa fa-plus" collection="Meeting" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
+</template>
+
+<template name="updateMeetingInfoModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Meeting" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
+</template>
+
+<template name="deleteMeetingInfoModalForm">
+    {{#afModal class="fa fa-trash" collection="Meeting" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>
