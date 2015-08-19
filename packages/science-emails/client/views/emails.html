@@ -1,6 +1,14 @@
 <template name="Emails">
-   <h1>
-       Email this page
-   </h1>
-    Recipient's email address:
+    <h1>
+        Email this page
+    </h1>
+    <label>{{_ "Recipient's email address"}}：</label>
+    <input data-queryField="title.en" type="text" class="queryField" style="width: 65%;"/>
+    <label>{{_ "Your email address"}}：</label>
+    <input data-queryField="title.en" type="text" class="queryField" style="width: 72%;"/>
+    <label>{{_ "Subject"}}：</label>
+    <input data-queryField="title.en" type="text" class="queryField" style="width: 85%;"/>
+    <button type="submit" class="btn btn-primary">send</button>
 </template>
+
+
