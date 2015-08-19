@@ -27,6 +27,15 @@ Config={
             'collections'
         ]
     },
+    NewsPage: {
+        journal: [
+            'journal.name.volume',
+            'journal.name'
+        ],
+        global:[
+            'home'
+        ]
+    },
     solrCore: {
         host:"192.168.99.100",
         port:"8983",

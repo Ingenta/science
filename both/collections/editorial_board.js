@@ -14,14 +14,15 @@ this.EditorialBoard.allow({
 
 EditorialBoardSchema = new SimpleSchema({
     name: {
-        type: Science.schemas.MultiplePersonNameSchema
+        type: Science.schemas.MultipleTextSchema
     },
     position: {
         type: String,
         optional: true
     },
     workUnits: {
-        type: Science.schemas.MultipleTextSchema
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
     },
     phone: {
         type: String,
@@ -36,10 +37,12 @@ EditorialBoardSchema = new SimpleSchema({
         optional: true
     },
     researchArea: {
-        type: Science.schemas.MultipleTextSchema
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
     },
     abstract: {
-        type: Science.schemas.MultipleAreaSchema
+        type: Science.schemas.MultipleAreaSchema,
+        optional: true
     },
     picture: {
         type: String,

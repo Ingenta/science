@@ -2,15 +2,28 @@ this.News = new Meteor.Collection("news");
 
 NewsSchema = new SimpleSchema({
     title: {
-        type: String,
-        unique: true
+        type: Science.schemas.MultiLangSchema
     },
-    description: {
-        type: String,
+    createDate: {
+        type: Date,
         optional: true,
         autoform: {
-            rows: 4
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
         }
+    },
+    author: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    abstract: {
+        type: Science.schemas.MultipleAreaSchema,
+        optional: true
+    },
+    content: {
+        type:Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     url: {
         type: String,
@@ -26,6 +39,17 @@ NewsSchema = new SimpleSchema({
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
         }
+    },
+    types: {
+        type: String
+    },
+    about: {
+        type: String,
+        optional: true
+    },
+    publications: {
+        type: String,
+        optional: true
     }
 });
 Meteor.startup(function () {

@@ -20,15 +20,6 @@ Science.schemas.MultipleTextSchema = new SimpleSchema({
 		optional: true
 	}
 });
-// 必填字段/非唯一
-Science.schemas.MultiplePersonNameSchema = new SimpleSchema({
-	en:{
-		type: String
-	},
-	cn:{
-		type: String
-	}
-});
 
 // 普通文本
 Science.schemas.MultipleAreaSchema = new SimpleSchema({
@@ -52,6 +43,7 @@ Science.schemas.MultipleAreaSchema = new SimpleSchema({
 Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 	en:{
 		type: String,
+		optional: true,
 		autoform: {
 			afFieldInput: {
 				type: 'summernote',
@@ -61,6 +53,7 @@ Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 	},
 	cn:{
 		type: String,
+		optional: true,
 		autoform: {
 			afFieldInput: {
 				type: 'summernote',

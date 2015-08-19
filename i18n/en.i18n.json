@@ -32,11 +32,14 @@
             "email": {
                 "label": "E_Mail"
             },
-            "addressEn": {
-                "label": "English Address"
-            },
-            "addressCn": {
-                "label": "Chinese Address"
+            "address": {
+                "label": "Address",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "phone": {
                 "label": "Phone"
@@ -166,10 +169,46 @@
         },
         "news": {
             "title": {
-                "label": "Title"
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
-            "description": {
-                "label": "Description"
+            "createDate": {
+                "label": "Release time"
+            },
+            "author": {
+                "label": "Author",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "abstract": {
+                "label": "Abstract",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "content": {
+                "label": "Full Text",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "url": {
+                "label": "Link"
             },
             "picture": {
                 "label": "Choose file"
@@ -363,6 +402,44 @@
                 "weChat":{
                     "label":"Wechat"
                 }
+            }
+        },
+        "meetingInfo": {
+            "title": {
+                "label": "The meeting name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "startDate": {
+                "label": "The meeting time"
+            },
+            "address": {
+                "label": "The meeting address",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "phone": {
+                "label": "Contact"
+            },
+            "theme": {
+                "label": "The theme",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "url": {
+                "label": "Link"
             }
         }
     },
