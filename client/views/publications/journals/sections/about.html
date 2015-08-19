@@ -48,7 +48,7 @@
     <div class="part">
         <p>
             {{#each publications}}
-                {{title}}<br>投稿问题及查询事宜<br> E-mail：{{email}}<br>地址：{{translateThis addressCn addressEn}}<br>电话：{{phone}}<br>传真：{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}
+                {{title}}<br>投稿问题及查询事宜<br> E-mail：{{email}}<br>地址：{{translateThis address.cn address.en}}<br>电话：{{phone}}<br>传真：{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}
                 {{else}}
                 {{_ "No publications found!"}}
             {{/each}}
@@ -99,6 +99,6 @@
 
 
 <template name="updatePublicationEmailModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="email,addressEn,addressCn,phone,fax" buttonContent=getUpdateButtonContent}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="email,address,address.cn,address.en,phone,fax" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>

@@ -206,11 +206,14 @@
             "email": {
                 "label": "邮箱"
             },
-            "addressEn": {
-                "label": "英文地址"
-            },
-            "addressCn": {
-                "label": "中文地址"
+            "address": {
+                "label": "地址",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "phone": {
                 "label": "电话"
@@ -340,10 +343,46 @@
         },
         "news": {
             "title": {
-                "label": "标题"
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
-            "description": {
-                "label": "描述"
+            "createDate": {
+                "label": "发布时间"
+            },
+            "author": {
+                "label": "作者",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "abstract": {
+                "label": "摘要",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "content": {
+                "label": "内容全文",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "url": {
+                "label": "链接"
             },
             "picture": {
                 "label": "选择图片"
@@ -537,6 +576,44 @@
                 "weChat":{
                     "label":"微信号"
                 }
+            }
+        },
+        "meetingInfo": {
+            "title": {
+                "label": "会议名称",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "startDate": {
+                "label": "会议时间"
+            },
+            "address": {
+                "label": "会议地址",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "phone": {
+                "label": "联系方式"
+            },
+            "theme": {
+                "label": "会议主题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "url": {
+                "label": "链接"
             }
         }
     },
