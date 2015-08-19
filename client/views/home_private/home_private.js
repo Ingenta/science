@@ -11,10 +11,9 @@ Template.NewsList.events({
 
 Template.HomePrivate.helpers({
     hasMostThreeNews: function () {
-        return News.find().count() < 3;
+        return News.find({types:"1"}).count() < 3;
     }
 });
-
 
 Template.NewsList.helpers({
     news: function (type) {
@@ -51,7 +50,7 @@ Template.NewsList.onRendered(function(){
 
 Template.SingleNews.helpers({
     hasMoreThanOneNews: function () {
-        return News.find().count() > 1;
+        return News.find({types:"1"}).count() > 1;
     }
 });
 
@@ -102,9 +101,3 @@ AutoForm.addHooks(['cmForm'], {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     }
 }, true);
-//
-//AutoForm.addHooks(['deleteNewsForm'], {
-//    onSuccess: function () {
-//        reRender();
-//    }
-//}, true);
