@@ -1,0 +1,135 @@
+<template name="JournalTabInPublisher">
+    <div class="row">
+        <div class="col-xs-12">
+            {{#if can "add-journal" "resource" }}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
+                    {{_ "Add new"}}
+                </button>
+            {{/if}}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            {{> PublicationList}}
+        </div>
+    </div>
+    {{> addPublicationForm}}
+</template>
+
+<template name="PublicationList">
+    {{#each publications}}
+        {{> SinglePublication}}
+    {{else}}
+        {{_ "No publications found!"}}
+    {{/each}}
+    {{> Paginator_UI publications}}
+    <span style="float:right">{{_ "Display per page"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a
+            class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+</template>
+
+<template name="SinglePublication">
+    <div class="row">
+        <div class="col-xs-3">
+            <img src="{{getImageHelper picture}}" width="105"/>
+        </div>
+        <div class="col-xs-9">
+            <div class="row">
+                <div class="pull-right">
+                    {{#if can "modify-journal" "resource" }}
+                        {{> displayPublication}}
+                        {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
+                    {{/if}}
+                    {{#if can "delete-journal" "resource" }}
+                        {{> deletePublicationModalForm}}
+                    {{/if}}
+                </div>
+                <h3>{{> imageName}}&nbsp;&nbsp;
+                    <a href="{{getJournalUrl title}}">
+                        {{title}}
+                    </a>
+                </h3>
+            </div>
+            <div class="row">
+                {{description}}
+            </div>
+        </div>
+    </div>
+    <hr>
+</template>
+
+<template name="displayPublication">
+    {{#if visibleIs "1"}}
+        <span class="fa fa-eye" style="color: #0c75d2;cursor: pointer"></span>
+    {{/if}}
+    {{#if visibleIs "0"}}
+        <span class="fa fa-eye-slash" style="cursor: pointer"></span>
+    {{/if}}
+</template>
+
+<template name="updatePublicationModalForm">
+    {{#autoForm doc=this collection="Publications" id="updatePublicationsModal" type="update" buttonContent=getUpdateButtonContent}}
+        <fieldset>
+            {{> afQuickField name="title"}}
+            {{> afQuickField name="shortTitle"}}
+            {{> afQuickField name="description"}}
+            {{> afQuickField name="accessKey"}}
+            {{> afQuickField name="visible"}}
+            {{> afQuickField name="picture"}}
+            {{> afQuickField name="banner"}}
+            {{> afFieldInput name="tabSelections"}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
+</template>
+
+<template name="deletePublicationModalForm">
+    {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="imageName">
+    {{#if accessKeyIs "1"}}
+        <img src="/icon_access_fc.gif">
+    {{/if}}
+    {{#if accessKeyIs "2"}}
+        <img src="/icon_access_oa.gif">
+    {{/if}}
+    {{#if accessKeyIs "3"}}
+        <img src="/icon_access_sc.gif">
+    {{/if}}
+    {{#if accessKeyIs "4"}}
+        <img src="/icon_access_ft.gif">
+    {{/if}}
+</template>
+
+<template name="addPublicationForm">
+    <div class="modal fade" id="addPublicationModal" tabindex="-1" role="dialog"
+         aria-labelledby="addPublicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addPublicationModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addPublicationModalForm" collection="Publications" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="shortTitle"}}
+                        {{> afQuickField name="issn"}}
+                        {{> afQuickField name="description"}}
+                        {{> afQuickField name="accessKey"}}
+                        {{> afQuickField name="visible"}}
+                        {{> afQuickField name="picture"}}
+                        {{> afQuickField name="banner"}}
+                        {{> afFieldInput name="tabSelections"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
