@@ -33,7 +33,8 @@ Package.onUse(function(api) {
     'client/view/search.html',
     'client/view/search.js',
     'client/view/oneArticle.html',
-    'client/view/oneArticle.js'
+    'client/view/oneArticle.js',
+    'client/view/stylesheets/search.css'
   ],'client');
 
   //api.addFiles([

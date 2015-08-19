@@ -2,28 +2,28 @@ var pageSession = new ReactiveDict();
 
 
 Meteor.startup(function(){
-//    Tracker.autorun(function(){
-//        var query = pageSession.get("query");
-//        Meteor.call("search",query,function(err,result){
-//            var ok = err?false:result.responseHeader.status==0;
-//            pageSession.set("ok",ok);
-//            if(ok){
-//                //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
-//                if(result.response){
-//                    pageSession.set("numFound",result.response.numFound);
-//                    pageSession.set("start",result.response.start);
-//                    pageSession.set("docs",undefined);
-//                    pageSession.set("docs",result.response.docs);
-//                }
-//                if(result.facet_counts){
-//                    pageSession.set("facets",result.facet_counts.facet_fields);
-//                }
-//                if(result.highlighting){
-//                    pageSession.set("highlight",result.highlighting);
-//                }
-//            }
-//        })
-//    });
+    Tracker.autorun(function(){
+        var query = pageSession.get("query");
+        var filterQuery = pageSession.get("filterQuery");
+        Meteor.call("search",query,filterQuery,function(err,result){
+            var ok = err?false:result.responseHeader.status==0;
+            pageSession.set("ok",ok);
+            if(ok){
+                //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
+                if(result.response){
+                    pageSession.set("numFound",result.response.numFound);
+                    pageSession.set("start",result.response.start);
+                    pageSession.set("docs",result.response.docs);
+                }
+                if(result.facet_counts){
+                    pageSession.set("facets",result.facet_counts.facet_fields);
+                }
+                if(result.highlighting){
+                    pageSession.set("highlight",result.highlighting);
+                }
+            }
+        })
+    });
 })
 
 Template.SolrSearchBar.events({
@@ -31,9 +31,11 @@ Template.SolrSearchBar.events({
         var sword = $('#searchInput').val();
         if (sword){
             var query="title.cn:" + sword + " OR title.en:"+ sword ;
-            Router.go('/search?q=' + query);
             if(Router.current().route.getName()=='solrsearch'){
                 pageSession.set("query",query);
+                pageSession.set("filterQuery",undefined);
+            }else{
+                Router.go('/search?q=' + query);
             }
         }
     },
@@ -42,10 +44,12 @@ Template.SolrSearchBar.events({
             var sword = $('#searchInput').val();
             if (sword){
                 var query="title.cn:" + sword + " OR title.en:"+ sword ;
-                Router.go('/search?q=' + query);
-            }
-            if(Router.current().route.getName()=='solrsearch'){
-                pageSession.set("query",query);
+                if(Router.current().route.getName()=='solrsearch'){
+                    pageSession.set("query",query);
+                    pageSession.set("filterQuery",undefined);
+                }else{
+                    Router.go('/search?q=' + query);
+                }
             }
         }
     }
@@ -71,12 +75,93 @@ Template.SolrSearchResults.helpers({
             var results = [];
             for(var i=0;i<fields.length;i++){
                 var filter = {filterOptions:[]};
-                if(fields[i]=='publisher'){
+                if(fields[i]=='all_topics'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Topic");
+                    var facetTopic = facets[fields[i]];
+                    for(var j=0;j<facetTopic.length;j+=2){
+                        if(facetTopic[j+1]>0){
+                            var topic= Topics.findOne({_id:facetTopic[j]});
+                            if(topic){
+                                filter.filterOptions.push({
+                                    name:topic.englishName,
+                                    cname:topic.name,
+                                    count:facetTopic[j+1],
+                                    fq:fields[i]+":"+facetTopic[j]
+                                })
+                            }
+                        }
+                    }
+                    results.push(filter);
+                }else if(fields[i]=='publisher'){
                     filter.filterTitle=TAPi18n.__("FILTER BY Publisher");
                     var facetPublisher = facets[fields[i]];
                     for(var j=0;j<facetPublisher.length;j+=2){
-                        var publisher= Publishers.findOne({_id:facetPublisher[j]});
-                        filter.filterOptions.push({name:publisher.name,cname:publisher.chinesename,count:facetPublisher[j+1]})
+                        if(facetPublisher[j+1]>0){
+                            var publisher= Publishers.findOne({_id:facetPublisher[j]});
+                            filter.filterOptions.push({
+                                name:publisher.name,
+                                cname:publisher.chinesename,
+                                count:facetPublisher[j+1],
+                                fq:fields[i]+":"+facetPublisher[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
+                }else if(fields[i]=='facet_all_authors_cn' && TAPi18n.getLanguage()==='zh-CN'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Author");
+                    var facetAuthor = facets[fields[i]];
+                    for(var j=0;j<facetAuthor.length;j+=2){
+                        if(facetAuthor[j+1]>0){
+                            filter.filterOptions.push({
+                                name:facetAuthor[j],
+                                cname:facetAuthor[j],
+                                count:facetAuthor[j+1],
+                                fq:fields[i]+":"+facetAuthor[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
+                }else if(fields[i]=='facet_all_authors_en' && TAPi18n.getLanguage()==='en'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Author");
+                    var facetAuthor = facets[fields[i]];
+                    for(var j=0;j<facetAuthor.length;j+=2){
+                        if(facetAuthor[j+1]>0){
+                            filter.filterOptions.push({
+                                name:facetAuthor[j],
+                                cname:facetAuthor[j],
+                                count:facetAuthor[j+1],
+                                fq:fields[i]+":"+facetAuthor[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
+                }else if(fields[i]=='journalId'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Publications");
+                    var facetJournal = facets[fields[i]];
+                    for(var j=0;j<facetJournal.length;j+=2){
+                        if(facetJournal[j+1]>0){
+                            var journal= Publications.findOne({_id:facetJournal[j]});
+                            filter.filterOptions.push({
+                                name:journal.title,
+                                cname:journal.title,
+                                count:facetJournal[j+1],
+                                fq:fields[i]+":"+facetJournal[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
+                }else if(fields[i]=='year'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Release Date");
+                    var facetYear = facets[fields[i]];
+                    for(var j=0;j<facetYear.length;j+=2){
+                        if(facetYear[j+1]>0){
+                            filter.filterOptions.push({
+                                name:facetYear[j],
+                                cname:facetYear[j],
+                                count:facetYear[j+1],
+                                fq:fields[i]+":"+facetYear[j]
+                            })
+                        }
                     }
                     results.push(filter);
                 }
@@ -97,8 +182,8 @@ Template.oneSolrArticle.helpers({
     },
     getFullName: function () {
         if (TAPi18n.getLanguage() === "zh-CN")
-            return this.surname.cn + ' ' + this.given.cn;
-        return this.surname.en + ' ' + this.given.en;
+            return this.surname.cn + this.given.cn;
+        return this.given.en + " " + this.surname.en;
     },
     query      : function () {
         return Router.current().params.searchQuery;
@@ -140,5 +225,26 @@ Template.oneSolrArticle.events({
                 timer:2000
             });
         });
+    }
+})
+
+Template.solrFilterItem.events({
+    'click a':function(e){
+        e.preventDefault();
+        var fq=pageSession.get("filterQuery") || [];
+        if(this.selStatus){
+            fq = _.without(fq,this.fq);
+        }else{
+            fq = _.union(fq,this.fq)
+        }
+        pageSession.set("filterQuery",fq);
+    }
+});
+
+Template.solrFilterItem.helpers({
+    class:function(){
+        var fq=pageSession.get("filterQuery") || [];
+        this.selStatus= _.contains(fq,this.fq);
+        return this.selStatus?"fa fa-mail-reply":"fa fa-mail-forward";
     }
 })

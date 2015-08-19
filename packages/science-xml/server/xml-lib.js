@@ -49,6 +49,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     authorNodes.forEach(function (author) {
         var surnamePart = {};
         var givenPart = {};
+        var fullnamePart ={};
         var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
         //var authorAffNodes = xpath.select("child::xref[@ref-type='aff']/text()", author);
         //authorAffNodes.forEach(function (aff) {
@@ -66,11 +67,15 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var givenEn = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
             var surnameCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
             var givenCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
+            var fullnameEn = givenEn + " " + surnameEn;
+            var fullnameCn = surnameCn+givenCn;
             surnamePart = {en: surnameEn, cn: surnameCn};
             givenPart = {en: givenEn, cn: givenCn};
+            fullnamePart = {en:fullnameEn,cn:fullnameCn};
+
         }
 
-        fullName = {emailRef: emailRef, given: givenPart, surname: surnamePart};
+        fullName = {emailRef: emailRef, given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
 
         results.authors.push(fullName);
