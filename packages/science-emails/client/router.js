@@ -11,3 +11,16 @@ Router.route("/emails/", {
         ]
     }
 });
+Router.route("publications", {
+    parent: "home",
+    title: function () {
+        return TAPi18n.__("Publications");
+    },
+    waitOn: function () {
+        return [
+            Meteor.subscribe('images'),
+            Meteor.subscribe('publications'),
+            Meteor.subscribe('publishers')
+        ]
+    }
+});

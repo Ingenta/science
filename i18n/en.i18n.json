@@ -177,9 +177,6 @@
                     "label": "English"
                 }
             },
-            "createDate": {
-                "label": "Release time"
-            },
             "author": {
                 "label": "Author",
                 "cn":{

@@ -1,3 +1,9 @@
+Template.collections.helpers({
+	isCollection: function() {
+		return Router.current().route.getName() == "collections";
+	}
+});
+
 Template.addCollectionForm.helpers({
 	getpublishers:function(){
 		var iscn=TAPi18n.getLanguage()==='zh-CN';
@@ -9,9 +15,9 @@ Template.addCollectionForm.helpers({
 		});
 		return result;
 	},
-    journalId : function(){
-        return Session.get("currentJournalId");
-    }
+	isCollection: function() {
+		return Router.current().route.getName() == "collections";
+	}
 });
 
 
@@ -24,8 +30,9 @@ AutoForm.addHooks(['addCollectionModalForm'], {
         insert: function (doc) {
             doc.journalId = Session.get('currentJournalId');
             var a = Publications.findOne({"_id" : Session.get('currentJournalId')});
-            if(a)
-            doc.publisherId = a.publisher;
+            if(a) doc.publisherId = a.publisher;
+			var pid = Session.get('currentPublisherId');
+			if(!doc.publisherId && pid) doc.publisherId = pid;
             return doc;
         }
     }

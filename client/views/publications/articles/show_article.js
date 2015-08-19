@@ -79,10 +79,7 @@ Template.articleOptions.helpers({
     context: function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         return Articles.findOne({doi: currentDoi});
-    }
-});
-
-Template.articleOptions.helpers({
+    },
     tabs: function () {
         return [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
@@ -99,6 +96,7 @@ Template.articleOptions.helpers({
 //        return Session.get('activeTab');
     }
 });
+
 Template.showArticle.events({
     'click .pdfDownload': function () {
         ArticleViews.insert({
