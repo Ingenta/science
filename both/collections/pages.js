@@ -5,18 +5,12 @@ PagesSchema = new SimpleSchema({
         type: String,
         unique: true
     },
-    "title.cn": {
-        type: String
-    },
-    "description.cn": {
-        type: String,
+    title: {
+        type: Science.schemas.MultipleTextSchema,
         optional: true
     },
-    "title.en": {
-        type: String
-    },
-    "description.en": {
-        type: String,
+    description: {
+        type: Science.schemas.MultipleAreaSchema,
         optional: true
     }
 });

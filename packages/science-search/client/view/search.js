@@ -170,7 +170,6 @@ Template.SolrSearchResults.helpers({
         }
     },
     'highlightFields': function(){
-        console.log('hl')
         return pageSession.get("highlight")[this._id];
     }
 });
@@ -201,6 +200,9 @@ Template.oneSolrArticle.helpers({
     			return hl["title.en"];
     	}
     	return isLangCn?this.title.cn:this.title.en;
+    },
+    class:function(){
+        //return "fa fa-language";
     }
 });
 

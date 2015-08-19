@@ -216,10 +216,22 @@
         },
         "pages": {
             "title": {
-                "label": "Title"
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "description": {
-                "label": "Description"
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             }
         },
         "advertisement": {

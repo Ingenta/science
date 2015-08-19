@@ -391,10 +391,22 @@
         },
         "pages": {
             "title": {
-                "label": "标题"
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "description": {
-                "label": "描述"
+                "label": "描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             }
         },
         "advertisement": {
