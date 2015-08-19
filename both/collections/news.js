@@ -5,13 +5,7 @@ NewsSchema = new SimpleSchema({
         type: Science.schemas.MultiLangSchema
     },
     createDate: {
-        type: Date,
-        optional: true,
-        autoform: {
-            afFieldInput: {
-                type: "bootstrap-datepicker"
-            }
-        }
+        type: Date
     },
     author: {
         type: Science.schemas.MultipleTextSchema,

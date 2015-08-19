@@ -352,9 +352,6 @@
                     "label": "英文"
                 }
             },
-            "createDate": {
-                "label": "发布时间"
-            },
             "author": {
                 "label": "作者",
                 "cn":{
