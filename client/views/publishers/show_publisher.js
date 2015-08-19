@@ -3,10 +3,6 @@ ReactiveTabs.createInterface({
 });
 
 Template.publisherOptions.helpers({
-    context: function () {
-        var currentPublisher = Router.current().params.publisherName;
-        return Publishers.findOne({name: currentPublisher});
-    },
     tabs: function () {
         return [
             {name: TAPi18n.__("Journals"), slug: 'journals'},

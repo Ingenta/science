@@ -27,6 +27,7 @@
             {{> PublisherWebsite}}
         </div>
         <br/>
+
         <div class="row">
             {{> publisherOptions}}
         </div>
@@ -46,22 +47,14 @@
 <template name="publisherOptions">
     {{#publisherTabs name="" tabs=tabs activeTab="journals"}}
         {{#tabContent slug="journals"}}
-            {{#with context}}
-                {{> JournalTabInPublisher}}
-            {{/with}}
+            {{> JournalTabInPublisher}}
         {{/tabContent}}
 
         {{#tabContent slug="collections"}}
-            {{#with context}}
-                {{> CollectionTabInPublisher}}
-            {{/with}}
+            {{> collections}}
         {{/tabContent}}
 
     {{/publisherTabs}}
-
-</template>
-
-<template name="CollectionTabInPublisher">
 
 </template>
 

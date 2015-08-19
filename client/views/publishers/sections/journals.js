@@ -1,3 +1,9 @@
+Template.JournalTabInPublisher.helpers({
+    publisher: function() {
+        return Router.current().data();
+    }
+});
+
 Template.PublicationList.helpers({
     publications: function () {
         var numPerPage = Session.get('PerPage');
