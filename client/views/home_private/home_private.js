@@ -86,6 +86,14 @@ AutoForm.addHooks(['addNewsModalForm'], {
     onSuccess: function () {
         $("#addNewsModal").modal('hide');
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
+            var type =newPage?2:1;
+            doc.types = type;
+            return doc;
+        }
     }
 }, true);
 

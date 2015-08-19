@@ -15,6 +15,7 @@ Meteor.subscribe("volumes");
 Meteor.subscribe("about_articles");
 Meteor.subscribe("editorial_member");
 Meteor.subscribe("editorial_board");
+Meteor.subscribe("meeting_info");
 Meteor.subscribe('articleXml');
 Meteor.subscribe('pages');
 Meteor.subscribe('news');

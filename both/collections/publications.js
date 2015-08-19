@@ -28,12 +28,8 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         optional: true
     },
-    addressEn: {
-        type: String,
-        optional: true
-    },
-    addressCn: {
-        type: String,
+    address: {
+        type: Science.schemas.MultipleTextSchema,
         optional: true
     },
     phone: {
