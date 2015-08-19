@@ -90,6 +90,7 @@ Meteor.startup(function () {
     Pages.remove({})
     if (Pages.find().count() === 0) {
         var names = [
+            {key: "homepage", e: "", c: ""},
             {key: "publisher", e: "Publishers", c: "出版商"},
             {key: "publication", e: "Publications", c: "出版物"},
             {key: "topic", e: "Topics", c: "主题"},

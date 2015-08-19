@@ -6,14 +6,16 @@ PagesSchema = new SimpleSchema({
         unique: true
     },
     "title.cn": {
-        type: String
+        type: String,
+        optional: true
     },
     "description.cn": {
         type: String,
         optional: true
     },
     "title.en": {
-        type: String
+        type: String,
+        optional: true
     },
     "description.en": {
         type: String,
