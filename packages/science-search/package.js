@@ -14,13 +14,13 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
   api.use([
-    'templating',
     'iron:router',
     'science-lib'
   ]);
 
-  api.use('jackjiang:solr','server')
+  api.use('jackjiang:solr','server');
 
+  api.use('templating','client');
 
 
   api.addFiles([

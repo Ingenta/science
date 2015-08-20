@@ -91,19 +91,19 @@ Router.map(function () {
         }
     });
 
-    this.route("publications", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Publications");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('images'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers')
-            ]
-        }
-    });
+//    this.route("publications", {
+//        parent: "home",
+//        title: function () {
+//            return TAPi18n.__("Publications");
+//        },
+//        waitOn: function () {
+//            return [
+//                Meteor.subscribe('images'),
+//                Meteor.subscribe('publications'),
+//                Meteor.subscribe('publishers')
+//            ]
+//        }
+//    });
     this.route("publishers", {
         parent: "home",
         title: function () {
@@ -150,6 +150,7 @@ Router.map(function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
             if (pub) {
                 Session.set('currentPublisherId', pub._id);
+                Session.set('filterPublisher', pub._id);
                 return pub;
             }
 
@@ -168,7 +169,8 @@ Router.map(function () {
             return [
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers')
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('allCollections')
             ]
         }
     });

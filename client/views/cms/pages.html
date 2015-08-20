@@ -1,7 +1,11 @@
 <template name="pageElement">
     <div class="row">
-        <h2>{{getPageTitle key}}</h2>
-
+        {{#if isHomePage key}}
+            {{setHomePageElement key}}
+        {{/if}}
+        {{#unless isHomePage key}}
+            <h2>{{getPageTitle key}}</h2>
+        {{/unless}}
         <div class="pull-right">
             {{#if can "add-publisher" "publisher" }}
                 {{> updatePagesModalForm}}
