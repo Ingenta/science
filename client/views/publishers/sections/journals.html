@@ -1,22 +1,25 @@
 <template name="JournalTabInPublisher">
-    <div class="row">
-        <div class="col-xs-12">
-            {{#if can "add-journal" "resource" }}
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
-                    {{_ "Add new"}}
-                </button>
-            {{/if}}
+    <div class="container-fluid">
+        {{> PublicationsAlphabetBar}}
+        <div class="row">
+            <div class="col-xs-12">
+                {{#if can "add-journal" "resource" }}
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
+                        {{_ "Add new"}}
+                    </button>
+                {{/if}}
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div id="menu" class="col-xs-3">
+        <hr>
+        <div class="row">
+            <div id="menu" class="col-xs-3">
 
-        </div>
-        <div id="subcontent" class="col-xs-9">
-            {{#with publisher}}
-                {{> PublicationList}}
-            {{/with}}
+            </div>
+            <div id="subcontent" class="col-xs-9">
+                {{#with publisher}}
+                    {{> PublicationList}}
+                {{/with}}
+            </div>
         </div>
     </div>
     {{> addPublicationForm}}

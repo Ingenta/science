@@ -133,6 +133,17 @@ Router.map(function () {
         }
     });
 
+    this.route('/news/:newsId', {
+        template: "showNewsArticle",
+        title: ":newsId",
+        parent: "home",
+        name: "news.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('news')
+            ]
+        }
+    });
 
     this.route('/publisher/:publisherName', {
         data: function () {

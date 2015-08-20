@@ -25,6 +25,23 @@ Template.PublicationsAlphabetBar.helpers({
         return "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(',');
     }
 });
+Template.PublicationsAlphabetBar.events({
+    'click .letterFilter': function (event) {
+        var num = $(event.target).text();
+        Session.set('pubFirstLetter', num);
+        Session.set('filterPublisher', undefined);
+        Session.set('PerPage', 10);
+    },
+    'click .resetOtherFilter': function () {
+        Session.set('pubFirstLetter',"other");
+        Session.set('filterPublisher', undefined);
+        Session.set('PerPage', 10);
+    },
+    'click .resetAlphabetFilter': function (event) {
+        Session.set('pubFirstLetter', undefined);
+        Session.set('PerPage', 10);
+    },
+})
 Template.FilterList.helpers({
     publishers: function () {
         var pubId = Session.get('filterPublisher');
@@ -35,7 +52,7 @@ Template.FilterList.helpers({
     },
     publications: function () {
         var pubId = Session.get('filterPublisher');
-        var first = Session.get('firstLetter');
+        var first = Session.get('pubFirstLetter');
         var numPerPage = Session.get('PerPage');
         if(numPerPage === undefined){
             numPerPage = 10;
@@ -65,25 +82,11 @@ Template.FilterList.events({
         Session.set('filterPublisher', f);
         Session.set('PerPage', 10);
     },
-    'click .letterFilter': function (event) {
-        var num = $(event.target).text();
-        Session.set('firstLetter', num);
-        Session.set('filterPublisher', undefined);
-        Session.set('PerPage', 10);
-    },
-    'click .resetOtherFilter': function () {
-        Session.set('firstLetter',"other");
-        Session.set('filterPublisher', undefined);
-        Session.set('PerPage', 10);
-    },
     'click .clearPublisher': function (event) {
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
     },
-    'click .resetAlphabetFilter': function (event) {
-        Session.set('firstLetter', undefined);
-        Session.set('PerPage', 10);
-    },
+
     'click .perPage': function (event) {
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
@@ -91,6 +94,6 @@ Template.FilterList.events({
 });
 Template.FilterList.onRendered(function () {
     Session.set('filterPublisher', undefined);
-    Session.set('firstLetter', undefined);
+    Session.set('pubFirstLetter', undefined);
     Session.set('PerPage', 10);
 });
