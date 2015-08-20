@@ -25,11 +25,31 @@ Template.newsCenterList.helpers({
     }
 });
 
+Template.pubDynamicList.helpers({
+    pubDynamic: function () {
+        var aboutId = Session.get('tabNews');
+        var publicationId = Session.get('currentJournalId');
+        return News.find({about: aboutId,publications:publicationId,types:"2"});
+    }
+});
+
 Template.meetingInfoList.helpers({
     meetingContent: function () {
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
         return Meeting.find({about: aboutId,publications:publicationId});
+    },
+    StartDate: function () {
+        if(this.startDate){
+            return true;
+        }
+        return false;
+    },
+    Phone: function () {
+        if(this.phone){
+            return true;
+        }
+        return false;
     },
     Address: function () {
         if(this.address.en||this.address.cn){
@@ -47,6 +67,24 @@ Template.meetingInfoList.helpers({
 
 AutoForm.addHooks(['addNewsCenterModal'], {
     onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
+            var type =newPage?2:1;
+            doc.types = type;
+            doc.createDate = new Date();
+            doc.about = Session.get('tabNews');
+            doc.publications = Session.get('currentJournalId');
+            return doc;
+        }
+    }
+}, true);
+
+AutoForm.addHooks(['addPublishingDynamicForm'], {
+    onSuccess: function () {
+        $("#addPublishingDynamicModal").modal('hide');
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {

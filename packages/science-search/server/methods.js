@@ -7,7 +7,7 @@ Meteor.methods({
 			"facet":true,
 			"facet.field":["publisher","journalId","all_topics","facet_all_authors_cn","facet_all_authors_en","year"],
 			"hl":true,
-			"hl.fl":"title.en,title.cn",
+			"hl.fl":"title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics",
 			"hl.simple.pre":"<span class='highlight'>",
 			"hl.simple.post":"</span>",
 		};

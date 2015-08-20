@@ -6,11 +6,23 @@ Template.JournalTabInPublisher.helpers({
 
 Template.PublicationList.helpers({
     publications: function () {
+        var pubId = this._id;
+        var first = Session.get('pubFirstLetter');
         var numPerPage = Session.get('PerPage');
         if(numPerPage === undefined){
             numPerPage = 10;
         }
-        return myPubPagination.find({publisher: this._id}, {itemsPerPage: numPerPage});
+        var q = {};
+        pubId && (q.publisher = pubId);
+        var reg;
+        if(first && first == "other"){
+            reg="^[^A-Z]"
+        }else{
+            reg = "^" + first;
+        }
+        first && (q.shortTitle = {$regex:reg, $options: "i"});
+        Session.set("totalPublicationResults", Publications.find(q).count());
+        return myPubPagination.find(q, {itemsPerPage: numPerPage});
     }
 });
 

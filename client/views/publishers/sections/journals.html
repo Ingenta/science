@@ -1,36 +1,43 @@
 <template name="JournalTabInPublisher">
-    <div class="row">
-        <div class="col-xs-12">
-            {{#if can "add-journal" "resource" }}
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
-                    {{_ "Add new"}}
-                </button>
-            {{/if}}
+    <div class="container-fluid">
+        {{> PublicationsAlphabetBar}}
+        <div class="row">
+            <div class="col-xs-12">
+                {{#if can "add-journal" "resource" }}
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#addPublicationModal">
+                        {{_ "Add new"}}
+                    </button>
+                {{/if}}
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div id="menu" class="col-xs-3">
+        <hr>
+        <div class="row">
+            <div id="menu" class="col-xs-3">
 
-        </div>
-        <div id="subcontent" class="col-xs-9">
-            {{#with publisher}}
-                {{> PublicationList}}
-            {{/with}}
+            </div>
+            <div id="subcontent" class="col-xs-9">
+                {{#with publisher}}
+                    {{> PublicationList}}
+                {{/with}}
+            </div>
         </div>
     </div>
     {{> addPublicationForm}}
 </template>
 
 <template name="PublicationList">
-    {{#each publications}}
-        {{> SinglePublication}}
-    {{else}}
-        {{_ "No publications found!"}}
-    {{/each}}
-    {{> Paginator_UI publications}}
-    <span style="float:right">{{_ "Display per page"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a
-            class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 20px;">
+            {{#each publications}}
+                {{> SinglePublication}}
+            {{else}}
+                {{_ "No publications found!"}}
+            {{/each}}
+            {{> Paginator_UI publications}}
+            <span style="float:right">{{_ "Display per page"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+        </div>
+    </div>
 </template>
 
 <template name="SinglePublication">

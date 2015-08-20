@@ -1,17 +1,19 @@
 <template name="collections">
     <div class="container-fluid">
-
         {{#if isCollection}}
             {{> pageElement key="collections"}}
         {{/if}}
         {{> collAlphabetBar}}
         <div class="row">
-            {{#if can "add-pulisher-collections" "collections" }}
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
-                    {{_ "Add new"}}
-                </button>
-            {{/if}}
+            <div class="col-xs-12">
+                {{#if can "add-pulisher-collections" "collections" }}
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
+                        {{_ "Add new"}}
+                    </button>
+                {{/if}}
+            </div>
         </div>
+        <hr>
         <div class="row">
             <div id="menu" class="col-xs-3">
                 {{#if isCollection}}

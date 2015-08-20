@@ -18,7 +18,6 @@ MeetingSchema = new SimpleSchema({
     },
     startDate: {
         type: Date,
-        optional: true,
         autoform: {
             afFieldInput: {
                 type: "bootstrap-datepicker"
