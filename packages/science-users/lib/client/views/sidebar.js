@@ -17,5 +17,8 @@ Template.LayoutSideBar.helpers({
     },
     canUseAdminPanel: function () {
         return !!Permissions.getUserRoles().length;
+    },
+    currentArticle: function () {
+        return Router.current().route.getName()=="article.show";
     }
 });
