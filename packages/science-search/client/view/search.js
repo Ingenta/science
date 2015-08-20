@@ -32,12 +32,11 @@ Template.SolrSearchBar.events({
     'click .btn': function () {
         var sword = $('#searchInput').val();
         if (sword){
-            var query="title.cn:" + sword + " OR title.en:"+ sword ;
             if(Router.current().route.getName()=='solrsearch'){
-                pageSession.set("query",query);
+                pageSession.set("query",sword);
                 pageSession.set("filterQuery",undefined);
             }else{
-                Router.go('/search?q=' + query);
+                Router.go('/search?q=' + sword);
             }
         }
     },
@@ -45,12 +44,11 @@ Template.SolrSearchBar.events({
         if (event.keyCode === 13) {
             var sword = $('#searchInput').val();
             if (sword){
-                var query="title.cn:" + sword + " OR title.en:"+ sword ;
                 if(Router.current().route.getName()=='solrsearch'){
-                    pageSession.set("query",query);
+                    pageSession.set("query",sword);
                     pageSession.set("filterQuery",undefined);
                 }else{
-                    Router.go('/search?q=' + query);
+                    Router.go('/search?q=' + sword);
                 }
             }
         }

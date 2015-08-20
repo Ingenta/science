@@ -14,9 +14,7 @@
             <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong>
                 <div class="pull-right">
                     {{#if can "add-news" "resource"  }}
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublishingDynamicModal">
-                            {{_ "Add new"}}
-                        </button>{{> addPublishingDynamicForm}}
+                        <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addPublishingDynamicModal"></span>{{> addPublishingDynamicForm}}
                     {{/if}}
                 </div>
             </div><hr>
@@ -78,10 +76,10 @@
         </div>
         </p>
         <p>
-            {{#if startDate}}
-                {{_"Meeting Time"}}：&nbsp;{{startDate}}&nbsp;&nbsp;&nbsp;&nbsp;
+            {{#if StartDate}}
+                {{_"Meeting Time"}}：&nbsp;{{startDate}}&nbsp;&nbsp;
             {{/if}}
-            {{#if phone}}
+            {{#if Phone}}
                 {{_"Contact Way"}}：&nbsp;{{phone}}<br>
             {{/if}}
             {{#if Address}}
