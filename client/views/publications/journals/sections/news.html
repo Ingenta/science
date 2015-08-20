@@ -11,8 +11,16 @@
             <div class="tab-pane active" id="a1"><div class="part"><strong>{{_ "News Center"}}</strong><div class="pull-right">{{#if can "add-news" "resource"  }}{{> addNewsCenterModalForm}}{{/if}}</div></div><hr>
                 {{> newsCenterList}}
             </div>
-            <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong><div class="pull-right">{{#if can "add-news" "resource"  }}{{> addNewsCenterModalForm}}{{/if}}</div></div><hr>
-
+            <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong>
+                <div class="pull-right">
+                    {{#if can "add-news" "resource"  }}
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublishingDynamicModal">
+                            {{_ "Add new"}}
+                        </button>{{> addPublishingDynamicForm}}
+                    {{/if}}
+                </div>
+            </div><hr>
+                {{> pubDynamicList}}
             </div>
             <div class="tab-pane" id="c1"><div class="part"><strong>{{_ "Meeting Information"}}</strong><div class="pull-right">{{#if can "add-meeting-info" "resource"  }}{{> addMeetingInfoModalForm}}{{/if}}</div></div><hr>
                 {{> meetingInfoList}}
@@ -32,7 +40,26 @@
         </div>
         </p>
         <p>
-            {{translateThis abstract.cn abstract.en}}
+            {{{translateThis abstract.cn abstract.en}}}
+        </p>
+    </div>
+    {{else}}
+    {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="pubDynamicList">
+    {{#each pubDynamic}}
+    <div class="part"><p>
+        <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
+
+        <div class="pull-right">
+            {{#if can "modify-news" "resource"  }}{{> updatePublishingDynamicModalForm}}{{/if}}
+            {{#if can "delete-news" "resource"  }}{{> deletePublishingDynamicModalForm}}{{/if}}
+        </div>
+        </p>
+        <p>
+            <img src="{{getImageHelper picture}}" width="89" height="126"/>{{{translateThis abstract.cn abstract.en}}}
         </p>
     </div>
     {{else}}
@@ -80,6 +107,41 @@
 
 <template name="deleteNewsCenterModalForm">
     {{#afModal class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+</template>
+
+
+<template name="addPublishingDynamicForm">
+    <div class="modal fade" id="addPublishingDynamicModal" tabindex="-1" role="dialog" aria-labelledby="addPublishingDynamicModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addPublishingDynamicModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addPublishingDynamicForm" collection="News" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="url"}}
+                    {{> afQuickField name="abstract"}}
+                    {{> afQuickField name="picture"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="updatePublishingDynamicModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,title.cn,title.en,url,abstract,abstract.cn,abstract.en,picture" buttonContent=getUpdateButtonContent}}{{/afModal}}
+</template>
+
+<template name="deletePublishingDynamicModalForm">
+    {{#afModal id="deleteNewsForm" class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>
 
 
