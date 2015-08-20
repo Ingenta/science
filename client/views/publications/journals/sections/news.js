@@ -39,6 +39,18 @@ Template.meetingInfoList.helpers({
         var publicationId = Session.get('currentJournalId');
         return Meeting.find({about: aboutId,publications:publicationId});
     },
+    StartDate: function () {
+        if(this.startDate){
+            return true;
+        }
+        return false;
+    },
+    Phone: function () {
+        if(this.phone){
+            return true;
+        }
+        return false;
+    },
     Address: function () {
         if(this.address.en||this.address.cn){
             return true;
