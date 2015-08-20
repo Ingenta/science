@@ -3,7 +3,7 @@
         {{> pageElement key="topic"}}
         <div class="row">
             {{#if can "add-topic" "topic"}}
-                {{> addTopicModalForm}}
+	            {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm"}}{{_ "Add new"}}{{/jkafModal}}
             {{/if}}
         </div>
         <hr>
@@ -46,8 +46,12 @@
 </template>
 
 <template name="updateTopicModalForm">
-    {{#afModal class="fa fa-pencil" collection="Topics" doc=_id operation="update" omitFields="parentId" buttonContent=getUpdateButtonContent title=getUpdateButtonContent}}
-    {{/afModal}}
+	{{#autoForm collection="Topics" id="updateTopicModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+		{{> afQuickField name="name" }}
+		{{> afQuickField name="englishName" }}
+		{{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
+		<button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+	{{/autoForm}}
 </template>
 
 <template name="deleteTopicModalForm">
@@ -56,14 +60,12 @@
 </template>
 
 <template name="addTopicModalForm">
-    {{#afModal class="btn btn-success" collection="Topics" operation="insert" omitFields="parentId" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
-        {{_ "Add new"}}
-    {{/afModal}}
-</template>
-
-<template name="addSubTopicModalForm">
-    {{#afModal formId="addSubTopicModalForm" class="fa fa-plus" collection="Topics" operation="insert" omitFields="parentId" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
-    {{/afModal}}
+	{{#autoForm collection="Topics" id="addTopicModalForm" type="insert" buttonContent=getCreateButtonContent}}
+		{{> afQuickField name="name" }}
+		{{> afQuickField name="englishName" }}
+		{{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
+		<button type="submit" class="btn btn-primary">{{_ "Add new"}}</button>
+	{{/autoForm}}
 </template>
 
 <template name="TopicButtons">
@@ -72,8 +74,12 @@
     </a>
 
     <div class="pull-right">
-        {{#if can "add-topic" "topic" }}{{> addSubTopicModalForm}}{{/if}}
-		{{#if can "modify-topic" "topic" }}{{> updateTopicModalForm}}{{/if}}
+        {{#if can "add-topic" "topic" }}
+	        {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm"}}
+        {{/if}}
+		{{#if can "modify-topic" "topic" }}
+			{{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm"}}
+		{{/if}}
 		{{#if can "delete-topic" "topic" }}
             {{#if hasSubTopic _id}}
                 {{> deleteTopicModalForm}}

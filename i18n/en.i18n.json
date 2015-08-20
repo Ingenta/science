@@ -117,6 +117,9 @@
             },
             "englishName": {
                 "label": "English Name"
+            },
+            "relatedTopics":{
+                "label": "Related Topics"
             }
         },
         "articles": {

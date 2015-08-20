@@ -296,6 +296,9 @@
             },
             "englishName": {
                 "label": "英文名称"
+            },
+            "relatedTopics":{
+                "label": "相关主题"
             }
         },
         "articles": {

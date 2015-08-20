@@ -24,16 +24,17 @@ TopicsSchema = new SimpleSchema({
     parentId: {
         type: String,
         optional: true
-    //},
-    //relatedTopics: {
-    //    type: [String],
-    //    optional: true,
-    //    autoform: {
-    //        type: "universe-select",
-    //        afFieldInput: {
-    //            multiple: true
-    //        }
-    //    }
+    },
+    relatedTopics: {
+        type: [String],
+        optional: true,
+        autoform: {
+            multiple: true,
+            afFieldInput: {
+                type: "universe-select"
+
+            }
+        }
     }
 });
 
