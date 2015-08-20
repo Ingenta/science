@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-xs-12">
                 {{#if can "add-journal" "resource" }}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#addPublicationModal">
                         {{_ "Add new"}}
                     </button>
                 {{/if}}
@@ -26,14 +27,17 @@
 </template>
 
 <template name="PublicationList">
-    {{#each publications}}
-        {{> SinglePublication}}
-    {{else}}
-        {{_ "No publications found!"}}
-    {{/each}}
-    {{> Paginator_UI publications}}
-    <span style="float:right">{{_ "Display per page"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a
-            class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 20px;">
+            {{#each publications}}
+                {{> SinglePublication}}
+            {{else}}
+                {{_ "No publications found!"}}
+            {{/each}}
+            {{> Paginator_UI publications}}
+            <span style="float:right">{{_ "Display per page"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+        </div>
+    </div>
 </template>
 
 <template name="SinglePublication">
