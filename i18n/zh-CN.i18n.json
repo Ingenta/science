@@ -673,6 +673,8 @@
     "select": "选择",
     "Add articles to collection": "添加到文章集",
     "Add articles to topics": "添加到主题",
+    "SCP User Agreement": "SCP用户注册协议",
+    "I accept": "我已阅读",
     "pubStatus":{
         "normal":"正常",
         "onlineFirst":"优先出版",
