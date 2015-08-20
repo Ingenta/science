@@ -73,6 +73,15 @@
 
 <template name="onePublication">
     <div class="row dotted-publication-item">
+	    <div class="pull-right">
+		    {{#if can "modify-journal" "resource" }}
+			    {{> displayPublication}}
+			    {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
+		    {{/if}}
+		    {{#if can "delete-journal" "resource" }}
+			    {{> deletePublicationModalForm}}
+		    {{/if}}
+	    </div>
         <div class="col-xs-2">
             <img src="{{getImageHelper picture}}" width="58" height="82"/>
         </div>
