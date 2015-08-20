@@ -40,6 +40,7 @@ copleykj:livestamp@1.1.7
 dburles:collection-helpers@1.0.3
 dburles:mongo-collection-instances@0.3.4
 ddp@1.1.0
+delgermurun:mediaelementjs@2.16.1_1
 deps@1.0.7
 didstopia:admzip@0.0.6
 ejson@1.0.6
@@ -126,6 +127,7 @@ science-collections@0.0.1
 science-emails@0.0.1
 science-institution@0.0.1
 science-lib@0.0.1
+science-media@0.0.1
 science-permissions@0.0.1
 science-reports@0.0.1
 science-search@0.0.1
