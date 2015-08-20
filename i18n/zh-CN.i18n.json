@@ -147,6 +147,10 @@
     "Research Area": "研究方向",
     "Introduction": "简介",
     "Email address": "邮件地址",
+    "Meeting Time": "会议时间",
+    "Contact Way": "联系方式",
+    "Meeting Address": "会议地点",
+    "Conference Theme": "会议主题",
     "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
@@ -601,6 +605,9 @@
             "startDate": {
                 "label": "会议时间"
             },
+            "phone": {
+                "label": "联系方式"
+            },
             "address": {
                 "label": "会议地址",
                 "cn":{
@@ -609,9 +616,6 @@
                 "en":{
                     "label": "英文"
                 }
-            },
-            "phone": {
-                "label": "联系方式"
             },
             "theme": {
                 "label": "会议主题",

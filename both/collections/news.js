@@ -1,5 +1,17 @@
 this.News = new Meteor.Collection("news");
 
+this.News.allow({
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-news", "resource", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-news", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-news", "resource", userId);
+    }
+});
+
 NewsSchema = new SimpleSchema({
     title: {
         type: Science.schemas.MultiLangSchema

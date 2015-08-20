@@ -4,3 +4,73 @@ Template.newContent.events({
         Session.set('tabNews', idValue);
     }
 });
+
+Template.newsCenterList.onRendered(function () {
+    if (Session.get('tabNews')===undefined) {
+        Session.set('tabNews', "a1");
+    }
+});
+
+Template.newsCenterList.helpers({
+    newsContent: function () {
+        var aboutId = Session.get('tabNews');
+        var publicationId = Session.get('currentJournalId');
+        return News.find({about: aboutId,publications:publicationId,types:"2"});
+    },
+    whichUrl: function() {
+        if(this.url){
+            return this.url;
+        }
+        return "/news/"+this._id;
+    }
+});
+
+Template.meetingInfoList.helpers({
+    meetingContent: function () {
+        var aboutId = Session.get('tabNews');
+        var publicationId = Session.get('currentJournalId');
+        return Meeting.find({about: aboutId,publications:publicationId});
+    },
+    Address: function () {
+        if(this.address.en||this.address.cn){
+            return true;
+        }
+        return false;
+    },
+    Theme: function () {
+        if(this.theme.en||this.theme.cn){
+            return true;
+        }
+        return false;
+    }
+});
+
+AutoForm.addHooks(['addNewsCenterModal'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
+            var type =newPage?2:1;
+            doc.types = type;
+            doc.createDate = new Date();
+            doc.about = Session.get('tabNews');
+            doc.publications = Session.get('currentJournalId');
+            return doc;
+        }
+    }
+}, true);
+
+AutoForm.addHooks(['addMeetingInfoModal'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            doc.about = Session.get('tabNews');
+            doc.publications = Session.get('currentJournalId');
+            return doc;
+        }
+    }
+}, true);

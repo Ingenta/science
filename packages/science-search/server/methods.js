@@ -14,10 +14,12 @@ Meteor.methods({
 		if(filterQuery){
 			options.fq=filterQuery;
 		}
+
 		SolrClient.query(query,options,function(err,response){
 			if(!err)
-				return myFuture.return(JSON.parse(response));
-			myFuture.throw(err);
+				return myFuture.return(JSON.parse(response.content));
+			else
+				myFuture.throw(err);
 		});
 		return myFuture.wait();
 	}

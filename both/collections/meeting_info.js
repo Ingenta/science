@@ -1,5 +1,17 @@
 this.Meeting = new Meteor.Collection("meeting_info");
 
+this.Meeting.allow({
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-meeting-info", "resource", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-meeting-info", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-meeting-info", "resource", userId);
+    }
+});
+
 MeetingSchema = new SimpleSchema({
     title: {
         type: Science.schemas.MultiLangSchema
@@ -13,12 +25,12 @@ MeetingSchema = new SimpleSchema({
             }
         }
     },
-    address: {
-        type: Science.schemas.MultipleTextSchema,
-        optional: true
-    },
     phone: {
         type: String,
+        optional: true
+    },
+    address: {
+        type: Science.schemas.MultipleTextSchema,
         optional: true
     },
     theme: {

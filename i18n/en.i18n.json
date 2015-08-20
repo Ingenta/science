@@ -426,6 +426,9 @@
             "startDate": {
                 "label": "The meeting time"
             },
+            "phone": {
+                "label": "Contact"
+            },
             "address": {
                 "label": "The meeting address",
                 "cn":{
@@ -434,9 +437,6 @@
                 "en":{
                     "label": "English"
                 }
-            },
-            "phone": {
-                "label": "Contact"
             },
             "theme": {
                 "label": "The theme",

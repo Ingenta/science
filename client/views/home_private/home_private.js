@@ -56,7 +56,7 @@ Template.SingleNews.helpers({
         if(this.url){
             return this.url;
         }
-        return this._id;
+        return "/news/"+this._id;
     }
 });
 
