@@ -43,7 +43,7 @@
 <template name="meetingInfoList">
     {{#each meetingContent}}
     <div class="part"><p>
-        <a href={{url}}><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
+        <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
 
         <div class="pull-right">
             {{#if can "modify-meeting-info" "resource"  }}{{> updateMeetingInfoModalForm}}{{/if}}
