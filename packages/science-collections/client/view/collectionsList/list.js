@@ -12,7 +12,7 @@ Template.collectionsList.helpers({
         journalId &&(q.journalId = journalId);
         var reg;
         if(first && first == "other"){
-            reg="[^A-Z]"
+            reg="^[^A-Z]"
         }else{
             reg = "^" + first;
         }
