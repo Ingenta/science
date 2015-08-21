@@ -1,68 +1,70 @@
 <template name="showArticle">
-	{{> journalBanner journal=journalId}}
-	{{> figModal figures}}
-	{{> tableModal tables}}
-	<div class="row articleHeading">
-		<div class="col-xs-9">
-			<h3><img src="/icon_access_fc.gif"/> {{translateThis title.cn title.en}}
-				&nbsp;&nbsp;
-				{{#if can "modify-article" "resource"  }}
-					{{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
-				{{/if}}</h3>
-			<ul>
-				<li>
-					<p>
-						{{#each authors}}
-							{{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
-						{{/each}}
-					</p>
-				</li>
-				<li>
-					<p>{{> affiliation}}</p>
-				</li>
-				<li>
-					<p>
-						{{#each authorNotes}}
-							<i>{{label}} <a href="mailto:{{email}}">{{email}}</a></i>
-						{{/each}}
-					</p>
-				</li>
-				<li>
-					<p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
-							href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
-							class="fa fa-external-link"></i></a></p>
-				</li>
-			</ul>
-		</div>
-		<div class="col-xs-3">
-			<br>
+    {{> journalBanner journal=journalId}}
+    {{> figModal figures}}
+    {{> tableModal tables}}
+    <div class="row articleHeading">
+        <div class="col-xs-9">
+            <h3><img src="/icon_access_fc.gif"/> {{translateThis title.cn title.en}}
+                &nbsp;&nbsp;
+                {{#if can "modify-article" "resource"  }}
+                    {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
+                {{/if}}</h3>
+            <ul>
+                <li>
+                    <p>
+                        {{#each authors}}
+                            {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
+                        {{/each}}
+                    </p>
+                </li>
+                <li>
+                    <p>{{> affiliation}}</p>
+                </li>
+                <li>
+                    <p>
+                        {{#each authorNotes}}
+                            <i>{{label}} <a href="mailto:{{email}}">{{email}}</a></i>
+                        {{/each}}
+                    </p>
+                </li>
+                <li>
+                    <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
+                            href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
+                            class="fa fa-external-link"></i></a></p>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-3">
+            <br>
 
-			<div class="container-fluid">
-				<div class="row">
-					{{#if pdfId}}
-						<li class="pdf">
-							<a class="pdfDownload" href="{{getPdfById pdfId}}">{{_ "Download"}} PDF</a>
-						</li>
-					{{/if}}
-				</div>
-				<div class="row"><img src="/crossmark.jpg"></div>
-			</div>
-			<br>
+            <div class="container-fluid">
+                <div class="row">
+                    {{#if pdfId}}
+                        <li class="pdf">
+                            <a class="pdfDownload" href="{{getPdfById pdfId}}">{{_ "Download"}} PDF</a>
+                        </li>
+                    {{/if}}
+                </div>
+                <div class="row"><img src="/crossmark.jpg"></div>
+            </div>
+            <br>
 
-			<!--<div class="container-fluid">-->
-			<!--<div class="row">{{_ "Share"}}</div>-->
-			<!--<div class="row">-->
-			<!--<i class="fa fa-weibo"></i>-->
-			<!--<i class="fa fa-weixin"></i>-->
-			<!--</div>-->
-			<!--</div>-->
-		</div>
-	</div>
-	{{> articlePage}}
-	<div class="row">
-		<div class="col-xs-8">
-		</div>
-		<div class="col-xs-4">
+            <!--<div class="container-fluid">-->
+            <!--<div class="row">{{_ "Share"}}</div>-->
+            <!--<div class="row">-->
+            <!--<i class="fa fa-weibo"></i>-->
+            <!--<i class="fa fa-weixin"></i>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    {{> articlePage}}
+    <div class="row">
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-4">
+            <div class="raty"></div>
+            {{!--
             <span class="rating">
             <span class="star"></span>
             <span class="star"></span>
@@ -70,132 +72,133 @@
             <span class="star"></span>
             <span class="star"></span>
             </span>
-		</div>
-	</div>
-	{{> articleOptions}}
-	<!--<hr>-->
-	<!--<div class="row">-->
-	<!--<div class="col-xs-5">-->
-	<!--<h4>{{_ "Most Read"}}</h4>-->
-	<!--</div>-->
-	<!--<div class="col-xs-5">-->
-	<!--<h4>{{_ "Most Cited"}}</h4>-->
-	<!--</div>-->
-	<!--</div>-->
+            --}}
+        </div>
+    </div>
+    {{> articleOptions}}
+    <!--<hr>-->
+    <!--<div class="row">-->
+    <!--<div class="col-xs-5">-->
+    <!--<h4>{{_ "Most Read"}}</h4>-->
+    <!--</div>-->
+    <!--<div class="col-xs-5">-->
+    <!--<h4>{{_ "Most Cited"}}</h4>-->
+    <!--</div>-->
+    <!--</div>-->
 </template>
 
 <template name="articlePage">
-	<hr>
-	<div class="clear articlenav std-display">
-		<ul class="flat navigate-resources bobby">
-			<h6><span style="color: darkgray">
+    <hr>
+    <div class="clear articlenav std-display">
+        <ul class="flat navigate-resources bobby">
+            <h6><span style="color: darkgray">
                 <i class="fa fa-chevron-left"></i>
-				{{#if preValue}}
-					<a href="{{preValue}}">
-						<b>{{_ "Previous Article"}}</b>
-					</a>
-				{{else}}
-					<b>{{_ "Previous Article"}}</b>
-				{{/if}}
-				&nbsp;&nbsp;&Iota;&nbsp;&nbsp;
+                {{#if preValue}}
+                    <a href="{{preValue}}">
+                        <b>{{_ "Previous Article"}}</b>
+                    </a>
+                {{else}}
+                    <b>{{_ "Previous Article"}}</b>
+                {{/if}}
+                &nbsp;&nbsp;&Iota;&nbsp;&nbsp;
                 <a href="../"><b>{{_ "Table of Contents"}}</b></a>&nbsp;&nbsp;&Iota;&nbsp;&nbsp;
-				{{#if nextValue}}
-					<a href="{{nextValue}}">
-						<b>{{_ "Next Article"}}</b>
-					</a>
-				{{else}}
-					<b>{{_ "Next Article"}}</b>
-				{{/if}}
-				<i class="fa fa-chevron-right"></i>
+                {{#if nextValue}}
+                    <a href="{{nextValue}}">
+                        <b>{{_ "Next Article"}}</b>
+                    </a>
+                {{else}}
+                    <b>{{_ "Next Article"}}</b>
+                {{/if}}
+                <i class="fa fa-chevron-right"></i>
             </span></h6>
-		</ul>
-		<div class="socialMediaCommenting">
-		</div>
-	</div>
-	<br>
+        </ul>
+        <div class="socialMediaCommenting">
+        </div>
+    </div>
+    <br>
 </template>
 
 <template name="articleOptions">
 
-	{{#articleTabs name="" tabs=tabs activeTab="full text"}}
-		{{#tabContent slug="abstract"}}
-			{{#with context}}
-				{{> AbstractTemplate}}
-			{{/with}}
-		{{/tabContent}}
+    {{#articleTabs name="" tabs=tabs activeTab="full text"}}
+        {{#tabContent slug="abstract"}}
+            {{#with context}}
+                {{> AbstractTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-		{{#tabContent slug="full text"}}
-			{{#with context}}
-				{{> FullTextTemplate}}
-			{{/with}}
-		{{/tabContent}}
+        {{#tabContent slug="full text"}}
+            {{#with context}}
+                {{> FullTextTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-		{{#tabContent slug="references"}}
-			{{#with context}}
-				{{> ReferencesTemplate}}
-			{{/with}}
-		{{/tabContent}}
+        {{#tabContent slug="references"}}
+            {{#with context}}
+                {{> ReferencesTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-		{{#tabContent slug="cited by"}}
-			{{> CitedByTemplate}}
-		{{/tabContent}}
+        {{#tabContent slug="cited by"}}
+            {{> CitedByTemplate}}
+        {{/tabContent}}
 
-		{{#tabContent slug="data media"}}
-			{{#with context}}
-				{{> DataMediaTemplate}}
-			{{/with}}
-		{{/tabContent}}
+        {{#tabContent slug="data media"}}
+            {{#with context}}
+                {{> DataMediaTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-		{{#tabContent slug="metrics"}}
-			{{> MetricsTemplate}}
-		{{/tabContent}}
+        {{#tabContent slug="metrics"}}
+            {{> MetricsTemplate}}
+        {{/tabContent}}
 
-		{{#tabContent slug="related"}}
-			{{> RelatedTemplate}}
-		{{/tabContent}}
+        {{#tabContent slug="related"}}
+            {{> RelatedTemplate}}
+        {{/tabContent}}
 
-	{{/articleTabs}}
+    {{/articleTabs}}
 
 </template>
 
 <template name="articleTabs">
 
-	<div class="articleTabs-container">
+    <div class="articleTabs-container">
 
-		{{#if activeTab}}
-			{{trackActiveTab activeTab}}
-		{{/if}}
+        {{#if activeTab}}
+            {{trackActiveTab activeTab}}
+        {{/if}}
 
-		{{trackTabs tabs}}
+        {{trackTabs tabs}}
 
-		<ul class="nav nav-tabs" role="tablist">
-			{{#each tabs}}
-				<li role="presentation" class="tab-item {{isActiveTab slug}}">
-					<a role="tab" data-toggle="tab">{{name}}</a>
-				</li>
-			{{/each}}
-		</ul>
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab">{{name}}</a>
+                </li>
+            {{/each}}
+        </ul>
 
-		<div class="tabs-content-container">
-			{{> UI.contentBlock context=__context__ }}
-		</div>
-	</div>
+        <div class="tabs-content-container">
+            {{> UI.contentBlock context=__context__ }}
+        </div>
+    </div>
 </template>
 
 
 <template name="DataMediaTemplate">
-	<div class="row">
-		{{#each figures}}
-			{{> figure}}
-		{{/each}}
-		{{#each tables}}
-			{{> atttable}}
-		{{/each}}
-	</div>
+    <div class="row">
+        {{#each figures}}
+            {{> figure}}
+        {{/each}}
+        {{#each tables}}
+            {{> atttable}}
+        {{/each}}
+    </div>
 </template>
 
 <template name="RelatedTemplate">
-	<div>
+    <div>
         <span>
             《页岩压裂中压裂液返排率低的孔隙尺度模拟与解释》
             鞠杨, 郑泽民, 卢晋波, 毛灵涛, 高峰, 彭瑞东
@@ -204,14 +207,14 @@
             语种类型：中文
             概述
         </span>
-	</div>
+    </div>
 </template>
 
 <template name="updateArticleTitleModalForm">
-	{{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-		{{!-- {{> afObjectField name="title"}} --}}
-		{{> afQuickField name="title.en"}}
-		{{> afQuickField name="title.cn"}}
-		<button type="submit" class="btn btn-primary">update</button>
-	{{/autoForm}}
+    {{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+    {{!-- {{> afObjectField name="title"}} --}}
+        {{> afQuickField name="title.en"}}
+        {{> afQuickField name="title.cn"}}
+        <button type="submit" class="btn btn-primary">update</button>
+    {{/autoForm}}
 </template>
