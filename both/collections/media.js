@@ -9,3 +9,12 @@ this.Medias = new Meteor.Files({
 		}
 	}
 });
+
+MediasSchema  = new SimpleSchema({
+	title:{
+		type:Science.schemas.MultiLangSchema
+	},
+	description:{
+		type:Science.schemas.MultipleAreaSchema
+	}
+});

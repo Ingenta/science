@@ -1,28 +1,43 @@
 <template name="mediaList">
 	{{> addMediaForm}}
 	<ul class="list-unstyled">
-	{{#each medias}}
-		<li>
-			<div class="col-xs-8">
-				<video preload="auto" controls="controls">
-					<source src="{{fileURL this}}?play=true" type="{{type}}"/>
-				</video>
-			</div>
-			<div class="col-xs-4">
+		{{#each medias}}
+			<li>
+				<div class="col-xs-8">
+					<video preload="auto" controls="controls">
+						<source src="{{fileURL this}}?play=true" type="{{type}}"/>
+					</video>
+				</div>
+				<div class="col-xs-4">
 
-			</div>
-		</li>
-	{{/each}}
+				</div>
+			</li>
+		{{/each}}
 	</ul>
 </template>
 
 <template name="addMediaForm">
-	<input class="btn btn-success" id="file" type="file"/>
-	{{#if progress}}
-		<div class="progress">
-			<div style="width:{{progress}}%" class="progress-bar progress-bar-striped active">
-				<span class="sr-only">{{progress}}</span>
+	{{#autoForm schema="MediasSchema" id="addMediaModalForm"}}
+		<div class="modal-body">
+			{{> afQuickField name="title.en"}}
+			{{> afQuickField name="title.cn"}}
+			{{> afQuickField name="description.en"}}
+			{{> afQuickField name="description.cn"}}
+			<div class="row">
+				<div class="col-xs-4">
+					<input class="btn btn-success" id="file" type="file"/>
+				</div>
+				<div class="col-xs-8">
+					{{#if progress}}
+						<div class="progress">
+							<div style="width:{{progress}}%" class="progress-bar progress-bar-striped active">
+								<span class="sr-only">{{progress}}</span>
+							</div>
+						</div>
+					{{/if}}
+				</div>
 			</div>
+
 		</div>
-	{{/if}}
+	{{/autoForm}}
 </template>
