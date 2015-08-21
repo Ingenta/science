@@ -58,12 +58,12 @@
                 </div>
                 <h3>{{> imageName}}&nbsp;&nbsp;
                     <a href="{{getJournalUrl title}}">
-                        {{title}}
+                        {{translateThis titleCn title}}
                     </a>
                 </h3>
             </div>
             <div class="row">
-                {{description}}
+                {{translateThis description.cn description.en}}
             </div>
         </div>
     </div>
@@ -82,8 +82,14 @@
 <template name="updatePublicationModalForm">
     {{#autoForm doc=this collection="Publications" id="updatePublicationsModal" type="update" buttonContent=getUpdateButtonContent}}
         <fieldset>
-            {{> afQuickField name="title"}}
             {{> afQuickField name="shortTitle"}}
+            {{> afQuickField name="createdBy" value=currentUser.username}}
+            {{> afQuickField name="chiefEditor"}}
+            {{> afQuickField name="competentOrganization"}}
+            {{> afQuickField name="sponsor"}}
+            {{> afQuickField name="frequencyPublication"}}
+            {{> afQuickField name="embody"}}
+            {{> afQuickField name="topicId" options=getTopics}}
             {{> afQuickField name="description"}}
             {{> afQuickField name="accessKey"}}
             {{> afQuickField name="visible"}}
@@ -128,8 +134,20 @@
                 {{#autoForm id="addPublicationModalForm" collection="Publications" type="insert"}}
                     <div class="modal-body">
                         {{> afQuickField name="title"}}
+                        {{> afQuickField name="titleCn"}}
                         {{> afQuickField name="shortTitle"}}
                         {{> afQuickField name="issn"}}
+                        {{> afQuickField name="EISSN"}}
+                        {{> afQuickField name="CN"}}
+                        {{> afQuickField name="publicationDate"}}
+                        {{> afQuickField name="createdBy" value=currentUser.username}}
+                        {{> afQuickField name="chiefEditor"}}
+                        {{> afQuickField name="competentOrganization"}}
+                        {{> afQuickField name="sponsor"}}
+                        {{> afQuickField name="frequencyPublication"}}
+                        {{> afQuickField name="embody"}}
+                        {{> afQuickField name="language"}}
+                        {{> afQuickField name="topicId" options=getTopics}}
                         {{> afQuickField name="description"}}
                         {{> afQuickField name="accessKey"}}
                         {{> afQuickField name="visible"}}

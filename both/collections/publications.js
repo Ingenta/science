@@ -16,6 +16,9 @@ PublicationsSchema = new SimpleSchema({
     title: {
         type: String
     },
+    titleCn: {
+        type: String
+    },
     shortTitle: {
         type: String,
         max: 10
@@ -23,6 +26,57 @@ PublicationsSchema = new SimpleSchema({
     issn: {
         type: String,
         max: 9
+    },
+    createdBy: {
+        type: String
+    },
+    createDate: {
+        type: Date
+    },
+    chiefEditor: {
+        type: Science.schemas.MultipleTextSchema
+    },
+    competentOrganization: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    sponsor: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    EISSN: {
+        type: String,
+        optional: true
+    },
+    CN: {
+        type: String
+    },
+    publicationDate: {
+        type: Date,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
+    frequencyPublication: {
+        type: String,
+        optional: true
+    },
+    embody: {
+        type: String,
+        optional: true
+    },
+    language: {
+        type: String,
+        optional: true
+    },
+    topicId: {
+        type: String,
+        unique: true,
+        autoform: {
+            type: 'universe-select'
+        }
     },
     email: {
         type: String,
@@ -47,11 +101,7 @@ PublicationsSchema = new SimpleSchema({
         type: String
     },
     description: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 4
-        }
+        type: Science.schemas.MultipleAreaSchema
     },
     publisher: {
         type: String

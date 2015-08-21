@@ -41,6 +41,16 @@ Template.displayPublication.helpers({
 Template.updatePublicationModalForm.helpers({
     getTitle: function () {
         return TAPi18n.__("Update");
+    },
+    getTopics:function(){
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var topics = Topics.find().fetch();
+        var result = [];
+        _.each(topics,function(item){
+            var name = iscn?item.name:item.englishName;
+            result.push({label:name,value:item._id});
+        });
+        return result;
     }
 });
 Template.deletePublicationModalForm.helpers({
@@ -62,6 +72,19 @@ Template.SinglePublication.helpers({
     }
 });
 
+Template.addPublicationForm.helpers({
+    getTopics:function(){
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var topics = Topics.find().fetch();
+        var result = [];
+        _.each(topics,function(item){
+            var name = iscn?item.name:item.englishName;
+            result.push({label:name,value:item._id});
+        });
+        return result;
+    }
+});
+
 AutoForm.addHooks(['addPublicationModalForm'], {
     onSuccess: function () {
         $("#addPublicationModal").modal('hide');
@@ -69,6 +92,7 @@ AutoForm.addHooks(['addPublicationModalForm'], {
     },
     before: {
         insert: function (doc) {
+            doc.createDate = new Date();
             doc.publisher = Session.get('currentPublisherId');
             if(doc.issn) doc.issn = doc.issn.trim().replace("-","");
             return doc;
