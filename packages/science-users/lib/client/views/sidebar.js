@@ -18,7 +18,31 @@ Template.LayoutSideBar.helpers({
     canUseAdminPanel: function () {
         return !!Permissions.getUserRoles().length;
     },
-    currentArticle: function () {
+    isArticlePage: function () {
         return Router.current().route.getName()=="article.show";
+    },
+    favoriteName: function(){
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var article = Articles.findOne({doi: currentDoi});
+        if(Meteor.userId()){
+            var fav = Meteor.user().favorite || [];
+            return _.contains(fav, article._id)?TAPi18n.__("Favorited"):TAPi18n.__("Favorite");
+        }
     }
 });
+
+Template.LayoutSideBar.events({
+    "click .favorite": function(){
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var article = Articles.findOne({doi: currentDoi});
+        if(Meteor.userId()){
+            var fav = Meteor.user().favorite || [];
+            if(_.contains(fav, article._id)){
+                fav = _.without(fav, article._id)
+            }else{
+                fav.push(article._id)
+            }
+            Users.update({_id: Meteor.userId()},{$set:{favorite: fav}});
+        }
+    }
+})
