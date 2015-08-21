@@ -22,6 +22,9 @@
             <li> <a href="{{pathFor 'emails'}}"><span class="fa fa-envelope-o"></span>{{_ "Email this"}}</a></li>
             <li> <a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
         {{/if}}
+        {{#if isJourmalPage}}
+            <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+        {{/if}}
         <hr>
         <li><a href="#">{{_ "ScholarOne Login"}}</a></li>
         <li><a href="#">{{_ "Editors Login"}}</a></li>

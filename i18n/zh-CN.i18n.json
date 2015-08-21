@@ -764,6 +764,8 @@
     "Email this page":"邮件发送",
     "Favorite": "收藏",
     "Favorited":"已收藏",
+    "Journal Watch":"期刊关注",
+    "Watched":"已关注",
     "pubStatus":{
         "normal":"正常",
         "onlineFirst":"优先出版",
