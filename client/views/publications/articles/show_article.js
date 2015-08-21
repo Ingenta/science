@@ -61,34 +61,36 @@ Template.showArticle.onRendered(function () {
     Session.set("recentViewedArticles", rva);
     //Rating Start
     var aid = this.data._id;
-    var arr = this.data.rating || [];
-    $('.raty').raty({
-        //half: true,
-        score: function () {
-            if (arr.length > 0) {
-                var sum = 0;
-                _.each(arr, function (element) {
-                    sum += element.score;
-                });
-                return sum / arr.length;
-            } else {
-                return 0;
-            }
-        },
-        click: function (score, evt) {
-            if (Meteor.userId()) {
-                var temp = _.find(arr, function(obj){
-                    return obj.user == Meteor.userId();
-                });
-                if (temp) {
-                    arr = _.without(arr, temp);
+
+    Tracker.autorun(function(){
+        var arr = Articles.findOne({_id: aid}).rating || [];
+        $('.raty').raty({
+            //half: true,
+            score: function () {
+                if (arr.length > 0) {
+                    var sum = 0;
+                    _.each(arr, function (element) {
+                        sum += element.score;
+                    });
+                    return sum / arr.length;
+                } else {
+                    return 0;
                 }
-                arr.push({"user": Meteor.userId(), score: score});
-                Articles.update({_id: aid}, {$set: {rating: arr}});
-            } else{
+            },
+            click: function (score, evt) {
+                if (Meteor.userId()) {
+                    var temp = _.find(arr, function(obj){
+                        return obj.user == Meteor.userId();
+                    });
+                    if (temp) {
+                        arr = _.without(arr, temp);
+                    }
+                    arr.push({"user": Meteor.userId(), score: score});
+                    Articles.update({_id: aid}, {$set: {rating: arr}});
+                }
                 return false;
             }
-        }
+        });
     });
     //Rating End
 });
