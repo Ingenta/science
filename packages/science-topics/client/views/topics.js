@@ -1,10 +1,18 @@
 Template.SingleTopic.events({
-    'click .fa': function (event) {
-        var id = $(event.currentTarget).parent().attr('id');
-        var es = Session.get("expandStatus" + id);
-        Session.set("expandStatus" + id, !es);
+    'click .fa-plus': function (event) {
+        event.preventDefault();
+        debugger
+
+        var id = $(event.currentTarget).parent().parent().attr('id');
         Session.set("parentId", id);
         event.stopPropagation();
+    },
+    'click i':function(e){
+        e.preventDefault();
+        var id = $(event.target).parent().attr('id');
+        var es = Session.get("expandStatus" + id);
+        Session.set("expandStatus" + id, !es);
+        e.stopPropagation();
     }
 });
 
@@ -29,14 +37,28 @@ Template.TopicList.events({
     }
 });
 
-Template.addSubTopicModalForm.events({
-    'click .fa': function (event) {
-        var id = $(event.currentTarget).parent().parent().attr('id');
-        Session.set("parentId", id);
-        event.stopPropagation();
+Template.addTopicModalForm.helpers({
+    topics: function () {
+        var t = Topics.find().fetch();
+        var result = [];
+        _.each(t,function(item){
+            result.push({label:TAPi18n.getLanguage()=='zh-CN'?item.name:item.englishName,value:item._id});
+        });
+        return result;
     }
 });
+Template.updateTopicModalForm.helpers({
+    topics: function () {
+        var thisId = this && this._id;
 
+        var t = Topics.find({_id:{$ne:thisId}}).fetch();
+        var result = [];
+        _.each(t,function(item){
+            result.push({label:TAPi18n.getLanguage()=='zh-CN'?item.name:item.englishName,value:item._id});
+        });
+        return result;
+    }
+})
 Template.TopicList.helpers({
     topics: function () {
         return Topics.find({"parentId": null});
@@ -71,7 +93,7 @@ Template.deleteTopicModalForm.helpers({
     }
 });
 
-AutoForm.addHooks(['addSubTopicModalForm'], {
+AutoForm.addHooks(['addTopicModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
