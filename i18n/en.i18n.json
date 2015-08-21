@@ -208,6 +208,15 @@
             },
             "abstract":{
                 "label": "abstract"
+            },
+            "accessKey": {
+                "label": "Choose an Access Key",
+                "options": {
+                    "1": "Free Content",
+                    "2": "Open Access Content",
+                    "3": "Subscribed Content",
+                    "4": "Free Trial Content"
+                }
             }
         },
         "about": {
