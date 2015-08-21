@@ -246,6 +246,7 @@ Tasks.insertArticleTask = function (logId, result) {
     result.pubStatus = log.pubStatus;//设置文章的出版状态和上传时选择的出版状态一致。
 
     try {
+        inserAccessKey(result);
         inertKeywords(result.keywords);
         articleId = insertArticle(result);
     }
@@ -274,6 +275,10 @@ var inertKeywords = function (a) {
             });
         }
     })
+}
+
+var inserAccessKey = function (a) {
+    a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
 }
 
 var insertArticle = function (a) {
@@ -328,7 +333,8 @@ var insertArticle = function (a) {
         tables: a.tables,
         keywords: a.keywords,
         references: a.references,
-        pubStatus: a.pubStatus //出版状态
+        pubStatus: a.pubStatus, //出版状态
+        accessKey: a.accessKey
     });
     return id;
 }

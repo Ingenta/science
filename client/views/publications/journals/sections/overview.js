@@ -29,6 +29,53 @@ Template.journalCoverSummary.helpers({
    }
 });
 
+Template.journalSummary.helpers({
+    Title: function (id) {
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var publishers = Publishers.findOne({_id:id});
+        var title = iscn?publishers.chinesename:publishers.name;
+        return title;
+    },
+    Frequency: function (num) {
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        if(num=="1"){
+            var title = iscn?"季刊":"Quarterly Publication";
+            return title;
+        }
+        if(num=="2"){
+            var title = iscn?"月刊":"Monthly Publication";
+            return title;
+        }
+        if(num=="3"){
+            var title = iscn?"半月刊":"Semimonthly Publication";
+            return title;
+        }
+        if(num=="4"){
+            var title = iscn?"旬刊":"The ten-day Publication";
+            return title;
+        }
+    },
+    Types: function (num1) {
+        if(num1=="1"){
+            return "EES";
+        }
+        if(num1=="2"){
+            return "DOAJ";
+        }
+    },
+    Language: function (num2) {
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        if(num2=="1"){
+            var title = iscn?"英文":"English";
+            return title;
+        }
+        if(num2=="2"){
+            var title = iscn?"中文":"Chinese";
+            return title;
+        }
+    }
+});
+
 Template.recommendArticles.helpers({
     recommendArticles: function () {
         var journalId = Session.get('currentJournalId');

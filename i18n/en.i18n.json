@@ -17,17 +17,82 @@
     "PleaseWait": "Please wait...",
     "schemas": {
         "publications": {
-            "description": {
-                "label": "Description"
-            },
             "title": {
-                "label": "Publication Name"
+                "label": "English Tiele"
+            },
+            "titleCn": {
+                "label": "Chinese Title"
             },
             "shortTitle": {
-                "label": "Short Title"
+                "label": "Shot Title"
             },
             "issn": {
                 "label": "ISSN"
+            },
+            "createdBy": {
+                "label": "CreatedBy"
+            },
+            "chiefEditor": {
+                "label": "Editor in chief",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "competentOrganization": {
+                "label": "Competent Organization",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "sponsor": {
+                "label": "Sponsor",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "EISSN": {
+                "label": "E-ISSN"
+            },
+            "CN": {
+                "label": "CN"
+            },
+            "publicationDate": {
+                "label": "Date of publication"
+            },
+            "frequencyPublication": {
+                "label": "Frequency of publication",
+                "options": {
+                    "1": "Quarterly Publication",
+                    "2": "Monthly Publication",
+                    "3": "Semimonthly Publication",
+                    "4": "The ten-day Publication"
+                }
+            },
+            "embody": {
+                "label": "Journal Embody Type",
+                "options": {
+                    "1": "EES",
+                    "2": "DOAJ"
+                }
+            },
+            "language": {
+                "label": "Language Type",
+                "options": {
+                    "1": "English",
+                    "2": "Chinese"
+                }
+            },
+            "topicId": {
+                "label": "Topic Subject"
             },
             "email": {
                 "label": "E_Mail"
@@ -61,6 +126,15 @@
                 "options": {
                     "1": "Visible",
                     "0": "Invisible"
+                }
+            },
+            "description": {
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
                 }
             },
             "picture": {
@@ -134,6 +208,15 @@
             },
             "abstract":{
                 "label": "abstract"
+            },
+            "accessKey": {
+                "label": "Choose an Access Key",
+                "options": {
+                    "1": "Free Content",
+                    "2": "Open Access Content",
+                    "3": "Subscribed Content",
+                    "4": "Free Trial Content"
+                }
             }
         },
         "about": {

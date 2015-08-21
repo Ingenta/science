@@ -30,7 +30,7 @@ Meteor.startup(function () {
 Meteor.publish(null, function() {
     if (this.userId) {
         var query = {};
-        var fields = {profile: 1, username: 1, emails: 1,disable: 1,orbit_roles:1};
+        var fields = {profile: 1, username: 1, emails: 1,disable: 1,orbit_roles:1,favorite:1,watch:1};
         if(!Permissions.userCan("user","list-user",this.userId)){
             query._id=this.userId;
         }

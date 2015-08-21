@@ -15,10 +15,9 @@
     "Manager": "主管单位",
     "Publisher": "出版单位",
     "Period": "刊期",
-    "Fortnightly": "半月刊",
     "Editor": "主编",
     "Classification": "期刊收录类型",
-    "Release Date": "发布日期",
+    "Release Date": "创刊日期",
     "Co-ordinator": "主办单位",
     "Description": "描述",
     "Display per page": "显示",
@@ -77,7 +76,7 @@
     "Collections": "文章集",
     "Received": "稿件接收时间",
     "Accepted Date": "稿件收录时间",
-    "Published online": "网络发布时间",
+    "Published online": "发布时间",
     "Accepted" : "预出版",
     "Online First": "优先出版",
     "MOOP": "MOOP",
@@ -196,17 +195,82 @@
     "No Cover Description": "无封面描述",
     "schemas": {
         "publications": {
-            "description": {
-                "label": "英文描述"
-            },
             "title": {
-                "label": "出版物名字"
+                "label": "出版物英文名"
+            },
+            "titleCn": {
+                "label": "出版物中文名"
             },
             "shortTitle": {
                 "label": "简称"
             },
             "issn": {
                 "label": "ISSN"
+            },
+            "createdBy": {
+                "label": "创建者"
+            },
+            "chiefEditor": {
+                "label": "主编",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "competentOrganization": {
+                "label": "主管单位",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "sponsor": {
+                "label": "主办单位",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "EISSN": {
+                "label": "E-ISSN"
+            },
+            "CN": {
+                "label": "CN"
+            },
+            "publicationDate": {
+                "label": "出版日期"
+            },
+            "frequencyPublication": {
+                "label": "刊期",
+                "options": {
+                    "1": "季刊",
+                    "2": "月刊",
+                    "3": "半月刊",
+                    "4": "旬刊"
+                }
+            },
+            "embody": {
+                "label": "期刊收录类型",
+                "options": {
+                    "1": "EES",
+                    "2": "DOAJ"
+                }
+            },
+            "language": {
+                "label": "语种类型",
+                "options": {
+                    "1": "英文",
+                    "2": "中文"
+                }
+            },
+            "topicId": {
+                "label": "主题学科"
             },
             "email": {
                 "label": "邮箱"
@@ -229,10 +293,10 @@
             "accessKey": {
                 "label": "请选择一个资源标签",
                 "options": {
-                    "1": "免费",
-                    "2": "开源",
-                    "3": "订阅",
-                    "4": "免费试用"
+                    "1": "免费获取",
+                    "2": "开源获取",
+                    "3": "订阅获取",
+                    "4": "免费试读"
                 }
             },
             "visible": {
@@ -240,6 +304,15 @@
                 "options": {
                     "1": "可见",
                     "0": "不可见"
+                }
+            },
+            "description": {
+                "label": "期刊描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
                 }
             },
             "picture": {
@@ -313,6 +386,15 @@
             },
             "abstract":{
                 "label": "摘要"
+            },
+            "accessKey": {
+                "label": "请选择一个资源标签",
+                "options": {
+                    "1": "免费获取",
+                    "2": "开源获取",
+                    "3": "订阅获取",
+                    "4": "免费试读"
+                }
             }
         },
         "about": {
@@ -683,11 +765,16 @@
     "SCP User Agreement": "SCP用户注册协议",
     "I accept": "我已阅读",
     "Email this": "在线推荐",
+    "Add to favorites": "添加到收藏夹",
     "Recipient's email address":"收件人的邮件地址",
     "Your email address":"你的邮件地址",
     "Subject": "主题",
     "send": "发送",
     "Email this page":"邮件发送",
+    "Favorite": "收藏",
+    "Favorited":"已收藏",
+    "Journal Watch":"期刊关注",
+    "Watched":"已关注",
     "pubStatus":{
         "normal":"正常",
         "onlineFirst":"优先出版",
