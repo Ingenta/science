@@ -72,10 +72,13 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     topicId: {
-        type: String,
-        unique: true,
-        autoform: {
-            type: 'universe-select'
+        type: [String],
+        optional: true,
+        autoform:{
+            type: "universe-select",
+            afFieldInput: {
+                multiple: true
+            }
         }
     },
     email: {

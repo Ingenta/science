@@ -83,13 +83,12 @@
     {{#autoForm doc=this collection="Publications" id="updatePublicationsModal" type="update" buttonContent=getUpdateButtonContent}}
         <fieldset>
             {{> afQuickField name="shortTitle"}}
-            {{> afQuickField name="createdBy" value=currentUser.username}}
+            {{> afQuickField type="hidden" name="createdBy" value=currentUser.username}}
             {{> afQuickField name="chiefEditor"}}
             {{> afQuickField name="competentOrganization"}}
             {{> afQuickField name="sponsor"}}
             {{> afQuickField name="frequencyPublication"}}
             {{> afQuickField name="embody"}}
-            {{> afQuickField name="topicId" options=getTopics}}
             {{> afQuickField name="description"}}
             {{> afQuickField name="accessKey"}}
             {{> afQuickField name="visible"}}
@@ -140,7 +139,7 @@
                         {{> afQuickField name="EISSN"}}
                         {{> afQuickField name="CN"}}
                         {{> afQuickField name="publicationDate"}}
-                        {{> afQuickField name="createdBy" value=currentUser.username}}
+                        {{> afQuickField type="hidden" name="createdBy" value=currentUser.username}}
                         {{> afQuickField name="chiefEditor"}}
                         {{> afQuickField name="competentOrganization"}}
                         {{> afQuickField name="sponsor"}}
