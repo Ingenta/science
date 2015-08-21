@@ -196,17 +196,82 @@
     "No Cover Description": "无封面描述",
     "schemas": {
         "publications": {
-            "description": {
-                "label": "英文描述"
-            },
             "title": {
-                "label": "出版物名字"
+                "label": "出版物英文名"
+            },
+            "titleCn": {
+                "label": "出版物中文名"
             },
             "shortTitle": {
                 "label": "简称"
             },
             "issn": {
                 "label": "ISSN"
+            },
+            "createdBy": {
+                "label": "创建者"
+            },
+            "chiefEditor": {
+                "label": "主编",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "competentOrganization": {
+                "label": "主管单位",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "sponsor": {
+                "label": "主办单位",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "EISSN": {
+                "label": "E-ISSN"
+            },
+            "CN": {
+                "label": "CN"
+            },
+            "publicationDate": {
+                "label": "出版日期"
+            },
+            "frequencyPublication": {
+                "label": "刊期",
+                "options": {
+                    "1": "季刊",
+                    "2": "月刊",
+                    "3": "半月刊",
+                    "4": "旬刊"
+                }
+            },
+            "embody": {
+                "label": "期刊收录类型",
+                "options": {
+                    "1": "EES",
+                    "2": "DOAJ"
+                }
+            },
+            "language": {
+                "label": "语种类型",
+                "options": {
+                    "1": "英文",
+                    "2": "中文"
+                }
+            },
+            "topicId": {
+                "label": "主题学科"
             },
             "email": {
                 "label": "邮箱"
@@ -229,10 +294,10 @@
             "accessKey": {
                 "label": "请选择一个资源标签",
                 "options": {
-                    "1": "免费",
-                    "2": "开源",
-                    "3": "订阅",
-                    "4": "免费试用"
+                    "1": "免费获取",
+                    "2": "开源获取",
+                    "3": "订阅获取",
+                    "4": "免费试读"
                 }
             },
             "visible": {
@@ -240,6 +305,15 @@
                 "options": {
                     "1": "可见",
                     "0": "不可见"
+                }
+            },
+            "description": {
+                "label": "期刊描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
                 }
             },
             "picture": {

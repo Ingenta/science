@@ -90,7 +90,7 @@
                 <li>
                     <h4>
                         <a href="{{getUrlToJournal publisher title}}">
-                            {{> imageName}} {{title}}
+                            {{> imageName}} {{translateThis titleCn title}}
                         </a>
                     </h4>
                 </li>
@@ -102,5 +102,5 @@
 </template>
 
 <template name="journalDescription">
-    {{> toggleField field=description _id=_id}}
+    {{> toggleField field=description.en _id=_id}}
 </template>

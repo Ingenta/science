@@ -12,8 +12,8 @@
     </div>
     <p><img src="{{getImageHelper picture}}" width="137" height="200"/></p>
     <p>ISSN: {{issnFormat issn}}</p>
-    <p>E-ISSN: 2095-9419</p>
-    <p>CN: 11-1784/N</p>
+    <p>E-ISSN: {{EISSN}}</p>
+    <p>CN: {{CN}}</p>
 </template>
 <template name="journalSummary">
     <div class="row">
@@ -22,19 +22,19 @@
         </div>
         <div class="col-xs-9">
             <div class="row">
-                <h4>{{title}}</h4>
+                <h4>{{translateThis titleCn title}}</h4>
                 <div class="dotted">
                     <div class="col-xs-6">
-                        <p>{{_ "Manager"}}:</p>
-                        <p>{{_ "Publisher"}}:</p>
-                        <p>{{_ "Period"}}: {{_ "Fortnightly"}}</p>
-                        <p>{{_ "Editor"}}:</p>
+                        <p>{{_ "Manager"}}:&nbsp;{{translateThis competentOrganization.cn competentOrganization.en}}</p>
+                        <p>{{_ "Publisher"}}:&nbsp;{{Title publisher}}</p>
+                        <p>{{_ "Period"}}:&nbsp;{{Frequency frequencyPublication}}</p>
+                        <p>{{_ "Editor"}}:&nbsp;{{translateThis chiefEditor.cn chiefEditor.en}}</p>
                     </div>
                     <div class="col-xs-6">
-                        <p>{{_ "Co-ordinator"}}:</p>
-                        <p>{{_ "Classification"}}:</p>
-                        <p>{{_ "Language"}}: {{_ "English"}}</p>
-                        <p>{{_ "Release Date"}}: 2014-11-12</p>
+                        <p>{{_ "Co-ordinator"}}:&nbsp;{{translateThis sponsor.cn sponsor.en}}</p>
+                        <p>{{_ "Classification"}}:&nbsp;{{Types embody}}</p>
+                        <p>{{_ "Language"}}:&nbsp;{{Language language}}</p>
+                        <p>{{_ "Release Date"}}:&nbsp;{{formatDate publicationDate "YYYY-MM-DD"}}</p>
                     </div>
                 </div>
                 <h5>{{_ "Description"}}</h5>
@@ -43,7 +43,7 @@
                         {{> updatePublicationDescriptionModalForm}}
                     {{/if}}
                 </div>
-                {{description}}
+                {{translateThis description.cn description.en}}
             </div>
         </div>
     </div>
