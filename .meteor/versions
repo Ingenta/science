@@ -112,6 +112,9 @@ observe-sequence@1.0.6
 ongoworks:security@1.2.0
 orbit:permissions@0.1.1
 ordered-dict@1.0.3
+ostrio:cookies@1.0.1
+ostrio:files@1.3.7
+ostrio:jsextensions@0.0.4
 perak:user-roles@1.0.10
 raix:eventemitter@0.1.3
 raix:handlebar-helpers@0.2.4

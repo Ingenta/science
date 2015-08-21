@@ -1,0 +1,28 @@
+<template name="mediaList">
+	{{> addMediaForm}}
+	<ul class="list-unstyled">
+	{{#each medias}}
+		<li>
+			<div class="col-xs-8">
+				<video preload="auto" controls="controls">
+					<source src="{{fileURL this}}?play=true" type="{{type}}"/>
+				</video>
+			</div>
+			<div class="col-xs-4">
+
+			</div>
+		</li>
+	{{/each}}
+	</ul>
+</template>
+
+<template name="addMediaForm">
+	<input class="btn btn-success" id="file" type="file"/>
+	{{#if progress}}
+		<div class="progress">
+			<div style="width:{{progress}}%" class="progress-bar progress-bar-striped active">
+				<span class="sr-only">{{progress}}</span>
+			</div>
+		</div>
+	{{/if}}
+</template>

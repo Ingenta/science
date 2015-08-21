@@ -197,7 +197,8 @@ Router.map(function () {
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('about'),
                 Meteor.subscribe('about_articles'),
-                Meteor.subscribe('allCollections')
+                Meteor.subscribe('allCollections'),
+                Meteor.subscribe('medias')
             ]
         }
 
@@ -232,7 +233,8 @@ Router.map(function () {
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('about'),
-                Meteor.subscribe('about_articles')
+                Meteor.subscribe('about_articles'),
+                Meteor.subscribe('medias')
             ]
         }
 
