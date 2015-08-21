@@ -10,7 +10,6 @@ arthuryyx:ftp@0.3.10
 arthuryyx:simple-schema-i18n@0.1.9
 autoupdate@1.2.1
 babrahams:editable-json@0.4.3
-barbatus:stars-rating@1.0.2
 base64@1.0.3
 binary-heap@1.0.3
 blaze@2.1.2
@@ -103,6 +102,7 @@ mongo-livedata@1.0.8
 mpowaga:autoform-summernote@0.4.2
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.1
+mrt:jquery-raty@2.7.2
 mrt:mathjax@0.6.3
 mrt:moment@2.8.1
 msavin:mongol@1.1.5
