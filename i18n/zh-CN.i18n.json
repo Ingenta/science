@@ -17,7 +17,7 @@
     "Period": "刊期",
     "Editor": "主编",
     "Classification": "期刊收录类型",
-    "Release Date": "出版日期",
+    "Release Date": "创刊日期",
     "Co-ordinator": "主办单位",
     "Description": "描述",
     "Display per page": "显示",
@@ -773,6 +773,8 @@
     "Email this page":"邮件发送",
     "Favorite": "收藏",
     "Favorited":"已收藏",
+    "Journal Watch":"期刊关注",
+    "Watched":"已关注",
     "pubStatus":{
         "normal":"正常",
         "onlineFirst":"优先出版",

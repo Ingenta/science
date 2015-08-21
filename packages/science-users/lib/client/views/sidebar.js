@@ -21,12 +21,23 @@ Template.LayoutSideBar.helpers({
     isArticlePage: function () {
         return Router.current().route.getName()=="article.show";
     },
+    isJourmalPage: function () {
+        return Router.current().route.getName()=="journal.name";
+    },
     favoriteName: function(){
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if(Meteor.userId()){
             var fav = Meteor.user().favorite || [];
             return _.contains(fav, article._id)?TAPi18n.__("Favorited"):TAPi18n.__("Favorite");
+        }
+    },
+    watchName: function(){
+        var currentTitle = Router.current().params.journalTitle;
+        var journal = Publications.findOne({title: currentTitle});
+        if(Meteor.userId()){
+            var wat = Meteor.user().watch || [];
+            return _.contains(wat, journal._id)?TAPi18n.__("Watched"):TAPi18n.__("Journal Watch");
         }
     }
 });
@@ -44,5 +55,18 @@ Template.LayoutSideBar.events({
             }
             Users.update({_id: Meteor.userId()},{$set:{favorite: fav}});
         }
-    }
+    },
+    "click .watch": function(){
+        var currentTitle = Router.current().params.journalTitle;
+        var journal = Publications.findOne({title: currentTitle});
+        if(Meteor.userId()){
+            var wat = Meteor.user().watch || [];
+            if(_.contains(wat, journal._id)){
+                wat = _.without(wat, journal._id)
+            }else{
+                wat.push(journal._id)
+            }
+            Users.update({_id: Meteor.userId()},{$set:{watch: wat}});
+        }
+}
 })
