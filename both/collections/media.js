@@ -15,6 +15,14 @@ MediasSchema  = new SimpleSchema({
 		type:Science.schemas.MultiLangSchema
 	},
 	description:{
+		optional:true,
 		type:Science.schemas.MultipleAreaSchema
+	//},
+	//media:{
+	//	type:String
 	}
 });
+
+Meteor.startup(function(){
+	MediasSchema.i18n("schemas.medias");
+})

@@ -714,6 +714,26 @@
             "url": {
                 "label": "链接"
             }
+        },
+        "medias":{
+            "title": {
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "description": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            }
         }
     },
     "roles": "角色",
@@ -779,5 +799,7 @@
         "normal":"正常",
         "onlineFirst":"优先出版",
         "preset":"预出版"
-    }
+    },
+    "mediaFile":"文件",
+    "Please choose a media file":"请选择一个媒体文件！"
 }

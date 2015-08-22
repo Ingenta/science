@@ -1,43 +1,66 @@
 <template name="mediaList">
-	{{> addMediaForm}}
+	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success"}}{{_ "Add new"}}{{/jkafModal}}
 	<ul class="list-unstyled">
 		{{#each medias}}
 			<li>
-				<div class="col-xs-8">
-					<video preload="auto" controls="controls">
-						<source src="{{fileURL this}}?play=true" type="{{type}}"/>
-					</video>
-				</div>
-				<div class="col-xs-4">
+				<div class="row">
+					<div class="col-xs-5">
+						{{> Template.dynamic template=dynamicTemp data=this}}
 
+					</div>
+					<div class="col-xs-7">
+						<div class="pull-right">
+							<a href="#" class="fa fa-trash"></a>
+						</div>
+						<h4>{{translateThis meta.title.cn meta.title.en}}</h4>
+
+						<p>{{translateThis meta.description.cn meta.description.en}}</p>
+					</div>
 				</div>
 			</li>
 		{{/each}}
 	</ul>
 </template>
 
+<template name="videoTemplate">
+	<video width="100%" controls="controls">
+		<source src="{{fileURL this}}?play=true" type="{{type}}"/>
+	</video>
+</template>
+
+<template name="audioTemplate">
+	<audio width="100%" controls="controls">
+		<source src="{{fileURL this}}?play=true" type="{{type}}"/>
+	</audio>
+</template>
+
+<template name="fileDownloadTemplate">
+	<a href="{{fileURL this}}?download=true">{{name}}</a>
+</template>
+
 <template name="addMediaForm">
 	{{#autoForm schema="MediasSchema" id="addMediaModalForm"}}
 		<div class="modal-body">
-			{{> afQuickField name="title.en"}}
-			{{> afQuickField name="title.cn"}}
-			{{> afQuickField name="description.en"}}
-			{{> afQuickField name="description.cn"}}
-			<div class="row">
-				<div class="col-xs-4">
-					<input class="btn btn-success" id="file" type="file"/>
-				</div>
-				<div class="col-xs-8">
-					{{#if progress}}
-						<div class="progress">
-							<div style="width:{{progress}}%" class="progress-bar progress-bar-striped active">
-								<span class="sr-only">{{progress}}</span>
-							</div>
-						</div>
-					{{/if}}
-				</div>
-			</div>
+			{{> afObjectField name="title"}}
+			{{> afObjectField name="description"}}
+			<div class="form-group{{#if isMediaInvalid}} has-error{{/if}}">
+				<label class="control-label">{{_ "mediaFile"}}</label>
+				<input class="media-uploader" name="media" type="file"/>
 
+				{{#if isMediaInvalid}}
+					<span class="help-block">{{_ "Please choose a media file"}}</span>
+				{{/if}}
+			</div>
+			{{#if progress}}
+				<div class="form-group progress">
+					<div style="width:{{progress}}%" class="progress-bar progress-bar-striped active">
+						<span class="sr-only">{{progress}}</span>
+					</div>
+				</div>
+			{{/if}}
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary">{{_ "Create"}}</button>
 		</div>
 	{{/autoForm}}
 </template>
