@@ -1,3 +1,4 @@
+//ReactiveDict的有效范围似乎限于本JS文件内，所以暂时不分成多个文件。
 var pageSession = new ReactiveDict();
 
 
@@ -33,11 +34,11 @@ Template.SolrSearchBar.events({
         var sword = $('#searchInput').val();
         if (sword){
             if(Router.current().route.getName()=='solrsearch'){
+                //已经在搜索结果页时，通过通栏检索框进行检索时，清空筛选条件，重新检索
                 pageSession.set("query",sword);
                 pageSession.set("filterQuery",undefined);
-            }else{
-                Router.go('/search?q=' + sword);
             }
+            Router.go('/search?q=' + sword);//从其他页面通过通栏检索进行检索
         }
     },
     'keydown input': function (event) {
@@ -47,9 +48,8 @@ Template.SolrSearchBar.events({
                 if(Router.current().route.getName()=='solrsearch'){
                     pageSession.set("query",sword);
                     pageSession.set("filterQuery",undefined);
-                }else{
-                    Router.go('/search?q=' + sword);
                 }
+                Router.go('/search?q=' + sword);
             }
         }
     }
@@ -57,7 +57,10 @@ Template.SolrSearchBar.events({
 
 Template.SolrSearchResults.onRendered(function(){
     if(Router.current().params.query.q){
+        //刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
         pageSession.set("query",Router.current().params.query.q);
+        var fq=Router.current().params.query.fq;
+        console.log(fq);
     }
 });
 
@@ -86,7 +89,7 @@ Template.SolrSearchResults.helpers({
                                     name:topic.englishName,
                                     cname:topic.name,
                                     count:facetTopic[j+1],
-                                    fq:fields[i]+":"+facetTopic[j]
+                                    fq:fields[i]+":"+facetTopic[j].replace(/ /g,'\\ ')
                                 })
                             }
                         }
@@ -116,7 +119,7 @@ Template.SolrSearchResults.helpers({
                                 name:facetAuthor[j],
                                 cname:facetAuthor[j],
                                 count:facetAuthor[j+1],
-                                fq:fields[i]+":"+facetAuthor[j]
+                                fq:fields[i]+":"+facetAuthor[j].replace(/ /g,'\\ ')
                             })
                         }
                     }
@@ -130,7 +133,7 @@ Template.SolrSearchResults.helpers({
                                 name:facetAuthor[j],
                                 cname:facetAuthor[j],
                                 count:facetAuthor[j+1],
-                                fq:fields[i]+":"+facetAuthor[j]
+                                fq:fields[i]+":"+facetAuthor[j].replace(/ /g,'\\ ')
                             })
                         }
                     }
@@ -240,6 +243,9 @@ Template.solrFilterItem.events({
             fq = _.union(fq,this.fq)
         }
         pageSession.set("filterQuery",fq);
+        console.log(fq)
+        var sword=pageSession.get('query');
+        Router.go('/search?q=' + sword+'&fq='+fq);
     }
 });
 
