@@ -104,6 +104,7 @@ PublicationsSchema = new SimpleSchema({
         type: String
     },
     description: {
+        optional:true,
         type: Science.schemas.MultipleAreaSchema
     },
     publisher: {
