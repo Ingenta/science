@@ -34,8 +34,8 @@
                     <h4>
                         <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
                     </h4>
-
                 </li>
+                <li>{{_ "createAt"}}: {{formatDate createdAt "YYYY-MM-DD"}}</li>
             </ul>
             {{> collectionDesc}}
         </div>
