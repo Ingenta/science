@@ -95,7 +95,7 @@ Meteor.startup(function () {
             {key: "publication", e: "Publications", c: "出版物"},
             {key: "topic", e: "Topics", c: "主题"},
             {key: "collections", e: "Collections", c: "文章集"},
-            {key: "authors", e: "Authors", c: "作者中心"},
+            {key: "author center", e: "Author Center", c: "作者中心"},
             {key: "institutions", e: "Institution", c: "机构中心"}
         ];
         _.each(names, function (name) {

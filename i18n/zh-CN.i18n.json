@@ -81,7 +81,7 @@
     "Accepted" : "预出版",
     "Online First": "优先出版",
     "MOOP": "MOOP",
-    "Author": "作者中心",
+    "Author Center": "作者中心",
     "Last release was": "最后更新于",
     "Any Publisher": "+ 更多",
     "Editors": "编辑",
@@ -336,7 +336,7 @@
                     "Accepted": "预出版",
                     "Online First": "优先出版",
                     "MOOP": "MOOP",
-                    "Author": "作者中心"
+                    "Author Center": "作者中心"
                 }
             }
         },
