@@ -5,19 +5,19 @@
 </template>
 
 <template name="institutionDetail">
-    <div class="pull-right">
-        {{#if can "modify-institution" "institution" }}
-            {{> updateInstitutionForm}}
-        {{/if}}
-    </div>
     <div class="container-fluid">
+        {{!--<div class="pull-right">
+            {{#if can "modify-institution" "institution" }}
+                {{> updateInstitutionForm}}
+            {{/if}}
+        </div>--}}
         <h3>{{translateThis name.cn name.en}}</h3>
 
         <div class="row">
             <div class="col-xs-4">
                 <img width="100%" height="auto" src="{{getImageHelper logo}}"/>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-8">
                 <ul class="list-unstyled">
                     <li>{{_ "Institution Number"}}: {{number}}</li>
                     <hr>
@@ -45,16 +45,15 @@
 
 <template name="institutionOptions">
     {{#institutionTabs name="" tabs=tabs activeTab="detail"}}
-        {{#tabContent slug="detail"}}
-            {{#with info}}
+        {{#with info}}
+            {{#tabContent slug="detail"}}
                 {{>institutionDetail}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="account"}}
-
-        {{/tabContent}}
-
+            {{#tabContent slug="account"}}
+                {{>institutionAccounts}}
+            {{/tabContent}}
+        {{/with}}
     {{/institutionTabs}}
 
 </template>
