@@ -795,6 +795,8 @@
     "Favorited":"已收藏",
     "Journal Watch":"期刊关注",
     "Watched":"已关注",
+    "Please enter the receiving mailbox":"请输入接收邮箱",
+    "You need to enter email address!":"你需要输入邮件地址!",
     "pubStatus":{
         "normal":"正常",
         "onlineFirst":"优先出版",

@@ -8,12 +8,12 @@
             {{#if can "modify-article" "resource" }}
                 {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
             {{/if}}
-            <h3>{{translateThis title.cn title.en}}</h3>
-
+            <span style="font-size:24px;font-weight: bold;">
+                {{translateThis title.cn title.en}}
+            </span>
             {{#if can "modify-article" "resource" }}
                 {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
             {{/if}}
-
             <ul>
                 <li>
                     <p>

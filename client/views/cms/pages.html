@@ -6,15 +6,29 @@
         {{#unless isHomePage key}}
             <h2>{{getPageTitle key}}</h2>
         {{/unless}}
-        <div class="pull-right">
-            {{#if can "add-publisher" "publisher" }}
-                {{> updatePagesModalForm}}
-            {{/if}}
-        </div>
+        {{#if isHomePage key}}
+            <div class="pull-right">
+                {{#if can "add-publisher" "publisher" }}
+                    {{> updateHomePagesModalForm}}
+                {{/if}}
+            </div>
+        {{/if}}
+        {{#unless isHomePage key}}
+            <div class="pull-right">
+                {{#if can "add-publisher" "publisher" }}
+                    {{> updatePagesModalForm}}
+                {{/if}}
+            </div>
+        {{/unless}}
     </div>
     <div class="row">
         <p>{{{getPageDescription key}}}</p>
     </div>
+</template>
+
+<template name="updateHomePagesModalForm">
+    {{#afModal class="fa fa-pencil" collection="Pages" operation="update" doc=getPageId prompt=getPrompt buttonContent=getUpdateButtonContent omitFields="key,title"}}
+    {{/afModal}}
 </template>
 
 <template name="updatePagesModalForm">

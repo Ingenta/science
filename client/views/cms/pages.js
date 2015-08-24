@@ -29,6 +29,17 @@ Template.pageElement.helpers({
     }
 });
 
+Template.updateHomePagesModalForm.helpers({
+    getPageId: function (key) {
+        var key = Session.get("thisPageElement")
+        var element = Pages.findOne({key: key});
+        if (!element) {
+            return
+        }
+        return element._id;
+    }
+});
+
 Template.updatePagesModalForm.helpers({
     getPageId: function (key) {
         var key = Session.get("thisPageElement")
