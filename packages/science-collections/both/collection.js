@@ -14,23 +14,10 @@ ArticleCollections.allow({
 
 ArticleCollectionsSchema = new SimpleSchema({
 	title: {
-		type: String,
-		unique: true
-	},
-	chinesetitle:{
-		type: String
+		type: Science.schemas.MultiLangSchema
 	},
 	description:{
-		type: String,
-		autoform: {
-			rows: 2
-		}
-	},
-	chinesedescription: {
-		type: String,
-		autoform: {
-			rows: 2
-		}
+		type: Science.schemas.MultipleAreaSchema
 	},
 	picture: {
 		type: String,

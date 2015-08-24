@@ -41,6 +41,16 @@ Template.displayPublication.helpers({
 Template.updatePublicationModalForm.helpers({
     getTitle: function () {
         return TAPi18n.__("Update");
+    },
+    getTopics: function () {
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var topics = Topics.find({},{name:1,englishName:1}).fetch();
+        var result = [];
+        _.each(topics,function(item){
+            var name = iscn?item.name:item.englishName;
+            result.push({label:name,value:item._id});
+        });
+        return result;
     }
 });
 Template.deletePublicationModalForm.helpers({
@@ -63,10 +73,9 @@ Template.SinglePublication.helpers({
 });
 
 Template.addPublicationForm.helpers({
-    getTopics:function(){
-        console.log($("#currentUser.username"));
+    getTopics: function () {
         var iscn=TAPi18n.getLanguage()==='zh-CN';
-        var topics = Topics.find().fetch();
+        var topics = Topics.find({},{name:1,englishName:1}).fetch();
         var result = [];
         _.each(topics,function(item){
             var name = iscn?item.name:item.englishName;
@@ -93,7 +102,7 @@ AutoForm.addHooks(['addPublicationModalForm'], {
 
 Template.displayPublication.events({
     'click .fa-eye': function (event) {
-        Publications.update({_id:this._id},{$set:{visible:2}});
+        //Publications.update({_id:this._id},{$set:{visible:2}});
         Publications.update({_id:this._id},{$set:{visible:0}});
     },
     'click .fa-eye-slash': function (event) {

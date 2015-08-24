@@ -40,7 +40,7 @@ Template.PublicationsAlphabetBar.events({
     'click .resetAlphabetFilter': function (event) {
         Session.set('pubFirstLetter', undefined);
         Session.set('PerPage', 10);
-    },
+    }
 })
 Template.FilterList.helpers({
     publishers: function () {
@@ -73,7 +73,6 @@ Template.FilterList.helpers({
     selectedPublisher: function () {
         return Session.get('filterPublisher');
     }
-
 });
 
 Template.FilterList.events({

@@ -52,6 +52,8 @@
     "Pending": "未决定",
     "Upload": "上传",
     "Institution": "机构",
+    "Institution Detail": "机构详情",
+    "Institution Account": "机构帐号",
     "Parse": " 解析",
     "Extract": "解压",
     "moreContentBy": "作者其他文章",
@@ -80,7 +82,7 @@
     "Accepted" : "预出版",
     "Online First": "优先出版",
     "MOOP": "MOOP",
-    "Author": "作者中心",
+    "Author Center": "作者中心",
     "Last release was": "最后更新于",
     "Any Publisher": "+ 更多",
     "Editors": "编辑",
@@ -255,7 +257,7 @@
                     "4": "旬刊"
                 }
             },
-            "embody": {
+            "included": {
                 "label": "期刊收录类型",
                 "options": {
                     "1": "EES",
@@ -335,7 +337,7 @@
                     "Accepted": "预出版",
                     "Online First": "优先出版",
                     "MOOP": "MOOP",
-                    "Author": "作者中心"
+                    "Author Center": "作者中心"
                 }
             }
         },
@@ -522,16 +524,22 @@
         },
         "collections": {
             "title": {
-                "label": "英文标题"
-            },
-            "chinesetitle": {
-                "label": "中文标题"
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "description": {
-                "label": "英文简介"
-            },
-            "chinesedescription": {
-                "label": "中文简介"
+                "label": "描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "picture": {
                 "label": "选择图片"
@@ -542,7 +550,22 @@
         },
         "institutions": {
             "name": {
-                "label": "机构名称"
+                "label": "机构名称",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "description": {
+                "label": "描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "number": {
                 "label": "机构编号"
@@ -562,13 +585,15 @@
                 "label": "Logo"
             },
             "ipRange": {
-                "label": "IP范围"
-            },
-            "ipRange.$.startIP": {
-                "label": "起始 IP"
-            },
-            "ipRange.$.endIP": {
-                "label": "结束 IP"
+                "label": "IP范围",
+                "$": {
+                    "startIP": {
+                        "label": "起始 IP"
+                    },
+                    "endIP": {
+                        "label": "结束 IP"
+                    }
+                }
             }
         },
         "recommend": {
@@ -734,6 +759,17 @@
                     "label": "英文"
                 }
             }
+        },
+        "emails":{
+            "myEmail": {
+                "label": "收件人的邮件地址:"
+            },
+            "youEmail": {
+                "label": "你的邮件地址:"
+            },
+            "subject": {
+                "label": "主题:"
+            }
         }
     },
     "roles": "角色",
@@ -786,9 +822,6 @@
     "I accept": "我已阅读",
     "Email this": "在线推荐",
     "Add to favorites": "添加到收藏夹",
-    "Recipient's email address":"收件人的邮件地址",
-    "Your email address":"你的邮件地址",
-    "Subject": "主题",
     "send": "发送",
     "Email this page":"邮件发送",
     "Favorite": "收藏",
@@ -803,5 +836,16 @@
         "preset":"预出版"
     },
     "mediaFile":"文件",
-    "Please choose a media file":"请选择一个媒体文件！"
+    "Please choose a media file":"请选择一个媒体文件！",
+    "Institution Number": "机构编号",
+    "Institution Type": "机构类型",
+    "IP Range": "IP范围",
+    "Start IP": "起始 IP",
+    "End IP": "结束 IP",
+    "Librarian": "图书馆",
+    "Publisher": "出版商",
+    "Editorial Board": "编辑部",
+    "University": "大学",
+    "Research Institution": "研究机构",
+    "Others": "其他"
 }
