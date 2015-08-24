@@ -41,5 +41,9 @@ Config={
         port:"8983",
         core:"/articles",
         path:"/solr"
+    },
+    Media:{
+        allowType:['mp3', 'mp4','ppt','pptx'],
+        maxSize:200 //MB
     }
-}
+};

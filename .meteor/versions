@@ -10,6 +10,7 @@ arthuryyx:ftp@0.3.10
 arthuryyx:simple-schema-i18n@0.1.9
 autoupdate@1.2.1
 babrahams:editable-json@0.4.3
+barbatus:stars-rating@1.0.2
 base64@1.0.3
 binary-heap@1.0.3
 blaze@2.1.2
@@ -112,6 +113,9 @@ observe-sequence@1.0.6
 ongoworks:security@1.2.0
 orbit:permissions@0.1.1
 ordered-dict@1.0.3
+ostrio:cookies@1.0.1
+ostrio:files@1.3.7
+ostrio:jsextensions@0.0.4
 perak:user-roles@1.0.10
 raix:eventemitter@0.1.3
 raix:handlebar-helpers@0.2.4

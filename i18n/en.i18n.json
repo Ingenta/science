@@ -208,6 +208,15 @@
             },
             "abstract":{
                 "label": "abstract"
+            },
+            "accessKey": {
+                "label": "Choose an Access Key",
+                "options": {
+                    "1": "Free Content",
+                    "2": "Open Access Content",
+                    "3": "Subscribed Content",
+                    "4": "Free Trial Content"
+                }
             }
         },
         "about": {
@@ -527,6 +536,26 @@
             "url": {
                 "label": "Link"
             }
+        },
+        "medias":{
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "description":{
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            }
         }
     },
     "roles": "Roles",
@@ -576,5 +605,7 @@
         "normal":"normal",
         "onlineFirst":"online first",
         "preset":"preset"
-    }
+    },
+    "mediaFile":"File",
+    "Please choose a media file":"Please choose a media file"
 }

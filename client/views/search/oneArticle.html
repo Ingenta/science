@@ -7,7 +7,7 @@
 	        {{#if can "delete-article" "resource"}}
 	        <a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>
 	        {{/if}}
-            <h4><div class="resultsList"><img src="/icon_access_oa.gif"><a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></div></h4>
+            <h4><div class="resultsList">{{> imageName}}<a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></div></h4>
 
 	        <ul class="list-unstyled">
                 <li>

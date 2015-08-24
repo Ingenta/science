@@ -17,7 +17,7 @@
     "Period": "刊期",
     "Editor": "主编",
     "Classification": "期刊收录类型",
-    "Release Date": "出版日期",
+    "Release Date": "创刊日期",
     "Co-ordinator": "主办单位",
     "Description": "描述",
     "Display per page": "显示",
@@ -386,6 +386,15 @@
             },
             "abstract":{
                 "label": "摘要"
+            },
+            "accessKey": {
+                "label": "请选择一个资源标签",
+                "options": {
+                    "1": "免费获取",
+                    "2": "开源获取",
+                    "3": "订阅获取",
+                    "4": "免费试读"
+                }
             }
         },
         "about": {
@@ -705,6 +714,26 @@
             "url": {
                 "label": "链接"
             }
+        },
+        "medias":{
+            "title": {
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "description": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            }
         }
     },
     "roles": "角色",
@@ -772,5 +801,7 @@
         "normal":"正常",
         "onlineFirst":"优先出版",
         "preset":"预出版"
-    }
+    },
+    "mediaFile":"文件",
+    "Please choose a media file":"请选择一个媒体文件！"
 }

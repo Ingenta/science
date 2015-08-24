@@ -4,11 +4,16 @@
     {{> tableModal tables}}
     <div class="row articleHeading">
         <div class="col-xs-9">
-            <h3><img src="/icon_access_fc.gif"/> {{translateThis title.cn title.en}}
-                &nbsp;&nbsp;
-                {{#if can "modify-article" "resource" }}
-                    {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
-                {{/if}}</h3>
+            {{> imageName}}
+            {{#if can "modify-article" "resource" }}
+                {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
+            {{/if}}
+            <h3>{{translateThis title.cn title.en}}</h3>
+
+            {{#if can "modify-article" "resource" }}
+                {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
+            {{/if}}
+
             <ul>
                 <li>
                     <p>
@@ -235,6 +240,13 @@
     {{!-- {{> afObjectField name="title"}} --}}
         {{> afQuickField name="title.en"}}
         {{> afQuickField name="title.cn"}}
+        <button type="submit" class="btn btn-primary">update</button>
+    {{/autoForm}}
+</template>
+
+<template name="updateArticleAccessKeyModalForm">
+    {{#autoForm schema="ArticleAccessKeySchema" collection="Articles" id="updateArticleAccessKeyForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+        {{> afQuickField name="accessKey"}}
         <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>

@@ -2,36 +2,42 @@ this.Articles = new Meteor.Collection("articles");
 
 
 this.Articles.allow({
-	insert: function (userId, doc) {
-		return Permissions.userCan("add-article", "resource", userId);
-	},
-	update: function (userId, doc) {
-		return Permissions.userCan("modify-article", "resource", userId);
-	},
-	remove: function (userId, doc) {
-		return Permissions.userCan("delete-article", "resource", userId);
-	}
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-article", "resource", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-article", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-article", "resource", userId);
+    }
 });
 
-ArticleTitleSchema= new SimpleSchema({
-	title:{
-		type: Science.schemas.MultiLangSchema
-	}
+ArticleTitleSchema = new SimpleSchema({
+    title: {
+        type: Science.schemas.MultiLangSchema
+    }
 });
-ArticleAbstractSchema=new SimpleSchema({
-	abstract:{
-		type: String,
-		autoform: {
-			afFieldInput: {
-				type: 'summernote'
-			}
-		}
-	}
+ArticleAbstractSchema = new SimpleSchema({
+    abstract: {
+        type: String,
+        autoform: {
+            afFieldInput: {
+                type: 'summernote'
+            }
+        }
+    }
 
 });
-Meteor.startup(function(){
-	ArticleTitleSchema.i18n("schemas.articles");
-	ArticleAbstractSchema.i18n("schemas.articles");
+ArticleAccessKeySchema = new SimpleSchema({
+    accessKey: {
+        type: String
+    }
+});
+Meteor.startup(function () {
+    ArticleTitleSchema.i18n("schemas.articles");
+    ArticleAbstractSchema.i18n("schemas.articles");
+    ArticleAccessKeySchema.i18n("schemas.articles");
 });
 //ArticlesSchema  = new SimpleSchema({
 //    title: {
