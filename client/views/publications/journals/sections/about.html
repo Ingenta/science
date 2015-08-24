@@ -3,18 +3,18 @@
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
                 <li class="active"><a class="activeButton" data-aboutid="a" href="#a"  data-toggle="tab">{{_ "Editorial Policies"}}</a></li>
-                <li><a class="activeButton" data-aboutid="b" href="#b"  data-toggle="tab">{{_ "Readers"}}</a></li>
-                <li><a class="activeButton" data-aboutid="c" href="#c"  data-toggle="tab">{{_ "Contact"}}</a></li>
+                <li><a class="activeButton" data-aboutid="b" href="#b"  data-toggle="tab">{{_ "Notice To Readers"}}</a></li>
+                <li><a class="activeButton" data-aboutid="c" href="#c"  data-toggle="tab">{{_ "Contact Us"}}</a></li>
             </ul>
         </div>
         <div class="tab-content col-xs-9">
             <div class="tab-pane active" id="a"><div class="part"><strong>{{_ "Editorial Policies"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
                 {{> aboutArticlesList}}
             </div>
-            <div class="tab-pane" id="b"><div class="part"><strong>{{_ "Readers"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
+            <div class="tab-pane" id="b"><div class="part"><strong>{{_ "Notice To Readers"}}</strong><div class="pull-right">{{#if can "add-about-articles" "resource"  }}{{> addAboutArticlesModalForm}}{{/if}}</div></div><hr>
                 {{> aboutArticlesList}}
             </div>
-            <div class="tab-pane" id="c"><div class="part"><strong>{{_ "Contact"}}</strong></div><hr>
+            <div class="tab-pane" id="c"><div class="part"><strong>{{_ "Contact Us"}}</strong></div><hr>
                 {{> editorialMemberList}}
             </div>
         </div>
