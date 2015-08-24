@@ -32,7 +32,7 @@
             <ul class="list-unstyled">
                 <li>
                     <h4>
-                        <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis chinesetitle title}}</a>
+                        <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
                     </h4>
 
                 </li>
@@ -48,7 +48,6 @@
 </template>
 
 <template name="updateCollectionForm">
-    {{#afModal class="fa fa-pencil" title=getTitle collection="ArticleCollections" doc=_id operation="update"
-    buttonContent=getUpdateButtonContent omitFields="articles,publisherId"}}
+    {{#afModal class="fa fa-pencil" title=getTitle collection="ArticleCollections" doc=_id operation="update" buttonContent=getUpdateButtonContent omitFields="articles,publisherId,journalId"}}
     {{/afModal}}
 </template>
