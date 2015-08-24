@@ -157,7 +157,7 @@
                     "Accepted": "Accepted",
                     "Online First": "Online First",
                     "MOOP": "MOOP",
-                    "Author": "Author"
+                    "Author Center": "Author Center"
                 }
             }
         },
@@ -344,16 +344,22 @@
         },
         "collections": {
             "title": {
-                "label": "English Title"
-            },
-            "chinesetitle": {
-                "label": "Chinese Title"
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "description": {
-                "label": "English Description"
-            },
-            "chinesedescription": {
-                "label": "Chinese Description"
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "picture": {
                 "label": "Choose file"
@@ -364,7 +370,22 @@
         },
         "institutions": {
             "name": {
-                "label": "Institution Name"
+                "label": "Institution Name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "description": {
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "number": {
                 "label": "Institution No."
@@ -376,7 +397,7 @@
                     "2": "Publisher",
                     "3": "Editorial Board",
                     "4": "University",
-                    "5": "Institution",
+                    "5": "Research Institution",
                     "6": "Others"
                 }
             },
@@ -384,13 +405,15 @@
                 "label": "Logo"
             },
             "ipRange": {
-                "label": "IP Range"
-            },
-            "ipRange.$.startIP": {
-                "label": "Start IP"
-            },
-            "ipRange.$.endIP": {
-                "label": "End IP"
+                "label": "IP Range",
+                "$": {
+                    "startIP": {
+                        "label": "Start IP"
+                    },
+                    "endIP": {
+                        "label": "End IP"
+                    }
+                }
             }
         },
         "recommend": {

@@ -22,6 +22,7 @@
         <div class="col-xs-8">
             <div class="pull-right">
                 {{#if can "modify-institution" "institution" }}
+                    {{> availabilityModle}}
                     {{> updateInstitutionForm}}
                 {{/if}}
                 {{#if can "delete-institution" "institution" }}
@@ -31,10 +32,8 @@
             <ul class="list-unstyled">
                 <li>
                     <h4>
-                        {{name}}
-                        {{!--<a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis chinesetitle title}}</a>--}}
+                        <a href="{{pathFor 'admin.institutions.detail' insId=_id}}">{{translateThis name.cn name.en}}</a>
                     </h4>
-
                 </li>
             </ul>
             {{> institutionDesc}}
@@ -48,6 +47,15 @@
 </template>
 
 <template name="updateInstitutionForm">
-    {{#afModal formId="updateInstitutionModalForm" class="fa fa-pencil" title=getTitle collection="Institutions" doc=_id operation="update" omitFields="ipRange.$.startNum, ipRange.$.endNum" buttonContent=getUpdateButtonContent}}
+    {{#afModal formId="updateInstitutionModalForm" class="fa fa-pencil" title=getTitle collection="Institutions" doc=_id operation="update" omitFields="available, ipRange.$.startNum, ipRange.$.endNum" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
+</template>
+
+<template name="availabilityModle">
+    {{#if isAvaiable "1"}}
+        <span class="fa fa-eye" style="color: #0c75d2;cursor: pointer"></span>
+    {{/if}}
+    {{#if isAvaiable "0"}}
+        <span class="fa fa-eye-slash" style="cursor: pointer"></span>
+    {{/if}}
 </template>
