@@ -1,40 +1,84 @@
-<template name="institutionDetail">
-    {{#with info}}
-        <div class="pull-right">
-            {{#if can "modify-institution" "institution" }}
-                {{> updateInstitutionForm}}
-            {{/if}}
-        </div>
-        <div class="container-fluid">
-            <h3>{{translateThis name.cn name.en}}</h3>
+<template name="showInstitution">
+    <div class="row">
+        {{> institutionOptions}}
+    </div>
+</template>
 
-            <div class="row">
-                <div class="col-xs-4">
-                    <img width="100%" height="auto" src="{{getImageHelper logo}}"/>
-                </div>
-                <div class="col-xs-6">
-                    <ul class="list-unstyled">
-                        <li>{{_ "Institution Number"}}: {{number}}</li>
-                        <hr>
-                        <li>{{_ "Description"}}: {{translateThis description.cn description.en}}</li>
-                        <hr>
-                        <li>{{_ "Institution Type"}}: {{getType type}}</li>
-                        <hr>
-                        {{_ "IP Range"}}:
-                        <ul>
-                            {{#each ipRange}}
-                                {{> oneIP}}
-                            {{/each}}
-                        </ul>
+<template name="institutionDetail">
+    <div class="pull-right">
+        {{#if can "modify-institution" "institution" }}
+            {{> updateInstitutionForm}}
+        {{/if}}
+    </div>
+    <div class="container-fluid">
+        <h3>{{translateThis name.cn name.en}}</h3>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <img width="100%" height="auto" src="{{getImageHelper logo}}"/>
+            </div>
+            <div class="col-xs-6">
+                <ul class="list-unstyled">
+                    <li>{{_ "Institution Number"}}: {{number}}</li>
+                    <hr>
+                    <li>{{_ "Description"}}: {{translateThis description.cn description.en}}</li>
+                    <hr>
+                    <li>{{_ "Institution Type"}}: {{getType type}}</li>
+                    <hr>
+                    {{_ "IP Range"}}:
+                    <ul>
+                        {{#each ipRange}}
+                            {{> oneIP}}
+                        {{/each}}
                     </ul>
-                </div>
+                </ul>
             </div>
         </div>
-    {{/with}}
+    </div>
 </template>
 
 <template name="oneIP">
     <hr>
     <li>{{_ "Start IP"}}: {{startIP}}</li>
     <li>{{_ "End IP"}}: {{endIP}}</li>
+</template>
+
+<template name="institutionOptions">
+    {{#institutionTabs name="" tabs=tabs activeTab="detail"}}
+        {{#tabContent slug="detail"}}
+            {{#with info}}
+                {{>institutionDetail}}
+            {{/with}}
+        {{/tabContent}}
+
+        {{#tabContent slug="account"}}
+
+        {{/tabContent}}
+
+    {{/institutionTabs}}
+
+</template>
+
+<template name="institutionTabs">
+
+    <div class="institutionTabs-container">
+
+        {{#if activeTab}}
+            {{trackActiveTab activeTab}}
+        {{/if}}
+
+        {{trackTabs tabs}}
+
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab">{{name}}</a>
+                </li>
+            {{/each}}
+        </ul>
+
+        <div class="tabs-content-container">
+            {{> UI.contentBlock context=__context__ }}
+        </div>
+    </div>
 </template>
