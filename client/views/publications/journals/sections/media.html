@@ -1,5 +1,7 @@
 <template name="mediaList">
+	{{#if can "modify-journal" "resource"}}
 	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success"}}{{_ "Add new"}}{{/jkafModal}}
+	{{/if}}
 	<ul class="list-unstyled">
 		{{#each medias}}
 			<li>
@@ -9,9 +11,11 @@
 
 					</div>
 					<div class="col-xs-7">
+						{{#if can "modify-journal" "resource"}}
 						<div class="pull-right">
 							<a href="#" class="fa fa-trash"></a>
 						</div>
+						{{/if}}
 						<h4>{{translateThis meta.title.cn meta.title.en}}</h4>
 
 						<p>{{translateThis meta.description.cn meta.description.en}}</p>

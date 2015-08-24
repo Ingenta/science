@@ -243,9 +243,9 @@ Template.solrFilterItem.events({
             fq = _.union(fq,this.fq)
         }
         pageSession.set("filterQuery",fq);
-        console.log(fq)
         var sword=pageSession.get('query');
-        Router.go('/search?q=' + sword+'&fq='+fq);
+        var fq = Science.queryStringify({fq:pageSession.get("filterQuery")});
+        Router.go('/search?q=' + sword+'&'+fq);
     }
 });
 

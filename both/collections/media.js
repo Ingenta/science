@@ -1,3 +1,15 @@
+//this.UploadFiles = new FS.Collection("uploadFile", {
+//	stores: [new FS.Store.GridFS("uploadFile", {})]
+//});
+//UploadFiles.allow({
+//	insert: function (userId, doc) {
+//		return true;
+//	},
+//	download: function (userId) {
+//		return true;
+//	}
+//});
+
 this.Medias = new Meteor.Files({
 	collectionName: 'MediaFiles',
 	storagePath   : 'assets/',
