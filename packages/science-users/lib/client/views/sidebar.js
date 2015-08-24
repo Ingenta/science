@@ -38,6 +38,8 @@ Template.LayoutSideBar.helpers({
         if(Meteor.userId()){
             var wat = Meteor.user().watch || [];
             return _.contains(wat, journal._id)?TAPi18n.__("Watched"):TAPi18n.__("Journal Watch");
+        }else{
+            return TAPi18n.__("Journal Watch");
         }
     }
 });
@@ -67,6 +69,25 @@ Template.LayoutSideBar.events({
                 wat.push(journal._id)
             }
             Users.update({_id: Meteor.userId()},{$set:{watch: wat}});
+        }else{
+            swal({
+                    title: "",
+                    text: TAPi18n.__("Please enter the receiving mailbox"),
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "Write something"
+                },
+                function(inputValue){
+                    if (inputValue === false) return false;
+
+                    if (inputValue === "") {
+                        swal.showInputError(TAPi18n.__("You need to enter email address!"));
+                        return false
+                    }
+                    swal("Nice!", "You wrote: " + inputValue, "success");
+                });
         }
 }
 })
