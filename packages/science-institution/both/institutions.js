@@ -14,7 +14,7 @@ Institutions.allow({
 
 InstitutionsSchema = new SimpleSchema({
     name: {
-        type: String
+        type: Science.schemas.MultiLangSchema
         //unique: true
     },
     number: {
@@ -35,6 +35,9 @@ InstitutionsSchema = new SimpleSchema({
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
         }
+    },
+    description: {
+        type: Science.schemas.MultipleAreaSchema
     },
     ipRange: {
         type: [Object],
@@ -57,7 +60,10 @@ InstitutionsSchema = new SimpleSchema({
         type: Number,
         max: 4294967295,
         min: 0
-    }
+    },
+    available: {
+        type: String
+    },
 });
 Meteor.startup(function () {
     InstitutionsSchema.i18n("schemas.institutions");

@@ -52,6 +52,7 @@
     "Pending": "未决定",
     "Upload": "上传",
     "Institution": "机构",
+    "Institution Detail": "机构详情",
     "Parse": " 解析",
     "Extract": "解压",
     "moreContentBy": "作者其他文章",
@@ -542,7 +543,22 @@
         },
         "institutions": {
             "name": {
-                "label": "机构名称"
+                "label": "机构名称",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "description": {
+                "label": "描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "number": {
                 "label": "机构编号"
@@ -562,13 +578,15 @@
                 "label": "Logo"
             },
             "ipRange": {
-                "label": "IP范围"
-            },
-            "ipRange.$.startIP": {
-                "label": "起始 IP"
-            },
-            "ipRange.$.endIP": {
-                "label": "结束 IP"
+                "label": "IP范围",
+                "$": {
+                    "startIP": {
+                        "label": "起始 IP"
+                    },
+                    "endIP": {
+                        "label": "结束 IP"
+                    }
+                }
             }
         },
         "recommend": {
@@ -803,5 +821,16 @@
         "preset":"预出版"
     },
     "mediaFile":"文件",
-    "Please choose a media file":"请选择一个媒体文件！"
+    "Please choose a media file":"请选择一个媒体文件！",
+    "Institution Number": "机构编号",
+    "Institution Type": "机构类型",
+    "IP Range": "IP范围",
+    "Start IP": "起始 IP",
+    "End IP": "结束 IP",
+    "Librarian": "图书馆",
+    "Publisher": "出版商",
+    "Editorial Board": "编辑部",
+    "University": "大学",
+    "Institution": "研究机构",
+    "Others": "其他"
 }

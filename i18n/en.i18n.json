@@ -364,7 +364,22 @@
         },
         "institutions": {
             "name": {
-                "label": "Institution Name"
+                "label": "Institution Name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "description": {
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "number": {
                 "label": "Institution No."
@@ -384,13 +399,15 @@
                 "label": "Logo"
             },
             "ipRange": {
-                "label": "IP Range"
-            },
-            "ipRange.$.startIP": {
-                "label": "Start IP"
-            },
-            "ipRange.$.endIP": {
-                "label": "End IP"
+                "label": "IP Range",
+                "$": {
+                    "startIP": {
+                        "label": "Start IP"
+                    },
+                    "endIP": {
+                        "label": "End IP"
+                    }
+                }
             }
         },
         "recommend": {
