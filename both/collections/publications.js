@@ -63,7 +63,12 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         optional: true
     },
-    embody: {
+    included: {
+        type: [String],
+        minCount: 0,
+        optional: true
+    },
+    "included.$": {
         type: String,
         optional: true
     },

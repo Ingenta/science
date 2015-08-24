@@ -257,7 +257,7 @@
                     "4": "旬刊"
                 }
             },
-            "embody": {
+            "included": {
                 "label": "期刊收录类型",
                 "options": {
                     "1": "EES",
