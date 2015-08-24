@@ -1,83 +1,56 @@
-var currentUploadProgress = new ReactiveVar(false);
-var trySubmit =new ReactiveVar(false);
+var uploadingFile = new ReactiveVar(false);
 
 Template.addMediaForm.helpers({
-	progress: function() {
-		return currentUploadProgress.get();
-	},
-	isMediaInvalid:function(){
-		return trySubmit.get();
+	uploadedFiles: function() {
+		var curId=uploadingFile.get();
+
+		return curId && Collections.Files.find({_id:curId});
 	}
 });
 
 Template.addMediaForm.events({
-	'click .btn-primary':function(e,context){
-		e.preventDefault();
-		//check file uploader,make sure selected
-		var fileCtl = Template.instance().$(".media-uploader");
-		var isInvalid=!fileCtl.val();
-		trySubmit.set(isInvalid);
-		if(isInvalid)
-			return false;
-		//end of check
-		var journalId=Session.get('currentJournalId');
-		if(!journalId){
-			return "can't find journal's id";
+	'change input.any': FS.EventHandlers.insertFiles(Collections.Files, {
+		metadata: function (fileObj) {
+			return {
+				owner: Meteor.userId(),
+				foo: "bar",
+				dropped: false
+			};
+		},
+		after: function (error, fileObj) {
+			if (!error) {
+				uploadingFile.set(fileObj._id);
+				console.log("Inserted", fileObj.name());
+			}
 		}
-		var formData = {journalId:journalId};
-		var formCtls=Template.instance().$('.form-control');
-		_.each(formCtls,function(item){
-			formData[$(item).attr('name')]=$(item).val();
-		})
-		formData=deepen(formData);
-		Medias.insert({
-			file:fileCtl[0].files[0],
-			meta:formData,
-			onUploaded:function(err,fileObj){
-				currentUploadProgress.set(false);
-				formCtls.val("");
-				$("#jkafModal").modal('hide');
-			},
-			onProgress: function(progress){
-				currentUploadProgress.set(progress);
-			},
-			onBeforeUpload: function() {
-				var allowedExt, allowedMaxSize;
-				allowedExt = Config.Media.allowType;
-				allowedMaxSize = Config.Media.maxSize*1024*1024;
-				if (allowedExt.inArray(this.ext) && this.size < allowedMaxSize) {
-					return true;
-				} else {
-					return "Max upload size is " + Config.Media.maxSize + " Mb. Allowed extensions is " + (allowedExt.join(', '));
-				}
-			},
-			streams: 8
-		})
-		return true;
-
-	},
-	'change .form-control[name="media"]':function(e){
-		e.preventDefault();
-		var isInvalid=!Template.instance().$(".media-uploader").val();
-		trySubmit.set(isInvalid)
-	}
+	})
 })
 
 Template.mediaList.helpers({
 	medias:function(){
-		return Medias.find({"meta.journalId":this._id}).get();
+		var jid=Session.get("currJournalId") || this._id;
+		if(jid)
+			return Collections.Medias.find({"journalId":jid});
 	},
 	dynamicTemp:function(){
-		switch (this.type){
-			case 'video/mp4':
-				return 'videoTemplate';
-			case 'audio/mp3':
-				return 'audioTemplate';
-			default :
-				return 'fileDownloadTemplate';
+		var file = Collections.Files.findOne({_id:this.fileId});
+		if(file){
+			var ftype=file.original.type;
+			switch (ftype){
+				case 'video/mp4':
+					return 'videoTemplate';
+				case 'audio/mp3':
+					return 'audioTemplate';
+				default :
+					return 'fileDownloadTemplate';
+			}
 		}
+	},
+	getdata:function(){
+		var file = Collections.Files.findOne({_id:this.fileId});
+		return file;
 	}
-})
+});
 
 Template.mediaList.events({
 	'click .fa-trash':function(e){
@@ -93,7 +66,7 @@ Template.mediaList.events({
 			cancelButtonText  : TAPi18n.__("Cancel"),
 			closeOnConfirm    : false
 		}, function () {
-			Medias.remove({_id:id});
+			Collections.Medias.remove({_id:id});
 			sweetAlert({
 				title:TAPi18n.__("Deleted"),
 				text:TAPi18n.__("Operation_success"),
@@ -101,5 +74,22 @@ Template.mediaList.events({
 				timer:2000
 			});
 		});
+	}
+})
+
+
+AutoForm.addHooks(['addMediaModalForm'],{
+	onSuccess: function () {
+		$("#jkafModal").modal('hide');
+		uploadingFile.set(false);
+		FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+	},
+	before: {
+		insert: function (doc) {
+			doc.createDate = new Date();
+			doc.fileId=uploadingFile.get();
+			doc.journalId = Session.get('currentJournalId');
+			return doc;
+		}
 	}
 })

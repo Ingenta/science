@@ -758,6 +758,9 @@
                 "en":{
                     "label": "英文"
                 }
+            },
+            "fileId":{
+                "label":"媒体文件"
             }
         },
         "emails":{

@@ -195,6 +195,7 @@ Uploader = {
 
     // set the upload related callbacks for HTML node that has jqUploadclass specified for it
     // Example html node: <input type="file" class="jqUploadclass" />
+    debugger;
     templateContext.uploadControl.fileupload({
       url: Uploader.uploadUrl,
       dataType: 'json',

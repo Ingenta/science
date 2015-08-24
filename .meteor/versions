@@ -18,6 +18,7 @@ blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 callback-hook@1.0.3
 cfs:access-point@0.1.49
+cfs:autoform@2.2.1
 cfs:base-package@0.0.30
 cfs:collection@0.5.5
 cfs:collection-filters@0.2.4
@@ -33,6 +34,7 @@ cfs:reactive-property@0.0.4
 cfs:standard-packages@0.5.9
 cfs:storage-adapter@0.2.2
 cfs:tempstore@0.1.5
+cfs:ui@0.1.3
 cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.0.5
@@ -119,6 +121,7 @@ ostrio:jsextensions@0.0.4
 perak:user-roles@1.0.10
 raix:eventemitter@0.1.3
 raix:handlebar-helpers@0.2.4
+raix:ui-dropped-event@0.0.7
 rajit:bootstrap3-datepicker@1.4.1
 random@1.0.3
 reactive-dict@1.1.0

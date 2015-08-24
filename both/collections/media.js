@@ -1,26 +1,5 @@
-//this.UploadFiles = new FS.Collection("uploadFile", {
-//	stores: [new FS.Store.GridFS("uploadFile", {})]
-//});
-//UploadFiles.allow({
-//	insert: function (userId, doc) {
-//		return true;
-//	},
-//	download: function (userId) {
-//		return true;
-//	}
-//});
+Collections.Medias = new Mongo.Collection("medias");
 
-this.Medias = new Meteor.Files({
-	collectionName: 'MediaFiles',
-	storagePath   : 'assets/',
-	onBeforeUpload: function () {
-		var allowedExt;
-		allowedExt = Config.Media.allowType;
-		if (allowedExt.inArray(this.ext) && this.size < Config.Media.maxSize  * 1024 * 1024) {
-			return true;
-		}
-	}
-});
 
 MediasSchema  = new SimpleSchema({
 	title:{
@@ -29,12 +8,26 @@ MediasSchema  = new SimpleSchema({
 	description:{
 		optional:true,
 		type:Science.schemas.MultipleAreaSchema
-	//},
-	//media:{
-	//	type:String
+	},
+	fileId: {
+		type: String,
+		autoform: {
+			type: "cfs-file",
+			collection: "files"
+		}
+	},
+	journalId:{
+		type:String,
+		optional:true,
+		autoform:{
+			type: "hidden"
+		}
+
 	}
 });
 
+
 Meteor.startup(function(){
 	MediasSchema.i18n("schemas.medias");
+	Collections.Medias.attachSchema(MediasSchema);
 })
