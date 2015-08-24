@@ -536,6 +536,26 @@
             "url": {
                 "label": "Link"
             }
+        },
+        "medias":{
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "description":{
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            }
         }
     },
     "roles": "Roles",
@@ -585,5 +605,7 @@
         "normal":"normal",
         "onlineFirst":"online first",
         "preset":"preset"
-    }
+    },
+    "mediaFile":"File",
+    "Please choose a media file":"Please choose a media file"
 }

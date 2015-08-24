@@ -714,6 +714,26 @@
             "url": {
                 "label": "链接"
             }
+        },
+        "medias":{
+            "title": {
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "description": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            }
         }
     },
     "roles": "角色",
@@ -775,9 +795,13 @@
     "Favorited":"已收藏",
     "Journal Watch":"期刊关注",
     "Watched":"已关注",
+    "Please enter the receiving mailbox":"请输入接收邮箱",
+    "You need to enter email address!":"你需要输入邮件地址!",
     "pubStatus":{
         "normal":"正常",
         "onlineFirst":"优先出版",
         "preset":"预出版"
-    }
+    },
+    "mediaFile":"文件",
+    "Please choose a media file":"请选择一个媒体文件！"
 }
