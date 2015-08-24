@@ -53,6 +53,7 @@
     "Upload": "上传",
     "Institution": "机构",
     "Institution Detail": "机构详情",
+    "Institution Account": "机构帐号",
     "Parse": " 解析",
     "Extract": "解压",
     "moreContentBy": "作者其他文章",
@@ -256,7 +257,7 @@
                     "4": "旬刊"
                 }
             },
-            "embody": {
+            "included": {
                 "label": "期刊收录类型",
                 "options": {
                     "1": "EES",
@@ -758,6 +759,17 @@
                     "label": "英文"
                 }
             }
+        },
+        "emails":{
+            "myEmail": {
+                "label": "收件人的邮件地址:"
+            },
+            "youEmail": {
+                "label": "你的邮件地址:"
+            },
+            "subject": {
+                "label": "主题:"
+            }
         }
     },
     "roles": "角色",
@@ -810,9 +822,6 @@
     "I accept": "我已阅读",
     "Email this": "在线推荐",
     "Add to favorites": "添加到收藏夹",
-    "Recipient's email address":"收件人的邮件地址",
-    "Your email address":"你的邮件地址",
-    "Subject": "主题",
     "send": "发送",
     "Email this page":"邮件发送",
     "Favorite": "收藏",

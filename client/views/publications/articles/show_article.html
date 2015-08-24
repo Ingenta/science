@@ -46,11 +46,13 @@
                 <div class="row">
                     {{#if pdfId}}
                         <li class="pdf">
-                            <a class="pdfDownload" href="{{getPdfById pdfId}}">{{_ "Download"}} PDF</a>
+                            <a class="pdfDownload" href="{{getPdfById pdfId}}">
+	                            <img src="/pdf.png"/> {{_ "Download"}} PDF
+                            </a>
                         </li>
                     {{/if}}
                 </div>
-                <div class="row"><img src="/crossmark.jpg"></div>
+                <!--<div class="row"><img src="/crossmark.jpg"></div>-->
             </div>
             <br>
 

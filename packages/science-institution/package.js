@@ -40,7 +40,9 @@ Package.onUse(function(api) {
     'client/view/admin/institutions/list.html',
     'client/view/admin/institutions/list.js',
     'client/view/admin/institutions/detail.html',
-    'client/view/admin/institutions/detail.js'
+    'client/view/admin/institutions/detail.js',
+    'client/view/admin/institutions/account/account.html',
+    'client/view/admin/institutions/account/account.js'
   ], 'client')
 });
 

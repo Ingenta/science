@@ -20,7 +20,7 @@ Router.route("/admin/institutions/:insId/", {
 	name          : "admin.institutions.detail",
 	parent        : "admin.institutions",
 	yieldTemplates: {
-		'institutionDetail': { to: 'AdminSubcontent'}
+		'showInstitution': { to: 'AdminSubcontent'}
 	},
 	title         : function () {
 		return TAPi18n.__("Institution Detail");

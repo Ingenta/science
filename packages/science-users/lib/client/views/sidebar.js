@@ -77,7 +77,9 @@ Template.LayoutSideBar.events({
                     showCancelButton: true,
                     closeOnConfirm: false,
                     animation: "slide-from-top",
-                    inputPlaceholder: "Write something"
+                    inputPlaceholder: "Write something",
+                    cancelButtonText  : TAPi18n.__("Cancel"),
+                    confirmButtonText : TAPi18n.__("OK")
                 },
                 function(inputValue){
                     if (inputValue === false) return false;
@@ -86,7 +88,7 @@ Template.LayoutSideBar.events({
                         swal.showInputError(TAPi18n.__("You need to enter email address!"));
                         return false
                     }
-                    swal("Nice!", "You wrote: " + inputValue, "success");
+                    swal(TAPi18n.__("Success"));
                 });
         }
 }

@@ -25,8 +25,21 @@
             <li>{{{field}}}</li>
         </ul>
         <ul class="list-unstyled">
-           <a href="{{pathFor 'emails'}}"> <li>{{_ "Email this"}}</li></a>
+           {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
         </ul>
     </div>
     {{/if}}
+</template>
+
+<template name="sendEmails">
+    {{#autoForm schema="EmailsSchema" id="addEmailsModalForm" type="method"}}
+    <div class="modal-body">
+        {{> afQuickField name="myEmail"}}
+        {{> afQuickField name="youEmail"}}
+        {{> afQuickField name="subject"}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary">{{_ "send"}}</button>
+    </div>
+    {{/autoForm}}
 </template>
