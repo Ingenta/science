@@ -556,6 +556,17 @@
                     "label": "English"
                 }
             }
+        },
+        "emails":{
+            "myEmail": {
+                "label": "Recipient's email address:"
+            },
+            "youEmail": {
+                "label": "Your email address:"
+            },
+            "subject": {
+                "label": "Subject:"
+            }
         }
     },
     "roles": "Roles",

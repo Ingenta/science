@@ -734,6 +734,17 @@
                     "label": "英文"
                 }
             }
+        },
+        "emails":{
+            "myEmail": {
+                "label": "收件人的邮件地址:"
+            },
+            "youEmail": {
+                "label": "你的邮件地址:"
+            },
+            "subject": {
+                "label": "主题:"
+            }
         }
     },
     "roles": "角色",
@@ -786,9 +797,6 @@
     "I accept": "我已阅读",
     "Email this": "在线推荐",
     "Add to favorites": "添加到收藏夹",
-    "Recipient's email address":"收件人的邮件地址",
-    "Your email address":"你的邮件地址",
-    "Subject": "主题",
     "send": "发送",
     "Email this page":"邮件发送",
     "Favorite": "收藏",
