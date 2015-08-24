@@ -8,7 +8,7 @@
 			<div class="col-xs-6">
 				<ul class="list-unstyled">
 					<li>{{_ "publisher"}}: {{publisherName}}</li>
-					<li>{{_ "createAt"}}: {{moFormat createdAt}}</li>
+					<li>{{_ "createAt"}}: {{formatDate createdAt "YYYY-MM-DD"}}</li>
 					<li>{{_ "articlesCount"}}: {{articleCount}}</li>
                     <li>{{_ "Description"}}: {{translateThis description.cn description.en}}</li>
 				</ul>
