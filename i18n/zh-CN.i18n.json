@@ -523,16 +523,22 @@
         },
         "collections": {
             "title": {
-                "label": "英文标题"
-            },
-            "chinesetitle": {
-                "label": "中文标题"
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "description": {
-                "label": "英文简介"
-            },
-            "chinesedescription": {
-                "label": "中文简介"
+                "label": "描述",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
             },
             "picture": {
                 "label": "选择图片"

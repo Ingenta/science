@@ -344,16 +344,22 @@
         },
         "collections": {
             "title": {
-                "label": "English Title"
-            },
-            "chinesetitle": {
-                "label": "Chinese Title"
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "description": {
-                "label": "English Description"
-            },
-            "chinesedescription": {
-                "label": "Chinese Description"
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             },
             "picture": {
                 "label": "Choose file"

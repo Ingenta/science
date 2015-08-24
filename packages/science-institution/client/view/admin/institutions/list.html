@@ -43,7 +43,7 @@
 </template>
 
 <template name="institutionDesc">
-    {{translateThis description.cn description.en}}
+    {{> toggleField field=description _id=_id}}
 </template>
 
 <template name="updateInstitutionForm">
