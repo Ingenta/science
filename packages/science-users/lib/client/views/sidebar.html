@@ -12,18 +12,21 @@
                 </li>
             {{/if}}
             <li><a href="{{pathFor 'logout'}}">{{_ "Log Out"}}</a></li>
+           {{#if isArticlePage}}
+                 <li> <a href="{{pathFor 'emails'}}"><span class="fa fa-envelope-o"></span>{{_ "Email this"}}</a></li>
+                 <li> <a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
+            {{/if}}
+            {{#if isJourmalPage}}
+                <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+             {{/if}}
         {{else}}
             <li>
                 <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
-        {{/if}}
-        {{#if isArticlePage}}
-            <li> <a href="{{pathFor 'emails'}}"><span class="fa fa-envelope-o"></span>{{_ "Email this"}}</a></li>
-            <li> <a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
-        {{/if}}
-        {{#if isJourmalPage}}
-            <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+            {{#if isJourmalPage}}
+                <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+            {{/if}}
         {{/if}}
         <hr>
         <li><a href="#">{{_ "ScholarOne Login"}}</a></li>
