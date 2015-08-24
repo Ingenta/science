@@ -9,7 +9,7 @@ Template.institutionDetail.helpers({
             case "2": return TAPi18n.__("Publisher");
             case "3": return TAPi18n.__("Editorial Board");
             case "4": return TAPi18n.__("University");
-            case "5": return TAPi18n.__("Institution");
+            case "5": return TAPi18n.__("Research Institution");
             case "6": return TAPi18n.__("Others");
         }
     }
