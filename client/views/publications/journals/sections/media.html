@@ -7,7 +7,7 @@
 			<li>
 				<div class="row">
 					<div class="col-xs-5">
-						{{> Template.dynamic template=dynamicTemp data=this}}
+						{{> Template.dynamic template=dynamicTemp data=getdata}}
 
 					</div>
 					<div class="col-xs-7">
@@ -16,9 +16,9 @@
 							<a href="#" class="fa fa-trash"></a>
 						</div>
 						{{/if}}
-						<h4>{{translateThis meta.title.cn meta.title.en}}</h4>
+						<h4>{{translateThis title.cn title.en}}</h4>
 
-						<p>{{translateThis meta.description.cn meta.description.en}}</p>
+						<p>{{translateThis description.cn description.en}}</p>
 					</div>
 				</div>
 			</li>
@@ -27,44 +27,49 @@
 </template>
 
 <template name="videoTemplate">
-	<video width="100%" controls="controls">
-		<source src="{{fileURL this}}?play=true" type="{{type}}"/>
+	<video preload="auto" width="100%" controls="controls">
+		{{#with this.url play=true}}
+		<source src="{{this}}" type="video/mp4"/>
+		{{/with}}
 	</video>
 </template>
 
 <template name="audioTemplate">
-	<audio width="100%" controls="controls">
-		<source src="{{fileURL this}}?play=true" type="{{type}}"/>
+	<audio preload="auto" width="100%" controls="controls">
+		{{#with this.url play=true}}
+		<source src="{{this}}" type="audio/mp3"/>
+		{{/with}}
 	</audio>
 </template>
 
 <template name="fileDownloadTemplate">
-	<a href="{{fileURL this}}?download=true">{{name}}</a>
+	{{#with this.url download=true}}
+	<a href="{{this}}">{{#if name}}{{name}}{{else}}{{../name}}{{/if}}</a>
+	{{/with}}
 </template>
 
 <template name="addMediaForm">
-	{{#autoForm schema="MediasSchema" id="addMediaModalForm"}}
+	<!--{{> quickForm id="addMediaModalForm" type="insert" collection=Collections.Medias}}-->
+	{{#autoForm collection=Collections.Medias id="addMediaModalForm" type="insert"}}
 		<div class="modal-body">
 			{{> afObjectField name="title"}}
 			{{> afObjectField name="description"}}
-			<div class="form-group{{#if isMediaInvalid}} has-error{{/if}}">
-				<label class="control-label">{{_ "mediaFile"}}</label>
-				<input class="media-uploader" name="media" type="file"/>
-
-				{{#if isMediaInvalid}}
-					<span class="help-block">{{_ "Please choose a media file"}}</span>
-				{{/if}}
-			</div>
-			{{#if progress}}
-				<div class="form-group progress">
-					<div style="width:{{progress}}%" class="progress-bar progress-bar-striped active">
-						<span class="sr-only">{{progress}}</span>
-					</div>
-				</div>
-			{{/if}}
+			<input name="fileId" type="file" class="any"/>
+			{{#each uploadedFiles}}
+				{{> uploadedFile}}
+			{{/each}}
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-primary">{{_ "Create"}}</button>
+			<button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
 		</div>
 	{{/autoForm}}
+</template>
+
+<template name="uploadedFile">
+	<h4>{{#with this.url}}{{../name}}{{else}}{{this.name}}{{/with}} ({{this.size}} bytes)</h4>
+	{{#if this.isUploaded}}
+		{{> FS.DeleteButton class="btn btn-danger btn-xs"}}
+	{{else}}
+		<p>{{> FS.UploadProgressBar bootstrap=true}} Uploading...</p>
+	{{/if}}
 </template>

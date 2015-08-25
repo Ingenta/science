@@ -578,6 +578,9 @@
                 "en":{
                     "label": "English"
                 }
+            },
+            "fileId":{
+                "label":"Media file"
             }
         },
         "emails":{
