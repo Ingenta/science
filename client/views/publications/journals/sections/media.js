@@ -93,3 +93,18 @@ AutoForm.addHooks(['addMediaModalForm'],{
 		}
 	}
 })
+
+AutoForm.addHooks(['updateMediaModalForm'],{
+	onSuccess: function () {
+		$("#jkafModal").modal('hide');
+		uploadingFile.set(false);
+		FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+	},
+	before: {
+		update: function (doc) {
+			doc.updateDate = new Date();
+			doc.fileId=uploadingFile.get();
+			return doc;
+		}
+	}
+})

@@ -1,6 +1,6 @@
 <template name="mediaList">
 	{{#if can "modify-journal" "resource"}}
-	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success"}}{{_ "Add new"}}{{/jkafModal}}
+	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success" title="Add new"}}{{_ "Add new"}}{{/jkafModal}}
 	{{/if}}
 	<ul class="list-unstyled">
 		{{#each medias}}
@@ -13,6 +13,7 @@
 					<div class="col-xs-7">
 						{{#if can "modify-journal" "resource"}}
 						<div class="pull-right">
+							{{> jkafModal template="updateMediaForm" doc=this }}
 							<a href="#" class="fa fa-trash"></a>
 						</div>
 						{{/if}}
@@ -50,7 +51,7 @@
 
 <template name="addMediaForm">
 	<!--{{> quickForm id="addMediaModalForm" type="insert" collection=Collections.Medias}}-->
-	{{#autoForm collection=Collections.Medias id="addMediaModalForm" type="insert"}}
+	{{#autoForm collection=Collections.Medias title="Add" id="addMediaModalForm" type="insert"}}
 		<div class="modal-body">
 			{{> afObjectField name="title"}}
 			{{> afObjectField name="description"}}
@@ -63,6 +64,10 @@
 			<button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
 		</div>
 	{{/autoForm}}
+</template>
+
+<template name="updateMediaForm">
+	{{> quickForm id="updateMediaForm" doc=this type="update" collection=Collections.Medias omitFields='fileId'}}
 </template>
 
 <template name="uploadedFile">
