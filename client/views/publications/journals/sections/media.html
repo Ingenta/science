@@ -28,7 +28,7 @@
 </template>
 
 <template name="videoTemplate">
-	<video preload="auto" width="100%" controls="controls">
+	<video width="100%" controls="controls">
 		{{#with this.url play=true}}
 		<source src="{{this}}" type="video/mp4"/>
 		{{/with}}
@@ -36,7 +36,7 @@
 </template>
 
 <template name="audioTemplate">
-	<audio preload="auto" width="100%" controls="controls">
+	<audio width="100%" controls="controls">
 		{{#with this.url play=true}}
 		<source src="{{this}}" type="audio/mp3"/>
 		{{/with}}
