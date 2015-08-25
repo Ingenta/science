@@ -15,12 +15,16 @@ topicPermissions
 	.definePermission("delete-topic", {
 		en: {name: "delete topic", summary: "can delete topic"},
 		cn: {name: "删除分类", summary: "您可以删除分类信息"}
-	});
+	})
+    .definePermission("add-article-to-topic", {
+        en: {name: "add article to topic", summary: "can add article to topic"},
+        cn: {name: "为分类添加文章", summary: "您可以为分类添加文章"}
+    });
 
 // 定义预定义角色及其权限
 // registrar.defineRole(role_name, permissions, description) [anywhere]
 topicPermissions
-	.defineRole("topic-manager", ["add-topic", "modify-topic", "delete-topic"], {
+	.defineRole("topic-manager", ["add-topic", "modify-topic", "delete-topic", "add-article-to-topic"], {
 		en: {
 			name   : "topic manager",
 			summary: "manager for topic"

@@ -9,6 +9,9 @@ this.Topics.allow({
     },
     remove: function (userId, doc) {
         return Permissions.userCan("delete-topic", "topic", userId);
+    },
+    update: function (userId, doc) {
+        return Permissions.userCan("add-article-to-topic", "topic", userId);
     }
 });
 

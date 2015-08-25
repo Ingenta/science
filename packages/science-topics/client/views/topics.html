@@ -3,7 +3,7 @@
         {{> pageElement key="topic"}}
         <div class="row">
             {{#if can "add-topic" "topic"}}
-	            {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm"}}{{_ "Add new"}}{{/jkafModal}}
+                {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm"}}{{_ "Add new"}}{{/jkafModal}}
             {{/if}}
         </div>
         <hr>
@@ -46,12 +46,12 @@
 </template>
 
 <template name="updateTopicModalForm">
-	{{#autoForm collection="Topics" id="updateTopicModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-		{{> afQuickField name="name" }}
-		{{> afQuickField name="englishName" }}
-		{{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
-		<button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
-	{{/autoForm}}
+    {{#autoForm collection="Topics" id="updateTopicModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+        {{> afQuickField name="name" }}
+        {{> afQuickField name="englishName" }}
+        {{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
 
 <template name="deleteTopicModalForm">
@@ -60,12 +60,12 @@
 </template>
 
 <template name="addTopicModalForm">
-	{{#autoForm collection="Topics" id="addTopicModalForm" type="insert" buttonContent=getCreateButtonContent}}
-		{{> afQuickField name="name" }}
-		{{> afQuickField name="englishName" }}
-		{{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
-		<button type="submit" class="btn btn-primary">{{_ "Add new"}}</button>
-	{{/autoForm}}
+    {{#autoForm collection="Topics" id="addTopicModalForm" type="insert" buttonContent=getCreateButtonContent}}
+        {{> afQuickField name="name" }}
+        {{> afQuickField name="englishName" }}
+        {{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
+        <button type="submit" class="btn btn-primary">{{_ "Add new"}}</button>
+    {{/autoForm}}
 </template>
 
 <template name="TopicButtons">
@@ -75,16 +75,18 @@
 
     <div class="pull-right">
         {{#if can "add-topic" "topic" }}
-	        {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm"}}
+            {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm"}}
         {{/if}}
-		{{#if can "modify-topic" "topic" }}
-			{{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm"}}
-		{{/if}}
-		{{#if can "delete-topic" "topic" }}
+        {{#if can "modify-topic" "topic" }}
+            {{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm"}}
+        {{/if}}
+        {{#if can "delete-topic" "topic" }}
             {{#if hasSubTopic _id}}
                 {{> deleteTopicModalForm}}
             {{/if}}
-		{{/if}}
-        <a class="fa fa-long-arrow-right" href="{{pathFor 'topics.selectArticles' topicsId=_id}}"></a>
+        {{/if}}
+        {{#if can "add-article-to-topic" "topic" }}
+            <a class="fa fa-long-arrow-right" href="{{pathFor 'topics.selectArticles' topicsId=_id}}"></a>
+        {{/if}}
     </div>
 </template>
