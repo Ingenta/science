@@ -7,10 +7,10 @@ Collections.Files = new FS.Collection("files",{
 
 if(Meteor.isServer){
 	function trueFunc(userId) {
-		if (!userId) {
-			// must be logged in
-			return false;
-		}
+		//if (!userId) {
+		//	// must be logged in
+		//	return false;
+		//}
 
 		return true;
 	};
