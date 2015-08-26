@@ -10,6 +10,9 @@ Images.allow({
     },
     download: function (userId) {
         return true;
+    },
+    remove:function(userId){
+        return true;
     }
 });
 
