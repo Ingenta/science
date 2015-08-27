@@ -23,7 +23,6 @@ aldeed:autoform
 aldeed:collection2
 mrt:flash-messages
 gwendall:autoform-i18n
-yogiben:autoform-modals
 monbro:iron-router-breadcrumb
 cfs:filesystem
 cfs:standard-packages
@@ -69,10 +68,11 @@ wylio:mandrill
 science-emails
 mpowaga:autoform-summernote
 fortawesome:fontawesome
-jackjiang:autoform-modals
 barbatus:stars-rating
 ostrio:files
 reactive-var
 mrt:jquery-raty
 cfs:ui
 cfs:autoform
+jackjiang:autoform-modals
+yogiben:autoform-modals-up
