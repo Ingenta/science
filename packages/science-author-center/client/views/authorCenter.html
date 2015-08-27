@@ -1,3 +1,54 @@
 <template name="authorCenter">
-    ddaf
-    </template>
+    <div class="container-fluid">
+        {{> pageElement key="author center"}}
+        <hr>
+        <div class="row">
+            {{> PublisherListForAuthorCenter}}
+        </div>
+    </div>
+</template>
+
+<template name="PublisherListForAuthorCenter">
+    {{#each publishers}}
+    {{> SinglePublisherForAuthorCenter}}
+    {{else}}
+    {{_ "No publishers found!"}}
+    {{/each}}
+</template>
+
+<template name="showImageForAuthorCenter">
+    <img src="{{getImageHelper picture}}"/>
+</template>
+
+<template name="SinglePublisherForAuthorCenter">
+    <div class="row">
+        <div class="col-xs-3">
+            <a href="{{pathFor 'publisher.name' publisherName=name}}">
+                <img src="{{getImageHelper picture}}" width="105"/>
+            </a>
+        </div>
+        <div class="col-xs-9">
+            <div class="row">
+                <h3>
+                    <a class="text" href="{{pathFor 'publisher.name' publisherName=name}}">
+                        {{translateThis chinesename name}}
+                    </a>
+                </h3>
+            </div>
+            <div class="row">
+                    {{#each hasJournal _id}}
+                        <div class="col-xs-6">
+                            {{> SingleJournal}}
+                        </div>
+                     {{/each}}
+            </div>
+        </div>
+    </div>
+    <hr>
+</template>
+
+<template name="SingleJournal">
+    <a href="{{getJournalUrl publisher}}">
+        <a>{{translateThis titleCn title}}</a>
+    </a>
+</template>
