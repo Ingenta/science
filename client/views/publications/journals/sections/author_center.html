@@ -1,0 +1,24 @@
+<template name="authorCenterList">
+    <div>
+        {{#each authorResources}}
+            <h2>{{translateThis authorTitle.cn authorTitle.en}}》</h2><br>
+            <span>{{translateThis authorDescription.cn authorDescription.en}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</span>
+            <img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}
+            <a href="">{{translateThis fileName.cn fileName.en}}</a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}
+        {{else}}
+            {{_ "No results found!"}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="updateAuthorCenterTitleModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="authorTitle,authorDescription" buttonContent=getUpdateButtonContent}}{{/afModal}}
+</template>
+
+<template name="updateAuthorCenterPictureModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="authorPicture" buttonContent=getUpdateButtonContent}}{{/afModal}}
+</template>
+
+<template name="updateAuthorCenterFileModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="fileName,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
+</template>

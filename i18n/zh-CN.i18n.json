@@ -292,6 +292,39 @@
             "fax": {
                 "label": "传真"
             },
+            "authorTitle": {
+                "label": "作者中心标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "authorDescription": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "fileName": {
+                "label": "模版标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "authorPicture": {
+                "label": "选择图片"
+            },
+            "fileId":{
+                "label":"选择模版文件"
+            },
             "accessKey": {
                 "label": "请选择一个资源标签",
                 "options": {
