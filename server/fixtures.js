@@ -1,6 +1,6 @@
 Meteor.startup(function () {
 
-    Topics.remove({})
+    //Topics.remove({})
     if (Topics.find().count() === 0) {
         var names = [
             {
@@ -87,7 +87,7 @@ Meteor.startup(function () {
 //        }
 //    }
 
-    Pages.remove({})
+    //Pages.remove({})
     if (Pages.find().count() === 0) {
         var names = [
             {key: "homepage", e: "", c: ""},
