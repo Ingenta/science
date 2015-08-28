@@ -10,7 +10,7 @@ div.articleHeading li {
 .rating {
     unicode-bidi: bidi-override;
     direction: rtl;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .rating span.star {
