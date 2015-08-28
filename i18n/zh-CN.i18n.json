@@ -75,6 +75,9 @@
     "News": "新闻",
     "Media": "多媒体",
     "Special Topics": "专题",
+    "Submission Guidelines": "投稿前须知",
+    "Prepare Manuscript": "准备手稿",
+    "Submit  Manuscript": "提交稿件",
     "Collections": "文章集",
     "Received": "稿件接收时间",
     "Accepted Date": "稿件收录时间",
@@ -830,6 +833,9 @@
             },
             "url": {
                 "label": "相关链接"
+            },
+            "parentId": {
+                "label": "是否选择一个父集合"
             }
         }
     },

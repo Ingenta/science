@@ -6,9 +6,6 @@ this.AuthorCenter.allow({
     },
     update: function (userId, doc) {
         return Permissions.userCan("modify-author-center", "resource", userId);
-    },
-    remove: function (userId, doc) {
-        return Permissions.userCan("delete-author-center", "resource", userId);
     }
 });
 
@@ -31,7 +28,10 @@ AuthorCenterSchema = new SimpleSchema({
     },
     parentId: {
         type: String,
-        optional: true
+        optional: true,
+        autoform: {
+            type: 'universe-select'
+        }
     },
     publications: {
         type: String

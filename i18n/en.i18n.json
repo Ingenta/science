@@ -648,6 +648,9 @@
             },
             "url": {
                 "label": "A Link"
+            },
+            "parentId": {
+                "label": "Choose Father and son set"
             }
         }
     },
