@@ -11,14 +11,13 @@ Template.NewsList.events({
 
 Template.HomePrivate.helpers({
     hasMostThreeNews: function () {
-        return News.find().count() < 3;
+        return News.find({types:"1"}).count() < 3;
     }
 });
 
-
 Template.NewsList.helpers({
     news: function (type) {
-        var n = News.find({}, {limit: 3});
+        var n = News.find({types:"1"}, {limit: 3});
         if(type=='extend'){
             n = n.map(function(newsItem, index) {
                 newsItem.index = index;
@@ -51,7 +50,13 @@ Template.NewsList.onRendered(function(){
 
 Template.SingleNews.helpers({
     hasMoreThanOneNews: function () {
-        return News.find().count() > 1;
+        return News.find({types:"1"}).count() > 1;
+    },
+    whichUrl: function() {
+        if(this.url){
+            return this.url;
+        }
+        return "/news/"+this._id;
     }
 });
 
@@ -64,7 +69,7 @@ Template.deleteNewsModalForm.helpers({
 
 Template.recentArticles.helpers({
     newestArticle: function () {
-        return Articles.find({}, {sort: {createdAt: -1}, limit: 3});
+        return Articles.find({}, {sort: {createdAt: -1}, limit: 5});
     },
     mostReadArticles: function () {
         Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
@@ -86,6 +91,15 @@ AutoForm.addHooks(['addNewsModalForm'], {
     onSuccess: function () {
         $("#addNewsModal").modal('hide');
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+    },
+    before: {
+        insert: function (doc) {
+            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
+            var type =newPage?2:1;
+            doc.types = type;
+            doc.createDate = new Date();
+            return doc;
+        }
     }
 }, true);
 
@@ -94,9 +108,3 @@ AutoForm.addHooks(['cmForm'], {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     }
 }, true);
-//
-//AutoForm.addHooks(['deleteNewsForm'], {
-//    onSuccess: function () {
-//        reRender();
-//    }
-//}, true);

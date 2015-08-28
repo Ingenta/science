@@ -1,0 +1,167 @@
+<template name="aboutTitle">
+    <div class="tabbable">
+        <div class="col-xs-3">
+            <ul class="nav nav-pills nav-stacked aboutNavTabs">
+                {{#each abouts}}
+                <div class="pull-right row aboutEditButtons">
+                    {{#if can "modify-about" "resource" }}{{> updateAboutTitleModalForm}}{{/if}}
+                    {{#if can "delete-about" "resource" }}{{> deleteAboutTitleModalForm}}{{/if}}
+                </div>
+
+                <li class="{{isActive _id}}">
+                    <a class="activeButton" data-aboutsid="{{_id}}" data-toggle="tab">
+                        {{translateThis title.cn title.en}}
+                    </a>
+                </li>
+                {{else}}
+                {{_ "No About found!"}}
+                {{/each}}
+                <div class="pull-right">
+                    {{#if can "add-about" "resource" }}{{> addAboutTitleModalForm}}{{/if}}
+                </div>
+            </ul>
+        </div>
+        <div class="tab-content col-xs-9">
+            {{#if boardMember}}
+            <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
+            {{else}}
+            <div class="tab-pane active">{{> EditorialBoardList}}</div>
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="EditorialBoardMembersList">
+    {{#each about}}
+    <div class="part"><strong>编委会——{{translateThis title.cn title.en}}</strong>
+
+        <div class="pull-right">
+            {{#if can "add-editorial-member" "resource" }}{{> addEditorialBoardModalForm}}{{/if}}
+        </div>
+    </div>
+    <hr>
+    {{else}}
+    {{_ "No About found!"}}
+    {{/each}}
+    <div class="part">
+        <p>
+            {{#each editorialBoards}}
+            <span style="border:1px double #000"><a href="#{{_id}}">{{translateThis name.cn name.en}}</a></span>
+            {{else}}
+            {{_ "No results found!"}}
+            {{/each}}
+        </p>
+    </div>
+    {{#each editorialBoards}}
+    <div class="part" id="{{_id}}">
+        <div class="pull-right">
+            {{#if can "modify-editorial-member" "resource" }}{{> updateEditorialBoardModalForm}}{{/if}}
+            {{#if can "delete-editorial-member" "resource" }}{{> deleteEditorialBoardModalForm}}{{/if}}
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <img src="{{getImageHelper picture}}" width="133" height="180"/>
+                <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
+            </div>
+            <div class="col-xs-9">
+                {{#if WorkUnits}}
+                    {{_"Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
+                {{/if}}
+                {{#if Phone}}
+                    {{_"Phone"}}：&nbsp;{{phone}}<br>
+                {{/if}}
+                {{#if Fax}}
+                    {{_"Fax"}}：&nbsp;{{fax}}<br>
+                {{/if}}
+                {{#if Email}}
+                    {{_"E-mail"}}：&nbsp;{{email}}<br>
+                {{/if}}
+                {{#if ResearchArea}}
+                    {{_"Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
+                {{/if}}
+                {{#if Abstract}}
+                    {{_"Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}<br>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{else}}
+    {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="EditorialBoardList">
+    {{#each about}}
+    <div class="part"><strong>编委会——{{translateThis title.cn title.en}}</strong>
+
+        <div class="pull-right">
+            {{#if can "add-editorial-member" "resource" }}{{> addEditorialBoardModalForm}}{{/if}}
+        </div>
+    </div>
+    <hr>
+    {{else}}
+    {{_ "No About found!"}}
+    {{/each}}
+    {{#each editorialBoards}}
+    <div class="part">
+        <div class="pull-right">
+            {{#if can "modify-editorial-member" "resource" }}{{> updateEditorialBoardModalForm}}{{/if}}
+            {{#if can "delete-editorial-member" "resource" }}{{> deleteEditorialBoardModalForm}}{{/if}}
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <img src="{{getImageHelper picture}}" width="133" height="180"/>
+              <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
+            </div>
+            <div class="col-xs-9">
+                {{#if WorkUnits}}
+                    {{_"Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
+                {{/if}}
+                {{#if Phone}}
+                    {{_"Phone"}}：&nbsp;{{phone}}<br>
+                {{/if}}
+                {{#if Fax}}
+                    {{_"Fax"}}：&nbsp;{{fax}}<br>
+                {{/if}}
+                {{#if Email}}
+                    {{_"E-mail"}}：&nbsp;{{email}}<br>
+                {{/if}}
+                {{#if ResearchArea}}
+                    {{_"Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
+                {{/if}}
+                {{#if Abstract}}
+                    {{_"Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}<br>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{else}}
+    {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="addAboutTitleModalForm">
+    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert" omitFields="publications" title=getCreateButtonContent}}{{/afModal}}
+</template>
+
+<template name="updateAboutTitleModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update" omitFields="publications"}}{{/afModal}}
+</template>
+
+<template name="deleteAboutTitleModalForm">
+    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+</template>
+
+
+<template name="addEditorialBoardModalForm">
+    {{#afModal formId="addEditorialBoardModalForm" class="fa fa-plus" collection="EditorialBoard" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
+</template>
+
+<template name="updateEditorialBoardModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialBoard" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
+</template>
+
+<template name="deleteEditorialBoardModalForm">
+    {{#afModal class="fa fa-trash" collection="EditorialBoard" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
+</template>

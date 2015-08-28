@@ -1,19 +1,16 @@
-//Template.addCollectionForm.helpers({
-//    getpublishers:function(){
-//        var iscn=TAPi18n.getLanguage()==='zh-CN';
-//        var pubs = Publishers.find({},{chinesename:1,name:1}).fetch();
-//        var result = [];
-//        _.each(pubs,function(item){
-//            var name = iscn?item.chinesename:item.name;
-//            result.push({label:name,value:item._id});
-//        });
-//        return result;
-//    }
-//});
-
-//AutoForm.addHooks(['addCollectionModalForm'], {
-//    onSuccess: function () {
-//        $("#addCollectionModal").modal('hide');
-//        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
-//    }
-//}, true);
+AutoForm.addHooks(['addInstitutionModalForm'], {
+    before: {
+        insert: function (doc) {
+            doc.available = 1;
+            _.each(doc.ipRange, function (obj) {
+                if (obj.startIP) {
+                    obj.startNum = Science.ipToNumber(obj.startIP);
+                }
+                if (obj.endIP) {
+                    obj.endNum = Science.ipToNumber(obj.endIP);
+                }
+            });
+            return doc;
+        }
+    }
+}, true);

@@ -1,52 +1,59 @@
 <template name="collections">
-	<div class="container-fluid">
-		{{> pageElement key="collections"}}
-		{{> collAlphabetBar}}
-		<div class="row">
-			{{#if can "add-pulisher-collections" "collections" }}
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
-					{{_ "Add new"}}
-				</button>
-			{{/if}}
-		</div>
-		<div class="row">
-			<div id="menu" class="col-xs-3">
-				{{> collLeftFilters}}
-			</div>
-			<div id="subcontent" class="col-xs-9">
-				{{> collectionsList}}
-			</div>
-		</div>
-	</div>
-	{{> addCollectionForm}}
+    <div class="container-fluid">
+        {{#if isCollection}}
+            {{> pageElement key="collections"}}
+        {{/if}}
+        {{> collAlphabetBar}}
+        <div class="row">
+            <div class="col-xs-12">
+                {{#if can "add-pulisher-collections" "collections" }}
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
+                        {{_ "Add new"}}
+                    </button>
+                {{/if}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div id="menu" class="col-xs-3">
+                {{#if isCollection}}
+                    {{> collLeftFilters}}
+                {{/if}}
+            </div>
+            <div id="subcontent" class="col-xs-9">
+                {{> collectionsList}}
+            </div>
+        </div>
+    </div>
+    {{> addCollectionForm}}
 </template>
 
 <template name="addCollectionForm">
-	<div class="modal fade" id="addCollectionModal" tabindex="-1" role="dialog"
-	     aria-labelledby="addCollectionModalLabel"
-	     aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="addCollectionModalLabel">{{_ "Add new"}}</h4>
-				</div>
-				{{#autoForm id="addCollectionModalForm" collection="ArticleCollections" type="insert"}}
-					<div class="modal-body">
-						{{> afQuickField name="title"}}
-						{{> afQuickField name="chinesetitle"}}
-						{{> afQuickField name="description"}}
-						{{> afQuickField name="chinesedescription"}}
-						{{> afQuickField name="picture"}}
-						{{> afQuickField name="publisherId" type="universe-select" options=getpublishers }}
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-					</div>
-				{{/autoForm}}
-			</div>
-		</div>
-	</div>
+    <div class="modal fade" id="addCollectionModal" tabindex="-1" role="dialog"
+         aria-labelledby="addCollectionModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addCollectionModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addCollectionModalForm" collection="ArticleCollections" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="description"}}
+                        {{> afQuickField name="picture"}}
+                        {{#if isCollection}}
+                            {{> afQuickField name="publisherId" type="universe-select" options=getpublishers }}
+                        {{/if}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
 </template>
 

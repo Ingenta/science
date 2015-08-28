@@ -18,7 +18,7 @@
 </template>
 
 <template name="journalBanner">
-    <h2><img src="{{getJournalBannerById journal}}" width="650" height="94" alt="{{title}}"></h2>
+    <h2><img src="{{getJournalBannerById journal}}" width="650" height="94" alt="{{translateThis titleCn title}}"></h2>
 </template>
 
 <template name="journalOptions">
@@ -38,61 +38,60 @@
 
         {{#tabContent slug="About"}}
             {{#with journalContext}}
-                {{> AboutTitle}}
+                {{> aboutTopics}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Editorial Board"}}
             {{#with journalContext}}
-
+                {{> aboutTitle}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="News"}}
             {{#with journalContext}}
-
+                {{> newContent}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Media"}}
             {{#with journalContext}}
-
+	            {{> mediaList}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Special Topics"}}
             {{#with journalContext}}
-
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Collections"}}
             {{#with journalContext}}
-
+                {{> collections}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Accepted"}}
             {{#with journalContext}}
-
+                {{> articleListRight pubStatus="preset"}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Online First"}}
             {{#with journalContext}}
-
+                {{> articleListRight pubStatus="online_frist"}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="MOOP"}}
             {{#with journalContext}}
-
+	            {{> mediaList}}
             {{/with}}
         {{/tabContent}}
 
         {{#tabContent slug="Author"}}
             {{#with journalContext}}
-
+                {{> authorCenterList}}
             {{/with}}
         {{/tabContent}}
     {{/journalTabs}}

@@ -1,5 +1,6 @@
 Template.collectionsList.helpers({
 	collections:function(){
+        var journalId = Session.get("currentJournalId");
 		var pubId = Session.get('filterPublisher');
 		var first = Session.get('firstLetter');
 		var numPerPage = Session.get('PerPage');
@@ -8,7 +9,14 @@ Template.collectionsList.helpers({
 		}
 		var q = {};
 		pubId && (q.publisherId = pubId);
-		first && (q.title = {$regex: "^" + first, $options: "i"});
+        journalId &&(q.journalId = journalId);
+        var reg;
+        if(first && first == "other"){
+            reg="^[^A-Z]"
+        }else{
+            reg = "^" + first;
+        }
+		first && (q.title = {$regex:reg, $options: "i"});
 		return collPaginator.find(q,{itemsPerPage:numPerPage});
 	}
 });

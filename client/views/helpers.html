@@ -7,8 +7,39 @@
 
         <div class="collapse" id="toggle{{_id}}">
             <ul class="list-unstyled">
-                <li>{{{field}}}</li>
+                <li>{{{getContent field}}}</li>
             </ul>
         </div>
     {{/if}}
+</template>
+
+<template name="toggleFieldBrowse">
+    {{#if field}}
+    <p>
+        <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
+           aria-expanded="false" aria-controls="toggle{{_id}}"> {{_ "Details"}}: </i>
+    </p>
+
+    <div class="collapse" id="toggle{{_id}}">
+        <ul class="list-unstyled">
+            <li>{{{field}}}</li>
+        </ul>
+        <ul class="list-unstyled">
+           {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
+        </ul>
+    </div>
+    {{/if}}
+</template>
+
+<template name="sendEmails">
+    {{#autoForm schema="EmailsSchema" id="addEmailsModalForm" type="method"}}
+    <div class="modal-body">
+        {{> afQuickField name="myEmail"}}
+        {{> afQuickField name="youEmail"}}
+        {{> afQuickField name="subject"}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary">{{_ "send"}}</button>
+    </div>
+    {{/autoForm}}
 </template>

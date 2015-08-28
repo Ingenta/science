@@ -49,6 +49,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     authorNodes.forEach(function (author) {
         var surnamePart = {};
         var givenPart = {};
+        var fullnamePart ={};
         var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
         //var authorAffNodes = xpath.select("child::xref[@ref-type='aff']/text()", author);
         //authorAffNodes.forEach(function (aff) {
@@ -66,11 +67,15 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var givenEn = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
             var surnameCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
             var givenCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
+            var fullnameEn = givenEn + " " + surnameEn;
+            var fullnameCn = surnameCn+givenCn;
             surnamePart = {en: surnameEn, cn: surnameCn};
             givenPart = {en: givenEn, cn: givenCn};
+            fullnamePart = {en:fullnameEn,cn:fullnameCn};
+
         }
 
-        fullName = {emailRef: emailRef, given: givenPart, surname: surnamePart};
+        fullName = {emailRef: emailRef, given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
 
         results.authors.push(fullName);
@@ -272,14 +277,14 @@ ScienceXML.getFigures = function (doc) {
             var graphics = xpath.select("child::alternatives/graphic", fig);
             if (graphics && graphics.length) {
                 figure.graphics = [];
-                var xlinkSelect = xpath.useNamespaces({"xlink": "http://www.w3.org/1999/xlink"});
+                //var xlinkSelect = xpath.useNamespaces({"xlink": "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
                 graphics.forEach(function (grap) {
                     var g = {};
                     var suse = xpath.select("./@specific-use", grap);
                     if (suse && suse.length) {
                         g.use = suse[0].value;
                     }
-                    var href = xlinkSelect('@xlink:href', grap);
+                    var href = xpath.select('@href', grap);
                     if (href && href.length) {
                         g.href = href[0].value;
                     }

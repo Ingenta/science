@@ -21,5 +21,3 @@ Template.uploadTableRow.events({
         Session.set('uploadLogId', this._id);
     }
 });
-
-

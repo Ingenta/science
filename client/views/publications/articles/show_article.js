@@ -59,6 +59,40 @@ Template.showArticle.onRendered(function () {
     }
     rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
+    //Rating Start
+    var aid = this.data._id;
+
+    Tracker.autorun(function(){
+        var arr = Articles.findOne({_id: aid}).rating || [];
+        $('.raty').raty({
+            //half: true,
+            score: function () {
+                if (arr.length > 0) {
+                    var sum = 0;
+                    _.each(arr, function (element) {
+                        sum += element.score;
+                    });
+                    return sum / arr.length;
+                } else {
+                    return 0;
+                }
+            },
+            click: function (score, evt) {
+                if (Meteor.userId()) {
+                    var temp = _.find(arr, function(obj){
+                        return obj.user == Meteor.userId();
+                    });
+                    if (temp) {
+                        arr = _.without(arr, temp);
+                    }
+                    arr.push({"user": Meteor.userId(), score: score});
+                    Articles.update({_id: aid}, {$set: {rating: arr}});
+                }
+                return false;
+            }
+        });
+    });
+    //Rating End
 });
 
 Template.showArticle.helpers({
@@ -79,10 +113,7 @@ Template.articleOptions.helpers({
     context: function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         return Articles.findOne({doi: currentDoi});
-    }
-});
-
-Template.articleOptions.helpers({
+    },
     tabs: function () {
         return [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
@@ -99,6 +130,7 @@ Template.articleOptions.helpers({
 //        return Session.get('activeTab');
     }
 });
+
 Template.showArticle.events({
     'click .pdfDownload': function () {
         ArticleViews.insert({

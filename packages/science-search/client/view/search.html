@@ -1,0 +1,86 @@
+<template name="SolrSearchBar">
+	<div class="navbar-form pull-right" role="search" name="search">
+		<div class="input-group">
+			<input id="searchInput" type="text" class="form-control" placeholder='{{_ "Search"}}'>
+           <span class="input-group-btn">
+               <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+           </span>
+		</div>
+	</div>
+</template>
+
+<template name="SolrSearchResults">
+	<div class="col-xs-4">
+		{{#each filters}}
+			{{> solrFilterItem}}
+		{{/each}}
+	</div>
+	<div class="col-xs-8">
+		<h4>{{_ "Search results"}}</h4>
+		{{#if statusOK}}
+			{{#each articles}}
+				{{> oneSolrArticle}}
+			{{/each}}
+		{{else}}
+			{{_ "No results found!"}}
+		{{/if}}
+
+	</div>
+</template>
+
+<template name="solrFilterItem">
+	<h5 class="bg-eee">{{filterTitle}}</h5>
+	<ul class="list-unstyled list-ul">
+		{{#if filterOptions}}
+			{{#each filterOptions}}
+					<li class="search-cond {{class}}">
+						<a href="#">
+							{{translateThis cname name}}({{count}})
+						</a>
+					</li>
+			{{/each}}
+		{{else}}
+			{{_ "No results found!"}}
+		{{/if}}
+	</ul>
+</template>
+
+
+<template name="oneSolrArticle">
+
+	<ul class="dotted list-unstyled">
+		<li>
+
+			<!--<h6>{{_ "Topic"}}: {{_ topic}}</h6>-->
+			{{#if can "delete-article" "resource"}}
+				<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>
+			{{/if}}
+			{{#with article}}
+				<h4>
+					<div class="resultsList"><img src="/icon_access_oa.gif">
+						<a class="{{class}}" href="{{urlToArticleById _id}}">{{{showTitle}}}</a>
+					</div>
+				</h4>
+
+				<ul class="list-unstyled">
+					<li>
+						{{#each authors}}
+							{{> authorPopButton name=getFullName}} ,
+						{{/each}}
+					</li>
+					<li>
+						<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
+						<b>{{volume}}</b>, {{elocationId}} ({{year}})
+						<a href="http://dx.doi.org/{{doi}}">{{doi}} <i class="fa fa-external-link"></i></a>
+					</li>
+					<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+					{{> abstractDetails}}
+				</ul>
+			{{/with}}
+		</li>
+	</ul>
+</template>
+
+<template name="solrAbstractDetails">
+	{{> toggleFieldBrowse field=abstract _id=_id}}
+</template>

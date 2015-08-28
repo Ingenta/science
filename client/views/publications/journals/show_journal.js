@@ -29,15 +29,15 @@ Template.journalOptions.helpers({
         if (!currentTitle)return;
         var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {
-            if (t === "Overview") {
-                tabList.push({name: TAPi18n.__("Overview"), slug: 'Overview'});
-                tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
-            } else if (tabList.length == 0) {
-                tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
-                tabList.push({name: TAPi18n.__("About"), slug: 'About'});
-            } else {
-                tabList.push({name: TAPi18n.__("About"), slug: 'About'});
-            }
+            //if (t === "Overview") {
+            //    tabList.push({name: TAPi18n.__("Overview"), slug: 'Overview'});
+            //    tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
+            //} else if (tabList.length == 0) {
+            //    tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});
+            //    tabList.push({name: TAPi18n.__(t), slug: t});
+            //} else {
+                tabList.push({name: TAPi18n.__(t), slug: t});
+            //}
         });
         if (tabList.length == 0) {
             tabList.push({name: TAPi18n.__("Browse"), slug: 'Browse'});

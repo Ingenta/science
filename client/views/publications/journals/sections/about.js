@@ -1,15 +1,4 @@
-Template.AboutTitle.helpers({
-    about: function () {
-        var publicationsId = Session.get('currentJournalId');
-        return About.find({publications: publicationsId});
-    },
-    isActive: function (id) {
-        var aboutId = Session.get('tabAbout');
-        if (aboutId === id)return "active";
-    }
-});
-
-Template.AboutTitle.events({
+Template.aboutTopics.events({
     'click .activeButton': function (event) {
         var aboutValue = $(event.target).data().aboutid;
         Session.set('tabAbout', aboutValue);
@@ -17,40 +6,51 @@ Template.AboutTitle.events({
 });
 
 Template.aboutArticlesList.onRendered(function () {
-    if (!Session.get('tabAbout')) {
-        var a = About.findOne();
-        if (a)Session.set('tabAbout', a._id);
+    if (Session.get('tabAbout')===undefined) {
+        Session.set('tabAbout', "a");
     }
 });
 
 Template.aboutArticlesList.helpers({
-    about: function () {
+    aboutArticle: function () {
         var aboutId = Session.get('tabAbout');
-        return About.find({_id: aboutId});
-    },
-    aboutarticle: function () {
-        var aboutId = Session.get('tabAbout');
-        return AboutArticles.find({about: aboutId});
+        var publicationId = Session.get('currentJournalId');
+        return AboutArticles.find({about: aboutId,publications:publicationId});
     }
 });
 
-AutoForm.addHooks(['addAboutArticlesModalForm'], {
+Template.editorialMemberList.helpers({
+    members: function () {
+        var aboutId = Session.get('tabAbout');
+        var publicationId = Session.get('currentJournalId');
+        return EditorialMember.find({about: aboutId,publications:publicationId});
+    },
+    publications: function () {
+        var publicationId = Session.get('currentJournalId');
+        return Publications.find({_id:publicationId});
+    }
+});
+
+AutoForm.addHooks(['addAboutArticlesModal'], {
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {
         insert: function (doc) {
             doc.about = Session.get('tabAbout');
+            doc.publications = Session.get('currentJournalId');
             return doc;
         }
     }
 }, true);
-AutoForm.addHooks(['addAboutTitleModalForm'], {
+
+AutoForm.addHooks(['addEditorialMemberModal'], {
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {
         insert: function (doc) {
+            doc.about = Session.get('tabAbout');
             doc.publications = Session.get('currentJournalId');
             return doc;
         }

@@ -1,0 +1,80 @@
+<template name="mediaList">
+	{{#if can "modify-journal" "resource"}}
+	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success" title="Add new"}}{{_ "Add new"}}{{/jkafModal}}
+	{{/if}}
+	<ul class="list-unstyled">
+		{{#each medias}}
+			<li>
+				<div class="row">
+					<div class="col-xs-5">
+						{{> Template.dynamic template=dynamicTemp data=getdata}}
+
+					</div>
+					<div class="col-xs-7">
+						{{#if can "modify-journal" "resource"}}
+						<div class="pull-right">
+							{{> jkafModal template="updateMediaForm" doc=this }}
+							<a href="#" class="fa fa-trash"></a>
+						</div>
+						{{/if}}
+						<h4>{{translateThis title.cn title.en}}</h4>
+
+						<p>{{translateThis description.cn description.en}}</p>
+					</div>
+				</div>
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="videoTemplate">
+	<video width="100%" controls="controls">
+		{{#with this.url play=true}}
+		<source src="{{this}}" type="video/mp4"/>
+		{{/with}}
+	</video>
+</template>
+
+<template name="audioTemplate">
+	<audio width="100%" controls="controls">
+		{{#with this.url play=true}}
+		<source src="{{this}}" type="audio/mp3"/>
+		{{/with}}
+	</audio>
+</template>
+
+<template name="fileDownloadTemplate">
+	{{#with this.url download=true}}
+	<a href="{{this}}" target="_blank">{{#if name}}{{name}}{{else}}{{../name}}{{/if}}</a>
+	{{/with}}
+</template>
+
+<template name="addMediaForm">
+	<!--{{> quickForm id="addMediaModalForm" type="insert" collection=Collections.Medias}}-->
+	{{#autoForm collection=Collections.Medias title="Add" id="addMediaModalForm" type="insert"}}
+		<div class="modal-body">
+			{{> afObjectField name="title"}}
+			{{> afObjectField name="description"}}
+			<input name="fileId" type="file" class="any"/>
+			{{#each uploadedFiles}}
+				{{> uploadedFile}}
+			{{/each}}
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+		</div>
+	{{/autoForm}}
+</template>
+
+<template name="updateMediaForm">
+	{{> quickForm id="updateMediaForm" doc=this type="update" collection=Collections.Medias omitFields='fileId'}}
+</template>
+
+<template name="uploadedFile">
+	<h4>{{#with this.url}}{{../name}}{{else}}{{this.name}}{{/with}} ({{this.size}} bytes)</h4>
+	{{#if this.isUploaded}}
+		{{> FS.DeleteButton class="btn btn-danger btn-xs"}}
+	{{else}}
+		<p>{{> FS.UploadProgressBar bootstrap=true}} Uploading...</p>
+	{{/if}}
+</template>

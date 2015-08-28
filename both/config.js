@@ -9,6 +9,10 @@ Config={
         tmpDir: '/tmp/uploads/tmp',
         uploadDir:'/tmp/uploads'
     },
+    uploadMediaDir:{
+        tmpDir: '/tmp/uploads/tmp',
+        uploadDir:'/tmp/uploads'
+    },
     ftp:{
         downloadDir:"/tmp/downloads"
     },
@@ -26,5 +30,24 @@ Config={
             'publications',
             'collections'
         ]
+    },
+    NewsPage: {
+        journal: [
+            'journal.name.volume',
+            'journal.name'
+        ],
+        global:[
+            'home'
+        ]
+    },
+    solrCore: {
+        host:"192.168.99.100",
+        port:"8983",
+        core:"/articles",
+        path:"/solr"
+    },
+    Media:{
+        allowType:['mp3', 'mp4','ppt','pptx'],
+        maxSize:200 //MB
     }
-}
+};

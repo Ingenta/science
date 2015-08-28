@@ -1,12 +1,24 @@
 this.Recommend = new Meteor.Collection("recommend");
 
-RecommendSchema = new SimpleSchema({
-    title: {
-        type: String,
-        unique: true
+this.Recommend.allow({
+    insert: function (userId, doc) {
+        return Permissions.userCan("add-recommend", "resource", userId);
     },
-    chineseTitle: {
-        type: String
+    update: function (userId, doc) {
+        return Permissions.userCan("modify-recommend", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-recommend", "resource", userId);
+    }
+});
+
+RecommendSchema = new SimpleSchema({
+    ArticlesId: {
+        type: String,
+        unique: true,
+        autoform: {
+                type: 'universe-select'
+        }
     },
     behalfPicture: {
         type: String,

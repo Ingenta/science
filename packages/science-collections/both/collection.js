@@ -14,23 +14,10 @@ ArticleCollections.allow({
 
 ArticleCollectionsSchema = new SimpleSchema({
 	title: {
-		type: String,
-		unique: true
-	},
-	chinesetitle:{
-		type: String
+		type: Science.schemas.MultiLangSchema
 	},
 	description:{
-		type: String,
-		autoform: {
-			rows: 2
-		}
-	},
-	chinesedescription: {
-		type: String,
-		autoform: {
-			rows: 2
-		}
+		type: Science.schemas.MultipleAreaSchema
 	},
 	picture: {
 		type: String,
@@ -52,7 +39,11 @@ ArticleCollectionsSchema = new SimpleSchema({
 	articles: {
 		type: [String],
 		optional: true
-	}
+    },
+    journalId:{
+        type: String,
+        optional: true
+    }
 });
 Meteor.startup(function () {
 	ArticleCollectionsSchema.i18n("schemas.collections");

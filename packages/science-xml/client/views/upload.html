@@ -26,7 +26,20 @@
 </template>
 
 <template name="uploadForm">
-    {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true}}
+	<p>
+		<div class="btn-group" data-toggle="buttons">
+			<label class="btn btn-primary active">
+				<input type="radio" name="pubStatus" value="normal" autocomplete="off" checked> {{_ "pubStatus.normal" }}
+			</label>
+			<label class="btn btn-primary">
+				<input type="radio" name="pubStatus" value="online_frist" autocomplete="off"> {{_ "pubStatus.onlineFirst" }}
+			</label>
+			<label class="btn btn-primary">
+				<input type="radio" name="pubStatus" value="preset" autocomplete="off"> {{_ "pubStatus.preset" }}
+			</label>
+		</div>
+	</p>
+    {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true dynamicField='pubStatus'}}
 </template>
 
 <template name="uploadTableRow">

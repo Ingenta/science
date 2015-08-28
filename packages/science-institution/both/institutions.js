@@ -14,8 +14,16 @@ Institutions.allow({
 
 InstitutionsSchema = new SimpleSchema({
     name: {
+        type: Science.schemas.MultiLangSchema
+        //unique: true
+    },
+    number: {
         type: String
         //unique: true
+    },
+    type: {
+        type: String,
+        optional: true
     },
     logo: {
         type: String,
@@ -28,9 +36,34 @@ InstitutionsSchema = new SimpleSchema({
             }
         }
     },
+    description: {
+        type: Science.schemas.MultipleAreaSchema
+    },
     ipRange: {
+        type: [Object],
+        minCount: 1
+    },
+    "ipRange.$.startIP": {
+        type: String,
+        regEx: SimpleSchema.RegEx.IPv4
+    },
+    "ipRange.$.endIP": {
+        type: String,
+        regEx: SimpleSchema.RegEx.IPv4
+    },
+    "ipRange.$.startNum": {
+        type: Number,
+        max: 4294967295,
+        min: 0
+    },
+    "ipRange.$.endNum": {
+        type: Number,
+        max: 4294967295,
+        min: 0
+    },
+    available: {
         type: String
-    }
+    },
 });
 Meteor.startup(function () {
     InstitutionsSchema.i18n("schemas.institutions");

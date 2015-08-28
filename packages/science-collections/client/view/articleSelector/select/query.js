@@ -26,8 +26,10 @@ Template.searchArticleForAddToCollection.helpers({
     },
     issues: function () {
         if(Session.get("volume"))
-        console.log();
              return Issues.find({volume: Session.get("volume"),journalId: Session.get("journalId")});
+    },
+    journalId : function(){
+        return Session.get("currentJournalId");
     }
 });
 Template.searchArticleForAddToCollection.events({
@@ -40,7 +42,7 @@ Template.searchArticleForAddToCollection.events({
     }
 });
 Template.searchArticleForAddToCollection.onRendered(function(){
-    Session.set("journalId", null);
+    Session.set("journalId", Session.get("currentJournalId"));
     Session.set("volume", null);
     Session.set("issue", null);
     Session.set("query", null);

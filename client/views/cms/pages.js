@@ -1,4 +1,11 @@
 Template.pageElement.helpers({
+    setHomePageElement: function (key) {
+        var element = Pages.findOne({key: key});
+        if (!element) {
+            return
+        }
+        Session.set("thisPageElement", element.key);
+    },
     getPageTitle: function (key) {
         var element = Pages.findOne({key: key});
         if (!element) {
@@ -16,6 +23,20 @@ Template.pageElement.helpers({
         if (TAPi18n.getLanguage() === "zh-CN")
             return element.description.cn;
         return element.description.en;
+    },
+    isHomePage: function (key) {
+        return "homepage" == key;
+    }
+});
+
+Template.updateHomePagesModalForm.helpers({
+    getPageId: function (key) {
+        var key = Session.get("thisPageElement")
+        var element = Pages.findOne({key: key});
+        if (!element) {
+            return
+        }
+        return element._id;
     }
 });
 

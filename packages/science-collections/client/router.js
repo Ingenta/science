@@ -15,7 +15,10 @@ Router.route("/collections/", {
 	onBeforeAction: function () {
 		Session.set('filterPublisher', undefined);
 		Session.set('firstLetter', undefined);
+        Session.set('otherLetter', undefined);
 		Session.set('PerPage', 10);
+        Session.set('journalId', undefined);
+        Session.set('currentJournalId', undefined);
 		this.next();
 	}
 });

@@ -3,7 +3,7 @@
         {{> pageElement key="institutions"}}
         <div class="row">
             {{#if can "add-institution" "institution"}}
-                {{> addInstitutionModalForm}}
+                {{> addInstitutionForm}}
             {{/if}}
         </div>
         <hr>
@@ -13,8 +13,8 @@
     </div>
 </template>
 
-<template name="addInstitutionModalForm">
-    {{#afModal class="btn btn-success" collection="Institutions" operation="insert" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
+<template name="addInstitutionForm">
+    {{#afModal formId="addInstitutionModalForm" class="btn btn-success" collection="Institutions" operation="insert" omitFields="available, ipRange.$.startNum, ipRange.$.endNum" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
         {{_ "Add new"}}
     {{/afModal}}
 </template>

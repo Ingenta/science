@@ -7,14 +7,14 @@
     <div class="col-xs-10">
         <nav>
             <div class="container-fluid">
-                {{>SearchBar}}
+                {{> SolrSearchBar}}
             </div>
         </nav>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div id="navbar">
                     {{> LeftMenu}}
-                    {{> PublicLayoutRightMenu}}
+                    {{> PublicLayoutRightMenu lang="zhcn"}}
                 </div>
             </div>
         </nav>
@@ -63,9 +63,8 @@
             </a>
         </li>
         <li id="menu-item-simple-left" class="navbar-left-button {{menuItemClass 'author'}}">
-            <!-- <a href="{{pathFor 'author'}}"> -->
-            <a href="#" >
-                {{_ "Author"}}
+             <a href="{{pathFor 'authorCenter'}}">
+                {{_ "Author Center"}}
             </a>
         </li>
     </ul>

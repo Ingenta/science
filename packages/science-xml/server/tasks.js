@@ -1,11 +1,15 @@
 Tasks = {};
 
-Tasks.startJob = function (pathToFile, fileName, fileType) {
+Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
 
     if (!pathToFile || !fileName || !fileType)return;
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
+    //文章的出版状态(默认是正式出版)
+    var pubstatus = formFields ? formFields.pubStatus : "normal";
+
     var logId = UploadLog.insert({
         name: fileName,
+        pubStatus: pubstatus,
         uploadedAt: new Date(),
         status: "Started",
         filePath: pathToFile,
@@ -31,7 +35,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType) {
         Tasks.extract(logId, pathToFile, targetPath);
         return;
     }
-    Tasks.failSimple(taskId, logId, "File is not suitable");
+    Tasks.failSimple(undefined, logId, "File is not suitable");
 };
 
 Tasks.fail = function (taskId, logId, errors) {
@@ -237,7 +241,12 @@ Tasks.insertArticleTask = function (logId, result) {
 
     var hadError = false;
     var articleId;
+
+    var log = UploadLog.findOne({_id: logId});
+    result.pubStatus = log.pubStatus;//设置文章的出版状态和上传时选择的出版状态一致。
+
     try {
+        inserAccessKey(result);
         inertKeywords(result.keywords);
         articleId = insertArticle(result);
     }
@@ -247,7 +256,6 @@ Tasks.insertArticleTask = function (logId, result) {
     }
     if (!hadError) {
         //cleanup and set log and tasks to done
-        var log = UploadLog.findOne({_id: logId});
         ScienceXML.RemoveFile(log.filePath);
         UploadTasks.update(
             {_id: taskId},
@@ -267,6 +275,10 @@ var inertKeywords = function (a) {
             });
         }
     })
+}
+
+var inserAccessKey = function (a) {
+    a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
 }
 
 var insertArticle = function (a) {
@@ -309,7 +321,7 @@ var insertArticle = function (a) {
         received: a.received,
         accepted: a.accepted,
         published: a.published,
-        topic: a.topic,
+        topic: [a.topic],
         contentType: a.contentType,
         acknowledgements: a.ack,
         pdfId: a.pdfId,
@@ -320,7 +332,9 @@ var insertArticle = function (a) {
         figures: a.figures,
         tables: a.tables,
         keywords: a.keywords,
-        references: a.references
+        references: a.references,
+        pubStatus: a.pubStatus, //出版状态
+        accessKey: a.accessKey
     });
     return id;
 }

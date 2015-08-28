@@ -16,6 +16,9 @@ PublicationsSchema = new SimpleSchema({
     title: {
         type: String
     },
+    titleCn: {
+        type: String
+    },
     shortTitle: {
         type: String,
         max: 10
@@ -24,6 +27,112 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         max: 9
     },
+    createdBy: {
+        type: String
+    },
+    createDate: {
+        type: Date
+    },
+    chiefEditor: {
+        type: Science.schemas.MultipleTextSchema
+    },
+    competentOrganization: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    sponsor: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    EISSN: {
+        type: String,
+        optional: true
+    },
+    CN: {
+        type: String
+    },
+    publicationDate: {
+        type: Date,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
+    frequencyPublication: {
+        type: String,
+        optional: true
+    },
+    included: {
+        type: [String],
+        minCount: 0,
+        optional: true
+    },
+    "included.$": {
+        type: String,
+        optional: true
+    },
+    language: {
+        type: String,
+        optional: true
+    },
+    topicId: {
+        type: [String],
+        optional: true,
+        autoform:{
+            type: "universe-select",
+            afFieldInput: {
+                multiple: true
+            }
+        }
+    },
+    email: {
+        type: String,
+        optional: true
+    },
+    address: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    phone: {
+        type: String,
+        optional: true
+    },
+    fax: {
+        type: String,
+        optional: true
+    },
+    authorTitle: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    authorDescription: {
+        type: Science.schemas.MultipleAreaSchema,
+        optional: true
+    },
+    fileName: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    authorPicture: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
+            }
+        }
+    },
+    fileId: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "cfs-file",
+            collection: "files"
+        }
+    },
     accessKey: {
         type: String
     },
@@ -31,11 +140,8 @@ PublicationsSchema = new SimpleSchema({
         type: String
     },
     description: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 4
-        }
+        optional:true,
+        type: Science.schemas.MultipleAreaSchema
     },
     publisher: {
         type: String

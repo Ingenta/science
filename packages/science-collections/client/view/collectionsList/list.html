@@ -1,54 +1,53 @@
 <template name="collectionsList">
-	<div class="container-fluid">
-		<div class="row" style="margin-top: 20px;">
-			{{#each collections}}
-				{{> oneCollection}}
-			{{/each}}
-			{{> Paginator_UI collections}}
-			<span style="float:right">{{_ "Display per page"}}:
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 20px;">
+            {{#each collections}}
+                {{> oneCollection}}
+            {{/each}}
+            {{> Paginator_UI collections}}
+            <span style="float:right">{{_ "Display per page"}}:
                     <a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;
 					<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;
 					<a class="perPage" data-pagenum="50">50</a>
 				</span>
-		</div>
-	</div>
+        </div>
+    </div>
 </template>
 
 <template name="oneCollection">
-	<div class="row dotted-publication-item">
-		<div class="col-xs-2">
-			<img src="{{getImageHelper picture}}" width="58" height="82"/>
-		</div>
-		<div class="col-xs-10">
-			<div class="pull-right">
-				{{#if can "modify-pulisher-collections" "collections" }}
-				<a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
-				{{> updateCollectionForm}}
-				{{/if}}
-				{{#if can "delete-pulisher-collections" "collections" }}
-				<a href="#" class="fa fa-trash" collId="{{_id}}"></a>
-				{{/if}}
-			</div>
-			<ul class="list-unstyled">
-				<li>
-					<h4>
-						<a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis chinesetitle title}}</a>
-					</h4>
-
-				</li>
-			</ul>
-			{{> collectionDesc}}
-		</div>
-	</div>
-	<hr>
+    <div class="row dotted-publication-item">
+        <div class="col-xs-3">
+            <img src="{{getImageHelper picture}}" width="105"/>
+        </div>
+        <div class="col-xs-9">
+            <div class="pull-right">
+                {{#if can "modify-pulisher-collections" "collections" }}
+                    <a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
+                    {{> updateCollectionForm}}
+                {{/if}}
+                {{#if can "delete-pulisher-collections" "collections" }}
+                    <a href="#" class="fa fa-trash" collId="{{_id}}"></a>
+                {{/if}}
+            </div>
+            <ul class="list-unstyled">
+                <li>
+                    <h4>
+                        <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
+                    </h4>
+                </li>
+                <li>{{_ "createAt"}}: {{formatDate createdAt "YYYY-MM-DD"}}</li>
+            </ul>
+            {{> collectionDesc}}
+        </div>
+    </div>
+    <hr>
 </template>
 
 <template name="collectionDesc">
-	{{> toggleField field=description _id=_id}}
+    {{> toggleField field=description _id=_id}}
 </template>
 
 <template name="updateCollectionForm">
-	{{#afModal class="fa fa-pencil" title=getTitle collection="ArticleCollections" doc=_id operation="update"
-	buttonContent=getUpdateButtonContent omitFields="articles,publisherId"}}
-	{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getTitle collection="ArticleCollections" doc=_id operation="update" buttonContent=getUpdateButtonContent omitFields="articles,publisherId,journalId"}}
+    {{/afModal}}
 </template>
