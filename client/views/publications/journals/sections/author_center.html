@@ -1,13 +1,58 @@
 <template name="authorCenterList">
-    <div>
+    {{> publicationPdfContent}}
+    <hr>
+    <p style="background-color: #ffb733"><h4><b>>>&nbsp;{{_"Guide for Authors"}}</b></h4></p>
+    {{> guideArticles}}
+    <hr>
+    <p style="background-color: #ffb733"><h4><b>>>&nbsp;{{_"The author article search history"}}</b></h4></p>
+    <div class="col-xs-12 col-sm-6 col-md-8" style="margin-top: 20px"><p>{{_"Author"}}：<input type="text" name="">&nbsp;&nbsp;&nbsp;&nbsp;{{_"Company name"}}：<input type="text" name=""></p></div>
+    <div class="col-xs-6 col-md-4" style="margin-top: 20px"><p><button type="button">{{_ "search"}}</button></p></div>
+</template>
+
+<template name="publicationPdfContent">
+    <div class="row" style="margin-top: 10px">
         {{#each authorResources}}
-            <h2>{{translateThis authorTitle.cn authorTitle.en}}》</h2><br>
-            <span>{{translateThis authorDescription.cn authorDescription.en}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</span>
-            <img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}
-            <a href="">{{translateThis fileName.cn fileName.en}}</a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}
+        <div class="col-xs-5"><h4><b>{{translateThis authorTitle.cn authorTitle.en}}&nbsp;>></b></h4><br><span>{{{translateThis authorDescription.cn authorDescription.en}}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</span></div>
+        <div class="col-xs-3" style="margin-top: 20px"><img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}</div>
+        <div class="col-xs-4" style="margin-top: 60px"><a href="{{pdfValue}}" target="_blank">{{translateThis fileName.cn fileName.en}}&nbsp;&nbsp;<img src="/pdf.png" height="18" width="21"></a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}</div>
         {{else}}
-            {{_ "No results found!"}}
+        {{_ "No results found!"}}
         {{/each}}
+    </div>
+</template>
+
+<template name="guideArticles">
+    <div class="row">
+        <div class="col-md-4">
+            <p style="background-color: #d0e9c6">
+                <strong>投稿前须知</strong><br>
+            </p>
+            <p style="background-color: #f8e5be">
+                <ul>
+                    <li>1111</li>
+                </ul>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p style="background-color: #d0e9c6">
+                <strong>准备手稿</strong><br>
+            </p>
+            <p style="background-color: #f8e5be">
+            <ul>
+                <li>1111</li>
+            </ul>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p style="background-color: #d0e9c6">
+                <strong>提交稿件</strong><br>
+            </p>
+            <p style="background-color: #f8e5be">
+            <ul>
+                <li>1111</li>
+            </ul>
+            </p>
+        </div>
     </div>
 </template>
 
