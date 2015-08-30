@@ -60,7 +60,6 @@ Template.SolrSearchResults.onRendered(function(){
         //刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
         pageSession.set("query",Router.current().params.query.q);
         var fq=Router.current().params.query.fq;
-        console.log(fq);
     }
 });
 
@@ -182,10 +181,23 @@ Template.oneSolrArticle.helpers({
     journalName: function (id) {
         return Publications.findOne({_id: id}).title;
     },
+    getAutors:function(){
+        var hl = pageSession.get("highlight")[this._id];
+        var isLangCn = TAPi18n.getLanguage()==="zh-CN";
+        if(hl && hl[isLangCn?"all_authors_cn":"all_authors_en"]){
+            return hl[isLangCn?"all_authors_cn":"all_authors_en"];
+        }else{
+            return this.authors;
+        }
+    },
     getFullName: function () {
-        if (TAPi18n.getLanguage() === "zh-CN")
-            return this.surname.cn + this.given.cn;
-        return this.given.en + " " + this.surname.en;
+        if(this.surname || this.given){
+            if (TAPi18n.getLanguage() === "zh-CN")
+                return this.surname.cn + this.given.cn;
+            return this.given.en + " " + this.surname.en;
+        }else{
+            return this + "";
+        }
     },
     query      : function () {
         return Router.current().params.searchQuery;
@@ -203,6 +215,13 @@ Template.oneSolrArticle.helpers({
     			return hl["title.en"];
     	}
     	return isLangCn?this.title.cn:this.title.en;
+    },
+    showdoi:function(){
+        var hl = pageSession.get("highlight")[this._id];
+        if(hl && hl["doi"]){
+           return hl["doi"];
+        }
+        return this.doi;
     },
     class:function(){
         //return "fa fa-language";
