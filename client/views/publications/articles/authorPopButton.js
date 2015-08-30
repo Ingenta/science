@@ -3,7 +3,7 @@ Template.authorPopButton.events({
         event.preventDefault();
         var ele = $(event.currentTarget);
         var name = Template.currentData().name;
-        var clearname=Science.replaceSubstringsNoEscape(name,"</?[^>]*?>",'');
+        var clearname=Science.clearTags(name);
         var html = "<div class='author-pop'>";
         html += "<div><a href='/author/" + clearname + "'>" + TAPi18n.__("Go to author page") + "</a></div>";
         html += "<hr>";

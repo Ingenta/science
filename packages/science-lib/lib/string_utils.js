@@ -4,15 +4,12 @@ Science.escapeRegEx = function (string) {
 
 Science.replaceSubstrings = function (string, find, replace) {
     if (string===undefined)return string;
-    console.log()
     return string.replace(new RegExp(Science.escapeRegEx(find), 'g'), replace);
 };
 
-Science.replaceSubstringsNoEscape = function (string, find, replace) {
-    if (string===undefined)return string;
-    console.log()
-    return string.replace(new RegExp(find, 'g'), replace);
-};
+Science.clearTags = function(string){
+    return string && string.replace(new RegExp("</?[^>]*?>", 'g'), "");
+}
 
 Science.joinStrings = function (stringArray, join) {
     var sep = join || ", ";
