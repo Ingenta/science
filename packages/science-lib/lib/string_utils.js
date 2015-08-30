@@ -4,7 +4,14 @@ Science.escapeRegEx = function (string) {
 
 Science.replaceSubstrings = function (string, find, replace) {
     if (string===undefined)return string;
+    console.log()
     return string.replace(new RegExp(Science.escapeRegEx(find), 'g'), replace);
+};
+
+Science.replaceSubstringsNoEscape = function (string, find, replace) {
+    if (string===undefined)return string;
+    console.log()
+    return string.replace(new RegExp(find, 'g'), replace);
 };
 
 Science.joinStrings = function (stringArray, join) {
