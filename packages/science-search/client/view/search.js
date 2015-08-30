@@ -59,7 +59,8 @@ Template.SolrSearchResults.onRendered(function(){
     if(Router.current().params.query.q){
         //刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
         pageSession.set("query",Router.current().params.query.q);
-        var fq=Router.current().params.query.fq;
+        var fq=Science.getParamsFormUrl("fq");
+        pageSession.set("filterQuery",fq);
     }
 });
 
