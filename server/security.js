@@ -17,6 +17,6 @@ Recommend.permit(['insert', 'update', 'remove']).apply();
 EditorialMember.permit(['insert', 'update', 'remove']).apply();
 EditorialBoard.permit(['insert', 'update', 'remove']).apply();
 Meeting.permit(['insert', 'update', 'remove']).apply();
-
+AuthorCenter.permit(['insert', 'update', 'remove']).apply();
 //Collections.Files.permit(['insert', 'update', 'remove']).apply();
 Collections.Medias.permit(['insert', 'update', 'remove']).apply();

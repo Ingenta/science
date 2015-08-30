@@ -75,6 +75,9 @@
     "News": "新闻",
     "Media": "多媒体",
     "Special Topics": "专题",
+    "Submission Guidelines": "投稿前须知",
+    "Prepare Manuscript": "准备手稿",
+    "Submit  Manuscript": "提交稿件",
     "Collections": "文章集",
     "Received": "稿件接收时间",
     "Accepted Date": "稿件收录时间",
@@ -83,6 +86,8 @@
     "Online First": "优先出版",
     "MOOP": "MOOP",
     "Author Center": "作者中心",
+    "Guide for Authors": "投稿指南",
+    "The author article search history": "作者历史文章查看",
     "Last release was": "最后更新于",
     "Any Publisher": "+ 更多",
     "Editors": "编辑",
@@ -291,6 +296,39 @@
             },
             "fax": {
                 "label": "传真"
+            },
+            "authorTitle": {
+                "label": "作者中心标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "authorDescription": {
+                "label": "简介",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "fileName": {
+                "label": "模版标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "authorPicture": {
+                "label": "选择图片"
+            },
+            "fileId":{
+                "label":"选择模版文件"
             },
             "accessKey": {
                 "label": "请选择一个资源标签",
@@ -772,6 +810,32 @@
             },
             "subject": {
                 "label": "主题:"
+            }
+        },
+        "authorCenter":{
+            "title": {
+                "label": "标题",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "content": {
+                "label": "全文",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "url": {
+                "label": "相关链接"
+            },
+            "parentId": {
+                "label": "是否选择一个父集合"
             }
         }
     },

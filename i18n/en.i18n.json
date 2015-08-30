@@ -112,6 +112,39 @@
             "fax": {
                 "label": "faxes"
             },
+            "authorTitle": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "authorDescription": {
+                "label": "Description",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "fileName": {
+                "label": "File Name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "authorPicture": {
+                "label": "Choose file"
+            },
+            "fileId":{
+                "label":"Choose PDF file"
+            },
             "accessKey": {
                 "label": "Choose an Access Key",
                 "options": {
@@ -592,6 +625,32 @@
             },
             "subject": {
                 "label": "Subject:"
+            }
+        },
+        "authorCenter":{
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "content": {
+                "label": "Full Text",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "url": {
+                "label": "A Link"
+            },
+            "parentId": {
+                "label": "Choose Father and son set"
             }
         }
     },
