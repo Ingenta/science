@@ -2,15 +2,15 @@
     <div class="container-fluid" id="content">
         {{> pageElement key="homepage"}}
         <hr>
-		{{#if can "manager-homepage" "news" }}
-        {{> addNewsForm}}
-        {{/if}}
         {{> NewsList}}
+	    {{#if can "manager-homepage" "news" }}
+		    {{> addNewsForm}}
             {{#if hasMostThreeNews}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
                     {{_ "Add new"}}
                 </button>
             {{/if}}
+	    {{/if}}
         <hr>
         {{> recentArticles}}
         {{> HomePublicContent}}
