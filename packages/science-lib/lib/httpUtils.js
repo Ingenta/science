@@ -1,0 +1,1 @@
+Science.Request = Npm.require('request');
