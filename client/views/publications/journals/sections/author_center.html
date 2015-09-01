@@ -48,9 +48,10 @@
             <p style="background-color: #f8e5be">
                 <ul>
                     {{#each manuscript}}
-                    <li><a href={{url}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
+                        <span>>>{{translateThis title.cn title.en}}</span>
+                        <li><a href={{url}} target="_blank">{{childTitle _id}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
                     {{else}}
-                    {{_ "No results found!"}}
+                        {{_ "No results found!"}}
                     {{/each}}
                 </ul>
             </p>

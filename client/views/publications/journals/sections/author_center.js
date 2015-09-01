@@ -16,7 +16,14 @@ Template.guideArticles.helpers({
     },
     manuscript: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type:"2",publications:journalId});
+        return AuthorCenter.find({type:"2",publications:journalId,parentId:null});
+    },
+    childTitle: function (id) {
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var journalId = Session.get('currentJournalId');
+        var authors = AuthorCenter.findOne({type:"2",publications:journalId,parentId:id});
+        var name = iscn?authors.title.cn:authors.title.en;
+        return name;
     },
     submitManuscript: function () {
         var journalId = Session.get('currentJournalId');
@@ -28,7 +35,7 @@ Template.addManuscriptModalForm.helpers({
     getManuscript:function(){
         var iscn=TAPi18n.getLanguage()==='zh-CN';
         var journalId = Session.get('currentJournalId');
-        var articles = AuthorCenter.find({type:"2",publications:journalId}).fetch();
+        var articles = AuthorCenter.find({type:"2",publications:journalId,parentId:null}).fetch();
         var result = [];
         _.each(articles,function(item){
             var name = iscn?item.title.cn:item.title.en;
