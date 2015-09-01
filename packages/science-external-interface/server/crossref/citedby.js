@@ -1,6 +1,6 @@
 var apiUrl = "https://doi.crossref.org/servlet/getForwardLinks?" +
 	"usr=scichina&pwd=scichina1&startDate=1990-01-01&" +
-	"endDate=" + new Date().format(yyyy-MM-dd) + "&doi=";
+	"endDate=" + new Date().format("yyyy-MM-dd") + "&doi=";
 
 Science.CrossRef.getCitedBy = function(doi,callback){
 	Science.Request(apiUrl+doi,function(err,response,body){
@@ -17,7 +17,7 @@ Science.CrossRef.getCitedBy = function(doi,callback){
 }
 
 Meteor.startup(function(){
-	Science.CrossRef.get("10.1360/972010-666",function(obj){
+	Science.CrossRef.getCitedBy("10.1360/972010-666",function(obj){
 		return ;
 	});
 })
