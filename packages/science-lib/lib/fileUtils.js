@@ -1,0 +1,1 @@
+Science.FSE = Npm.require('fs-extra');

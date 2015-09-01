@@ -65,8 +65,9 @@ Template.meetingInfoList.helpers({
     }
 });
 
-AutoForm.addHooks(['addNewsCenterModal'], {
+AutoForm.addHooks(['addNewsCenterModalForm'], {
     onSuccess: function () {
+        $("#addNewsCenterModal").modal('hide');
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     },
     before: {

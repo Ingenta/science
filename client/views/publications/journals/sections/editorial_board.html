@@ -142,13 +142,11 @@
 </template>
 
 <template name="addAboutTitleModalForm">
-    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert"
-    omitFields="publications" title=getCreateButtonContent}}{{/afModal}}
+    {{#afModal formId="addAboutTitleModalForm" class="fa fa-plus" collection="About" operation="insert" omitFields="publications" title=getCreateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateAboutTitleModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update"
-    omitFields="publications"}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update" omitFields="publications"}}{{/afModal}}
 </template>
 
 <template name="deleteAboutTitleModalForm">
@@ -157,13 +155,11 @@
 
 
 <template name="addEditorialBoardModalForm">
-    {{#afModal formId="addEditorialBoardModalForm" class="fa fa-plus" collection="EditorialBoard" operation="insert"
-    omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
+    {{#afModal formId="addEditorialBoardModalForm" class="fa fa-plus" collection="EditorialBoard" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateEditorialBoardModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialBoard" doc=_id operation="update"
-    omitFields="about,publications"}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialBoard" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
 </template>
 
 <template name="deleteEditorialBoardModalForm">

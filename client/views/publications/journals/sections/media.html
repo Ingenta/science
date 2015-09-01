@@ -45,7 +45,7 @@
 
 <template name="fileDownloadTemplate">
 	{{#with this.url download=true}}
-	<a href="{{this}}">{{#if name}}{{name}}{{else}}{{../name}}{{/if}}</a>
+	<a href="{{this}}" target="_blank">{{#if name}}{{name}}{{else}}{{../name}}{{/if}}</a>
 	{{/with}}
 </template>
 

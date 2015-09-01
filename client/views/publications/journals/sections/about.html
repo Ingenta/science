@@ -45,15 +45,14 @@
 </template>
 
 <template name="editorialMemberList">
-    <div class="part">
-        <p>
-            {{#each publications}}
-            <strong>{{title}}&nbsp;：</strong><br> {{_"E-mail"}}：&nbsp;{{email}}<br>{{_"Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>{{_"Phone"}}：&nbsp;{{phone}}<br>{{_"Fax"}}：&nbsp;{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}
-                {{else}}
-                {{_ "No publications found!"}}
-            {{/each}}
-        </p>
-    </div>
+    <div class="row part">
+        {{#each publications}}
+            <div class="col-xs-6 col-md-6"><p><strong>{{title}}&nbsp;</strong><br><br>{{_"E-mail"}}：&nbsp;{{email}}</p></div>
+            <div class="col-xs-12 col-md-6"><p>{{_"Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>{{_"Phone"}}：&nbsp;{{phone}}<br>{{_"Fax"}}：&nbsp;{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}</p></div>
+        {{else}}
+            {{_ "No publications found!"}}
+        {{/each}}
+    </div><hr>
         <p>
             <strong>编辑部成员简介</strong>
             <div class="pull-right">
@@ -67,7 +66,7 @@
                     {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
                 </p>
             </div>
-            {{else}}
+        {{else}}
             {{_ "No results found!"}}
         {{/each}}
 </template>
@@ -99,6 +98,6 @@
 
 
 <template name="updatePublicationEmailModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="email,address,address.cn,address.en,phone,fax" buttonContent=getUpdateButtonContent}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="email,address,phone,fax" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>

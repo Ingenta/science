@@ -7,6 +7,10 @@ Science.replaceSubstrings = function (string, find, replace) {
     return string.replace(new RegExp(Science.escapeRegEx(find), 'g'), replace);
 };
 
+Science.clearTags = function(string){
+    return string && string.replace(new RegExp("</?[^>]*?>", 'g'), "");
+}
+
 Science.joinStrings = function (stringArray, join) {
     var sep = join || ", ";
     var res = "";
@@ -53,21 +57,52 @@ Science.queryStringify = function(obj, sep, eq, name) {
         obj = undefined;
     }
 
+    //if (typeof obj === 'object') {
+    //    return Object.keys(obj).map(function(k) {
+    //        var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+    //        if (Array.isArray(obj[k])) {
+    //            return obj[k].map(function(v) {
+    //                return ks + encodeURIComponent(stringifyPrimitive(v));
+    //            }).join(sep);
+    //        } else {
+    //            return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+    //        }
+    //    }).join(sep);
+    //
+    //}
+    //
+    //if (!name) return '';
+    //return encodeURIComponent(stringifyPrimitive(name)) + eq +
+    //    encodeURIComponent(stringifyPrimitive(obj));
+
     if (typeof obj === 'object') {
         return Object.keys(obj).map(function(k) {
-            var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+            var ks = (stringifyPrimitive(k)) + eq;
             if (Array.isArray(obj[k])) {
                 return obj[k].map(function(v) {
-                    return ks + encodeURIComponent(stringifyPrimitive(v));
+                    return ks + (stringifyPrimitive(v));
                 }).join(sep);
             } else {
-                return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+                return ks + (stringifyPrimitive(obj[k]));
             }
         }).join(sep);
 
     }
 
     if (!name) return '';
-    return encodeURIComponent(stringifyPrimitive(name)) + eq +
-        encodeURIComponent(stringifyPrimitive(obj));
+    return (stringifyPrimitive(name)) + eq +
+        (stringifyPrimitive(obj));
 };
+
+Science.getParamsFormUrl= function(paramName){
+    var reg=new RegExp("[&\?]"+paramName+"=[^&]+","g");
+    var paramstrs = decodeURIComponent(window.location.search).match(reg);
+    var params;
+    if(paramstrs || paramstrs.length){
+        params = [];
+        _.each(paramstrs,function(str){
+            params.push(str.substr(2+paramName.length));
+        });
+    }
+    return params;
+}
