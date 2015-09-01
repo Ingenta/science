@@ -18,16 +18,21 @@ Template.guideArticles.helpers({
         var journalId = Session.get('currentJournalId');
         return AuthorCenter.find({type:"2",publications:journalId,parentId:null});
     },
-    childTitle: function (id) {
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
+    childList: function () {
         var journalId = Session.get('currentJournalId');
-        var authors = AuthorCenter.findOne({type:"2",publications:journalId,parentId:id});
-        var name = iscn?authors.title.cn:authors.title.en;
-        return name;
+        return AuthorCenter.find({type:"2",publications:journalId,parentId:this._id});
     },
     submitManuscript: function () {
         var journalId = Session.get('currentJournalId');
         return AuthorCenter.find({type:"3",publications:journalId});
+    },
+    whichUrl: function() {
+        if(this.url){
+            return this.url;
+        }
+        var journalId = Session.get('currentJournalId');
+        var publication = Publications.findOne({_id:journalId});
+        return publication.title+"/guide/"+this._id;
     }
 });
 
