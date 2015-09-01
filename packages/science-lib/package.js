@@ -13,7 +13,8 @@ Package.describe({
 Npm.depends({
   "fs-extra": "0.24.0",
   "request": "2.61.0",
-  "readline": "1.0.0"
+  "readline": "1.0.0",
+  "xml2js": "0.4.11"
 });
 
 Package.onUse(function(api) {
@@ -28,7 +29,8 @@ Package.onUse(function(api) {
     'iron:router@1.0.9',
     'matb33:collection-hooks@0.7.11',
     'aldeed:simple-schema@1.1.0',
-    'underscore'
+    'underscore',
+    'jackkav:xpath'
   ];
   api.use(packages);
 
@@ -38,13 +40,14 @@ Package.onUse(function(api) {
     'lib/core.js',
     'lib/string_utils.js',
     'lib/dateUtils.js',
-    'lib/schema.js',
     'both/schema/multiLang.js'
   ],['server','client']);
 
   api.addFiles([
     'lib/fileUtils.js',
-    'lib/httpUtils.js'
+    'lib/httpUtils.js',
+    'lib/jsonUtils.js',
+    'lib/xpathUtils.js'
   ],'server');
   api.export(
       'Science'
