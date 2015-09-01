@@ -12,7 +12,8 @@ Package.describe({
 
 Npm.depends({
   "fs-extra": "0.24.0",
-  "request": "2.61.0"
+  "request": "2.61.0",
+  "readline": "1.0.0"
 });
 
 Package.onUse(function(api) {
