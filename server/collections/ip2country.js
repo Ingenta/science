@@ -1,0 +1,1 @@
+IP2Country = new Meteor.Collection('ip2country');
