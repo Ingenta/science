@@ -3,10 +3,6 @@
     <hr>
     <p style="background-color: #ffb733"><h4><b>>>&nbsp;{{_"Guide for Authors"}}</b></h4></p>
     {{> guideArticles}}
-    <hr>
-    <p style="background-color: #ffb733"><h4><b>>>&nbsp;{{_"The author article search history"}}</b></h4></p>
-    <div class="col-xs-12 col-sm-6 col-md-8" style="margin-top: 20px"><p>{{_"Author"}}：<input type="text" name="">&nbsp;&nbsp;&nbsp;&nbsp;{{_"Company name"}}：<input type="text" name=""></p></div>
-    <div class="col-xs-6 col-md-4" style="margin-top: 20px"><p><button type="button">{{_ "search"}}</button></p></div>
 </template>
 
 <template name="publicationPdfContent">
@@ -32,7 +28,7 @@
             <p style="background-color: #f8e5be">
                 <ul>
                     {{#each instructions}}
-                        <li><a href={{url}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
+                        <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
                     {{else}}
                         {{_ "No results found!"}}
                     {{/each}}
@@ -46,13 +42,19 @@
                 <br>
             </p>
             <p style="background-color: #f8e5be">
-                <ul>
+
                     {{#each manuscript}}
-                    <li><a href={{url}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
+                        <span style="margin-left: 15px">>>{{translateThis title.cn title.en}}</span>
+                        {{#each childList}}
+                            <ul>
+                                <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
+                            </ul>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
                     {{else}}
-                    {{_ "No results found!"}}
+                        {{_ "No results found!"}}
                     {{/each}}
-                </ul>
             </p>
         </div>
         <div class="col-md-4">
@@ -64,7 +66,7 @@
             <p style="background-color: #f8e5be">
                 <ul>
                     {{#each submitManuscript}}
-                    <li><a href={{url}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</li>
+                    <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</li>
                     {{else}}
                     {{_ "No results found!"}}
                     {{/each}}

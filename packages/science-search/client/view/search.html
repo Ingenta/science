@@ -64,14 +64,14 @@
 
 				<ul class="list-unstyled">
 					<li>
-						{{#each authors}}
+						{{#each getAutors}}
 							{{> authorPopButton name=getFullName}} ,
 						{{/each}}
 					</li>
 					<li>
 						<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
 						<b>{{volume}}</b>, {{elocationId}} ({{year}})
-						<a href="http://dx.doi.org/{{doi}}">{{doi}} <i class="fa fa-external-link"></i></a>
+						<a href="http://dx.doi.org/{{doi}}">{{{showdoi}}} <i class="fa fa-external-link"></i></a>
 					</li>
 					<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
 					{{> abstractDetails}}

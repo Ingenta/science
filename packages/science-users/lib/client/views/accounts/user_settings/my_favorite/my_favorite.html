@@ -1,0 +1,12 @@
+<template name="UserSettingsMyFavorite">
+   <div>
+       {{#each favorite}}
+            {{> SingleFavorite}}
+       {{/each}}
+   </div>
+</template>
+<template name="SingleFavorite">
+    <a href="{{ArticleUrl _id}}">
+         <a>{{translateThis title.cn title.en}}</a>
+    </a>
+</template>

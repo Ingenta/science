@@ -1,0 +1,28 @@
+<template name="ShowGuidelines">
+    <div class="container-fluid">
+        <div class="row">
+            <div id="menu" class="col-xs-3">
+                <ul class="list-unstyled">
+                    <h6 class="text-uppercase bg-eee" align="center">{{LeftTitle}}</h6>
+                    {{#each authorTitle}}
+                    <li style="margin-left: 10px"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
+                    {{else}}
+                        {{_ "No results found!"}}
+                    {{/each}}
+                </ul>
+            </div>
+            <div id="subcontent" class="col-xs-9">
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 20px;">
+                        {{#each authorCenters}}
+                            <h4 align="center"><b>{{translateThis title.cn title.en}}</b></h4>
+                            <h5>{{{translateThis content.cn content.en}}}</h5>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

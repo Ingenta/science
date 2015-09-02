@@ -208,6 +208,28 @@ Router.map(function () {
 
     });
 
+    this.route('/publisher/:publisherName/journal/:journalTitle/guide/:guideId', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({title: this.params.journalTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return journal;
+            }
+        },
+        template: "ShowGuidelines",
+        title: ":guideId",
+        parent: "journal.name",
+        name: "guidelines.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe("author_center")
+            ]
+        }
+
+    });
+
     this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});

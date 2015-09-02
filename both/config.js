@@ -49,5 +49,8 @@ Config={
     Media:{
         allowType:['mp3', 'mp4','ppt','pptx'],
         maxSize:200 //MB
+    },
+    DOI_Register:{
+        savePath:"/tmp/doi-register-file/"
     }
 };
