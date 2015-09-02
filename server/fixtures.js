@@ -108,19 +108,15 @@ Meteor.startup(function () {
 
     if(IP2Country.find().count() ===0 ){
         console.log("import ip-country data, please wait ……");
-        var dataReader = Science.FSE.readline(process.env.PWD +"/private/ip2country_fixture.txt");
+        var dataReader = Science.FSE.readline( process.cwd() + "/assets/app/ip2country_fixture.txt");
         dataReader
             .on('line',Meteor.bindEnvironment(function(line,lineCount,byteCount){//lineCount:行号,byteCount:总字节数
-                try{
-                    var obj = JSON.parse(line)
-                    IP2Country.insert(obj);
-                    //console.log(lineCount + ":\t" + obj.detail);
-                }catch(e){
-                    throw {index:lineCount,err:e};
-                }
+                var obj = JSON.parse(line);
+                IP2Country.insert(obj);
+                //console.log(lineCount + ":\t" + obj.detail);
             }))
             .on('error',Meteor.bindEnvironment(function(err){
-                console.log(err.index);//用于检查错误 for debug
+                console.log(err);//用于检查错误 for debug
             }))
     }
 });
