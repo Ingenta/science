@@ -1,0 +1,12 @@
+<template name="UserSettingsMyWatch">
+    <div>
+        {{#each watch}}
+        {{> SingleWatch}}
+        {{/each}}
+    </div>
+</template>
+<template name="SingleWatch">
+    <a href="{{JournalUrl _id}}">
+        <a>{{translateThis titleCn title}}</a>
+    </a>
+</template>
