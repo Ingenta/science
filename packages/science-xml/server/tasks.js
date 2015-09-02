@@ -35,7 +35,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
         Tasks.extract(logId, pathToFile, targetPath);
         return;
     }
-    Tasks.failSimple(undefined, logId, "File is not suitable");
+    Tasks.failSimple(undefined, logId, "Filetype is not suitable: "+fileType);
 };
 
 Tasks.fail = function (taskId, logId, errors) {
