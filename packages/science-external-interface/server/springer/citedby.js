@@ -36,12 +36,12 @@ Science.Interface.Springer.getCitedBy = function (doi, callback) {
 	});
 };
 
-Meteor.startup(function () {
-	Science.Interface.Springer.getCitedBy("10.1007/s11433-009-0247-2", function (err, obj) {
-		if (!err && obj) {
-			_.each(obj, function (item) {
-				console.dir(item)
-			})
-		}
-	});
-})
+//Meteor.startup(function () {
+//	Science.Interface.Springer.getCitedBy("10.1007/s11433-009-0247-2", function (err, obj) {
+//		if (!err && obj) {
+//			_.each(obj, function (item) {
+//				console.dir(item)
+//			})
+//		}
+//	});
+//})
