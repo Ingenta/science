@@ -44,7 +44,7 @@
             <p style="background-color: #f8e5be">
 
                     {{#each manuscript}}
-                        <span style="margin-left: 15px">>>{{translateThis title.cn title.en}}</span>
+                        <span style="margin-left: 15px">>>{{translateThis title.cn title.en}}{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</span>
                         {{#each childList}}
                             <ul>
                                 <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
