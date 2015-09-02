@@ -18,7 +18,8 @@ Package.onUse(function(api) {
   ],'server');
 
   api.addFiles([
-    'server/crossref/core.js'
+    'server/crossref/register.js',
+    'server/crossref/citedby.js'
   ],'server');
 
 });
