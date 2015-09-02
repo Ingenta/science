@@ -18,6 +18,8 @@ Package.onUse(function(api) {
   ],'server');
 
   api.addFiles([
+    'server/index.js',
+    'server/springer/citedby.js',
     'server/crossref/register.js',
     'server/crossref/citedby.js'
   ],'server');

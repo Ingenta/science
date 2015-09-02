@@ -1,15 +1,10 @@
-var apiUrl = "https://doi.crossref.org/servlet/getForwardLinks?" +
-	"usr=scichina&pwd=scichina1&startDate=1990-01-01&" +
-	"endDate=" + new Date().format("yyyy-MM-dd") + "&doi=";
+var apiUrl = "http://citationsapi.nkb3.org/article/citations?&s=1&p=100000&doi=";
 
-Science.Interface.CrossRef.getCitedBy = function (doi, callback) {
+Science.Interface.Springer.getCitedBy = function (doi, callback) {
 	Science.Request.get(apiUrl + doi, function (err, response, body) {
 		if (!err && response.statusCode == 200) {
-			if (body.length > 460) {
+
 				var xmlDom  = new Science.Dom().parseFromString(body);
-				var bodystr = xmlDom.documentElement.getElementsByTagName('body')[0].toString();
-				xmlDom      = new Science.Dom().parseFromString(bodystr);//ok, i know it's bad way, we will make it's
-			                                                             // better at future；
 				var journalCite = Science.XPath.select("//journal_cite", xmlDom);
 				var result      = [];
 				_.each(journalCite, function (item) {
@@ -36,17 +31,17 @@ Science.Interface.CrossRef.getCitedBy = function (doi, callback) {
 				callback(null, result);
 				return;
 			}
-		}
+
 		callback('some thing wrong');
 	});
-}
+};
 
-//Meteor.startup(function () {
-//	Science.Interface.CrossRef.getCitedBy("10.1360/972010-666", function (err, obj) {
-//		if (!err && obj) {
-//			_.each(obj, function (item) {
-//				console.dir(item)
-//			})
-//		}
-//	});
-//})
+Meteor.startup(function () {
+	Science.Interface.Springer.getCitedBy("10.1007/s11433-009-0247-2", function (err, obj) {
+		if (!err && obj) {
+			_.each(obj, function (item) {
+				console.dir(item)
+			})
+		}
+	});
+})
