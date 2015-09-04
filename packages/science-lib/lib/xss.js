@@ -1,0 +1,1 @@
+Science.XSS = Npm.require('xss');

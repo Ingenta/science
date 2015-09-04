@@ -14,7 +14,8 @@ Npm.depends({
   "fs-extra": "0.24.0",
   "request": "2.61.0",
   "readline": "1.0.0",
-  "xml2js": "0.4.11"
+  "xml2js": "0.4.11",
+  "xss":"0.2.7",
 });
 
 Package.onUse(function(api) {
@@ -30,7 +31,8 @@ Package.onUse(function(api) {
     'matb33:collection-hooks@0.7.11',
     'aldeed:simple-schema@1.1.0',
     'underscore',
-    'jackkav:xpath'
+    'jackkav:xpath',
+    'percolate:synced-cron'
   ];
   api.use(packages);
 
@@ -47,7 +49,9 @@ Package.onUse(function(api) {
     'lib/fileUtils.js',
     'lib/httpUtils.js',
     'lib/jsonUtils.js',
-    'lib/xpathUtils.js'
+    'lib/xpathUtils.js',
+    'lib/xss.js',
+    'lib/cron.js'
   ],'server');
   api.export(
       'Science'
