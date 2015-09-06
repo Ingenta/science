@@ -1,5 +1,3 @@
-Science.CrossRef ={};
-
 var xmlStr='<?xml version="1.0" encoding="UTF-8"?>';
 var doiBatchStr='<doi_batch version="4.3.4" xmlns="http://www.crossref.org/schema/4.3.4" ' +
 	'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
@@ -81,10 +79,10 @@ var post2CrossRef =function(filepath){
 		console.log('Upload successful!  Server responded with:', body);
 	})
 };
-Science.CrossRef.register = function(doiArr, recvEmail, rootUrl){
+Science.Interface.CrossRef.register = function(doiArr, recvEmail, rootUrl){
 	generationXML(doiArr,recvEmail,rootUrl,post2CrossRef)
 };
 
 //Meteor.startup(function(){
-//	Science.CrossRef.register('10.1063/1.0000004','kai.jiang@digitalpublishing.cn','http://phys.scichina.com:8083/sciG/CN/');
+//	Science.Interface.CrossRef.register('10.1063/1.0000004','kai.jiang@digitalpublishing.cn','http://phys.scichina.com:8083/sciG/CN/');
 //})
