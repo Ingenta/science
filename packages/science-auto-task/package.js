@@ -29,7 +29,8 @@ Package.onUse(function(api) {
   ],both);
 
   api.addFiles([
-      'server/publish.js'
+      'server/publish.js',
+      'server/cron.js'
   ],'server');
 
   api.addFiles([
