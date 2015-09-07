@@ -41,6 +41,17 @@ Meteor.startup(function () {
         },
         parent: "home"
     });
+    Router.route("admin.email", {
+        path: "/admin/email",
+        title: function () {
+            return TAPi18n.__("Email");
+        },
+        parent: "admin",
+        template:"Admin",
+        yieldTemplates: {
+            'AdminEmail': { to: 'AdminSubcontent'}
+        }
+    });
     Router.route("admin.roles", {
         path: "/admin/roles",
         controller: "AdminRolesController",
