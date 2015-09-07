@@ -1,7 +1,7 @@
 var pageSession = new ReactiveDict();
 
 Template.AdminUsers.rendered = function() {
-	
+
 };
 
 Template.AdminUsers.events({
@@ -132,7 +132,7 @@ Template.AdminUsersView.events({
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
-		Router.go("admin.users.insert", {});
+		Router.go(Router.current().route.getName() + ".insert", {insId: Router.current().params.insId});
 	},
 
 	"click #dataview-export-default": function(e, t) {
@@ -160,8 +160,9 @@ Template.AdminUsersView.events({
 
 Template.AdminUsersView.helpers({
 
-	
-
+	"isInstitution": function () {
+		return "admin.institutions.detail" == Router.current().route.getName();
+	},
 	"isEmpty": function() {
 		return !this.admin_users || this.admin_users.count() == 0;
 	},
@@ -222,7 +223,7 @@ Template.AdminUsersViewTableItems.rendered = function() {
 Template.AdminUsersViewTableItems.events({
 	"click td": function(e, t) {
 		e.preventDefault();
-		Router.go("admin.users.edit", {userId: this._id});
+		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	},
 
@@ -252,7 +253,7 @@ Template.AdminUsersViewTableItems.events({
 	},
 	"click #edit-button": function(e) {
 		e.preventDefault();
-		Router.go("admin.users.edit", {userId: this._id});
+		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	}
 });
