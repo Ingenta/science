@@ -1,18 +1,11 @@
 <template name="showNewsArticle">
-    <div class="row articleHeading">
-        {{#each newsArticles}}
-            <div align="center">
-                <div class="pull-right">
-                    {{#if can "modify-news" "resource"  }}{{> updateNewsCenterModalForm}}{{/if}}
-                </div>
-                <h3>{{translateThis title.cn title.en}}</h3><br>
-                <h6>{{_ "Published online"}}&nbsp;：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}&nbsp;：{{translateThis author.cn author.en}}</h6><br>
-            </div>
-            <div class="col-xs-9" style="margin-left:110px;">
-                <h4>{{{translateThis content.cn content.en}}}</h4>
-            </div>
-        {{else}}
+    {{#each newsArticles}}
+        <div class="part">
+            <div align="center"><span style="font-size:24px;">{{translateThis title.cn title.en}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{#if can "modify-news" "resource"  }}{{> updateNewsCenterModalForm}}{{/if}}</div><br>
+            <p class="text-center">{{_ "Published online"}}：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：2533&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{translateThis author.cn author.en}}</p><br>
+            <p align="text-center" style="margin-left: 1.5%">{{{translateThis content.cn content.en}}}</p>
+        </div>
+    {{else}}
         {{_ "No results found!"}}
-        {{/each}}
-    </div>
+    {{/each}}
 </template>
