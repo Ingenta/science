@@ -2,6 +2,12 @@ ReactiveTabs.createInterface({
     template: 'institutionTabs'
 });
 
+Template.showInstitution.helpers({
+    "getInstitutionNameById": function () {
+        return Institutions.findOne({_id: Router.current().params.insId}).name;
+    }
+});
+
 Template.institutionOptions.helpers({
     tabs: function () {
         return [
@@ -18,6 +24,9 @@ Template.institutionOptions.helpers({
     info: function () {
         var obj = Institutions.findOne({_id: Router.current().params.insId});
         return obj;
+    },
+    getUsers: function () {
+        return Users.find({institutionId: Router.current().params.insId}, {});
     }
 });
 
