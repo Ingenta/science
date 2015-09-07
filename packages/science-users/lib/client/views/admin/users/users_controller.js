@@ -1,10 +1,10 @@
 this.AdminUsersController = RouteController.extend({
 	template: "Admin",
-	
+
 
 	yieldTemplates: {
 		'AdminUsers': { to: 'AdminSubcontent'}
-		
+
 	},
 
 	onBeforeAction: function() {
@@ -24,7 +24,7 @@ this.AdminUsersController = RouteController.extend({
 	},
 
 	data: function() {
-		
+
 
 		return {
 			params: this.params || {},

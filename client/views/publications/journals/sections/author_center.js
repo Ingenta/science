@@ -6,6 +6,18 @@ Template.publicationPdfContent.helpers({
     pdfValue:function(){
         var file = Collections.Files.findOne({_id:this.fileId});
         return file.url()+"&download=true";
+    },
+    AuthorTitle: function () {
+        if(this.authorTitle.en||this.authorTitle.cn){
+            return true;
+        }
+        return false;
+    },
+    FileName: function () {
+        if(this.fileName.en||this.fileName.cn){
+            return true;
+        }
+        return false;
     }
 });
 
@@ -37,6 +49,20 @@ Template.guideArticles.helpers({
 });
 
 Template.addManuscriptModalForm.helpers({
+    getManuscript:function(){
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var journalId = Session.get('currentJournalId');
+        var articles = AuthorCenter.find({type:"2",publications:journalId,parentId:null}).fetch();
+        var result = [];
+        _.each(articles,function(item){
+            var name = iscn?item.title.cn:item.title.en;
+            result.push({label:name,value:item._id});
+        });
+        return result;
+    }
+});
+
+Template.updateManuscriptModalForm.helpers({
     getManuscript:function(){
         var iscn=TAPi18n.getLanguage()==='zh-CN';
         var journalId = Session.get('currentJournalId');

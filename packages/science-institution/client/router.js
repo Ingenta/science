@@ -15,7 +15,7 @@ Router.route("/admin/institutions/", {
 	}
 });
 
-Router.route("/admin/institutions/:insId/", {
+Router.route("/admin/institutions/detail/:insId/", {
 	template      : "Admin",
 	name          : "admin.institutions.detail",
 	parent        : "admin.institutions",
@@ -30,4 +30,34 @@ Router.route("/admin/institutions/:insId/", {
 			Meteor.subscribe('institutions'),
 		]
 	}
+});
+
+Router.route("/admin/institutions/detail/insert/:insId", {
+	template      : "Admin",
+	name          : "admin.institutions.detail.insert",
+	parent        : "admin.institutions.detail",
+	title         : function () {
+		return TAPi18n.__("Add new user");
+	},
+	waitOn        : function () {
+		return [
+			Meteor.subscribe('institutions'),
+		]
+	},
+	controller: "AdminUsersInsertController",
+});
+
+Router.route("/admin/institutions/detail/edit/:userId", {
+	template      : "Admin",
+	name          : "admin.institutions.detail.edit",
+	parent        : "admin.institutions.detail",
+	title         : function () {
+		return TAPi18n.__("Edit user");
+	},
+	waitOn        : function () {
+		return [
+			Meteor.subscribe('institutions'),
+		]
+	},
+	controller: "AdminUsersEditController",
 });

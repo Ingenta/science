@@ -15,8 +15,11 @@
                 <div class="container-fluid">
                     <div class="row" style="margin-top: 20px;">
                         {{#each authorCenters}}
-                            <h4 align="center"><b>{{translateThis title.cn title.en}}</b></h4>
-                            <h5>{{{translateThis content.cn content.en}}}</h5>
+                            <div align="center">
+                                <span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
+                                {{#if can "modify-author-center" "resource"  }}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
+                            </div><br>
+                            <p>{{{translateThis content.cn content.en}}}</p>
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}
@@ -25,4 +28,14 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateContributeModalForm">
+    {{#autoForm doc=this collection="AuthorCenter" id="updateContributeModal" type="update" buttonContent=getUpdateButtonContent}}
+    <fieldset>
+        {{> afQuickField name="title"}}
+        {{> afQuickField name="content"}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
