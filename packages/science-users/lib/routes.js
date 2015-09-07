@@ -170,6 +170,15 @@ Meteor.startup(function () {
             ]
         }
     });
+    Router.route("user_settings.my_watch", {
+        path: "/user_settings/my_watch",
+        controller: "UserSettingsMyWatchController",
+        waitOn:function () {
+            return [
+                Meteor.subscribe('publications')
+            ]
+        }
+    });
     Router.route("logout", {
         path: "/logout",
         controller: "LogoutController"

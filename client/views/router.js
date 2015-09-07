@@ -105,6 +105,7 @@ Router.map(function () {
             ]
         }
     });
+
     this.route("publishers", {
         parent: "home",
         title: function () {
@@ -115,6 +116,19 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications')
+            ]
+        }
+    });
+
+    this.route("advancedSearch", {
+        parent: "home",
+        title: function () {
+            return TAPi18n.__("Advanced Search");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('publishers')
             ]
         }
     });
@@ -136,7 +150,9 @@ Router.map(function () {
 
     this.route('/news/:newsId', {
         template: "showNewsArticle",
-        title: ":newsId",
+        title: function () {
+            return TAPi18n.__("News");
+        },
         parent: "home",
         name: "news.show",
         waitOn: function () {
@@ -219,7 +235,9 @@ Router.map(function () {
             }
         },
         template: "ShowGuidelines",
-        title: ":guideId",
+        title: function () {
+            return TAPi18n.__("Guide for Authors");
+        },
         parent: "journal.name",
         name: "guidelines.show",
         waitOn: function () {

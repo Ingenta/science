@@ -65,8 +65,8 @@
     "Browse journal": "出版目录浏览",
     "Details": "详情",
     "User details": "用户明细",
-    "Quick Search": "快速查找",
-    "Advanced Search": "高级查找",
+    "Quick Search": "快速检索",
+    "Advanced Search": "高级检索",
     "Home page for": "",
     "Overview": "期刊概述",
     "Browse": "出版目录",
@@ -157,6 +157,7 @@
     "Contact Way": "联系方式",
     "Address": "地址",
     "Conference Theme": "会议主题",
+    "The author article history": "作者历史文章查看",
     "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
@@ -808,8 +809,8 @@
             "youEmail": {
                 "label": "你的邮件地址:"
             },
-            "subject": {
-                "label": "主题:"
+            "reasons": {
+                "label": "推荐理由:"
             }
         },
         "authorCenter":{
@@ -896,6 +897,8 @@
     "Journal Watch":"期刊关注",
     "Watched":"已关注",
     "My favorite":"收藏夹",
+    "My Favorite":"我的收藏夹",
+    "My watch":"我的关注",
     "Please enter the receiving mailbox":"请输入接收邮箱",
     "You need to enter email address!":"你需要输入邮件地址!",
     "pubStatus":{
