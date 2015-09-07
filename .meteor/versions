@@ -119,7 +119,7 @@ ostrio:cookies@1.0.1
 ostrio:files@1.3.7
 ostrio:jsextensions@0.0.4
 perak:user-roles@1.0.10
-percolate:synced-cron@1.1.1
+percolate:synced-cron@1.2.1
 raix:eventemitter@0.1.3
 raix:handlebar-helpers@0.2.4
 raix:ui-dropped-event@0.0.7
