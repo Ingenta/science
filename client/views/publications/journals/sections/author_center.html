@@ -1,78 +1,83 @@
 <template name="authorCenterList">
     {{> publicationPdfContent}}
-    <hr>
-    <p style="background-color: #ffb733"><h4><b>>>&nbsp;{{_"Guide for Authors"}}</b></h4></p>
+    <div class="part"><strong> >> {{_"Guide for Authors"}}</strong> </div>
     {{> guideArticles}}
+    <div class="part"><strong> >> {{_"The author article history"}}</strong> </div>
+    {{> authorArticlesHistory}}
 </template>
 
 <template name="publicationPdfContent">
-    <div class="row" style="margin-top: 10px">
+    <div class="part" style="margin-top: 10px">
         {{#each authorResources}}
-        <div class="col-xs-5"><h4><b>{{translateThis authorTitle.cn authorTitle.en}}&nbsp;>></b></h4><br><span>{{{translateThis authorDescription.cn authorDescription.en}}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</span></div>
-        <div class="col-xs-3" style="margin-top: 20px"><img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}</div>
-        <div class="col-xs-4" style="margin-top: 60px"><a href="{{pdfValue}}" target="_blank">{{translateThis fileName.cn fileName.en}}&nbsp;&nbsp;<img src="/pdf.png" height="18" width="21"></a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}</div>
+            <div class="col-xs-5"><strong>{{translateThis authorTitle.cn authorTitle.en}} {{#if AuthorTitle}}>>{{/if}} </strong><br><p>{{{translateThis authorDescription.cn authorDescription.en}}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</p></div>
+            <div class="col-xs-3" style="margin-top: 20px"><img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}</div>
+            <div class="col-xs-4" style="margin-top: 60px"><p><a href="{{pdfValue}}" target="_blank">{{translateThis fileName.cn fileName.en}}&nbsp;&nbsp;{{#if FileName}}<img src="/pdf.png" height="18" width="21">{{/if}}</a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}</p></div>
         {{else}}
-        {{_ "No results found!"}}
+            {{_ "No results found!"}}
         {{/each}}
     </div>
 </template>
 
 <template name="guideArticles">
-    <div class="row">
-        <div class="col-md-4">
-            <p style="background-color: #d0e9c6">
-                <strong>{{_"Submission Guidelines"}}</strong>
+    <div class="col-xs-4">
+        <div class="part h220">
+            <div class="dotted mb15">
+                <strong style="margin-left: 30%">{{_"Submission Guidelines"}}</strong>
                 {{#if can "add-author-center" "resource"  }}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addInstructionsModal"></span>{{> addInstructionsModalForm}}{{/if}}
-                <br>
-            </p>
-            <p style="background-color: #f8e5be">
+            </div>
+            {{#each instructions}}
                 <ul>
-                    {{#each instructions}}
-                        <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
-                    {{else}}
-                        {{_ "No results found!"}}
-                    {{/each}}
+                    <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
                 </ul>
-            </p>
+            {{else}}
+                {{_ "No results found!"}}
+            {{/each}}
         </div>
-        <div class="col-md-4">
-            <p style="background-color: #d0e9c6">
-                <strong>{{_"Prepare Manuscript"}}</strong>
-                {{#if can "add-author-center" "resource"  }}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addManuscriptModal"></span>{{> addManuscriptModalForm}}{{/if}}
-                <br>
-            </p>
-            <p style="background-color: #f8e5be">
-
-                    {{#each manuscript}}
-                        <span style="margin-left: 15px">>>{{translateThis title.cn title.en}}{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</span>
-                        {{#each childList}}
-                            <ul>
-                                <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}{{/if}}</li>
-                            </ul>
-                        {{else}}
-                            {{_ "No results found!"}}
-                        {{/each}}
-                    {{else}}
-                        {{_ "No results found!"}}
-                    {{/each}}
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p style="background-color: #d0e9c6">
-                <strong>{{_"Submit  Manuscript"}}</strong>
-                {{#if can "add-author-center" "resource"  }}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>{{> addSubmitManuscriptModalForm}}{{/if}}
-                <br>
-            </p>
-            <p style="background-color: #f8e5be">
-                <ul>
-                    {{#each submitManuscript}}
-                    <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</li>
-                    {{else}}
+    </div>
+    <div class="col-xs-4">
+        <div class="part h220">
+            <div class="dotted mb15">
+                <strong style="margin-left: 30%">{{_"Prepare Manuscript"}}</strong>
+                {{#if can  "add-author-center" "resource"  }}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addManuscriptModal"></span>{{> addManuscriptModalForm}}{{/if}}
+            </div>
+            {{#each manuscript}}
+                <p> >> {{translateThis title.cn title.en}}{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</p>
+                {{#each childList}}
+                    <ul>
+                        <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}{{/if}}</li>
+                    </ul>
+                {{else}}
                     {{_ "No results found!"}}
-                    {{/each}}
-                </ul>
-            </p>
+                {{/each}}
+            {{else}}
+                {{_ "No results found!"}}
+            {{/each}}
         </div>
+    </div>
+    <div class="col-xs-4">
+        <div class="part h220">
+            <div class="dotted mb15">
+                <strong style="margin-left: 30%">{{_"Submit  Manuscript"}}</strong>
+                {{#if can "add-author-center" "resource"  }}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>{{> addSubmitManuscriptModalForm}}{{/if}}
+            </div>
+            {{#each submitManuscript}}
+                <ul>
+                    <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</li>
+                </ul>
+            {{else}}
+                {{_ "No results found!"}}
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="authorArticlesHistory">
+    <div class="form-group form-inline">
+        <label for="exampleInputName2">{{_"Author"}}：</label>
+        <input type="text" class="form-control" placeholder="作者名称">&nbsp;&nbsp;&nbsp;&nbsp;
+        <label for="exampleInputName2">{{_"Company name"}}：</label>
+        <input type="text" class="form-control" placeholder="作者单位">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info btn-sm">{{_"search"}}</button>
     </div>
 </template>
 
