@@ -24,7 +24,7 @@ Meteor.methods({
         var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
         if (doi === undefined) results.errors.push("No doi found");
         else {
-            doi=doi.trim();
+            doi = doi.trim();
             results.doi = doi;
             results.articledoi = getArticleDoiFromFullDOI(doi);
         }

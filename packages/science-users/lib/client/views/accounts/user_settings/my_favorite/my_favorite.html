@@ -1,12 +1,20 @@
 <template name="UserSettingsMyFavorite">
+   <h3>{{_ "My Favorite"}}</h3>
    <div>
        {{#each favorite}}
             {{> SingleFavorite}}
        {{/each}}
+       <!--{{> deleteFavoriteModalForm}}-->
    </div>
 </template>
+
 <template name="SingleFavorite">
     <a href="{{ArticleUrl _id}}">
          <a>{{translateThis title.cn title.en}}</a>
     </a>
 </template>
+
+<!--<template name="deleteFavoriteModalForm">-->
+    <!--{{#afModal class="fa fa-trash" collection="Users" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}-->
+    <!--{{/afModal}}-->
+<!--</template>-->

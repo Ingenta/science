@@ -31,8 +31,7 @@ Package.onUse(function(api) {
     'matb33:collection-hooks@0.7.11',
     'aldeed:simple-schema@1.1.0',
     'underscore',
-    'jackkav:xpath',
-    'percolate:synced-cron'
+    'jackkav:xpath'
   ];
   api.use(packages);
 
@@ -50,8 +49,7 @@ Package.onUse(function(api) {
     'lib/httpUtils.js',
     'lib/jsonUtils.js',
     'lib/xpathUtils.js',
-    'lib/xss.js',
-    'lib/cron.js'
+    'lib/xss.js'
   ],'server');
   api.export(
       'Science'
