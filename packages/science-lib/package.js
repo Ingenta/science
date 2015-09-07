@@ -10,6 +10,14 @@ Package.describe({
   documentation: 'README.md'
 });
 
+Npm.depends({
+  "fs-extra": "0.24.0",
+  "request": "2.61.0",
+  "readline": "1.0.0",
+  "xml2js": "0.4.11",
+  "xss":"0.2.7",
+});
+
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   //最好能在引用的包后面加上版本号，以免系统自动更新新版本的包，造成不稳定的情况
@@ -22,7 +30,9 @@ Package.onUse(function(api) {
     'iron:router@1.0.9',
     'matb33:collection-hooks@0.7.11',
     'aldeed:simple-schema@1.1.0',
-    'underscore'
+    'underscore',
+    'jackkav:xpath',
+    'percolate:synced-cron'
   ];
   api.use(packages);
 
@@ -31,10 +41,18 @@ Package.onUse(function(api) {
   api.addFiles([
     'lib/core.js',
     'lib/string_utils.js',
-    'lib/schema.js',
+    'lib/dateUtils.js',
     'both/schema/multiLang.js'
   ],['server','client']);
 
+  api.addFiles([
+    'lib/fileUtils.js',
+    'lib/httpUtils.js',
+    'lib/jsonUtils.js',
+    'lib/xpathUtils.js',
+    'lib/xss.js',
+    'lib/cron.js'
+  ],'server');
   api.export(
       'Science'
   )

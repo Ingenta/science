@@ -35,7 +35,7 @@ Template.LayoutSideBar.helpers({
     watchName: function(){
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
-        if(Meteor.userId()){
+        if(Meteor.userId() && journal){
             var wat = Meteor.user().watch || [];
             return _.contains(wat, journal._id)?TAPi18n.__("Watched"):TAPi18n.__("Journal Watch");
         }else{

@@ -139,6 +139,15 @@ Meteor.startup(function(){
             ]
         }
     });
+    Router.route("user_settings.my_favorite", {
+        path: "/user_settings/my_favorite",
+        controller: "UserSettingsMyFavoriteController",
+        waitOn:function () {
+            return [
+                Meteor.subscribe('publications')
+            ]
+        }
+    });
     Router.route("logout", {
         path: "/logout",
         controller: "LogoutController"

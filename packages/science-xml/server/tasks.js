@@ -29,13 +29,13 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
         return;
     }
 
-    if (fileType === "application/zip") {
+    if (fileType === "application/zip" || fileType === "application/x-zip-compressed") {
         //extract to a folder with the same name inside extracted folder
         var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
         Tasks.extract(logId, pathToFile, targetPath);
         return;
     }
-    Tasks.failSimple(undefined, logId, "File is not suitable");
+    Tasks.failSimple(undefined, logId, "Filetype is not suitable: "+fileType);
 };
 
 Tasks.fail = function (taskId, logId, errors) {

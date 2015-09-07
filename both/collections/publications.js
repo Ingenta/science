@@ -102,6 +102,37 @@ PublicationsSchema = new SimpleSchema({
         type: String,
         optional: true
     },
+    authorTitle: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    authorDescription: {
+        type: Science.schemas.MultipleAreaSchema,
+        optional: true
+    },
+    fileName: {
+        type: Science.schemas.MultipleTextSchema,
+        optional: true
+    },
+    authorPicture: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
+            }
+        }
+    },
+    fileId: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "cfs-file",
+            collection: "files"
+        }
+    },
     accessKey: {
         type: String
     },

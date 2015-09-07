@@ -19,7 +19,7 @@
 </template>
 
 <template name="updateAdvertisementModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update" omitFields="types, publications"}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="Advertisement" doc=_id operation="update" omitFields="types, publications"}}
     {{/afModal}}
 </template>
 

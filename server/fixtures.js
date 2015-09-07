@@ -1,6 +1,6 @@
 Meteor.startup(function () {
 
-    Topics.remove({})
+    //Topics.remove({})
     if (Topics.find().count() === 0) {
         var names = [
             {
@@ -87,7 +87,7 @@ Meteor.startup(function () {
 //        }
 //    }
 
-    Pages.remove({})
+    //Pages.remove({})
     if (Pages.find().count() === 0) {
         var names = [
             {key: "homepage", e: "", c: ""},
@@ -106,4 +106,17 @@ Meteor.startup(function () {
         });
     }
 
+    if(IP2Country.find().count() ===0 ){
+        console.log("import ip-country data, please wait ……");
+        var dataReader = Science.FSE.readline( process.cwd() + "/assets/app/ip2country_fixture.txt");
+        dataReader
+            .on('line',Meteor.bindEnvironment(function(line,lineCount,byteCount){//lineCount:行号,byteCount:总字节数
+                var obj = JSON.parse(line);
+                IP2Country.insert(obj);
+                //console.log(lineCount + ":\t" + obj.detail);
+            }))
+            .on('error',Meteor.bindEnvironment(function(err){
+                console.log(err);//用于检查错误 for debug
+            }))
+    }
 });

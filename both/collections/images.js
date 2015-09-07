@@ -5,7 +5,15 @@ Images.allow({
     insert: function (userId, doc) {
         return true;
     },
+    update:function(userId,doc){
+        return true;
+    },
     download: function (userId) {
+        return true;
+    },
+    remove:function(userId){
         return true;
     }
 });
+
+//TODO: permission check
