@@ -50,6 +50,20 @@ Template.addManuscriptModalForm.helpers({
     }
 });
 
+Template.updateManuscriptModalForm.helpers({
+    getManuscript:function(){
+        var iscn=TAPi18n.getLanguage()==='zh-CN';
+        var journalId = Session.get('currentJournalId');
+        var articles = AuthorCenter.find({type:"2",publications:journalId,parentId:null}).fetch();
+        var result = [];
+        _.each(articles,function(item){
+            var name = iscn?item.title.cn:item.title.en;
+            result.push({label:name,value:item._id});
+        });
+        return result;
+    }
+});
+
 AutoForm.addHooks(['addInstructionsModalForm'], {
     onSuccess: function () {
         $("#addInstructionsModal").modal('hide');

@@ -44,10 +44,10 @@
             <p style="background-color: #f8e5be">
 
                     {{#each manuscript}}
-                        <span style="margin-left: 15px">>>{{translateThis title.cn title.en}}{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</span>
+                        <span style="margin-left: 15px">>>{{translateThis title.cn title.en}}{{#if can "modify-author-center" "resource"  }}{{> updateSubmitManuscriptModalForm}}{{/if}}</span>
                         {{#each childList}}
                             <ul>
-                                <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{> updateAuthorCenterModalForm}}{{/if}}</li>
+                                <li><a href={{whichUrl}} target="_blank">{{translateThis title.cn title.en}}</a>{{#if can "modify-author-center" "resource"  }}{{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}{{/if}}</li>
                             </ul>
                         {{else}}
                             {{_ "No results found!"}}
@@ -162,6 +162,18 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateManuscriptModalForm">
+    {{#autoForm doc=this collection="AuthorCenter" id="updateManuscriptModal" type="update" buttonContent=getUpdateButtonContent}}
+    <fieldset>
+        {{> afQuickField name="title"}}
+        {{> afQuickField name="content"}}
+        {{> afQuickField name="url"}}
+        {{> afQuickField name="parentId" options=getManuscript }}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
 
 <template name="updateAuthorCenterModalForm">
