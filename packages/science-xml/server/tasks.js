@@ -29,7 +29,8 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
         return;
     }
 
-    if (fileType === "application/zip" || fileType === "application/x-zip-compressed") {
+    if (fileType === "application/zip" || fileType === "application/x-zip-compressed"
+        || (fileType ==="application/octet-stream" && fileName.endWith(".zip"))) {
         //extract to a folder with the same name inside extracted folder
         var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
         Tasks.extract(logId, pathToFile, targetPath);
