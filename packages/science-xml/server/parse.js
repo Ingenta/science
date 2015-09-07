@@ -24,6 +24,7 @@ Meteor.methods({
         var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
         if (doi === undefined) results.errors.push("No doi found");
         else {
+            doi=doi.trim();
             results.doi = doi;
             results.articledoi = getArticleDoiFromFullDOI(doi);
         }
@@ -46,12 +47,12 @@ Meteor.methods({
                 var secondaryTitle = ScienceXML.getSimpleValueByXPath("//trans-title-group/trans-title", doc);
                 if (primaryLang === 'en') {
                     results.title.en = primaryTitle;
-                    if(secondaryTitle === undefined) results.title.cn = primaryTitle;
+                    if (secondaryTitle === undefined) results.title.cn = primaryTitle;
                     else results.title.cn = secondaryTitle;
                 }
                 else if (primaryLang === 'zh-Hans') {
                     results.title.cn = primaryTitle;
-                    if(secondaryTitle === undefined) results.title.en = primaryTitle;
+                    if (secondaryTitle === undefined) results.title.en = primaryTitle;
                     else results.title.en = secondaryTitle;
                 }
             }
@@ -79,13 +80,15 @@ Meteor.methods({
         else results.year = year;
 
         var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subj-group/subject", doc);
-        if (topic === undefined)
-            results.errors.push("No subject found");
-        else{
+        if (topic === undefined) {
+            topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
+            if (topic === undefined)results.errors.push("No subject found");
+        }
+        else {
             var topicEneity = Topics.findOne({"englishName": topic});
-            if(topicEneity)
+            if (topicEneity)
                 results.topic = topicEneity._id;
-            else{
+            else {
                 results.errors.push("No subject match:" + topic);
             }
         }
