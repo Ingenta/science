@@ -807,8 +807,8 @@
             "youEmail": {
                 "label": "你的邮件地址:"
             },
-            "subject": {
-                "label": "主题:"
+            "reasons": {
+                "label": "推荐理由:"
             }
         },
         "authorCenter":{
@@ -895,6 +895,7 @@
     "Journal Watch":"期刊关注",
     "Watched":"已关注",
     "My favorite":"收藏夹",
+    "My Favorite":"我的收藏夹",
     "My watch":"我的关注",
     "Please enter the receiving mailbox":"请输入接收邮箱",
     "You need to enter email address!":"你需要输入邮件地址!",

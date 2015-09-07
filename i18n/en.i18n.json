@@ -623,8 +623,8 @@
             "youEmail": {
                 "label": "Your email address:"
             },
-            "subject": {
-                "label": "Subject:"
+            "reasons": {
+                "label": "Reasons:"
             }
         },
         "authorCenter":{
