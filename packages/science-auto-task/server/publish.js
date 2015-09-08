@@ -1,6 +1,6 @@
-Meteor.publish('queues',function(){
+Meteor.publish('autoTasks',function(){
 	if (this.userId) {
-		return Queue.find();
+		return AutoTasks.find();
 	} else {
 		return null;
 	}

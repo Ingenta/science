@@ -1,284 +1,289 @@
 <template name="AdvancedSearch">
-    <h4>高级检索</h4>
-    <p>请在下面输入一个或多个搜索条件，本检索功能支持布尔逻辑词“且”、“或”、“非”的逻辑运算检索，（如量子或物理）。词组必须置于双引号“ ”中，如“重子衰变”，系统会按照给定词组的准确顺序进行检索；使用星号*可代替任意多个字符,表示前方一致检索,如输入macro*,可以检索到含有macrocode、macrocircuit等的文献。
-    </p>
-    <h5>输入检索条件</h5>
-    <div class="dotted mb15">
-        <form>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control">
+    <div class="container-fluid">
+        {{> pageElement key="advancedSearch"}}
+        <h5>{{_"Retrieval Condition"}}</h5>
+        <div class="dotted mb15">
+            <form>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-inline form-group">
+                            <select class="form-control">
+                                <option>{{_"And"}}</option>
+                                <option>{{_"Or"}}</option>
+                                <option>{{_"Non"}}</option>
+                            </select>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-inline form-group">
+                            <select class="form-control">
+                                <option>{{_"And"}}</option>
+                                <option>{{_"Or"}}</option>
+                                <option>{{_"Non"}}</option>
+                            </select>
+                            <input type="text" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-inline form-group">
-                        <select class="form-control">
-                            <option>且</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-inline form-group">
-                        <select class="form-control">
-                            <option>或</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-inline form-group">
-                        <label>检索范围：</label>
-                        <select class="form-control">
-                            <option>全文</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-inline form-group">
-                        <label>检索范围：</label>
-                        <select class="form-control">
-                            <option>全文</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-inline form-group">
-                        <label>检索范围：</label>
-                        <select class="form-control">
-                            <option>全文</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <p class="text-right"><button type="button" class="btn btn-primary btn-sm">开始搜索</button></p>
-    </div>
-    <div class="dotted mb15">
-        <form>
-            <div class="form-inline form-group">
-                <label>结果排序：</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-inline form-group">
-                <label>出版时间：</label>
-                <select class="form-control">
-                    <option>2014年</option>
-                    <option>2013年</option>
-                    <option>2012年</option>
-                    <option>2011年</option>
-                    <option>2000年</option>
-                </select>
-                <select class="form-control">
-                    <option>6月</option>
-                    <option>5月</option>
-                    <option>3月</option>
-                    <option>2月</option>
-                    <option>1月</option>
-                </select>
-                <select class="form-control">
-                    <option>16日</option>
-                    <option>15日</option>
-                    <option>14日</option>
-                    <option>13日</option>
-                    <option>12日</option>
-                </select>
-                <label>至</label>
-                <select class="form-control">
-                    <option>2014年</option>
-                    <option>2013年</option>
-                    <option>2012年</option>
-                    <option>2011年</option>
-                    <option>2000年</option>
-                </select>
-                <select class="form-control">
-                    <option>6月</option>
-                    <option>5月</option>
-                    <option>3月</option>
-                    <option>2月</option>
-                    <option>1月</option>
-                </select>
-                <select class="form-control">
-                    <option>16日</option>
-                    <option>15日</option>
-                    <option>14日</option>
-                    <option>13日</option>
-                    <option>12日</option>
-                </select>
-            </div>
-        </form>
-    </div>
-    <h5>选择检索控制条件：</h5>
-    <div class="form-group">
-        <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）" data-toggle="modal" data-target="#myModal"  readonly>
-        <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）1" data-toggle="modal" data-target="#myModal1"  readonly>
-        <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）2" data-toggle="modal" data-target="#myModal2"  readonly>
-        <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）3" data-toggle="modal" data-target="#myModal3"  readonly>
-        <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）4" data-toggle="modal" data-target="#myModal4"  readonly>
-        <p class="text-right"><button type="button" class="btn btn-primary btn-sm">开始搜索</button></p>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">出版商名称</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 全部出版商
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 中国科学出版社
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 北京外语出版社
-                                </label>
-                            </div>
-                            <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
-                        </form>
+                    <div class="col-xs-6">
+                        <div class="form-inline form-group">
+                            <label>{{_"Retrieval Range"}}：</label>
+                            <select class="form-control">
+                                <option>{{_"Full Text"}}</option>
+                                <option>{{_"Title"}}</option>
+                                <option>{{_"Author"}}</option>
+                                <option>{{_"Keywords"}}</option>
+                                <option>{{_"Abstract"}}</option>
+                                <option>ISSN</option>
+                                <option>E-ISSN</option>
+                                <option>DOI</option>
+                            </select>
+                        </div>
+                        <div class="form-inline form-group">
+                            <label>{{_"Retrieval Range"}}：</label>
+                            <select class="form-control">
+                                <option>{{_"Full Text"}}</option>
+                                <option>{{_"Title"}}</option>
+                                <option>{{_"Author"}}</option>
+                                <option>{{_"Keywords"}}</option>
+                                <option>{{_"Abstract"}}</option>
+                                <option>ISSN</option>
+                                <option>E-ISSN</option>
+                                <option>DOI</option>
+                            </select>
+                        </div>
+                        <div class="form-inline form-group">
+                            <label>{{_"Retrieval Range"}}：</label>
+                            <select class="form-control">
+                                <option>{{_"Full Text"}}</option>
+                                <option>{{_"Title"}}</option>
+                                <option>{{_"Author"}}</option>
+                                <option>{{_"Keywords"}}</option>
+                                <option>{{_"Abstract"}}</option>
+                                <option>ISSN</option>
+                                <option>E-ISSN</option>
+                                <option>DOI</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+            <p class="text-right"><button type="button" class="btn btn-primary btn-sm">开始搜索</button></p>
         </div>
-        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">出版商名称1</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 全部出版商
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 中国科学出版社
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 北京外语出版社
-                                </label>
-                            </div>
-                            <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
-                        </form>
+        <div class="dotted mb15">
+            <form>
+                <div class="form-inline form-group">
+                    <label>结果排序：</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-inline form-group">
+                    <label>出版时间：</label>
+                    <select class="form-control">
+                        <option>2014年</option>
+                        <option>2013年</option>
+                        <option>2012年</option>
+                        <option>2011年</option>
+                        <option>2000年</option>
+                    </select>
+                    <select class="form-control">
+                        <option>6月</option>
+                        <option>5月</option>
+                        <option>3月</option>
+                        <option>2月</option>
+                        <option>1月</option>
+                    </select>
+                    <select class="form-control">
+                        <option>16日</option>
+                        <option>15日</option>
+                        <option>14日</option>
+                        <option>13日</option>
+                        <option>12日</option>
+                    </select>
+                    <label>至</label>
+                    <select class="form-control">
+                        <option>2014年</option>
+                        <option>2013年</option>
+                        <option>2012年</option>
+                        <option>2011年</option>
+                        <option>2000年</option>
+                    </select>
+                    <select class="form-control">
+                        <option>6月</option>
+                        <option>5月</option>
+                        <option>3月</option>
+                        <option>2月</option>
+                        <option>1月</option>
+                    </select>
+                    <select class="form-control">
+                        <option>16日</option>
+                        <option>15日</option>
+                        <option>14日</option>
+                        <option>13日</option>
+                        <option>12日</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <h5>选择检索控制条件：</h5>
+        <div class="form-group">
+            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）" data-toggle="modal" data-target="#myModal"  readonly>
+            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）1" data-toggle="modal" data-target="#myModal1"  readonly>
+            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）2" data-toggle="modal" data-target="#myModal2"  readonly>
+            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）3" data-toggle="modal" data-target="#myModal3"  readonly>
+            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）4" data-toggle="modal" data-target="#myModal4"  readonly>
+            <p class="text-right"><button type="button" class="btn btn-primary btn-sm">开始搜索</button></p>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">出版商名称</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 全部出版商
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 中国科学出版社
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 北京外语出版社
+                                    </label>
+                                </div>
+                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">出版商名称2</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 全部出版商
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 中国科学出版社
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 北京外语出版社
-                                </label>
-                            </div>
-                            <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">出版商名称3</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 全部出版商
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 中国科学出版社
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 北京外语出版社
-                                </label>
-                            </div>
-                            <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
-                        </form>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">出版商名称1</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 全部出版商
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 中国科学出版社
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 北京外语出版社
+                                    </label>
+                                </div>
+                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">出版商名称4</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 全部出版商
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 中国科学出版社
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""> 北京外语出版社
-                                </label>
-                            </div>
-                            <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
-                        </form>
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">出版商名称2</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 全部出版商
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 中国科学出版社
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 北京外语出版社
+                                    </label>
+                                </div>
+                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">出版商名称3</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 全部出版商
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 中国科学出版社
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 北京外语出版社
+                                    </label>
+                                </div>
+                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">出版商名称4</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 全部出版商
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 中国科学出版社
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> 北京外语出版社
+                                    </label>
+                                </div>
+                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </div>
 </template>

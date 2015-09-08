@@ -1,1 +1,1 @@
-this.Queue=new Meteor.Collection("queue");
+this.AutoTasks= new Meteor.Collection("autoTasks");
