@@ -4,7 +4,11 @@ SyncedCron.add({
 		return parser.text(Config.AutoTasks.DOI_Register.rate || "at 1:00am every day");
 	},
 	job: function(){
-		Science.Interface.CrossRef.register(null,Config.AutoTasks.DOI_Register.recvEmail,Config.AutoTasks.DOI_Register.rootUrl);
+		Science.Interface.CrossRef.register({
+			recvEmail:Config.AutoTasks.DOI_Register.recvEmail,
+			rootUrl:Config.AutoTasks.DOI_Register.rootUrl,
+			condition:Config.AutoTasks.DOI_Register.condition
+		});
 	}
 });
 
