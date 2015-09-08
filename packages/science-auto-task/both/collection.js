@@ -1,1 +1,1 @@
-this.Queue=Meteor.Collection("queue");
+this.Queue=new Meteor.Collection("queue");
