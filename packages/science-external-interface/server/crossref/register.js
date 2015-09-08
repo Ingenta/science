@@ -16,63 +16,75 @@ var articleStr = '<journal_article publication_type="full_text"><titles><title>{
 	'<publication_date media_type="online"><year>{year}</year></publication_date>'+
 	'<doi_data><doi>{doi}</doi><resource>{url}</resource></doi_data></journal_article>';
 
-var generationXML = function(arr, recvEmail, rootUrl,callback){
+var generationXML = function(dois, recvEmail, rootUrl,callback){
 	if(!Articles || !Publications){
 		throw new Error('Articles and Publication are required');
 	}
 	var journals = {};
-	if(typeof arr == 'string'){
-		arr = [arr];
+	var articles;
+	var query;
+	if(dois && typeof dois == 'string'){
+		dois = [dois];
 	}
-	_.each(arr,function(item){
-		var articleInfo = makeSureIsArticleObj(item);
-		if(articleInfo){
-			articleInfo.xmlContent = articleStr.replace("{title}",articleInfo.title.en || articleInfo.title.cn)
-				.replace("{year}",articleInfo.year)
-				.replace("{doi}",articleInfo.doi)
-				.replace("{url}",rootUrl + articleInfo.doi);//TODO  最终的url待确认
-			if(!journals.hasOwnProperty(articleInfo.journalId)){
-				var journalInfo = Publications.findOne({_id:articleInfo.journalId},{fields:{title:1,shortTitle:1,issn:1}});
-				journalInfo.xmlContent = journalStr.replace("{journalTitle}",journalInfo.title)
-					.replace("{abbrTitle}",journalInfo.shortTitle)
-					.replace("{issn}",journalInfo.issn);
-				journals[articleInfo.journalId]=journalInfo;
-			}
-			if(!journals[articleInfo.journalId].hasOwnProperty('articles')){
-				journals[articleInfo.journalId].articles=[];
-				journals[articleInfo.journalId].allArticleXmlContent="";
-			}
-			journals[articleInfo.journalId].articles.push(articleInfo);
-			journals[articleInfo.journalId].allArticleXmlContent+=articleInfo.xmlContent;
+	if(dois){
+		query={doi:{$in:dois}};
+	}else{
+		var condition=Config.AutoTasks.DOI_Register.condition || 1;
+		condition = new Date().addDays(0-condition);
+		query={$or:[
+			{"stamps.rdoi":{$exists:false}}, //从未进行过注册的
+			{"stamps.rdoi":{$lte:condition}} //较早前进行过注册的
+		]};
+	}
+	articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1}});
+	if(articles.count()==0){
+		console.log("Not found any article for DOI register");
+		return;
+	}
+	articles.forEach(function(articleInfo){
+		journals.articleCount = (journals.articleCount || 0)+1;
+		articleInfo.xmlContent = articleStr.replace("{title}",articleInfo.title.en || articleInfo.title.cn)
+			.replace("{year}",articleInfo.year)
+			.replace("{doi}",articleInfo.doi)
+			.replace("{url}",rootUrl + articleInfo.doi);//TODO  最终的url待确认
+		if(!journals.hasOwnProperty(articleInfo.journalId)){
+			var journalInfo = Publications.findOne({_id:articleInfo.journalId},{fields:{title:1,shortTitle:1,issn:1}});
+			journalInfo.xmlContent = journalStr.replace("{journalTitle}",journalInfo.title)
+				.replace("{abbrTitle}",journalInfo.shortTitle)
+				.replace("{issn}",journalInfo.issn);
+			journals[articleInfo.journalId]=journalInfo;
 		}
-	});
-	var allJournalXmlContent="";
-	_.each(journals,function(item){
-		allJournalXmlContent+= item.xmlContent.replace("{articles}",item.allArticleXmlContent);
+		if(!journals[articleInfo.journalId].hasOwnProperty('articles')){
+			journals[articleInfo.journalId].articles=[];
+			journals[articleInfo.journalId].allArticleXmlContent="";
+		}
+		journals[articleInfo.journalId].articles.push(articleInfo);
+		journals[articleInfo.journalId].allArticleXmlContent+=articleInfo.xmlContent;
+
+		if(journals.articleCount>= articles.count()){//最后一个article处理完以后拼装出完整的xml内容
+			delete journals.articleCount;
+			var allJournalXmlContent="";
+			_.each(journals,function(journalInfo){
+				allJournalXmlContent+= journalInfo.xmlContent.replace("{articles}",journalInfo.allArticleXmlContent);
+			});
+			//以当前时间命名准备提交个crossRef的xml文件
+			var timestamp = new Date().format("yyyyMMddhhmmss");
+			var headContent = headStr.replace("{batchId}",timestamp.substr(0,8))
+				.replace("{timestamp}",timestamp)
+				.replace("{recvEmail}",recvEmail);
+			var finallyXmlContent = xmlStr+
+				doiBatchStr.replace("{content}",headContent + bodyStr.replace("{journals}",allJournalXmlContent));
+			//保存文件到预定位置，在回调函数中提交给crossRef
+			var filePath = Config.AutoTasks.DOI_Register.savePath+timestamp +".xml";
+			Science.FSE.outputFile(filePath,finallyXmlContent,function(err){
+				if(!err && callback){
+					callback(filePath);
+				}
+			});
+		}
 	});
 
-	var timestamp = new Date().format("yyyyMMddhhmmss");
-	var headContent = headStr.replace("{batchId}",timestamp.substr(0,8))
-		.replace("{timestamp}",timestamp)
-		.replace("{recvEmail}",recvEmail);
-	var finallyXmlContent = xmlStr+
-		doiBatchStr.replace("{content}",headContent + bodyStr.replace("{journals}",allJournalXmlContent));
-	Science.FSE.outputFile(Config.AutoTasks.DOI_Register.savePath+timestamp +".xml",finallyXmlContent,function(err){
-		if(!err && callback){
-			callback(Config.AutoTasks.DOI_Register.savePath+timestamp +".xml");
-		}
-	});
 };
-
-var makeSureIsArticleObj = function(item){
-	var articleInfo;
-	if(typeof item == 'string'){
-		articleInfo = Articles.findOne({doi:item},{fields:{journalId:1,doi:1,title:1,year:1}});
-	}else {
-		articleInfo = item;
-	}
-	return articleInfo;
-}
 
 var post2CrossRef =function(filepath){
 	var formData={
