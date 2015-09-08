@@ -7,6 +7,7 @@
     "FILTER BY Topic":"按主题过滤",
     "Retrieval Condition":"检索条件",
     "Retrieval Range":"检索范围",
+    "Start Search":"开始搜索",
     "Or":"或",
     "And":"且",
     "Non":"非",
@@ -923,5 +924,6 @@
     "Editorial Board": "编委会",
     "University": "大学",
     "Research Institution": "研究机构",
-    "Others": "其他"
+    "Others": "其他",
+    "Favorite Is Empty" : "收藏夹为空"
 }
