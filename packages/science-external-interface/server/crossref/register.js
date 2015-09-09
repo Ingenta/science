@@ -44,11 +44,13 @@ var generationXML = function(options,callback){
 		]};
 	}
 	articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1}});
+
 	if(articles.count()==0){
+		AutoTasks.update({_id:options.taskId},{$set:{status:"aborted",total:0}});
 		console.log("Not found any article for DOI register");
 		return;
 	}
-	options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"pending"}});
+	options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"splicing",total:articles.count()}});
 
 	articles.forEach(function(articleInfo){
 		//计数器
@@ -78,7 +80,7 @@ var generationXML = function(options,callback){
 
 		if(journals.articleCount>= articles.count()){//最后一个article处理完以后拼装出完整的xml内容
 			//保存本次任务提交的doi集合
-			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{dois:options.dois || dois}})
+			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{dois:options.dois || dois}});
 			delete journals.articleCount;
 			var allJournalXmlContent="";
 			_.each(journals,function(journalInfo){
