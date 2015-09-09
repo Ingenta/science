@@ -36,6 +36,16 @@ Template.LayoutSideBar.helpers({
 
         }
     },
+    watchArticleName: function(){
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var article = Articles.findOne({doi: currentDoi});
+        if(Meteor.userId() && article){
+            var wat = Meteor.user().watchArticle || [];
+            return _.contains(wat, article._id)?TAPi18n.__("Watched"):TAPi18n.__("Article Watch");
+        }else{
+            return TAPi18n.__("Article Watch");
+        }
+    },
     watchName: function(){
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
@@ -63,6 +73,19 @@ Template.LayoutSideBar.events({
                 fav.push({articleId:article._id,createOn:new Date()})
             }
             Users.update({_id: Meteor.userId()},{$set:{favorite: fav}});
+        }
+    },
+    "click .watchArticle": function(){
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var article = Articles.findOne({doi: currentDoi});
+        if(Meteor.userId()){
+            var wat = Meteor.user().watchArticle || [];
+            if(_.contains(wat, article._id)){
+                wat = _.without(wat, article._id)
+            }else{
+                wat.push(article._id)
+            }
+            Users.update({_id: Meteor.userId()},{$set:{watchArticle: wat}});
         }
     },
     "click .watch": function(){
