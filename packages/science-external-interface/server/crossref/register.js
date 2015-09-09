@@ -142,6 +142,5 @@ var post2CrossRef =function(taskId,filepath){
  * @param rootUrl DOI绑定的URL的前缀
  */
 Science.Interface.CrossRef.register = function(options){
-	options.taskId = AutoTasks.insert({type: "doi_register",status: "creating",createOn: new Date()});
 	generationXML(options,Meteor.bindEnvironment(post2CrossRef));
 };
