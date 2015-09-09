@@ -67,6 +67,7 @@ Template.AdminUsersEditEditForm.events({
             }
             if (Router.current().route.getName() === "admin.institutions.detail.edit") {
                 history.back();
+                Session.set('activeTab', 'account');
             } else {
                 Router.go("admin.users", {});
             }
@@ -109,6 +110,7 @@ Template.AdminUsersEditEditForm.events({
         e.preventDefault();
         if (Router.current().route.getName() === "admin.institutions.detail.edit") {
             history.back();
+            Session.set('activeTab', 'account');
         } else {
             Router.go("admin.users", {});
         }
