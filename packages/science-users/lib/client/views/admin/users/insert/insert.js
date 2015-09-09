@@ -1,120 +1,131 @@
 var pageSession = new ReactiveDict();
 
-Template.AdminUsersInsert.rendered = function() {
-	
+Template.AdminUsersInsert.rendered = function () {
+
 };
 
-Template.AdminUsersInsert.events({
-	
-});
+Template.AdminUsersInsert.events({});
 
-Template.AdminUsersInsert.helpers({
-	
-});
+Template.AdminUsersInsert.helpers({});
 
-Template.AdminUsersInsertInsertForm.rendered = function() {
-	
+Template.AdminUsersInsertInsertForm.rendered = function () {
 
-	pageSession.set("adminUsersInsertInsertFormInfoMessage", "");
-	pageSession.set("adminUsersInsertInsertFormErrorMessage", "");
 
-	$(".input-group.date").each(function() {
-		var format = $(this).find("input[type='text']").attr("data-format");
+    pageSession.set("adminUsersInsertInsertFormInfoMessage", "");
+    pageSession.set("adminUsersInsertInsertFormErrorMessage", "");
 
-		if(format) {
-			format = format.toLowerCase();			
-		}
-		else {
-			format = "mm/dd/yyyy";
-		}
+    $(".input-group.date").each(function () {
+        var format = $(this).find("input[type='text']").attr("data-format");
 
-		$(this).datepicker({
-			autoclose: true,
-			todayHighlight: true,
-			todayBtn: true,
-			forceParse: false,
-			keyboardNavigation: false,
-			format: format
-		});
-	});
+        if (format) {
+            format = format.toLowerCase();
+        }
+        else {
+            format = "mm/dd/yyyy";
+        }
 
-	$("input[autofocus]").focus();
+        $(this).datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            todayBtn: true,
+            forceParse: false,
+            keyboardNavigation: false,
+            format: format
+        });
+    });
+
+    $("input[autofocus]").focus();
 };
 
 Template.AdminUsersInsertInsertForm.events({
-	"submit": function(e, t) {
-		e.preventDefault();
-		pageSession.set("adminUsersInsertInsertFormInfoMessage", "");
-		pageSession.set("adminUsersInsertInsertFormErrorMessage", "");
-		
-		var self = this;
+    "submit": function (e, t) {
+        e.preventDefault();
+        pageSession.set("adminUsersInsertInsertFormInfoMessage", "");
+        pageSession.set("adminUsersInsertInsertFormErrorMessage", "");
 
-		function submitAction(msg) {
-			var adminUsersInsertInsertFormMode = "insert";
-			if(!t.find("#form-cancel-button")) {
-				switch(adminUsersInsertInsertFormMode) {
-					case "insert": {
-						$(e.target)[0].reset();
-					}; break;
+        var self = this;
 
-					case "update": {
-						var message = msg || "Saved.";
-						pageSession.set("adminUsersInsertInsertFormInfoMessage", message);
-					}; break;
-				}
-			}
+        function submitAction(msg) {
+            var adminUsersInsertInsertFormMode = "insert";
+            if (!t.find("#form-cancel-button")) {
+                switch (adminUsersInsertInsertFormMode) {
+                    case "insert":
+                    {
+                        $(e.target)[0].reset();
+                    }
+                        ;
+                        break;
 
-			Router.go("admin.users", {});
-		}
+                    case "update":
+                    {
+                        var message = msg || "Saved.";
+                        pageSession.set("adminUsersInsertInsertFormInfoMessage", message);
+                    }
+                        ;
+                        break;
+                }
+            }
 
-		function errorAction(msg) {
-			var message = msg || "Error.";
-			pageSession.set("adminUsersInsertInsertFormErrorMessage", message);
-		}
+            if (Router.current().route.getName() === "admin.institutions.detail.insert") {
+                history.back();
+            } else {
+                Router.go("admin.users", {});
+            }
+        }
 
-		validateForm(
-			$(e.target),
-			function(fieldName, fieldValue) {
+        function errorAction(msg) {
+            var message = msg || "Error.";
+            pageSession.set("adminUsersInsertInsertFormErrorMessage", message);
+        }
 
-			},
-			function(msg) {
+        validateForm(
+            $(e.target),
+            function (fieldName, fieldValue) {
 
-			},
-			function(values) {
-				Permissions.check("add-user","user");
-				Meteor.call("createUserAccount", values, function(e) { if(e) errorAction(e.message); else submitAction(); });
-			}
-		);
+            },
+            function (msg) {
 
-		return false;
-	},
-	"click #form-cancel-button": function(e, t) {
-		e.preventDefault();
+            },
+            function (values) {
+                Permissions.check("add-user", "user");
+                values.institutionId = Router.current().params.insId;
+                Meteor.call("createUserAccount", values, function (e) {
+                    if (e) errorAction(e.message); else submitAction();
+                });
+            }
+        );
+
+        return false;
+    },
+    "click #form-cancel-button": function (e, t) {
+        e.preventDefault();
+
+        if (Router.current().route.getName() === "admin.institutions.detail.insert") {
+            history.back();
+        } else {
+            Router.go("admin.users", {});
+        }
+    },
+    "click #form-close-button": function (e, t) {
+        e.preventDefault();
+
+        /*CLOSE_REDIRECT*/
+    },
+    "click #form-back-button": function (e, t) {
+        e.preventDefault();
+
+        /*BACK_REDIRECT*/
+    }
 
 
-
-		Router.go("admin.users", {});
-	},
-	"click #form-close-button": function(e, t) {
-		e.preventDefault();
-
-		/*CLOSE_REDIRECT*/
-	},
-	"click #form-back-button": function(e, t) {
-		e.preventDefault();
-
-		/*BACK_REDIRECT*/
-	}
-
-	
 });
 
 Template.AdminUsersInsertInsertForm.helpers({
-	"infoMessage": function() {
-		return pageSession.get("adminUsersInsertInsertFormInfoMessage");
-	},
-	"errorMessage": function() {
-		return pageSession.get("adminUsersInsertInsertFormErrorMessage");
-	}
-	
+    "infoMessage": function () {
+        return pageSession.get("adminUsersInsertInsertFormInfoMessage");
+    },
+    "errorMessage": function () {
+        return pageSession.get("adminUsersInsertInsertFormErrorMessage");
+    }
+
 });
