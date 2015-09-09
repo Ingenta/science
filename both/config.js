@@ -57,6 +57,7 @@ Config={
             recvEmail:"kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
             rootUrl:"http://phys.scichina.com:8083/sciG/CN/",//必须以/结束 ，必须
             rate:"at 1:00am every day",//提交注册请求的频率，默认每晚1点
+            //rate:"every 10 sec",
             condition:1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
         }
     }
