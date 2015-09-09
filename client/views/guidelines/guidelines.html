@@ -16,10 +16,10 @@
                     <div class="row" style="margin-top: 20px;">
                         {{#each authorCenters}}
                             <div align="center">
-                                <span style="font-size:24px;font-weight: bold;text-align:center;">{{translateThis title.cn title.en}}</span>
+                                <span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
                                 {{#if can "modify-author-center" "resource"  }}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
-                            </div>
-                            <h5>{{{translateThis content.cn content.en}}}</h5>
+                            </div><br>
+                            <p>{{{translateThis content.cn content.en}}}</p>
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}

@@ -5,7 +5,7 @@ EmailsSchema  = new SimpleSchema({
     youEmail:{
         type:String
     },
-    subject:{
+    reasons:{
         type:String
     }
 });

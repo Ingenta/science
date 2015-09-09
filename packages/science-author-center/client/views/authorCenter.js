@@ -15,6 +15,7 @@ Template.SinglePublisherForAuthorCenter.helpers({
 Template.SingleJournal.helpers({
     getJournalUrl:function(pubId){
         var publisher = Publishers.findOne({_id: pubId});
+        Session.set("activeTab", "Author Center");
         return "/publisher/" + publisher.name + "/journal/" + this.title
     }
 })

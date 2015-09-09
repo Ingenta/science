@@ -1,4 +1,4 @@
-Meteor.startup(function(){
+Meteor.startup(function () {
     Router.route("login", {
         parent: "home",
         path: "/login",
@@ -41,10 +41,21 @@ Meteor.startup(function(){
         },
         parent: "home"
     });
+    Router.route("admin.email", {
+        path: "/admin/email",
+        title: function () {
+            return TAPi18n.__("Email");
+        },
+        parent: "admin",
+        template:"Admin",
+        yieldTemplates: {
+            'AdminEmail': { to: 'AdminSubcontent'}
+        }
+    });
     Router.route("admin.roles", {
         path: "/admin/roles",
         controller: "AdminRolesController",
-        title:function(){
+        title: function () {
             return TAPi18n.__("roles");
         },
         parent: "admin"
@@ -52,36 +63,38 @@ Meteor.startup(function(){
     Router.route("admin.roles.insert", {
         path: "/admin/roles/insert",
         controller: "AdminRolesInsertController",
-        title:function(){
+        title: function () {
             return TAPi18n.__("newRole");
         },
         parent: "admin.roles"
     });
     Router.route("admin.roles.update", {
         path: "/admin/roles/update/:roleId",
-        title:function(){return "update"},
-        parent:"admin.roles",
+        title: function () {
+            return "update"
+        },
+        parent: "admin.roles",
         template: "Admin",
         yieldTemplates: {
-            'AdminRoleEdit': { to: 'AdminSubcontent'}
+            'AdminRoleEdit': {to: 'AdminSubcontent'}
         },
-        onBeforeAction: function() {
-            Permissions.check("edit-custom-roles","permissions");
+        onBeforeAction: function () {
+            Permissions.check("edit-custom-roles", "permissions");
             this.next();
         }
     });
-    Router.route("admin.roles.choose.permissions",{
-        path:"/admin/roles/:roleId/choose",
-        template:"Admin",
+    Router.route("admin.roles.choose.permissions", {
+        path: "/admin/roles/:roleId/choose",
+        template: "Admin",
         yieldTemplates: {
-            'AdminChoosePermissions': { to: 'AdminSubcontent'}
+            'AdminChoosePermissions': {to: 'AdminSubcontent'}
         },
-        title:function(){
+        title: function () {
             return TAPi18n.__("choosePermissions");
         },
-        parent:"admin.roles",
-        onBeforeAction: function() {
-            Permissions.check("edit-custom-roles","permissions");
+        parent: "admin.roles",
+        onBeforeAction: function () {
+            Permissions.check("edit-custom-roles", "permissions");
             this.next();
         }
     });
@@ -119,20 +132,36 @@ Meteor.startup(function(){
     });
     Router.route("user_settings", {
         path: "/user_settings",
-        controller: "UserSettingsController"
+        controller: "UserSettingsController",
+        title: function () {
+            return TAPi18n.__("User settings");
+        },
+        parent: "home"
     });
     Router.route("user_settings.profile", {
         path: "/user_settings/profile",
-        controller: "UserSettingsProfileController"
+        controller: "UserSettingsProfileController",
+        title: function () {
+            return TAPi18n.__("Profile");
+        },
+        parent: "user_settings"
     });
     Router.route("user_settings.change_pass", {
         path: "/user_settings/change_pass",
-        controller: "UserSettingsChangePassController"
+        controller: "UserSettingsChangePassController",
+        title: function () {
+            return TAPi18n.__("Change password");
+        },
+        parent: "user_settings"
     });
     Router.route("user_settings.update_information", {
         path: "/user_settings/update_information",
         controller: "UserSettingsUpdateInformationController",
-		waitOn:function () {
+        title: function () {
+            return TAPi18n.__("Update information");
+        },
+        parent: "user_settings",
+        waitOn: function () {
             return [
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('publications')
@@ -142,6 +171,19 @@ Meteor.startup(function(){
     Router.route("user_settings.my_favorite", {
         path: "/user_settings/my_favorite",
         controller: "UserSettingsMyFavoriteController",
+        title: function () {
+            return TAPi18n.__("My favorite");
+        },
+        parent: "user_settings",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publications')
+            ]
+        }
+    });
+    Router.route("user_settings.my_watch", {
+        path: "/user_settings/my_watch",
+        controller: "UserSettingsMyWatchController",
         waitOn:function () {
             return [
                 Meteor.subscribe('publications')

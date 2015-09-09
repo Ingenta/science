@@ -1,12 +1,47 @@
 <template name="UserSettingsMyFavorite">
+   <h3>{{_ "My Favorite"}}</h3>
    <div>
        {{#each favorite}}
             {{> SingleFavorite}}
+       {{else}}
+            {{_ "Favorite Is Empty"}}
        {{/each}}
    </div>
 </template>
+
 <template name="SingleFavorite">
-    <a href="{{ArticleUrl _id}}">
-         <a>{{translateThis title.cn title.en}}</a>
-    </a>
+    {{> favoriteArticle}}
+</template>
+
+<template name="favoriteArticle">
+
+    <ul class="dotted list-unstyled">
+        <li>
+            <!--<h6>{{_ "Topic"}}: {{_ topic}}</h6>-->
+            <!--{{#if can "delete-article" "resource"}}-->
+            <!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
+            <!--{{/if}}-->
+            <h4><div class="resultsList">{{> imageName}}<a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></div></h4>
+
+            <ul class="list-unstyled">
+                <li>
+                    {{#each authors}}
+                    {{> authorPopButton name=getFullName}}
+                    {{/each}}
+                </li>
+                <li>
+                    <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                    <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+                </li>
+                <li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+                {{> abstractDetails}}
+            </ul>
+        </li>
+        <div class="bdsharebuttonbox pull-right">
+            <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
+            <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a></div>
+        <script>window._bd_share_config = {"common": {"bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16"}, "share": {}};
+        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+        </script>
+    </ul>
 </template>

@@ -6,6 +6,18 @@ Template.publicationPdfContent.helpers({
     pdfValue:function(){
         var file = Collections.Files.findOne({_id:this.fileId});
         return file.url()+"&download=true";
+    },
+    AuthorTitle: function () {
+        if(this.authorTitle.en||this.authorTitle.cn){
+            return true;
+        }
+        return false;
+    },
+    FileName: function () {
+        if(this.fileName.en||this.fileName.cn){
+            return true;
+        }
+        return false;
     }
 });
 

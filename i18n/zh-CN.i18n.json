@@ -5,6 +5,12 @@
     "FILTER BY Author": "按作者过滤浏览",
     "FILTER BY Release Date": "按出版日期过滤浏览",
     "FILTER BY Topic":"按主题过滤",
+    "Retrieval Condition":"检索条件",
+    "Retrieval Range":"检索范围",
+    "Start Search":"开始搜索",
+    "Or":"或",
+    "And":"且",
+    "Non":"非",
     "Other": "其它",
     "Reports": "统计",
     "Caption": "解说词",
@@ -65,8 +71,8 @@
     "Browse journal": "出版目录浏览",
     "Details": "详情",
     "User details": "用户明细",
-    "Quick Search": "快速查找",
-    "Advanced Search": "高级查找",
+    "Quick Search": "快速检索",
+    "Advanced Search": "高级检索",
     "Home page for": "",
     "Overview": "期刊概述",
     "Browse": "出版目录",
@@ -105,6 +111,7 @@
     "Related": "相关文章",
     "Home": "首页",
     "All": "所有",
+    "User settings": "用户设置",
     "Profile": "个人资料",
     "Update information": "更新注册资料",
     "Please update your registered information (optional)": "请填写您的注册资料（选填）",
@@ -156,6 +163,7 @@
     "Contact Way": "联系方式",
     "Address": "地址",
     "Conference Theme": "会议主题",
+    "The author article history": "作者历史文章查看",
     "Publishers": "出版商",
     "Publications": "出版物",
     "Topics": "主题",
@@ -807,8 +815,8 @@
             "youEmail": {
                 "label": "你的邮件地址:"
             },
-            "subject": {
-                "label": "主题:"
+            "reasons": {
+                "label": "推荐理由:"
             }
         },
         "authorCenter":{
@@ -895,6 +903,8 @@
     "Journal Watch":"期刊关注",
     "Watched":"已关注",
     "My favorite":"收藏夹",
+    "My Favorite":"我的收藏夹",
+    "My watch":"我的关注",
     "Please enter the receiving mailbox":"请输入接收邮箱",
     "You need to enter email address!":"你需要输入邮件地址!",
     "pubStatus":{
@@ -914,5 +924,6 @@
     "Editorial Board": "编委会",
     "University": "大学",
     "Research Institution": "研究机构",
-    "Others": "其他"
+    "Others": "其他",
+    "Favorite Is Empty" : "收藏夹为空"
 }
