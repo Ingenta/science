@@ -1,0 +1,72 @@
+<template name="AdminTag">
+    <div class="container-fluid">
+        {{> pageElement key="tags"}}
+        <div class="row">
+            {{#if can "add-tag" "resource"}}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTagModal">{{_ "Add new"}}</button>
+                {{> addTagModalForm}}
+            {{/if}}
+        </div>
+        <hr>
+        <div class="row">
+            {{> tagList}}
+        </div>
+    </div>
+</template>
+
+<template name="tagList">
+    <table class="table table-bordered table-condensed">
+        <thead>
+        <tr>
+            <td>{{_"Tag Number"}}</td>
+            <td>{{_"Tag Name"}}</td>
+            <td>{{_"Creator"}}</td>
+            <td>{{_"createAt"}}</td>
+            <td>{{_"Action"}}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each tags}}
+        <tr>
+            <td>{{tagNumber}}</td>
+            <td>{{translateThis name.cn name.en}}</td>
+            <td>{{createdBy}}</td>
+            <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
+            <td>{{#if can "delete-tag" "resource"}}{{> deleteTagModalForm}}{{/if}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="addTagModalForm">
+    <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="addTagModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addTagModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addTagModalForm" collection="Tags" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="tagNumber"}}
+                    {{> afQuickField name="name"}}
+                    {{> afQuickField name="icon"}}
+                    {{> afQuickField name="url"}}
+                    {{> afQuickField type="hidden" name="createdBy" value=currentUser.username}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="deleteTagModalForm">
+    {{#afModal class="fa fa-trash" collection="Tags" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
+    {{/afModal}}
+</template>
