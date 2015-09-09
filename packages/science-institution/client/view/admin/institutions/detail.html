@@ -45,7 +45,7 @@
 </template>
 
 <template name="institutionOptions">
-    {{#institutionTabs name="" tabs=tabs activeTab="detail"}}
+    {{#institutionTabs name="" tabs=tabs activeTab=activeTab}}
         {{#with info}}
             {{#tabContent slug="detail"}}
                 {{>institutionDetail}}
