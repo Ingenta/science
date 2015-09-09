@@ -33,9 +33,9 @@ var generationXML = function(options,callback){
 		options.dois = [options.dois];
 	}
 	if(options.dois){
-		inQuery=true;
 		query={doi:{$in:options.dois}};
 	}else{
+		inQuery=true;
 		var condition=options.condition || 1;//默认1天
 		condition = new Date().addDays(0-condition);
 		query={$or:[
@@ -54,7 +54,7 @@ var generationXML = function(options,callback){
 		//计数器
 		journals.articleCount = (journals.articleCount || 0)+1;
 
-		inQuery && articleInfo.doi && dois.push[articleInfo.doi];
+		inQuery && articleInfo.doi && dois.push(articleInfo.doi);
 		//单条article的xml内容
 		articleInfo.xmlContent = articleStr.replace("{title}",articleInfo.title.en || articleInfo.title.cn)
 			.replace("{year}",articleInfo.year)
@@ -142,6 +142,5 @@ var post2CrossRef =function(taskId,filepath){
  * @param rootUrl DOI绑定的URL的前缀
  */
 Science.Interface.CrossRef.register = function(options){
-	options.taskId = AutoTasks.insert({type: "doi_register",status: "creating",createOn: new Date()});
 	generationXML(options,Meteor.bindEnvironment(post2CrossRef));
 };
