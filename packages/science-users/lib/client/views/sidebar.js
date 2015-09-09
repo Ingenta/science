@@ -29,7 +29,11 @@ Template.LayoutSideBar.helpers({
         var article = Articles.findOne({doi: currentDoi});
         if(Meteor.userId()){
             var fav = Meteor.user().favorite || [];
-            return _.contains(fav, article._id)?TAPi18n.__("Favorited"):TAPi18n.__("Favorite");
+            var existObj =_.find(fav,function(obj){
+                return obj.articleId == article._id;
+            });
+            return existObj?TAPi18n.__("Favorited"):TAPi18n.__("Favorite");
+
         }
     },
     watchName: function(){
@@ -50,10 +54,13 @@ Template.LayoutSideBar.events({
         var article = Articles.findOne({doi: currentDoi});
         if(Meteor.userId()){
             var fav = Meteor.user().favorite || [];
-            if(_.contains(fav, article._id)){
-                fav = _.without(fav, article._id)
+            var existObj =_.find(fav,function(obj){
+                return obj.articleId == article._id;
+            });
+            if(existObj){
+                fav = _.without(fav, existObj)
             }else{
-                fav.push(article._id)
+                fav.push({articleId:article._id,createOn:new Date()})
             }
             Users.update({_id: Meteor.userId()},{$set:{favorite: fav}});
         }
