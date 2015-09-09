@@ -88,6 +88,7 @@ Template.AdminUsersInsertInsertForm.events({
             },
             function (values) {
                 Permissions.check("add-user", "user");
+                values.institutionId = Router.current().params.insId;
                 Meteor.call("createUserAccount", values, function (e) {
                     if (e) errorAction(e.message); else submitAction();
                 });
