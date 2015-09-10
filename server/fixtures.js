@@ -100,6 +100,7 @@ Meteor.startup(function () {
             {key: "advancedSearch", e: "Advanced Search", c: "高级检索"},
             {key: "favorite", e: "My Favorite", c: "我的收藏"},
             {key: "watch", e: "My Watch", c: "我的关注"}
+            {key: "tags", e: "Journal Tag", c: "期刊收录标签"}
         ];
         _.each(names, function (name) {
             Pages.insert({

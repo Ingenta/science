@@ -194,4 +194,21 @@ Meteor.startup(function () {
         path: "/logout",
         controller: "LogoutController"
     });
+    Router.route("admin.tag", {
+        path: "/admin/tag",
+        title: function () {
+            return TAPi18n.__("Label included");
+        },
+        parent: "admin",
+        template:"Admin",
+        yieldTemplates: {
+            'AdminTag': { to: 'AdminSubcontent'}
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe("tag"),
+                Meteor.subscribe('pages')
+            ]
+        }
+    });
 });

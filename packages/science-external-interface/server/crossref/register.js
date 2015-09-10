@@ -33,9 +33,9 @@ var generationXML = function(options,callback){
 		options.dois = [options.dois];
 	}
 	if(options.dois){
-		inQuery=true;
 		query={doi:{$in:options.dois}};
 	}else{
+		inQuery=true;
 		var condition=options.condition || 1;//默认1天
 		condition = new Date().addDays(0-condition);
 		query={$or:[
@@ -44,17 +44,19 @@ var generationXML = function(options,callback){
 		]};
 	}
 	articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1}});
+
 	if(articles.count()==0){
+		AutoTasks.update({_id:options.taskId},{$set:{status:"aborted",total:0}});
 		console.log("Not found any article for DOI register");
 		return;
 	}
-	options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"pending"}});
+	options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"splicing",total:articles.count()}});
 
 	articles.forEach(function(articleInfo){
 		//计数器
 		journals.articleCount = (journals.articleCount || 0)+1;
 
-		inQuery && articleInfo.doi && dois.push[articleInfo.doi];
+		inQuery && articleInfo.doi && dois.push(articleInfo.doi);
 		//单条article的xml内容
 		articleInfo.xmlContent = articleStr.replace("{title}",articleInfo.title.en || articleInfo.title.cn)
 			.replace("{year}",articleInfo.year)
@@ -78,7 +80,7 @@ var generationXML = function(options,callback){
 
 		if(journals.articleCount>= articles.count()){//最后一个article处理完以后拼装出完整的xml内容
 			//保存本次任务提交的doi集合
-			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{dois:options.dois || dois}})
+			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{dois:options.dois || dois}});
 			delete journals.articleCount;
 			var allJournalXmlContent="";
 			_.each(journals,function(journalInfo){
@@ -142,6 +144,5 @@ var post2CrossRef =function(taskId,filepath){
  * @param rootUrl DOI绑定的URL的前缀
  */
 Science.Interface.CrossRef.register = function(options){
-	options.taskId = AutoTasks.insert({type: "doi_register",status: "creating",createOn: new Date()});
 	generationXML(options,Meteor.bindEnvironment(post2CrossRef));
 };

@@ -1,3 +1,7 @@
+Template.AdminInstitutionsList.onRendered(function(){
+    Session.set('activeTab', 'detail');
+});
+
 Template.AdminInstitutionsList.helpers({
 	institutions:function(){
 		//var pubId = Session.get('filterPublisher');

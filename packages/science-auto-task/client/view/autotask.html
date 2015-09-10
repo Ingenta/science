@@ -1,0 +1,34 @@
+<template name="autoTask">
+	Auto tasks
+	{{#autoTaskTabs tabs=tabs}}
+		{{#tabContent slug="doi"}}
+			{{> registerdoi}}
+		{{/tabContent}}
+
+		{{#tabContent slug="citation"}}
+			citation
+		{{/tabContent}}
+	{{/autoTaskTabs}}
+</template>
+
+<template name="autoTaskTabs">
+	<div>
+		{{#if activeTab}}
+			{{trackActiveTab activeTab}}
+		{{/if}}
+
+		{{trackTabs tabs}}
+
+		<ul class="nav nav-tabs" role="tablist">
+			{{#each tabs}}
+				<li role="presentation" class="tab-item {{isActiveTab slug}}">
+					<a href="#" role="tab" data-toggle="tab">{{name}}</a>
+				</li>
+			{{/each}}
+		</ul>
+
+		<div class="tabs-content-container">
+			{{> UI.contentBlock context=__context__ }}
+		</div>
+	</div>
+</template>

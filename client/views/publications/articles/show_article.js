@@ -105,7 +105,7 @@ Template.showArticle.helpers({
         return this.surname.en + ' ' + this.given.en;
     },
     getPdfById: function (id) {
-        return ArticleXml.findOne({_id: id}).url();
+        return ArticleXml.findOne({_id: id}).url() + "&download=true";
     }
 });
 

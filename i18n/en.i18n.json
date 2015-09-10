@@ -652,6 +652,26 @@
             "parentId": {
                 "label": "Choose Father and son set"
             }
+        },
+        "tags":{
+            "tagNumber": {
+                "label": "Tag number"
+            },
+            "name": {
+                "label": "Tag name",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "icon": {
+                "label": "Choose file"
+            },
+            "url": {
+                "label": "A Link"
+            }
         }
     },
     "roles": "Roles",

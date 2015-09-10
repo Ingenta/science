@@ -11,6 +11,7 @@ Router.configure({
 Meteor.subscribe("current_user_data");
 Meteor.subscribe("issues");
 Meteor.subscribe("about");
+Meteor.subscribe("tag");
 Meteor.subscribe("volumes");
 Meteor.subscribe("about_articles");
 Meteor.subscribe("editorial_member");
@@ -128,7 +129,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers')
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('topics')
             ]
         }
     });
