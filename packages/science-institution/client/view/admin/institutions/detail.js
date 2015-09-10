@@ -17,10 +17,7 @@ Template.institutionOptions.helpers({
     },
     activeTab: function () {
         return Session.get('activeTab');
-    }
-});
-
-Template.institutionOptions.helpers({
+    },
     info: function () {
         var obj = Institutions.findOne({_id: Router.current().params.insId});
         return obj;

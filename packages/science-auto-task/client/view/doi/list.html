@@ -1,0 +1,32 @@
+<template name="registerdoi">
+	<table class="table table-striped table-hover">
+		<thead>
+		<tr>
+			<th>
+				{{_ "createOn"}}
+			</th>
+			<th>
+				{{_ "total"}}
+			</th>
+			<th>
+				{{_ "status"}}
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+			{{#each tasks}}
+				<tr>
+					<td>
+						{{moFormat createOn "l"}}
+					</td>
+					<td>
+						{{total}}
+					</td>
+					<td>
+						{{status}}&nbsp;{{> taskLoadIcon}}
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>

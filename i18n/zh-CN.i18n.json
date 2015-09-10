@@ -7,6 +7,14 @@
     "FILTER BY Topic":"按主题过滤",
     "Retrieval Condition":"检索条件",
     "Retrieval Range":"检索范围",
+    "Start Search":"开始搜索",
+    "Results the sorting":"结果排序",
+    "Direct Correlation":"直接相关",
+    "The latest published":"最新出版",
+    "Originally published":"最早出版",
+    "Publication date":"出版时间",
+    "Choose search control condition":"选择检索控制条件",
+    "Context Property":"文章内容属性",
     "Or":"或",
     "And":"且",
     "Non":"非",
@@ -27,6 +35,11 @@
     "Description": "描述",
     "Display per page": "显示",
     "Article": "文章",
+    "Review": "评述",
+    "Research Highlights": "点评",
+    "Editorial": "编者按",
+    "Letter": "快讯",
+    "Blogs": "论坛",
     "Recently Viewed Articles": "最近浏览的文章",
     "Total views over time": "阅读行为统计",
     "Abstract views over time": "摘要浏览时间统计",
@@ -76,7 +89,6 @@
     "Overview": "期刊概述",
     "Browse": "出版目录",
     "About": "关于我们",
-    "Editorial Board": "编委会",
     "News": "新闻",
     "Media": "多媒体",
     "Special Topics": "专题",
@@ -101,6 +113,9 @@
     "News Center": "新闻中心",
     "Publishing Dynamic": "出版动态",
     "Meeting Information": "会议信息",
+    "Tag Number": "标签编号",
+    "Tag Name": "标签全称",
+    "Creator": "创建者",
     "Abstract": "摘要",
     "Full Text": "全文",
     "References": "参考文献",
@@ -132,6 +147,7 @@
     "Roles": "角色",
     "Are you sure?": "你确定吗？",
     "Access Key": "资源标签",
+    "Label included": "收录标签",
     "Free Content": "免费获取",
     "Open Access Content": "开源获取",
     "Subscribed Content": "订阅获取",
@@ -843,6 +859,26 @@
             "parentId": {
                 "label": "是否选择一个父集合"
             }
+        },
+        "tags":{
+            "tagNumber": {
+                "label": "标签编号"
+            },
+            "name": {
+                "label": "标签全称",
+                "cn":{
+                    "label": "中文"
+                },
+                "en":{
+                    "label": "英文"
+                }
+            },
+            "icon": {
+                "label": "标签图标"
+            },
+            "url": {
+                "label": "标签详情URL"
+            }
         }
     },
     "roles": "角色",
@@ -923,5 +959,6 @@
     "Editorial Board": "编委会",
     "University": "大学",
     "Research Institution": "研究机构",
-    "Others": "其他"
+    "Others": "其他",
+    "Favorite Is Empty" : "收藏夹为空"
 }

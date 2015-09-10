@@ -73,3 +73,11 @@ Accounts.validateLoginAttempt(function (attempt) {
     }
     return true;
 });
+
+Accounts.onCreateUser(function (options, user) {
+    if (options.profile)
+        user.profile = options.profile;
+    if (options.institutionId)
+        user.institutionId = options.institutionId;
+    return user;
+});

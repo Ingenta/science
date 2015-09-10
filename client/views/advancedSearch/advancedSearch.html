@@ -69,95 +69,56 @@
                     </div>
                 </div>
             </form>
-            <p class="text-right"><button type="button" class="btn btn-primary btn-sm">开始搜索</button></p>
+            <p class="text-right"><button type="button" class="btn btn-primary btn-sm">{{_"Start Search"}}</button></p>
         </div>
         <div class="dotted mb15">
             <form>
                 <div class="form-inline form-group">
-                    <label>结果排序：</label>
-                    <input type="text" class="form-control">
+                    <label>{{_"Results the sorting"}}：</label>
+                    <select class="form-control">
+                        <option>{{_"Direct Correlation"}}</option>
+                        <option>{{_"The latest published"}}</option>
+                        <option>{{_"Originally published"}}</option>
+                    </select>
                 </div>
-                <div class="form-inline form-group">
-                    <label>出版时间：</label>
-                    <select class="form-control">
-                        <option>2014年</option>
-                        <option>2013年</option>
-                        <option>2012年</option>
-                        <option>2011年</option>
-                        <option>2000年</option>
-                    </select>
-                    <select class="form-control">
-                        <option>6月</option>
-                        <option>5月</option>
-                        <option>3月</option>
-                        <option>2月</option>
-                        <option>1月</option>
-                    </select>
-                    <select class="form-control">
-                        <option>16日</option>
-                        <option>15日</option>
-                        <option>14日</option>
-                        <option>13日</option>
-                        <option>12日</option>
-                    </select>
-                    <label>至</label>
-                    <select class="form-control">
-                        <option>2014年</option>
-                        <option>2013年</option>
-                        <option>2012年</option>
-                        <option>2011年</option>
-                        <option>2000年</option>
-                    </select>
-                    <select class="form-control">
-                        <option>6月</option>
-                        <option>5月</option>
-                        <option>3月</option>
-                        <option>2月</option>
-                        <option>1月</option>
-                    </select>
-                    <select class="form-control">
-                        <option>16日</option>
-                        <option>15日</option>
-                        <option>14日</option>
-                        <option>13日</option>
-                        <option>12日</option>
-                    </select>
+                <div class="form-inline form-group input-group datetimepicker">
+                    <label>{{_"Publication date"}}：</label>
+                    <div class="input-group datetimepicker">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input class="set-due-date form-control" type="text"/>
+                    </div>
+                    <label>--</label>
+                    <div class="input-group datetimepicker">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input class="set-due-date form-control" type="text"/>
+                    </div>
                 </div>
             </form>
         </div>
-        <h5>选择检索控制条件：</h5>
+        <h5>{{_"Choose search control condition"}}：</h5>
         <div class="form-group">
-            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）" data-toggle="modal" data-target="#myModal"  readonly>
-            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）1" data-toggle="modal" data-target="#myModal1"  readonly>
-            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）2" data-toggle="modal" data-target="#myModal2"  readonly>
-            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）3" data-toggle="modal" data-target="#myModal3"  readonly>
-            <input type="text" class="form-control form-group" placeholder="出版商名称（默认所有）4" data-toggle="modal" data-target="#myModal4"  readonly>
-            <p class="text-right"><button type="button" class="btn btn-primary btn-sm">开始搜索</button></p>
+            <input type="text" class="form-control form-group" placeholder="{{_'Publisher name'}}" data-toggle="modal" data-target="#myModal"  readonly>
+            <input type="text" class="form-control form-group" placeholder="{{_'Journal name'}}" data-toggle="modal" data-target="#myModal1"  readonly>
+            <input type="text" class="form-control form-group" placeholder="{{_'The topic name'}}(level 1)" data-toggle="modal" data-target="#myModal2"  readonly>
+            <input type="text" class="form-control form-group" placeholder="{{_'Context Property'}}" data-toggle="modal" data-target="#myModal3"  readonly>
+            <input type="text" class="form-control form-group" placeholder="{{_'Classification'}}" data-toggle="modal" data-target="#myModal4"  readonly>
+            <p class="text-right"><button type="button" class="btn btn-primary btn-sm">{{_"Start Search"}}</button></p>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">出版商名称</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{_"Publisher name"}}</h4>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 全部出版商
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 中国科学出版社
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 北京外语出版社
-                                    </label>
-                                </div>
-                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
+                                {{#each publisherList}}
+                                    <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis chinesename name}}</label></div>
+                                {{else}}
+                                    {{_ "No results found!"}}
+                                {{/each}}
+                                <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
                             </form>
                         </div>
                     </div>
@@ -168,26 +129,17 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">出版商名称1</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{_"Journal name"}}</h4>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 全部出版商
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 中国科学出版社
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 北京外语出版社
-                                    </label>
-                                </div>
-                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
+                                {{#each publicationList}}
+                                    <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis titleCn title}}</label></div>
+                                {{else}}
+                                    {{_ "No results found!"}}
+                                {{/each}}
+                                <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
                             </form>
                         </div>
                     </div>
@@ -198,26 +150,17 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">出版商名称2</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{_"The topic name"}}(level 1)</h4>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 全部出版商
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 中国科学出版社
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 北京外语出版社
-                                    </label>
-                                </div>
-                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
+                                {{#each topicList}}
+                                    <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis name englishName}}</label></div>
+                                {{else}}
+                                    {{_ "No results found!"}}
+                                {{/each}}
+                                <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
                             </form>
                         </div>
                     </div>
@@ -228,26 +171,18 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">出版商名称3</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{_"Context Property"}}</h4>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 全部出版商
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 中国科学出版社
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 北京外语出版社
-                                    </label>
-                                </div>
-                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"Article"}}</label></div>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"Review"}}</label></div>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"Research Highlights"}}</label></div>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"Editorial"}}</label></div>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"Letter"}}</label></div>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"Blogs"}}</label></div>
+                                <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
                             </form>
                         </div>
                     </div>
@@ -258,26 +193,17 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">出版商名称4</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{_"Classification"}}</h4>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 全部出版商
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 中国科学出版社
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> 北京外语出版社
-                                    </label>
-                                </div>
-                                <p><button class="btn btn-warning btn-sm" type="reset">重置</button> <button type="submit" class="btn btn-primary btn-sm">提交</button> </p>
+                                <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
+                                {{#each tagList}}
+                                    <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis name.cn name.en}}</label></div>
+                                {{else}}
+                                    {{_ "No results found!"}}
+                                {{/each}}
+                                <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
                             </form>
                         </div>
                     </div>

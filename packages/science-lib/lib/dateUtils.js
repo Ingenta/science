@@ -22,3 +22,40 @@ Date.prototype.format = function(fmt)
 			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
 	return fmt;
 }
+
+Date.prototype.addDays = function(d)
+{
+	this.setDate(this.getDate() + d);
+	return this;
+};
+
+
+Date.prototype.addWeeks = function(w)
+{
+	this.addDays(w * 7);
+	return this;
+};
+
+
+Date.prototype.addMonths= function(m)
+{
+	var d = this.getDate();
+	this.setMonth(this.getMonth() + m);
+
+	if (this.getDate() < d)
+		this.setDate(0);
+	return this;
+};
+
+
+Date.prototype.addYears = function(y)
+{
+	var m = this.getMonth();
+	this.setFullYear(this.getFullYear() + y);
+
+	if (m < this.getMonth())
+	{
+		this.setDate(0);
+	}
+	return this;
+};
