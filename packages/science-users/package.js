@@ -54,6 +54,12 @@ Package.onUse(function (api) {
     'lib/client/views/accounts/user_settings/my_favorite/my_favorite_controller.js',
     'lib/client/views/accounts/user_settings/my_watch/my_watch.html',
     'lib/client/views/accounts/user_settings/my_watch/my_watch.js',
+    'lib/client/views/accounts/user_settings/my_watch/my_articleWatch.html',
+    'lib/client/views/accounts/user_settings/my_watch/my_articleWatch.js',
+    'lib/client/views/accounts/user_settings/my_watch/my_journalWatch.html',
+    'lib/client/views/accounts/user_settings/my_watch/my_journalWatch.js',
+    'lib/client/views/accounts/user_settings/my_watch/my_topicWatch.html',
+    'lib/client/views/accounts/user_settings/my_watch/my_topicWatch.js',
     'lib/client/views/accounts/user_settings/my_watch/my_watch_controller.js',
     'lib/client/views/accounts/user_settings/update_information/update_information.html',
     'lib/client/views/accounts/user_settings/update_information/update_information.js',
@@ -91,8 +97,8 @@ Package.onUse(function (api) {
     'lib/client/views/admin/users/insert/insert_controller.js',
     'lib/client/views/sidebar.html',
     'lib/client/views/sidebar.js',
-    'lib/client/views/advertisement.html',
-    'lib/client/views/advertisement.js',
+    'lib/client/views/promote.html',
+    'lib/client/views/promote.js',
     'lib/client/views/admin/tag/tag.html',
     'lib/client/views/admin/tag/tag.js'
   ],['client']);//必须写上第二个参数，否则可能会出现  Template is not defined 因为server side是没有templating包的
