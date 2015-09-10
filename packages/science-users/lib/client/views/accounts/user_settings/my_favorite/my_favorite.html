@@ -1,5 +1,7 @@
 <template name="UserSettingsMyFavorite">
-   <h3>{{_ "My Favorite"}}</h3>
+   {{> pageElement key="favorite"}}
+   {{_ "result"}}:{{count}}
+    <hr>
    <div>
        {{#each favorite}}
             {{> SingleFavorite}}

@@ -1,12 +1,44 @@
 <template name="UserSettingsMyWatch">
-    <div>
-        {{#each watch}}
-        {{> SingleWatch}}
-        {{/each}}
-    </div>
+    {{> pageElement key="watch"}}
+    {{> watchOptions}}
 </template>
-<template name="SingleWatch">
-    <a href="{{JournalUrl _id}}">
-        <a>{{translateThis titleCn title}}</a>
-    </a>
+
+<template name="watchOptions">
+    {{#watchTabs name="" tabs=tabs activeTab="article"}}
+    {{#tabContent slug="article"}}
+        {{> ArticleWatch}}
+    {{/tabContent}}
+
+    {{#tabContent slug="journal"}}
+        {{> JournalWatch}}
+    {{/tabContent}}
+
+    {{#tabContent slug="topic"}}
+        {{> TopicWatch}}
+    {{/tabContent}}
+    {{/watchTabs}}
+</template>
+
+<template name="watchTabs">
+
+    <div class="watchTabs-container">
+
+        {{#if activeTab}}
+        {{trackActiveTab activeTab}}
+        {{/if}}
+
+        {{trackTabs tabs}}
+
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+            <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                <a role="tab" data-toggle="tab">{{name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+
+        <div class="tabs-content-container">
+            {{> UI.contentBlock context=__context__ }}
+        </div>
+    </div>
 </template>

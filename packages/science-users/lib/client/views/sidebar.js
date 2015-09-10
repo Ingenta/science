@@ -50,8 +50,8 @@ Template.LayoutSideBar.helpers({
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if(Meteor.userId() && journal){
-            var wat = Meteor.user().watch || [];
-            return _.contains(wat, journal._id)?TAPi18n.__("Watched"):TAPi18n.__("Journal Watch");
+            var pro = Meteor.user().profile.interestedOfJournals || [];
+            return _.contains(pro, journal._id)?TAPi18n.__("Watched"):TAPi18n.__("Journal Watch");
         }else{
             return TAPi18n.__("Journal Watch");
         }
@@ -92,13 +92,13 @@ Template.LayoutSideBar.events({
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if(Meteor.userId()){
-            var wat = Meteor.user().watch || [];
-            if(_.contains(wat, journal._id)){
-                wat = _.without(wat, journal._id)
+            var pro = Meteor.user().profile.interestedOfJournals || [];
+            if(_.contains(pro, journal._id)){
+                pro = _.without(pro, journal._id)
             }else{
-                wat.push(journal._id)
+                pro.push(journal._id)
             }
-            Users.update({_id: Meteor.userId()},{$set:{watch: wat}});
+            Users.update({_id: Meteor.userId()},{$set:{"profile.interestedOfJournals": pro}});
         }else{
             swal({
                     title: "",

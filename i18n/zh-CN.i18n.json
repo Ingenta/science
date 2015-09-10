@@ -902,10 +902,12 @@
     "Favorited":"已收藏",
     "Journal Watch":"期刊关注",
     "Article Watch":"文章关注",
+    "Topic Watch": "学科关注",
     "Watched":"已关注",
     "My favorite":"收藏夹",
     "My Favorite":"我的收藏夹",
     "My watch":"我的关注",
+    "My Alerts": "我的关注",
     "Please enter the receiving mailbox":"请输入接收邮箱",
     "You need to enter email address!":"你需要输入邮件地址!",
     "pubStatus":{
@@ -926,5 +928,8 @@
     "University": "大学",
     "Research Institution": "研究机构",
     "Others": "其他",
-    "Favorite Is Empty" : "收藏夹为空"
+    "Favorite Is Empty" : "收藏夹为空",
+    "result": "结果",
+    "Table Of Contents" : "关注目录",
+    "Content Type" : "关注类型"
 }

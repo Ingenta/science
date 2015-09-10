@@ -97,7 +97,9 @@ Meteor.startup(function () {
             {key: "collections", e: "Collections", c: "文章集"},
             {key: "author center", e: "Author Center", c: "作者中心"},
             {key: "institutions", e: "Institution", c: "机构中心"},
-            {key: "advancedSearch", e: "Advanced Search", c: "高级检索"}
+            {key: "advancedSearch", e: "Advanced Search", c: "高级检索"},
+            {key: "favorite", e: "My Favorite", c: "我的收藏"},
+            {key: "watch", e: "My Watch", c: "我的关注"}
         ];
         _.each(names, function (name) {
             Pages.insert({
