@@ -14,24 +14,34 @@ SyncedCron.add({
 	}
 });
 
-//SyncedCron.add({
-//	name:"Update Citations(引用)",
-//	schedule:function(parser){
-//		return parser.text("every 10 sec");
-//	},
-//	job:function(){
-//		var taskId = AutoTasks.insert({type: "update_citation",status: "creating",createOn: new Date()});
-//		var articles = Articles.find({},{fields:{doi:1}});
-//		var index = 0;
-//		articles.forEach(function(item){
-//			var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
-//			Science.Queue.Citation.add({id:stId,doi:item.doi});
-//		})
-//		AutoTasks.update({_id:taskId},{$set:{status:"created",total:articles.count()}})
-//	}
-//});
+SyncedCron.add({
+	name:"Update Citations(引用)",
+	schedule:function(parser){
+		return parser.text("every 30 sec");
+	},
+	job:function(){
+		Science.Queue.Citation.reset();
+		var taskId = AutoTasks.insert({type: "update_citation",status: "creating",createOn: new Date()});
+
+		var articles = Articles.find({},{fields:{doi:1}});
+		var index = 0;
+		//articles.forEach(function(item){
+		//	var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
+		//	Science.Queue.Citation.add({id:stId,taskId:taskId,doi:item.doi});
+		//})
+		var item = {doi:'10.1360/972010-666'};
+		for(var ii=0;ii<100;ii++){
+			var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
+			Science.Queue.Citation.add({id:stId,taskId:taskId,doi:item.doi});
+		}
+		AutoTasks.update({_id:taskId},{$set:{status:"created",total:100}});
+		Science.Queue.Citation.taskId = taskId;
+		//SyncedCron.stop();
+	}
+});
+
 var abortUnfinishTask = function(){
-	AutoTasks.update({status:{$nin:["done","success","error","aborted"]}},{$set:{status:"aborted"}},{multi:true});
+	AutoTasks.update({status:{$nin:["ended","aborted"]}},{$set:{status:"aborted",processing:0}},{multi:true});
 }
 
 Meteor.startup(function(){
