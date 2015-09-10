@@ -3,8 +3,11 @@ Template.UserSettingsMyFavorite.helpers({
         var user = Users.findOne({_id: Meteor.userId()});
         var i;
         for(i=0;i<=user.favorite.length;i++) {
-            return Articles.find({"_id": user.favorite[i]});
+            return Articles.find({"_id": user.favorite[i].articleId});
         }
+    },
+    count : function () {
+        return Users.findOne().favorite.length;
     }
 })
 

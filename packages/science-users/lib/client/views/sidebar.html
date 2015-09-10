@@ -15,6 +15,7 @@
            {{#if isArticlePage}}
                  {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
                  <li> <a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
+                 <li> <a class="watchArticle" href=""><span class="fa fa-eye"></span>{{watchArticleName}}</a></li>
             {{/if}}
             {{#if isJourmalPage}}
                 <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>

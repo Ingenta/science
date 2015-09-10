@@ -1,0 +1,37 @@
+<template name="TopicWatch">
+    <table id="dataview-table" class="table table-striped table-hover">
+        <thead id="dataview-table-header">
+        <tr id="dataview-table-header-row">
+            <th class="th-sortable" data-sort="username">
+                {{_ "Table Of Contents"}}
+            </th>
+            <th>
+                {{_ "Content Type"}}
+            </th>
+            <th class="th-sortable">
+                {{_ "Cancel"}}
+            </th>
+        </tr>
+        </thead>
+        <tbody id="dataview-table-items">
+        {{#each watch}}
+        {{> SingleTopicWatch}}
+        {{else}}
+        {{_ "Topic Watch Is Empty"}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="SingleTopicWatch">
+    <td>
+        <!--<a href="{{ArticleUrl _id}}">-->
+            <a>{{translateThis title.cn title.en}}</a>
+        <!--</a>-->
+    </td>
+    <td>
+        &nbsp;
+    </td>
+    <td>
+    </td>
+</template>
