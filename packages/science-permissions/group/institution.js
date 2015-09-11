@@ -17,21 +17,21 @@ institutionPermissions
 institutionPermissions
     .defineRole("institution-manager-from-admin", ["add-institution", "modify-institution", "delete-institution"], {
         en: {
-            name   : "institution manager (platform)",
+            name: "institution manager (platform)",
             summary: "system admin of institution"
         },
         cn: {
-            name   : "机构管理（平台）",
+            name: "机构管理（平台）",
             summary: "可以增删改机构信息的角色"
         }
     })
     .defineRole("institution-manager-from-user", ["modify-institution"], {
         en: {
-            name   : "institution manager (institution)",
+            name: "institution manager (institution)",
             summary: "institution manager"
         },
         cn: {
-            name   : "机构管理(机构)",
+            name: "机构管理(机构)",
             summary: "只能修改机构信息的角色"
         }
     });
