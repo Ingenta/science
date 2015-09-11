@@ -38,12 +38,12 @@ Package.onUse(function(api) {
       'client/route.js',
       'client/view/autoTask.html',
       'client/view/autoTask.js',
+      'client/view/progressBar.html',
+      'client/view/progressBar.js',
       'client/view/doi/list.html',
       'client/view/doi/list.js',
       'client/view/citation/list.html',
-      'client/view/citation/list.js',
-      'client/view/progressBar.html',
-      'client/view/progressBar.js'
+      'client/view/citation/list.js'
   ],'client');
 });
 
