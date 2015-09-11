@@ -2,7 +2,7 @@ Template.LayoutSideBar.helpers({
     institutionLogo: function () {
         var logo = undefined;
         var institutuion = undefined;
-        if(Meteor.user().institutionId){
+        if(Meteor.user() && Meteor.user().institutionId){
             institutuion = Institutions.findOne({_id: Meteor.user().institutionId});
         } else{
             var currentUserIPNumber = Session.get("currentUserIPNumber");
@@ -21,7 +21,10 @@ Template.LayoutSideBar.helpers({
         else return;
     },
     canUseAdminPanel: function () {
-        return !!Permissions.getUserRoles().length;
+        return !!_.without(Permissions.getUserRoles(), "institution:institution-manager-from-user").length;
+    },
+    canUseInstitutionPanel: function () {
+        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
     },
     isArticlePage: function () {
         return Router.current().route.getName()=="article.show";
