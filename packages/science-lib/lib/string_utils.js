@@ -98,7 +98,7 @@ Science.getParamsFormUrl= function(paramName){
     var reg=new RegExp("[&\?]"+paramName+"=[^&]+","g");
     var paramstrs = decodeURIComponent(window.location.search).match(reg);
     var params;
-    if(paramstrs || paramstrs.length){
+    if(paramstrs && paramstrs.length){
         params = [];
         _.each(paramstrs,function(str){
             params.push(str.substr(2+paramName.length));
