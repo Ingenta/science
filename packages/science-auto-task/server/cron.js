@@ -1,5 +1,5 @@
 SyncedCron.add({
-	name:'DOI Register(注册DOI)',
+	name:'DOIRegister',
 	schedule: function(parser){
 		return parser.text(Config.AutoTasks.DOI_Register.rate || "at 1:00 am");//默认每天凌晨1点执行
 	},
@@ -15,7 +15,7 @@ SyncedCron.add({
 });
 
 SyncedCron.add({
-	name:"Update Citations(引用)",
+	name:"CitationsUpdate",
 	schedule:function(parser){
 		return parser.text(Config.AutoTasks.Citation.rate || "at 1:00 am except on Sat");//默认每周六凌晨1点执行
 	},
