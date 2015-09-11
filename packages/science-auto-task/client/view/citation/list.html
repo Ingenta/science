@@ -2,14 +2,14 @@
 	<table class="table table-striped table-hover">
 		<thead>
 		<tr>
-			<th style="width:20%">
-				{{_ "createOn"}}
+			<th style="width:30%">
+				{{_ "createAt"}}
 			</th>
 			<th style="width:10%">
-				{{_ "total"}}
+				{{_ "Total"}}
 			</th>
-			<th style="width:70%">
-				{{_ "status"}}
+			<th style="width:60%">
+				{{_ "Status"}}
 			</th>
 		</tr>
 		</thead>
@@ -17,14 +17,14 @@
 		{{#each tasks}}
 			<tr>
 				<td>
-					{{moFormat createOn "l"}}
+					{{moFormat createOn "lll"}}
 				</td>
 				<td>
 					{{total}}
 				</td>
 				<td>
 					<div class="row">
-						<div class="col-xs-2">{{status}}</div>
+						<div class="col-xs-2">{{i18nStatus}}</div>
 						<div class="col-xs-10">{{> taskProgressBar}}</div>
 					</div>
 				</td>

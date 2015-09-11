@@ -1,7 +1,7 @@
 SyncedCron.add({
 	name:'DOI Register(注册DOI)',
 	schedule: function(parser){
-		return parser.text(Config.AutoTasks.DOI_Register.rate || "at 1:00am every day");
+		return parser.text(Config.AutoTasks.DOI_Register.rate || "at 1:00 am");//默认每天凌晨1点执行
 	},
 	job: function(){
 		var taskId = AutoTasks.insert({type: "doi_register",status: "creating",createOn: new Date()});
@@ -17,7 +17,7 @@ SyncedCron.add({
 SyncedCron.add({
 	name:"Update Citations(引用)",
 	schedule:function(parser){
-		return parser.text("every 30 sec");
+		return parser.text(Config.AutoTasks.Citation.rate || "at 1:00 am except on Sat");//默认每周六凌晨1点执行
 	},
 	job:function(){
 		Science.Queue.Citation.reset();
@@ -25,15 +25,15 @@ SyncedCron.add({
 
 		var articles = Articles.find({},{fields:{doi:1}});
 		var index = 0;
-		//articles.forEach(function(item){
-		//	var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
-		//	Science.Queue.Citation.add({id:stId,taskId:taskId,doi:item.doi});
-		//})
-		var item = {doi:'10.1360/972010-666'};
-		for(var ii=0;ii<100;ii++){
+		articles.forEach(function(item){
 			var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
 			Science.Queue.Citation.add({id:stId,taskId:taskId,doi:item.doi});
-		}
+		})
+		//var item = {doi:'10.1360/972010-666'};
+		//for(var ii=0;ii<100;ii++){
+		//	var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
+		//	Science.Queue.Citation.add({id:stId,taskId:taskId,doi:item.doi});
+		//}
 		AutoTasks.update({_id:taskId},{$set:{status:"created",total:100}});
 		Science.Queue.Citation.taskId = taskId;
 		//SyncedCron.stop();

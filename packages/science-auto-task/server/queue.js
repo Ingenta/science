@@ -1,13 +1,12 @@
 Science.Queue = {
 	Citation:new PowerQueue({
 		maxProcessing: 10,//10并发
-		maxFailures:3, //对失败的子任务重试2次（加上第一次失败共3次）
-
+		maxFailures: 3 //对失败的子任务重试2次（加上第一次失败共3次）
 	})
 };
 
 Science.Queue.Citation.errorHandler = function(data){
-	SubTasks.update({_id:data.id},{$set:{status:"failed"}});
+	SubTasks.update({_id:data.id},{$set:{status:"error"}});
 	AutoTasks.update({_id:data.taskId},{$set:{
 		failed:Science.Queue.Citation.failures()+Science.Queue.Citation.errors(),
 		queueTotal:Science.Queue.Citation.total()

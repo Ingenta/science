@@ -966,5 +966,21 @@
     "Favorite Is Empty" : "收藏夹为空",
     "result": "结果",
     "Table Of Contents" : "关注目录",
-    "Content Type" : "关注类型"
+    "Content Type" : "关注类型",
+    "Total":"总数",
+    "AutoTask":"自动任务",
+    "DOI":"DOI注册",
+    "UpdateCitations":"更新被引用信息",
+    "TaskStatus":{
+        "created":"创建",
+        "aborted":"取消",
+        "splicing":"生成任务XML",
+        "saving":"保存任务XML",
+        "saved":"任务XML已保存",
+        "error":"错误",
+        "pending":"待处理",
+        "success":"成功",
+        "ended":"结束",
+        "processing":"正在处理"
+    }
 }

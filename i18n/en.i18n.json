@@ -723,5 +723,21 @@
         "preset":"preset"
     },
     "mediaFile":"File",
-    "Please choose a media file":"Please choose a media file"
+    "Please choose a media file":"Please choose a media file",
+    "Total":"Total",
+    "AutoTask":"Auto task",
+    "DOI":"DOI register",
+    "UpdateCitations":"Update Citations",
+    "TaskStatus":{
+        "created":"Created",
+        "aborted":"Aborted",
+        "splicing":"Splicing",
+        "saving":"Saving",
+        "saved":"Saved",
+        "error":"Error",
+        "pending":"Pending",
+        "success":"Successfully",
+        "ended":"Ended",
+        "processing":"Processing"
+    }
 }

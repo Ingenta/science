@@ -98,7 +98,7 @@ var generationXML = function(options,callback){
 			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"saving"}});
 			Science.FSE.outputFile(filePath,finallyXmlContent,Meteor.bindEnvironment(function(err){
 					if(!err && callback){
-						options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"ready"}});
+						options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"saved"}});
 						callback(options.taskId,filePath);
 					}else{
 						options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"error",error:err}});
