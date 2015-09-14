@@ -90,7 +90,8 @@ Template.AdminUsersInsertInsertForm.events({
             function (values) {
                 Permissions.check("add-user", "user");
                 values.institutionId = Router.current().params.insId;
-                Meteor.call("createUserAccount", values, function (e) {
+                Meteor.call("createUserAccount", values, function (e, userId) {
+                    if (values.institutionId) Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
                     if (e) errorAction(e.message); else submitAction();
                 });
             }
