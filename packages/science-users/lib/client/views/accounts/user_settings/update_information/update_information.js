@@ -61,8 +61,6 @@ Template.UserSettingsUpdateInformationForm.events({
 
             },
             function (values) {
-
-                //console.log(values);
                 Meteor.call("updateUserAccount", t.data.current_user_data._id, values, function (e) {
                     if (e) errorAction(e.message); else submitAction();
                 });
@@ -104,6 +102,10 @@ Template.UserSettingsUpdateInformationForm.events({
         $(e.target).prev().click();
     }
 });
+
+Template.UserSettingsUpdateInformationForm.onRendered(function(){
+    $("input[name='profile.hidden']").val("nothing");
+})
 
 Template.UserSettingsUpdateInformationForm.helpers({
     "infoMessage": function () {

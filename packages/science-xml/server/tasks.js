@@ -305,12 +305,16 @@ var insertArticle = function (a) {
     //确保article有一个关联的issue
     a.issueId = issue._id || issue;
 
+    var journalInfo = Publications.findOne({_id: a.journalId},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1}});
+    a.journalInfo = journalInfo;
+
     var id = Articles.insert({
         doi: a.doi,
         articledoi: a.articledoi,
         title: a.title,
         abstract: a.abstract,
         journalId: a.journalId,
+        journal: a.journalInfo,//journal是后加的
         publisher: a.publisher,
         elocationId: a.elocationId,
         year: a.year,

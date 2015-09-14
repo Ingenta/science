@@ -42,5 +42,14 @@ userProfileSchema  = new SimpleSchema({
 	weChat:{
 		type: String,
 		optional: true
+	},
+	hidden:{
+		type: String,
+		optional: true,
+		autoform:{
+			afFieldInput:{
+				type: "hidden"
+			}
+		}
 	}
 });
