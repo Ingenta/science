@@ -72,10 +72,8 @@
 
 <template name="PublicLayoutRightMenu">
     <ul id="nav-items" class="nav navbar-nav navbar-right">
-        <li id="menu-item-simple-right" class="navbar-right-button">
-            <a href="#">
-                <i class="fa fa-search-plus"></i> {{_ "Quick Search"}}
-            </a>
+        <li id="menu-item-simple-right" class="navbar-right-button btn-group">
+	        {{> quickSearchTemplate}}
         </li>
         <li id="menu-item-simple-right" class="navbar-right-button">
             <a href="{{pathFor 'advancedSearch'}}">

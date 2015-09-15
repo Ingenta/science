@@ -30,6 +30,8 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'client/router.js',
+    'client/view/quickSearch.html',
+    'client/view/quickSearch.js',
     'client/view/search.html',
     'client/view/search.js',
     'client/view/oneArticle.html',

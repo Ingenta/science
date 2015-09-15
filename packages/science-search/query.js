@@ -21,6 +21,7 @@ SolrQuery = {
 		"month":["month"],
 		"volume":["volume"],
 		"issue":["issue"],
+		"page":["startPage",'elocationId'],
 		"publishDate":["publishDate"]
 	},
 	getQueryStr:function(queryArr){
@@ -44,6 +45,7 @@ SolrQuery = {
 		return "q="+encodeURIComponent(qstring || "");
 	},
 	getFilterQueryStr:function(queryArr){
+		console.log(queryArr);
 		var qstring;
 		if(queryArr){
 			qstring="";

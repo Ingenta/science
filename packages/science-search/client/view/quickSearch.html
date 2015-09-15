@@ -1,0 +1,26 @@
+<template name="quickSearchTemplate">
+	<a href="#" class="fa fa-search-plus dropdown-toggle" data-toggle="dropdown"
+	   aria-haspopup="true" aria-expanded="false">
+		{{_ "Quick Search"}}
+	</a>
+
+	<div class="dropdown-menu quick-search">
+		<div class="qs-row">
+			<span>{{_ "Publications"}}:</span>
+			<select class="qs-journal-selector qs-param">
+				<option value="">{{_ "Choose"}}</option>
+				{{#each journals}}
+					<option value="{{_id}}">{{translateThis title titleCn }}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div class="qs-row">
+			<span>{{_ "Volume"}}:</span><input type="text" class="qs-param qs-volume"/>
+			<span>{{_ "Issue"}}:</span><input type="text" class="qs-param qs-issue"/>
+			<span>{{_ "startPage"}}:</span><input type="text" class="qs-param qs-page"/>
+			<div class="pull-right">
+				<button class="btn btn-success btn-sm qs-submit">{{_ "Search"}}</button>
+			</div>
+		</div>
+	</div>
+</template>

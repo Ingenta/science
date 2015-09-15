@@ -4,3 +4,21 @@
 li.search-cond{
     width:90%
 }
+.quick-search{
+    width:350px;
+    border-radius:6px;
+}
+.qs-param{
+    width:40px;
+    margin-left:5px;
+}
+.qs-journal-selector{
+    width:100%
+}
+.qs-row{
+    width:90% !important;
+    margin:10px !important;
+}
+.qs-row>span{
+    font-size:12px;
+}

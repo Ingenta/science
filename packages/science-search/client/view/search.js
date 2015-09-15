@@ -7,6 +7,7 @@ Meteor.startup(function(){
         var query = pageSession.get("query");
         var filterQuery = pageSession.get("filterQuery");
         if(query || filterQuery){
+            console.log('call search');
             Meteor.call("search",query,filterQuery,function(err,result){
                 var ok = err?false:result.responseHeader.status==0;
                 pageSession.set("ok",ok);
@@ -56,7 +57,7 @@ Template.SolrSearchBar.events({
 });
 
 Template.SolrSearchResults.onRendered(function(){
-    if(Router.current().params.query.q){
+    if(Router.current().params.query.q || Router.current().params.query.fq){
         //刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
         pageSession.set("query",Router.current().params.query.q);
         var fq=Science.getParamsFormUrl("fq");

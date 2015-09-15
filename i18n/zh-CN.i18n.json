@@ -987,5 +987,7 @@
         "success":"成功",
         "ended":"结束",
         "processing":"正在处理"
-    }
+    },
+    "Choose":"选择...",
+    "startPage":"起始页"
 }

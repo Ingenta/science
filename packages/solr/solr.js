@@ -28,6 +28,7 @@ Solr.prototype.query = function(query,options, callback) {
 		+ "/select?"
 		+ queryStringify(queryParams);
 	try{
+		console.log(url);
 		HTTP.get(url, {timeout:this.options.timeout},callback)
 	}catch(e){
 		throw e;
