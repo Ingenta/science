@@ -20,8 +20,7 @@ PublicationsSchema = new SimpleSchema({
         type: String
     },
     shortTitle: {
-        type: String,
-        max: 10
+        type: String
     },
     issn: {
         type: String,
@@ -184,6 +183,43 @@ PublicationsSchema = new SimpleSchema({
         autoform: {
             type: "select-checkbox-inline"
         }
+    },
+    historicalJournal: {
+        type: [Object],
+        optional: true
+    },
+    "historicalJournal.$.title": {
+        type: Science.schemas.MultiLangSchema
+    },
+    "historicalJournal.$.dateRange": {
+        type: String
+    },
+    //"historicalJournal.$.dateRange": {
+    //    type: Object,
+    //},
+    //"historicalJournal.$.dateRange.start": {
+    //    type: Date,
+    //    autoform: {
+    //        afFieldInput: {
+    //            type: "bootstrap-datepicker"
+    //        }
+    //    }
+    //},
+    //"historicalJournal.$.dateRange.end": {
+    //    type: Date,
+    //    autoform: {
+    //        afFieldInput: {
+    //            type: "bootstrap-datepicker"
+    //        }
+    //    }
+    //},
+    "historicalJournal.$.issn": {
+        type: String,
+        max: 9
+    },
+    "historicalJournal.$.essn": {
+        type: String,
+        optional: true
     }
 });
 Meteor.startup(function () {
