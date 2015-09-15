@@ -34,10 +34,19 @@ ArticleAccessKeySchema = new SimpleSchema({
         type: String
     }
 });
+
+ArticleLanguageSchema = new SimpleSchema({
+    language: {
+        type: String,
+        optional: true
+    }
+});
+
 Meteor.startup(function () {
     ArticleTitleSchema.i18n("schemas.articles");
     ArticleAbstractSchema.i18n("schemas.articles");
     ArticleAccessKeySchema.i18n("schemas.articles");
+    ArticleLanguageSchema.i18n("schemas.articles");
 });
 //ArticlesSchema  = new SimpleSchema({
 //    title: {

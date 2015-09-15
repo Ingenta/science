@@ -6,19 +6,19 @@
         <div class="col-xs-9">
             {{> imageName}}
             {{#if can "modify-article" "resource" }}
-            {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
+                {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
             {{/if}}
             <span style="font-size:24px;font-weight: bold;">
                 {{translateThis title.cn title.en}}
             </span>
             {{#if can "modify-article" "resource" }}
-            {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
+                {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
             {{/if}}
             <ul>
                 <li>
                     <p>
                         {{#each authors}}
-                        {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
+                            {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
                         {{/each}}
                     </p>
                 </li>
@@ -28,14 +28,22 @@
                 <li>
                     <p>
                         {{#each authorNotes}}
-                        <i>{{label}} <a href="mailto:{{email}}">{{email}}</a></i>
+                            <i>{{label}} <a href="mailto:{{email}}">{{email}}</a></i>
                         {{/each}}
                     </p>
                 </li>
                 <li>
-                    <p>{{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}}); <a
-                            href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i
-                            class="fa fa-external-link"></i></a></p>
+                    <p>
+                        {{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}});
+                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a>
+                    </p>
+                </li>
+                <li>
+                    <p>{{_ "Language"}}:&nbsp;{{Language language}}
+                        {{#if can "modify-article" "resource" }}
+                            {{>jkafModal template="updateArticleLanguageModalForm" doc=this id="updateArticleLanguageForm"}}
+                        {{/if}}
+                    </p>
                 </li>
             </ul>
         </div>
@@ -45,11 +53,11 @@
             <div class="container-fluid">
                 <div class="row">
                     {{#if pdfId}}
-                    <li class="pdf">
-                        <a class="pdfDownload" href="{{getPdfById pdfId}}">
-                            <img style="height:50px" src="/pdf.png"/> {{_ "Download"}} PDF
-                        </a>
-                    </li>
+                        <li class="pdf">
+                            <a class="pdfDownload" href="{{getPdfById pdfId}}">
+                                <img style="height:50px" src="/pdf.png"/> {{_ "Download"}} PDF
+                            </a>
+                        </li>
                     {{/if}}
                 </div>
                 <!--<div class="row"><img src="/crossmark.jpg"></div>-->
@@ -115,8 +123,17 @@
             <div class="bdsharebuttonbox pull-right">
                 <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
                 <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a></div>
-            <script>window._bd_share_config = {"common": {"bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16"}, "share": {}};
-                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+            <script>window._bd_share_config = {
+                "common": {
+                    "bdSnsKey": {},
+                    "bdText": "",
+                    "bdMini": "2",
+                    "bdPic": "",
+                    "bdStyle": "0",
+                    "bdSize": "16"
+                }, "share": {}
+            };
+            with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
             </script>
 
         </div>
@@ -129,41 +146,41 @@
 <template name="articleOptions">
 
     {{#articleTabs name="" tabs=tabs activeTab="full text"}}
-    {{#tabContent slug="abstract"}}
-    {{#with context}}
-    {{> AbstractTemplate}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="abstract"}}
+            {{#with context}}
+                {{> AbstractTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="full text"}}
-    {{#with context}}
-    {{> FullTextTemplate}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="full text"}}
+            {{#with context}}
+                {{> FullTextTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="references"}}
-    {{#with context}}
-    {{> ReferencesTemplate}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="references"}}
+            {{#with context}}
+                {{> ReferencesTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="cited by"}}
-    {{> CitedByTemplate}}
-    {{/tabContent}}
+        {{#tabContent slug="cited by"}}
+            {{> CitedByTemplate}}
+        {{/tabContent}}
 
-    {{#tabContent slug="data media"}}
-    {{#with context}}
-    {{> DataMediaTemplate}}
-    {{/with}}
-    {{/tabContent}}
+        {{#tabContent slug="data media"}}
+            {{#with context}}
+                {{> DataMediaTemplate}}
+            {{/with}}
+        {{/tabContent}}
 
-    {{#tabContent slug="metrics"}}
-    {{> MetricsTemplate}}
-    {{/tabContent}}
+        {{#tabContent slug="metrics"}}
+            {{> MetricsTemplate}}
+        {{/tabContent}}
 
-    {{#tabContent slug="related"}}
-    {{> RelatedTemplate}}
-    {{/tabContent}}
+        {{#tabContent slug="related"}}
+            {{> RelatedTemplate}}
+        {{/tabContent}}
     {{/articleTabs}}
 
 </template>
@@ -173,16 +190,16 @@
     <div class="articleTabs-container">
 
         {{#if activeTab}}
-        {{trackActiveTab activeTab}}
+            {{trackActiveTab activeTab}}
         {{/if}}
 
         {{trackTabs tabs}}
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-            <li role="presentation" class="tab-item {{isActiveTab slug}}">
-                <a role="tab" data-toggle="tab">{{name}}</a>
-            </li>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab">{{name}}</a>
+                </li>
             {{/each}}
         </ul>
 
@@ -196,10 +213,10 @@
 <template name="DataMediaTemplate">
     <div class="row">
         {{#each figures}}
-        {{> figure}}
+            {{> figure}}
         {{/each}}
         {{#each tables}}
-        {{> atttable}}
+            {{> atttable}}
         {{/each}}
     </div>
 </template>
@@ -221,16 +238,24 @@
     {{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update"
     buttonContent=getUpdateButtonContent}}
     {{!-- {{> afObjectField name="title"}} --}}
-    {{> afQuickField name="title.en"}}
-    {{> afQuickField name="title.cn"}}
-    <button type="submit" class="btn btn-primary">update</button>
+        {{> afQuickField name="title.en"}}
+        {{> afQuickField name="title.cn"}}
+        <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>
 
 <template name="updateArticleAccessKeyModalForm">
     {{#autoForm schema="ArticleAccessKeySchema" collection="Articles" id="updateArticleAccessKeyForm" doc=this
     type="update" buttonContent=getUpdateButtonContent}}
-    {{> afQuickField name="accessKey"}}
-    <button type="submit" class="btn btn-primary">update</button>
+        {{> afQuickField name="accessKey"}}
+        <button type="submit" class="btn btn-primary">update</button>
+    {{/autoForm}}
+</template>
+
+<template name="updateArticleLanguageModalForm">
+    {{#autoForm schema="ArticleLanguageSchema" collection="Articles" id="updateArticleLanguageForm" doc=this
+    type="update" buttonContent=getUpdateButtonContent}}
+        {{> afQuickField name="language"}}
+        <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>
