@@ -7,7 +7,7 @@ SolrQuery = {
 		"code":["doi","issn","EISSN","CN"],
 		"journalTitle":["journal.title","journal.titleCn"],
 		"keyword":["all_keywords"],
-		"author":["all_authors_en","all_authors_en"],
+		"author":["all_authors_en","all_authors_cn"],
 		"affiliation":["all_affiliations_en","all_affiliations_cn"],
 		"abstract":["abstract"],
 		"fulltext":["fulltext"]
