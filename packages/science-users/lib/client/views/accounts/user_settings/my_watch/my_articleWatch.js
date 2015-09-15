@@ -2,10 +2,7 @@ Template.ArticleWatch.helpers({
     watch : function(){
         var user = Users.findOne({_id: Meteor.userId()});
         return user.watchArticle;
-    }
-})
-
-Template.SingleArticleWatch.helpers({
+    },
     ArticleUrl: function(Arid){
         var article = Articles.findOne({_id: Arid});
         var publication = Publications.findOne({_id: article.journalId});
@@ -15,5 +12,16 @@ Template.SingleArticleWatch.helpers({
     },
     articleWatch: function(){
         return Articles.findOne({_id: this.toString()})
+    },
+    count : function () {
+        return Users.findOne().watchArticle.length;
+    }
+});
+
+Template.ArticleWatch.events({
+    'click .btn': function () {
+        var selected =  _.pluck($("input[name='selectedArticle']:checked"),'value');
+        var diff = _.difference(Meteor.user().watchArticle,selected);
+        Users.update({_id:Meteor.userId()},{$set:{watchArticle: diff}});
     }
 })

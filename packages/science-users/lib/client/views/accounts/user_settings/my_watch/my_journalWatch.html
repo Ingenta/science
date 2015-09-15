@@ -1,39 +1,31 @@
 <template name="JournalWatch">
-    <table id="dataview-table" class="table table-striped table-hover">
-        <thead id="dataview-table-header">
-        <tr id="dataview-table-header-row">
-            <th class="th-sortable" data-sort="username">
-                {{_ "Table Of Contents"}}
-            </th>
-            <th>
-                {{_ "Content Type"}}
-            </th>
-            <th class="th-sortable">
-                {{_ "Cancel"}}
-            </th>
+    {{_ "result"}}:{{count}}
+    <table class="table table-bordered table-condensed">
+        <thead>
+        <tr>
+            <td>{{_ "Table Of Contents"}}</td>
+            <td>{{_ "Content Type"}}</td>
+            <td>{{_"Action"}}</td>
         </tr>
         </thead>
-        <tbody id="dataview-table-items">
+        <tbody>
         {{#each watch}}
-        {{> SingleJournalWatch}}
+        {{#with journalWatch}}
+        <tr>
+            <td>
+                <a href="{{JournalUrl _id}}">
+                    <a>{{translateThis titleCn title}}</a>
+                </a>
+            </td>
+            <td>{{_ "Journals"}}</td>
+            <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedJournal" value={{_id}}>{{/if}}
+            </td>
+        </tr>
+        {{/with}}
         {{else}}
         {{_ "Journal Watch Is Empty"}}
         {{/each}}
         </tbody>
     </table>
-</template>
-
-<template name="SingleJournalWatch">
-    {{#with journalWatch}}
-    <td>
-        <a href="{{JournalUrl _id}}">
-            <a>{{translateThis titleCn title}}</a>
-        </a>
-    </td>
-    <td>
-        &nbsp;
-    </td>
-    <td>
-    </td>
-    {{/with}}
+    <button type="button" class="btn">{{_ "Update"}}</button>
 </template>

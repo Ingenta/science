@@ -1,4 +1,5 @@
 <template name="ArticleWatch">
+    {{_ "result"}}:{{count}}
     <table class="table table-bordered table-condensed">
         <thead>
         <tr>
@@ -9,24 +10,21 @@
         </thead>
         <tbody>
         {{#each watch}}
-            {{> SingleArticleWatch}}
+            {{#with articleWatch}}
+            <tr>
+                <td>
+                    <a href="{{ArticleUrl _id}}">
+                        <a>{{translateThis title.cn title.en}}</a>
+                    </a>
+                </td>
+                <td>{{_ "Article"}}</td>
+                <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}</td>
+            </tr>
+            {{/with}}
         {{else}}
             {{_ "Article Watch Is Empty"}}
         {{/each}}
         </tbody>
     </table>
-</template>
-
-<template name="SingleArticleWatch">
-    {{#with articleWatch}}
-    <tr>
-        <td>
-            <a href="{{ArticleUrl _id}}">
-                <a>{{translateThis title.cn title.en}}</a>
-            </a>
-        </td>
-        <td>11</td>
-        <td>{{#if can "delete-tag" "resource"}}{{> deleteTagModalForm}}{{/if}}</td>
-    </tr>
-    {{/with}}
+    <button type="button" class="btn" style="text-align:right">{{_ "Update"}}</button>
 </template>
