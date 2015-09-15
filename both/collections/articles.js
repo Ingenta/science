@@ -36,16 +36,6 @@ ArticleSchema = new SimpleSchema({
     language: {
         type: String,
         optional: true
-    },
-    historialJournal: {
-        type: String,
-        optional: true,
-        autoform: {
-            type: "universe-select",
-            afFieldInput: {
-                multiple: false
-            }
-        }
     }
 });
 
