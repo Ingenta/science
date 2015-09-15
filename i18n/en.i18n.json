@@ -188,6 +188,29 @@
                     "MOOP": "MOOP",
                     "Author Center": "Author Center"
                 }
+            },
+            "historicalJournal": {
+                "label": "Historical Journal",
+                "$": {
+                    "title": {
+                        "label": "Previous Title",
+                        "cn": {
+                            "label": "Chinese"
+                        },
+                        "en": {
+                            "label": "English"
+                        }
+                    },
+                    "dateRange": {
+                        "label": "Effective Date"
+                    },
+                    "issn": {
+                        "label": "ISSN"
+                    },
+                    "essn": {
+                        "label": "ESSN"
+                    }
+                }
             }
         },
         "publishers": {

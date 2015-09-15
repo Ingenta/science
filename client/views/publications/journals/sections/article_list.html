@@ -6,6 +6,14 @@
         </div>
         <div class="col-xs-9">
             {{> articleListRight pubStatus="normal"}}
+            <hr>
+            <div class="pull-right">
+                {{#if can "modify-article" "resource" }}
+                    {{>jkafModal template="updateHistoricalJournalModalForm" doc=this id="updateHistoricalJournalForm"}}
+                {{/if}}
+            </div>
+            <h4>{{_ "Historical Journal"}}</h4>
+            {{> HistoricalJournalTable}}
         </div>
     </div>
 </template>
@@ -27,23 +35,23 @@
 
 <template name="articleListRight">
     {{#if normal}}
-    <h4>{{getIssueTitle}}</h4>
-    {{#with issueContext}}
-        {{#if can "modify-journal" "resource" }}
-            <div class="pull-right">
-                {{> updateIssueDescriptionModalForm}}
-            </div>
-        {{/if}}
-        {{#if description}}
-            {{description}}
-        {{else}}
+        <h4>{{getIssueTitle}}</h4>
+        {{#with issueContext}}
             {{#if can "modify-journal" "resource" }}
-                {{_ "No Cover Description"}}
+                <div class="pull-right">
+                    {{> updateIssueDescriptionModalForm}}
+                </div>
             {{/if}}
-        {{/if}}
-    {{/with}}
-    <hr>
-    {{resetArticlesFilter}}
+            {{#if description}}
+                {{description}}
+            {{else}}
+                {{#if can "modify-journal" "resource" }}
+                    {{_ "No Cover Description"}}
+                {{/if}}
+            {{/if}}
+        {{/with}}
+        <hr>
+        {{resetArticlesFilter}}
     {{/if}}
     <ul class="article-list list-unstyled">
         {{#each articles}}
@@ -52,4 +60,60 @@
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
+</template>
+
+<template name="HistoricalJournalTable">
+    <table id="dataview-table" class="table table-striped table-hover">
+        <thead id="dataview-table-header">
+        <tr id="dataview-table-header-row">
+            <th class="th-sortable" data-sort="username">
+                {{_ "Previous Title"}}
+            </th>
+            <th class="th-sortable">
+                {{_ "Effective Date"}}
+            </th>
+            <th class="th-sortable">
+                {{_ "ISSN"}}
+            </th>
+            <th class="th-sortable">
+                {{_ "ESSN"}}
+            </th>
+            <!--<th>-->
+                <!--&nbsp;-->
+            <!--</th>-->
+        </tr>
+        </thead>
+        <tbody id="dataview-table-items">
+        {{#each historicalJournal}} {{> HistoricalJournalItem}} {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="HistoricalJournalItem">
+    <tr id="dataview-table-items-row">
+        <td>
+            {{translateThis title.cn title.en}}
+        </td>
+        <td>
+            {{dateRange}}
+        </td>
+        <td>
+            {{issn}}
+        </td>
+        <td>
+            {{essn}}
+        </td>
+        <!--<td class="td-icon">-->
+            <!--{{#if can "user-modify" "user"}}-->
+                <!--<span id="edit-button" class="fa fa-pencil " title="Edit"></span>-->
+            <!--{{/if}}-->
+        <!--</td>-->
+    </tr>
+</template>
+
+<template name="updateHistoricalJournalModalForm">
+    {{#autoForm schema="PublicationsSchema" collection="Publications" id="updateHistoricalJournalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+        {{> afQuickField name="historicalJournal"}}
+        <button type="submit" class="btn btn-primary">update</button>
+    {{/autoForm}}
 </template>
