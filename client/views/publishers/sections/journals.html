@@ -53,7 +53,7 @@
                         {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
                     {{/if}}
                     {{#if can "delete-journal" "resource" }}
-                        {{> deletePublicationModalForm}}
+                        <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </div>
                 <h3>{{> imageName}}&nbsp;&nbsp;
@@ -88,8 +88,9 @@
             {{> afQuickField name="competentOrganization"}}
             {{> afQuickField name="sponsor"}}
             {{> afQuickField name="frequencyPublication"}}
-            {{> afQuickField name="included"}}
+            {{> afQuickField name="included" options=getTags}}
             {{> afQuickField name="description"}}
+            {{> afQuickField name="topicId" options=getTopics}}
             {{> afQuickField name="accessKey"}}
             {{> afQuickField name="visible"}}
             {{> afQuickField name="picture"}}
@@ -98,11 +99,6 @@
         </fieldset>
         <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
     {{/autoForm}}
-</template>
-
-<template name="deletePublicationModalForm">
-    {{#afModal class="fa fa-trash" collection="Publications" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
-    {{/afModal}}
 </template>
 
 <template name="imageName">
@@ -144,7 +140,7 @@
                         {{> afQuickField name="competentOrganization"}}
                         {{> afQuickField name="sponsor"}}
                         {{> afQuickField name="frequencyPublication"}}
-                        {{> afQuickField name="included"}}
+                        {{> afQuickField name="included" options=getTags}}
                         {{> afQuickField name="language"}}
                         {{> afQuickField name="topicId" options=getTopics}}
                         {{> afQuickField name="description"}}

@@ -9,9 +9,9 @@
 <template name="publicationPdfContent">
     <div class="part" style="margin-top: 10px">
         {{#each authorResources}}
-            <div class="col-xs-5"><strong>{{translateThis authorTitle.cn authorTitle.en}} {{#if AuthorTitle}}>>{{/if}} </strong><br><p>{{{translateThis authorDescription.cn authorDescription.en}}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</p></div>
+            <div class="col-xs-5"><strong>{{translateThis authorTitle.cn authorTitle.en}} >> </strong><br><p>{{{translateThis authorDescription.cn authorDescription.en}}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</p></div>
             <div class="col-xs-3" style="margin-top: 20px"><img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}</div>
-            <div class="col-xs-4" style="margin-top: 60px"><p><a href="{{pdfValue}}" target="_blank">{{translateThis fileName.cn fileName.en}}&nbsp;&nbsp;{{#if FileName}}<img src="/pdf.png" height="18" width="21">{{/if}}</a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}</p></div>
+            <div class="col-xs-4" style="margin-top: 60px"><p><a href="{{pdfValue}}" target="_blank">{{translateThis fileName.cn fileName.en}}&nbsp;&nbsp;<img src="/pdf.png" height="18" width="21"></a>{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterFileModalForm}}{{/if}}</p></div>
         {{else}}
             {{_ "No results found!"}}
         {{/each}}

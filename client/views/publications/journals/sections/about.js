@@ -19,6 +19,24 @@ Template.aboutArticlesList.helpers({
     }
 });
 
+Template.aboutArticlesList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            AboutArticles.remove({_id:id});
+        })
+    }
+});
+
+Template.editorialMemberList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            EditorialMember.remove({_id:id});
+        })
+    }
+});
+
 Template.editorialMemberList.helpers({
     members: function () {
         var aboutId = Session.get('tabAbout');

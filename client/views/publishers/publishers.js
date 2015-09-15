@@ -4,9 +4,12 @@ Template.PublisherList.helpers({
     }
 });
 
-Template.deletePublisherModalForm.helpers({
-    getPrompt: function () {
-        return TAPi18n.__("Are you sure?");
+Template.SinglePublisher.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Publishers.remove({_id:id});
+        })
     }
 });
 

@@ -65,13 +65,23 @@ PublicationsSchema = new SimpleSchema({
     },
     included: {
         type: [String],
-        minCount: 0,
-        optional: true
+        optional: true,
+        autoform:{
+            type: "universe-select",
+            afFieldInput: {
+                multiple: true
+            }
+        }
     },
-    "included.$": {
-        type: String,
-        optional: true
-    },
+    //included: {
+    //    type: [String],
+    //    minCount: 0,
+    //    optional: true
+    //},
+    //"included.$": {
+    //    type: String,
+    //    optional: true
+    //},
     language: {
         type: String,
         optional: true

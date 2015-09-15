@@ -5,7 +5,7 @@
                 {{#each abouts}}
                 <div class="pull-right row aboutEditButtons">
                     {{#if can "modify-about" "resource" }}{{> updateAboutTitleModalForm}}{{/if}}
-                    {{#if can "delete-about" "resource" }}{{> deleteAboutTitleModalForm}}{{/if}}
+                    {{#if can "delete-about" "resource" }}<a href="#" class="fa fa-trash about"></a>{{/if}}
                 </div>
 
                 <li class="{{isActive _id}}">
@@ -56,7 +56,7 @@
     <div class="part" id="{{_id}}">
         <div class="pull-right">
             {{#if can "modify-editorial-member" "resource" }}{{> updateEditorialBoardModalForm}}{{/if}}
-            {{#if can "delete-editorial-member" "resource" }}{{> deleteEditorialBoardModalForm}}{{/if}}
+            {{#if can "delete-editorial-member" "resource" }}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
 
         <div class="row">
@@ -107,7 +107,7 @@
     <div class="part">
         <div class="pull-right">
             {{#if can "modify-editorial-member" "resource" }}{{> updateEditorialBoardModalForm}}{{/if}}
-            {{#if can "delete-editorial-member" "resource" }}{{> deleteEditorialBoardModalForm}}{{/if}}
+            {{#if can "delete-editorial-member" "resource" }}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         <div class="row">
             <div class="col-xs-3">
@@ -149,10 +149,6 @@
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="About" doc=_id operation="update" omitFields="publications"}}{{/afModal}}
 </template>
 
-<template name="deleteAboutTitleModalForm">
-    {{#afModal class="fa fa-trash" collection="About" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
-</template>
-
 
 <template name="addEditorialBoardModalForm">
     {{#afModal formId="addEditorialBoardModalForm" class="fa fa-plus" collection="EditorialBoard" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
@@ -160,8 +156,4 @@
 
 <template name="updateEditorialBoardModalForm">
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialBoard" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
-</template>
-
-<template name="deleteEditorialBoardModalForm">
-    {{#afModal class="fa fa-trash" collection="EditorialBoard" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>

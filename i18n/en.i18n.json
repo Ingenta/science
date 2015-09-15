@@ -78,11 +78,7 @@
                 }
             },
             "included": {
-                "label": "Journal Included Type",
-                "options": {
-                    "1": "EES",
-                    "2": "DOAJ"
-                }
+                "label": "Journal Included Type"
             },
             "language": {
                 "label": "Language Type",
@@ -249,6 +245,13 @@
                     "2": "Open Access Content",
                     "3": "Subscribed Content",
                     "4": "Free Trial Content"
+                }
+            },
+            "language": {
+                "label": "Language Type",
+                "options": {
+                    "1": "English",
+                    "2": "Chinese"
                 }
             }
         },

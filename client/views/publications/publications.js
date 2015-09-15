@@ -4,6 +4,16 @@ Template.onePublication.helpers({
         return "/publisher/" + name + "/journal/" + title;
     }
 });
+
+Template.onePublication.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Publications.remove({_id:id});
+        })
+    }
+});
+
 Template.onePublisherInFilterList.helpers({
     count: function (id) {
         var first = Session.get('firstLetter');

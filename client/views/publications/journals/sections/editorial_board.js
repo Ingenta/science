@@ -20,6 +20,12 @@ Template.aboutTitle.events({
     'click .activeButton': function (event) {
         var boardValue = $(event.target).data().aboutsid;
         Session.set('tabBoard', boardValue);
+    },
+    'click .about': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            About.remove({_id:id});
+        })
     }
 });
 
@@ -75,6 +81,24 @@ Template.EditorialBoardList.helpers({
             return true;
         }
         return false;
+    }
+});
+
+Template.EditorialBoardList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            EditorialBoard.remove({_id:id});
+        })
+    }
+});
+
+Template.EditorialBoardMembersList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            EditorialBoard.remove({_id:id});
+        })
     }
 });
 
