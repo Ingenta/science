@@ -188,6 +188,29 @@
                     "MOOP": "MOOP",
                     "Author Center": "Author Center"
                 }
+            },
+            "historicalJournal": {
+                "label": "Historical Journal",
+                "$": {
+                    "title": {
+                        "label": "Previous Title",
+                        "cn": {
+                            "label": "Chinese"
+                        },
+                        "en": {
+                            "label": "English"
+                        }
+                    },
+                    "dateRange": {
+                        "label": "Effective Date"
+                    },
+                    "issn": {
+                        "label": "ISSN"
+                    },
+                    "essn": {
+                        "label": "EISSN"
+                    }
+                }
             }
         },
         "publishers": {
@@ -245,13 +268,6 @@
                     "2": "Open Access Content",
                     "3": "Subscribed Content",
                     "4": "Free Trial Content"
-                }
-            },
-            "language": {
-                "label": "Language Type",
-                "options": {
-                    "1": "English",
-                    "2": "Chinese"
                 }
             }
         },
