@@ -12,7 +12,9 @@
 </template>
 
 <template name="SingleFavorite">
-    {{> favoriteArticle}}
+    {{#with article}}
+        {{> favoriteArticle}}
+    {{/with}}
 </template>
 
 <template name="favoriteArticle">
