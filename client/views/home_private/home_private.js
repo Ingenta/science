@@ -63,9 +63,9 @@ Template.SingleNews.helpers({
 
 Template.SingleNews.events({
     'click .fa-trash': function (e) {
-        var that = this;
+        var id = this._id;
         confirmDelete(e,function(){
-            News.remove({_id:that._id});
+            News.remove({_id:id});
         })
     }
 });
