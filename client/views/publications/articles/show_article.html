@@ -245,7 +245,7 @@
 </template>
 
 <template name="updateArticleAccessKeyModalForm">
-    {{#autoForm schema="ArticleAccessKeySchema" collection="Articles" id="updateArticleAccessKeyForm" doc=this
+    {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleAccessKeyForm" doc=this
     type="update" buttonContent=getUpdateButtonContent}}
         {{> afQuickField name="accessKey"}}
         <button type="submit" class="btn btn-primary">update</button>
@@ -253,7 +253,7 @@
 </template>
 
 <template name="updateArticleLanguageModalForm">
-    {{#autoForm schema="ArticleLanguageSchema" collection="Articles" id="updateArticleLanguageForm" doc=this
+    {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleLanguageForm" doc=this
     type="update" buttonContent=getUpdateButtonContent}}
         {{> afQuickField name="language"}}
         <button type="submit" class="btn btn-primary">update</button>
