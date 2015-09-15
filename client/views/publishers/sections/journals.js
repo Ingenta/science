@@ -51,11 +51,22 @@ Template.updatePublicationModalForm.helpers({
             result.push({label:name,value:item._id});
         });
         return result;
+    },
+    getTags: function () {
+        var tags = Tags.find({}).fetch();
+        var result = [];
+        _.each(tags,function(item){
+            result.push({label:item.tagNumber,value:item._id});
+        });
+        return result;
     }
 });
-Template.deletePublicationModalForm.helpers({
-    getPrompt: function () {
-        return TAPi18n.__("Are you sure?");
+Template.SinglePublication.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Publications.remove({_id:id});
+        })
     }
 });
 
@@ -80,6 +91,14 @@ Template.addPublicationForm.helpers({
         _.each(topics,function(item){
             var name = iscn?item.name:item.englishName;
             result.push({label:name,value:item._id});
+        });
+        return result;
+    },
+    getTags: function () {
+        var tags = Tags.find({}).fetch();
+        var result = [];
+        _.each(tags,function(item){
+            result.push({label:item.tagNumber,value:item._id});
         });
         return result;
     }

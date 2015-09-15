@@ -78,11 +78,7 @@
                 }
             },
             "included": {
-                "label": "Journal Included Type",
-                "options": {
-                    "1": "EES",
-                    "2": "DOAJ"
-                }
+                "label": "Journal Included Type"
             },
             "language": {
                 "label": "Language Type",

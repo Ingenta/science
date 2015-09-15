@@ -35,6 +35,15 @@ Template.sidebarAd.helpers({
     }
 });
 
+Template.sidebarAd.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Advertisement.remove({_id:id});
+        })
+    }
+});
+
 AutoForm.addHooks(['addAdvertisementModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});

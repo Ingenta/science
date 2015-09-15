@@ -4,20 +4,11 @@ Template.publicationPdfContent.helpers({
         return Publications.find({_id:journalId});
     },
     pdfValue:function(){
+        if(this.fileId===undefined){
+            return null;
+        }
         var file = Collections.Files.findOne({_id:this.fileId});
         return file.url()+"&download=true";
-    },
-    AuthorTitle: function () {
-        if(this.authorTitle.en||this.authorTitle.cn){
-            return true;
-        }
-        return false;
-    },
-    FileName: function () {
-        if(this.fileName.en||this.fileName.cn){
-            return true;
-        }
-        return false;
     }
 });
 

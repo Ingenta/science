@@ -287,11 +287,7 @@
                 }
             },
             "included": {
-                "label": "期刊收录类型",
-                "options": {
-                    "1": "EES",
-                    "2": "DOAJ"
-                }
+                "label": "期刊收录类型"
             },
             "language": {
                 "label": "语种类型",

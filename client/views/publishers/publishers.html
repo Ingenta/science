@@ -43,7 +43,7 @@
                     {{/if}}
 					{{#if can "delete-publisher" "publisher"}}
                         {{#unless hasNoJournals _id}}
-                            {{> deletePublisherModalForm}}
+                            <a href="#" class="fa fa-trash"></a>
                         {{/unless}}
                     {{/if}}
                 </div>
@@ -68,11 +68,6 @@
 
 <template name="updatePublisherModalForm">
     {{#afModal class="fa fa-pencil" title=getTitle collection="Publishers" doc=_id operation="update" buttonContent=getUpdateButtonContent}}
-    {{/afModal}}
-</template>
-
-<template name="deletePublisherModalForm">
-    {{#afModal class="fa fa-trash" collection="Publishers" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent}}
     {{/afModal}}
 </template>
 
