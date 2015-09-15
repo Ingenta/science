@@ -29,15 +29,30 @@ ArticleAbstractSchema = new SimpleSchema({
     }
 
 });
-ArticleAccessKeySchema = new SimpleSchema({
+ArticleSchema = new SimpleSchema({
     accessKey: {
         type: String
+    },
+    language: {
+        type: String,
+        optional: true
+    },
+    historialJournal: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "universe-select",
+            afFieldInput: {
+                multiple: false
+            }
+        }
     }
 });
+
 Meteor.startup(function () {
     ArticleTitleSchema.i18n("schemas.articles");
     ArticleAbstractSchema.i18n("schemas.articles");
-    ArticleAccessKeySchema.i18n("schemas.articles");
+    ArticleSchema.i18n("schemas.articles");
 });
 //ArticlesSchema  = new SimpleSchema({
 //    title: {

@@ -56,14 +56,11 @@ Template.journalSummary.helpers({
         }
     },
     Language: function (num2) {
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
         if(num2=="1"){
-            var title = iscn?"英文":"English";
-            return title;
+            return TAPi18n.__("English");
         }
         if(num2=="2"){
-            var title = iscn?"中文":"Chinese";
-            return title;
+            return TAPi18n.__("Chinese");
         }
     }
 });

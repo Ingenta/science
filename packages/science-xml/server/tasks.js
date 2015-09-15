@@ -248,6 +248,7 @@ Tasks.insertArticleTask = function (logId, result) {
 
     try {
         inserAccessKey(result);
+        inserLanguage(result);
         inertKeywords(result.keywords);
         articleId = insertArticle(result);
     }
@@ -280,6 +281,10 @@ var inertKeywords = function (a) {
 
 var inserAccessKey = function (a) {
     a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
+}
+
+var inserLanguage = function (a) {
+    a.language = Publications.findOne({_id: a.journalId}).language;
 }
 
 var insertArticle = function (a) {
@@ -339,7 +344,8 @@ var insertArticle = function (a) {
         keywords: a.keywords,
         references: a.references,
         pubStatus: a.pubStatus, //出版状态
-        accessKey: a.accessKey
+        accessKey: a.accessKey,
+        language: a.language
     });
     return id;
 }

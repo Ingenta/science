@@ -106,6 +106,14 @@ Template.showArticle.helpers({
     },
     getPdfById: function (id) {
         return ArticleXml.findOne({_id: id}).url() + "&download=true";
+    },
+    Language: function (num2) {
+        if(num2=="1"){
+            return TAPi18n.__("English");
+        }
+        if(num2=="2"){
+            return TAPi18n.__("Chinese");
+        }
     }
 });
 
