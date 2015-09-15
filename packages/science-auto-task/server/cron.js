@@ -34,7 +34,7 @@ SyncedCron.add({
 		//	var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
 		//	Science.Queue.Citation.add({id:stId,taskId:taskId,doi:item.doi});
 		//}
-		AutoTasks.update({_id:taskId},{$set:{status:"created",total:100}});
+		AutoTasks.update({_id:taskId},{$set:{status:"created",total:articles.count()}});
 		Science.Queue.Citation.taskId = taskId;
 		//SyncedCron.stop();
 	}

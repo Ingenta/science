@@ -56,7 +56,7 @@
             {{#if can "manager-homepage" "news" }}
 	            {{> updateNewsModalForm}}
 	            {{#if hasMoreThanOneNews}}
-	                {{> deleteNewsModalForm}}
+	                <a href="#" data-id="{{_id}}" class="fa fa-trash"></a>
 	            {{/if}}
             {{/if}}
         </div>
@@ -72,10 +72,6 @@
 
 <template name="updateNewsModalForm">
     {{#afModal class="fa fa-pencil" title="Update" collection="News" doc=_id operation="update" omitFields="createDate,types,about,publications"}}
-    {{/afModal}}
-</template>
-<template name="deleteNewsModalForm">
-    {{#afModal id="deleteNewsForm" class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}
     {{/afModal}}
 </template>
 

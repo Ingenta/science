@@ -37,8 +37,13 @@ Package.onUse(function(api) {
     'client/view/stylesheets/search.css'
   ],'client');
 
-  //api.addFiles([
-  //],['server','client'])
+  api.addFiles([
+      'query.js'
+  ],['server','client']);
+
+  api.export([
+      'SolrQuery'
+  ])
 });
 
 Package.onTest(function(api) {
