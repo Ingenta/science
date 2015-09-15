@@ -29,6 +29,7 @@ Package.onUse(function(api) {
   ],'server');
 
   api.addFiles([
+    'client/query.js',
     'client/router.js',
     'client/view/quickSearch.html',
     'client/view/quickSearch.js',
@@ -36,12 +37,10 @@ Package.onUse(function(api) {
     'client/view/search.js',
     'client/view/oneArticle.html',
     'client/view/oneArticle.js',
+    'client/view/filters.html',
+    'client/view/filters.js',
     'client/view/stylesheets/search.css'
   ],'client');
-
-  api.addFiles([
-      'query.js'
-  ],['server','client']);
 
   api.export([
       'SolrQuery'

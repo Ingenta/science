@@ -5,7 +5,7 @@ li.search-cond{
     width:90%
 }
 .quick-search{
-    width:350px;
+    width:350px !important;
     border-radius:6px;
 }
 .qs-param{

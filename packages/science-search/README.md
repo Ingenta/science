@@ -30,7 +30,7 @@ Fields for filter:
 
 Usage：
 -----------------
-    SolrQuery.create().search({query:[
+    SolrQuery.search({query:[
         {key:"title",valu:"aaa"},
         {logicRelation:"NOT",key:"code",value:"123123"}
     ],filterQuery:[

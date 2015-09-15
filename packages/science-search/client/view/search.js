@@ -1,32 +1,31 @@
 //ReactiveDict的有效范围似乎限于本JS文件内，所以暂时不分成多个文件。
-var pageSession = new ReactiveDict();
+//var pageSession = new ReactiveDict();
 
 
 Meteor.startup(function(){
     Tracker.autorun(function(){
-        var query = pageSession.get("query");
-        var filterQuery = pageSession.get("filterQuery");
-        if(query || filterQuery){
-            console.log('call search');
+        var query = SolrQuery.pageSession.get("query");
+        var filterQuery = SolrQuery.pageSession.get("filterQuery");
+        //if(query || filterQuery){
             Meteor.call("search",query,filterQuery,function(err,result){
                 var ok = err?false:result.responseHeader.status==0;
-                pageSession.set("ok",ok);
+	            SolrQuery.pageSession.set("ok",ok);
                 if(ok){
                     //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
                     if(result.response){
-                        pageSession.set("numFound",result.response.numFound);
-                        pageSession.set("start",result.response.start);
-                        pageSession.set("docs",result.response.docs);
+	                    SolrQuery.pageSession.set("numFound",result.response.numFound);
+	                    SolrQuery.pageSession.set("start",result.response.start);
+	                    SolrQuery.pageSession.set("docs",result.response.docs);
                     }
                     if(result.facet_counts){
-                        pageSession.set("facets",result.facet_counts.facet_fields);
+	                    SolrQuery.pageSession.set("facets",result.facet_counts.facet_fields);
                     }
                     if(result.highlighting){
-                        pageSession.set("highlight",result.highlighting);
+	                    SolrQuery.pageSession.set("highlight",result.highlighting);
                     }
                 }
             })
-        }
+        //}
     });
 })
 
@@ -36,8 +35,8 @@ Template.SolrSearchBar.events({
         if (sword){
             if(Router.current().route.getName()=='solrsearch'){
                 //已经在搜索结果页时，通过通栏检索框进行检索时，清空筛选条件，重新检索
-                pageSession.set("query",sword);
-                pageSession.set("filterQuery",undefined);
+	            SolrQuery.pageSession.set("query",sword);
+	            SolrQuery.pageSession.set("filterQuery",undefined);
             }
             Router.go('/search?q=' + sword);//从其他页面通过通栏检索进行检索
         }
@@ -47,8 +46,8 @@ Template.SolrSearchBar.events({
             var sword = $('#searchInput').val();
             if (sword){
                 if(Router.current().route.getName()=='solrsearch'){
-                    pageSession.set("query",sword);
-                    pageSession.set("filterQuery",undefined);
+	                SolrQuery.pageSession.set("query",sword);
+	                SolrQuery.pageSession.set("filterQuery",undefined);
                 }
                 Router.go('/search?q=' + sword);
             }
@@ -57,23 +56,24 @@ Template.SolrSearchBar.events({
 });
 
 Template.SolrSearchResults.onRendered(function(){
-    if(Router.current().params.query.q || Router.current().params.query.fq){
-        //刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
-        pageSession.set("query",Router.current().params.query.q);
-        var fq=Science.getParamsFormUrl("fq");
-        pageSession.set("filterQuery",fq);
-    }
+	//刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
+	if(Router.current().params.query.q)
+		SolrQuery.pageSession.set("query",Router.current().params.query.q);
+	if(Router.current().params.query.fq){
+		var fq=Science.getParamsFormUrl("fq");
+		SolrQuery.pageSession.set("filterQuery",fq);
+	}
 });
 
 Template.SolrSearchResults.helpers({
     'articles': function () {
-        return pageSession.get("docs");
+        return SolrQuery.pageSession.get("docs");
     },
     'statusOK':function(){
-        return pageSession.get("ok");
+        return SolrQuery.pageSession.get("ok");
     },
     'filters': function () {
-        var facets = pageSession.get("facets");
+        var facets = SolrQuery.pageSession.get("facets");
         if(facets){
             var fields = Object.keys(facets);
             var results = [];
@@ -174,91 +174,10 @@ Template.SolrSearchResults.helpers({
         }
     },
     'highlightFields': function(){
-        return pageSession.get("highlight")[this._id];
+        return SolrQuery.pageSession.get("highlight")[this._id];
     }
 });
 
 
-Template.oneSolrArticle.helpers({
-    journalName: function (id) {
-        return Publications.findOne({_id: id}).title;
-    },
-    getAutors:function(){
-        var hl = pageSession.get("highlight")[this._id];
-        var isLangCn = TAPi18n.getLanguage()==="zh-CN";
-        if(hl && hl[isLangCn?"all_authors_cn":"all_authors_en"]){
-            return hl[isLangCn?"all_authors_cn":"all_authors_en"];
-        }else{
-            return this.authors;
-        }
-    },
-    getFullName: function () {
-        if(this.surname || this.given){
-            if (TAPi18n.getLanguage() === "zh-CN")
-                return this.surname.cn + this.given.cn;
-            return this.given.en + " " + this.surname.en;
-        }else{
-            return this + "";
-        }
-    },
-    query      : function () {
-        return Router.current().params.searchQuery;
-    },
-    article:function(){
-        return Articles.findOne({_id:this._id});
-    },
-    showTitle:function(){
-    	var isLangCn = TAPi18n.getLanguage()==="zh-CN";
-    	var hl = pageSession.get("highlight")[this._id];
-    	if(hl && (hl["title.cn"] || hl["title.en"])){
-    		if(isLangCn && hl["title.cn"])
-    			return hl["title.cn"];
-    		else if(!isLangCn && hl["title.en"])
-    			return hl["title.en"];
-    	}
-    	return isLangCn?this.title.cn:this.title.en;
-    },
-    showdoi:function(){
-        var hl = pageSession.get("highlight")[this._id];
-        if(hl && hl["doi"]){
-           return hl["doi"];
-        }
-        return this.doi;
-    },
-    class:function(){
-        //return "fa fa-language";
-    }
-});
 
-Template.oneSolrArticle.events({
-    "click .btn-delete-article": function () {
-        var articleId = this._id;
-        confirmDelete(e,function(){
-            Articles.remove({_id:articleId});
-        });
-    }
-})
 
-Template.solrFilterItem.events({
-    'click a':function(e){
-        e.preventDefault();
-        var fq=pageSession.get("filterQuery") || [];
-        if(this.selStatus){
-            fq = _.without(fq,this.fq);
-        }else{
-            fq = _.union(fq,this.fq)
-        }
-        pageSession.set("filterQuery",fq);
-        var sword=pageSession.get('query');
-        var fq = Science.queryStringify({fq:pageSession.get("filterQuery")});
-        Router.go('/search?q=' + sword+'&'+fq);
-    }
-});
-
-Template.solrFilterItem.helpers({
-    class:function(){
-        var fq=pageSession.get("filterQuery") || [];
-        this.selStatus= _.contains(fq,this.fq);
-        return this.selStatus?"fa fa-mail-reply":"fa fa-mail-forward";
-    }
-})

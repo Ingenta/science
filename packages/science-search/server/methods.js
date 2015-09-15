@@ -2,7 +2,6 @@ Future = Npm.require('fibers/future');
 
 Meteor.methods({
 	"search":function(query,filterQuery){
-		console.dir(query)
 		var myFuture = new Future();
 		var options= {
 			"facet":true,

@@ -50,6 +50,6 @@ Template.AdvancedSearch.events({
             query.push(p);
             flag=true;
         }
-        SolrQuery.create().search({query:query});
+        SolrQuery.search({query:query});
     }
 });

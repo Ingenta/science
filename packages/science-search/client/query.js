@@ -1,4 +1,5 @@
 SolrQuery = {
+	pageSession:new ReactiveDict(),
 	fieldMap : {
 		"title":["title.cn","title.en"],
 		"doi":["doi"],
@@ -42,11 +43,10 @@ SolrQuery = {
 				qstring += "(" + subQueues.join(" OR ") + ")";
 			})
 		}
-		return "q="+encodeURIComponent(qstring || "");
+		return qstring || "";
 	},
-	getFilterQueryStr:function(queryArr){
-		console.log(queryArr);
-		var qstring;
+	getFilterQueryStrArr:function(queryArr){
+		var fqStrArr = [];
 		if(queryArr){
 			qstring="";
 			_.each(queryArr,function(sQuery){
@@ -55,19 +55,28 @@ SolrQuery = {
 				var subQueues = _.map(solrFields,function(sField){
 					return sField + ":" + sQuery.val;
 				});
-				qstring +=  "&fq=" + encodeURIComponent(subQueues.join(" OR "));
+				fqStrArr.push(subQueues.join(" OR "));
 			})
 		}
-		return qstring || "";
+		return fqStrArr;
 	},
-	create:function(){
-		var query = {};
-		query.search = function(option){
-			var qString= SolrQuery.getQueryStr(option.query);
-			var fqString= SolrQuery.getFilterQueryStr(option.filterQuery);
-			Router.go('/search?' + qString + fqString);
-		};
-		return query;
+	search : function(option){
+		var queryStr= SolrQuery.getQueryStr(option.query);
+		var fqStrArr= SolrQuery.getFilterQueryStrArr(option.filterQuery);
+		if(Router.current().route.getName()=='solrsearch'){
+			//已经在搜索结果页时，通过通栏检索框进行检索时，清空筛选条件，重新检索
+			SolrQuery.pageSession.set("query",queryStr);
+			SolrQuery.pageSession.set("filterQuery",fqStrArr);
+		}
+		var qString="";
+		if(queryStr){
+			qString = "?q="+ queryStr;
+		}
+		if(fqStrArr && fqStrArr.length){
+			var l = qstring ? "&" : "?";
+			qString += (l + "fq=" + fqStrArr.join("&fq="));
+		}
+		Router.go('/search' + qString);
 	}
 };
 
