@@ -24,9 +24,10 @@
 </template>
 
 <template name="SingleTopicWatch">
+    {{#with topicWatch}}
     <td>
         <!--<a href="{{ArticleUrl _id}}">-->
-            <a>{{translateThis title.cn title.en}}</a>
+            <a>{{translateThis name englishName}}</a>
         <!--</a>-->
     </td>
     <td>
@@ -34,4 +35,5 @@
     </td>
     <td>
     </td>
+    {{/with}}
 </template>

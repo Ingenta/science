@@ -1,10 +1,7 @@
 Template.ArticleWatch.helpers({
     watch : function(){
         var user = Users.findOne({_id: Meteor.userId()});
-        var i;
-        for(i=0;i<=user.watchArticle.length;i++){
-            return Articles.find({"_id": user.watchArticle[i]});
-        }
+        return user.watchArticle;
     }
 })
 
@@ -15,5 +12,8 @@ Template.SingleArticleWatch.helpers({
         var publisher = Publishers.findOne({_id: publication.publisher});
         var urls = "/publisher/"+publisher.name+"/journal/"+publication.title+"/"+article.volume+"/"+article.issue+"/"+article.doi;
         return urls;
+    },
+    articleWatch: function(){
+        return Articles.findOne({_id: this.toString()})
     }
 })

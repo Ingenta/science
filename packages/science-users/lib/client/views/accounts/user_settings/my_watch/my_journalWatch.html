@@ -24,16 +24,16 @@
 </template>
 
 <template name="SingleJournalWatch">
+    {{#with journalWatch}}
     <td>
-        <!--<a href="{{JournalUrl _id}}">-->
-        {{#with eachJournal _id}}
+        <a href="{{JournalUrl _id}}">
             <a>{{translateThis titleCn title}}</a>
-        {{/with}}
-        <!--</a>-->
+        </a>
     </td>
     <td>
         &nbsp;
     </td>
     <td>
     </td>
+    {{/with}}
 </template>
