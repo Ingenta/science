@@ -80,6 +80,48 @@ SolrQuery = {
 			qString += (l + "fq=" + fqStrArr.join("&fq="));
 		}
 		Router.go('/search' + qString);
+	},
+	interstingSearch:function(event){
+		var content = Science.dom.getSelContent();
+		if(content){
+			console.log(content);
+			var trimContent = content.trim();
+			if(trimContent.length >2 && trimContent.length < 100){
+
+				var journalId = Session.get('currentJournalId');
+				var filterQuery = [{journalId:journalId}];
+				var setting = {rows:5};
+				Meteor.call("search",trimContent,filterQuery,setting,function(err,result){
+					var ok = err?false:result.responseHeader.status==0;
+					if(ok){
+						console.log(result);
+						var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
+							result:result
+						});
+
+						var pointEle = $(".point-ele");
+						if(!pointEle || !pointEle.length){
+							pointEle=$('<a href="#" class="point-ele" role="button" tabindex="0" data-toggle="popover" ></a>');
+							$("body").append(pointEle);
+						}
+						pointEle.on('hidden.bs.popover',function(){
+							pointEle.popover('destroy');
+							pointEle.remove();
+						});
+						pointEle.css({left: event.pageX,top: event.pageY});
+						pointEle.popover({
+							html:true,
+							content:htmlContent,
+							title:"兴趣检索",
+							trigger:"focus"
+						});
+						pointEle.focus();
+					}
+				})
+
+
+			}
+		}
 	}
 };
 
