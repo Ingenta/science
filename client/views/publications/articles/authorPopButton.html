@@ -2,3 +2,17 @@
     <a class="author-name" href="#" tabindex="0" data-html="true" data-placement="bottom" data-toggle="popover"
        data-trigger="focus">{{{name}}}</a>
 </template>
+
+<template name="authorPopTitle">
+	{{_ "moreContentBy"}}<br><span class='author-pop-name'>{{name}}</span>
+</template>
+
+<template name="authorPopContent">
+	<div class='author-pop'>
+		<div><a href='/author/{{name}}'>{{_ "Go to author page"}}</a></div>
+		<hr>
+		<div><a target='_blank' href='http://www.ncbi.nlm.nih.gov/pubmed?term={{name}}[Author]'>PubMed</a></div>
+		<hr>
+		<div><a target='_blank' href='http://scholar.google.com/scholar?q=author:{{name}}'>Google Scholar</a></div>
+	</div>
+</template>
