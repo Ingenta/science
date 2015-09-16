@@ -20,5 +20,6 @@ Template.quickSearchTemplate.events({
 		issue && query.filterQuery.push({key:'issue',val:issue});
 		page && query.filterQuery.push({key:'page',val:page});
 		SolrQuery.search(query);
+		$('.qs-submit').dropdown('toggle');
 	}
 });

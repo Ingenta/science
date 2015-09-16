@@ -23,7 +23,7 @@ SolrQuery = {
 		"volume":["volume"],
 		"issue":["issue"],
 		"page":["startPage",'elocationId'],
-		"publishDate":["publishDate"]
+		"publishDate":["publishDate"],
 	},
 	getQueryStr:function(queryArr){
 		var qstring;
@@ -52,6 +52,9 @@ SolrQuery = {
 			_.each(queryArr,function(sQuery){
 				isFirstOne=false;
 				var solrFields = SolrQuery.facetFieldMap[sQuery.key];
+				if(sQuery.key=='publishDate'){
+
+				}
 				var subQueues = _.map(solrFields,function(sField){
 					return sField + ":" + sQuery.val;
 				});
