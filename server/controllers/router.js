@@ -8,15 +8,17 @@ Router.map(function () {
             if (obj.language == 1) {
                 text = obj.title.en;
                 obj.authors.forEach(function (author) {
-                    text += author.given.en + ", " + author.surname.en + ", ";
+                    text += author.given.en + ", " + author.surname.en + " and ";
                 });
-                text += obj.journal.title + ", ";
+                text = text.substring(0, text.length-5);
+                text += ", " + obj.journal.title + ", ";
             } else {
                 text = obj.title.cn;
                 obj.authors.forEach(function (author) {
-                    text += author.given.cn + ", " + author.surname.cn + ", ";
+                    text += author.surname.cn + ", " + author.given.cn + " and ";
                 });
-                text += obj.journal.titleCn + ", ";
+                text = text.substring(0, text.length-5);
+                text += ", " + obj.journal.titleCn + ", ";
             }
             text += obj.volume + ", " + obj.elocationId + " (" + obj.year + "), DOI:http://dx.doi.org/" + this.params.publisherDoi + "/" + this.params.articleDoi;
 
