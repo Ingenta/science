@@ -51,6 +51,11 @@ Package.onUse(function(api) {
     'lib/xpathUtils.js',
     'lib/xss.js'
   ],'server');
+
+  api.addFiles([
+      'lib/dom.js'
+  ],'client');
+
   api.export(
       'Science'
   )
