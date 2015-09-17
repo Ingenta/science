@@ -12,3 +12,14 @@ Template.toggleField.helpers({
         }
     }
 })
+Template.sendEmails.events({
+    "click .btn-primary": function () {
+        console.log("abc")
+        Meteor.call('sendEmail',
+            'jack.kavanagh@digitalpublishing.cn',
+            'eryaer@sina.com',
+            'Hello from Meteor!',
+            'This is a test of Email.send.');
+    }
+})
+
