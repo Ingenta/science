@@ -21,10 +21,6 @@ Template.AdvancedSearch.helpers({
 
 Template.AdvancedSearch.events({
     'click .checkBox': function () {
-        if(checked){
-            $("input[name='checkboxA']").prop({checked:true});
-            $("input[name='checkbox']").prop({disabled:true});
-        }
         $("input[name='checkbox']").prop({disabled:false});
         $("input[name='checkboxA']").prop({checked:false});
     },

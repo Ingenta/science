@@ -197,7 +197,7 @@ Meteor.startup(function () {
     Router.route("admin.tag", {
         path: "/admin/tag",
         title: function () {
-            return TAPi18n.__("Label included");
+            return TAPi18n.__("Journal label");
         },
         parent: "admin",
         template:"Admin",

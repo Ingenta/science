@@ -8,6 +8,15 @@ Template.tagList.helpers({
     }
 });
 
+Template.tagList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Tags.remove({_id:id});
+        })
+    }
+});
+
 Template.AdminTag.events({
     'click .btn': function () {
         var query = $('#searchTagNumber').val();
