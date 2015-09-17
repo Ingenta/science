@@ -84,18 +84,15 @@ SolrQuery = {
 	interstingSearch:function(event){
 		var content = Science.dom.getSelContent();
 		if(content){
-			console.log(content);
 			var trimContent = content.trim();
 			if(trimContent.length >2 && trimContent.length < 100){
 
 				var journalId = Session.get('currentJournalId');
-				console.log(journalId);
 				var filterQuery = ["journalId:"+journalId];
 				var setting = {rows:5};
 				Meteor.call("search",trimContent,filterQuery,setting,function(err,result){
 					var ok = err?false:result.responseHeader.status==0;
 					if(ok){
-						console.log(result);
 						var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
 							keyword:trimContent,
 							journalId:journalId,
