@@ -2,7 +2,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-9">
-                {{{abstract}}}
+	            <div class="interesting-content">
+		            {{{abstract}}}
+	            </div>
             </div>
 	        {{#if can "modify-article" "resource"  }}
 	            {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}

@@ -1,6 +1,7 @@
 ReactiveTabs.createInterface({
     template: 'journalTabs'
 });
+
 Template.journalBanner.helpers({
     getJournalBannerById: function (journalId) {
         if (!journalId)return;

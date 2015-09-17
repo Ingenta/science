@@ -24,6 +24,11 @@ Meteor.startup(function () {
         return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:<br> ' + url;
     };
 
+    Accounts.emailTemplates.resetPassword.text = function (user, url) {
+        return "请点击下面的链接以重置您的密码 To reset your password, simply click the link below:\n\n"
+            + url;
+    };
+
 });
 
 //override defualt publish
