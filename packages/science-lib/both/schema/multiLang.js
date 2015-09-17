@@ -21,6 +21,16 @@ Science.schemas.MultipleTextSchema = new SimpleSchema({
 	}
 });
 
+//
+Science.schemas.MultipleText1Schema = new SimpleSchema({
+	en:{
+		type: String
+	},
+	cn:{
+		type: String
+	}
+});
+
 // 普通文本
 Science.schemas.MultipleAreaSchema = new SimpleSchema({
 	en:{
