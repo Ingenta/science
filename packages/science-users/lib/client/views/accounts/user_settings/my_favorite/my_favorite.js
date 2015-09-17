@@ -4,6 +4,7 @@ Template.UserSettingsMyFavorite.helpers({
         return user.favorite;
     },
     count : function () {
+        if(Users.findOne().favorite)
         return Users.findOne().favorite.length;
     }
 })

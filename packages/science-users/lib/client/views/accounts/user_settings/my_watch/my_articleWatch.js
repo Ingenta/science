@@ -1,5 +1,5 @@
 Template.ArticleWatch.helpers({
-    watch : function(){
+    sbWatch : function(){
         var user = Users.findOne({_id: Meteor.userId()});
         return user.watchArticle;
     },
@@ -14,6 +14,7 @@ Template.ArticleWatch.helpers({
         return Articles.findOne({_id: this.toString()})
     },
     count : function () {
+        if(Users.findOne().watchArticle)
         return Users.findOne().watchArticle.length;
     }
 });
