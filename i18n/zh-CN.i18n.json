@@ -14,7 +14,7 @@
   "Oldest First": "最早出版",
   "Search Between These Dates": "出版时间",
   "Search Within": "选择检索控制条件",
-  "Context Property": "文章内容属性",
+  "Article Content Type": "文章内容属性",
   "Or": "或",
   "And": "且",
   "Not": "非",
@@ -31,7 +31,8 @@
   "Publisher": "出版单位",
   "Period": "刊期",
   "Editor": "主编",
-  "Classification": "期刊收录类型",
+  "Journal label": "期刊收录类型",
+  "label": "收录类型",
   "Release Date": "创刊日期",
   "Co-ordinator": "主办单位",
   "Description": "描述",
@@ -149,7 +150,6 @@
   "Roles": "角色",
   "Are you sure?": "你确定吗？",
   "Access Key": "资源标签",
-  "Tag": "收录标签",
   "Free Content": "免费获取",
   "Open Access Content": "开源获取",
   "Subscribed Content": "订阅获取",
@@ -1016,5 +1016,9 @@
   "Effective Date": "有效日期",
   "Choose": "选择...",
   "startPage": "起始页",
-  "Export Citations": "引用出口"
+  "Export Citations": "引用出口",
+  "interstingSearch":"兴趣检索",
+  "searchInJournal":"搜索: '__keyword__' ,在 __journal__ 中",
+  "viewResult":"查看本刊中所有__count__个结果",
+  "topRelatedArticle":"最相关的__count__篇文章"
 }

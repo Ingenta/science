@@ -18,5 +18,12 @@ Template.selectionSearch.helpers({
 			result.push({id:doc._id,'title':stitle});
 		});
 		return result;
+	},
+	searchUrl:function(){
+		var option = {
+			query:this.keyword,
+			filterQuery:[{key:"journalId","val":this.journalId}]
+		}
+		return SolrQuery.makeUrl(option);
 	}
 });
