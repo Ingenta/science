@@ -22,3 +22,12 @@ li.search-cond{
 .qs-row>span{
     font-size:12px;
 }
+.point-ele{
+    width:0px;
+    height:0px;
+    position:absolute;
+    z-index:9999;
+}
+.is-container{
+    min-width:450px;
+}

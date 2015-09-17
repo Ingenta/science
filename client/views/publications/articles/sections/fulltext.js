@@ -70,6 +70,9 @@ Template.FullTextTemplate.events({
     },
     "click #resetFulltext": function () {
         initFulltext();
+    },
+    'mouseup #fulltext-viewer':function(e){
+        SolrQuery.interstingSearch(e);
     }
 });
 

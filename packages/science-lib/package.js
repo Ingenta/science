@@ -40,6 +40,7 @@ Package.onUse(function(api) {
   api.addFiles([
     'lib/core.js',
     'lib/string_utils.js',
+    'lib/jsonUtils.js',
     'lib/dateUtils.js',
     'both/schema/multiLang.js'
   ],['server','client']);
@@ -47,7 +48,6 @@ Package.onUse(function(api) {
   api.addFiles([
     'lib/fileUtils.js',
     'lib/httpUtils.js',
-    'lib/jsonUtils.js',
     'lib/xpathUtils.js',
     'lib/xss.js'
   ],'server');
