@@ -1,14 +1,31 @@
 <template name="selectionSearch">
 	<div>
-		<h5>Searching: '{{result.responseHeader.params.q}}' in {{journalTitle}} </h5>
-		<hr>
-		<div class="pull-right">
-			<a href="#" class="view-all">View all {{result.response.numFound}} results</a> from this journal
+		<div>
+			<h4>Searching: '{{result.responseHeader.params.q}}' in {{journalTitle}} </h4>
+			<hr>
+			<div class="blockquote-reverse">
+				<a href="#" class="view-all">View all {{result.response.numFound}} results</a> from this journal
+			</div>
+		</div>
+		<div>
+			<h5>
+				Top {{count}} Related Articles
+			</h5>
+			<ul class="list-unstyled">
+				{{#each titles}}
+					<li class="title_style">
+						<a href="{{urlToArticleById id}}">{{title}}</a>
+					</li>
+				{{/each}}
+			</ul>
 		</div>
 	</div>
-	<div>
-		<span>
-			Top {{count}} Related Articles
-		</span>
+</template>
+
+<template name="qsPopTemplate">
+	<div class="popover is-container" role="tooltip">
+		<div class="arrow"></div>
+		<h3 class="popover-title"></h3>
+		<div class="popover-content"></div>
 	</div>
 </template>

@@ -102,6 +102,8 @@ SolrQuery = {
 							result:result
 						});
 
+						var templateContent = Blaze.toHTML(Template.qsPopTemplate);
+
 						var pointEle = $(".point-ele");
 						if(!pointEle || !pointEle.length){
 							pointEle=$('<a href="#" class="point-ele" role="button" tabindex="0" data-toggle="popover" ></a>');
@@ -116,7 +118,8 @@ SolrQuery = {
 							html:true,
 							content:htmlContent,
 							title:"兴趣检索",
-							trigger:"focus"
+							trigger:"focus",
+							template:templateContent
 						});
 						pointEle.focus();
 					}

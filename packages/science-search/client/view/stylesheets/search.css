@@ -28,3 +28,6 @@ li.search-cond{
     position:absolute;
     z-index:9999;
 }
+.is-container{
+    min-width:450px;
+}
