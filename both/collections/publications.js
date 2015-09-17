@@ -189,7 +189,7 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     "historicalJournal.$.title": {
-        type: Science.schemas.MultiLangSchema
+        type: Science.schemas.MultipleText1Schema
     },
     "historicalJournal.$.dateRange": {
         type: String
