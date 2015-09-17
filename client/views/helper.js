@@ -19,7 +19,7 @@ Template.sendEmails.events({
             'jack.kavanagh@digitalpublishing.cn',
             'eryaer@sina.com',
             'Hello from Meteor!',
-            'This is a test of Email.send.');
+            'Here is an article you might be interested in. \n\n' + Router.current().url);
     }
 })
 
