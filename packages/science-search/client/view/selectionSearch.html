@@ -1,8 +1,14 @@
 <template name="selectionSearch">
-			<div class="modal-header">
-				<h5>{{result.responseHeader.params.q}}</h5>
-			</div>
-			<div class="modal-body">
-
-			</div>
+	<div>
+		<h5>Searching: '{{result.responseHeader.params.q}}' in {{journalTitle}} </h5>
+		<hr>
+		<div class="pull-right">
+			<a href="#" class="view-all">View all {{result.response.numFound}} results</a> from this journal
+		</div>
+	</div>
+	<div>
+		<span>
+			Top {{count}} Related Articles
+		</span>
+	</div>
 </template>
