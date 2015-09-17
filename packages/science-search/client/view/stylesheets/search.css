@@ -12,7 +12,7 @@ li.search-cond{
     width:40px;
     margin-left:5px;
 }
-.qs-journal-selector{
+.qs-journal{
     width:100%
 }
 .qs-row{
@@ -21,4 +21,10 @@ li.search-cond{
 }
 .qs-row>span{
     font-size:12px;
+}
+.point-ele{
+    width:0px;
+    height:0px;
+    position:absolute;
+    z-index:9999;
 }

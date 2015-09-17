@@ -19,21 +19,26 @@
                 </li>
             {{/if}}
             <li><a href="{{pathFor 'logout'}}">{{_ "Log Out"}}</a></li>
-           {{#if isArticlePage}}
-                 {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
-                 <li> <a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
-                 <li> <a class="watchArticle" href=""><span class="fa fa-eye"></span>{{watchArticleName}}</a></li>
+            {{#if isArticlePage}}
+                {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
+                <li><a class="exportCitations" data-toggle="collapse" data-target="#collapseOne"><span class="fa fa-arrow-circle-o-right"></span>{{_ "Export Citations"}}</a></li>
+                <div id="collapseOne" class="collapse">
+                    <li><a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;Plain Text</a></li>
+                </div>
+                <li><a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
+                <li><a class="watchArticle" href=""><span class="fa fa-eye"></span>{{watchArticleName}}</a></li>
+
             {{/if}}
             {{#if isJourmalPage}}
-                <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
-             {{/if}}
+                <li><a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+            {{/if}}
         {{else}}
             <li>
                 <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
             {{#if isJourmalPage}}
-                <li> <a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+                <li><a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
             {{/if}}
         {{/if}}
         <hr>
@@ -41,17 +46,17 @@
         <li><a href="#">{{_ "Editors Login"}}</a></li>
         <hr>
         {{#if showAccessKey}}
-        <h4>{{_ "Access Key"}}&nbsp;:</h4>
-        <li style="font-size: 78%;"><img src="/icon_access_fc.gif">&nbsp;&nbsp;{{_ "Free Content"}}</li>
-        <li style="font-size: 78%"><img src="/icon_access_oa.gif">&nbsp;&nbsp;{{_ "Open Access Content"}}</li>
-        <li style="font-size: 78%"><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
-        <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
-        <hr>
+            <h4>{{_ "Access Key"}}&nbsp;:</h4>
+            <li style="font-size: 78%;"><img src="/icon_access_fc.gif">&nbsp;&nbsp;{{_ "Free Content"}}</li>
+            <li style="font-size: 78%"><img src="/icon_access_oa.gif">&nbsp;&nbsp;{{_ "Open Access Content"}}</li>
+            <li style="font-size: 78%"><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
+            <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
+            <hr>
         {{/if}}
         {{#if showEmailThis}}
-        <a class="emailThis"><h4>{{_ "Email This"}}</h4></a>
-        <hr>
-    {{/if}}
+            <a class="emailThis"><h4>{{_ "Email This"}}</h4></a>
+            <hr>
+        {{/if}}
         {{> sidebarAd}}
     </ul>
 </template>

@@ -32,6 +32,9 @@ Template.LayoutSideBar.helpers({
     isJourmalPage: function () {
         return Router.current().route.getName()=="journal.name";
     },
+    getCurrentDoi: function () {
+        return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+    },
     favoriteName: function(){
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});

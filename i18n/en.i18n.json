@@ -24,7 +24,7 @@
                 "label": "Chinese Title"
             },
             "shortTitle": {
-                "label": "Shot Title"
+                "label": "Short Title"
             },
             "issn": {
                 "label": "ISSN"
@@ -268,6 +268,13 @@
                     "2": "Open Access Content",
                     "3": "Subscribed Content",
                     "4": "Free Trial Content"
+                }
+            },
+            "language": {
+                "label": "Language Type",
+                "options": {
+                    "1": "English",
+                    "2": "Chinese"
                 }
             }
         },

@@ -39,6 +39,8 @@ Package.onUse(function(api) {
     'client/view/oneArticle.js',
     'client/view/filters.html',
     'client/view/filters.js',
+    'client/view/selectionSearch.html',
+    'client/view/selectionSearch.js',
     'client/view/stylesheets/search.css'
   ],'client');
 

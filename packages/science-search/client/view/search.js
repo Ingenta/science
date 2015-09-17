@@ -1,31 +1,24 @@
-//ReactiveDict的有效范围似乎限于本JS文件内，所以暂时不分成多个文件。
-//var pageSession = new ReactiveDict();
-
-
 Meteor.startup(function(){
     Tracker.autorun(function(){
         var query = SolrQuery.pageSession.get("query");
         var filterQuery = SolrQuery.pageSession.get("filterQuery");
-        //if(query || filterQuery){
-            Meteor.call("search",query,filterQuery,function(err,result){
-                var ok = err?false:result.responseHeader.status==0;
-	            SolrQuery.pageSession.set("ok",ok);
-                if(ok){
-                    //pageSession.set("qtime",err?undefined:result.responseHeader.QTime);
-                    if(result.response){
-	                    SolrQuery.pageSession.set("numFound",result.response.numFound);
-	                    SolrQuery.pageSession.set("start",result.response.start);
-	                    SolrQuery.pageSession.set("docs",result.response.docs);
-                    }
-                    if(result.facet_counts){
-	                    SolrQuery.pageSession.set("facets",result.facet_counts.facet_fields);
-                    }
-                    if(result.highlighting){
-	                    SolrQuery.pageSession.set("highlight",result.highlighting);
-                    }
+        Meteor.call("search",query,filterQuery,function(err,result){
+            var ok = err?false:result.responseHeader.status==0;
+            SolrQuery.pageSession.set("ok",ok);
+            if(ok){
+                if(result.response){
+                    SolrQuery.pageSession.set("numFound",result.response.numFound);
+                    SolrQuery.pageSession.set("start",result.response.start);
+                    SolrQuery.pageSession.set("docs",result.response.docs);
                 }
-            })
-        //}
+                if(result.facet_counts){
+                    SolrQuery.pageSession.set("facets",result.facet_counts.facet_fields);
+                }
+                if(result.highlighting){
+                    SolrQuery.pageSession.set("highlight",result.highlighting);
+                }
+            }
+        })
     });
 })
 
