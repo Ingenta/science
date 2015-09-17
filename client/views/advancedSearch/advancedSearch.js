@@ -24,7 +24,7 @@ Template.AdvancedSearch.events({
         $("input[name='checkbox']").prop({disabled:false});
         $("input[name='checkboxA']").prop({checked:false});
     },
-    'click .btn': function () {
+    'click .searchBtn': function () {
         var name1 = $('#searchValue1').val();
         var name2 = $('#searchValue3').val();
         var name3 = $('#searchValue5').val();
