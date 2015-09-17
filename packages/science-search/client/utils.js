@@ -71,6 +71,14 @@ QueryUtils = {
 		}
 		return fqStrArr;
 	},
+	getSortStr:function(sort){
+		if(!sort || !sort.trim())
+			return "";
+		var fields = Science.JSON.MergeObject(Querystring.fieldMap,QueryUtils.facetFieldMap);
+		var splitSortStr = sort.trim().split(' ');
+		var sortField = fields[splitSortStr[0]] && fields[splitSortStr[0]][0];
+		return sortField + (sortField.length > 1 && (" "+sortField[1]));
+	},
 	getSolrFormat:function(date){
 		if(!date || !date.trim())
 			return "*";

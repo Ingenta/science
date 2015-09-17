@@ -1,12 +1,20 @@
 SolrQuery = {
 	pageSession:new ReactiveDict(),
+	set:function(key,val){
+		var setting = SolrQuery.pageSession.get("setting") || {};
+		setting[key]=val;
+		SolrQuery.pageSession.set("setting",setting)
+	},
 	makeUrl:function(option){
 		var queryStr= QueryUtils.getQueryStr(option.query);
 		var fqStrArr= QueryUtils.getFilterQueryStrArr(option.filterQuery);
+		var setting = QueryUtils.getSortStr(option.setting);
 		if(Router.current().route.getName()=='solrsearch'){
 			//已经在搜索结果页时，通过通栏检索框进行检索时，清空筛选条件，重新检索
 			SolrQuery.pageSession.set("query",queryStr);
 			SolrQuery.pageSession.set("filterQuery",fqStrArr);
+			var setting = SolrQuery.pageSession.get("setting") || {};
+			SolrQuery.pageSession.set("setting",setting);
 		}
 		var qString="";
 		if(queryStr){
@@ -15,6 +23,10 @@ SolrQuery = {
 		if(fqStrArr && fqStrArr.length){
 			var l = qString ? "&" : "?";
 			qString += (l + "fq=" + fqStrArr.join("&fq="));
+		}
+		if(sortStr){
+			var l = qString ? "&" : "?";
+			qString += "&sort="+sortStr;
 		}
 		return "/search" + qString;
 	},
