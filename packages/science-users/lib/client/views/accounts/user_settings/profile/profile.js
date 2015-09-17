@@ -1,19 +1,19 @@
 var pageSession = new ReactiveDict();
 
 Template.UserSettingsProfile.rendered = function() {
-	
+
 };
 
 Template.UserSettingsProfile.events({
-	
+
 });
 
 Template.UserSettingsProfile.helpers({
-	
+
 });
 
 Template.UserSettingsProfileEditForm.rendered = function() {
-	
+
 
 	pageSession.set("userSettingsProfileEditFormInfoMessage", "");
 	pageSession.set("userSettingsProfileEditFormErrorMessage", "");
@@ -22,7 +22,7 @@ Template.UserSettingsProfileEditForm.rendered = function() {
 		var format = $(this).find("input[type='text']").attr("data-format");
 
 		if(format) {
-			format = format.toLowerCase();			
+			format = format.toLowerCase();
 		}
 		else {
 			format = "mm/dd/yyyy";
@@ -46,7 +46,7 @@ Template.UserSettingsProfileEditForm.events({
 		e.preventDefault();
 		pageSession.set("userSettingsProfileEditFormInfoMessage", "");
 		pageSession.set("userSettingsProfileEditFormErrorMessage", "");
-		
+
 		var self = this;
 
 		function submitAction(msg) {
@@ -90,7 +90,7 @@ Template.UserSettingsProfileEditForm.events({
 	"click #form-cancel-button": function(e, t) {
 		e.preventDefault();
 
-		
+
 
 		/*CANCEL_REDIRECT*/
 	},
@@ -105,7 +105,7 @@ Template.UserSettingsProfileEditForm.events({
 		/*BACK_REDIRECT*/
 	}
 
-	
+
 });
 
 Template.UserSettingsProfileEditForm.helpers({
@@ -116,7 +116,9 @@ Template.UserSettingsProfileEditForm.helpers({
 		return pageSession.get("userSettingsProfileEditFormErrorMessage");
 	},
 	"emailAddress": function(){
-		return this.current_user_data.emails[0].address;
+        if (this.current_user_data)
+            if (this.current_user_data.emails[0])
+                return this.current_user_data.emails[0].address;
 	}
-	
+
 });
