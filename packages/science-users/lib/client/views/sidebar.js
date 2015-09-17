@@ -1,14 +1,19 @@
 Template.LayoutSideBar.helpers({
     institutionLogo: function () {
-        var currentUserIPNumber = Session.get("currentUserIPNumber");
-        if (currentUserIPNumber === undefined) {
-            Meteor.call("getClientIP", function (err, ip) {
-                currentUserIPNumber = Science.ipToNumber(ip);
-                Session.set("currentUserIPNumber", currentUserIPNumber);
-            });
-        }
         var logo = undefined;
-        var institutuion = Institutions.findOne({ipRange: {$elemMatch: {startNum: {$lte: currentUserIPNumber}, endNum: {$gte: currentUserIPNumber}}}});
+        var institutuion = undefined;
+        if(Meteor.user() && Meteor.user().institutionId){
+            institutuion = Institutions.findOne({_id: Meteor.user().institutionId});
+        } else{
+            var currentUserIPNumber = Session.get("currentUserIPNumber");
+            if (currentUserIPNumber === undefined) {
+                Meteor.call("getClientIP", function (err, ip) {
+                    currentUserIPNumber = Science.ipToNumber(ip);
+                    Session.set("currentUserIPNumber", currentUserIPNumber);
+                });
+            }
+            institutuion = Institutions.findOne({ipRange: {$elemMatch: {startNum: {$lte: currentUserIPNumber}, endNum: {$gte: currentUserIPNumber}}}});
+        }
         if (institutuion) {
             logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo}).url();
         }
@@ -16,13 +21,19 @@ Template.LayoutSideBar.helpers({
         else return;
     },
     canUseAdminPanel: function () {
-        return !!Permissions.getUserRoles().length;
+        return !!_.without(Permissions.getUserRoles(), "institution:institution-manager-from-user").length;
+    },
+    canUseInstitutionPanel: function () {
+        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
     },
     isArticlePage: function () {
         return Router.current().route.getName()=="article.show";
     },
     isJourmalPage: function () {
         return Router.current().route.getName()=="journal.name";
+    },
+    getCurrentDoi: function () {
+        return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
     },
     favoriteName: function(){
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;

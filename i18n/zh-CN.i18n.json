@@ -1,970 +1,1020 @@
 {
-    "FILTER BY Publisher": "按出版商过滤浏览",
-    "FILTER BY Publications": "按出版物过滤浏览",
-    "FILTER BY Content Properties": "按内容属性过滤浏览",
-    "FILTER BY Author": "按作者过滤浏览",
-    "FILTER BY Release Date": "按出版日期过滤浏览",
-    "FILTER BY Topic":"按主题过滤",
-    "Retrieval Condition":"检索条件",
-    "Retrieval Range":"检索范围",
-    "Start Search":"开始搜索",
-    "Results the sorting":"结果排序",
-    "Direct Correlation":"直接相关",
-    "The latest published":"最新出版",
-    "Originally published":"最早出版",
-    "Publication date":"出版时间",
-    "Choose search control condition":"选择检索控制条件",
-    "Context Property":"文章内容属性",
-    "Or":"或",
-    "And":"且",
-    "Non":"非",
-    "Other": "其它",
-    "Reports": "统计",
-    "Caption": "解说词",
-    "Share": "在线分享",
-    "Previous Article": "上一篇",
-    "Next Article": "下一篇",
-    "Table of Contents": "目录",
-    "Manager": "主管单位",
-    "Publisher": "出版单位",
-    "Period": "刊期",
-    "Editor": "主编",
-    "Classification": "期刊收录类型",
-    "Release Date": "创刊日期",
-    "Co-ordinator": "主办单位",
-    "Description": "描述",
-    "Display per page": "显示",
-    "Article": "文章",
-    "Review": "评述",
-    "Research Highlights": "点评",
-    "Editorial": "编者按",
-    "Letter": "快讯",
-    "Blogs": "论坛",
-    "Recently Viewed Articles": "最近浏览的文章",
-    "Total views over time": "阅读行为统计",
-    "Abstract views over time": "摘要浏览时间统计",
-    "Most read articles": "热读文章",
-    "volumeItem": "第%s卷",
-    "issueItem": "第%s期",
-    "Editors Recommend": "编辑推荐",
-    "Latest Articles": "最新文章",
-    "Most recent articles": "最新资源",
-    "Month": "月",
-    "Year": "年",
-    "Title": "标题",
-    "Volume": "卷",
-    "Issue": "期",
-    "Success": "成功",
-    "Failed": "失败",
-    "File type mismatch!": "文件格式不对！",
-    "No errors": "没有错",
-    "No title found": "没找到标题",
-    "No volume found": "没找到卷",
-    "No issue found": "没找到期",
-    "No abstract found": "没找到摘要",
-    "No author found": "没找到作者",
-    "Article Language": "语种类型",
-    "Action": "操作",
-    "Date": "日期",
-    "Status": "状态",
-    "Pending": "未决定",
-    "Upload": "上传",
-    "Institution": "机构",
-    "Institution Detail": "机构详情",
-    "Institution Account": "机构帐号",
-    "Parse": " 解析",
-    "Extract": "解压",
-    "moreContentBy": "作者其他文章",
-    "Go to author page": "本平台",
-    "PasswordResetInstructions": "密码重置邮件已发到您的邮箱",
-    "Submit": "提交",
-    "Search results": "搜索文章查看",
-    "No results found!": "暂无数据",
-    "Browse journal": "出版目录浏览",
-    "Details": "详情",
-    "User details": "用户明细",
-    "Quick Search": "快速检索",
-    "Advanced Search": "高级检索",
-    "Home page for": "",
-    "Overview": "期刊概述",
-    "Browse": "出版目录",
-    "About": "关于我们",
-    "News": "新闻",
-    "Media": "多媒体",
-    "Special Topics": "专题",
-    "Submission Guidelines": "投稿前须知",
-    "Prepare Manuscript": "准备手稿",
-    "Submit  Manuscript": "提交稿件",
-    "Collections": "文章集",
-    "Received": "稿件接收时间",
-    "Accepted Date": "稿件收录时间",
-    "Published online": "发布时间",
-    "Accepted" : "预出版",
-    "Online First": "优先出版",
-    "MOOP": "MOOP",
-    "Author Center": "作者中心",
-    "Guide for Authors": "投稿指南",
-    "Last release was": "最后更新于",
-    "Any Publisher": "+ 更多",
-    "Editors": "编辑",
-    "Editorial Policies": "编辑政策",
-    "Notice To Readers": "读者须知",
-    "Contact Us": "联系我们",
-    "News Center": "新闻中心",
-    "Publishing Dynamic": "出版动态",
-    "Meeting Information": "会议信息",
-    "Tag Number": "标签编号",
-    "Tag Name": "标签全称",
-    "Creator": "创建者",
-    "Abstract": "摘要",
-    "Full Text": "全文",
-    "References": "参考文献",
-    "Cited By": "被引用",
-    "Data & Media": "数据&媒体",
-    "Metrics": "阅读行为统计",
-    "Related": "相关文章",
-    "Home": "首页",
-    "All": "所有",
-    "User settings": "用户设置",
-    "Profile": "个人资料",
-    "Update information": "更新注册资料",
-    "Please update your registered information (optional)": "请填写您的注册资料（选填）",
-    "Please select more journal name": "请选择期刊名称",
-    "Publisher name": "出版商名称",
-    "Journal name": "期刊名称",
-    "Volume name": "卷号",
-    "Issue name": "期号",
-    "Please select a subject matter (level 1)": "请选择学科主题（一级）",
-    "The topic name": "主题名称",
-    "All the options": "全部",
-    "Add new": "添加",
-    "Delete selected": "选中删除",
-    "Cancel": "取消",
-    "Save": "保存",
-    "Password": "密码",
-    "Add new user": "添加新用户",
-    "Role": "角色",
-    "Roles": "角色",
-    "Are you sure?": "你确定吗？",
-    "Access Key": "资源标签",
-    "Label included": "收录标签",
-    "Free Content": "免费获取",
-    "Open Access Content": "开源获取",
-    "Subscribed Content": "订阅获取",
-    "Free Trial Content": "免费试用",
-    "PleaseEmail": "请输入正确的邮箱地址",
-    "Are you sure?": "确定删除？",
-    "Introductory text": "文字介绍",
-    "No publications found!": "没有找到出版物！",
-    "No publishers found!": "没有找到出版商！",
-    "No About found!": "没有找到主题！",
-    "No articles found!": "没有找到文章！",
-    "No AboutArticle found!": "没有找到关于我们的信息！",
-    "Welcome Message": "欢迎",
-    "Your full name": "你的全名",
-    "Page not found": "找不到网页",
-    "Click Here": "点击这里",
-    "PleaseWait": "请等一会...",
-    "Search": "搜索",
-    "Name": "名字",
-    "Company name": "单位",
-    "Phone": "电话",
-    "Fax": "传真",
-    "E-mail": "邮箱",
-    "Research Area": "研究方向",
-    "Introduction": "简介",
-    "Email address": "邮件地址",
-    "Meeting Time": "会议时间",
-    "Contact Way": "联系方式",
-    "Address": "地址",
-    "Conference Theme": "会议主题",
-    "The author article history": "作者历史文章查看",
-    "Publishers": "出版商",
-    "Publications": "出版物",
-    "Topics": "主题",
-    "Topic": "主题",
-    "Journals": "期刊",
-    "Author": "作者",
-    "Register": "注册",
-    "Login": "登录",
-    "Log Out": "退出",
-    "Settings": "设置",
-    "Users": "用户",
-    "User": "用户",
-    "Edit user": "修改用户信息",
-    "Blocked": "锁定",
-    "Add new": "添加",
-    "Admin": "管理员",
-    "ScholarOne Login": "ScholarOne登录",
-    "Editors Login": "协同编辑登录",
-    "Create": "新建",
-    "Update": "修改",
-    "Delete": "删除",
-    "Language": "语种类型",
-    "Chinese": "中文",
-    "English": "英文",
-    "Please sign in": "登录",
-    "Sign in": "登录",
-    "Not a member?": "没有用户？",
-    "Forgot password": "忘记密码",
-    "OK": "确定",
-    "Edit your profile": "编辑您的资料",
-    "Change password": "修改密码",
-    "Confirm password": "确认密码",
-    "Your new password": "新密码",
-    "Your old password": "旧密码",
-    "New password": "新密码",
-    "Repeat new password": "重复密码",
-    "Reset password": "重置密码",
-    "Sign up here": "注册",
-    "Please sign up": "新用户注册",
-    "Sign up": "注册",
-    "Already a member?": "注册过了吗?",
-    "Sign in here": "登录",
-    "No Cover Description": "无封面描述",
-    "schemas": {
-        "publications": {
-            "title": {
-                "label": "出版物英文名"
-            },
-            "titleCn": {
-                "label": "出版物中文名"
-            },
-            "shortTitle": {
-                "label": "简称"
-            },
-            "issn": {
-                "label": "ISSN"
-            },
-            "createdBy": {
-                "label": "创建者"
-            },
-            "chiefEditor": {
-                "label": "主编",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "competentOrganization": {
-                "label": "主管单位",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "sponsor": {
-                "label": "主办单位",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "EISSN": {
-                "label": "E-ISSN"
-            },
-            "CN": {
-                "label": "CN"
-            },
-            "publicationDate": {
-                "label": "创刊日期"
-            },
-            "frequencyPublication": {
-                "label": "刊期",
-                "options": {
-                    "1": "季刊",
-                    "2": "月刊",
-                    "3": "半月刊",
-                    "4": "旬刊"
-                }
-            },
-            "included": {
-                "label": "期刊收录类型",
-                "options": {
-                    "1": "EES",
-                    "2": "DOAJ"
-                }
-            },
-            "language": {
-                "label": "语种类型",
-                "options": {
-                    "1": "英文",
-                    "2": "中文"
-                }
-            },
-            "topicId": {
-                "label": "主题学科"
-            },
-            "email": {
-                "label": "邮箱"
-            },
-            "address": {
-                "label": "地址",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "phone": {
-                "label": "电话"
-            },
-            "fax": {
-                "label": "传真"
-            },
-            "authorTitle": {
-                "label": "作者中心标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "authorDescription": {
-                "label": "简介",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "fileName": {
-                "label": "模版标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "authorPicture": {
-                "label": "选择图片"
-            },
-            "fileId":{
-                "label":"选择模版文件"
-            },
-            "accessKey": {
-                "label": "请选择一个资源标签",
-                "options": {
-                    "1": "免费获取",
-                    "2": "开源获取",
-                    "3": "订阅获取",
-                    "4": "免费试读"
-                }
-            },
-            "visible": {
-                "label": "是否可见",
-                "options": {
-                    "1": "可见",
-                    "0": "不可见"
-                }
-            },
-            "description": {
-                "label": "期刊描述",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "picture": {
-                "label": "选择封面图片"
-            },
-            "banner": {
-                "label": "选择横幅图片"
-            },
-            "tabSelections": {
-                "label": "选择标签页",
-                "options": {
-                    "Overview": "期刊概述",
-                    "Editorial Board": "编委会",
-                    "Browse": "出版目录",
-                    "About": "关于我们",
-                    "News": "新闻",
-                    "Media": "多媒体",
-                    "Special Topics": "专题",
-                    "Collections": "文章集",
-                    "Accepted": "预出版",
-                    "Online First": "优先出版",
-                    "MOOP": "MOOP",
-                    "Author Center": "作者中心"
-                }
-            }
+  "FILTER BY Publisher": "按出版商过滤浏览",
+  "FILTER BY Publications": "按出版物过滤浏览",
+  "FILTER BY Content Properties": "按内容属性过滤浏览",
+  "FILTER BY Author": "按作者过滤浏览",
+  "FILTER BY Release Date": "按出版日期过滤浏览",
+  "FILTER BY Topic": "按主题过滤",
+  "Retrieval Condition": "检索条件",
+  "Retrieval Range": "检索范围",
+  "Start Search": "开始搜索",
+  "Sort Results By": "结果排序",
+  "Relevance": "直接相关",
+  "Newest First": "最新出版",
+  "Oldest First": "最早出版",
+  "Search Between These Dates": "出版时间",
+  "Search Within": "选择检索控制条件",
+  "Context Property": "文章内容属性",
+  "Or": "或",
+  "And": "且",
+  "Not": "非",
+  "From": "从",
+  "To": "至",
+  "Other": "其它",
+  "Reports": "统计",
+  "Caption": "解说词",
+  "Share": "在线分享",
+  "Previous Article": "上一篇",
+  "Next Article": "下一篇",
+  "Table of Contents": "目录",
+  "Manager": "主管单位",
+  "Publisher": "出版单位",
+  "Period": "刊期",
+  "Editor": "主编",
+  "Classification": "期刊收录类型",
+  "Release Date": "创刊日期",
+  "Co-ordinator": "主办单位",
+  "Description": "描述",
+  "Display per page": "显示",
+  "Article": "文章",
+  "Review": "评述",
+  "Research Highlights": "点评",
+  "Editorial": "编者按",
+  "Letter": "快讯",
+  "Blogs": "论坛",
+  "Recently Viewed Articles": "最近浏览的文章",
+  "Total views over time": "阅读行为统计",
+  "Abstract views over time": "摘要浏览时间统计",
+  "Most read articles": "热读文章",
+  "volumeItem": "第%s卷",
+  "issueItem": "第%s期",
+  "Editors Recommend": "编辑推荐",
+  "Latest Articles": "最新文章",
+  "Most recent articles": "最新资源",
+  "Month": "月",
+  "Year": "年",
+  "Title": "标题",
+  "Volume": "卷",
+  "Issue": "期",
+  "Success": "成功",
+  "Failed": "失败",
+  "File type mismatch!": "文件格式不对！",
+  "No errors": "没有错",
+  "No title found": "没找到标题",
+  "No volume found": "没找到卷",
+  "No issue found": "没找到期",
+  "No abstract found": "没找到摘要",
+  "No author found": "没找到作者",
+  "Article Language": "语种类型",
+  "Action": "操作",
+  "Date": "日期",
+  "Status": "状态",
+  "Pending": "未决定",
+  "Upload": "上传",
+  "Institution": "机构",
+  "Institution Detail": "机构详情",
+  "Institution Account": "机构帐号",
+  "Parse": " 解析",
+  "Extract": "解压",
+  "moreContentBy": "作者其他文章",
+  "Go to author page": "本平台",
+  "PasswordResetInstructions": "密码重置邮件已发到您的邮箱",
+  "Submit": "提交",
+  "Search results": "搜索文章查看",
+  "No results found!": "暂无数据",
+  "Browse journal": "出版目录浏览",
+  "Details": "详情",
+  "User details": "用户明细",
+  "Quick Search": "快速检索",
+  "Advanced Search": "高级检索",
+  "Home page for": "",
+  "Overview": "期刊概述",
+  "Browse": "出版目录",
+  "About": "关于我们",
+  "News": "新闻",
+  "Media": "多媒体",
+  "Special Topics": "专题",
+  "Submission Guidelines": "投稿前须知",
+  "Prepare Manuscript": "准备手稿",
+  "Submit  Manuscript": "提交稿件",
+  "Collections": "文章集",
+  "Received": "稿件接收时间",
+  "Accepted Date": "稿件收录时间",
+  "Published online": "发布时间",
+  "Accepted": "预出版",
+  "Online First": "优先出版",
+  "MOOP": "MOOP",
+  "Author Center": "作者中心",
+  "Guide for Authors": "投稿指南",
+  "Last release was": "最后更新于",
+  "Any Publisher": "+ 更多",
+  "Editors": "编辑",
+  "Editorial Policies": "编辑政策",
+  "Notice To Readers": "读者须知",
+  "Contact Us": "联系我们",
+  "News Center": "新闻中心",
+  "Publishing Dynamic": "出版动态",
+  "Meeting Information": "会议信息",
+  "Tag Number": "标签编号",
+  "Tag Name": "标签全称",
+  "Creator": "创建者",
+  "Abstract": "摘要",
+  "Full Text": "全文",
+  "References": "参考文献",
+  "Cited By": "被引用",
+  "Data & Media": "数据&媒体",
+  "Metrics": "阅读行为统计",
+  "Related": "相关文章",
+  "Home": "首页",
+  "All": "所有",
+  "User settings": "用户设置",
+  "Profile": "个人资料",
+  "Update information": "更新注册资料",
+  "Please update your registered information (optional)": "请填写您的注册资料（选填）",
+  "Please select more journal name": "请选择期刊名称",
+  "Publisher name": "出版商名称",
+  "Journal name": "期刊名称",
+  "Volume name": "卷号",
+  "Issue name": "期号",
+  "Please select a subject matter (level 1)": "请选择学科主题（一级）",
+  "The topic name": "主题名称",
+  "All the options": "全部",
+  "Add new": "添加",
+  "Delete selected": "选中删除",
+  "Cancel": "取消",
+  "Save": "保存",
+  "Password": "密码",
+  "Add new user": "添加新用户",
+  "Role": "角色",
+  "Roles": "角色",
+  "Are you sure?": "你确定吗？",
+  "Access Key": "资源标签",
+  "Tag": "收录标签",
+  "Free Content": "免费获取",
+  "Open Access Content": "开源获取",
+  "Subscribed Content": "订阅获取",
+  "Free Trial Content": "免费试用",
+  "PleaseEmail": "请输入正确的邮箱地址",
+  "Are you sure?": "确定删除？",
+  "Introductory text": "文字介绍",
+  "No publications found!": "没有找到出版物！",
+  "No publishers found!": "没有找到出版商！",
+  "No About found!": "没有找到主题！",
+  "No articles found!": "没有找到文章！",
+  "No AboutArticle found!": "没有找到关于我们的信息！",
+  "Welcome Message": "欢迎",
+  "Your full name": "你的全名",
+  "Page not found": "找不到网页",
+  "Click Here": "点击这里",
+  "PleaseWait": "请等一会...",
+  "Search": "搜索",
+  "Name": "名字",
+  "Company name": "单位",
+  "Phone": "电话",
+  "Fax": "传真",
+  "E-mail": "邮箱",
+  "Research Area": "研究方向",
+  "Introduction": "简介",
+  "Email address": "邮件地址",
+  "Meeting Time": "会议时间",
+  "Contact Way": "联系方式",
+  "Address": "地址",
+  "Conference Theme": "会议主题",
+  "The author article history": "作者历史文章查看",
+  "Publishers": "出版商",
+  "Publications": "出版物",
+  "Topics": "主题",
+  "Topic": "主题",
+  "Journals": "期刊",
+  "Author": "作者",
+  "Register": "注册",
+  "Login": "登录",
+  "Log Out": "退出",
+  "Settings": "设置",
+  "Users": "用户",
+  "User": "用户",
+  "Edit user": "修改用户信息",
+  "Blocked": "锁定",
+  "Add new": "添加",
+  "Admin": "管理员",
+  "ScholarOne Login": "ScholarOne登录",
+  "Editors Login": "协同编辑登录",
+  "Create": "新建",
+  "Update": "修改",
+  "Delete": "删除",
+  "Language": "语种类型",
+  "Chinese": "中文",
+  "English": "英文",
+  "Please sign in": "登录",
+  "Sign in": "登录",
+  "Not a member?": "没有用户？",
+  "Forgot password": "忘记密码",
+  "OK": "确定",
+  "Edit your profile": "编辑您的资料",
+  "Change password": "修改密码",
+  "Confirm password": "确认密码",
+  "Your new password": "新密码",
+  "Your old password": "旧密码",
+  "New password": "新密码",
+  "Repeat new password": "重复密码",
+  "Reset password": "重置密码",
+  "Sign up here": "注册",
+  "Please sign up": "新用户注册",
+  "Sign up": "注册",
+  "Already a member?": "注册过了吗?",
+  "Sign in here": "登录",
+  "No Cover Description": "无封面描述",
+  "schemas": {
+    "publications": {
+      "title": {
+        "label": "出版物英文名"
+      },
+      "titleCn": {
+        "label": "出版物中文名"
+      },
+      "shortTitle": {
+        "label": "简称"
+      },
+      "issn": {
+        "label": "ISSN"
+      },
+      "createdBy": {
+        "label": "创建者"
+      },
+      "chiefEditor": {
+        "label": "主编",
+        "cn": {
+          "label": "中文"
         },
-        "publishers": {
-            "description": {
-                "label": "英文描述"
-            },
-            "chinesedescription": {
-                "label": "中文描述"
-            },
-            "name": {
-                "label": "出版商英文名字"
-            },
-            "chinesename": {
-                "label": "出版商中文名字"
-            },
-            "urlname": {
-                "label": "简称"
-            },
-            "website": {
-                "label": "网站",
-                "placeholder": "http://www.scitation.aip.org"
-            },
-            "picture": {
-                "label": "选择图片"
-            }
-        },
-        "topics": {
-            "name": {
-                "label": "中文名称"
-            },
-            "englishName": {
-                "label": "英文名称"
-            },
-            "relatedTopics":{
-                "label": "相关主题"
-            }
-        },
-        "articles": {
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "abstract":{
-                "label": "摘要"
-            },
-            "accessKey": {
-                "label": "请选择一个资源标签",
-                "options": {
-                    "1": "免费获取",
-                    "2": "开源获取",
-                    "3": "订阅获取",
-                    "4": "免费试读"
-                }
-            }
-        },
-        "about": {
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "agree": {
-                "label": "是否同意创建编委列表?"
-            }
-        },
-        "aboutArticles": {
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "description": {
-                "label": "描述",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            }
-        },
-        "news": {
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "author": {
-                "label": "作者",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "abstract": {
-                "label": "摘要",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "content": {
-                "label": "内容全文",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "url": {
-                "label": "链接"
-            },
-            "picture": {
-                "label": "选择图片"
-            }
-        },
-        "pages": {
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "description": {
-                "label": "描述",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            }
-        },
-        "advertisement": {
-            "title": {
-                "label": "描述"
-            },
-            "link": {
-                "label": "链接"
-            },
-            "defaultLink": {
-                "label": "默认链接"
-            },
-            "endDate": {
-                "label": "截止日期"
-            },
-            "pictures": {
-                "label": "选择图片"
-            },
-            "defaultPictures": {
-                "label": "选择默认图片"
-            }
-        },
-        "issues": {
-            "description": {
-                "label": "封面描述"
-            }
-        },
-        "collections": {
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "description": {
-                "label": "描述",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "picture": {
-                "label": "选择图片"
-            },
-            "publisherId": {
-                "label": "出版商"
-            }
-        },
-        "institutions": {
-            "name": {
-                "label": "机构名称",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "description": {
-                "label": "描述",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "number": {
-                "label": "机构编号"
-            },
-            "type": {
-                "label": "机构类型",
-                "options": {
-                    "1": "图书馆",
-                    "2": "出版商",
-                    "3": "编辑部",
-                    "4": "大学",
-                    "5": "研究机构",
-                    "6": "其他"
-                }
-            },
-            "logo": {
-                "label": "Logo"
-            },
-            "ipRange": {
-                "label": "IP范围",
-                "$": {
-                    "startIP": {
-                        "label": "起始 IP"
-                    },
-                    "endIP": {
-                        "label": "结束 IP"
-                    }
-                }
-            }
-        },
-        "recommend": {
-            "ArticlesId": {
-                "label": "标题"
-            },
-            "behalfPicture": {
-                "label": "选择代表图片"
-            },
-            "defaultPicture": {
-                "label": "选择默认图片"
-            }
-        },
-        "editorialMember": {
-            "abstract": {
-                "label": "简介",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "picture": {
-                "label": "选择图片"
-            }
-        },
-        "editorialBoard": {
-            "name": {
-                "label": "姓名",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "position": {
-                "label": "职称"
-            },
-            "workUnits": {
-                "label": "单位",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "phone": {
-                "label": "电话"
-            },
-            "fax": {
-                "label": "传真"
-            },
-            "email": {
-                "label": "邮箱"
-            },
-            "researchArea": {
-                "label": "研究方向",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "abstract": {
-                "label": "简介",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "picture": {
-                "label": "选择图片"
-            }
-        },
-        "users":{
-            "profile":{
-                "realname":{
-                    "label":"您的真实姓名"
-                },
-                "institution":{
-                    "label":"机构单位"
-                },
-                "fieldOfResearch":{
-                    "label":"您的研究领域"
-                },
-                "interestedOfJournals":{
-                    "label":"您关注的期刊名称"
-                },
-                "interestedOfTopics":{
-                    "label":"您关注的学科"
-                },
-                "phone":{
-                    "label":"联系电话"
-                },
-                "address":{
-                    "label":"通讯地址"
-                },
-                "weChat":{
-                    "label":"微信号"
-                }
-            }
-        },
-        "meetingInfo": {
-            "title": {
-                "label": "会议名称",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "startDate": {
-                "label": "会议时间"
-            },
-            "phone": {
-                "label": "联系方式"
-            },
-            "address": {
-                "label": "会议地址",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "theme": {
-                "label": "会议主题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "url": {
-                "label": "链接"
-            }
-        },
-        "medias":{
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "description": {
-                "label": "简介",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "fileId":{
-                "label":"媒体文件"
-            }
-        },
-        "emails":{
-            "myEmail": {
-                "label": "收件人的邮件地址:"
-            },
-            "youEmail": {
-                "label": "你的邮件地址:"
-            },
-            "reasons": {
-                "label": "推荐理由:"
-            }
-        },
-        "authorCenter":{
-            "title": {
-                "label": "标题",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "content": {
-                "label": "全文",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "url": {
-                "label": "相关链接"
-            },
-            "parentId": {
-                "label": "是否选择一个父集合"
-            }
-        },
-        "tags":{
-            "tagNumber": {
-                "label": "标签编号"
-            },
-            "name": {
-                "label": "标签全称",
-                "cn":{
-                    "label": "中文"
-                },
-                "en":{
-                    "label": "英文"
-                }
-            },
-            "icon": {
-                "label": "标签图标"
-            },
-            "url": {
-                "label": "标签详情URL"
-            }
+        "en": {
+          "label": "英文"
         }
+      },
+      "competentOrganization": {
+        "label": "主管单位",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "sponsor": {
+        "label": "主办单位",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "EISSN": {
+        "label": "E-ISSN"
+      },
+      "CN": {
+        "label": "CN"
+      },
+      "publicationDate": {
+        "label": "创刊日期"
+      },
+      "frequencyPublication": {
+        "label": "刊期",
+        "options": {
+          "1": "季刊",
+          "2": "月刊",
+          "3": "半月刊",
+          "4": "旬刊"
+        }
+      },
+      "included": {
+        "label": "期刊收录类型"
+      },
+      "language": {
+        "label": "语种类型",
+        "options": {
+          "1": "英文",
+          "2": "中文"
+        }
+      },
+      "topicId": {
+        "label": "主题学科"
+      },
+      "email": {
+        "label": "邮箱"
+      },
+      "address": {
+        "label": "地址",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "phone": {
+        "label": "电话"
+      },
+      "fax": {
+        "label": "传真"
+      },
+      "authorTitle": {
+        "label": "作者中心标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "authorDescription": {
+        "label": "简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "fileName": {
+        "label": "模版标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "authorPicture": {
+        "label": "选择图片"
+      },
+      "fileId": {
+        "label": "选择模版文件"
+      },
+      "accessKey": {
+        "label": "请选择一个资源标签",
+        "options": {
+          "1": "免费获取",
+          "2": "开源获取",
+          "3": "订阅获取",
+          "4": "免费试读"
+        }
+      },
+      "visible": {
+        "label": "是否可见",
+        "options": {
+          "1": "可见",
+          "0": "不可见"
+        }
+      },
+      "description": {
+        "label": "期刊描述",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "picture": {
+        "label": "选择封面图片"
+      },
+      "banner": {
+        "label": "选择横幅图片"
+      },
+      "tabSelections": {
+        "label": "选择标签页",
+        "options": {
+          "Overview": "期刊概述",
+          "Editorial Board": "编委会",
+          "Browse": "出版目录",
+          "About": "关于我们",
+          "News": "新闻",
+          "Media": "多媒体",
+          "Special Topics": "专题",
+          "Collections": "文章集",
+          "Accepted": "预出版",
+          "Online First": "优先出版",
+          "MOOP": "MOOP",
+          "Author Center": "作者中心"
+        }
+      },
+      "historicalJournal": {
+        "label": "历史期刊",
+        "$": {
+          "title": {
+            "label": "过刊名称",
+            "cn": {
+              "label": "中文"
+            },
+            "en": {
+              "label": "英文"
+            }
+          },
+          "dateRange": {
+            "label": "有效日期"
+          },
+          "issn": {
+            "label": "ISSN"
+          },
+          "essn": {
+            "label": "EISSN"
+          }
+        }
+      }
     },
-    "roles": "角色",
-    "roleName": "角色名",
-    "roleSummary": "描述",
-    "choosePermissions": "设置权限",
-    "newRole": "增加角色",
-    "deleteRole": "删除角色",
-    "roleNameEN": "英文名称",
-    "roleSummaryEN": "英文描述",
-    "roleNameCN": "中文名称",
-    "roleSummaryCN": "中文描述",
-    "addNewRole": "增加角色",
-    "editRole": "编辑角色",
-    "permissions-get-users-roles": "查看角色列表",
-    "permissions-edit-custom-roles": "设置自定义角色",
-    "permissions-delegate-and-revoke": "设置用户角色",
-    "Status": "状态",
-    "Enable": "启用",
-    "Disable": "禁用",
-    "email_not_verified": "邮箱未验证",
-    "user_blocked": "用户被禁用",
-    "Email address or username": "邮箱或用户名",
-    "Lock message": "您的账号被锁定。剩余%s秒",
-    "section_selector_button": "章节列表",
-    "Keywords": "关键词",
-    "Warning": "警告",
-    "Confirm_delete": "请注意！您将无法撤销此删除操作！",
-    "Do_it": "好的，删除它",
-    "Operation_success": "操作成功！",
-    "Deleted": "已删除",
-    "addArticleToCollection": "选择文章",
-    "collectionDetail": "文章集详情",
-    "remove": "移除",
-    "select publisher": "选择出版商",
-    "select journal": "选择期刊",
-    "select volume": "选择卷",
-    "select issue": "选择期",
-    "article title": "文章标题",
-    "search": "搜索",
-    "publisher": "出版商",
-    "createAt": "创建时间",
-    "articlesCount": "文章数",
-    "add article": "添加文章",
-    "added articles": "已选文章",
-    "select": "选择",
-    "Add articles to collection": "添加到文章集",
-    "Add articles to topics": "添加到主题",
-    "SCP User Agreement": "SCP用户注册协议",
-    "I accept": "我已阅读",
-    "Email this": "在线推荐",
-    "Add to favorites": "添加到收藏夹",
-    "send": "发送",
-    "Email this page":"邮件发送",
-    "Favorite": "收藏",
-    "Favorited":"已收藏",
-    "Journal Watch":"期刊关注",
-    "Article Watch":"文章关注",
-    "Topic Watch": "学科关注",
-    "Watched":"已关注",
-    "My favorite":"收藏夹",
-    "My Favorite":"我的收藏夹",
-    "My watch":"我的关注",
-    "My Alerts": "我的关注",
-    "Please enter the receiving mailbox":"请输入接收邮箱",
-    "You need to enter email address!":"你需要输入邮件地址!",
-    "pubStatus":{
-        "normal":"正常",
-        "onlineFirst":"优先出版",
-        "preset":"预出版"
+    "publishers": {
+      "description": {
+        "label": "英文描述"
+      },
+      "chinesedescription": {
+        "label": "中文描述"
+      },
+      "name": {
+        "label": "出版商英文名字"
+      },
+      "chinesename": {
+        "label": "出版商中文名字"
+      },
+      "urlname": {
+        "label": "简称"
+      },
+      "website": {
+        "label": "网站",
+        "placeholder": "http://www.scitation.aip.org"
+      },
+      "picture": {
+        "label": "选择图片"
+      }
     },
-    "mediaFile":"文件",
-    "Please choose a media file":"请选择一个媒体文件！",
-    "Institution Number": "机构编号",
-    "Institution Type": "机构类型",
-    "IP Range": "IP范围",
-    "Start IP": "起始 IP",
-    "End IP": "结束 IP",
-    "Librarian": "图书馆",
-    "Publisher": "出版商",
-    "Editorial Board": "编委会",
-    "University": "大学",
-    "Research Institution": "研究机构",
-    "Others": "其他",
-    "Favorite Is Empty" : "收藏夹为空",
-    "result": "结果",
-    "Table Of Contents" : "关注目录",
-    "Content Type" : "关注类型"
+    "topics": {
+      "name": {
+        "label": "中文名称"
+      },
+      "englishName": {
+        "label": "英文名称"
+      },
+      "relatedTopics": {
+        "label": "相关主题"
+      }
+    },
+    "articles": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "abstract": {
+        "label": "摘要"
+      },
+      "accessKey": {
+        "label": "请选择一个资源标签",
+        "options": {
+          "1": "免费获取",
+          "2": "开源获取",
+          "3": "订阅获取",
+          "4": "免费试读"
+        }
+      },
+      "language": {
+        "label": "语种类型",
+        "options": {
+          "1": "英文",
+          "2": "中文"
+        }
+      }
+    },
+    "about": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "agree": {
+        "label": "是否同意创建编委列表?"
+      }
+    },
+    "aboutArticles": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "description": {
+        "label": "描述",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      }
+    },
+    "news": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "author": {
+        "label": "作者",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "abstract": {
+        "label": "摘要",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "content": {
+        "label": "内容全文",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "url": {
+        "label": "链接"
+      },
+      "picture": {
+        "label": "选择图片"
+      }
+    },
+    "pages": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "description": {
+        "label": "描述",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      }
+    },
+    "advertisement": {
+      "title": {
+        "label": "描述"
+      },
+      "link": {
+        "label": "链接"
+      },
+      "defaultLink": {
+        "label": "默认链接"
+      },
+      "endDate": {
+        "label": "截止日期"
+      },
+      "pictures": {
+        "label": "选择图片"
+      },
+      "defaultPictures": {
+        "label": "选择默认图片"
+      }
+    },
+    "issues": {
+      "description": {
+        "label": "封面描述"
+      }
+    },
+    "collections": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "description": {
+        "label": "描述",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "picture": {
+        "label": "选择图片"
+      },
+      "publisherId": {
+        "label": "出版商"
+      }
+    },
+    "institutions": {
+      "name": {
+        "label": "机构名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "description": {
+        "label": "描述",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "number": {
+        "label": "机构编号"
+      },
+      "type": {
+        "label": "机构类型",
+        "options": {
+          "1": "图书馆",
+          "2": "出版商",
+          "3": "编辑部",
+          "4": "大学",
+          "5": "研究机构",
+          "6": "其他"
+        }
+      },
+      "logo": {
+        "label": "Logo"
+      },
+      "ipRange": {
+        "label": "IP范围",
+        "$": {
+          "startIP": {
+            "label": "起始 IP"
+          },
+          "endIP": {
+            "label": "结束 IP"
+          }
+        }
+      }
+    },
+    "recommend": {
+      "ArticlesId": {
+        "label": "标题"
+      },
+      "behalfPicture": {
+        "label": "选择代表图片"
+      },
+      "defaultPicture": {
+        "label": "选择默认图片"
+      }
+    },
+    "editorialMember": {
+      "abstract": {
+        "label": "简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "picture": {
+        "label": "选择图片"
+      }
+    },
+    "editorialBoard": {
+      "name": {
+        "label": "姓名",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "position": {
+        "label": "职称"
+      },
+      "workUnits": {
+        "label": "单位",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "phone": {
+        "label": "电话"
+      },
+      "fax": {
+        "label": "传真"
+      },
+      "email": {
+        "label": "邮箱"
+      },
+      "researchArea": {
+        "label": "研究方向",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "abstract": {
+        "label": "简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "picture": {
+        "label": "选择图片"
+      }
+    },
+    "users": {
+      "profile": {
+        "realname": {
+          "label": "您的真实姓名"
+        },
+        "institution": {
+          "label": "机构单位"
+        },
+        "fieldOfResearch": {
+          "label": "您的研究领域"
+        },
+        "interestedOfJournals": {
+          "label": "您关注的期刊名称"
+        },
+        "interestedOfTopics": {
+          "label": "您关注的学科"
+        },
+        "phone": {
+          "label": "联系电话"
+        },
+        "address": {
+          "label": "通讯地址"
+        },
+        "weChat": {
+          "label": "微信号"
+        }
+      }
+    },
+    "meetingInfo": {
+      "title": {
+        "label": "会议名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "startDate": {
+        "label": "会议时间"
+      },
+      "phone": {
+        "label": "联系方式"
+      },
+      "address": {
+        "label": "会议地址",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "theme": {
+        "label": "会议主题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "url": {
+        "label": "链接"
+      }
+    },
+    "medias": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "description": {
+        "label": "简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "fileId": {
+        "label": "媒体文件"
+      }
+    },
+    "emails": {
+      "myEmail": {
+        "label": "收件人的邮件地址:"
+      },
+      "youEmail": {
+        "label": "你的邮件地址:"
+      },
+      "reasons": {
+        "label": "推荐理由:"
+      }
+    },
+    "authorCenter": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "content": {
+        "label": "全文",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "url": {
+        "label": "相关链接"
+      },
+      "parentId": {
+        "label": "是否选择一个父集合"
+      }
+    },
+    "tags": {
+      "tagNumber": {
+        "label": "标签编号"
+      },
+      "name": {
+        "label": "标签全称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "icon": {
+        "label": "标签图标"
+      },
+      "url": {
+        "label": "标签详情URL"
+      }
+    }
+  },
+  "roles": "角色",
+  "roleName": "角色名",
+  "roleSummary": "描述",
+  "choosePermissions": "设置权限",
+  "newRole": "增加角色",
+  "deleteRole": "删除角色",
+  "roleNameEN": "英文名称",
+  "roleSummaryEN": "英文描述",
+  "roleNameCN": "中文名称",
+  "roleSummaryCN": "中文描述",
+  "addNewRole": "增加角色",
+  "editRole": "编辑角色",
+  "permissions-get-users-roles": "查看角色列表",
+  "permissions-edit-custom-roles": "设置自定义角色",
+  "permissions-delegate-and-revoke": "设置用户角色",
+  "Status": "状态",
+  "Enable": "启用",
+  "Disable": "禁用",
+  "email_not_verified": "邮箱未验证",
+  "user_blocked": "用户被禁用",
+  "Email address or username": "邮箱或用户名",
+  "Lock message": "您的账号被锁定。剩余%s秒",
+  "section_selector_button": "章节列表",
+  "Keywords": "关键词",
+  "Warning": "警告",
+  "Confirm_delete": "请注意！您将无法撤销此删除操作！",
+  "Do_it": "好的，删除它",
+  "Operation_success": "操作成功！",
+  "Deleted": "已删除",
+  "addArticleToCollection": "选择文章",
+  "collectionDetail": "文章集详情",
+  "remove": "移除",
+  "select publisher": "选择出版商",
+  "select journal": "选择期刊",
+  "select volume": "选择卷",
+  "select issue": "选择期",
+  "article title": "文章标题",
+  "search": "搜索",
+  "publisher": "出版商",
+  "createAt": "创建时间",
+  "articlesCount": "文章数",
+  "add article": "添加文章",
+  "added articles": "已选文章",
+  "select": "选择",
+  "Add articles to collection": "添加到文章集",
+  "Add articles to topics": "添加到主题",
+  "SCP User Agreement": "SCP用户注册协议",
+  "I accept": "我已阅读",
+  "Email this": "在线推荐",
+  "Add to favorites": "添加到收藏夹",
+  "send": "发送",
+  "Email this page": "邮件发送",
+  "Favorite": "收藏",
+  "Favorited": "已收藏",
+  "Journal Watch": "期刊关注",
+  "Article Watch": "文章关注",
+  "Topic Watch": "学科关注",
+  "Watched": "已关注",
+  "My favorite": "收藏夹",
+  "My Favorite": "我的收藏夹",
+  "My watch": "我的关注",
+  "My Alerts": "我的关注",
+  "Please enter the receiving mailbox": "请输入接收邮箱",
+  "You need to enter email address!": "你需要输入邮件地址!",
+  "pubStatus": {
+    "normal": "正常",
+    "onlineFirst": "优先出版",
+    "preset": "预出版"
+  },
+  "mediaFile": "文件",
+  "Please choose a media file": "请选择一个媒体文件！",
+  "Institution Number": "机构编号",
+  "Institution Type": "机构类型",
+  "IP Range": "IP范围",
+  "Start IP": "起始 IP",
+  "End IP": "结束 IP",
+  "Librarian": "图书馆",
+  "Publisher": "出版商",
+  "Editorial Board": "编委会",
+  "University": "大学",
+  "Research Institution": "研究机构",
+  "Others": "其他",
+  "Favorite Is Empty": "收藏夹为空",
+  "result": "结果",
+  "Table Of Contents": "关注目录",
+  "Content Type": "关注类型",
+  "Total": "总数",
+  "AutoTask": "自动任务",
+  "DOI": "DOI注册",
+  "UpdateCitations": "更新被引用信息",
+  "TaskStatus": {
+    "created": "创建",
+    "aborted": "取消",
+    "splicing": "生成任务XML",
+    "saving": "保存任务XML",
+    "saved": "任务XML已保存",
+    "error": "错误",
+    "pending": "待处理",
+    "success": "成功",
+    "ended": "结束",
+    "processing": "正在处理"
+  },
+  "Historical Journal": "历史期刊",
+  "Previous Title": "过刊名称",
+  "Effective Date": "有效日期",
+  "Choose": "选择...",
+  "startPage": "起始页",
+  "Export Citations": "引用出口"
 }

@@ -55,24 +55,19 @@ Template.journalSummary.helpers({
             return title;
         }
     },
-    Types: function (num1) {
-        if(num1=="1"){
-            return "EES";
-        }
-        if(num1=="2"){
-            return "DOAJ";
-        }
-    },
     Language: function (num2) {
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
         if(num2=="1"){
-            var title = iscn?"英文":"English";
-            return title;
+            return TAPi18n.__("English");
         }
         if(num2=="2"){
-            var title = iscn?"中文":"Chinese";
-            return title;
+            return TAPi18n.__("Chinese");
         }
+    }
+});
+
+Template.TagList.helpers({
+    getTag: function(){
+        return Tags.findOne({_id: this.toString()});
     }
 });
 
@@ -93,6 +88,15 @@ Template.recommendArticles.helpers({
         var article = Articles.findOne({_id:Arid});
         var urls = title+"/"+article.volume+"/"+article.issue+"/"+article.doi;
         return urls;
+    }
+});
+
+Template.recommendArticles.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Recommend.remove({_id:id});
+        })
     }
 });
 

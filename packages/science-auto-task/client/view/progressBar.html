@@ -1,8 +1,16 @@
 <template name="taskLoadIcon">
-	{{#if isDoiReg}}
-		{{#if isSending}}
-			<img src="/loading.gif"/>
-		{{/if}}
-	{{else}}
+	{{#if isSending}}
+		<img src="/loading.gif"/>
 	{{/if}}
+</template>
+
+<template name="taskProgressBar">
+	<div class="progress" style="margin-bottom:0px">
+		<div class="progress-bar progress-bar-success" style="width: {{rate 'success'}}%">
+		</div>
+		<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: {{rate 'processing'}}%">
+		</div>
+		<div class="progress-bar progress-bar-danger" style="width: {{rate 'failed'}}%">
+		</div>
+	</div>
 </template>

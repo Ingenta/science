@@ -31,7 +31,7 @@
                     {{> updateAboutArticlesModalForm}}
                 {{/if}}
                 {{#if can "delete-about-articles" "resource"  }}
-                    {{> deleteAboutArticlesModalForm}}
+                    <a href="#" class="fa fa-trash"></a>
                 {{/if}}
             </div>
             </p>
@@ -63,7 +63,7 @@
             <div class="part">
                 <p>
                     <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstract.cn abstract.en}}}
-                    {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}{{> deleteEditorialMemberModalForm}}{{/if}}
+                    {{#if can "modify-editorial-member" "resource"  }}{{> updateEditorialMemberModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-editorial-member" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
                 </p>
             </div>
         {{else}}
@@ -79,10 +79,6 @@
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AboutArticles" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
 </template>
 
-<template name="deleteAboutArticlesModalForm">
-    {{#afModal class="fa fa-trash" collection="AboutArticles" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
-</template>
-
 
 <template name="addEditorialMemberModalForm">
     {{#afModal formId="addEditorialMemberModal" class="fa fa-plus" collection="EditorialMember" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
@@ -90,10 +86,6 @@
 
 <template name="updateEditorialMemberModalForm">
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="EditorialMember" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
-</template>
-
-<template name="deleteEditorialMemberModalForm">
-    {{#afModal class="fa fa-trash" collection="EditorialMember" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>
 
 

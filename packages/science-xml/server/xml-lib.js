@@ -101,7 +101,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     var hasAlternatives = xpath.select("//contrib-group/aff-alternatives", doc);
     if (!hasAlternatives || !hasAlternatives.length) {
         var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
-        if (affText)results.affiliations.push({en: affText, cn: affText});
+        if (affText)results.affiliations.push({affText:{en: affText, cn: affText}});
     } else {
         var affNode = xpath.select("//contrib-group/aff-alternatives", doc);
         if (affNode !== undefined) {
@@ -114,8 +114,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 if (!affTextCn)affTextCn = affTextEn;
                 if (!affTextEn)affTextEn = affTextCn;
 
-                if (!id) oneAffiliation = {en: affTextEn, cn: affTextCn};
-                else oneAffiliation = {id: id.value, en: affTextEn, cn: affTextCn}
+                if (!id) oneAffiliation = {affText:{en: affTextEn, cn: affTextCn}};
+                else oneAffiliation = {id: id.value, affText:{en: affTextEn, cn: affTextCn}};
                 results.affiliations.push(oneAffiliation);
             });
         }

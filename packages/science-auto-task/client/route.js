@@ -1,7 +1,7 @@
 Router.route("admin.autotask", {
 	path: "/admin/autotask",
 	title: function () {
-		return "AutoTask"
+		return TAPi18n.__("AutoTask");
 	},
 	parent: "admin",
 	template: "Admin",

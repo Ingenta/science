@@ -40,7 +40,7 @@
 
         <div class="pull-right">
             {{#if can "modify-news" "resource"  }}{{> updateNewsCenterModalForm}}{{/if}}
-            {{#if can "delete-news" "resource"  }}{{> deleteNewsCenterModalForm}}{{/if}}
+            {{#if can "delete-news" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
         <p>
@@ -59,7 +59,7 @@
 
         <div class="pull-right">
             {{#if can "modify-news" "resource"  }}{{> updatePublishingDynamicModalForm}}{{/if}}
-            {{#if can "delete-news" "resource"  }}{{> deletePublishingDynamicModalForm}}{{/if}}
+            {{#if can "delete-news" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
         <p>
@@ -78,7 +78,7 @@
 
         <div class="pull-right">
             {{#if can "modify-meeting-info" "resource"  }}{{> updateMeetingInfoModalForm}}{{/if}}
-            {{#if can "delete-meeting-info" "resource"  }}{{> deleteMeetingInfoModalForm}}{{/if}}
+            {{#if can "delete-meeting-info" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
         <p>
@@ -133,10 +133,6 @@
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,author,abstract,content,url" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
-<template name="deleteNewsCenterModalForm">
-    {{#afModal class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
-</template>
-
 
 <template name="addPublishingDynamicForm">
     <div class="modal fade" id="addPublishingDynamicModal" tabindex="-1" role="dialog" aria-labelledby="addPublishingDynamicModalLabel"
@@ -168,10 +164,6 @@
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,abstract,picture" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
-<template name="deletePublishingDynamicModalForm">
-    {{#afModal id="deleteNewsForm" class="fa fa-trash" collection="News" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
-</template>
-
 
 <template name="addMeetingInfoModalForm">
     {{#afModal formId="addMeetingInfoModal" class="fa fa-plus" collection="Meeting" operation="insert" omitFields="about,publications" title=getCreateButtonContent}}{{/afModal}}
@@ -179,8 +171,4 @@
 
 <template name="updateMeetingInfoModalForm">
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Meeting" doc=_id operation="update" omitFields="about,publications"}}{{/afModal}}
-</template>
-
-<template name="deleteMeetingInfoModalForm">
-    {{#afModal class="fa fa-trash" collection="Meeting" operation="remove" doc=_id prompt=getPrompt}}{{/afModal}}
 </template>

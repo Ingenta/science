@@ -1,12 +1,12 @@
 <template name="autoTask">
-	Auto tasks
+	<h3 id="component-title">{{_ "AutoTask"}}</h3>
 	{{#autoTaskTabs tabs=tabs}}
 		{{#tabContent slug="doi"}}
 			{{> registerdoi}}
 		{{/tabContent}}
 
 		{{#tabContent slug="citation"}}
-			citation
+			{{> citationTaskList}}
 		{{/tabContent}}
 	{{/autoTaskTabs}}
 </template>

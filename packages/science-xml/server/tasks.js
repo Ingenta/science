@@ -248,6 +248,7 @@ Tasks.insertArticleTask = function (logId, result) {
 
     try {
         inserAccessKey(result);
+        inserLanguage(result);
         inertKeywords(result.keywords);
         articleId = insertArticle(result);
     }
@@ -282,6 +283,10 @@ var inserAccessKey = function (a) {
     a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
 }
 
+var inserLanguage = function (a) {
+    a.language = Publications.findOne({_id: a.journalId}).language;
+}
+
 var insertArticle = function (a) {
     var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
     if (!volume) {
@@ -305,12 +310,16 @@ var insertArticle = function (a) {
     //确保article有一个关联的issue
     a.issueId = issue._id || issue;
 
+    var journalInfo = Publications.findOne({_id: a.journalId},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1}});
+    a.journalInfo = journalInfo;
+
     var id = Articles.insert({
         doi: a.doi,
         articledoi: a.articledoi,
         title: a.title,
         abstract: a.abstract,
         journalId: a.journalId,
+        journal: a.journalInfo,//journal是后加的
         publisher: a.publisher,
         elocationId: a.elocationId,
         year: a.year,
@@ -335,7 +344,8 @@ var insertArticle = function (a) {
         keywords: a.keywords,
         references: a.references,
         pubStatus: a.pubStatus, //出版状态
-        accessKey: a.accessKey
+        accessKey: a.accessKey,
+        language: a.language
     });
     return id;
 }

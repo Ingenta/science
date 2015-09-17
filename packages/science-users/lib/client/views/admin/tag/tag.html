@@ -2,7 +2,7 @@
     <div class="container-fluid">
         {{> pageElement key="tags"}}
         <div class="form-group form-inline">
-            <label for="exampleInputName2">{{_"Tag Name"}}：</label>
+            <label for="exampleInputName2">{{_"Tag Number"}}：</label>
             <input id="searchTagNumber" type="text" class="form-control">
             <button class="btn btn-info btn-sm">{{_"search"}}</button>
         </div>
@@ -37,7 +37,7 @@
             <td>{{translateThis name.cn name.en}}</td>
             <td>{{createdBy}}</td>
             <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
-            <td>{{#if can "delete-tag" "resource"}}{{> deleteTagModalForm}}{{/if}}</td>
+            <td>{{#if can "modify-tag" "resource"}}{{> updateTagModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-tag" "resource"}}{{> deleteTagModalForm}}{{/if}}</td>
         </tr>
         {{/each}}
         </tbody>
@@ -69,6 +69,10 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateTagModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Tags" doc=_id operation="update" omitFields="createdBy,createDate"}}{{/afModal}}
 </template>
 
 <template name="deleteTagModalForm">

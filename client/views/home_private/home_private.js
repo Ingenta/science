@@ -61,9 +61,12 @@ Template.SingleNews.helpers({
 });
 
 
-Template.deleteNewsModalForm.helpers({
-    getPrompt: function () {
-        return TAPi18n.__("Are you sure?");
+Template.SingleNews.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            News.remove({_id:id});
+        })
     }
 });
 

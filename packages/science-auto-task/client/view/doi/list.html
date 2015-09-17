@@ -3,13 +3,13 @@
 		<thead>
 		<tr>
 			<th>
-				{{_ "createOn"}}
+				{{_ "createAt"}}
 			</th>
 			<th>
-				{{_ "total"}}
+				{{_ "Total"}}
 			</th>
 			<th>
-				{{_ "status"}}
+				{{_ "Status"}}
 			</th>
 		</tr>
 		</thead>
@@ -17,13 +17,13 @@
 			{{#each tasks}}
 				<tr>
 					<td>
-						{{moFormat createOn "l"}}
+						{{moFormat createOn "lll"}}
 					</td>
 					<td>
 						{{total}}
 					</td>
 					<td>
-						{{status}}&nbsp;{{> taskLoadIcon}}
+						{{i18nStatus}}&nbsp;{{> taskLoadIcon}}
 					</td>
 				</tr>
 			{{/each}}

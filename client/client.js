@@ -33,6 +33,28 @@ this.menuItemClass = function (routeName) {
     return currentPath.indexOf(routePath) === 0 ? "active" : "";
 };
 
+this.confirmDelete = function(event,callback){
+    event.preventDefault();
+    sweetAlert({
+        title             : TAPi18n.__("Warning"),
+        text              : TAPi18n.__("Confirm_delete"),
+        type              : "warning",
+        showCancelButton  : true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText : TAPi18n.__("Do_it"),
+        cancelButtonText  : TAPi18n.__("Cancel"),
+        closeOnConfirm    : false
+    }, function () {
+        callback();
+        sweetAlert({
+            title:TAPi18n.__("Deleted"),
+            text:TAPi18n.__("Operation_success"),
+            type:"success",
+            timer:2000
+        });
+    });
+}
+
 Helpers.menuItemClass = function (routeName) {
     return menuItemClass(routeName);
 };

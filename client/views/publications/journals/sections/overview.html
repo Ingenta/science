@@ -10,7 +10,7 @@
             {{> updatePublicationPictureModalForm}}
         {{/if}}
     </div>
-    <p><img src="{{getImageHelper picture}}" width="137" height="200"/></p>
+    <p><img src="{{getImageHelper picture}}" width="137"/></p>
     <p>ISSN: {{issnFormat issn}}</p>
     <p>E-ISSN: {{EISSN}}</p>
     <p>CN: {{CN}}</p>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-xs-6">
                         <p>{{_ "Co-ordinator"}}:&nbsp;{{translateThis sponsor.cn sponsor.en}}</p>
-                        <p>{{_ "Classification"}}:&nbsp;{{Types embody}}</p>
+                        <p>{{_ "Classification"}}:&nbsp;{{> TagList}}</p>
                         <p>{{_ "Language"}}:&nbsp;{{Language language}}</p>
                         <p>{{_ "Release Date"}}:&nbsp;{{formatDate publicationDate "YYYY-MM-DD"}}</p>
                     </div>
@@ -47,6 +47,14 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="TagList">
+    {{#each included}}
+        {{#with getTag}}
+            <span title={{translateThis name.cn name.en}}>{{tagNumber}}</span>&nbsp;
+        {{/with}}
+    {{/each}}
 </template>
 
 <template name="latestUploadedArticles">
@@ -85,8 +93,8 @@
         <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}{{/if}}
     </h4>
     {{#each recommendArticles}}
-    <h5><a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>{{titles ArticlesId}}</a>
-        {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}{{> deleteRecommendModalForm}}{{/if}}</h5>
+    <h5><a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>&nbsp;&nbsp;{{titles ArticlesId}}</a>
+        {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</h5>
     {{else}}
     {{_ "No articles found!"}}
     {{/each}}
@@ -126,10 +134,4 @@
         </fieldset>
     <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
     {{/autoForm}}
-</template>
-
-
-<template name="deleteRecommendModalForm">
-    {{#afModal class="fa fa-trash" collection="Recommend" operation="remove" doc=_id prompt=getPrompt}}
-    {{/afModal}}
 </template>

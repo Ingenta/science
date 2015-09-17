@@ -3,96 +3,91 @@
         {{> pageElement key="advancedSearch"}}
         <h5>{{_"Retrieval Condition"}}</h5>
         <div class="dotted mb15">
-            <form>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
-                            <input type="text" class="form-control">
+                            <input id="searchValue1" type="text" class="form-control">
                         </div>
                         <div class="form-inline form-group">
-                            <select class="form-control">
-                                <option>{{_"And"}}</option>
-                                <option>{{_"Or"}}</option>
-                                <option>{{_"Non"}}</option>
+                            <select id="searchValue2" class="form-control">
+                                <option value="AND">{{_"And"}}</option>
+                                <option value="OR">{{_"Or"}}</option>
+                                <option value="NOT">{{_"Not"}}</option>
                             </select>
-                            <input type="text" class="form-control">
+                            <input id="searchValue3" type="text" class="form-control">
                         </div>
                         <div class="form-inline form-group">
-                            <select class="form-control">
-                                <option>{{_"And"}}</option>
-                                <option>{{_"Or"}}</option>
-                                <option>{{_"Non"}}</option>
+                            <select id="searchValue4" class="form-control">
+                                <option value="AND">{{_"And"}}</option>
+                                <option value="OR">{{_"Or"}}</option>
+                                <option value="NOT">{{_"Not"}}</option>
                             </select>
-                            <input type="text" class="form-control">
+                            <input id="searchValue5" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-inline form-group">
                             <label>{{_"Retrieval Range"}}：</label>
-                            <select class="form-control">
-                                <option>{{_"Full Text"}}</option>
-                                <option>{{_"Title"}}</option>
-                                <option>{{_"Author"}}</option>
-                                <option>{{_"Company name"}}</option>
-                                <option>{{_"Keywords"}}</option>
-                                <option>{{_"Abstract"}}</option>
-                                <option>ISSN,E-ISSN,DOI</option>
+                            <select id="searchValue6" class="form-control">
+                                <option value="fulltext">{{_"Full Text"}}</option>
+                                <option value="title">{{_"Title"}}</option>
+                                <option value="author">{{_"Author"}}</option>
+                                <option value="affiliation">{{_"Company name"}}</option>
+                                <option value="keyword">{{_"Keywords"}}</option>
+                                <option value="abstract">{{_"Abstract"}}</option>
+                                <option value="code">ISSN,E-ISSN,DOI</option>
                             </select>
                         </div>
                         <div class="form-inline form-group">
                             <label>{{_"Retrieval Range"}}：</label>
-                            <select class="form-control">
-                                <option>{{_"Full Text"}}</option>
-                                <option>{{_"Title"}}</option>
-                                <option>{{_"Author"}}</option>
-                                <option>{{_"Company name"}}</option>
-                                <option>{{_"Keywords"}}</option>
-                                <option>{{_"Abstract"}}</option>
-                                <option>ISSN,E-ISSN,DOI</option>
+                            <select id="searchValue7" class="form-control">
+                                <option value="fulltext">{{_"Full Text"}}</option>
+                                <option value="title">{{_"Title"}}</option>
+                                <option value="author">{{_"Author"}}</option>
+                                <option value="affiliation">{{_"Company name"}}</option>
+                                <option value="keyword">{{_"Keywords"}}</option>
+                                <option value="abstract">{{_"Abstract"}}</option>
+                                <option value="code">ISSN,E-ISSN,DOI</option>
                             </select>
                         </div>
                         <div class="form-inline form-group">
                             <label>{{_"Retrieval Range"}}：</label>
-                            <select class="form-control">
-                                <option>{{_"Full Text"}}</option>
-                                <option>{{_"Title"}}</option>
-                                <option>{{_"Author"}}</option>
-                                <option>{{_"Company name"}}</option>
-                                <option>{{_"Keywords"}}</option>
-                                <option>{{_"Abstract"}}</option>
-                                <option>ISSN,E-ISSN,DOI</option>
+                            <select id="searchValue8" class="form-control">
+                                <option value="fulltext">{{_"Full Text"}}</option>
+                                <option value="title">{{_"Title"}}</option>
+                                <option value="author">{{_"Author"}}</option>
+                                <option value="affiliation">{{_"Company name"}}</option>
+                                <option value="keyword">{{_"Keywords"}}</option>
+                                <option value="abstract">{{_"Abstract"}}</option>
+                                <option value="code">ISSN,E-ISSN,DOI</option>
                             </select>
                         </div>
                     </div>
                 </div>
-            </form>
             <p class="text-right"><button type="button" class="btn btn-primary btn-sm">{{_"Start Search"}}</button></p>
         </div>
-        <div class="dotted mb15">
-            <form>
-                <div class="form-inline form-group">
-                    <label>{{_"Results the sorting"}}：</label>
-                    <select class="form-control">
-                        <option>{{_"Direct Correlation"}}</option>
-                        <option>{{_"The latest published"}}</option>
-                        <option>{{_"Originally published"}}</option>
-                    </select>
-                </div>
-                <div class="form-inline form-group input-group datetimepicker">
-                    <label>{{_"Publication date"}}：</label>
-                    <div class="input-group datetimepicker">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input class="set-due-date form-control" type="text"/>
-                    </div>
-                    <label>--</label>
-                    <div class="input-group datetimepicker">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input class="set-due-date form-control" type="text"/>
-                    </div>
-                </div>
-            </form>
+        <div class="form-inline form-group">
+            <label>{{_"Sort Results By"}}：</label>
+            <select class="form-control">
+                <option>{{_"Relevance"}}</option>
+                <option>{{_"Newest First"}}</option>
+                <option>{{_"Oldest First"}}</option>
+            </select>
         </div>
-        <h5>{{_"Choose search control condition"}}：</h5>
+        <div class="form-inline form-group input-group datetimepicker">
+            <label>{{_"Search Between These Dates"}}：</label>
+            <label>{{_"From"}}</label>
+            <div class="input-group datetimepicker">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input class="set-due-date form-control" type="text"/>
+            </div>
+            <label>{{_"To"}}</label>
+            <div class="input-group datetimepicker">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input class="set-due-date form-control" type="text"/>
+            </div>
+        </div>
+        <h5>{{_"Search Within"}}：</h5>
         <div class="form-group">
             <input type="text" class="form-control form-group" placeholder="{{_'Publisher name'}}" data-toggle="modal" data-target="#myModal"  readonly>
             <input type="text" class="form-control form-group" placeholder="{{_'Journal name'}}" data-toggle="modal" data-target="#myModal1"  readonly>
@@ -108,7 +103,6 @@
                             <h4 class="modal-title" id="myModalLabel">{{_"Publisher name"}}</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
                                 {{#each publisherList}}
                                     <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis chinesename name}}</label></div>
@@ -116,7 +110,6 @@
                                     {{_ "No results found!"}}
                                 {{/each}}
                                 <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -129,7 +122,6 @@
                             <h4 class="modal-title" id="myModalLabel">{{_"Journal name"}}</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
                                 {{#each publicationList}}
                                     <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis titleCn title}}</label></div>
@@ -137,7 +129,6 @@
                                     {{_ "No results found!"}}
                                 {{/each}}
                                 <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -150,7 +141,6 @@
                             <h4 class="modal-title" id="myModalLabel">{{_"The topic name"}}(level 1)</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
                                 {{#each topicList}}
                                     <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis name englishName}}</label></div>
@@ -158,7 +148,6 @@
                                     {{_ "No results found!"}}
                                 {{/each}}
                                 <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -171,7 +160,6 @@
                             <h4 class="modal-title" id="myModalLabel">{{_"Context Property"}}</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"Article"}}</label></div>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"Review"}}</label></div>
@@ -180,7 +168,6 @@
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"Letter"}}</label></div>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"Blogs"}}</label></div>
                                 <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -193,7 +180,6 @@
                             <h4 class="modal-title" id="myModalLabel">{{_"Classification"}}</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
                                 <div class="checkbox"><label><input type="checkbox" value=""> {{_"All the options"}}</label></div>
                                 {{#each tagList}}
                                     <div class="checkbox"><label><input type="checkbox" value={{_id}}> {{translateThis name.cn name.en}}</label></div>
@@ -201,7 +187,6 @@
                                     {{_ "No results found!"}}
                                 {{/each}}
                                 <p><button class="btn btn-warning btn-sm" type="reset">{{_"Cancel"}}</button> <button type="submit" class="btn btn-primary btn-sm">{{_"Submit"}}</button> </p>
-                            </form>
                         </div>
                     </div>
                 </div>

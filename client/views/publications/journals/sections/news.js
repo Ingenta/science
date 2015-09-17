@@ -11,6 +11,33 @@ Template.newsCenterList.onRendered(function () {
     }
 });
 
+Template.newsCenterList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            News.remove({_id:id});
+        })
+    }
+});
+
+Template.pubDynamicList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            News.remove({_id:id});
+        })
+    }
+});
+
+Template.meetingInfoList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Meeting.remove({_id:id});
+        })
+    }
+});
+
 Template.newsCenterList.helpers({
     newsContent: function () {
         var aboutId = Session.get('tabNews');

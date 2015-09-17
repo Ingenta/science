@@ -11,8 +11,8 @@ ReactiveTabs.createInterface({
 Template.autoTask.helpers({
 	tabs: function () {
 		return [
-			{name: TAPi18n.__("doi_register"), slug: 'doi'},
-			{name: TAPi18n.__("update_citation"), slug: 'citation'}
+			{name: TAPi18n.__("DOI"), slug: 'doi'},
+			{name: TAPi18n.__("UpdateCitations"), slug: 'citation'}
 		]
 	},
 	activeTab: function () {

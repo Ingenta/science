@@ -22,25 +22,9 @@ Template.singleArticleInTopics.events({
         e.preventDefault();
         var that=this;
         var topicsId = Router.current().params.topicsId;
-        sweetAlert({
-            title: TAPi18n.__("Warning"),
-            text: TAPi18n.__("Confirm_delete"),
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: TAPi18n.__("Do_it"),
-            cancelButtonText: TAPi18n.__("Cancel"),
-            closeOnConfirm: false
-        }, function () {
+        confirmDelete(e,function(){
             var withOutThis = _.without(that.topic, topicsId);
             Articles.update({_id: that._id}, {$set: {topic: withOutThis}});
-            sweetAlert({
-                title: TAPi18n.__("Deleted"),
-                text: TAPi18n.__("Operation_success"),
-                type: "success",
-                timer: 2000
-            });
         });
-
     }
 });
