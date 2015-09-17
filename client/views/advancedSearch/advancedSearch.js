@@ -1,5 +1,7 @@
 Template.AdvancedSearch.onRendered(function() {
     this.$('.datetimepicker').datetimepicker();
+    $("input[name='checkboxA']").prop({checked:true});
+    $("input[name='checkbox']").prop({disabled:true});
 });
 
 Template.AdvancedSearch.helpers({
@@ -18,6 +20,14 @@ Template.AdvancedSearch.helpers({
 });
 
 Template.AdvancedSearch.events({
+    'click .checkBox': function () {
+        if(checked){
+            $("input[name='checkboxA']").prop({checked:true});
+            $("input[name='checkbox']").prop({disabled:true});
+        }
+        $("input[name='checkbox']").prop({disabled:false});
+        $("input[name='checkboxA']").prop({checked:false});
+    },
     'click .btn': function () {
         var name1 = $('#searchValue1').val();
         var name2 = $('#searchValue3').val();
