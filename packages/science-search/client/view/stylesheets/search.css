@@ -28,3 +28,20 @@ li.search-cond{
     position:absolute;
     z-index:9999;
 }
+.is-container{
+    min-width:450px;
+}
+.simple-list{
+    margin: 15px 0;
+    font-size: 13px;
+    color: #999;
+}
+.simple-list>li:first-child {
+    border-top: 0;
+}
+.simple-list>li{
+    margin: 0;
+    padding: 11px 0 8px;
+    list-style-type: none;
+    border-top: 1px solid #eee;
+}

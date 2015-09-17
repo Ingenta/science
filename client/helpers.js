@@ -38,9 +38,8 @@ Template.registerHelper('getImageHelper', function (pictureId) {
 });
 
 Template.registerHelper('isChinese', function (language) {
-    if (language === "zh-CN")
-        return true;
-    return false;
+    if(!language) language = TAPi18n.getLanguage();
+    return language === "zh-CN" ? true : false;
 });
 
 Template.registerHelper('translateThis', function (chinese, english) {

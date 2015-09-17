@@ -23,7 +23,11 @@
                 {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
                 <li><a class="exportCitations" data-toggle="collapse" data-target="#collapseOne"><span class="fa fa-arrow-circle-o-right"></span>{{_ "Export Citations"}}</a></li>
                 <div id="collapseOne" class="collapse">
-                    <li><a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;Plain Text</a></li>
+                    <li><a href="/citation/bibtex/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;&nbsp;BibTeX</a></li>
+                    <li><a href="/citation/endnote/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;&nbsp;Endnote</a></li>
+                    <li><a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;&nbsp;Plain Text</a></li>
+                    <li><a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;&nbsp;RefWorks</a></li>
+                    <li><a href="/citation/pubmed/{{getCurrentDoi}}" target="_blank">&nbsp;&nbsp;&nbsp;PubMed</a></li>
                 </div>
                 <li><a class="favorite" href=""><span class="fa fa-star"></span>{{favoriteName}}</a></li>
                 <li><a class="watchArticle" href=""><span class="fa fa-eye"></span>{{watchArticleName}}</a></li>

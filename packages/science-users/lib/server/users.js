@@ -5,7 +5,7 @@ Meteor.startup(function () {
         server: 'smtp.sina.com',  // eg: mail.gandi.net
         port: 25
     }
-    //process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
+    process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 
     // By default, the email is sent from no-reply@meteor.com. If you wish to receive email from users asking for help with their account, be sure to set this to an email address that you can receive email at.
     Accounts.emailTemplates.from = 'SCP <eryaer@sina.com>';
@@ -22,6 +22,11 @@ Meteor.startup(function () {
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
     Accounts.emailTemplates.verifyEmail.text = function (user, url) {
         return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:<br> ' + url;
+    };
+
+    Accounts.emailTemplates.resetPassword.text = function (user, url) {
+        return "请点击下面的链接以重置您的密码 To reset your password, simply click the link below:\n\n"
+            + url;
     };
 
 });

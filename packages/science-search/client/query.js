@@ -28,7 +28,8 @@ SolrQuery = {
 	getQueryStr:function(queryArr){
 		var qstring;
 		if(queryArr){
-			console.dir(queryArr);
+			if(typeof queryArr === 'string')
+				return queryArr;
 			qstring="";
 			var isFirstOne = true;
 			_.each(queryArr,function(sQuery){
@@ -63,7 +64,7 @@ SolrQuery = {
 		}
 		return fqStrArr;
 	},
-	search : function(option){
+	makeUrl:function(option){
 		var queryStr= SolrQuery.getQueryStr(option.query);
 		var fqStrArr= SolrQuery.getFilterQueryStrArr(option.filterQuery);
 		if(Router.current().route.getName()=='solrsearch'){
@@ -76,31 +77,36 @@ SolrQuery = {
 			qString = "?q="+ queryStr;
 		}
 		if(fqStrArr && fqStrArr.length){
-			var l = qstring ? "&" : "?";
+			var l = qString ? "&" : "?";
 			qString += (l + "fq=" + fqStrArr.join("&fq="));
 		}
-		Router.go('/search' + qString);
+		return "/search" + qString;
+	},
+	search : function(option){
+		var url=SolrQuery.makeUrl(option);
+		Router.go(url);
 	},
 	interstingSearch:function(event){
+		event.stopPropagation();
+		event.preventDefault();
 		var content = Science.dom.getSelContent();
 		if(content){
-			console.log(content);
 			var trimContent = content.trim();
 			if(trimContent.length >2 && trimContent.length < 100){
 
 				var journalId = Session.get('currentJournalId');
-				console.log(journalId);
 				var filterQuery = ["journalId:"+journalId];
 				var setting = {rows:5};
 				Meteor.call("search",trimContent,filterQuery,setting,function(err,result){
 					var ok = err?false:result.responseHeader.status==0;
 					if(ok){
-						console.log(result);
 						var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
 							keyword:trimContent,
 							journalId:journalId,
 							result:result
 						});
+
+						var templateContent = Blaze.toHTML(Template.qsPopTemplate);
 
 						var pointEle = $(".point-ele");
 						if(!pointEle || !pointEle.length){
@@ -111,12 +117,15 @@ SolrQuery = {
 							pointEle.popover('destroy');
 							pointEle.remove();
 						});
+
+
 						pointEle.css({left: event.pageX,top: event.pageY});
 						pointEle.popover({
 							html:true,
 							content:htmlContent,
-							title:"兴趣检索",
-							trigger:"focus"
+							title:TAPi18n.__("interstingSearch"),
+							trigger:"focus",
+							template:templateContent
 						});
 						pointEle.focus();
 					}

@@ -15,7 +15,14 @@ Meteor.startup(function () {
             return TAPi18n.__("Register");
         }
     });
-
+    Router.route("agreement", {
+        parent: "register",
+        path: "/register/user_agreement",
+        template: "Agreement",
+        title: function () {
+            return TAPi18n.__("SCP User Agreement");
+        }
+    });
     Router.route("forgot_password", {
         path: "/forgot_password",
         controller: "ForgotPasswordController",
