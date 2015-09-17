@@ -36,7 +36,7 @@ QueryUtils = {
 					qstring += " " + sQuery.logicRelation + " ";
 				}
 				isFirstOne=false;
-				var solrFields = SolrQuery.fieldMap[sQuery.key];
+				var solrFields = QueryUtils.fieldMap[sQuery.key];
 				var subQueues = _.map(solrFields,function(sField){
 					return sField + ":" + sQuery.val;
 				});
@@ -51,7 +51,7 @@ QueryUtils = {
 			qstring="";
 			_.each(queryArr,function(sQuery){
 				isFirstOne=false;
-				var solrFields = SolrQuery.facetFieldMap[sQuery.key];
+				var solrFields = QueryUtils.facetFieldMap[sQuery.key];
 				if(sQuery.key=='publishDate'){
 					if(sQuery.val && (sQuery.val.start || sQuery.val.end)){
 						var subQueues = _.map(solrFields,function(sField){
