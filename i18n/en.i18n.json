@@ -767,5 +767,11 @@
         "processing":"Processing"
     },
     "Choose":"Choose...",
-    "startPage":"Page"
+    "startPage":"Page",
+    "interstingSearch":"Intersting search",
+    "searchInJournal":"Searching: '__keyword__' in __journal__",
+    "viewResult":"View all __count__ result from this journal",
+    "viewResult_plural":"View all __count__ results from this journal",
+    "topRelatedArticle":"Top __count__ Related Article",
+    "topRelatedArticle_plural":"Top __count__ Related Articles"
 }
