@@ -203,7 +203,7 @@
                     },
                     "dateRange": {
                         "label": "Effective Date",
-                        "placeholder": "YYYY-YYYY"
+                        "placeholder": "例如1950.08-2001.10……"
                     },
                     "issn": {
                         "label": "ISSN"

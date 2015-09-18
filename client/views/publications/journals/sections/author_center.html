@@ -74,10 +74,10 @@
 <template name="authorArticlesHistory">
     <div class="form-group form-inline">
         <label for="exampleInputName2">{{_"Author"}}：</label>
-        <input type="text" class="form-control" placeholder="作者名称">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="authorName" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;
         <label for="exampleInputName2">{{_"Company name"}}：</label>
-        <input type="text" class="form-control" placeholder="作者单位">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-info btn-sm">{{_"search"}}</button>
+        <input type="text" id="affiliation" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info btn-sm" id="searchAuthor">{{_"search"}}</button>
     </div>
 </template>
 

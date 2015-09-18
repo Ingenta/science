@@ -1,5 +1,5 @@
 Template.AdvancedSearch.onRendered(function() {
-    this.$('.datetimepicker').datetimepicker();
+    this.$('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD'});
     $("input[id='ck_publisher']").prop({checked:true});
     $("input[id='ck_journal']").prop({checked:true});
     $("input[id='ck_topic']").prop({checked:true});
@@ -124,8 +124,6 @@ Template.AdvancedSearch.events({
 
         //---------------------------------------筛选条件------------------------------------------
 
-        //结果排序
-        var orders = $('#sort').val();
         //出版时间
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
@@ -136,10 +134,6 @@ Template.AdvancedSearch.events({
         var str4 = document.getElementsByName("contentType");
         var str5 = document.getElementsByName("tag");
         var filterQuery = [];
-
-        if(orders){
-            filterQuery.push({key:"publisher",val:orders});
-        }
 
         if(startDate||endDate){
             filterQuery.push({key:"publishDate",val:{start:startDate,end:endDate}});
@@ -181,6 +175,20 @@ Template.AdvancedSearch.events({
         //    }
         //}
 
-        SolrQuery.search({query:query,filterQuery:filterQuery});
+        //---------------------------------------结果排序------------------------------------------
+
+        //结果排序
+        var orders = $('#sort').val();
+        var sorting = "";
+
+        if(orders=="1"){
+            sorting = "publishDate desc";
+        }
+
+        if(orders=="2"){
+            sorting = "publishDate asc";
+        }
+
+        SolrQuery.search({query:query,filterQuery:filterQuery,setting:{sort:sorting}});
     }
 });

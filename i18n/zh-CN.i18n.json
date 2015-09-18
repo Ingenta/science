@@ -169,6 +169,7 @@
   "PleaseWait": "请等一会...",
   "Search": "搜索",
   "Name": "名字",
+  "User Name": "用户名",
   "Company name": "单位",
   "Phone": "电话",
   "Fax": "传真",
@@ -412,7 +413,7 @@
           },
           "dateRange": {
             "label": "有效日期",
-            "placeholder": "YYYY-YYYY"
+            "placeholder": "例如1950.08-2001.10……"
           },
           "issn": {
             "label": "ISSN"
