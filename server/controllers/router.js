@@ -130,4 +130,51 @@ Router.map(function () {
             return this.response.end(text);
         }
     });
+    this.route('PubMed', {
+        where: 'server',
+        path: '/citation/pubmed/:publisherDoi/:articleDoi',
+        action: function () {
+            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var publisher = Publishers.findOne({_id: obj.publisher});
+            var text = "%0 Journal Article\n%D " + obj.year + "\n%@ " + obj.journal.issn.substring(0, 4) + "-" + obj.journal.issn.substring(3);
+            if (obj.language == 1) {
+                text += "\n%J " + (obj.journal.title || journal.titleCn) + "\n%V ";
+            } else {
+                text += "\n%J " + (obj.journal.titleCn || journal.title) + "\n%V ";
+            }
+            text += obj.volume + "\n%N " + obj.issue + "\n%R " + obj.doi + "\n%T ";
+            if (obj.language == 1) {
+                text += (obj.title.en || obj.title.cn) + "\n%U http://dx.doi.org/" + obj.doi + "\n%I " + publisher.name;
+            } else {
+                text += (obj.title.cn || obj.title.en) + "\n%U http://dx.doi.org/" + obj.doi + "\n%I " + publisher.chinesename;
+            }
+            text += "\n%8 " + (obj.published ? obj.published.format("yyyy-MM-dd") : "") + "\n";
+            obj.keywords.forEach(function (keyword) {
+                text += "%K " + keyword + "\n";
+            });
+            if (obj.language == 1) {
+                obj.authors.forEach(function (author) {
+                    text += "%A " + (author.given.en || author.given.cn) + ", " + (author.surname.en || author.surname.cn) + "\n";
+                });
+            } else {
+                obj.authors.forEach(function (author) {
+                    text += "%A " + (author.given.cn || author.given.en) + ", " + (author.surname.cn || author.surname.en) + "\n";
+                });
+            }
+            text += "%P " + (obj.startPage ? obj.startPage + "-" + obj.endPage : "") + "\n%G ";
+            if (obj.language == 1) {
+                text += "English\n";
+            } else {
+                text += "中文\n";
+            }
+            var filename = this.params.articleDoi + '.txt';
+            var headers = {
+                'Content-Type': 'text/plain',
+                'Content-Disposition': "attachment; filename=" + filename
+            };
+
+            this.response.writeHead(200, headers);
+            return this.response.end(text);
+        }
+    });
 });
