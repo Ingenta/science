@@ -84,7 +84,8 @@ Template.recentArticles.helpers({
 
         var resultArray = [];
         most.forEach(function (id) { //TODO: figure out a better way to do this instead of calling the db for each id in the list
-            resultArray.push(Articles.findOne({_id: id._id.articleId}));
+            var article = Articles.findOne({_id: id._id.articleId});
+            article && resultArray.push(article);
         });
         return resultArray;
     }
