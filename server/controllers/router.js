@@ -165,7 +165,7 @@ Router.map(function () {
             if (obj.language == 1) {
                 text += "English\n";
             } else {
-                text += "中文\n";
+                text += "Chinese\n";
             }
             var filename = this.params.articleDoi + '.txt';
             var headers = {

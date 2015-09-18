@@ -148,9 +148,9 @@ Template.SolrSearchResults.helpers({
                     for(var j=0;j<facetJournal.length;j+=2){
                         if(facetJournal[j+1]>0){
                             var journal= Publications.findOne({_id:facetJournal[j]});
-                            filter.filterOptions.push({
+                            journal && filter.filterOptions.push({
                                 name:journal.title,
-                                cname:journal.title,
+                                cname:journal.titleCn,
                                 count:facetJournal[j+1],
                                 fq:fields[i]+":"+facetJournal[j]
                             })

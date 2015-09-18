@@ -57,7 +57,7 @@ QueryUtils = {
 						var subQueues = _.map(solrFields,function(sField){
 							var start = QueryUtils.getSolrFormat(sQuery.val.start);
 							var end = QueryUtils.getSolrFormat(sQuery.val.end);
-							return sField + ":[" + start + " TO " + end + "]";
+							return sField + ":[\"" + start + "\" TO \"" + end + "\"]";
 						});
 						fqStrArr.push(subQueues.join(" OR "));
 					}

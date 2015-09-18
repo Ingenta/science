@@ -141,6 +141,9 @@ Template.AdminUsersEditEditForm.helpers({
     },
     "emailAddress": function () {
         return this.admin_user.emails[0].address;
+    },
+    "getInstitutionNameById": function () {
+        return Institutions.findOne({_id: this.admin_user.institutionId}).name;
     }
 });
 

@@ -169,6 +169,7 @@
   "PleaseWait": "请等一会...",
   "Search": "搜索",
   "Name": "名字",
+  "User Name": "用户名",
   "Company name": "单位",
   "Phone": "电话",
   "Fax": "传真",
@@ -411,7 +412,8 @@
             }
           },
           "dateRange": {
-            "label": "有效日期"
+            "label": "有效日期",
+            "placeholder": "例如1950.08-2001.10……"
           },
           "issn": {
             "label": "ISSN"
@@ -999,6 +1001,7 @@
   "AutoTask": "自动任务",
   "DOI": "DOI注册",
   "UpdateCitations": "更新被引用信息",
+  "Cancel Watch": "取消关注",
   "TaskStatus": {
     "created": "创建",
     "aborted": "取消",
@@ -1017,8 +1020,8 @@
   "Choose": "选择...",
   "startPage": "起始页",
   "Export Citations": "引用出口",
-  "interstingSearch":"兴趣检索",
-  "searchInJournal":"搜索: '__keyword__' ,在 __journal__ 中",
-  "viewResult":"查看本刊中所有__count__个结果",
-  "topRelatedArticle":"最相关的__count__篇文章"
+  "interstingSearch": "兴趣检索",
+  "searchInJournal": "搜索: '__keyword__' ,在 __journal__ 中",
+  "viewResult": "查看本刊中所有__count__个结果",
+  "topRelatedArticle": "最相关的__count__篇文章"
 }

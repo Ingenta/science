@@ -24,7 +24,7 @@ Date.prototype.format = function(fmt)
 }
 
 Date.prototype.toSolrString = function(){
-	return this.format('yyyy-MM-ddThh-mm-ssZ');
+	return this.format('yyyy-MM-ddThh:mm:ssZ');
 }
 
 Date.prototype.addDays = function(d)
