@@ -31,7 +31,7 @@ institutionPermissions
             summary: "institution manager"
         },
         cn: {
-            name: "机构管理(机构)",
+            name: "机构管理 (机构)",
             summary: "只能修改机构信息的角色"
         }
     });

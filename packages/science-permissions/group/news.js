@@ -9,11 +9,11 @@ newsPermissions
 publisherPermissions
 	.defineRole("news-manager", ["add-publisher", "modify-publisher", "delete-publisher"], {
 		en: {
-			name   : "publisher manager",
-			summary: "manager for publisher"
+			name   : "news manager",
+			summary: "manager for news"
 		},
 		cn: {
-			name   : "出版社管理",
-			summary: "可以增删改出版社信息的角色"
+			name   : "新闻管理",
+			summary: "可以增删改新闻信息的角色"
 		}
 	});
