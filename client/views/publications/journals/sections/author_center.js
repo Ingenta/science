@@ -67,6 +67,21 @@ Template.updateManuscriptModalForm.helpers({
     }
 });
 
+Template.authorArticlesHistory.events({
+    'click #searchAuthor': function () {
+        var name = $('#authorName').val();
+        var company = $('#affiliation').val();
+        var query = [];
+        if(name){
+            query.push({key:"author",val:name});
+        }
+        if(company){
+            query.push({key:"affiliation",val:company});
+        }
+        SolrQuery.search({query:query});
+    }
+});
+
 AutoForm.addHooks(['addInstructionsModalForm'], {
     onSuccess: function () {
         $("#addInstructionsModal").modal('hide');
