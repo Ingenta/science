@@ -71,13 +71,23 @@ QueryUtils = {
 		}
 		return fqStrArr;
 	},
-	getSortStr:function(sort){
-		if(!sort || !sort.trim())
+	getSettingStr:function(setting){
+		if(!setting)
 			return "";
-		var fields = Science.JSON.MergeObject(Querystring.fieldMap,QueryUtils.facetFieldMap);
-		var splitSortStr = sort.trim().split(' ');
-		var sortField = fields[splitSortStr[0]] && fields[splitSortStr[0]][0];
-		return sortField + (sortField.length > 1 && (" "+sortField[1]));
+		var fields = Science.JSON.MergeObject(QueryUtils.fieldMap,QueryUtils.facetFieldMap);
+		var settingStr = "";
+		_.each(setting,function(val,key){
+			if(val){
+				if(_.contains(["sort","fl"],key)){
+					var splitVal = val.trim().split(' ');
+					var field = fields[splitVal[0]] && fields[splitVal[0]][0];
+					settingStr+="&"+ key + "="+ field + (splitVal.length > 1 && (" "+splitVal[1]));
+				}else{
+					settingStr+="&"+key+"="+val;
+				}
+			}
+		});
+		return settingStr && settingStr.substr(1);//trim frist &
 	},
 	getSolrFormat:function(date){
 		if(!date || !date.trim())
