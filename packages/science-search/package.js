@@ -41,7 +41,10 @@ Package.onUse(function(api) {
     'client/view/filters.js',
     'client/view/selectionSearch.html',
     'client/view/selectionSearch.js',
-    'client/view/stylesheets/search.css'
+    'client/view/advSearch.html',
+    'client/view/advSearch.js',
+    'client/view/stylesheets/search.css',
+    'client/utils.js'
   ],'client');
 
   api.export([

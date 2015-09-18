@@ -10,7 +10,7 @@ Science.JSON.MergeObject=function(a, b){
 			if (typeof a[key] == 'undefined') {
 				a[key] = b[key];
 			} else if (typeof a[key] == 'object' && typeof b[key] == 'object') {
-				a[key] = merge(a[key], b[key]);
+				a[key] = Science.JSON.MergeObject(a[key], b[key]);
 			}
 		}
 	}

@@ -2,7 +2,8 @@ Meteor.startup(function(){
     Tracker.autorun(function(){
         var query = SolrQuery.pageSession.get("query");
         var filterQuery = SolrQuery.pageSession.get("filterQuery");
-        Meteor.call("search",query,filterQuery,function(err,result){
+	    var querySetting = SolrQuery.pageSession.get("setting") || {};
+        Meteor.call("search",query,filterQuery,querySetting,function(err,result){
             var ok = err?false:result.responseHeader.status==0;
             SolrQuery.pageSession.set("ok",ok);
             if(ok){
@@ -30,6 +31,7 @@ Template.SolrSearchBar.events({
                 //已经在搜索结果页时，通过通栏检索框进行检索时，清空筛选条件，重新检索
 	            SolrQuery.pageSession.set("query",sword);
 	            SolrQuery.pageSession.set("filterQuery",undefined);
+	            SolrQuery.pageSession.set("setting",undefined);
             }
             Router.go('/search?q=' + sword);//从其他页面通过通栏检索进行检索
         }
@@ -41,6 +43,7 @@ Template.SolrSearchBar.events({
                 if(Router.current().route.getName()=='solrsearch'){
 	                SolrQuery.pageSession.set("query",sword);
 	                SolrQuery.pageSession.set("filterQuery",undefined);
+	                SolrQuery.pageSession.set("setting",undefined);
                 }
                 Router.go('/search?q=' + sword);
             }
@@ -50,12 +53,19 @@ Template.SolrSearchBar.events({
 
 Template.SolrSearchResults.onRendered(function(){
 	//刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
-	if(Router.current().params.query.q)
-		SolrQuery.pageSession.set("query",Router.current().params.query.q);
-	if(Router.current().params.query.fq){
-		var fq=Science.getParamsFormUrl("fq");
-		SolrQuery.pageSession.set("filterQuery",fq);
-	}
+	_.each(Router.current().params.query,function(obj){
+		if(Router.current().params.query.q)
+			SolrQuery.pageSession.set("query",Router.current().params.query.q);
+		if(Router.current().params.query.fq){
+			var fq=Science.getParamsFormUrl("fq");
+			SolrQuery.pageSession.set("filterQuery",fq);
+		}
+		else{
+			_.each(Router.current().params,function(val,key){
+				SolrQuery.set(key,val);
+			});
+		}
+	})
 });
 
 Template.SolrSearchResults.helpers({

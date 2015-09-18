@@ -1,7 +1,4 @@
 Config={
-    host:{
-        url:'http://scp.com'
-    },
     isDevMode:true,  //开发模式
     "defaultAdmin":{
         "username":"admin",
