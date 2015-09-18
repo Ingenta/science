@@ -202,7 +202,8 @@
                         }
                     },
                     "dateRange": {
-                        "label": "Effective Date"
+                        "label": "Effective Date",
+                        "placeholder": "YYYY-YYYY"
                     },
                     "issn": {
                         "label": "ISSN"
