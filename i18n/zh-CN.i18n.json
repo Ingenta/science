@@ -412,7 +412,7 @@
           },
           "dateRange": {
             "label": "有效日期",
-            "placeholder": "YYYY-YYYY"
+            "placeholder": "例如1950.08-2001.10……"
           },
           "issn": {
             "label": "ISSN"
