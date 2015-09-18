@@ -29,14 +29,16 @@
                 </div>
             {{/if}}
             {{#if admin_user.institutionId}}
-                <label>
-                    {{_ "Institution"}}
-                </label>
+                <div class="form-group">
+                    <label>
+                        {{_ "Institution"}}
+                    </label>
 
-                <div class="input-div">
-                    {{#with getInstitutionNameById}}
-                        <input type="text" value="{{translateThis this.cn this.en}}" class="form-control" disabled="disabled">
-                    {{/with}}
+                    <div class="input-div">
+                        {{#with getInstitutionNameById}}
+                            <input type="text" value="{{translateThis this.cn this.en}}" class="form-control" disabled="disabled">
+                        {{/with}}
+                    </div>
                 </div>
             {{/if}}
             <div class="form-group  field-name">
