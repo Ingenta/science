@@ -68,6 +68,14 @@ Template.TopicList.helpers({
 Template.TopicButtons.helpers({
     hasSubTopic: function (parentId) {
         return Topics.find({"parentId": parentId}).count() === 0;
+    },
+    searchUrl: function(){
+        var option = {
+            filterQuery:[
+                {key:"topic","val":this._id}
+            ]
+        };
+        return SolrQuery.makeUrl(option);
     }
 });
 
