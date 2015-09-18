@@ -8,7 +8,7 @@ SolrQuery = {
 	makeUrl:function(option){
 		var queryStr= QueryUtils.getQueryStr(option.query);
 		var fqStrArr= QueryUtils.getFilterQueryStrArr(option.filterQuery);
-		var setting = QueryUtils.getSortStr(option.setting);
+		var settingStr = QueryUtils.getSettingStr(option.setting);
 		if(Router.current().route.getName()=='solrsearch'){
 			//已经在搜索结果页时，通过通栏检索框进行检索时，清空筛选条件，重新检索
 			SolrQuery.pageSession.set("query",queryStr);
@@ -24,9 +24,9 @@ SolrQuery = {
 			var l = qString ? "&" : "?";
 			qString += (l + "fq=" + fqStrArr.join("&fq="));
 		}
-		if(sortStr){
+		if(settingStr){
 			var l = qString ? "&" : "?";
-			qString += "&sort="+sortStr;
+			qString += l+settingStr;
 		}
 		return "/search" + qString;
 	},
