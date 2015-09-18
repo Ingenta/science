@@ -23,6 +23,10 @@ Date.prototype.format = function(fmt)
 	return fmt;
 }
 
+Date.prototype.toSolrString = function(){
+	return this.format('yyyy-MM-ddThh-mm-ssZ');
+}
+
 Date.prototype.addDays = function(d)
 {
 	this.setDate(this.getDate() + d);

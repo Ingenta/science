@@ -193,7 +193,8 @@ Meteor.startup(function () {
         controller: "UserSettingsMyWatchController",
         waitOn:function () {
             return [
-                Meteor.subscribe('publications')
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('topics')
             ]
         }
     });

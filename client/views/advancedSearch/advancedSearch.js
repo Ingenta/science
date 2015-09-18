@@ -89,7 +89,7 @@ Template.AdvancedSearch.events({
         $("#myModal4").modal('hide');
     },
     'click .searchBtn': function () {
-        // 搜索字段
+        // 检索条件
         var name1 = $('#searchValue1').val();
         var name2 = $('#searchValue3').val();
         var name3 = $('#searchValue5').val();
@@ -122,13 +122,29 @@ Template.AdvancedSearch.events({
             flag=true;
         }
 
-        //筛选条件
+        //---------------------------------------筛选条件------------------------------------------
+
+        //结果排序
+        var orders = $('#sort').val();
+        //出版时间
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        //选择检索控制筛选条件
         var str1 = document.getElementsByName("publisher");
         var str2 = document.getElementsByName("journal");
         var str3 = document.getElementsByName("topic");
         var str4 = document.getElementsByName("contentType");
         var str5 = document.getElementsByName("tag");
         var filterQuery = [];
+
+        if(orders){
+            filterQuery.push({key:"publisher",val:orders});
+        }
+
+        if(startDate||endDate){
+            filterQuery.push({key:"publishDate",val:{start:startDate,end:endDate}});
+        }
+
         if(0<str1.length){
             for (i = 0; i < str1.length; i++) {
                 if (str1[i].checked) {
