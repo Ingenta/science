@@ -12,9 +12,7 @@
 
 <template name="UserSettingsUpdateInformationForm">
 	<div class="">
-		<h2 id="component-title">
-			{{_ "Please update your registered information (optional)"}}:
-		</h2>
+        {{> columeTitle titleName="Please update your registered information (optional)"}}
 		{{#autoForm schema=getUserProfileSchema doc=current_user_data collection="Users" id="updateUserProfiles" type="update"}}
 			<fieldset>
 				{{> afQuickField name='profile.realname'}}
