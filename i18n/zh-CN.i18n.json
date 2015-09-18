@@ -1000,6 +1000,7 @@
   "AutoTask": "自动任务",
   "DOI": "DOI注册",
   "UpdateCitations": "更新被引用信息",
+  "Cancel Watch": "取消关注",
   "TaskStatus": {
     "created": "创建",
     "aborted": "取消",
