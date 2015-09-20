@@ -1,8 +1,6 @@
 Template.SingleTopic.events({
     'click .fa-plus': function (event) {
         event.preventDefault();
-        debugger
-
         var id = $(event.currentTarget).parent().parent().attr('id');
         Session.set("parentId", id);
         event.stopPropagation();
