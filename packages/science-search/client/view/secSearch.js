@@ -9,3 +9,9 @@ Template.secSearch.events({
 		SolrQuery.resetSecQuery();
 	}
 })
+
+Template.secSearch.helpers({
+	hasSecCond:function(){
+		return !!SolrQuery.session.get("secQuery");
+	}
+})
