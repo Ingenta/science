@@ -4,5 +4,8 @@ Template.secSearch.events({
 		var searchval =ele.val();
 		ele.val("");
 		SolrQuery.addSecQuery(searchval);
+	},
+	'click .sq-reset':function(e){
+		SolrQuery.resetSecQuery();
 	}
 })

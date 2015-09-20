@@ -26,7 +26,6 @@ Meteor.methods({
 		if(customOptions){
 			options = Science.JSON.MergeObject(customOptions,options);
 		}
-		console.log(query);
 		SolrClient.query(query,options,function(err,response){
 			if(!err)
 				return myFuture.return(JSON.parse(response.content));

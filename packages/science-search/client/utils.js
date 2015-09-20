@@ -99,7 +99,6 @@ QueryUtils = {
 		}
 	},
 	interstingSearchPop:function(keyword,journalId,result){
-		console.log(keyword)
 		var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
 			keyword:keyword,
 			journalId:journalId,

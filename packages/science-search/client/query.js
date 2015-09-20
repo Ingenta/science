@@ -109,6 +109,12 @@ SolrQuery = {
 		_.each(SolrQuery.session.keys,function(val,key){
 			SolrQuery.session.set(key,null);
 		});
+	},
+	/**
+	 * 清空二次检索条件
+	 */
+	resetSecQuery:function(){
+		SolrQuery.session.set("secQuery",undefined);
 	}
 };
 
