@@ -43,6 +43,8 @@ Package.onUse(function(api) {
     'client/view/selectionSearch.js',
     'client/view/advSearch.html',
     'client/view/advSearch.js',
+    'client/view/secSearch.html',
+    'client/view/secSearch.js',
     'client/view/stylesheets/search.css',
     'client/utils.js'
   ],'client');

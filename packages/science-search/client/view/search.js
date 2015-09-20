@@ -25,6 +25,7 @@ Meteor.startup(function(){
 
 Template.SolrSearchBar.events({
     'click .btn': function () {
+	    SolrQuery.reset();
         var sword = $('#searchInput').val();
         if (sword){
             if(Router.current().route.getName()=='solrsearch'){
@@ -40,7 +41,8 @@ Template.SolrSearchBar.events({
         if (event.keyCode === 13) {
             var sword = $('#searchInput').val();
             if (sword){
-                if(Router.current().route.getName()=='solrsearch'){
+	            SolrQuery.reset();
+	            if(Router.current().route.getName()=='solrsearch'){
 	                SolrQuery.pageSession.set("query",sword);
 	                SolrQuery.pageSession.set("filterQuery",undefined);
 	                SolrQuery.pageSession.set("setting",undefined);

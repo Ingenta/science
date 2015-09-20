@@ -5,6 +5,9 @@ SolrQuery = {
 		setting[key]=val;
 		SolrQuery.pageSession.set("setting",setting)
 	},
+	addFilterQuery:function(){
+
+	},
 	makeUrl:function(option){
 		var queryStr= QueryUtils.getQueryStr(option.query);
 		var fqStrArr= QueryUtils.getFilterQueryStrArr(option.filterQuery);
@@ -78,10 +81,13 @@ SolrQuery = {
 						pointEle.focus();
 					}
 				})
-
-
 			}
 		}
+	},
+	reset:function(){
+		_.each(SolrQuery.pageSession.keys,function(val,key){
+			SolrQuery.pageSession.set(key,null);
+		});
 	}
 };
 

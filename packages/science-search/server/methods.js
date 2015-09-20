@@ -19,6 +19,11 @@ Meteor.methods({
 			options.fq=filterQuery;
 		}
 		if(customOptions){
+			if(customOptions.secSearch && customOptions.secSearch.length){
+				_.each(customOptions.secSearch,function(fq){
+					options.fq
+				})
+			}
 			options = Science.JSON.MergeObject(customOptions,options);
 		}
 		SolrClient.query(query,options,function(err,response){

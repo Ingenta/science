@@ -1023,5 +1023,6 @@
   "interstingSearch": "兴趣检索",
   "searchInJournal": "搜索: '__keyword__' ,在 __journal__ 中",
   "viewResult": "查看本刊中所有__count__个结果",
+  "searchByResults":"继续检索",
   "topRelatedArticle": "最相关的__count__篇文章"
 }
