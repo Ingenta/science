@@ -23,7 +23,7 @@ Template.selectionSearch.helpers({
 		var option = {
 			query:this.keyword || "",
 			filterQuery:[{key:"journalId","val":this.journalId}]
-		}
+		};
 		return SolrQuery.makeUrl(option);
 	}
 });

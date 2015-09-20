@@ -1,6 +1,8 @@
 Template.secSearch.events({
 	'click .btn-success':function(e){
-		var searchval = Template.instance().$("#secSearchInput").val();
-		console.log(searchval);
+		var ele =  Template.instance().$("#secSearchInput")
+		var searchval =ele.val();
+		ele.val("");
+		SolrQuery.addSecQuery(searchval);
 	}
 })

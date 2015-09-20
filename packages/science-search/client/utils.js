@@ -97,5 +97,36 @@ QueryUtils = {
 		}else{
 			return date.toSolrString();
 		}
+	},
+	interstingSearchPop:function(keyword,journalId,result){
+		console.log(keyword)
+		var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
+			keyword:keyword,
+			journalId:journalId,
+			result:result
+		});
+
+		var templateContent = Blaze.toHTML(Template.qsPopTemplate);
+
+		var pointEle = $(".point-ele");
+		if(!pointEle || !pointEle.length){
+			pointEle=$('<a href="#" class="point-ele" role="button" tabindex="0" data-toggle="popover" ></a>');
+			$("body").append(pointEle);
+		}
+		pointEle.on('hidden.bs.popover',function(){
+			pointEle.popover('destroy');
+			pointEle.remove();
+		});
+
+
+		pointEle.css({left: event.pageX,top: event.pageY});
+		pointEle.popover({
+			html:true,
+			content:htmlContent,
+			title:TAPi18n.__("interstingSearch"),
+			trigger:"focus",
+			template:templateContent
+		});
+		pointEle.focus();
 	}
 }

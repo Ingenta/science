@@ -1,7 +1,7 @@
 Future = Npm.require('fibers/future');
 
 Meteor.methods({
-	"search":function(query,filterQuery,customOptions){
+	"search":function(query,filterQuery,secQuery,customOptions){
 		var myFuture = new Future();
 		var options= {
 			"facet":true,
@@ -18,14 +18,15 @@ Meteor.methods({
 		if(filterQuery){
 			options.fq=filterQuery;
 		}
+		if(secQuery){
+			_.each(secQuery,function(fq){
+				query += " AND " + fq;
+			});
+		}
 		if(customOptions){
-			if(customOptions.secSearch && customOptions.secSearch.length){
-				_.each(customOptions.secSearch,function(fq){
-					options.fq
-				})
-			}
 			options = Science.JSON.MergeObject(customOptions,options);
 		}
+		console.log(query);
 		SolrClient.query(query,options,function(err,response){
 			if(!err)
 				return myFuture.return(JSON.parse(response.content));
