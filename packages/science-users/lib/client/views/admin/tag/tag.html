@@ -2,13 +2,17 @@
     <div class="container-fluid">
         {{> pageElement key="tags"}}
         <div class="form-group form-inline">
-            <label for="exampleInputName2">{{_"Tag Number"}}：</label>
+            <label for="exampleInputName2">{{_ "Tag Number"}}：</label>
             <input id="searchTagNumber" type="text" class="form-control">
-            <button class="btn btn-info btn-sm">{{_"search"}}</button>
+            <button class="btn btn-info btn-sm">{{_ "search"}}</button>
         </div>
         <div class="row">
             {{#if can "add-tag" "resource"}}
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTagModal">{{_ "Add new"}}</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTagModal">
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
+                </button>
                 {{> addTagModalForm}}
             {{/if}}
         </div>
@@ -23,11 +27,11 @@
     <table class="table table-bordered table-condensed">
         <thead>
         <tr>
-            <td>{{_"Tag Number"}}</td>
-            <td>{{_"Tag Name"}}</td>
-            <td>{{_"Creator"}}</td>
-            <td>{{_"createAt"}}</td>
-            <td>{{_"Action"}}</td>
+            <td>{{_ "Tag Number"}}</td>
+            <td>{{_ "Tag Name"}}</td>
+            <td>{{_ "Creator"}}</td>
+            <td>{{_ "createAt"}}</td>
+            <td>{{_ "Action"}}</td>
         </tr>
         </thead>
         <tbody>
