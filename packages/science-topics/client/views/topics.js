@@ -71,7 +71,8 @@ Template.TopicButtons.helpers({
         var option = {
             filterQuery:[
                 {key:"topic","val":this._id}
-            ]
+            ],
+            setting:{from:'topic'}
         };
         return SolrQuery.makeUrl(option);
     }
