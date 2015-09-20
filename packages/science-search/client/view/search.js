@@ -45,17 +45,15 @@ Template.SolrSearchResults.onRendered(function(){
 	//刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
 	_.each(Router.current().params.query,function(obj,key){
 		if(key=="q"){
-			SolrQuery.session.set("query",obj);
+			SolrQuery.set("query",obj);
 		}else if(key=="fq"){//筛选检索条件
 			var fq=Science.getParamsFormUrl("fq");
-			SolrQuery.session.set("filterQuery",fq);
+			SolrQuery.set("filterQuery",fq);
 		}else if(key=="sq"){//二次检索条件
 			var sq=Science.getParamsFormUrl("sq");
-			SolrQuery.session.set("secQuery",sq);
+			SolrQuery.set("secQuery",sq);
 		}else{//其他检索条件
-			_.each(Router.current().params,function(val,key){
-				SolrQuery.set(key,val);
-			});
+            SolrQuery.set(key,obj);
 		}
 	})
 });
@@ -170,6 +168,9 @@ Template.SolrSearchResults.helpers({
     },
     'highlightFields': function(){
         return SolrQuery.session.get("highlight")[this._id];
+    },
+    'isFromTopic':function(){
+        return SolrQuery.getSetting("from") === 'topic';
     }
 });
 

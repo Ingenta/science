@@ -4,9 +4,12 @@ Template.secSearch.events({
 		var searchval =ele.val();
 		ele.val("");
 		SolrQuery.addSecQuery(searchval);
+		Router.go(SolrQuery.makeUrl());
 	},
 	'click .sq-reset':function(e){
+		e.preventDefault();
 		SolrQuery.resetSecQuery();
+		Router.go(SolrQuery.makeUrl());
 	}
 })
 

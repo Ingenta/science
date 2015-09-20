@@ -7,16 +7,14 @@ Template.solrFilterItem.events({
 		}else{
 			fq = _.union(fq,this.fq)
 		}
-		SolrQuery.session.set("filterQuery",fq);
-		var sword=SolrQuery.session.get('query');
-		var fq = Science.queryStringify({fq:SolrQuery.session.get("filterQuery")});
-		Router.go('/search?q=' + sword+'&'+fq);
+		SolrQuery.addFilterQuery(fq);
+		Router.go(SolrQuery.makeUrl());
 	}
 });
 
 Template.solrFilterItem.helpers({
 	class:function(){
-		var fq=SolrQuery.session.get("filterQuery") || [];
+		var fq=SolrQuery.getSetting("filterQuery");
 		this.selStatus= _.contains(fq,this.fq);
 		return this.selStatus?"fa fa-mail-reply":"fa fa-mail-forward";
 	}

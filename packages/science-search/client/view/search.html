@@ -10,6 +10,9 @@
 </template>
 
 <template name="SolrSearchResults">
+	{{#if isFromTopic}}
+		{{> relatedTopicLists}}
+	{{/if}}
 	{{> secSearch}}
 	<div class="col-xs-4">
 		{{#each filters}}

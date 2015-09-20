@@ -5,10 +5,14 @@ SolrQuery = {
 	 * @param key
 	 * @param val
 	 */
-	addSetting:function(key,val){
-		var setting = SolrQuery.session.get("setting") || {};
-		setting[key]=val;
-		SolrQuery.session.set("setting",setting)
+	set:function(key,val){
+		var setting = SolrQuery.getSetting() || {};
+		setting[key] = val;
+		SolrQuery.session.set("setting",setting);
+	},
+	getSetting:function(key){
+		var setting = SolrQuery.session.get("setting");
+		return (key && setting) ? setting[key] : setting;
 	},
 	/**
 	 * 增加一个值到ReactiveDict中
