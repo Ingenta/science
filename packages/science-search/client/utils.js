@@ -57,7 +57,7 @@ QueryUtils = {
 						var subQueues = _.map(solrFields,function(sField){
 							var start = QueryUtils.getSolrFormat(sQuery.val.start);
 							var end = QueryUtils.getSolrFormat(sQuery.val.end);
-							return sField + ":[" + start + " TO " + end + "]";
+							return sField + ":[\"" + start + "\" TO \"" + end + "\"]";
 						});
 						fqStrArr.push(subQueues.join(" OR "));
 					}
@@ -97,5 +97,35 @@ QueryUtils = {
 		}else{
 			return date.toSolrString();
 		}
+	},
+	interstingSearchPop:function(keyword,journalId,result){
+		var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
+			keyword:keyword,
+			journalId:journalId,
+			result:result
+		});
+
+		var templateContent = Blaze.toHTML(Template.qsPopTemplate);
+
+		var pointEle = $(".point-ele");
+		if(!pointEle || !pointEle.length){
+			pointEle=$('<a href="#" class="point-ele" role="button" tabindex="0" data-toggle="popover" ></a>');
+			$("body").append(pointEle);
+		}
+		pointEle.on('hidden.bs.popover',function(){
+			pointEle.popover('destroy');
+			pointEle.remove();
+		});
+
+
+		pointEle.css({left: event.pageX,top: event.pageY});
+		pointEle.popover({
+			html:true,
+			content:htmlContent,
+			title:TAPi18n.__("interstingSearch"),
+			trigger:"focus",
+			template:templateContent
+		});
+		pointEle.focus();
 	}
 }

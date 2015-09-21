@@ -1,7 +1,7 @@
 Future = Npm.require('fibers/future');
 
 Meteor.methods({
-	"search":function(query,filterQuery,customOptions){
+	"search":function(query,filterQuery,secQuery,customOptions){
 		var myFuture = new Future();
 		var options= {
 			"facet":true,
@@ -17,6 +17,11 @@ Meteor.methods({
 		}
 		if(filterQuery){
 			options.fq=filterQuery;
+		}
+		if(secQuery){
+			_.each(secQuery,function(fq){
+				query += " AND " + fq;
+			});
 		}
 		if(customOptions){
 			options = Science.JSON.MergeObject(customOptions,options);

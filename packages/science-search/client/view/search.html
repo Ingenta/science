@@ -1,15 +1,19 @@
 <template name="SolrSearchBar">
-	<div class="navbar-form pull-right" role="search" name="search">
+	<div class="navbar-form pull-right" role="search">
 		<div class="input-group">
-			<input id="searchInput" type="text" class="form-control" placeholder='{{_ "Search"}}'>
-           <span class="input-group-btn">
+			<input id="searchInput" type="text" class="form-control" placeholder='{{_ "search"}}'>
+            <span class="input-group-btn">
                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-           </span>
+            </span>
 		</div>
 	</div>
 </template>
 
 <template name="SolrSearchResults">
+	{{#if isFromTopic}}
+		{{> relatedTopicLists}}
+	{{/if}}
+	{{> secSearch}}
 	<div class="col-xs-4">
 		{{#each filters}}
 			{{> solrFilterItem}}

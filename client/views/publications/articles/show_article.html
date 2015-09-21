@@ -146,34 +146,27 @@
 <template name="articleOptions">
 
     {{#articleTabs name="" tabs=tabs activeTab="full text"}}
-        {{#tabContent slug="abstract"}}
-            {{#with context}}
+        {{#with context}}
+            {{#tabContent slug="abstract"}}
                 {{> AbstractTemplate}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="full text"}}
-            {{#with context}}
+            {{#tabContent slug="full text"}}
                 {{> FullTextTemplate}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="references"}}
-            {{#with context}}
+            {{#tabContent slug="references"}}
                 {{> ReferencesTemplate}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="cited by"}}
-            {{> CitedByTemplate}}
-        {{/tabContent}}
+            {{#tabContent slug="cited by"}}
+                {{> CitedByTemplate}}
+            {{/tabContent}}
 
-        {{#tabContent slug="data media"}}
-            {{#with context}}
+            {{#tabContent slug="data media"}}
                 {{> DataMediaTemplate}}
-            {{/with}}
-        {{/tabContent}}
-
+            {{/tabContent}}
+        {{/with}}
         {{#tabContent slug="metrics"}}
             {{> MetricsTemplate}}
         {{/tabContent}}

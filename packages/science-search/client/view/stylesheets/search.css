@@ -13,7 +13,7 @@ li.search-cond{
     margin-left:5px;
 }
 .qs-journal{
-    width:100%
+    width:75%
 }
 .qs-row{
     width:90% !important;
@@ -30,18 +30,4 @@ li.search-cond{
 }
 .is-container{
     min-width:450px;
-}
-.simple-list{
-    margin: 15px 0;
-    font-size: 13px;
-    color: #999;
-}
-.simple-list>li:first-child {
-    border-top: 0;
-}
-.simple-list>li{
-    margin: 0;
-    padding: 11px 0 8px;
-    list-style-type: none;
-    border-top: 1px solid #eee;
 }

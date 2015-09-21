@@ -21,9 +21,9 @@ Template.selectionSearch.helpers({
 	},
 	searchUrl:function(){
 		var option = {
-			query:this.keyword,
+			query:this.keyword || "",
 			filterQuery:[{key:"journalId","val":this.journalId}]
-		}
+		};
 		return SolrQuery.makeUrl(option);
 	}
 });

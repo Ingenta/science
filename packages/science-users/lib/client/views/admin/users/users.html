@@ -22,9 +22,9 @@
             {{#if can "add-user" "user"}}
                 <div id="dataview-controls-insert" class="form-group ">
                     <button type="submit" id="dataview-insert-button" class="btn btn-success">
-					<span class="fa fa-plus">
-					</span>
-                        {{_ "Add new"}}
+                        <span class="fa fa-plus">
+                            {{_ "Add new"}}
+                        </span>
                     </button>
                 </div>
             {{/if}}
@@ -66,7 +66,7 @@
         <thead id="dataview-table-header">
         <tr id="dataview-table-header-row">
             <th class="th-sortable" data-sort="username">
-                {{_ "Name"}}
+                {{_ "User Name"}}
             </th>
             <th class="th-sortable">
                 {{_ "E-mail"}}

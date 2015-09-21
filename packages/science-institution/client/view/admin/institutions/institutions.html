@@ -15,6 +15,8 @@
 
 <template name="addInstitutionForm">
     {{#afModal formId="addInstitutionModalForm" class="btn btn-success" collection="Institutions" operation="insert" omitFields="available, ipRange.$.startNum, ipRange.$.endNum" buttonContent=getCreateButtonContent title=getCreateButtonContent}}
-        {{_ "Add new"}}
+        <span class="fa fa-plus">
+            {{_ "Add new"}}
+        </span>
     {{/afModal}}
 </template>

@@ -1,0 +1,23 @@
+<template name="secSearch">
+	<div class="container-fluid">
+		<hr>
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="input-group">
+					<input id="secSearchInput" type="text" class="form-control" placeholder="{{_ "searchByResults"}}">
+		            <span class="input-group-btn">
+		                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+		            </span>
+				</div>
+			</div>
+			{{#if hasSecCond}}
+			<div class="col-xs-7">
+				<div>
+					<button class="btn btn-warning sq-reset" type="button"><i class="fa fa-mail-reply"></i>{{_ "resetSecSearch"}}</button>
+				</div>
+			</div>
+			{{/if}}
+		</div>
+		<hr>
+	</div>
+</template>

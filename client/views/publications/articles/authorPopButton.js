@@ -12,7 +12,7 @@ Template.authorPopButton.events({
         });
         ele.popover({
             title: title,
-            content: content
+            content: content,
         });
         ele.popover('show');
     },
@@ -24,4 +24,18 @@ Template.authorPopButton.helpers({
     name: function () {
         return Template.currentData().name;
     }
-});
+})
+
+
+Template.authorPopContent.helpers({
+    searchUrl:function(){
+        var authorName = Template.currentData().name && "\""+Template.currentData().name+"\"";
+        var option = {
+            filterQuery:[
+                {key:"journalId","val":this.journalId},
+                {key:"author","val":authorName || ""}
+            ]
+        };
+        return SolrQuery.makeUrl(option);
+    }
+})

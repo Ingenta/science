@@ -4,7 +4,9 @@
         <div class="row">
             {{#if can "add-publisher" "publisher" }}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublisherModal">
-                    {{_ "Add new"}}
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
                 </button>
             {{/if}}
         </div>

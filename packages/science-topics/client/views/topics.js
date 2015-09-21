@@ -1,8 +1,6 @@
 Template.SingleTopic.events({
     'click .fa-plus': function (event) {
         event.preventDefault();
-        debugger
-
         var id = $(event.currentTarget).parent().parent().attr('id');
         Session.set("parentId", id);
         event.stopPropagation();
@@ -68,6 +66,15 @@ Template.TopicList.helpers({
 Template.TopicButtons.helpers({
     hasSubTopic: function (parentId) {
         return Topics.find({"parentId": parentId}).count() === 0;
+    },
+    searchUrl: function(){
+        var option = {
+            filterQuery:[
+                {key:"topic","val":this._id}
+            ],
+            setting:{from:'topic'}
+        };
+        return SolrQuery.makeUrl(option);
     }
 });
 

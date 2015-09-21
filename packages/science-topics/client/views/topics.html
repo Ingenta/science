@@ -3,7 +3,11 @@
         {{> pageElement key="topic"}}
         <div class="row">
             {{#if can "add-topic" "topic"}}
-                {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm"}}{{_ "Add new"}}{{/jkafModal}}
+                {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm"}}
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
+                {{/jkafModal}}
             {{/if}}
         </div>
         <hr>
@@ -69,7 +73,7 @@
 </template>
 
 <template name="TopicButtons">
-    <a href="/topic/{{translateThis name englishName}}">
+    <a href="{{searchUrl}}">
         {{translateThis name englishName}}
     </a>
 
@@ -86,7 +90,7 @@
             {{/if}}
         {{/if}}
         {{#if can "add-article-to-topic" "topic" }}
-            <a class="fa fa-long-arrow-right" href="{{pathFor 'topics.selectArticles' topicsId=_id}}"></a>
+            <a class="fa fa-long-arrow-right" href="{{searchUrl}}"></a>
         {{/if}}
     </div>
 </template>

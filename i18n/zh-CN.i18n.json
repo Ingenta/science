@@ -131,7 +131,7 @@
   "User settings": "用户设置",
   "Profile": "个人资料",
   "Update information": "更新注册资料",
-  "Please update your registered information (optional)": "请填写您的注册资料（选填）",
+  "Please update your registered information (optional)": "更新注册资料",
   "Please select more journal name": "请选择期刊名称",
   "Publisher name": "出版商名称",
   "Journal name": "期刊名称",
@@ -169,6 +169,7 @@
   "PleaseWait": "请等一会...",
   "Search": "搜索",
   "Name": "名字",
+  "User Name": "用户名",
   "Company name": "单位",
   "Phone": "电话",
   "Fax": "传真",
@@ -411,7 +412,8 @@
             }
           },
           "dateRange": {
-            "label": "有效日期"
+            "label": "有效日期",
+            "placeholder": "例如1950.08-2001.10……"
           },
           "issn": {
             "label": "ISSN"
@@ -440,7 +442,7 @@
       },
       "website": {
         "label": "网站",
-        "placeholder": "http://www.scitation.aip.org"
+        "placeholder": "http://www.baidu.com"
       },
       "picture": {
         "label": "选择图片"
@@ -1053,8 +1055,11 @@
   "interstingSearch":"兴趣检索",
   "searchInJournal":"搜索: '__keyword__' ,在 __journal__ 中",
   "viewResult":"查看本刊中所有__count__个结果",
-  "topRelatedArticle":"最相关的__count__篇文章",
   "Year of publication":"出版年份",
   "Topic name":"专题名称",
-  "Guest Editor":"客座编辑"
+  "Guest Editor":"客座编辑",
+  "searchByResults":"继续检索",
+  "topRelatedArticle": "最相关的__count__篇文章",
+  "secSeachOr":"或",
+  "resetSecSearch":"重置"
 }

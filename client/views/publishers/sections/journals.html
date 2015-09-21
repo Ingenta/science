@@ -4,9 +4,10 @@
         <div class="row">
             <div class="col-xs-12">
                 {{#if can "add-journal" "resource" }}
-                    <button type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#addPublicationModal">
-                        {{_ "Add new"}}
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
+                        <span class="fa fa-plus">
+                            {{_ "Add new"}}
+                        </span>
                     </button>
                 {{/if}}
             </div>

@@ -7,7 +7,9 @@
 		    {{> addNewsForm}}
             {{#if hasMostThreeNews}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
-                    {{_ "Add new"}}
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
                 </button>
             {{/if}}
 	    {{/if}}
@@ -63,9 +65,11 @@
         <div class="row">
             <h5><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></h5>
         </div>
-        <small>
-            {{{translateThis abstract.cn abstract.en}}}
-        </small>
+        <div class="over-height">
+            <small>
+                {{{translateThis abstract.cn abstract.en}}}
+            </small>
+        </div>
     </div>
     <!--<hr>-->
 </template>
@@ -107,21 +111,28 @@
     <div class="row">
         <div class="col-xs-6">
             <h4>{{_ "Most recent articles"}}</h4>
-            {{#each newestArticle}}
-            <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
-            {{else}}
-            {{_ "No articles found!"}}
-            {{/each}}
+	        <ul class="list-unstyled simple-list">
+		        {{#each newestArticle}}
+			        <li>
+				        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+			        </li>
+		        {{else}}
+			        {{_ "No articles found!"}}
+		        {{/each}}
+	        </ul>
             <br/>
-
         </div>
         <div class="col-xs-6">
             <h4>{{_ "Most read articles"}}</h4>
-            {{#each mostReadArticles}}
-                <h5><a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a></h5>
-            {{else}}
-                {{_ "No articles found!"}}
-            {{/each}}
+	        <ul class="list-unstyled simple-list">
+		        {{#each mostReadArticles}}
+			        <li>
+				        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+			        </li>
+		        {{else}}
+			        {{_ "No articles found!"}}
+		        {{/each}}
+	        </ul>
             <br/>
         </div>
     </div>

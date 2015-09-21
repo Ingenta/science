@@ -42,7 +42,9 @@ Usage：
         sort:"publishDate desc",
         rows:10,  //每页10条数据
         start:11,  //从第几条开始查询
-        fl:"title.cn, title.en" //只返回指定字段内容
+        fl:"title.cn, title.en", //只返回指定字段内容
+        from:"topic" //从哪个页面进入搜索页，（不同页面进入到搜索结果页，页面功能有差异）
     }});
 ###注意：
     日期值可以是string也可以是Date，start和end可以只有一个。
+    from用于判断用户是从哪个页面进入搜索结果。
