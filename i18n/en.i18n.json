@@ -232,7 +232,7 @@
             },
             "website": {
                 "label": "Website",
-                "placeholder": "http://www.scitation.aip.org"
+                "placeholder": "http://www.baidu.com"
             },
             "picture": {
                 "label": "Choose file"
