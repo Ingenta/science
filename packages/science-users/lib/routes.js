@@ -191,6 +191,9 @@ Meteor.startup(function () {
     Router.route("user_settings.my_watch", {
         path: "/user_settings/my_watch",
         controller: "UserSettingsMyWatchController",
+        title: function () {
+            return TAPi18n.__("My watch");
+        },
         waitOn:function () {
             return [
                 Meteor.subscribe('publications'),
