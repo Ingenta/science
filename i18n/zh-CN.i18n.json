@@ -228,13 +228,16 @@
   "schemas": {
     "publications": {
       "title": {
-        "label": "出版物英文名"
+        "label": "出版物英文名",
+        "placeholder": "Science China Mathematics"
       },
       "titleCn": {
-        "label": "出版物中文名"
+        "label": "出版物中文名",
+        "placeholder": "中国科学 数学"
       },
       "shortTitle": {
-        "label": "简称"
+        "label": "简称",
+        "placeholder": "math"
       },
       "issn": {
         "label": "ISSN",
@@ -434,17 +437,20 @@
         "label": "中文描述"
       },
       "name": {
-        "label": "出版商英文名字"
+        "label": "出版商英文名字",
+        "placeholder": "Science China Publishing"
       },
       "chinesename": {
-        "label": "出版商中文名字"
+        "label": "出版商中文名字",
+        "placeholder": "中国科学出版社"
       },
       "urlname": {
-        "label": "简称"
+        "label": "简称",
+        "placeholder": "SCP"
       },
       "website": {
         "label": "网站",
-        "placeholder": "http://www.baidu.com"
+        "placeholder": "http://www.scichina.com"
       },
       "picture": {
         "label": "选择图片"
