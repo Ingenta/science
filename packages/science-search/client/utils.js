@@ -22,7 +22,7 @@ QueryUtils = {
 			return date.toSolrString();
 		}
 	},
-	interstingSearchPop : function (keyword, journalId, result) {
+	interstingSearchPop : function (event, keyword, journalId, result) {
 		var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
 			keyword  : keyword,
 			journalId: journalId,

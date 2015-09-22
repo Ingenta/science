@@ -26,7 +26,8 @@ SolrUtils = {
 		"volume"     : ["volume"],
 		"issue"      : ["issue"],
 		"page"       : ["startPage", 'elocationId'],
-		"publishDate": ["published"]
+		"publishDate": ["published"],
+		"not_id"         : ["NOT _id"]
 	},
 	getQueryStr         : function (queryArr) {
 		var qstring;
@@ -39,7 +40,7 @@ SolrUtils = {
 				if (!isFirstOne && sQuery.logicRelation) {
 					qstring += " " + sQuery.logicRelation + " ";
 				}
-				isFirstOne = false;
+				isFirstOne     = false;
 				var solrFields = SolrUtils.fieldMap[sQuery.key];
 				var subQueues  = _.map(solrFields, function (sField) {
 					return sField + ":" + sQuery.val;
@@ -122,41 +123,41 @@ SolrUtils = {
 };
 
 Meteor.methods({
-	"search":function(params){
-		var myFuture = new Future();
-		var options= {
-			"facet":true,
-			"facet.field":["publisher","journalId","all_topics","facet_all_authors_cn","facet_all_authors_en","year"],
-			"hl":true,
-			"hl.fl":"title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics,doi,abstract",
-			"hl.preserveMulti":true,
-			"hl.simple.pre":"<span class='highlight'>",
-			"hl.simple.post":"</span>",
-			"wt":"json"
+	"search": function (params) {
+		var myFuture   = new Future();
+		var options    = {
+			"facet"           : true,
+			"facet.field"     : ["publisher", "journalId", "all_topics", "facet_all_authors_cn", "facet_all_authors_en", "year"],
+			"hl"              : true,
+			"hl.fl"           : "title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics,doi,abstract",
+			"hl.preserveMulti": true,
+			"hl.simple.pre"   : "<span class='highlight'>",
+			"hl.simple.post"  : "</span>",
+			"wt"              : "json"
 		};
-		var userParams = _.clone(params) || {q:"*"};
+		var userParams = _.clone(params) || {q: "*"};
 
-		if(!userParams.q){
-			userParams.q="*";
-		}else{
+		if (!userParams.q) {
+			userParams.q = "*";
+		} else {
 			userParams.q = SolrUtils.getQueryStr(userParams.q)
 		}
-		if(userParams.sq){
-			_.each(userParams.sq,function(sq){
+		if (userParams.sq) {
+			_.each(userParams.sq, function (sq) {
 				userParams.q += " AND " + sq;
 			});
 		}
-		if(userParams.fq){
+		if (userParams.fq) {
 			userParams.fq = SolrUtils.getFilterQueryStrArr(userParams.fq)
 		}
-		if(userParams.st){
+		if (userParams.st) {
 			var setting = _.clone(userParams.st);
 			delete userParams.st;
-			userParams = Science.JSON.MergeObject(userParams,setting);
+			userParams  = Science.JSON.MergeObject(userParams, setting);
 		}
-		userParams = Science.JSON.MergeObject(userParams,options);
-		SolrClient.query(userParams,function(err,response){
-			if(!err)
+		userParams = Science.JSON.MergeObject(userParams, options);
+		SolrClient.query(userParams, function (err, response) {
+			if (!err)
 				return myFuture.return(JSON.parse(response.content));
 			else
 				myFuture.throw(err);

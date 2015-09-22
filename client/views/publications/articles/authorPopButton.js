@@ -31,10 +31,10 @@ Template.authorPopContent.helpers({
     searchUrl:function(){
         var authorName = Template.currentData().name && "\""+Template.currentData().name+"\"";
         var option = {
-            filterQuery:[
-                {key:"journalId","val":this.journalId},
-                {key:"author","val":authorName || ""}
-            ]
+            filterQuery:{
+                journalId:this.journalId,
+                author:authorName
+            }
         };
         return SolrQuery.makeUrl(option);
     }
