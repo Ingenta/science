@@ -24,6 +24,10 @@ Meteor.methods({
     'countSession': function(){
         var c = UserStatus.connections.find().count();
         return c;
+    },
+    'ipInChina': function () {
+        var currentUserIPNumber = Science.ipToNumber(this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress);
+        return IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber.toString()}, endIpLong: {$gte: currentUserIPNumber.toString()}, countryCode2: "CN"})? false: true;
     }
 });
 

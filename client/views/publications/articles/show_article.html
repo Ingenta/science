@@ -152,7 +152,11 @@
             {{/tabContent}}
 
             {{#tabContent slug="full text"}}
-                {{> FullTextTemplate}}
+                {{#if ipRedirect}}
+                    {{> RedirectTemplate}}
+                {{else}}
+                    {{> FullTextTemplate}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="references"}}
