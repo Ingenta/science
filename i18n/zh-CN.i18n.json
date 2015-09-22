@@ -237,7 +237,8 @@
         "label": "简称"
       },
       "issn": {
-        "label": "ISSN"
+        "label": "ISSN",
+        "placeholder": "1234-5678"
       },
       "createdBy": {
         "label": "创建者"
@@ -416,7 +417,8 @@
             "placeholder": "例如1950.08-2001.10……"
           },
           "issn": {
-            "label": "ISSN"
+            "label": "ISSN",
+            "placeholder": "1234-5678"
           },
           "essn": {
             "label": "EISSN"

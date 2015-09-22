@@ -27,7 +27,8 @@
                 "label": "Short Title"
             },
             "issn": {
-                "label": "ISSN"
+                "label": "ISSN",
+                "placeholder": "1234-5678"
             },
             "createdBy": {
                 "label": "CreatedBy"
@@ -206,7 +207,8 @@
                         "placeholder": "例如1950.08-2001.10……"
                     },
                     "issn": {
-                        "label": "ISSN"
+                        "label": "ISSN",
+                        "placeholder": "1234-5678"
                     },
                     "essn": {
                         "label": "EISSN"
