@@ -8,8 +8,9 @@ SolrQuery = {
 		return SolrQuery;
 	},
 	add             : function (key, val) {
-		var arr = SolrQuery.session.get(key) || [];
+		var arr = SolrQuery.get(key) || [];
 		arr.push(val);
+		SolrQuery.set(key,arr);
 		return SolrQuery;
 	},
 	setting:function(key,val){
@@ -35,7 +36,11 @@ SolrQuery = {
 		if(val===undefined){
 			return params[key];
 		}else{
-			params[key]=val;
+			if(_.isEmpty(val)){
+				delete params[key];
+			}else{
+				params[key]=val;
+			}
 			SolrQuery.set("params",params);
 			return params;
 		}
@@ -57,8 +62,15 @@ SolrQuery = {
 		params.fq[field]=currFilter;
 		SolrQuery.params("fq", params.fq);
 	},
+	changeFilterQuery  : function (field,val) {
+		var params = SolrQuery.params();
+		params.fq[field]=[val];
+		SolrQuery.params("fq", params.fq);
+	},
 	addSecondQuery  : function (val) {
-		SolrQuery.add("secondQuery", val);
+		var sq = SolrQuery.params("sq") || [];
+		sq= _.union(sq,[val]);
+		SolrQuery.params("sq",sq);
 	},
 	makeUrl         : function (option) {
 		var queryStr   = JSON.stringify(option ? option.query : SolrQuery.params("q"));
@@ -73,7 +85,7 @@ SolrQuery = {
 			qString += "&fq=" + fqStr;
 		}
 		if (sqStr) {
-			qString += "&sq=" + fqStr;
+			qString += "&sq=" + sqStr;
 		}
 		if (settingStr) {
 			qString += "&st=" + settingStr;
@@ -137,7 +149,8 @@ SolrQuery = {
 	 * 清空二次检索条件
 	 */
 	resetSecQuery   : function () {
-		SolrQuery.session.set("secondQuery", undefined);
+		console.log('aaa');
+		SolrQuery.params("sq",[]);
 	},
 
 	callSearchMethod: function () {

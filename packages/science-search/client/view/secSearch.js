@@ -1,5 +1,5 @@
 Template.secSearch.events({
-	'click .btn-success':function(e){
+	'click .btn-primary':function(e){
 		var ele =  Template.instance().$("#secSearchInput");
 		var searchval =ele.val();
 		ele.val("");
@@ -15,6 +15,6 @@ Template.secSearch.events({
 
 Template.secSearch.helpers({
 	hasSecCond:function(){
-		return !!SolrQuery.get("secondQuery");
+		return !_.isEmpty(SolrQuery.params("sq"));
 	}
 })

@@ -1,24 +1,34 @@
 <template name="relatedTopicLists">
 	<div class="container-fluid">
+		{{#with currTopic}}
 		<div class="row">
 			<div class="col-xs-12">
-				<h2>Topic</h2>
-				<p>Browse Scitation content quickly and easily by topic by selecting broad categories or more specific subdisciplines. The browse function is supported by the powerful Scitation thesaurus (7,500+ terms) developed to address researchers’ information needs.</p>
+				<h2>{{translateThis name englishName}}</h2>
+				<p>{{pageDesc}}</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-4">
 				<h5>More general topics:</h5>
-				111
+				{{> topicListInSearchResult list=parentTopic}}
 			</div>
 			<div class="col-xs-4">
 				<h5>More specific topics:</h5>
-				222
+				{{> topicListInSearchResult list=subTopics}}
 			</div>
 			<div class="col-xs-4">
 				<h5>Related topics:</h5>
-				333
+				{{> topicListInSearchResult list=relatedTopics}}
 			</div>
 		</div>
+		{{/with}}
 	</div>
+</template>
+
+<template name="topicListInSearchResult">
+	<ul class="list-unstyled">
+		{{#each list}}
+			<li><a href="#">{{translateThis name englishName}}</a></li>
+		{{/each}}
+	</ul>
 </template>
