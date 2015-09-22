@@ -190,6 +190,10 @@ ScienceXML.replaceItalics = function (input) {
     return input;
 }
 
+ScienceXML.replaceNewLines = function (input) {
+    input = Science.replaceSubstrings(input, "/n", " ");
+    return input;
+}
 
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {
     var titleNodes = xpath.select(xp, doc)[0];

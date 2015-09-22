@@ -27,7 +27,8 @@
                 "label": "Short Title"
             },
             "issn": {
-                "label": "ISSN"
+                "label": "ISSN",
+                "placeholder": "1234-5678"
             },
             "createdBy": {
                 "label": "CreatedBy"
@@ -206,7 +207,8 @@
                         "placeholder": "例如1950.08-2001.10……"
                     },
                     "issn": {
-                        "label": "ISSN"
+                        "label": "ISSN",
+                        "placeholder": "1234-5678"
                     },
                     "essn": {
                         "label": "EISSN"
@@ -698,6 +700,38 @@
             },
             "url": {
                 "label": "A Link"
+            }
+        },
+        "specialTopics": {
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "IssueId": {
+                "label": "Volume-Issue"
+            },
+            "guest_editor": {
+                "label": "Guest Editor",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "abstract": {
+                "label": "Abstract",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
             }
         }
     },

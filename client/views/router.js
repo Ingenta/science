@@ -30,6 +30,7 @@ Meteor.subscribe('articleViews');
 Meteor.subscribe('recommend');
 Meteor.subscribe('institutions');
 Meteor.subscribe('mostCited');
+Meteor.subscribe('specialTopics');
 
 Router.onBeforeAction(function () {
     // loading indicator here
