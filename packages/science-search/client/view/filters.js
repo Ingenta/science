@@ -1,21 +1,16 @@
 Template.solrFilterItem.events({
 	'click a':function(e){
 		e.preventDefault();
-		var fq=SolrQuery.session.get("filterQuery") || [];
-		if(this.selStatus){
-			fq = _.without(fq,this.fq);
-		}else{
-			fq = _.union(fq,this.fq)
-		}
-		SolrQuery.addFilterQuery(fq);
+		SolrQuery.toggleFilterQuery(this.field,this.val,!this.selStatus);
 		Router.go(SolrQuery.makeUrl());
 	}
 });
 
 Template.solrFilterItem.helpers({
 	class:function(){
-		var fq=SolrQuery.getSetting("filterQuery");
-		this.selStatus= _.contains(fq,this.fq);
+		var fq=SolrQuery.params("fq");
+		fq = fq && fq[this.field];
+		this.selStatus=fq? _.contains(fq,this.val):false;
 		return this.selStatus?"fa fa-mail-reply":"fa fa-mail-forward";
 	}
-})
+});

@@ -1,29 +1,3 @@
-Meteor.startup(function(){
-    Tracker.autorun(function(){
-        var query = SolrQuery.session.get("query");
-        var filterQuery = SolrQuery.session.get("filterQuery");
-	    var querySetting = SolrQuery.session.get("setting") || {};
-	    var secQuery = SolrQuery.session.get("secQuery");
-        Meteor.call("search",query,filterQuery,secQuery,querySetting,function(err,result){
-            var ok = err?false:result.responseHeader.status==0;
-            SolrQuery.session.set("ok",ok);
-            if(ok){
-                if(result.response){
-                    SolrQuery.session.set("numFound",result.response.numFound);
-                    SolrQuery.session.set("start",result.response.start);
-                    SolrQuery.session.set("docs",result.response.docs);
-                }
-                if(result.facet_counts){
-                    SolrQuery.session.set("facets",result.facet_counts.facet_fields);
-                }
-                if(result.highlighting){
-                    SolrQuery.session.set("highlight",result.highlighting);
-                }
-            }
-        })
-    });
-})
-
 Template.SolrSearchBar.events({
     'click .btn': function () {
         var sword = $('#searchInput').val();
@@ -41,32 +15,15 @@ Template.SolrSearchBar.events({
     }
 });
 
-Template.SolrSearchResults.onRendered(function(){
-	//刚从其他页跳转过来时，将URL中的检索条件传到pageSession中，触发检索动作
-	_.each(Router.current().params.query,function(obj,key){
-		if(key=="q"){
-			SolrQuery.set("query",obj);
-		}else if(key=="fq"){//筛选检索条件
-			var fq=Science.getParamsFormUrl("fq");
-			SolrQuery.set("filterQuery",fq);
-		}else if(key=="sq"){//二次检索条件
-			var sq=Science.getParamsFormUrl("sq");
-			SolrQuery.set("secQuery",sq);
-		}else{//其他检索条件
-            SolrQuery.set(key,obj);
-		}
-	})
-});
-
 Template.SolrSearchResults.helpers({
     'articles': function () {
-        return SolrQuery.session.get("docs");
+        return SolrQuery.get("docs");
     },
     'statusOK':function(){
-        return SolrQuery.session.get("ok");
+        return SolrQuery.get("ok");
     },
     'filters': function () {
-        var facets = SolrQuery.session.get("facets");
+        var facets = SolrQuery.get("facets");
         if(facets){
             var fields = Object.keys(facets);
             var results = [];
@@ -83,7 +40,8 @@ Template.SolrSearchResults.helpers({
                                     name:topic.englishName,
                                     cname:topic.name,
                                     count:facetTopic[j+1],
-                                    fq:fields[i]+":"+facetTopic[j].replace(/ /g,'\\ ')
+                                    field:"topic",
+                                    val:facetTopic[j].replace(/ /g,'\\ ')
                                 })
                             }
                         }
@@ -99,7 +57,8 @@ Template.SolrSearchResults.helpers({
                                 name:publisher.name,
                                 cname:publisher.chinesename,
                                 count:facetPublisher[j+1],
-                                fq:fields[i]+":"+facetPublisher[j]
+                                field:fields[i],
+                                val:facetPublisher[j]
                             })
                         }
                     }
@@ -113,7 +72,8 @@ Template.SolrSearchResults.helpers({
                                 name:facetAuthor[j],
                                 cname:facetAuthor[j],
                                 count:facetAuthor[j+1],
-                                fq:fields[i]+":"+facetAuthor[j].replace(/ /g,'\\ ')
+                                field:"author",
+                                val:facetAuthor[j].replace(/ /g,'\\ ')
                             })
                         }
                     }
@@ -127,7 +87,8 @@ Template.SolrSearchResults.helpers({
                                 name:facetAuthor[j],
                                 cname:facetAuthor[j],
                                 count:facetAuthor[j+1],
-                                fq:fields[i]+":"+facetAuthor[j].replace(/ /g,'\\ ')
+                                field:"author",
+                                val:facetAuthor[j].replace(/ /g,'\\ ')
                             })
                         }
                     }
@@ -142,7 +103,8 @@ Template.SolrSearchResults.helpers({
                                 name:journal.title,
                                 cname:journal.titleCn,
                                 count:facetJournal[j+1],
-                                fq:fields[i]+":"+facetJournal[j]
+                                field:fields[i],
+                                val:facetJournal[j]
                             })
                         }
                     }
@@ -156,7 +118,8 @@ Template.SolrSearchResults.helpers({
                                 name:facetYear[j],
                                 cname:facetYear[j],
                                 count:facetYear[j+1],
-                                fq:fields[i]+":"+facetYear[j]
+                                field:fields[i],
+                                val:facetYear[j]
                             })
                         }
                     }
@@ -167,10 +130,10 @@ Template.SolrSearchResults.helpers({
         }
     },
     'highlightFields': function(){
-        return SolrQuery.session.get("highlight")[this._id];
+        return SolrQuery.get("highlight")[this._id];
     },
     'isFromTopic':function(){
-        return SolrQuery.getSetting("from") === 'topic';
+        return SolrQuery.params("st") && SolrQuery.params("st").from === 'topic';
     }
 });
 

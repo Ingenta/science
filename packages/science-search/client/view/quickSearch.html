@@ -9,14 +9,14 @@
 			<span>{{_ "Publications"}}:</span>
 			{{#if isJournalPage}}
 				{{#with journal}}
-					<p class="qs-journal qs-param">{{translateThis title titleCn}}</p>
+					<p class="qs-journal qs-param">{{translateThis titleCn title}}</p>
 					<input class="qs-journal-hidden" type="hidden" value="{{_id}}"/>
 				{{/with}}
 			{{else}}
 				<select class="qs-journal qs-param">
 					<option value="">{{_ "Choose"}}</option>
 					{{#each journals}}
-						<option value="{{_id}}">{{translateThis title titleCn }}</option>
+						<option value="{{_id}}">{{translateThis titleCn title}}</option>
 					{{/each}}
 				</select>
 			{{/if}}

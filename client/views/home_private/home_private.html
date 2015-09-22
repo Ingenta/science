@@ -3,8 +3,8 @@
         {{> pageElement key="homepage"}}
         <hr>
         {{> NewsList}}
-	    {{#if can "manager-homepage" "news" }}
-		    {{> addNewsForm}}
+        {{#if can "manager-homepage" "news" }}
+            {{> addNewsForm}}
             {{#if hasMostThreeNews}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
                     <span class="fa fa-plus">
@@ -12,7 +12,7 @@
                     </span>
                 </button>
             {{/if}}
-	    {{/if}}
+        {{/if}}
         <hr>
         {{> recentArticles}}
         {{> HomePublicContent}}
@@ -27,26 +27,26 @@
                 <!-- 轮播（Carousel）指标 -->
                 <ol class="carousel-indicators">
                     {{#each news "extend"}}
-                    <li data-target="#myCarousel" data-slide-to="{{index}}" class="{{class}}"></li>
+                        <li data-target="#myCarousel" data-slide-to="{{index}}" class="{{class}}"></li>
                     {{/each}}
                 </ol>
                 <!-- 轮播（Carousel）项目 -->
                 <div class="carousel-inner">
                     {{#each news "extend"}}
-                    <div class="item {{class}}">
-                        <img src="{{getImageHelper picture}}" width="340" height="240">
-                    </div>
+                        <div class="item {{class}}">
+                            <img src="{{getImageHelper picture}}" width="340" height="240">
+                        </div>
                     {{/each}}
                 </div>
             </div>
         </div>
         <div class="col-xs-6">
             <div class="container-fluid">
-            {{#each news}}
-            {{> SingleNews}}
-            {{else}}
-            {{_ "No results found!"}}
-            {{/each}}
+                {{#each news}}
+                    {{> SingleNews}}
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
             </div>
         </div>
     </div>
@@ -56,10 +56,10 @@
     <div class="row index index-num" index="{{index}}">
         <div class="pull-right">
             {{#if can "manager-homepage" "news" }}
-	            {{> updateNewsModalForm}}
-	            {{#if hasMoreThanOneNews}}
-	                <a href="#" class="fa fa-trash"></a>
-	            {{/if}}
+                {{> updateNewsModalForm}}
+                {{#if hasMoreThanOneNews}}
+                    <a href="#" class="fa fa-trash"></a>
+                {{/if}}
             {{/if}}
         </div>
         <div class="row">
@@ -81,26 +81,26 @@
 
 <template name="addNewsForm">
     <div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="addNewsModalLabel">{{_ "Add new"}}</h4>
                 </div>
                 {{#autoForm id="addNewsModalForm" collection="News" type="insert"}}
-                <div class="modal-body">
-                    {{> afQuickField name="title"}}
-                    {{> afQuickField name="author"}}
-                    {{> afQuickField name="abstract"}}
-                    {{> afQuickField name="content"}}
-                    {{> afQuickField name="url"}}
-                    {{> afQuickField name="picture"}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-                </div>
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="author"}}
+                        {{> afQuickField name="abstract"}}
+                        {{> afQuickField name="content"}}
+                        {{> afQuickField name="url"}}
+                        {{> afQuickField name="picture"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
                 {{/autoForm}}
             </div>
         </div>
@@ -111,29 +111,42 @@
     <div class="row">
         <div class="col-xs-6">
             <h4>{{_ "Most recent articles"}}</h4>
-	        <ul class="list-unstyled simple-list">
-		        {{#each newestArticle}}
-			        <li>
-				        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
-			        </li>
-		        {{else}}
-			        {{_ "No articles found!"}}
-		        {{/each}}
-	        </ul>
+            <ul class="list-unstyled simple-list">
+                {{#each newestArticle}}
+                    <li>
+                        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                    </li>
+                {{else}}
+                    {{_ "No articles found!"}}
+                {{/each}}
+            </ul>
             <br/>
         </div>
         <div class="col-xs-6">
-            <h4>{{_ "Most read articles"}}</h4>
-	        <ul class="list-unstyled simple-list">
-		        {{#each mostReadArticles}}
-			        <li>
-				        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
-			        </li>
-		        {{else}}
-			        {{_ "No articles found!"}}
-		        {{/each}}
-	        </ul>
-            <br/>
+            <div class="row">
+                <h4>{{_ "Most read articles"}}</h4>
+                <ul class="list-unstyled simple-list">
+                    {{#each mostReadArticles}}
+                        <li>
+                            <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                        </li>
+                    {{else}}
+                        {{_ "No articles found!"}}
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="row">
+                <h4>{{_ "Most cited by"}}</h4>
+                <ul class="list-unstyled simple-list">
+                    {{#each mostCitedArticles}}
+                        <li>
+                            <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                        </li>
+                    {{else}}
+                        {{_ "No articles found!"}}
+                    {{/each}}
+                </ul>
+            </div>
         </div>
     </div>
 </template>

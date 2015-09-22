@@ -18,16 +18,20 @@
     "schemas": {
         "publications": {
             "title": {
-                "label": "English Title"
+                "label": "English Title",
+                "placeholder": "Science China Mathematics"
             },
             "titleCn": {
-                "label": "Chinese Title"
+                "label": "Chinese Title",
+                "placeholder": "中国科学 数学"
             },
             "shortTitle": {
-                "label": "Short Title"
+                "label": "Short Title",
+                "placeholder": "math"
             },
             "issn": {
-                "label": "ISSN"
+                "label": "ISSN",
+                "placeholder": "1234-5678"
             },
             "createdBy": {
                 "label": "CreatedBy"
@@ -206,7 +210,8 @@
                         "placeholder": "例如1950.08-2001.10……"
                     },
                     "issn": {
-                        "label": "ISSN"
+                        "label": "ISSN",
+                        "placeholder": "1234-5678"
                     },
                     "essn": {
                         "label": "EISSN"
@@ -219,20 +224,23 @@
                 "label": "Description"
             },
             "chinesedescription": {
-                "label": "Chinesedescription"
+                "label": "Chinese Description"
             },
             "name": {
-                "label": "Publisher Name"
+                "label": "Publisher Name",
+                "placeholder": "Science China Publishing"
             },
             "chinesename": {
-                "label": "Chinese Publisher Name"
+                "label": "Chinese Publisher Name",
+                "placeholder": "中国科学出版社"
             },
             "urlname": {
-                "label": "Abbreviation"
+                "label": "Abbreviation",
+                "placeholder": "SCP"
             },
             "website": {
                 "label": "Website",
-                "placeholder": "http://www.baidu.com"
+                "placeholder": "http://www.scichina.com"
             },
             "picture": {
                 "label": "Choose file"
@@ -764,22 +772,22 @@
     "Deleted": "Deleted!",
     "addArticleToCollection": "Select articles",
     "collectionDetail": "Detail",
-    "remove": "remove",
-    "select journal": "select journal",
-    "article title": "title of article",
+    "remove": "Remove",
+    "select journal": "Select journal",
+    "article title": "Title of article",
     "search": "Search",
     "publisher": "Publisher",
     "createAt": "Created on",
     "articlesCount": "Number of articles",
     "add article": "Add Article",
     "added articles": "Already in collection",
-    "select": "select",
+    "select": "Select",
     "Add articles to collection": "Add to collection",
     "Accepted Date": "Accepted",
     "pubStatus":{
-        "normal":"normal",
-        "onlineFirst":"online first",
-        "preset":"preset"
+        "normal":"Normal",
+        "onlineFirst":"Online first",
+        "preset":"Preset"
     },
     "mediaFile":"File",
     "Please choose a media file":"Please choose a media file",
@@ -801,14 +809,14 @@
     },
     "Choose":"Choose...",
     "startPage":"Page",
-    "interstingSearch":"Intersting search",
+    "interestingSearch":"Interesting search",
     "searchInJournal":"Searching: '__keyword__' in __journal__",
     "viewResult":"View all __count__ result from this journal",
     "viewResult_plural":"View all __count__ results from this journal",
     "topRelatedArticle":"Top __count__ Related Article",
     "topRelatedArticle_plural":"Top __count__ Related Articles",
     "Please update your registered information (optional)":"Please update your registered information (optional)",
-    "searchByResults":"Search by results",
+    "RefineSearch":"Refine your search",
     "secSeachOr":"Or",
     "resetSecSearch":"Reset"
 }

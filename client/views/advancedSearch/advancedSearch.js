@@ -133,30 +133,30 @@ Template.AdvancedSearch.events({
         var str3 = document.getElementsByName("topic");
         var str4 = document.getElementsByName("contentType");
         var str5 = document.getElementsByName("tag");
-        var filterQuery = [];
+        var filterQuery = {};
 
         if(startDate||endDate){
-            filterQuery.push({key:"publishDate",val:{start:startDate,end:endDate}});
+            filterQuery["publishDate"] ={start:startDate,end:endDate};
         }
 
         if(0<str1.length){
             for (i = 0; i < str1.length; i++) {
                 if (str1[i].checked) {
-                    filterQuery.push({key:"publisher",val:str1[i].value});
+                    filterQuery["publisher"] =[str1[i].value];
                 }
             }
         }
         if(0<str2.length){
             for (i = 0; i < str2.length; i++) {
                 if (str2[i].checked) {
-                    filterQuery.push({key:"journalId",val:str2[i].value});
+                    filterQuery["journalId"] =[str2[i].value];
                 }
             }
         }
         if(0<str3.length){
             for (i = 0; i < str3.length; i++) {
                 if (str3[i].checked) {
-                    filterQuery.push({key:"topic",val:str3[i].value});
+                    filterQuery["topic"] =[str3[i].value];
                 }
             }
         }
