@@ -16,9 +16,8 @@ Solr.createClient = function(options) {
 	return solr;
 };
 
-Solr.prototype.query = function(query,options, callback) {
+Solr.prototype.query = function(options, callback) {
 	options = options || {};
-	var queryParams = merge(options,{q:query,wt:"json"});
 
 	var url =  this.options.host
 		+ ':'
@@ -26,7 +25,7 @@ Solr.prototype.query = function(query,options, callback) {
 		+ this.options.path
 		+ this.options.core
 		+ "/select?"
-		+ queryStringify(queryParams);
+		+ queryStringify(options);
 	try{
 		HTTP.get(url, {timeout:this.options.timeout},callback)
 	}catch(e){

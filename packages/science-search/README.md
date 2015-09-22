@@ -35,9 +35,9 @@ Usage：
         {key:"title",val:"aaa"},
         {logicRelation:"NOT",key:"code",val:"123123"}
     ],filterQuery:[
-        {key:"publisher",val:"ljdfogjojosdf"},
-        {key:"topic",val:"34sfdgdsfsdfsdf"},
-        {key:"publishDate",val:{start:'2015-1-2',end:new Date()}}
+        {publisher:["ljdfogjojosdf"]},
+        {topic:["34sfdgdsfsdfsdf"]},
+        {publishDate:{start:'2015-1-2',end:new Date()}}
     ],setting:{
         sort:"publishDate desc",
         rows:10,  //每页10条数据

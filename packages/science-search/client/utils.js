@@ -1,131 +1,67 @@
 QueryUtils = {
-	fieldMap : {
-		"title":["title.cn","title.en"],
-		"doi":["doi"],
-		"issn":["issn","EISSN"],
-		"cn":["CN"],
-		"code":["doi","issn","EISSN","CN"],
-		"journalTitle":["journal.title","journal.titleCn"],
-		"keyword":["all_keywords"],
-		"author":["all_authors_en","all_authors_cn"],
-		"affiliation":["all_affiliations_en","all_affiliations_cn"],
-		"abstract":["abstract"],
-		"fulltext":["fulltext"]
-	},
-	facetFieldMap:{
-		"publisher":["publisher"],
-		"journalId":["journalId"],
-		"author":["facet_all_authors_en","facet_all_authors_cn"],
-		"topic":["all_topics"],
-		"year":["year"],
-		"month":["month"],
-		"volume":["volume"],
-		"issue":["issue"],
-		"page":["startPage",'elocationId'],
-		"publishDate":["published"]
-	},
-	getQueryStr:function(queryArr){
-		var qstring;
-		if(queryArr){
-			if(typeof queryArr === 'string')
-				return queryArr;
-			qstring="";
-			var isFirstOne = true;
-			_.each(queryArr,function(sQuery){
-				if(!isFirstOne && sQuery.logicRelation){
-					qstring += " " + sQuery.logicRelation + " ";
-				}
-				isFirstOne=false;
-				var solrFields = QueryUtils.fieldMap[sQuery.key];
-				var subQueues = _.map(solrFields,function(sField){
-					return sField + ":" + sQuery.val;
-				});
-				qstring += "(" + subQueues.join(" OR ") + ")";
-			})
-		}
-		return qstring || "";
-	},
-	getFilterQueryStrArr:function(queryArr){
-		var fqStrArr = [];
-		if(queryArr){
-			qstring="";
-			_.each(queryArr,function(sQuery){
-				isFirstOne=false;
-				var solrFields = QueryUtils.facetFieldMap[sQuery.key];
-				if(sQuery.key=='publishDate'){
-					if(sQuery.val && (sQuery.val.start || sQuery.val.end)){
-						var subQueues = _.map(solrFields,function(sField){
-							var start = QueryUtils.getSolrFormat(sQuery.val.start);
-							var end = QueryUtils.getSolrFormat(sQuery.val.end);
-							return sField + ":[\"" + start + "\" TO \"" + end + "\"]";
-						});
-						fqStrArr.push(subQueues.join(" OR "));
-					}
-				}else{
-					var subQueues = _.map(solrFields,function(sField){
-						return sField + ":" + sQuery.val;
-					});
-					fqStrArr.push(subQueues.join(" OR "));
+	getFilterQuery: function (queryObj) {
+		var fqObj;
+		if (queryObj) {
+			_.each(queryObj, function (val,key) {
+				if(!_.isEmpty(val)){
+					fqObj = fqObj || {};
+					fqObj[key]=val;
 				}
 			})
 		}
-		return fqStrArr;
+		return fqObj;
 	},
-	getSettingStr:function(setting){
-		if(!setting)
-			return "";
-		var fields = Science.JSON.MergeObject(QueryUtils.fieldMap,QueryUtils.facetFieldMap);
-		var settingStr = "";
-		_.each(setting,function(val,key){
-			if(val){
-				if(_.contains(["sort","fl"],key)){
-					var splitVal = val.trim().split(' ');
-					var field = fields[splitVal[0]] && fields[splitVal[0]][0];
-					settingStr+="&"+ key + "="+ field + (splitVal.length > 1 && (" "+splitVal[1]));
-				}else{
-					settingStr+="&"+key+"="+val;
-				}
-			}
-		});
-		return settingStr && settingStr.substr(1);//trim frist &
-	},
-	getSolrFormat:function(date){
-		if(!date || !date.trim())
+	getSolrFormat       : function (date) {
+		if (!date)
 			return "*";
-		if(typeof date === 'string'){
-			return new Date(date).toSolrString();
-		}else{
+		if (typeof date === 'string') {
+			if(date.trim())
+				return new Date(date).toSolrString();
+			return "*";
+		} else {
 			return date.toSolrString();
 		}
 	},
-	interstingSearchPop:function(keyword,journalId,result){
+	interstingSearchPop : function (keyword, journalId, result) {
 		var htmlContent = Blaze.toHTMLWithData(Template.selectionSearch, {
-			keyword:keyword,
-			journalId:journalId,
-			result:result
+			keyword  : keyword,
+			journalId: journalId,
+			result   : result
 		});
 
 		var templateContent = Blaze.toHTML(Template.qsPopTemplate);
 
 		var pointEle = $(".point-ele");
-		if(!pointEle || !pointEle.length){
-			pointEle=$('<a href="#" class="point-ele" role="button" tabindex="0" data-toggle="popover" ></a>');
+		if (!pointEle || !pointEle.length) {
+			pointEle = $('<a href="#" class="point-ele" role="button" tabindex="0" data-toggle="popover" ></a>');
 			$("body").append(pointEle);
 		}
-		pointEle.on('hidden.bs.popover',function(){
+		pointEle.on('hidden.bs.popover', function () {
 			pointEle.popover('destroy');
 			pointEle.remove();
 		});
 
 
-		pointEle.css({left: event.pageX,top: event.pageY});
+		pointEle.css({left: event.pageX, top: event.pageY});
 		pointEle.popover({
-			html:true,
-			content:htmlContent,
-			title:TAPi18n.__("interstingSearch"),
-			trigger:"focus",
-			template:templateContent
+			html    : true,
+			content : htmlContent,
+			title   : TAPi18n.__("interstingSearch"),
+			trigger : "focus",
+			template: templateContent
 		});
 		pointEle.focus();
+	},
+	//从Url中获取参数
+	parseUrl : function () {
+		var params = {};
+		_.each(Router.current().params.query, function (obj, key) {
+			params[key] = JSON.parse(obj);
+		});
+		if(params.st && params.st.from === 'topic'){
+			if(_.isEmpty(params.fq) || _.isEmpty(params.fq.topic))
+				delete params.st.from;
+		}
+		return params;
 	}
 }

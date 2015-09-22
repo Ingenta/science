@@ -23,11 +23,15 @@ Template.quickSearchTemplate.events({
 		var volume = Template.instance().$('.qs-volume').val();
 		var issue = Template.instance().$('.qs-issue').val();
 		var page = Template.instance().$('.qs-page').val();
-		var query = {filterQuery:[]};
-		journalId && query.filterQuery.push({key:'journalId',val:journalId});
-		volume && query.filterQuery.push({key:'volume',val:volume});
-		issue && query.filterQuery.push({key:'issue',val:issue});
-		page && query.filterQuery.push({key:'page',val:page});
+		var query = {filterQuery:{}};
+		if(journalId)
+			query.filterQuery.journalId=[journalId];
+		if(volume)
+			query.filterQuery.volume=[volume];
+		if(issue)
+			query.filterQuery.issue=[issue];
+		if(page)
+			query.filterQuery.page=[page];
 		Template.instance().$('.dropdown-toggle').dropdown('toggle');
 		SolrQuery.search(query);
 	}

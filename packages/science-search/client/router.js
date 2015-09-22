@@ -13,5 +13,9 @@ Router.route('/search', {
 			Meteor.subscribe('keywords'),
 			Meteor.subscribe('topics')
 		]
+	},
+	onBeforeAction:function(){
+		SolrQuery.callSearchMethod();
+		this.next();
 	}
 });
