@@ -221,7 +221,8 @@ Router.map(function () {
                 Meteor.subscribe('allCollections'),
                 Meteor.subscribe('medias'),
                 Meteor.subscribe('files'),
-                Meteor.subscribe('topics')
+                Meteor.subscribe('topics'),
+                Meteor.subscribe('specialTopics')
             ]
         }
 

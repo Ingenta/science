@@ -1,4 +1,5 @@
 <template name="SpecialTopics">
+    {{> pageElement key="specialTopics"}}
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addSpecialTopicsModal">
         {{_ "Add new"}}
     </button>
@@ -8,19 +9,20 @@
             <td>{{_ "Year of publication"}}</td>
             <td>{{_ "Topic name"}}</td>
             <td>{{_"Guest Editor"}}</td>
+            <td>{{_ "Action"}}</td>
         </tr>
         </thead>
         <tbody>
-        {{#each issueId}}
-        <!--{{#with articleWatch}}-->
+        {{#each specialTopics}}
         <tr>
             <td>{{year}}</td>
-            <td>{{specialTopics}}</td>
-            <td>33</td>
+            <td><a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a></td>
+            <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
+            <td>{{#if can "modify-pulisher-collections" "collections" }}
+                    <a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
+                {{/if}}
+                {{#if can "modify-specialTopics" "resource"}}{{> updateSpecialTopicsModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-specialTopics" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
         </tr>
-        <!--{{/with}}-->
-        {{else}}
-        {{_ "Article Watch Is Empty"}}
         {{/each}}
         </tbody>
     </table>
@@ -52,4 +54,8 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateSpecialTopicsModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="SpecialTopics" doc=_id operation="update"}}{{/afModal}}
 </template>
