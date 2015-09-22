@@ -809,7 +809,7 @@
     },
     "Choose":"Choose...",
     "startPage":"Page",
-    "interstingSearch":"Interesting search",
+    "interestingSearch":"Interesting search",
     "searchInJournal":"Searching: '__keyword__' in __journal__",
     "viewResult":"View all __count__ result from this journal",
     "viewResult_plural":"View all __count__ results from this journal",
