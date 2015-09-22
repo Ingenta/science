@@ -1,14 +1,14 @@
 <template name="CitedByTemplate">
     <div>
-
-        <p>
-            1. citation 1
-            http://dx.doi.org/10.1016/j.mseb.2013.08.002
-        </p>
-
-        <p>
-            2. citation 2
-            <a href="http://dx.doi.org/10.1016/j.mseb.2013.08.002">http://dx.doi.org/10.1016/j.mseb.2013.08.002</a>
-        </p>
+        <ol>
+            {{#each citations}}
+                <li>
+                    {{this.journal.title}} {{_ "Author"}}: {{getAuthorString}}<br>
+                    {{#if this.doi}}
+                        <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i class="fa fa-external-link"></i></a>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ol>
     </div>
 </template>

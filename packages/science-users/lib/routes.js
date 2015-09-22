@@ -15,14 +15,14 @@ Meteor.startup(function () {
             return TAPi18n.__("Register");
         }
     });
-    Router.route("agreement", {
-        parent: "register",
-        path: "/register/user_agreement",
-        template: "Agreement",
-        title: function () {
-            return TAPi18n.__("SCP User Agreement");
-        }
-    });
+    //Router.route("agreement", {
+    //    parent: "register",
+    //    path: "/register/user_agreement",
+    //    template: "Agreement",
+    //    title: function () {
+    //        return TAPi18n.__("SCP User Agreement");
+    //    }
+    //});
     Router.route("forgot_password", {
         path: "/forgot_password",
         controller: "ForgotPasswordController",
@@ -191,6 +191,9 @@ Meteor.startup(function () {
     Router.route("user_settings.my_watch", {
         path: "/user_settings/my_watch",
         controller: "UserSettingsMyWatchController",
+        title: function () {
+            return TAPi18n.__("My watch");
+        },
         waitOn:function () {
             return [
                 Meteor.subscribe('publications'),

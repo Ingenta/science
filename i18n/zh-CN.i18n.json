@@ -52,6 +52,7 @@
   "Editors Recommend": "编辑推荐",
   "Latest Articles": "最新文章",
   "Most recent articles": "最新资源",
+  "Most cited by": "最多引用",
   "Month": "月",
   "Year": "年",
   "Title": "标题",
@@ -228,16 +229,20 @@
   "schemas": {
     "publications": {
       "title": {
-        "label": "出版物英文名"
+        "label": "出版物英文名",
+        "placeholder": "Science China Mathematics"
       },
       "titleCn": {
-        "label": "出版物中文名"
+        "label": "出版物中文名",
+        "placeholder": "中国科学 数学"
       },
       "shortTitle": {
-        "label": "简称"
+        "label": "简称",
+        "placeholder": "math"
       },
       "issn": {
-        "label": "ISSN"
+        "label": "ISSN",
+        "placeholder": "1234-5678"
       },
       "createdBy": {
         "label": "创建者"
@@ -416,7 +421,8 @@
             "placeholder": "例如1950.08-2001.10……"
           },
           "issn": {
-            "label": "ISSN"
+            "label": "ISSN",
+            "placeholder": "1234-5678"
           },
           "essn": {
             "label": "EISSN"
@@ -432,17 +438,20 @@
         "label": "中文描述"
       },
       "name": {
-        "label": "出版商英文名字"
+        "label": "出版商英文名字",
+        "placeholder": "Science China Publishing"
       },
       "chinesename": {
-        "label": "出版商中文名字"
+        "label": "出版商中文名字",
+        "placeholder": "中国科学出版社"
       },
       "urlname": {
-        "label": "简称"
+        "label": "简称",
+        "placeholder": "SCP"
       },
       "website": {
         "label": "网站",
-        "placeholder": "http://www.scitation.aip.org"
+        "placeholder": "http://www.scichina.com"
       },
       "picture": {
         "label": "选择图片"
@@ -909,7 +918,39 @@
       "url": {
         "label": "标签详情URL"
       }
-    }
+    },
+      "specialTopics": {
+          "title": {
+              "label": "标题",
+              "cn": {
+                  "label": "中文"
+              },
+              "en": {
+                  "label": "英文"
+              }
+          },
+          "IssueId": {
+              "label": "卷-期"
+          },
+          "guest_editor": {
+              "label": "客座编辑",
+              "cn":{
+                  "label": "中文"
+              },
+              "en":{
+                  "label": "英文"
+              }
+          },
+          "abstract": {
+              "label": "描述",
+              "cn":{
+                  "label": "中文"
+              },
+              "en":{
+                  "label": "英文"
+              }
+          }
+      }
   },
   "roles": "角色",
   "roleName": "角色名",
@@ -1020,9 +1061,13 @@
   "Choose": "选择...",
   "startPage": "起始页",
   "Export Citations": "引用出口",
-  "interstingSearch": "兴趣检索",
-  "searchInJournal": "搜索: '__keyword__' ,在 __journal__ 中",
-  "viewResult": "查看本刊中所有__count__个结果",
+  "interestingSearch":"兴趣检索",
+  "searchInJournal":"搜索: '__keyword__' ,在 __journal__ 中",
+  "viewResult":"查看本刊中所有__count__个结果",
+  "Year of publication":"出版年份",
+  "Topic name":"专题名称",
+  "Guest Editor":"客座编辑",
+  "searchByResults":"继续检索",
   "topRelatedArticle": "最相关的__count__篇文章",
   "RefineSearch":"继续检索",
   "secSeachOr":"或",

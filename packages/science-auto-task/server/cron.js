@@ -40,6 +40,20 @@ SyncedCron.add({
 	}
 });
 
+SyncedCron.add({
+    name: "MostCitedTable",
+    schedule: function (parser) {
+        return parser.text("every 10 min");
+    },
+    job: function () {
+        MostCited.remove({});
+        var citations = Articles.find({citations: {$exists: true}}, {$sort: {'citations.size': -1}, limit: 20});
+		citations.forEach(function (item) {
+			MostCited.insert({title: item.title, count: item.citations.length});
+		});
+    }
+});
+
 var abortUnfinishTask = function(){
 	AutoTasks.update({status:{$nin:["ended","aborted"]}},{$set:{status:"aborted",processing:0}},{multi:true});
 }

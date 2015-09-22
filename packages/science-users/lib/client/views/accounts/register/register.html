@@ -1,36 +1,57 @@
 <template name="Register">
-	<div class="container-fluid">
-		<form id="register_form" class="account-form" role="form">
-			<h2>
-				{{_ "Please sign up"}}
-			</h2>
-			{{#if errorMessage}}
-			<div class="alert alert-warning">
-				{{errorMessage}}
-			</div>
-			{{/if}}
-			<input id="register_name" type="text" class="form-control" placeholder="{{_ 'Your full name'}}" required autofocus>
-			<input id="register_email" type="text" class="form-control" placeholder="{{_ 'Email address'}}" required>
-			<input id="register_password" type="password" class="form-control" placeholder="{{_ 'Password'}}" required>
-            <input id="register_accept" type="checkbox" checked="checked"> {{_ "I accept"}} <a href="{{pathFor 'agreement'}}" target="_blank"><em>{{_ "SCP User Agreement"}}</em></a>
-			<button id="register_submit" class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="{{_ 'PleaseWait'}}">
-				{{_ "Sign up"}}
-			</button>
-			<p class="account-form-text-after">
-				{{_ "Already a member?"}}
-				<a href="{{pathFor 'login'}}">
-					{{_ "Sign in here"}}
-				</a>
-			</p>
-		</form>
-	</div>
+    <div class="container-fluid">
+        <form id="register_form" class="account-form" role="form">
+            <h2>
+                {{_ "Please sign up"}}
+            </h2>
+            {{#if errorMessage}}
+                <div class="alert alert-warning">
+                    {{errorMessage}}
+                </div>
+            {{/if}}
+            <input id="register_name" type="text" class="form-control" placeholder="{{_ 'Your full name'}}" required
+                   autofocus>
+            <input id="register_email" type="text" class="form-control" placeholder="{{_ 'Email address'}}" required>
+            <input id="register_password" type="password" class="form-control" placeholder="{{_ 'Password'}}" required>
+            <input id="register_accept" type="checkbox" checked="checked"> {{_ "I accept"}} <a data-toggle="modal"
+                                                                                               data-target="#myModal"><em>{{_ "SCP User Agreement"}}</em></a>
+            {{> Agreement}}
+            <button id="register_submit" class="btn btn-lg btn-primary btn-block" type="submit"
+                    data-loading-text="{{_ 'PleaseWait'}}">
+                {{_ "Sign up"}}
+            </button>
+            <p class="account-form-text-after">
+                {{_ "Already a member?"}}
+                <a href="{{pathFor 'login'}}">
+                    {{_ "Sign in here"}}
+                </a>
+            </p>
+        </form>
+    </div>
 </template>
 
 <template name="Agreement">
-    {{#if isChinese}}
-        中文
-    {{/if}}
-    {{#unless isChinese}}
-        English
-    {{/unless}}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <!--<div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    模态框（Modal）标题
+                </h4>
+            </div>-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    {{#if isChinese}}
+                        中文
+                    {{/if}}
+                    {{#unless isChinese}}
+                        English
+                    {{/unless}}
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

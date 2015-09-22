@@ -88,6 +88,9 @@ Template.recentArticles.helpers({
             article && resultArray.push(article);
         });
         return resultArray;
+    },
+    mostCitedArticles: function () {
+        return MostCited.find({}, {sort: {count: 1}, limit: 5});
     }
 });
 
