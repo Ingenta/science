@@ -126,8 +126,8 @@ Template.articleOptions.helpers({
         return [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
             {name: TAPi18n.__("Full Text"), slug: 'full text'},
-            {name: TAPi18n.__("References") + "(" + this.references.length + ")", slug: 'references'},
-            {name: TAPi18n.__("Cited By") + "(" + this.citations.length + ")", slug: 'cited by'},
+            {name: TAPi18n.__("References") + "(" + (this.references ? this.references.length : 0) + ")", slug: 'references'},
+            {name: TAPi18n.__("Cited By") + "(" + (this.citations ? this.citations.length : 0) + ")", slug: 'cited by'},
             {name: TAPi18n.__("Data & Media"), slug: 'data media'},
             {name: TAPi18n.__("Metrics"), slug: 'metrics'},
             {name: TAPi18n.__("Related"), slug: 'related'}
