@@ -16,22 +16,35 @@ Template.addSpecialTopicsForm.helpers({
     }
 })
 
+Template.SpecialTopics.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            SpecialTopics.remove({_id:id});
+        })
+    }
+});
+
 Template.SpecialTopics.helpers({
-    issueId: function(){
-        var id = Session.get("currentJournalId");
-        var issue = Issues.find({journalId: id}).fetch();
-        return issue;
+    specialTopics: function(){
+        return SpecialTopics.find();
     },
     year: function(){
         var id = Session.get("currentJournalId");
         var issue = Issues.findOne({journalId: id});
+        if(issue)
         return issue.year;
-}
+    },
+    name: function(){
+        var id = Session.get("specialTopicsId");
+        var specialTopics = SpecialTopics.findOne({_id: id});
+        return specialTopics.title;
+    }
 })
 
 AutoForm.addHooks(['addSpecialTopicsModalForm'], {
     onSuccess: function () {
-        $("#addSpecialTopicsModalForm").modal('hide');
+        $("#addSpecialTopicsModal").modal('hide');
         FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
     }
 }, true);
