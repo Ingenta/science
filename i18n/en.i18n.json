@@ -701,6 +701,38 @@
             "url": {
                 "label": "A Link"
             }
+        },
+        "specialTopics": {
+            "title": {
+                "label": "Title",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "IssueId": {
+                "label": "Volume-Issue"
+            },
+            "guest_editor": {
+                "label": "Guest Editor",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            },
+            "abstract": {
+                "label": "Abstract",
+                "cn":{
+                    "label": "Chinese"
+                },
+                "en":{
+                    "label": "English"
+                }
+            }
         }
     },
     "roles": "Roles",
