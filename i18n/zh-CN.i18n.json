@@ -1071,5 +1071,8 @@
   "topRelatedArticle": "最相关的__count__篇文章",
   "RefineSearch":"继续检索",
   "secSeachOr":"或",
-  "resetSecSearch":"重置"
+  "resetSecSearch":"重置",
+  "More_general_topics": "上级主题",
+  "More_specific_topics": "下级主题",
+  "Related_topics": "相关主题"
 }
