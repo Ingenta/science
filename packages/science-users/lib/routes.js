@@ -57,6 +57,11 @@ Meteor.startup(function () {
         template:"Admin",
         yieldTemplates: {
             'AdminEmail': { to: 'AdminSubcontent'}
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe("emailConfig")
+            ]
         }
     });
     Router.route("admin.roles", {
