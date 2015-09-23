@@ -3,7 +3,7 @@ this.AdminUsersController = RouteController.extend({
 
 
     yieldTemplates: {
-        'AdminUsers': {to: 'AdminSubcontent'}
+        'AccountTabsTemplate': {to: 'AdminSubcontent'}
 
     },
 
@@ -28,14 +28,16 @@ this.AdminUsersController = RouteController.extend({
         return true;
     },
 
-    data: function () {
-
-        return {
-            params: this.params || {},
-            admin_users: Users.find({institutionId: {$exists: false}}, {})
-        };
-        /*DATA_FUNCTION*/
-    },
+    //data: function () {
+    //
+    //    return {
+    //        params: this.params || {},
+    //        admin_users: Users.find({institutionId: {$exists: false}, orbit_roles: {$exists: false}}, {})
+    //        admin_users: Users.find({orbit_roles: "permissions:admin"}, {})
+    //
+    //    };
+    //    /*DATA_FUNCTION*/
+    //},
 
     onAfterAction: function () {
     }
