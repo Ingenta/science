@@ -321,7 +321,8 @@ Router.map(function () {
         onBeforeAction: function () {
             if (!Session.get("ipInChina")) {
                 Meteor.call("ipInChina", function (err, result) {
-                    Session.set("ipInChina", result);
+                    console.log(result.number);
+                    Session.set("ipInChina", result.code);
                 })
             }
             this.next();

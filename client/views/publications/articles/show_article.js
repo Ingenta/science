@@ -138,7 +138,6 @@ Template.articleOptions.helpers({
 //        return Session.get('activeTab');
     },
     ipRedirect: function () {
-        console.log(this.language === "2")
         if(this.language === "2") return false;
         return Session.get("ipInChina");
     }
