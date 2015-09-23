@@ -6,7 +6,7 @@
                 {{_ "Email type"}}
             </th>
             <th>
-                {{_ "Description"}}
+                {{_ "Subject"}}
             </th>
             <th>
                 &nbsp;
@@ -16,9 +16,9 @@
         <tbody id="dataview-table-items">
         {{#each emailConfigurations}}
             <tr>
-            <td>{{_ key}}</td>
-            <td>1</td>
-            <td>2</td>
+            <td>{{key}}</td>
+            <td>{{subject}}</td>
+            <td><i class="fa fa-pencil"></i></td>
             </tr>
         {{else}}
             No emails
