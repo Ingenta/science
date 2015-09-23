@@ -1,11 +1,3 @@
-Template.LayoutSideBar.onRendered(function () {
-    if(!Session.get("ipInChina")) {
-        Meteor.call("ipInChina", function (err, result) {
-            Session.set("ipInChina", result);
-        })
-    }
-});
-
 Template.LayoutSideBar.helpers({
     institutionLogo: function () {
         var logo = undefined;

@@ -1,3 +1,7 @@
+ReactiveTabs.createInterface({
+	template: 'accountTabs'
+});
+
 var pageSession = new ReactiveDict();
 
 Template.AdminUsers.rendered = function() {
@@ -264,5 +268,35 @@ Template.AdminUsersViewTableItems.helpers({
 			return "";
 		}
 		return Permissions.getRoleDescByCode(code).name;
+	}
+});
+
+Template.accountOptions.helpers({
+	tabs: function () {
+		return [
+			{name: TAPi18n.__("Admin"), slug: 'admin'},
+			{name: TAPi18n.__("Normal User"), slug: 'normal'},
+			{name: TAPi18n.__("Publisher"), slug: 'publisher'},
+			{name: TAPi18n.__("Institution"), slug: 'institution'}
+		];
+	},
+	activeTab: function () {
+		return Session.get('activeTab');
+	},
+	//info: function () {
+	//	var obj = Institutions.findOne({_id: Router.current().params.insId});
+	//	return obj;
+	//},
+	getAdmins: function () {
+		return Users.find({orbit_roles: "permissions:admin"}, {});
+	},
+	getNormals: function () {
+		return Users.find({orbit_roles: {$exists: false}}, {});
+	},
+	getPublishers: function () {
+		return Users.find({publisherId: {$exists: true}}, {});
+	},
+	getInstitution: function () {
+		return Users.find({institutionId: {$exists: true}}, {});
 	}
 });

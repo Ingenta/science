@@ -1,10 +1,16 @@
 Template.tagList.helpers({
     tags: function () {
-        var tagNum = Session.get('TagNumber');
-        if(tagNum===undefined||tagNum==""){
+        var tagName = Session.get('searchValue');
+        if(tagName===undefined||tagName==""){
             return Tags.find();
         }
-        return Tags.find({tagNumber:tagNum});
+        var fq = $('#searchId').val();
+        if(fq=="tagNumber"){
+            return Tags.find({tagNumber:tagName});
+        }
+        if(fq=="name"){
+            return Tags.find({name:tagName});
+        }
     }
 });
 
@@ -17,10 +23,10 @@ Template.tagList.events({
     }
 });
 
-Template.AdminTag.events({
+Template.searchTag.events({
     'click .btn': function () {
-        var query = $('#searchTagNumber').val();
-        Session.set('TagNumber', query);
+        var query = $('#searchValue').val();
+        Session.set('searchValue', query);
     }
 });
 

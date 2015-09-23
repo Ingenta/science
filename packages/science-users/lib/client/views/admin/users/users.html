@@ -1,3 +1,10 @@
+<template name="AccountTabsTemplate">
+    <h3 id="component-title">
+        {{_ "Account"}}
+    </h3>
+    {{> accountOptions}}
+</template>
+
 <template name="AdminUsers">
     <div class="container-fluid" id="content">
         <div class="row" id="title_row">
@@ -6,18 +13,13 @@
                 </div>
             </div>
         </div>
+
         {{> AdminUsersView}}
     </div>
 </template>
 
 <template name="AdminUsersView">
     <div id="data_view" class="">
-        <h3 id="component-title">
-            {{#unless isInstitution}}
-                {{_ "Users"}}
-            {{/unless}}
-        </h3>
-
         <form id="dataview-controls" class="form-inline">
             {{#if can "add-user" "user"}}
                 <div id="dataview-controls-insert" class="form-group ">
@@ -114,3 +116,47 @@
     </tr>
 </template>
 
+<template name="accountOptions">
+    {{#accountTabs name="" tabs=tabs activeTab=activeTab}}
+        {{#tabContent slug="admin"}}
+            {{> AdminUsers admin_users=getAdmins}}
+        {{/tabContent}}
+
+        {{#tabContent slug="normal"}}
+            {{> AdminUsers admin_users=getNormals}}
+        {{/tabContent}}
+
+        {{#tabContent slug="publisher"}}
+            {{> AdminUsers admin_users=getPublishers}}
+        {{/tabContent}}
+
+        {{#tabContent slug="institution"}}
+            {{> AdminUsers admin_users=getInstitution}}
+        {{/tabContent}}
+    {{/accountTabs}}
+
+</template>
+
+<template name="accountTabs">
+
+    <div class="accountTabs-container">
+
+        {{#if activeTab}}
+            {{trackActiveTab activeTab}}
+        {{/if}}
+
+        {{trackTabs tabs}}
+
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab">{{name}}</a>
+                </li>
+            {{/each}}
+        </ul>
+
+        <div class="tabs-content-container">
+            {{> UI.contentBlock context=__context__ }}
+        </div>
+    </div>
+</template>

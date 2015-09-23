@@ -57,6 +57,11 @@ Meteor.startup(function () {
         template:"Admin",
         yieldTemplates: {
             'AdminEmail': { to: 'AdminSubcontent'}
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe("emailConfig")
+            ]
         }
     });
     Router.route("admin.roles", {
@@ -109,7 +114,7 @@ Meteor.startup(function () {
         path: "/admin/users",
         controller: "AdminUsersController",
         title: function () {
-            return TAPi18n.__("Users");
+            return TAPi18n.__("Account");
         },
         parent: "admin"
     });

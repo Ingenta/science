@@ -6,7 +6,7 @@
                 {{_ "Email type"}}
             </th>
             <th>
-                {{_ "Description"}}
+                {{_ "Subject"}}
             </th>
             <th>
                 &nbsp;
@@ -14,28 +14,22 @@
         </tr>
         </thead>
         <tbody id="dataview-table-items">
-        <!--<tr>-->
-            <!--<td>{{_ "Registration"}}</td>-->
-            <!--<td></td>-->
-            <!--<td>{{>jkafModal class="fa fa-pencil" doc=this template="updateEmailConfigModalForm" id="updateEmailConfigModalForm"}}</td>-->
-        <!--</tr>-->
-        <tr>
-            <td>{{_ "Forgot Password"}}</td>
-            <td></td>
-            <td>{{>jkafModal class="fa fa-pencil" doc=this template="updateEmailConfigModalForm" id="updateEmailConfigModalForm"}}</td>
-        </tr>
-        <!--<tr>-->
-            <!--<td>{{_ "Watch Journal"}}</td>-->
-            <!--<td></td>-->
-            <!--<td>{{>jkafModal class="fa fa-pencil" doc=this template="updateEmailConfigModalForm" id="updateEmailConfigModalForm"}}</td>-->
-        <!--</tr>-->
+        {{#each emailConfigurations}}
+            <tr>
+            <td>{{key}}</td>
+            <td>{{subject}}</td>
+            <td><i class="fa fa-pencil"></i></td>
+            </tr>
+        {{else}}
+            No emails
+        {{/each}}
         </tbody>
     </table>
 </template>
-<template name="updateEmailConfigModalForm">
-    {{#autoForm collection="EmailConfig" id="updateEmailConfigModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-        {{> afQuickField name="subject" }}
-        {{> afQuickField name="body" }}
-        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
-    {{/autoForm}}
-</template>
+<!--<template name="updateEmailConfigModalForm">-->
+        <!--{{#autoForm collection="EmailConfig" id="updateEmailConfigModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}-->
+<!--{{> afQuickField name="subject" }}-->
+<!--{{> afQuickField name="body" }}-->
+<!--<button type="submit" class="btn btn-primary">{{_ "Update"}}</button>-->
+        <!--{{/autoForm}}-->
+<!--</template>-->
