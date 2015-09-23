@@ -20,7 +20,10 @@ Package.onUse(function(api) {
 
   api.use('jackjiang:solr','server');
 
-  api.use('templating','client');
+  api.use([
+    'templating',
+    'reactive-var'
+  ],'client');
 
 
   api.addFiles([
@@ -47,6 +50,8 @@ Package.onUse(function(api) {
     'client/view/secSearch.js',
     'client/view/topics.html',
     'client/view/topics.js',
+    'client/view/pagination.html',
+    'client/view/pagination.js',
     'client/view/stylesheets/search.css',
     'client/utils.js'
   ],'client');

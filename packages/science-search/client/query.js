@@ -76,7 +76,12 @@ SolrQuery = {
 		var queryStr   = JSON.stringify(option ? option.query : SolrQuery.params("q"));
 		var fqStr   = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
 		var sqStr   = JSON.stringify(option ? option.secondQuery : SolrQuery.params("sq"));
-		var settingStr = JSON.stringify(option ? option.setting : SolrQuery.params("st"));
+		var setting =(option ? option.setting : SolrQuery.params("st")) || {};
+		if(!setting.start)
+			setting.start=0;
+		if(!setting.rows)
+			setting.rows=10;
+		var settingStr = JSON.stringify(setting);
 		var qString    = "";
 		if (queryStr) {
 			qString += "&q=" + queryStr;
@@ -154,6 +159,7 @@ SolrQuery = {
 	},
 
 	callSearchMethod: function () {
+		console.log("aaaaaa");
 		var params = QueryUtils.parseUrl();
 		SolrQuery.session.set("params",params);
 		Meteor.call("search", params, function (err, result) {
@@ -164,7 +170,12 @@ SolrQuery = {
 				if (result.response) {
 					SolrQuery.session.set("numFound", result.response.numFound);
 					SolrQuery.session.set("start", result.response.start);
+					//SolrQuery.session.set("rows",result.responseHeader.params.rows);
 					SolrQuery.session.set("docs", result.response.docs);
+					//var setting = SolrQuery.params("st") || {};
+					//setting.start = result.response.start;
+					//setting.rows = result.responseHeader.params.rows;
+					//SolrQuery.params("st",setting);
 				}
 				if (result.facet_counts) {
 					SolrQuery.session.set("facets", result.facet_counts.facet_fields);

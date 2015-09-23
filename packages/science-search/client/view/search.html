@@ -25,6 +25,7 @@
 			{{#each articles}}
 				{{> oneSolrArticle}}
 			{{/each}}
+			{{> btPagination rows=rows total=total currPage=currPage  maxShow=10 onClick=pagingFunc}}
 		{{else}}
 			{{_ "No results found!"}}
 		{{/if}}
