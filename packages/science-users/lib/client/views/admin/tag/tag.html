@@ -1,11 +1,7 @@
 <template name="AdminTag">
     <div class="container-fluid">
         {{> pageElement key="tags"}}
-        <div class="form-group form-inline">
-            <label for="exampleInputName2">{{_ "Tag Number"}}：</label>
-            <input id="searchTagNumber" type="text" class="form-control">
-            <button class="btn btn-info btn-sm">{{_ "search"}}</button>
-        </div>
+        {{> searchTag}}
         <div class="row">
             {{#if can "add-tag" "resource"}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTagModal">
@@ -20,6 +16,17 @@
         <div class="row">
             {{> tagList}}
         </div>
+    </div>
+</template>
+
+<template name="searchTag">
+    <div class="form-group form-inline">
+        <input id="searchValue" type="text" class="form-control">
+        <select id="searchId" class="form-control">
+            <option value="tagNumber">{{_ "Tag Number"}}</option>
+            <option value="name">{{_ "Tag Name"}}</option>
+        </select>
+        <button class="btn btn-info btn-sm">{{_ "search"}}</button>
     </div>
 </template>
 

@@ -100,7 +100,7 @@ Meteor.startup(function () {
             {key: "advancedSearch", e: "Advanced Search", c: "高级检索"},
             {key: "favorite", e: "My Favorite", c: "我的收藏"},
             {key: "watch", e: "My Alerts", c: "我的关注"},
-            {key: "tags", e: "Journal label", c: "期刊收录标签"},
+            {key: "tags", e: "Journal label", c: "期刊收录类型"},
             {key: "specialTopics", e: "Special Topics", c: "专题推荐"}
         ];
         _.each(names, function (name) {
