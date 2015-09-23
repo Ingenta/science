@@ -317,6 +317,14 @@ Router.map(function () {
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml')
             ]
+        },
+        onBeforeAction: function () {
+            if (!Session.get("ipInChina")) {
+                Meteor.call("ipInChina", function (err, result) {
+                    Session.set("ipInChina", result);
+                })
+            }
+            this.next();
         }
     });
 
