@@ -75,19 +75,6 @@ Meteor.startup(function () {
         });
     }
 
-//    News.remove({})
-//    if (News.find().count() === 0) {
-//        for (var i = 0; i <= 2; i++) {
-//            News.insert({
-//                title: "News" + i + 1,
-//                description: "本文提出汇聚群体智慧的可信软件开发新方法—— 群体化方法，该方法的核心是“群体协同、资源分享、运行监控、可信分析”，支持创新软件作品向可信软件产品转化，支持软件的可信演化.",
-//                url: "http://www.baidu.com",
-//                index: i
-//            });
-//        }
-//    }
-
-    //Pages.remove({})
     if (Pages.find().count() === 0) {
         var names = [
             {key: "homepage", e: "", c: ""},
@@ -107,6 +94,22 @@ Meteor.startup(function () {
             Pages.insert({
                 key: name.key,
                 title: {cn: name.c, en: name.e}
+            });
+        });
+    }
+
+    if (EmailConfig.find().count() === 0) {
+        var emails = [
+            {key: "forgotPassword", e: "Forgot password", c: "email body"},
+            {key: "registration", e: "Registration", c: "email body"},
+            {key: "emailThis", e: "Email This", c: "email body"},
+            {key: "watchJournal", e: "Watch this journal", c: "email body"}
+        ];
+        _.each(emails, function (email) {
+            EmailConfig.insert({
+                key: email.key,
+                subject:  email.e,
+                body : email.c
             });
         });
     }
