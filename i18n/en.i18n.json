@@ -4,7 +4,7 @@
     "FILTER BY Content Properties": "Filter by Content Properties",
     "FILTER BY Author": "Filter by author",
     "FILTER BY Release Date": "Filter by Date",
-    "FILTER BY Topic":"Filter by topic",
+    "FILTER BY Topic": "Filter by topic",
     "Reports": "Statistics",
     "volumeItem": "Volume %s",
     "issueItem": "Issue %s",
@@ -38,28 +38,28 @@
             },
             "chiefEditor": {
                 "label": "Editor in chief",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "competentOrganization": {
                 "label": "Competent Organization",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "sponsor": {
                 "label": "Sponsor",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -99,10 +99,10 @@
             },
             "address": {
                 "label": "Address",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -114,36 +114,36 @@
             },
             "authorTitle": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "authorDescription": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "fileName": {
                 "label": "File Name",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "authorPicture": {
                 "label": "Choose file"
             },
-            "fileId":{
-                "label":"Choose PDF file"
+            "fileId": {
+                "label": "Choose PDF file"
             },
             "accessKey": {
                 "label": "Choose an Access Key",
@@ -163,10 +163,10 @@
             },
             "description": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -253,21 +253,21 @@
             "englishName": {
                 "label": "English Name"
             },
-            "relatedTopics":{
+            "relatedTopics": {
                 "label": "Related Topics"
             }
         },
         "articles": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
-            "abstract":{
+            "abstract": {
                 "label": "abstract"
             },
             "accessKey": {
@@ -290,10 +290,10 @@
         "about": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -304,19 +304,19 @@
         "aboutArticles": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "description": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             }
@@ -324,37 +324,37 @@
         "news": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "author": {
                 "label": "Author",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "abstract": {
                 "label": "Abstract",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "content": {
                 "label": "Full Text",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -368,19 +368,19 @@
         "pages": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "description": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             }
@@ -413,19 +413,19 @@
         "collections": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "description": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -439,19 +439,19 @@
         "institutions": {
             "name": {
                 "label": "Institution Name",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "description": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -498,10 +498,10 @@
         "editorialMember": {
             "abstract": {
                 "label": "Introduction",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -512,10 +512,10 @@
         "editorialBoard": {
             "name": {
                 "label": "Name",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -524,10 +524,10 @@
             },
             "workUnits": {
                 "label": "The Company name",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -542,19 +542,19 @@
             },
             "researchArea": {
                 "label": "Research area",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "abstract": {
                 "label": "Introduction",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -562,41 +562,41 @@
                 "label": "Choose file"
             }
         },
-        "users":{
-            "profile":{
-                "realname":{
-                    "label":"Real name"
+        "users": {
+            "profile": {
+                "realname": {
+                    "label": "Real name"
                 },
-                "institution":{
-                    "label":"Institution"
+                "institution": {
+                    "label": "Institution"
                 },
-                "fieldOfResearch":{
-                    "label":"Field of research"
+                "fieldOfResearch": {
+                    "label": "Field of research"
                 },
-                "interestedOfJournals":{
-                    "label":"Interested of journals"
+                "interestedOfJournals": {
+                    "label": "Interested of journals"
                 },
-                "interestedOfTopics":{
-                    "label":"Interested of topics"
+                "interestedOfTopics": {
+                    "label": "Interested of topics"
                 },
-                "phone":{
-                    "label":"Phone"
+                "phone": {
+                    "label": "Phone"
                 },
-                "address":{
-                    "label":"Address"
+                "address": {
+                    "label": "Address"
                 },
-                "weChat":{
-                    "label":"Wechat"
+                "weChat": {
+                    "label": "Wechat"
                 }
             }
         },
         "meetingInfo": {
             "title": {
                 "label": "The meeting name",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -608,19 +608,19 @@
             },
             "address": {
                 "label": "The meeting address",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "theme": {
                 "label": "The theme",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -628,30 +628,30 @@
                 "label": "Link"
             }
         },
-        "medias":{
+        "medias": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
-            "description":{
+            "description": {
                 "label": "Description",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
-            "fileId":{
-                "label":"Media file"
+            "fileId": {
+                "label": "Media file"
             }
         },
-        "emails":{
+        "emails": {
             "myEmail": {
                 "label": "Recipient's email address:"
             },
@@ -662,22 +662,22 @@
                 "label": "Reasons:"
             }
         },
-        "authorCenter":{
+        "authorCenter": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "content": {
                 "label": "Full Text",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -688,16 +688,16 @@
                 "label": "Choose Father and son set"
             }
         },
-        "tags":{
+        "tags": {
             "tagNumber": {
                 "label": "Tag number"
             },
             "name": {
                 "label": "Tag name",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -711,10 +711,10 @@
         "specialTopics": {
             "title": {
                 "label": "Title",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
@@ -723,19 +723,19 @@
             },
             "guest_editor": {
                 "label": "Guest Editor",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             },
             "abstract": {
                 "label": "Abstract",
-                "cn":{
+                "cn": {
                     "label": "Chinese"
                 },
-                "en":{
+                "en": {
                     "label": "English"
                 }
             }
@@ -784,39 +784,42 @@
     "select": "Select",
     "Add articles to collection": "Add to collection",
     "Accepted Date": "Accepted",
-    "pubStatus":{
-        "normal":"Normal",
-        "onlineFirst":"Online first",
-        "preset":"Preset"
+    "pubStatus": {
+        "normal": "Normal",
+        "onlineFirst": "Online first",
+        "preset": "Preset"
     },
-    "mediaFile":"File",
-    "Please choose a media file":"Please choose a media file",
-    "Total":"Total",
-    "AutoTask":"Auto task",
-    "DOI":"DOI register",
-    "UpdateCitations":"Update Citations",
-    "TaskStatus":{
-        "created":"Created",
-        "aborted":"Aborted",
-        "splicing":"Splicing",
-        "saving":"Saving",
-        "saved":"Saved",
-        "error":"Error",
-        "pending":"Pending",
-        "success":"Successfully",
-        "ended":"Ended",
-        "processing":"Processing"
+    "mediaFile": "File",
+    "Please choose a media file": "Please choose a media file",
+    "Total": "Total",
+    "AutoTask": "Auto task",
+    "DOI": "DOI register",
+    "UpdateCitations": "Update Citations",
+    "TaskStatus": {
+        "created": "Created",
+        "aborted": "Aborted",
+        "splicing": "Splicing",
+        "saving": "Saving",
+        "saved": "Saved",
+        "error": "Error",
+        "pending": "Pending",
+        "success": "Successfully",
+        "ended": "Ended",
+        "processing": "Processing"
     },
-    "Choose":"Choose...",
-    "startPage":"Page",
-    "interestingSearch":"Interesting search",
-    "searchInJournal":"Searching: '__keyword__' in __journal__",
-    "viewResult":"View all __count__ result from this journal",
-    "viewResult_plural":"View all __count__ results from this journal",
-    "topRelatedArticle":"Top __count__ Related Article",
-    "topRelatedArticle_plural":"Top __count__ Related Articles",
-    "Please update your registered information (optional)":"Please update your registered information (optional)",
-    "RefineSearch":"Refine your search",
-    "secSeachOr":"Or",
-    "resetSecSearch":"Reset"
+    "Choose": "Choose...",
+    "startPage": "Page",
+    "interestingSearch": "Interesting search",
+    "searchInJournal": "Searching: '__keyword__' in __journal__",
+    "viewResult": "View all __count__ result from this journal",
+    "viewResult_plural": "View all __count__ results from this journal",
+    "topRelatedArticle": "Top __count__ Related Article",
+    "topRelatedArticle_plural": "Top __count__ Related Articles",
+    "Please update your registered information (optional)": "Please update your registered information (optional)",
+    "RefineSearch": "Refine your search",
+    "secSeachOr": "Or",
+    "resetSecSearch": "Reset",
+    "More_general_topics": "More general topics",
+    "More_specific_topics": "More specific topics",
+    "Related_topics": "Related topics"
 }
