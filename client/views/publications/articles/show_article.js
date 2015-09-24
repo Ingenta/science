@@ -1,6 +1,7 @@
 ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
+        Session.set('activeTab', slug);
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
                 var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
@@ -59,6 +60,14 @@ Template.showArticle.onRendered(function () {
     }
     rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
+
+    //Set default tab based on fulltext empty or not.
+    if (Articles.findOne({_id: this.data._id}).sections) {
+        Session.set('activeTab', 'full text');
+    } else {
+        Session.set('activeTab', 'abstract');
+    }
+
     //Rating Start
     var aid = this.data._id;
 
@@ -134,8 +143,7 @@ Template.articleOptions.helpers({
         ];
     },
     activeTab: function () {
-
-//        return Session.get('activeTab');
+        return Session.get('activeTab');
     },
     ipRedirect: function () {
         if (this.language === "2") return false;
