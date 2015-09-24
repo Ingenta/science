@@ -1,8 +1,15 @@
 ReactiveTabs.createInterface({
-	template: 'accountTabs'
+	template: 'accountTabs',
+	onChange: function (slug) {
+		Session.set('activeTab', slug);
+	}
 });
 
 var pageSession = new ReactiveDict();
+
+//Template.AccountTabsTemplate.onRendered(function(){
+//	Session.set('activeTab', 'admin');
+//});
 
 Template.AdminUsers.rendered = function() {
 
@@ -230,7 +237,11 @@ Template.AdminUsersViewTableItems.events({
 		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	},
-
+	"click #edit-button": function(e) {
+		e.preventDefault();
+		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
+		return false;
+	},
 	"click #delete-button": function(e, t) {
 		e.preventDefault();
 		Permissions.check("delete-user","user");
@@ -253,11 +264,6 @@ Template.AdminUsersViewTableItems.events({
 				}
 			}
 		});
-		return false;
-	},
-	"click #edit-button": function(e) {
-		e.preventDefault();
-		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	}
 });
