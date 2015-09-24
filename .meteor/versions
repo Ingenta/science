@@ -104,6 +104,7 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:autoform-summernote@0.4.2
 mpowaga:string-template@0.1.0
+mrt:cookies@0.3.0
 mrt:flash-messages@1.0.1
 mrt:jquery-raty@2.7.2
 mrt:mathjax@0.6.3
