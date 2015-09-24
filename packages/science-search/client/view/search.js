@@ -147,7 +147,7 @@ Template.SolrSearchResults.helpers({
     },
     'currPage':function(){
         var setting = SolrQuery.params("st");
-        if(setting.start && setting.rows){
+        if(setting && setting.start && setting.rows){
             return Math.ceil(setting.start/setting.rows)+1;
         }
         return 1;
