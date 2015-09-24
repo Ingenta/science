@@ -33,6 +33,7 @@ var initFulltext = function () {
 
 Template.FullTextTemplate.onRendered(function () {
     initFulltext();
+
 });
 
 Meteor.startup(function () {
