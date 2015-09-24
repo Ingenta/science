@@ -7,24 +7,27 @@ Users.recent={
 	 */
 	read:function(articleInfo){
 		if(articleInfo){
-			var recentReadArr = Science.Cookies.getObj("recentRead") || [] ;
-			var total=recentReadArr.length;
-
-			if(total && recentReadArr[total-1]._id === articleInfo._id){
-				return;
-			}
-			var obj = {
-				_id:articleInfo._id,
-				title:articleInfo.title
-			};
-			recentReadArr = _.union([obj],recentReadArr);
-			if(recentReadArr.length>10){
-				recentReadArr = _.initial(recentReadArr);
-			}
-			Science.Cookies.setObj("recentRead",recentReadArr);
-			return recentReadArr;
+			//var obj = {
+			//	_id:articleInfo._id,
+			//	title:articleInfo.title
+			//};
+			//return Science.Cookies.queue("recentRead",obj,5)
+			return Science.Cookies.queue("recentRead",articleInfo._id,5);
 		}else{
-			return Science.Cookies.getObj("recentRead");
+			return Science.Cookies.queue("recentRead");
 		}
-	}
+	},
+	/**
+	 * 最近搜索
+	 * 和最近阅读差不多 -。-
+	 * @param keyword
+	 */
+	search:function(keyword){
+		if(keyword){
+			return Science.Cookies.queue("recentSearch",keyword,5)
+		}else{
+			return Science.Cookies.queue("recentSearch");
+		}
+	},
+
 };

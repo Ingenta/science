@@ -10,26 +10,28 @@
 </template>
 
 <template name="SolrSearchResults">
-	{{#if isFromTopic}}
-		{{> relatedTopicLists}}
-	{{/if}}
-	{{> secSearch}}
-	<div class="col-xs-4">
-		{{#each filters}}
-			{{> solrFilterItem}}
-		{{/each}}
-	</div>
-	<div class="col-xs-8">
-		<h4>{{_ "Search results"}}</h4>
-		{{#if statusOK}}
-			{{#each articles}}
-				{{> oneSolrArticle}}
-			{{/each}}
-			{{> btPagination rows=rows total=total currPage=currPage  maxShow=10 onClick=pagingFunc}}
-		{{else}}
-			{{_ "No results found!"}}
+	<div class="row">
+		{{#if isFromTopic}}
+			{{> relatedTopicLists}}
 		{{/if}}
+		{{> secSearch}}
+		<div class="col-xs-4">
+			{{#each filters}}
+				{{> solrFilterItem}}
+			{{/each}}
+		</div>
+		<div class="col-xs-8">
+			<h4>{{_ "Search results"}}</h4>
+			{{#if statusOK}}
+				{{#each articles}}
+					{{> oneSolrArticle}}
+				{{/each}}
+				{{> btPagination rows=rows total=total currPage=currPage  maxShow=10 onClick=pagingFunc}}
+			{{else}}
+				{{_ "No results found!"}}
+			{{/if}}
 
+		</div>
 	</div>
 </template>
 

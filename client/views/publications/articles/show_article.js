@@ -2,10 +2,11 @@ ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
         Session.set('activeTab', slug);
+        var article = Router.current().data();
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-                var article = Articles.findOne({doi: currentDoi});
+                //var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+                //var article = Articles.findOne({doi: currentDoi});
                 if (article) {
                     ArticleViews.insert({
                         articleId: article._id,
@@ -18,8 +19,8 @@ ReactiveTabs.createInterface({
             });
         } else if (slug === 'full text') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-                var article = Articles.findOne({doi: currentDoi});
+                //var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+                //var article = Articles.findOne({doi: currentDoi});
                 if (article) {
                     ArticleViews.insert({
                         articleId: article._id,
@@ -34,6 +35,7 @@ ReactiveTabs.createInterface({
                     })
                 }
             });
+            Users.recent.read(article);
         }
     }
 });
