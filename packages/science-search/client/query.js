@@ -105,9 +105,7 @@ SolrQuery = {
 	 * @param option
 	 */
 	search          : function (option) {
-		SolrQuery.reset();
 		var url = SolrQuery.makeUrl(option);
-		console.log(url);
 		Router.go(url);
 	},
 	/**
@@ -154,14 +152,12 @@ SolrQuery = {
 	 * 清空二次检索条件
 	 */
 	resetSecQuery   : function () {
-		console.log('aaa');
 		SolrQuery.params("sq",[]);
 	},
 
 	callSearchMethod: function () {
-		console.log("aaaaaa");
+		SolrQuery.reset();
 		var params = QueryUtils.parseUrl();
-		SolrQuery.session.set("params",params);
 		Meteor.call("search", params, function (err, result) {
 			SolrQuery.session.set("params",params);
 			var ok = err ? false : result.responseHeader.status == 0;
@@ -170,12 +166,7 @@ SolrQuery = {
 				if (result.response) {
 					SolrQuery.session.set("numFound", result.response.numFound);
 					SolrQuery.session.set("start", result.response.start);
-					//SolrQuery.session.set("rows",result.responseHeader.params.rows);
 					SolrQuery.session.set("docs", result.response.docs);
-					//var setting = SolrQuery.params("st") || {};
-					//setting.start = result.response.start;
-					//setting.rows = result.responseHeader.params.rows;
-					//SolrQuery.params("st",setting);
 				}
 				if (result.facet_counts) {
 					SolrQuery.session.set("facets", result.facet_counts.facet_fields);
