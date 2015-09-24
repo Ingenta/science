@@ -1,0 +1,11 @@
+<template name="relatedArticles">
+	<ul class="article-list list-unstyled">
+		{{#each relatedList}}
+			{{#with article _id}}
+				{{> oneArticle}}
+			{{/with}}
+		{{else}}
+			{{_ "No articles found!"}}
+		{{/each}}
+	</ul>
+</template>

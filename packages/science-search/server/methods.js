@@ -12,7 +12,7 @@ SolrUtils = {
 		"author"      : ["all_authors_en", "all_authors_cn"],
 		"affiliation" : ["all_affiliations_en", "all_affiliations_cn"],
 		"abstract"    : ["abstract"],
-		"fulltext"    : ["fulltext"]
+		"fulltext"    : ["fulltext"],
 	},
 	facetFieldMap       : {
 		"publisher"  : ["publisher"],
@@ -80,8 +80,17 @@ SolrUtils = {
 								result = "(" + result + ")";
 							}
 							return result;
-						} else {
-
+						} else if (toString.apply(val) === '[object Object]'){
+							var result = "";
+							var operator = val.operator || "AND";
+							_.each(val.arr, function (str) {
+								result += " "+operator+" " + field + ":" + str;
+							});
+							if (result.length) {
+								result = result.substr(4).trim();
+								result = "(" + result + ")";
+							}
+							return result;
 						}
 					});
 					fqStrArr.push(subQueues.join(" OR "));
