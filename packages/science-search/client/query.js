@@ -95,9 +95,11 @@ SolrQuery = {
 		if (settingStr) {
 			qString += "&st=" + settingStr;
 		}
+		qString +="&stamp="+new Date().getTime();
 		if(qString){
 			qString= "?"+qString.substr(1)
 		}
+
 		return "/search" + qString;
 	},
 	/**
