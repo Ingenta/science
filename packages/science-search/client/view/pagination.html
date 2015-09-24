@@ -1,4 +1,5 @@
 <template name="btPagination">
+	{{#if moreThanOne}}
 	<nav>
 		<ul class="pagination pagination-sm">
 			<li class="{{disabledStatus 'first'}}"><a data-pagenum="1" href="#"><i class="fa fa-angle-double-left"></i></a></li>
@@ -10,6 +11,7 @@
 			<li class="{{disabledStatus 'last'}}"><a data-pagenum="{{page 'last'}}" href="#"><i class="fa fa-angle-double-right"></i></a></li>
 		</ul>
 	</nav>
+	{{/if}}
 	<span class="pull-right">{{_ "Display per page"}}:
 		<a href="#" class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;
 		<a href="#" class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;
