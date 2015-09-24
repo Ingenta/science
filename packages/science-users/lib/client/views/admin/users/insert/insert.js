@@ -68,7 +68,7 @@ Template.AdminUsersInsertInsertForm.events({
 
             if (Router.current().route.getName() === "admin.institutions.detail.insert") {
                 history.back();
-                Session.set('activeTab', 'account');
+                //Session.set('activeTab', 'account');
             } else {
                 Router.go("admin.users", {});
             }
@@ -104,7 +104,7 @@ Template.AdminUsersInsertInsertForm.events({
 
         if (Router.current().route.getName() === "admin.institutions.detail.insert") {
             history.back();
-            Session.set('activeTab', 'account');
+            //Session.set('activeTab', 'account');
         } else {
             Router.go("admin.users", {});
         }
