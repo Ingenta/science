@@ -145,7 +145,7 @@
 
 <template name="articleOptions">
 
-    {{#articleTabs name="" tabs=tabs activeTab="full text"}}
+    {{#articleTabs name="" tabs=tabs activeTab=activeTab}}
         {{#with context}}
             {{#tabContent slug="abstract"}}
                 {{> AbstractTemplate}}
