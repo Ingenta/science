@@ -61,6 +61,7 @@ Template.LayoutSideBar.helpers({
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if(Meteor.userId() && journal){
+            if(!Meteor.user().profile)return TAPi18n.__("Journal Watch");
             var pro = Meteor.user().profile.interestedOfJournals || [];
             return _.contains(pro, journal._id)?TAPi18n.__("Watched"):TAPi18n.__("Journal Watch");
         }else{
