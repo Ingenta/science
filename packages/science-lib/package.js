@@ -31,7 +31,8 @@ Package.onUse(function(api) {
     'matb33:collection-hooks@0.7.11',
     'aldeed:simple-schema@1.1.0',
     'underscore',
-    'jackkav:xpath'
+    'jackkav:xpath',
+    'mrt:cookies'
   ];
   api.use(packages);
 
@@ -53,7 +54,8 @@ Package.onUse(function(api) {
   ],'server');
 
   api.addFiles([
-      'lib/dom.js'
+      'lib/dom.js',
+      'lib/cookieUtils.js'
   ],'client');
 
   api.export(

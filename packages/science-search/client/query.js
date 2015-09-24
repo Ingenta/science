@@ -1,4 +1,5 @@
 SolrQuery = {
+
 	session         : new ReactiveDict(),
 	get             : function (key) {
 		return SolrQuery.session.get(key);
