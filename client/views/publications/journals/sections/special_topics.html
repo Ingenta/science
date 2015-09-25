@@ -19,7 +19,7 @@
             <td><a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a></td>
             <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
             <td>{{#if can "modify-pulisher-collections" "collections" }}
-                    <a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
+                    <a class="fa fa-plus" href="{{pathFor 'specialTopics.selectArticles' specialTopicsId=_id}}"></a>
                 {{/if}}
                 {{#if can "modify-specialTopics" "resource"}}{{> updateSpecialTopicsModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-specialTopics" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
         </tr>

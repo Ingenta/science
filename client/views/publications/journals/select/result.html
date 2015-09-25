@@ -1,0 +1,57 @@
+<template name="searchResultForAddToSpecialTopics">
+	<div>
+		<div class="row pull-right">
+			<button class="btn btn-success addSelectedArticleToCollection">
+                <span class="fa fa-plus">
+                    {{_ "Add articles to topics"}}
+                </span>
+            </button>
+		</div>
+		<div class="btn-group" data-toggle="buttons">
+			<ul class="article-list list-unstyled">
+				{{#each articles}}
+					{{> oneArticleOfResultSpecialTopics}}
+				{{else}}
+					{{_ "No articles found!"}}
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</template>
+
+
+<template name="oneArticleOfResultSpecialTopics">
+	<div class="row">
+		<ul class="dotted list-unstyled">
+			<li style="width: 50px" class="manage-btn">
+                {{#unless isSelected}}
+				    <label class="btn btn-primary btn-xs">
+			            <input value="{{_id}}" class="articleCkd" style="position:absolute;clip:rect(0,0,0,0);" type="checkbox" autocomplete="false">{{_ "select"}}
+				    </label>
+                {{/unless}}
+			</li>
+			<li style="float:left">
+				<h4>
+					<div class="resultsList"><img src="/icon_access_oa.gif">
+						<a href="{{urlToArticle title.en}}">{{translateThis title.cn title.en}}</a>
+					</div>
+				</h4>
+
+				<ul class="list-unstyled">
+					<li>
+						{{#each authors}}
+							{{> authorPopButton name=getFullName}}
+						{{/each}}
+					</li>
+					<li>
+						<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}}
+						({{year}})
+						<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+								class="fa fa-external-link"></i></a>
+					</li>
+				</ul>
+			</li>
+			<li style="clear:both"></li>
+		</ul>
+	</div>
+</template>
