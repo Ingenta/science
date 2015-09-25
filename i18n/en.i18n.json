@@ -207,7 +207,7 @@
                     },
                     "dateRange": {
                         "label": "Effective Date",
-                        "placeholder": "e.g. 1950-2001……"
+                        "placeholder": "e.g. 1950-2001"
                     },
                     "issn": {
                         "label": "ISSN",
