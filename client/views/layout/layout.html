@@ -15,13 +15,12 @@
             <div class="row">
                 {{> navigation}}
             </div>
-            <div class="row" id="white-content-area">
+            <div class="row white-content-area">
                 <div class="col-xs-10" id="main">
                     {{> breadcrumb}}
                     {{> flashMessages}}
                     {{> yield}}
-	                {{> autoformModals}}
-	                {{> jkautoformModals}}
+	                {{> recentReadAndSearchContainer}}
                 </div>
                 <div class="col-xs-2">
                     <div id="sidebar">
@@ -32,24 +31,27 @@
                 <br>
             </div>
         </div>
+	    {{> autoformModals}}
+	    {{> jkautoformModals}}
     </div>
-    <div id="footer">
-        <div class="footer-container container">
-            <p class="text-muted">
+	<div id="footer">
 
-            <div class="row">
-                <div class="col-xs-8">
+		<div class="footer-container container">
+			<p class="text-muted">
 
-                    PT 北京 - 中国科学的团队 - 杰克，蒋凯，杨冬冬，崔显，刘奇，李楠，黄新华，杨鹤，冯素晶，刘桐
+			<div class="row">
+				<div class="col-xs-8">
 
-                </div>
-                <div class="col-xs-4">
-                    {{_ "Last release was"}}
-                </div>
-            </div>
-            </p>
-        </div>
-    </div>
+					PT 北京 - 中国科学的团队 - 杰克，蒋凯，杨冬冬，崔显，刘奇，李楠，黄新华，杨鹤，冯素晶，刘桐
+
+				</div>
+				<div class="col-xs-4">
+					{{_ "Last release was"}}
+				</div>
+			</div>
+			</p>
+		</div>
+	</div>
     <!--<script type="text/javascript">-->
         <!--window._pt_lt = new Date().getTime();-->
         <!--window._pt_sp_2 = [];-->

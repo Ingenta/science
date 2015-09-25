@@ -1,4 +1,5 @@
 SolrQuery = {
+
 	session         : new ReactiveDict(),
 	get             : function (key) {
 		return SolrQuery.session.get(key);
@@ -160,6 +161,11 @@ SolrQuery = {
 	callSearchMethod: function () {
 		SolrQuery.reset();
 		var params = QueryUtils.parseUrl();
+		if(!_.isEmpty(params.q) && _.isString(params.q)){
+			Users.recent.search(params.q);
+			var q=(params.st && _.contains(["bar","history"],params.st.from)) ? params.q : "";
+			$("#searchInput").val(q);
+		}
 		Meteor.call("search", params, function (err, result) {
 			SolrQuery.session.set("params",params);
 			var ok = err ? false : result.responseHeader.status == 0;
