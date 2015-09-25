@@ -297,7 +297,7 @@ Template.accountOptions.helpers({
 		return Users.find({orbit_roles: "permissions:admin"}, {});
 	},
 	getNormals: function () {
-		return Users.find({orbit_roles: {$exists: false}}, {});
+		return Users.find({$or: [{orbit_roles: {$exists: false}}, {orbit_roles: {$size: 0}}]}, {});
 	},
 	getPublishers: function () {
 		return Users.find({publisherId: {$exists: true}}, {});
