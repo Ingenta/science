@@ -27,7 +27,8 @@ Meteor.methods({
     },
     'ipInChina': function () {
         var currentUserIPNumber = Science.ipToNumber(this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress);
-        return IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber}, endIpLong: {$gte: currentUserIPNumber}, countryCode2: "CN"})? {code: false, number: currentUserIPNumber}: {code: true, number: currentUserIPNumber};
+        var item = IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber}, endIpLong: {$gte: currentUserIPNumber}});
+        return IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber}, endIpLong: {$gte: currentUserIPNumber}, countryCode2: "CN"})? {code: false, number: currentUserIPNumber, country: item}: {code: true, number: currentUserIPNumber, country: item};
     }
 });
 

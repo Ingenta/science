@@ -1,0 +1,49 @@
+<template name="searchArticleForAddToSpecialTopics">
+	<ul class="list-unstyled">
+        <li class="condition">
+            <label for="publisherName">{{_ "Publisher name"}}</label>
+            <select id="publisherSelect" data-queryField="publisherId" class="queryField" placeholder="Publisher name" style="width: 90%;">
+                <option value="">{{_ "select publisher"}}</option>
+                {{#each publishers}}
+                <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </li>
+		<li class="condition">
+			<label for="journalName">{{_ "Journal name"}}</label>
+			<select id="journalSelect" data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
+				<option value="">{{_ "select journal"}}</option>
+				{{#each journals}}
+					<option value="{{_id}}">{{title}}</option>
+				{{/each}}
+			</select>
+		</li>
+        <li class="condition">
+            <label for="volumeName">{{_ "Volume name"}}</label>
+            <select id="volumesSelect" data-queryField="volume" class="queryField" placeholder="Volume name" style="width: 90%;">
+                <option value="">{{_ "select volume"}}</option>
+                {{#each volumes}}
+                <option value="{{volume}}">{{volume}}</option>
+                {{/each}}
+            </select>
+        </li>
+        <li class="condition">
+            <label for="issueName">{{_ "Issue name"}}</label>
+            <select data-queryField="issue" class="queryField" placeholder="Issue name" style="width: 90%;">
+                <option value="">{{_ "select issue"}}</option>
+                {{#each issues}}
+                <option value="{{issue}}">{{issue}}</option>
+                {{/each}}
+            </select>
+        </li>
+		<li class="condition" style="width: 95%;margin-top:15px; margin-bottom:10px;">
+			<label for="articleName">{{_ "article title"}}</label>
+			<input data-queryField="title.en" type="text" class="queryField" placeholder="Article name"/>
+		</li>
+		<li class="search-btn">
+			<button class="btn btn-primary">{{_ "search"}}</button>
+		</li>
+		<li class="condition-clear">
+		</li>
+	</ul>
+</template>

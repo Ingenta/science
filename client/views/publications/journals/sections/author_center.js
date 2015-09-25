@@ -72,11 +72,18 @@ Template.authorArticlesHistory.events({
         var name = $('#authorName').val();
         var company = $('#affiliation').val();
         var query = [];
+        var flag=false;
         if(name){
             query.push({key:"author",val:name});
+            flag=true;
         }
         if(company){
-            query.push({key:"affiliation",val:company});
+            var p = {key:"affiliation",val:company};
+            if(flag){
+                p.logicRelation="AND";
+            }
+            query.push(p);
+            flag=true;
         }
         SolrQuery.search({query:query});
     }

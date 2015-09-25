@@ -229,6 +229,32 @@ Router.map(function () {
 
     });
 
+    this.route('/specialTopics/:specialTopicsId', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({title: this.params.journalTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return journal;
+            }
+        },
+        template      : "addArticleForSpecialTopics",
+        name          : "specialTopics.selectArticles",
+        parent        : "journal.name",
+        title: function () {
+            return TAPi18n.__("addSpecialTopicsToCollection");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('specialTopics')
+            ]
+        }
+    });
+
     this.route('/publisher/:publisherName/journal/:journalTitle/guide/:guideId', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
@@ -322,6 +348,7 @@ Router.map(function () {
             if (Session.get("ipInChina") === undefined) {
                 Meteor.call("ipInChina", function (err, result) {
                     console.log(result.number);
+                    console.log(result.country?result.country.country.cn:"No country found!");
                     Session.set("ipInChina", result.code);
                 })
             }
