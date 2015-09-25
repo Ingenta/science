@@ -14,6 +14,7 @@ Template.JournalWatch.helpers({
         return Publications.findOne({_id: this.toString()});
     },
     count : function () {
+        if(Users.findOne().profile)
         if(Users.findOne().profile.interestedOfJournals)
         return Users.findOne().profile.interestedOfJournals.length;
     }

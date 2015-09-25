@@ -821,5 +821,7 @@
     "resetSecSearch": "Reset",
     "More_general_topics": "More general topics",
     "More_specific_topics": "More specific topics",
-    "Related_topics": "Related topics"
+    "Related_topics": "Related topics",
+    "Recent_read":"Recently viewed content",
+    "Recent_search":"Recent Searches"
 }

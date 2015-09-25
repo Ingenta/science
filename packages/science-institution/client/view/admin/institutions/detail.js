@@ -1,5 +1,8 @@
 ReactiveTabs.createInterface({
-    template: 'institutionTabs'
+    template: 'institutionTabs',
+    onChange: function (slug) {
+        Session.set('activeTab', slug);
+    }
 });
 
 Template.showInstitution.helpers({

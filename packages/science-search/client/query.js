@@ -1,4 +1,5 @@
 SolrQuery = {
+
 	session         : new ReactiveDict(),
 	get             : function (key) {
 		return SolrQuery.session.get(key);
@@ -76,7 +77,12 @@ SolrQuery = {
 		var queryStr   = JSON.stringify(option ? option.query : SolrQuery.params("q"));
 		var fqStr   = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
 		var sqStr   = JSON.stringify(option ? option.secondQuery : SolrQuery.params("sq"));
-		var settingStr = JSON.stringify(option ? option.setting : SolrQuery.params("st"));
+		var setting =(option ? option.setting : SolrQuery.params("st")) || {};
+		if(!setting.start)
+			setting.start=0;
+		if(!setting.rows)
+			setting.rows=10;
+		var settingStr = JSON.stringify(setting);
 		var qString    = "";
 		if (queryStr) {
 			qString += "&q=" + queryStr;
@@ -90,9 +96,11 @@ SolrQuery = {
 		if (settingStr) {
 			qString += "&st=" + settingStr;
 		}
+		qString +="&stamp="+new Date().getTime();
 		if(qString){
 			qString= "?"+qString.substr(1)
 		}
+
 		return "/search" + qString;
 	},
 	/**
@@ -100,9 +108,7 @@ SolrQuery = {
 	 * @param option
 	 */
 	search          : function (option) {
-		SolrQuery.reset();
 		var url = SolrQuery.makeUrl(option);
-		console.log(url);
 		Router.go(url);
 	},
 	/**
@@ -149,13 +155,17 @@ SolrQuery = {
 	 * 清空二次检索条件
 	 */
 	resetSecQuery   : function () {
-		console.log('aaa');
 		SolrQuery.params("sq",[]);
 	},
 
 	callSearchMethod: function () {
+		SolrQuery.reset();
 		var params = QueryUtils.parseUrl();
-		SolrQuery.session.set("params",params);
+		if(!_.isEmpty(params.q) && _.isString(params.q)){
+			Users.recent.search(params.q);
+			var q=(params.st && _.contains(["bar","history"],params.st.from)) ? params.q : "";
+			$("#searchInput").val(q);
+		}
 		Meteor.call("search", params, function (err, result) {
 			SolrQuery.session.set("params",params);
 			var ok = err ? false : result.responseHeader.status == 0;

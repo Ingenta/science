@@ -31,6 +31,7 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'lib/client/connection.js',
+    'lib/client/recentBehavior.js',
     'lib/client/views/accounts/forgot_password/forgot_password.html',
     'lib/client/views/accounts/forgot_password/forgot_password.js',
     'lib/client/views/accounts/forgot_password/forgot_password_controller.js',

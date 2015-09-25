@@ -4,7 +4,7 @@ body{
     background-color: #E8E8EA;
 }
 
-#white-content-area{
+.white-content-area{
     background: white;
     padding-bottom: 30px;
 }

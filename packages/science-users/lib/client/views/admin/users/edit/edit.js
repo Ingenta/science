@@ -66,8 +66,9 @@ Template.AdminUsersEditEditForm.events({
                 }
             }
             if (Router.current().route.getName() === "admin.institutions.detail.edit") {
-                history.back();
-                Session.set('activeTab', 'account');
+                //history.back();
+                Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
+                //Session.set('activeTab', 'account');
             } else {
                 Router.go("admin.users", {});
             }
@@ -109,8 +110,9 @@ Template.AdminUsersEditEditForm.events({
     "click #form-cancel-button": function (e, t) {
         e.preventDefault();
         if (Router.current().route.getName() === "admin.institutions.detail.edit") {
-            history.back();
-            Session.set('activeTab', 'account');
+            //history.back();
+            Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
+            //Session.set('activeTab', 'account');
         } else {
             Router.go("admin.users", {});
         }

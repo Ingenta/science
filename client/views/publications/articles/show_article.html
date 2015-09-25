@@ -145,7 +145,7 @@
 
 <template name="articleOptions">
 
-    {{#articleTabs name="" tabs=tabs activeTab="full text"}}
+    {{#articleTabs name="" tabs=tabs activeTab=activeTab}}
         {{#with context}}
             {{#tabContent slug="abstract"}}
                 {{> AbstractTemplate}}
@@ -170,14 +170,16 @@
             {{#tabContent slug="data media"}}
                 {{> DataMediaTemplate}}
             {{/tabContent}}
-        {{/with}}
-        {{#tabContent slug="metrics"}}
-            {{> MetricsTemplate}}
-        {{/tabContent}}
 
-        {{#tabContent slug="related"}}
-            {{> RelatedTemplate}}
-        {{/tabContent}}
+	        {{#tabContent slug="metrics"}}
+		        {{> MetricsTemplate}}
+	        {{/tabContent}}
+
+	        {{#tabContent slug="related"}}
+		        {{> relatedArticles}}
+	        {{/tabContent}}
+        {{/with}}
+
     {{/articleTabs}}
 
 </template>
@@ -218,18 +220,6 @@
     </div>
 </template>
 
-<template name="RelatedTemplate">
-    <div>
-        <span>
-            《页岩压裂中压裂液返排率低的孔隙尺度模拟与解释》
-            鞠杨, 郑泽民, 卢晋波, 毛灵涛, 高峰, 彭瑞东
-            张龙，
-            2014, 59(32): 3109-3119
-            语种类型：中文
-            概述
-        </span>
-    </div>
-</template>
 
 <template name="updateArticleTitleModalForm">
     {{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update"

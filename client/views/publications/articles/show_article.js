@@ -1,10 +1,12 @@
 ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
+        Session.set('activeTab', slug);
+        var article = Router.current().data();
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-                var article = Articles.findOne({doi: currentDoi});
+                //var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+                //var article = Articles.findOne({doi: currentDoi});
                 if (article) {
                     ArticleViews.insert({
                         articleId: article._id,
@@ -17,8 +19,8 @@ ReactiveTabs.createInterface({
             });
         } else if (slug === 'full text') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-                var article = Articles.findOne({doi: currentDoi});
+                //var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+                //var article = Articles.findOne({doi: currentDoi});
                 if (article) {
                     ArticleViews.insert({
                         articleId: article._id,
@@ -33,6 +35,7 @@ ReactiveTabs.createInterface({
                     })
                 }
             });
+            Users.recent.read(article);
         }
     }
 });
@@ -59,6 +62,14 @@ Template.showArticle.onRendered(function () {
     }
     rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
+
+    //Set default tab based on fulltext empty or not.
+    if (Articles.findOne({_id: this.data._id}).sections) {
+        Session.set('activeTab', 'full text');
+    } else {
+        Session.set('activeTab', 'abstract');
+    }
+
     //Rating Start
     var aid = this.data._id;
 
@@ -134,11 +145,10 @@ Template.articleOptions.helpers({
         ];
     },
     activeTab: function () {
-
-//        return Session.get('activeTab');
+        return Session.get('activeTab');
     },
     ipRedirect: function () {
-        if(this.language === "2") return false;
+        if (this.language === "2") return false;
         return Session.get("ipInChina");
     }
 });

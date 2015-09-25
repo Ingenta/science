@@ -2,14 +2,14 @@ Template.SolrSearchBar.events({
     'click .btn': function () {
         var sword = $('#searchInput').val();
         if (sword){
-	        SolrQuery.search({query:sword});
+            SolrQuery.search({query:sword,setting:{from:"bar"}});
         }
     },
     'keydown input': function (event) {
         if (event.keyCode === 13) {
             var sword = $('#searchInput').val();
             if (sword){
-	            SolrQuery.search({query:sword});
+	            SolrQuery.search({query:sword,setting:{from:"bar"}});
             }
         }
     }
@@ -134,6 +134,34 @@ Template.SolrSearchResults.helpers({
     },
     'isFromTopic':function(){
         return SolrQuery.params("st") && SolrQuery.params("st").from === 'topic';
+    },
+    'pagingFunc':function(){
+        return function(page,row){
+            var setting = SolrQuery.params("st") || {};
+            setting.start = (page-1) * row;
+            setting.rows = row;
+            SolrQuery.params("st",setting);
+            //var url = SolrQuery.makeUrl();
+            Router.go(SolrQuery.makeUrl());
+        }
+    },
+    'currPage':function(){
+        var setting = SolrQuery.params("st");
+        if(setting && setting.start && setting.rows){
+            return Math.ceil(setting.start/setting.rows)+1;
+        }
+        return 1;
+    },
+    'total':function(){
+        var found = SolrQuery.session.get("numFound") || 0;
+        return found;
+    },
+    'rows':function(){
+        var setting = SolrQuery.params("st");
+        if(setting && setting.rows){
+            return setting.rows;
+        }
+        return 10;
     }
 });
 

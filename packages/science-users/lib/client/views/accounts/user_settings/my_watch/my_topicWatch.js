@@ -7,6 +7,7 @@ Template.TopicWatch.helpers({
         return Topics.findOne({_id: this.toString()});
     },
     count : function () {
+        if(Users.findOne().profile)
         if(Users.findOne().profile.interestedOfTopics)
         return Users.findOne().profile.interestedOfTopics.length;
     }
