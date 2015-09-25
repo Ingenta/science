@@ -53,6 +53,8 @@
   "Latest Articles": "最新文章",
   "Most recent articles": "最新资源",
   "Most cited by": "最多引用",
+  "Subject": "邮件主题",
+  "Email type": "邮件类型",
   "Month": "月",
   "Year": "年",
   "Title": "标题",
@@ -162,7 +164,8 @@
   "No publishers found!": "没有找到出版商！",
   "No About found!": "没有找到主题！",
   "No articles found!": "没有找到文章！",
-  "No AboutArticle found!": "没有找到关于我们的信息！",
+  "No content found!": "没有找到关于我们的信息！",
+  "No users yet": "还没有用户",
   "Welcome Message": "欢迎",
   "Your full name": "你的全名",
   "Page not found": "找不到网页",
@@ -420,7 +423,7 @@
           },
           "dateRange": {
             "label": "有效日期",
-            "placeholder": "例如1950.08-2001.10……"
+            "placeholder": "例如 1950-2001"
           },
           "issn": {
             "label": "ISSN",
