@@ -322,6 +322,7 @@ Router.map(function () {
             if (Session.get("ipInChina") === undefined) {
                 Meteor.call("ipInChina", function (err, result) {
                     console.log(result.number);
+                    console.log(result.country?result.country.country.cn:"No country found!");
                     Session.set("ipInChina", result.code);
                 })
             }
