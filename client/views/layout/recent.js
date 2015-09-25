@@ -11,9 +11,14 @@ Template.recentReadAndSearchContainer.helpers({
 	article:function(){
 		return Articles.findOne({_id:this.toString()});
 	},
-	anyThingNeedShow:function(){
-		return !(_.isEmpty(Users.recent.read())
-				&& _.isEmpty(Users.recent.search())
-		);
+	anyThingNeedShow:function(name){
+		if(!name)
+			return !(_.isEmpty(Users.recent.read())
+					&& _.isEmpty(Users.recent.search())
+			);
+		else if(name==='read')
+			return !_.isEmpty(Users.recent.read());
+		else if(name==='search')
+			return !_.isEmpty(Users.recent.search());
 	}
-})
+});
