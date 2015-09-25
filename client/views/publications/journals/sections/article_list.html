@@ -58,7 +58,7 @@
 <template name="HistoricalJournalTable">
     <div class="pull-right">
         {{#if can "modify-article" "resource" }}
-            {{>jkafModal template="updateHistoricalJournalModalForm" doc=this id="updateHistoricalJournalForm"}}
+            {{> updateHistoricalJournalModalForm}}
         {{/if}}
     </div>
     {{#if historicalJournal}}
@@ -115,8 +115,6 @@
 </template>
 
 <template name="updateHistoricalJournalModalForm">
-    {{#autoForm schema="PublicationsSchema" collection="Publications" id="updateHistoricalJournalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-        {{> afQuickField name="historicalJournal"}}
-        <button type="submit" class="btn btn-primary">update</button>
-    {{/autoForm}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="historicalJournal" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
 </template>
