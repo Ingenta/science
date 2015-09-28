@@ -43,7 +43,8 @@ Parser = function(filepath,options,callback){
 	};
 	var getNodes=function(xp,ele){
 		return xpath.select(xp,ele || dom);
-	}
+	};
+
 	/**
 	 * 异步方法
 	 * 解析DOM
@@ -73,7 +74,7 @@ Parser = function(filepath,options,callback){
 				article.subject=getMultiVal("child::subject[@locale='{lang}']/text()",articleNode);
 				article.subspecialty=getMultiVal("child::subspecialty[@locale='{lang}']/text()",articleNode);
 				article.abstract=getMultiVal("child::abstract[@locale='{lang}']/text()",articleNode);
-				article.indexing=getMultiVal("child::indexing/subject/[@locale='{lang}']/text()",articleNode);
+				article.indexing=getMultiVal("child::indexing/subject[@locale='{lang}']/text()",articleNode);
 				article.pages=getSimpleVal("child::pages/text()",articleNode);
 				article.startPage=getSimpleVal("child::start_page/text()",articleNode);
 				article.endPage=getSimpleVal("child::endPage/text()",articleNode);
