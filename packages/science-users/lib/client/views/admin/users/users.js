@@ -143,7 +143,11 @@ Template.AdminUsersView.events({
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
-		Router.go(Router.current().route.getName() + ".insert", {insId: Router.current().params.insId});
+		if(Session.get("activeTab") === "account"){
+			Router.go("admin.institutions.detail.insert", {insId: Router.current().params.insId});
+		} else{
+			Router.go("admin.users.insert", {});
+		}
 	},
 
 	"click #dataview-export-default": function(e, t) {
@@ -171,9 +175,6 @@ Template.AdminUsersView.events({
 
 Template.AdminUsersView.helpers({
 
-	"isInstitution": function () {
-		return "admin.institutions.detail" == Router.current().route.getName();
-	},
 	"isEmpty": function() {
 		return !this.admin_users || this.admin_users.count() == 0;
 	},

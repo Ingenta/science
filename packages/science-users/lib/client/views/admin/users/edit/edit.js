@@ -146,6 +146,9 @@ Template.AdminUsersEditEditForm.helpers({
     },
     "getInstitutionNameById": function () {
         return Institutions.findOne({_id: this.admin_user.institutionId}).name;
+    },
+    "isNormalUser": function () {
+        return "normal" === Session.get("activeTab");
     }
 });
 

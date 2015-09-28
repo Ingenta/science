@@ -77,19 +77,21 @@
                     <label for="disable">{{_ "Disable"}}</label>
                 </div>
             </div>
-            <div class="form-group  field-roles">
-                <label for="roles">
-                    {{_ "Role"}}
-                </label>
+            {{#unless isNormalUser}}
+                <div class="form-group  field-roles">
+                    <label for="roles">
+                        {{_ "Role"}}
+                    </label>
 
-                <div class="input-div">
-                    {{> userEditRoles}}
-                    <span id="help-text" class="help-block">
+                    <div class="input-div">
+                        {{> userEditRoles}}
+                        <span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
+                    </div>
                 </div>
-            </div>
+            {{/unless}}
             <div class="form-group">
                 <div class="submit-div">
                     <button id="form-submit-button" class="btn btn-success" type="submit">

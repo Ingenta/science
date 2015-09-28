@@ -1,5 +1,12 @@
 ReactiveTabs.createInterface({
-    template: 'journalTabs'
+    template: 'journalTabs',
+    onChange: function (slug) {
+        Session.set('activeTab', slug);
+    }
+});
+
+Template.ShowJournal.onRendered(function () {
+    Session.set('activeTab', 'overview');
 });
 
 Template.journalBanner.helpers({
@@ -11,18 +18,14 @@ Template.journalBanner.helpers({
         return Images.findOne({_id: journal.banner}).url();
     }
 });
-Template.journalOptions.helpers({
-    journalContext: function () {
-        var currentTitle = Router.current().params.journalTitle;
-        return Publications.findOne({title: currentTitle});
-    }
-});
+
 Template.ShowJournal.helpers({
     initPage: function (id, publisher) {
         Session.set('currentJournalId', id);
         Session.set('currentPublisherId', publisher);
     }
 });
+
 Template.journalOptions.helpers({
     tabs: function () {
         var tabList = [];
@@ -48,6 +51,10 @@ Template.journalOptions.helpers({
     },
     activeTab: function () {
         return Session.get('activeTab');
+    },
+    journalContext: function () {
+        var currentTitle = Router.current().params.journalTitle;
+        return Publications.findOne({title: currentTitle});
     }
 });
 

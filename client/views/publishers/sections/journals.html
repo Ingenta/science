@@ -83,6 +83,8 @@
 <template name="updatePublicationModalForm">
     {{#autoForm doc=this collection="Publications" id="updatePublicationsModal" type="update" buttonContent=getUpdateButtonContent}}
         <fieldset>
+            {{> afQuickField name="title"}}
+            {{> afQuickField name="titleCn"}}
             {{> afQuickField name="shortTitle"}}
             {{> afQuickField type="hidden" name="createdBy" value=currentUser.username}}
             {{> afQuickField name="chiefEditor"}}
