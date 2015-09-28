@@ -989,6 +989,7 @@
   "addArticleToCollection": "选择文章",
   "collectionDetail": "文章集详情",
   "remove": "移除",
+  "select institution": "选择出机构",
   "select publisher": "选择出版商",
   "select journal": "选择期刊",
   "select volume": "选择卷",

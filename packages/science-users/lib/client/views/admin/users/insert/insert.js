@@ -3,7 +3,9 @@ var pageSession = new ReactiveDict();
 Template.AdminUsersInsert.rendered = function () {
 
 };
-
+Template.AdminUsersInsert.onRendered( function () {
+    Session.set("publisherId", "");
+});
 Template.AdminUsersInsert.events({});
 
 Template.AdminUsersInsert.helpers({});
@@ -91,6 +93,7 @@ Template.AdminUsersInsertInsertForm.events({
             function (values) {
                 Permissions.check("add-user", "user");
                 if (Router.current().params.insId) values.institutionId = Router.current().params.insId;
+                console.log(values);
                 Meteor.call("createUserAccount", values, function (e, userId) {
                     console.log(userId);
                     if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
@@ -122,8 +125,11 @@ Template.AdminUsersInsertInsertForm.events({
         e.preventDefault();
 
         /*BACK_REDIRECT*/
+    },
+    "change #form-select-publisher": function (e) {
+        e.preventDefault();
+        Session.set("publisherId",$(e.target).val());
     }
-
 
 });
 
@@ -137,8 +143,17 @@ Template.AdminUsersInsertInsertForm.helpers({
     "isInstitution": function () {
         return "institution" === Session.get("activeTab");
     },
+    "isPublisher": function () {
+        return "publisher" === Session.get("activeTab");
+    },
     "getInstitutions": function () {
         return Institutions.find({}, {name: 1});
+    },
+    "getPublishers": function () {
+        return Publishers.find({}, {chinesename: 1, name: 1});
+    },
+    "getJournals": function () {
+        return Publications.find({publisher: Session.get("publisherId")}, {titleCn: 1, title: 1});
     }
 
 });
