@@ -8,7 +8,7 @@ this.AdminUsersController = RouteController.extend({
     },
 
     onBeforeAction: function () {
-        Permissions.check("list-user", "user");
+        //Permissions.check("list-user", "user");
         /*BEFORE_FUNCTION*/
         this.next();
     },
