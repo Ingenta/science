@@ -27,6 +27,25 @@
 				{{infoMessage}}
 			</div>
 			{{/if}}
+            {{#if isInstitution}}
+                <div class="form-group  field-profile-institution">
+                    <label for="institutionId">
+                        {{_ "Institution"}}
+                    </label>
+                    <div class="input-div">
+                        <select name="institutionId" class="form-control" required="required" data-type="string">
+                            <option value="">{{_ "select publisher"}}</option>
+                            {{#each getInstitutions}}
+                                <option value={{this._id}}>{{translateThis this.name.cn this.name.en}}</option>
+                            {{/each}}
+                        </select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+                    </div>
+                </div>
+            {{/if}}
 			<div class="form-group  field-profile-name">
 				<label for="username">
 					{{_ "User Name"}}
