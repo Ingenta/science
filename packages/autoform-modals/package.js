@@ -11,7 +11,7 @@ Package.onUse(function (api) {
   api.use([
     'jquery',
     'templating',
-    'less',
+    'less@1.0.0 || 2.5.0',
     'session',
     'coffeescript',
     'ui',
