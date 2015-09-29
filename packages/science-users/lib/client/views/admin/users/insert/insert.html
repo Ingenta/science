@@ -12,9 +12,7 @@
 
 <template name="AdminUsersInsertInsertForm">
 	<div class="">
-		<h2 id="component-title">
-			{{_ "Add new user"}}
-		</h2>
+        {{> columeTitle titleName="Add new user"}}
 		<form id="form" role="form">
 			{{#if errorMessage}}
 			<div class="alert alert-warning">
