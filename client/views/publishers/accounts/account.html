@@ -1,0 +1,6 @@
+<template name="publisherAccountTemplate">
+    {{#with getPublisherNameById}}
+        <h3>{{translateThis this.chinesename this.name}}</h3>
+    {{/with}}
+    {{> AdminUsers}}
+</template>
