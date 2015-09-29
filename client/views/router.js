@@ -166,10 +166,10 @@ Router.map(function () {
         }
     });
 
-    this.route('/publiser/account/:pubId', {
+    this.route('/publisher/account/:pubId', {
         template: "publisherAccountTemplate",
         parent: "home",
-        name: "publiser.account",
+        name: "publisher.account",
         title: function () {
             return TAPi18n.__("Publisher");
         },
@@ -179,6 +179,7 @@ Router.map(function () {
             ]
         },
         data: function () {
+            Session.set("activeTab", "publisher");
             return {
                 admin_users: Users.find({publisherId: this.params.pubId})
             };

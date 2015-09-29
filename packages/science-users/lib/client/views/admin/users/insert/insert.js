@@ -144,7 +144,7 @@ Template.AdminUsersInsertInsertForm.helpers({
         return "institution" === Session.get("activeTab");
     },
     "isPublisher": function () {
-        return ("publisher" === Session.get("activeTab") || Router.current().route.getName() === "publisher.account");
+        return "publisher" === Session.get("activeTab");
     },
     "getInstitutions": function () {
         return Institutions.find({}, {name: 1});
