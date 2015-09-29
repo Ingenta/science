@@ -298,7 +298,19 @@ Template.accountOptions.helpers({
 		return Users.find({orbit_roles: "permissions:admin"}, {});
 	},
 	getNormals: function () {
-		return Users.find({$or: [{orbit_roles: {$exists: false}}, {orbit_roles: {$size: 0}}]}, {});
+		return Users.find(
+			{
+				$and: [
+					{
+						$or: [
+							{orbit_roles: {$exists: false}},
+							{orbit_roles: {$size: 0}}
+						]
+					},
+					{publisherId: {$exists: false}},
+					{institutionId: {$exists: false}}
+				]
+			}, {});
 	},
 	getPublishers: function () {
 		return Users.find({publisherId: {$exists: true}}, {});
