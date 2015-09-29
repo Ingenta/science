@@ -2,6 +2,7 @@
  * Call the function to built the chart when the template is rendered
  */
 Template.MetricsTemplate.rendered = function () {
+    buildPieChart2();
     Tracker.autorun(function () {
         buildPieChart();
         builtArea();
@@ -80,7 +81,26 @@ var buildPieChart = function () {
             data: data
         }]
     });
-}
+};
+
+
+var buildPieChart2 = function () {
+    var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+    var article = Articles.findOne({doi: currentDoi});
+    if (!article)return;
+    var articleId = article._id;
+    if (!articleId)return;
+    var data = new Array();
+    Meteor.call("getLocationReport", "abstract", articleId, function (err, arr) {
+        _.keys(arr).forEach(function (key) {
+            data.push({
+                name: TAPi18n.getLanguage() === "zh-CN" ? arr[key].name.cn : arr[key].name.en,
+                y: arr[key].localCount,
+                color: '#DDDF0D'
+            });
+      });
+    });
+};
 /*
  * Function to draw the area chart
  */
