@@ -18,6 +18,13 @@
                     </a>
                 </li>
             {{/if}}
+            {{#if canUsePublisherPanel}}
+                <li>
+                    <a href="{{pathFor 'publiser.account' pubId=currentUser.publisherId}}">
+                        {{_ "Publisher"}}
+                    </a>
+                </li>
+            {{/if}}
             <li><a href="{{pathFor 'logout'}}">{{_ "Log Out"}}</a></li>
             {{#if isArticlePage}}
                 {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
