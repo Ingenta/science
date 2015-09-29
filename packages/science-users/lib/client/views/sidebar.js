@@ -21,10 +21,14 @@ Template.LayoutSideBar.helpers({
         else return;
     },
     canUseAdminPanel: function () {
-        return !!_.without(Permissions.getUserRoles(), "institution:institution-manager-from-user").length;
+        //return !!_.without(Permissions.getUserRoles(), ["institution:institution-manager-from-user"]).length;
+        return _.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     canUseInstitutionPanel: function () {
         return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
+    },
+    canUsePublisherPanel: function () {
+        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
     },
     isArticlePage: function () {
         return Router.current().route.getName()=="article.show";
