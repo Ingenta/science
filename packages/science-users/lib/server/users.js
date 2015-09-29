@@ -44,7 +44,9 @@ Meteor.publish(null, function () {
             favorite: 1,
             watch: 1,
             watchArticle: 1,
-            institutionId: 1
+            institutionId: 1,
+            publisherId: 1,
+            journalId: 1
         };
         if (!Permissions.userCan("user", "list-user", this.userId)) {
             query._id = this.userId;
@@ -85,5 +87,9 @@ Accounts.onCreateUser(function (options, user) {
         user.profile = options.profile;
     if (options.institutionId)
         user.institutionId = options.institutionId;
+    if (options.publisherId)
+        user.publisherId = options.publisherId;
+    if (options.journalId)
+        user.journalId = options.journalId;
     return user;
 });

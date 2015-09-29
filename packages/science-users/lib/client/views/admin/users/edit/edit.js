@@ -147,8 +147,15 @@ Template.AdminUsersEditEditForm.helpers({
     "getInstitutionNameById": function () {
         return Institutions.findOne({_id: this.admin_user.institutionId}).name;
     },
+    "getPublisherNameById": function () {
+        console.log(this.admin_user);
+        return Publishers.findOne({_id: this.admin_user.publisherId}, {chinesename: 1, name: 1});
+    },
     "isNormalUser": function () {
         return "normal" === Session.get("activeTab");
+    },
+    "getJournals": function () {
+        return Publications.find({publisher: this.admin_user.publisherId}, {titleCn: 1, title: 1});
     }
 });
 

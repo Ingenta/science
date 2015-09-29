@@ -17,9 +17,12 @@ Package.onUse(function(api) {
     'underscore',
     'science-lib'
   ],'server');
-  api.addFiles('lib/parser.js','server');
+  api.addFiles([
+    'lib/parser.js',
+    'lib/import.js'
+  ],'server');
 
-  api.export('Parser','server');
+  api.export('PastDataImport','server');
 });
 
 Package.onTest(function(api) {
