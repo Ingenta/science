@@ -49,8 +49,8 @@ PastDataImport = function () {
 	var getAuthors = function(authorsArr){
 		if(!_.isEmpty(authorsArr)){
 			var authors = [];
-			var affiliations = new Science.JSON.UniqueArray(isSameAffiliation);
-			var authorNotes = new Science.JSON.UniqueArray();
+			var affiliations = new Science.JSON.UniqueArray("id",isSameAffiliation);
+			var authorNotes = new Science.JSON.UniqueArray("label");
 			_.each(authorsArr,function(obj){
 				var author={affRef:[]};
 				if(obj.affiliation){
@@ -60,10 +60,11 @@ PastDataImport = function () {
 						var index = affiliations.push({affText:{cn:affCnArr[i],en:affEnArr[i]}});
 						author.affRef.push(index);
 					};
+					author.affRef= _.uniq(author.affRef);
 				}
 
 				if(obj.isPrimary === 'true' && obj.email){
-					var index = authorNotes.push(obj.email);
+					var index = authorNotes.push({email:obj.email});
 					author.emailRef=index;
 				}
 

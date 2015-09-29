@@ -100,10 +100,21 @@ Meteor.methods({
             if (topicEneity) results.topic = topicEneity._id;
         }
 
-        var keywords = xpath.select("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc).toString();
-        keywords = keywords.split(',');
-        if (keywords === undefined) results.errors.push("No keywords found");
-        else results.keywords = keywords;
+        //var keywords = xpath.select("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc).toString();
+        //keywords = keywords.split(',');
+        //if (keywords === undefined) results.errors.push("No keywords found");
+        //else results.keywords = keywords;
+
+        var keywordsCn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()",doc);
+        var keywordsEn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()",doc);
+        if(_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)){
+            results.errors.push("No keywords found");
+        }else{
+            results.keywords = {
+                cn:keywordsCn,
+                en:keywordsEn
+            }
+        }
 
         var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
         if (elocationId !== undefined) results.elocationId = elocationId;
