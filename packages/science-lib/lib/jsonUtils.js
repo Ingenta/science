@@ -15,4 +15,33 @@ Science.JSON.MergeObject=function(a, b){
 		}
 	}
 	return a;
-}
+};
+/**
+ * 不重复的数组
+ * @param equelFunc 判断是否重复的表达式 可选
+ * @constructor
+ */
+Science.JSON.UniqueArray=function(equelFunc){
+	var arr=[];
+	var index=0;
+	var func = equelFunc || _.isEqual;
+	this.push = function(obj){
+		var existObj = _.find(arr,function(insideObj){
+			return func(_.omit(insideObj,"_index"),obj);
+		});
+		if(existObj){
+			return existObj._index;
+		}else{
+			var cloneObj= _.clone(obj);
+			cloneObj._index=index++;
+			arr.push(cloneObj);
+			return cloneObj._index;
+		}
+	};
+	this.getArray=function(clearIndex){
+		if(clearIndex){
+			return _.map(arr, function(obj){ return _.omit(obj,"_index")});
+		}
+		return arr;
+	};
+};
