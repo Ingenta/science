@@ -29,6 +29,26 @@ Meteor.methods({
         var currentUserIPNumber = Science.ipToNumber(this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress);
         var item = IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber}, endIpLong: {$gte: currentUserIPNumber}});
         return IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber}, endIpLong: {$gte: currentUserIPNumber}, countryCode2: "CN"})? {code: false, number: currentUserIPNumber, country: item}: {code: true, number: currentUserIPNumber, country: item};
+    },
+    'getLocationReport': function (action, articleId) {
+        var countryViews = {Others: {name: {cn:'其他', en: 'Others'}, localCount: 0}};
+        ArticleViews.find({action: action, articleId: articleId}).forEach(function(item){
+            var currentUserIPNumber = Science.ipToNumber(item.ip)
+            var country = IP2Country.findOne({startIpLong: {$lte: currentUserIPNumber}, endIpLong: {$gte: currentUserIPNumber}});
+            if(country){
+                if(countryViews[country.countryCode2]){
+                    countryViews[country.countryCode2].localCount += 1;
+                } else {
+                    countryViews[country.countryCode2].name = obj.country;
+                    countryViews[country.countryCode2].localCount = 1;
+                }
+            } else {
+                countryViews['Others'].localCount += 1;
+            }
+
+        });
+        return countryViews;
     }
+        
 });
 

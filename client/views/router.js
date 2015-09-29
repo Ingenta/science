@@ -166,6 +166,26 @@ Router.map(function () {
         }
     });
 
+    this.route('/publisher/account/:pubId', {
+        template: "publisherAccountTemplate",
+        parent: "home",
+        name: "publisher.account",
+        title: function () {
+            return TAPi18n.__("Publisher");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers')
+            ]
+        },
+        data: function () {
+            Session.set("activeTab", "publisher");
+            return {
+                admin_users: Users.find({publisherId: this.params.pubId})
+            };
+        }
+    });
+
     this.route('/publisher/:publisherName', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
