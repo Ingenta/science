@@ -42,25 +42,47 @@ PastDataImport = function () {
 		}
 	};
 
-	var getAuthors = function(authors){
-		if(!_.isEmpty(authors)){
+	var isSameAffiliation = function(a,b){
+		return a.affText.cn===b.affText.cn;
+	};
+
+	var getAuthors = function(authorsArr){
+		if(!_.isEmpty(authorsArr)){
 			var authors = [];
-			var affiliations = [];
-			_.each(authors,function(obj){
-				var author={};
+			var affiliations = new Science.JSON.UniqueArray(isSameAffiliation);
+			var authorNotes = new Science.JSON.UniqueArray();
+			_.each(authorsArr,function(obj){
+				var author={affRef:[]};
+				if(obj.affiliation){
+					var affCnArr = obj.affiliation.cn.split("#");
+					var affEnArr = obj.affiliation.en?obj.affiliation.en.split("#"):affCnArr;//如果没有英文工作单位信息，用中文代替。
+					for(var i=0;i<affCnArr.length;i++){
+						var index = affiliations.push({affText:{cn:affCnArr[i],en:affEnArr[i]}});
+						author.affRef.push(index);
+					};
+				}
+
+				if(obj.isPrimary === 'true' && obj.email){
+					var index = authorNotes.push(obj.email);
+					author.emailRef=index;
+				}
+
 				author.surname={en:obj.firstname,cn:obj.firstname};
 				author.given={
 					en:(obj.middlename || "" + " " + obj.lastname || ""),
 					cn:(obj.middlename || "" + " " + obj.lastname || "")
+				};
+				author.fullname=obj.authorname;
+				if(author.fullname && author.fullname.cn){
+					author.fullname.en=author.fullname.en || author.fullname.cn;
 				}
+
 				authors.push(author);
-				if(author.affiliation){
-					affiliations.push(author);
-				}
-			})
-			return {authors:authors,affiliations:affiliations};
+
+			});
+			return {authors:authors,affiliations:affiliations.getArray(),authorNotes:authorNotes.getArray()};
 		}
-	}
+	};
 
 	Science.FSE.readdir(folder,Meteor.bindEnvironment( function (err, fileList) {
 		if (err)
@@ -80,6 +102,8 @@ PastDataImport = function () {
 								newOne.journalId=journal._id;
 								newOne.volume=issue.volume;
 								newOne.issue=issue.number;
+								newOne.year=issue.year;
+
 								newOne.volumeId=vi.volumeId;
 								newOne.issueId=vi.issueId;
 								newOne.doi=article.doi;
@@ -87,9 +111,8 @@ PastDataImport = function () {
 								newOne.title=article.title;
 								newOne.publisher=journal.publisher;
 								newOne.startPage=article.startPage;
-								newOne.year=article.year;
-								newOne.accepted=article.accepted;
-								newOne.published=article.published;
+								newOne.accepted=article.acceptDate;
+								newOne.published=article.publishDate;
 								newOne.topic=getTopic(article.subspecialty);
 								newOne.articleType=article.property.en;
 								var authors=getAuthors(article.authors);
@@ -99,7 +122,7 @@ PastDataImport = function () {
 								newOne.keywords=article.indexing;
 								newOne.pubStatus="normal";
 								newOne.accessKey=journal.accessKey;
-								newOne.language=article.language;
+								newOne.language=article.language=='zh_CN'?2:1;
 								Articles.insert(newOne);
 								console.log("import "+newOne.doi + " successfully");
 							})
