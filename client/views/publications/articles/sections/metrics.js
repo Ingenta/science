@@ -2,10 +2,10 @@
  * Call the function to built the chart when the template is rendered
  */
 Template.MetricsTemplate.rendered = function () {
-    buildPieChart2();
     Tracker.autorun(function () {
         buildPieChart();
         builtArea();
+        buildPieChart2();
     });
 }
 
@@ -64,7 +64,7 @@ var buildPieChart = function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false,
+                    enabled: false
                     //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     //                style: {
                     //                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -91,14 +91,62 @@ var buildPieChart2 = function () {
     var articleId = article._id;
     if (!articleId)return;
     var data = new Array();
-    Meteor.call("getLocationReport", "abstract", articleId, function (err, arr) {
+    Meteor.call("getLocationReport", "fulltext", articleId, function (err, arr) {
+        var colors=['#DDDF0D','#DD000D','#00DF0D','#DDDFFF'];
+        var index=0;
         _.keys(arr).forEach(function (key) {
+            var color=colors[ index % colors.length ];
+            index++;
             data.push({
                 name: TAPi18n.getLanguage() === "zh-CN" ? arr[key].name.cn : arr[key].name.en,
                 y: arr[key].localCount,
-                color: '#DDDF0D'
+                color:color
             });
       });
+        Session.set('reactive2', data);
+    });
+
+    chart = $('#container').highcharts({
+
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+
+        title: {
+            text: ''
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
+        },
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                    //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    //                style: {
+                    //                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    //                },
+                    //connectorColor: 'silver'
+                },
+                showInLegend: true
+            }
+        },
+
+        series: [{
+            type: 'pie',
+            name: 'views',
+            data: Session.get('reactive2')
+        }]
     });
 };
 /*

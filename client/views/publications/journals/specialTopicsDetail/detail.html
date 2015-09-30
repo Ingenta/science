@@ -1,5 +1,7 @@
 <template name="specialTopicsDetailHeader">
-    <h3>{{_ "Special Topics"}}: {{name}}</h3>
+    {{#with collInfo}}
+        <h3>{{_ "Special Topics"}}: {{name}}</h3>
+    {{/with}}
 </template>
 
 <template name="specialTopicsDetail">
