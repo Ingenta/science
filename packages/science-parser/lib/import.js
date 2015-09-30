@@ -94,13 +94,16 @@ PastDataImport = function () {
 					if (err)
 						console.dir(err) ;
 					if (issue && !_.isEmpty(issue.articles)) {
-						var journal =  Publications.findOne({issn: issue.issn.replace('-','')});
+						var journal =  Publications.findOne({issn: issue.issn.replace('-','')},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1,publisher:1}});
+
 						if (journal) {
-							var vi = ensureVolIss(journal._id, issue);
+
+						var vi = ensureVolIss(journal._id, issue);
 							_.each(issue.articles, function (article) {
 								console.log("import "+article.doi + " start");
 								var newOne = {};
 								newOne.journalId=journal._id;
+								newOne.journalInfo=journal;
 								newOne.volume=issue.volume;
 								newOne.issue=issue.number;
 								newOne.year=issue.year;
@@ -124,8 +127,17 @@ PastDataImport = function () {
 								newOne.pubStatus="normal";
 								newOne.accessKey=journal.accessKey;
 								newOne.language=article.language=='zh_CN'?2:1;
-								Articles.insert(newOne);
-								console.log("import "+newOne.doi + " successfully");
+
+								var existArticle = Articles.findOne({doi: newOne.doi});
+								if(existArticle){
+									Articles.update({_id:existArticle._id},{$set:newOne});
+									console.log("update "+newOne.doi + " successfully");
+
+								}else{
+									Articles.insert(newOne);
+									console.log("import "+newOne.doi + " successfully");
+								}
+
 							})
 						} else {
 							console.log("journal not exists");
