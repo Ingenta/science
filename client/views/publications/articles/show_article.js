@@ -120,7 +120,8 @@ Template.showArticle.helpers({
         return this.surname.en + ' ' + this.given.en;
     },
     getPdfById: function (id) {
-        return ArticleXml.findOne({_id: id}).url() + "&download=true";
+        console.log(id);
+        return Collections.Pdfs.findOne({_id: id}).url() + "&download=true";
     },
     Language: function (num2) {
         if(num2=="1"){

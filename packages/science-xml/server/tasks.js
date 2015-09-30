@@ -188,8 +188,7 @@ Tasks.insertArticlePdf = function (logId, result) {
         status: "Started",
         logId: logId
     });
-
-    ArticleXml.insert(log.pdf, function (err, fileObj) {
+    Collections.Pdfs.insert(log.pdf, function (err, fileObj) {
         result.pdfId = fileObj._id;
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
         UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});

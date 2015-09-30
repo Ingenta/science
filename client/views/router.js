@@ -361,7 +361,8 @@ Router.map(function () {
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('keywords'),
-                Meteor.subscribe('articleXml')
+                Meteor.subscribe('articleXml'),
+                Meteor.subscribe('pdfs')
             ]
         },
         onBeforeAction: function () {
