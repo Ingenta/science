@@ -269,14 +269,36 @@ Tasks.insertArticleTask = function (logId, result) {
     }
 }
 var inertKeywords = function (a) {
-    a.forEach(function (name) {
-        if (!Keywords.findOne({name: name})) {
-            Keywords.insert({
-                name: name,
-                score: 0
-            });
-        }
-    })
+    if(a.cn){
+        a.cn.forEach(function (name) {
+            if (!Keywords.findOne({name: name})) {
+                Keywords.insert({
+                    lang:"cn",
+                    name: name,
+                    score: 0
+                });
+            }
+        })
+    }
+    if(a.en){
+        a.en.forEach(function (name) {
+            if (!Keywords.findOne({name: name})) {
+                Keywords.insert({
+                    lang:"en",
+                    name: name,
+                    score: 0
+                });
+            }
+        })
+    }
+    //a.forEach(function (name) {
+    //    if (!Keywords.findOne({name: name})) {
+    //        Keywords.insert({
+    //            name: name,
+    //            score: 0
+    //        });
+    //    }
+    //})
 }
 
 var inserAccessKey = function (a) {

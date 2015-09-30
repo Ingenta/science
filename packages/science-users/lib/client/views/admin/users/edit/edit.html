@@ -12,10 +12,7 @@
 
 <template name="AdminUsersEditEditForm">
     <div class="">
-        <h2 id="component-title">
-            {{_ "Edit user"}}
-        </h2>
-
+        {{> columeTitle titleName="Edit user"}}
         <form id="form" role="form">
             {{#if errorMessage}}
                 <div class="alert alert-warning">
