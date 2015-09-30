@@ -62,7 +62,7 @@ ScienceXML.parseXml = function (path) {
     ScienceXML.getContentType(results, doc);
 
     var ack = ScienceXML.getValueByXPathIncludingXml("//back/ack", doc);
-    if (ack !== undefined) results.ack = ack;
+    if (ack !== undefined) results.acknowledgements = ack;
 
     var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
     if (volume === undefined) results.errors.push("No volume found");

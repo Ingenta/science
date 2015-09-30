@@ -19,10 +19,6 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     if (Tasks.inProgress(undefined, logId, fileNameWithoutExtension)) {
         return;
     }
-    if (Tasks.hasExistingArticleByArticleDoi(undefined, logId, fileNameWithoutExtension)) {
-        return;
-    }
-
 
     if (fileType === "text/xml") {
         Tasks.parse(logId, pathToFile);
@@ -152,7 +148,7 @@ Tasks.parse = function (logId, pathToXml) {
     //TODO: refactor this after solving, unhandled error, [TypeError: Cannot read property 'localNSMap' of undefined]
     try{
         var result = ScienceXML.parseXml( pathToXml);
-
+        if(result.pdf)
         log.errors = result.errors;
         if (log.errors.length) {
             Tasks.fail(taskId, logId, log.errors);
@@ -331,9 +327,18 @@ var insertArticle = function (a) {
     //确保article有一个关联的issue
     a.issueId = issue._id || issue;
 
+    //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
+    var existArticle = Articles.findOne({doi: a.doi});
+    if(existArticle){
+        var sets = _.pick(a,Config.fieldsWhichFromXml);
+        Articles.update({_id:existArticle._id},{$set:sets});
+        return existArticle._id;
+    }
+
     var journalInfo = Publications.findOne({_id: a.journalId},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1}});
     a.journalInfo = journalInfo;
 
+    //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml
     var id = Articles.insert({
         doi: a.doi,
         articledoi: a.articledoi,
