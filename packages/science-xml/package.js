@@ -18,10 +18,10 @@ Package.onUse(function (api) {
         both);
     api.addFiles('both/routes.js',both);
     api.addFiles('both/uploadLog.js', both);
+    api.addFiles('server/xml-lib.js', 'server');
     api.addFiles('server/science-xml.js', 'server');
     api.addFiles('server/parse.js', 'server');
     api.addFiles('server/tasks.js', 'server');
-    api.addFiles('server/xml-lib.js', 'server');
     api.addFiles('server/interface.js', 'server');
     api.addFiles('client/views/upload.html', 'client');
     api.addFiles('client/views/upload.js', 'client');

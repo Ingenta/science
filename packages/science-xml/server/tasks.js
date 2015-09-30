@@ -127,7 +127,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 return;
                             }
                             var targetXml = targetPath + "/" + xmlFileName + ".xml";
-                            var targetPdf = targetPath + "/" + xmlFileName + ".pdf";
+                            var targetPdf = targetPath + "/" + xmlFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
                             UploadLog.update({_id: logId}, {
                                 $set: {
                                     xml: targetXml,
@@ -150,12 +150,9 @@ Tasks.parse = function (logId, pathToXml) {
         logId: logId
     });
     //TODO: refactor this after solving, unhandled error, [TypeError: Cannot read property 'localNSMap' of undefined]
-    Meteor.call('parseXml', pathToXml, function (error, result) {
-        if (error) {
-            log.errors.push(error.toString());
-            Tasks.fail(taskId, logId, log.errors);
-            return;
-        }
+    try{
+        var result = ScienceXML.parseXml( pathToXml);
+
         log.errors = result.errors;
         if (log.errors.length) {
             Tasks.fail(taskId, logId, log.errors);
@@ -171,7 +168,10 @@ Tasks.parse = function (logId, pathToXml) {
 
         //start import tasks
         Tasks.insertArticlePdf(logId, result);
-    });
+    }catch(e){
+        log.errors.push(e.toString());
+        Tasks.fail(taskId, logId, log.errors);
+    }
 }
 
 
