@@ -29,7 +29,11 @@ ReactiveTabs.createInterface({
                         action: "fulltext",
                         ip: session
                     });
-                    article.keywords.forEach(function (k) {
+                    article.keywords.en.forEach(function (k) {
+                        var id = Keywords.findOne({"name": k})._id;
+                        Keywords.update({_id: id}, {$inc: {"score": 2}})
+                    });
+                    article.keywords.cn.forEach(function (k) {
                         var id = Keywords.findOne({"name": k})._id;
                         Keywords.update({_id: id}, {$inc: {"score": 2}})
                     })
