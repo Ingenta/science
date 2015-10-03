@@ -27,9 +27,7 @@ Science.JSON.UniqueArray=function(id, equelFunc){
 	var index=0;
 	var func = equelFunc || _.isEqual;
 	this.push = function(obj){
-		var existObj = _.find(arr,function(insideObj){
-			return func(_.omit(insideObj,id),obj);
-		});
+		var existObj = this.exists(obj);
 		if(existObj){
 			return existObj[id];
 		}else{
@@ -44,5 +42,29 @@ Science.JSON.UniqueArray=function(id, equelFunc){
 			return _.map(arr, function(obj){ return _.omit(obj,id)});
 		}
 		return arr;
+	};
+	this.exists = function(obj){
+		return _.find(arr,function(insideObj){
+			return func(_.omit(insideObj,id),obj);
+		});
+	}
+};
+/**
+ * 不重复数组的另一种实现方式
+ * @param keyGenerator
+ * @constructor
+ */
+Science.JSON.UniqueList = function(keyGenerator){
+	if(!keyGenerator || !_.isFunction(keyGenerator)){
+		throw new Error("generator is wrong! it's should be a function");
+	}
+	var _list = {};
+	this.push = function(obj){
+		var key = keyGenerator(obj);
+		_list[key]=obj;
+	};
+	this.exists = function(obj){
+		var key = keyGenerator(obj);
+		return _list.hasOwnProperty(key);
 	};
 };

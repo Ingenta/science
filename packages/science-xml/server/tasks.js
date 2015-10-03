@@ -374,4 +374,4 @@ var insertArticle = function (a) {
         language: a.language
     });
     return id;
-}
+};

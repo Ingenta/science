@@ -1,28 +1,7 @@
 PastDataImport = function () {
 	var folder = "/Users/jiangkai/WORK/ImportPastData/";
 
-	var ensureVolIss = function (journalId, issueObj) {
-		var volume = Volumes.findOne({journalId: journalId, volume: issueObj.volume});
-		if (!volume) {
-			volume = Volumes.insert({
-				journalId: journalId,
-				volume   : issueObj.volume
-			});
-		}
-
-		var issue = Issues.findOne({journalId: journalId, volume: issueObj.volume, issue: issueObj.number});
-		if (!issue) {
-			issue = Issues.insert({
-				journalId: journalId,
-				volume   : issueObj.volume,
-				issue    : issueObj.number,
-				year     : issueObj.year,
-				month    : issueObj.month || "1"
-			});
-		}
-
-		return {volumeId: volume._id || volume, issueId: issue._id || issue};
-	};
+	var issueCreator = new ScienceXML.IssueCreator();
 
 	var getDoiSecondPart = function(doi){
 		if(doi){
@@ -98,7 +77,14 @@ PastDataImport = function () {
 
 						if (journal) {
 
-						var vi = ensureVolIss(journal._id, issue);
+							var vi = issueCreator.createIssue({
+								journalId:journal._id,
+								volume:issue.volume,
+								issue:issue.issue,
+								year:issue.year,
+								month:issue.month
+							});
+
 							_.each(issue.articles, function (article) {
 								console.log("import "+article.doi + " start");
 								var newOne = {};
