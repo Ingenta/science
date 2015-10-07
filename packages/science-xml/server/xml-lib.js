@@ -382,3 +382,17 @@ ScienceXML.handlePara = function (paragraph) {
     return handled;
 
 };
+
+
+ScienceXML.getKeywords= function(xp,dom){
+    var keywords = xpath.select(xp, dom);
+    var allkeywords = [];
+    if(keywords && keywords.length){
+        _.each(keywords,function(kw){
+            var skw=kw.toString().split(/\s*[,，]\s*/);
+            allkeywords=_.union(allkeywords,skw);
+
+        })
+    }
+    return _.uniq(allkeywords);
+}

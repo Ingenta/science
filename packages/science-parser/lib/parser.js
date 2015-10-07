@@ -58,7 +58,7 @@ Parser = function(filepath,options,callback){
 		issue.title=getSimpleVal("//issue/title/text()");
 		issue.year=getSimpleVal("//issue/year/text()");
 		issue.volume=getSimpleVal("//issue/volume/text()");
-		issue.number=getSimpleVal("//issue/number/text()");
+		issue.issue=getSimpleVal("//issue/number/text()");
 		issue.articles=[];
 		var sections=getNodes("//issue/section");
 		_.each(sections,function(sec){
