@@ -25,14 +25,9 @@ Package.onUse(function(api) {
 
     api.addFiles('server/emails.js', 'server');
 
-    api.addFiles('science-emails.js');
     api.addFiles('client/router.js','client');
-    api.addFiles('client/views/emails.html','client');
-    api.addFiles('client/views/emails.js','client');
+    api.addFiles('client/views/admin/emails.html','client');
+    api.addFiles('client/views/admin/emails.js','client');
+    api.addFiles('client/views/user/user-email-settings.html','client');
 });
 
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('science-emails');
-  api.addFiles('science-emails-tests.js');
-});
