@@ -33,7 +33,7 @@ Template.LayoutSideBar.helpers({
     isArticlePage: function () {
         return Router.current().route.getName()=="article.show";
     },
-    isJourmalPage: function () {
+    isJournalPage: function () {
         return Router.current().route.getName()=="journal.name";
     },
     getCurrentDoi: function () {
