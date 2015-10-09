@@ -29,7 +29,11 @@ ReactiveTabs.createInterface({
                         action: "fulltext",
                         ip: session
                     });
-                    article.keywords.forEach(function (k) {
+                    article.keywords.en.forEach(function (k) {
+                        var id = Keywords.findOne({"name": k})._id;
+                        Keywords.update({_id: id}, {$inc: {"score": 2}})
+                    });
+                    article.keywords.cn.forEach(function (k) {
                         var id = Keywords.findOne({"name": k})._id;
                         Keywords.update({_id: id}, {$inc: {"score": 2}})
                     })
@@ -116,7 +120,8 @@ Template.showArticle.helpers({
         return this.surname.en + ' ' + this.given.en;
     },
     getPdfById: function (id) {
-        return ArticleXml.findOne({_id: id}).url() + "&download=true";
+        console.log(id);
+        return Collections.Pdfs.findOne({_id: id}).url() + "&download=true";
     },
     Language: function (num2) {
         if(num2=="1"){

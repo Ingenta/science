@@ -31,7 +31,6 @@ AdvertisementSchema = new SimpleSchema({
     },
     endDate: {
         type: Date,
-        optional: true,
         autoform: {
             afFieldInput: {
                 type: "bootstrap-datepicker"

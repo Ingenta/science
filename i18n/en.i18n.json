@@ -574,10 +574,10 @@
                     "label": "Field of research"
                 },
                 "interestedOfJournals": {
-                    "label": "Interested of journals"
+                    "label": "Journals of interest"
                 },
                 "interestedOfTopics": {
-                    "label": "Interested of topics"
+                    "label": "Topics of interest"
                 },
                 "phone": {
                     "label": "Phone"

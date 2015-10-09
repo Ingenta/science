@@ -1,28 +1,7 @@
 PastDataImport = function () {
 	var folder = "/Users/jiangkai/WORK/ImportPastData/";
 
-	var ensureVolIss = function (journalId, issueObj) {
-		var volume = Volumes.findOne({journalId: journalId, volume: issueObj.volume});
-		if (!volume) {
-			volume = Volumes.insert({
-				journalId: journalId,
-				volume   : issueObj.volume
-			});
-		}
-
-		var issue = Issues.findOne({journalId: journalId, volume: issueObj.volume, issue: issueObj.number});
-		if (!issue) {
-			issue = Issues.insert({
-				journalId: journalId,
-				volume   : issueObj.volume,
-				issue    : issueObj.number,
-				year     : issueObj.year,
-				month    : issueObj.month || "1"
-			});
-		}
-
-		return {volumeId: volume._id || volume, issueId: issue._id || issue};
-	};
+	var issueCreator = new ScienceXML.IssueCreator();
 
 	var getDoiSecondPart = function(doi){
 		if(doi){
@@ -94,13 +73,23 @@ PastDataImport = function () {
 					if (err)
 						console.dir(err) ;
 					if (issue && !_.isEmpty(issue.articles)) {
-						var journal =  Publications.findOne({issn: issue.issn.replace('-','')});
+						var journal =  Publications.findOne({issn: issue.issn.replace('-','')},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1,publisher:1}});
+
 						if (journal) {
-							var vi = ensureVolIss(journal._id, issue);
+
+							var vi = issueCreator.createIssue({
+								journalId:journal._id,
+								volume:issue.volume,
+								issue:issue.issue,
+								year:issue.year,
+								month:issue.month
+							});
+
 							_.each(issue.articles, function (article) {
 								console.log("import "+article.doi + " start");
 								var newOne = {};
 								newOne.journalId=journal._id;
+								newOne.journalInfo=journal;
 								newOne.volume=issue.volume;
 								newOne.issue=issue.number;
 								newOne.year=issue.year;
@@ -124,8 +113,17 @@ PastDataImport = function () {
 								newOne.pubStatus="normal";
 								newOne.accessKey=journal.accessKey;
 								newOne.language=article.language=='zh_CN'?2:1;
-								Articles.insert(newOne);
-								console.log("import "+newOne.doi + " successfully");
+
+								var existArticle = Articles.findOne({doi: newOne.doi});
+								if(existArticle){
+									Articles.update({_id:existArticle._id},{$set:newOne});
+									console.log("update "+newOne.doi + " successfully");
+
+								}else{
+									Articles.insert(newOne);
+									console.log("import "+newOne.doi + " successfully");
+								}
+
 							})
 						} else {
 							console.log("journal not exists");
