@@ -5,9 +5,9 @@ ReactiveTabs.createInterface({
     }
 });
 
-Template.ShowJournal.onRendered(function () {
-    Session.set('activeTab', 'overview');
-});
+//Template.ShowJournal.onRendered(function () {
+//    Session.set('activeTab', 'overview');
+//});
 
 Template.journalBanner.helpers({
     getJournalBannerById: function (journalId) {
