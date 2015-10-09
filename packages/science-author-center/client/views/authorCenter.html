@@ -22,18 +22,10 @@
 
 <template name="SinglePublisherForAuthorCenter">
     <div class="row">
-        <div class="col-xs-3">
-            <a href="{{pathFor 'publisher.name' publisherName=name}}">
-                <img src="{{getImageHelper picture}}" width="105"/>
-            </a>
-        </div>
+        <div class="col-xs-3" align="center"><img src="{{getImageHelper picture}}" width="105"/></div>
         <div class="col-xs-9">
             <div class="row">
-                <h3>
-                    <a class="text" href="{{pathFor 'publisher.name' publisherName=name}}">
-                        {{translateThis chinesename name}}
-                    </a>
-                </h3>
+                <h3>{{translateThis chinesename name}}</h3>
             </div>
             <div class="row">
                     {{#each hasJournal _id}}
