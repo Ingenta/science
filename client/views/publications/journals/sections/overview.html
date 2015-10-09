@@ -63,7 +63,7 @@
             {{> recommendArticles}}
             <h4>{{_ "Latest Articles"}}</h4>
             {{#each latestArticles}}
-                <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
             {{else}}
                 {{_ "No articles found!"}}
             {{/each}}
@@ -78,7 +78,7 @@
             <div class="col-xs-12">
                 <h4>{{_ "Recently Viewed Articles"}}</h4>
                 {{#each recentArticles}}
-                    <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                    <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
                 {{else}}
                     {{_ "No articles found!"}}
                 {{/each}}
