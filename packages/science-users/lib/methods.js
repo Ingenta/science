@@ -32,6 +32,12 @@ Meteor.methods({
             password = userOptions.password;
             delete userOptions.password;
         }
+
+        if(options.journalId)
+        {
+            userOptions.journalId = options.journalId;
+        }
+
         if(userOptions) {
             Users.update(userId, { $set: userOptions });
         }
