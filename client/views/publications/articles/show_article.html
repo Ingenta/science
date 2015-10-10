@@ -54,23 +54,15 @@
                 <div class="row">
                     {{#if pdfId}}
                         <li class="pdf">
-                            <a class="pdfDownload" href="{{getPdfById pdfId}}">
+                            <a target="_blank" class="pdfDownload" href="/downloadPdf/{{pdfId}}">
                                 <img style="height:50px" src="/pdf.png"/> {{_ "Download"}} PDF
                             </a>
                         </li>
                     {{/if}}
                 </div>
-                <!--<div class="row"><img src="/crossmark.jpg"></div>-->
             </div>
             <br>
 
-            <!--<div class="container-fluid">-->
-            <!--<div class="row">{{_ "Share"}}</div>-->
-            <!--<div class="row">-->
-            <!--<i class="fa fa-weibo"></i>-->
-            <!--<i class="fa fa-weixin"></i>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
     </div>
     <hr>
@@ -86,15 +78,6 @@
         </div>
     </div>
     {{> articleOptions}}
-    <!--<hr>-->
-    <!--<div class="row">-->
-    <!--<div class="col-xs-5">-->
-    <!--<h4>{{_ "Most Read"}}</h4>-->
-    <!--</div>-->
-    <!--<div class="col-xs-5">-->
-    <!--<h4>{{_ "Most Cited"}}</h4>-->
-    <!--</div>-->
-    <!--</div>-->
 </template>
 
 <template name="articlePage">

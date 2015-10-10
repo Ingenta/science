@@ -10,7 +10,6 @@ Template.AdminUsersEdit.helpers({});
 
 Template.AdminUsersEditEditForm.rendered = function () {
 
-
     pageSession.set("adminUsersEditEditFormInfoMessage", "");
     pageSession.set("adminUsersEditEditFormErrorMessage", "");
 
@@ -148,7 +147,6 @@ Template.AdminUsersEditEditForm.helpers({
         return Institutions.findOne({_id: this.admin_user.institutionId}).name;
     },
     "getPublisherNameById": function () {
-        console.log(this.admin_user);
         return Publishers.findOne({_id: this.admin_user.publisherId}, {chinesename: 1, name: 1});
     },
     "isNormalUser": function () {
@@ -156,7 +154,14 @@ Template.AdminUsersEditEditForm.helpers({
     },
     "getJournals": function () {
         return Publications.find({publisher: this.admin_user.publisherId}, {titleCn: 1, title: 1});
+    },
+    "setJournalId": function () {
+        Session.set("journalId", this.admin_user.journalId);
+    },
+    "getJournalId": function () {
+        return Session.get("journalId");
     }
+
 });
 
 Template.userEditRoles.helpers({

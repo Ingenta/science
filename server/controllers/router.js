@@ -177,4 +177,49 @@ Router.map(function () {
             return this.response.end(text);
         }
     });
+    this.route('downloadPdf',{
+        where: 'server',
+        path: '/downloadPdf/:pdfId',
+        action:function(){
+            var pdf=Collections.Pdfs.findOne({_id:this.params.pdfId});
+            if(pdf){
+                var article=Articles.findOne({pdfId:this.params.pdfId},{fields:{doi:1,pubStatus:1}});
+                var response = this.response;
+                var ip= this.request.headers["x-forwarded-for"] || this.request.connection.remoteAddress || this.request.socket.remoteAddress;
+                var stamp = process.cwd()+"/assets/app/stamp.pdf";
+                var footmark = Config.pdf.footmark.replace("{ip}",ip || "unknown")
+                    .replace("{time}",new Date().format("yyyy-MM-dd hh:mm:ss"))
+                    .replace("{url}",Config.rootUrl + Science.URL.articleDetail(article._id) || "");
+                var params = [
+                    "-i",Config.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
+                    "-o",Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key, //处理完成后保存的文件位置
+                    "-s",process.cwd()+"/assets/app/stamp.pdf",       //广告页位置
+                    "-f",footmark
+                ];
+                //预出版的文章pdf上需要加上“Accepted”字样的水印
+                if(article.pubStatus === 'preset'){
+                    params=_.union(params,["-w",Config.pdf.watermark]);
+                }
+                Science.Pdf(params,function(error,stdout,stderr){
+                        if(!error){
+                            Science.FSE.exists(Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key,function(result){
+                                if(result){
+                                    var headers = {
+                                        'Content-Type': pdf.copies.pdfs.type,
+                                        'Content-Disposition': "attachment; filename=" + pdf.copies.pdfs.name
+                                    };
+
+                                    response.writeHead(200, headers);
+                                    response.end(Science.FSE.readFileSync(Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key));
+                                }
+                            });
+                        }else{
+                            throw error;
+                        }
+                    }
+                );
+
+            }
+        }
+    })
 });

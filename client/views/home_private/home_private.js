@@ -88,14 +88,10 @@ Template.recentArticles.helpers({
             var article = Articles.findOne({_id: id._id.articleId});
             article && mostReadArticles.push(article);
         });
-        return mostReadArticles;
+        return _.first(mostReadArticles,[5]);
     },
     mostCitedArticles: function () {
         return MostCited.find({}, {sort: {count: 1}, limit: 5});
-    },
-    hasMostCited: function () {
-        if (MostCited.find().count())return true;
-        return false;
     }
 });
 
