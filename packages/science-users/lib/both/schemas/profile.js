@@ -17,7 +17,8 @@ userProfileSchema  = new SimpleSchema({
 		autoform:{
 			type: "universe-select",
 			afFieldInput: {
-				multiple: true
+				multiple: true,
+				create: false
 			}
 		}
 	},
@@ -27,7 +28,8 @@ userProfileSchema  = new SimpleSchema({
 		autoform:{
 			type: "universe-select",
 			afFieldInput: {
-				multiple: true
+				multiple: true,
+				create: false
 			}
 		}
 	},

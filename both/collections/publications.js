@@ -68,19 +68,11 @@ PublicationsSchema = new SimpleSchema({
         autoform:{
             type: "universe-select",
             afFieldInput: {
-                multiple: true
+                multiple: true,
+                create: false
             }
         }
     },
-    //included: {
-    //    type: [String],
-    //    minCount: 0,
-    //    optional: true
-    //},
-    //"included.$": {
-    //    type: String,
-    //    optional: true
-    //},
     language: {
         type: String,
         optional: true
@@ -91,7 +83,8 @@ PublicationsSchema = new SimpleSchema({
         autoform:{
             type: "universe-select",
             afFieldInput: {
-                multiple: true
+                multiple: true,
+                create: false
             }
         }
     },
