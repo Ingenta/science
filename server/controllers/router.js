@@ -177,4 +177,38 @@ Router.map(function () {
             return this.response.end(text);
         }
     });
+    this.route('downloadPdf',{
+        where: 'server',
+        path: '/downloadPdf/:pdfId',
+        action:function(){
+            var pdf=Collections.Pdfs.findOne({_id:this.params.pdfId});
+            if(pdf){
+                var response = this.response;
+                Science.Pdf([
+                        "-i",Config.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
+                        "-o",Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key, //处理完成后保存的文件位置
+                        "-s","/Users/jiangkai/stamp.pdf",       //广告页位置
+                        "-w","watermark"
+                    ],function(error,stdout,stderr){
+                        console.log(error);
+                        if(!error){
+                            Science.FSE.exists(Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key,function(result){
+                                console.log("exists:"+result);
+                                if(result){
+                                    var headers = {
+                                        'Content-Type': pdf.copies.pdfs.type,
+                                        'Content-Disposition': "attachment; filename=" + pdf.copies.pdfs.name
+                                    };
+
+                                    response.writeHead(200, headers);
+                                    response.end(Science.FSE.readFileSync(Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key));
+                                }
+                            });
+                        }
+                    }
+                );
+
+            }
+        }
+    })
 });
