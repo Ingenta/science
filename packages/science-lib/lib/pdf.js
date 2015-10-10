@@ -1,6 +1,6 @@
 var execFile = Npm.require('child_process').execFile;
-//var pdfjar = process.cwd()+"/assets/app/pdf.jar";
-var pdfjar="/Users/jiangkai/Desktop/pdf.jar";
+var pdfjar = process.cwd()+"/assets/app/pdf.jar";
+//var pdfjar="/Users/jiangkai/Desktop/pdf.jar";
 Science.Pdf = Meteor.wrapAsync(function execute(args, callback) {
 	console.log(pdfjar);
 	var argArr = _.union(["-jar",pdfjar],args);
