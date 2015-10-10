@@ -1,10 +1,10 @@
 Template.sidebarAd.helpers({
     whichLink: function() {
-        if(this.endDate >new Date()) return this.link;
+        if(this.endDate.format("yyyy-MM-dd") >= new Date().format("yyyy-MM-dd")) return this.link;
         return this.defaultLink;
     },
     whichPictures: function() {
-        if(this.endDate >new Date()) return this.pictures;
+        if(this.endDate.format("yyyy-MM-dd") >= new Date().format("yyyy-MM-dd")) return this.pictures;
         return this.defaultPictures;
     },
     advertisement: function () {
