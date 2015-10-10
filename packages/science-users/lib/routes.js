@@ -206,6 +206,24 @@ Meteor.startup(function () {
             ]
         }
     });
+
+    Router.route("user_settings.my_emails", {
+        path: "/user_settings/my_emails",
+        yieldTemplates: {
+            'UserSettingsMyEmails': {to: 'UserSettingsSubcontent'}
+        },
+        parent: "user_settings",
+        template:"UserSettings",
+        title: function () {
+            return TAPi18n.__("My emails");
+        },
+        waitOn:function () {
+            return [
+                //Meteor.subscribe('publications'),
+                //Meteor.subscribe('topics')
+            ]
+        }
+    });
     Router.route("logout", {
         path: "/logout",
         controller: "LogoutController"

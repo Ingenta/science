@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-xs-12">
                 {{#if can "add-journal" "resource" }}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPublicationModal">
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#addPublicationModal">
                         <span class="fa fa-plus">
                             {{_ "Add new"}}
                         </span>
@@ -36,9 +37,18 @@
                 {{_ "No publications found!"}}
             {{/each}}
             {{> Paginator_UI publications}}
-            <span style="float:right">{{_ "Display per page"}}:<a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+            {{> displayPerPage}}
         </div>
     </div>
+</template>
+
+<template name="displayPerPage">
+    <span class="pull-right">
+        {{_ "Display per page"}}:
+            <a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;
+            <a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;
+            <a class="perPage" data-pagenum="50">50</a>
+    </span>
 </template>
 
 <template name="SinglePublication">

@@ -3,42 +3,38 @@ ReactiveTabs.createInterface({
     onChange: function (slug, template) {
         Session.set('activeTab', slug);
         var article = Router.current().data();
+        if (!article)return;
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                //var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-                //var article = Articles.findOne({doi: currentDoi});
-                if (article) {
-                    ArticleViews.insert({
-                        articleId: article._id,
-                        userId: Meteor.userId(),
-                        when: new Date(),
-                        action: "abstract",
-                        ip: session
-                    });
-                }
+                ArticleViews.insert({
+                    articleId: article._id,
+                    userId: Meteor.userId(),
+                    when: new Date(),
+                    action: "abstract",
+                    ip: session
+                });
             });
         } else if (slug === 'full text') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                //var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-                //var article = Articles.findOne({doi: currentDoi});
-                if (article) {
-                    ArticleViews.insert({
-                        articleId: article._id,
-                        userId: Meteor.userId(),
-                        when: new Date(),
-                        action: "fulltext",
-                        ip: session
-                    });
-                    article.keywords.en.forEach(function (k) {
-                        var id = Keywords.findOne({"name": k})._id;
-                        Keywords.update({_id: id}, {$inc: {"score": 2}})
-                    });
-                    article.keywords.cn.forEach(function (k) {
-                        var id = Keywords.findOne({"name": k})._id;
-                        Keywords.update({_id: id}, {$inc: {"score": 2}})
-                    })
-                }
+                ArticleViews.insert({
+                    articleId: article._id,
+                    userId: Meteor.userId(),
+                    when: new Date(),
+                    action: "fulltext",
+                    ip: session
+                });
             });
+            if (article.keywords) {
+                article.keywords.en.forEach(function (k) {
+                    var id = Keywords.findOne({"name": k})._id;
+                    Keywords.update({_id: id}, {$inc: {"score": 2}})
+                });
+                article.keywords.cn.forEach(function (k) {
+                    var id = Keywords.findOne({"name": k})._id;
+                    Keywords.update({_id: id}, {$inc: {"score": 2}})
+                });
+            }
+
             Users.recent.read(article);
         }
     }
@@ -77,7 +73,7 @@ Template.showArticle.onRendered(function () {
     //Rating Start
     var aid = this.data._id;
 
-    Tracker.autorun(function(){
+    Tracker.autorun(function () {
         var arr = Articles.findOne({_id: aid}).rating || [];
         $('.raty').raty({
             //half: true,
@@ -94,7 +90,7 @@ Template.showArticle.onRendered(function () {
             },
             click: function (score, evt) {
                 if (Meteor.userId()) {
-                    var temp = _.find(arr, function(obj){
+                    var temp = _.find(arr, function (obj) {
                         return obj.user == Meteor.userId();
                     });
                     if (temp) {
@@ -124,10 +120,10 @@ Template.showArticle.helpers({
         return Collections.Pdfs.findOne({_id: id}).url() + "&download=true";
     },
     Language: function (num2) {
-        if(num2=="1"){
+        if (num2 == "1") {
             return TAPi18n.__("English");
         }
-        if(num2=="2"){
+        if (num2 == "2") {
             return TAPi18n.__("Chinese");
         }
     }
@@ -142,7 +138,10 @@ Template.articleOptions.helpers({
         return [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
             {name: TAPi18n.__("Full Text"), slug: 'full text'},
-            {name: TAPi18n.__("References") + "(" + (this.references ? this.references.length : 0) + ")", slug: 'references'},
+            {
+                name: TAPi18n.__("References") + "(" + (this.references ? this.references.length : 0) + ")",
+                slug: 'references'
+            },
             {name: TAPi18n.__("Cited By") + "(" + (this.citations ? this.citations.length : 0) + ")", slug: 'cited by'},
             {name: TAPi18n.__("Data & Media"), slug: 'data media'},
             {name: TAPi18n.__("Metrics"), slug: 'metrics'},

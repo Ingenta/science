@@ -132,6 +132,7 @@
   "Home": "首页",
   "All": "所有",
   "User settings": "用户设置",
+  "My emails": "我的邮件",
   "Profile": "个人资料",
   "Update information": "更新注册资料",
   "Please update your registered information (optional)": "更新注册资料",
@@ -1008,7 +1009,7 @@
   "I accept": "我已阅读",
   "Email this": "在线推荐",
   "Add to favorites": "添加到收藏夹",
-  "send": "发送",
+  "Send": "发送",
   "Email this page": "邮件发送",
   "Favorite": "收藏",
   "Favorited": "已收藏",
@@ -1083,5 +1084,6 @@
   "Related_topics": "相关主题",
   "Recent_read":"最近浏览",
   "Recent_search":"最近搜索",
-  "User stats statistics":"用户地区统计"
+  "User stats statistics":"用户地区统计",
+  "Add articles to special topics":"添加到专题"
 }
