@@ -91,7 +91,7 @@ PastDataImport = function () {
 								newOne.journalId=journal._id;
 								newOne.journalInfo=journal;
 								newOne.volume=issue.volume;
-								newOne.issue=issue.number;
+								newOne.issue=issue.issue;
 								newOne.year=issue.year;
 
 								newOne.volumeId=vi.volumeId;
