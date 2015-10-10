@@ -43,7 +43,8 @@ Package.onUse(function(api) {
     'lib/string_utils.js',
     'lib/jsonUtils.js',
     'lib/dateUtils.js',
-    'both/schema/multiLang.js'
+    'both/schema/multiLang.js',
+    'both/url.js'
   ],['server','client']);
 
   api.addFiles([

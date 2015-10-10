@@ -47,7 +47,6 @@ Meteor.methods({
             } else {
                 countryViews['Others'].localCount += 1;
             }
-
         });
         return countryViews;
     },

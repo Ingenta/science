@@ -1,15 +1,16 @@
 Template.tagList.helpers({
     tags: function () {
-        var tagName = Session.get('searchValue');
-        if(tagName===undefined||tagName==""){
+        if(Session.get('searchValue')){
+            var tagName = Session.get('searchValue').replace(/(^\s*)|(\s*$)/g,"");
+            var fq = $('#searchId').val();
+            if(fq=="tagNumber"){
+                return Tags.find({tagNumber:tagName});
+            }
+            if(fq=="name"){
+                return Tags.find({name:tagName});
+            }
+        }else{
             return Tags.find();
-        }
-        var fq = $('#searchId').val();
-        if(fq=="tagNumber"){
-            return Tags.find({tagNumber:tagName});
-        }
-        if(fq=="name"){
-            return Tags.find({name:tagName});
         }
     }
 });

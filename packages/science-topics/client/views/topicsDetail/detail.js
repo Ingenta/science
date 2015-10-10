@@ -13,7 +13,7 @@ Template.topicsDetailHeader.helpers({
         return 0;
     },
     name:function(){
-        var top = Topics.findOne();
+        var top = Topics.findOne({_id:Router.current().params.topicsId});
         if(top){
             return TAPi18n.getLanguage()=='zh-CN'?top.name:top.englishName;
         }
