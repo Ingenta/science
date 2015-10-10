@@ -1,6 +1,6 @@
 Template.tagList.helpers({
     tags: function () {
-        var tagName = Session.get('searchValue');
+        var tagName = Session.get('searchValue').replace(/(^\s*)|(\s*$)/g,"");
         if(tagName===undefined||tagName==""){
             return Tags.find();
         }
