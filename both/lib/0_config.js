@@ -13,7 +13,7 @@ Config={
         tmpDir: '/tmp/uploads/tmp',
         uploadDir:'/tmp/uploads'
     },
-    uploadPdfDir:'/Users/jiangkai/pdf',
+    uploadPdfDir:'/tmp/pdf',
     ftp:{
         downloadDir:"/tmp/downloads"
     },
@@ -94,5 +94,10 @@ Config={
         "pubStatus",
         "accessKey",
         "language"
-    ]
+    ],
+    pdf:{
+        watermark:"Accepted",
+        footmark:"All article content, except where otherwise noted, is licensed under a Creative Commons Attribution 3.0 Unported license.\n"
+                +"Downloaded to IP: {ip} On: {time} {url}"
+    }
 };
