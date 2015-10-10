@@ -37,8 +37,7 @@
                             {{_ "No publications found!"}}
                         {{/each}}
                         {{> Paginator_UI publications}}
-                        <span style="float:right">{{_ "Display per page"}}:
-                            <a class="perPage" data-pagenum="10">10</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="20">20</a>&nbsp;|&nbsp;<a class="perPage" data-pagenum="50">50</a></span>
+                        {{> displayPerPage}}
                         <br>
                     </div>
                 </div>
@@ -73,15 +72,15 @@
 
 <template name="onePublication">
     <div class="row dotted-publication-item">
-	    <div class="pull-right">
-		    {{#if can "modify-journal" "resource" }}
-			    {{> displayPublication}}
-			    {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
-		    {{/if}}
-		    {{#if can "delete-journal" "resource" }}
+        <div class="pull-right">
+            {{#if can "modify-journal" "resource" }}
+                {{> displayPublication}}
+                {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
+            {{/if}}
+            {{#if can "delete-journal" "resource" }}
                 <a href="#" class="fa fa-trash"></a>
-		    {{/if}}
-	    </div>
+            {{/if}}
+        </div>
         <div class="col-xs-3">
             <img src="{{getImageHelper picture}}" width="105"/>
         </div>

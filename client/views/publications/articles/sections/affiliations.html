@@ -1,10 +1,11 @@
 <template name="affiliation">
     {{#if affiliations}}
         <p>
-            <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#authorAffiliations"
+            <i class="fa fa-plus" data-toggle="collapse" data-target="#authorAffiliations"></i>
+            <a style="cursor:pointer" data-toggle="collapse" data-target="#authorAffiliations"
                aria-expanded="false" aria-controls="authorAffiliations">
                 {{_ "Affiliations"}}
-            </i>
+            </a>
         </p>
 
         <div class="collapse" id="authorAffiliations">

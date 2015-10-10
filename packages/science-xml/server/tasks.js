@@ -26,13 +26,13 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     }
 
     if (fileType === "application/zip" || fileType === "application/x-zip-compressed"
-        || (fileType ==="application/octet-stream" && fileName.endWith(".zip"))) {
+        || (fileType === "application/octet-stream" && fileName.endWith(".zip"))) {
         //extract to a folder with the same name inside extracted folder
         var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
         Tasks.extract(logId, pathToFile, targetPath);
         return;
     }
-    Tasks.failSimple(undefined, logId, "Filetype is not suitable: "+fileType);
+    Tasks.failSimple(undefined, logId, "Filetype is not suitable: " + fileType);
 };
 
 Tasks.fail = function (taskId, logId, errors) {
@@ -146,10 +146,10 @@ Tasks.parse = function (logId, pathToXml) {
         logId: logId
     });
     //TODO: refactor this after solving, unhandled error, [TypeError: Cannot read property 'localNSMap' of undefined]
-    try{
-        var result = ScienceXML.parseXml( pathToXml);
-        if(result.pdf)
-        log.errors = result.errors;
+    try {
+        var result = ScienceXML.parseXml(pathToXml);
+        if (result.pdf)
+            log.errors = result.errors;
         if (log.errors.length) {
             Tasks.fail(taskId, logId, log.errors);
             return;
@@ -164,7 +164,7 @@ Tasks.parse = function (logId, pathToXml) {
 
         //start import tasks
         Tasks.insertArticlePdf(logId, result);
-    }catch(e){
+    } catch (e) {
         log.errors.push(e.toString());
         Tasks.fail(taskId, logId, log.errors);
     }
@@ -242,9 +242,9 @@ Tasks.insertArticleTask = function (logId, result) {
     result.pubStatus = log.pubStatus;//设置文章的出版状态和上传时选择的出版状态一致。
 
     try {
-        inserAccessKey(result);
-        inserLanguage(result);
-        inertKeywords(result.keywords);
+        insertAccessKey(result);
+        insertLanguage(result);
+        insertKeywords(result.keywords);
         articleId = insertArticle(result);
     }
     catch (ex) {
@@ -263,23 +263,24 @@ Tasks.insertArticleTask = function (logId, result) {
         );
     }
 }
-var inertKeywords = function (a) {
-    if(a.cn){
+var insertKeywords = function (a) {
+    if (!a)return;
+    if (a.cn) {
         a.cn.forEach(function (name) {
             if (!Keywords.findOne({name: name})) {
                 Keywords.insert({
-                    lang:"cn",
+                    lang: "cn",
                     name: name,
                     score: 0
                 });
             }
         })
     }
-    if(a.en){
+    if (a.en) {
         a.en.forEach(function (name) {
             if (!Keywords.findOne({name: name})) {
                 Keywords.insert({
-                    lang:"en",
+                    lang: "en",
                     name: name,
                     score: 0
                 });
@@ -296,11 +297,11 @@ var inertKeywords = function (a) {
     //})
 }
 
-var inserAccessKey = function (a) {
+var insertAccessKey = function (a) {
     a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
 }
 
-var inserLanguage = function (a) {
+var insertLanguage = function (a) {
     a.language = Publications.findOne({_id: a.journalId}).language;
 }
 
@@ -329,13 +330,21 @@ var insertArticle = function (a) {
 
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
-    if(existArticle){
-        var sets = _.pick(a,Config.fieldsWhichFromXml);
-        Articles.update({_id:existArticle._id},{$set:sets});
+    if (existArticle) {
+        var sets = _.pick(a, Config.fieldsWhichFromXml);
+        Articles.update({_id: existArticle._id}, {$set: sets});
         return existArticle._id;
     }
 
-    var journalInfo = Publications.findOne({_id: a.journalId},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1}});
+    var journalInfo = Publications.findOne({_id: a.journalId}, {
+        fields: {
+            title: 1,
+            titleCn: 1,
+            issn: 1,
+            EISSN: 1,
+            CN: 1
+        }
+    });
     a.journalInfo = journalInfo;
 
     //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml

@@ -2,7 +2,7 @@ this.App = {};
 this.Helpers = {};
 
 Meteor.startup(function () {
-
+    TimeSync.loggingEnabled = false;
 });
 
 App.logout = function () {

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         {{> pageElement key="homepage"}}
     </div>
-    <hr>
+    <br>
     {{> NewsList}}
     {{#if can "manager-homepage" "news" }}
         {{> addNewsForm}}
@@ -44,8 +44,6 @@
             <div class="container-fluid">
                 {{#each news}}
                     {{> SingleNews}}
-                {{else}}
-                    {{_ "No results found!"}}
                 {{/each}}
             </div>
         </div>
@@ -139,16 +137,18 @@
         <div class="col-xs-6">
         </div>
         <div class="col-xs-6">
-            <h4>{{_ "Most cited by"}}</h4>
-            <ul class="list-unstyled simple-list">
-                {{#each mostCitedArticles}}
-                    <li>
-                        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
-                    </li>
-                {{else}}
-                    {{_ "No articles found!"}}
-                {{/each}}
-            </ul>
+            {{#if hasMostCited}}
+                <h4>{{_ "Most cited by"}}</h4>
+                <ul class="list-unstyled simple-list">
+                    {{#each mostCitedArticles}}
+                        <li>
+                            <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                        </li>
+                    {{else}}
+                        {{_ "No articles found!"}}
+                    {{/each}}
+                </ul>
+            {{/if}}
         </div>
     </div>
 </template>

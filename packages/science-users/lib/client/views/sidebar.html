@@ -40,7 +40,7 @@
                 <li><a class="watchArticle" href=""><span class="fa fa-eye"></span>{{watchArticleName}}</a></li>
 
             {{/if}}
-            {{#if isJourmalPage}}
+            {{#if isJournalPage}}
                 <li><a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
             {{/if}}
         {{else}}
@@ -48,7 +48,7 @@
                 <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
-            {{#if isJourmalPage}}
+            {{#if isJournalPage}}
                 <li><a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
             {{/if}}
         {{/if}}

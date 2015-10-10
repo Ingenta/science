@@ -13,7 +13,7 @@ Config={
         tmpDir: '/tmp/uploads/tmp',
         uploadDir:'/tmp/uploads'
     },
-    uploadPdfDir:'~/pdf',
+    uploadPdfDir:'/Users/jiangkai/pdf',
     ftp:{
         downloadDir:"/tmp/downloads"
     },

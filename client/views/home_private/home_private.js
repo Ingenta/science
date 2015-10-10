@@ -11,31 +11,31 @@ Template.NewsList.events({
 
 Template.HomePrivate.helpers({
     hasMostThreeNews: function () {
-        return News.find({types:"1"}).count() < 3;
+        return News.find({types: "1"}).count() < 3;
     }
 });
 
 Template.NewsList.helpers({
     news: function (type) {
-        var n = News.find({types:"1"}, {limit: 3});
-        if(type=='extend'){
-            n = n.map(function(newsItem, index) {
+        var n = News.find({types: "1"}, {limit: 3});
+        if (type == 'extend') {
+            n = n.map(function (newsItem, index) {
                 newsItem.index = index;
-                newsItem.class= index==0?"active":"";
+                newsItem.class = index == 0 ? "active" : "";
                 return newsItem;
             });
-            if(Session.get("renderd")){
-                var nums =  $(".index-num");
-                _.each(nums,function(item,index){
-                    $(item).attr('index',index);
+            if (Session.get("renderd")) {
+                var nums = $(".index-num");
+                _.each(nums, function (item, index) {
+                    $(item).attr('index', index);
                 });
                 $(".carousel-inner .item").removeClass("next").removeClass("left");
                 var item = $(".carousel-inner .item");
-                if(item && item.length){
+                if (item && item.length) {
                     $(item[0]).addClass('active');
                 }
                 var indicators = $(".carousel-indicators li");
-                if(indicators && indicators.length){
+                if (indicators && indicators.length) {
                     $(indicators[0]).addClass('active');
                 }
             }
@@ -44,19 +44,19 @@ Template.NewsList.helpers({
     }
 });
 
-Template.NewsList.onRendered(function(){
-    Session.set("renderd",true);
+Template.NewsList.onRendered(function () {
+    Session.set("renderd", true);
 });
 
 Template.SingleNews.helpers({
     hasMoreThanOneNews: function () {
-        return News.find({types:"1"}).count() > 1;
+        return News.find({types: "1"}).count() > 1;
     },
-    whichUrl: function() {
-        if(this.url){
+    whichUrl: function () {
+        if (this.url) {
             return this.url;
         }
-        return "/news/"+this._id;
+        return "/news/" + this._id;
     }
 });
 
@@ -64,8 +64,8 @@ Template.SingleNews.helpers({
 Template.SingleNews.events({
     'click .fa-trash': function (e) {
         var id = this._id;
-        confirmDelete(e,function(){
-            News.remove({_id:id});
+        confirmDelete(e, function () {
+            News.remove({_id: id});
         })
     }
 });
@@ -92,6 +92,10 @@ Template.recentArticles.helpers({
     },
     mostCitedArticles: function () {
         return MostCited.find({}, {sort: {count: 1}, limit: 5});
+    },
+    hasMostCited: function () {
+        if (MostCited.find().count())return true;
+        return false;
     }
 });
 
@@ -102,8 +106,8 @@ AutoForm.addHooks(['addNewsModalForm'], {
     },
     before: {
         insert: function (doc) {
-            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
-            var type =newPage?2:1;
+            var newPage = _.contains(Config.NewsPage.journal, Router.current().route.getName());
+            var type = newPage ? 2 : 1;
             doc.types = type;
             doc.createDate = new Date();
             return doc;

@@ -1,3 +1,5 @@
+var Future = Npm.require('fibers/future');
+
 Meteor.methods({
     'distinctVolume': function (journalId) {
         result = Issues.distinct("volume", {"journalId": journalId});
@@ -48,7 +50,20 @@ Meteor.methods({
 
         });
         return countryViews;
+    },
+    'modifyPdf': function(pdfId){
+        var myFuture = new Future();
+        Science.Pdf([
+                "-i",Config.uploadPdfDir + "/" + fileObj.copies.pdfs.key,   //待处理的pdf文件位置
+                "-o","/Users/jiangkai/pdf/handle/"+fileObj.copies.pdfs.key, //处理完成后保存的文件位置
+                "-s","/Users/jiangkai/stamp.pdf"       //广告页位置
+            ],function(error,stdout,stderr){
+                if(error)
+                    return myFuture.throw(error);
+                return myFuture.return("ready");
+            }
+        );
+        return myFuture.wait();
     }
-        
 });
 

@@ -50,7 +50,8 @@ Package.onUse(function(api) {
     'lib/fileUtils.js',
     'lib/httpUtils.js',
     'lib/xpathUtils.js',
-    'lib/xss.js'
+    'lib/xss.js',
+    'lib/pdf.js'
   ],'server');
 
   api.addFiles([
