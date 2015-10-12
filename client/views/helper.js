@@ -15,7 +15,7 @@ Template.toggleField.helpers({
 
 Template.sendEmails.helpers({
     getCurrentUrl: function(){
-        return Router.current().url;
+        return window.location.href;
     }
 })
 
