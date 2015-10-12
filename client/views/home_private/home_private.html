@@ -16,6 +16,8 @@
     {{/if}}
     <hr>
     {{> recentArticles}}
+    <hr>
+    {{> homePgaeTopicList}}
 </template>
 
 <template name="NewsList">
@@ -147,5 +149,22 @@
                 {{/each}}
             </ul>
         </div>
+    </div>
+</template>
+
+<template name="homePgaeTopicList">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>{{_ "Topics"}}</h4>
+        </div>
+    </div>
+    <div class="row">
+        {{#each topics}}
+            <div class="col-xs-4">
+                <a href="{{searchUrl}}">
+                    {{translateThis name englishName}}
+                </a>
+            </div>
+        {{/each}}
     </div>
 </template>
