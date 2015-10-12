@@ -21,5 +21,6 @@ Template.sendEmails.helpers({
 AutoForm.addHooks(['sendEmailsModalForm'], {
     onSuccess: function () {
         $("#sendEmailModal").modal('hide');
+        FlashMessages.sendSuccess("Success!", {hideDelay: 3000});
     }
 })
