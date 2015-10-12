@@ -12,6 +12,7 @@ Template.toggleField.helpers({
         }
     }
 })
+
 Template.sendEmails.helpers({
     getCurrentUrl: function(){
         return Router.current().url;
@@ -21,6 +22,6 @@ Template.sendEmails.helpers({
 AutoForm.addHooks(['sendEmailsModalForm'], {
     onSuccess: function () {
         $("#sendEmailModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 3000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
 })

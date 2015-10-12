@@ -24,7 +24,7 @@ Template.addCollectionForm.helpers({
 AutoForm.addHooks(['addCollectionModalForm'], {
 	onSuccess: function () {
 		$("#addCollectionModal").modal('hide');
-		FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+		FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
 	},
     before: {
         insert: function (doc) {

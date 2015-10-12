@@ -95,7 +95,7 @@ Template.meetingInfoList.helpers({
 AutoForm.addHooks(['addNewsCenterModalForm'], {
     onSuccess: function () {
         $("#addNewsCenterModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
@@ -113,7 +113,7 @@ AutoForm.addHooks(['addNewsCenterModalForm'], {
 AutoForm.addHooks(['addPublishingDynamicForm'], {
     onSuccess: function () {
         $("#addPublishingDynamicModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
@@ -130,7 +130,7 @@ AutoForm.addHooks(['addPublishingDynamicForm'], {
 
 AutoForm.addHooks(['addMeetingInfoModal'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
