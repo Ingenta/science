@@ -28,6 +28,5 @@ Package.onUse(function(api) {
     api.addFiles('client/router.js','client');
     api.addFiles('client/views/admin/emails.html','client');
     api.addFiles('client/views/admin/emails.js','client');
-    api.addFiles('client/views/user/user-email-settings.html','client');
 });
 
