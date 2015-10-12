@@ -12,7 +12,7 @@ Meteor.startup(function(){
 				year:2000+Math.getRandom()%14,
 				active:actives[Math.getRandom()%4],
 				month:Math.getRandom()%12+1
-			});
+			}); 
 		}
 	}
 })
