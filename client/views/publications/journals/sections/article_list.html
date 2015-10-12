@@ -56,11 +56,17 @@
 </template>
 
 <template name="HistoricalJournalTable">
-    <div class="pull-right">
-        {{#if can "modify-article" "resource" }}
+    {{#if can "modify-article" "resource" }}
+        {{#unless historicalJournal}}
+            <div class="pull-left">
+                {{_ "No historical journal found!"}}
+            </div>
+        {{/unless}}
+        <div class="pull-right">
             {{> updateHistoricalJournalModalForm}}
-        {{/if}}
-    </div>
+        </div>
+    {{/if}}
+
     {{#if historicalJournal}}
         <h4>{{_ "Historical Journal"}}</h4>
         <table id="dataview-table" class="table table-striped table-hover">
