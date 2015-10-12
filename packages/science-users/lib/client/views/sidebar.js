@@ -78,6 +78,9 @@ Template.LayoutSideBar.helpers({
         } else {
             return TAPi18n.__("Journal Watch");
         }
+    },
+    showAccessKey: function () {
+        return _.contains(Config.AccessKey,Router.current().route.getName());
     }
 });
 

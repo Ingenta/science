@@ -41,6 +41,13 @@ Config={
             'home'
         ]
     },
+    AccessKey: [
+        'publisher.name',
+        'publications',
+        'journal.name',
+        'article.show',
+        'solrsearch'
+    ],
     solrCore: {
         host:"192.168.99.100",
         port:"8983",
