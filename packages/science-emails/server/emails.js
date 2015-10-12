@@ -22,14 +22,17 @@ Meteor.methods({
         if (Meteor.user().profile)
             if (Meteor.user().profile.realname)
                 user = Meteor.user().profile.realname;
-        Meteor.call('sendEmail',
-                    values.recipient,
-                    'eryaer@sina.com',
-                    user + ' has sent you an article',
-                    values.reasons + ' \n\n' +
-                    'Click the link below to check it out. \n\n' + values.url,
-                    function () {
-                        console.log('Successfully emailed '+values.url+' to '+values.recipient)
-                    });
+        if(values.reasons===undefined)values.reasons="";
+        var reason = values.reasons + ' \n\n'
+
+        Meteor.defer(function(){
+            Email.send({
+                to: values.recipient,
+                from: 'eryaer@sina.com',
+                subject: user + ' has sent you an article',
+                text: reason + 'Click the link below to check it out. \n\n' + values.url
+            });
+        });
+
     }
 });

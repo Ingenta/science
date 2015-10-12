@@ -3,7 +3,8 @@ EmailsSchema  = new SimpleSchema({
         type:String
     },
     reasons:{
-        type:String
+        type:String,
+        optional: true
     },
     url:{
         type:String,
