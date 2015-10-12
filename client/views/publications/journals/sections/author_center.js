@@ -92,7 +92,7 @@ Template.authorArticlesHistory.events({
 AutoForm.addHooks(['addInstructionsModalForm'], {
     onSuccess: function () {
         $("#addInstructionsModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
@@ -106,7 +106,7 @@ AutoForm.addHooks(['addInstructionsModalForm'], {
 AutoForm.addHooks(['addManuscriptModalForm'], {
     onSuccess: function () {
         $("#addManuscriptModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
@@ -120,7 +120,7 @@ AutoForm.addHooks(['addManuscriptModalForm'], {
 AutoForm.addHooks(['addSubmitManuscriptModalForm'], {
     onSuccess: function () {
         $("#addSubmitManuscriptModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {

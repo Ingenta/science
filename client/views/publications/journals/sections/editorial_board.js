@@ -160,7 +160,7 @@ Template.EditorialBoardMembersList.helpers({
 
 AutoForm.addHooks(['addAboutTitleModalForm'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
@@ -172,7 +172,7 @@ AutoForm.addHooks(['addAboutTitleModalForm'], {
 
 AutoForm.addHooks(['addEditorialBoardModalForm'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {

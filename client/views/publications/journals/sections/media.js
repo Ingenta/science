@@ -67,7 +67,7 @@ AutoForm.addHooks(['addMediaModalForm'],{
 	onSuccess: function () {
 		$("#jkafModal").modal('hide');
 		uploadingFile.set(false);
-		FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+		FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
 	},
 	before: {
 		insert: function (doc) {
@@ -83,7 +83,7 @@ AutoForm.addHooks(['updateMediaModalForm'],{
 	onSuccess: function () {
 		$("#jkafModal").modal('hide');
 		uploadingFile.set(false);
-		FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+		FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
 	},
 	before: {
 		update: function (doc) {

@@ -103,7 +103,7 @@ Template.recommendArticles.events({
 AutoForm.addHooks(['addRecommendModalForm'], {
     onSuccess: function () {
         $("#addRecommendModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
