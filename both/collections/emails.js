@@ -1,12 +1,15 @@
 EmailsSchema  = new SimpleSchema({
-    myEmail:{
-        type:String
-    },
-    youEmail:{
+    recipient:{
         type:String
     },
     reasons:{
         type:String
+    },
+    url:{
+        type:String,
+        autoform:{
+            type: "hidden"
+        }
     }
 });
 

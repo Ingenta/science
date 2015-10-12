@@ -652,14 +652,11 @@
             }
         },
         "emails": {
-            "myEmail": {
-                "label": "Recipient's email address:"
-            },
-            "youEmail": {
-                "label": "Your email address:"
+            "recipient": {
+                "label": "Recipient's email address"
             },
             "reasons": {
-                "label": "Reasons:"
+                "label": "Reasons"
             }
         },
         "authorCenter": {
