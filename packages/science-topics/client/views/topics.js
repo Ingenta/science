@@ -1,3 +1,9 @@
+Template.Topics.helpers({
+    getAddNewStr: function () {
+        return TAPi18n.__("Add new");
+    }
+});
+
 Template.SingleTopic.events({
     'click .fa-plus': function (event) {
         event.preventDefault();
@@ -75,6 +81,12 @@ Template.TopicButtons.helpers({
             setting:{from:'topic'}
         };
         return SolrQuery.makeUrl(option);
+    },
+    getAddNewStr: function () {
+        return TAPi18n.__("Add new");
+    },
+    getUpdateStr: function () {
+        return TAPi18n.__("Update");
     }
 });
 
