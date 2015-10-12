@@ -12,22 +12,15 @@ Template.toggleField.helpers({
         }
     }
 })
-Template.sendEmails.events({
-    "click .btn-primary": function () {
-        if (!Meteor.user())return;
-        if (!Meteor.user().emails[0])return;
-        if (!Meteor.user().emails[0].address)return;
-
-        var user = Meteor.user().emails[0].address;
-        if (Meteor.user().profile)
-            if (Meteor.user().profile.realname)
-                user = Meteor.user().profile.realname;
-        Meteor.call('sendEmail',
-            Meteor.user().emails[0].address,
-            'eryaer@sina.com',
-            user + ' has sent you an article',
-            'Click the link below to check it out. \n\n' + Router.current().url);
-
+Template.sendEmails.helpers({
+    getCurrentUrl: function(){
+        return Router.current().url;
     }
 })
 
+AutoForm.addHooks(['sendEmailsModalForm'], {
+    onSuccess: function () {
+        $("#sendEmailModal").modal('hide');
+        FlashMessages.sendSuccess("Success!", {hideDelay: 3000});
+    }
+})

@@ -869,14 +869,11 @@
       }
     },
     "emails": {
-      "myEmail": {
-        "label": "收件人的邮件地址:"
-      },
-      "youEmail": {
-        "label": "你的邮件地址:"
+      "recipient": {
+        "label": "收件人的邮件地址"
       },
       "reasons": {
-        "label": "推荐理由:"
+        "label": "推荐理由"
       }
     },
     "authorCenter": {

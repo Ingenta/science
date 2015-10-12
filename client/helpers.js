@@ -91,10 +91,3 @@ Template.registerHelper('clearStr', function (str) {
 Template.registerHelper("highlight", function (keyword, str) {
     return str.split(keyword).join("<span class='highlight'>" + keyword + "</span>")
 });
-
-Template.sendEmails.events({
-    'click .btn': function () {
-        $("#jkafModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 3000});
-    }
-})

@@ -10,14 +10,6 @@
 	            {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
             {{/if}}
             <div class="col-xs-3">
-                {{#each getKeywords}}
-                <p class="title_style">
-                   <a href="/keywords/{{word}}">{{word}}</a>
-                </p>
-                <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
-
-                </p>
-               {{/each}}
                 {{> keywordsPanel}}
             </div>
         </div>

@@ -212,7 +212,6 @@
 <template name="updateArticleTitleModalForm">
     {{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update"
     buttonContent=getUpdateButtonContent}}
-    {{!-- {{> afObjectField name="title"}} --}}
         {{> afQuickField name="title.en"}}
         {{> afQuickField name="title.cn"}}
         <button type="submit" class="btn btn-primary">update</button>
