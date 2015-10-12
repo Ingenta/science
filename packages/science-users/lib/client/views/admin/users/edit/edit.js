@@ -95,8 +95,8 @@ Template.AdminUsersEditEditForm.events({
                 });
                 var allRoles = Object.keys(Permissions.getRoles());
                 var revokeRoles = _.difference(allRoles, roles);//从所有角色中去掉需要设置的角色，即为需要取消的角色
-                Permissions.revoke(t.data.admin_user._id, revokeRoles);
-                Permissions.delegate(t.data.admin_user._id, roles, function (err) {
+                !_.isEmpty(revokeRoles) && Permissions.revoke(t.data.admin_user._id, revokeRoles);
+                !_.isEmpty(roles) && Permissions.delegate(t.data.admin_user._id, roles, function (err) {
                     if (err) {
                         console.log(err);
                     }
