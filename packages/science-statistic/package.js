@@ -13,6 +13,10 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
   api.addFiles('science-statistic.js');
+
+  api.addFiles([
+      'server/collection.js'
+  ],'server')
 });
 
 Package.onTest(function(api) {
