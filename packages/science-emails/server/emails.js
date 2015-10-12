@@ -32,7 +32,6 @@ Meteor.methods({
                 subject: user + ' has sent you an article',
                 text: reason + 'Click the link below to check it out. \n\n' + values.url
             });
-            console.log('Successfully emailed '+values.url+' to '+values.recipient)
         });
 
     }
