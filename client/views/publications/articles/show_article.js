@@ -1,7 +1,7 @@
 ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
-        Session.set('activeTab', slug);
+        //Session.set('activeTab', slug);//此处死循环，可导致页面假死。
         var article = Router.current().data();
         if (!article)return;
         if (slug === 'abstract') {
