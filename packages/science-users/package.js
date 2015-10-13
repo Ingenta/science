@@ -61,6 +61,8 @@ Package.onUse(function (api) {
     'lib/client/views/accounts/user_settings/my_watch/my_journalWatch.js',
     'lib/client/views/accounts/user_settings/my_watch/my_topicWatch.html',
     'lib/client/views/accounts/user_settings/my_watch/my_topicWatch.js',
+    'lib/client/views/accounts/user_settings/search_history/search_history.html',
+    'lib/client/views/accounts/user_settings/search_history/search_history.js',
     'lib/client/views/accounts/user_settings/update_information/update_information.html',
     'lib/client/views/accounts/user_settings/update_information/update_information.js',
     'lib/client/views/accounts/user_settings/update_information/update_information_controller.js',
