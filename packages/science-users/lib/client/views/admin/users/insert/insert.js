@@ -72,6 +72,8 @@ Template.AdminUsersInsertInsertForm.events({
                 //history.back();
                 Router.go("admin.institutions.detail", {insId: Router.current().params.insId});
                 //Session.set('activeTab', 'account');
+            } else if(Router.current().route.getName() === "publisher.account.insert") {
+                Router.go("publisher.account", {pubId: Router.current().params.pubId});
             } else {
                 Router.go("admin.users", {});
             }
@@ -112,6 +114,8 @@ Template.AdminUsersInsertInsertForm.events({
             //history.back();
             Router.go("admin.institutions.detail", {insId: Router.current().params.insId});
             //Session.set('activeTab', 'account');
+        } else if(Router.current().route.getName() === "publisher.account.insert") {
+            Router.go("publisher.account", {pubId: Router.current().params.pubId});
         } else {
             Router.go("admin.users", {});
         }

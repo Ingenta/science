@@ -68,6 +68,8 @@ Template.AdminUsersEditEditForm.events({
                 //history.back();
                 Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
                 //Session.set('activeTab', 'account');
+            } else if(Router.current().route.getName() === "publisher.account.edit") {
+                Router.go("publisher.account", {pubId: this.admin_user.publisherId});
             } else {
                 Router.go("admin.users", {});
             }
@@ -112,6 +114,8 @@ Template.AdminUsersEditEditForm.events({
             //history.back();
             Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
             //Session.set('activeTab', 'account');
+        } else if(Router.current().route.getName() === "publisher.account.edit") {
+            Router.go("publisher.account", {pubId: this.admin_user.publisherId});
         } else {
             Router.go("admin.users", {});
         }

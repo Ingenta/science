@@ -19,15 +19,13 @@
 <template name="AdminUsersView">
     <div id="data_view" class="">
         <form id="dataview-controls" class="form-inline">
-            {{#if can "add-user" "user"}}
-                <div id="dataview-controls-insert" class="form-group ">
-                    <button type="submit" id="dataview-insert-button" class="btn btn-success">
-                        <span class="fa fa-plus">
-                            {{_ "Add new"}}
-                        </span>
-                    </button>
-                </div>
-            {{/if}}
+            <div id="dataview-controls-insert" class="form-group ">
+                <button type="submit" id="dataview-insert-button" class="btn btn-success">
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
+                </button>
+            </div>
             <div id="dataview-controls-search">
                 {{#if isNotEmpty}}
                     <div id="dataview-controls-search-group" class="form-group">

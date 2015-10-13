@@ -1,7 +1,8 @@
 ReactiveTabs.createInterface({
 	template: 'accountTabs',
 	onChange: function (slug) {
-		Session.set('activeTab', slug);
+		if(slug !== Session.get('activeTab'))
+			Session.set('activeTab', slug);
 	}
 });
 
@@ -143,11 +144,7 @@ Template.AdminUsersView.events({
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
-		if(Session.get("activeTab") === "account"){
-			Router.go("admin.institutions.detail.insert", {insId: Router.current().params.insId});
-		} else{
-			Router.go("admin.users.insert", {});
-		}
+		Router.go(Router.current().route.getName() + ".insert", {insId: Router.current().params.insId, pubId: Router.current().params.pubId});
 	},
 
 	"click #dataview-export-default": function(e, t) {

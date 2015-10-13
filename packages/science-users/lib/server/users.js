@@ -48,8 +48,12 @@ Meteor.publish(null, function () {
             publisherId: 1,
             journalId: 1
         };
-        if (!Permissions.userCan("user", "list-user", this.userId)) {
-            query._id = this.userId;
+        if (!Permissions.userCan("list-user", "user", this.userId)) {
+            if (Permissions.userCan("add-user", "publisher", this.userId)){
+                query.publisherId = Users.findOne({_id: this.userId}).publisherId;
+            } else{
+                query._id = this.userId;
+            }
         }
         return Meteor.users.find(query, {fields: fields});
     } else {

@@ -8,7 +8,7 @@ this.AdminUsersEditController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
-		Permissions.check("modify-user","user");
+		Permissions.check("modify-user","publisher");
 		/*BEFORE_FUNCTION*/
 		this.next();
 	},
