@@ -1,8 +1,9 @@
 <template name="toggleField">
     {{#if field}}
         <p>
-            <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
-               aria-expanded="false" aria-controls="toggle{{_id}}"> {{_ "Details"}}: </i>
+            <i class="fa fa-plus" data-toggle="collapse" data-target="#toggle{{_id}}"></i>
+            <a style="cursor:pointer" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
+               aria-expanded="false" aria-controls="toggle{{_id}}"> {{_ "Details"}}</a>
         </p>
 
         <div class="collapse" id="toggle{{_id}}">
@@ -15,31 +16,50 @@
 
 <template name="toggleFieldBrowse">
     {{#if field}}
-    <p>
-        <i class="fa fa-plus" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
-           aria-expanded="false" aria-controls="toggle{{_id}}"> {{_ "Details"}}: </i>
-    </p>
+        <p>
+            <i class="fa fa-plus" data-toggle="collapse" data-target="#toggle{{_id}}"></i>
+            <a style="cursor:pointer" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
+               aria-expanded="false" aria-controls="toggle{{_id}}"> {{_ "Details"}}</a>
+        </p>
 
-    <div class="collapse" id="toggle{{_id}}">
-        <ul class="list-unstyled">
-            <li>{{{field}}}</li>
-        </ul>
-        <ul class="list-unstyled">
-           {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}{{_ "Email this"}}{{/jkafModal}}
-        </ul>
-    </div>
+        <div class="collapse" id="toggle{{_id}}">
+            <ul class="list-unstyled">
+                <li>{{{field}}}</li>
+            </ul>
+            <ul class="list-unstyled">
+                {{#jkafModal template="sendEmails" id="addEmailsModalForm" class="fa fa-envelope-o" title=""}}
+                    {{_ "Email this"}}
+                {{/jkafModal}}
+            </ul>
+        </div>
     {{/if}}
 </template>
 
+<template name="sendEmailModalForm">
+    <div class="modal fade" id="sendEmailModal" tabindex="-1" role="dialog" aria-labelledby="sendEmailModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="sendEmailModalLabel">{{_ "Email This"}}</h4>
+                </div>
+                {{> sendEmails}}
+            </div>
+        </div>
+    </div>
+</template>
+
 <template name="sendEmails">
-    {{#autoForm schema="EmailsSchema" id="addEmailsModalForm" type="method"}}
-    <div class="modal-body">
-        {{> afQuickField name="myEmail"}}
-        <!--{{> afQuickField name="youEmail"}}-->
-        {{> afQuickField name="reasons"}}
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary">{{_ "Send"}}</button>
-    </div>
+    {{#autoForm schema="EmailsSchema" id="sendEmailsModalForm" type="method" meteormethod="emailThis"}}
+        <div class="modal-body">
+            {{> afQuickField name="recipient"}}
+            {{> afQuickField name="reasons"}}
+            {{> afFieldInput name='url' value=getCurrentUrl}}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary">{{_ "Send"}}</button>
+        </div>
     {{/autoForm}}
 </template>

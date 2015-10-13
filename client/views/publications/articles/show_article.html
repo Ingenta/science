@@ -67,7 +67,9 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-2">
+        </div>
+        <div class="col-xs-6">
             {{> articlePage}}
         </div>
         <div class="col-xs-2">
@@ -212,7 +214,6 @@
 <template name="updateArticleTitleModalForm">
     {{#autoForm schema="ArticleTitleSchema" collection="Articles" id="updateArticleTitleForm" doc=this type="update"
     buttonContent=getUpdateButtonContent}}
-    {{!-- {{> afObjectField name="title"}} --}}
         {{> afQuickField name="title.en"}}
         {{> afQuickField name="title.cn"}}
         <button type="submit" class="btn btn-primary">update</button>

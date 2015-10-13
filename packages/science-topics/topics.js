@@ -32,10 +32,10 @@ TopicsSchema = new SimpleSchema({
         type: [String],
         optional: true,
         autoform: {
-            multiple: true,
+            type: "universe-select",
             afFieldInput: {
-                type: "universe-select"
-
+                multiple: true,
+                create: false
             }
         }
     }

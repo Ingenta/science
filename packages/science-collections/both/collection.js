@@ -33,7 +33,10 @@ ArticleCollectionsSchema = new SimpleSchema({
 	publisherId: {
 		type: String,
 		autoform: {
-			type: "universe-select"
+			type: "universe-select",
+			afFieldInput: {
+				create: false
+			}
 		}
 	},
 	articles: {

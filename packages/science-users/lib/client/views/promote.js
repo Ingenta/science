@@ -46,7 +46,7 @@ Template.sidebarAd.events({
 
 AutoForm.addHooks(['addAdvertisementModalForm'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {

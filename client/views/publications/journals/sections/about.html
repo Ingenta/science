@@ -47,8 +47,8 @@
 <template name="editorialMemberList">
     <div class="row part">
         {{#each publications}}
-            <div class="col-xs-6 col-md-6"><p><strong>{{title}}&nbsp;</strong><br><br>{{_"E-mail"}}：&nbsp;{{email}}</p></div>
-            <div class="col-xs-12 col-md-6"><p>{{_"Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>{{_"Phone"}}：&nbsp;{{phone}}<br>{{_"Fax"}}：&nbsp;{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}</p></div>
+            <div class="col-xs-6 col-md-6"><p><strong>{{title}}&nbsp;</strong><br><br>{{_ "E-mail"}}：&nbsp;{{email}}</p></div>
+            <div class="col-xs-12 col-md-6"><p>{{_ "Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>{{_ "Phone"}}：&nbsp;{{phone}}<br>{{_ "Fax"}}：&nbsp;{{fax}}{{#if can "modify-journal" "resource"  }}{{> updatePublicationEmailModalForm}}{{/if}}</p></div>
         {{else}}
             {{_ "No publications found!"}}
         {{/each}}

@@ -56,6 +56,7 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('articleViews'),
+                Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news')
             ]

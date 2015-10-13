@@ -1,10 +1,9 @@
 <template name="JournalWatch">
-    {{_ "result"}}:{{count}}
     <table class="table table-bordered table-condensed">
         <thead>
         <tr>
             <td>{{_ "Table Of Contents"}}</td>
-            <td>{{_ "Content Type"}}</td>
+            <td style="width:210px">{{_ "Email Frequency"}}</td>
             <td>{{_"Action"}}</td>
         </tr>
         </thead>
@@ -17,13 +16,27 @@
                     <a>{{translateThis titleCn title}}</a>
                 </a>
             </td>
-            <td>{{_ "Journals"}}</td>
+            <td>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> {{_ "Off"}}
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> {{_ "Weekly"}}
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> {{_ "Monthly"}}
+                    </label>
+                </div>
+            </td>
             <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedJournal" value={{_id}}>{{/if}}
             </td>
         </tr>
         {{/with}}
         {{else}}
-        {{_ "Journal Watch Is Empty"}}
+            <tr>
+                {{_ "Journal Watch Is Empty"}}
+            </tr>
         {{/each}}
         </tbody>
     </table>

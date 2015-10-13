@@ -16,6 +16,11 @@
   "Search Between These Dates": "出版时间",
   "Search Within": "选择检索控制条件",
   "Article Content Type": "文章内容属性",
+  "Email This": "个人推荐",
+  "Off": "关",
+  "Weekly": "每周",
+  "Monthly": "每月",
+  "Email Frequency": "邮件评率",
   "Or": "或",
   "And": "且",
   "Not": "非",
@@ -71,6 +76,8 @@
   "No abstract found": "没找到摘要",
   "No author found": "没找到作者",
   "Article Language": "语种类型",
+  "Affiliations": "背景",
+  "Download": "下载",
   "Action": "操作",
   "Date": "日期",
   "Status": "状态",
@@ -166,6 +173,7 @@
   "No publishers found!": "没有找到出版商！",
   "No About found!": "没有找到主题！",
   "No articles found!": "没有找到文章！",
+  "No historical journal found!": "没有找到过刊！",
   "No content found!": "没有找到关于我们的信息！",
   "No users yet": "还没有用户",
   "Welcome Message": "欢迎",
@@ -870,14 +878,11 @@
       }
     },
     "emails": {
-      "myEmail": {
-        "label": "收件人的邮件地址:"
-      },
-      "youEmail": {
-        "label": "你的邮件地址:"
+      "recipient": {
+        "label": "收件人的邮件地址"
       },
       "reasons": {
-        "label": "推荐理由:"
+        "label": "推荐理由"
       }
     },
     "authorCenter": {
@@ -1020,7 +1025,7 @@
   "Watched": "已关注",
   "My favorite": "收藏夹",
   "My Favorite": "我的收藏夹",
-  "My watch": "我的关注",
+  "My alerts": "我的关注",
   "My Alerts": "我的关注",
   "Please enter the receiving mailbox": "请输入接收邮箱",
   "You need to enter email address!": "你需要输入邮件地址!",
@@ -1086,5 +1091,12 @@
   "Recent_read":"最近浏览",
   "Recent_search":"最近搜索",
   "User stats statistics":"用户地区统计",
-  "Add articles to special topics":"添加到专题"
+  "Add articles to special topics":"添加到专题",
+  "Search History":"搜索历史",
+  "Search History View":"搜索历史查看",
+  "Search Folder Management":"搜索文件夹管理",
+  "Search Information":"搜索信息",
+  "Search time":"搜索时间",
+  "Delete search history":"删除搜索历史",
+  "Save to Folder":"保存到文件夹"
 }

@@ -54,9 +54,9 @@ Meteor.startup(function () {
             return TAPi18n.__("Email");
         },
         parent: "admin",
-        template:"Admin",
+        template: "Admin",
         yieldTemplates: {
-            'AdminEmail': { to: 'AdminSubcontent'}
+            'AdminEmail': {to: 'AdminSubcontent'}
         },
         waitOn: function () {
             return [
@@ -195,11 +195,15 @@ Meteor.startup(function () {
     });
     Router.route("user_settings.my_watch", {
         path: "/user_settings/my_watch",
-        controller: "UserSettingsMyWatchController",
-        title: function () {
-            return TAPi18n.__("My watch");
+        yieldTemplates: {
+            'UserSettingsMyWatch': {to: 'UserSettingsSubcontent'}
         },
-        waitOn:function () {
+        parent: "user_settings",
+        template: "UserSettings",
+        title: function () {
+            return TAPi18n.__("My alerts");
+        },
+        waitOn: function () {
             return [
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('topics')
@@ -213,17 +217,35 @@ Meteor.startup(function () {
             'UserSettingsMyEmails': {to: 'UserSettingsSubcontent'}
         },
         parent: "user_settings",
-        template:"UserSettings",
+        template: "UserSettings",
         title: function () {
             return TAPi18n.__("My emails");
         },
-        waitOn:function () {
+        waitOn: function () {
             return [
                 //Meteor.subscribe('publications'),
                 //Meteor.subscribe('topics')
             ]
         }
     });
+
+    Router.route("user_settings.search_history", {
+        path: "/user_settings/search_history",
+        yieldTemplates: {
+            'UserSettingsSearchHistory': {to: 'UserSettingsSubcontent'}
+        },
+        parent: "user_settings",
+        template: "UserSettings",
+        title: function () {
+            return TAPi18n.__("Search History");
+        },
+        waitOn: function () {
+            return [
+//                Meteor.subscribe('publications'),
+            ]
+        }
+    });
+
     Router.route("logout", {
         path: "/logout",
         controller: "LogoutController"
@@ -234,9 +256,9 @@ Meteor.startup(function () {
             return TAPi18n.__("Journal label");
         },
         parent: "admin",
-        template:"Admin",
+        template: "Admin",
         yieldTemplates: {
-            'AdminTag': { to: 'AdminSubcontent'}
+            'AdminTag': {to: 'AdminSubcontent'}
         },
         waitOn: function () {
             return [

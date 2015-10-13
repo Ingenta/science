@@ -95,10 +95,25 @@ Template.recentArticles.helpers({
     }
 });
 
+Template.homePgaeTopicList.helpers({
+    topics: function () {
+        return Topics.find({"parentId": null});
+    },
+    searchUrl: function(){
+        var option = {
+            filterQuery:{
+                topic:[this._id]
+            },
+            setting:{from:'topic'}
+        };
+        return SolrQuery.makeUrl(option);
+    }
+});
+
 AutoForm.addHooks(['addNewsModalForm'], {
     onSuccess: function () {
         $("#addNewsModal").modal('hide');
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {
         insert: function (doc) {
@@ -113,6 +128,6 @@ AutoForm.addHooks(['addNewsModalForm'], {
 
 AutoForm.addHooks(['cmForm'], {
     onSuccess: function () {
-        FlashMessages.sendSuccess("Success!", {hideDelay: 5000});
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
 }, true);
