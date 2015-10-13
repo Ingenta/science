@@ -1,0 +1,35 @@
+<template name="searchHistoryList">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>
+                {{_ "Search Information"}}
+            </th>
+            <th>
+                {{_ "Search time"}}
+            </th>
+            <th>
+                {{_ "Delete search history"}}
+            </th>
+            <th>
+                {{_ "Save to Folder"}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each searchHistory}}
+        <tr>
+            <td>
+                <!--{{moFormat createOn "lll"}}-->
+            </td>
+            <td>
+                <!--{{total}}-->
+            </td>
+            <td>
+                <!--{{i18nStatus}}&nbsp;{{> taskLoadIcon}}-->
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

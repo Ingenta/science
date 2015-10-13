@@ -1091,5 +1091,11 @@
   "Recent_search":"最近搜索",
   "User stats statistics":"用户地区统计",
   "Add articles to special topics":"添加到专题",
-  "Search History":"搜索历史"
+  "Search History":"搜索历史",
+  "Search History View":"搜索历史查看",
+  "Search Folder Management":"搜索文件夹管理",
+  "Search Information":"搜索信息",
+  "Search time":"搜索时间",
+  "Delete search history":"删除搜索历史",
+  "Save to Folder":"保存到文件夹"
 }
