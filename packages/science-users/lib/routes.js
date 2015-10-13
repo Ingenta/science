@@ -201,7 +201,7 @@ Meteor.startup(function () {
         parent: "user_settings",
         template: "UserSettings",
         title: function () {
-            return TAPi18n.__("My watch");
+            return TAPi18n.__("My alerts");
         },
         waitOn: function () {
             return [
