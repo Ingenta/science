@@ -1,5 +1,4 @@
 <template name="TopicWatch">
-    {{_ "result"}}:{{count}}
     <table class="table table-bordered table-condensed">
         <thead>
         <tr>
@@ -11,27 +10,33 @@
         </thead>
         <tbody>
         {{#each watch}}
-        {{#with topicWatch}}
-        <tr>
-            <td>
-                <a>{{translateThis name englishName}}</a>
-            </td>
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Off
-                </label>
-                <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off"> Weekly
-                </label>
-                <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option3" autocomplete="off"> Monthly
-                </label>
-            </div>
-            <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}</td>
-        </tr>
-        {{/with}}
+            {{#with topicWatch}}
+                <tr>
+                    <td>
+                        <a>{{translateThis name englishName}}</a>
+                    </td>
+                    <td>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Off
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> Weekly
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="option3" autocomplete="off"> Monthly
+                            </label>
+                        </div>
+                    </td>
+                    <td>{{#if can "delete-tag" "resource"}}
+                        <input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}
+                    </td>
+                </tr>
+            {{/with}}
         {{else}}
-        {{_ "Topic Watch Is Empty"}}
+            <tr>
+                {{_ "Topic Watch Is Empty"}}
+            </tr>
         {{/each}}
         </tbody>
     </table>

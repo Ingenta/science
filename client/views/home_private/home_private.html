@@ -113,7 +113,7 @@
             <ul class="list-unstyled simple-list">
                 {{#each newestArticle}}
                     <li>
-                        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                        <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
                     </li>
                 {{else}}
                     {{_ "No articles found!"}}
@@ -126,7 +126,7 @@
             <ul class="list-unstyled simple-list">
                 {{#each mostReadArticles}}
                     <li>
-                        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                        <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
                     </li>
                 {{else}}
                     {{_ "No articles found!"}}
@@ -142,7 +142,7 @@
             <ul class="list-unstyled simple-list">
                 {{#each mostCitedArticles}}
                     <li>
-                        <h5><a href={{urlToArticle title.en}}>{{translateThis title.cn title.en}}</a></h5>
+                        <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
                     </li>
                 {{else}}
                     {{_ "No articles found!"}}

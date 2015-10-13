@@ -21,6 +21,7 @@ Package.onUse(function(api) {
             'aldeed:simple-schema',
             'science-lib',
             'science-permissions',
+            'aldeed:autoform',
         ],both);
 
     api.addFiles('server/emails.js', 'server');
