@@ -16,20 +16,18 @@
         <tbody id="dataview-table-items">
         {{#each emailConfigurations}}
             <tr>
-            <td>{{key}}</td>
-            <td>{{subject}}</td>
-            <td><i class="fa fa-pencil"></i></td>
+                <td>{{key}}</td>
+                <td>{{subject}}</td>
+                <td>{{>jkafModal template="updateEmailConfig" doc=this}}</td>
             </tr>
-        {{else}}
-            No emails
         {{/each}}
         </tbody>
     </table>
 </template>
-<!--<template name="updateEmailConfigModalForm">-->
-        <!--{{#autoForm collection="EmailConfig" id="updateEmailConfigModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}-->
-<!--{{> afQuickField name="subject" }}-->
-<!--{{> afQuickField name="body" }}-->
-<!--<button type="submit" class="btn btn-primary">{{_ "Update"}}</button>-->
-        <!--{{/autoForm}}-->
-<!--</template>-->
+<template name="updateEmailConfig">
+    {{#autoForm id="test123" collection="EmailConfig"  doc=this type="update" buttonContent=getUpdateButtonContent}}
+        {{> afQuickField name="subject" }}
+        {{> afQuickField name="body" }}
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
+</template>
