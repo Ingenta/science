@@ -69,6 +69,7 @@ Template.AdminUsersEditEditForm.events({
                 Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
                 //Session.set('activeTab', 'account');
             } else if(Router.current().route.getName() === "publisher.account.edit") {
+                console.log(admin_user);
                 Router.go("publisher.account", {pubId: this.admin_user.publisherId});
             } else {
                 Router.go("admin.users", {});
@@ -89,7 +90,7 @@ Template.AdminUsersEditEditForm.events({
 
             },
             function (values) {
-                Permissions.check("modify-user", "user");
+                Permissions.check("modify-user","publisher");
                 var roles = values.roles;
                 delete values.roles;
                 Meteor.call("updateUserAccount", t.data.admin_user._id, values, function (e) {

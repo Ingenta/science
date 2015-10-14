@@ -3,8 +3,6 @@
         <thead>
         <tr>
             <td>{{_ "Table Of Contents"}}</td>
-            <td style="width:210px">{{_ "Email Frequency"}}</td>
-
             <td>{{_"Action"}}</td>
         </tr>
         </thead>
@@ -14,19 +12,6 @@
                 <tr>
                     <td>
                         <a>{{translateThis name englishName}}</a>
-                    </td>
-                    <td>
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Off
-                            </label>
-                            <label class="btn btn-primary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> Weekly
-                            </label>
-                            <label class="btn btn-primary">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Monthly
-                            </label>
-                        </div>
                     </td>
                     <td>{{#if can "delete-tag" "resource"}}
                         <input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}
