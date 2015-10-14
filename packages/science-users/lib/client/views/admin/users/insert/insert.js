@@ -93,13 +93,16 @@ Template.AdminUsersInsertInsertForm.events({
 
             },
             function (values) {
-                Permissions.check("add-user", "user");
+                Permissions.check("add-user", "publisher");
                 if (Router.current().params.insId) values.institutionId = Router.current().params.insId;
                 console.log(values);
                 Meteor.call("createUserAccount", values, function (e, userId) {
                     console.log(userId);
                     if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
-                    if (values.institutionId) Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
+                    if (values.institutionId) {
+                        Permissions.delegate(userId, ["permissions:permissions-manager"]);
+                        Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
+                    }
                     if (e) errorAction(e.message); else submitAction();
                 });
             }
