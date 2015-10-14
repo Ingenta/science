@@ -23,17 +23,17 @@ publisherPermissions
     });
 
 publisherPermissions
-    .defineRole("publisher-manager-from-admin", ["add-publisher", "modify-publisher", "delete-publisher", "add-user", "modify-user"], {
-        en: {
-            name: "publisher manager (platform)",
-            summary: "system admin of publisher"
-        },
-        cn: {
-            name: "出版社管理（平台）",
-            summary: "可以增删改出版社信息的角色"
-        }
-    })
-    .defineRole("publisher-manager-from-user", ["add-publisher", "modify-publisher", "delete-publisher", "add-user", "modify-user"], {
+    //.defineRole("publisher-manager-from-admin", ["add-publisher", "modify-publisher", "delete-publisher", "add-user", "modify-user"], {
+    //    en: {
+    //        name: "publisher manager (platform)",
+    //        summary: "system admin of publisher"
+    //    },
+    //    cn: {
+    //        name: "出版社管理（平台）",
+    //        summary: "可以增删改出版社信息的角色"
+    //    }
+    //})
+    .defineRole("publisher-manager-from-user", ["modify-publisher", "add-user", "modify-user"], {
         en: {
             name: "publisher manager (publisher)",
             summary: "publisher manager"
