@@ -101,7 +101,7 @@ meteorhacks:kadira@2.23.6
 meteorhacks:meteorx@1.4.1
 meteorhacks:npm@1.5.0
 meteorspark:util@0.2.0
-meteortoys:toykit@2.1.1
+meteortoys:toykit@2.1.0
 minifiers@1.1.7
 minimongo@1.0.10
 mizzao:bootboxjs@4.4.0
@@ -123,7 +123,7 @@ mrt:flash-messages@1.0.1
 mrt:jquery-raty@2.7.2
 mrt:mathjax@0.6.3
 mrt:moment@2.8.1
-msavin:mongol@1.4.3
+msavin:mongol@1.4.0
 multiply:iron-router-progress@1.0.2
 npm-bcrypt@0.7.8_2
 npm-container@1.2.0

@@ -142,6 +142,9 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 }
 
 ScienceXML.getParagraphsFromASectionNode = function (section) {
+    //debugger
+    //var paragraphNodes = xpath.select("child::p | child::fig", section);
+    //var paragraphs = {html: "", tex: [], figures:[]};
     var paragraphNodes = xpath.select("child::p", section);
     var paragraphs = {html: "", tex: []};
     paragraphNodes.forEach(function (paragraph) {
@@ -165,6 +168,17 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
 ScienceXML.getFullText = function (results, doc) {
     var sectionNodes = xpath.select("//body/sec", doc); //get all parent sections
     results.sections = ScienceXML.getSubSection(sectionNodes);
+    //if(_.isEmpty(sectionNodes)){
+    //    var body = xpath.select("//body",doc);
+    //    if(_.isEmpty(body)){
+    //        return results;
+    //    }else{
+    //        var content = ScienceXML.getParagraphsFromASectionNode(body[0]);
+    //        results.sections = [{label:undefined,title:results.title.en,body:content}];
+    //    }
+    //}else{
+    //    results.sections = ScienceXML.getSubSection(sectionNodes);
+    //}
     return results;
 }
 
@@ -339,45 +353,51 @@ ScienceXML.getTables = function (doc) {
 ScienceXML.handlePara = function (paragraph) {
     var handled = {paraNode: paragraph};
 
-    //检查是否含有公式
-    var formulaNodes = xpath.select("child::disp-formula", paragraph);
-    if (formulaNodes && formulaNodes.length) {
-        handled.formulas = [];
-        formulaNodes.forEach(function (fnode) {
-            var formula = {};
-            var id = xpath.select("./@id", fnode);
-            if (id && id.length) {
-                formula.id = id[0].value;
-            }
-            var label = xpath.select("child::label", fnode);
-            if (label && label.length) {
-                formula.label = label[0].textContent;
-            }
-            var tex = xpath.select("child::alternatives/tex-math", fnode);
-            if (tex && tex.length) {
-                if (tex[0].childNodes[2] && tex[0].childNodes[2].nodeName == '#cdata-section') {
-                    formula.tex = tex[0].childNodes[2].data;
+    //if(paragraph.tagName==='fig'){
+    //
+    //}else{
+        //检查是否含有公式
+        var formulaNodes = xpath.select("child::disp-formula", paragraph);
+        if (formulaNodes && formulaNodes.length) {
+            handled.formulas = [];
+            formulaNodes.forEach(function (fnode) {
+                var formula = {};
+                var id = xpath.select("./@id", fnode);
+                if (id && id.length) {
+                    formula.id = id[0].value;
+                }
+                var label = xpath.select("child::label", fnode);
+                if (label && label.length) {
+                    formula.label = label[0].textContent;
+                }
+                var tex = xpath.select("child::alternatives/tex-math", fnode);
+                if (tex && tex.length) {
+                    if (tex[0].childNodes[2] && tex[0].childNodes[2].nodeName == '#cdata-section') {
+                        formula.tex = tex[0].childNodes[2].data;
+                    }
+
+                }
+                var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
+                var mathml = mmlSelect('child::alternatives/mml:math', fnode);
+                if (mathml && mathml.length) {
+                    formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+                }
+                handled.formulas.push(formula);
+                while (fnode.firstChild)
+                    fnode.removeChild(fnode.firstChild);
+
+                if (formula.mathml) {
+                    var nd = ScienceXML.xmlStringToXmlDoc(formula.mathml);
+                    fnode.appendChild(nd.documentElement);
+                } else if (formula.tex) {
+                    fnode.appendChild(ScienceXML.xmlStringToXmlDoc("<p>" + formula.tex + "</p>").documentElement);
                 }
 
-            }
-            var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
-            var mathml = mmlSelect('child::alternatives/mml:math', fnode);
-            if (mathml && mathml.length) {
-                formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
-            }
-            handled.formulas.push(formula);
-            while (fnode.firstChild)
-                fnode.removeChild(fnode.firstChild);
+            });
+        }
+    //}
 
-            if (formula.mathml) {
-                var nd = ScienceXML.xmlStringToXmlDoc(formula.mathml);
-                fnode.appendChild(nd.documentElement);
-            } else if (formula.tex) {
-                fnode.appendChild(ScienceXML.xmlStringToXmlDoc("<p>" + formula.tex + "</p>").documentElement);
-            }
 
-        });
-    }
 
     return handled;
 
