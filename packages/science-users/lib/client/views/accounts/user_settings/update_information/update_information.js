@@ -36,7 +36,7 @@ Template.UserSettingsUpdateInformationForm.events({
 
                     case "update":
                     {
-                        var message = msg || "Saved.";
+                        var message = msg || TAPi18n.__("Saved");
                         pageSession.set("userSettingsUpdateInformationFormInfoMessage", message);
                     }
                         ;

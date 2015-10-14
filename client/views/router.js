@@ -124,6 +124,44 @@ Router.map(function () {
         }
     });
 
+    this.route('mostReadArticles', {
+        template: "mostReadArticle",
+        title: function () {
+            return TAPi18n.__("Most read articles");
+        },
+        parent: "home",
+        name: "mostRead.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
+    this.route('mostCiteArticles', {
+        template: "mostCiteArticle",
+        title: function () {
+            return TAPi18n.__("Most cited by");
+        },
+        parent: "home",
+        name: "mostCite.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
     this.route("advancedSearch", {
         parent: "home",
         title: function () {

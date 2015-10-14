@@ -58,7 +58,7 @@ Template.UserSettingsProfileEditForm.events({
 					}; break;
 
 					case "update": {
-						var message = msg || "Saved.";
+						var message = msg || TAPi18n.__("Saved");
 						pageSession.set("userSettingsProfileEditFormInfoMessage", message);
 					}; break;
 				}
