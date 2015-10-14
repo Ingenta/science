@@ -3,7 +3,7 @@
         {{> pageElement key="topic"}}
         <div class="row">
             {{#if can "add-topic" "topic"}}
-                {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm"}}
+                {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
                     <span class="fa fa-plus">
                         {{_ "Add new"}}
                     </span>
@@ -64,11 +64,11 @@
 </template>
 
 <template name="addTopicModalForm">
-    {{#autoForm collection="Topics" id="addTopicModalForm" type="insert" buttonContent=getCreateButtonContent}}
+    {{#autoForm collection="Topics" id="addTopicModalForm" type="insert"}}
         {{> afQuickField name="name" }}
         {{> afQuickField name="englishName" }}
         {{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
-        <button type="submit" class="btn btn-primary">{{_ "Add new"}}</button>
+        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
     {{/autoForm}}
 </template>
 
@@ -79,10 +79,10 @@
 
     <div class="pull-right">
         {{#if can "add-topic" "topic" }}
-            {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm"}}
+            {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
         {{/if}}
         {{#if can "modify-topic" "topic" }}
-            {{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm"}}
+            {{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
         {{/if}}
         {{#if can "delete-topic" "topic" }}
             {{#if hasSubTopic _id}}

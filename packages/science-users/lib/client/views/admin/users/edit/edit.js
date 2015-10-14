@@ -42,7 +42,7 @@ Template.AdminUsersEditEditForm.events({
         pageSession.set("adminUsersEditEditFormInfoMessage", "");
         pageSession.set("adminUsersEditEditFormErrorMessage", "");
 
-        var self = this;
+        var that = this;
 
         function submitAction(msg) {
             var adminUsersEditEditFormMode = "update";
@@ -57,7 +57,7 @@ Template.AdminUsersEditEditForm.events({
 
                     case "update":
                     {
-                        var message = msg || "Saved.";
+                        var message = msg || TAPi18n.__("Saved");
                         pageSession.set("adminUsersEditEditFormInfoMessage", message);
                     }
                         ;
@@ -66,8 +66,10 @@ Template.AdminUsersEditEditForm.events({
             }
             if (Router.current().route.getName() === "admin.institutions.detail.edit") {
                 //history.back();
-                Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
+                Router.go("admin.institutions.detail", {insId: that.admin_user.institutionId});
                 //Session.set('activeTab', 'account');
+            } else if(Router.current().route.getName() === "publisher.account.edit") {
+                Router.go("publisher.account", {pubId: that.admin_user.publisherId});
             } else {
                 Router.go("admin.users", {});
             }
@@ -87,7 +89,7 @@ Template.AdminUsersEditEditForm.events({
 
             },
             function (values) {
-                Permissions.check("modify-user", "user");
+                Permissions.check("modify-user","publisher");
                 var roles = values.roles;
                 delete values.roles;
                 Meteor.call("updateUserAccount", t.data.admin_user._id, values, function (e) {
@@ -112,6 +114,8 @@ Template.AdminUsersEditEditForm.events({
             //history.back();
             Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
             //Session.set('activeTab', 'account');
+        } else if(Router.current().route.getName() === "publisher.account.edit") {
+            Router.go("publisher.account", {pubId: this.admin_user.publisherId});
         } else {
             Router.go("admin.users", {});
         }

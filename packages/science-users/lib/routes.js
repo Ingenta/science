@@ -201,7 +201,7 @@ Meteor.startup(function () {
         parent: "user_settings",
         template: "UserSettings",
         title: function () {
-            return TAPi18n.__("My watch");
+            return TAPi18n.__("My alerts");
         },
         waitOn: function () {
             return [
@@ -228,6 +228,24 @@ Meteor.startup(function () {
             ]
         }
     });
+
+    Router.route("user_settings.search_history", {
+        path: "/user_settings/search_history",
+        yieldTemplates: {
+            'UserSettingsSearchHistory': {to: 'UserSettingsSubcontent'}
+        },
+        parent: "user_settings",
+        template: "UserSettings",
+        title: function () {
+            return TAPi18n.__("Search History");
+        },
+        waitOn: function () {
+            return [
+//                Meteor.subscribe('publications'),
+            ]
+        }
+    });
+
     Router.route("logout", {
         path: "/logout",
         controller: "LogoutController"

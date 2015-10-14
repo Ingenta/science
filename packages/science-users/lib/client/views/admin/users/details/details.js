@@ -58,7 +58,7 @@ Template.AdminUsersDetailsDetailsForm.events({
 
 					case "update":
 					{
-						var message = msg || "Saved.";
+						var message = msg || TAPi18n.__("Saved");
 						pageSession.set("adminUsersDetailsDetailsFormInfoMessage", message);
 					}
 						;

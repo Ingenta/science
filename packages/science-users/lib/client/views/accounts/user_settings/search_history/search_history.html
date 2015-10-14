@@ -1,0 +1,34 @@
+<template name="UserSettingsSearchHistory">
+    {{> pageElement key="searchHistory"}}
+    {{#searchHistoryTabs tabs=tabs}}
+        {{#tabContent slug="showsSearchHistory"}}
+            {{> searchHistoryList}}
+        {{/tabContent}}
+
+        {{#tabContent slug="searchHistoryFolder"}}
+            {{> searchHistoryFolderList}}
+        {{/tabContent}}
+    {{/searchHistoryTabs}}
+</template>
+
+<template name="searchHistoryTabs">
+    <div>
+        {{#if activeTab}}
+        {{trackActiveTab activeTab}}
+        {{/if}}
+
+        {{trackTabs tabs}}
+
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+            <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                <a href="#" role="tab" data-toggle="tab">{{name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+
+        <div class="tabs-content-container">
+            {{> UI.contentBlock context=__context__ }}
+        </div>
+    </div>
+</template>

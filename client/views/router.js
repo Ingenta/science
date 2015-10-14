@@ -124,6 +124,44 @@ Router.map(function () {
         }
     });
 
+    this.route('mostReadArticles', {
+        template: "mostReadArticle",
+        title: function () {
+            return TAPi18n.__("Most read articles");
+        },
+        parent: "home",
+        name: "mostRead.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
+    this.route('mostCiteArticles', {
+        template: "mostCiteArticle",
+        title: function () {
+            return TAPi18n.__("Most cited by");
+        },
+        parent: "home",
+        name: "mostCite.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
     this.route("advancedSearch", {
         parent: "home",
         title: function () {
@@ -168,9 +206,12 @@ Router.map(function () {
     });
 
     this.route('/publisher/account/:pubId', {
-        template: "publisherAccountTemplate",
-        parent: "home",
+        template: "Admin",
         name: "publisher.account",
+        parent: "home",
+        yieldTemplates: {
+            'publisherAccountTemplate': {to: 'AdminSubcontent'}
+        },
         title: function () {
             return TAPi18n.__("Publisher");
         },
@@ -185,6 +226,36 @@ Router.map(function () {
                 admin_users: Users.find({publisherId: this.params.pubId})
             };
         }
+    });
+
+    this.route("/publisher/account/insert/:pubId", {
+        template: "Admin",
+        name: "publisher.account.insert",
+        parent: "publisher.account",
+        title: function () {
+            return TAPi18n.__("Add new user");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers'),
+            ]
+        },
+        controller: "AdminUsersInsertController",
+    });
+
+    this.route("/publisher/account/edit/:userId", {
+        template: "Admin",
+        name: "publisher.account.edit",
+        parent: "publisher.account",
+        title: function () {
+            return TAPi18n.__("Edit user");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers'),
+            ]
+        },
+        controller: "AdminUsersEditController",
     });
 
     this.route('/publisher/:publisherName', {
@@ -363,7 +434,8 @@ Router.map(function () {
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml'),
-                Meteor.subscribe('pdfs')
+                Meteor.subscribe('pdfs'),
+                Meteor.subscribe('emailConfig')
             ]
         },
         onBeforeAction: function () {

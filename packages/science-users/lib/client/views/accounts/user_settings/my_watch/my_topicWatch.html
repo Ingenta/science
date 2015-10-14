@@ -1,26 +1,27 @@
 <template name="TopicWatch">
-    {{_ "result"}}:{{count}}
     <table class="table table-bordered table-condensed">
         <thead>
         <tr>
             <td>{{_ "Table Of Contents"}}</td>
-            <td>{{_ "Content Type"}}</td>
             <td>{{_"Action"}}</td>
         </tr>
         </thead>
         <tbody>
         {{#each watch}}
-        {{#with topicWatch}}
-        <tr>
-            <td>
-                <a>{{translateThis name englishName}}</a>
-            </td>
-            <td>{{_ "Topics"}}</td>
-            <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}</td>
-        </tr>
-        {{/with}}
+            {{#with topicWatch}}
+                <tr>
+                    <td>
+                        <a>{{translateThis name englishName}}</a>
+                    </td>
+                    <td>{{#if can "delete-tag" "resource"}}
+                        <input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}
+                    </td>
+                </tr>
+            {{/with}}
         {{else}}
-        {{_ "Topic Watch Is Empty"}}
+            <tr>
+                {{_ "Topic Watch Is Empty"}}
+            </tr>
         {{/each}}
         </tbody>
     </table>

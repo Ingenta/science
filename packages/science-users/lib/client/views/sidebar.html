@@ -41,7 +41,7 @@
                 {{>sendEmailModalForm}}
             {{/if}}
             {{#if isJournalPage}}
-                <li><a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+                <li><a class="watch" href=""><i class="fa fa-eye"></i> {{watchName}}</a></li>
             {{/if}}
         {{else}}
             <li>
@@ -49,7 +49,7 @@
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
             {{#if isJournalPage}}
-                <li><a class="watch" href=""><span class="fa fa-eye"></span>{{watchName}}</a></li>
+                <li><a class="watch" href=""><i class="fa fa-eye"></i> {{watchName}}</a></li>
             {{/if}}
         {{/if}}
         <hr>

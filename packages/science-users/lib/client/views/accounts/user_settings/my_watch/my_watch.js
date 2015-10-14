@@ -14,3 +14,14 @@ Template.watchOptions.helpers({
         return Session.get('activeTab');
     }
 });
+Template.UserSettingsMyWatch.onRendered(function () {
+    var freq = Meteor.user().emailFrequency;
+    if (!freq)freq = "off";
+    $('#' + freq).click();
+})
+Template.UserSettingsMyWatch.events({
+    "change .emailFrequencyButtons": function (e) {
+        if (Meteor.user().emailFrequency !== e.target.id)
+            Users.update(Meteor.userId(), {$set: {emailFrequency: e.target.id}})
+    }
+})
