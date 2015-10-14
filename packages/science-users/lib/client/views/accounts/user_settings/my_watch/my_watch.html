@@ -1,21 +1,39 @@
 <template name="UserSettingsMyWatch">
     {{> pageElement key="watch"}}
+    <p>
+        <label class="control-label" for="frequencySelect">
+            {{_ "Email Frequency"}}
+        </label>
+
+    <div class="btn-group pull-right" data-toggle="buttons" id="frequencySelect">
+        <label class="btn btn-primary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> {{_ "Off"}}
+        </label>
+        <label class="btn btn-primary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> {{_ "Weekly"}}
+        </label>
+        <label class="btn btn-primary">
+            <input type="radio" name="options" id="option3" autocomplete="off"> {{_ "Monthly"}}
+        </label>
+    </div>
+    </p>
+    <hr>
     {{> watchOptions}}
 </template>
 
 <template name="watchOptions">
     {{#watchTabs name="" tabs=tabs activeTab="article"}}
-    {{#tabContent slug="article"}}
-        {{> ArticleWatch}}
-    {{/tabContent}}
+        {{#tabContent slug="article"}}
+            {{> ArticleWatch}}
+        {{/tabContent}}
 
-    {{#tabContent slug="journal"}}
-        {{> JournalWatch}}
-    {{/tabContent}}
+        {{#tabContent slug="journal"}}
+            {{> JournalWatch}}
+        {{/tabContent}}
 
-    {{#tabContent slug="topic"}}
-        {{> TopicWatch}}
-    {{/tabContent}}
+        {{#tabContent slug="topic"}}
+            {{> TopicWatch}}
+        {{/tabContent}}
     {{/watchTabs}}
 </template>
 
@@ -24,16 +42,16 @@
     <div class="watchTabs-container">
 
         {{#if activeTab}}
-        {{trackActiveTab activeTab}}
+            {{trackActiveTab activeTab}}
         {{/if}}
 
         {{trackTabs tabs}}
 
         <ul class="nav nav-tabs" role="tablist">
             {{#each tabs}}
-            <li role="presentation" class="tab-item {{isActiveTab slug}}">
-                <a role="tab" data-toggle="tab">{{name}}</a>
-            </li>
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab">{{name}}</a>
+                </li>
             {{/each}}
         </ul>
 
