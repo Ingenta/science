@@ -72,7 +72,7 @@ Template.SingleNews.events({
 
 Template.recentArticles.helpers({
     newestArticle: function () {
-        return Articles.find({}, {sort: {createdAt: -1}, limit: 5});
+        return Articles.find({}, {sort: {createdAt: -1}, limit: 10});
     },
     mostReadArticles: function () {
         Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
