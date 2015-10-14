@@ -357,7 +357,7 @@ ScienceXML.handlePara = function (paragraph) {
     //
     //}else{
         //检查是否含有公式
-        var formulaNodes = xpath.select("child::disp-formula", paragraph);
+        var formulaNodes = xpath.select("child::disp-formula | child::inline-formula", paragraph);
         if (formulaNodes && formulaNodes.length) {
             handled.formulas = [];
             formulaNodes.forEach(function (fnode) {
@@ -381,6 +381,11 @@ ScienceXML.handlePara = function (paragraph) {
                 var mathml = mmlSelect('child::alternatives/mml:math', fnode);
                 if (mathml && mathml.length) {
                     formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+                }else{
+                    mathml = mmlSelect('child::mml:math', fnode);
+                    if (mathml && mathml.length) {
+                        formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+                    }
                 }
                 handled.formulas.push(formula);
                 while (fnode.firstChild)
