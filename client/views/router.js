@@ -168,9 +168,12 @@ Router.map(function () {
     });
 
     this.route('/publisher/account/:pubId', {
-        template: "publisherAccountTemplate",
-        parent: "home",
+        template: "Admin",
         name: "publisher.account",
+        parent: "home",
+        yieldTemplates: {
+            'publisherAccountTemplate': {to: 'AdminSubcontent'}
+        },
         title: function () {
             return TAPi18n.__("Publisher");
         },
@@ -185,6 +188,36 @@ Router.map(function () {
                 admin_users: Users.find({publisherId: this.params.pubId})
             };
         }
+    });
+
+    this.route("/publisher/account/insert/:pubId", {
+        template: "Admin",
+        name: "publisher.account.insert",
+        parent: "publisher.account",
+        title: function () {
+            return TAPi18n.__("Add new user");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers'),
+            ]
+        },
+        controller: "AdminUsersInsertController",
+    });
+
+    this.route("/publisher/account/edit/:userId", {
+        template: "Admin",
+        name: "publisher.account.edit",
+        parent: "publisher.account",
+        title: function () {
+            return TAPi18n.__("Edit user");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers'),
+            ]
+        },
+        controller: "AdminUsersEditController",
     });
 
     this.route('/publisher/:publisherName', {
