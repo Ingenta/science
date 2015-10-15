@@ -1,5 +1,5 @@
 Template.mostCiteArticle.helpers({
-    mostCitedArticle: function () {
+    mostCitedArticles: function () {
         return MostCited.find({});
     }
 });

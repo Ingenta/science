@@ -1,19 +1,19 @@
 <template name="mostCiteArticle">
-    <h4 class="dotted"><b>最多引用查看&nbsp;:</b></h4>
+    <h4 class="dotted"><b>{{_ "Most cited by to view"}}&nbsp;:</b></h4>
     <div class="dotted">
-        <label>{{_"Sort Results By"}}：</label>
+        <label>{{_ "Sort Results By"}}：</label>
         <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> {{_"Relevance"}}
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> {{_ "Relevance"}}
         </label>
         <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> {{_"Newest First"}}
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> {{_ "Newest First"}}
         </label>
         <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> {{_"Oldest First"}}
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> {{_ "Oldest First"}}
         </label>
     </div>
     <div class="dotted">
-        {{#each mostCitedArticle}}
+        {{#each mostCitedArticles}}
         <li>
             <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
         </li>

@@ -162,6 +162,25 @@ Router.map(function () {
         }
     });
 
+    this.route('mostEditorRecommend', {
+        template: "mostRecommendArticles",
+        title: function () {
+            return TAPi18n.__("Editors Recommend");
+        },
+        parent: "home",
+        name: "mostEditor.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
     this.route("advancedSearch", {
         parent: "home",
         title: function () {
@@ -240,7 +259,7 @@ Router.map(function () {
                 Meteor.subscribe('publishers'),
             ]
         },
-        controller: "AdminUsersInsertController",
+        controller: "AdminUsersInsertController"
     });
 
     this.route("/publisher/account/edit/:userId", {
@@ -255,7 +274,7 @@ Router.map(function () {
                 Meteor.subscribe('publishers'),
             ]
         },
-        controller: "AdminUsersEditController",
+        controller: "AdminUsersEditController"
     });
 
     this.route('/publisher/:publisherName', {
