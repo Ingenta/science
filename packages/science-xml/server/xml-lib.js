@@ -165,20 +165,20 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
     return {label: label, title: title, body: paragraphs};
 };
 
+//若body下没有sec节点，即没有章节信息，则将body下的所有p标签视为一个以文章标题为名称的章节。
 ScienceXML.getFullText = function (results, doc) {
     var sectionNodes = xpath.select("//body/sec", doc); //get all parent sections
-    results.sections = ScienceXML.getSubSection(sectionNodes);
-    //if(_.isEmpty(sectionNodes)){
-    //    var body = xpath.select("//body",doc);
-    //    if(_.isEmpty(body)){
-    //        return results;
-    //    }else{
-    //        var content = ScienceXML.getParagraphsFromASectionNode(body[0]);
-    //        results.sections = [{label:undefined,title:results.title.en,body:content}];
-    //    }
-    //}else{
-    //    results.sections = ScienceXML.getSubSection(sectionNodes);
-    //}
+    if(_.isEmpty(sectionNodes)){
+        var body = xpath.select("//body",doc);
+        if(_.isEmpty(body)){
+            return results;
+        }else{
+            var content = ScienceXML.getParagraphsFromASectionNode(body[0]);
+            results.sections = [{label:undefined,title:results.title.en,body:content}];
+        }
+    }else{
+        results.sections = ScienceXML.getSubSection(sectionNodes);
+    }
     return results;
 }
 
@@ -357,10 +357,12 @@ ScienceXML.handlePara = function (paragraph) {
     //
     //}else{
         //检查是否含有公式
-        var formulaNodes = xpath.select("child::disp-formula | child::inline-formula", paragraph);
+    debugger;
+        var formulaNodes = xpath.select("descendant::disp-formula | descendant::inline-formula", paragraph);
         if (formulaNodes && formulaNodes.length) {
             handled.formulas = [];
             formulaNodes.forEach(function (fnode) {
+                debugger;
                 var formula = {};
                 var id = xpath.select("./@id", fnode);
                 if (id && id.length) {
@@ -378,14 +380,9 @@ ScienceXML.handlePara = function (paragraph) {
 
                 }
                 var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
-                var mathml = mmlSelect('child::alternatives/mml:math', fnode);
+                var mathml = mmlSelect('descendant::mml:math', fnode);
                 if (mathml && mathml.length) {
                     formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
-                }else{
-                    mathml = mmlSelect('child::mml:math', fnode);
-                    if (mathml && mathml.length) {
-                        formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
-                    }
                 }
                 handled.formulas.push(formula);
                 while (fnode.firstChild)
