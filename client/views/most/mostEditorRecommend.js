@@ -1,9 +1,13 @@
-Template.mostReadArticle.helpers({
+Template.mostRecommendArticles.helpers({
     mostRecommendArticles: function () {
         var journalId = Session.get('currentJournalId');
-        if(0 < Recommend.find({publications:journalId})){
-            return Articles.findOne({_id: Recommend.find({publications:journalId}).ArticlesId});
-        }
+        var editorRecommends = Recommend.find({publications:journalId}).fetch();
+        var result = [];
+        _.each(editorRecommends,function(item){
+            var article = Articles.findOne({_id: item.ArticlesId});
+            result.push(article);
+        });
+        return result;
     },
     journalName: function (id) {
         return Publications.findOne({_id: id}).title;
