@@ -357,12 +357,10 @@ ScienceXML.handlePara = function (paragraph) {
     //
     //}else{
         //检查是否含有公式
-    debugger;
         var formulaNodes = xpath.select("descendant::disp-formula | descendant::inline-formula", paragraph);
         if (formulaNodes && formulaNodes.length) {
             handled.formulas = [];
             formulaNodes.forEach(function (fnode) {
-                debugger;
                 var formula = {};
                 var id = xpath.select("./@id", fnode);
                 if (id && id.length) {
