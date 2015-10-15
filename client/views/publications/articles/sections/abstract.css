@@ -122,3 +122,7 @@ xref[ref-type='table'] {
 .title_style{
     margin: 0 0 0px;
 }
+
+#fulltext-viewer p, .interesting-content p {
+    text-align: justify;
+}
