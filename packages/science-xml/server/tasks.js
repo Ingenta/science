@@ -119,11 +119,6 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 return;
                             }
 
-                            var log = UploadLog.findOne({_id: logId});
-                            if (log.filename !== xmlFileName) {
-                                Tasks.failSimple(taskId, logId, "xml file found inside zip does not match filename doi");
-                                return;
-                            }
                             var targetXml = targetPath + "/" + xmlFileName + ".xml";
                             var targetPdf = targetPath + "/" + xmlFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
                             UploadLog.update({_id: logId}, {
@@ -156,11 +151,7 @@ Tasks.parse = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        //DOI in xml doesn't match filename
-        if (result.articledoi !== log.filename) {
-            Tasks.failSimple(taskId, logId, "doi in article xml does not match filename");
-            return;
-        }
+
         //set parse task to success and start next task
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
