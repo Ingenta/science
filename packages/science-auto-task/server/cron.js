@@ -49,7 +49,7 @@ SyncedCron.add({
         MostCited.remove({});
         var citations = Articles.find({citations: {$exists: true}}, {$sort: {'citations.size': -1}, limit: 20});
 		citations.forEach(function (item) {
-			MostCited.insert({title: item.title, count: item.citations.length});
+			MostCited.insert({articleId: item._id, title: item.title, count: item.citations.length});
 		});
     }
 });

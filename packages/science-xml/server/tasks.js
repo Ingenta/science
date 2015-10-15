@@ -67,13 +67,15 @@ Tasks.hasExistingArticleByArticleDoi = function (taskId, logId, articledoi) {
 }
 
 Tasks.inProgress = function (taskId, logId, filename) {
-    var existingLog = UploadLog.findOne({filename: filename, status: "Pending"});
-    if (!existingLog) {
-        //set to in progress(pending)
-        UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
-        return false;
+    var existingLog = UploadLog.findOne({_id: logId});
+    if (existingLog) {
+        if(existingLog.status!=='Pending'){
+            //set to in progress(pending)
+            UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
+            return false;
+        }
+        Tasks.failSimple(taskId, logId, "Import in progress matching this filename: " + filename);
     }
-    Tasks.failSimple(taskId, logId, "Import in progress matching this filename: " + filename);
     return true;
 }
 

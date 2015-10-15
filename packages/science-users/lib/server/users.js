@@ -21,7 +21,11 @@ Meteor.startup(function () {
     // A Function that takes a user object and a url, and returns the body text for the email.
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
     Accounts.emailTemplates.verifyEmail.text = function (user, url) {
-        return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:<br> ' + url;
+        return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:\n\n' + url;
+    };
+
+    Accounts.emailTemplates.resetPassword.subject = function (user) {
+        return '中国科学出版社重置您的密码 Reset Password';
     };
 
     Accounts.emailTemplates.resetPassword.text = function (user, url) {
@@ -29,9 +33,14 @@ Meteor.startup(function () {
             + url;
     };
 
+    Accounts.emailTemplates.resetPassword.html = function (user, url) {
+        return "<hr><p>请点击下面的链接以重置您的密码 To reset your password, simply click the link below:</p><hr>"
+            + url;
+    };
+
 });
 
-//override defualt publish
+//override default publish
 Meteor.publish(null, function () {
     if (this.userId) {
         var query = {};
