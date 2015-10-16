@@ -98,7 +98,9 @@
     {{else}}
     {{_ "No articles found!"}}
     {{/each}}
-    <div align="right"><a href="/mostEditorRecommend"><button>+{{_ "more"}}</button></a></div>
+    {{#if recommendArt}}
+        <div align="right"><a href="/mostEditorRecommend"><button>+{{_ "more"}}</button></a></div>
+    {{/if}}
     <hr>
 </template>
 

@@ -25,8 +25,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
         return;
     }
 
-    if (fileType === "application/zip" || fileType === "application/x-zip-compressed"
-        || (fileType === "application/octet-stream" && fileName.endWith(".zip"))) {
+    if (fileName.endWith(".zip")) {
         //extract to a folder with the same name inside extracted folder
         var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
         Tasks.extract(logId, pathToFile, targetPath);
@@ -142,16 +141,15 @@ Tasks.parse = function (logId, pathToXml) {
         status: "Started",
         logId: logId
     });
-    //TODO: refactor this after solving, unhandled error, [TypeError: Cannot read property 'localNSMap' of undefined]
     try {
         var result = ScienceXML.parseXml(pathToXml);
-        if (result.pdf)
+        if (result.pdf){
             log.errors = result.errors;
+        }
         if (log.errors.length) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-
         //set parse task to success and start next task
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
@@ -199,19 +197,26 @@ Tasks.insertArticleImages = function (logId, result) {
     }
     else {
         result.figures.forEach(function (fig) {
-            var figName = _.findWhere(fig.graphics, {use: "online"}).href;
-            var figLocation = log.extractTo + "/" + figName;
-            if (!ScienceXML.FileExists(figLocation)) {
-                console.log("image missing: " + figName);
-            }
-            else {
-                ArticleXml.insert(figLocation, function (err, fileObj) {
-                    fig.imageId = fileObj._id;
-                    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                    if (_.last(result.figures) === fig) {
-                        Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
-                    }
+            var onlineOne = _.findWhere(fig.graphics, {use: "online"});
+            // 兼容中国科学数据
+            onlineOne = onlineOne || _.find(fig.graphics,function(g){
+                    return !g.use;
                 });
+            if(onlineOne){
+                var figName = onlineOne.href;
+                var figLocation = log.extractTo + "/" + figName;
+                if (!ScienceXML.FileExists(figLocation)) {
+                    console.log("image missing: " + figName);
+                }
+                else {
+                    ArticleXml.insert(figLocation, function (err, fileObj) {
+                        fig.imageId = fileObj._id;
+                        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                        if (_.last(result.figures) === fig) {
+                            Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
+                        }
+                    });
+                }
             }
         });
     }
