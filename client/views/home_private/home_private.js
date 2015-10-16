@@ -92,6 +92,13 @@ Template.recentArticles.helpers({
     },
     mostCitedArticles: function () {
         return MostCited.find({}, {sort: {count: 1}, limit: 5});
+    },
+    mostCiteCount: function () {
+        if(5 < MostCited.find().count()){
+            return true;
+        }else{
+            return false;
+        }
     }
 });
 
