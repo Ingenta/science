@@ -186,10 +186,9 @@ tsega:bootstrap3-datetimepicker@4.17.37_1
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
-vazco:universe-autoform-select@0.0.9
+vazco:universe-autoform-select@0.1.15
 webapp@1.2.2
 webapp-hashing@1.0.5
-wizonesolutions:underscore-string@1.0.0
 wylio:mandrill@1.0.1
 yogiben:autoform-file@0.2.9
 yogiben:autoform-modals-up@0.3.7
