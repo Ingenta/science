@@ -10,13 +10,7 @@ echo “building meteor bundle 正在建设代码..”
 meteor build --architecture=os.linux.x86_64 ./
 
 echo “copying bundle to remote 正在推代码包，密码是P@ssw0rd”
-scp science.tar.gz root@219.238.6.206:~/app/
+scp science.tar.gz administrator@219.238.6.206:~/app/
 
 echo “ssh to remote 正在连SSH到本地服务器，密码是P@ssw0rd”
-ssh root@219.238.6.206
-
-echo “restarting docker container 正在重启服务器..”
-docker restart meteor
-
-echo “exiting， update complete 更新完成了”
-exit
+ssh administrator@219.238.6.206 'bash -s' < restart-docker.sh

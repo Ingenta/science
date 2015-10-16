@@ -13,10 +13,4 @@ echo “copying bundle to remote 正在推代码包，密码是ingenta”
 scp science.tar.gz root@192.168.1.10:~/science/scienceproject/
 
 echo “ssh to remote 正在连SSH到本地服务器，密码是ingenta”
-ssh root@192.168.1.10
-
-echo “restarting docker container 正在重启服务器..”
-docker restart meteor
-
-echo “exiting， update complete 更新完成了”
-exit
+ssh root@192.168.1.10 'bash -s' < restart-docker.sh
