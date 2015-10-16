@@ -153,8 +153,8 @@ Template.AdminUsersEditEditForm.helpers({
     "getPublisherNameById": function () {
         return Publishers.findOne({_id: this.admin_user.publisherId}, {chinesename: 1, name: 1});
     },
-    "isNormalUser": function () {
-        return "normal" === Session.get("activeTab");
+    "canEditRoles": function () {
+        return "publisher" === Session.get("activeTab") || "admin" === Session.get("activeTab");
     },
     "getJournals": function () {
         return Publications.find({publisher: this.admin_user.publisherId}, {titleCn: 1, title: 1});
@@ -172,7 +172,19 @@ Template.userEditRoles.helpers({
     "usersRoles": function () {
         var user = Meteor.users.findOne({_id: Router.current().params.userId});
         Session.set("curUser", user);
-        var pr = Permissions.getRoles();
+        var pr = {};
+        if("admin" === Session.get("activeTab"))
+            pr = Permissions.getRoles();
+        if("publisher" === Session.get("activeTab")){
+            var temp = Permissions.getRoles();
+            var keys = ["news:news-manager"];
+            keys.forEach(function (key) {
+                pr[key] = temp[key];
+            });
+            if(OrbitPermissions.isAdmin(Meteor.user())){
+                pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
+            };
+        }
         return Object.keys(pr);
     },
     "itemIsChecked": function () {
@@ -188,5 +200,11 @@ Template.userEditRoles.helpers({
     },
     "itemIsDisabled": function () {
         return Permissions.userCan("delegate-and-revoke", "permissions", Meteor.userId()) ? "" : "disabled";
+    //},
+    //"radioOrCheckbox": function () {
+    //    if("admin" === Session.get("activeTab"))
+    //        return "checkbox";
+    //    if("publisher" === Session.get("activeTab"))
+    //        return "radio";
     }
 });
