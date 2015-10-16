@@ -10,7 +10,7 @@ echo “building meteor bundle 正在建设代码..”
 meteor build --architecture=os.linux.x86_64 ./
 
 echo “copying bundle to remote 正在推代码包，密码是ingenta”
-scp ~/apps/science/science.tar.gz root@192.168.1.10:~/app/
+scp science.tar.gz root@192.168.1.10:~/science/scienceproject/
 
 echo “ssh to remote 正在连SSH到本地服务器，密码是ingenta”
 ssh root@192.168.1.10
