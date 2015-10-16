@@ -102,7 +102,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.affiliations = [];
     var hasAlternatives = xpath.select("//contrib-group/aff-alternatives", doc);
     if (!hasAlternatives || !hasAlternatives.length) {
-        var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
+        var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff/label", doc);
+        if(!affText)affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
         if (affText)results.affiliations.push({affText:{en: affText, cn: affText}});
     } else {
         var affNode = xpath.select("//contrib-group/aff-alternatives", doc);

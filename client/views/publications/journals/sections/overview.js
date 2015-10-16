@@ -88,6 +88,14 @@ Template.recommendArticles.helpers({
         var article = Articles.findOne({_id:Arid});
         var urls = title+"/"+article.volume+"/"+article.issue+"/"+article.doi;
         return urls;
+    },
+    recommendArt: function () {
+        var journalId = Session.get('currentJournalId');
+        if(5 < Recommend.find({publications:journalId}).count()){
+            return true;
+        }else{
+            return false;
+        }
     }
 });
 

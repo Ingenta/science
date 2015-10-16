@@ -25,8 +25,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
         return;
     }
 
-    if (fileType === "application/zip" || fileType === "application/x-zip-compressed"
-        || (fileType === "application/octet-stream" && fileName.endWith(".zip"))) {
+    if (fileName.endWith(".zip")) {
         //extract to a folder with the same name inside extracted folder
         var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
         Tasks.extract(logId, pathToFile, targetPath);
@@ -142,7 +141,6 @@ Tasks.parse = function (logId, pathToXml) {
         status: "Started",
         logId: logId
     });
-    //TODO: refactor this after solving, unhandled error, [TypeError: Cannot read property 'localNSMap' of undefined]
     try {
         var result = ScienceXML.parseXml(pathToXml);
         if (result.pdf){
