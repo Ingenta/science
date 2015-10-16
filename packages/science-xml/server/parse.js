@@ -183,11 +183,13 @@ ScienceXML.parseXml = function (path) {
     var published = ScienceXML.getDateFromHistory("published", doc);
     if (published) results.published = published
 
-
-    results.figures = ScienceXML.getFigures(doc);
+    var figuresInFloatGroup=ScienceXML.getFigures(doc);
+    if(!_.isEmpty(figuresInFloatGroup)){
+        results.figures = results.figures || [];
+        results.figures = _.union(results.figures,figuresInFloatGroup);
+    }
 
     results.tables = ScienceXML.getTables(doc);
-
 
     return results;
 }
