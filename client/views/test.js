@@ -22,10 +22,10 @@ Template.test.helpers({
 		//	+"\\;&+\\hbar\\alpha_{\\rm L}(\\hat{a}+\\hat{a}^\\dag)+H_{\\kappa}+H_{\\gamma},\\tag 3"
 		//	+"\\end{align*}";
 
-		return "\\begin{align}"
-		+"\\tau_{q}[\\rho_{q}({\\emph{\\textbf{r}}})]=&\\frac{3}{5}(3\\uppi^2)^{2/3}\\rho^{5/3}_{q}+\\frac{1}{36}\\frac{(\\nabla\\rho_{q})^2}{\\rho_{q}}\\nonumber\\\\"
-		+"&+\\frac{1}{3}\\Delta\\rho_{q}+\\frac{1}{6}\\frac{\\nabla\\rho_{q}\\nabla f_{q}+\\rho_{q}\\Delta f_{q}}{f_{q}}\\nonumber\\\\"
-		+"&-\\frac{1}{12}\\rho_{q}\\bigg(\\frac{\\nabla f_{q}}{f_{q}}\\bigg)^2+\\frac{1}{2}\\rho_{q}\\bigg[\\frac{2m}{\\hbar^2}\\frac{W_{0}}{2}\\frac{\\nabla(\\rho+\\rho_{q})}{f_{q}}\\bigg]^2"
-		+"\\end{align}";
+		//return "\\begin{align}"
+		//+"\\tau_{q}[\\rho_{q}({\\emph{\\textbf{r}}})]=&\\frac{3}{5}(3\\uppi^2)^{2/3}\\rho^{5/3}_{q}+\\frac{1}{36}\\frac{(\\nabla\\rho_{q})^2}{\\rho_{q}}\\nonumber\\\\"
+		//+"&+\\frac{1}{3}\\Delta\\rho_{q}+\\frac{1}{6}\\frac{\\nabla\\rho_{q}\\nabla f_{q}+\\rho_{q}\\Delta f_{q}}{f_{q}}\\nonumber\\\\"
+		//+"&-\\frac{1}{12}\\rho_{q}\\bigg(\\frac{\\nabla f_{q}}{f_{q}}\\bigg)^2+\\frac{1}{2}\\rho_{q}\\bigg[\\frac{2m}{\\hbar^2}\\frac{W_{0}}{2}\\frac{\\nabla(\\rho+\\rho_{q})}{f_{q}}\\bigg]^2"
+		//+"\\end{align}";
 	}
 })

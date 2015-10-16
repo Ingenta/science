@@ -26,13 +26,15 @@ ScienceXML.getLocationAsync = function (path, cb) {
 }
 ScienceXML.getFileContentsFromFullPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+    //remove first / from path because meteor absolute url includes it absoluteurl =
+    // 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
     if (path === undefined)return;
     return getLocationSync(path);
 }
 ScienceXML.getFileContentsFromRemotePath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+    //remove first / from path because meteor absolute url includes it absoluteurl =
+    // 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
     if (!path)return;
     var fullPath = Meteor.absoluteUrl(path.substring(1));
     return getLocationSync(fullPath);
@@ -141,22 +143,26 @@ ScienceXML.getSubSection = function (subSectionNodes) {
     return thisSubSection;
 }
 
+var getParagraphs = function (paragraphNodes) {
+	var paragraphs = {html: "", tex: []};
+	paragraphNodes.forEach(function (paragraph) {
+		var parseResult = ScienceXML.handlePara(paragraph);
+		var sectionText = new serializer().serializeToString(parseResult.paraNode);
+		paragraphs.html += ScienceXML.replaceItalics(sectionText);
+		if (parseResult.formulas && parseResult.formulas.length) {
+			paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
+		}
+	});
+	return paragraphs;
+}
+
 ScienceXML.getParagraphsFromASectionNode = function (section) {
     //debugger
     //var paragraphNodes = xpath.select("child::p | child::fig", section);
     //var paragraphs = {html: "", tex: [], figures:[]};
     var paragraphNodes = xpath.select("child::p", section);
-    var paragraphs = {html: "", tex: []};
-    paragraphNodes.forEach(function (paragraph) {
-        var parseResult = ScienceXML.handlePara(paragraph);
-        var sectionText = new serializer().serializeToString(parseResult.paraNode);
-        paragraphs.html += ScienceXML.replaceItalics(sectionText);
-        if (parseResult.formulas && parseResult.formulas.length) {
-            paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
-        }
-    });
-    return paragraphs;
-}
+    return getParagraphs(paragraphNodes);
+};
 
 ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
     var title = ScienceXML.getValueByXPathIncludingXml("child::title", section);
@@ -165,22 +171,28 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
     return {label: label, title: title, body: paragraphs};
 };
 
-//若body下没有sec节点，即没有章节信息，则将body下的所有p标签视为一个以文章标题为名称的章节。
 ScienceXML.getFullText = function (results, doc) {
-    var sectionNodes = xpath.select("//body/sec", doc); //get all parent sections
-    if(_.isEmpty(sectionNodes)){
-        var body = xpath.select("//body",doc);
-        if(_.isEmpty(body)){
-            return results;
-        }else{
-            var content = ScienceXML.getParagraphsFromASectionNode(body[0]);
-            results.sections = [{label:undefined,title:results.title.en,body:content}];
-        }
-    }else{
-        results.sections = ScienceXML.getSubSection(sectionNodes);
-    }
-    return results;
-}
+	// 先检查body下是否有不包含在sec节点中的p节点，如果有的话，
+	// 将这些p节点提取出来作为一个新的章节放到章节列表的顶部
+	var ghostSec, normalSecs = [];
+	var pUnderBody           = xpath.select("//body/p", doc);
+	if (!_.isEmpty(pUnderBody)) {
+		var ghostContent = getParagraphs(pUnderBody);
+		ghostSec         = ghostContent && {label: undefined, title: "__start__", body: ghostContent};
+	}
+	// 取出body下的正常章节信息
+	var sectionNodes = xpath.select("//body/sec", doc);
+	if (!_.isEmpty(sectionNodes)) {
+		//调用递归方法按层级关系取得所有章节信息
+		normalSecs = ScienceXML.getSubSection(sectionNodes);
+	}
+	// 若开头存在无sec内容，合并
+	if (ghostSec) {
+		normalSecs = _.union(ghostSec, normalSecs);
+	}
+	results.sections=normalSecs;
+	return results;
+};
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
@@ -295,7 +307,8 @@ ScienceXML.getFigures = function (doc) {
             var graphics = xpath.select("child::alternatives/graphic", fig);
             if (graphics && graphics.length) {
                 figure.graphics = [];
-                //var xlinkSelect = xpath.useNamespaces({"xlink": "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
+                //var xlinkSelect = xpath.useNamespaces({"xlink":
+                // "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
                 graphics.forEach(function (grap) {
                     var g = {};
                     var suse = xpath.select("./@specific-use", grap);

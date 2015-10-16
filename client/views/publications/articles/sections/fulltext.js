@@ -5,8 +5,11 @@ var initFulltext = function () {
     $("#sidebar").affix({
         offset: {
             top: function () {
-                $("#sidebar").css({"width": $("#section-index").width()});
-                return $("#section-index").offset().top - 20;
+                var secIndex=$("#section-index");
+                if(secIndex){
+                    secIndex.css({"width": secIndex.width()});
+                    return secIndex.offset().top - 20;
+                }
             }
         }
     });
@@ -43,6 +46,12 @@ Meteor.startup(function () {
         }
     });
 });
+
+Template.FullTextTemplate.helpers({
+    handledTitle:function(){
+        return this.title==='__start__'?"":this.title;
+    }
+})
 
 Template.FullTextTemplate.events({
     "click xref[ref-type='fig']": function (e) {
@@ -118,3 +127,16 @@ Template.tableModal.helpers({
         return Session.get("table").table;
     }
 });
+
+Template.sectionSelector.helpers({
+    handledSections:function(){
+        if(!_.isEmpty(this.sections) && this.sections[0].title==='__start__')
+            return _.rest(this.sections);
+        return this.sections;
+    },
+    anyNormalSection:function(){
+        return !_.isEmpty(this.sections)
+            && ((this.sections[0].title==='__start__' && this.sections.length>1)
+                || this.sections[0].title!=='__start__')
+    }
+})
