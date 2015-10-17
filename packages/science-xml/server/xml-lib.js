@@ -164,7 +164,7 @@ var getParagraphs = function (paragraphNodes) {
 			var fig = getFigure(paragraph);
 			if(fig){
 				paragraphs.figures.push(fig);
-				var ref = '<xref ref-type="fig" rid="'+fig.id+'">'+fig.label+'</xref>';
+				var ref = '<p><xref ref-type="fig" rid="'+fig.id+'">'+fig.label+'</xref></p>';
 				paragraphs.html+=ref;
 			}
 		}else{
@@ -318,7 +318,7 @@ var getFigure = function(fig){
 	}
 
 	var label = xpath.select("child::label/text()", fig);
-	if (label && label.length) {
+	if (!label || !label.length) {
 		label = xpath.select("child::caption/title/text()",fig);//兼容中国科学的数据
 	}
 	if (label && label.length) {

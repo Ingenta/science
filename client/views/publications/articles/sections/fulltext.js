@@ -6,7 +6,7 @@ var initFulltext = function () {
         offset: {
             top: function () {
                 var secIndex=$("#section-index");
-                if(secIndex){
+                if(secIndex.length){
                     secIndex.css({"width": secIndex.width()});
                     return secIndex.offset().top - 20;
                 }
@@ -22,6 +22,7 @@ var initFulltext = function () {
         }
         if (refs && refs.length) {
             Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
+            $(refs[0].remove());
         }
     });
 
