@@ -111,21 +111,9 @@
                     <label for="disable">{{_ "Disable"}}</label>
                 </div>
             </div>
-            {{#unless isNormalUser}}
-                <div class="form-group  field-roles">
-                    <label for="roles">
-                        {{_ "Role"}}
-                    </label>
-
-                    <div class="input-div">
-                        {{> userEditRoles}}
-                        <span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-                    </div>
-                </div>
-            {{/unless}}
+            {{#if canEditRoles}}
+                {{> userEditRoles}}
+            {{/if}}
             <div class="form-group">
                 <div class="submit-div">
                     <button id="form-submit-button" class="btn btn-success" type="submit">
@@ -143,13 +131,21 @@
 </template>
 
 <template name="userEditRoles">
-    {{#each usersRoles}}
-        <div class="radio">
-            <label>
-                <input type="checkbox" value="{{this}}" name="roles"
-                       data-type="array" {{itemIsChecked}} {{itemIsDisabled}}>
-                {{i18nName}}
-            </label>
+    <div class="form-group  field-roles">
+        <label for="roles">
+            {{_ "Role"}}
+        </label>
+        <div class="input-div">
+            {{#each usersRoles}}
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" value="{{this}}" name="roles" data-type="array" {{itemIsChecked}} {{itemIsDisabled}}>
+                        {{i18nName}}
+                    </label>
+                </div>
+            {{/each}}
+            <span id="help-text" class="help-block"></span>
+			<span id="error-text" class="help-block"></span>
         </div>
-    {{/each}}
+    </div>
 </template>

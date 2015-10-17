@@ -6,8 +6,8 @@ newsPermissions
 		cn: {name: "首页新闻管理", summary: "可管理出现在首页上的新闻"}
 	});
 
-publisherPermissions
-	.defineRole("news-manager", ["add-publisher", "modify-publisher", "delete-publisher"], {
+newsPermissions
+	.defineRole("news-manager", ["manager-homepage"], {
 		en: {
 			name   : "news manager",
 			summary: "manager for news"
