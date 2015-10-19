@@ -235,12 +235,12 @@ Router.map(function () {
             return TAPi18n.__("Publisher");
         },
         waitOn: function () {
+            Session.set("activeTab", "publisher");
             return [
                 Meteor.subscribe('publishers')
             ]
         },
         data: function () {
-            Session.set("activeTab", "publisher");
             return {
                 admin_users: Users.find({publisherId: this.params.pubId})
             };
@@ -255,6 +255,7 @@ Router.map(function () {
             return TAPi18n.__("Add new user");
         },
         waitOn: function () {
+            Session.set("activeTab", "publisher");
             return [
                 Meteor.subscribe('publishers'),
             ]
@@ -270,6 +271,7 @@ Router.map(function () {
             return TAPi18n.__("Edit user");
         },
         waitOn: function () {
+            Session.set("activeTab", "publisher");
             return [
                 Meteor.subscribe('publishers'),
             ]
@@ -466,6 +468,9 @@ Router.map(function () {
                 })
             }
             this.next();
+        },
+        onStop:function(){
+            Meteor.clearInterval(Session.get("dynamicRender"));
         }
     });
 

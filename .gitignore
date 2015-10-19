@@ -1,2 +1,5 @@
 .meteor/local
 .idea
+scienceproject.tar.gz
+update-client.sh
+update-local.sh

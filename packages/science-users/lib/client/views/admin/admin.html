@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            {{#if can "list-user" "user"}}
+            {{#if can "list-user" "user"}}<!--canUseAdminPanel-->
                 <div id="menu" class="col-xs-2">
                     <h2>
                     </h2>
@@ -27,7 +27,7 @@
 
 <template name="AdminSideMenu">
     <ul id="menu-items" class="nav nav-stacked nav-pills">
-        {{#if can "list-user" "user"}}
+        {{#if can "list-user" "user"}}<!--canUseAdminPanel-->
             <li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
                 <a href="{{pathFor 'admin.users'}}">
                     {{_ "Account"}}
