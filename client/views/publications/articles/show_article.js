@@ -1,5 +1,5 @@
 var dynamicRender = function(){
-	console.log("rending");
+	Session.get('dynamicRender') && Meteor.clearInterval(Session.get("dynamicRender"));
 	var figs = Router.current().data().figures;
 	_.each(figs, function (fig) {
 		var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
@@ -81,7 +81,6 @@ var removeArticleFromArray = function (array, articleId) {
 };
 
 Template.showArticle.onRendered(function () {
-	//Session.set("dynamicRender", Meteor.setInterval(dynamicRender,2000));
 	var rva = Session.get("recentViewedArticles");
 	if (!rva) {
 		rva = [];
