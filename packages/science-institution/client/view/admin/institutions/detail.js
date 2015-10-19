@@ -8,7 +8,8 @@ ReactiveTabs.createInterface({
 
 Template.showInstitution.helpers({
     "getInstitutionNameById": function () {
-        return Institutions.findOne({_id: Router.current().params.insId}).name;
+        if(Router.current().params.insId)
+            return Institutions.findOne({_id: Router.current().params.insId}).name;
     },
     isInstitutionAdmin: function () {
         return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
