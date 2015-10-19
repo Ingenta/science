@@ -10,7 +10,7 @@ Science.Pdf = Meteor.wrapAsync(function execute(args, callback) {
 			else
 				callback(error);
 		} else {
-			callback(null, new Buffer(stdout, 'binary'), new Buffer(stderr, 'binary'));
+			callback(null, stdout, stderr);
 		}
 	});
 });
