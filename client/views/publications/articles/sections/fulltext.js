@@ -2,11 +2,11 @@ var initFulltext = function () {
     $('body').scrollspy({
         target: '#section-index'
     });
-    $("#sidebar").affix({
+    $("#indexsidebar").affix({
         offset: {
             top: function () {
                 var secIndex=$("#section-index");
-                secIndex.css({"width": secIndex.width()});
+                //secIndex.css({"width": secIndex.width()});
                 return secIndex.offset().top - 20;
             }
         }

@@ -5,15 +5,15 @@ Template.Topics.helpers({
 });
 
 Template.SingleTopic.events({
-    'click .fa-plus': function (event) {
-        event.preventDefault();
-        var id = $(event.currentTarget).parent().parent().attr('id');
+    'click .fa-plus': function (e) {
+        e.preventDefault();
+        var id = $(e.currentTarget).parent().parent().attr('id');
         Session.set("parentId", id);
-        event.stopPropagation();
+        e.stopPropagation();
     },
     'click i':function(e){
         e.preventDefault();
-        var id = $(event.target).parent().attr('id');
+        var id = $(e.target).parent().attr('id');
         var es = Session.get("expandStatus" + id);
         Session.set("expandStatus" + id, !es);
         e.stopPropagation();
@@ -21,9 +21,9 @@ Template.SingleTopic.events({
 });
 
 Template.TopicList.events({
-    'keyup .refineSearch': function (event) {
+    'keyup .refineSearch': function (e) {
         $(".parentTopicList li").hide();
-        var term = $(event.currentTarget).val();
+        var term = $(e.currentTarget).val();
         _.each($(".parentTopicList li"), function (item) {
             var eachTopic = item.textContent.trim().toLowerCase();
             if (eachTopic && eachTopic.indexOf(term.toLowerCase().trim()) > -1) {
