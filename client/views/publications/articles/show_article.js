@@ -1,6 +1,34 @@
+var dynamicRender = function(){
+	console.log("rending");
+	var figs = Router.current().data().figures;
+	_.each(figs, function (fig) {
+		var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
+		if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
+			refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
+		}
+		if (refs && refs.length) {
+			Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
+			$(refs[0].remove());
+		}
+	});
+
+	var tbs = Router.current().data().tables;
+	_.each(tbs, function (tb) {
+		var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
+		if (refs && refs.length) {
+			Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
+		}
+	});
+};
+
 ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
+		if(slug==='full text'){
+			Session.set("dynamicRender", Meteor.setInterval(dynamicRender,2000));
+		}else{
+			Session.get("dynamicRender") && Meteor.clearInterval(Session.get("dynamicRender"));
+		}
 		if (Session.get('activeTab') != slug) {
 			//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
 			var article = Router.current().data();
@@ -53,6 +81,7 @@ var removeArticleFromArray = function (array, articleId) {
 };
 
 Template.showArticle.onRendered(function () {
+	//Session.set("dynamicRender", Meteor.setInterval(dynamicRender,2000));
 	var rva = Session.get("recentViewedArticles");
 	if (!rva) {
 		rva = [];
