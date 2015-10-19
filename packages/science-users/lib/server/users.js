@@ -58,7 +58,7 @@ Meteor.publish(null, function () {
             journalId: 1,
             emailFrequency: 1
         };
-        if (!OrbitPermissions.isAdmin(Meteor.user())) {
+        if (!Permissions.userCan("list-user", "user", this.userId)) {
             if (Permissions.userCan("add-user", "publisher", this.userId)){
                 query.publisherId = Users.findOne({_id: this.userId}).publisherId;
             } else{
