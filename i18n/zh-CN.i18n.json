@@ -1103,5 +1103,6 @@
   "Search Information":"搜索信息",
   "Search time":"搜索时间",
   "Delete search history":"删除搜索历史",
-  "Save to Folder":"保存到文件夹"
+  "Save to Folder":"保存到文件夹",
+  "Permission denied": "没有权限"
 }
