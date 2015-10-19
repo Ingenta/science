@@ -240,6 +240,11 @@ Router.map(function () {
                 Meteor.subscribe('publishers')
             ]
         },
+        onBeforeAction: function () {
+            Permissions.check("add-user", "publisher");
+            /*BEFORE_FUNCTION*/
+            this.next();
+        },
         data: function () {
             return {
                 admin_users: Users.find({publisherId: this.params.pubId})
