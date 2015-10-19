@@ -468,6 +468,9 @@ Router.map(function () {
                 })
             }
             this.next();
+        },
+        onStop:function(){
+            Meteor.clearInterval(Session.get("dynamicRender"));
         }
     });
 

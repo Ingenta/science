@@ -6,46 +6,15 @@ var initFulltext = function () {
         offset: {
             top: function () {
                 var secIndex=$("#section-index");
-                if(secIndex.length){
-                    secIndex.css({"width": secIndex.width()});
-                    return secIndex.offset().top - 20;
-                }
+                secIndex.css({"width": secIndex.width()});
+                return secIndex.offset().top - 20;
             }
-        }
-    });
-
-    var figs = Router.current().data().figures;
-    _.each(figs, function (fig) {
-        var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
-        if (!refs || !refs.length) {
-            refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
-        }
-        if (refs && refs.length) {
-            Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
-            $(refs[0].remove());
-        }
-    });
-
-    var tbs = Router.current().data().tables;
-    _.each(tbs, function (tb) {
-        var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
-        if (refs && refs.length) {
-            Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
         }
     });
 };
 
 Template.FullTextTemplate.onRendered(function () {
     initFulltext();
-
-});
-
-Meteor.startup(function () {
-    TAPi18n.addChangeHook("fullTextInit", function () {
-        if (Router.current().route.getName() == 'article.show') {
-            Meteor.setTimeout(initFulltext, 1000);
-        }
-    });
 });
 
 Template.FullTextTemplate.helpers({
@@ -135,9 +104,10 @@ Template.sectionSelector.helpers({
             return _.rest(this.sections);
         return this.sections;
     },
-    anyNormalSection:function(){
-        return !_.isEmpty(this.sections)
+    displayStatus:function(){
+        var status = !_.isEmpty(this.sections)
             && ((this.sections[0].title==='__start__' && this.sections.length>1)
-                || this.sections[0].title!=='__start__')
+                || this.sections[0].title!=='__start__');
+        return status?"block":"none";
     }
 })

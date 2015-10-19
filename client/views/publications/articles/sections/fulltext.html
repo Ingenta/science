@@ -50,8 +50,7 @@
 </template>
 
 <template name="sectionSelector">
-	{{#if anyNormalSection}}
-    <h4>{{_ "section_selector_button"}}</h4>
+	<h4 style="display:{{displayStatus}}">{{_ "section_selector_button"}}</h4>
     <nav id="section-index">
         <ul id="sidebar" class="nav nav-stacked">
             {{#each handledSections}}
@@ -75,7 +74,6 @@
             {{/each}}
         </ul>
     </nav>
-	{{/if}}
 </template>
 
 
