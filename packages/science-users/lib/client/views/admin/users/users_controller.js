@@ -8,7 +8,8 @@ this.AdminUsersController = RouteController.extend({
     },
 
     onBeforeAction: function () {
-        //Permissions.check("list-user", "user");
+        if (!OrbitPermissions.isAdmin(Meteor.user()))
+            Router.go("home");
         /*BEFORE_FUNCTION*/
         this.next();
     },
