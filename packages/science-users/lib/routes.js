@@ -15,14 +15,6 @@ Meteor.startup(function () {
             return TAPi18n.__("Register");
         }
     });
-    //Router.route("agreement", {
-    //    parent: "register",
-    //    path: "/register/user_agreement",
-    //    template: "Agreement",
-    //    title: function () {
-    //        return TAPi18n.__("SCP User Agreement");
-    //    }
-    //});
     Router.route("forgot_password", {
         path: "/forgot_password",
         controller: "ForgotPasswordController",
@@ -267,4 +259,28 @@ Meteor.startup(function () {
             ]
         }
     });
+});
+
+
+Router.map(function () {
+
+    this.route('verifyEmail', {
+        path: '/verify-email/:token',
+        action: function () {
+            Accounts.verifyEmail(this.params.token, function () {
+                Router.go('/');
+            });
+        }
+    });
+    //this.route('verified', {
+    //    path: '/verified',
+    //    template: 'verified',
+    //    layoutTemplate: 'fullScreen'
+    //
+    //});
+    //this.route('checkemail', {
+    //    path: '/checkemail',
+    //    template: 'checkemail',
+    //    layoutTemplate: 'fullScreen'
+    //});
 });
