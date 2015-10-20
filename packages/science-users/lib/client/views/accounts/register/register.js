@@ -50,8 +50,8 @@ Template.Register.events({
                 pageSession.set("errorMessage", err.message);
             else {
                 pageSession.set("errorMessage", "");
-                alert("Verification email sent to "+register_email);
                 Router.go("home", {});
+                sweetAlert(TAPi18n.__("We sent you a link to create your account. Please check your email."));
             }
         });
         return false;

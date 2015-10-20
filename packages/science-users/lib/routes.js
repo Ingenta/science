@@ -259,28 +259,13 @@ Meteor.startup(function () {
             ]
         }
     });
-});
-
-
-Router.map(function () {
-
-    this.route('verifyEmail', {
+    Router.route('verifyEmail', {
         path: '/verify-email/:token',
         action: function () {
             Accounts.verifyEmail(this.params.token, function () {
+                sweetAlert(TAPi18n.__("Email verified successfully"));
                 Router.go('/');
             });
         }
     });
-    //this.route('verified', {
-    //    path: '/verified',
-    //    template: 'verified',
-    //    layoutTemplate: 'fullScreen'
-    //
-    //});
-    //this.route('checkemail', {
-    //    path: '/checkemail',
-    //    template: 'checkemail',
-    //    layoutTemplate: 'fullScreen'
-    //});
 });

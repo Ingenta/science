@@ -25,11 +25,6 @@ Meteor.startup(function () {
         return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:\n\n' + url;
     };
 
-    Accounts.urls.verifyEmail = function (token) {
-        return Meteor.absoluteUrl('verify-email/' + token);
-    };
-
-
     Accounts.emailTemplates.resetPassword.subject = function (user) {
         return '中国科学出版社重置您的密码 Reset Password';
     };
@@ -85,6 +80,10 @@ Accounts.urls.resetPassword = function (token) {
     return Meteor.absoluteUrl('reset_password/' + token);
 };
 
+Accounts.urls.verifyEmail = function (token) {
+    return Meteor.absoluteUrl('verify-email/' + token);
+};
+
 Accounts.validateLoginAttempt(function (attempt) {
     if (Config && Config.isDevMode)//开发模式不检查邮箱是否已验证
         return true;
@@ -119,11 +118,5 @@ Meteor.methods({
         Meteor.defer(function () {
             Accounts.sendVerificationEmail(userId);
         });
-        console.log("sent! to " + email);
-    },
-    //verifyEmail: function() {
-    //    Accounts.verifyEmail(this.params.token, function() {
-    //        Router.go('/verified');
-    //    });
-    //}
+    }
 });
