@@ -15,6 +15,7 @@
     "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
     "PleaseEmail": "Please enter valid e-mail address.",
     "PleaseWait": "Please wait...",
+    "CheckEmail": "We sent you a link to create your account. Please check your email.",
     "schemas": {
         "publications": {
             "title": {

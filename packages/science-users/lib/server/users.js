@@ -13,6 +13,7 @@ Meteor.startup(function () {
     // The public name of your application. Defaults to the DNS name of the application (eg: awesome.meteor.com).
     Accounts.emailTemplates.siteName = '中国科学出版社 Science China Publisher';
 
+
     // A Function that takes a user object and returns a String for the subject line of the email.
     Accounts.emailTemplates.verifyEmail.subject = function (user) {
         return '中国科学出版社账号激活邮件 Confirm Your Email Address';
@@ -79,6 +80,10 @@ Accounts.urls.resetPassword = function (token) {
     return Meteor.absoluteUrl('reset_password/' + token);
 };
 
+Accounts.urls.verifyEmail = function (token) {
+    return Meteor.absoluteUrl('verify-email/' + token);
+};
+
 Accounts.validateLoginAttempt(function (attempt) {
     if (Config && Config.isDevMode)//开发模式不检查邮箱是否已验证
         return true;
@@ -102,4 +107,16 @@ Accounts.onCreateUser(function (options, user) {
     if (options.journalId)
         user.journalId = options.journalId;
     return user;
+});
+Meteor.methods({
+    registerUser: function (username, password, email) {
+        var userId = Accounts.createUser({
+            email: email,
+            password: password,
+            username: username
+        });
+        Meteor.defer(function () {
+            Accounts.sendVerificationEmail(userId);
+        });
+    }
 });
