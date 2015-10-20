@@ -96,15 +96,16 @@ Template.AdminUsersInsertInsertForm.events({
                 Permissions.check("add-user", "publisher");
                 if (Router.current().params.insId) values.institutionId = Router.current().params.insId;//机构帐号标签页才需要设值
                 Meteor.call("createUserAccount", values, function (e, userId) {
-                    if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
-                    if (values.institutionId) {
-                        Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
+                    if (e) {
+                        errorAction(e.message);
                     }
-                    //if (values.publisherId) {
-                        //Permissions.delegate(userId, ["permissions:permissions-manager"]);
-                        //Permissions.delegate(userId, ["publisher:publisher-manager-from-user"]);
-                    //}
-                    if (e) errorAction(e.message); else submitAction();
+                    else {
+                        if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
+                        if (values.institutionId) {
+                            Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
+                        }
+                        submitAction();
+                    }
                 });
             }
         );
