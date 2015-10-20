@@ -45,42 +45,6 @@ Template.EditorialBoardList.helpers({
         var aboutId = Session.get('tabBoard');
         var publicationId = Session.get('currentJournalId');
         return EditorialBoard.find({about: aboutId,publications:publicationId});
-    },
-    WorkUnits: function () {
-        if(this.workUnits.en||this.workUnits.cn){
-            return true;
-        }
-        return false;
-    },
-    Phone: function () {
-        if(this.phone){
-            return true;
-        }
-        return false;
-    },
-    Fax: function () {
-        if(this.fax){
-            return true;
-        }
-        return false;
-    },
-    Email: function () {
-        if(this.email){
-            return true;
-        }
-        return false;
-    },
-    ResearchArea: function () {
-        if(this.researchArea.en||this.researchArea.cn){
-            return true;
-        }
-        return false;
-    },
-    Abstract: function () {
-        if(this.abstract.en||this.abstract.cn){
-            return true;
-        }
-        return false;
     }
 });
 
@@ -119,42 +83,6 @@ Template.EditorialBoardMembersList.helpers({
         var aboutId = Session.get('tabBoard');
         var publicationId = Session.get('currentJournalId');
         return EditorialBoard.find({about: aboutId,publications:publicationId});
-    },
-    WorkUnits: function () {
-        if(this.workUnits.en||this.workUnits.cn){
-            return true;
-        }
-        return false;
-    },
-    Phone: function () {
-        if(this.phone){
-            return true;
-        }
-        return false;
-    },
-    Fax: function () {
-        if(this.fax){
-            return true;
-        }
-        return false;
-    },
-    Email: function () {
-        if(this.email){
-            return true;
-        }
-        return false;
-    },
-    ResearchArea: function () {
-        if(this.researchArea.en||this.researchArea.cn){
-            return true;
-        }
-        return false;
-    },
-    Abstract: function () {
-        if(this.abstract.en||this.abstract.cn){
-            return true;
-        }
-        return false;
     }
 });
 

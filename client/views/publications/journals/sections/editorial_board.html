@@ -3,18 +3,18 @@
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
                 {{#each abouts}}
-                <div class="pull-right row aboutEditButtons">
-                    {{#if can "modify-about" "resource" }}{{> updateAboutTitleModalForm}}{{/if}}
-                    {{#if can "delete-about" "resource" }}<a href="#" class="fa fa-trash about"></a>{{/if}}
-                </div>
+                    <div class="pull-right row aboutEditButtons">
+                        {{#if can "modify-about" "resource" }}{{> updateAboutTitleModalForm}}{{/if}}
+                        {{#if can "delete-about" "resource" }}<a href="#" class="fa fa-trash about"></a>{{/if}}
+                    </div>
 
-                <li class="{{isActive _id}}">
-                    <a class="activeButton" data-aboutsid="{{_id}}" data-toggle="tab">
-                        {{translateThis title.cn title.en}}
-                    </a>
-                </li>
+                    <li class="{{isActive _id}}">
+                        <a class="activeButton" data-aboutsid="{{_id}}" data-toggle="tab">
+                            {{translateThis title.cn title.en}}
+                        </a>
+                    </li>
                 {{else}}
-                {{_ "No About found!"}}
+                    {{_ "No About found!"}}
                 {{/each}}
                 <div class="pull-right">
                     {{#if can "add-about" "resource" }}{{> addAboutTitleModalForm}}{{/if}}
@@ -23,9 +23,9 @@
         </div>
         <div class="tab-content col-xs-9">
             {{#if boardMember}}
-            <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
+                <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
             {{else}}
-            <div class="tab-pane active">{{> EditorialBoardList}}</div>
+                <div class="tab-pane active">{{> EditorialBoardList}}</div>
             {{/if}}
         </div>
     </div>
@@ -65,23 +65,23 @@
                 <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
             </div>
             <div class="col-xs-9">
-                {{#if WorkUnits}}
-                    {{_"Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
+                {{#if workUnits}}
+                    {{_ "Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
                 {{/if}}
-                {{#if Phone}}
-                    {{_"Phone"}}：&nbsp;{{phone}}<br>
+                {{#if phone}}
+                    {{_ "Phone"}}：&nbsp;{{phone}}<br>
                 {{/if}}
-                {{#if Fax}}
-                    {{_"Fax"}}：&nbsp;{{fax}}<br>
+                {{#if fax}}
+                    {{_ "Fax"}}：&nbsp;{{fax}}<br>
                 {{/if}}
-                {{#if Email}}
-                    {{_"E-mail"}}：&nbsp;{{email}}<br>
+                {{#if email}}
+                    {{_ "E-mail"}}：&nbsp;{{email}}<br>
                 {{/if}}
-                {{#if ResearchArea}}
-                    {{_"Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
+                {{#if researchArea}}
+                    {{_ "Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
                 {{/if}}
-                {{#if Abstract}}
-                    {{_"Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}<br>
+                {{#if abstract}}
+                    {{_ "Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}<br>
                 {{/if}}
             </div>
         </div>
@@ -115,23 +115,23 @@
               <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
             </div>
             <div class="col-xs-9">
-                {{#if WorkUnits}}
-                    {{_"Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
+                {{#if workUnits}}
+                    {{_ "Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
                 {{/if}}
-                {{#if Phone}}
-                    {{_"Phone"}}：&nbsp;{{phone}}<br>
+                {{#if phone}}
+                    {{_ "Phone"}}：&nbsp;{{phone}}<br>
                 {{/if}}
-                {{#if Fax}}
-                    {{_"Fax"}}：&nbsp;{{fax}}<br>
+                {{#if fax}}
+                    {{_ "Fax"}}：&nbsp;{{fax}}<br>
                 {{/if}}
-                {{#if Email}}
-                    {{_"E-mail"}}：&nbsp;{{email}}<br>
+                {{#if email}}
+                    {{_ "E-mail"}}：&nbsp;{{email}}<br>
                 {{/if}}
-                {{#if ResearchArea}}
-                    {{_"Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
+                {{#if researchArea}}
+                    {{_ "Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
                 {{/if}}
-                {{#if Abstract}}
-                    {{_"Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}<br>
+                {{#if abstract}}
+                    {{_ "Introduction"}}：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}<br>
                 {{/if}}
             </div>
         </div>
