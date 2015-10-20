@@ -1,16 +1,19 @@
 <template name="mostRecommendArticles">
-    <h4 class="dotted"><b>{{_ "Editors recommend to view"}}&nbsp;:</b></h4>
+    <h3 class="dotted"><b>{{_ "Editors recommend to view"}}&nbsp;:</b></h3>
     <div class="dotted">
         <label>{{_ "Sort Results By"}}：</label>
         <label class="radio-inline">
-            <input type="radio"  id="radio" value="0"> {{_ "Relevance"}}
+            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
         </label>
         <label class="radio-inline">
-            <input type="radio"  id="radio1" value="1"> {{_ "Newest First"}}
+            <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
         </label>
         <label class="radio-inline">
-            <input type="radio" id="radio2" value="2"> {{_ "Oldest First"}}
+            <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
         </label>
+    </div>
+    <div class="dotted">
+        <h4><b>{{_ "This platform within the editors recommend articles look at it"}}：</b><span style="color: #8c8c8c">（{{_ "According to article 20"}}）</span></h4>
     </div>
     <div class="dotted">
         {{#each mostRecommendArticles}}

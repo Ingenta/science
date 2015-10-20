@@ -1,43 +1,6 @@
-Template.mostReadArticle.onRendered(function() {
-    $("input[id='radio']").prop({checked:true});
-    Session.set("order1", "0");
-    Session.set("order2", undefined);
-    Session.set("order3", undefined);
-});
-
 Template.mostReadArticle.events({
-    'click #radio': function () {
-        if(document.getElementById("radio").checked){
-            $("input[id='radio']").prop({checked:true});
-            $("input[id='radio1']").prop({checked:false});
-            $("input[id='radio2']").prop({checked:false});
-            var name = $('#radio').val();
-            Session.set("order1", name);
-            Session.set("order2", undefined);
-            Session.set("order3", undefined);
-        }
-    },
-    'click #radio1': function () {
-        if(document.getElementById("radio1").checked){
-            $("input[id='radio']").prop({checked:false});
-            $("input[id='radio1']").prop({checked:true});
-            $("input[id='radio2']").prop({checked:false});
-            var name = $('#radio1').val();
-            Session.set("order1", undefined);
-            Session.set("order2", name);
-            Session.set("order3", undefined);
-        }
-    },
-    'click #radio2': function () {
-        if(document.getElementById("radio2").checked){
-            $("input[id='radio']").prop({checked:false});
-            $("input[id='radio1']").prop({checked:false});
-            $("input[id='radio2']").prop({checked:true});
-            var name = $('#radio2').val();
-            Session.set("order1", undefined);
-            Session.set("order2", undefined);
-            Session.set("order3", name);
-        }
+    'click .datesort': function (event) {
+        Session.set("sort",event.target.value);
     }
 });
 
@@ -46,28 +9,19 @@ Template.mostReadArticle.helpers({
         Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
             Session.set("mostRead", result);
         });
-
+        // ArticleViews获取最多引用
         var most = Session.get("mostRead");
         if (!most)return;
-
-        //TODO: figure out a better way to do this instead of calling the db for each id in the list
-        var mostReadArticles = [];
-        most.forEach(function (id) {
-            var sort1 = Session.get("order1");
-            var sort2 = Session.get("order2");
-            var sort3 = Session.get("order3");
-            if(sort1){
-                var article = Articles.findOne({_id: id._id.articleId});
-            }
-            if(sort2){
-                var article = Articles.findOne({_id: id._id.articleId},{sort: {createdAt: -1}});
-            }
-            if(sort3){
-                var article = Articles.findOne({_id: id._id.articleId},{sort: {createdAt: 1}});
-            }
-            article && mostReadArticles.push(article);
+        // 获取更多Id
+        var allId=[];
+        _.each(most,function(item){
+            allId.push(item._id.articleId);
         });
-        return _.first(mostReadArticles,[5]);
+        // 返回article信息，并排序
+        var sort = {};
+        if(Session.get("sort"))
+            sort={"published":Session.get("sort")};
+        return Articles.find({_id:{$in:allId}},{sort:sort});
     },
     journalName: function (id) {
         return Publications.findOne({_id: id}).title;
