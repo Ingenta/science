@@ -161,7 +161,6 @@ var getParagraphs = function (paragraphNodes) {
 	paragraphNodes.forEach(function (paragraph) {
 		if(paragraph.tagName==='fig'){
 			//兼容中国科学插图数据处理
-            debugger;
 			var fig = getFigure(paragraph);
 			if(fig){
 				paragraphs.figures.push(fig);
@@ -329,18 +328,19 @@ var getFigure = function(fig){
 	if (caption && caption.length) {
 		figure.caption = caption[0].toString();
 	}
-	var graphicLinks = xpath.select("child::graphic", fig);
-	if (graphicLinks && graphicLinks.length) {
-		figure.links = [];
-		graphicLinks.forEach(function (gl) {
-			var glId = xpath.select("./@id", gl);
-			if (glId && glId.length) {
-				figure.links.push(glId[0].value);
-			}
-		})
-	}
+    //中国科学数据中无此项
+	//var graphicLinks = xpath.select("child::graphic", fig);
+	//if (graphicLinks && graphicLinks.length) {
+	//	figure.links = [];
+	//	graphicLinks.forEach(function (gl) {
+	//		var glId = xpath.select("./@id", gl);
+	//		if (glId && glId.length) {
+	//			figure.links.push(glId[0].value);
+	//		}
+	//	})
+	//}
 
-	var graphics = xpath.select("child::alternatives/graphic", fig);
+	var graphics = xpath.select("descendant::graphic", fig);
 	if (graphics && graphics.length) {
 		figure.graphics = [];
 		//var xlinkSelect = xpath.useNamespaces({"xlink":

@@ -177,13 +177,14 @@ Template.userEditRoles.helpers({
             pr = Permissions.getRoles();
         if("publisher" === Session.get("activeTab")){
             var temp = Permissions.getRoles();
-            var keys = ["news:news-manager"];
+            if(OrbitPermissions.isAdmin(Meteor.user())){
+                pr["permissions:permissions-manager"] = temp["permissions:permissions-manager"];
+                pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
+            };
+            var keys = ["news:news-manager"];//出版商管理员可设置的权限
             keys.forEach(function (key) {
                 pr[key] = temp[key];
             });
-            if(OrbitPermissions.isAdmin(Meteor.user())){
-                pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
-            };
         }
         return Object.keys(pr);
     },
