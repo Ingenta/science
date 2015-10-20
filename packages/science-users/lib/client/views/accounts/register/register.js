@@ -44,17 +44,14 @@ Template.Register.events({
         }
 
         submit_button.button("loading");
-        Accounts.createUser({
-            email: register_email,
-            password: register_password,
-            username: register_name
-        }, function (err) {
+        Meteor.call("registerUser", register_name, register_password, register_email, function (err) {
             submit_button.button("reset");
             if (err)
                 pageSession.set("errorMessage", err.message);
             else {
                 pageSession.set("errorMessage", "");
                 Router.go("home", {});
+                sweetAlert(TAPi18n.__("We sent you a link to create your account. Please check your email."));
             }
         });
         return false;
