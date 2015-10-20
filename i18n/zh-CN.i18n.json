@@ -1076,6 +1076,8 @@
     "ended": "结束",
     "processing": "正在处理"
   },
+  "Email verified successfully": "账号注册成功",
+  "CheckEmail": "账号激活链接已发送至您邮箱，请前往邮箱完成注册。",
   "Saved": "已保存",
   "Historical Journal": "历史期刊",
   "Previous Title": "过刊名称",
