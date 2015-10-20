@@ -1,5 +1,8 @@
 var dynamicRender = function(){
 	Session.get('dynamicRender') && Meteor.clearInterval(Session.get("dynamicRender"));
+	if(!Router.current().data() || !Router.current().data().figures){
+		return;
+	}
 	var figs = Router.current().data().figures;
 	_.each(figs, function (fig) {
 		var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
