@@ -32,7 +32,8 @@ Package.onUse(function(api) {
     'aldeed:simple-schema@1.1.0',
     'underscore',
     'jackkav:xpath',
-    'mrt:cookies'
+    'mrt:cookies',
+    'meteorhacks:ssr'
   ];
   api.use(packages);
 
@@ -52,7 +53,8 @@ Package.onUse(function(api) {
     'lib/httpUtils.js',
     'lib/xpathUtils.js',
     'lib/xss.js',
-    'lib/pdf.js'
+    'lib/pdf.js',
+    'lib/SSR.js'
   ],'server');
 
   api.addFiles([
