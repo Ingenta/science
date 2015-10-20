@@ -1,8 +1,19 @@
 <template name="JournalOverview">
     {{> journalSummary}}
     <hr>
-    {{> latestUploadedArticles}}
-    {{> recentlyViewedArticles}}
+    <div class="row">
+        <div class="col-xs-6">
+            {{> recommendArticles}}
+        </div>
+        <div class="col-xs-6">
+            <div class="row">
+                {{> mostReadArticleList journalId=getJournalIdFromSession}}
+            </div>
+            <div class="row">
+                {{> mostCitedArticleList journalId=getJournalIdFromSession}}
+            </div>
+        </div>
+    </div>
 </template>
 <template name="journalCoverSummary">
     <div class="pull-right">
@@ -57,51 +68,19 @@
     {{/each}}
 </template>
 
-<template name="latestUploadedArticles">
-    <div class="row">
-        <div class="col-xs-12">
-            {{> recommendArticles}}
-            <h4>{{_ "Latest Articles"}}</h4>
-            {{#each latestArticles}}
-                <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
-            {{else}}
-                {{_ "No articles found!"}}
-            {{/each}}
-            <br/>
-        </div>
-    </div>
-</template>
-
-<template name="recentlyViewedArticles">
-    {{#if recentArticles}}
-        <div class="row">
-            <div class="col-xs-12">
-                <h4>{{_ "Recently Viewed Articles"}}</h4>
-                {{#each recentArticles}}
-                    <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
-                {{else}}
-                    {{_ "No articles found!"}}
-                {{/each}}
-                <br/>
-            </div>
-        </div>
-    {{/if}}
-</template>
-
 <template name="recommendArticles">
     <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;&nbsp;{{#if can "add-pulisher-collections" "collections" }}
         <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}{{/if}}
     </h4>
     {{#each recommendArticles}}
-    <h5><a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>&nbsp;&nbsp;{{titles ArticlesId}}</a>
-        {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</h5>
+        <h5><a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>&nbsp;&nbsp;{{titles ArticlesId}}</a>
+            {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</h5>
     {{else}}
-    {{_ "No articles found!"}}
+        {{_ "No articles found!"}}
     {{/each}}
     {{#if recommendArt}}
         <div align="right"><a href="/mostEditorRecommend"><button>+{{_ "more"}}</button></a></div>
     {{/if}}
-    <hr>
 </template>
 
 <template name="addRecommendModalForm">
@@ -109,8 +88,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="addRecommendModalLabel">{{_ "Add new"}}</h4>
                 </div>
                 {{#autoForm id="addRecommendModalForm" collection="Recommend" type="insert"}}
