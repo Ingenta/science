@@ -1,5 +1,6 @@
+Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
 Config={
-    isDevMode:true,  //开发模式
+    isDevMode:true,  //开发模式 should use isDevelopment in future
     "defaultAdmin":{
         "username":"admin",
         "password":"123123",

@@ -1,3 +1,11 @@
+Meteor.startup(function(){
+    if(Meteor.isServer){
+        Science.FSE.ensureDir(Config.uploadPdfDir + "/handle/",function(err){
+            if(err)
+                throw new Meteor.Error(err);
+        });
+    }
+})
 Router.map(function () {
     this.route('PlainText', {
         where: 'server',
@@ -201,6 +209,16 @@ Router.map(function () {
                     params=_.union(params,["-w",Config.pdf.watermark]);
                 }
                 Science.Pdf(params,function(error,stdout,stderr){
+                        if(stdout){
+                            console.log('------STDOUT--------');
+                            console.dir(stdout);
+                            console.log('------STDOUT--------');
+                        }
+                        if(stderr){
+                            console.log('------STDERR--------');
+                            console.dir(stderr);
+                            console.log('------STDERR--------');
+                        }
                         if(!error){
                             Science.FSE.exists(Config.uploadPdfDir + "/handle/"+pdf.copies.pdfs.key,function(result){
                                 if(result){

@@ -203,6 +203,7 @@ Tasks.insertArticleImages = function (logId, result) {
                     return !g.use;
                 });
             if(onlineOne){
+                console.dir(onlineOne);
                 var figName = onlineOne.href;
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
@@ -213,7 +214,7 @@ Tasks.insertArticleImages = function (logId, result) {
                         fig.imageId = fileObj._id;
                         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                         if (_.last(result.figures) === fig) {
-                            Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000)
+                            Meteor.setTimeout(function(){ScienceXML.RemoveFile(log.extractTo);}, 20000)
                         }
                     });
                 }

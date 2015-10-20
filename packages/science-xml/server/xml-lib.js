@@ -130,7 +130,7 @@ ScienceXML.getSubSection = function (subSectionNodes) {
     var thisSubSection = [];
     subSectionNodes.forEach(function (subSection) {
         var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(subSection);
-        var childSectionNodes = xpath.select("child::sec[@id]", subSection);
+        var childSectionNodes = xpath.select("child::sec", subSection);
         if (!childSectionNodes.length)thisSubSection.push(thisSection);
         else {
 	        var subSecs = ScienceXML.getSubSection(childSectionNodes);
@@ -138,18 +138,18 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 	        if(!_.isEmpty(subSecs)){
 		        var figures=[];
 		        for(var i=0;i<subSecs.length;i++){
-			        if(!_.isEmpty(subSecs[i].figures)){
-				        figures= _.union(figures,subSecs[i].figures);
-				        delete subSecs[i].figures;
+			        if(!_.isEmpty(subSecs[i].body.figures)){
+				        figures= _.union(figures,subSecs[i].body.figures);
+				        delete subSecs[i].body.figures;
 			        }
 		        }
+                thisSection.body.figures=figures
 	        }
             thisSubSection.push({
                 label: thisSection.label,
                 title: thisSection.title,
                 body: thisSection.body,
-                sections: subSecs,
-	            figures:figures
+                sections: subSecs
             });
         }
     });
@@ -180,7 +180,6 @@ var getParagraphs = function (paragraphNodes) {
 }
 
 ScienceXML.getParagraphsFromASectionNode = function (section) {
-    //debugger
     var paragraphNodes = xpath.select("child::p | child::fig", section);
     //var paragraphNodes = xpath.select("child::p", section);
     return getParagraphs(paragraphNodes);
@@ -329,18 +328,19 @@ var getFigure = function(fig){
 	if (caption && caption.length) {
 		figure.caption = caption[0].toString();
 	}
-	var graphicLinks = xpath.select("child::graphic", fig);
-	if (graphicLinks && graphicLinks.length) {
-		figure.links = [];
-		graphicLinks.forEach(function (gl) {
-			var glId = xpath.select("./@id", gl);
-			if (glId && glId.length) {
-				figure.links.push(glId[0].value);
-			}
-		})
-	}
+    //中国科学数据中无此项
+	//var graphicLinks = xpath.select("child::graphic", fig);
+	//if (graphicLinks && graphicLinks.length) {
+	//	figure.links = [];
+	//	graphicLinks.forEach(function (gl) {
+	//		var glId = xpath.select("./@id", gl);
+	//		if (glId && glId.length) {
+	//			figure.links.push(glId[0].value);
+	//		}
+	//	})
+	//}
 
-	var graphics = xpath.select("child::alternatives/graphic", fig);
+	var graphics = xpath.select("descendant::graphic", fig);
 	if (graphics && graphics.length) {
 		figure.graphics = [];
 		//var xlinkSelect = xpath.useNamespaces({"xlink":
@@ -353,7 +353,7 @@ var getFigure = function(fig){
 			}
 			var href = xpath.select('@href', grap);
 			if (href && href.length) {
-				g.href = href[0].value;
+				g.href = href[0].value && href[0].value.replace('\\','/');//兼容windows的分隔符\
 			}
 			figure.graphics.push(g);
 		})

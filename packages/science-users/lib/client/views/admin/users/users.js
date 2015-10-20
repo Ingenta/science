@@ -232,11 +232,35 @@ Template.AdminUsersViewTableItems.rendered = function() {
 Template.AdminUsersViewTableItems.events({
 	"click td": function(e, t) {
 		e.preventDefault();
+		if (Router.current().route.getName() === "publisher.account" && _.contains(Users.findOne({_id: this._id}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this._id !== Meteor.userId()){
+			sweetAlert({
+				title             : TAPi18n.__("Warning"),
+				text              : TAPi18n.__("Permission denied"),
+				type              : "warning",
+				showCancelButton  : false,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText : TAPi18n.__("OK"),
+				closeOnConfirm    : true
+			});
+			return false;
+		}
 		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	},
 	"click #edit-button": function(e) {
 		e.preventDefault();
+		if (Router.current().route.getName() === "publisher.account" && _.contains(Users.findOne({_id: this._id}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this._id !== Meteor.userId()){
+			sweetAlert({
+				title             : TAPi18n.__("Warning"),
+				text              : TAPi18n.__("Permission denied"),
+				type              : "warning",
+				showCancelButton  : false,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText : TAPi18n.__("OK"),
+				closeOnConfirm    : true
+			});
+			return false;
+		}
 		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	},
