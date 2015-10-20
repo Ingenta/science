@@ -70,10 +70,13 @@ Template.SingleNews.events({
     }
 });
 
-Template.recentArticles.helpers({
-    newestArticle: function () {
+Template.latestUploadedArticleList.helpers({
+    latestUploadedArticles: function () {
         return Articles.find({}, {sort: {createdAt: -1}, limit: 10});
-    },
+    }
+});
+
+Template.mostReadArticleList.helpers({
     mostReadArticles: function () {
         Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
             Session.set("mostRead", result);
@@ -89,7 +92,10 @@ Template.recentArticles.helpers({
             article && mostReadArticles.push(article);
         });
         return _.first(mostReadArticles,[5]);
-    },
+    }
+});
+
+Template.mostCitedArticleList.helpers({
     mostCitedArticles: function () {
         return MostCited.find({}, {sort: {count: 1}, limit: 5});
     },
