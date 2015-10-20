@@ -3,3 +3,10 @@ Template.AbstractTemplate.events({
 		SolrQuery.interstingSearch(e);
 	}
 });
+
+Template.AbstractTemplate.helpers({
+	getJournalIdFromSession: function () {
+		var journalId = Session.get('currentJournalId');
+		return journalId ? journalId : "";
+	}
+});

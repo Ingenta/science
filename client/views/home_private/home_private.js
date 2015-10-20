@@ -70,27 +70,36 @@ Template.SingleNews.events({
     }
 });
 
-Template.recentArticles.helpers({
-    newestArticle: function () {
+Template.latestUploadedArticleList.helpers({
+    latestUploadedArticles: function () {
         return Articles.find({}, {sort: {createdAt: -1}, limit: 10});
-    },
+    }
+});
+
+Template.mostReadArticleList.helpers({
     mostReadArticles: function () {
         Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
             Session.set("mostRead", result);
         });
-
         var most = Session.get("mostRead");
         if (!most)return;
 
         //TODO: figure out a better way to do this instead of calling the db for each id in the list
         var mostReadArticles = [];
+        var journalId = this.journalId
         most.forEach(function (id) {
-            var article = Articles.findOne({_id: id._id.articleId});
+            var article = undefined;
+            if(journalId) article = Articles.findOne({_id: id._id.articleId, journalId: journalId});
+            else article = Articles.findOne({_id: id._id.articleId});
             article && mostReadArticles.push(article);
         });
         return _.first(mostReadArticles,[5]);
-    },
+    }
+});
+
+Template.mostCitedArticleList.helpers({
     mostCitedArticles: function () {
+        if(this.journalId) return MostCited.find({journalId: this.journalId}, {sort: {count: 1}, limit: 5});
         return MostCited.find({}, {sort: {count: 1}, limit: 5});
     },
     mostCiteCount: function () {

@@ -51,7 +51,7 @@ Template.Register.events({
             else {
                 pageSession.set("errorMessage", "");
                 Router.go("home", {});
-                sweetAlert(TAPi18n.__("We sent you a link to create your account. Please check your email."));
+                sweetAlert(TAPi18n.__("CheckEmail"));
             }
         });
         return false;
