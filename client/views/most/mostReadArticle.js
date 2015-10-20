@@ -1,19 +1,27 @@
+Template.mostReadArticle.events({
+    'click .datesort': function (event) {
+        Session.set("sort",event.target.value);
+    }
+});
+
 Template.mostReadArticle.helpers({
     mostReadArticles: function () {
         Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
             Session.set("mostRead", result);
         });
-
+        // ArticleViews获取最多引用
         var most = Session.get("mostRead");
         if (!most)return;
-
-        //TODO: figure out a better way to do this instead of calling the db for each id in the list
-        var mostReadArticles = [];
-        most.forEach(function (id) {
-            var article = Articles.findOne({_id: id._id.articleId});
-            article && mostReadArticles.push(article);
+        // 获取更多Id
+        var allId=[];
+        _.each(most,function(item){
+            allId.push(item._id.articleId);
         });
-        return _.first(mostReadArticles,[5]);
+        // 返回article信息，并排序
+        var sort = {};
+        if(Session.get("sort"))
+            sort={"published":Session.get("sort")};
+        return Articles.find({_id:{$in:allId}},{sort:sort});
     },
     journalName: function (id) {
         return Publications.findOne({_id: id}).title;

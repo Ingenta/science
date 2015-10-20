@@ -19,7 +19,8 @@ Meteor.methods({
                 _id: {articleId: '$articleId'},
                 count: {$sum: 1}
             }
-        }, {$sort: {count: -1}}]);
+        }, {$sort: {count: -1}}
+        ,{$limit:20}]);
         if (!a)return;
         return a;
     },

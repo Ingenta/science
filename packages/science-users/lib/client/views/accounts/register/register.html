@@ -15,7 +15,7 @@
             <input id="register_password" type="password" class="form-control" placeholder="{{_ 'Password'}}" required>
             <input id="register_accept" type="checkbox"> {{_ "I accept"}} <a data-toggle="modal" data-target="#myModal"><em>{{_ "SCP User Agreement"}}</em></a>
             {{> Agreement}}
-            <button id="register_submit" class="btn btn-lg btn-primary btn-block" type="submit"
+            <button id="register_submit" class="btn btn-lg btn-primary btn-block" disabled type="submit"
                     data-loading-text="{{_ 'PleaseWait'}}">
                 {{_ "Sign up"}}
             </button>

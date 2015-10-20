@@ -1,16 +1,19 @@
 <template name="mostReadArticle">
-    <h4 class="dotted"><b>{{_ "Most read articles to view"}}&nbsp;:</b></h4>
+    <h3 class="dotted"><b>{{_ "Most read articles to view"}}&nbsp;:</b></h3>
     <div class="dotted">
         <label>{{_ "Sort Results By"}}：</label>
         <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> {{_ "Relevance"}}
+            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
         </label>
         <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> {{_ "Newest First"}}
+            <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
         </label>
         <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> {{_ "Oldest First"}}
+            <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
         </label>
+    </div>
+    <div class="dotted">
+        <h4><b>{{_ "This platform up to read the article within view"}}：</b><span style="color: #8c8c8c">（{{_ "According to article 20"}}）</span></h4>
     </div>
     <div class="dotted">
         {{#each mostReadArticles}}
