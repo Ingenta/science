@@ -46,7 +46,7 @@ Meteor.methods({
                 if(countryViews[country.countryCode2]){
                     countryViews[country.countryCode2].localCount += 1;
                 } else {
-                    countryViews[country.countryCode2].name = obj.country;
+                    countryViews[country.countryCode2].name = item.country;
                     countryViews[country.countryCode2].localCount = 1;
                 }
             } else {

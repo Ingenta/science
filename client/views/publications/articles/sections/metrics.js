@@ -94,12 +94,12 @@ var buildPieChart2 = function () {
     Meteor.call("getLocationReport", "fulltext", articleId, function (err, arr) {
         var colors=['#DDDF0D','#DD000D','#00DF0D','#DDDFFF'];
         var index=0;
-        _.keys(arr).forEach(function (key) {
+        _.each(arr,function (obj) {
             var color=colors[ index % colors.length ];
             index++;
             data.push({
-                name: TAPi18n.getLanguage() === "zh-CN" ? arr[key].name.cn : arr[key].name.en,
-                y: arr[key].localCount,
+                name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
+                y: obj.localCount,
                 color:color
             });
       });
