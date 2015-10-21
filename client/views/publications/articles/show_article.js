@@ -41,6 +41,7 @@ ReactiveTabs.createInterface({
 					ArticleViews.insert({
 						articleId: article._id,
 						userId   : Meteor.userId(),
+						journalId: article.journalId,
 						when     : new Date(),
 						action   : "abstract",
 						ip       : session
@@ -51,6 +52,7 @@ ReactiveTabs.createInterface({
 					ArticleViews.insert({
 						articleId: article._id,
 						userId   : Meteor.userId(),
+						journalId: article.journalId,
 						when     : new Date(),
 						action   : "fulltext",
 						ip       : session
@@ -194,6 +196,7 @@ Template.showArticle.events({
 		ArticleViews.insert({
 			articleId: this._id,
 			userId   : Meteor.userId(),
+			journalId: article.journalId,
 			when     : new Date(),
 			action   : "pdfDownload"
 		})

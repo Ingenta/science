@@ -6,9 +6,9 @@ Template.mostReadArticle.events({
 
 Template.mostReadArticle.helpers({
     mostReadArticles: function () {
-        Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
-            Session.set("mostRead", result);
-        });
+        //Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
+        //    Session.set("mostRead", result);
+        //});
         // ArticleViews获取最多引用
         var most = Session.get("mostRead");
         if (!most)return;

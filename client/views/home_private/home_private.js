@@ -78,7 +78,7 @@ Template.latestUploadedArticleList.helpers({
 
 Template.mostReadArticleList.helpers({
     mostReadArticles: function () {
-        Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
+        Meteor.call("getMostRead", Meteor.userId(), this.journalId, function (err, result) {
             Session.set("mostRead", result);
         });
         var most = Session.get("mostRead");
@@ -86,11 +86,8 @@ Template.mostReadArticleList.helpers({
 
         //TODO: figure out a better way to do this instead of calling the db for each id in the list
         var mostReadArticles = [];
-        var journalId = this.journalId
         most.forEach(function (id) {
-            var article = undefined;
-            if(journalId) article = Articles.findOne({_id: id._id.articleId, journalId: journalId});
-            else article = Articles.findOne({_id: id._id.articleId});
+            var article = Articles.findOne({_id: id._id.articleId});
             article && mostReadArticles.push(article);
         });
         return _.first(mostReadArticles,[5]);
