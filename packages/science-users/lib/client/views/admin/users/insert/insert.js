@@ -104,6 +104,7 @@ Template.AdminUsersInsertInsertForm.events({
                         if (values.institutionId) {
                             Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
                         }
+
                         submitAction();
                     }
                 });

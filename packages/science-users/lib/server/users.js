@@ -84,6 +84,10 @@ Accounts.urls.verifyEmail = function (token) {
     return Meteor.absoluteUrl('verify-email/' + token);
 };
 
+Accounts.urls.enrollAccount = function (token) {
+    return Meteor.absoluteUrl('enroll-account/' + token);
+};
+
 Accounts.validateLoginAttempt(function (attempt) {
     if (Config && Config.isDevMode)//开发模式不检查邮箱是否已验证
         return true;
