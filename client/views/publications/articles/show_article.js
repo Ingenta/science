@@ -1,5 +1,8 @@
 var dynamicRender = function(){
 	Session.get('dynamicRender') && Meteor.clearInterval(Session.get("dynamicRender"));
+	if(!Router.current().data() || !Router.current().data().figures){
+		return;
+	}
 	var figs = Router.current().data().figures;
 	_.each(figs, function (fig) {
 		var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
@@ -24,47 +27,46 @@ var dynamicRender = function(){
 ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
-		if(slug==='full text'){
-			Session.set("dynamicRender", Meteor.setInterval(dynamicRender,2000));
-		}else{
+		if(slug!=='full text'){
 			Session.get("dynamicRender") && Meteor.clearInterval(Session.get("dynamicRender"));
 		}
-		if (Session.get('activeTab') != slug) {
-			//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
-			var article = Router.current().data();
-			if (!article)return;
-			if (slug === 'abstract') {
-				Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-					ArticleViews.insert({
-						articleId: article._id,
-						userId   : Meteor.userId(),
-						when     : new Date(),
-						action   : "abstract",
-						ip       : session
-					});
+		//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
+		var article = Router.current().data();
+		if (!article)return;
+		if (slug === 'abstract') {
+			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+				ArticleViews.insert({
+					articleId: article._id,
+					userId   : Meteor.userId(),
+					journalId: article.journalId,
+					when     : new Date(),
+					action   : "abstract",
+					ip       : session
 				});
-			} else if (slug === 'full text') {
-				Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-					ArticleViews.insert({
-						articleId: article._id,
-						userId   : Meteor.userId(),
-						when     : new Date(),
-						action   : "fulltext",
-						ip       : session
-					});
+			});
+		} else if (slug === 'full text') {
+			Session.set("dynamicRender", Meteor.setInterval(dynamicRender,2000));
+			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+				ArticleViews.insert({
+					articleId: article._id,
+					userId   : Meteor.userId(),
+					journalId: article.journalId,
+					when     : new Date(),
+					action   : "fulltext",
+					ip       : session
 				});
-				if (article.keywords) {
-					article.keywords.en.forEach(function (k) {
-						var id = Keywords.findOne({"name": k})._id;
-						Keywords.update({_id: id}, {$inc: {"score": 2}})
-					});
-					article.keywords.cn.forEach(function (k) {
-						var id = Keywords.findOne({"name": k})._id;
-						Keywords.update({_id: id}, {$inc: {"score": 2}})
-					});
-				}
-				Users.recent.read(article);
+			});
+			if (article.keywords) {
+				_.each(article.keywords.en,function (k) {
+					var id = Keywords.findOne({"name": k})._id;
+					Keywords.update({_id: id}, {$inc: {"score": 2}})
+				});
+				_.each(article.keywords.cn,function (k) {
+					var id = Keywords.findOne({"name": k})._id;
+					Keywords.update({_id: id}, {$inc: {"score": 2}})
+				});
 			}
+			Users.recent.read(article);
 		}
 	}
 });
@@ -191,6 +193,7 @@ Template.showArticle.events({
 		ArticleViews.insert({
 			articleId: this._id,
 			userId   : Meteor.userId(),
+			journalId: article.journalId,
 			when     : new Date(),
 			action   : "pdfDownload"
 		})

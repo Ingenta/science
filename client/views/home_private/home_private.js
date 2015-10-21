@@ -70,15 +70,17 @@ Template.SingleNews.events({
     }
 });
 
-Template.recentArticles.helpers({
-    newestArticle: function () {
+Template.latestUploadedArticleList.helpers({
+    latestUploadedArticles: function () {
         return Articles.find({}, {sort: {createdAt: -1}, limit: 10});
-    },
+    }
+});
+
+Template.mostReadArticleList.helpers({
     mostReadArticles: function () {
-        Meteor.call("getMostRead", Meteor.userId(), function (err, result) {
+        Meteor.call("getMostRead", Meteor.userId(), this.journalId, function (err, result) {
             Session.set("mostRead", result);
         });
-
         var most = Session.get("mostRead");
         if (!most)return;
 
@@ -90,7 +92,23 @@ Template.recentArticles.helpers({
         });
         return _.first(mostReadArticles,[5]);
     },
+    mostReadCount: function () {
+        var most = Session.get("mostRead");
+        var allId=[];
+        _.each(most,function(item){
+            allId.push(item._id.articleId);
+        });
+        if(5 < allId.length){
+            return true;
+        }else{
+            return false;
+        }
+    }
+});
+
+Template.mostCitedArticleList.helpers({
     mostCitedArticles: function () {
+        if(this.journalId) return MostCited.find({journalId: this.journalId}, {sort: {count: 1}, limit: 5});
         return MostCited.find({}, {sort: {count: 1}, limit: 5});
     },
     mostCiteCount: function () {
