@@ -19,7 +19,7 @@
 </template>
 
 <template name="journalBanner">
-	<h2><img src="{{getJournalBannerById journal}}" width="650" height="94" alt="{{translateThis titleCn title}}"></h2>
+    <h2><img src="{{getJournalBannerById journal}}" width="650" height="94" alt="{{translateThis titleCn title}}"></h2>
 </template>
 
 <template name="journalOptions">
@@ -57,7 +57,7 @@
 
         {{#tabContent slug="Media"}}
             {{#with journalContext}}
-	            {{> mediaList}}
+                {{> mediaList}}
             {{/with}}
         {{/tabContent}}
 
@@ -87,7 +87,7 @@
 
         {{#tabContent slug="MOOP"}}
             {{#with journalContext}}
-	            {{> mediaList}}
+                {{> mediaList}}
             {{/with}}
         {{/tabContent}}
 
@@ -100,24 +100,26 @@
 </template>
 
 <template name="journalTabs">
-    <div class="journalTabs-container">
+    <div class="row">
+        <div class="journalTabs-container">
 
-        {{#if activeTab}}
-            {{trackActiveTab activeTab}}
-        {{/if}}
+            {{#if activeTab}}
+                {{trackActiveTab activeTab}}
+            {{/if}}
 
-        {{trackTabs tabs}}
+            {{trackTabs tabs}}
 
-        <ul class="nav nav-tabs" role="tablist">
-            {{#each tabs}}
-                <li role="presentation" class="tab-item {{isActiveTab slug}}">
-	                <a role="tab" data-toggle="tab">{{name}}</a>
-                </li>
-            {{/each}}
-        </ul>
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each tabs}}
+                    <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                        <a role="tab" data-toggle="tab">{{name}}</a>
+                    </li>
+                {{/each}}
+            </ul>
 
-        <div class="tabs-content-container">
-            {{> UI.contentBlock context=__context__ }}
+            <div class="tabs-content-container">
+                {{> UI.contentBlock context=__context__ }}
+            </div>
         </div>
     </div>
 </template>
