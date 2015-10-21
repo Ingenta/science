@@ -3,7 +3,7 @@ var pageSession = new ReactiveDict();
 pageSession.set("errorMessage", "");
 
 Template.Register.rendered = function () {
-
+    if (Meteor.userId())Router.go("home");
     $("input[autofocus]").focus();
 };
 
