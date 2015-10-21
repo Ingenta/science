@@ -16,19 +16,25 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'templating',
-    'spacebars-compiler'
+    'reactive-var',
+    'spacebars-compiler',
+    'summernote:summernote'
   ],'client');
 
   api.addFiles([
-    'editable-template.js'
+    'editable-template.js',
+    'both/collection.js'
   ],both);
 
   api.addFiles([
-    'client/editor.html',
-    'client/editor.js',
-    'client/preview.html',
-    'client/preview.js'
+    'client/initial.js',
+    'client/view/editor.html',
+    'client/view/editor.js',
+    'client/view/preview.html',
+    'client/view/preview.js'
   ],'client');
+
+  api.export('JET');
 });
 
 Package.onTest(function(api) {

@@ -1,0 +1,1 @@
+editableTemplate=new Meteor.Collection("editable_template");

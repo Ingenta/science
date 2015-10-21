@@ -139,14 +139,12 @@
 
 
 <template name="test">
-	<div class="row">
+	<div class="row" style="height:500px">
 		<div class="col-xs-6">
-			<textarea>{{{content}}}</textarea>
+			{{> etEditor }}
 		</div>
 		<div class="col-xs-6">
-			{{> Template.dynamic template=getTemp data=getData}}
-			{{{html}}}
+			{{> etPreview}}
 		</div>
 	</div>
-	<button>preview</button>
 </template>
