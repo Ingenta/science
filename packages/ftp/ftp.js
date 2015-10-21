@@ -42,11 +42,19 @@ FTP.prototype.getSingleFile = function (options, targetFile, callback) {
 		self.size(options.sourcePath, onsize);
 	};
 
+	var ontimeout = function(e){
+		callback && callback(e);
+		self.end();
+	};
+
 	self.on('ready', onready);
+	self.on('error',ontimeout);
 
 	self.connect({
 		host    : options.host,
 		user    : options.user,
-		password: options.password
+		password: options.password,
+		connTimeout:2000,
+		pasvTimeout:2000
 	});
 };
