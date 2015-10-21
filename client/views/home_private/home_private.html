@@ -130,7 +130,9 @@
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
-    <div align="right"><a href="/mostReadArticles"><button>+{{_ "more"}}</button></a></div>
+    {{#if mostReadCount}}
+        <div align="right"><a href="/mostReadArticles"><button>+{{_ "more"}}</button></a></div>
+    {{/if}}
 </template>
 
 <template name="mostCitedArticleList">
