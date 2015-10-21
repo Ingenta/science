@@ -22,7 +22,12 @@ Meteor.startup(function () {
     // A Function that takes a user object and a url, and returns the body text for the email.
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
     Accounts.emailTemplates.verifyEmail.text = function (user, url) {
-        return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:\n\n' + url;
+        return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.\n\n' + url;
+    };
+
+    Accounts.emailTemplates.verifyEmail.html = function (user, url) {
+        return "<hr><p>欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.</p><hr>"
+            + "<a href='" + url + "'>" + url + "</a>";
     };
 
     Accounts.emailTemplates.resetPassword.subject = function (user) {
@@ -30,13 +35,13 @@ Meteor.startup(function () {
     };
 
     Accounts.emailTemplates.resetPassword.text = function (user, url) {
-        return "请点击下面的链接以重置您的密码 To reset your password, simply click the link below:\n\n"
+        return "请点击下面的链接以重置您的密码 To reset your password, simply click the link below.\n\n"
             + url;
     };
 
     Accounts.emailTemplates.resetPassword.html = function (user, url) {
         return "<hr><p>请点击下面的链接以重置您的密码 To reset your password, simply click the link below:</p><hr>"
-            + url;
+            + "<a href='" + url + "'>" + url + "</a>";
     };
 
 });
