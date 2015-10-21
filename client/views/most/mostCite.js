@@ -6,7 +6,10 @@ Template.mostCiteArticle.events({
 
 Template.mostCiteArticle.helpers({
     mostCitedArticles: function () {
-        var citedAr = MostCited.find({}, {limit: 20}).fetch();
+        var citedAr = undefined;
+        var journalId = Router.current().params.journalId;
+        if(journalId) citedAr = MostCited.find({journalId: journalId}, {limit: 20}).fetch();
+        else citedAr = MostCited.find({}, {limit: 20}).fetch();
         // 获取更多Id
         var allId=[];
         _.each(citedAr,function(item){

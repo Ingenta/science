@@ -146,7 +146,9 @@
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
+    {{#if mostCiteCount}}
         <div align="right"><a href="/mostCiteArticles/{{this.journalId}}"><button>+{{_ "more"}}</button></a></div>
+    {{/if}}
 </template>
 
 <template name="homePageSystemRecommendedArticles">
