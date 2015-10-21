@@ -130,7 +130,9 @@
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
-    <div align="right"><a href="/mostReadArticles"><button>+{{_ "more"}}</button></a></div>
+    {{#if mostReadCount}}
+        <div align="right"><a href="/mostReadArticles"><button>+{{_ "more"}}</button></a></div>
+    {{/if}}
 </template>
 
 <template name="mostCitedArticleList">
@@ -155,16 +157,15 @@
             {{> latestUploadedArticleList}}
         </div>
         <div class="col-xs-6">
-            {{> mostReadArticleList}}
+            <div class="row">
+                {{> mostReadArticleList}}
+            </div>
+            <div class="row">
+                {{> mostCitedArticleList}}
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-6">
-        </div>
-        <div class="col-xs-6">
-            {{> mostCitedArticleList}}
-        </div>
-    </div>
+
 </template>
 
 <template name="homePgaeTopicList">
