@@ -91,6 +91,18 @@ Template.mostReadArticleList.helpers({
             article && mostReadArticles.push(article);
         });
         return _.first(mostReadArticles,[5]);
+    },
+    mostReadCount: function () {
+        var most = Session.get("mostRead");
+        var allId=[];
+        _.each(most,function(item){
+            allId.push(item._id.articleId);
+        });
+        if(5 < allId.length){
+            return true;
+        }else{
+            return false;
+        }
     }
 });
 
