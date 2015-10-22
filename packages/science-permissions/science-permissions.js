@@ -24,7 +24,6 @@ _.extend(Permissions, {
         return Permissions.getRolesDescriptions()[code];
     },
     check: function (perm, pkg) {
-        console.log(Meteor.user());
         if (Meteor.user() && Meteor.user().disable) {
             console.log("account disabled");
             Meteor.logout();
