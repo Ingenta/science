@@ -156,6 +156,10 @@ Template.AdminUsersInsertInsertForm.helpers({
     "isPublisher": function () {
         return "publisher" === Session.get("activeTab");
     },
+    "isPublisherAdmin": function () {
+        console.log(Router.current().route.getName());
+        return "publisher.account.insert" === Router.current().route.getName();
+    },
     "getInstitutions": function () {
         return Institutions.find({}, {name: 1});
     },

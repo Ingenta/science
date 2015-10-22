@@ -164,6 +164,10 @@ Template.AdminUsersEditEditForm.helpers({
     },
     "getJournalId": function () {
         return Session.get("journalId");
+    },
+    "isPublisherAdmin": function () {
+        console.log(Permissions.getUserRoles());
+        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
     }
 
 });
