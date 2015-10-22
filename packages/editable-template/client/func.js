@@ -35,34 +35,46 @@ JET.editor = function () {
 };
 
 JET.save = function () {
-	if(JET.verifyName(JET.name,"empty")){
+	var verifyData = function(){
+		if(_.isEmpty(JET.previewData)){
+			sweetConfirm("Warning","您没有添加示例数据",function(){
+				doSave();
+			});
+		}else{
+			doSave();
+		}
+	};
+	var doSave=function(){
+		if (JET.compile()) {
+			var obj = {
+				name:JET.name,
+				description:JET.description,
+				previewData:JET.previewData,
+				content: JET.previewTemplate.get()
+			};
+			var existObj=JET.store.findOne({name:obj.name});
+			if(existObj){
+				JET.store.update({_id:existObj._id},obj);
+			}else{
+				JET.store.insert(obj);
+			}
+			sweetAlert("Saved successfully","保存成功！", "success");
+		}
+	}
+	if(!JET.verifyName(JET.name,"empty")){
 		sweetAlert("Save Failed","please set a name for the template","error");
 		return;
 	}
-	if(JET.verifyName(JET.name,"reg")){
+	if(!JET.verifyName(JET.name,"reg")){
 		sweetAlert("Save Failed","模板名称只能包含半角英文字母、数字及下划线，且必须以英文字母开头","error");
 		return;
 	}
 	if(JET.description===""){
 		sweetConfirm("Warning","您没有设置模板介绍信息",function(){
-			if(_.isEmpty(JET.previewData)){
-				sweetConfirm("Warning","您没有添加示例数据",function(){
-					if (JET.compile()) {
-						var obj = {
-							name:JET.name,
-							description:JET.description,
-							previewData:JET.previewData,
-							content: JET.previewTemplate.get()
-						};
-						if(JET.store.findOne({name:obj.name})){
-							JET.store.update({name:obj.name},obj);
-						}else{
-							JET.store.insert(obj);
-						}
-					}
-				});
-			}
+			verifyData();
 		});
+	}else{
+		verifyData();
 	}
 };
 

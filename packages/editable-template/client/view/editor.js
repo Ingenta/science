@@ -17,7 +17,7 @@ Template.etEditor.events({
 	'click .save':function(e){
 		JET.name=Template.instance().$("#etName").val();
 		JET.description=Template.instance().$("#etDescription").val();
-		JET.
+		JET.previewData.set(Template.instance().$("#etData").val());
 		JET.save();
 	},
 	'keyup #etName':function(){
