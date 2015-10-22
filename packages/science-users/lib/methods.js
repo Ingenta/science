@@ -1,8 +1,16 @@
 Meteor.methods({
-    "createUserAccount": function(options) {
-        return Accounts.createUser(options);
+    "createUserAccount": function (options) {
+        var userId = Accounts.createUser(options);
+        Accounts.sendEnrollmentEmail(userId, options.email, function(err){
+            if (err){
+                console.log("email didn't get sent");
+            } else {
+                console.log('success');
+            }
+        });
+        return userId;
     },
-    "updateUserAccount": function(userId, options) {
+    "updateUserAccount": function (userId, options) {
         //// only admin or users own profile
         //if(!(Users.isAdmin(Meteor.userId()) || userId == Meteor.userId())) {
         //    throw new Meteor.Error(403, "Access denied.");
@@ -17,32 +25,31 @@ Meteor.methods({
         //}
 
         var userOptions = {};
-        if(options.username) userOptions.username = options.username;
-        if(options.email) {
-            var emails = Meteor.users.findOne({_id:userId}).emails;
-            emails[0].address=options.email;
+        if (options.username) userOptions.username = options.username;
+        if (options.email) {
+            var emails = Meteor.users.findOne({_id: userId}).emails;
+            emails[0].address = options.email;
             userOptions.emails = emails;
         }
-        if(options.password) userOptions.password = options.password;
-        if(typeof(options.disable) !== "undefined") userOptions.disable = options.disable;
-        if(options.profile) userOptions.profile = options.profile;
+        if (options.password) userOptions.password = options.password;
+        if (typeof(options.disable) !== "undefined") userOptions.disable = options.disable;
+        if (options.profile) userOptions.profile = options.profile;
 
         var password = "";
-        if(userOptions.password) {
+        if (userOptions.password) {
             password = userOptions.password;
             delete userOptions.password;
         }
 
-        if(options.journalId)
-        {
+        if (options.journalId) {
             userOptions.journalId = options.journalId;
         }
 
-        if(userOptions) {
-            Users.update(userId, { $set: userOptions });
+        if (userOptions) {
+            Users.update(userId, {$set: userOptions});
         }
 
-        if(password) {
+        if (password) {
             Accounts.setPassword(userId, password);
         }
     }
