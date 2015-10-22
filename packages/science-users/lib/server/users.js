@@ -11,7 +11,7 @@ Meteor.startup(function () {
     Accounts.emailTemplates.from = 'SCP <eryaer@sina.com>';
 
     // The public name of your application. Defaults to the DNS name of the application (eg: awesome.meteor.com).
-    Accounts.emailTemplates.siteName = '《中国科学》杂志社平台 Science China Publisher';
+    Accounts.emailTemplates.siteName = '《中国科学》杂志社平台 Science China Publishing';
 
 
     // A Function that takes a user object and returns a String for the subject line of the email.
@@ -21,12 +21,9 @@ Meteor.startup(function () {
 
     // A Function that takes a user object and a url, and returns the body text for the email.
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
-    Accounts.emailTemplates.verifyEmail.text = function (user, url) {
-        return '欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.\n\n' + url;
-    };
 
     Accounts.emailTemplates.verifyEmail.html = function (user, url) {
-        return "<hr><p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.</p><hr>"
+        return "<p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Publishing, please click the link below to activate your account.</p>"
             + "<a href='" + url + "'>" + url + "</a>";
     };
 
@@ -34,13 +31,18 @@ Meteor.startup(function () {
         return '《中国科学》杂志社平台重置您的密码 Reset Password';
     };
 
-    Accounts.emailTemplates.resetPassword.text = function (user, url) {
-        return "请点击下面的链接以重置您的密码 To reset your password, simply click the link below.\n\n"
-            + url;
+    Accounts.emailTemplates.resetPassword.html = function (user, url) {
+        return "<p>请点击下面的链接以重置您的密码 To reset your password, simply click the link below:</p>"
+            + "<a href='" + url + "'>" + url + "</a>";
     };
 
-    Accounts.emailTemplates.resetPassword.html = function (user, url) {
-        return "<hr><p>请点击下面的链接以重置您的密码 To reset your password, simply click the link below:</p><hr>"
+    Accounts.emailTemplates.enrollAccount.subject = function (user) {
+        return '欢迎使用《中国科学》杂志社平台 Welcome to the China Science Publishing';
+    };
+
+    Accounts.emailTemplates.enrollAccount.html = function (user, url) {
+        return "<p>《中国科学》杂志社平台邀请您开通账号, 请点击下方的链接以激活您的账号。</p>"
+            + "<p>You have been invited to the China Science Publishing platform, please click on the link below to activate your account.</p>"
             + "<a href='" + url + "'>" + url + "</a>";
     };
 

@@ -31,6 +31,14 @@ Meteor.startup(function () {
             return TAPi18n.__("Reset password");
         }
     });
+    Router.route("enroll-account", {
+        path: "/enroll-account/:resetPasswordToken",
+        controller: "ResetPasswordController",
+        parent: "home",
+        title: function () {
+            return TAPi18n.__("Reset password");
+        }
+    });
 
     Router.route("admin", {
         path: "/admin",

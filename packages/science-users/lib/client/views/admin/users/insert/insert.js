@@ -3,7 +3,7 @@ var pageSession = new ReactiveDict();
 Template.AdminUsersInsert.rendered = function () {
 
 };
-Template.AdminUsersInsert.onRendered( function () {
+Template.AdminUsersInsert.onRendered(function () {
     Session.set("publisherId", "");
 });
 Template.AdminUsersInsert.events({});
@@ -72,7 +72,7 @@ Template.AdminUsersInsertInsertForm.events({
                 //history.back();
                 Router.go("admin.institutions.detail", {insId: Router.current().params.insId});
                 //Session.set('activeTab', 'account');
-            } else if(Router.current().route.getName() === "publisher.account.insert") {
+            } else if (Router.current().route.getName() === "publisher.account.insert") {
                 Router.go("publisher.account", {pubId: Router.current().params.pubId});
             } else {
                 Router.go("admin.users", {});
@@ -104,7 +104,6 @@ Template.AdminUsersInsertInsertForm.events({
                         if (values.institutionId) {
                             Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
                         }
-
                         submitAction();
                     }
                 });
@@ -120,7 +119,7 @@ Template.AdminUsersInsertInsertForm.events({
             //history.back();
             Router.go("admin.institutions.detail", {insId: Router.current().params.insId});
             //Session.set('activeTab', 'account');
-        } else if(Router.current().route.getName() === "publisher.account.insert") {
+        } else if (Router.current().route.getName() === "publisher.account.insert") {
             Router.go("publisher.account", {pubId: Router.current().params.pubId});
         } else {
             Router.go("admin.users", {});
@@ -138,7 +137,7 @@ Template.AdminUsersInsertInsertForm.events({
     },
     "change #form-select-publisher": function (e) {
         e.preventDefault();
-        Session.set("publisherId",$(e.target).val());
+        Session.set("publisherId", $(e.target).val());
     }
 
 });
