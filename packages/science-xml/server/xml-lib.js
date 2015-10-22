@@ -326,7 +326,7 @@ var getFigure = function(fig){
 
 	var caption = xpath.select("child::caption/p", fig);
 	if (caption && caption.length) {
-		figure.caption = caption[0].toString();
+		figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
 	}
     //中国科学数据中无此项
 	//var graphicLinks = xpath.select("child::graphic", fig);
