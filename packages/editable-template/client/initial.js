@@ -3,3 +3,13 @@
  */
 //client side only
 JET.previewTemplate = new ReactiveVar("");
+
+JET.previewData = new ReactiveVar({});
+
+JET.selector = "#editorContainer";
+
+JET.tempName = "_previewEditableTemplate";
+
+JET.name="unnamed";
+
+JET.description="";

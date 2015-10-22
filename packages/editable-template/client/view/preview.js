@@ -4,14 +4,9 @@
 Template.etPreview.helpers({
 	getTemplate:function(){
 		var temp = JET.previewTemplate.get();
-		if(!temp){
-			console.log('nothing found');
-			return
-		}else{
-			return "_previewEditableTemplate";
-		}
+		return temp?JET.tempName:"_etStart";
 	},
 	getData:function(){
-		return {name:"jack",recentRead:["java编程思想", "javascript权威指南", "meteor入门"]};
+		return JET.previewData.get();
 	}
 })

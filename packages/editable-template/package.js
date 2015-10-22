@@ -18,16 +18,20 @@ Package.onUse(function(api) {
     'templating',
     'reactive-var',
     'spacebars-compiler',
-    'summernote:summernote'
+    'summernote:summernote',
+    'kevohagan:sweetalert'
   ],'client');
-
+  //api.use('perak:codemirror');
   api.addFiles([
     'editable-template.js',
-    'both/collection.js'
+    'both/collection.js',
+    'both/func.js'
   ],both);
 
   api.addFiles([
     'client/initial.js',
+    'client/func.js',
+    'client/view/start.html',
     'client/view/editor.html',
     'client/view/editor.js',
     'client/view/preview.html',
