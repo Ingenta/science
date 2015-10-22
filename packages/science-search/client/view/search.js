@@ -15,6 +15,17 @@ Template.SolrSearchBar.events({
     }
 });
 
+Template.SolrSearchResults.events({
+    'change input.datesort': function (event) {
+        var sortStr = $(event.target).val();
+        var setting = SolrQuery.params('st');
+        if (sortStr) setting.sort = sortStr;
+        else delete setting.sort;
+        SolrQuery.params('st', setting);
+        Router.go(SolrQuery.makeUrl());
+    }
+});
+
 Template.SolrSearchResults.helpers({
     'articles': function () {
         return SolrQuery.get("docs");

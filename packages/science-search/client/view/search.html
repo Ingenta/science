@@ -10,11 +10,23 @@
 </template>
 
 <template name="SolrSearchResults">
+    {{#if isFromTopic}}
+        {{> relatedTopicLists}}
+    {{/if}}
+    {{> secSearch}}
+    <div class="dotted">
+        <label>{{_ "Sort Results By"}}:</label>
+        <label class="radio-inline">
+            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
+        </label>
+        <label class="radio-inline">
+            <input class="datesort" type="radio" name="sort" value="year desc"> {{_ "Newest First"}}
+        </label>
+        <label class="radio-inline">
+            <input class="datesort" type="radio" name="sort" value="year asc"> {{_ "Oldest First"}}
+        </label>
+    </div>
 	<div class="row">
-		{{#if isFromTopic}}
-			{{> relatedTopicLists}}
-		{{/if}}
-		{{> secSearch}}
 		<div class="col-xs-4">
 			{{#each filters}}
 				{{> solrFilterItem}}
