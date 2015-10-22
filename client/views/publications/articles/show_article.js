@@ -1,6 +1,15 @@
+var clearDR = function(){
+	var dr = Session.get('dynamicRender') ;
+	if(!_.isEmpty(dr)){
+		_.each(dr,function(num){
+			Meteor.clearInterval(num);
+		})
+		Session.set('dynamicRender',undefined);
+	}
+}
 var dynamicRender = function(){
-	Session.get('dynamicRender') && Meteor.clearInterval(Session.get("dynamicRender"));
-	if(!Router.current().data() || !Router.current().data().figures){
+	clearDR();
+	if(!Router.current().data || !Router.current().data() || !Router.current().data().figures){
 		return;
 	}
 	var figs = Router.current().data().figures;
@@ -28,10 +37,10 @@ ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
 		if(slug!=='full text'){
-			Session.get("dynamicRender") && Meteor.clearInterval(Session.get("dynamicRender"));
+			clearDR()
 		}
 		//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
-		var article = Router.current().data();
+		var article = Router.current().data && Router.current().data();
 		if (!article)return;
 		if (slug === 'abstract') {
 			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
@@ -44,7 +53,8 @@ ReactiveTabs.createInterface({
 				});
 			});
 		} else if (slug === 'full text') {
-			Session.set("dynamicRender", Meteor.setInterval(dynamicRender,2000));
+			var dr = Session.get("dynamicRender") || new Science.JSON.UniqueArray();
+			Session.set("dynamicRender", dr.push(Meteor.setInterval(dynamicRender,2000)));
 			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
 				ArticleViews.insert({
 					articleId: article._id,

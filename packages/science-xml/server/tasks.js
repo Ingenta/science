@@ -297,12 +297,14 @@ var insertKeywords = function (a) {
 }
 
 var insertAccessKey = function (a) {
+    console.log('debug for accessKey ');
+    console.dir(a)
     a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
-}
+};
 
 var insertLanguage = function (a) {
     a.language = Publications.findOne({_id: a.journalId}).language;
-}
+};
 
 var insertArticle = function (a) {
     var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
