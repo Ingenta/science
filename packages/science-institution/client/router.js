@@ -73,5 +73,10 @@ Router.route("/institution/detail/:insId/", {
         return [
             Meteor.subscribe('institutions'),
         ]
+    },
+    onBeforeAction: function () {
+        Permissions.check("modify-institution", "institution");
+        /*BEFORE_FUNCTION*/
+        this.next();
     }
 });
