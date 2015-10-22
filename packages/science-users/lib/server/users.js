@@ -11,27 +11,27 @@ Meteor.startup(function () {
     Accounts.emailTemplates.from = 'SCP <eryaer@sina.com>';
 
     // The public name of your application. Defaults to the DNS name of the application (eg: awesome.meteor.com).
-    Accounts.emailTemplates.siteName = '中国科学出版社 Science China Publisher';
+    Accounts.emailTemplates.siteName = '《中国科学》杂志社平台 Science China Publisher';
 
 
     // A Function that takes a user object and returns a String for the subject line of the email.
     Accounts.emailTemplates.verifyEmail.subject = function (user) {
-        return '中国科学出版社账号激活邮件 Confirm Your Email Address';
+        return '《中国科学》杂志社平台 账号激活邮件 Confirm Your Email Address';
     };
 
     // A Function that takes a user object and a url, and returns the body text for the email.
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
     Accounts.emailTemplates.verifyEmail.text = function (user, url) {
-        return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.\n\n' + url;
+        return '欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.\n\n' + url;
     };
 
     Accounts.emailTemplates.verifyEmail.html = function (user, url) {
-        return "<hr><p>欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.</p><hr>"
+        return "<hr><p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Press, please click the link below to activate your account.</p><hr>"
             + "<a href='" + url + "'>" + url + "</a>";
     };
 
     Accounts.emailTemplates.resetPassword.subject = function (user) {
-        return '中国科学出版社重置您的密码 Reset Password';
+        return '《中国科学》杂志社平台重置您的密码 Reset Password';
     };
 
     Accounts.emailTemplates.resetPassword.text = function (user, url) {
