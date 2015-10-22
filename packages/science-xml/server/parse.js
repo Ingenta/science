@@ -147,25 +147,8 @@ ScienceXML.parseXml = function (path) {
     else {
         results.publisherName = publisherName;
     }
-
     //      GET REFERENCES
-    results.references = [];
-    var refNodes = xpath.select("//ref", doc);
-    refNodes.forEach(function (ref) {
-        var refNodes = xpath.select("descendant::text()", ref);
-        var text = "";
-        if (refNodes[0]) {
-            refNodes.forEach(function (reference) {
-                text += reference.data;
-            });
-        }
-        var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-        if (doi) {
-            results.references.push({ref: text.substr(0, text.indexOf(doi)), doi: doi});
-        } else {
-            results.references.push({ref: text});
-        }
-    });
+    results.references = ScienceXML.getReferences(doc);
 
     //      GET ABSTRACT AND FULL TEXT
     results.sections = [];

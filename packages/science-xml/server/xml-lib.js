@@ -466,3 +466,75 @@ ScienceXML.getKeywords= function(xp,dom){
     }
     return _.uniq(allkeywords);
 }
+
+ScienceXML.getReferences=function(doc){
+    var refs = [];
+    var refNodes = xpath.select("//back/ref-list/ref", doc);
+    var index=1;
+    _.each(refNodes,function (refNode) {
+        var ref = {};
+        ref.index=index++;
+        //提取引文作者信息 开始
+        var authorNodes = xpath.select("descendant::person-group/name",refNode);
+        if(authorNodes){
+            var authors = [];
+            _.each(authorNodes,function(authorNode){
+                var author = {};
+                var surnameNode=xpath.select("child::surname/text()",authorNode);
+                if(!_.isEmpty(surnameNode)){
+                    author.surName=surnameNode.toString()
+                }
+                var givenNode=xpath.select("child::given-names/text()",authorNode);
+                if(!_.isEmpty(givenNode)){
+                    author.givenName=givenNode.toString()
+                }
+                authors.push(author);
+            })
+            //若从引文信息中提取到了作者信息，将作者信息放入引文信息中
+            if(!_.isEmpty(authors)){
+                ref.authors = authors;
+                //检查是否有更多被省略的作者(若存在etal标签，可判定有被省略的作者)
+                if(xpath.select("descendant::person-group/etal",refNode).length){
+                    ref.etal=true;
+                }
+            }
+        }
+        //提取引文作者信息 完成
+        var titleNode = xpath.select("child::element-citation/article-title",refNode);
+        if(!_.isEmpty(titleNode)){
+            var textNodes = xpath.select("descendant::text()",titleNode[0]);
+            var title = "";
+            _.each(textNodes,function(t){
+                title+= " " + t.toString();
+            })
+            ref.title=title.trim();
+        }
+        if(!ref.title){
+            ref.title="not found";
+        }
+        ref.publisherLoc=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-loc",refNode);
+        ref.publisherName=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-name",refNode);
+        ref.year=ScienceXML.getSimpleValueByXPath("child::element-citation/year",refNode);
+        ref.firstPage=ScienceXML.getSimpleValueByXPath("child::element-citation/fpage",refNode);
+        ref.lastPage=ScienceXML.getSimpleValueByXPath("child::element-citation/lpage",refNode);
+        ref.doi=ScienceXML.getSimpleValueByXPath("child::element-citation/pub-id[@pub-id-type='doi']",refNode);
+
+        var uriNodes = xpath.select("child::element-citation/source/uri",refNode);
+        if(!_.isEmpty(uriNodes)){
+            var xlinkSelect = xpath.useNamespaces({"xlink":"http://www.w3.org/1999/xlink"});
+            var uriArr = [];
+            _.each(uriNodes,function(uNode){
+                var uri = {};
+                var hrefAttr = xlinkSelect("attribute::xlink:href",uNode);
+                if(!_.isEmpty(hrefAttr)){
+                    uri.href=hrefAttr[0].value;
+                    uri.name = xpath.select("self::text()",uNode);
+                    uriArr.push(uri);
+                }
+            });
+            ref.uri=uriArr;
+        }
+        refs.push(ref);
+    });
+    return refs;
+};
