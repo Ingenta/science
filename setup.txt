@@ -1,0 +1,26 @@
+Deploy notes v1
+For setup on 219.238.6.206:80
+To change meteor port edit -p 80:80 -> -p [PORT]:80
+
+--------------------------
+1. unpack dockerfiles.zip from https://github.com/Ingenta/deploy/archive/master.zip
+   meteor build --architecture=os.linux.x86_64 ./
+   copy *.tar.gz to ~/app folder on server
+
+--------------------------
+2. cd to respective folder and build docker images
+
+docker build -t jackjk/mongo .
+docker build -t jackjk/solr .
+docker build -t jackjk/conn .
+
+--------------------------
+3. run each container
+docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo jackjk/conn
+
+docker run -d --name solr --restart=always -p 8983:8983 jackjk/solr
+
+docker run -d --name mongo --restart=always -p 27017:27017 jackjk/mongo
+
+docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 meteorhacks/meteord:base
+--------------------------

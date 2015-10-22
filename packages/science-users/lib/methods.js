@@ -1,8 +1,13 @@
 Meteor.methods({
     "createUserAccount": function (options) {
         var userId = Accounts.createUser(options);
-        //send enrollment email
-        //Accounts.sendEnrollmentEmail(userId);
+        Accounts.sendEnrollmentEmail(userId, options.email, function(err){
+            if (err){
+                console.log("email didn't get sent");
+            } else {
+                console.log('success');
+            }
+        });
         return userId;
     },
     "updateUserAccount": function (userId, options) {

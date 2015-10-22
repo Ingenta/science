@@ -1,13 +1,27 @@
 <template name="ReferencesTemplate">
     <div>
-        {{#each references}}
-            <p>
-                {{this.ref}}
-                {{#if this.doi}}
-                    <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}}<i
-                            class="fa fa-external-link"></i></a>
-                {{/if}}
-            </p>
-        {{/each}}
+	    <ul class="list-unstyled simple-list text-justify">
+		    {{#each references}}
+			    {{> singleReferenceTemplate}}
+		    {{/each}}
+	    </ul>
     </div>
+</template>
+
+<template name="singleReferenceTemplate">
+	<li>
+		[{{index}}]
+		{{#each authors}}
+			{{givenName}} {{surName}},
+		{{/each}}
+		{{#if etal}} et al{{/if}}.
+		{{title}}{{contentType}}.{{{journalName}}}
+		{{formatYear}}
+		{{formatVolIssue}}
+		{{formatRange}}
+	</li>
+</template>
+
+<template name="referenceLinkTemplate">
+	<a target="_blank" href="{{href}}">{{name}}</a>,
 </template>

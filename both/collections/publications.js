@@ -74,8 +74,7 @@ PublicationsSchema = new SimpleSchema({
         }
     },
     language: {
-        type: String,
-        optional: true
+        type: String
     },
     topicId: {
         type: [String],
