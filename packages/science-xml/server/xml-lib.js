@@ -474,6 +474,15 @@ ScienceXML.getReferences=function(doc){
     _.each(refNodes,function (refNode) {
         var ref = {};
         ref.index=index++;
+        var ele=xpath.select("child::element-citation",refNode)[0];
+        var idAttr = xpath.select("attribute::id",ele);
+        if(!_.isEmpty(idAttr)){
+            ref.id=idAttr[0].value;
+        }
+        var typeAttr=xpath.select("attribute::publication-type",ele);
+        if(!_.isEmpty(typeAttr)){
+            ref.type=typeAttr[0].value;
+        }
         //提取引文作者信息 开始
         var authorNodes = xpath.select("descendant::person-group/name",refNode);
         if(authorNodes){
@@ -515,24 +524,25 @@ ScienceXML.getReferences=function(doc){
         ref.publisherLoc=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-loc",refNode);
         ref.publisherName=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-name",refNode);
         ref.year=ScienceXML.getSimpleValueByXPath("child::element-citation/year",refNode);
+        ref.volume = ScienceXML.getSimpleValueByXPath("child::element-citation/volume",refNode);
+        ref.issue = ScienceXML.getSimpleValueByXPath("child::element-citation/issue",refNode);
         ref.firstPage=ScienceXML.getSimpleValueByXPath("child::element-citation/fpage",refNode);
         ref.lastPage=ScienceXML.getSimpleValueByXPath("child::element-citation/lpage",refNode);
         ref.doi=ScienceXML.getSimpleValueByXPath("child::element-citation/pub-id[@pub-id-type='doi']",refNode);
 
-        var uriNodes = xpath.select("child::element-citation/source/uri",refNode);
-        if(!_.isEmpty(uriNodes)){
-            var xlinkSelect = xpath.useNamespaces({"xlink":"http://www.w3.org/1999/xlink"});
-            var uriArr = [];
-            _.each(uriNodes,function(uNode){
-                var uri = {};
-                var hrefAttr = xlinkSelect("attribute::xlink:href",uNode);
+        var sourceNodes = xpath.select("child::element-citation/source",refNode);
+        if(!_.isEmpty(sourceNodes)){
+            var uriNodes = xpath.select("child::uri",sourceNodes[0]);
+            if(!_.isEmpty(uriNodes)){
+                var xlinkSelect = xpath.useNamespaces({"xlink":"http://www.w3.org/1999/xlink"});
+                var hrefAttr = xlinkSelect("attribute::xlink:href",uriNodes[0]);
                 if(!_.isEmpty(hrefAttr)){
-                    uri.href=hrefAttr[0].value;
-                    uri.name = xpath.select("self::text()",uNode);
-                    uriArr.push(uri);
+                    ref.href=hrefAttr[0].value;
+                    ref.source = xpath.select("child::text()",uriNodes[0]).toString();
                 }
-            });
-            ref.uri=uriArr;
+            }else{
+                ref.source=xpath.select("child::text()",sourceNodes[0]).toString();
+            }
         }
         refs.push(ref);
     });
