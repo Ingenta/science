@@ -101,16 +101,29 @@ Meteor.startup(function () {
 
     if (EmailConfig.find().count() === 0) {
         var emails = [
-            {key: "forgotPassword", e: "Forgot password", c: "email body"},
-            {key: "registration", e: "Registration", c: "email body"},
-            {key: "emailThis", e: "Email This", c: "email body"},
-            {key: "watchJournal", e: "Watch this journal", c: "email body"}
+            {
+                key: "forgotPassword",
+                s: "《中国科学》杂志社平台重置您的密码 Reset Password",
+                b: "<p>请点击下面的链接以重置您的密码 To reset your password, simply click the link below:</p>"
+            },
+            {
+                key: "registration",
+                s: "欢迎使用《中国科学》杂志社平台 Welcome to the China Science Publishing",
+                b: "<p>《中国科学》杂志社平台邀请您开通账号, 请点击下方的链接以激活您的账号。</p><p>You have been invited to the China Science Publishing platform, please click on the link below to activate your account.</p>"
+            },
+            {
+                key: "verifyEmail",
+                s: "《中国科学》杂志社平台 账号激活邮件 Confirm Your Email Address",
+                b: "<p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Publishing, please click the link below to activate your account.</p>"
+            },
+            {key: "emailThis", s: "Email This", b: "email body"},
+            {key: "watchJournal", s: "Watch this journal", b: "email body"}
         ];
         _.each(emails, function (email) {
             EmailConfig.insert({
                 key: email.key,
-                subject:  email.e,
-                body : email.c
+                subject: email.s,
+                body: email.b
             });
         });
     }

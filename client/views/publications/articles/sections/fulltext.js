@@ -24,28 +24,43 @@ Template.FullTextTemplate.helpers({
 })
 
 Template.FullTextTemplate.events({
-    "click xref[ref-type='fig']": function (e) {
-        var rid = ($(e.target).attr("rid"));
+    "click xref": function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var xr = $(e.target);
+        var rid = xr.attr("rid");
         if (rid) {
+            //----插图
             var fig = _.find(Template.currentData().figures, function (fig) {
                 return fig.id == rid || _.contains(fig.links, rid);
             });
             if (fig) {
                 Session.set("fig", fig);
+                $(".figure-modal").modal('show');
+                return;
             }
-            $(".figure-modal").modal('show');
-        }
-    },
-    "click xref[ref-type='table']": function (e) {
-        var rid = ($(e.target).attr("rid"));
-        if (rid) {
+            //----表格
             var table = _.find(Template.currentData().tables, function (table) {
                 return table.id == rid;
             });
             if (table) {
                 Session.set("table", table);
+                $(".table-modal").modal('show');
+                return;
             }
-            $(".table-modal").modal('show');
+            //----引用文献
+            var reference = _.find(Template.currentData().references,function(ref){
+                return ref.id == rid;
+            })
+            if(reference){
+                var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
+                var refIndexs = Science.StringUtils.parseToNumbers(indexStr);
+                if(!_.isEmpty(refIndexs)){
+                    Session.set("refs",refIndexs);
+                    $(".reference-modal").modal('show');
+                    return;
+                }
+            }
         }
     },
     "click #resetFulltext": function () {
@@ -97,6 +112,19 @@ Template.tableModal.helpers({
         return Session.get("table").table;
     }
 });
+
+Template.referenceModal.helpers({
+    "referencesArr": function(){
+        var allRefs = Template.currentData().references;
+        var currRefs = Session.get("refs");
+        if(_.isEmpty(allRefs) || _.isEmpty(currRefs))
+            return;
+        var refs = _.filter(allRefs,function(ref){
+            return _.contains(currRefs,ref.index);
+        });
+        return refs;
+    }
+})
 
 Template.sectionSelector.helpers({
     handledSections:function(){
