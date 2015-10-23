@@ -181,33 +181,17 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     "historicalJournal.$.title": {
-        type: Science.schemas.MultipleTextOptionalSchema
+        type: Science.schemas.MultipleTextOptionalSchema,
+        optional: true
     },
     "historicalJournal.$.dateRange": {
-        type: String
+        type: String,
+        optional: true
     },
-    //"historicalJournal.$.dateRange": {
-    //    type: Object,
-    //},
-    //"historicalJournal.$.dateRange.start": {
-    //    type: Date,
-    //    autoform: {
-    //        afFieldInput: {
-    //            type: "bootstrap-datepicker"
-    //        }
-    //    }
-    //},
-    //"historicalJournal.$.dateRange.end": {
-    //    type: Date,
-    //    autoform: {
-    //        afFieldInput: {
-    //            type: "bootstrap-datepicker"
-    //        }
-    //    }
-    //},
     "historicalJournal.$.issn": {
         type: String,
-        max: 9
+        max: 9,
+        optional: true
     },
     "historicalJournal.$.essn": {
         type: String,
