@@ -61,6 +61,7 @@ Template.FullTextTemplate.events({
                     return;
                 }
             }
+            Science.dom.scollToElement("#"+rid);
         }
     },
     "click #resetFulltext": function () {
