@@ -147,25 +147,8 @@ ScienceXML.parseXml = function (path) {
     else {
         results.publisherName = publisherName;
     }
-
     //      GET REFERENCES
-    results.references = [];
-    var refNodes = xpath.select("//ref", doc);
-    refNodes.forEach(function (ref) {
-        var refNodes = xpath.select("descendant::text()", ref);
-        var text = "";
-        if (refNodes[0]) {
-            refNodes.forEach(function (reference) {
-                text += reference.data;
-            });
-        }
-        var doi = xpath.select("descendant::pub-id[@pub-id-type='doi']/text()", ref).toString();
-        if (doi) {
-            results.references.push({ref: text.substr(0, text.indexOf(doi)), doi: doi});
-        } else {
-            results.references.push({ref: text});
-        }
-    });
+    results.references = ScienceXML.getReferences(doc);
 
     //      GET ABSTRACT AND FULL TEXT
     results.sections = [];
@@ -176,19 +159,26 @@ ScienceXML.parseXml = function (path) {
     //          GET AUTHORS, NOTES AND AFFILIATIONS
     ScienceXML.getAuthorInfo(results, doc);
 
-    var received = ScienceXML.getDateFromHistory("received", doc);
+    var received = ScienceXML.getDateFromHistory(["Received","received"], doc);
     if (received) results.received = received
-    var accepted = ScienceXML.getDateFromHistory("accepted", doc);
+    var accepted = ScienceXML.getDateFromHistory(["accepted"], doc);
     if (accepted) results.accepted = accepted
-    var published = ScienceXML.getDateFromHistory("published", doc);
+    var published = ScienceXML.getDateFromHistory(["published online","published"], doc);
     if (published) results.published = published
 
-
-    results.figures = ScienceXML.getFigures(doc);
+    var figuresInFloatGroup=ScienceXML.getFigures(doc);
+    if(!_.isEmpty(figuresInFloatGroup)){
+        results.figures = results.figures || [];
+        results.figures = _.union(results.figures,figuresInFloatGroup);
+    }
 
     results.tables = ScienceXML.getTables(doc);
 
-
+    var pacsArr = ScienceXML.getPACS(doc);
+    console.dir(pacsArr);
+    if(!_.isEmpty(pacsArr)){
+        results.pacs=pacsArr;
+    }
     return results;
 }
 

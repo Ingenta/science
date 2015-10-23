@@ -106,3 +106,30 @@ Science.getParamsFormUrl= function(paramName){
     }
     return params;
 }
+
+Science.StringUtils = {
+    parseToNumbers:function(str){
+        if(!str)
+            return;
+        var parts = str.replace(/\s/g,"").split(/[,，]/);
+        var resultArr = [];
+        _.each(parts,function(part){
+            var tPart = part.trim();
+            var range = tPart.split(/[-－–]/);
+            if(!_.isEmpty(range)){
+                if(range.length===2){
+                    var n1=Number(range[0]);
+                    var n2=Number(range[1]);
+                    if(n1<=n2){
+                        for(var i=n1;i<=n2;i++){
+                            resultArr.push(i);
+                        }
+                    }
+                }else if(range.length===1){
+                    resultArr.push(Number(range[0]));
+                }
+            }
+        })
+        return _.sortBy(resultArr);
+    }
+};

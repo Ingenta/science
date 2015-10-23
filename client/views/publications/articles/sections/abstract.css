@@ -2,8 +2,9 @@ div.articleOutline li {
     list-style-type: none;
 }
 
-#sidebar.affix {
+#indexsidebar.affix {
     top: 20px;
+    width:350px;
 }
 
 /* sidebar */
@@ -48,14 +49,14 @@ div.articleOutline li {
     height: auto;
     text-overflow: clip;
     white-space: normal;
-    width: 350px;
+    /*width: 340px;*/
 }
 
 /* all active links */
 #section-index .nav > .active > a,
 #section-index .nav > .active:hover > a,
 #section-index .nav > .active:focus > a {
-    width: 350px;
+    /*width: 340px;*/
     height: auto;
     font-weight: 700;
 }
@@ -121,4 +122,8 @@ xref[ref-type='table'] {
 }
 .title_style{
     margin: 0 0 0px;
+}
+
+#fulltext-viewer p, .interesting-content p {
+    text-align: justify;
 }

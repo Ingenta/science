@@ -1,42 +1,82 @@
+var clearDR = function(){
+	var dr = Session.get('dynamicRender') ;
+	if(!_.isEmpty(dr)){
+		_.each(dr,function(num){
+			Meteor.clearInterval(num);
+		})
+		Session.set('dynamicRender',undefined);
+	}
+}
+var dynamicRender = function(){
+	clearDR();
+	if(!Router.current().data || !Router.current().data() || !Router.current().data().figures){
+		return;
+	}
+	var figs = Router.current().data().figures;
+	_.each(figs, function (fig) {
+		var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
+		if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
+			refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
+		}
+		if (refs && refs.length) {
+			Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
+			$(refs[0]).remove();
+		}
+	});
+
+	var tbs = Router.current().data().tables;
+	_.each(tbs, function (tb) {
+		var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
+		if (refs && refs.length) {
+			Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
+		}
+	});
+};
+
 ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
-		if (Session.get('activeTab') != slug) {
-			//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
-			var article = Router.current().data();
-			if (!article)return;
-			if (slug === 'abstract') {
-				Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-					ArticleViews.insert({
-						articleId: article._id,
-						userId   : Meteor.userId(),
-						when     : new Date(),
-						action   : "abstract",
-						ip       : session
-					});
+		if(slug!=='full text'){
+			clearDR()
+		}
+		//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
+		var article = Router.current().data && Router.current().data();
+		if (!article)return;
+		if (slug === 'abstract') {
+			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+				ArticleViews.insert({
+					articleId: article._id,
+					userId   : Meteor.userId(),
+					journalId: article.journalId,
+					when     : new Date(),
+					action   : "abstract",
+					ip       : session
 				});
-			} else if (slug === 'full text') {
-				Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-					ArticleViews.insert({
-						articleId: article._id,
-						userId   : Meteor.userId(),
-						when     : new Date(),
-						action   : "fulltext",
-						ip       : session
-					});
+			});
+		} else if (slug === 'full text') {
+			var dr = Session.get("dynamicRender") || new Science.JSON.UniqueArray();
+			Session.set("dynamicRender", dr.push(Meteor.setInterval(dynamicRender,2000)));
+			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+				ArticleViews.insert({
+					articleId: article._id,
+					userId   : Meteor.userId(),
+					journalId: article.journalId,
+					when     : new Date(),
+					action   : "fulltext",
+					ip       : session
 				});
-				if (article.keywords) {
-					article.keywords.en.forEach(function (k) {
-						var id = Keywords.findOne({"name": k})._id;
-						Keywords.update({_id: id}, {$inc: {"score": 2}})
-					});
-					article.keywords.cn.forEach(function (k) {
-						var id = Keywords.findOne({"name": k})._id;
-						Keywords.update({_id: id}, {$inc: {"score": 2}})
-					});
-				}
-				Users.recent.read(article);
+			});
+			if (article.keywords) {
+				_.each(article.keywords.en,function (k) {
+					var id = Keywords.findOne({"name": k})._id;
+					Keywords.update({_id: id}, {$inc: {"score": 2}})
+				});
+				_.each(article.keywords.cn,function (k) {
+					var id = Keywords.findOne({"name": k})._id;
+					Keywords.update({_id: id}, {$inc: {"score": 2}})
+				});
 			}
+			Users.recent.read(article);
 		}
 	}
 });
@@ -163,6 +203,7 @@ Template.showArticle.events({
 		ArticleViews.insert({
 			articleId: this._id,
 			userId   : Meteor.userId(),
+			journalId: article.journalId,
 			when     : new Date(),
 			action   : "pdfDownload"
 		})

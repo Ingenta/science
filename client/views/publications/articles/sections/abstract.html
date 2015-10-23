@@ -69,6 +69,15 @@
             <!--{{/each}}-->
         <!--</ul>-->
         <!--</div>-->
+        <hr>
+        <div class="row">
+            <div class="col-xs-6">
+                {{> mostReadArticleList journalId=getJournalIdFromSession}}
+            </div>
+            <div class="col-xs-6">
+                {{> mostCitedArticleList journalId=getJournalIdFromSession}}
+            </div>
+        </div>
     </div>
 </template>
 

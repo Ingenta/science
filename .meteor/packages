@@ -99,3 +99,5 @@ check
 
 npm-container
 meteorhacks:kadira
+meteortoys:toykit
+spacebars-compiler

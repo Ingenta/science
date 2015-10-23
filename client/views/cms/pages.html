@@ -8,14 +8,14 @@
         {{/unless}}
         {{#if isHomePage key}}
             <div class="pull-right">
-                {{#if can "add-publisher" "publisher" }}
+                {{#if can "list-user" "user"}}
                     {{> updateHomePagesModalForm}}
                 {{/if}}
             </div>
         {{/if}}
         {{#unless isHomePage key}}
             <div class="pull-right">
-                {{#if can "add-publisher" "publisher" }}
+                {{#if can "list-user" "user"}}
                     {{> updatePagesModalForm}}
                 {{/if}}
             </div>

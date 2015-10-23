@@ -26,13 +26,15 @@ ScienceXML.getLocationAsync = function (path, cb) {
 }
 ScienceXML.getFileContentsFromFullPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+    //remove first / from path because meteor absolute url includes it absoluteurl =
+    // 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
     if (path === undefined)return;
     return getLocationSync(path);
 }
 ScienceXML.getFileContentsFromRemotePath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    //remove first / from path because meteor absolute url includes it absoluteurl = 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
+    //remove first / from path because meteor absolute url includes it absoluteurl =
+    // 'https://science-ci.herokuapp.com/' path = "/cfs/test.xml/89ndweincdsnc"
     if (!path)return;
     var fullPath = Meteor.absoluteUrl(path.substring(1));
     return getLocationSync(fullPath);
@@ -100,7 +102,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.affiliations = [];
     var hasAlternatives = xpath.select("//contrib-group/aff-alternatives", doc);
     if (!hasAlternatives || !hasAlternatives.length) {
-        var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
+        var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff/label", doc);
+        if(!affText)affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
         if (affText)results.affiliations.push({affText:{en: affText, cn: affText}});
     } else {
         var affNode = xpath.select("//contrib-group/aff-alternatives", doc);
@@ -127,33 +130,60 @@ ScienceXML.getSubSection = function (subSectionNodes) {
     var thisSubSection = [];
     subSectionNodes.forEach(function (subSection) {
         var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(subSection);
-        var childSectionNodes = xpath.select("child::sec[@id]", subSection);
+        var childSectionNodes = xpath.select("child::sec", subSection);
         if (!childSectionNodes.length)thisSubSection.push(thisSection);
         else {
+	        var subSecs = ScienceXML.getSubSection(childSectionNodes);
+	        var figures=[];
+	        if(!_.isEmpty(subSecs)){
+		        var figures=[];
+		        for(var i=0;i<subSecs.length;i++){
+			        if(!_.isEmpty(subSecs[i].body.figures)){
+				        figures= _.union(figures,subSecs[i].body.figures);
+				        delete subSecs[i].body.figures;
+			        }
+		        }
+                thisSection.body.figures=figures
+	        }
             thisSubSection.push({
                 label: thisSection.label,
                 title: thisSection.title,
                 body: thisSection.body,
-                sections: ScienceXML.getSubSection(childSectionNodes)
+                sections: subSecs
             });
         }
     });
     return thisSubSection;
 }
 
-ScienceXML.getParagraphsFromASectionNode = function (section) {
-    var paragraphNodes = xpath.select("child::p", section);
-    var paragraphs = {html: "", tex: []};
-    paragraphNodes.forEach(function (paragraph) {
-        var parseResult = ScienceXML.handlePara(paragraph);
-        var sectionText = new serializer().serializeToString(parseResult.paraNode);
-        paragraphs.html += ScienceXML.replaceItalics(sectionText);
-        if (parseResult.formulas && parseResult.formulas.length) {
-            paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
-        }
-    });
-    return paragraphs;
+var getParagraphs = function (paragraphNodes) {
+	var paragraphs = {html: "", tex: [], figures:[]};
+	paragraphNodes.forEach(function (paragraph) {
+		if(paragraph.tagName==='fig'){
+			//兼容中国科学插图数据处理
+			var fig = getFigure(paragraph);
+			if(fig){
+				paragraphs.figures.push(fig);
+				var ref = '<p><xref ref-type="fig" rid="'+fig.id+'">'+fig.label+'</xref></p>';
+				paragraphs.html+=ref;
+			}
+		}else{
+			var parseResult = ScienceXML.handlePara(paragraph);
+			var sectionText = new serializer().serializeToString(parseResult.paraNode);
+			paragraphs.html += ScienceXML.replaceItalics(sectionText);
+			if (parseResult.formulas && parseResult.formulas.length) {
+				paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
+			}
+		}
+	});
+	return paragraphs;
 }
+
+ScienceXML.getParagraphsFromASectionNode = function (section) {
+    var paragraphNodes = xpath.select("child::p | child::fig", section);
+    //var paragraphNodes = xpath.select("child::p", section);
+    return getParagraphs(paragraphNodes);
+};
 
 ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
     var title = ScienceXML.getValueByXPathIncludingXml("child::title", section);
@@ -163,10 +193,40 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
 };
 
 ScienceXML.getFullText = function (results, doc) {
-    var sectionNodes = xpath.select("//body/sec", doc); //get all parent sections
-    results.sections = ScienceXML.getSubSection(sectionNodes);
-    return results;
-}
+	// 先检查body下是否有不包含在sec节点中的p节点，如果有的话，
+	// 将这些p节点提取出来作为一个新的章节放到章节列表的顶部
+	var ghostSec, normalSecs = [];
+	var pUnderBody           = xpath.select("//body/p | //body/fig", doc);
+	if (!_.isEmpty(pUnderBody)) {
+		var ghostContent = getParagraphs(pUnderBody);
+		ghostSec         = ghostContent && {label: undefined, title: "__start__", body: ghostContent};
+	}
+	// 取出body下的正常章节信息
+	var sectionNodes = xpath.select("//body/sec", doc);
+	if (!_.isEmpty(sectionNodes)) {
+		//调用递归方法按层级关系取得所有章节信息
+		normalSecs = ScienceXML.getSubSection(sectionNodes);
+	}
+	// 若开头存在无sec内容，合并
+	if (ghostSec) {
+		normalSecs = _.union(ghostSec, normalSecs);
+	}
+	// 兼容中国科学插图
+	// 将文内插图取出统一放到文章的figures节点中
+	if(!_.isEmpty(normalSecs)){
+		var figures=[];
+		for(var i=0;i<normalSecs.length;i++){
+			if(!_.isEmpty(normalSecs[i].body.figures)){
+				figures= _.union(figures,normalSecs[i].body.figures);
+				delete normalSecs[i].body.figures;
+			}
+		}
+		results.figures=figures;
+	}
+
+	results.sections=normalSecs;
+	return results;
+};
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
@@ -174,7 +234,7 @@ ScienceXML.getAbstract = function (results, doc) {
     if (!abstract)  results.errors.push("No abstract found");
     else results.abstract = abstract;
     return results;
-}
+};
 
 ScienceXML.getContentType = function (results, doc) {
     if (!results.errors) results.errors = [];
@@ -196,9 +256,10 @@ ScienceXML.replaceNewLines = function (input) {
 }
 
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {
-    var titleNodes = xpath.select(xp, doc)[0];
-    if (!titleNodes)return;
-    return titleNodes.firstChild.data;
+    var titleNodes = xpath.select(xp, doc);
+    if (_.isEmpty(titleNodes))return;
+    if(!titleNodes[0].firstChild) return;
+    return titleNodes[0].firstChild.data;
 }
 
 ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
@@ -237,12 +298,74 @@ ScienceXML.validateXml = function (xml) {
 }
 
 
-ScienceXML.getDateFromHistory = function (type, doc) {
-    var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
-    var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
-    var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
-    if (!day || !month || !year)return;
-    return new Date(Date.parse(year + '/ ' + month + '/' + day));
+ScienceXML.getDateFromHistory = function (types, doc) {
+    var result;
+    _.each(types,function(type){
+        var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
+        var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
+        var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
+        if (day && month && year){
+            result = new Date(Date.parse(year + '/ ' + month + '/' + day));
+            return;
+        }
+    })
+    return result;
+};
+
+var getFigure = function(fig){
+	var figure = {};
+	var id = xpath.select("./@id", fig);
+	if (id && id.length) {
+		figure.id = id[0].value;
+	}
+	var position = xpath.select("./@position", fig);
+	if (position && position.length) {
+		figure.position = position[0].value;
+	}
+
+	var label = xpath.select("child::label/text()", fig);
+	if (!label || !label.length) {
+		label = xpath.select("child::caption/title/text()",fig);//兼容中国科学的数据
+	}
+	if (label && label.length) {
+		figure.label = label[0].toString();
+	}
+
+	var caption = xpath.select("child::caption/p", fig);
+	if (caption && caption.length) {
+		figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+	}
+    //中国科学数据中无此项
+	//var graphicLinks = xpath.select("child::graphic", fig);
+	//if (graphicLinks && graphicLinks.length) {
+	//	figure.links = [];
+	//	graphicLinks.forEach(function (gl) {
+	//		var glId = xpath.select("./@id", gl);
+	//		if (glId && glId.length) {
+	//			figure.links.push(glId[0].value);
+	//		}
+	//	})
+	//}
+
+	var graphics = xpath.select("descendant::graphic", fig);
+	if (graphics && graphics.length) {
+		figure.graphics = [];
+		//var xlinkSelect = xpath.useNamespaces({"xlink":
+		// "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
+		graphics.forEach(function (grap) {
+			var g = {};
+			var suse = xpath.select("./@specific-use", grap);
+			if (suse && suse.length) {
+				g.use = suse[0].value;
+			}
+			var href = xpath.select('@href', grap);
+			if (href && href.length) {
+				g.href = href[0].value && href[0].value.replace('\\','/');//兼容windows的分隔符\
+			}
+			figure.graphics.push(g);
+		})
+	}
+	return figure;
 };
 
 ScienceXML.getFigures = function (doc) {
@@ -250,53 +373,8 @@ ScienceXML.getFigures = function (doc) {
     if (figNodes && figNodes.length) {
         var figures = [];
         figNodes.forEach(function (fig) {
-            var figure = {};
-            var id = xpath.select("./@id", fig);
-            if (id && id.length) {
-                figure.id = id[0].value;
-            }
-            var position = xpath.select("./@position", fig);
-            if (position && position.length) {
-                figure.position = position[0].value;
-            }
-            var label = xpath.select("child::label/text()", fig);
-            if (label && label.length) {
-                figure.label = label[0].toString();
-            }
-            var caption = xpath.select("child::caption/p", fig);
-            if (caption && caption.length) {
-                figure.caption = caption[0].toString();
-            }
-            var graphicLinks = xpath.select("child::graphic", fig);
-            if (graphicLinks && graphicLinks.length) {
-                figure.links = [];
-                graphicLinks.forEach(function (gl) {
-                    var glId = xpath.select("./@id", gl);
-                    if (glId && glId.length) {
-                        figure.links.push(glId[0].value);
-                    }
-                })
-            }
-
-            var graphics = xpath.select("child::alternatives/graphic", fig);
-            if (graphics && graphics.length) {
-                figure.graphics = [];
-                //var xlinkSelect = xpath.useNamespaces({"xlink": "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
-                graphics.forEach(function (grap) {
-                    var g = {};
-                    var suse = xpath.select("./@specific-use", grap);
-                    if (suse && suse.length) {
-                        g.use = suse[0].value;
-                    }
-                    var href = xpath.select('@href', grap);
-                    if (href && href.length) {
-                        g.href = href[0].value;
-                    }
-                    figure.graphics.push(g);
-                })
-            }
-
-            figures.push(figure);
+            var figure = getFigure(fig);
+	        figure && figures.push(figure);
         });
         return figures;
     }
@@ -339,8 +417,7 @@ ScienceXML.getTables = function (doc) {
 ScienceXML.handlePara = function (paragraph) {
     var handled = {paraNode: paragraph};
 
-    //检查是否含有公式
-    var formulaNodes = xpath.select("child::disp-formula", paragraph);
+    var formulaNodes = xpath.select("descendant::disp-formula | descendant::inline-formula", paragraph);
     if (formulaNodes && formulaNodes.length) {
         handled.formulas = [];
         formulaNodes.forEach(function (fnode) {
@@ -361,7 +438,7 @@ ScienceXML.handlePara = function (paragraph) {
 
             }
             var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
-            var mathml = mmlSelect('child::alternatives/mml:math', fnode);
+            var mathml = mmlSelect('descendant::mml:math', fnode);
             if (mathml && mathml.length) {
                 formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
             }
@@ -395,4 +472,100 @@ ScienceXML.getKeywords= function(xp,dom){
         })
     }
     return _.uniq(allkeywords);
+}
+
+ScienceXML.getReferences=function(doc){
+    var refs = [];
+    var refNodes = xpath.select("//back/ref-list/ref", doc);
+    var index=1;
+    _.each(refNodes,function (refNode) {
+        var ref = {};
+        ref.index=index++;
+        var ele=xpath.select("child::element-citation",refNode)[0];
+        var idAttr = xpath.select("attribute::id",ele);
+        if(!_.isEmpty(idAttr)){
+            ref.id=idAttr[0].value;
+        }
+        var typeAttr=xpath.select("attribute::publication-type",ele);
+        if(!_.isEmpty(typeAttr)){
+            ref.type=typeAttr[0].value;
+        }
+        //提取引文作者信息 开始
+        var authorNodes = xpath.select("descendant::person-group/name",refNode);
+        if(authorNodes){
+            var authors = [];
+            _.each(authorNodes,function(authorNode){
+                var author = {};
+                var surnameNode=xpath.select("child::surname/text()",authorNode);
+                if(!_.isEmpty(surnameNode)){
+                    author.surName=surnameNode.toString()
+                }
+                var givenNode=xpath.select("child::given-names/text()",authorNode);
+                if(!_.isEmpty(givenNode)){
+                    author.givenName=givenNode.toString()
+                }
+                authors.push(author);
+            })
+            //若从引文信息中提取到了作者信息，将作者信息放入引文信息中
+            if(!_.isEmpty(authors)){
+                ref.authors = authors;
+                //检查是否有更多被省略的作者(若存在etal标签，可判定有被省略的作者)
+                if(xpath.select("descendant::person-group/etal",refNode).length){
+                    ref.etal=true;
+                }
+            }
+        }
+        //提取引文作者信息 完成
+        var titleNode = xpath.select("child::element-citation/article-title",refNode);
+        if(!_.isEmpty(titleNode)){
+            var textNodes = xpath.select("descendant::text()",titleNode[0]);
+            var title = "";
+            _.each(textNodes,function(t){
+                title+= " " + t.toString();
+            })
+            ref.title=title.trim();
+        }
+        if(!ref.title){
+            ref.title="not found";
+        }
+        ref.publisherLoc=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-loc",refNode);
+        ref.publisherName=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-name",refNode);
+        ref.year=ScienceXML.getSimpleValueByXPath("child::element-citation/year",refNode);
+        ref.volume = ScienceXML.getSimpleValueByXPath("child::element-citation/volume",refNode);
+        ref.issue = ScienceXML.getSimpleValueByXPath("child::element-citation/issue",refNode);
+        ref.firstPage=ScienceXML.getSimpleValueByXPath("child::element-citation/fpage",refNode);
+        ref.lastPage=ScienceXML.getSimpleValueByXPath("child::element-citation/lpage",refNode);
+        ref.doi=ScienceXML.getSimpleValueByXPath("child::element-citation/pub-id[@pub-id-type='doi']",refNode);
+
+        var sourceNodes = xpath.select("child::element-citation/source",refNode);
+        if(!_.isEmpty(sourceNodes)){
+            var uriNodes = xpath.select("child::uri",sourceNodes[0]);
+            if(!_.isEmpty(uriNodes)){
+                var xlinkSelect = xpath.useNamespaces({"xlink":"http://www.w3.org/1999/xlink"});
+                var hrefAttr = xlinkSelect("attribute::xlink:href",uriNodes[0]);
+                if(!_.isEmpty(hrefAttr)){
+                    ref.href=hrefAttr[0].value;
+                    ref.source = xpath.select("child::text()",uriNodes[0]).toString();
+                }
+            }else{
+                ref.source=xpath.select("child::text()",sourceNodes[0]).toString();
+            }
+        }
+        refs.push(ref);
+    });
+    return refs;
+};
+
+ScienceXML.getPACS = function(doc){
+    var pacsNodes = xpath.select("//kwd-group[@kwd-group-type='pacs-codes']/compound-kwd/compound-kwd-part[@content-type='code']/text()",doc);
+    if(_.isEmpty(pacsNodes))
+        return
+    var codes = [];
+    _.each(pacsNodes,function(node){
+        var code = node && node.data
+        if(code && code.trim()){
+            codes.push(code.trim());
+        }
+    })
+    return codes;
 }

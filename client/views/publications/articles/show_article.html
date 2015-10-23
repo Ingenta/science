@@ -1,7 +1,8 @@
 <template name="showArticle">
     {{> journalBanner journal=journalId}}
-    {{> figModal figures}}
-    {{> tableModal tables}}
+    {{> figModal}}
+    {{> tableModal}}
+	{{> referenceModal}}
     <div class="row articleHeading">
         <div class="col-xs-9">
             {{> imageName}}
@@ -18,7 +19,7 @@
                 <li>
                     <p>
                         {{#each authors}}
-                            {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
+                            <span  class="separate-comma">{{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup></span>
                         {{/each}}
                     </p>
                 </li>
@@ -35,7 +36,7 @@
                 <li>
                     <p>
                         {{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}});
-                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a>
+                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
                     </p>
                 </li>
                 <li>
@@ -45,6 +46,16 @@
                         {{/if}}
                     </p>
                 </li>
+	            {{#if pacs}}
+		            <li>
+			            <p>
+				            {{_ "PACS" count=pacs.length}}
+				            {{#each pacs}}
+					            <span class="separate-comma">{{this}}</span>
+				            {{/each}}
+			            </p>
+		            </li>
+	            {{/if}}
             </ul>
         </div>
         <div class="col-xs-3">

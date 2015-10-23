@@ -15,6 +15,7 @@
     "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
     "PleaseEmail": "Please enter valid e-mail address.",
     "PleaseWait": "Please wait...",
+    "CheckEmail": "We sent you a link to create your account. Please check your email.",
     "schemas": {
         "publications": {
             "title": {
@@ -831,5 +832,7 @@
     "More_specific_topics": "More specific topics",
     "Related_topics": "Related topics",
     "Recent_read":"Recently viewed content",
-    "Recent_search":"Recent Searches"
+    "Recent_search":"Recent Searches",
+    "PACS":"PACS number:",
+    "PACS_plural":"PACS numbers:"
 }

@@ -5,7 +5,7 @@
 
                 {{#each sections}}
                     <div>
-                        <h3 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h3>
+                        <h3 id="sec-{{clearStr title}}">{{label}} {{{handledTitle}}}</h3>
                     </div>
                     <p>
                         {{{body.html}}}
@@ -50,10 +50,10 @@
 </template>
 
 <template name="sectionSelector">
-    <h4>{{_ "section_selector_button"}}</h4>
+	<h4 style="display:{{displayStatus}}">{{_ "section_selector_button"}}</h4>
     <nav id="section-index">
-        <ul id="sidebar" class="nav nav-stacked">
-            {{#each sections}}
+        <ul id="indexsidebar" class="nav nav-stacked">
+            {{#each handledSections}}
                 <li>
                     <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
                     <ul class="nav nav-stacked">
@@ -105,30 +105,54 @@
 </template>
 
 <template name="tableModal">
-    <div class="modal fade table-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="att-table">
-                        <div>
-                            {{{table}}}
-                        </div>
-                        <div>
-                            <b>{{label}} {{{caption}}}</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade table-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="att-table">
+						<div>
+							{{{table}}}
+						</div>
+						<div>
+							<b>{{label}} {{{caption}}}</b>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="referenceModal">
+	<div class="modal fade reference-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="gridSystemModalLabel">Reference</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="list-unstyled simple-list text-justify">
+					{{#each referencesArr}}
+						{{> singleReferenceTemplate}}
+					{{/each}}
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="figure">
@@ -138,7 +162,7 @@
             <span>{{label}}</span>
         </div>
         <div class="figure-caption">
-            <b>{{_ "Caption"}}</b>&nbsp;&nbsp;{{{caption}}}</div>
+            <b>{{_ "Caption"}}</b>&nbsp;&nbsp;{{#mathjax}}{{{caption}}}{{/mathjax}}</div>
         <div style="clear:both;"></div>
     </div>
 </template>
@@ -155,5 +179,5 @@
 </template>
 
 <template name="RedirectTemplate">
-    <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}}<i class="fa fa-external-link"></i></a>
+    <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
 </template>

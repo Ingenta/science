@@ -125,6 +125,82 @@ Router.map(function () {
         }
     });
 
+    this.route('mostReadArticles', {
+        template: "mostReadArticle",
+        title: function () {
+            return TAPi18n.__("Most read articles");
+        },
+        parent: "home",
+        name: "mostRead.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
+    this.route('/mostCiteArticles', {
+        template: "mostCiteArticle",
+        title: function () {
+            return TAPi18n.__("Most cited by");
+        },
+        parent: "home",
+        name: "mostCite.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
+    this.route('/mostCiteArticles/:journalId', {
+        template: "mostCiteArticle",
+        title: function () {
+            return TAPi18n.__("Most cited by");
+        },
+        parent: "home",
+        name: "mostCite.showWithJournalId",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
+    this.route('mostEditorRecommend', {
+        template: "mostRecommendArticles",
+        title: function () {
+            return TAPi18n.__("Editors Recommend");
+        },
+        parent: "home",
+        name: "mostEditor.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
     this.route("advancedSearch", {
         parent: "home",
         title: function () {
@@ -179,12 +255,17 @@ Router.map(function () {
             return TAPi18n.__("Publisher");
         },
         waitOn: function () {
+            Session.set("activeTab", "publisher");
             return [
                 Meteor.subscribe('publishers')
             ]
         },
+        onBeforeAction: function () {
+            Permissions.check("add-user", "publisher");
+            /*BEFORE_FUNCTION*/
+            this.next();
+        },
         data: function () {
-            Session.set("activeTab", "publisher");
             return {
                 admin_users: Users.find({publisherId: this.params.pubId})
             };
@@ -199,11 +280,12 @@ Router.map(function () {
             return TAPi18n.__("Add new user");
         },
         waitOn: function () {
+            Session.set("activeTab", "publisher");
             return [
                 Meteor.subscribe('publishers'),
             ]
         },
-        controller: "AdminUsersInsertController",
+        controller: "AdminUsersInsertController"
     });
 
     this.route("/publisher/account/edit/:userId", {
@@ -214,11 +296,12 @@ Router.map(function () {
             return TAPi18n.__("Edit user");
         },
         waitOn: function () {
+            Session.set("activeTab", "publisher");
             return [
                 Meteor.subscribe('publishers'),
             ]
         },
-        controller: "AdminUsersEditController",
+        controller: "AdminUsersEditController"
     });
 
     this.route('/publisher/:publisherName', {
@@ -410,6 +493,9 @@ Router.map(function () {
                 })
             }
             this.next();
+        },
+        onStop:function(){
+            Meteor.clearInterval(Session.get("dynamicRender"));
         }
     });
 

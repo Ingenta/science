@@ -85,9 +85,26 @@ Template.registerHelper('pluralize', pluralize);
 
 Template.registerHelper('clearStr', function (str) {
     str = str.replace(/(<\/?[^>]+?>|\.)/g, '');
-    return str.replace(/\s/g, '-');
+    return str.replace(/[^\w\d_-]/g,"-")
 });
 
 Template.registerHelper("highlight", function (keyword, str) {
     return str.split(keyword).join("<span class='highlight'>" + keyword + "</span>")
+});
+
+Template.registerHelper('checkPermissionToJournal', function (roles, publisherId, journalId) {
+    if(!Meteor.user()) return false;
+    if(_.contains(Permissions.getUserRoles(), "permissions:admin")) return true;
+    if(!Meteor.user().publisherId) return false;
+    if(Meteor.user().publisherId !== publisherId) return false;
+    if(_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) return true;
+    if(!journalId) return false;
+    if(!_.contain(Meteor.user().journalId, journalId)) return false;
+    roles = roles.split(',');
+    console.log(roles);
+    roles.forEach(function (oneRole) {
+        if(_.contains(Permissions.getUserRoles(), oneRole)) return true;
+    });
+    return false;
+
 });

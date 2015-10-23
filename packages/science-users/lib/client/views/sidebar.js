@@ -80,7 +80,8 @@ Template.LayoutSideBar.helpers({
         }
     },
     showAccessKey: function () {
-        return _.contains(Config.AccessKey,Router.current().route.getName());
+        if (!Router.current().route)return false;
+        return _.contains(Config.AccessKey, Router.current().route.getName());
     }
 });
 

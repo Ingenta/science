@@ -11,27 +11,43 @@ Meteor.startup(function () {
     Accounts.emailTemplates.from = 'SCP <eryaer@sina.com>';
 
     // The public name of your application. Defaults to the DNS name of the application (eg: awesome.meteor.com).
-    Accounts.emailTemplates.siteName = '中国科学出版社 Science China Publisher';
+    Accounts.emailTemplates.siteName = '《中国科学》杂志社平台 Science China Publishing';
+
 
     // A Function that takes a user object and returns a String for the subject line of the email.
     Accounts.emailTemplates.verifyEmail.subject = function (user) {
-        return '中国科学出版社账号激活邮件 Confirm Your Email Address';
+        return EmailConfig.findOne({key: "verifyEmail"}).subject;
     };
 
     // A Function that takes a user object and a url, and returns the body text for the email.
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
-    Accounts.emailTemplates.verifyEmail.text = function (user, url) {
-        return '欢迎使用中国科学出版社平台，请点击下方的链接以激活您的账号:<br> ' + url;
+
+    Accounts.emailTemplates.verifyEmail.html = function (user, url) {
+        return EmailConfig.findOne({key: "verifyEmail"}).body
+            + "<a href='" + url + "'>" + url + "</a>";
     };
 
-    Accounts.emailTemplates.resetPassword.text = function (user, url) {
-        return "请点击下面的链接以重置您的密码 To reset your password, simply click the link below:\n\n"
-            + url;
+    Accounts.emailTemplates.resetPassword.subject = function (user) {
+        return EmailConfig.findOne({key: "forgotPassword"}).subject;
+    };
+
+    Accounts.emailTemplates.resetPassword.html = function (user, url) {
+        return EmailConfig.findOne({key: "forgotPassword"}).body
+            + "<a href='" + url + "'>" + url + "</a>";
+    };
+
+    Accounts.emailTemplates.enrollAccount.subject = function (user) {
+        return EmailConfig.findOne({key: "registration"}).subject;
+    };
+
+    Accounts.emailTemplates.enrollAccount.html = function (user, url) {
+        return EmailConfig.findOne({key: "registration"}).body
+            + "<a href='" + url + "'>" + url + "</a>";
     };
 
 });
 
-//override defualt publish
+//override default publish
 Meteor.publish(null, function () {
     if (this.userId) {
         var query = {};
@@ -51,9 +67,9 @@ Meteor.publish(null, function () {
             history: 1
         };
         if (!Permissions.userCan("list-user", "user", this.userId)) {
-            if (Permissions.userCan("add-user", "publisher", this.userId)){
+            if (Permissions.userCan("add-user", "publisher", this.userId)) {
                 query.publisherId = Users.findOne({_id: this.userId}).publisherId;
-            } else{
+            } else {
                 query._id = this.userId;
             }
         }
@@ -71,20 +87,24 @@ Accounts.urls.resetPassword = function (token) {
     return Meteor.absoluteUrl('reset_password/' + token);
 };
 
+Accounts.urls.verifyEmail = function (token) {
+    return Meteor.absoluteUrl('verify-email/' + token);
+};
+
+Accounts.urls.enrollAccount = function (token) {
+    return Meteor.absoluteUrl('enroll-account/' + token);
+};
+
 Accounts.validateLoginAttempt(function (attempt) {
     if (Config && Config.isDevMode)//开发模式不检查邮箱是否已验证
         return true;
-    if (attempt.user && attempt.user.emails && !attempt.user.emails[0].verified) {
-        throw new Meteor.Error(403, 'email_not_verified');
-    }
-    return true;
-});
-
-
-Accounts.validateLoginAttempt(function (attempt) {
+    if (attempt.user.emails[0].address === "admin@scp.com")//admin user can't be blocked and doesn't need verification
+        return true;
     if (attempt.user && attempt.user.disable) {
         throw new Meteor.Error(403, 'user_blocked');
     }
+    if (attempt.user && attempt.user.emails && !attempt.user.emails[0].verified)
+        throw new Meteor.Error(100002, "email not verified");
     return true;
 });
 
@@ -98,4 +118,16 @@ Accounts.onCreateUser(function (options, user) {
     if (options.journalId)
         user.journalId = options.journalId;
     return user;
+});
+Meteor.methods({
+    registerUser: function (username, password, email) {
+        var userId = Accounts.createUser({
+            email: email,
+            password: password,
+            username: username
+        });
+        Meteor.defer(function () {
+            Accounts.sendVerificationEmail(userId);
+        });
+    }
 });

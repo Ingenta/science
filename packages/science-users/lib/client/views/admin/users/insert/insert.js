@@ -3,7 +3,7 @@ var pageSession = new ReactiveDict();
 Template.AdminUsersInsert.rendered = function () {
 
 };
-Template.AdminUsersInsert.onRendered( function () {
+Template.AdminUsersInsert.onRendered(function () {
     Session.set("publisherId", "");
 });
 Template.AdminUsersInsert.events({});
@@ -60,7 +60,7 @@ Template.AdminUsersInsertInsertForm.events({
 
                     case "update":
                     {
-                        var message = msg || "Saved.";
+                        var message = msg || TAPi18n.__("Saved");
                         pageSession.set("adminUsersInsertInsertFormInfoMessage", message);
                     }
                         ;
@@ -72,7 +72,7 @@ Template.AdminUsersInsertInsertForm.events({
                 //history.back();
                 Router.go("admin.institutions.detail", {insId: Router.current().params.insId});
                 //Session.set('activeTab', 'account');
-            } else if(Router.current().route.getName() === "publisher.account.insert") {
+            } else if (Router.current().route.getName() === "publisher.account.insert") {
                 Router.go("publisher.account", {pubId: Router.current().params.pubId});
             } else {
                 Router.go("admin.users", {});
@@ -94,16 +94,18 @@ Template.AdminUsersInsertInsertForm.events({
             },
             function (values) {
                 Permissions.check("add-user", "publisher");
-                if (Router.current().params.insId) values.institutionId = Router.current().params.insId;
-                console.log(values);
+                if (Router.current().params.insId) values.institutionId = Router.current().params.insId;//机构帐号标签页才需要设值
                 Meteor.call("createUserAccount", values, function (e, userId) {
-                    console.log(userId);
-                    if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
-                    if (values.institutionId) {
-                        Permissions.delegate(userId, ["permissions:permissions-manager"]);
-                        Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
+                    if (e) {
+                        errorAction(e.message);
                     }
-                    if (e) errorAction(e.message); else submitAction();
+                    else {
+                        if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
+                        if (values.institutionId) {
+                            Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
+                        }
+                        submitAction();
+                    }
                 });
             }
         );
@@ -117,7 +119,7 @@ Template.AdminUsersInsertInsertForm.events({
             //history.back();
             Router.go("admin.institutions.detail", {insId: Router.current().params.insId});
             //Session.set('activeTab', 'account');
-        } else if(Router.current().route.getName() === "publisher.account.insert") {
+        } else if (Router.current().route.getName() === "publisher.account.insert") {
             Router.go("publisher.account", {pubId: Router.current().params.pubId});
         } else {
             Router.go("admin.users", {});
@@ -135,7 +137,7 @@ Template.AdminUsersInsertInsertForm.events({
     },
     "change #form-select-publisher": function (e) {
         e.preventDefault();
-        Session.set("publisherId",$(e.target).val());
+        Session.set("publisherId", $(e.target).val());
     }
 
 });
@@ -152,6 +154,10 @@ Template.AdminUsersInsertInsertForm.helpers({
     },
     "isPublisher": function () {
         return "publisher" === Session.get("activeTab");
+    },
+    "isPublisherAdmin": function () {
+        console.log(Router.current().route.getName());
+        return "publisher.account.insert" === Router.current().route.getName();
     },
     "getInstitutions": function () {
         return Institutions.find({}, {name: 1});

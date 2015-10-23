@@ -58,7 +58,7 @@ Template.AdminRolesInsertForm.events({
 
 					case "update":
 					{
-						var message = msg || "Saved.";
+						var message = msg || TAPi18n.__("Saved");
 						pageSession.set("adminRolesInsertFormInfoMessage", message);
 					}
 						;

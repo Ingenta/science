@@ -25,6 +25,25 @@
                         {{_ "Add new"}}
                     </span>
                 </button>
+                <button type="submit" id="batch-insert-button" class="btn btn-success" data-toggle="modal" data-target="#uploadModal">
+                    <span class="fa fa-plus">
+                        {{_ "Batch Add"}}
+                    </span>
+                </button>
+                <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">{{_ "Batch Add"}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div><input type="file" name="fileName"></div>
+                                <div align="right"><button type="submit" id="btnUpload" class="btn btn-primary btn-sm">{{_"Upload"}}</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="dataview-controls-search">
                 {{#if isNotEmpty}}

@@ -42,7 +42,7 @@ Template.AdminUsersEditEditForm.events({
         pageSession.set("adminUsersEditEditFormInfoMessage", "");
         pageSession.set("adminUsersEditEditFormErrorMessage", "");
 
-        var self = this;
+        var that = this;
 
         function submitAction(msg) {
             var adminUsersEditEditFormMode = "update";
@@ -57,7 +57,7 @@ Template.AdminUsersEditEditForm.events({
 
                     case "update":
                     {
-                        var message = msg || "Saved.";
+                        var message = msg || TAPi18n.__("Saved");
                         pageSession.set("adminUsersEditEditFormInfoMessage", message);
                     }
                         ;
@@ -66,11 +66,10 @@ Template.AdminUsersEditEditForm.events({
             }
             if (Router.current().route.getName() === "admin.institutions.detail.edit") {
                 //history.back();
-                Router.go("admin.institutions.detail", {insId: this.admin_user.institutionId});
+                Router.go("admin.institutions.detail", {insId: that.admin_user.institutionId});
                 //Session.set('activeTab', 'account');
             } else if(Router.current().route.getName() === "publisher.account.edit") {
-                console.log(admin_user);
-                Router.go("publisher.account", {pubId: this.admin_user.publisherId});
+                Router.go("publisher.account", {pubId: that.admin_user.publisherId});
             } else {
                 Router.go("admin.users", {});
             }
@@ -154,8 +153,8 @@ Template.AdminUsersEditEditForm.helpers({
     "getPublisherNameById": function () {
         return Publishers.findOne({_id: this.admin_user.publisherId}, {chinesename: 1, name: 1});
     },
-    "isNormalUser": function () {
-        return "normal" === Session.get("activeTab");
+    "canEditRoles": function () {
+        return "publisher" === Session.get("activeTab") || "admin" === Session.get("activeTab");
     },
     "getJournals": function () {
         return Publications.find({publisher: this.admin_user.publisherId}, {titleCn: 1, title: 1});
@@ -165,6 +164,10 @@ Template.AdminUsersEditEditForm.helpers({
     },
     "getJournalId": function () {
         return Session.get("journalId");
+    },
+    "isPublisherAdmin": function () {
+        console.log(Permissions.getUserRoles());
+        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
     }
 
 });
@@ -173,7 +176,20 @@ Template.userEditRoles.helpers({
     "usersRoles": function () {
         var user = Meteor.users.findOne({_id: Router.current().params.userId});
         Session.set("curUser", user);
-        var pr = Permissions.getRoles();
+        var pr = {};
+        if("admin" === Session.get("activeTab"))
+            pr = Permissions.getRoles();
+        if("publisher" === Session.get("activeTab")){
+            var temp = Permissions.getRoles();
+            if(OrbitPermissions.isAdmin(Meteor.user())){
+                pr["permissions:permissions-manager"] = temp["permissions:permissions-manager"];
+                pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
+            };
+            var keys = ["news:news-manager"];//出版商管理员可设置的权限
+            keys.forEach(function (key) {
+                pr[key] = temp[key];
+            });
+        }
         return Object.keys(pr);
     },
     "itemIsChecked": function () {
@@ -189,5 +205,11 @@ Template.userEditRoles.helpers({
     },
     "itemIsDisabled": function () {
         return Permissions.userCan("delegate-and-revoke", "permissions", Meteor.userId()) ? "" : "disabled";
+    //},
+    //"radioOrCheckbox": function () {
+    //    if("admin" === Session.get("activeTab"))
+    //        return "checkbox";
+    //    if("publisher" === Session.get("activeTab"))
+    //        return "radio";
     }
 });

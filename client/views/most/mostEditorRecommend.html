@@ -1,0 +1,42 @@
+<template name="mostRecommendArticles">
+    <h3 class="dotted"><b>{{_ "Editors recommend to view"}}&nbsp;:</b></h3>
+    <div class="dotted">
+        <label>{{_ "Sort Results By"}}：</label>
+        <label class="radio-inline">
+            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
+        </label>
+        <label class="radio-inline">
+            <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
+        </label>
+        <label class="radio-inline">
+            <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
+        </label>
+    </div>
+    <div class="dotted">
+        <h4><b>{{_ "This platform within the editors recommend articles look at it"}}：</b><span style="color: #8c8c8c">（{{_ "According to article 20"}}）</span></h4>
+    </div>
+    <div class="dotted">
+        {{#each mostRecommendArticles}}
+        <ul class="dotted list-unstyled">
+            <li>
+                <h4><div class="resultsList">{{> imageName}}<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a></div></h4>
+
+                <ul class="list-unstyled">
+                    <li>
+                        {{#each authors}}
+                        {{> authorPopButton name=getFullName}}
+                        {{/each}}
+                    </li>
+                    <li>
+                        <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+                    </li>
+                    {{> abstractDetails}}
+                </ul>
+            </li>
+        </ul>
+        {{else}}
+        {{_ "No articles found!"}}
+        {{/each}}
+    </div>
+</template>
