@@ -20,7 +20,7 @@ var dynamicRender = function(){
 		}
 		if (refs && refs.length) {
 			Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
-			$(refs[0].remove());
+			$(refs[0]).remove();
 		}
 	});
 

@@ -1,5 +1,5 @@
-Router.route("test",{
-	path:"/test"
+Router.route("test2",{
+	path:"/test2"
 });
 
 Template.test1.helpers({
@@ -28,7 +28,7 @@ Meteor.startup(function(){
 
 })
 
-Template.test.helpers({
+Template.test2.helpers({
 	content:function(){
 		return Session.get("userTemp");
 	},
@@ -52,7 +52,7 @@ Template.test.helpers({
 		}
 	}
 });
-Template.test.events({
+Template.test2.events({
 	'click button':function(e){
 		var content = Template.instance().$("textarea").val();
 		content = content.trim();

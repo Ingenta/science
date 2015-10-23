@@ -3,8 +3,8 @@ Router.map(function () {
         path: "/miniplatform",
         layoutTemplate: "miniLayout"
     });
-    this.route("test", {
-        path: "/miniplatform/test",
+    this.route("authorCentered", {
+        path: "/miniplatform/authorCentered",
         layoutTemplate: "miniLayout"
     });
 });

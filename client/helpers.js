@@ -85,7 +85,7 @@ Template.registerHelper('pluralize', pluralize);
 
 Template.registerHelper('clearStr', function (str) {
     str = str.replace(/(<\/?[^>]+?>|\.)/g, '');
-    return str.replace(/\s/g, '-');
+    return str.replace(/[^\w\d_-]/g,"-")
 });
 
 Template.registerHelper("highlight", function (keyword, str) {

@@ -256,9 +256,10 @@ ScienceXML.replaceNewLines = function (input) {
 }
 
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {
-    var titleNodes = xpath.select(xp, doc)[0];
-    if (!titleNodes)return;
-    return titleNodes.firstChild.data;
+    var titleNodes = xpath.select(xp, doc);
+    if (_.isEmpty(titleNodes))return;
+    if(!titleNodes[0].firstChild) return;
+    return titleNodes[0].firstChild.data;
 }
 
 ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
@@ -326,7 +327,7 @@ var getFigure = function(fig){
 
 	var caption = xpath.select("child::caption/p", fig);
 	if (caption && caption.length) {
-		figure.caption = caption[0].toString();
+		figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
 	}
     //中国科学数据中无此项
 	//var graphicLinks = xpath.select("child::graphic", fig);
