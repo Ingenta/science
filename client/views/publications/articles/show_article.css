@@ -35,3 +35,8 @@ div.articleHeading li {
     content: "\f005";
     color: #e3cf7a;
 }
+
+.separate-comma:not(:last-child):after{
+    content:",";
+    margin:auto 3px;
+}
