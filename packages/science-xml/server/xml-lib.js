@@ -298,12 +298,18 @@ ScienceXML.validateXml = function (xml) {
 }
 
 
-ScienceXML.getDateFromHistory = function (type, doc) {
-    var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
-    var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
-    var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
-    if (!day || !month || !year)return;
-    return new Date(Date.parse(year + '/ ' + month + '/' + day));
+ScienceXML.getDateFromHistory = function (types, doc) {
+    var result;
+    _.each(types,function(type){
+        var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
+        var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
+        var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
+        if (day && month && year){
+            result = new Date(Date.parse(year + '/ ' + month + '/' + day));
+            return;
+        }
+    })
+    return result;
 };
 
 var getFigure = function(fig){
@@ -549,3 +555,17 @@ ScienceXML.getReferences=function(doc){
     });
     return refs;
 };
+
+ScienceXML.getPACS = function(doc){
+    var pacsNodes = xpath.select("//kwd-group[@kwd-group-type='pacs-codes']/compound-kwd/compound-kwd-part[@content-type='code']/text()",doc);
+    if(_.isEmpty(pacsNodes))
+        return
+    var codes = [];
+    _.each(pacsNodes,function(node){
+        var code = node && node.data
+        if(code && code.trim()){
+            codes.push(code.trim());
+        }
+    })
+    return codes;
+}
