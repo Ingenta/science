@@ -10,16 +10,15 @@ Template.singleReferenceTemplate.helpers({
 	contentType:function(){
 		return this.type && ("["+contentType[this.type.toLowerCase().trim()] + "]");
 	},
-	journalName:function(){
-		if(this.source){
-			if(this.href){
-				return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:this.source});
-			}else if(this.doi){
-				return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:"http://dx.doi.org/"+this.doi});
-			}else{
-				return this.source + ", ";
-			}
+	link:function(){
+		if(this.href){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:this.doi || this.title});
+		}else if(this.doi){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:this.doi});
 		}
+	},
+	formatJournal:function(){
+		return this.source && (this.source + ", ")
 	},
 	formatYear:function(){
 		return this.year && (this.year + ", ")
