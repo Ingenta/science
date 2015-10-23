@@ -738,6 +738,17 @@
                 }
             }
         },
+        "searchHistory": {
+            "folderName": {
+                "label": "Folder Name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            }
+        },
         "fileExcel": {
             "fileId": {
                 "label": "Choose Excel"
@@ -826,5 +837,7 @@
     "More_specific_topics": "More specific topics",
     "Related_topics": "Related topics",
     "Recent_read":"Recently viewed content",
-    "Recent_search":"Recent Searches"
+    "Recent_search":"Recent Searches",
+    "PACS":"PACS number:",
+    "PACS_plural":"PACS numbers:"
 }

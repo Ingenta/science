@@ -28,6 +28,6 @@ Users.recent={
 		}else{
 			return Science.Cookies.queue("recentSearch");
 		}
-	},
+	}
 
 };

@@ -29,14 +29,13 @@ resourcePermissions
 	});
 
 resourcePermissions
-	.defineRole("journal-manager", ["add-journal", "modify-journal", "delete-journal",
-		"add-article", "modify-article", "delete-article"], {
+	.defineRole("journal-manager", ["modify-journal"], {
 		en: {
-			name   : "journal manager",
-			summary: "manager for journal"
+			name: "journal manager (publisher)",
+			summary: "journal manager"
 		},
 		cn: {
-			name   : "期刊管理",
-			summary: "可以增删改期刊信息的角色"
+			name: "期刊管理员 (出版商)",
+			summary: "期刊管理员"
 		}
 	});

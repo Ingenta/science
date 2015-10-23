@@ -24,3 +24,4 @@ Tags.permit(['insert', 'update', 'remove']).apply();
 Collections.Medias.permit(['insert', 'update', 'remove']).apply();
 SpecialTopics.permit(['insert', 'update', 'remove']).apply();
 fileExcel.permit(['insert', 'update', 'remove']).apply();
+SearchHistory.permit(['insert', 'update', 'remove']).apply();

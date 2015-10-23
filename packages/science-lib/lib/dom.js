@@ -7,3 +7,9 @@ Science.dom.getSelContent = function(){
 		return document.getSelection().toString();
 	}
 }
+
+Science.dom.scollToElement = function(selector){
+	var ele = $(selector);
+	var top = ele.length ? ele.offset().top : 0;
+	$('html,body').animate({scrollTop: top}, 400);
+}

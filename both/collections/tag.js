@@ -18,7 +18,7 @@ TagsSchema = new SimpleSchema({
         unique: true
     },
     name: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     icon: {

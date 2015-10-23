@@ -971,6 +971,17 @@
             }
         }
     },
+    "searchHistory": {
+        "folderName": {
+            "label": "文件夹名称",
+            "cn": {
+                "label": "中文"
+            },
+            "en": {
+                "label": "英文"
+            }
+        }
+    },
     "fileExcel": {
       "fileId": {
         "label": "选择Excel文件"
@@ -1115,5 +1126,6 @@
   "Search time":"搜索时间",
   "Delete search history":"删除搜索历史",
   "Save to Folder":"保存到文件夹",
-  "Permission denied": "没有权限"
+  "Permission denied": "没有权限",
+  "PACS":"PACS代号:"
 }

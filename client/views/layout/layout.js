@@ -10,12 +10,7 @@ Template.layout.rendered = function () {
 			var hash = href.substring(1);
 			if (hash) {
 				e.preventDefault();
-
-				var offset = $('*[id="' + hash + '"]').offset();
-
-				if (offset) {
-					$('html,body').animate({scrollTop: offset.top}, 400);
-				}
+				Science.dom.scollToElement("#"+hash);
 			}
 		} else {
 			if (href.indexOf("http://") != 0 && href.indexOf("https://") != 0 && href.indexOf("#") != 0) {

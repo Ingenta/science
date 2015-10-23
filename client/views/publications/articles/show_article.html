@@ -19,7 +19,7 @@
                 <li>
                     <p>
                         {{#each authors}}
-                            {{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup>
+                            <span  class="separate-comma">{{> authorPopButton name=getFullName}}<sup>{{emailRef}}</sup></span>
                         {{/each}}
                     </p>
                 </li>
@@ -46,6 +46,16 @@
                         {{/if}}
                     </p>
                 </li>
+	            {{#if pacs}}
+		            <li>
+			            <p>
+				            {{_ "PACS" count=pacs.length}}
+				            {{#each pacs}}
+					            <span class="separate-comma">{{this}}</span>
+				            {{/each}}
+			            </p>
+		            </li>
+	            {{/if}}
             </ul>
         </div>
         <div class="col-xs-3">

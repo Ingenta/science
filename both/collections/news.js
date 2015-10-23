@@ -20,7 +20,7 @@ NewsSchema = new SimpleSchema({
         type: Date
     },
     author: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     abstract: {

@@ -15,13 +15,15 @@
 			{{givenName}} {{surName}},
 		{{/each}}
 		{{#if etal}} et al{{/if}}.
-		{{title}}{{contentType}}.{{{journalName}}}
+		{{title}}{{contentType}}.
+		{{formatJournal}}
 		{{formatYear}}
 		{{formatVolIssue}}
 		{{formatRange}}
+		{{{link}}}
 	</li>
 </template>
 
 <template name="referenceLinkTemplate">
-	<a target="_blank" href="{{href}}">{{name}}</a>,
+	,<a target="_blank" href="{{href}}">{{name}}</a>
 </template>

@@ -166,8 +166,8 @@ Template.AdminUsersEditEditForm.helpers({
         return Session.get("journalId");
     },
     "isPublisherAdmin": function () {
-        console.log(Permissions.getUserRoles());
-        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
+        //console.log(Permissions.getUserRoles());
+        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user") && this.admin_user._id !== Meteor.userId();
     }
 
 });
@@ -181,11 +181,11 @@ Template.userEditRoles.helpers({
             pr = Permissions.getRoles();
         if("publisher" === Session.get("activeTab")){
             var temp = Permissions.getRoles();
-            if(OrbitPermissions.isAdmin(Meteor.user())){
+            if(Permissions.isAdmin()){
                 pr["permissions:permissions-manager"] = temp["permissions:permissions-manager"];
                 pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
             };
-            var keys = ["news:news-manager"];//出版商管理员可设置的权限
+            var keys = ["resource:journal-manager", "news:news-manager"];//出版商管理员可设置的权限
             keys.forEach(function (key) {
                 pr[key] = temp[key];
             });

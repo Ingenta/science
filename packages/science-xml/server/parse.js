@@ -159,11 +159,11 @@ ScienceXML.parseXml = function (path) {
     //          GET AUTHORS, NOTES AND AFFILIATIONS
     ScienceXML.getAuthorInfo(results, doc);
 
-    var received = ScienceXML.getDateFromHistory("received", doc);
+    var received = ScienceXML.getDateFromHistory(["Received","received"], doc);
     if (received) results.received = received
-    var accepted = ScienceXML.getDateFromHistory("accepted", doc);
+    var accepted = ScienceXML.getDateFromHistory(["accepted"], doc);
     if (accepted) results.accepted = accepted
-    var published = ScienceXML.getDateFromHistory("published", doc);
+    var published = ScienceXML.getDateFromHistory(["published online","published"], doc);
     if (published) results.published = published
 
     var figuresInFloatGroup=ScienceXML.getFigures(doc);
@@ -174,6 +174,11 @@ ScienceXML.parseXml = function (path) {
 
     results.tables = ScienceXML.getTables(doc);
 
+    var pacsArr = ScienceXML.getPACS(doc);
+    console.dir(pacsArr);
+    if(!_.isEmpty(pacsArr)){
+        results.pacs=pacsArr;
+    }
     return results;
 }
 
