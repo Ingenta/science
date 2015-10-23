@@ -47,7 +47,8 @@ Meteor.publish(null, function () {
             institutionId: 1,
             publisherId: 1,
             journalId: 1,
-            emailFrequency: 1
+            emailFrequency: 1,
+            history: 1
         };
         if (!Permissions.userCan("list-user", "user", this.userId)) {
             if (Permissions.userCan("add-user", "publisher", this.userId)){
