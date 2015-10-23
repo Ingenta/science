@@ -256,9 +256,10 @@ ScienceXML.replaceNewLines = function (input) {
 }
 
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {
-    var titleNodes = xpath.select(xp, doc)[0];
-    if (!titleNodes)return;
-    return titleNodes.firstChild.data;
+    var titleNodes = xpath.select(xp, doc);
+    if (_.isEmpty(titleNodes))return;
+    if(!titleNodes[0].firstChild) return;
+    return titleNodes[0].firstChild.data;
 }
 
 ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
