@@ -43,7 +43,7 @@ SyncedCron.add({
 SyncedCron.add({
     name: "MostCitedTable",
     schedule: function (parser) {
-        return parser.text("every 10 min");
+        return parser.text("at 6:00 am except on Sat");
     },
     job: function () {
         MostCited.remove({});
