@@ -10,7 +10,7 @@ Science.schemas.MultiLangSchema = new SimpleSchema({
 	}
 });
 // 非必填字段
-Science.schemas.MultipleTextSchema = new SimpleSchema({
+Science.schemas.MultipleTextOptionalSchema = new SimpleSchema({
 	en:{
 		type: String,
 		optional: true
@@ -22,7 +22,7 @@ Science.schemas.MultipleTextSchema = new SimpleSchema({
 });
 
 //
-Science.schemas.MultipleText1Schema = new SimpleSchema({
+Science.schemas.MultipleTextRequiredSchema = new SimpleSchema({
 	en:{
 		type: String
 	},

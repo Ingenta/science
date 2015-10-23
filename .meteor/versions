@@ -126,6 +126,7 @@ mrt:mathjax@0.6.3
 mrt:moment@2.8.1
 msavin:mongol@1.5.0
 multiply:iron-router-progress@1.0.2
+netanelgilad:excel@0.2.4
 npm-bcrypt@0.7.8_2
 npm-container@1.2.0
 npm-mongo@1.4.39_1

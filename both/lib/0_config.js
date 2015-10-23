@@ -15,6 +15,7 @@ Config = {
         uploadDir: '/tmp/uploads'
     },
     uploadPdfDir: '/tmp/pdf',
+    uploadExcelDir: '/tmp/excel',
     ftp: {
         downloadDir: "/tmp/downloads"
     },

@@ -737,6 +737,22 @@
                     "label": "English"
                 }
             }
+        },
+        "searchHistory": {
+            "folderName": {
+                "label": "Folder Name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            }
+        },
+        "fileExcel": {
+            "fileId": {
+                "label": "Choose Excel"
+            }
         }
     },
     "roles": "Roles",

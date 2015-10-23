@@ -12,6 +12,7 @@ Meteor.subscribe("current_user_data");
 Meteor.subscribe("issues");
 Meteor.subscribe("about");
 Meteor.subscribe("tag");
+Meteor.subscribe("file_excel");
 Meteor.subscribe("volumes");
 Meteor.subscribe("about_articles");
 Meteor.subscribe("editorial_member");
@@ -31,6 +32,7 @@ Meteor.subscribe('recommend');
 Meteor.subscribe('institutions');
 Meteor.subscribe('mostCited');
 Meteor.subscribe('specialTopics');
+Meteor.subscribe('searchHistory');
 
 Router.onBeforeAction(function () {
     // loading indicator here

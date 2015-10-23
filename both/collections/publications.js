@@ -33,14 +33,14 @@ PublicationsSchema = new SimpleSchema({
         type: Date
     },
     chiefEditor: {
-        type: Science.schemas.MultipleTextSchema
+        type: Science.schemas.MultipleTextOptionalSchema
     },
     competentOrganization: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     sponsor: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     EISSN: {
@@ -92,7 +92,7 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     address: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     phone: {
@@ -104,7 +104,7 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     authorTitle: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     authorDescription: {
@@ -112,7 +112,7 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     fileName: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     authorPicture: {
@@ -181,33 +181,17 @@ PublicationsSchema = new SimpleSchema({
         optional: true
     },
     "historicalJournal.$.title": {
-        type: Science.schemas.MultipleText1Schema
+        type: Science.schemas.MultipleTextOptionalSchema,
+        optional: true
     },
     "historicalJournal.$.dateRange": {
-        type: String
+        type: String,
+        optional: true
     },
-    //"historicalJournal.$.dateRange": {
-    //    type: Object,
-    //},
-    //"historicalJournal.$.dateRange.start": {
-    //    type: Date,
-    //    autoform: {
-    //        afFieldInput: {
-    //            type: "bootstrap-datepicker"
-    //        }
-    //    }
-    //},
-    //"historicalJournal.$.dateRange.end": {
-    //    type: Date,
-    //    autoform: {
-    //        afFieldInput: {
-    //            type: "bootstrap-datepicker"
-    //        }
-    //    }
-    //},
     "historicalJournal.$.issn": {
         type: String,
-        max: 9
+        max: 9,
+        optional: true
     },
     "historicalJournal.$.essn": {
         type: String,
