@@ -1,29 +1,28 @@
 <template name="JournalTabInPublisher">
     <div class="container-fluid">
         {{> PublicationsAlphabetBar}}
-        <div class="row">
-            <div class="col-xs-12">
-                {{#if can "add-journal" "resource" }}
-                    <button type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#addPublicationModal">
+        {{#with publisher}}
+            <div class="row">
+                <div class="col-xs-12">
+                    {{#if checkPermissionToJournal "add-journal,resource" _id ""}}
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#addPublicationModal">
                         <span class="fa fa-plus">
                             {{_ "Add new"}}
                         </span>
-                    </button>
-                {{/if}}
+                        </button>
+                    {{/if}}
+                </div>
             </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div id="menu" class="col-xs-3">
-
-            </div>
-            <div id="subcontent" class="col-xs-9">
-                {{#with publisher}}
+            <hr>
+            <div class="row">
+                <div id="menu" class="col-xs-3">
+                </div>
+                <div id="subcontent" class="col-xs-9">
                     {{> PublicationList}}
-                {{/with}}
+                </div>
             </div>
-        </div>
+        {{/with}}
     </div>
     {{> addPublicationForm}}
 </template>
@@ -59,11 +58,11 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="pull-right">
-                    {{#if can "modify-journal" "resource" }}
+                    {{#if checkPermissionToJournal "modify-journal,resource" publisher ""}}
                         {{> displayPublication}}
                         {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
                     {{/if}}
-                    {{#if can "delete-journal" "resource" }}
+                    {{#if checkPermissionToJournal "delete-journal,resource" publisher ""}}
                         <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </div>
