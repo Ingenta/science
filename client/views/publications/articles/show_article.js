@@ -8,7 +8,6 @@ var clearDR = function(){
 	}
 }
 var dynamicRender = function(){
-	console.log('dr..')
 	clearDR();
 	if(!Router.current().data || !Router.current().data() || !Router.current().data().figures){
 		return;
@@ -74,8 +73,7 @@ ReactiveTabs.createInterface({
 				if(!_.isEmpty(keywords)){
 					console.dir(keywords)
 					Meteor.call("updateKeywordScore",{name:{$in:keywords}},2,function(err,result){
-						console.log(err);
-						console.log(result);
+						
 					})
 				}
 			}

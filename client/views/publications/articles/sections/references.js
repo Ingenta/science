@@ -12,10 +12,30 @@ Template.singleReferenceTemplate.helpers({
 	},
 	link:function(){
 		if(this.href){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:"[CrossRef]"});
-		}else if(this.doi){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:"[CrossRef]"});
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:"CrossRef"});
+		}//else if(this.doi){
+		//	return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:"CrossRef"});
+		//}
+	},
+	googleScholar:function(){
+		var href="http://scholar.google.com/scholar_lookup?";
+		var paramsStrArr=[];
+		this.title && paramsStrArr.push("title="+this.title);
+		if(!_.isEmpty(this.authors)){
+			_.each(this.authors,function(author){
+				paramsStrArr.push("author="+author.givenName + " " + author.surName);
+			})
 		}
+		this.year && paramsStrArr.push("publication_year="+this.year);
+		this.source && paramsStrArr.push("journal="+this.source);
+		this.volume && paramsStrArr.push("volume="+this.volume);
+		this.issue && paramsStrArr.push("issue="+this.issue);
+		this.firstPage && this.lastPage && paramsStrArr.push("pages="+this.firstPage+"-"+this.lastPage);
+		if(_.isEmpty(paramsStrArr))
+			return;
+
+		var queryStr = paramsStrArr.join("&");
+		return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:href+queryStr,name:"Google Scholar"});
 	},
 	formatJournal:function(){
 		return this.source && (this.source + ", ")
