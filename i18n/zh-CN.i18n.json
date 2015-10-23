@@ -7,7 +7,6 @@
   "This platform up to read the article within view": "本平台内最多阅读文章查看",
   "This platform in the most cited article view": "本平台内最多引用文章查看",
   "This platform within the editors recommend articles look at it": "本平台内编辑推荐文章查看",
-  "According to article 20": "显示20篇",
   "FILTER BY Publisher": "按出版商过滤浏览",
   "FILTER BY Publications": "按出版物过滤浏览",
   "FILTER BY Content Properties": "按内容属性过滤浏览",
@@ -940,38 +939,43 @@
         "label": "标签详情URL"
       }
     },
-      "specialTopics": {
-          "title": {
-              "label": "标题",
-              "cn": {
-                  "label": "中文"
-              },
-              "en": {
-                  "label": "英文"
-              }
-          },
-          "IssueId": {
-              "label": "卷-期"
-          },
-          "guest_editor": {
-              "label": "客座编辑",
-              "cn":{
-                  "label": "中文"
-              },
-              "en":{
-                  "label": "英文"
-              }
-          },
-          "abstract": {
-              "label": "描述",
-              "cn":{
-                  "label": "中文"
-              },
-              "en":{
-                  "label": "英文"
-              }
-          }
+    "specialTopics": {
+        "title": {
+            "label": "标题",
+            "cn": {
+                "label": "中文"
+            },
+            "en": {
+                "label": "英文"
+            }
+        },
+        "IssueId": {
+            "label": "卷-期"
+        },
+        "guest_editor": {
+            "label": "客座编辑",
+            "cn":{
+                "label": "中文"
+            },
+            "en":{
+                "label": "英文"
+            }
+        },
+        "abstract": {
+            "label": "描述",
+            "cn":{
+                "label": "中文"
+            },
+            "en":{
+                "label": "英文"
+            }
+        }
+    },
+    "fileExcel": {
+      "fileId": {
+        "label": "选择Excel文件"
       }
+    }
   },
   "roles": "角色",
   "roleName": "角色名",
