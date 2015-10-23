@@ -12,9 +12,9 @@ Template.singleReferenceTemplate.helpers({
 	},
 	link:function(){
 		if(this.href){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:this.doi || this.title});
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:"[CrossRef]"});
 		}else if(this.doi){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:this.doi});
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:"[CrossRef]"});
 		}
 	},
 	formatJournal:function(){

@@ -8,6 +8,7 @@ var clearDR = function(){
 	}
 }
 var dynamicRender = function(){
+	console.log('dr..')
 	clearDR();
 	if(!Router.current().data || !Router.current().data() || !Router.current().data().figures){
 		return;
@@ -36,10 +37,11 @@ var dynamicRender = function(){
 ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
+		console.log(slug);
 		if(slug!=='full text'){
 			clearDR()
 		}
-		//Session.set('activeTab', slug);//此处死循环，可导致页面假死。
+		Session.set('activeTab', slug);
 		var article = Router.current().data && Router.current().data();
 		if (!article)return;
 		if (slug === 'abstract') {
@@ -66,15 +68,16 @@ ReactiveTabs.createInterface({
 					ip       : session
 				});
 			});
-			if (article.keywords) {
-				_.each(article.keywords.en,function (k) {
-					var id = Keywords.findOne({"name": k})._id;
-					Keywords.update({_id: id}, {$inc: {"score": 2}})
-				});
-				_.each(article.keywords.cn,function (k) {
-					var id = Keywords.findOne({"name": k})._id;
-					Keywords.update({_id: id}, {$inc: {"score": 2}})
-				});
+
+			if (!_.isEmpty(article.keywords)) {
+				var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn))
+				if(!_.isEmpty(keywords)){
+					console.dir(keywords)
+					Meteor.call("updateKeywordScore",{name:{$in:keywords}},2,function(err,result){
+						console.log(err);
+						console.log(result);
+					})
+				}
 			}
 			Users.recent.read(article);
 		}
@@ -190,7 +193,7 @@ Template.articleOptions.helpers({
 		];
 	},
 	activeTab : function () {
-		return Session.get('activeTab');
+		//return Session.get('activeTab');
 	},
 	ipRedirect: function () {
 		if (this.language === "2") return false;
