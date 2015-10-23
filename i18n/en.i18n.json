@@ -737,6 +737,17 @@
                     "label": "English"
                 }
             }
+        },
+        "searchHistory": {
+            "folderName": {
+                "label": "Folder Name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            }
         }
     },
     "roles": "Roles",

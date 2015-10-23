@@ -6,6 +6,7 @@
                 {{_ "Search Information"}}
             </th>
             <th>
+
                 {{_ "Search time"}}
             </th>
             <th>
@@ -20,16 +21,32 @@
         {{#each searchHistory}}
         <tr>
             <td>
-                <!--{{moFormat createOn "lll"}}-->
+                {{word}}
             </td>
             <td>
-                <!--{{total}}-->
+                {{time}}
             </td>
             <td>
-                <!--{{i18nStatus}}&nbsp;{{> taskLoadIcon}}-->
+                <a href="#" class="fa fa-trash"></a>
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Dropdown
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        {{#each folder}}
+                            <li><a href="#">
+                                {{translateThis folderName.cn folderName.en}}
+                            </a></li>
+                        {{/each}}
+                    </ul>
+                </div>
             </td>
         </tr>
         {{/each}}
         </tbody>
     </table>
+    <button type="button" class="btn" style="text-align:right">{{_ "Cancel"}}</button>
 </template>

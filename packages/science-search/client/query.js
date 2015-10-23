@@ -1,5 +1,5 @@
 SolrQuery = {
-
+    lastQuery:null,
 	session         : new ReactiveDict(),
 	get             : function (key) {
 		return SolrQuery.session.get(key);
@@ -157,8 +157,15 @@ SolrQuery = {
 	resetSecQuery   : function () {
 		SolrQuery.params("sq",[]);
 	},
-
+    searchLimit:function(){
+        var result=(SolrQuery.lastQuery && (new Date()-SolrQuery.lastQuery)<500)
+        SolrQuery.lastQuery=new Date();
+        return result;
+    },
 	callSearchMethod: function () {
+        if(SolrQuery.searchLimit()){
+            return;
+        }
 		SolrQuery.reset();
 		var params = QueryUtils.parseUrl();
 		if(!_.isEmpty(params.q) && _.isString(params.q)){
@@ -166,6 +173,19 @@ SolrQuery = {
 			var q=(params.st && _.contains(["bar","history"],params.st.from)) ? params.q : "";
 			$("#searchInput").val(q);
 		}
+        if (Meteor.userId()) {
+            var his = !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave:[]}
+            var obj= _.find(his, function(arr,key){
+                    return _.find(arr,function(item){
+                        return item.word===q;
+                    })
+                });
+            if(!obj){
+                his.unsave=his.unsave || [];
+                his.unsave.push({word: q, createOn: new Date()})
+                Users.update({_id: Meteor.userId()}, {$set: {"history": his}});
+            }
+        }
 		Meteor.call("search", params, function (err, result) {
 			SolrQuery.session.set("params",params);
 			var ok = err ? false : result.responseHeader.status == 0;

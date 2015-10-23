@@ -971,6 +971,17 @@
                   "label": "英文"
               }
           }
+      },
+      "searchHistory": {
+          "folderName": {
+              "label": "文件夹名称",
+              "cn": {
+                  "label": "中文"
+              },
+              "en": {
+                  "label": "英文"
+              }
+          }
       }
   },
   "roles": "角色",
