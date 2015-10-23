@@ -26,7 +26,7 @@ SpecialTopicsSchema  = new SimpleSchema({
         type:Science.schemas.MultiLangSchema
     },
     abstract:{
-        type:Science.schemas.MultipleTextSchema
+        type:Science.schemas.MultipleTextOptionalSchema
     }
 });
 

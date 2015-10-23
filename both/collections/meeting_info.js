@@ -29,7 +29,7 @@ MeetingSchema = new SimpleSchema({
         optional: true
     },
     address: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     theme: {

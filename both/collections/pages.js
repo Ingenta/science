@@ -6,7 +6,7 @@ PagesSchema = new SimpleSchema({
         unique: true
     },
     title: {
-        type: Science.schemas.MultipleTextSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     description: {
