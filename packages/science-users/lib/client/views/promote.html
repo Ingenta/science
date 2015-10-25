@@ -1,10 +1,10 @@
 <template name="sidebarAd">
     {{#if isADPage}}
         {{#each advertisement}}
-            {{#if permissionCheck "modify-advertisement,publisher;modify-advertisement,journal;modify-advertisement,advertisement"}}
+            {{#if permissionCheck "modify-advertisement,publisher;modify-advertisement,publication;modify-advertisement,advertisement"}}
                 {{> updateAdvertisementModalForm}}
             {{/if}}
-            {{#if permissionCheck "delete-advertisement,publisher;delete-advertisement,journal;delete-advertisement,advertisement"}}
+            {{#if permissionCheck "delete-advertisement,publisher;delete-advertisement,publication;delete-advertisement,advertisement"}}
                 <a href="#" class="fa fa-trash"></a>
             {{/if}}
             <li>
@@ -13,7 +13,7 @@
             <br>
         {{/each}}
         {{#if AdCount}}
-            {{#if permissionCheck "add-advertisement,publisher;add-advertisement,journal;add-advertisement,advertisement"}}
+            {{#if permissionCheck "add-advertisement,publisher;add-advertisement,publication;add-advertisement,advertisement"}}
                 {{> addAdvertisementModalForm}}
             {{/if}}
         {{/if}}
