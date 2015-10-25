@@ -185,7 +185,7 @@ Template.userEditRoles.helpers({
                 pr["permissions:permissions-manager"] = temp["permissions:permissions-manager"];
                 pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
             };
-            var keys = ["publication:journal-manager", "news:news-manager", "advertisement:advertisement-manager"];//出版商管理员可设置的权限
+            var keys = ["resource:journal-manager", "news:news-manager", "advertisement:advertisement-manager"];//出版商管理员可设置的权限
             keys.forEach(function (key) {
                 pr[key] = temp[key];
             });
