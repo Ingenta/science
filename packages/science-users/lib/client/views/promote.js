@@ -34,6 +34,21 @@ Template.sidebarAd.helpers({
             return false;
         }
         return true;
+    },
+    permissionCheck: function (permissions) {
+        if(!Meteor.user()) return false;
+        if(Permissions.isAdmin()) return true;
+
+        if(!Meteor.user().publisherId) return false;
+        if(!_.contains(Config.ADPages.journal, Router.current().route.getName())) return false;
+        if (Meteor.user().publisherId !== Session.get('currentPublisherId')) return false;
+        permissions = permissions.split(';');
+        var flag = false;
+        permissions.forEach(function (onePermission) {
+            onePermission = onePermission.split(',');
+            if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
+        });
+        return flag;
     }
 });
 

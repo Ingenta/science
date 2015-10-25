@@ -1,14 +1,21 @@
 <template name="sidebarAd">
     {{#if isADPage}}
         {{#each advertisement}}
-            {{#if can "modify-advertisement" "resource"  }}{{> updateAdvertisementModalForm}}{{/if}}
-            {{#if can "delete-advertisement" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
-            <li><a href="{{whichLink}}" target="_blank"><img src="{{getImageHelper whichPictures}}" width="135" height="142"></a></li><br>
+            {{#if permissionCheck "modify-advertisement,publisher;modify-advertisement,journal;modify-advertisement,advertisement"}}
+                {{> updateAdvertisementModalForm}}
+            {{/if}}
+            {{#if permissionCheck "delete-advertisement,publisher;delete-advertisement,journal;delete-advertisement,advertisement"}}
+                <a href="#" class="fa fa-trash"></a>
+            {{/if}}
+            <li>
+                <a href="{{whichLink}}" target="_blank"><img src="{{getImageHelper whichPictures}}" width="135" height="142"></a>
+            </li>
+            <br>
         {{/each}}
         {{#if AdCount}}
-        {{#if can "add-advertisement" "resource"  }}
-            {{> addAdvertisementModalForm}}
-        {{/if}}
+            {{#if permissionCheck "add-advertisement,publisher;add-advertisement,journal;add-advertisement,advertisement"}}
+                {{> addAdvertisementModalForm}}
+            {{/if}}
         {{/if}}
     {{/if}}
 </template>
