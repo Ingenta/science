@@ -9,21 +9,24 @@
 </template>
 
 <template name="singleReferenceTemplate">
-	<li>
-		[{{index}}]
-		{{#each authors}}
-			{{givenName}} {{surName}},
-		{{/each}}
-		{{#if etal}} et al{{/if}}.
-		{{title}}{{contentType}}.
-		{{formatJournal}}
-		{{formatYear}}
-		{{formatVolIssue}}
-		{{formatRange}}
-		{{{link}}}
+	<li style="overflow:hidden">
+		<span style="float:left;margin-right:10px;">[{{index}}]</span>
+		<span style="float:left; width:95%;">
+			{{#each authors}}
+				{{givenName}} {{surName}},
+			{{/each}}
+			{{#if etal}} et al{{/if}}.
+			{{title}}{{contentType}}.
+			{{formatJournal}}
+			{{formatYear}}
+			{{formatVolIssue}}
+			{{formatRange}}
+			{{{link}}}
+			{{{googleScholar}}}
+		</span>
 	</li>
 </template>
 
 <template name="referenceLinkTemplate">
-	,<a target="_blank" href="{{href}}">{{name}}</a>
+	<i class="fa fa-angle-double-right"></i><a target="_blank" href="{{href}}">{{name}}</a>
 </template>

@@ -798,6 +798,7 @@
     "select": "Select",
     "Add articles to collection": "Add to collection",
     "Accepted Date": "Accepted",
+    "Published online":"Published",
     "pubStatus": {
         "normal": "Normal",
         "onlineFirst": "Online first",
