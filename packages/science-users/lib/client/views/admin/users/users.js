@@ -338,3 +338,10 @@ Template.accountOptions.helpers({
 		return Users.find({institutionId: {$exists: true}}, {});
 	}
 });
+
+AutoForm.addHooks(['addUploadExcelModalForm'], {
+	onSuccess: function () {
+		$("#addUploadExcelModal").modal('hide');
+		FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+	}
+}, true);
