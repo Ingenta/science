@@ -38,10 +38,14 @@ resourcePermissions
 	.definePermission("delete-advertisement", {
 		en: {name: "delete advertisement", summary: "can delete advertisement"},
 		cn: {name: "删除广告", summary: "您可以删除广告信息"}
+	})
+	.definePermission("journal-collection", {
+		en: {name: "journal collection", summary: "manage journal collection"},
+		cn: {name: "期刊文章集（同刊）", summary: "管理期刊文章集"}
 	});
 
 resourcePermissions
-	.defineRole("journal-manager", ["modify-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement"], {
+	.defineRole("journal-manager", ["modify-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement", "journal-collection"], {
 		en: {
 			name: "journal manager (publisher)",
 			summary: "journal manager"
