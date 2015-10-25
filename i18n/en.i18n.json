@@ -753,6 +753,34 @@
             "fileId": {
                 "label": "Choose Excel"
             }
+        },
+        "newsLink": {
+            "picture": {
+                "label": "Choose images"
+            },
+            "link": {
+                "label": "Link"
+            }
+        },
+        "newsContact": {
+            "title": {
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            },
+            "content": {
+                "label": "Content",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            }
         }
     },
     "roles": "Roles",

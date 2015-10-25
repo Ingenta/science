@@ -89,7 +89,13 @@ Meteor.startup(function () {
             {key: "watch", e: "My Alerts", c: "我的关注"},
             {key: "searchHistory", e: "Search History", c: "搜索历史"},
             {key: "tags", e: "Journal label", c: "期刊收录类型"},
-            {key: "specialTopics", e: "Special Topics", c: "专题推荐"}
+            {key: "specialTopics", e: "Special Topics", c: "专题推荐"},
+            {key: "cooperation", e: "Publishing Cooperation", c: "出版合作"},
+            {key: "contact", e: "Contact Us", c: "联系我们"},
+            {key: "magazineProfile", e: "Magazine Profile", c: "杂志社简介"},
+            {key: "council", e: "Council", c: "理事会"},
+            {key: "memorabilia", e: "Two Issue Of Memorabilia", c: "两刊大事记"},
+            {key: "subscription", e: "Subscription Info", c: "订阅信息"}
         ];
         _.each(names, function (name) {
             Pages.insert({

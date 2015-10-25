@@ -986,6 +986,34 @@
       "fileId": {
         "label": "选择Excel文件"
       }
+    },
+    "newsLink": {
+      "picture": {
+        "label": "选择图片"
+      },
+      "link": {
+        "label": "链接地址"
+      }
+    },
+    "newsContact": {
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "content": {
+        "label": "内容",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      }
     }
   },
   "roles": "角色",
