@@ -25,11 +25,12 @@
                         {{_ "Add new"}}
                     </span>
                 </button>
-                <button type="button" id="uploadExcels" class="btn btn-success" data-target="#addUploadExcelModal">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUploadExcelModal">
                     <span class="fa fa-plus">
                         {{_ "Batch Add"}}
                     </span>
                 </button>
+                {{> addUploadExcelModalForm}}
             </div>
             <div id="dataview-controls-search">
                 {{#if isNotEmpty}}
