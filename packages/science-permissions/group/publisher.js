@@ -60,10 +60,18 @@ publisherPermissions
     .definePermission("delete-advertisement", {
         en: {name: "delete advertisement", summary: "can delete advertisement"},
         cn: {name: "删除广告", summary: "您可以删除广告信息"}
+    })
+    .definePermission("publiser-collection", {
+        en: {name: "publisher collection", summary: "manage publisher collection"},
+        cn: {name: "出版商文章集（跨刊）", summary: "管理出版商文章集"}
+    })
+    .definePermission("journal-collection", {
+        en: {name: "journal collection", summary: "manage journal collection"},
+        cn: {name: "期刊文章集（同刊）", summary: "管理期刊文章集"}
     });
 
 publisherPermissions
-    .defineRole("publisher-manager-from-user", ["modify-publisher", "add-user", "modify-user","add-journal", "modify-journal", "delete-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement"], {
+    .defineRole("publisher-manager-from-user", ["modify-publisher", "add-user", "modify-user","add-journal", "modify-journal", "delete-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement", "publisher-collection", "journal-collection"], {
         en: {
             name: "publisher manager (publisher)",
             summary: "publisher manager"

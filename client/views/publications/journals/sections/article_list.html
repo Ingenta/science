@@ -19,7 +19,9 @@
             </li>
             <div id="vol_{{_id}}" class="issues">
                 {{#each issueList journalId volume}}
-                    <div class="issue" data-value="{{_id}}">{{_ "issueItem" issue }}（{{year}}, {{month}}）</div>
+                    <div class="issue" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
+                        {{_ "issueItem" issue }}（{{year}}, {{month}}）
+                    </div>
                 {{/each}}
             </div>
         {{/each}}
@@ -85,7 +87,7 @@
                     "EISSN"
                 </th>
                 <!--<th>-->
-                    <!--&nbsp;-->
+                <!--&nbsp;-->
                 <!--</th>-->
             </tr>
             </thead>
@@ -114,7 +116,7 @@
         </td>
         <!--<td class="td-icon">-->
             <!--{{#if can "user-modify" "user"}}-->
-                <!--<span id="edit-button" class="fa fa-pencil " title="Edit"></span>-->
+        <!--<span id="edit-button" class="fa fa-pencil " title="Edit"></span>-->
             <!--{{/if}}-->
         <!--</td>-->
     </tr>
