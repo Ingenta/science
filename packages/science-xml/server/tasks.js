@@ -292,7 +292,10 @@ var insertKeywords = function (a) {
 
 var insertArticle = function (a) {
     var journal = Publications.findOne({_id: a.journalId});
-    if (!journal)return;
+    if (!journal){
+        console.log("Parser didn't fail on missing journal as it should.")
+        return;
+    } //should never happen.
 
     a.accessKey = journal.accessKey;
     a.language = journal.language;
