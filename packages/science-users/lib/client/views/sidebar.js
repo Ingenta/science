@@ -119,7 +119,10 @@ Template.LayoutSideBar.events({
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if (Meteor.userId()) {
-            var pro = Meteor.user().profile.interestedOfJournals || [];
+            var pro = [];
+            if(Meteor.user().profile){
+                pro = Meteor.user().profile.interestedOfJournals || [];
+            }
             if (_.contains(pro, journal._id)) {
                 pro = _.without(pro, journal._id)
             } else {
