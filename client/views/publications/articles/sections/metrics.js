@@ -97,11 +97,13 @@ var buildPieChart2 = function () {
         _.each(arr,function (obj) {
             var color=colors[ index % colors.length ];
             index++;
-            data.push({
-                name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
-                y: obj.localCount,
-                color:color
-            });
+            if(obj.name) {
+                data.push({
+                    name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
+                    y: obj.localCount,
+                    color: color
+                });
+            }
       });
         Session.set('reactive2', data);
     });

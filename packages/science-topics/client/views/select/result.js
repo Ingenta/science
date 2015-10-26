@@ -21,9 +21,6 @@ Template.searchResultForAddToTopics.events({
 
 
 Template.oneArticleOfResultTopics.helpers({
-	journalName: function (id) {
-		return Publications.findOne({_id: id}).title;
-	},
     isSelected: function () {
         return _.contains(this.topic, Router.current().params.topicsId);
     }

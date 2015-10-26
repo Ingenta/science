@@ -1,8 +1,4 @@
 Template.oneSolrArticle.helpers({
-	journalName: function (id) {
-		var journal = Publications.findOne({_id: id});
-		return journal && (TAPi18n.getLanguage()==="zh-CN"?journal.titleCn:journal.title);
-	},
 	getAutors:function(){
 		var hl = SolrQuery.session.get("highlight")[this._id];
 		var isLangCn = TAPi18n.getLanguage()==="zh-CN";

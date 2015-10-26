@@ -19,7 +19,7 @@
         <tbody>
         {{#each searchHistory}}
         <tr>
-            <td>
+            <td class="keywordContainer">
                 {{word}}
             </td>
             <td>
@@ -34,11 +34,11 @@
                         Dropdown
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" data-keyword="{{word}}">
                         {{#each folder}}
-                            <li><a href="#">
-                                {{folderName}}
-                            </a></li>
+                            <li class="folder">
+                                <a href="#">{{folderName}}</a>
+                            </li>
                         {{/each}}
                     </ul>
                 </div>

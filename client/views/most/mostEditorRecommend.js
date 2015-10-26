@@ -19,9 +19,6 @@ Template.mostRecommendArticles.helpers({
             sort={"published":Session.get("sort")};
         return Articles.find({_id:{$in:allId}},{sort:sort});
     },
-    journalName: function (id) {
-        return Publications.findOne({_id: id}).title;
-    },
     query      : function () {
         return Router.current().params.searchQuery;
     }
