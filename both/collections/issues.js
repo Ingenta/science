@@ -22,6 +22,9 @@ IssuesSchema = new SimpleSchema({
         autoform: {
             rows: 4
         }
+    },
+    createDate: {
+        type: Date
     }
 });
 

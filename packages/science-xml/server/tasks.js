@@ -325,7 +325,8 @@ var insertArticle = function (a) {
 			volume   : a.volume,
 			issue    : a.issue,
 			year     : a.year,
-			month    : a.month
+			month    : a.month,
+			createDate:new Date()
 		});
 	}
 	//确保article有一个关联的issue

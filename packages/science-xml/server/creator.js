@@ -17,7 +17,8 @@ ScienceXML.IssueCreator = function () {
 						volume   : obj.volume,
 						issue    : obj.issue,
 						year     : obj.year,
-						month    : obj.month || "01"
+						month    : obj.month || "01",
+						createDate: new Date()
 					})
 
 				return {volumeId: volume, issueId: issue};
