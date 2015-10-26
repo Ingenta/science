@@ -21,7 +21,9 @@ Template.UserSettingsMyWatch.onRendered(function () {
 })
 Template.UserSettingsMyWatch.events({
     "change .emailFrequencyButtons": function (e) {
-        if (Meteor.user().emailFrequency !== e.target.id)
-            Users.update(Meteor.userId(), {$set: {emailFrequency: e.target.id}})
+        if (Meteor.user().emailFrequency !== e.target.id){
+            if(e.target.id === 'off') Users.update(Meteor.userId(), {$unset: {emailFrequency: ''}});
+            else Users.update(Meteor.userId(), {$set: {emailFrequency: e.target.id}})
+        }
     }
 })
