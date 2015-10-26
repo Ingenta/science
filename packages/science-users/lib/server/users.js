@@ -59,7 +59,6 @@ Meteor.publish(null, function () {
             orbit_roles: 1,
             favorite: 1,
             watch: 1,
-            watchArticle: 1,
             institutionId: 1,
             publisherId: 1,
             journalId: 1,

@@ -1,7 +1,7 @@
 Template.ArticleWatch.helpers({
     sbWatch : function(){
         var user = Users.findOne({_id: Meteor.userId()});
-        return user.watchArticle;
+        return user.profile ? user.profile.interestedOfArticles : undefined;
     },
     ArticleUrl: function(Arid){
         var article = Articles.findOne({_id: Arid});
@@ -12,17 +12,13 @@ Template.ArticleWatch.helpers({
     },
     articleWatch: function(){
         return Articles.findOne({_id: this.toString()})
-    },
-    count : function () {
-        if(Users.findOne().watchArticle)
-        return Users.findOne().watchArticle.length;
     }
 });
 
 Template.ArticleWatch.events({
     'click .btn': function () {
-        var selected =  _.pluck($("input[name='selectedArticle']:checked"),'value');
-        var diff = _.difference(Meteor.user().watchArticle,selected);
-        Users.update({_id:Meteor.userId()},{$set:{watchArticle: diff}});
+        var selected = _.pluck($("input[name='selectedArticle']:checked"),'value');
+        var diff = _.difference(Meteor.user().profile ? Meteor.user().profile.interestedOfArticles : undefined, selected);
+        Users.update({_id: Meteor.userId()}, {$set: {'profile.interestedOfArticles': diff}});
     }
 })

@@ -62,7 +62,10 @@ Template.LayoutSideBar.helpers({
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
-            var wat = Meteor.user().watchArticle || [];
+            var wat = [];
+            if(Meteor.user().profile){
+                wat = Meteor.user().profile.interestedOfArticles || [];
+            }
             return _.contains(wat, article._id) ? TAPi18n.__("Watched") : TAPi18n.__("Article Watch");
         } else {
             return TAPi18n.__("Article Watch");
@@ -106,13 +109,16 @@ Template.LayoutSideBar.events({
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId()) {
-            var wat = Meteor.user().watchArticle || [];
+            var wat = [];
+            if(Meteor.user().profile){
+                wat = Meteor.user().profile.interestedOfArticles || [];
+            }
             if (_.contains(wat, article._id)) {
                 wat = _.without(wat, article._id)
             } else {
                 wat.push(article._id)
             }
-            Users.update({_id: Meteor.userId()}, {$set: {watchArticle: wat}});
+            Users.update({_id: Meteor.userId()}, {$set: {'profile.interestedOfArticles': wat}});
         }
     },
     "click .watch": function () {
