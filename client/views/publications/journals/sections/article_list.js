@@ -58,11 +58,12 @@ Template.articleListRight.helpers({
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");
-        if (curIssue) {
-            var i = Issues.findOne({_id: curIssue});
-            var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;
-            return title;
-        }
+        if (!curIssue) return;
+        var i = Issues.findOne({_id: curIssue});
+        if (!i)return;
+        var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;
+        return title;
+
 
     },
     issueContext: function () {
