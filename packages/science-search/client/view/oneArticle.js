@@ -12,15 +12,6 @@ Template.oneSolrArticle.helpers({
 			return this.authors;
 		}
 	},
-	getFullName: function () {
-		if(this.surname || this.given){
-			if (TAPi18n.getLanguage() === "zh-CN")
-				return this.surname.cn + this.given.cn;
-			return this.given.en + " " + this.surname.en;
-		}else{
-			return this + "";
-		}
-	},
 	query      : function () {
 		return Router.current().params.searchQuery;
 	},
