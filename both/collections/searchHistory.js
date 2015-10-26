@@ -14,7 +14,7 @@ this.SearchHistory.allow({
 
 SearchHistorySchema  = new SimpleSchema({
     folderName: {
-        type: Science.schemas.MultiLangSchema
+        type: String
     }
 });
 

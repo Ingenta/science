@@ -46,41 +46,69 @@ ScienceXML.getFileContentsFromLocalPath = function (path) {
 ScienceXML.getAuthorInfo = function (results, doc) {
     results.authors = [];
     results.authorNotes = [];
-    var fullName = {};
+    results.affiliations = [];
+
     var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
-    authorNodes.forEach(function (author) {
+    _.each(authorNodes,function (author) {
+        var authorObj = {};
         var surnamePart = {};
         var givenPart = {};
         var fullnamePart ={};
-        var emailRef = xpath.select("child::xref[@ref-type='author-note']/text()", author).toString();
+
         //var authorAffNodes = xpath.select("child::xref[@ref-type='aff']/text()", author);
         //authorAffNodes.forEach(function (aff) {
         //    var rid = xpath.select("attribute::rid", aff)[0];
         //});
         var hasAlternatives = xpath.select("child::name-alternatives", author);
-        if (!hasAlternatives || !hasAlternatives.length) {
-            var surname = xpath.select("child::name/surname/text()", author).toString();
-            var given = xpath.select("child::name/given-names/text()", author).toString();
-            surnamePart = {en: surname, cn: surname};
-            givenPart = {en: given, cn: given};
-        }
-        else {
-            var surnameEn = xpath.select("child::name-alternatives/name[@lang='en']/surname/text()", author).toString();
-            var givenEn = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
-            var surnameCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
-            var givenCn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
-            var fullnameEn = givenEn + " " + surnameEn;
-            var fullnameCn = surnameCn+givenCn;
-            surnamePart = {en: surnameEn, cn: surnameCn};
-            givenPart = {en: givenEn, cn: givenCn};
-            fullnamePart = {en:fullnameEn,cn:fullnameCn};
+        if (_.isEmpty(hasAlternatives)) {
+            var enNode = xpath.select("child::name[@name-style='western']", author);
+            if(!_.isEmpty(enNode)){
+                var cnNode = xpath.select("child::name[@name-style='eastern']", author);
+                surnamePart.en=xpath.select("child::surname/text()",enNode[0]).toString();
+                givenPart.en=xpath.select("child::given-names/text()",enNode[0]).toString();
+                if(_.isEmpty(cnNode)){
+                    surnamePart.cn=surnamePart.en;
+                    givenPart.cn=givenPart.en;
+                }else{
+                    surnamePart.cn= ScienceXML.getSimpleValueByXPath("child::surname/text()",cnNode[0]);
+                    givenPart.cn= ScienceXML.getSimpleValueByXPath("child::given-names/text()",cnNode[0]);
+                }
+            }else{
+                var surname = xpath.select("child::name/surname/text()", author).toString();
+                var given = xpath.select("child::name/given-names/text()", author).toString();
+                surnamePart = {en: surname, cn: surname};
+                givenPart = {en: given, cn: given};
+            }
+        }else {
+            surnamePart.en = xpath.select("child::name-alternatives/name[@lang='en']/surname/text()", author).toString();
+            givenPart.en = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
+            surnamePart.cn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
+            givenPart.cn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
 
         }
+        fullnamePart.en = givenPart.en + " " + surnamePart.en;
+        fullnamePart.cn = givenPart.cn + " " + surnamePart.cn;
 
-        fullName = {emailRef: emailRef, given: givenPart, surname: surnamePart,fullname:fullnamePart};
+        authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
 
-        results.authors.push(fullName);
+        //通讯作者信息
+        var noteAttr = xpath.select("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
+        if(!_.isEmpty(noteAttr)){
+            authorObj.email=noteAttr[0].value;
+            console.log('email')
+        }
+
+        //工作单位信息
+        var affAttrs = xpath.select("child::xref[@ref-type='aff']/attribute::rid", author);
+        if(!_.isEmpty(affAttrs)){
+            var affs = _.pluck(affAttrs,"value");
+            if(!_.isEmpty(affs)){
+                authorObj.affs = affs;
+            }
+        }
+
+        results.authors.push(authorObj);
     });
     if (results.authors.length === 0) {
         results.errors.push("No author found");
@@ -99,30 +127,39 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.authorNotes.push(entry);
         }
     });
-    results.affiliations = [];
-    var hasAlternatives = xpath.select("//contrib-group/aff-alternatives", doc);
-    if (!hasAlternatives || !hasAlternatives.length) {
-        var affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff/label", doc);
-        if(!affText)affText = ScienceXML.getValueByXPathIgnoringXml("//contrib-group/aff", doc);
-        if (affText)results.affiliations.push({affText:{en: affText, cn: affText}});
-    } else {
-        var affNode = xpath.select("//contrib-group/aff-alternatives", doc);
-        if (affNode !== undefined) {
-            affNode.forEach(function (affiliation) {
-                var affTextEn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='en']", affiliation);
-                var affTextCn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='zh-Hans']", affiliation);
-                var id = xpath.select("attribute::id", affiliation)[0];
-                //if one doesn't exist copy the other one.
-                var oneAffiliation = {};
-                if (!affTextCn)affTextCn = affTextEn;
-                if (!affTextEn)affTextEn = affTextCn;
 
-                if (!id) oneAffiliation = {affText:{en: affTextEn, cn: affTextCn}};
-                else oneAffiliation = {id: id.value, affText:{en: affTextEn, cn: affTextCn}};
-                results.affiliations.push(oneAffiliation);
-            });
-        }
+    var affNodes = xpath.select("//contrib-group/aff-alternatives", doc);
+    if (_.isEmpty(affNodes)) {
+        affNodes = xpath.select("//contrib-group/aff",doc);
+        _.each(affNodes,function(affNode){
+            var affiliation = {id:undefined,affText:{}};
+            var idAttr = xpath.select("attribute::id",affNode);
+            if(!_.isEmpty(idAttr) && idAttr[0].value){
+                affiliation.id=idAttr[0].value;
+            }
+            var labels=xpath.select("child::label",affNode);
+            if(!_.isEmpty(labels)){
+                var addr= xpath.select("child::text()",labels[labels.length-1]);
+                affiliation.affText.en = !_.isEmpty(addr) && addr.toString().replace(/\s+/g,' ').trim();
+            }
+            !_.isEmpty(affiliation) && results.affiliations.push(affiliation);
+        })
+    } else {
+        _.each(affNodes,function (affiliation) {
+            var affTextEn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='en']", affiliation);
+            var affTextCn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='zh-Hans']", affiliation);
+            var id = xpath.select("attribute::id", affiliation)[0];
+            //if one doesn't exist copy the other one.
+            var oneAffiliation = {};
+            if (!affTextCn)affTextCn = affTextEn;
+            if (!affTextEn)affTextEn = affTextCn;
+
+            if (!id) oneAffiliation = {affText:{en: affTextEn, cn: affTextCn}};
+            else oneAffiliation = {id: id.value, affText:{en: affTextEn, cn: affTextCn}};
+            results.affiliations.push(oneAffiliation);
+        });
     }
+    console.log('parse author done')
     return results;
 }
 
@@ -239,8 +276,17 @@ ScienceXML.getAbstract = function (results, doc) {
 ScienceXML.getContentType = function (results, doc) {
     if (!results.errors) results.errors = [];
     var contentType = xpath.select("//article/@article-type", doc);
-    if (contentType[0].value === undefined) results.errors.push("No content type found");
-    else results.contentType = contentType[0].value.trim().toLowerCase();
+    if(!_.isEmpty(contentType)){
+        if (contentType[0].value !== undefined)
+            results.contentType = contentType[0].value.trim().toLowerCase();
+    }else{
+        contentType=ScienceXML.getSimpleValueByXPath("//article-meta/article-type",doc);
+        if(contentType){
+            results.contentType = contentType.trim().toLowerCase();
+        }else{
+            results.errors.push("No content type found");
+        }
+    }
     return results;
 }
 
@@ -568,4 +614,21 @@ ScienceXML.getPACS = function(doc){
         }
     })
     return codes;
+}
+
+ScienceXML.getFunding=function(doc){
+    debugger;
+    var fundingNodes = xpath.select("//funding-group/award-group",doc);
+    if(_.isEmpty(fundingNodes)){
+        return;
+    }
+    var fundingObjects = [];
+    _.each(fundingNodes,function(fundNode){
+        var funding = {};
+        debugger
+        funding.source=ScienceXML.getSimpleValueByXPath("child::funding-source",fundNode);
+        funding.contract = ScienceXML.getSimpleValueByXPath("child::award-id[@award-type='contract']",fundNode);
+        fundingObjects.push(funding);
+    })
+    return fundingObjects;
 }

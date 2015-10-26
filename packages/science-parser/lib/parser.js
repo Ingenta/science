@@ -91,7 +91,7 @@ Parser = function(filepath,options,callback){
 					author.lastname=getSimpleVal("child::lastname/text()",authorNode);
 					author.authorname=getMultiVal("child::authorname[@locale='{lang}']/text()",authorNode);
 					author.affiliation=getMultiVal("child::affiliation[@locale='{lang}']/text()",authorNode);
-					author.email=getSimpleVal("child::email/text()",authorNode);
+					author.corresp=getSimpleVal("child::email/text()",authorNode);
 					article.authors.push(author);
 				});
 				issue.articles.push(article);

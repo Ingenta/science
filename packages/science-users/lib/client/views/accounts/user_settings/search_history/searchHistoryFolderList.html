@@ -12,7 +12,6 @@
                 {{_ "Name"}}
             </th>
             <th>
-
                 {{_ "Action"}}
             </th>
         </tr>
@@ -21,7 +20,7 @@
         {{#each historyFolder}}
         <tr>
             <td>
-                {{translateThis folderName.cn folderName.en}}
+                {{folderName}}
             </td>
             <td>
                 {{#if can "delete-searchHistory" "resource" }}
@@ -45,13 +44,14 @@
                     <h4 class="modal-title" id="addFolderModalLabel">{{_ "Add Folder"}}</h4>
                 </div>
                 <div class="modal-body">
-                    <h5>{{_ "Folder Name"}}</h5>
-                    <p>
-                        <input type="text"/>
-                    </p>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary">{{_ "Save"}}</button>
+                    {{#autoForm schema="SearchHistorySchema" id="searchHistoryModalForm" type="method" meteormethod ="upsertSearchFolder"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="folderName"}}
                     </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">{{_ "Send"}}</button>
+                    </div>
+                    {{/autoForm}}
                 </div>
             </div>
         </div>
