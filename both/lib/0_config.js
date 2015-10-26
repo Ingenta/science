@@ -28,7 +28,7 @@ Config = {
         global: [
             'home',
             'topics',
-            'author',
+            'authorCenter',
             'publishers',
             'publications',
             'collections'

@@ -22,6 +22,8 @@ Meteor.subscribe("author_center");
 Meteor.subscribe('articleXml');
 Meteor.subscribe('pages');
 Meteor.subscribe('news');
+Meteor.subscribe('news_contact');
+Meteor.subscribe('news_link');
 Meteor.subscribe('images');
 Meteor.subscribe('advertisement');
 Meteor.subscribe('publishers');

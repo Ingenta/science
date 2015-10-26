@@ -129,5 +129,18 @@ Meteor.methods({
         Meteor.defer(function () {
             Accounts.sendVerificationEmail(userId);
         });
+    },
+    upsertSearchFolder:function(doc){
+        var history = Meteor.user().history;
+        if(!history) history={saved:[],unsaved:[]};
+        if(!history.saved) history.saved=[];
+        if(!_.find(history.saved,function(dir){
+            return dir.folderName === doc.folderName
+        })){
+            history.saved.push({folderName:doc.folderName})
+            Users.update({_id: Meteor.userId()}, {$set: {"history": history}});
+            return true;
+        }
+        return false;
     }
 });

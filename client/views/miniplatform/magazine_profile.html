@@ -1,0 +1,54 @@
+<template name="magazineProfile">
+    <div class="container-fluid">
+        {{> pageElement key="magazineProfile"}}
+        <div class="row">
+            {{#if can  "add-news-contact" "resource"  }}
+            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMagazineProfileModal"></span>{{> addMagazineProfileModalForm}}
+            {{/if}}
+        </div>
+        <hr>
+        <div class="row">
+            {{> magazineProfileList}}
+        </div>
+    </div>
+</template>
+
+<template name="magazineProfileList">
+    {{#each profiles}}
+        <div><strong>{{translateThis title.cn title.en}}</strong>
+            {{#if can  "modify-news-contact" "resource"  }}{{> updateMagazineProfileModalForm}}{{/if}}
+            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+        </div>
+        <div>{{{translateThis content.cn content.en}}}</div>
+    {{else}}
+        {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="updateMagazineProfileModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="types"}}{{/afModal}}
+</template>
+
+<template name="addMagazineProfileModalForm">
+    <div class="modal fade" id="addMagazineProfileModal" tabindex="-1" role="dialog" aria-labelledby="addMagazineProfileModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMagazineProfileModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addMagazineProfileModalForm" collection="NewsContact" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="content"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
