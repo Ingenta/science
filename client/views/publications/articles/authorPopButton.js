@@ -33,12 +33,15 @@ Template.authorPopButton.helpers({
                     allrefs.push(match[0]);
                 }
             })
+            if(!_.isEmpty(allrefs)){
+                allrefs=_.sortBy(allrefs,function(i){return i});
+            }
         }
         if(this.corresp){
             allrefs.push("*");
         }
         if(!_.isEmpty(allrefs)){
-            return allrefs.join(",");
+            return allrefs;
         }
     }
 })

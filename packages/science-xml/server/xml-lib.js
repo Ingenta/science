@@ -131,7 +131,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     if (_.isEmpty(affNodes)) {
         affNodes = xpath.select("//contrib-group/aff",doc);
         _.each(affNodes,function(affNode){
-            var affiliation = {};
+            var affiliation = {id:undefined,affText:{}};
             var idAttr = xpath.select("attribute::id",affNode);
             if(!_.isEmpty(idAttr) && idAttr[0].value){
                 affiliation.id=idAttr[0].value;
@@ -139,7 +139,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var labels=xpath.select("child::label",affNode);
             if(!_.isEmpty(labels)){
                 var addr= xpath.select("child::text()",labels[labels.length-1]);
-                affiliation.addr = !_.isEmpty(addr) && addr.toString().replace(/\s+/g,' ').trim();
+                affiliation.affText.en = !_.isEmpty(addr) && addr.toString().replace(/\s+/g,' ').trim();
             }
             !_.isEmpty(affiliation) && results.affiliations.push(affiliation);
         })
