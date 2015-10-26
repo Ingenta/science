@@ -1,28 +1,26 @@
 Template.searchHistoryFolderList.helpers({
     historyFolder : function(){
-        return SearchHistory.find();
+        return Meteor.user().history.saved;
     }
-})
+});
 
 Template.searchHistoryFolderList.events({
     'click .fa-trash': function (e) {
-        var id = this._id;
+        e.folderName = this.folderName;
         confirmDelete(e,function(){
-            SearchHistory.remove({_id:id});
+            var tempArray = Meteor.user().history.saved;
+            var resultArray = _.filter(tempArray, function (element) {
+                return element.folderName !== e.folderName
+            });
+            Users.update({_id: Meteor.userId()}, {$set: {'history.saved': resultArray}});
         })
     }
 });
 
-Template.addFolderModalForm.events({
-    'click .btn-primary': function () {
-
-    }
-})
-
-AutoForm.addHooks(['addSearchHistoryModalForm'], {
+AutoForm.addHooks(['searchHistoryModalForm'], {
     onSuccess: function () {
-        $("#addSearchHistoryModal").modal('hide');
+        $("#addFolderModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
-}, true);
+})
 

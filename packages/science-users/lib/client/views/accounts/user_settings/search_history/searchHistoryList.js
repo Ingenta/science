@@ -7,7 +7,7 @@ Template.searchHistoryList.helpers({
         return this.createOn.format("yyyy-MM-dd");
     },
     folder : function(){
-        return SearchHistory.find();
+        return Meteor.user().history.saved;
     }
 })
 

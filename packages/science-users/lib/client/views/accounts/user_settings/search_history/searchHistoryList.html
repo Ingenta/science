@@ -6,7 +6,6 @@
                 {{_ "Search Information"}}
             </th>
             <th>
-
                 {{_ "Search time"}}
             </th>
             <th>
@@ -38,7 +37,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {{#each folder}}
                             <li><a href="#">
-                                {{translateThis folderName.cn folderName.en}}
+                                {{folderName}}
                             </a></li>
                         {{/each}}
                     </ul>
@@ -48,5 +47,5 @@
         {{/each}}
         </tbody>
     </table>
-    <button type="button" class="btn" style="text-align:right">{{_ "Cancel"}}</button>
+    <!--<button type="button" class="btn" style="text-align:right">{{_ "Cancel"}}</button>-->
 </template>
