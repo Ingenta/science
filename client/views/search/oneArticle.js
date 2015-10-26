@@ -1,8 +1,5 @@
 Template.oneArticle.helpers({
-	journalName: function (id) {
-		return Publications.findOne({_id: id}).title;
-	},
-	query      : function () {
+	"query": function () {
 		return Router.current().params.searchQuery;
 	}
 });

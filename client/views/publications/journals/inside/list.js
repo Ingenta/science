@@ -6,12 +6,6 @@ Template.articlesInSpecialTopics.helpers({
     }
 })
 
-Template.singleArticleInSpecialTopics.helpers({
-    journalName: function (id) {
-        return Publications.findOne({_id: id}).title;
-    }
-})
-
 Template.singleArticleInSpecialTopics.events({
     "click button.btn-danger": function (e) {
         e.preventDefault();

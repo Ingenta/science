@@ -20,9 +20,6 @@ Template.searchResultForAddToSpecialTopics.events({
 
 
 Template.oneArticleOfResultSpecialTopics.helpers({
-	journalName: function (id) {
-		return Publications.findOne({_id: id}).title;
-	},
     isSelected: function () {
         return _.contains(this.specialTopics, Router.current().params.specialTopicsId);
     }

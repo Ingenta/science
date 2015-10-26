@@ -8,12 +8,6 @@ Template.articlesInCollection.helpers({
 	}
 })
 
-Template.singleArticleInColl.helpers({
-	journalName: function (id) {
-		return Publications.findOne({_id: id}).title;
-	}
-})
-
 Template.singleArticleInColl.events({
 	"click button.btn-danger":function(e){
 		e.preventDefault();

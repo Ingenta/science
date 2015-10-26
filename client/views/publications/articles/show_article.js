@@ -149,9 +149,6 @@ Template.showArticle.onRendered(function () {
 });
 
 Template.showArticle.helpers({
-	journalName: function (id) {
-		return Publications.findOne({_id: id}).title;
-	},
 	getPdfById : function (id) {
 		console.log(id);
 		return Collections.Pdfs.findOne({_id: id}).url() + "&download=true";

@@ -23,10 +23,3 @@ Template.searchResultForAddToCollection.events({
 		ArticleCollections.update({_id: Router.current().params.collId}, {$set: {articles: newest}});
 	}
 });
-
-
-Template.oneArticleOfResult.helpers({
-	journalName: function (id) {
-		return Publications.findOne({_id: id}).title;
-	}
-});
