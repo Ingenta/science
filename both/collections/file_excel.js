@@ -5,10 +5,12 @@ fileExcelSchema  = new SimpleSchema({
 		type: String,
 		autoform: {
 			type: "cfs-file",
-			collection: "files"
+			collection: "excels"
 		}
 	}
 });
+
+
 
 Meteor.startup(function () {
 	fileExcelSchema.i18n("schemas.fileExcel");
