@@ -16,6 +16,14 @@ var getIssueComponentByArticle = function (article) {
     return "/" + issue.volume + "/" + issue.issue;
 }
 
+var journalIdToName = function (id) {
+    var journal = Publications.findOne({_id: id});
+    return journal && (TAPi18n.getLanguage() === "zh-CN" ? journal.titleCn : journal.title);
+}
+Template.registerHelper('journalName', function (id) {
+    return journalIdToName(id);
+});
+
 Template.registerHelper('urlToArticle', function (title) {
     var article = Articles.findOne({'title.en': title});
     return urlToArticleByArticleObject(article);
@@ -38,7 +46,7 @@ Template.registerHelper('getImageHelper', function (pictureId) {
 });
 
 Template.registerHelper('isChinese', function (language) {
-    if(!language) language = TAPi18n.getLanguage();
+    if (!language) language = TAPi18n.getLanguage();
     return language === "zh-CN" ? true : false;
 });
 
@@ -85,7 +93,7 @@ Template.registerHelper('pluralize', pluralize);
 
 Template.registerHelper('clearStr', function (str) {
     str = str.replace(/(<\/?[^>]+?>|\.)/g, '');
-    return str.replace(/[^\w\d_-]/g,"-")
+    return str.replace(/[^\w\d_-]/g, "-")
 });
 
 Template.registerHelper("highlight", function (keyword, str) {
@@ -93,20 +101,20 @@ Template.registerHelper("highlight", function (keyword, str) {
 });
 
 Template.registerHelper('checkPermissionToJournal', function (permissions, publisherId, journalId) {
-    if(!Meteor.user()) return false;
-    if(Permissions.isAdmin()) return true;
-    if(!Meteor.user().publisherId) return false;
-    if(Meteor.user().publisherId !== publisherId) return false;
-    if(_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) return true;
-    if(!journalId) return false;
-    if(!_.contains(Meteor.user().journalId, journalId)) return false;
+    if (!Meteor.user()) return false;
+    if (Permissions.isAdmin()) return true;
+    if (!Meteor.user().publisherId) return false;
+    if (Meteor.user().publisherId !== publisherId) return false;
+    if (_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) return true;
+    if (!journalId) return false;
+    if (!_.contains(Meteor.user().journalId, journalId)) return false;
     permissions = permissions.split(';');
     //console.log(permissions);
     var flag = false;
     permissions.forEach(function (onePermission) {
         onePermission = onePermission.split(',');
         //console.log(onePermission);
-        if(Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
+        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
     });
     return flag;
 

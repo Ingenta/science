@@ -17,14 +17,22 @@ Template.articleListTree.helpers({
 
 Template.articleListTree.events({
     "click .volume": function (event) {
-        var toggleOption=["fa-plus","fa-minus"];
-        var remove = $(event.currentTarget).find("span.fa-plus").length?0:1;
-        $(event.currentTarget).find("span").removeClass(toggleOption[remove]).addClass(toggleOption[1-remove]);
+        var toggleOption = ["fa-plus", "fa-minus"];
+        var remove = $(event.currentTarget).find("span.fa-plus").length ? 0 : 1;
+        $(event.currentTarget).find("span").removeClass(toggleOption[remove]).addClass(toggleOption[1 - remove]);
         $(event.currentTarget).next("div").toggle(200);
     },
     "click .issue": function (event) {
-        var issue = $(event.target).data().value;
-        issue && Session.set("currentIssueId", issue);
+        var issueId = $(event.target).data().value;
+        var volume = $(event.target).data().volume;
+        var issue = $(event.target).data().issue;
+        issueId && Session.set("currentIssueId", issueId);
+        //if url contains issue, router.go
+        if (Router.current().params.volume && Router.current().params.issue) {
+            Router.current().params.volume = volume;
+            Router.current().params.issue = issue;
+            Router.go("journal.name.volume", Router.current().params)
+        }
     }
 });
 
@@ -40,7 +48,7 @@ Template.articleListRight.helpers({
         var pubStatus = Template.currentData().pubStatus;
         var curIssue = Session.get("currentIssueId");
         if (curIssue) {
-            return Articles.find({issueId: curIssue,pubStatus: pubStatus}, {sort: {title: 1}});
+            return Articles.find({issueId: curIssue, pubStatus: pubStatus}, {sort: {title: 1}});
         } else {
             var journalId = Session.get('currentJournalId');
             //return Articles.find({journalId: journalId}, {sort: {issue: -1}}); this shows all articles, uncomment for testing, below only shows latest issue as AIP
@@ -50,11 +58,12 @@ Template.articleListRight.helpers({
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");
-        if (curIssue) {
-            var i = Issues.findOne({_id: curIssue});
-            var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;
-            return title;
-        }
+        if (!curIssue) return;
+        var i = Issues.findOne({_id: curIssue});
+        if (!i)return;
+        var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;
+        return title;
+
 
     },
     issueContext: function () {
@@ -63,7 +72,7 @@ Template.articleListRight.helpers({
             return Issues.findOne({_id: curIssue});
         }
     },
-    normal: function(){
-        return Template.currentData().pubStatus=="normal"
+    normal: function () {
+        return Template.currentData().pubStatus == "normal"
     }
 });

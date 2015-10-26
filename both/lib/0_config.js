@@ -103,7 +103,8 @@ Config = {
         "pubStatus",
         "accessKey",
         "language",
-        "pacs"
+        "pacs",
+        "fundings"
     ],
     pdf: {
         watermark: "Accepted",

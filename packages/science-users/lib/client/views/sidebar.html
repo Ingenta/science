@@ -38,7 +38,6 @@
                 <li><a class="favorite" href=""><i class="fa fa-star"></i> {{favoriteName}}</a></li>
                 <li><a class="watchArticle" href=""><i class="fa fa-eye"></i> {{watchArticleName}}</a></li>
                 <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i class="fa fa-envelope"></i> {{_ "Email This"}}</a></li>
-                {{>sendEmailModalForm}}
             {{/if}}
             {{#if isJournalPage}}
                 <li><a class="watch" href=""><i class="fa fa-eye"></i> {{watchName}}</a></li>
@@ -66,6 +65,7 @@
         {{/if}}
         {{> sidebarAd}}
     </ul>
+    {{>sendEmailModalForm}}
 </template>
 
 

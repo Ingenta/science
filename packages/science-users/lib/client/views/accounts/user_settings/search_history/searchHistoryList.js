@@ -7,7 +7,7 @@ Template.searchHistoryList.helpers({
         return this.createOn.format("yyyy-MM-dd");
     },
     folder : function(){
-        return SearchHistory.find();
+        return Meteor.user().history.saved;
     }
 })
 
@@ -21,5 +21,25 @@ Template.searchHistoryList.events({
             });
             Users.update({_id: Meteor.userId()}, {$set: {'history.unsave': resultArray}});
         })
+    },
+    'click .folder' : function(e){
+        e.stopPropagation();
+        var keyword=$(e.target).closest("ul").data().keyword;
+        var tempArray = Meteor.user().history.unsave;
+        var resultArray = _.filter(tempArray, function (element) {
+            return element.word !== keyword
+        });
+        var folderName=this.folderName;
+        var savedObjs = _.map(Meteor.user().history.saved,function(item){
+            if( item.folderName===folderName){
+                if(!item.words){
+                    item.words=[];
+                }
+                item.words.push({word:keyword,createOn:new Date()});
+            }
+            return item;
+        });
+
+        Users.update({_id: Meteor.userId()}, {$set: {"history.unsave":resultArray,"history.saved":savedObjs}});
     }
 })
