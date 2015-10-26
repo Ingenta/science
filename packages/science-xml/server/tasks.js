@@ -2,388 +2,376 @@ Tasks = {};
 
 Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
 
-	if (!pathToFile || !fileName || !fileType)return;
-	var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
-	//文章的出版状态(默认是正式出版)
-	var pubstatus = formFields ? formFields.pubStatus : "normal";
+    if (!pathToFile || !fileName || !fileType)return;
+    var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
+    //文章的出版状态(默认是正式出版)
+    var pubstatus = formFields ? formFields.pubStatus : "normal";
 
-	var logId = UploadLog.insert({
-		name      : fileName,
-		pubStatus : pubstatus,
-		uploadedAt: new Date(),
-		status    : "Started",
-		filePath  : pathToFile,
-		filename  : fileNameWithoutExtension,
-		errors    : []
-	});
-	if (Tasks.inProgress(undefined, logId, fileNameWithoutExtension)) {
-		return;
-	}
+    var logId = UploadLog.insert({
+        name: fileName,
+        pubStatus: pubstatus,
+        uploadedAt: new Date(),
+        status: "Started",
+        filePath: pathToFile,
+        filename: fileNameWithoutExtension,
+        errors: []
+    });
+    if (Tasks.inProgress(undefined, logId, fileNameWithoutExtension)) {
+        return;
+    }
 
-	if (fileType === "text/xml") {
-		Tasks.parse(logId, pathToFile);
-		return;
-	}
+    if (fileType === "text/xml") {
+        Tasks.parse(logId, pathToFile);
+        return;
+    }
 
-	if (fileName.endWith(".zip")) {
-		//extract to a folder with the same name inside extracted folder
-		var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
-		Tasks.extract(logId, pathToFile, targetPath);
-		return;
-	}
-	Tasks.failSimple(undefined, logId, "Filetype is not suitable: " + fileType);
+    if (fileName.endWith(".zip")) {
+        //extract to a folder with the same name inside extracted folder
+        var targetPath = Config.uploadXmlDir.uploadDir + "/extracted/" + fileNameWithoutExtension;
+        Tasks.extract(logId, pathToFile, targetPath);
+        return;
+    }
+    Tasks.failSimple(undefined, logId, "Filetype is not suitable: " + fileType);
 };
 
 Tasks.fail = function (taskId, logId, errors) {
-	if (taskId)
-		UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
-	UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: errors}});
+    if (taskId)
+        UploadTasks.update({_id: taskId}, {$set: {status: "Failed"}});
+    UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: errors}});
 
-	var log = UploadLog.findOne({_id: logId});
-	ScienceXML.RemoveFile(log.filePath);
-	if (log.extractTo)
-		ScienceXML.RemoveFile(log.extractTo);
+    var log = UploadLog.findOne({_id: logId});
+    ScienceXML.RemoveFile(log.filePath);
+    if (log.extractTo)
+        ScienceXML.RemoveFile(log.extractTo);
 }
 
 Tasks.failSimple = function (taskId, logId, errorMessage) {
-	var e = [];
-	e=_.union(e,errorMessage);
-	Tasks.fail(taskId, logId, e);
+    var e = [];
+    e = _.union(e, errorMessage);
+    Tasks.fail(taskId, logId, e);
 }
 
 Tasks.hasExistingArticleByFullDoi = function (taskId, logId, doi) {
-	var existingArticle = Articles.findOne({doi: doi});
-	if (!existingArticle)return false;
-	Tasks.failSimple(taskId, logId, "Article found matching this DOI: " + doi);
-	return true;
+    var existingArticle = Articles.findOne({doi: doi});
+    if (!existingArticle)return false;
+    Tasks.failSimple(taskId, logId, "Article found matching this DOI: " + doi);
+    return true;
 }
 
 Tasks.hasExistingArticleByArticleDoi = function (taskId, logId, articledoi) {
-	var existingArticle = Articles.findOne({articledoi: articledoi});
-	if (!existingArticle)return false;
-	Tasks.failSimple(taskId, logId, "Article found matching this article DOI: " + articledoi);
-	return true;
+    var existingArticle = Articles.findOne({articledoi: articledoi});
+    if (!existingArticle)return false;
+    Tasks.failSimple(taskId, logId, "Article found matching this article DOI: " + articledoi);
+    return true;
 }
 
 Tasks.inProgress = function (taskId, logId, filename) {
-	var existingLog = UploadLog.findOne({_id: logId});
-	if (existingLog) {
-		if (existingLog.status !== 'Pending') {
-			//set to in progress(pending)
-			UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
-			return false;
-		}
-		Tasks.failSimple(taskId, logId, "Import in progress matching this filename: " + filename);
-	}
-	return true;
+    var existingLog = UploadLog.findOne({_id: logId});
+    if (existingLog) {
+        if (existingLog.status !== 'Pending') {
+            //set to in progress(pending)
+            UploadLog.update({_id: logId}, {$set: {status: "Pending"}});
+            return false;
+        }
+        Tasks.failSimple(taskId, logId, "Import in progress matching this filename: " + filename);
+    }
+    return true;
 }
 
 Tasks.extract = function (logId, pathToFile, targetPath) {
-	var taskId = UploadTasks.insert({
-		action : "Extract",
-		started: new Date(),
-		status : "Started",
-		logId  : logId
-	});
+    var taskId = UploadTasks.insert({
+        action: "Extract",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
 
-	extractZip(pathToFile, targetPath, true,
-		Meteor.bindEnvironment(
-			function (error) {
-				if (error) {
-					console.log("Error extracting ZIP file: " + error);//report error
-					//THIS DOESNT REALLY WORK
-					//TODO: test this condition
-					return;
-				}
-				//set extract task to success, cleanup and start next task
-				UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-				//get target xml filename TODO: make this better
-				FSE.readdir(targetPath,
-					Meteor.bindEnvironment(
-						function (err, file) {
-							if (err) {
-								console.log(err);
-								//TODO: test this condition
-								return;
-							}
-							var xmlFileName = "";
-							file.forEach(function (f) {
-								if (f.endWith('.xml') && f !== "readme.xml") {
-									xmlFileName = f.substr(0, f.lastIndexOf(".xml"));
-									//TODO: should break here, or better yet find a better means of finding the xml
-								}
-							});
-							if (!xmlFileName) {
-								Tasks.failSimple(taskId, logId, "xml not found inside zip file");
-								return;
-							}
+    extractZip(pathToFile, targetPath, true,
+        Meteor.bindEnvironment(
+            function (error) {
+                if (error) {
+                    console.log("Error extracting ZIP file: " + error);//report error
+                    //THIS DOESNT REALLY WORK
+                    //TODO: test this condition
+                    return;
+                }
+                //set extract task to success, cleanup and start next task
+                UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                //get target xml filename TODO: make this better
+                FSE.readdir(targetPath,
+                    Meteor.bindEnvironment(
+                        function (err, file) {
+                            if (err) {
+                                console.log(err);
+                                //TODO: test this condition
+                                return;
+                            }
+                            var xmlFileName = "";
+                            file.forEach(function (f) {
+                                if (f.endWith('.xml') && f !== "readme.xml") {
+                                    xmlFileName = f.substr(0, f.lastIndexOf(".xml"));
+                                    //TODO: should break here, or better yet find a better means of finding the xml
+                                }
+                            });
+                            if (!xmlFileName) {
+                                Tasks.failSimple(taskId, logId, "xml not found inside zip file");
+                                return;
+                            }
 
-							var targetXml = targetPath + "/" + xmlFileName + ".xml";
-							var targetPdf = targetPath + "/" + xmlFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
-							UploadLog.update({_id: logId}, {
-								$set: {
-									xml      : targetXml,
-									pdf      : targetPdf,
-									extractTo: targetPath
-								}
-							});
-							Tasks.parse(logId, targetXml);
+                            var targetXml = targetPath + "/" + xmlFileName + ".xml";
+                            var targetPdf = targetPath + "/" + xmlFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
+                            UploadLog.update({_id: logId}, {
+                                $set: {
+                                    xml: targetXml,
+                                    pdf: targetPdf,
+                                    extractTo: targetPath
+                                }
+                            });
+                            Tasks.parse(logId, targetXml);
 
-						}));
-			}));
+                        }));
+            }));
 }
 
 Tasks.parse = function (logId, pathToXml) {
-	var log    = UploadLog.findOne({_id: logId});
-	var taskId = UploadTasks.insert({
-		action : "Parse",
-		started: new Date(),
-		status : "Started",
-		logId  : logId
-	});
-	try {
-		var result = ScienceXML.parseXml(pathToXml);
-		if (result.pdf) {
-			log.errors = result.errors;
-		}
-		if (log.errors.length) {
-			Tasks.fail(taskId, logId, log.errors);
-			return;
-		}
-		//set parse task to success and start next task
-		UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+    var log = UploadLog.findOne({_id: logId});
+    var taskId = UploadTasks.insert({
+        action: "Parse",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
+    try {
+        var result = ScienceXML.parseXml(pathToXml);
+        if (result.pdf) {
+            log.errors = result.errors;
+        }
+        if (log.errors.length) {
+            Tasks.fail(taskId, logId, log.errors);
+            return;
+        }
+        //set parse task to success and start next task
+        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
-		//start import tasks
-		Tasks.insertArticlePdf(logId, result);
-	} catch (e) {
-		log.errors.push(e.toString());
-		Tasks.fail(taskId, logId, log.errors);
-	}
+        //start import tasks
+        Tasks.insertArticlePdf(logId, result);
+    } catch (e) {
+        log.errors.push(e.toString());
+        Tasks.fail(taskId, logId, log.errors);
+    }
 }
 
 
 Tasks.insertArticlePdf = function (logId, result) {
-	var log = UploadLog.findOne({_id: logId});
-	if (!ScienceXML.FileExists(log.pdf)) {
-		console.log("pdf missing");
-		Tasks.insertArticleImages(logId, result);
-		return;
-	}
-	var taskId = UploadTasks.insert({
-		action : "Insert PDF",
-		started: new Date(),
-		status : "Started",
-		logId  : logId
-	});
-	Collections.Pdfs.insert(log.pdf, function (err, fileObj) {
-		result.pdfId = fileObj._id;
-		UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-		UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
-		Tasks.insertArticleImages(logId, result);
-	});
+    var log = UploadLog.findOne({_id: logId});
+    if (!ScienceXML.FileExists(log.pdf)) {
+        console.log("pdf missing");
+        Tasks.insertArticleImages(logId, result);
+        return;
+    }
+    var taskId = UploadTasks.insert({
+        action: "Insert PDF",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
+    Collections.Pdfs.insert(log.pdf, function (err, fileObj) {
+        result.pdfId = fileObj._id;
+        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+        UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
+        Tasks.insertArticleImages(logId, result);
+    });
 }
 
 Tasks.insertArticleImages = function (logId, result) {
-	var taskId = UploadTasks.insert({
-		action : "Insert Images",
-		started: new Date(),
-		status : "Started",
-		logId  : logId
-	});
+    var taskId = UploadTasks.insert({
+        action: "Insert Images",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
 
-	var log = UploadLog.findOne({_id: logId});
-	if (!result.figures) {
-		if (log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
-	}
-	else {
-		result.figures.forEach(function (fig) {
-			var onlineOne = _.findWhere(fig.graphics, {use: "online"});
-			// 兼容中国科学数据
-			onlineOne = onlineOne || _.find(fig.graphics, function (g) {
-					return !g.use;
-				});
-			if (onlineOne) {
-				console.dir(onlineOne);
-				var figName     = onlineOne.href;
-				var figLocation = log.extractTo + "/" + figName;
-				if (!ScienceXML.FileExists(figLocation)) {
-					console.log("image missing: " + figName);
-				}
-				else {
-					ArticleXml.insert(figLocation, function (err, fileObj) {
-						fig.imageId = fileObj._id;
-						UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-						if (_.last(result.figures) === fig) {
-							Meteor.setTimeout(function () {
-								ScienceXML.RemoveFile(log.extractTo);
-							}, 20000)
-						}
-					});
-				}
-			}
-		});
-	}
+    var log = UploadLog.findOne({_id: logId});
+    if (!result.figures) {
+        if (log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
+    }
+    else {
+        result.figures.forEach(function (fig) {
+            var onlineOne = _.findWhere(fig.graphics, {use: "online"});
+            // 兼容中国科学数据
+            onlineOne = onlineOne || _.find(fig.graphics, function (g) {
+                    return !g.use;
+                });
+            if (onlineOne) {
+                console.dir(onlineOne);
+                var figName = onlineOne.href;
+                var figLocation = log.extractTo + "/" + figName;
+                if (!ScienceXML.FileExists(figLocation)) {
+                    console.log("image missing: " + figName);
+                }
+                else {
+                    ArticleXml.insert(figLocation, function (err, fileObj) {
+                        fig.imageId = fileObj._id;
+                        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                        if (_.last(result.figures) === fig) {
+                            Meteor.setTimeout(function () {
+                                ScienceXML.RemoveFile(log.extractTo);
+                            }, 20000)
+                        }
+                    });
+                }
+            }
+        });
+    }
 
-	Tasks.insertArticleTask(logId, result);
+    Tasks.insertArticleTask(logId, result);
 }
 
 
 Tasks.insertArticleTask = function (logId, result) {
-	var taskId = UploadTasks.insert({
-		action : "Insert",
-		started: new Date(),
-		status : "Started",
-		logId  : logId
-	});
+    var taskId = UploadTasks.insert({
+        action: "Insert",
+        started: new Date(),
+        status: "Started",
+        logId: logId
+    });
 
-	var hadError = false;
-	var articleId;
+    var hadError = false;
+    var articleId;
 
-	var log          = UploadLog.findOne({_id: logId});
-	result.pubStatus = log.pubStatus;//设置文章的出版状态和上传时选择的出版状态一致。
+    var log = UploadLog.findOne({_id: logId});
+    result.pubStatus = log.pubStatus;//设置文章的出版状态和上传时选择的出版状态一致。
 
-	try {
-		articleId = insertArticle(result);
-		if(articleId){
-			insertAccessKey(result);
-			insertLanguage(result);
-			insertKeywords(result.keywords);
-		}
-	}
-	catch (ex) {
-		Tasks.failSimple(taskId, logId, _.union(result.errors,ex.message));
-		hadError = true;
-	}
-	if (!hadError) {
-		//cleanup and set log and tasks to done
-		ScienceXML.RemoveFile(log.filePath);
-		UploadTasks.update(
-			{_id: taskId},
-			{$set: {status: "Success"}});
-		UploadLog.update(
-			{_id: logId},
-			{$set: {status: "Success", articleId: articleId}}
-		);
-	}
+    try {
+        articleId = insertArticle(result);
+        if (articleId) {
+            insertKeywords(result.keywords);
+        }
+    }
+    catch (ex) {
+        Tasks.failSimple(taskId, logId, _.union(result.errors, ex.message));
+        hadError = true;
+    }
+    if (!hadError) {
+        //cleanup and set log and tasks to done
+        ScienceXML.RemoveFile(log.filePath);
+        UploadTasks.update(
+            {_id: taskId},
+            {$set: {status: "Success"}});
+        UploadLog.update(
+            {_id: logId},
+            {$set: {status: "Success", articleId: articleId}}
+        );
+    }
 }
-var insertKeywords      = function (a) {
-	if (!a)return;
-	if (a.cn) {
-		a.cn.forEach(function (name) {
-			if (!Keywords.findOne({name: name})) {
-				Keywords.insert({
-					lang : "cn",
-					name : name,
-					score: 0
-				});
-			}
-		})
-	}
-	if (a.en) {
-		a.en.forEach(function (name) {
-			if (!Keywords.findOne({name: name})) {
-				Keywords.insert({
-					lang : "en",
-					name : name,
-					score: 0
-				});
-			}
-		})
-	}
-	//a.forEach(function (name) {
-	//    if (!Keywords.findOne({name: name})) {
-	//        Keywords.insert({
-	//            name: name,
-	//            score: 0
-	//        });
-	//    }
-	//})
+var insertKeywords = function (a) {
+    if (!a)return;
+    if (a.cn) {
+        a.cn.forEach(function (name) {
+            if (!Keywords.findOne({name: name})) {
+                Keywords.insert({
+                    lang: "cn",
+                    name: name,
+                    score: 0
+                });
+            }
+        })
+    }
+    if (a.en) {
+        a.en.forEach(function (name) {
+            if (!Keywords.findOne({name: name})) {
+                Keywords.insert({
+                    lang: "en",
+                    name: name,
+                    score: 0
+                });
+            }
+        })
+    }
 }
-
-var insertAccessKey = function (a) {
-	a.accessKey = Publications.findOne({_id: a.journalId}).accessKey;
-};
-
-var insertLanguage = function (a) {
-	a.language = Publications.findOne({_id: a.journalId}).language;
-};
 
 var insertArticle = function (a) {
-	var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
-	if (!volume) {
-		volume = Volumes.insert({
-			journalId: a.journalId,
-			volume   : a.volume
-		});
-	}
-	a.volumeId = volume._id || volume;
+    var journal = Publications.findOne({_id: a.journalId});
+    if (!journal)return;
 
-	var issue = Issues.findOne({journalId: a.journalId, volume: a.volume, issue: a.issue});
-	if (!issue) {
-		issue = Issues.insert({
-			journalId: a.journalId,
-			volume   : a.volume,
-			issue    : a.issue,
-			year     : a.year,
-			month    : a.month
-		});
-	}
-	//确保article有一个关联的issue
-	a.issueId = issue._id || issue;
+    a.accessKey = journal.accessKey;
+    a.language = journal.language;
 
-	//若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
-	var existArticle = Articles.findOne({doi: a.doi});
-	if (existArticle) {
-		var sets = _.pick(a, Config.fieldsWhichFromXml);
-		Articles.update({_id: existArticle._id}, {$set: sets});
-		return existArticle._id;
-	}
+    var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
+    if (!volume) {
+        volume = Volumes.insert({
+            journalId: a.journalId,
+            volume: a.volume
+        });
+    }
+    a.volumeId = volume._id || volume;
 
-	var journalInfo = Publications.findOne({_id: a.journalId}, {
-		fields: {
-			title  : 1,
-			titleCn: 1,
-			issn   : 1,
-			EISSN  : 1,
-			CN     : 1
-		}
-	});
-	a.journalInfo   = journalInfo;
+    var issue = Issues.findOne({journalId: a.journalId, volume: a.volume, issue: a.issue});
+    if (!issue) {
+        issue = Issues.insert({
+            journalId: a.journalId,
+            volume: a.volume,
+            issue: a.issue,
+            year: a.year,
+            month: a.month
+        });
+    }
+    //确保article有一个关联的issue
+    a.issueId = issue._id || issue;
 
-	//如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml
-	var id = Articles.insert({
-		doi             : a.doi,
-		articledoi      : a.articledoi,
-		title           : a.title,
-		abstract        : a.abstract,
-		journalId       : a.journalId,
-		journal         : a.journalInfo,//journal是后加的
-		publisher       : a.publisher,
-		elocationId     : a.elocationId,
-		year            : a.year,
-		month           : a.month,
-		issue           : a.issue,
-		volume          : a.volume,
-		issueId         : a.issueId,
-		volumeId        : a.volumeId,
-		received        : a.received,
-		accepted        : a.accepted,
-		published       : a.published,
-		topic           : [a.topic],
-		contentType     : a.contentType,
-		acknowledgements: a.ack,
-		pdfId           : a.pdfId,
-		authors         : a.authors,
-		authorNotes     : a.authorNotes,
-		affiliations    : a.affiliations,
-		sections        : a.sections,
-		figures         : a.figures,
-		tables          : a.tables,
-		keywords        : a.keywords,
-		references      : a.references,
-		pubStatus       : a.pubStatus, //出版状态
-		accessKey       : a.accessKey,
-		language        : a.language
-	});
-	return id;
+    //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
+    var existArticle = Articles.findOne({doi: a.doi});
+    if (existArticle) {
+        var sets = _.pick(a, Config.fieldsWhichFromXml);
+        Articles.update({_id: existArticle._id}, {$set: sets});
+        return existArticle._id;
+    }
+
+    var journalInfo = Publications.findOne({_id: a.journalId}, {
+        fields: {
+            title: 1,
+            titleCn: 1,
+            issn: 1,
+            EISSN: 1,
+            CN: 1
+        }
+    });
+    a.journalInfo = journalInfo;
+
+    //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml
+    var id = Articles.insert({
+        doi: a.doi,
+        articledoi: a.articledoi,
+        title: a.title,
+        abstract: a.abstract,
+        journalId: a.journalId,
+        journal: a.journalInfo,//journal是后加的
+        publisher: a.publisher,
+        elocationId: a.elocationId,
+        year: a.year,
+        month: a.month,
+        issue: a.issue,
+        volume: a.volume,
+        issueId: a.issueId,
+        volumeId: a.volumeId,
+        received: a.received,
+        accepted: a.accepted,
+        published: a.published,
+        topic: [a.topic],
+        contentType: a.contentType,
+        acknowledgements: a.ack,
+        pdfId: a.pdfId,
+        authors: a.authors,
+        authorNotes: a.authorNotes,
+        affiliations: a.affiliations,
+        sections: a.sections,
+        figures: a.figures,
+        tables: a.tables,
+        keywords: a.keywords,
+        references: a.references,
+        pubStatus: a.pubStatus, //出版状态
+        accessKey: a.accessKey,
+        language: a.language
+    });
+    return id;
 };
