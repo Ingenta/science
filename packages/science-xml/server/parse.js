@@ -210,6 +210,12 @@ ScienceXML.parseXml = function (path) {
     if(!_.isEmpty(pacsArr)){
         results.pacs=pacsArr;
     }
+
+    var fundings= ScienceXML.getFunding(doc);
+    if(!_.isEmpty(fundings)){
+        results.fundings = fundings;
+    }
+    console.log("parsed fundings");
     return results;
 }
 
