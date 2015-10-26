@@ -15,6 +15,7 @@ Config = {
         uploadDir: '/tmp/uploads'
     },
     uploadPdfDir: '/tmp/pdf',
+    uploadExcelDir: '/tmp/excel',
     ftp: {
         downloadDir: "/tmp/downloads"
     },
@@ -27,7 +28,7 @@ Config = {
         global: [
             'home',
             'topics',
-            'author',
+            'authorCenter',
             'publishers',
             'publications',
             'collections'

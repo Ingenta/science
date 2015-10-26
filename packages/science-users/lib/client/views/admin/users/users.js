@@ -165,11 +165,6 @@ Template.AdminUsersView.events({
 	"click #dataview-export-json": function(e, t) {
 		e.preventDefault();
 		AdminUsersViewExport(this.admin_users, "json");
-	},
-
-	'click #btnUpload': function (e) {
-		var excel = new Excel('xlsx');
-		var workbook = excel.readFile( basepath+'yourFilesFoler/someExcelFile.xls');
 	}
 });
 
@@ -343,3 +338,10 @@ Template.accountOptions.helpers({
 		return Users.find({institutionId: {$exists: true}}, {});
 	}
 });
+
+AutoForm.addHooks(['addUploadExcelModalForm'], {
+	onSuccess: function () {
+		$("#addUploadExcelModal").modal('hide');
+		FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+	}
+}, true);

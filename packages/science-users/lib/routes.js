@@ -116,7 +116,12 @@ Meteor.startup(function () {
         title: function () {
             return TAPi18n.__("Account");
         },
-        parent: "admin"
+        parent: "admin",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('file_excel')
+            ]
+        }
     });
     Router.route("admin.users.details", {
         path: "/admin/users/details/:userId",

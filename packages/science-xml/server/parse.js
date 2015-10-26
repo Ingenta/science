@@ -109,7 +109,12 @@ ScienceXML.parseXml = function (path) {
     var keywordsCn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()",doc);
     var keywordsEn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()",doc);
     if(_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)){
-        results.errors.push("No keywords found");
+        keywordsEn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec']/kwd/text()",doc);
+        if(_.isEmpty(keywordsEn)){
+            results.errors.push("No keywords found");
+        }else{
+            results.keywords= {en:keywordsEn};
+        }
     }else{
         results.keywords = {
             cn:keywordsCn,

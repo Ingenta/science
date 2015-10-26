@@ -748,6 +748,39 @@
                     "label": "English"
                 }
             }
+        },
+        "fileExcel": {
+            "fileId": {
+                "label": "Choose Excel"
+            }
+        },
+        "newsLink": {
+            "picture": {
+                "label": "Choose images"
+            },
+            "link": {
+                "label": "Link"
+            }
+        },
+        "newsContact": {
+            "title": {
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            },
+            "content": {
+                "label": "Content",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            }
         }
     },
     "roles": "Roles",
@@ -793,6 +826,7 @@
     "select": "Select",
     "Add articles to collection": "Add to collection",
     "Accepted Date": "Accepted",
+    "Published online":"Published",
     "pubStatus": {
         "normal": "Normal",
         "onlineFirst": "Online first",
