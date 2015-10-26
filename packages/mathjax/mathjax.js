@@ -57,7 +57,7 @@ function onMathJaxReady(callback) {
 						showProcessingMessages: false,
 						tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
 						menuSettings: {
-							zoom: "Click",        //  when to do MathZoom
+							zoom: "No Zoom",        //  when to do MathZoom
 							CTRL: false,         //    require CTRL for MathZoom?
 							ALT: false,          //    require Alt or Option?
 							CMD: false,          //    require CMD?
