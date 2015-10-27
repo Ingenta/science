@@ -617,7 +617,6 @@ ScienceXML.getPACS = function(doc){
 }
 
 ScienceXML.getFunding=function(doc){
-    debugger;
     var fundingNodes = xpath.select("//funding-group/award-group",doc);
     if(_.isEmpty(fundingNodes)){
         return;
@@ -625,7 +624,6 @@ ScienceXML.getFunding=function(doc){
     var fundingObjects = [];
     _.each(fundingNodes,function(fundNode){
         var funding = {};
-        debugger
         funding.source=ScienceXML.getSimpleValueByXPath("child::funding-source",fundNode);
         funding.contract = ScienceXML.getSimpleValueByXPath("child::award-id[@award-type='contract']",fundNode);
         fundingObjects.push(funding);

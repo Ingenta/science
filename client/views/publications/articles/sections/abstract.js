@@ -10,3 +10,10 @@ Template.AbstractTemplate.helpers({
 		return journalId ? journalId : "";
 	}
 });
+
+
+Template.fundingTemplating.helpers({
+	"fundings3":function(){
+		return _.first(this.fundings,3);
+	}
+})

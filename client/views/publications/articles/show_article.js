@@ -37,10 +37,14 @@ ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
 		console.log(slug);
+		//if(slug===Session.get('activeTab'))
+		//	return;
+		//console.log(slug);
 		if(slug!=='full text'){
 			clearDR()
 		}
-		Session.set('activeTab', slug);
+
+		//Session.set('activeTab', slug);
 		var article = Router.current().data && Router.current().data();
 		if (!article)return;
 		if (slug === 'abstract') {
@@ -67,14 +71,13 @@ ReactiveTabs.createInterface({
 					ip       : session
 				});
 			});
-
 			if (!_.isEmpty(article.keywords)) {
-				var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn))
+				var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn));
 				if(!_.isEmpty(keywords)){
-					console.dir(keywords)
-					Meteor.call("updateKeywordScore",{name:{$in:keywords}},2,function(err,result){
-						
-					})
+					_.each(Keywords.find({name:{$in:keywords}},{fields:{_id:1}}).fetch(),function(k){
+						Keywords.update({_id: k._id},{$inc: {"score": 2}},{multi:true});
+					});
+					//Meteor.call("updateKeywordScore",keywords,2,function(err,result){})
 				}
 			}
 			Users.recent.read(article);
@@ -106,11 +109,11 @@ Template.showArticle.onRendered(function () {
 	Session.set("recentViewedArticles", rva);
 
 	//Set default tab based on fulltext empty or not.
-	if (Articles.findOne({_id: this.data._id}).sections) {
-		Session.set('activeTab', 'full text');
-	} else {
-		Session.set('activeTab', 'abstract');
-	}
+	//if (Articles.findOne({_id: this.data._id}).sections) {
+	//	Session.set('activeTab', 'full text');
+	//} else {
+	//	Session.set('activeTab', 'abstract');
+	//}
 
 	//Rating Start
 	var aid = this.data._id;
@@ -183,7 +186,7 @@ Template.articleOptions.helpers({
 		];
 	},
 	activeTab : function () {
-		//return Session.get('activeTab');
+		return Session.get('activeTab');
 	},
 	ipRedirect: function () {
 		if (this.language === "2") return false;

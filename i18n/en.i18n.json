@@ -862,5 +862,6 @@
     "Recent_read":"Recently viewed content",
     "Recent_search":"Recent Searches",
     "PACS":"PACS number:",
-    "PACS_plural":"PACS numbers:"
+    "PACS_plural":"PACS numbers:",
+    "funding":"Fund"
 }
