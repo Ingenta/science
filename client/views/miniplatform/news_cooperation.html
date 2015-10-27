@@ -1,5 +1,6 @@
 <template name="cooperationContent">
     <div class="container-fluid">
+        {{> autoformModals}}
         {{> pageElement key="cooperation"}}
         <div class="row">
             {{#if can  "add-news-link" "resource"  }}
@@ -24,7 +25,7 @@
 </template>
 
 <template name="updateNewsLinkModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsLink" doc=_id operation="update" fields="picture,link" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsLink" doc=_id operation="update" omitFields="types"}}{{/afModal}}
 </template>
 
 <template name="addNewsLinkModalForm">
@@ -40,7 +41,7 @@
                 {{#autoForm id="addNewsLinkModalForm" collection="NewsLink" type="insert"}}
                 <div class="modal-body">
                     {{> afQuickField name="picture"}}
-                    {{> afQuickField name="link"}}
+                    {{> afQuickField name="link" value="http://"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>

@@ -997,22 +997,16 @@
     },
     "newsContact": {
       "title": {
-        "label": "标题",
-        "cn": {
-          "label": "中文"
-        },
-        "en": {
-          "label": "英文"
-        }
+        "label": "标题"
       },
       "content": {
-        "label": "内容",
-        "cn": {
-          "label": "中文"
-        },
-        "en": {
-          "label": "英文"
-        }
+        "label": "内容"
+      },
+      "fileName": {
+        "label": "附件名称"
+      },
+      "fileId": {
+        "label": "选择文件"
       }
     }
   },
@@ -1155,5 +1149,6 @@
   "Delete search history":"删除搜索历史",
   "Save to Folder":"保存到文件夹",
   "Permission denied": "没有权限",
-  "PACS":"PACS代号:"
+  "PACS":"PACS代号:",
+  "funding":"基金资助"
 }

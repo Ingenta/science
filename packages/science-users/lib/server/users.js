@@ -59,7 +59,6 @@ Meteor.publish(null, function () {
             orbit_roles: 1,
             favorite: 1,
             watch: 1,
-            watchArticle: 1,
             institutionId: 1,
             publisherId: 1,
             journalId: 1,
@@ -129,18 +128,72 @@ Meteor.methods({
         Meteor.defer(function () {
             Accounts.sendVerificationEmail(userId);
         });
+        return userId;
     },
     upsertSearchFolder:function(doc){
         var history = Meteor.user().history;
         if(!history) history={saved:[],unsaved:[]};
         if(!history.saved) history.saved=[];
         if(!_.find(history.saved,function(dir){
-            return dir.folderName === doc.folderName
-        })){
+                return dir.folderName === doc.folderName
+            })){
             history.saved.push({folderName:doc.folderName})
             Users.update({_id: Meteor.userId()}, {$set: {"history": history}});
             return true;
         }
         return false;
+    },
+    parseExcel:function(excelId) {
+        Meteor.setTimeout(function () {
+            if (!excelId) return;
+
+            var excelObj = fileExcel.findOne({_id: excelId});
+            if (!excelObj || !excelObj.fileId) return;
+
+            var excelFile = Collections.Excels.findOne({_id: excelObj.fileId}, {fields: {copies: 1}});
+            if (!excelFile || !excelFile.copies || !excelFile.copies.excels || !excelFile.copies.excels.key) return;
+
+            var filePath = Config.uploadExcelDir + "/" + excelFile.copies.excels.key;
+            var ext = excelFile.copies.excels.key.toLowerCase().endWith(".xlsx") ? "xlsx" : "xls";
+            var excel = new Excel(ext);
+            var workbook = excel.readFile(filePath);
+            var workbookJson = excel.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+            for (var i = 0; i < workbookJson.length; i++) {
+                Meteor.call("registerUser", workbookJson[i].username, workbookJson[i].password, workbookJson[i].email, function (err, id) {
+                        if (err) return;
+                        var journal =[];
+                        var topic = []
+                        if(workbookJson[i].journals){
+                            _.map(workbookJson[i].journals.split(","),function(item){
+                                var journals = Publications.find({issn:item.trim()},{_id:1}).fetch();
+                                _.each(journals,function(item){
+                                    journal.push(item._id);
+                                });
+                            });
+                        }
+                        if(workbookJson[i].topics){
+                            _.map(workbookJson[i].topics.split(","),function(item){
+                                var topics = Topics.find({name:item.trim(),"parentId": null},{_id:1}).fetch();
+                                _.each(topics,function(item){
+                                    topic.push(item._id);
+                                });
+                            });
+                        }
+                        Users.update({_id: id}, {
+                            $set: {
+                                "profile.realname": workbookJson[i].realname,
+                                "profile.institution": workbookJson[i].institution,
+                                "profile.fieldOfResearch": workbookJson[i].field,
+                                "profile.interestedOfJournals": journal,
+                                "profile.interestedOfTopics": topic,
+                                "profile.phone": workbookJson[i].phone,
+                                "profile.address": workbookJson[i].address,
+                                "profile.weChat": workbookJson[i].weChat
+                            }
+                        });
+                    }
+                );
+            }
+        }, 2000)
     }
 });

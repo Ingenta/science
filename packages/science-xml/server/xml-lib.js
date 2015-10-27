@@ -95,7 +95,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         //通讯作者信息
         var noteAttr = xpath.select("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
         if(!_.isEmpty(noteAttr)){
-            authorObj.corresp=noteAttr[0].value;
+            authorObj.email=noteAttr[0].value;
+            console.log('email')
         }
 
         //工作单位信息
@@ -158,6 +159,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.affiliations.push(oneAffiliation);
         });
     }
+    console.log('parse author done')
     return results;
 }
 
@@ -274,8 +276,17 @@ ScienceXML.getAbstract = function (results, doc) {
 ScienceXML.getContentType = function (results, doc) {
     if (!results.errors) results.errors = [];
     var contentType = xpath.select("//article/@article-type", doc);
-    if (contentType[0].value === undefined) results.errors.push("No content type found");
-    else results.contentType = contentType[0].value.trim().toLowerCase();
+    if(!_.isEmpty(contentType)){
+        if (contentType[0].value !== undefined)
+            results.contentType = contentType[0].value.trim().toLowerCase();
+    }else{
+        contentType=ScienceXML.getSimpleValueByXPath("//article-meta/article-type",doc);
+        if(contentType){
+            results.contentType = contentType.trim().toLowerCase();
+        }else{
+            results.errors.push("No content type found");
+        }
+    }
     return results;
 }
 
@@ -603,4 +614,19 @@ ScienceXML.getPACS = function(doc){
         }
     })
     return codes;
+}
+
+ScienceXML.getFunding=function(doc){
+    var fundingNodes = xpath.select("//funding-group/award-group",doc);
+    if(_.isEmpty(fundingNodes)){
+        return;
+    }
+    var fundingObjects = [];
+    _.each(fundingNodes,function(fundNode){
+        var funding = {};
+        funding.source=ScienceXML.getSimpleValueByXPath("child::funding-source",fundNode);
+        funding.contract = ScienceXML.getSimpleValueByXPath("child::award-id[@award-type='contract']",fundNode);
+        fundingObjects.push(funding);
+    })
+    return fundingObjects;
 }

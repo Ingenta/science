@@ -764,22 +764,16 @@
         },
         "newsContact": {
             "title": {
-                "label": "Title",
-                "cn": {
-                    "label": "Chinese"
-                },
-                "en": {
-                    "label": "English"
-                }
+                "label": "Title"
             },
             "content": {
-                "label": "Content",
-                "cn": {
-                    "label": "Chinese"
-                },
-                "en": {
-                    "label": "English"
-                }
+                "label": "Content"
+            },
+            "fileName": {
+                "label": "AttachmentName"
+            },
+            "fileId": {
+                "label": "Choose file"
             }
         }
     },
@@ -868,5 +862,6 @@
     "Recent_read":"Recently viewed content",
     "Recent_search":"Recent Searches",
     "PACS":"PACS number:",
-    "PACS_plural":"PACS numbers:"
+    "PACS_plural":"PACS numbers:",
+    "funding":"Fund"
 }
