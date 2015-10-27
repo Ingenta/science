@@ -159,27 +159,33 @@ Meteor.methods({
             var workbook = excel.readFile(filePath);
             var workbookJson = excel.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
             for (var i = 0; i < workbookJson.length; i++) {
-                //console.dir(workbookJson[i]);
                 Meteor.call("registerUser", workbookJson[i].username, workbookJson[i].password, workbookJson[i].email, function (err, id) {
                         if (err) return;
-                        //var journal =[];
-                        //var topic = []
-                        ////if(workbookJson[i].journals){
-                        ////    journal = workbookJson[i].journals.split(",");
-                        ////    var journalsId = Publications.find({issn:{$in:journal}});
-                        ////}
-                        //if(workbookJson[i].topics){
-                        //    topic = workbookJson[i].topics.split(",");
-                        //    var topicsId = Topics.find({name:{$in:topic}});
-                        //}
-                        //console.dir(topicsId._id);
+                        var journal =[];
+                        var topic = []
+                        if(workbookJson[i].journals){
+                            _.map(workbookJson[i].journals.split(","),function(item){
+                                var journals = Publications.find({issn:item.trim()},{_id:1}).fetch();
+                                _.each(journals,function(item){
+                                    journal.push(item._id);
+                                });
+                            });
+                        }
+                        if(workbookJson[i].topics){
+                            _.map(workbookJson[i].topics.split(","),function(item){
+                                var topics = Topics.find({name:item.trim(),"parentId": null},{_id:1}).fetch();
+                                _.each(topics,function(item){
+                                    topic.push(item._id);
+                                });
+                            });
+                        }
                         Users.update({_id: id}, {
                             $set: {
                                 "profile.realname": workbookJson[i].realname,
                                 "profile.institution": workbookJson[i].institution,
                                 "profile.fieldOfResearch": workbookJson[i].field,
-                                "profile.interestedOfJournals": workbookJson[i].journals,
-                                "profile.interestedOfTopics": workbookJson[i].topics,
+                                "profile.interestedOfJournals": journal,
+                                "profile.interestedOfTopics": topic,
                                 "profile.phone": workbookJson[i].phone,
                                 "profile.address": workbookJson[i].address,
                                 "profile.weChat": workbookJson[i].weChat
