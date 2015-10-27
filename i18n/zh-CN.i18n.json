@@ -1149,5 +1149,6 @@
   "Delete search history":"删除搜索历史",
   "Save to Folder":"保存到文件夹",
   "Permission denied": "没有权限",
-  "PACS":"PACS代号:"
+  "PACS":"PACS代号:",
+  "funding":"基金资助"
 }
