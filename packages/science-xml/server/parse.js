@@ -145,7 +145,6 @@ ScienceXML.parseXml = function (path) {
     else results.journalTitle = journalTitle;
     console.log('parsed journal\'s title');
 
-
     var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
     if (issn === undefined) {
         results.errors.push("No issn found in xml");
