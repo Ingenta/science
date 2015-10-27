@@ -80,12 +80,12 @@ SyncedCron.add({
 				]
 			}
 		);
-
 		userList.forEach(function (oneUser) {
 			if(!oneUser.lastSentDate) {
 				if(oneUser.emailFrequency == 'daily') oneUser.lastSentDate = yesterday;
 				else if(oneUser.emailFrequency == 'weekly') oneUser.lastSentDate = lastWeek;
 				else if(oneUser.emailFrequency == 'monthly') oneUser.lastSentDate = lastMonth;
+				else oneUser.lastSentDate = new Date();
 			}
 			if (oneUser.profile.interestedOfJournals && oneUser.profile.interestedOfJournals.length > 0) {
 				Issues.find({
@@ -103,7 +103,7 @@ SyncedCron.add({
 						}, {
 							fields: {_id: 1}
 						}).fetch();
-					outgoingList.push({userId: oneUser._id, email: oneUser.email[0].address, issue: oneIssue, articleIds: issueToArticles[oneIssue._id]});
+					if(issueToArticles[oneIssue._id].length) outgoingList.push({userId: oneUser._id, email: oneUser.emails[0].address, issue: oneIssue, articleIds: issueToArticles[oneIssue._id]});
 				});
 			}
 			if (oneUser.profile.interestedOfTopics && oneUser.profile.interestedOfTopics.length > 0) {
@@ -117,7 +117,7 @@ SyncedCron.add({
 					}, {
 						fields: {_id: 1}
 					}).fetch();
-					outgoingList.push({userId: oneUser._id, email: oneUser.email[0].address, topicId: oneTopic, articleIds: tempArray});
+					if(tempArray.length) outgoingList.push({userId: oneUser._id, email: oneUser.emails[0].address, topicId: oneTopic, articleIds: tempArray});
 				})
 
 			}
@@ -130,7 +130,7 @@ SyncedCron.add({
 				}, {
 					fields: {_id: 1}
 				}).fetch();
-				outgoingList.push({userId: oneUser._id, email: oneUser.email[0].address, articleIds: tempArray});
+				if(tempArray.length) outgoingList.push({userId: oneUser._id, email: oneUser.emails[0].address, articleIds: tempArray});
 			}
 		});
 	}
