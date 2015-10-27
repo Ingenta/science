@@ -349,7 +349,13 @@ Router.map(function () {
             }
         },
         template: "ShowJournal",
-        title: ":journalTitle",
+        title: function () {
+            if (TAPi18n.getLanguage() === "en") return ":journalTitle";
+            var id = Session.get('currentJournalId');
+            var p = Publications.findOne({_id: id});
+            if (p) return p.titleCn || p.title;
+            return ":journalTitle";
+        },
         parent: "publisher.name",
         name: "journal.name",
         waitOn: function () {
