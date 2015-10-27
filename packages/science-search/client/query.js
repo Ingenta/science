@@ -170,22 +170,23 @@ SolrQuery = {
 		var params = QueryUtils.parseUrl();
 		if(!_.isEmpty(params.q) && _.isString(params.q)){
 			Users.recent.search(params.q);
-			var q=(params.st && _.contains(["bar","history"],params.st.from)) ? params.q : "";
+            var setting = params.st || {};
+			var q=(_.contains(["bar","history"],setting.from)) ? params.q : "";
 			$("#searchInput").val(q);
-		}
-        if (Meteor.userId()) {
-            var his = !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave:[]}
-            var obj= _.find(his, function(arr,key){
+            if (Meteor.userId()) {
+                var his = !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave:[]}
+                var obj= _.find(his, function(arr,key){
                     return _.find(arr,function(item){
                         return item.word===q;
                     })
                 });
-            if(!obj){
-                his.unsave=his.unsave || [];
-                his.unsave.push({word: q, createOn: new Date()})
-                Users.update({_id: Meteor.userId()}, {$set: {"history": his}});
+                if(!obj){
+                    his.unsave=his.unsave || [];
+                    his.unsave.push({word: q, from:setting.from, createOn: new Date()})
+                    Users.update({_id: Meteor.userId()}, {$set: {"history": his}});
+                }
             }
-        }
+		}
 		Meteor.call("search", params, function (err, result) {
 			SolrQuery.session.set("params",params);
 			var ok = err ? false : result.responseHeader.status == 0;

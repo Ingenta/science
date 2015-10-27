@@ -1149,5 +1149,8 @@
   "Delete search history":"删除搜索历史",
   "Save to Folder":"保存到文件夹",
   "Permission denied": "没有权限",
-  "PACS":"PACS代号:"
+  "PACS":"PACS代号:",
+  "Common Search":"一般检索",
+  "Add Folder":"添加收藏夹",
+  "Dropdown":"下拉"
 }
