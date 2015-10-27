@@ -14,12 +14,30 @@ this.NewsContact.allow({
 
 NewsContactSchema = new SimpleSchema({
     title: {
-        type: Science.schemas.MultipleTextOptionalSchema,
+        type: String,
         optional: true
     },
     content: {
-        type:Science.schemas.MultipleTextAreaSchema,
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'summernote',
+                class: 'editor'
+            }
+        }
+    },
+    fileName: {
+        type: String,
         optional: true
+    },
+    fileId: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "cfs-file",
+            collection: "files"
+        }
     },
     types: {
         type: String,

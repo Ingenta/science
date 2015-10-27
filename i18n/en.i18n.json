@@ -764,22 +764,16 @@
         },
         "newsContact": {
             "title": {
-                "label": "Title",
-                "cn": {
-                    "label": "Chinese"
-                },
-                "en": {
-                    "label": "English"
-                }
+                "label": "Title"
             },
             "content": {
-                "label": "Content",
-                "cn": {
-                    "label": "Chinese"
-                },
-                "en": {
-                    "label": "English"
-                }
+                "label": "Content"
+            },
+            "fileName": {
+                "label": "AttachmentName"
+            },
+            "fileId": {
+                "label": "Choose file"
             }
         }
     },
