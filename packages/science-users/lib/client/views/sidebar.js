@@ -62,7 +62,10 @@ Template.LayoutSideBar.helpers({
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
-            var wat = Meteor.user().watchArticle || [];
+            var wat = [];
+            if(Meteor.user().profile){
+                wat = Meteor.user().profile.interestedOfArticles || [];
+            }
             return _.contains(wat, article._id) ? TAPi18n.__("Watched") : TAPi18n.__("Article Watch");
         } else {
             return TAPi18n.__("Article Watch");
@@ -106,20 +109,26 @@ Template.LayoutSideBar.events({
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId()) {
-            var wat = Meteor.user().watchArticle || [];
+            var wat = [];
+            if(Meteor.user().profile){
+                wat = Meteor.user().profile.interestedOfArticles || [];
+            }
             if (_.contains(wat, article._id)) {
                 wat = _.without(wat, article._id)
             } else {
                 wat.push(article._id)
             }
-            Users.update({_id: Meteor.userId()}, {$set: {watchArticle: wat}});
+            Users.update({_id: Meteor.userId()}, {$set: {'profile.interestedOfArticles': wat}});
         }
     },
     "click .watch": function () {
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if (Meteor.userId()) {
-            var pro = Meteor.user().profile.interestedOfJournals || [];
+            var pro = [];
+            if(Meteor.user().profile){
+                pro = Meteor.user().profile.interestedOfJournals || [];
+            }
             if (_.contains(pro, journal._id)) {
                 pro = _.without(pro, journal._id)
             } else {

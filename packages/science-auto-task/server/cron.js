@@ -37,21 +37,103 @@ SyncedCron.add({
 		AutoTasks.update({_id:taskId},{$set:{status:"created",total:articles.count()}});
 		Science.Queue.Citation.taskId = taskId;
 		//SyncedCron.stop();
+
+		MostCited.remove({});
+		var citations = Articles.find({citations: {$exists: true}}, {$sort: {'citations.size': -1}, limit: 20});
+		citations.forEach(function (item) {
+			MostCited.insert({articleId: item._id, title: item.title, count: item.citations.length, journalId: item.journalId});
+		});
 	}
 });
 
 SyncedCron.add({
-    name: "MostCitedTable",
+    name: "SendingWatchEmail",
     schedule: function (parser) {
-        return parser.text("at 6:00 am except on Sat");
+        return parser.text("at 1:00 am");
     },
     job: function () {
-        MostCited.remove({});
-        var citations = Articles.find({citations: {$exists: true}}, {$sort: {'citations.size': -1}, limit: 20});
-		citations.forEach(function (item) {
-			MostCited.insert({articleId: item._id, title: item.title, count: item.citations.length, journalId: item.journalId});
+		var outgoingList = [];
+		var issueToArticles = {};
+
+		var today = moment().startOf('day');
+		var yesterday = moment(today).subtract(1, 'days').toDate();
+		var lastWeek = moment(today).subtract(7, 'days').toDate();
+		var lastMonth = moment(today).subtract(1, 'months').toDate();
+
+		var userList = Users.find(
+			{
+				$and: [
+					{
+						$or: [
+							{$and: [{emailFrequency: {$exists: 1}}, {lastSentDate: {$exists: 0}}]},
+							{$and: [{emailFrequency: 'daily'}, {lastSentDate: {$lt: yesterday}}]},
+							{$and: [{emailFrequency: 'weekly'}, {lastSentDate: {$lt: lastWeek}}]},
+							{$and: [{emailFrequency: 'monthly'}, {lastSentDate: {$lt: lastMonth}}]}
+						]
+					}, {
+						$or: [
+							{'profile.interestedOfArticles': {$exists: 1}},
+							{'profile.interestedOfJournals': {$exists: 1}},
+							{'profile.interestedOfTopics': {$exists: 1}}
+						]
+					}
+				]
+			}
+		);
+
+		userList.forEach(function (oneUser) {
+			if(!oneUser.lastSentDate) {
+				if(oneUser.emailFrequency == 'daily') oneUser.lastSentDate = yesterday;
+				else if(oneUser.emailFrequency == 'weekly') oneUser.lastSentDate = lastWeek;
+				else if(oneUser.emailFrequency == 'monthly') oneUser.lastSentDate = lastMonth;
+			}
+			if (oneUser.profile.interestedOfJournals && oneUser.profile.interestedOfJournals.length > 0) {
+				Issues.find({
+					$and: [
+						{journalId: {$in: oneUser.profile.interestedOfJournals}},
+						{createDate: {$gt: oneUser.lastSentDate}}
+					]
+				}).forEach(function (oneIssue) {
+					if (!issueToArticles[oneIssue._id])
+						issueToArticles[oneIssue._id] = Articles.find({
+							journalId: oneIssue.journalId,
+							volume: oneIssue.volume,
+							issue: oneIssue.issue,
+							pubStatus: 'normal'
+						}, {
+							fields: {_id: 1}
+						}).fetch();
+					outgoingList.push({userId: oneUser._id, email: oneUser.email[0].address, issue: oneIssue, articleIds: issueToArticles[oneIssue._id]});
+				});
+			}
+			if (oneUser.profile.interestedOfTopics && oneUser.profile.interestedOfTopics.length > 0) {
+				oneUser.profile.interestedOfTopics.forEach(function (oneTopic) {
+					var tempArray = Articles.find({
+						$and: [
+							{topic: {$in: [oneTopic]}},
+							{createAt: {$gt: oneUser.lastSentDate}},
+							{$or: [{pubStatus: 'normal'}, {pubStatus: 'online_frist'}]}
+						]
+					}, {
+						fields: {_id: 1}
+					}).fetch();
+					outgoingList.push({userId: oneUser._id, email: oneUser.email[0].address, topicId: oneTopic, articleIds: tempArray});
+				})
+
+			}
+			if (oneUser.profile.interestedOfArticles && oneUser.profile.interestedOfArticles.length > 0) {
+				var tempArray = Articles.find({
+					$and: [
+						{_id: {$in: oneUser.profile.interestedOfArticles}},
+						{createAt: {$gt: oneUser.lastSentDate}}
+					]
+				}, {
+					fields: {_id: 1}
+				}).fetch();
+				outgoingList.push({userId: oneUser._id, email: oneUser.email[0].address, articleIds: tempArray});
+			}
 		});
-    }
+	}
 });
 
 var abortUnfinishTask = function(){

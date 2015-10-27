@@ -59,7 +59,6 @@ Meteor.publish(null, function () {
             orbit_roles: 1,
             favorite: 1,
             watch: 1,
-            watchArticle: 1,
             institutionId: 1,
             publisherId: 1,
             journalId: 1,
@@ -129,18 +128,66 @@ Meteor.methods({
         Meteor.defer(function () {
             Accounts.sendVerificationEmail(userId);
         });
+        return userId;
     },
     upsertSearchFolder:function(doc){
         var history = Meteor.user().history;
         if(!history) history={saved:[],unsaved:[]};
         if(!history.saved) history.saved=[];
         if(!_.find(history.saved,function(dir){
-            return dir.folderName === doc.folderName
-        })){
+                return dir.folderName === doc.folderName
+            })){
             history.saved.push({folderName:doc.folderName})
             Users.update({_id: Meteor.userId()}, {$set: {"history": history}});
             return true;
         }
         return false;
+    },
+    parseExcel:function(excelId) {
+        Meteor.setTimeout(function () {
+            if (!excelId) return;
+
+            var excelObj = fileExcel.findOne({_id: excelId});
+            if (!excelObj || !excelObj.fileId) return;
+
+            var excelFile = Collections.Excels.findOne({_id: excelObj.fileId}, {fields: {copies: 1}});
+            if (!excelFile || !excelFile.copies || !excelFile.copies.excels || !excelFile.copies.excels.key) return;
+
+            var filePath = Config.uploadExcelDir + "/" + excelFile.copies.excels.key;
+            var ext = excelFile.copies.excels.key.toLowerCase().endWith(".xlsx") ? "xlsx" : "xls";
+            var excel = new Excel(ext);
+            var workbook = excel.readFile(filePath);
+            var workbookJson = excel.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+            for (var i = 0; i < workbookJson.length; i++) {
+                //console.dir(workbookJson[i]);
+                Meteor.call("registerUser", workbookJson[i].username, workbookJson[i].password, workbookJson[i].email, function (err, id) {
+                        if (err) return;
+                        //var journal =[];
+                        //var topic = []
+                        ////if(workbookJson[i].journals){
+                        ////    journal = workbookJson[i].journals.split(",");
+                        ////    var journalsId = Publications.find({issn:{$in:journal}});
+                        ////}
+                        //if(workbookJson[i].topics){
+                        //    topic = workbookJson[i].topics.split(",");
+                        //    var topicsId = Topics.find({name:{$in:topic}});
+                        //}
+                        //console.dir(topicsId._id);
+                        Users.update({_id: id}, {
+                            $set: {
+                                "profile.realname": workbookJson[i].realname,
+                                "profile.institution": workbookJson[i].institution,
+                                "profile.fieldOfResearch": workbookJson[i].field,
+                                "profile.interestedOfJournals": workbookJson[i].journals,
+                                "profile.interestedOfTopics": workbookJson[i].topics,
+                                "profile.phone": workbookJson[i].phone,
+                                "profile.address": workbookJson[i].address,
+                                "profile.weChat": workbookJson[i].weChat
+                            }
+                        });
+                    }
+                );
+            }
+        }, 2000)
     }
 });
