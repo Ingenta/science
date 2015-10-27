@@ -1,5 +1,6 @@
 <template name="subscription">
     <div class="container-fluid">
+        {{> autoformModals}}
         {{> pageElement key="subscription"}}
         <div class="row">
             {{#if can  "add-news-contact" "resource"  }}
@@ -15,18 +16,19 @@
 
 <template name="subscriptionList">
     {{#each subscriptions}}
-        <div><strong>{{translateThis title.cn title.en}}</strong>
+        <div><p><strong>{{title}}</strong>
             {{#if can  "modify-news-contact" "resource"  }}{{> updateSubscriptionModalForm}}{{/if}}
-            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</p>
         </div>
-        <div>{{{translateThis content.cn content.en}}}</div>
+        <div><p>{{{content}}}</p></div>
+        <div><p><img src="/subscriptionImg.png"><a href="{{wordValue}}" target="_blank">{{fileName}}</a></p></div>
     {{else}}
         {{_ "No results found!"}}
     {{/each}}
 </template>
 
 <template name="updateSubscriptionModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="types"}}{{/afModal}}
 </template>
 
 <template name="addSubscriptionModalForm">
@@ -43,6 +45,8 @@
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
+                    {{> afQuickField name="fileName"}}
+                    {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>

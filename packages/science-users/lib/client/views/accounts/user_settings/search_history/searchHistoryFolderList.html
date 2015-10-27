@@ -20,7 +20,7 @@
         {{#each historyFolder}}
         <tr>
             <td>
-                {{folderName}}
+                <a data-toggle="collapse" data-target="#{{folderName}}">{{folderName}}</a>
             </td>
             <td>
                 {{#if can "delete-searchHistory" "resource" }}
@@ -28,6 +28,11 @@
                 {{/if}}
             </td>
         </tr>
+        <li class="list-unstyled"  id="{{folderName}}">
+            {{#each words}}
+                {{> eachWords}}
+            {{/each}}
+        </li>
         {{/each}}
         </tbody>
     </table>
@@ -56,4 +61,15 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="eachWords">
+    <tr>
+        <td>
+            {{word}}
+        </td>
+        <td>
+            <a href="#" class="fa fa-trash "></a>
+        </td>
+    </tr>
 </template>

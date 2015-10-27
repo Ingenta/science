@@ -2,6 +2,13 @@ Template.subscriptionList.helpers({
     subscriptions: function () {
         var type = "5";
         return NewsContact.find({types:type});
+    },
+    wordValue:function(){
+        if(this.fileId===undefined){
+            return null;
+        }
+        var file = Collections.Files.findOne({_id:this.fileId});
+        return file.url()+"&download=true";
     }
 });
 

@@ -17,6 +17,12 @@ Template.searchHistoryFolderList.events({
     }
 });
 
+Template.eachWords.events({
+    'click .fa-trash':function(){
+
+    }
+});
+
 AutoForm.addHooks(['searchHistoryModalForm'], {
     onSuccess: function () {
         $("#addFolderModal").modal('hide');
