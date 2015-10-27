@@ -1,5 +1,5 @@
 Template.oneSolrArticle.helpers({
-	getAutors:function(){
+	getAuthors:function(){
 		var hl = SolrQuery.session.get("highlight")[this._id];
 		var isLangCn = TAPi18n.getLanguage()==="zh-CN";
 		if(hl && hl[isLangCn?"all_authors_cn":"all_authors_en"]){

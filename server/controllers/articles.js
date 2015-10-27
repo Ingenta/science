@@ -68,13 +68,13 @@ Meteor.methods({
         });
         return countryViews;
     },
-    'updateKeywordScore':function(query,score){
-        var sc=score || 1;
-        if(_.isEmpty(query)){
-            console.dir(query);
+    'updateKeywordScore':function(keywords,score){
+        if(_.isEmpty(keywords))
             return;
-        }
-        Keywords.update(query, {$inc: {"score": sc}});
+        var arr = (typeof keywords ==='string')?[keywords]:keywords;
+        var sc=score || 1;
+
+        Keywords.update({name:{$in:arr}},{$inc: {"score": sc}},{multi:true});
         return true;
     }
 });
