@@ -36,7 +36,7 @@ JET.editor = function () {
 
 JET.save = function () {
 	var verifyData = function(){
-		if(_.isEmpty(JET.previewData)){
+		if(_.isEmpty(JET.previewData.get())){
 			sweetConfirm("Warning","您没有添加示例数据",function(){
 				doSave();
 			});
@@ -49,7 +49,7 @@ JET.save = function () {
 			var obj = {
 				name:JET.name,
 				description:JET.description,
-				previewData:JET.previewData,
+				previewData:JET.previewData.get(),
 				content: JET.previewTemplate.get()
 			};
 			var existObj=JET.store.findOne({name:obj.name});
@@ -70,7 +70,7 @@ JET.save = function () {
 		return;
 	}
 	if(JET.description===""){
-		sweetConfirm("Warning","您没有设置模板介绍信息",function(){
+		JET.sweetConfirm("Warning","您没有设置模板介绍信息",function(){
 			verifyData();
 		});
 	}else{
@@ -78,7 +78,7 @@ JET.save = function () {
 	}
 };
 
-var sweetConfirm = function(title,text,callback){
+JET.sweetConfirm = function(title,text,callback){
 	sweetAlert({
 		title             : title,
 		text              : text,
@@ -87,7 +87,7 @@ var sweetConfirm = function(title,text,callback){
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText : "Yes",
 		cancelButtonText  : "Cancel",
-		closeOnConfirm    : false
+		closeOnConfirm    : true
 	}, function () {
 		callback && callback();
 	});

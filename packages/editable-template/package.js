@@ -27,6 +27,10 @@ Package.onUse(function(api) {
     'both/collection.js',
     'both/func.js'
   ],both);
+  
+  api.addFiles([
+    'server/render.js'
+  ],'server');
 
   api.addFiles([
     'client/initial.js',

@@ -12,13 +12,39 @@ Template.etEditor.onRendered(function(){
 
 Template.etEditor.events({
 	'click .preview':function(e){
-		JET.compile();
+		try{
+			var dataStr = Template.instance().$("#etData").val();
+			var userData = {};
+			if(dataStr){
+				userData = JSON.parse(dataStr);
+			}
+			JET.previewData.set(userData);
+			JET.compile();
+		}catch(e){
+			sweetAlert("Error","json格式有误:\n"+ e.message,"error");
+		}
 	},
 	'click .save':function(e){
+		var dataStr = Template.instance().$("#etData").val();
+		var userData ;
 		JET.name=Template.instance().$("#etName").val();
 		JET.description=Template.instance().$("#etDescription").val();
-		JET.previewData.set(Template.instance().$("#etData").val());
-		JET.save();
+		if(dataStr){
+			try{
+				userData = JSON.parse(dataStr);
+			}catch(e){
+				sweetAlert("Error","json格式有误:\n"+ e.message,"error");
+				return;
+			}
+			JET.previewData.set(userData);
+			JET.save();
+		}else{
+			JET.sweetConfirm("Warning","您确定不填写样例数据吗？",function(){
+				JET.previewData.set({});
+				JET.save();
+			});
+		}
+
 	},
 	'keyup #etName':function(){
 		var inputName = Template.instance().$("#etName").val();
@@ -29,7 +55,9 @@ Template.etEditor.events({
 					var obj = JET.store.findOne({name:inputName});
 					if(obj){
 						instance.$("#etDescription").val(obj.description);
-						instance.$("#etData").val(obj.previewData);
+						if(obj.previewData){
+							instance.$("#etData").val(JSON.stringify(obj.previewData));
+						}
 						JET.editor().code(obj.content)
 					}else{
 						instance.$("#etDescription").val("");
