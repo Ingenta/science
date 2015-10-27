@@ -1,50 +1,39 @@
-var clearDR = function(){
-	var dr = Session.get('dynamicRender') ;
-	if(!_.isEmpty(dr)){
-		_.each(dr,function(num){
-			Meteor.clearInterval(num);
-		})
-		Session.set('dynamicRender',undefined);
-	}
-}
-var dynamicRender = function(){
-	clearDR();
-	if(!Router.current().data || !Router.current().data() || !Router.current().data().figures){
-		return;
-	}
-	var figs = Router.current().data().figures;
-	_.each(figs, function (fig) {
-		var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
-		if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
-			refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
-		}
-		if (refs && refs.length) {
-			Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
-			$(refs[0]).remove();
-		}
-	});
+var drId;
+var delayRender = function(){
+	if(drId) return;
+	drId=Meteor.setTimeout(function(){
+		console.log('dr..')
 
-	var tbs = Router.current().data().tables;
-	_.each(tbs, function (tb) {
-		var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
-		if (refs && refs.length) {
-			Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
+		if(!Router.current().data || !Router.current().data() || !Router.current().data().figures){
+			return;
 		}
-	});
-};
+		var figs = Router.current().data().figures;
+		_.each(figs, function (fig) {
+			var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
+			if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
+				refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
+			}
+			if (refs && refs.length) {
+				Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
+				$(refs[0]).remove();
+			}
+		});
+
+		var tbs = Router.current().data().tables;
+		_.each(tbs, function (tb) {
+			var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
+			if (refs && refs.length) {
+				Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
+			}
+		});
+		drId=undefined;
+	},1000)
+}
 
 ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
 		console.log(slug);
-		//if(slug===Session.get('activeTab'))
-		//	return;
-		//console.log(slug);
-		if(slug!=='full text'){
-			clearDR()
-		}
-
-		//Session.set('activeTab', slug);
 		var article = Router.current().data && Router.current().data();
 		if (!article)return;
 		if (slug === 'abstract') {
@@ -59,8 +48,6 @@ ReactiveTabs.createInterface({
 				});
 			});
 		} else if (slug === 'full text') {
-			var dr = Session.get("dynamicRender") || new Science.JSON.UniqueArray();
-			Session.set("dynamicRender", dr.push(Meteor.setInterval(dynamicRender,2000)));
 			Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
 				ArticleViews.insert({
 					articleId: article._id,
@@ -97,6 +84,8 @@ var removeArticleFromArray = function (array, articleId) {
 };
 
 Template.showArticle.onRendered(function () {
+	delayRender()
+	TAPi18n.addChangeHook('dynamicRender',delayRender);
 	var rva = Session.get("recentViewedArticles");
 	if (!rva) {
 		rva = [];

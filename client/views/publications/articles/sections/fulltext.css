@@ -7,8 +7,11 @@
 .title_style{
     margin: 0 0 0px;
 }
-xref{
+#fulltext-viewer xref{
     cursor:pointer;
     text-decoration: underline;
     color: blue;
+}
+#fulltext-viewer table{
+    width:100%;
 }
