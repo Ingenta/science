@@ -43,8 +43,9 @@
             </div>
 
         </div>
-	    {{> fundingTemplating}}
-
+	    {{#if fundings}}
+	        {{> fundingTemplating}}
+		{{/if}}
 	    <!--<div class="row">-->
         <!--<h6>{{_ "Acknowledgments"}}:</h6>-->
         <!--This study was supported by the National Development Programming of Key Fundamental Researches of China-->
