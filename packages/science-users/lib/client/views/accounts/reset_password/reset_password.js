@@ -28,7 +28,6 @@ Template.ResetPassword.events({
             t.find('#new_password_confirm').focus();
             return false;
         }
-        debugger;
         submit_button.button("loading");
         Accounts.resetPassword(this.params.resetPasswordToken, new_password, function (err) {
             submit_button.button("reset");

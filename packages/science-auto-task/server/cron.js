@@ -188,7 +188,7 @@ SyncedCron.add({
 
                 Email.send({
                     to: oneEmail.email,
-                    from: 'eryaer@sina.com',
+                    from: 'publish@scichina.org',
                     subject: emailSubject,
                     html: emailContent
                 });
@@ -211,26 +211,10 @@ Meteor.startup(function () {
 });
 
 
-var urlToArticleByArticleObject = function (article) {
-    if (!article)return;
-    return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
-};
-var getJournalComponentByArticle = function (article) {
-    if (!article)return;
-    var pub = Publishers.findOne({_id: article.publisher});
-    if (!pub)return;
-    var journal = Publications.findOne({_id: article.journalId});
-    if (!journal)return;
-    return "/publisher/" + pub.name + "/journal/" + journal.title;
-};
-var getIssueComponentByArticle = function (article) {
-    if (!article)return;
-    var issue = Issues.findOne({_id: article.issueId});
-    return "/" + issue.volume + "/" + issue.issue;
-};
-
 var createEmailContent = function (article) {
-    debugger;
-    var url = urlToArticleByArticleObject(Articles.findOne({_id: article._id}));
+    if (!article)return article.title.cn;
+    if (!article._id)return article.title.cn;
+    var url = Science.URL.articleDetail(article._id);
+    if (!url)return article.title.cn;
     return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
 };
