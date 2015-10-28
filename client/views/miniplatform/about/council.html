@@ -1,27 +1,26 @@
 <template name="council">
     <div class="banner">
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="council"}}
             <div class="row">
-                {{#if can  "add-news-contact" "resource"  }}
-                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addCouncilModal"></span>{{> addCouncilModalForm}}
+                {{#if can  "add-news-contact" "resource"}}
+                <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addCouncilModal"></span>{{> addCouncilModalForm}}
                 {{/if}}
             </div>
             <hr>
-            <div class="row">
-                {{> councilList}}
-            </div>
+            {{> councilList}}
         </div>
     </div>
 </template>
 
 <template name="councilList">
     {{#each councils}}
-        <div><strong>{{title}}</strong>
-            {{#if can  "modify-news-contact" "resource"  }}{{> updateCouncilModalForm}}{{/if}}
-            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="partContent">
+            <div align="center"><span style="font-size:24px;">{{title}}</span>
+                {{#if can  "modify-news-contact" "resource"}}{{> updateCouncilModalForm}}{{/if}}
+                {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</div><br>
+            <p>{{{content}}}</p>
         </div>
-        <div>{{{content}}}</div>
     {{else}}
         {{_ "No results found!"}}
     {{/each}}

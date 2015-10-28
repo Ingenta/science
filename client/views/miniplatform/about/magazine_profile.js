@@ -1,7 +1,12 @@
+Template.magazineProfile.helpers({
+    hide: function () {
+        return NewsContact.find({types:"2"}).count()<1 ? "": "hide";
+    }
+});
+
 Template.magazineProfileList.helpers({
     profiles: function () {
-        var type = "2";
-        return NewsContact.find({types:type});
+        return NewsContact.find({types:"2"});
     }
 });
 

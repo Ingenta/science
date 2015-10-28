@@ -1,26 +1,29 @@
 <template name="cooperation">
     <div class="banner">
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="cooperation"}}
             <div class="row">
-                《中国科学》杂志社和以下机构达成了战略合作：
-                {{#if can  "add-news-link" "resource"  }}
+                <strong>《中国科学》杂志社和以下机构达成了战略合作：</strong>
+                {{#if can  "add-news-link" "resource"}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
                 {{/if}}
             </div>
             <hr>
-            <div class="row">
+            <div class="row" style="margin-left: 10px">
                 {{> cooperationList}}
             </div>
+            <hr>
         </div>
     </div>
 </template>
 
 <template name="cooperationList">
     {{#each cooperationLists}}
-        <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="105" width="120"></a>
-        {{#if can  "modify-news-link" "resource"  }}{{> updateNewsLinkModalForm}}{{/if}}
-        {{#if can  "delete-news-link" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="col-xs-4" style="height: 80px">
+            <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="60" width="235"></a>
+            {{#if can  "modify-news-link" "resource"}}{{> updateNewsLinkModalForm}}{{/if}}
+            {{#if can  "delete-news-link" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+        </div>
     {{else}}
         {{_ "No results found!"}}
     {{/each}}
