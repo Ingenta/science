@@ -1,6 +1,6 @@
 Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
 Config = {
-    isDevMode: Meteor.isDevelopment,  //开发模式 should use isDevelopment in future
+    isDevMode: Meteor.isDevelopment,
     "defaultAdmin": {
         "username": "admin",
         "password": "123123",
@@ -111,5 +111,5 @@ Config = {
         footmark: "All article content, except where otherwise noted, is licensed under a Creative Commons Attribution 3.0 Unported license.\n"
         + "Downloaded to IP: {ip} On: {time} {url}"
     },
-    rootUrl: "http://www.scp.com"
+    rootUrl: Meteor.absoluteUrl()
 };
