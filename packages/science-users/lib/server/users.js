@@ -1,6 +1,6 @@
 Meteor.startup(function () {
     var smtp = {
-        username: 'publish',   // eg: server@gentlenode.com
+        username: 'publish@scichina.org',   // eg: server@gentlenode.com
         password: 'P@ssw0rd',   // eg: 3eeP1gtizk5eziohfervU
         server: '219.238.6.202',  // eg: mail.gandi.net
         port: 25
@@ -8,7 +8,7 @@ Meteor.startup(function () {
     process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 
     // By default, the email is sent from no-reply@meteor.com. If you wish to receive email from users asking for help with their account, be sure to set this to an email address that you can receive email at.
-    Accounts.emailTemplates.from = 'SCP <eryaer@sina.com>';
+    Accounts.emailTemplates.from = 'SCP <publish@scichina.org>';
 
     // The public name of your application. Defaults to the DNS name of the application (eg: awesome.meteor.com).
     Accounts.emailTemplates.siteName = '《中国科学》杂志社平台 Science China Publishing';
