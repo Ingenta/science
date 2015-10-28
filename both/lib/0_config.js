@@ -111,5 +111,6 @@ Config = {
         footmark: "All article content, except where otherwise noted, is licensed under a Creative Commons Attribution 3.0 Unported license.\n"
         + "Downloaded to IP: {ip} On: {time} {url}"
     },
-    rootUrl: Meteor.absoluteUrl()
+    rootUrl: Meteor.absoluteUrl(),
+    mainPublish:"hSsscs85HXuu2qTfJ"
 };
