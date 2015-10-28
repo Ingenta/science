@@ -8,6 +8,20 @@ Template.miniLayout.helpers({
 });
 
 Template.miniLayout.events({
+    'click .btn': function () {
+        var sword = $('#searchInput').val();
+        if (sword){
+            SolrQuery.search({query:sword,setting:{from:"bar"}});
+        }
+    },
+    'keydown input': function (event) {
+        if (event.keyCode === 13) {
+            var sword = $('#searchInput').val();
+            if (sword){
+                SolrQuery.search({query:sword,setting:{from:"bar"}});
+            }
+        }
+    },
     'click .fa-trash': function (e) {
         var id = this._id;
         confirmDelete(e,function(){

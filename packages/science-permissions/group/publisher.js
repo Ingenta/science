@@ -71,7 +71,24 @@ publisherPermissions
     });
 
 publisherPermissions
-    .defineRole("publisher-manager-from-user", ["modify-publisher", "add-user", "modify-user","add-journal", "modify-journal", "delete-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement", "publisher-collection", "journal-collection"], {
+    .defineRole("publisher-manager-from-user", [
+        "modify-publisher",
+        "add-user",
+        "modify-user",
+        "add-journal",
+        "modify-journal",
+        "delete-journal",
+        "add-article",
+        "modify-article",
+        "delete-article",
+        "add-advertisement",
+        "modify-advertisement",
+        "delete-advertisement",
+        "publisher-collection",
+        "journal-collection",
+        "permissions:delegate-and-revoke",
+        "permissions:get-users-roles"
+    ], {
         en: {
             name: "publisher manager (publisher)",
             summary: "publisher manager"
