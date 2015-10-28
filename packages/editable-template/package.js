@@ -11,8 +11,13 @@ Package.describe({
 });
 var both = ['server','client'];
 
+Npm.depends({
+  'juice':"1.6.0"
+});
+
 Package.onUse(function(api) {
   api.versionsFrom('1.2.0.4-logging.0');
+
   api.use([
     'ecmascript',
     'templating',
@@ -21,6 +26,9 @@ Package.onUse(function(api) {
     'summernote:summernote',
     'kevohagan:sweetalert'
   ],'client');
+  api.use([
+      'meteorhacks:ssr'
+  ],'server');
   //api.use('perak:codemirror');
   api.addFiles([
     'editable-template.js',
@@ -43,6 +51,7 @@ Package.onUse(function(api) {
   ],'client');
 
   api.export('JET');
+  api.export('juice');
 });
 
 Package.onTest(function(api) {
