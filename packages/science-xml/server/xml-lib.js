@@ -159,7 +159,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.affiliations.push(oneAffiliation);
         });
     }
-    console.log('parse author done')
+    console.log('parse author done');
     return results;
 }
 

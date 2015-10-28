@@ -18,8 +18,16 @@ Template.searchHistoryFolderList.events({
 });
 
 Template.eachWords.events({
-    'click .fa-trash':function(){
-
+    'click .fa-trash':function(e){
+//        e.word = this.word;
+//        confirmDelete(e,function(){
+//        var tempArray = Meteor.user().history.saved;
+//        var resultArray = _.filter(tempArray, function (element) {
+//            return element.word !== e.word
+//        });
+//            console.log(resultArray);
+//             Users.update({_id: Meteor.userId()}, {$set: {"history.saved":resultArray}});
+//        })
     }
 });
 

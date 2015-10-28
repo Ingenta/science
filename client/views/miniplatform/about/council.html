@@ -1,24 +1,24 @@
-<template name="contactContent">
+<template name="council">
     <div class="container-fluid">
         {{> autoformModals}}
-        {{> pageElement key="contact"}}
+        {{> pageElement key="council"}}
         <div class="row">
             {{#if can  "add-news-contact" "resource"  }}
-                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsContactModal"></span>{{> addNewsContactModalForm}}
+            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addCouncilModal"></span>{{> addCouncilModalForm}}
             {{/if}}
         </div>
         <hr>
         <div class="row">
-            {{> contactList}}
+            {{> councilList}}
         </div>
     </div>
 </template>
 
-<template name="contactList">
-    {{#each contactUs}}
+<template name="councilList">
+    {{#each councils}}
         <div><strong>{{title}}</strong>
-        {{#if can  "modify-news-contact" "resource"  }}{{> updateNewsContactModalForm}}{{/if}}
-        {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if can  "modify-news-contact" "resource"  }}{{> updateCouncilModalForm}}{{/if}}
+            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         <div>{{{content}}}</div>
     {{else}}
@@ -26,21 +26,21 @@
     {{/each}}
 </template>
 
-<template name="updateNewsContactModalForm">
+<template name="updateCouncilModalForm">
     {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="fileName,fileId,types"}}{{/afModal}}
 </template>
 
-<template name="addNewsContactModalForm">
-    <div class="modal fade" id="addNewsContactModal" tabindex="-1" role="dialog" aria-labelledby="addNewsContactModalLabel"
+<template name="addCouncilModalForm">
+    <div class="modal fade" id="addCouncilModal" tabindex="-1" role="dialog" aria-labelledby="addCouncilModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addNewsContactModalLabel">{{_ "Add new"}}</h4>
+                    <h4 class="modal-title" id="addCouncilModalLabel">{{_ "Add new"}}</h4>
                 </div>
-                {{#autoForm id="addNewsContactModalForm" collection="NewsContact" type="insert"}}
+                {{#autoForm id="addCouncilModalForm" collection="NewsContact" type="insert"}}
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
