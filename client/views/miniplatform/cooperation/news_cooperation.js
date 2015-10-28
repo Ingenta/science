@@ -1,7 +1,6 @@
 Template.cooperationList.helpers({
     cooperationLists: function () {
-        var type = "2";
-        return NewsLink.find({types:type});
+        return NewsLink.find({types:"2"});
     }
 });
 
