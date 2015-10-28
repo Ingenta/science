@@ -126,8 +126,8 @@ SyncedCron.add({
                     var tempArray = Articles.find({
                         $and: [
                             {topic: {$in: [oneTopic]}},
-                            {createAt: {$gt: oneUser.lastSentDate}},
-                            {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_frist'}]}
+                            {createdAt: {$gt: oneUser.lastSentDate}},
+                            {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_first'}]}
                         ]
                     }, {
                         fields: {_id: 1, title: 1}
@@ -145,7 +145,7 @@ SyncedCron.add({
                 var tempArray = Articles.find({
                     $and: [
                         {_id: {$in: oneUser.profile.interestedOfArticles}},
-                        {createAt: {$gt: oneUser.lastSentDate}}
+                        {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
                 }, {
                     fields: {_id: 1, title: 1}
@@ -157,6 +157,7 @@ SyncedCron.add({
                 });
             }
         });
+
         //TODO: add url to email content
         //TODO: link email content to email template
         //TODO: setup email template fixture
@@ -177,12 +178,13 @@ SyncedCron.add({
                 }
                 var emailContent = "";
                 if (oneEmail.issue)
-                    oneEmail.articleIds.forEach(function (articleId) {
-                        emailContent += createEmailContent(articleId);
+                    issueToArticles[oneEmail.issue._id].forEach(function (article) {
+                        emailContent += createEmailContent(article);
                     });
-                else issueToArticles[oneEmail.issue._id].forEach(function (articleId) {
-                    emailContent += createEmailContent(articleId);
-                });
+                else
+                    oneEmail.articleIds.forEach(function (article) {
+                        emailContent += createEmailContent(article);
+                    });
 
                 Email.send({
                     to: oneEmail.email,
@@ -192,9 +194,9 @@ SyncedCron.add({
                 });
 
             });
-        }
-        else
+        } else {
             console.log('empty email list');
+        }
     }
 });
 
@@ -227,7 +229,8 @@ var getIssueComponentByArticle = function (article) {
     return "/" + issue.volume + "/" + issue.issue;
 };
 
-var createEmailContent = function (articleId) {
-    var url = urlToArticleByArticleObject(Articles.findOne({_id: articleId._id}));
-    return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + articleId.title.cn + "</a>" + "\n\n";
+var createEmailContent = function (article) {
+    debugger;
+    var url = urlToArticleByArticleObject(Articles.findOne({_id: article._id}));
+    return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
 };
