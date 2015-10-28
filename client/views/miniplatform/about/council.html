@@ -1,15 +1,16 @@
-<template name="councilContent">
-    <div class="container-fluid">
-        {{> autoformModals}}
-        {{> pageElement key="council"}}
-        <div class="row">
-            {{#if can  "add-news-contact" "resource"  }}
-            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addCouncilModal"></span>{{> addCouncilModalForm}}
-            {{/if}}
-        </div>
-        <hr>
-        <div class="row">
-            {{> councilList}}
+<template name="council">
+    <div class="banner">
+        <div class="container-fluid">
+            {{> pageElement key="council"}}
+            <div class="row">
+                {{#if can  "add-news-contact" "resource"  }}
+                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addCouncilModal"></span>{{> addCouncilModalForm}}
+                {{/if}}
+            </div>
+            <hr>
+            <div class="row">
+                {{> councilList}}
+            </div>
         </div>
     </div>
 </template>

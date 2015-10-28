@@ -1,15 +1,17 @@
-<template name="cooperationContent">
-    <div class="container-fluid">
-        {{> autoformModals}}
-        {{> pageElement key="cooperation"}}
-        <div class="row">
-            {{#if can  "add-news-link" "resource"  }}
-                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
-            {{/if}}
-        </div>
-        <hr>
-        <div class="row">
-            {{> cooperationList}}
+<template name="cooperation">
+    <div class="banner">
+        <div class="container-fluid">
+            {{> pageElement key="cooperation"}}
+            <div class="row">
+                《中国科学》杂志社和以下机构达成了战略合作：
+                {{#if can  "add-news-link" "resource"  }}
+                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
+                {{/if}}
+            </div>
+            <hr>
+            <div class="row">
+                {{> cooperationList}}
+            </div>
         </div>
     </div>
 </template>

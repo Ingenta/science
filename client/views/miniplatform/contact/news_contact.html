@@ -1,15 +1,16 @@
-<template name="contactContent">
-    <div class="container-fluid">
-        {{> autoformModals}}
-        {{> pageElement key="contact"}}
-        <div class="row">
-            {{#if can  "add-news-contact" "resource"  }}
-                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsContactModal"></span>{{> addNewsContactModalForm}}
-            {{/if}}
-        </div>
-        <hr>
-        <div class="row">
-            {{> contactList}}
+<template name="contact">
+    <div class="banner">
+        <div class="container-fluid">
+            {{> pageElement key="contact"}}
+            <div class="row">
+                {{#if can  "add-news-contact" "resource"  }}
+                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsContactModal"></span>{{> addNewsContactModalForm}}
+                {{/if}}
+            </div>
+            <hr>
+            <div class="row">
+                {{> contactList}}
+            </div>
         </div>
     </div>
 </template>
