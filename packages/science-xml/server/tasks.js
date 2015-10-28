@@ -143,9 +143,7 @@ Tasks.parse = function (logId, pathToXml) {
     });
     try {
         var result = ScienceXML.parseXml(pathToXml);
-        if (result.pdf) {
-            log.errors = result.errors;
-        }
+        log.errors = result.errors;
         if (log.errors.length) {
             Tasks.fail(taskId, logId, log.errors);
             return;
@@ -211,12 +209,16 @@ Tasks.insertArticleImages = function (logId, result) {
                 }
                 else {
                     ArticleXml.insert(figLocation, function (err, fileObj) {
-                        fig.imageId = fileObj._id;
-                        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-                        if (_.last(result.figures) === fig) {
-                            Meteor.setTimeout(function () {
-                                ScienceXML.RemoveFile(log.extractTo);
-                            }, 20000)
+                        if(err)
+                            console.dir(err);
+                        else{
+                            fig.imageId = fileObj._id;
+                            UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+                            if (_.last(result.figures) === fig) {
+                                Meteor.setTimeout(function () {
+                                    ScienceXML.RemoveFile(log.extractTo);
+                                }, 20000)
+                            }
                         }
                     });
                 }
@@ -293,7 +295,7 @@ var insertKeywords = function (a) {
 var insertArticle = function (a) {
     var journal = Publications.findOne({_id: a.journalId});
     if (!journal){
-        console.log("Parser didn't fail on missing journal as it should.")
+        console.log("Parser didn't fail on missing journal as it should.");
         return;
     } //should never happen.
 
