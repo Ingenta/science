@@ -8,10 +8,14 @@ JET.initEditor = function () {
 	});
 };
 
-JET.compile = function () {
+
+JET.editor = function () {
+	return $(JET.selector);
+};
+
+JET.compile = function (name,content) {
 	var result = false;
 	try {
-		var content = JET.editor().code().trim();
 		if (!content) {
 			sweetAlert("Compile failed", "Please fill some thing into the editor", "error");
 			return;
@@ -19,9 +23,9 @@ JET.compile = function () {
 		var compiledStr = SpacebarsCompiler.compile(content, {
 			isTemplate: true
 		});
-		JET.previewTemplate.set(content);
-		delete Template[JET.tempName];
-		Template.__define__(JET.tempName, eval(compiledStr));
+
+		delete Template[name];
+		Template.__define__(name, eval(compiledStr));
 		result          = true;
 	} catch (e) {
 		sweetAlert("Compile failed", e.message, "error");
@@ -30,46 +34,41 @@ JET.compile = function () {
 	return result;
 };
 
-JET.editor = function () {
-	return $(JET.selector);
+JET.preview=function(options){
+	JET.compile(JET.tempName,options.content);
+	JET.previewTemplate.set(options.content);
 };
 
-JET.save = function () {
+JET.save = function (options) {
 	var verifyData = function(){
-		if(_.isEmpty(JET.previewData.get())){
-			sweetConfirm("Warning","您没有添加示例数据",function(){
-				doSave();
+		if(_.isEmpty(options.previewData)){
+			JET.sweetConfirm("Warning","您确定不填写示例数据吗？",function(){
+				doSave(options);
 			});
 		}else{
-			doSave();
+			doSave(options);
 		}
 	};
-	var doSave=function(){
-		if (JET.compile()) {
-			var obj = {
-				name:JET.name,
-				description:JET.description,
-				previewData:JET.previewData.get(),
-				content: JET.previewTemplate.get()
-			};
+	var doSave=function(obj){
+		if (JET.compile(obj.name,obj.content)) {
 			var existObj=JET.store.findOne({name:obj.name});
 			if(existObj){
-				JET.store.update({_id:existObj._id},obj);
+				JET.store.update({_id:existObj._id},{$set:obj});
 			}else{
 				JET.store.insert(obj);
 			}
 			sweetAlert("Saved successfully","保存成功！", "success");
 		}
 	}
-	if(!JET.verifyName(JET.name,"empty")){
+	if(!JET.verifyName(options.name,"empty")){
 		sweetAlert("Save Failed","please set a name for the template","error");
 		return;
 	}
-	if(!JET.verifyName(JET.name,"reg")){
+	if(!JET.verifyName(options.name,"reg")){
 		sweetAlert("Save Failed","模板名称只能包含半角英文字母、数字及下划线，且必须以英文字母开头","error");
 		return;
 	}
-	if(JET.description===""){
+	if(options.description===""){
 		JET.sweetConfirm("Warning","您没有设置模板介绍信息",function(){
 			verifyData();
 		});

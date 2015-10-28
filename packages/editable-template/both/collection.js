@@ -16,4 +16,8 @@ if(Meteor.isServer){
 	Meteor.publish('oneEditableTemplate', function(name) {
 		return JET.store.find({name:name});
 	});
+
+	Meteor.publish('allEditableTemplate',function(){
+		return JET.store.find();
+	})
 }
