@@ -188,7 +188,7 @@ SyncedCron.add({
 
                 Email.send({
                     to: oneEmail.email,
-                    from: 'eryaer@sina.com',
+                    from: 'publish@scichina.org',
                     subject: emailSubject,
                     html: emailContent
                 });
