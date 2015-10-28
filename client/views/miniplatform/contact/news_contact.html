@@ -1,14 +1,14 @@
 <template name="contact">
     <div class="banner">
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="contact"}}
             <div class="row">
-                {{#if can  "add-news-contact" "resource"  }}
+                {{#if can  "add-news-contact" "resource"}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsContactModal"></span>{{> addNewsContactModalForm}}
                 {{/if}}
             </div>
             <hr>
-            <div class="row">
+            <div class="row" style="margin-left: 10px">
                 {{> contactList}}
             </div>
         </div>
@@ -17,11 +17,13 @@
 
 <template name="contactList">
     {{#each contactUs}}
-        <div><strong>{{title}}</strong>
-        {{#if can  "modify-news-contact" "resource"  }}{{> updateNewsContactModalForm}}{{/if}}
-        {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="col-xs-6">
+            <div><strong>{{title}}</strong>
+            {{#if can  "modify-news-contact" "resource"}}{{> updateNewsContactModalForm}}{{/if}}
+            {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+            </div>
+            <div><p>{{{content}}}</p></div>
         </div>
-        <div>{{{content}}}</div>
     {{else}}
         {{_ "No results found!"}}
     {{/each}}

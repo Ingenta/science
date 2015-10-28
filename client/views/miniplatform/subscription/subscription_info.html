@@ -1,28 +1,27 @@
 <template name="subscription">
     <div class="banner">
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="subscription"}}
-            <div class="row">
-                {{#if can  "add-news-contact" "resource"  }}
-                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubscriptionModal"></span>{{> addSubscriptionModalForm}}
-                {{/if}}
-            </div>
-            <hr>
-            <div class="row">
-                {{> subscriptionList}}
-            </div>
+                <div class="row">
+                        {{#if can  "add-news-contact" "resource"}}
+                        <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubscriptionModal"></span>{{> addSubscriptionModalForm}}
+                        {{/if}}
+                </div>
+                <hr>
+            {{> subscriptionList}}
         </div>
     </div>
 </template>
 
 <template name="subscriptionList">
     {{#each subscriptions}}
-        <div><p><strong>{{title}}</strong>
-            {{#if can  "modify-news-contact" "resource"  }}{{> updateSubscriptionModalForm}}{{/if}}
-            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</p>
+        <div class="partContent">
+            <div align="center"><span style="font-size:24px;">{{title}}</span>
+                {{#if can  "modify-news-contact" "resource"}}{{> updateSubscriptionModalForm}}{{/if}}
+                {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</div><br>
+            <p>{{{content}}}</p>
+            <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{fileName}}</a></p>
         </div>
-        <div><p>{{{content}}}</p></div>
-        <div><p><img src="/subscriptionImg.png"><a href="{{wordValue}}" target="_blank">{{fileName}}</a></p></div>
     {{else}}
         {{_ "No results found!"}}
     {{/each}}

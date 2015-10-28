@@ -1,3 +1,9 @@
+Template.council.helpers({
+    hide: function () {
+        return NewsContact.find({types:"3"}).count()<1 ? "": "hide";
+    }
+});
+
 Template.councilList.helpers({
     councils: function () {
         var type = "3";

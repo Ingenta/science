@@ -5,7 +5,7 @@ fileExcelSchema  = new SimpleSchema({
 		type: String,
 		autoform: {
 			type: "cfs-file",
-			collection: "excels"
+			collection: "files"
 		}
 	}
 });

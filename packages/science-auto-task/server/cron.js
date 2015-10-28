@@ -211,8 +211,10 @@ Meteor.startup(function () {
 });
 
 
-
 var createEmailContent = function (article) {
+    if (!article)return article.title.cn;
+    if (!article._id)return article.title.cn;
     var url = Science.URL.articleDetail(article._id);
+    if (!url)return article.title.cn;
     return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
 };

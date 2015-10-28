@@ -36,6 +36,11 @@ Router.map(function () {
 
     this.route("subscription", {
         path: "/miniplatform/subscription",
-        layoutTemplate: "miniLayout"
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('files')
+            ]
+        }
     });
 });
