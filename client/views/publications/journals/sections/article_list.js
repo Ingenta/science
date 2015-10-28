@@ -18,14 +18,12 @@ Template.articleListTree.helpers({
 Template.articleListTree.events({
     "click .volume": function (event) {
         var toggleOption = ["fa-plus", "fa-minus"];
-        var remove = $(event.currentTarget).find("span.fa-plus").length ? 0 : 1;
-        $(event.currentTarget).find("span").removeClass(toggleOption[remove]).addClass(toggleOption[1 - remove]);
+        var remove = $(event.currentTarget).find("i.fa-plus").length ? 0 : 1;
+        $(event.currentTarget).find("i").removeClass(toggleOption[remove]).addClass(toggleOption[1 - remove]);
         $(event.currentTarget).next("div").toggle(200);
     },
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
-        var volume = $(event.target).data().volume;
-        var issue = $(event.target).data().issue;
         issueId && Session.set("currentIssueId", issueId);
         //if url contains issue and volume, router.go to journal page
         if (Router.current().params.volume && Router.current().params.issue) {
