@@ -33,7 +33,8 @@ Package.onUse(function(api) {
   api.addFiles([
     'editable-template.js',
     'both/collection.js',
-    'both/func.js'
+    'both/func.js',
+    'both/initial.js'
   ],both);
   
   api.addFiles([
