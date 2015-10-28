@@ -152,9 +152,9 @@ Template.AdminUsersEditEditForm.helpers({
     },
     "getPublisherNameById": function () {
         return Publishers.findOne({_id: this.admin_user.publisherId}, {chinesename: 1, name: 1});
-    },
-    "canEditRoles": function () {
-        return "publisher" === Session.get("activeTab") || "admin" === Session.get("activeTab");
+    //},
+    //"canEditRoles": function () {
+    //    return "publisher" === Session.get("activeTab") || "admin" === Session.get("activeTab");
     },
     "getJournals": function () {
         return Publications.find({publisher: this.admin_user.publisherId}, {titleCn: 1, title: 1});
@@ -181,14 +181,10 @@ Template.userEditRoles.helpers({
             pr = Permissions.getRoles();
         if("publisher" === Session.get("activeTab")){
             var temp = Permissions.getRoles();
-            if(Permissions.isAdmin()){
-                pr["permissions:permissions-manager"] = temp["permissions:permissions-manager"];
-                pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
-            };
-            var keys = ["resource:journal-manager", "news:news-manager", "advertisement:advertisement-manager"];//出版商管理员可设置的权限
-            keys.forEach(function (key) {
-                pr[key] = temp[key];
-            });
+            pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
+            pr["resource:journal-manager"] = temp["resource:journal-manager"];
+            pr["news:news-manager"] = temp["news:news-manager"];
+            pr["advertisement:advertisement-manager"] = temp["advertisement:advertisement-manager"];
         }
         return Object.keys(pr);
     },
@@ -204,6 +200,10 @@ Template.userEditRoles.helpers({
         return Permissions.getRoleDescByCode(this).name;
     },
     "itemIsDisabled": function () {
+        if (this == 'publisher:publisher-manager-from-user')
+            if (!Permissions.isAdmin())
+                if (_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user"))
+                    return "disabled";
         return Permissions.userCan("delegate-and-revoke", "permissions", Meteor.userId()) ? "" : "disabled";
     //},
     //"radioOrCheckbox": function () {
