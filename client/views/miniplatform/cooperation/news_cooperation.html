@@ -1,15 +1,17 @@
 <template name="cooperation">
-    <div class="container-fluid">
-        {{> autoformModals}}
-        {{> pageElement key="cooperation"}}
-        <div class="row">
-            {{#if can  "add-news-link" "resource"  }}
-                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
-            {{/if}}
-        </div>
-        <hr>
-        <div class="row">
-            {{> cooperationList}}
+    <div class="banner">
+        <div class="container-fluid">
+            {{> autoformModals}}
+            {{> pageElement key="cooperation"}}
+            <div class="row">
+                {{#if can  "add-news-link" "resource"  }}
+                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
+                {{/if}}
+            </div>
+            <hr>
+            <div class="row">
+                {{> cooperationList}}
+            </div>
         </div>
     </div>
 </template>

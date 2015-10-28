@@ -1,15 +1,17 @@
 <template name="memorabilia">
-    <div class="container-fluid">
-        {{> autoformModals}}
-        {{> pageElement key="memorabilia"}}
-        <div class="row">
-            {{#if can  "add-news-contact" "resource"  }}
-            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMemorabiliaModal"></span>{{> addMemorabiliaModalForm}}
-            {{/if}}
-        </div>
-        <hr>
-        <div class="row">
-            {{> memorabiliaList}}
+    <div class="banner">
+        <div class="container-fluid">
+            {{> autoformModals}}
+            {{> pageElement key="memorabilia"}}
+            <div class="row">
+                {{#if can  "add-news-contact" "resource"  }}
+                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMemorabiliaModal"></span>{{> addMemorabiliaModalForm}}
+                {{/if}}
+            </div>
+            <hr>
+            <div class="row">
+                {{> memorabiliaList}}
+            </div>
         </div>
     </div>
 </template>
