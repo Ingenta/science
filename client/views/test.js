@@ -26,9 +26,4 @@ Template.test1.helpers({
 
 Meteor.startup(function(){
 
-})
-
-Template.test.onRendered(function(){
-	JET.previewData.set({name:"jack"});
-	JET.name
-})
+});
