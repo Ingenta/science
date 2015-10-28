@@ -112,7 +112,7 @@
                     <label for="disable">{{_ "Disable"}}</label>
                 </div>
             </div>
-            {{#if canEditRoles}}
+            {{#if can "delegate-and-revoke" "permissions"}}
                 {{> userEditRoles}}
             {{/if}}
             <div class="form-group">
