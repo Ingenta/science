@@ -4,8 +4,8 @@
     <div class="head">
         <div class="top">
             <div class="logo">
-                <div class="copLogo"><a href="#"><img src="/logo.png" /></a></div>
-                <div class="year">Since  1950 <a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a></div>
+                <div class="copLogo"><a href="{{pathFor 'newsPlatform'}}"><img src="/logo.png" /></a></div>
+                <div class="year">Since  1950</div>
             </div>
             <div class="serach">
                 <div class="navbar-form pull-right" role="search">
@@ -23,33 +23,41 @@
     <!-- nav 开始 -->
     <div class="nav">
         <ul>
-            <li class="curLi">
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">关于我们</a></p>
+            <li id="nav-item-dropdown" class="dropdown curLi">
+                <a data-toggle="dropdown"  class="dropdown-toggle">关于我们<b class="caret"></b></a>
+                <ul id="dropdown-nav-items" class="dropdown-menu" style="min-width: 132px">
+                    <li class="curLi">
+                        <p><a href="{{pathFor 'magazineProfile'}}" >杂志社简介</a></p>
+                    </li>
+                    <li class="curLi">
+                        <p><a href="{{pathFor 'council'}}" >理事会</a></p>
+                    </li>
+                    <li class="curLi">
+                        <p><a href="{{pathFor 'memorabilia'}}" >两刊大事记</a></p>
+                    </li>
+                    <li class="curLi">
+                        <p><a href="{{pathFor 'subscription'}}" >企业文化</a></p>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">作者中心</a></p>
+                <p><a href="{{pathFor 'authorCentered'}}">作者中心</a></p>
             </li>
             <li>
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">文章集</a></p>
+                <p><a href="{{pathFor 'collections'}}">文章集</a></p>
             </li>
             <li>
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">出版合作</a></p>
+                <p><a href="{{pathFor 'cooperation'}}">出版合作</a></p>
             </li>
             <li>
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">广告合作</a></p>
+                <p><a href="{{pathFor 'collections'}}">广告合作</a></p>
             </li>
             <li>
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">新闻中心</a></p>
+                <p><a href="{{pathFor 'collections'}}">新闻中心</a></p>
             </li>
             <li>
-                <a href="#afModal" class="fa fa-pencil" collection="Pages" operation="update"></a>
-                <p><a href="#">联系我们</a></p>
+                <!--<a href="/" class="fa fa-pencil" collection="Pages" operation="update"></a>-->
+                <p><a href="{{pathFor 'contact'}}">联系我们</a></p>
             </li>
         </ul>
     </div>

@@ -11,31 +11,31 @@ Router.map(function () {
 
     this.route("cooperation", {
         path: "/miniplatform/cooperation",
-        layoutTemplate: "cooperationContent"
+        layoutTemplate: "miniLayout"
     });
 
     this.route("contact", {
         path: "/miniplatform/contact",
-        layoutTemplate: "contactContent"
+        layoutTemplate: "miniLayout"
     });
 
     this.route("magazineProfile", {
         path: "/miniplatform/magazineProfile",
-        layoutTemplate: "magazineProfile"
+        layoutTemplate: "miniLayout"
     });
 
     this.route("council", {
         path: "/miniplatform/council",
-        layoutTemplate: "councilContent"
+        layoutTemplate: "miniLayout"
     });
 
     this.route("memorabilia", {
         path: "/miniplatform/memorabilia",
-        layoutTemplate: "memorabilia"
+        layoutTemplate: "miniLayout"
     });
 
     this.route("subscription", {
         path: "/miniplatform/subscription",
-        layoutTemplate: "subscription"
+        layoutTemplate: "miniLayout"
     });
 });
