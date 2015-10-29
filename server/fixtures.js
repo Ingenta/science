@@ -124,8 +124,10 @@ Meteor.startup(function () {
                 s: "《中国科学》杂志社平台 账号激活邮件 Confirm Your Email Address",
                 b: "<p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Publishing, please click the link below to activate your account.</p>"
             },
-            {key: "emailThis", s: "Email This", b: "email body"},
-            {key: "watchJournal", s: "Watch this journal", b: "email body"}
+            {key: "emailThis", s: "Email This", b: "a"},
+            {key: "watchJournal", s: "Watch this journal", b: "a"},
+            {key: "watchTopic", s: "Watch this topic", b: "a"},
+            {key: "watchArticle", s: "Watch this article", b: "a"}
         ];
         _.each(emails, function (email) {
             EmailConfig.insert({
