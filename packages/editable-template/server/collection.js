@@ -1,14 +1,13 @@
-console.log('collection~~~~~~~')
-console.dir(JET.store.after.insert);
-
-JET.store.before.insert(function (userId, doc) {
-	debugger;
+JET.store.after.insert(function (userId, doc) {
 	JET.reCompile(doc.name,doc.content);
 });
 
 JET.store.after.update(function (userId, doc, fieldNames, modifier) {
-	debugger;
-	if(modifier["content"]){
-		JET.reCompile(doc.name,modifier.content);
+	if(modifier.$set.content){
+		JET.reCompile(doc.name,modifier.$set.content);
 	}
 });
+
+JET.store.after.remove(function(userId,doc){
+	delete Template[doc.name];
+})

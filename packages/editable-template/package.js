@@ -19,7 +19,6 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.0.4-logging.0');
 
   api.use([
-    'mongo',
     'matb33:collection-hooks'
   ],both);
 

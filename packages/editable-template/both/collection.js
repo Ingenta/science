@@ -1,4 +1,4 @@
-JET.store=new Mongo.Collection("editable_template");
+JET.store=new Meteor.Collection("editable_template");
 
 JET.store.allow({
 	insert: function (userId, doc) {
