@@ -32,10 +32,10 @@ Template.LayoutSideBar.helpers({
         return _.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     canUseInstitutionPanel: function () {
-        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
+        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user") && !_.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     canUsePublisherPanel: function () {
-        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
+        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user") && !_.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     isArticlePage: function () {
         return Router.current().route.getName() == "article.show";
