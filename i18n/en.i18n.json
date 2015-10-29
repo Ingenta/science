@@ -775,6 +775,33 @@
             "fileId": {
                 "label": "Choose file"
             }
+        },
+        "newsCenter": {
+            "title": {
+                "label": "Title"
+            },
+            "author": {
+                "label": "Author"
+            },
+            "abstract": {
+                "label": "Abstract"
+            },
+            "content": {
+                "label": "Full Text"
+            },
+            "recommend": {
+                "label": "News recommend",
+                "options": {
+                    "1": "Recommend",
+                    "2": "The Top"
+                }
+            },
+            "url": {
+                "label": "Exterior Chain"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
         }
     },
     "roles": "Roles",
