@@ -15,15 +15,15 @@
                     <div>
                         <ul>
                             {{#each enterpriseNews}}
-                            <li>
-                                <p>
-                                    <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
-                                    {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
-                                    {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
-                                </p>
-                            </li>
+                                <li>
+                                    <p>
+                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
+                                        {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
                             {{else}}
-                            {{_ "No results found!"}}
+                                {{_ "No results found!"}}
                             {{/each}}
                         </ul>
                     </div><hr>
@@ -36,15 +36,15 @@
                     <div>
                         <ul>
                             {{#each editFields}}
-                            <li>
-                                <p>
-                                    <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
-                                    {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
-                                    {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
-                                </p>
-                            </li>
+                                <li>
+                                    <p>
+                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
+                                        {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
                             {{else}}
-                            {{_ "No results found!"}}
+                                {{_ "No results found!"}}
                             {{/each}}
                         </ul>
                     </div><hr>
