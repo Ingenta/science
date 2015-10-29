@@ -1008,6 +1008,33 @@
       "fileId": {
         "label": "选择文件"
       }
+    },
+    "newsCenter": {
+      "title": {
+        "label": "标题"
+      },
+      "author": {
+        "label": "作者"
+      },
+      "abstract": {
+        "label": "简介"
+      },
+      "content": {
+        "label": "全文"
+      },
+      "recommend": {
+        "label": "新闻推荐",
+        "options": {
+          "1": "推荐",
+          "2": "置顶"
+        }
+      },
+      "url": {
+        "label": "外链地址"
+      },
+      "picture": {
+        "label": "新闻配图"
+      }
     }
   },
   "roles": "角色",

@@ -91,11 +91,13 @@ Meteor.startup(function () {
             {key: "tags", e: "Journal label", c: "期刊收录类型"},
             {key: "specialTopics", e: "Special Topics", c: "专题推荐"},
             {key: "cooperation", e: "Publishing Cooperation", c: "出版合作"},
+            {key: "newsCenter", e: "News Center", c: "新闻中心"},
             {key: "contact", e: "Contact Us", c: "联系我们"},
             {key: "magazineProfile", e: "Magazine Profile", c: "杂志社简介"},
             {key: "council", e: "Council", c: "理事会"},
             {key: "memorabilia", e: "Two Issue Of Memorabilia", c: "两刊大事记"},
-            {key: "subscription", e: "Subscription Info", c: "订阅信息"}
+            {key: "subscription", e: "Subscription Info", c: "订阅信息"},
+            {key: "enterpriseCulture", e: "Enterprise Culture", c: "企业文化"}
         ];
         _.each(names, function (name) {
             Pages.insert({
@@ -122,8 +124,10 @@ Meteor.startup(function () {
                 s: "《中国科学》杂志社平台 账号激活邮件 Confirm Your Email Address",
                 b: "<p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Publishing, please click the link below to activate your account.</p>"
             },
-            {key: "emailThis", s: "Email This", b: "email body"},
-            {key: "watchJournal", s: "Watch this journal", b: "email body"}
+            {key: "emailThis", s: "Email This", b: "a"},
+            {key: "watchJournal", s: "Watch this journal", b: "a"},
+            {key: "watchTopic", s: "Watch this topic", b: "a"},
+            {key: "watchArticle", s: "Watch this article", b: "a"}
         ];
         _.each(emails, function (email) {
             EmailConfig.insert({
