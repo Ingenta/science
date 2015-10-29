@@ -158,32 +158,41 @@ SyncedCron.add({
             }
         });
 
-        //TODO: add url to email content
-        //TODO: link email content to email template
-        //TODO: setup email template fixture
         //TODO: refactor into methods and retest
 
         if (outgoingList.length) {
             outgoingList.forEach(function (oneEmail) {
                 var emailSubject = "";
+                var emailContent = "";
                 if (oneEmail.issue) {
                     //this is an issue watch
                     emailSubject = "Issue Watch";
+                    if (EmailConfig.findOne({key: "watchJournal"})) {
+                        emailSubject = EmailConfig.findOne({key: "watchJournal"}).subject;
+                        emailContent = EmailConfig.findOne({key: "watchJournal"}).body;
+                    }
                 } else if (oneEmail.topicId) {
                     //this is a topic watch
                     emailSubject = "Topic Watch";
+                    if (EmailConfig.findOne({key: "watchTopic"})) {
+                        emailSubject = EmailConfig.findOne({key: "watchTopic"}).subject;
+                        emailContent = EmailConfig.findOne({key: "watchTopic"}).body;
+                    }
                 } else {
                     //this is an article watch
                     emailSubject = "Article Watch";
+                    if (EmailConfig.findOne({key: "watchArticle"})) {
+                        emailSubject = EmailConfig.findOne({key: "watchArticle"}).subject;
+                        emailContent = EmailConfig.findOne({key: "watchArticle"}).body;
+                    }
                 }
-                var emailContent = "";
                 if (oneEmail.issue)
                     issueToArticles[oneEmail.issue._id].forEach(function (article) {
-                        emailContent += createEmailContent(article);
+                        emailContent += createEmailArticleListContent(article);
                     });
                 else
                     oneEmail.articleIds.forEach(function (article) {
-                        emailContent += createEmailContent(article);
+                        emailContent += createEmailArticleListContent(article);
                     });
 
                 Email.send({
@@ -195,7 +204,7 @@ SyncedCron.add({
 
             });
         } else {
-            console.log('empty email list');
+            console.log('watch email task ran but email list was empty, no emails sent.');
         }
     }
 });
@@ -211,7 +220,7 @@ Meteor.startup(function () {
 });
 
 
-var createEmailContent = function (article) {
+var createEmailArticleListContent = function (article) {
     if (!article)return article.title.cn;
     if (!article._id)return article.title.cn;
     var url = Science.URL.articleDetail(article._id);

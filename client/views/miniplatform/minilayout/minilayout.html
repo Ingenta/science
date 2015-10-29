@@ -70,10 +70,16 @@
         <div class="foot">
             <p class="oh">
                 <span class="colBlue">友情链接：</span>
-                <a href="#"><img src="/partner_01.png" class="vm mr10"/></a>
-                <a href="#"><img src="/partner_02.png" class="vm mr10"/></a>
-                <a href="#"><img src="/partner_03.png" class="vm mr10"/></a>
-                <a href="#"><img src="/partner_04.png" class="vm mr10"/></a>
+                {{#each myLinks}}
+                    <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="30" width="100"/></a>
+                    {{#if can  "modify-news-link" "resource"}}{{> updateIndexNewsLinkModalForm}}{{/if}}
+                    {{#if can  "delete-news-link" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
+                {{#if can  "add-news-link" "resource"}}
+                    <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addIndexNewsLinkModal"></span>{{> addIndexNewsLinkModalForm}}
+                {{/if}}
             </p>
             <p class="mt20">网站主管：010  64034113   sys@scihina.org </p>
             <p>中Copyright  2011  Science China  PressCo.,Ltd.《中国科学社》杂志社有限公司 </p>
@@ -122,4 +128,32 @@
     </div>
     <!-- publishAll 结束 -->
 
+</template>
+
+<template name="updateIndexNewsLinkModalForm">
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsLink" doc=_id operation="update" omitFields="types"}}{{/afModal}}
+</template>
+
+<template name="addIndexNewsLinkModalForm">
+    <div align="left" class="modal fade" id="addIndexNewsLinkModal" tabindex="-1" role="dialog" aria-labelledby="addIndexNewsLinkModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addIndexNewsLinkModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addIndexNewsLinkModalForm" collection="NewsLink" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="picture"}}
+                    {{> afQuickField name="link" value="http://"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
 </template>
