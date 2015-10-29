@@ -73,7 +73,7 @@
                 {{#each myLinks}}
                     <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="30" width="100"/></a>
                     {{#if can  "modify-news-link" "resource"}}{{> updateIndexNewsLinkModalForm}}{{/if}}
-                    {{#if can  "delete-news-link" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                    {{#if can  "delete-news-link" "resource"}}<a href="#" id="myLink" class="fa fa-trash"></a>{{/if}}
                 {{else}}
                     {{_ "No results found!"}}
                 {{/each}}
@@ -113,8 +113,7 @@
 
         <!-- 右侧内容开始 -->
         <div class="mainRight">
-            {{> layoutNews}}
-            {{> layoutDynamic}}
+            {{> layoutRightNews}}
         </div>
         <!-- 右侧内容结束 -->
     </div>

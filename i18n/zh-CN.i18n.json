@@ -1002,6 +1002,9 @@
       "content": {
         "label": "内容"
       },
+      "link": {
+        "label": "外链地址"
+      },
       "fileName": {
         "label": "附件名称"
       },
@@ -1029,7 +1032,7 @@
           "2": "置顶"
         }
       },
-      "url": {
+      "link": {
         "label": "外链地址"
       },
       "picture": {

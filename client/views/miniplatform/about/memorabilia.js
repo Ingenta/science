@@ -6,13 +6,12 @@ Template.memorabilia.helpers({
 
 Template.memorabiliaList.helpers({
     memorabilias: function () {
-        var type = "4";
-        return NewsContact.find({types:type});
+        return NewsContact.find({types:"4"});
     }
 });
 
 Template.memorabiliaList.events({
-    'click .fa-trash': function (e) {
+    'click #memDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsContact.remove({_id:id});
@@ -28,6 +27,7 @@ AutoForm.addHooks(['addMemorabiliaModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "4";
+            doc.createDate = new Date();
             return doc;
         }
     }
