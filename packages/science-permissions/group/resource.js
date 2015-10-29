@@ -27,31 +27,14 @@ resourcePermissions
 		cn: {name: "删除文章", summary: "您可以删除文章信息"}
 	})
 
-	.definePermission("add-advertisement", {
-		en: {name: "add advertisement", summary: "can add advertisement"},
-		cn: {name: "添加广告", summary: "您可以添加新广告到系统中"}
-	})
-	.definePermission("modify-advertisement", {
-		en: {name: "modify advertisement", summary: "can modify advertisement"},
-		cn: {name: "编辑广告", summary: "可以编辑广告信息"}
-	})
-	.definePermission("delete-advertisement", {
-		en: {name: "delete advertisement", summary: "can delete advertisement"},
-		cn: {name: "删除广告", summary: "您可以删除广告信息"}
-	})
-	.definePermission("journal-collection", {
-		en: {name: "journal collection", summary: "manage journal collection"},
-		cn: {name: "期刊文章集（同刊）", summary: "管理期刊文章集"}
-	});
-
-resourcePermissions
-	.defineRole("journal-manager", ["modify-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement", "journal-collection"], {
-		en: {
-			name: "journal manager (publisher)",
-			summary: "journal manager"
-		},
-		cn: {
-			name: "期刊管理员 (出版商)",
-			summary: "期刊管理员"
-		}
-	});
+//resourcePermissions
+//	.defineRole("journal-manager", ["modify-journal", "add-article", "modify-article", "delete-article", "add-advertisement", "modify-advertisement", "delete-advertisement"], {
+//		en: {
+//			name: "journal manager (publisher)",
+//			summary: "journal manager"
+//		},
+//		cn: {
+//			name: "期刊管理员 (出版商)",
+//			summary: "期刊管理员"
+//		}
+//	});

@@ -182,9 +182,9 @@ Template.userEditRoles.helpers({
         if("publisher" === Session.get("activeTab")){
             var temp = Permissions.getRoles();
             pr["publisher:publisher-manager-from-user"] = temp["publisher:publisher-manager-from-user"];
-            pr["resource:journal-manager"] = temp["resource:journal-manager"];
-            pr["news:news-manager"] = temp["news:news-manager"];
-            pr["advertisement:advertisement-manager"] = temp["advertisement:advertisement-manager"];
+            pr["publication:journal-manager-publisher"] = temp["publication:journal-manager-publisher"];
+            //pr["news:news-manager"] = temp["news:news-manager"];
+            pr["advertisement:advertisement-manager-publisher"] = temp["advertisement:advertisement-manager-publisher"];
         }
         return Object.keys(pr);
     },

@@ -23,7 +23,8 @@ NewsContactSchema = new SimpleSchema({
         autoform: {
             afFieldInput: {
                 type: 'summernote',
-                class: 'editor'
+                class: 'editor',
+                rows: 4
             }
         }
     },
