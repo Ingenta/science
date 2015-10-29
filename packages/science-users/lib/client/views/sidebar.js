@@ -32,16 +32,19 @@ Template.LayoutSideBar.helpers({
         return _.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     canUseInstitutionPanel: function () {
-        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
+        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user") && !_.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     canUsePublisherPanel: function () {
-        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
+        return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user") && !_.contains(Permissions.getUserRoles(), "permissions:admin");
     },
     isArticlePage: function () {
-        return Router.current().route.getName() == "article.show";
+        if (Router.current() && Router.current().route)
+            return Router.current().route.getName() == "article.show";
     },
     isJournalPage: function () {
-        return Router.current().route.getName() == "journal.name";
+        if (Router.current() && Router.current().route)
+            if (Router.current().route.getName() == "journal.name" || Router.current().route.getName() == "journal.name.volume")
+                return true;
     },
     getCurrentDoi: function () {
         return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
@@ -58,12 +61,12 @@ Template.LayoutSideBar.helpers({
 
         }
     },
-    watchArticleName: function () {
+    articleWatchState: function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
             var wat = [];
-            if(Meteor.user().profile){
+            if (Meteor.user().profile) {
                 wat = Meteor.user().profile.interestedOfArticles || [];
             }
             return _.contains(wat, article._id) ? TAPi18n.__("Watched") : TAPi18n.__("Article Watch");
@@ -71,7 +74,7 @@ Template.LayoutSideBar.helpers({
             return TAPi18n.__("Article Watch");
         }
     },
-    watchName: function () {
+    journalWatchState: function () {
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if (Meteor.userId() && journal) {
@@ -110,7 +113,7 @@ Template.LayoutSideBar.events({
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId()) {
             var wat = [];
-            if(Meteor.user().profile){
+            if (Meteor.user().profile) {
                 wat = Meteor.user().profile.interestedOfArticles || [];
             }
             if (_.contains(wat, article._id)) {
@@ -126,7 +129,7 @@ Template.LayoutSideBar.events({
         var journal = Publications.findOne({title: currentTitle});
         if (Meteor.userId()) {
             var pro = [];
-            if(Meteor.user().profile){
+            if (Meteor.user().profile) {
                 pro = Meteor.user().profile.interestedOfJournals || [];
             }
             if (_.contains(pro, journal._id)) {
@@ -135,27 +138,6 @@ Template.LayoutSideBar.events({
                 pro.push(journal._id)
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.interestedOfJournals": pro}});
-        } else {
-            swal({
-                    title: "",
-                    text: TAPi18n.__("Please enter the receiving mailbox"),
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: "Write something",
-                    cancelButtonText: TAPi18n.__("Cancel"),
-                    confirmButtonText: TAPi18n.__("OK")
-                },
-                function (inputValue) {
-                    if (inputValue === false) return false;
-
-                    if (inputValue === "") {
-                        swal.showInputError(TAPi18n.__("You need to enter email address!"));
-                        return false
-                    }
-                    swal(TAPi18n.__("Success"));
-                });
         }
     }
 })
