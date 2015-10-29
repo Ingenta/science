@@ -43,7 +43,8 @@ Template.LayoutSideBar.helpers({
     },
     isJournalPage: function () {
         if (Router.current() && Router.current().route)
-            return Router.current().route.getName() == "journal.name";
+            if (Router.current().route.getName() == "journal.name" || Router.current().route.getName() == "journal.name.volume")
+                return true;
     },
     getCurrentDoi: function () {
         return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
@@ -60,7 +61,7 @@ Template.LayoutSideBar.helpers({
 
         }
     },
-    watchArticleName: function () {
+    articleWatchState: function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
@@ -73,7 +74,7 @@ Template.LayoutSideBar.helpers({
             return TAPi18n.__("Article Watch");
         }
     },
-    watchName: function () {
+    journalWatchState: function () {
         var currentTitle = Router.current().params.journalTitle;
         var journal = Publications.findOne({title: currentTitle});
         if (Meteor.userId() && journal) {
@@ -137,27 +138,6 @@ Template.LayoutSideBar.events({
                 pro.push(journal._id)
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.interestedOfJournals": pro}});
-        } else {
-            swal({
-                    title: "",
-                    text: TAPi18n.__("Please enter the receiving mailbox"),
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: "Write something",
-                    cancelButtonText: TAPi18n.__("Cancel"),
-                    confirmButtonText: TAPi18n.__("OK")
-                },
-                function (inputValue) {
-                    if (inputValue === false) return false;
-
-                    if (inputValue === "") {
-                        swal.showInputError(TAPi18n.__("You need to enter email address!"));
-                        return false
-                    }
-                    swal(TAPi18n.__("Success"));
-                });
         }
     }
 })
