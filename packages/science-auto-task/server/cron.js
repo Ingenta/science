@@ -58,7 +58,7 @@ SyncedCron.add({
 });
 
 SyncedCron.add({
-    name: "SendingWatchEmail",
+    name: "SendWatchEmail",
     schedule: function (parser) {
         return parser.text("at 1:00 am");
     },
