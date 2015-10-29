@@ -4,6 +4,12 @@ Template.enterpriseCulture.helpers({
     },
     editFields: function () {
         return NewsContact.find({types:"7"},{sort: {createDate: -1}});
+    },
+    whichUrl: function () {
+        if (this.link) {
+            return this.link;
+        }
+        return "/miniplatform/enterpriseCulture/" + this._id;
     }
 });
 

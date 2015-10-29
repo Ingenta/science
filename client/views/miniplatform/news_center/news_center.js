@@ -7,6 +7,12 @@ Template.newsCenter.helpers({
     },
     miniPublishing: function () {
         return NewsCenter.find({types:"3"},{sort: {createDate: -1}});
+    },
+    whichUrl: function () {
+        if (this.link) {
+            return this.link;
+        }
+        return "/miniplatform/newsCenter/" + this._id;
     }
 });
 
