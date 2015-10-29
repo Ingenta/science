@@ -1,12 +1,11 @@
 Template.contactList.helpers({
     contactUs: function () {
-        var type = "1";
-        return NewsContact.find({types:type});
+        return NewsContact.find({types:"1"});
     }
 });
 
 Template.contactList.events({
-    'click .fa-trash': function (e) {
+    'click #contactDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsContact.remove({_id:id});
@@ -22,6 +21,7 @@ AutoForm.addHooks(['addNewsContactModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "1";
+            doc.createDate = new Date();
             return doc;
         }
     }

@@ -769,6 +769,9 @@
             "content": {
                 "label": "Content"
             },
+            "link": {
+                "label": "Exterior Chain"
+            },
             "fileName": {
                 "label": "AttachmentName"
             },
@@ -796,7 +799,7 @@
                     "2": "The Top"
                 }
             },
-            "url": {
+            "link": {
                 "label": "Exterior Chain"
             },
             "picture": {

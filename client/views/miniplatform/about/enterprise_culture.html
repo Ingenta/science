@@ -2,13 +2,107 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="enterpriseCulture"}}
-            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                    <a href="#a"><button type="button" class="btn btn-default">新闻动态>></button></a>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#enterBtn" aria-controls="home" role="tab" data-toggle="tab">企业新闻>></a></li>
+                <li role="presentation"><a href="#editBtn" aria-controls="profile" role="tab" data-toggle="tab">编辑园地>></a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="enterBtn" style="margin-left: 20px">
+                    <strong>企业新闻</strong>
+                    <div class="pull-right">
+                        {{#if can "add-news-contact" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
+                    </div><hr>
+                    <div>
+                        <ul>
+                            {{#each enterpriseNews}}
+                            <li>
+                                <p>
+                                    <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                    {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
+                                    {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
+                                </p>
+                            </li>
+                            {{else}}
+                            {{_ "No results found!"}}
+                            {{/each}}
+                        </ul>
+                    </div><hr>
                 </div>
-                <div class="btn-group" role="group">
-                    <a href="#b"><button type="button" class="btn btn-default">杂志社动态>></button></a>
+                <div role="tabpanel" class="tab-pane" id="editBtn" style="margin-left: 20px">
+                    <strong>编辑园地</strong>
+                    <div class="pull-right">
+                        {{#if can "add-news-contact" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
+                    </div><hr>
+                    <div>
+                        <ul>
+                            {{#each editFields}}
+                            <li>
+                                <p>
+                                    <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                    {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
+                                    {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
+                                </p>
+                            </li>
+                            {{else}}
+                            {{_ "No results found!"}}
+                            {{/each}}
+                        </ul>
+                    </div><hr>
                 </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="updateEnterpriseCultureModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="fileName,createDate,fileId,types"}}{{/afModal}}
+</template>
+
+<template name="addMiniEnterModalForm">
+    <div class="modal fade" id="addMiniEnterModal" tabindex="-1" role="dialog" aria-labelledby="addMiniEnterModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMiniEnterModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addMiniEnterModalForm" collection="NewsContact" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="content"}}
+                    {{> afQuickField name="link"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="addMiniEditFieldModalForm">
+    <div class="modal fade" id="addMiniEditFieldModal" tabindex="-1" role="dialog" aria-labelledby="addMiniEditFieldModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMiniEditFieldModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addMiniEditFieldModalForm" collection="NewsContact" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="content"}}
+                    {{> afQuickField name="link"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
             </div>
         </div>
     </div>

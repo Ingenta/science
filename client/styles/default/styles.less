@@ -492,11 +492,15 @@ ul.tree-view ul.tree-view {
   .nav li{
 	width:132px;
 	height:56px;
+	line-height:56px;
 	float:left;
 	margin-right:5px;
 	text-align:center;
 	background:url(navBg_02.jpg) no-repeat;
-	padding-top:4px;
+  }
+  .nav-tabs li {
+	background:none;
+	height:auto;
   }
   .nav .curLi,.nav li:hover{
 	background:url(navBg_01.jpg) no-repeat;
@@ -505,8 +509,17 @@ ul.tree-view ul.tree-view {
   .nav li:hover a,#dropdown-nav-items li:hover a{
 	color:#fff;
   }
+  .nav-tabs li:hover{
+	background:none;
+  }
+  .dropdown-menu > li > a {
+   line-height:56px;
+  }
   .nav .curLi a,.nav li a:hover,#dropdown-nav-items li a:hover{
 	color:#fff;
+  }
+  .nav-tabs li:hover a ,.nav-tabs .curLi a{
+	color:#036cb0;
   }
   .nav li a,#dropdown-nav-items li a{
 	color:#036cb0;

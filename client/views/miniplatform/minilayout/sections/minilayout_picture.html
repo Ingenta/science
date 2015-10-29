@@ -9,7 +9,7 @@
             <div class="oh mt15" style="margin-top: 28px">
                 <div class="fl mt30">
                     {{#if can  "modify-news-link" "resource"}}{{> updatePictureModalForm}}{{/if}}
-                    {{#if can  "delete-news-link" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                    {{#if can  "delete-news-link" "resource"}}<a href="#" id="picDel" class="fa fa-trash"></a>{{/if}}
                 </div>
                 <div class="fr">
                     <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="89" width="460"/></a>
