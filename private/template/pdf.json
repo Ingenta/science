@@ -1,14 +1,12 @@
 {
-  "title": "太阳半径与引力",
+  "title": "A hexahedron element formulation with a new multi-resolution analysis",
   "banner": "http://pic28.nipic.com/20130504/6814511_115241428191_2.jpg",
   "authors": [
-    "郭德纲",
-    "于谦",
-    "马三立",
-    "刘谦"
+    "夏一鸣",
+    "陈少林",
   ],
   "journal": "中国科学 物理",
-  "volume": "10",
+  "volume": "42",
   "page": "030212",
   "year": 2014,
   "doi": "10.1360/1.4773524",
@@ -17,6 +15,7 @@
   "similar": [
     {
       "journal": "中国科学 物理",
+      "title":"The Finite Element Method6th ed London Butterworth-Heihemann",
       "volume": "10",
       "page": "042123",
       "year": 2014,
@@ -25,6 +24,7 @@
     },
     {
       "journal": "中国科学 物理",
+      "title":"Genetic evolution of nonlinear material constitutive modelsComput",
       "volume": "10",
       "page": "042123",
       "year": 2014,
@@ -33,6 +33,7 @@
     },
     {
       "journal": "中国科学 物理",
+      "title":"Analysis of Wavelet Method Amsterdam",
       "volume": "10",
       "page": "042123",
       "year": 2014,
@@ -41,6 +42,7 @@
     },
     {
       "journal": "中国科学 物理",
+      "title":"The shear coefficient in Timoshenko’s beam theory",
       "volume": "10",
       "page": "042123",
       "year": 2014,
@@ -49,6 +51,7 @@
     },
     {
       "journal": "中国科学 物理",
+      "title":"Analysis of building collapse under blast loads",
       "volume": "10",
       "page": "042123",
       "year": 2014,

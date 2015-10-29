@@ -19,6 +19,11 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.0.4-logging.0');
 
   api.use([
+    'mongo',
+    'matb33:collection-hooks'
+  ],both);
+
+  api.use([
     'ecmascript',
     'templating',
     'reactive-var',
@@ -26,9 +31,11 @@ Package.onUse(function(api) {
     'summernote:summernote',
     'kevohagan:sweetalert'
   ],'client');
+
   api.use([
       'meteorhacks:ssr'
   ],'server');
+
   //api.use('perak:codemirror');
   api.addFiles([
     'editable-template.js',
@@ -38,7 +45,8 @@ Package.onUse(function(api) {
   ],both);
   
   api.addFiles([
-    'server/render.js'
+    'server/render.js',
+    'server/collection.js'
   ],'server');
 
   api.addFiles([
@@ -52,7 +60,6 @@ Package.onUse(function(api) {
   ],'client');
 
   api.export('JET');
-  api.export('juice');
 });
 
 Package.onTest(function(api) {
