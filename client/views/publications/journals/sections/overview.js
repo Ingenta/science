@@ -7,51 +7,51 @@ Template.JournalOverview.helpers({
 });
 
 Template.journalCoverSummary.helpers({
-   issnFormat: function (issn) {
-       if(!issn) return;
-       if(issn.length !== 8) return issn;
-       return issn.substr(0,4) + "-" + issn.substr(4,4);
-   }
+    issnFormat: function (issn) {
+        if (!issn) return;
+        if (issn.length !== 8) return issn;
+        return issn.substr(0, 4) + "-" + issn.substr(4, 4);
+    }
 });
 
 Template.journalSummary.helpers({
     Title: function (id) {
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
-        var publishers = Publishers.findOne({_id:id});
-        var title = iscn?publishers.chinesename:publishers.name;
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
+        var publishers = Publishers.findOne({_id: id});
+        var title = iscn ? publishers.chinesename : publishers.name;
         return title;
     },
     Frequency: function (num) {
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
-        if(num=="1"){
-            var title = iscn?"季刊":"Quarterly Publication";
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
+        if (num == "1") {
+            var title = iscn ? "季刊" : "Quarterly Publication";
             return title;
         }
-        if(num=="2"){
-            var title = iscn?"月刊":"Monthly Publication";
+        if (num == "2") {
+            var title = iscn ? "月刊" : "Monthly Publication";
             return title;
         }
-        if(num=="3"){
-            var title = iscn?"半月刊":"Semimonthly Publication";
+        if (num == "3") {
+            var title = iscn ? "半月刊" : "Semimonthly Publication";
             return title;
         }
-        if(num=="4"){
-            var title = iscn?"旬刊":"The ten-day Publication";
+        if (num == "4") {
+            var title = iscn ? "旬刊" : "The ten-day Publication";
             return title;
         }
     },
     Language: function (num2) {
-        if(num2=="1"){
+        if (num2 == "1") {
             return TAPi18n.__("English");
         }
-        if(num2=="2"){
+        if (num2 == "2") {
             return TAPi18n.__("Chinese");
         }
     }
 });
 
 Template.TagList.helpers({
-    getTag: function(){
+    getTag: function () {
         return Tags.findOne({_id: this.toString()});
     }
 });
@@ -59,26 +59,26 @@ Template.TagList.helpers({
 Template.recommendArticles.helpers({
     recommendArticles: function () {
         var journalId = Session.get('currentJournalId');
-        return Recommend.find({publications:journalId});
+        return Recommend.find({publications: journalId});
     },
     titles: function (Aid) {
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
-        var article = Articles.findOne({_id:Aid});
-        var title = iscn?article.title.cn:article.title.en;
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
+        var article = Articles.findOne({_id: Aid});
+        var title = iscn ? article.title.cn : article.title.en;
         return title;
     },
     ArticleUrl: function (Arid) {
         var journalId = Session.get('currentJournalId');
-        var title = Publications.findOne({_id:journalId}).title;
-        var article = Articles.findOne({_id:Arid});
-        var urls = title+"/"+article.volume+"/"+article.issue+"/"+article.doi;
-        return urls;
+        var title = Publications.findOne({_id: journalId}).title;
+        var article = Articles.findOne({_id: Arid});
+        if (article)
+            return title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
     },
-    recommendArt: function () {
+    hasMoreThanFiveRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
-        if(5 < Recommend.find({publications:journalId}).count()){
+        if (5 < Recommend.find({publications: journalId}).count()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -87,8 +87,8 @@ Template.recommendArticles.helpers({
 Template.recommendArticles.events({
     'click .fa-trash': function (e) {
         var id = this._id;
-        confirmDelete(e,function(){
-            Recommend.remove({_id:id});
+        confirmDelete(e, function () {
+            Recommend.remove({_id: id});
         })
     }
 });
@@ -107,28 +107,28 @@ AutoForm.addHooks(['addRecommendModalForm'], {
 }, true);
 
 Template.addRecommendModalForm.helpers({
-    getArticles:function(){
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
+    getArticles: function () {
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var journalId = Session.get('currentJournalId');
-        var articles = Articles.find({journalId:journalId}).fetch();
+        var articles = Articles.find({journalId: journalId}).fetch();
         var result = [];
-        _.each(articles,function(item){
-            var name = iscn?item.title.cn:item.title.en;
-            result.push({label:name,value:item._id});
+        _.each(articles, function (item) {
+            var name = iscn ? item.title.cn : item.title.en;
+            result.push({label: name, value: item._id});
         });
         return result;
     }
 });
 
 Template.updateRecommendModalForm.helpers({
-    getArticles:function(){
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
+    getArticles: function () {
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var journalId = Session.get('currentJournalId');
-        var articles = Articles.find({journalId:journalId}).fetch();
+        var articles = Articles.find({journalId: journalId}).fetch();
         var result = [];
-        _.each(articles,function(item){
-            var name = iscn?item.title.cn:item.title.en;
-            result.push({label:name,value:item._id});
+        _.each(articles, function (item) {
+            var name = iscn ? item.title.cn : item.title.en;
+            result.push({label: name, value: item._id});
         });
         return result;
     }

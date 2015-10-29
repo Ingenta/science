@@ -46,8 +46,9 @@ Template.Register.events({
         submit_button.button("loading");
         Meteor.call("registerUser", register_name, register_password, register_email, function (err) {
             submit_button.button("reset");
-            if (err)
-                pageSession.set("errorMessage", err.message);
+            if (err) {
+                pageSession.set("errorMessage", err.reason);
+            }
             else {
                 pageSession.set("errorMessage", "");
                 Router.go("home", {});
