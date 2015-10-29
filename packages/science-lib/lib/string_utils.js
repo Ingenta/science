@@ -1,17 +1,19 @@
-Science.escapeRegEx = function (string) {
+Science.String = {};
+
+Science.String.escapeRegEx=function (string) {
     return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
-Science.replaceSubstrings = function (string, find, replace) {
+Science.String.replaceSubstrings = function (string, find, replace) {
     if (string===undefined)return string;
     return string.replace(new RegExp(Science.escapeRegEx(find), 'g'), replace);
 };
 
-Science.clearTags = function(string){
+Science.String.clearTags = function(string){
     return string && string.replace(new RegExp("</?[^>]*?>", 'g'), "");
 }
 
-Science.joinStrings = function (stringArray, join) {
+Science.String.joinStrings = function (stringArray, join) {
     var sep = join || ", ";
     var res = "";
     _.each(stringArray, function (str) {
@@ -24,7 +26,7 @@ Science.joinStrings = function (stringArray, join) {
     return res;
 };
 
-Science.ipToNumber = function(ip){
+Science.String.ipToNumber = function(ip){
     var sum = 0;
     var arr = ip.split('.');
     arr.reverse().forEach(function (a, index) {
@@ -50,7 +52,7 @@ var stringifyPrimitive = function(v) {
     }
 };
 
-Science.queryStringify = function(obj, sep, eq, name) {
+Science.String.queryStringify = function(obj, sep, eq, name) {
     sep = sep || '&';
     eq = eq || '=';
     if (obj === null) {
@@ -94,7 +96,7 @@ Science.queryStringify = function(obj, sep, eq, name) {
         (stringifyPrimitive(obj));
 };
 
-Science.getParamsFormUrl= function(paramName){
+Science.String.getParamsFormUrl= function(paramName){
     var reg=new RegExp("[&\?]"+paramName+"=[^&]+","g");
     var paramstrs = decodeURIComponent(window.location.search).match(reg);
     var params;
@@ -105,4 +107,34 @@ Science.getParamsFormUrl= function(paramName){
         });
     }
     return params;
-}
+};
+
+Science.String.getLastPart=function(str, separate){
+    separate = separate || ".";
+    var lastIndex = str.lastIndexOf(separate);
+    if(lastIndex>-1){
+        return str.substr(lastIndex+separate.length);
+    }
+};
+
+Science.String.getExt = function(str){
+    return Science.String.getLastPart(str);
+};
+
+Science.String.getFileName = function(str){
+    return Science.String.getLastPart(str,"/") || Science.String.getLastPart(str,"\\") || str;
+};
+
+Science.String.getFileNameWithOutExt = function(str){
+    var name = Science.String.getFileName(str);
+    var lastIndex = name.lastIndexOf(".");
+    return lastIndex>-1?name.substr(0,lastIndex):name;
+};
+
+Science.escapeRegEx = Science.String.escapeRegEx;
+Science.replaceSubstrings = Science.String.replaceSubstrings;
+Science.clearTags =Science.String.clearTags ;
+Science.joinStrings=Science.String.joinStrings;
+Science.ipToNumber=Science.String.ipToNumber;
+Science.queryStringify =Science.String.queryStringify ;
+Science.getParamsFormUrl=Science.String.getParamsFormUrl;

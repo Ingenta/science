@@ -1,5 +1,6 @@
 Meteor.startup(function(){
     if(Meteor.isServer){
+        //确保pdf处理中间过程需要的文件夹存在
         Science.FSE.ensureDir(Config.uploadPdfDir + "/handle/",function(err){
             if(err)
                 throw new Meteor.Error(err);
@@ -196,7 +197,7 @@ Router.map(function () {
                 var html = JET.render('pdf');
                 var response = this.response;
                 var request = this.request;
-                wkhtmltopdf(html, Meteor.bindEnvironment(function(code, signal) {
+                wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>'+html+'</body></html>', Meteor.bindEnvironment(function(code, signal) {
 
                     var ip= request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
                     var footmark = Config.pdf.footmark.replace("{ip}",ip || "unknown")

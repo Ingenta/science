@@ -114,4 +114,34 @@ Meteor.startup(function () {
             });
         });
     }
+    if(JET.store.find().count()===0){
+        var templateFolder = process.cwd()+"/assets/app/template/";
+        if(!Science.FSE.existsSync(templateFolder))
+            return;
+
+        var files = Science.FSE.readdirSync(templateFolder);
+        if(_.isEmpty(files))
+            return;
+
+        var templates = {};
+        _.each(files,function(file){
+            var content = Science.FSE.readFileSync(templateFolder+file,"utf-8");
+            var name=Science.String.getFileNameWithOutExt(file);
+            var ext = Science.String.getExt(file);
+            if(!templates[name]){
+                templates[name]={};
+            }
+            templates[name][ext]=ext==="json"?JSON.parse(content):content;
+        });
+        _.each(templates,function(content,key){
+            if(content.html){
+                JET.store.insert({
+                    name:key,
+                    description:key,
+                    content:content.html,
+                    previewData:content.json
+                })
+            }
+        })
+    }
 });
