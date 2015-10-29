@@ -1,21 +1,8 @@
-Template.miniPublisherListForAuthorCenter.helpers({
-    publishers: function () {
-        return Publishers.find();
-    }
-});
-
-Template.miniSinglePublisherForAuthorCenter.helpers({
-    hasNoJournals: function (id) {
-        return Publications.find({"publisher": id}).count() !== 0;
+Template.authorCentered.helpers({
+    hasJournal: function(){
+        return Publications.find({"publisher": "hSsscs85HXuu2qTfJ"});
     },
-    hasJournal: function(id){
-        return Publications.find({"publisher": id});
+    getJournalUrl:function(){
+        return "/miniplatform/" + "authorCentered/" + this.title
     }
 });
-Template.miniSingleJournal.helpers({
-    getJournalUrl:function(pubId){
-        var publisher = Publishers.findOne({_id: pubId});
-        Session.set("activeTab", "Author Center");
-        return "/publisher/" + publisher.name + "/journal/" + this.title
-    }
-})

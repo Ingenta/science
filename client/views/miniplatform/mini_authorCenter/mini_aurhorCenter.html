@@ -4,7 +4,15 @@
             {{> pageElement key="author center"}}
             <hr>
             <div class="row" style="margin-left: 10px">
-                问题为问题为
+                {{#each hasJournal}}
+                    <div>
+                        <a href="{{getJournalUrl}}">
+                            <a>{{translateThis title titleCn}}</a>
+                        </a>
+                    </div>
+                {{else}}
+                    {{_ "No publications found!"}}
+                {{/each}}
             </div>
         </div>
     </div>

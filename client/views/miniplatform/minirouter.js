@@ -9,6 +9,18 @@ Router.map(function () {
         layoutTemplate: "miniLayout"
     });
 
+    this.route("journalArticle", {
+        path: "/miniplatform/authorCentered/:journalTitle",
+        layoutTemplate: "miniLayout",
+        data: function () {
+            var journal = Publications.findOne({title: this.params.journalTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                return journal;
+            }
+        }
+    });
+
     this.route("cooperation", {
         path: "/miniplatform/cooperation",
         layoutTemplate: "miniLayout"
