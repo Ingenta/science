@@ -58,7 +58,7 @@ SyncedCron.add({
 });
 
 SyncedCron.add({
-    name: "SendingWatchEmail",
+    name: "SendWatchEmail",
     schedule: function (parser) {
         return parser.text("at 1:00 am");
     },
@@ -126,8 +126,8 @@ SyncedCron.add({
                     var tempArray = Articles.find({
                         $and: [
                             {topic: {$in: [oneTopic]}},
-                            {createAt: {$gt: oneUser.lastSentDate}},
-                            {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_frist'}]}
+                            {createdAt: {$gt: oneUser.lastSentDate}},
+                            {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_first'}]}
                         ]
                     }, {
                         fields: {_id: 1, title: 1}
@@ -145,7 +145,7 @@ SyncedCron.add({
                 var tempArray = Articles.find({
                     $and: [
                         {_id: {$in: oneUser.profile.interestedOfArticles}},
-                        {createAt: {$gt: oneUser.lastSentDate}}
+                        {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
                 }, {
                     fields: {_id: 1, title: 1}
@@ -157,44 +157,55 @@ SyncedCron.add({
                 });
             }
         });
-        //TODO: add url to email content
-        //TODO: link email content to email template
-        //TODO: setup email template fixture
+
         //TODO: refactor into methods and retest
 
         if (outgoingList.length) {
             outgoingList.forEach(function (oneEmail) {
                 var emailSubject = "";
+                var emailContent = "";
                 if (oneEmail.issue) {
                     //this is an issue watch
                     emailSubject = "Issue Watch";
+                    if (EmailConfig.findOne({key: "watchJournal"})) {
+                        emailSubject = EmailConfig.findOne({key: "watchJournal"}).subject;
+                        emailContent = EmailConfig.findOne({key: "watchJournal"}).body;
+                    }
                 } else if (oneEmail.topicId) {
                     //this is a topic watch
                     emailSubject = "Topic Watch";
+                    if (EmailConfig.findOne({key: "watchTopic"})) {
+                        emailSubject = EmailConfig.findOne({key: "watchTopic"}).subject;
+                        emailContent = EmailConfig.findOne({key: "watchTopic"}).body;
+                    }
                 } else {
                     //this is an article watch
                     emailSubject = "Article Watch";
+                    if (EmailConfig.findOne({key: "watchArticle"})) {
+                        emailSubject = EmailConfig.findOne({key: "watchArticle"}).subject;
+                        emailContent = EmailConfig.findOne({key: "watchArticle"}).body;
+                    }
                 }
-                var emailContent = "";
                 if (oneEmail.issue)
-                    oneEmail.articleIds.forEach(function (articleId) {
-                        emailContent += createEmailContent(articleId);
+                    issueToArticles[oneEmail.issue._id].forEach(function (article) {
+                        emailContent += createEmailArticleListContent(article);
                     });
-                else issueToArticles[oneEmail.issue._id].forEach(function (articleId) {
-                    emailContent += createEmailContent(articleId);
-                });
+                else
+                    oneEmail.articleIds.forEach(function (article) {
+                        emailContent += createEmailArticleListContent(article);
+                    });
 
                 Email.send({
                     to: oneEmail.email,
-                    from: 'eryaer@sina.com',
+                    from: 'publish@scichina.org',
                     subject: emailSubject,
                     html: emailContent
                 });
 
             });
+        } else {
+            console.log('watch email task ran but email list was empty, no emails sent.');
         }
-        else
-            console.log('empty email list');
     }
 });
 
@@ -209,25 +220,10 @@ Meteor.startup(function () {
 });
 
 
-var urlToArticleByArticleObject = function (article) {
-    if (!article)return;
-    return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
-};
-var getJournalComponentByArticle = function (article) {
-    if (!article)return;
-    var pub = Publishers.findOne({_id: article.publisher});
-    if (!pub)return;
-    var journal = Publications.findOne({_id: article.journalId});
-    if (!journal)return;
-    return "/publisher/" + pub.name + "/journal/" + journal.title;
-};
-var getIssueComponentByArticle = function (article) {
-    if (!article)return;
-    var issue = Issues.findOne({_id: article.issueId});
-    return "/" + issue.volume + "/" + issue.issue;
-};
-
-var createEmailContent = function (articleId) {
-    var url = urlToArticleByArticleObject(Articles.findOne({_id: articleId._id}));
-    return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + articleId.title.cn + "</a>" + "\n\n";
+var createEmailArticleListContent = function (article) {
+    if (!article)return article.title.cn;
+    if (!article._id)return article.title.cn;
+    var url = Science.URL.articleDetail(article._id);
+    if (!url)return article.title.cn;
+    return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
 };

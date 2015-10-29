@@ -1,3 +1,9 @@
+Template.memorabilia.helpers({
+    hide: function () {
+        return NewsContact.find({types:"4"}).count()<1 ? "": "hide";
+    }
+});
+
 Template.memorabiliaList.helpers({
     memorabilias: function () {
         var type = "4";

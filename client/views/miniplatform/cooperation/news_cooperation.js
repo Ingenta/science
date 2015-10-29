@@ -1,22 +1,21 @@
-Template.magazineProfileList.helpers({
-    profiles: function () {
-        var type = "2";
-        return NewsContact.find({types:type});
+Template.cooperationList.helpers({
+    cooperationLists: function () {
+        return NewsLink.find({types:"2"});
     }
 });
 
-Template.magazineProfileList.events({
+Template.cooperationList.events({
     'click .fa-trash': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
-            NewsContact.remove({_id:id});
+            NewsLink.remove({_id:id});
         })
     }
 });
 
-AutoForm.addHooks(['addMagazineProfileModalForm'], {
+AutoForm.addHooks(['addNewsLinkModalForm'], {
     onSuccess: function () {
-        $("#addMagazineProfileModal").modal('hide');
+        $("#addNewsLinkModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     },
     before: {

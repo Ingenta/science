@@ -1,0 +1,19 @@
+<template name="authorCentered">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            {{> pageElement key="author center"}}
+            <hr>
+            <div class="row" style="margin-left: 10px">
+                {{#each hasJournal}}
+                    <div>
+                        <a href="{{getJournalUrl}}">
+                            <a>{{translateThis title titleCn}}</a>
+                        </a>
+                    </div>
+                {{else}}
+                    {{_ "No publications found!"}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>

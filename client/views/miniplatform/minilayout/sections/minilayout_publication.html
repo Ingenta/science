@@ -1,0 +1,87 @@
+<template name="layoutPublications">
+    <div class="banner">
+        <div class="oh">
+            <div class="lookBan">查看<br />全部<br />刊物</div>
+            <div class="lookList">
+                <!-- 代码 开始 -->
+                <div id="example">
+                    <div id="slides"><!--Slide控件开始-->
+                        <div class="slides_container tab-content">
+                            <div class="tab-pannel pn1 oh">
+                                {{#each hasJournal}}
+                                    <div class="bookPart oh">
+                                        <img src="{{getImageHelper picture}}" />
+                                        <div class="h90"><h1>
+                                            <!--<a href="{{getJournalUrl}}">-->
+                                                {{translateThis title titleCn}}
+                                            <!--</a>-->
+                                        </h1></div>
+                                        <p>主编:{{chiefEditor.cn}}</p>
+                                        <p>www.scichina.com</p>
+                                    </div>
+                                {{else}}
+                                    {{_ "No publications found!"}}
+                                {{/each}}
+                            </div>
+                            <div class="tab-pannel pn1 oh">
+                                <div class="bookPart oh">
+                                    <img src="book_01.jpg" />
+                                    <div class="h90"><h1>SCIENCE CHINA Chemistry 2</h1></div>
+                                    <p>主编:万立骏</p>
+                                    <p>www.scichina.com</p>
+                                </div>
+                                <div class="bookPart oh">
+                                    <img src="book_01.jpg" />
+                                    <div class="h90"><h1>SCIENCE CHINA Chemistry</h1></div>
+                                    <p>主编:万立骏</p>
+                                    <p>www.scichina.com</p>
+                                </div>
+                                <div class="bookPart bookPart1 oh">
+                                    <img src="book_01.jpg" />
+                                    <div class="h90"><h1>SCIENCE CHINA Chemistry</h1></div>
+                                    <p>主编:万立骏</p>
+                                    <p>www.scichina.com</p>
+                                </div>
+                            </div>
+                            <div class="tab-pannel pn1 oh">
+                                <div class="bookPart oh">
+                                    <img src="book_01.jpg" />
+                                    <div class="h90"><h1>SCIENCE CHINA Chemistry 3</h1></div>
+                                    <p>主编:万立骏</p>
+                                    <p>www.scichina.com</p>
+                                </div>
+                                <div class="bookPart oh">
+                                    <img src="book_01.jpg" />
+                                    <div class="h90"><h1>SCIENCE CHINA Chemistry</h1></div>
+                                    <p>主编:万立骏</p>
+                                    <p>www.scichina.com</p>
+                                </div>
+                                <div class="bookPart bookPart1 oh">
+                                    <img src="book_01.jpg" />
+                                    <div class="h90"><h1>SCIENCE CHINA Chemistry</h1></div>
+                                    <p>主编:万立骏</p>
+                                    <p>www.scichina.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" class="prev" id="J_pre"><img src="left.png" alt="Arrow Prev"></a>
+                        <a href="javascript:void(0);" class="next" id="J_next"><img src="right.png" alt="Arrow Next"></a>
+                        <ul class="tab-nav pagination">
+                            <li>
+                                <a href="javascript:void(0);">1</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">2</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">3</a>
+                            </li>
+                        </ul>
+                    </div><!--Slide控件结束-->
+                </div>
+                <!-- 代码结束 -->
+            </div>
+        </div>
+        <div class="banNext"><a href="#"><img src="banNext.png" /></a></div>
+    </div>
+</template>

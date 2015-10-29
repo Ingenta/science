@@ -38,7 +38,7 @@ Meteor.methods({
         Meteor.defer(function () {
             Email.send({
                 to: values.recipient,
-                from: 'eryaer@sina.com',
+                from: 'publish@scichina.org',
                 subject: emailSubject,
                 text: emailBody
             });

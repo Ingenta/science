@@ -1,7 +1,12 @@
+Template.subscription.helpers({
+    hide: function () {
+       return NewsContact.find({types:"5"}).count()<1 ? "": "hide";
+    }
+});
+
 Template.subscriptionList.helpers({
     subscriptions: function () {
-        var type = "5";
-        return NewsContact.find({types:type});
+        return NewsContact.find({types:"5"});
     },
     wordValue:function(){
         if(this.fileId===undefined){

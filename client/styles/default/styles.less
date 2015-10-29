@@ -486,7 +486,7 @@ ul.tree-view ul.tree-view {
   .nav{
 	width:1000px;
 	margin:0 auto;
-	overflow:hidden;
+//	overflow:hidden;
 	margin-bottom:20px;
   }
   .nav li{
@@ -498,17 +498,21 @@ ul.tree-view ul.tree-view {
 	background:url(navBg_02.jpg) no-repeat;
 	padding-top:4px;
   }
-  .nav .curLi{
+  .nav .curLi,.nav li:hover{
 	background:url(navBg_01.jpg) no-repeat;
-  }
-  .nav .curLi a{
 	color:#fff;
   }
-  .nav li a{
+  .nav li:hover a,#dropdown-nav-items li:hover a{
+	color:#fff;
+  }
+  .nav .curLi a,.nav li a:hover,#dropdown-nav-items li a:hover{
+	color:#fff;
+  }
+  .nav li a,#dropdown-nav-items li a{
 	color:#036cb0;
 	font-size:15px;
 	font-weight:bold;
-	}
+  }
   .nav li a.fa-pencil{
 	color:orange;
 	font-size:12px;
@@ -559,6 +563,16 @@ ul.tree-view ul.tree-view {
 	font-size:14px;
 	padding-top:15px;
   }
+
+  .partContent{
+	border:1px solid #d7d7d7;
+	height:auto;
+	margin-bottom:10px;
+	padding-left:45px;
+	font-size:14px;
+	padding-top:15px;
+  }
+
   .part1{
 	border-top:5px solid #9c749c;
 	background:url(part_01.png) no-repeat 10px center;

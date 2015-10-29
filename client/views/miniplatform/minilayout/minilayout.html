@@ -1,0 +1,159 @@
+<template name="miniLayout">
+    <div class="miniPlatform">
+    <!-- head 开始 -->
+    <div class="head">
+        <div class="top">
+            <div class="logo">
+                <div class="copLogo"><a href="{{pathFor 'newsPlatform'}}"><img src="/logo.png" /></a></div>
+                <div class="year">Since  1950</div>
+            </div>
+            <div class="serach">
+                <div class="navbar-form pull-right" role="search">
+                    <div class="input-group">
+                        <input id="searchInput" type="text" class="form-control" placeholder="搜索">
+            <span class="input-group-btn">
+               <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- head 结束 -->
+    <!-- nav 开始 -->
+    <div class="nav">
+        <ul>
+            <li id="nav-item-dropdown" class="dropdown">
+                <a data-toggle="dropdown"  class="dropdown-toggle">关于我们<b class="caret"></b></a>
+                <ul id="dropdown-nav-items" class="dropdown-menu" style="min-width: 132px">
+                    <li>
+                        <p><a href="{{pathFor 'magazineProfile'}}" >杂志社简介</a></p>
+                    </li>
+                    <li>
+                        <p><a href="{{pathFor 'council'}}" >理事会</a></p>
+                    </li>
+                    <li>
+                        <p><a href="{{pathFor 'memorabilia'}}" >两刊大事记</a></p>
+                    </li>
+                    <li>
+                        <p><a href="{{pathFor 'enterpriseCulture'}}" >企业文化</a></p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p><a href="{{pathFor 'authorCentered'}}">作者中心</a></p>
+            </li>
+            <li>
+                <p><a href="{{pathFor 'collections'}}">文章集</a></p>
+            </li>
+            <li>
+                <p><a href="{{pathFor 'cooperation'}}">出版合作</a></p>
+            </li>
+            <li>
+                <p><a href="/">广告合作</a></p>
+            </li>
+            <li>
+                <p><a href="{{pathFor 'newsCenter'}}">新闻中心</a></p>
+            </li>
+            <li>
+                <!--<a href="/" class="fa fa-pencil" collection="Pages" operation="update"></a>-->
+                <p><a href="{{pathFor 'contact'}}">联系我们</a></p>
+            </li>
+        </ul>
+    </div>
+    {{> autoformModals}}
+    {{> jkautoformModals}}
+    <!-- nav 结束 -->
+    {{> yield}}
+    <!-- footer 开始 -->
+    <div class="footer">
+        <div class="foot">
+            <p class="oh">
+                <span class="colBlue">友情链接：</span>
+                {{#each myLinks}}
+                    <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="30" width="100"/></a>
+                    {{#if can  "modify-news-link" "resource"}}{{> updateIndexNewsLinkModalForm}}{{/if}}
+                    {{#if can  "delete-news-link" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
+                {{#if can  "add-news-link" "resource"}}
+                    <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addIndexNewsLinkModal"></span>{{> addIndexNewsLinkModalForm}}
+                {{/if}}
+            </p>
+            <p class="mt20">网站主管：010  64034113   sys@scihina.org </p>
+            <p>中Copyright  2011  Science China  PressCo.,Ltd.《中国科学社》杂志社有限公司 </p>
+            <p>版权所有　京ICP备13008135号 </p>
+        </div>
+    </div>
+    <!-- footer 结束 -->
+    </div>
+</template>
+
+<template name="newsPlatform">
+    <!-- banner 开始 -->
+    {{> layoutPublications}}
+    <!-- banner 结束 -->
+
+    <!-- banner 1 开始 -->
+    <div class="banner">
+        {{> layoutNewsShow}}
+        {{> layoutColumns}}
+    </div>
+    <!-- banner 1 结束 -->
+
+    <!-- main 开始 -->
+    <div class="main">
+        <!-- 左侧内容开始 -->
+        <div class="mainLeft">
+            {{> layoutLatestArticles}}
+            {{> layoutPicture}}
+        </div>
+        <!-- 左侧内容结束 -->
+
+        <!-- 右侧内容开始 -->
+        <div class="mainRight">
+            {{> layoutNews}}
+            {{> layoutDynamic}}
+        </div>
+        <!-- 右侧内容结束 -->
+    </div>
+    <!-- mian 结束 -->
+    <!-- publishAll 开始 -->
+    <div class="publishAll">
+        <div class="pubAllCont">
+            <img src="/biao.png" class="vm"/>
+            <span class="ml200"><a href="/">点击进入SCP Publication平台 <img src="/goAll2.png" class="vm"/></a></span> <span class="ml10"></span>
+        </div>
+    </div>
+    <!-- publishAll 结束 -->
+
+</template>
+
+<template name="updateIndexNewsLinkModalForm">
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsLink" doc=_id operation="update" omitFields="types"}}{{/afModal}}
+</template>
+
+<template name="addIndexNewsLinkModalForm">
+    <div align="left" class="modal fade" id="addIndexNewsLinkModal" tabindex="-1" role="dialog" aria-labelledby="addIndexNewsLinkModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addIndexNewsLinkModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addIndexNewsLinkModalForm" collection="NewsLink" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="picture"}}
+                    {{> afQuickField name="link" value="http://"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>

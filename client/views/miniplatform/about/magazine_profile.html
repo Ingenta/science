@@ -1,14 +1,13 @@
 <template name="magazineProfile">
-    <div class="container-fluid">
-        {{> autoformModals}}
-        {{> pageElement key="magazineProfile"}}
-        <div class="row">
-            {{#if can  "add-news-contact" "resource"  }}
-            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMagazineProfileModal"></span>{{> addMagazineProfileModalForm}}
-            {{/if}}
-        </div>
-        <hr>
-        <div class="row">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            {{> pageElement key="magazineProfile"}}
+            <div class="row">
+                {{#if can  "add-news-contact" "resource"}}
+                <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMagazineProfileModal"></span>{{> addMagazineProfileModalForm}}
+                {{/if}}
+            </div>
+            <hr>
             {{> magazineProfileList}}
         </div>
     </div>
@@ -16,11 +15,12 @@
 
 <template name="magazineProfileList">
     {{#each profiles}}
-        <div><strong>{{title}}</strong>
-            {{#if can  "modify-news-contact" "resource"  }}{{> updateMagazineProfileModalForm}}{{/if}}
-            {{#if can  "delete-news-contact" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="partContent">
+            <div align="center"><span style="font-size:24px;">{{title}}</span>
+                {{#if can  "modify-news-contact" "resource"}}{{> updateMagazineProfileModalForm}}{{/if}}
+                {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</div><br>
+            <p>{{{content}}}</p>
         </div>
-        <div>{{{content}}}</div>
     {{else}}
         {{_ "No results found!"}}
     {{/each}}

@@ -8,6 +8,13 @@ Template.searchHistoryList.helpers({
     },
     folder : function(){
         return Meteor.user().history.saved;
+    },
+    form : function(){
+        var form = (_.contains(["bar","history"],this.from))?TAPi18n.__("Common Search"):"";
+        return form;
+    },
+    searchUrl:function(){
+        return SolrQuery.makeUrl({query:this.word,setting:{from:"history"}});
     }
 })
 
