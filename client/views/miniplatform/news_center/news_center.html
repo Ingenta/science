@@ -2,24 +2,165 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="newsCenter"}}
-            <div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">111.</div>
-                    <div role="tabpanel" class="tab-pane" id="profile">2222</div>
-                    <div role="tabpanel" class="tab-pane" id="messages">333</div>
-                    <div role="tabpanel" class="tab-pane" id="settings">444</div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">新闻动态>></a></li>
+                <li role="presentation"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">杂志社动态>></a></li>
+                <li role="presentation"><a href="#publishingBtn" aria-controls="messages" role="tab" data-toggle="tab">出版动态>></a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="newsBtn" style="margin-left: 20px">
+                    <strong>新闻动态</strong>
+                    <div class="pull-right">
+                        {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}
+                    </div><hr>
+                    <div>
+                        <ul>
+                            {{#each miniNews}}
+                                <li>
+                                    <p>
+                                        <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if can  "delete-news-center" "resource"}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
+                            {{else}}
+                                {{_ "No results found!"}}
+                            {{/each}}
+                        </ul>
+                    </div><hr>
                 </div>
+                <div role="tabpanel" class="tab-pane" id="magazineBtn" style="margin-left: 20px">
+                    <strong>杂志社动态</strong>
+                    <div class="pull-right">
+                        {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
+                    </div><hr>
+                    <div>
+                        <ul>
+                            {{#each miniMagazines}}
+                                <li>
+                                    <p>
+                                        <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if can  "delete-news-center" "resource"}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
+                            {{else}}
+                                {{_ "No results found!"}}
+                            {{/each}}
+                        </ul>
+                    </div><hr>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="publishingBtn" style="margin-left: 20px">
+                    <strong>出版动态</strong>
+                    <div class="pull-right">
+                        {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
+                    </div><hr>
+                    <div>
+                        <ul>
+                            {{#each miniPublishing}}
+                                <li>
+                                    <p>
+                                        <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if can  "delete-news-center" "resource"}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
+                            {{else}}
+                                {{_ "No results found!"}}
+                            {{/each}}
+                        </ul>
+                    </div><hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 
+<template name="updateMiniNewsCenterModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsCenter" doc=_id operation="update" omitFields="pageView,createDate,types"}}{{/afModal}}
+</template>
+
+<template name="addMiniNewsModalForm">
+    <div class="modal fade" id="addMiniNewsModal" tabindex="-1" role="dialog" aria-labelledby="addMiniNewsModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMiniNewsModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addMiniNewsModalForm" collection="NewsCenter" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="author"}}
+                    {{> afQuickField name="abstract"}}
+                    {{> afQuickField name="content"}}
+                    {{> afQuickField name="recommend"}}
+                    {{> afQuickField name="link"}}
+                    {{> afQuickField name="picture"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="addMiniMagazineModalForm">
+    <div class="modal fade" id="addMiniMagazineModal" tabindex="-1" role="dialog" aria-labelledby="addMiniMagazineModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMiniMagazineModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addMiniMagazineModalForm" collection="NewsCenter" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="author"}}
+                    {{> afQuickField name="abstract"}}
+                    {{> afQuickField name="content"}}
+                    {{> afQuickField name="recommend"}}
+                    {{> afQuickField name="link"}}
+                    {{> afQuickField name="picture"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="addMiniPublishingModalForm">
+    <div class="modal fade" id="addMiniPublishingModal" tabindex="-1" role="dialog" aria-labelledby="addMiniPublishingModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addMiniPublishingModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addMiniPublishingModalForm" collection="NewsCenter" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="author"}}
+                    {{> afQuickField name="abstract"}}
+                    {{> afQuickField name="content"}}
+                    {{> afQuickField name="link"}}
+                    {{> afQuickField name="picture"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
             </div>
         </div>
     </div>

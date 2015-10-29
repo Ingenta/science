@@ -33,7 +33,6 @@ var delayRender = function(){
 ReactiveTabs.createInterface({
 	template: 'articleTabs',
 	onChange: function (slug, template) {
-		console.log(slug);
 		var article = Router.current().data && Router.current().data();
 		if (!article)return;
 		if (slug === 'abstract') {
@@ -64,7 +63,6 @@ ReactiveTabs.createInterface({
 					_.each(Keywords.find({name:{$in:keywords}},{fields:{_id:1}}).fetch(),function(k){
 						Keywords.update({_id: k._id},{$inc: {"score": 2}},{multi:true});
 					});
-					//Meteor.call("updateKeywordScore",keywords,2,function(err,result){})
 				}
 			}
 			Users.recent.read(article);
@@ -96,13 +94,6 @@ Template.showArticle.onRendered(function () {
 	}
 	rva.unshift({_id: this.data._id});//add a article to array[0]
 	Session.set("recentViewedArticles", rva);
-
-	//Set default tab based on fulltext empty or not.
-	//if (Articles.findOne({_id: this.data._id}).sections) {
-	//	Session.set('activeTab', 'full text');
-	//} else {
-	//	Session.set('activeTab', 'abstract');
-	//}
 
 	//Rating Start
 	var aid = this.data._id;

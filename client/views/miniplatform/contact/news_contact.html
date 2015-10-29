@@ -20,7 +20,7 @@
         <div class="col-xs-6">
             <div><strong>{{title}}</strong>
             {{#if can  "modify-news-contact" "resource"}}{{> updateNewsContactModalForm}}{{/if}}
-            {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if can  "delete-news-contact" "resource"}}<a href="#" id="contactDel" class="fa fa-trash"></a>{{/if}}
             </div>
             <div><p>{{{content}}}</p></div>
         </div>
@@ -30,7 +30,7 @@
 </template>
 
 <template name="updateNewsContactModalForm">
-    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="fileName,fileId,types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="createDate,link,fileName,fileId,types"}}{{/afModal}}
 </template>
 
 <template name="addNewsContactModalForm">

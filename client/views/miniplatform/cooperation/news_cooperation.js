@@ -5,7 +5,7 @@ Template.cooperationList.helpers({
 });
 
 Template.cooperationList.events({
-    'click .fa-trash': function (e) {
+    'click #coopDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsLink.remove({_id:id});

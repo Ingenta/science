@@ -18,7 +18,7 @@ Template.subscriptionList.helpers({
 });
 
 Template.subscriptionList.events({
-    'click .fa-trash': function (e) {
+    'click #subDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsContact.remove({_id:id});
@@ -34,6 +34,7 @@ AutoForm.addHooks(['addSubscriptionModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "5";
+            doc.createDate = new Date();
             return doc;
         }
     }

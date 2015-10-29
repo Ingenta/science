@@ -33,8 +33,7 @@ NewsCenterSchema = new SimpleSchema({
         autoform: {
             afFieldInput: {
                 type: 'summernote',
-                class: 'editor',
-                rows: 4
+                class: 'editor'
             }
         }
     },
@@ -42,7 +41,7 @@ NewsCenterSchema = new SimpleSchema({
         type: String,
         optional: true
     },
-    url: {
+    link: {
         type: String,
         optional: true
     },

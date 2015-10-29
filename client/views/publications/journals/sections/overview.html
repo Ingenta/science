@@ -78,7 +78,7 @@
     {{else}}
         {{_ "No articles found!"}}
     {{/each}}
-    {{#if recommendArt}}
+    {{#if hasMoreThanFiveRecommendedArticles}}
         <div align="right"><a href="/mostEditorRecommend"><button>+{{_ "more"}}</button></a></div>
     {{/if}}
 </template>

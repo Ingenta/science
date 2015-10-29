@@ -22,7 +22,7 @@
         <div class="col-xs-4" style="height: 80px">
             <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="60" width="235"></a>
             {{#if can  "modify-news-link" "resource"}}{{> updateNewsLinkModalForm}}{{/if}}
-            {{#if can  "delete-news-link" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if can  "delete-news-link" "resource"}}<a href="#" id="coopDel" class="fa fa-trash"></a>{{/if}}
         </div>
     {{else}}
         {{_ "No results found!"}}

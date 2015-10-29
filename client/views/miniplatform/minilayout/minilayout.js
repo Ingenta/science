@@ -22,7 +22,7 @@ Template.miniLayout.events({
             }
         }
     },
-    'click .fa-trash': function (e) {
+    'click #myLink': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsLink.remove({_id:id});
