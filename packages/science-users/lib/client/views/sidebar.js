@@ -38,10 +38,12 @@ Template.LayoutSideBar.helpers({
         return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user");
     },
     isArticlePage: function () {
-        return Router.current().route.getName() == "article.show";
+        if (Router.current() && Router.current().route)
+            return Router.current().route.getName() == "article.show";
     },
     isJournalPage: function () {
-        return Router.current().route.getName() == "journal.name";
+        if (Router.current() && Router.current().route)
+            return Router.current().route.getName() == "journal.name";
     },
     getCurrentDoi: function () {
         return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
@@ -63,7 +65,7 @@ Template.LayoutSideBar.helpers({
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
             var wat = [];
-            if(Meteor.user().profile){
+            if (Meteor.user().profile) {
                 wat = Meteor.user().profile.interestedOfArticles || [];
             }
             return _.contains(wat, article._id) ? TAPi18n.__("Watched") : TAPi18n.__("Article Watch");
@@ -110,7 +112,7 @@ Template.LayoutSideBar.events({
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId()) {
             var wat = [];
-            if(Meteor.user().profile){
+            if (Meteor.user().profile) {
                 wat = Meteor.user().profile.interestedOfArticles || [];
             }
             if (_.contains(wat, article._id)) {
@@ -126,7 +128,7 @@ Template.LayoutSideBar.events({
         var journal = Publications.findOne({title: currentTitle});
         if (Meteor.userId()) {
             var pro = [];
-            if(Meteor.user().profile){
+            if (Meteor.user().profile) {
                 pro = Meteor.user().profile.interestedOfJournals || [];
             }
             if (_.contains(pro, journal._id)) {
