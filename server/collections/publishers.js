@@ -1,7 +1,6 @@
 Publishers.before.insert(function (userId, doc) {
     doc.createdAt = new Date();
     doc.createdBy = userId;
-    if (!doc.createdBy) doc.createdBy = userId;
 });
 
 Publishers.before.update(function (userId, doc, fieldNames, modifier, options) {

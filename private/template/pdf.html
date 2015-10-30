@@ -1,0 +1,28 @@
+<div style="height:100%">
+	<div style="height:auto"><img style="width:100%" src="{{banner}}"></div>
+	<div style="height:20%">
+		<h3>{{title}}</h3>
+		<div>
+			{{#each authors}}
+				<span>{{this}}</span>,
+			{{/each}}
+		</div>
+		<div>Citation: {{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); doi: {{doi}}</div>
+		<div>View online: <a href="{{fulltexturl}}">{{fulltextUrl}}</a></div>
+		<div>View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
+		<div>Published by the {{publisher}}</div>
+	</div>
+	<hr>
+	<div style="height:30%"><h4>Articles you may be interested in</h4>
+		<ul style="padding: 0px">
+			{{#each similar}}
+				<li style="list-style: none">
+					<div><a href="{{fulltextUrl}}">{{title}}</a></div>
+					<div>{{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); {{doi}}</div>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+	<hr>
+	<div style="height:auto"><img style="width:100%" src="{{ad}}"></div>
+</div>

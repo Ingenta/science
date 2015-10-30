@@ -59,3 +59,9 @@ Template.PublicLayoutRightMenu.rendered = function () {
 Template.PublicLayoutRightMenu.events({});
 
 Template.PublicLayoutRightMenu.helpers({});
+
+Template.layout.helpers({
+	developerModeEnabled:function(){
+		return Meteor.isDevelopment;
+	}
+});

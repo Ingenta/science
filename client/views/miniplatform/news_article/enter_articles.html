@@ -1,0 +1,19 @@
+<template name="enterpriseCultureDetails">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <div class="row">
+                <h3>企业文化>>企业文化详情</h3>
+            </div>
+            <hr>
+            {{#each cultureDetails}}
+                <div class="partContent">
+                    <div align="center"><span style="font-size:24px;">{{title}}</span>
+                        {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}</div><br>
+                    <p>{{{content}}}</p>
+                </div>
+            {{else}}
+                {{_ "No results found!"}}
+            {{/each}}
+        </div>
+    </div>
+</template>

@@ -18,7 +18,7 @@
                             {{#each miniNews}}
                                 <li>
                                     <p>
-                                        <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if can  "delete-news-center" "resource"}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -39,7 +39,7 @@
                             {{#each miniMagazines}}
                                 <li>
                                     <p>
-                                        <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if can  "delete-news-center" "resource"}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -60,7 +60,7 @@
                             {{#each miniPublishing}}
                                 <li>
                                     <p>
-                                        <a href="">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if can  "delete-news-center" "resource"}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -154,6 +154,7 @@
                     {{> afQuickField name="author"}}
                     {{> afQuickField name="abstract"}}
                     {{> afQuickField name="content"}}
+                    {{> afQuickField name="recommend"}}
                     {{> afQuickField name="link"}}
                     {{> afQuickField name="picture"}}
                 </div>
