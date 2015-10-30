@@ -4,6 +4,8 @@ Meteor.subscribe('news_link');
 Meteor.subscribe('news_center');
 Meteor.subscribe('news_recommend');
 Meteor.subscribe('files');
+Meteor.subscribe('column');
+Meteor.subscribe('column_views');
 
 //访问路径
 Router.map(function () {
@@ -89,6 +91,12 @@ Router.map(function () {
     //新闻中心详情页
     this.route("newsCenterDetails", {
         path: "/miniplatform/newsCenter/:newsCenterId",
+        layoutTemplate: "miniLayout"
+    });
+
+    //专栏详情页
+    this.route("columnViewsDetails", {
+        path: "/miniplatform/:columnId",
         layoutTemplate: "miniLayout"
     });
 });
