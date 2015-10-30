@@ -16,11 +16,15 @@ docker build -t jackjk/conn .
 
 --------------------------
 3. run each container
-docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo jackjk/conn
-
+   a. update ROOT_URL to match external ip or domain name
+   b. add KADIRA env variables if necessary
+   c. run each container in order
+   
 docker run -d --name solr --restart=always -p 8983:8983 jackjk/solr
 
 docker run -d --name mongo --restart=always -p 27017:27017 jackjk/mongo
 
-docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 meteorhacks/meteord:base
+docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo jackjk/conn
+
+docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 philipgraf/meteor-pdf
 --------------------------
