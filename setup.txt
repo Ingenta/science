@@ -1,4 +1,5 @@
 Deploy notes v2
+REQUIRED: server with docker installed
 For setup on 219.238.6.206:80
 To change meteor port edit -p 80:80 -> -p [PORT]:80
 
