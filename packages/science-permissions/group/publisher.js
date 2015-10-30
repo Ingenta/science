@@ -37,13 +37,23 @@ publisherPermissions
         "advertisement:modify-journal-advertisement",
         "advertisement:delete-journal-advertisement",
 
-        "collections:add-publisher-collections",
-        "collections:modify-publisher-collections",
-        "collections:delete-publisher-collections",
+        "collections:add-publisher-collection",
+        "collections:modify-publisher-collection",
+        "collections:delete-publisher-collection",
+        "collections:add-article-to-publisher-collection",
+        "collections:remove-article-from-publisher-collection",
 
-        "collections:add-journal-collections",
-        "collections:modify-journal-collections",
-        "collections:delete-journal-collections"
+        "collections:add-journal-collection",
+        "collections:modify-journal-collection",
+        "collections:delete-journal-collection",
+        "collections:add-article-to-journal-collection",
+        "collections:remove-article-from-journal-collection",
+
+        "collections:add-special-issue",
+        "collections:modify-special-issue",
+        "collections:delete-special-issue",
+        "collections:add-article-to-special-issue",
+        "collections:remove-article-from-special-issue"
 
     ], {
         en: {
