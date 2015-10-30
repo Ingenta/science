@@ -89,7 +89,7 @@ Template.AdminUsersEditEditForm.events({
 
             },
             function (values) {
-                Permissions.check("modify-user","publisher");
+                Permissions.check("modify-user","user");
                 var roles = values.roles;
                 delete values.roles;
                 Meteor.call("updateUserAccount", t.data.admin_user._id, values, function (e) {
