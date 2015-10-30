@@ -2,16 +2,14 @@
  * Call the function to built the chart when the template is rendered
  */
 Template.MetricsTemplate.rendered = function () {
-    Tracker.autorun(function () {
-        buildPieChart();
-        builtArea();
-        buildPieChart2();
-    });
+    buildHitCounterChart();
+    buildLocationChart();
+    buildHitCounterGraph();
 }
 
 
 var chart;
-var buildPieChart = function () {
+var buildHitCounterChart = function () {
     var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
     var article = Articles.findOne({doi: currentDoi});
     if (!article)return;
@@ -84,7 +82,7 @@ var buildPieChart = function () {
 };
 
 
-var buildPieChart2 = function () {
+var buildLocationChart = function () {
     var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
     var article = Articles.findOne({doi: currentDoi});
     if (!article)return;
@@ -92,19 +90,19 @@ var buildPieChart2 = function () {
     if (!articleId)return;
     var data = new Array();
     Meteor.call("getLocationReport", "fulltext", articleId, function (err, arr) {
-        var colors=['#DDDF0D','#DD000D','#00DF0D','#DDDFFF'];
-        var index=0;
-        _.each(arr,function (obj) {
-            var color=colors[ index % colors.length ];
+        var colors = ['#DDDF0D', '#DD000D', '#00DF0D', '#DDDFFF'];
+        var index = 0;
+        _.each(arr, function (obj) {
+            var color = colors[index % colors.length];
             index++;
-            if(obj.name) {
+            if (obj.name) {
                 data.push({
                     name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
                     y: obj.localCount,
                     color: color
                 });
             }
-      });
+        });
         Session.set('reactive2', data);
     });
 
@@ -151,11 +149,9 @@ var buildPieChart2 = function () {
         }]
     });
 };
-/*
- * Function to draw the area chart
- */
 
-function builtArea() {
+
+function buildHitCounterGraph() {
     var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
     var article = Articles.findOne({doi: currentDoi});
     if (!article)return;
@@ -169,21 +165,30 @@ function builtArea() {
     var c = new Array();
 
     var m = [];
-    var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    for(i=1; i<=12; i++){
-        var startDate = new Date(currentDate.getFullYear(),currentDate.getMonth(),1);
-        var endDate = new Date(currentDate.getFullYear(),currentDate.getMonth()+1,0);
-        a.unshift(ArticleViews.find({action: "abstract", articleId: articleId, when: {$gte:startDate, $lt:endDate}}).count());
-        f.unshift(ArticleViews.find({action: "fulltext", articleId: articleId, when: {$gte:startDate, $lt:endDate}}).count());
-        m.unshift(month[currentDate.getMonth()%12]+currentDate.getFullYear());
-        currentDate.setMonth(currentDate.getMonth()-1);
-    };
+    for (i = 1; i <= 12; i++) {
+        var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        a.unshift(ArticleViews.find({
+            action: "abstract",
+            articleId: articleId,
+            when: {$gte: startDate, $lt: endDate}
+        }).count());
+        f.unshift(ArticleViews.find({
+            action: "fulltext",
+            articleId: articleId,
+            when: {$gte: startDate, $lt: endDate}
+        }).count());
+        m.unshift(month[currentDate.getMonth() % 12] + currentDate.getFullYear());
+        currentDate.setMonth(currentDate.getMonth() - 1);
+    }
+    ;
 
-     $.each(a, function (index, el) {
-         var value = el + f[index];
-         c.push(value);
-     });
+    $.each(a, function (index, el) {
+        var value = el + f[index];
+        c.push(value);
+    });
 
     $('#container-area').highcharts({
         chart: {
