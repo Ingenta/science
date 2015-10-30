@@ -1,8 +1,7 @@
 <template name="SpecialTopics">
-    {{> pageElement key="specialTopics"}}
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addSpecialTopicsModal">
          <span class="fa fa-plus">
-            {{_ "Add new"}}
+             {{_ "Add new"}}
          </span>
     </button>
     <table class="table table-bordered">
@@ -16,15 +15,17 @@
         </thead>
         <tbody>
         {{#each specialTopics}}
-        <tr>
-            <td>{{year}}</td>
-            <td><a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a></td>
-            <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
-            <td>{{#if can "modify-pulisher-collections" "collections" }}
+            <tr>
+                <td>{{year}}</td>
+                <td><a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a></td>
+                <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
+                <td>{{#if can "modify-pulisher-collections" "collections" }}
                     <a class="fa fa-plus" href="{{pathFor 'specialTopics.selectArticles' specialTopicsId=_id}}"></a>
                 {{/if}}
-                {{#if can "modify-specialTopics" "resource"}}{{> updateSpecialTopicsModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-specialTopics" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
-        </tr>
+                    {{#if can "modify-specialTopics" "resource"}}{{> updateSpecialTopicsModalForm}}{{/if}}
+                    &nbsp;&nbsp;{{#if can "delete-specialTopics" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                </td>
+            </tr>
         {{/each}}
         </tbody>
     </table>
@@ -43,15 +44,15 @@
                     <h4 class="modal-title" id="addSpecialTopicsModalLabel">{{_ "Add new"}}</h4>
                 </div>
                 {{#autoForm id="addSpecialTopicsModalForm" collection="SpecialTopics" type="insert"}}
-                <div class="modal-body">
-                    {{> afQuickField name="title"}}
-                    {{> afQuickField name="IssueId" options=issue}}
-                    {{> afQuickField name="guest_editor"}}
-                    {{> afQuickField name="abstract"}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-                </div>
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="IssueId" options=issue}}
+                        {{> afQuickField name="guest_editor"}}
+                        {{> afQuickField name="abstract"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
                 {{/autoForm}}
             </div>
         </div>
