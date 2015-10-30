@@ -56,9 +56,8 @@ Package.onUse(function(api) {
     'client/utils.js'
   ],'client');
 
-  api.export([
-      'SolrQuery'
-  ])
+  api.export('SolrQuery','client');
+  api.export('SolrClient','server');
 });
 
 Package.onTest(function(api) {

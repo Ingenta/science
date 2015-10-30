@@ -1,5 +1,7 @@
 <div style="height:100%">
+	{{#if banner}}
 	<div style="height:auto"><img style="width:100%" src="{{banner}}"></div>
+	{{/if}}
 	<div style="height:20%">
 		<h3>{{title}}</h3>
 		<div>
@@ -24,5 +26,7 @@
 		</ul>
 	</div>
 	<hr>
-	<div style="height:auto"><img style="width:100%" src="{{ad}}"></div>
+	{{#if ad}}
+		<div style="height:auto"><img style="width:100%" src="{{ad}}"></div>
+	{{/if}}
 </div>
