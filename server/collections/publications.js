@@ -1,7 +1,6 @@
 Publications.before.insert(function (userId, doc) {
     doc.createdAt = new Date();
     doc.createdBy = userId;
-    if (!doc.createdBy) doc.createdBy = userId;
     if (doc.historicalJournal) doc.historicalJournal = _.compact(doc.historicalJournal);
 });
 

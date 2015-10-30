@@ -2,14 +2,14 @@
     <div class="mainPart">
         <div class="mainTitle">
             <p class="fl w300"><span class="mr20">科学新闻</span></p>
-            <p class="fr mt8"><a href="#"><img src="goAll.png"/></a></p>
+            <p class="fr mt8"><a href="#"><img src="/goAll.png"/></a></p>
         </div>
         {{#each layoutRecommendNews}}
             <div class="contPart">
-                <div class="fl w80"><img src="{{getImageHelper picture}}" height="72" width="65"/></div>
+                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p>{{title}}</p>
+                        <p><a href="{{whichUrl}}" target="_blank">{{title}}</a></p>
                         <p class="col777">{{author}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
                     <p class="tr">
@@ -26,14 +26,14 @@
     <div class="mainPart mt20">
         <div class="mainTitle">
             <p class="fl w300"><span class="mr20">杂志社动态</span></p>
-            <p class="fr mt8"><a href="#"><img src="goAll.png"/></a></p>
+            <p class="fr mt8"><a href="#"><img src="/goAll.png"/></a></p>
         </div>
         {{#each layoutRecommendMagazines}}
             <div class="contPart">
-                <div class="fl w80"><img src="{{getImageHelper picture}}" height="72" width="65"/></div>
+                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p>{{title}}</p>
+                        <p><a href="{{whichUrl}}" target="_blank">{{title}}</a></p>
                         <p class="col777">{{author}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
                     <p class="tr">
