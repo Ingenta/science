@@ -207,7 +207,8 @@ var getParagraphs = function (paragraphNodes) {
 		}else{
 			var parseResult = ScienceXML.handlePara(paragraph);
 			var sectionText = new serializer().serializeToString(parseResult.paraNode);
-			paragraphs.html += ScienceXML.replaceItalics(sectionText);
+			paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(sectionText));
+
 			if (parseResult.formulas && parseResult.formulas.length) {
 				paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
 			}
@@ -297,7 +298,8 @@ ScienceXML.replaceItalics = function (input) {
 }
 
 ScienceXML.replaceNewLines = function (input) {
-    input = Science.replaceSubstrings(input, "/n", " ");
+    input = Science.replaceSubstrings(input, "\r\n", " ");
+    input = Science.replaceSubstrings(input, "\n", " ");
     return input;
 }
 
@@ -305,7 +307,8 @@ ScienceXML.getSimpleValueByXPath = function (xp, doc) {
     var titleNodes = xpath.select(xp, doc);
     if (_.isEmpty(titleNodes))return;
     if(!titleNodes[0].firstChild) return;
-    return titleNodes[0].firstChild.data;
+    var text = titleNodes[0].firstChild.data;
+    return ScienceXML.replaceNewLines(text);
 }
 
 ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
@@ -315,7 +318,7 @@ ScienceXML.getValueByXPathIgnoringXml = function (xp, doc) {
     nodes.forEach(function (part) {
         text += part.data;
     });
-    return text;
+    return ScienceXML.replaceNewLines(text);
 }
 
 ScienceXML.getValueByXPathIncludingXml = function (xp, doc) {
@@ -326,7 +329,8 @@ ScienceXML.getValueByXPathIncludingXml = function (xp, doc) {
     var firstTagLength = text.indexOf(">") + 1;
     text = text.substr(firstTagLength);
     text = text.substr(0, text.lastIndexOf("<"));
-    return ScienceXML.replaceItalics(text);
+    text = ScienceXML.replaceItalics(text);
+    return ScienceXML.replaceNewLines(text);
 }
 
 ScienceXML.xmlStringToXmlDoc = function (xml) {

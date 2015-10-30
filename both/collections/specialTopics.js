@@ -2,13 +2,13 @@ this.SpecialTopics = new Meteor.Collection("specialTopics");
 
 this.SpecialTopics.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-specialTopics", "resource", userId);
+        return Permissions.userCan("add-special-issue", "collections", userId);
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-specialTopics", "resource", userId);
+        return Permissions.userCan("modify-special-issue", "collections", userId);
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-specialTopics", "resource", userId);
+        return Permissions.userCan("delete-special-issue", "collections", userId);
     }
 });
 

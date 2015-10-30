@@ -27,7 +27,6 @@ Package.onUse(function(api) {
     'templating',
     'reactive-var',
     'spacebars-compiler',
-    'summernote:summernote',
     'kevohagan:sweetalert'
   ],'client');
 

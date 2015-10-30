@@ -39,6 +39,23 @@ Template.SpecialTopics.helpers({
         var id = Session.get("specialTopicsId");
         var specialTopics = SpecialTopics.findOne({_id: id});
         return specialTopics.title;
+    },
+    permissionCheck: function (permissions) {
+        if(!Meteor.user()) return false;
+        if(Permissions.isAdmin()) return true;
+        //if(Permissions.userCan(onePermission, 'collections')) return true;
+
+        if(!Meteor.user().publisherId) return false;
+        if (Meteor.user().publisherId !== Session.get('currentPublisherId')) return false;
+
+        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
+            if (!_.contains(Meteor.user().journalId, Session.get('currentJournalId'))) return false;
+        }
+        var flag = false;
+        permissions.split(',').forEach(function (onePermission) {
+            if (Permissions.userCan(onePermission, 'collections')) flag = true;
+        });
+        return flag;
     }
 })
 

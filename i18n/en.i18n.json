@@ -755,6 +755,9 @@
             }
         },
         "newsLink": {
+            "remark": {
+                "label": "Remark"
+            },
             "picture": {
                 "label": "Choose images"
             },
@@ -812,6 +815,22 @@
             },
             "picture": {
                 "label": "Choose file"
+            }
+        },
+        "column": {
+            "title": {
+                "label": "Column name"
+            }
+        },
+        "columnViews": {
+            "title": {
+                "label": "Column name"
+            },
+            "abstract": {
+                "label": "Column profile"
+            },
+            "content": {
+                "label": "Column content"
             }
         }
     },

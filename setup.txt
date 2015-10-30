@@ -17,7 +17,8 @@ copy *.tar.gz to ~/app folder on server
 
 --------------------------
 3. unpack to root
- curl -O https://github.com/Ingenta/deploy/blob/master/science/dockerfiles.zip ~/.
+download https://github.com/Ingenta/deploy/blob/master/science/dockerfiles.zip
+to ~ then extract
 
 --------------------------
 4. cd to respective folder and build docker images
@@ -34,7 +35,7 @@ docker build -t jackjk/conn ~/mongo-connector/.
 
 docker run -d --name solr --restart=always -p 8983:8983 jackjk/solr
 
-docker run -d --name mongo --restart=always -p 27017:27017 jackjk/mongo
+docker run -d --name mongo --restart=always -v ~/data/db:/data/db -p 27017:27017 jackjk/mongo
 
 docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo jackjk/conn
 

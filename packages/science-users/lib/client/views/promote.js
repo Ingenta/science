@@ -39,16 +39,19 @@ Template.sidebarAd.helpers({
         if(!Meteor.user()) return false;
         if(Permissions.isAdmin()) return true;
 
+        permissions = permissions.split(',');
+        var onePermission = _.intersection(permissions, ["add-global-advertisement", "modify-global-advertisement", "delete-global-advertisement"])[0];
+        if(Permissions.userCan(onePermission, 'advertisement')) return true;
+
         if(!Meteor.user().publisherId) return false;
-        if(!_.contains(Config.ADPages.journal, Router.current().route.getName())) return false;
         if (Meteor.user().publisherId !== Session.get('currentPublisherId')) return false;
-        permissions = permissions.split(';');
-        var flag = false;
-        permissions.forEach(function (onePermission) {
-            onePermission = onePermission.split(',');
-            if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
-        });
-        return flag;
+        if(!_.contains(Config.ADPages.journal, Router.current().route.getName())) return false;
+
+        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
+            if (!_.contains(Meteor.user().journalId, Session.get('currentJournalId'))) return false;
+        }
+        onePermission = _.intersection(permissions, ["add-journal-advertisement", "modify-journal-advertisement", "delete-journal-advertisement"])[0];
+        return Permissions.userCan(onePermission, 'advertisement');
     }
 });
 

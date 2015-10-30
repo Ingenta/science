@@ -22,6 +22,22 @@ if (!(typeof MochaWeb === 'undefined')) {
                 it("should get the contents of a simple xpath", function () {
                     var testXml = "<book><author>Terry Pratchett</author><article-title>Witches abroad</article-title></book>";
                     var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+                    var result = ScienceXML.getValueByXPathIncludingXml("//author", doc);
+                    result.should.equal("Terry Pratchett");
+                });
+            });
+            describe("When parsing a simple field", function () {
+                it("should get the contents of a simple xpath removing newline for space", function () {
+                    var testXml = "<book><author>Terry\r\nPratchett</author><article-title>Witches abroad</article-title></book>";
+                    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
+                    var result = ScienceXML.getSimpleValueByXPath("//author", doc);
+                    result.should.equal("Terry Pratchett");
+                });
+            });
+            describe("When parsing a simple field", function () {
+                it("should get the contents of a simple xpath removing newline for space", function () {
+                    var testXml = "<book><author>Terry\nPratchett</author><article-title>Witches abroad</article-title></book>";
+                    var doc = ScienceXML.xmlStringToXmlDoc(testXml);
                     var result = ScienceXML.getSimpleValueByXPath("//author", doc);
                     result.should.equal("Terry Pratchett");
                 });
