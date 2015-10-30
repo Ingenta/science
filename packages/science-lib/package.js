@@ -38,7 +38,7 @@ Package.onUse(function(api) {
   api.use(packages);
 
   api.imply(packages);
-
+  api.addAssets('pdf.jar','server');
   api.addFiles([
     'lib/core.js',
     'lib/string_utils.js',
