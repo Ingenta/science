@@ -31,6 +31,7 @@ Template.searchHistoryList.events({
     },
     'click .folder' : function(e){
         e.stopPropagation();
+        $(e.target).closest("ul").dropdown('toggle');
         var keyword=$(e.target).closest("ul").data().keyword;
         var tempArray = Meteor.user().history.unsave;
         var resultArray = _.filter(tempArray, function (element) {
