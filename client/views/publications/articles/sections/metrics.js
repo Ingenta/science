@@ -34,9 +34,6 @@ var buildHitCounterChart = function () {
         color: '#DF5353'
     });
 
-    if (Session.get('reactive') !== undefined)
-        data = Session.get('reactive');
-
     chart = $('#container-pie').highcharts({
 
         chart: {
@@ -89,6 +86,7 @@ var buildLocationChart = function () {
     var articleId = article._id;
     if (!articleId)return;
     var data = new Array();
+    //TODO: consider only calling if location report data is older than a day?
     Meteor.call("getLocationReport", "fulltext", articleId, function (err, arr) {
         var colors = ['#DDDF0D', '#DD000D', '#00DF0D', '#DDDFFF'];
         var index = 0;
@@ -103,7 +101,7 @@ var buildLocationChart = function () {
                 });
             }
         });
-        Session.set('reactive2', data);
+        Session.set('locationReportData', data);
     });
 
     chart = $('#container').highcharts({
@@ -145,7 +143,7 @@ var buildLocationChart = function () {
         series: [{
             type: 'pie',
             name: 'views',
-            data: Session.get('reactive2')
+            data: Session.get('locationReportData')
         }]
     });
 };

@@ -60,7 +60,6 @@ Meteor.methods({
     'getLocationReport': function (action, articleId) {
         var countryViews = {Others: {name: {cn: '其他', en: 'Others'}, localCount: 0}};
         ArticleViews.find({action: action, articleId: articleId}).forEach(function (item) {
-
             if (!item.ip) {
                 countryViews['Others'].localCount += 1;
                 return;
