@@ -58,11 +58,11 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="pull-right">
-                    {{#if checkPermissionToJournal "modify-journal,resource" publisher ""}}
+                    {{#if checkPermissionToJournal "modify-journal,resource" publisher _id}}
                         {{> displayPublication}}
                         {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
                     {{/if}}
-                    {{#if checkPermissionToJournal "delete-journal,resource" publisher ""}}
+                    {{#if checkPermissionToJournal "delete-journal,resource" publisher _id}}
                         <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </div>
