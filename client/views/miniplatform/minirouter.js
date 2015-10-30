@@ -2,6 +2,7 @@
 Meteor.subscribe('news_contact');
 Meteor.subscribe('news_link');
 Meteor.subscribe('news_center');
+Meteor.subscribe('news_recommend');
 Meteor.subscribe('files');
 
 //访问路径
@@ -76,6 +77,18 @@ Router.map(function () {
     //订阅信息
     this.route("subscription", {
         path: "/miniplatform/subscription",
+        layoutTemplate: "miniLayout"
+    });
+
+    //关于我们-企业文化-详情页
+    this.route("enterpriseCultureDetails", {
+        path: "/miniplatform/enterpriseCulture/:cultureId",
+        layoutTemplate: "miniLayout"
+    });
+
+    //新闻中心详情页
+    this.route("newsCenterDetails", {
+        path: "/miniplatform/newsCenter/:newsCenterId",
         layoutTemplate: "miniLayout"
     });
 });

@@ -28,3 +28,4 @@ SearchHistory.permit(['insert', 'update', 'remove']).apply();
 NewsLink.permit(['insert', 'update', 'remove']).apply();
 NewsContact.permit(['insert', 'update', 'remove']).apply();
 NewsCenter.permit(['insert', 'update', 'remove']).apply();
+NewsRecommend.permit(['insert', 'update', 'remove']).apply();

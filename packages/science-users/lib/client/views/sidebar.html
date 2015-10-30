@@ -25,42 +25,43 @@
                     </a>
                 </li>
             {{/if}}
-            <li><a href="{{pathFor 'logout'}}">{{_ "Log Out"}}</a></li>
+            <li><a href="{{pathFor 'logout'}}"><i class="fa fa-sign-out"></i> {{_ "Log Out"}}</a></li>
             {{#if isArticlePage}}
-                <li><a class="exportCitations" href="" data-toggle="collapse" data-target="#collapseOne"><span class="fa fa-arrow-circle-o-right"></span> {{_ "Export Citations"}}</a></li>
+                <li><a class="exportCitations" href="" data-toggle="collapse" data-target="#collapseOne"><span
+                        class="fa fa-arrow-circle-o-right"></span> {{_ "Export Citations"}}</a></li>
                 <div id="collapseOne" class="collapse">
                     <li>&nbsp;&nbsp;&nbsp;<a href="/citation/bibtex/{{getCurrentDoi}}" target="_blank">BibTeX</a></li>
                     <li>&nbsp;&nbsp;&nbsp;<a href="/citation/endnote/{{getCurrentDoi}}" target="_blank">Endnote</a></li>
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">Plain Text</a></li>
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">RefWorks</a></li>
+                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">Plain Text</a>
+                    </li>
+                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">RefWorks</a>
+                    </li>
                     <li>&nbsp;&nbsp;&nbsp;<a href="/citation/pubmed/{{getCurrentDoi}}" target="_blank">PubMed</a></li>
                 </div>
                 <li><a class="favorite" href=""><i class="fa fa-star"></i> {{favoriteName}}</a></li>
-                <li><a class="watchArticle" href=""><i class="fa fa-eye"></i> {{watchArticleName}}</a></li>
-                <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i class="fa fa-envelope"></i> {{_ "Email This"}}</a></li>
+                <li><a class="watchArticle" href=""><i class="fa fa-eye"></i> {{articleWatchState}}</a></li>
+                <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i
+                        class="fa fa-envelope"></i> {{_ "Email This"}}</a></li>
             {{/if}}
             {{#if isJournalPage}}
-                <li><a class="watch" href=""><i class="fa fa-eye"></i> {{watchName}}</a></li>
+                <li><a class="watch" href=""><i class="fa fa-eye"></i> {{journalWatchState}}</a></li>
             {{/if}}
         {{else}}
             <li>
                 <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
-            {{#if isJournalPage}}
-                <li><a class="watch" href=""><i class="fa fa-eye"></i> {{watchName}}</a></li>
-            {{/if}}
         {{/if}}
         <hr>
         <li><a href="#">{{_ "ScholarOne Login"}}</a></li>
         <li><a href="#">{{_ "Editors Login"}}</a></li>
         <hr>
         {{#if showAccessKey}}
-            <h4>{{_ "Access Key"}}&nbsp;:</h4>
-            <li style="font-size: 78%;"><img src="/icon_access_fc.gif">&nbsp;&nbsp;{{_ "Free Content"}}</li>
-            <li style="font-size: 78%"><img src="/icon_access_oa.gif">&nbsp;&nbsp;{{_ "Open Access Content"}}</li>
-            <li style="font-size: 78%"><img src="/icon_access_sc.gif">&nbsp;&nbsp;{{_ "Subscribed Content"}}</li>
-            <li style="font-size: 78%"><img src="/icon_access_ft.gif">&nbsp;&nbsp;{{_ "Free Trial Content"}}</li>
+            <h4>{{_ "Access Key"}} :</h4>
+            <li style="font-size: 78%;"><img src="/icon_access_fc.gif"> {{_ "Free Content"}}</li>
+            <li style="font-size: 78%"><img src="/icon_access_oa.gif"> {{_ "Open Access Content"}}</li>
+            <li style="font-size: 78%"><img src="/icon_access_sc.gif"> {{_ "Subscribed Content"}}</li>
+            <li style="font-size: 78%"><img src="/icon_access_ft.gif"> {{_ "Free Trial Content"}}</li>
             <hr>
         {{/if}}
         {{> sidebarAd}}

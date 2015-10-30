@@ -755,6 +755,9 @@
             }
         },
         "newsLink": {
+            "remark": {
+                "label": "Remark"
+            },
             "picture": {
                 "label": "Choose images"
             },
@@ -768,6 +771,9 @@
             },
             "content": {
                 "label": "Content"
+            },
+            "link": {
+                "label": "Exterior Chain"
             },
             "fileName": {
                 "label": "AttachmentName"
@@ -796,8 +802,16 @@
                     "2": "The Top"
                 }
             },
-            "url": {
+            "link": {
                 "label": "Exterior Chain"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
+        },
+        "newsRecommend": {
+            "ArticlesId": {
+                "label": "Title"
             },
             "picture": {
                 "label": "Choose file"

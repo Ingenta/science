@@ -54,7 +54,7 @@ Template.FullTextTemplate.events({
             })
             if(reference){
                 var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
-                var refIndexs = Science.StringUtils.parseToNumbers(indexStr);
+                var refIndexs = Science.String.parseToNumbers(indexStr);
                 if(!_.isEmpty(refIndexs)){
                     Session.set("refs",refIndexs);
                     $(".reference-modal").modal('show');

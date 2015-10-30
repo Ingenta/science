@@ -23,15 +23,14 @@ Template.AdminUsers.events({
 Template.AdminUsers.helpers({
 	
 });
-
-var AdminUsersViewItems = function(cursor) {
+var AdminUsersViewItems = function(cursor, type) {
 	if(!cursor) {
 		return [];
 	}
 
-	var searchString = pageSession.get("AdminUsersViewSearchString");
-	var sortBy = pageSession.get("AdminUsersViewSortBy");
-	var sortAscending = pageSession.get("AdminUsersViewSortAscending");
+	var searchString = pageSession.get( type + "SearchString");
+	var sortBy = pageSession.get(type + "ViewSortBy");
+	var sortAscending = pageSession.get(type + "SortAscending");
 	if(typeof(sortAscending) == "undefined") sortAscending = true;
 
 	var raw = cursor.fetch();
@@ -71,8 +70,8 @@ var AdminUsersViewItems = function(cursor) {
 	return filtered;
 };
 
-var AdminUsersViewExport = function(cursor, fileType) {
-	var data = AdminUsersViewItems(cursor);
+var AdminUsersViewExport = function(cursor, fileType, type) {
+	var data = AdminUsersViewItems(cursor, type);
 	var exportFields = [];
 
 	var str = convertArrayOfObjects(data, exportFields, fileType);
@@ -89,57 +88,23 @@ Template.AdminUsersView.rendered = function() {
 };
 
 Template.AdminUsersView.events({
-	"submit #dataview-controls": function(e, t) {
-		return false;
+	"click .searchButton": function(e, t) {
+		e.stopPropagation();
+		var searchInput =Template.instance().$(".searchValue").val().trim();
+		console.log(searchInput);
+		var key =Template.currentData().type + "SearchString";
+		pageSession.set(key, searchInput);
 	},
 
-	"click #dataview-search-button": function(e, t) {
-		e.preventDefault();
-		var form = $(e.currentTarget).parent();
-		if(form) {
-			var searchInput = form.find("#dataview-search-input");
-			if(searchInput) {
-				searchInput.focus();
-				var searchString = searchInput.val();
-				pageSession.set("AdminUsersViewSearchString", searchString);
-			}
-
-		}
-		return false;
-	},
-
-	"keydown #dataview-search-input": function(e, t) {
-		if(e.which === 13)
+	"keydown .searchValue": function(e, t) {
+		e.stopPropagation();
+		if(e.keyCode === 13)
 		{
-			e.preventDefault();
-			var form = $(e.currentTarget).parent();
-			if(form) {
-				var searchInput = form.find("#dataview-search-input");
-				if(searchInput) {
-					var searchString = searchInput.val();
-					pageSession.set("AdminUsersViewSearchString", searchString);
-				}
-
-			}
-			return false;
+			var searchInput =$(e.target).val().trim();
+			console.log(searchInput);
+			var key =Template.currentData().type + "SearchString";
+			pageSession.set(key, searchInput);
 		}
-
-		if(e.which === 27)
-		{
-			e.preventDefault();
-			var form = $(e.currentTarget).parent();
-			if(form) {
-				var searchInput = form.find("#dataview-search-input");
-				if(searchInput) {
-					searchInput.val("");
-					pageSession.set("AdminUsersViewSearchString", "");
-				}
-
-			}
-			return false;
-		}
-
-		return true;
 	},
 
 	"click #dataview-insert-button": function(e, t) {
@@ -177,10 +142,12 @@ Template.AdminUsersView.helpers({
 		return this.admin_users && this.admin_users.count() > 0;
 	},
 	"isNotFound": function() {
-		return this.admin_users && pageSession.get("AdminUsersViewSearchString") && AdminUsersViewItems(this.admin_users).length == 0;
+		var type=Template.currentData().type;
+		return this.admin_users && pageSession.get(type+"SearchString") && AdminUsersViewItems(this.admin_users , type).length == 0;
 	},
 	"searchString": function() {
-		return pageSession.get("AdminUsersViewSearchString");
+		var type= Template.currentData().type || "";
+		return pageSession.get(type+"SearchString");
 	},
 	"viewAsTable": function() {
 		return pageSession.get("AdminUsersViewStyle") == "table";
@@ -190,6 +157,13 @@ Template.AdminUsersView.helpers({
 	},
 	"viewAsGallery": function() {
 		return pageSession.get("AdminUsersViewStyle") == "gallery";
+	},
+	"isShowButton": function() {
+		var tabs = Session.get("activeTab");
+		if(tabs=="normal"){
+			return true;
+		}
+		return false;
 	}
 
 	
@@ -203,22 +177,26 @@ Template.AdminUsersViewTable.rendered = function() {
 Template.AdminUsersViewTable.events({
 	"click .th-sortable": function(e, t) {
 		e.preventDefault();
-		var oldSortBy = pageSession.get("AdminUsersViewSortBy");
+		var type =Template.currentData().type;
+		var oldSortBy = pageSession.get(type+"ViewSortBy");
 		var newSortBy = $(e.target).attr("data-sort");
 
-		pageSession.set("AdminUsersViewSortBy", newSortBy);
+		pageSession.set(type+"ViewSortBy", newSortBy);
+
+
 		if(oldSortBy == newSortBy) {
-			var sortAscending = pageSession.get("AdminUsersViewSortAscending") || false;
-			pageSession.set("AdminUsersViewSortAscending", !sortAscending);
+			var sortAscending = pageSession.get(type+"SortAscending") || false;
+			pageSession.set(type+"SortAscending", !sortAscending);
 		} else {
-			pageSession.set("AdminUsersViewSortAscending", true);
+			pageSession.set(type+"SortAscending", true);
 		}
 	}
 });
 
 Template.AdminUsersViewTable.helpers({
 	"tableItems": function() {
-		return AdminUsersViewItems(this.admin_users);
+		var type =Template.currentData().type;
+		return AdminUsersViewItems(this.admin_users,type);
 	}
 });
 

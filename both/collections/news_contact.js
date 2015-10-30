@@ -23,10 +23,13 @@ NewsContactSchema = new SimpleSchema({
         autoform: {
             afFieldInput: {
                 type: 'summernote',
-                class: 'editor',
-                rows: 4
+                class: 'editor'
             }
         }
+    },
+    link: {
+        type: String,
+        optional: true
     },
     fileName: {
         type: String,
@@ -43,6 +46,9 @@ NewsContactSchema = new SimpleSchema({
     types: {
         type: String,
         optional: true
+    },
+    createDate: {
+        type: Date
     }
 });
 Meteor.startup(function () {

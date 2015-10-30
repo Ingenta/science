@@ -1,0 +1,36 @@
+<template name="newsCenterDetails">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <div class="row">
+                <h3>新闻中心>>新闻详情</h3>
+            </div>
+            <div class="row">
+                <div id="subcontent" class="col-xs-8">
+                    <div class="container-fluid">
+                        <div class="row" style="margin-top: 20px;">
+                            {{#each newsDetails}}
+                                <div align="center"><span style="font-size:24px;">{{title}}</span>
+                                    {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                </div><br>
+                                <p class="text-center">发布时间：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;作者：{{author}}</p><br>
+                                <p>{{{content}}}</p>
+                            {{else}}
+                                {{_ "No results found!"}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div id="menu" class="col-xs-4">
+                    <ul class="list-unstyled">
+                        <h6 class="text-uppercase bg-eee" align="center">最新资讯</h6>
+                        {{#each latestNews}}
+                            <li><p><a href="{{whichUrl}}">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a></p></li>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

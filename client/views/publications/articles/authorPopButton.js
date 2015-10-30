@@ -22,12 +22,14 @@ Template.authorPopButton.events({
 });
 Template.authorPopButton.helpers({
     name: function () {
-        return TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en;
+        if(Template.currentData().name)
+            return Template.currentData().name;
+        return TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en ;
     },
     refs: function(){
         var allrefs=[];
         if(!_.isEmpty(this.affs)){
-            var affsArr = _.each(this.affs,function(aff){
+            _.each(this.affs,function(aff){
                 var match = /\d/.exec(aff);
                 if(!_.isEmpty(match)){
                     allrefs.push(match[0]);

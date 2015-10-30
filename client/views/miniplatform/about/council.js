@@ -6,13 +6,12 @@ Template.council.helpers({
 
 Template.councilList.helpers({
     councils: function () {
-        var type = "3";
-        return NewsContact.find({types:type});
+        return NewsContact.find({types:"3"});
     }
 });
 
 Template.councilList.events({
-    'click .fa-trash': function (e) {
+    'click #couDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsContact.remove({_id:id});
@@ -28,6 +27,7 @@ AutoForm.addHooks(['addCouncilModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "3";
+            doc.createDate = new Date();
             return doc;
         }
     }

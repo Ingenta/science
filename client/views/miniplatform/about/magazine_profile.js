@@ -11,7 +11,7 @@ Template.magazineProfileList.helpers({
 });
 
 Template.magazineProfileList.events({
-    'click .fa-trash': function (e) {
+    'click #proDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsContact.remove({_id:id});
@@ -27,6 +27,7 @@ AutoForm.addHooks(['addMagazineProfileModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "2";
+            doc.createDate = new Date();
             return doc;
         }
     }

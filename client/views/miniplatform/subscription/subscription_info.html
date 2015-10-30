@@ -18,7 +18,7 @@
         <div class="partContent">
             <div align="center"><span style="font-size:24px;">{{title}}</span>
                 {{#if can  "modify-news-contact" "resource"}}{{> updateSubscriptionModalForm}}{{/if}}
-                {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</div><br>
+                {{#if can  "delete-news-contact" "resource"}}<a href="#" id="subDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{content}}}</p>
             <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{fileName}}</a></p>
         </div>
@@ -28,7 +28,7 @@
 </template>
 
 <template name="updateSubscriptionModalForm">
-    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="createDate,link,types"}}{{/afModal}}
 </template>
 
 <template name="addSubscriptionModalForm">

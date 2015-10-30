@@ -46,7 +46,7 @@
   "Period": "刊期",
   "Editor": "主编",
   "Journal label": "期刊收录类型",
-  "label": "收录类型",
+  "Journal Tags": "收录类型",
   "Release Date": "创刊日期",
   "Co-ordinator": "主办单位",
   "Description": "描述",
@@ -58,8 +58,9 @@
   "Letter": "快讯",
   "Blogs": "论坛",
   "Recently Viewed Articles": "最近浏览的文章",
-  "Total views over time": "阅读行为统计",
-  "Abstract views over time": "摘要浏览时间统计",
+  "Proportional views": "阅读行为统计",
+  "Proportional views by location": "用户地区统计",
+  "Total views by month":"总体浏览时间统计",
   "Most read articles": "热读文章",
   "volumeItem": "第%s卷",
   "issueItem": "第%s期",
@@ -249,6 +250,11 @@
   "Already a member?": "注册过了吗?",
   "Sign in here": "登录",
   "No Cover Description": "无封面描述",
+  "Username already exists.": "用户名已经存在",
+
+
+
+
   "schemas": {
     "publications": {
       "title": {
@@ -988,6 +994,9 @@
       }
     },
     "newsLink": {
+      "remark": {
+        "label": "备注"
+      },
       "picture": {
         "label": "选择图片"
       },
@@ -1001,6 +1010,9 @@
       },
       "content": {
         "label": "内容"
+      },
+      "link": {
+        "label": "外链地址"
       },
       "fileName": {
         "label": "附件名称"
@@ -1029,14 +1041,23 @@
           "2": "置顶"
         }
       },
-      "url": {
+      "link": {
         "label": "外链地址"
       },
       "picture": {
         "label": "新闻配图"
       }
-    }
+    },
+      "newsRecommend": {
+          "ArticlesId": {
+              "label": "标题"
+          },
+          "picture": {
+              "label": "选择代表图片"
+          }
+      }
   },
+
   "roles": "角色",
   "roleName": "角色名",
   "roleSummary": "描述",
@@ -1166,7 +1187,6 @@
   "Related_topics": "相关主题",
   "Recent_read":"最近浏览",
   "Recent_search":"最近搜索",
-  "User stats statistics":"用户地区统计",
   "Add articles to special topics":"添加到专题",
   "Search History":"搜索历史",
   "Search History View":"搜索历史查看",

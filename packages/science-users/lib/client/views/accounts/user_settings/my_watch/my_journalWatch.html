@@ -8,17 +8,18 @@
         </thead>
         <tbody>
         {{#each watch}}
-        {{#with journalWatch}}
-        <tr>
-            <td>
-                <a href="{{JournalUrl _id}}">
-                    <a>{{translateThis titleCn title}}</a>
-                </a>
-            </td>
-            <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedJournal" value={{_id}}>{{/if}}
-            </td>
-        </tr>
-        {{/with}}
+            {{#with journalWatch}}
+                <tr>
+                    <td>
+                        <a href="{{urlToJournalById _id}}">
+                            <a>{{translateThis titleCn title}}</a>
+                        </a>
+                    </td>
+                    <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedJournal"
+                                                                  value={{_id}}>{{/if}}
+                    </td>
+                </tr>
+            {{/with}}
         {{else}}
             <tr>
                 {{_ "Journal Watch Is Empty"}}

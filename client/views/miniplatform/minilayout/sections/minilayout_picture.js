@@ -8,7 +8,7 @@ Template.layoutPicture.helpers({
 });
 
 Template.layoutPicture.events({
-    'click .fa-trash': function (e) {
+    'click #picDel': function (e) {
         var id = this._id;
         confirmDelete(e,function(){
             NewsLink.remove({_id:id});

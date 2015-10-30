@@ -57,12 +57,12 @@ function onMathJaxReady(callback) {
 						showProcessingMessages: false,
 						tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
 						menuSettings: {
-							zoom: "No Zoom",        //  when to do MathZoom
+							zoom: "None",        //  when to do MathZoom
 							CTRL: false,         //    require CTRL for MathZoom?
 							ALT: false,          //    require Alt or Option?
 							CMD: false,          //    require CMD?
 							Shift: false,        //    require Shift?
-							zscale: "200%",      //  the scaling factor for MathZoom
+							zscale: "150%",      //  the scaling factor for MathZoom
 							font: "Auto",        //  what font HTML-CSS should use
 							context: "MathJax",  //  or "Browser" for pass-through to browser menu
 							mpContext: false,    //  true means pass menu events to MathPlayer in IE

@@ -18,7 +18,7 @@
         <div class="partContent">
             <div align="center"><span style="font-size:24px;">{{title}}</span>
                 {{#if can  "modify-news-contact" "resource"}}{{> updateCouncilModalForm}}{{/if}}
-                {{#if can  "delete-news-contact" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</div><br>
+                {{#if can  "delete-news-contact" "resource"}}<a href="#" id="couDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{content}}}</p>
         </div>
     {{else}}
@@ -27,7 +27,7 @@
 </template>
 
 <template name="updateCouncilModalForm">
-    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="fileName,fileId,types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="createDate,link,fileName,fileId,types"}}{{/afModal}}
 </template>
 
 <template name="addCouncilModalForm">

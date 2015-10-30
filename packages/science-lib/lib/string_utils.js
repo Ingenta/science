@@ -1,17 +1,19 @@
-Science.escapeRegEx = function (string) {
+Science.String = {};
+
+Science.String.escapeRegEx=function (string) {
     return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
-Science.replaceSubstrings = function (string, find, replace) {
+Science.String.replaceSubstrings = function (string, find, replace) {
     if (string===undefined)return string;
     return string.replace(new RegExp(Science.escapeRegEx(find), 'g'), replace);
 };
 
-Science.clearTags = function(string){
+Science.String.clearTags = function(string){
     return string && string.replace(new RegExp("</?[^>]*?>", 'g'), "");
 }
 
-Science.joinStrings = function (stringArray, join) {
+Science.String.joinStrings = function (stringArray, join) {
     var sep = join || ", ";
     var res = "";
     _.each(stringArray, function (str) {
@@ -24,7 +26,7 @@ Science.joinStrings = function (stringArray, join) {
     return res;
 };
 
-Science.ipToNumber = function(ip){
+Science.String.ipToNumber = function(ip){
     var sum = 0;
     var arr = ip.split('.');
     arr.reverse().forEach(function (a, index) {
@@ -50,7 +52,7 @@ var stringifyPrimitive = function(v) {
     }
 };
 
-Science.queryStringify = function(obj, sep, eq, name) {
+Science.String.queryStringify = function(obj, sep, eq, name) {
     sep = sep || '&';
     eq = eq || '=';
     if (obj === null) {
@@ -94,7 +96,7 @@ Science.queryStringify = function(obj, sep, eq, name) {
         (stringifyPrimitive(obj));
 };
 
-Science.getParamsFormUrl= function(paramName){
+Science.String.getParamsFormUrl= function(paramName){
     var reg=new RegExp("[&\?]"+paramName+"=[^&]+","g");
     var paramstrs = decodeURIComponent(window.location.search).match(reg);
     var params;
@@ -107,29 +109,58 @@ Science.getParamsFormUrl= function(paramName){
     return params;
 }
 
-Science.StringUtils = {
-    parseToNumbers:function(str){
-        if(!str)
-            return;
-        var parts = str.replace(/\s/g,"").split(/[,，]/);
-        var resultArr = [];
-        _.each(parts,function(part){
-            var tPart = part.trim();
-            var range = tPart.split(/[-－–]/);
-            if(!_.isEmpty(range)){
-                if(range.length===2){
-                    var n1=Number(range[0]);
-                    var n2=Number(range[1]);
-                    if(n1<=n2){
-                        for(var i=n1;i<=n2;i++){
-                            resultArr.push(i);
-                        }
+Science.String.parseToNumbers=function(str){
+    if(!str)
+        return;
+    var parts = str.replace(/\s/g,"").split(/[,，]/);
+    var resultArr = [];
+    _.each(parts,function(part){
+        var tPart = part.trim();
+        var range = tPart.split(/[-－–]/);
+        if(!_.isEmpty(range)){
+            if(range.length===2){
+                var n1=Number(range[0]);
+                var n2=Number(range[1]);
+                if(n1<=n2){
+                    for(var i=n1;i<=n2;i++){
+                        resultArr.push(i);
                     }
-                }else if(range.length===1){
-                    resultArr.push(Number(range[0]));
                 }
+            }else if(range.length===1){
+                resultArr.push(Number(range[0]));
             }
-        })
-        return _.sortBy(resultArr);
+        }
+    });
+    return _.sortBy(resultArr);
+};
+
+Science.String.getLastPart=function(str, separate){
+    separate = separate || ".";
+    var lastIndex = str.lastIndexOf(separate);
+    if(lastIndex>-1){
+        return str.substr(lastIndex+separate.length);
     }
 };
+
+Science.String.getExt = function(str){
+    return Science.String.getLastPart(str);
+};
+
+Science.String.getFileName = function(str){
+    return Science.String.getLastPart(str,"/") || Science.String.getLastPart(str,"\\") || str;
+};
+
+Science.String.getFileNameWithOutExt = function(str){
+    var name = Science.String.getFileName(str);
+    var lastIndex = name.lastIndexOf(".");
+    return lastIndex>-1?name.substr(0,lastIndex):name;
+};
+
+Science.escapeRegEx = Science.String.escapeRegEx;
+Science.replaceSubstrings = Science.String.replaceSubstrings;
+Science.clearTags =Science.String.clearTags ;
+Science.joinStrings=Science.String.joinStrings;
+Science.ipToNumber=Science.String.ipToNumber;
+Science.queryStringify =Science.String.queryStringify ;
+Science.getParamsFormUrl=Science.String.getParamsFormUrl;
+

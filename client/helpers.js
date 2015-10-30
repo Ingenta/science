@@ -4,10 +4,13 @@ var urlToArticleByArticleObject = function (article) {
 }
 var getJournalComponentByArticle = function (article) {
     if (!article)return;
-    var pub = Publishers.findOne({_id: article.publisher});
-    if (!pub)return;
-    var journal = Publications.findOne({_id: article.journalId});
+    return getJournalComponentByJournalId(article.journalId);
+}
+var getJournalComponentByJournalId = function (id) {
+    var journal = Publications.findOne({_id: id});
     if (!journal)return;
+    var pub = Publishers.findOne({_id: journal.publisher});
+    if (!pub)return;
     return "/publisher/" + pub.name + "/journal/" + journal.title;
 }
 var getIssueComponentByArticle = function (article) {
@@ -20,6 +23,7 @@ var journalIdToName = function (id) {
     var journal = Publications.findOne({_id: id});
     return journal && (TAPi18n.getLanguage() === "zh-CN" ? journal.titleCn : journal.title);
 }
+
 Template.registerHelper('journalName', function (id) {
     return journalIdToName(id);
 });
@@ -37,6 +41,10 @@ Template.registerHelper('urlToArticleById', function (id) {
 Template.registerHelper('urlToJournal', function (title) {
     var article = Articles.findOne({'title.en': title});
     return getJournalComponentByArticle(article);
+});
+
+Template.registerHelper('urlToJournalById', function (id) {
+    return getJournalComponentByJournalId(id);
 });
 
 
