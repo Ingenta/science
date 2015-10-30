@@ -1,25 +1,37 @@
-Deploy notes v1
+Deploy notes v2
 For setup on 219.238.6.206:80
 To change meteor port edit -p 80:80 -> -p [PORT]:80
 
 --------------------------
-1. unpack dockerfiles.zip from https://github.com/Ingenta/deploy/archive/master.zip
-   meteor build --architecture=os.linux.x86_64 ./
-   copy *.tar.gz to ~/app folder on server
+1. install meteor somewhere
+
+curl https://install.meteor.com/ | sh
 
 --------------------------
-2. cd to respective folder and build docker images
+2. clone project locally, build and copy .tar.gz file to server
+
+git clone https://04fe3f02dfee72fe280d2a6a91e9865030840ed8:x-oauth-basic@github.com/ingenta/science.git
+meteor build --architecture=os.linux.x86_64 ./
+copy *.tar.gz to ~/app folder on server
+
+--------------------------
+3. unpack https://github.com/Ingenta/deploy/blob/master/science/dockerfiles.zip
+
+cd dockerfiles
+
+--------------------------
+4. cd to respective folder and build docker images
 
 docker build -t jackjk/mongo .
 docker build -t jackjk/solr .
 docker build -t jackjk/conn .
 
 --------------------------
-3. run each container
+5. run each container
    a. update ROOT_URL to match external ip or domain name
    b. add KADIRA env variables if necessary
    c. run each container in order
-   
+
 docker run -d --name solr --restart=always -p 8983:8983 jackjk/solr
 
 docker run -d --name mongo --restart=always -p 27017:27017 jackjk/mongo
