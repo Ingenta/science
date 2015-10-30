@@ -207,7 +207,8 @@ var getParagraphs = function (paragraphNodes) {
 		}else{
 			var parseResult = ScienceXML.handlePara(paragraph);
 			var sectionText = new serializer().serializeToString(parseResult.paraNode);
-			paragraphs.html += ScienceXML.replaceItalics(sectionText);
+			paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(sectionText));
+
 			if (parseResult.formulas && parseResult.formulas.length) {
 				paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
 			}
@@ -297,8 +298,8 @@ ScienceXML.replaceItalics = function (input) {
 }
 
 ScienceXML.replaceNewLines = function (input) {
-    input = Science.replaceSubstrings(input, "\n", " ");
     input = Science.replaceSubstrings(input, "\r\n", " ");
+    input = Science.replaceSubstrings(input, "\n", " ");
     return input;
 }
 
