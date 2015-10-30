@@ -13,6 +13,10 @@ this.NewsLink.allow({
 });
 
 NewsLinkSchema = new SimpleSchema({
+    remark: {
+        type: String,
+        optional: true
+    },
     picture: {
         type: String,
         optional: true,

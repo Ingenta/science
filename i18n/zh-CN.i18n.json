@@ -993,6 +993,9 @@
       }
     },
     "newsLink": {
+      "remark": {
+        "label": "备注"
+      },
       "picture": {
         "label": "选择图片"
       },

@@ -755,6 +755,9 @@
             }
         },
         "newsLink": {
+            "remark": {
+                "label": "Remark"
+            },
             "picture": {
                 "label": "Choose images"
             },

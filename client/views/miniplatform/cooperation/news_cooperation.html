@@ -20,7 +20,7 @@
 <template name="cooperationList">
     {{#each cooperationLists}}
         <div class="col-xs-4" style="height: 80px">
-            <a href="{{link}}" target="_blank"><img src="{{getImageHelper picture}}" height="60" width="235"></a>
+            <a href="{{link}}" target="_blank" title="{{remark}}"><img src="{{getImageHelper picture}}" height="60" width="235"></a>
             {{#if can  "modify-news-link" "resource"}}{{> updateNewsLinkModalForm}}{{/if}}
             {{#if can  "delete-news-link" "resource"}}<a href="#" id="coopDel" class="fa fa-trash"></a>{{/if}}
         </div>
@@ -45,6 +45,7 @@
                 </div>
                 {{#autoForm id="addNewsLinkModalForm" collection="NewsLink" type="insert"}}
                 <div class="modal-body">
+                    {{> afQuickField name="remark"}}
                     {{> afQuickField name="picture"}}
                     {{> afQuickField name="link" value="http://"}}
                 </div>
