@@ -1,16 +1,13 @@
 var execFile = Npm.require('child_process').execFile;
-var pdfjar = process.cwd()+"/assets/app/pdf.jar";
+var pdfjar = process.cwd()+"/assets/packages/science-lib/pdf.jar";
+console.log("pdf.jar in here :" + pdfjar);
 //var pdfjar="/Users/jiangkai/Desktop/pdf.jar";
 Science.Pdf = Meteor.wrapAsync(function execute(args, callback) {
 	var argArr = _.union(["-jar",pdfjar],args);
 	execFile('java', argArr, {encoding: 'utf-8', maxBuffer: 1024 * 1000}, function pdfCallback(error, stdout, stderr) {
 		if (error) {
-			if (error.code === "ENOENT")
-				callback('Could not find pdf.jar executable');
-			else
-				callback(error);
-		} else {
-			callback(null, stdout, stderr);
+			console.dir(stderr);
 		}
+		callback(error,stdout,stderr);
 	});
 });
