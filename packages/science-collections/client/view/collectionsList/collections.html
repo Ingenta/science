@@ -6,7 +6,7 @@
         {{> collAlphabetBar}}
         <div class="row">
             <div class="col-xs-12">
-                {{#if permissionCheck}}
+                {{#if permissionCheck "add-publisher-collection,add-journal-collection"}}
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCollectionModal">
                         <span class="fa fa-plus">
                             {{_ "Add new"}}
