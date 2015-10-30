@@ -2,6 +2,7 @@
 Meteor.subscribe('news_contact');
 Meteor.subscribe('news_link');
 Meteor.subscribe('news_center');
+Meteor.subscribe('news_recommend');
 Meteor.subscribe('files');
 
 //访问路径

@@ -1038,8 +1038,17 @@
       "picture": {
         "label": "新闻配图"
       }
-    }
+    },
+      "newsRecommend": {
+          "ArticlesId": {
+              "label": "标题"
+          },
+          "picture": {
+              "label": "选择代表图片"
+          }
+      }
   },
+
   "roles": "角色",
   "roleName": "角色名",
   "roleSummary": "描述",

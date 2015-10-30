@@ -1,12 +1,21 @@
 <template name="layoutLatestArticles">
     <div class="mainPart">
         <div class="mainTitle">
-            <p class="fl w300"><span class="mr20">最新出版文章</span> <a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-plus"></a></p>
-            <p class="fr mt8"><a href="#"><img src="/goAll.png"/></a></p>
+            <p class="fl w300"><span class="mr20">最新出版文章</span>
+                <a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a>
+                <a href="#" class="fa fa-plus" data-toggle="modal" data-target="#addNewsRecommendModal"></a>
+            </p>
+            <p class="fr mt8">
+                <a href="#">
+                <img src="/goAll.png"/>
+                </a>
+            </p>
         </div>
         <!-- 一个部分开始 -->
         <div class="contPart">
-            <div class="fl w80"><img src="/img_01.jpg" /></div>
+            <div class="fl w80">
+                {{> addNewsRecommendModalForm}}
+            </div>
             <div class="fl w350">
                 <div class="h50">
                     <p>科学通报：生物多样性科学研究进展</p>
@@ -16,65 +25,27 @@
             </div>
         </div>
         <!-- 一个部分结束 -->
-        <!-- 一个部分开始 -->
-        <div class="contPart">
-            <div class="fl w80"><img src="/img_01.jpg" /></div>
-            <div class="fl w350">
-                <div class="h50">
-                    <p>科学通报：生物多样性科学研究进展</p>
-                    <p class="col777">科学通报 2014,59:429-429 </p>
+    </div>
+</template>
+
+<template name="addNewsRecommendModalForm">
+    <div class="modal fade" id="addNewsRecommendModal" tabindex="-1" role="dialog" aria-labelledby="addNewsRecommendModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addNewsRecommendModalLabel">{{_ "Add new"}}</h4>
                 </div>
-                <p class="tr"><a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-trash"></a></p>
+                {{#autoForm id="addNewsRecommendModalForm" collection="NewsRecommend" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="ArticlesId" options=getArticles }}
+                    {{> afQuickField name="picture"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
             </div>
         </div>
-        <!-- 一个部分结束 -->
-        <!-- 一个部分开始 -->
-        <div class="contPart">
-            <div class="fl w80"><img src="/img_01.jpg" /></div>
-            <div class="fl w350">
-                <div class="h50">
-                    <p>科学通报：生物多样性科学研究进展</p>
-                    <p class="col777">科学通报 2014,59:429-429 </p>
-                </div>
-                <p class="tr"><a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-trash"></a></p>
-            </div>
-        </div>
-        <!-- 一个部分结束 -->
-        <!-- 一个部分开始 -->
-        <div class="contPart">
-            <div class="fl w80"><img src="/img_01.jpg" /></div>
-            <div class="fl w350">
-                <div class="h50">
-                    <p>科学通报：生物多样性科学研究进展</p>
-                    <p class="col777">科学通报 2014,59:429-429 </p>
-                </div>
-                <p class="tr"><a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-trash"></a></p>
-            </div>
-        </div>
-        <!-- 一个部分结束 -->
-        <!-- 一个部分开始 -->
-        <div class="contPart">
-            <div class="fl w80"><img src="/img_01.jpg" /></div>
-            <div class="fl w350">
-                <div class="h50">
-                    <p>科学通报：生物多样性科学研究进展</p>
-                    <p class="col777">科学通报 2014,59:429-429 </p>
-                </div>
-                <p class="tr"><a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-trash"></a></p>
-            </div>
-        </div>
-        <!-- 一个部分结束 -->
-        <!-- 一个部分开始 -->
-        <div class="contPart">
-            <div class="fl w80"><img src="/img_01.jpg" /></div>
-            <div class="fl w350">
-                <div class="h50">
-                    <p>科学通报：生物多样性科学研究进展</p>
-                    <p class="col777">科学通报 2014,59:429-429 </p>
-                </div>
-                <p class="tr"><a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-trash"></a></p>
-            </div>
-        </div>
-        <!-- 一个部分结束 -->
     </div>
 </template>
