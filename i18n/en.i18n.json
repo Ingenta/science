@@ -805,6 +805,14 @@
             "picture": {
                 "label": "Choose file"
             }
+        },
+        "newsRecommend": {
+            "ArticlesId": {
+                "label": "Title"
+            },
+            "picture": {
+                "label": "Choose file"
+            }
         }
     },
     "roles": "Roles",

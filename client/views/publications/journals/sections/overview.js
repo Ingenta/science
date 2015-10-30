@@ -59,7 +59,7 @@ Template.TagList.helpers({
 Template.recommendArticles.helpers({
     recommendArticles: function () {
         var journalId = Session.get('currentJournalId');
-        return Recommend.find({publications: journalId});
+        return Recommend.find({publications: journalId}, {limit: 5});
     },
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
