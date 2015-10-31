@@ -82,6 +82,24 @@ Router.map(function () {
         layoutTemplate: "miniLayout"
     });
 
+    //更多新闻
+    this.route("newsShow", {
+        path: "/miniplatform/newsShow",
+        layoutTemplate: "miniLayout"
+    });
+
+    //更多杂志社动态
+    this.route("dynamicShow", {
+        path: "/miniplatform/dynamicShow",
+        layoutTemplate: "miniLayout"
+    });
+
+    //更多最新文章
+    this.route("dynamicArticleShow", {
+        path: "/miniplatform/dynamicArticleShow",
+        layoutTemplate: "miniLayout"
+    });
+
     //关于我们-企业文化-详情页
     this.route("enterpriseCultureDetails", {
         path: "/miniplatform/enterpriseCulture/:cultureId",
