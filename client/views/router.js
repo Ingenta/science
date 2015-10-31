@@ -13,6 +13,7 @@ Meteor.subscribe("issues");
 Meteor.subscribe("about");
 Meteor.subscribe("tag");
 Meteor.subscribe("file_excel");
+Meteor.subscribe("journal_ad");
 Meteor.subscribe("volumes");
 Meteor.subscribe("about_articles");
 Meteor.subscribe("editorial_member");
@@ -109,6 +110,15 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('publishers')
             ]
+        }
+    });
+
+    this.route('cooperationCenter', {
+        template: "cooperationCenter",
+        parent: "home",
+        name: "cooperationCenter",
+        title: function () {
+            return TAPi18n.__("Ad Center");
         }
     });
 
