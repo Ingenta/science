@@ -90,6 +90,7 @@ Meteor.startup(function () {
             {key: "searchHistory", e: "Search History", c: "搜索历史"},
             {key: "tags", e: "Journal label", c: "期刊收录类型"},
             {key: "specialTopics", e: "Special Topics", c: "专题推荐"},
+            {key: "adCenter", e: "AdCenter", c: "广告中心"},
             {key: "cooperation", e: "Publishing Cooperation", c: "出版合作"},
             {key: "newsCenter", e: "News Center", c: "新闻中心"},
             {key: "contact", e: "Contact Us", c: "联系我们"},

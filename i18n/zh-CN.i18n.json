@@ -1,6 +1,8 @@
 {
   "more": "更多",
   "Batch Add": "批量添加",
+  "Ad Center": "广告中心",
+  "Advertisement": "广告合作",
   "Most read articles to view": "热读文章查看",
   "Most cited by to view": "最多引用查看",
   "Editors recommend to view": "编辑推荐查看",
@@ -599,7 +601,8 @@
         }
       },
       "url": {
-        "label": "链接"
+        "label": "链接",
+        "placeholder": "http://"
       },
       "picture": {
         "label": "选择图片"
@@ -630,7 +633,8 @@
         "label": "描述"
       },
       "link": {
-        "label": "链接"
+        "label": "链接",
+        "placeholder": "http://"
       },
       "defaultLink": {
         "label": "默认链接"
@@ -865,7 +869,8 @@
         }
       },
       "url": {
-        "label": "链接"
+        "label": "链接",
+        "placeholder": "http://"
       }
     },
     "medias": {
@@ -919,7 +924,8 @@
         }
       },
       "url": {
-        "label": "相关链接"
+        "label": "相关链接",
+        "placeholder": "http://"
       },
       "parentId": {
         "label": "是否选择一个父集合"
@@ -942,7 +948,8 @@
         "label": "标签图标"
       },
       "url": {
-        "label": "标签详情URL"
+        "label": "标签详情URL",
+        "placeholder": "http://"
       }
     },
     "specialTopics": {
@@ -1001,7 +1008,8 @@
         "label": "选择图片"
       },
       "link": {
-        "label": "链接地址"
+        "label": "链接地址",
+        "placeholder": "http://"
       }
     },
     "newsContact": {
@@ -1012,7 +1020,8 @@
         "label": "内容"
       },
       "link": {
-        "label": "外链地址"
+        "label": "外链地址",
+        "placeholder": "http://"
       },
       "fileName": {
         "label": "附件名称"
@@ -1042,7 +1051,8 @@
         }
       },
       "link": {
-        "label": "外链地址"
+        "label": "外链地址",
+        "placeholder": "http://"
       },
       "picture": {
         "label": "新闻配图"
@@ -1070,6 +1080,18 @@
       },
       "content": {
         "label": "专栏内容"
+      }
+    },
+    "journalAC": {
+      "journalId": {
+        "label": "期刊名称"
+      },
+      "link": {
+        "label": "链接",
+        "placeholder": "http://"
+      },
+      "fileId": {
+        "label": "选择文件"
       }
     }
   },

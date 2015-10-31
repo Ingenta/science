@@ -360,7 +360,8 @@
                 }
             },
             "url": {
-                "label": "Link"
+                "label": "Link",
+                "placeholder": "http://"
             },
             "picture": {
                 "label": "Choose file"
@@ -391,7 +392,8 @@
                 "label": "Picture description"
             },
             "link": {
-                "label": "Link"
+                "label": "Link",
+                "placeholder": "http://"
             },
             "defaultLink": {
                 "label": "The default link"
@@ -626,7 +628,8 @@
                 }
             },
             "url": {
-                "label": "Link"
+                "label": "Link",
+                "placeholder": "http://"
             }
         },
         "medias": {
@@ -680,7 +683,8 @@
                 }
             },
             "url": {
-                "label": "A Link"
+                "label": "A Link",
+                "placeholder": "http://"
             },
             "parentId": {
                 "label": "Choose Father and son set"
@@ -703,7 +707,8 @@
                 "label": "Choose file"
             },
             "url": {
-                "label": "A Link"
+                "label": "A Link",
+                "placeholder": "http://"
             }
         },
         "specialTopics": {
@@ -762,7 +767,8 @@
                 "label": "Choose images"
             },
             "link": {
-                "label": "Link"
+                "label": "Link",
+                "placeholder": "http://"
             }
         },
         "newsContact": {
@@ -773,7 +779,8 @@
                 "label": "Content"
             },
             "link": {
-                "label": "Exterior Chain"
+                "label": "Exterior Chain",
+                "placeholder": "http://"
             },
             "fileName": {
                 "label": "AttachmentName"
@@ -803,7 +810,8 @@
                 }
             },
             "link": {
-                "label": "Exterior Chain"
+                "label": "Exterior Chain",
+                "placeholder": "http://"
             },
             "picture": {
                 "label": "Choose file"
@@ -831,6 +839,18 @@
             },
             "content": {
                 "label": "Column content"
+            }
+        },
+        "journalAC": {
+            "journalId": {
+                "label": "Journal title"
+            },
+            "link": {
+                "label": "Link",
+                "placeholder": "http://"
+            },
+            "fileId": {
+                "label": "Choose file"
             }
         }
     },
