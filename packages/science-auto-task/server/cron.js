@@ -43,17 +43,6 @@ SyncedCron.add({
         AutoTasks.update({_id: taskId}, {$set: {status: "created", total: articles.count()}});
         Science.Queue.Citation.taskId = taskId;
         //SyncedCron.stop();
-
-        MostCited.remove({});
-        var citations = Articles.find({citations: {$exists: true}}, {$sort: {'citations.size': -1}, limit: 20});
-        citations.forEach(function (item) {
-            MostCited.insert({
-                articleId: item._id,
-                title: item.title,
-                count: item.citations.length,
-                journalId: item.journalId
-            });
-        });
     }
 });
 
@@ -150,10 +139,20 @@ SyncedCron.add({
                 }, {
                     fields: {_id: 1, title: 1}
                 }).fetch();
-                if (tempArray.length) outgoingList.push({
+
+                var articleDois = Articles.find({_id: {$in: oneUser.profile.interestedOfArticles}}, {fields: {doi: 1}}).fetch();
+                var citations = Citations.find({
+                    $and: [
+                        {doi: {$in: articleDois}},
+                        {createdAt: {$gt: oneUser.lastSentDate}}
+                    ]
+                });
+
+                if (tempArray.length || citations.length) outgoingList.push({
                     userId: oneUser._id,
                     email: oneUser.emails[0].address,
-                    articleIds: tempArray
+                    articleIds: tempArray.length ? tempArray : undefined,
+                    citations: citations.length ? citations : undefined
                 });
             }
         });
@@ -164,36 +163,47 @@ SyncedCron.add({
             outgoingList.forEach(function (oneEmail) {
                 var emailSubject = "";
                 var emailContent = "";
+                var emailConfig = undefined;
                 if (oneEmail.issue) {
                     //this is an issue watch
                     emailSubject = "Issue Watch";
-                    if (EmailConfig.findOne({key: "watchJournal"})) {
-                        emailSubject = EmailConfig.findOne({key: "watchJournal"}).subject;
-                        emailContent = EmailConfig.findOne({key: "watchJournal"}).body;
+                    emailConfig = EmailConfig.findOne({key: "watchJournal"});
+                    if (emailConfig) {
+                        emailSubject = emailConfig.subject;
+                        emailContent = emailConfig.body;
                     }
-                } else if (oneEmail.topicId) {
-                    //this is a topic watch
-                    emailSubject = "Topic Watch";
-                    if (EmailConfig.findOne({key: "watchTopic"})) {
-                        emailSubject = EmailConfig.findOne({key: "watchTopic"}).subject;
-                        emailContent = EmailConfig.findOne({key: "watchTopic"}).body;
-                    }
-                } else {
-                    //this is an article watch
-                    emailSubject = "Article Watch";
-                    if (EmailConfig.findOne({key: "watchArticle"})) {
-                        emailSubject = EmailConfig.findOne({key: "watchArticle"}).subject;
-                        emailContent = EmailConfig.findOne({key: "watchArticle"}).body;
-                    }
-                }
-                if (oneEmail.issue)
                     issueToArticles[oneEmail.issue._id].forEach(function (article) {
                         emailContent += createEmailArticleListContent(article);
                     });
-                else
+                } else if (oneEmail.topicId) {
+                    //this is a topic watch
+                    emailSubject = "Topic Watch";
+                    emailConfig = EmailConfig.findOne({key: "watchTopic"});
+                    if (emailConfig) {
+                        emailSubject = emailConfig.subject;
+                        emailContent = emailConfig.body;
+                    }
                     oneEmail.articleIds.forEach(function (article) {
                         emailContent += createEmailArticleListContent(article);
-                    });
+                    })
+                } else {
+                    //this is an article watch
+                    emailSubject = "Article Watch";
+                    emailConfig = EmailConfig.findOne({key: "watchArticle"});
+                    if (emailConfig) {
+                        emailSubject = emailConfig.subject;
+                        emailContent = emailConfig.body;
+                    }
+                    if(oneEmail.articleIds){
+                        oneEmail.articleIds.forEach(function (article) {
+                            emailContent += createEmailArticleListContent(article);
+                        })
+                    }
+                    if(oneEmail.citations){
+                        emailContent += createEmailCitedArticleContent(oneEmail.citations);
+                    }
+
+                }
 
                 Email.send({
                     to: oneEmail.email,
@@ -226,4 +236,23 @@ var createEmailArticleListContent = function (article) {
     var url = Science.URL.articleDetail(article._id);
     if (!url)return article.title.cn;
     return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
+};
+
+var createEmailCitedArticleContent = function (citations) {
+    var citationMap = {};
+    citations.forEach(function (oneCitation) {
+        if(citationMap[oneCitation.doi]) citationMap[oneCitation.doi] = citationMap[oneCitation.doi].push(oneCitation.citation);
+        else citationMap[oneCitation.doi] = [oneCitation.citation];
+    });
+    var content = "";
+    citationMap.keys.forEach(function (doi) {
+        content += "<ul>" + createEmailCitedArticleContent(Articles.findOne({doi: doi}, {fields: {_id: 1, title: 1}})) + "</ul>";
+        citationMap[doi].forEach(function (oneCitation) {
+            if (!oneCitation.doi)
+                content += "<li>" + oneCitation.journal.title + "</li>";
+            else
+                content += "<a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a>" + "\n\n";
+        })
+    });
+    return content;
 };

@@ -1,4 +1,4 @@
-Deploy notes v4
+Deploy notes v6
 REQUIRED: server with docker installed
 For setup on 219.238.6.206:80
 To change meteor port edit -p 80:80 -> -p [PORT]:80
@@ -15,21 +15,17 @@ git clone https://04fe3f02dfee72fe280d2a6a91e9865030840ed8:x-oauth-basic@github.
 meteor build --architecture=os.linux.x86_64 ./
 copy *.tar.gz to ~/app folder on server
 
---------------------------
-3. unpack to root
-get dockerfiles.zip from jiangkai
-put in ~ directory
-unzip dockerfiles.zip
 
 --------------------------
-4. cd to respective folder and build docker images
+3. cd to respective folder and build docker images
 
-docker build -t jackjk/mongo ~/dockerfiles/mongo/.
-docker build -t jackjk/solr ~/dockerfiles/solr/.
-docker build -t jackjk/conn ~/dockerfiles/mongo-connector/.
+docker build -t jackjk/mongo https://github.com/Ingenta/docker-mongo.git
+docker build -t jackjk/solr https://github.com/Ingenta/docker-solr.git
+docker build -t jackjk/conn https://github.com/Ingenta/docker-mongo-connector.git
+docker build -t jackjk/meteor https://github.com/Ingenta/docker-meteor.git
 
 --------------------------
-5. run each container
+4. run each container
    a. update ROOT_URL to match external ip or domain name
    b. add KADIRA env variables if necessary
    c. run each container in order
@@ -40,5 +36,5 @@ docker run -d --name mongo --restart=always -v ~/data/db:/data/db -p 27017:27017
 
 docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo jackjk/conn
 
-docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 philipgraf/meteor-pdf
+docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 jackjk/meteor
 --------------------------

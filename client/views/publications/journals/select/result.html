@@ -21,16 +21,19 @@
 
 
 <template name="oneArticleOfResultSpecialTopics">
-	<div class="row">
-		<ul class="dotted list-unstyled">
-			<li style="width: 50px" class="manage-btn">
+	<div class="row dotted">
+
+        <div class="col-xs-2 text-center">
                 {{#unless isSelected}}
+                    <br>
+                    <br>
 				    <label class="btn btn-primary btn-xs">
 			            <input value="{{_id}}" class="articleCkd" style="position:absolute;clip:rect(0,0,0,0);" type="checkbox" autocomplete="false">{{_ "select"}}
 				    </label>
                 {{/unless}}
-			</li>
-			<li style="float:left">
+        </div>
+
+        <div class="col-xs-10">
 				<h4>
 					<div class="resultsList"><img src="/icon_access_oa.gif">
 						<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a>
@@ -50,8 +53,6 @@
 								class="fa fa-external-link"></i></a>
 					</li>
 				</ul>
-			</li>
-			<li style="clear:both"></li>
-		</ul>
+        </div>
 	</div>
 </template>
