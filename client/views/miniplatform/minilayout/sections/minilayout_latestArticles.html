@@ -2,7 +2,6 @@
     <div class="mainPart">
         <div class="mainTitle">
             <p class="fl w300"><span class="mr20">最新出版文章</span>
-                <a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a>
                 <a href="#" class="fa fa-plus" data-toggle="modal" data-target="#addNewsRecommendModal"></a>
             </p>
             <p class="fr mt8">
@@ -21,7 +20,10 @@
                     <p>科学通报：生物多样性科学研究进展</p>
                     <p class="col777">科学通报 2014,59:429-429 </p>
                 </div>
-                <p class="tr"><a href="#afModal" class="fa fa-pencil" collection="Advertisement" operation="update"></a> <a href="#" class="fa fa-trash"></a></p>
+                <p class="tr">
+                    {{#if can  "modify-newsRecommend" "resource"}}{{> updateMiniLatestArticlesModalForm}}{{/if}}
+                    {{#if can  "delete-newsRecommend" "resource"}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
+                </p>
             </div>
         </div>
         <!-- 一个部分结束 -->
@@ -48,4 +50,8 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateMiniLatestArticlesModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsRecommend" doc=_id operation="update" omitFields="pageView,createDate,types"}}{{/afModal}}
 </template>
