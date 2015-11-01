@@ -179,7 +179,7 @@ Template.showArticle.events({
 		ArticleViews.insert({
 			articleId: this._id,
 			userId   : Meteor.userId(),
-			journalId: article.journalId,
+			journalId: this.journalId,
 			when     : new Date(),
 			action   : "pdfDownload"
 		})

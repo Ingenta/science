@@ -1,0 +1,64 @@
+<template name="columnViewsDetails">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <div class="row"><h3>{{columnTitle}} >></h3></div><hr>
+            <div class="tabbable">
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills nav-stacked aboutNavTabs">
+                        {{#if can "add-column-views" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addColumnViewsModal"></span>{{> addColumnViewsModalForm}}{{/if}}
+                        {{#each columnList}}
+                            <li class="{{isActive _id}}">
+                                <a class="activeBut" data-columnid="{{_id}}" data-toggle="tab">
+                                    {{title}}
+                                </a>
+                                {{#if can "modify-column-views" "resource"  }}{{> updateColumnViewsModalForm}}{{/if}}
+                                {{#if can "delete-column-views" "resource"}}<a href="#" class="fa fa-trash columnDel"></a>{{/if}}
+                            </li>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="tab-content col-xs-9">
+                    <div class="tab-pane active">
+                        <div class="partContent">
+                            <p>
+                            <div align="center"><span style="font-size:24px;">{{columnViewsTitle}}</span></div></p><hr>
+                            <p>{{{columnViewsIntroduction}}}</p>
+                            <p>{{{columnViewsContent}}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="updateColumnViewsModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="ColumnViews" doc=_id operation="update" omitFields="columnId,usersId"}}{{/afModal}}
+</template>
+
+<template name="addColumnViewsModalForm">
+    <div class="modal fade" id="addColumnViewsModal" tabindex="-1" role="dialog" aria-labelledby="addColumnViewsModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addColumnViewsModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addColumnViewsModalForm" collection="ColumnViews" type="insert"}}
+                <div class="modal-body">
+                    {{> afQuickField name="title"}}
+                    {{> afQuickField name="abstract"}}
+                    {{> afQuickField name="content"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>

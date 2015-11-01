@@ -4,6 +4,8 @@ Meteor.subscribe('news_link');
 Meteor.subscribe('news_center');
 Meteor.subscribe('news_recommend');
 Meteor.subscribe('files');
+Meteor.subscribe('column');
+Meteor.subscribe('column_views');
 
 //访问路径
 Router.map(function () {
@@ -80,6 +82,24 @@ Router.map(function () {
         layoutTemplate: "miniLayout"
     });
 
+    //更多新闻
+    this.route("newsShow", {
+        path: "/miniplatform/newsShow",
+        layoutTemplate: "miniLayout"
+    });
+
+    //更多杂志社动态
+    this.route("dynamicShow", {
+        path: "/miniplatform/dynamicShow",
+        layoutTemplate: "miniLayout"
+    });
+
+    //更多最新文章
+    this.route("dynamicArticleShow", {
+        path: "/miniplatform/dynamicArticleShow",
+        layoutTemplate: "miniLayout"
+    });
+
     //关于我们-企业文化-详情页
     this.route("enterpriseCultureDetails", {
         path: "/miniplatform/enterpriseCulture/:cultureId",
@@ -89,6 +109,12 @@ Router.map(function () {
     //新闻中心详情页
     this.route("newsCenterDetails", {
         path: "/miniplatform/newsCenter/:newsCenterId",
+        layoutTemplate: "miniLayout"
+    });
+
+    //专栏详情页
+    this.route("columnViewsDetails", {
+        path: "/miniplatform/:columnId",
         layoutTemplate: "miniLayout"
     });
 });

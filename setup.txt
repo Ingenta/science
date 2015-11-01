@@ -1,4 +1,4 @@
-Deploy notes v3
+Deploy notes v4
 REQUIRED: server with docker installed
 For setup on 219.238.6.206:80
 To change meteor port edit -p 80:80 -> -p [PORT]:80
@@ -17,15 +17,16 @@ copy *.tar.gz to ~/app folder on server
 
 --------------------------
 3. unpack to root
-download https://github.com/Ingenta/deploy/blob/master/science/dockerfiles.zip
-to ~ then extract
+get dockerfiles.zip from jiangkai
+put in ~ directory
+unzip dockerfiles.zip
 
 --------------------------
 4. cd to respective folder and build docker images
 
-docker build -t jackjk/mongo ~/mongo/.
-docker build -t jackjk/solr ~/solr/.
-docker build -t jackjk/conn ~/mongo-connector/.
+docker build -t jackjk/mongo ~/dockerfiles/mongo/.
+docker build -t jackjk/solr ~/dockerfiles/solr/.
+docker build -t jackjk/conn ~/dockerfiles/mongo-connector/.
 
 --------------------------
 5. run each container

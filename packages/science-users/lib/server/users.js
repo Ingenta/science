@@ -66,7 +66,7 @@ Meteor.publish(null, function () {
             history: 1
         };
         if (!Permissions.userCan("list-user", "user", this.userId)) {
-            if (Permissions.userCan("add-user", "publisher", this.userId)) {
+            if (Permissions.userCan("add-user", "user", this.userId)) {
                 query.publisherId = Users.findOne({_id: this.userId}).publisherId;
             } else {
                 query._id = this.userId;

@@ -93,7 +93,7 @@ Template.AdminUsersInsertInsertForm.events({
 
             },
             function (values) {
-                Permissions.check("add-user", "publisher");
+                Permissions.check("add-user", "user");
                 if (Router.current().params.insId) values.institutionId = Router.current().params.insId;//机构帐号标签页才需要设值
                 Meteor.call("createUserAccount", values, function (e, userId) {
                     if (e) {

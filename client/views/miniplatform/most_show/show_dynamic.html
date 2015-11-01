@@ -1,0 +1,25 @@
+<template name="dynamicShow">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <h3 class="dotted"><b>杂志社动态查看&nbsp;:</b></h3>
+            <div class="dotted">
+                <label>结果排序：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> 默认</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> 最新发布</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> 最早发布</label>
+            </div>
+            <div class="dotted">
+                <h4><b>本平台内最多杂志社动态查看：</b></h4>
+            </div>
+            <div class="dotted">
+                {{#each mostMagazines}}
+                    <ul class="dotted list-unstyled">
+                        <li><p><a href="{{whichUrl}}">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a></p></li>
+                    </ul>
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>

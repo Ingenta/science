@@ -157,6 +157,10 @@ SolrQuery = {
 	resetSecQuery   : function () {
 		SolrQuery.params("sq",[]);
 	},
+	/**
+	 * 若两次检索时间间隔小于0.5秒,拒绝请求
+	 * @returns {null|boolean}
+	 */
     searchLimit:function(){
         var result=(SolrQuery.lastQuery && (new Date()-SolrQuery.lastQuery)<500)
         SolrQuery.lastQuery=new Date();

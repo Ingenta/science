@@ -111,11 +111,14 @@ Template.registerHelper("highlight", function (keyword, str) {
 Template.registerHelper('checkPermissionToJournal', function (permissions, publisherId, journalId) {
     if (!Meteor.user()) return false;
     if (Permissions.isAdmin()) return true;
-    if (!Meteor.user().publisherId) return false;
-    if (Meteor.user().publisherId !== publisherId) return false;
-    if (_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) return true;
-    if (!journalId) return false;
-    if (!_.contains(Meteor.user().journalId, journalId)) return false;
+    
+    if (Meteor.user().publisherId){
+        if (Meteor.user().publisherId !== publisherId) return false;
+        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
+            //if (!journalId) return false;
+            if (!_.contains(Meteor.user().journalId, journalId)) return false;
+        }
+    }
     permissions = permissions.split(';');
     //console.log(permissions);
     var flag = false;
