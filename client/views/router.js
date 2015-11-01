@@ -396,7 +396,7 @@ Router.map(function () {
         },
         template      : "addArticleForSpecialTopics",
         name          : "specialTopics.selectArticles",
-        parent        : "journal.name",
+        parent        : "home",
         title: function () {
             return TAPi18n.__("addSpecialTopicsToCollection");
         },
