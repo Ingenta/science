@@ -33,7 +33,7 @@ SyncedCron.add({
                 status: "pending",
                 createOn: new Date()
             });
-            Science.Queue.Citation.add({id: stId, taskId: taskId, doi: item.doi});
+            Science.Queue.Citation.add({id: stId, taskId: taskId, doi: item.doi, articleId: item._id});
         })
         //var item = {doi:'10.1360/972010-666'};
         //for(var ii=0;ii<100;ii++){
@@ -49,7 +49,7 @@ SyncedCron.add({
 SyncedCron.add({
     name: "SendWatchEmail",
     schedule: function (parser) {
-        return parser.text("at 1:00 am");
+        return parser.text("at 4:00 am");
     },
     job: function () {
         var outgoingList = [];
@@ -140,13 +140,12 @@ SyncedCron.add({
                     fields: {_id: 1, title: 1}
                 }).fetch();
 
-                var articleDois = Articles.find({_id: {$in: oneUser.profile.interestedOfArticles}}, {fields: {doi: 1}}).fetch();
                 var citations = Citations.find({
                     $and: [
-                        {doi: {$in: articleDois}},
+                        {articleId: {$in: oneUser.profile.interestedOfArticles}},
                         {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
-                });
+                }).fetch();
 
                 if (tempArray.length || citations.length) outgoingList.push({
                     userId: oneUser._id,
@@ -241,18 +240,20 @@ var createEmailArticleListContent = function (article) {
 var createEmailCitedArticleContent = function (citations) {
     var citationMap = {};
     citations.forEach(function (oneCitation) {
-        if(citationMap[oneCitation.doi]) citationMap[oneCitation.doi] = citationMap[oneCitation.doi].push(oneCitation.citation);
-        else citationMap[oneCitation.doi] = [oneCitation.citation];
+        if(citationMap[oneCitation.doi])
+            citationMap[oneCitation.doi].push(oneCitation.citation);
+        else
+            citationMap[oneCitation.doi] = [oneCitation.citation];
     });
     var content = "";
-    citationMap.keys.forEach(function (doi) {
-        content += "<ul>" + createEmailCitedArticleContent(Articles.findOne({doi: doi}, {fields: {_id: 1, title: 1}})) + "</ul>";
+    Object.keys(citationMap).forEach(function (doi) {
+        content += "<ul>" + createEmailArticleListContent(Articles.findOne({doi: doi}, {fields: {_id: 1, title: 1}})) + " Cited by:";
         citationMap[doi].forEach(function (oneCitation) {
             if (!oneCitation.doi)
                 content += "<li>" + oneCitation.journal.title + "</li>";
             else
-                content += "<a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a>" + "\n\n";
+                content += "<li><a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a></li>" + "\n\n";
         })
     });
-    return content;
+    return content + "</ul>";
 };

@@ -29,8 +29,8 @@ Science.Queue.Citation.taskHandler = function(data,next){
 					AutoTasks.update({_id:data.taskId},{$inc:{success:1},$set:{processing:Science.Queue.Citation.processing()}});
 
 					spResult.forEach(function (item) {
-						if (!Citations.find({doi: data.doi, citation: item}).count())
-							Citations.insert({doi: data.doi, citation: item, createdAt: new Date()});
+						if (!Citations.find({doi: data.doi, 'citation.doi': item.doi}).count())
+							Citations.insert({doi: data.doi, articleId:data.articleId, citation: item, source: 'springer', createdAt: new Date()});
 					})
 				}
 			}))
@@ -40,8 +40,8 @@ Science.Queue.Citation.taskHandler = function(data,next){
 			AutoTasks.update({_id:data.taskId},{$inc:{success:1}});
 
 			crResult.forEach(function (item) {
-				if (!Citations.find({doi: data.doi, citation: item}).count())
-					Citations.insert({doi: data.doi, citation: item, createdAt: new Date()});
+				if (!Citations.find({doi: data.doi, 'citation.doi': item.doi}).count())
+					Citations.insert({doi: data.doi, articleId:data.articleId, citation: item, source: 'crossref', createdAt: new Date()});
 			});
 		}
 		next();
