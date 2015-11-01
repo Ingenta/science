@@ -2,33 +2,40 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             <div class="row"><h3>{{columnTitle}} >></h3></div><hr>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills nav-stacked aboutNavTabs">
-                    {{#if can "add-column-views" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addColumnViewsModal"></span>{{> addColumnViewsModalForm}}{{/if}}<br>
-                    {{#each columnList}}
-                        <li>
-                            <a class="activeButton" data-aboutsid="{{_id}}" data-toggle="tab">
-                                {{title}}
-                            </a>
-                        </li>
-                    {{else}}
-                        {{_ "No results found!"}}
-                    {{/each}}
-                </ul>
-            </div>
-            <div class="tab-content col-xs-9">
-                <div class="tab-pane active">
-                    <div class="container-fluid">
-                        <div class="row" style="margin-top: 20px;">
-                            <div align="center"><span style="font-size:24px;">456456</span></div><br>
-                            <p>456456456</p><br>
-                            <p>456645645</p>
+            <div class="tabbable">
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills nav-stacked aboutNavTabs">
+                        {{#if can "add-column-views" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addColumnViewsModal"></span>{{> addColumnViewsModalForm}}{{/if}}
+                        {{#each columnList}}
+                            <li class="{{isActive _id}}">
+                                <a class="activeBut" data-columnid="{{_id}}" data-toggle="tab">
+                                    {{title}}
+                                </a>
+                                {{#if can "modify-column-views" "resource"  }}{{> updateColumnViewsModalForm}}{{/if}}
+                                {{#if can "delete-column-views" "resource"}}<a href="#" class="fa fa-trash columnDel"></a>{{/if}}
+                            </li>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="tab-content col-xs-9">
+                    <div class="tab-pane active">
+                        <div class="partContent">
+                            <p>
+                            <div align="center"><span style="font-size:24px;">{{columnViewsTitle}}</span></div></p><hr>
+                            <p>{{{columnViewsIntroduction}}}</p>
+                            <p>{{{columnViewsContent}}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateColumnViewsModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="ColumnViews" doc=_id operation="update" omitFields="columnId,usersId"}}{{/afModal}}
 </template>
 
 <template name="addColumnViewsModalForm">
