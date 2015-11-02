@@ -36,5 +36,5 @@ docker run -d --name mongo --restart=always -v ~/data/db:/data/db -p 27017:27017
 
 docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo jackjk/conn
 
-docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 jackjk/meteor
+docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
 --------------------------
