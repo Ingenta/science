@@ -9,16 +9,28 @@ Template.miniLayout.helpers({
 
 Template.miniLayout.events({
     'click .btn': function () {
+        var options = $('#searchSelect').val();
         var sword = $('#searchInput').val();
-        if (sword){
-            SolrQuery.search({query:sword,setting:{from:"bar"}});
+        if (sword) {
+            if (options == "resource") {
+                SolrQuery.search({query: sword, setting: {from: "bar"}});
+            }
+            if (options == "local") {
+                Router.go('/miniplatform/newsSearchShowPage/' + sword);
+            }
         }
     },
     'keydown input': function (event) {
         if (event.keyCode === 13) {
+            var options = $('#searchSelect').val();
             var sword = $('#searchInput').val();
-            if (sword){
-                SolrQuery.search({query:sword,setting:{from:"bar"}});
+            if (sword) {
+                if (options == "resource") {
+                    SolrQuery.search({query: sword, setting: {from: "bar"}});
+                }
+                if (options == "local") {
+                    Router.go('/miniplatform/newsSearchShowPage/' + sword);
+                }
             }
         }
     },

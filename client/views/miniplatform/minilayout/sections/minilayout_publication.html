@@ -4,7 +4,6 @@
             <div class="lookBan">查看<br />全部<br />刊物</div>
             <div class="lookList">
                 <!-- 代码 开始 -->
-                    <div id="owl-demo" class="owl-carousel owl-theme">
                         {{#each hasJournal}}
                             <div class="bookPart oh">
                                 <img src="{{getImageHelper picture}}" />
@@ -19,13 +18,6 @@
                         {{else}}
                             {{_ "No publications found!"}}
                         {{/each}}
-                    </div>
-                    <div class="customNavigation">
-                        <a class="btn prev">Previous</a>
-                        <a class="btn next">Next</a>
-                        <a class="btn play">Autoplay</a>
-                        <a class="btn stop">Stop</a>
-                    </div>
                 <!-- 代码结束 -->
             </div>
         </div>
