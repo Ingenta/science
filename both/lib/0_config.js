@@ -112,5 +112,4 @@ Config = {
         + "Downloaded to IP: {ip} On: {time} {url}"
     },
     rootUrl: Meteor.absoluteUrl(),
-    mainPublish:"hSsscs85HXuu2qTfJ"
 };
