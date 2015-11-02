@@ -20,7 +20,14 @@ Science.Queue.Citation.taskHandler = function(data,next){
 		if(crErr || !crResult || !crResult.length){
 			Science.Interface.Springer.getCitedBy(data.doi,Meteor.bindEnvironment(function(spErr,spResult){
 				if(spErr){
-					next(new Meteor.Error('something wrong'));
+					SubTasks.update({_id:data.id},{$set:{status:"error"}});
+					AutoTasks.update({_id:data.taskId},{$set:{
+						failed:Science.Queue.Citation.failures()+Science.Queue.Citation.errors(),
+						queueTotal:Science.Queue.Citation.total()
+					}});
+					//errorHandler和Meteor.bindEnvironment配合使用似乎有问题,
+					//在发生错误时不能正确调用到errorHandler方法,所以不使用errorHandler来处理异常了.
+					//next(new Meteor.Error('something wrong'));
 				}else if (!spResult || !spResult.length){
 					AutoTasks.update({_id:data.taskId},{$inc:{success:1}});
 				}else{
