@@ -212,7 +212,6 @@ Router.map(function () {
 				var adPdf   = Config.uploadPdfDir + "/handle/" + (new Date()).getTime() + ".pdf";
 				//准备需要添加到pdf中的数据
 				var lang          = this.params.query.lang || "en";
-				debugger;
 
 				var journalInfo   = Publications.findOne({_id: article.journal._id});
 				var publisherInfo = Publishers.findOne({_id: article.publisher});
@@ -226,11 +225,12 @@ Router.map(function () {
 					return data[langArr[index]] || data[langArr[1 - index]];
 				};
 				var data          = {};
+				var host = Config.isDevMode?Config.rootUrl:"http://localhost/";
 				if (journalInfo.banner) {
-					data.banner = Config.rootUrl+Images.findOne({_id: journalInfo.banner}).url();
+					data.banner = host+Images.findOne({_id: journalInfo.banner}).url();
 				}
 				if(!_.isEmpty(adObj)){
-					data.ad = Config.rootUrl+Images.findOne({_id:adObj.pictures}).url();
+					data.ad = host+Images.findOne({_id:adObj.pictures}).url();
 				}
 				data.title       = getdata(article.title, lang);
 				data.authors     = _.map(article.authors.fullname, function (fname) {
