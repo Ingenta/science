@@ -1,14 +1,11 @@
 Template.tagList.helpers({
     tags: function () {
         if(Session.get('searchValue')){
-            var tagName = Session.get('searchValue').replace(/(^\s*)|(\s*$)/g,"");
-            var fq = $('#searchId').val();
-            if(fq=="tagNumber"){
-                return Tags.find({tagNumber:tagName});
-            }
-            if(fq=="name"){
-                return Tags.find({name:tagName});
-            }
+            var tagName = Session.get('searchValue');
+            var mongoDbArr = [];
+            mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
+            return Tags.find({$or: mongoDbArr});
         }else{
             return Tags.find();
         }
