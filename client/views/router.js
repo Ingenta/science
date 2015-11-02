@@ -13,6 +13,7 @@ Meteor.subscribe("issues");
 Meteor.subscribe("about");
 Meteor.subscribe("tag");
 Meteor.subscribe("file_excel");
+Meteor.subscribe("journal_ad");
 Meteor.subscribe("volumes");
 Meteor.subscribe("about_articles");
 Meteor.subscribe("editorial_member");
@@ -112,6 +113,15 @@ Router.map(function () {
         }
     });
 
+    this.route('cooperationCenter', {
+        template: "cooperationCenter",
+        parent: "home",
+        name: "cooperationCenter",
+        title: function () {
+            return TAPi18n.__("Ad Center");
+        }
+    });
+
     this.route("publishers", {
         parent: "home",
         title: function () {
@@ -133,6 +143,25 @@ Router.map(function () {
         },
         parent: "home",
         name: "mostRead.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles'),
+                Meteor.subscribe('issues'),
+                Meteor.subscribe('files')
+            ]
+        }
+    });
+
+    this.route('mostReadArticles/:journalId', {
+        template: "mostReadArticle",
+        title: function () {
+            return TAPi18n.__("Most read articles");
+        },
+        parent: "home",
+        name: "mostRead.showWithJournalId",
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
@@ -386,7 +415,7 @@ Router.map(function () {
         },
         template      : "addArticleForSpecialTopics",
         name          : "specialTopics.selectArticles",
-        parent        : "journal.name",
+        parent        : "home",
         title: function () {
             return TAPi18n.__("addSpecialTopicsToCollection");
         },

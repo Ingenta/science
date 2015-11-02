@@ -1,0 +1,40 @@
+<template name="dynamicArticleShow">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <h3 class="dotted"><b>最新出版文章查看&nbsp;:</b></h3>
+            <div class="dotted">
+                <label>结果排序：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> 默认</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> 最新发布</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> 最早发布</label>
+            </div>
+            <div class="dotted">
+                <h4><b>本平台内最多最新出版文章查看：</b></h4>
+            </div>
+            <div class="dotted">
+                {{#each mostPublishingArticles}}
+                    <ul class="dotted list-unstyled">
+                        <li>
+                            <h4><div class="resultsList">{{> imageName}}<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a></div></h4>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    {{#each authors}}
+                                    {{> authorPopButton}}
+                                    {{/each}}
+                                </li>
+                                <li>
+                                    <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                                    <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+                                </li>
+                                {{> abstractDetails}}
+                            </ul>
+                        </li>
+                    </ul>
+                {{else}}
+                    {{_ "No articles found!"}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>

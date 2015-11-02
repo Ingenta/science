@@ -4,11 +4,10 @@
             {{> pageElement key="author center"}}
             <hr>
             <div class="row" style="margin-left: 10px">
+                <h4>《中国科学》杂志社</h4><hr>
                 {{#each hasJournal}}
-                    <div>
-                        <a href="{{getJournalUrl}}">
-                            <a>{{translateThis title titleCn}}</a>
-                        </a>
+                    <div class="col-xs-6">
+                        <a href="{{getJournalUrl}}" target="_blank">{{titleCn}}</a>
                     </div>
                 {{else}}
                     {{_ "No publications found!"}}
