@@ -22,22 +22,13 @@ Template.layoutLatestArticles.helpers({
 });
 
 Template.layoutLatestArticles.events({
-    'click #pubDel': function (e) {
-        var pid = this._id;
-        confirmDelete(e,function(){
-            NewsCenter.remove({_id:pid});
+    'click #latestADel': function (e) {
+        var id = this._id;
+        confirmDelete(e, function () {
+            NewsRecommend.remove({_id: id});
         })
     }
-})
-
-//AutoForm.addHooks(['addNewsRecommendModalForm'], {
-//    'click #latestADel': function (e) {
-//        var id = this._id;
-//        confirmDelete(e, function () {
-//            NewsRecommend.remove({_id: id});
-//        })
-//    }
-//});
+});
 
 Template.addLatestArticlesModalForm.helpers({
     getArticles: function () {

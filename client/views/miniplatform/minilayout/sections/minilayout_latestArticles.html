@@ -1,13 +1,6 @@
 <template name="layoutLatestArticles">
     <div class="mainPart">
         <div class="mainTitle">
-            <!--<p class="fl w300"><span class="mr20">最新出版文章</span>-->
-                <!--<a href="#" class="fa fa-plus" data-toggle="modal" data-target="#addNewsRecommendModal"></a>-->
-            <!--</p>-->
-            <!--<p class="fr mt8">-->
-                <!--<a href="#">-->
-                <!--<img src="/goAll.png"/>-->
-                <!--</a>-->
             <p class="fl w300">
                 <span class="mr20">最新出版文章</span>
                 {{#if can "add-journalAC" "resource" }}
@@ -30,10 +23,6 @@
                         {{#if can "delete-recommend" "resource"  }}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
                     </p>
                 </div>
-                <!--<p class="tr">-->
-                    <!--{{#if can  "modify-newsRecommend" "resource"}}{{> updateMiniLatestArticlesModalForm}}{{/if}}-->
-                    <!--{{#if can  "delete-newsRecommend" "resource"}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}-->
-                <!--</p>-->
             </div>
         {{else}}
             {{_ "No articles found!"}}
@@ -75,7 +64,3 @@
         </div>
     </div>
 </template>
-
-<!--<template name="updateMiniLatestArticlesModalForm">-->
-    <!--{{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsRecommend" doc=_id operation="update" omitFields="pageView,createDate,types"}}{{/afModal}}-->
-<!--</template>-->
