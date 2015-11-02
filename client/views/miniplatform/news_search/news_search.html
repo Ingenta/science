@@ -1,0 +1,35 @@
+<template name="newsSearchShowPage">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <h3 class="dotted"><b>检索结果查看>></b></h3>
+            <div class="dotted">
+                <label>结果排序：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> 默认</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> 最新发布</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> 最早发布</label>
+            </div>
+            <div class="dotted">
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <td>信息标题</td>
+                        <td>发布时间</td>
+                        <td>浏览量/次</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{#each results}}
+                            <tr>
+                                <td>{{title}}</td>
+                                <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
+                                <td>{{pageView}}</td>
+                            </tr>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

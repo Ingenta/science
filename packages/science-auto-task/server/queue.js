@@ -68,4 +68,4 @@ Science.Queue.Citation.onEnded = function(){
 	        journalId: item.journalId
 	    });
 	});
-}
+};

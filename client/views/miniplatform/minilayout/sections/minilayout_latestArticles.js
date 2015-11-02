@@ -5,19 +5,25 @@ Template.layoutLatestArticles.helpers({
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var article = Articles.findOne({_id: Aid});
-        var title = iscn ? article.title.cn : article.title.en;
-        return title;
+        if(article){
+            var title = iscn ? article.title.cn : article.title.en;
+            return title;
+        }
+        return;
     },
     publishDate: function (Apid) {
         var article = Articles.findOne({_id: Apid});
-        var Date = article.published;
-        return Date;
+        if(article)return article.published.format("yyyy-MM-dd");
+        return;
     },
     ArticleUrl: function (Arid) {
-        var publisher = Publishers.findOne({_id:Config.mainPublish});
         var article = Articles.findOne({_id: Arid});
-        var publication = Publications.findOne({_id: article.journalId});
-        if (article)return "/publisher/" +publisher.name+ "/journal/" + publication.title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
+        if (article){
+            var publisher = Publishers.findOne({_id:article.publisher});
+            var publication = Publications.findOne({_id: article.journalId});
+            return "/publisher/" +publisher.name+ "/journal/" + publication.title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
+        }
+        return;
     }
 });
 
@@ -33,26 +39,34 @@ Template.layoutLatestArticles.events({
 Template.addLatestArticlesModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var articles = Articles.find({publisher:Config.mainPublish}).fetch();
-        var result = [];
-        _.each(articles, function (item) {
-            var name = iscn ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
-        });
-        return result;
+        var publisher = Publishers.findOne({agree:true});
+        if(publisher){
+            var articles = Articles.find({publisher:publisher._id}).fetch();
+            var result = [];
+            _.each(articles, function (item) {
+                var name = iscn ? item.title.cn : item.title.en;
+                result.push({label: name, value: item._id});
+            });
+            return result;
+        }
+        return;
     }
 });
 
 Template.updateLatestArticlesModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var articles = Articles.find({publisher:Config.mainPublish}).fetch();
-        var result = [];
-        _.each(articles, function (item) {
-            var name = iscn ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
-        });
-        return result;
+        var publisher = Publishers.findOne({agree:true});
+        if(publisher){
+            var articles = Articles.find({publisher:publisher._id}).fetch();
+            var result = [];
+            _.each(articles, function (item) {
+                var name = iscn ? item.title.cn : item.title.en;
+                result.push({label: name, value: item._id});
+            });
+            return result;
+        }
+        return;
     }
 });
 
