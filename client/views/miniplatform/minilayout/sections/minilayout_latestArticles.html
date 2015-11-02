@@ -15,8 +15,8 @@
                 <div class="fl w80"><a href="{{ArticleUrl ArticlesId}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p>{{titles ArticlesId}}</p>
-                        <p class="col777">{{formatDate publishDate ArticlesId "YYYY-MM-DD"}}</p>
+                        <p><a href="{{ArticleUrl ArticlesId}}" target="_blank">{{titles ArticlesId}}</a></p>
+                        <p class="col777">({{publishDate ArticlesId}})</p>
                     </div>
                     <p class="tr">
                         {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
