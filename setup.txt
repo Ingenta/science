@@ -1,4 +1,4 @@
-Deploy notes v6
+Deploy notes v7
 REQUIRED: server with docker installed
 For setup on 219.238.6.206:80
 To change meteor port edit -p 80:80 -> -p [PORT]:80
@@ -22,7 +22,6 @@ copy *.tar.gz to ~/app folder on server
 docker build -t jackjk/mongo https://github.com/Ingenta/docker-mongo.git
 docker build -t jackjk/solr https://github.com/Ingenta/docker-solr.git
 docker build -t jackjk/conn https://github.com/Ingenta/docker-mongo-connector.git
-docker build -t jackjk/meteor https://github.com/Ingenta/docker-meteor.git
 
 --------------------------
 4. run each container
