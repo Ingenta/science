@@ -15,6 +15,7 @@
   "FILTER BY Author": "按作者过滤浏览",
   "FILTER BY Release Date": "按出版日期过滤浏览",
   "FILTER BY Topic": "按主题过滤",
+  "FILTER BY PACS":"按PACS过滤",
   "Retrieval Condition": "检索条件",
   "Retrieval Range": "检索范围",
   "Start Search": "开始搜索",
@@ -1238,5 +1239,8 @@
   "Common Search":"一般检索",
   "Add Folder":"添加收藏夹",
   "Dropdown":"下拉",
-  "funding":"基金资助"
+  "funding":"基金资助",
+  "contentType":{
+    "article":"文章"
+  }
 }
