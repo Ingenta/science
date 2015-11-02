@@ -86,8 +86,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             givenPart.cn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
 
         }
-        fullnamePart.en = givenPart.en + " " + surnamePart.en;
-        fullnamePart.cn = givenPart.cn + " " + surnamePart.cn;
+        fullnamePart.en = surnamePart.en + " " + givenPart.en;
+        fullnamePart.cn = surnamePart.cn + " " + givenPart.cn;
 
         authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
