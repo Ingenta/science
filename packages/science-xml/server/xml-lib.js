@@ -201,7 +201,7 @@ var getParagraphs = function (paragraphNodes) {
 			var fig = getFigure(paragraph);
 			if(fig){
 				paragraphs.figures.push(fig);
-				var ref = '<p><xref ref-type="fig" rid="'+fig.id+'">'+fig.label+'</xref></p>';
+				var ref = '<p style="display:none"><xref original="true" ref-type="fig" rid="'+fig.id+'">'+fig.label+'</xref></p>';
 				paragraphs.html+=ref;
 			}
 		}else{
