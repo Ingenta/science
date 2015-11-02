@@ -34,7 +34,7 @@ SyncedCron.add({
                 createOn: new Date()
             });
             Science.Queue.Citation.add({id: stId, taskId: taskId, doi: item.doi, articleId: item._id});
-        })
+        });
         //var item = {doi:'10.1360/972010-666'};
         //for(var ii=0;ii<100;ii++){
         //	var stId = SubTasks.insert({taskId:taskId,doi:item.doi,index:index++,status:"pending",createOn:new Date()});
@@ -210,7 +210,7 @@ SyncedCron.add({
                     subject: emailSubject,
                     html: emailContent
                 });
-
+                //Users.update({_id: oneEmail.userId}, {lastSentDate: today});
             });
         } else {
             console.log('watch email task ran but email list was empty, no emails sent.');
