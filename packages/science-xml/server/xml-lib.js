@@ -116,14 +116,22 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
     var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
     authorNotesNodes.forEach(function (note) {
+        debugger;
         var noteLabel = xpath.select("child::label/text()", note).toString();
         var email = xpath.select("descendant::ext-link/text()", note).toString();
+        var noteContent = xpath.select('child::p',note);
         if (noteLabel === undefined) {
             results.errors.push("No noteLabel found");
         } else if (email === undefined) {
             results.errors.push("No email found");
         } else {
             var entry = {label: noteLabel, email: email};
+            if(!_.isEmpty(noteContent)){
+                var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g,email);
+                noteContent = noteContent.toString().trim().replace(/<ext-link[^<]+<\/ext-link>/,mailTag);
+                noteContent = noteContent.replace(/<\/?p>/g,"");
+                entry.note=noteContent;
+            }
             results.authorNotes.push(entry);
         }
     });
