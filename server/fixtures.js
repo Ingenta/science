@@ -168,4 +168,16 @@ Meteor.startup(function () {
             }
         })
     }
+
+    if(pacs.find().count()===0){
+        console.log("fixture for PACS");
+        var pacsFile = process.cwd()+"/assets/app/pacs.json";
+        if(!Science.FSE.existsSync(pacsFile))
+            return;
+        var content = Science.FSE.readFileSync(pacsFile,"utf-8");
+        var pacsArr = JSON.parse(content);
+        _.each(pacsArr,function(obj){
+            pacs.insert(obj);
+        })
+    }
 });

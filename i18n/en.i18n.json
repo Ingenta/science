@@ -5,6 +5,7 @@
     "FILTER BY Author": "Filter by author",
     "FILTER BY Release Date": "Filter by Date",
     "FILTER BY Topic": "Filter by topic",
+    "FILTER BY PACS":"Filter by PACS",
     "Reports": "Statistics",
     "volumeItem": "Volume %s",
     "issueItem": "Issue %s",
@@ -943,5 +944,8 @@
     "Recent_search":"Recent Searches",
     "PACS":"PACS number:",
     "PACS_plural":"PACS numbers:",
-    "funding":"Fund"
+    "funding":"Fund",
+    "contentType":{
+        "article":"Article"
+    }
 }

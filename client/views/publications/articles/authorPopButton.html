@@ -1,10 +1,10 @@
 <template name="authorPopButton">
     <a class="author-name" href="#" tabindex="0" data-html="true" data-placement="bottom" data-toggle="popover"
        data-trigger="focus">{{{name}}}
-        {{#if refs}}
-	        <sup>{{refs}}</sup>
-        {{/if}}
     </a>
+	{{#if refs}}
+        <sup>{{refs}}</sup>
+    {{/if}}
 </template>
 
 <template name="authorPopTitle">

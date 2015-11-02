@@ -50,9 +50,18 @@
 		            <li>
 			            <p>
 				            {{_ "PACS" count=pacs.length}}
-				            {{#each pacs}}
-					            <span class="separate-comma">{{this}}</span>
-				            {{/each}}
+				            <table style="margin-left:20px">
+			                    <tr>
+				                    <th width="15%"></th>
+				                    <th width="84%"></th>
+			                    </tr>
+					            {{#each pacs}}
+						            <tr>
+							            <td><a href="#">{{pacsCode}}</a></td>
+							            <td>{{name}}</td>
+						            </tr>
+					            {{/each}}
+		                    </table>
 			            </p>
 		            </li>
 	            {{/if}}
