@@ -3,13 +3,13 @@
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="newsCenter"}}
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">新闻动态>></a></li>
+                <li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">新闻>></a></li>
                 <li role="presentation"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">杂志社动态>></a></li>
                 <li role="presentation"><a href="#publishingBtn" aria-controls="messages" role="tab" data-toggle="tab">出版动态>></a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="newsBtn" style="margin-left: 20px">
-                    <strong>新闻动态</strong>
+                    <strong>新闻</strong>
                     <div class="pull-right">
                         {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}
                     </div><hr>
