@@ -58,28 +58,33 @@ Meteor.methods({
         };
     },
     'getLocationReport': function (action, articleId) {
-        var countryViews = {Others: {name: {cn: '其他', en: 'Others'}, localCount: 0}};
-        ArticleViews.find({action: action, articleId: articleId}).forEach(function (item) {
-            if (!item.ip) {
-                countryViews['Others'].localCount += 1;
-                return;
+        var countryViews = [];
+        var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
+        ArticleViews.aggregate([{
+            $group: {
+                _id: {articleId: articleId, ip: '$ip'},
+                count: {$sum: 1}
             }
-            var currentUserIPNumber = Science.ipToNumber(item.ip)
-            var country = IP2Country.findOne({
-                startIpLong: {$lte: currentUserIPNumber},
-                endIpLong: {$gte: currentUserIPNumber}
-            });
-            if (country) {
-                if (countryViews[country.countryCode2]) {
-                    countryViews[country.countryCode2].localCount += 1;
-                } else {
-                    countryViews[country.countryCode2] = {name: country.country, localCount: 1}
-                }
-
+        }]).forEach(function (item) {
+            if (!item._id.ip) {
+                other.locationCount += item.count;
             } else {
-                countryViews['Others'].localCount += 1;
+                var currentUserIPNumber = Science.ipToNumber(item._id.ip)
+                var country = IP2Country.findOne({
+                        startIpLong: {$lte: currentUserIPNumber},
+                        endIpLong: {$gte: currentUserIPNumber}
+                    },
+                    {fields: {country: 1}}
+                );
+                if (country) {
+                    countryViews.push({name: country.country, locationCount: item.count});
+                } else {
+                    other.locationCount += item.count;
+                }
             }
         });
+        if (other.locationCount > 0)
+            countryViews.push(other);
         return countryViews;
     },
     'updateKeywordScore': function (keywords, score) {
