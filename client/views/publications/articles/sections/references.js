@@ -7,8 +7,26 @@ var contentType={
 	"news":"N"
 }
 Template.singleReferenceTemplate.helpers({
-	contentType:function(){
-		return this.type && ("["+contentType[this.type.toLowerCase().trim()] + "]");
+	formatAuthors:function(){
+		var authorStr="";
+		console.log('aa');
+		_.each(this.authors,function(author){
+			authorStr += author.surName + " " + author.givenName + ", "
+		});
+		if(this.etal){
+			authorStr+=this.etal+".";
+		}else{
+			if(authorStr.length>2){
+				authorStr=authorStr.substr(0,authorStr.length-2)+". ";
+			}
+		}
+		return authorStr;
+	},
+	formatContentType:function(){
+		if(this.type && contentType[this.type]){
+			return "["+contentType[this.type.toLowerCase().trim()] + "].";
+		}
+		return "."
 	},
 	link:function(){
 		if(this.href){
@@ -37,21 +55,27 @@ Template.singleReferenceTemplate.helpers({
 		var queryStr = paramsStrArr.join("&");
 		return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:href+queryStr,name:"Google Scholar"});
 	},
-	formatJournal:function(){
-		return this.source && (this.source + ", ")
-	},
-	formatYear:function(){
-		return this.year && (this.year + ", ")
-	},
-	formatVolIssue:function(){
+	formatSource:function(){
+		var sourceArr=[];
+		//publisher part begin
+		var publisher = [];
+		this.publisherLoc && publisher.push(this.publisherLoc.trim());
+		this.publisherName && publisher.push(this.publisherName.trim());
+		publisher = publisher.join(": ");
+		publisher && sourceArr.push(publisher && (publisher));
+		//publisher part end;
+		this.source && sourceArr.push(this.source.trim());
+		this.year && sourceArr.push(this.year.trim());
+		//volume & issue part begin
 		var content = "";
 		if(this.volume){
-			content+=this.volume;
+			content+=this.volume.trim();
 		}
 		if(this.issue){
-			content+="("+this.issue+")";
+			content+="("+this.issue.trim()+")";
 		}
-		return content;
+		content && sourceArr.push(content);
+		return _.isEmpty(sourceArr) || sourceArr.join(", ");
 	},
 	formatRange:function(){
 		var content= "";
@@ -61,6 +85,6 @@ Template.singleReferenceTemplate.helpers({
 		if(this.lastPage){
 			content+= content?("-"+this.lastPage):this.lastPage;
 		}
-		return content && (":"+content + ".")
+		return content && (": "+content + ".")
 	}
 })
