@@ -325,6 +325,12 @@ var insertArticle = function (a) {
     //确保article有一个关联的issue
     a.issueId = issue._id || issue;
 
+    //将PACS代号转换为PACS名称.
+    if(!_.isEmpty(a.pacs)){
+        var matchs = pacs.find({pacsCode:{$in: a.pacs}}).fetch();
+        a.pacs=matchs;
+    }
+
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
     if (existArticle) {
@@ -343,6 +349,8 @@ var insertArticle = function (a) {
         }
     });
     a.journalInfo = journalInfo;
+
+
 
     //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml
     var id = Articles.insert({
@@ -377,7 +385,9 @@ var insertArticle = function (a) {
         references: a.references,
         pubStatus: a.pubStatus, //出版状态
         accessKey: a.accessKey,
-        language: a.language
+        language: a.language,
+        pacs: a.pacs,
+        fundings: a.fundings
     });
     return id;
 };

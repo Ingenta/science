@@ -117,4 +117,10 @@ Router.map(function () {
         path: "/miniplatform/:columnId",
         layoutTemplate: "miniLayout"
     });
+
+    //门户搜索
+    this.route("newsSearchShowPage", {
+        path: "/miniplatform/newsSearchShowPage/:searchQuery",
+        layoutTemplate: "miniLayout"
+    });
 });

@@ -7,18 +7,14 @@
                     {{#if checkPermissionToJournal "add-journal,resource" _id ""}}
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#addPublicationModal">
-                        <span class="fa fa-plus">
-                            {{_ "Add new"}}
-                        </span>
+                            {{_ "Add new"}} <i class="fa fa-plus"></i>
                         </button>
                     {{/if}}
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div id="menu" class="col-xs-3">
-                </div>
-                <div id="subcontent" class="col-xs-9">
+                <div id="subcontent" class="col-xs-12">
                     {{> PublicationList}}
                 </div>
             </div>

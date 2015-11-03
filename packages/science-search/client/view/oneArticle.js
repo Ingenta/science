@@ -5,7 +5,9 @@ Template.oneSolrArticle.helpers({
 		if(hl && hl[isLangCn?"all_authors_cn":"all_authors_en"]){
 			return hl[isLangCn?"all_authors_cn":"all_authors_en"];
 		}else{
-			return this.authors;
+			return _.map(this.authors,function(author){
+				return author.fullname[isLangCn?"cn":"en"];
+			});
 		}
 	},
 	query      : function () {

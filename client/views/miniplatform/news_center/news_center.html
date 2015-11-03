@@ -26,8 +26,12 @@
                             {{else}}
                                 {{_ "No results found!"}}
                             {{/each}}
+
+                            {{> displayPerPage}}
                         </ul>
+
                     </div><hr>
+                    {{> Paginator_UI miniNews}}
                 </div>
                 <div role="tabpanel" class="tab-pane" id="magazineBtn" style="margin-left: 20px">
                     <strong>杂志社动态</strong>
@@ -47,6 +51,8 @@
                             {{else}}
                                 {{_ "No results found!"}}
                             {{/each}}
+                            {{> Paginator_UI miniMagazines}}
+                            {{> displayPerPage}}
                         </ul>
                     </div><hr>
                 </div>
@@ -68,6 +74,8 @@
                             {{else}}
                                 {{_ "No results found!"}}
                             {{/each}}
+                            {{> Paginator_UI miniPublishing}}
+                            {{> displayPerPage}}
                         </ul>
                     </div><hr>
                 </div>

@@ -27,11 +27,17 @@
                     <p>{{> affiliation}}</p>
                 </li>
                 <li>
-                    <p>
+                    <ul>
                         {{#each authorNotes}}
-                            <i>{{label}} <a href="mailto:{{email}}">{{email}}</a></i>
+	                        <li>
+	                        {{#if note}}
+		                        {{label}} {{{note}}}
+	                        {{else}}
+                                {{label}} <a href="mailto:{{email}}">{{email}}</a>
+	                        {{/if}}
+	                        </li>
                         {{/each}}
-                    </p>
+                    </ul>
                 </li>
                 <li>
                     <p>
@@ -49,10 +55,7 @@
 	            {{#if pacs}}
 		            <li>
 			            <p>
-				            {{_ "PACS" count=pacs.length}}
-				            {{#each pacs}}
-					            <span class="separate-comma">{{this}}</span>
-				            {{/each}}
+				            {{> pacsTemplate}}
 			            </p>
 		            </li>
 	            {{/if}}

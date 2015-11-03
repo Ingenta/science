@@ -135,6 +135,36 @@ Template.SolrSearchResults.helpers({
                         }
                     }
                     results.push(filter);
+                }else if(fields[i]=='pacsCodes'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY PACS");
+                    var facetpacs = facets[fields[i]];
+                    for(var j=0;j<facetpacs.length;j+=2){
+                        if(facetpacs[j+1]>0){
+                            filter.filterOptions.push({
+                                name:facetpacs[j],
+                                cname:facetpacs[j],
+                                count:facetpacs[j+1],
+                                field:"pacsCodes",
+                                val:facetpacs[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
+                }else if(fields[i]=='contentType'){
+                    filter.filterTitle=TAPi18n.__("FILTER BY Content Properties");
+                    var facetType = facets[fields[i]];
+                    for(var j=0;j<facetType.length;j+=2){
+                        if(facetType[j+1]>0){
+                            filter.filterOptions.push({
+                                name:TAPi18n.__("contentType."+facetType[j],"zh-CN"),
+                                cname:TAPi18n.__("contentType."+facetType[j],"en"),
+                                count:facetType[j+1],
+                                field:"contentType",
+                                val:facetType[j]
+                            })
+                        }
+                    }
+                    results.push(filter);
                 }
             }
             return results;
