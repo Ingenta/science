@@ -85,7 +85,7 @@ var buildLocationChart = function () {
     if (!article)return;
     var articleId = article._id;
     if (!articleId)return;
-    var data = new Array();
+    var data = [];
     //TODO: consider only calling if location report data is older than a day?
     Meteor.call("getLocationReport", "fulltext", articleId, function (err, arr) {
         var colors = ['#DDDF0D', '#DD000D', '#00DF0D', '#DDDFFF'];
@@ -96,7 +96,7 @@ var buildLocationChart = function () {
             if (obj.name) {
                 data.push({
                     name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
-                    y: obj.localCount,
+                    y: obj.locationCount,
                     color: color
                 });
             }

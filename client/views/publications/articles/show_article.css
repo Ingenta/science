@@ -2,9 +2,8 @@
     background-color: lightgrey;
 }
 
-div.articleHeading li {
+div.articleDetails li {
     list-style-type: none;
-    /*cursor:pointer;*/
 }
 
 .rating {

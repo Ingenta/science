@@ -55,7 +55,7 @@ Template.authorPopContent.helpers({
         var option = {
             filterQuery:{
                 journalId:this.journalId,
-                author:authorName
+                author:[authorName]
             }
         };
         return SolrQuery.makeUrl(option);

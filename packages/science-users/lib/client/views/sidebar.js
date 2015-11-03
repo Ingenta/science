@@ -88,6 +88,12 @@ Template.LayoutSideBar.helpers({
     showAccessKey: function () {
         if (!Router.current().route)return false;
         return _.contains(Config.AccessKey, Router.current().route.getName());
+    },
+    scholarOne: function () {
+        return Config.url.ScholarOne;
+    },
+    editors: function () {
+        return Config.url.Editors;
     }
 });
 
