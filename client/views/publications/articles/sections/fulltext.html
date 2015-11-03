@@ -87,8 +87,7 @@
 					<div>
 						<img style="width:100%" src="{{getFigFromSession}}"/>
 					</div>
-					<h5>{{_ "Caption"}}</h5>
-
+					<h5>{{label}}</h5>
 					<p>
 						{{{caption}}}
 					</p>
@@ -156,10 +155,10 @@
 	<div class="figure" id="fig-{{id}}">
 		<div class="figure-image">
 			<img src="{{getFigById imageId}}" border="0" alt="">
-			<span>{{label}}</span>
+			<a href="#">{{_ "clickToView"}}</a>
 		</div>
 		<div class="figure-caption">
-			<b>{{_ "Caption"}}</b>&nbsp;&nbsp;{{#mathjax}}{{{caption}}}{{/mathjax}}</div>
+			<b>{{label}}</b>&nbsp;&nbsp;{{#mathjax}}{{{caption}}}{{/mathjax}}</div>
 		<div style="clear:both;"></div>
 	</div>
 </template>
