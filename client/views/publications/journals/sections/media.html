@@ -1,9 +1,7 @@
 <template name="mediaList">
 	{{#if can "modify-journal" "resource"}}
 	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success" title="Add new"}}
-        <span class="fa fa-plus">
-            {{_ "Add new"}}
-        </span>
+        {{_ "Add new"}} <i class="fa fa-plus"/>
     {{/jkafModal}}
 	{{/if}}
 	<ul class="list-unstyled">
