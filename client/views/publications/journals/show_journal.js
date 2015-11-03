@@ -16,6 +16,13 @@ Template.journalBanner.helpers({
         if (!journal) return;
         if (!journal.banner) return;
         return Images.findOne({_id: journal.banner}).url();
+    },
+    hasJournalBanner: function(journalId){
+        if (!journalId)return;
+        var journal = Publications.findOne({_id: journalId});
+        if (!journal) return;
+        if (!journal.banner) return;
+        return true;
     }
 });
 
