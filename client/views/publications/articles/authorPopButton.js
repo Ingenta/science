@@ -39,7 +39,7 @@ Template.authorPopButton.helpers({
                 allrefs=_.sortBy(allrefs,function(i){return i});
             }
         }
-        if(this.corresp){
+        if(this.email){
             allrefs.push("*");
         }
         if(!_.isEmpty(allrefs)){

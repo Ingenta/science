@@ -212,7 +212,6 @@ body,
 .simple-list{
     margin: 15px 0;
     font-size: 13px;
-    color: #999;
 }
 .simple-list>li:first-child {
     border-top: 0;

@@ -1,10 +1,17 @@
 <template name="FullTextTemplate">
-	<div id="fulltext-viewer">
-		<div class="col-xs-9">
-			{{#mathjax}}
+	<div id="fulltext-viewer" class="col-xs-9">
+		{{#mathjax}}
+			{{#each sections}}
+				<div>
+					<h3 id="sec-{{clearStr title}}">{{label}} {{{handledTitle}}}</h3>
+				</div>
+				<p>
+					{{{body.html}}}
+				</p>
+				<br>
 				{{#each sections}}
 					<div>
-						<h3 id="sec-{{clearStr title}}">{{label}} {{{handledTitle}}}</h3>
+						<h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
 					</div>
 					<p>
 						{{{body.html}}}
@@ -12,39 +19,30 @@
 					<br>
 					{{#each sections}}
 						<div>
-							<h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+							<h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
 						</div>
 						<p>
 							{{{body.html}}}
 						</p>
-						<br>
-						{{#each sections}}
-							<div>
-								<h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
-							</div>
-							<p>
-								{{{body.html}}}
-							</p>
-						{{/each}}
 					{{/each}}
 				{{/each}}
-			{{/mathjax}}
-			{{> ReferencesTemplate}}
-		</div>
-		<!--{{{acknowledgements}}}-->
-		<div class="col-xs-3">
-			{{#each getKeywords}}
-				<p class="title_style">
-					<a href="/keywords/{{word}}">{{word}}</a>
-				</p>
-
-				<p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
-
-				</p>
 			{{/each}}
-			{{> keywordsPanel}}
-			{{> sectionSelector sections=sections}}
-		</div>
+		{{/mathjax}}
+		{{> ReferencesTemplate}}
+	</div>
+	<!--{{{acknowledgements}}}-->
+	<div class="col-xs-3">
+		{{#each getKeywords}}
+			<p class="title_style">
+				<a href="/keywords/{{word}}">{{word}}</a>
+			</p>
+
+			<p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
+
+			</p>
+		{{/each}}
+		{{> keywordsPanel}}
+		{{> sectionSelector sections=sections}}
 	</div>
 </template>
 
