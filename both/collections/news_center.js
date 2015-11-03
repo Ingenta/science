@@ -71,3 +71,7 @@ Meteor.startup(function () {
     NewsCenterSchema.i18n("schemas.newsCenter");
     NewsCenter.attachSchema(NewsCenterSchema);
 });
+
+if (Meteor.isClient) {
+    myNewsCenterPagination = new Paginator(NewsCenter);
+}

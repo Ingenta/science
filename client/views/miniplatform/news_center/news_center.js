@@ -4,21 +4,21 @@ Template.newsCenter.helpers({
         if (numPerPage === undefined) {
             numPerPage = 10;
         }
-        return NewsCenter.find({types:"1"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
+        return myNewsCenterPagination.find({types:"1"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
     },
     miniMagazines: function () {
         var numPerPage = Session.get('PerPage');
         if (numPerPage === undefined) {
             numPerPage = 10;
         }
-        return NewsCenter.find({types:"2"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
+        return myNewsCenterPagination.find({types:"2"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
     },
     miniPublishing: function () {
         var numPerPage = Session.get('PerPage');
         if (numPerPage === undefined) {
             numPerPage = 10;
         }
-        return NewsCenter.find({types:"3"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
+        return myNewsCenterPagination.find({types:"3"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
     },
     whichUrl: function () {
         if (this.link) {
