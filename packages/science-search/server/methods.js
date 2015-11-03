@@ -172,7 +172,7 @@ Meteor.methods({
 				myFuture.throw(err);
 		});
 		if(params.st && params.st.from == 'bar'){
-			SearchLog.update({str: params.q}, {$inc: {count: 1}}, 1);
+			SearchLog.upsert({str: params.q}, {$inc: {count: 1}});
 		}
 		return myFuture.wait();
 	}
