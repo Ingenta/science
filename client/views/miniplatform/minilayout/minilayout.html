@@ -23,7 +23,7 @@
     <!-- nav 开始 -->
     <div class="navMini">
         <ul>
-            <li id="nav-item-dropdown" class="dropdown">
+            <li id="nav-item-dropdown" class="dropdown {{menuClass 'magazineProfile'}}">
                 <a data-toggle="dropdown"  class="dropdown-toggle">关于我们<b class="caret"></b></a>
                 <ul id="dropdown-nav-items" class="dropdown-menu" style="min-width: 132px">
                     <li>
@@ -40,22 +40,22 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="{{menuClass 'authorCentered'}}">
                <a href="{{pathFor 'authorCentered'}}">作者中心</a>
             </li>
             <li>
                 <a href="{{pathFor 'collections'}}">文章集</a>
             </li>
-            <li>
+            <li class="{{menuClass 'cooperation'}}">
                <a href="{{pathFor 'cooperation'}}">出版合作</a>
             </li>
             <li>
-                <a href="{{pathFor 'cooperationCenter'}}">广告合作</a>
+                <a href="{{pathFor 'cooperationCenter' 'curLi'}}">广告合作</a>
             </li>
-            <li>
+            <li class="{{menuClass 'newsCenter'}}">
                 <a href="{{pathFor 'newsCenter'}}">新闻中心</a>
             </li>
-            <li>
+            <li class="{{menuClass 'contact'}}">
                 <!--<a href="/" class="fa fa-pencil" collection="Pages" operation="update"></a>-->
                 <a href="{{pathFor 'contact'}}">联系我们</a>
             </li>

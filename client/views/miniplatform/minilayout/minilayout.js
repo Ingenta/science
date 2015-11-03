@@ -4,6 +4,22 @@ Template.miniLayout.helpers({
     },
     hide: function () {
         return NewsLink.find({types:"1"}).count()<6 ? "": "hide";
+    },
+    menuClass:function(routeName){
+        if (!Router.current() || !Router.current().route) {
+            return "";
+        }
+
+        if (!Router.routes[routeName]) {
+            return "";
+        }
+
+        var currentPath = Router.routes[Router.current().route.getName()].handler.path;
+        var routePath = Router.routes[routeName].handler.path;
+        if (routePath === "/") {
+            return currentPath == routePath ? "curLi" : "";
+        }
+        return currentPath.indexOf(routePath) === 0 ? "curLi" : "";
     }
 });
 
