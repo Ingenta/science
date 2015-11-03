@@ -55,19 +55,7 @@
 	            {{#if pacs}}
 		            <li>
 			            <p>
-				            {{_ "PACS" count=pacs.length}}
-				            <table style="margin-left:10px">
-			                    <tr>
-				                    <th width="15%"></th>
-				                    <th width="84%"></th>
-			                    </tr>
-					            {{#each pacs}}
-						            <tr>
-							            <td><a href="#">{{pacsCode}}</a></td>
-							            <td>{{name}}</td>
-						            </tr>
-					            {{/each}}
-		                    </table>
+				            {{> pacsTemplate}}
 			            </p>
 		            </li>
 	            {{/if}}
