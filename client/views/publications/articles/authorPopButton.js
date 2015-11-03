@@ -2,7 +2,7 @@ Template.authorPopButton.events({
     'click a.author-name': function (event) {
         event.preventDefault();
         var ele = $(event.currentTarget);
-        var name = TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en;
+        var name = this.name || (TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en);
         var clearname=Science.clearTags(name);
         var title = Blaze.toHTMLWithData(Template.authorPopTitle,{
             name:name
@@ -55,7 +55,7 @@ Template.authorPopContent.helpers({
         var option = {
             filterQuery:{
                 journalId:this.journalId,
-                author:authorName
+                author:[authorName]
             }
         };
         return SolrQuery.makeUrl(option);

@@ -947,5 +947,6 @@
     "funding":"Fund",
     "contentType":{
         "article":"Article"
-    }
+    },
+    "clickToView":"Click to view"
 }
