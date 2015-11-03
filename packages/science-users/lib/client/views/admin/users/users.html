@@ -18,34 +18,37 @@
 
 <template name="AdminUsersView">
     <div id="data_view" class="">
-        <div class="form-inline">
-            <button type="button" class="btn btn-success">
-                <span class="fa fa-plus">
-                    {{_ "Add new"}}
-                </span>
-            </button>
-            {{#if isShowButton}}
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUploadExcelModal">
+        <form id="dataview-controls" class="form-inline">
+            <div id="dataview-controls-insert" class="form-group ">
+                <button type="submit" id="dataview-insert-button" class="btn btn-success">
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
+                </button>
+                {{#if isShowButton}}
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUploadExcelModal">
                     <span class="fa fa-plus">
                         {{_ "Batch Add"}}
                     </span>
-                </button>
-            {{/if}}
-
+                    </button>
+                    {{> addUploadExcelModalForm}}
+                {{/if}}
+            </div>
+            <div id="dataview-controls-search">
                 {{#if isNotEmpty}}
-                    <div class="form-group">
+                    <div id="dataview-controls-search-group" class="form-group">
                         <label class="sr-only" for="search">
                             {{_ "Search"}}
                         </label>
-                        <input type="text" class="form-control searchValue" placeholder="{{_ 'Search'}}"
-                               autofocus="autofocus">
-                        <button type="button" class="btn btn-primary searchButton">
+                        <input type="text" class="form-control" id="dataview-search-input" placeholder="{{_ 'Search'}}"
+                               name="search" value="{{searchString}}" autofocus="autofocus">
+                        <button type="button" id="dataview-search-button" class="btn btn-primary">
                             <span class="fa fa-search"></span>
                         </button>
                     </div>
                 {{/if}}
-
-        </div>
+            </div>
+        </form>
         {{#if isNotEmpty}}
             {{#if isNotFound}}
                 <div class="alert alert-warning">
@@ -118,22 +121,21 @@
 </template>
 
 <template name="accountOptions">
-    {{> addUploadExcelModalForm1}}
     {{#accountTabs name="" tabs=tabs activeTab=activeTab}}
         {{#tabContent slug="admin"}}
-            {{> AdminUsers type="admin" admin_users=getAdmins}}
+            {{> AdminUsers admin_users=getAdmins}}
         {{/tabContent}}
 
         {{#tabContent slug="normal"}}
-            {{> AdminUsers type="normal" admin_users=getNormals}}
+            {{> AdminUsers admin_users=getNormals}}
         {{/tabContent}}
 
         {{#tabContent slug="publisher"}}
-            {{> AdminUsers type="publisher" admin_users=getPublishers}}
+            {{> AdminUsers admin_users=getPublishers}}
         {{/tabContent}}
 
         {{#tabContent slug="institution"}}
-            {{> AdminUsers type="institution" admin_users=getInstitution}}
+            {{> AdminUsers admin_users=getInstitution}}
         {{/tabContent}}
     {{/accountTabs}}
 
@@ -163,7 +165,7 @@
     </div>
 </template>
 
-<template name="addUploadExcelModalForm1">
+<template name="addUploadExcelModalForm">
     <div class="modal fade" id="addUploadExcelModal" tabindex="-1" role="dialog" aria-labelledby="addUploadExcelModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
