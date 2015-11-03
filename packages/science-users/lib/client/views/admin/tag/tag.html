@@ -5,9 +5,7 @@
         <div class="row">
             {{#if can "add-tag" "resource"}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addTagModal">
-                    <span class="fa fa-plus">
-                        {{_ "Add new"}}
-                    </span>
+                    {{_ "Add new"}} <i class="fa fa-plus"></i>
                 </button>
                 {{> addTagModalForm}}
             {{/if}}

@@ -4,9 +4,7 @@
         <div class="row">
             {{#if can "add-topic" "topic"}}
                 {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
-                    <span class="fa fa-plus">
-                        {{_ "Add new"}}
-                    </span>
+                    {{_ "Add new"}} <i class="fa fa-plus"></i>
                 {{/jkafModal}}
             {{/if}}
         </div>
