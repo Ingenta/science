@@ -53,19 +53,22 @@
                     </p>
                 </li>
                 <li>
-                    <p>{{_ "Language"}}:&nbsp;{{Language language}}
+                    <div class="pull-right">
                         {{#if can "modify-article" "resource" }}
                             {{>jkafModal template="updateArticleLanguageModalForm" doc=this id="updateArticleLanguageForm"}}
                         {{/if}}
+                    </div>
+                    <p>{{_ "Language"}}:&nbsp;{{Language language}}
+
                     </p>
                 </li>
-	            {{#if pacs}}
-		            <li>
-			            <p>
-				            {{> pacsTemplate}}
-			            </p>
-		            </li>
-	            {{/if}}
+                {{#if pacs}}
+                    <li>
+                        <p>
+                            {{> pacsTemplate}}
+                        </p>
+                    </li>
+                {{/if}}
             </ul>
         </div>
         <div class="col-xs-3">

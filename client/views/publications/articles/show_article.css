@@ -4,6 +4,14 @@
 
 div.articleDetails li {
     list-style-type: none;
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+.indent {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .rating {
