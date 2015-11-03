@@ -12,15 +12,7 @@
 	<li style="overflow:hidden">
 		<span style="float:left;margin-right:10px;">[{{index}}]</span>
 		<span style="float:left; width:92%;">
-			{{#each authors}}
-				{{givenName}} {{surName}},
-			{{/each}}
-			{{#if etal}} et al{{/if}}.
-			{{title}}{{contentType}}.
-			{{formatJournal}}
-			{{formatYear}}
-			{{formatVolIssue}}
-			{{formatRange}}
+			{{formatAuthors}}{{title}}{{formatContentType}}{{formatSource}}{{formatRange}}
 			{{{link}}}
 			{{{googleScholar}}}
 		</span>
