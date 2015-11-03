@@ -4,8 +4,20 @@ Template.layoutPublications.helpers({
         if(publisher)return Publications.find({publisher:publisher._id});
     },
     getJournalUrl:function(){
-        return "/miniplatform/" + "authorCentered/" + this.title
+        var publisher = Publishers.findOne({agree:true});
+        if(publisher)return "/publisher/"+publisher.name+"/journal/"+this.title;
+    },
+    publisherUrl: function(){
+        var publisher = Publishers.findOne({agree:true});
+        if(publisher)return "/publisher/"+publisher.name;
     }
 });
 
-
+Template.layoutPublications.rendered = function() {
+    $('#carousel').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000
+    });
+}

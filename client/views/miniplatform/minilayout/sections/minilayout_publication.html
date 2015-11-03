@@ -1,26 +1,25 @@
 <template name="layoutPublications">
     <div class="banner">
         <div class="oh">
-            <div class="lookBan">查看<br />全部<br />刊物</div>
-            <div class="lookList">
-                <!-- 代码 开始 -->
+            <div class="lookBan"><a href="{{publisherUrl}}">查看<br />全部<br />刊物</a></div>
+                <div class="lookList">
+                    <div class="bookPar" id="carousel">
+                        <!-- 代码 开始 -->
                         {{#each hasJournal}}
                             <div class="bookPart oh">
-                                <img src="{{getImageHelper picture}}" />
-                                <div class="h90"><h1>
-                                    <!--<a href="{{getJournalUrl}}">-->
-                                        {{translateThis title titleCn}}
-                                    <!--</a>-->
-                                </h1></div>
-                                <p>主编:{{chiefEditor.cn}}</p>
-                                <p>www.scichina.com</p>
+                                <a href="{{getJournalUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 87px;height: 115px"/></a>
+                                <div class="h90">
+                                    <p style="font-size: 14px;margin-top: 15px"><strong><a href="{{getJournalUrl}}" target="_blank">{{titleCn}}</a></strong></p><br>
+                                    <p>主编:{{chiefEditor.cn}}</p>
+                                    <p>www.scichina.com</p>
+                                </div>
                             </div>
                         {{else}}
                             {{_ "No publications found!"}}
                         {{/each}}
-                <!-- 代码结束 -->
+                        <!-- 代码结束 -->
+                </div>
             </div>
         </div>
-        <div class="banNext"><a href="#"><img src="banNext.png" /></a></div>
     </div>
 </template>
