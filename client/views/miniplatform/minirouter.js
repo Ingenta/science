@@ -15,7 +15,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('images')
+                Meteor.subscribe('images'),
+                Meteor.subscribe('news_center')
             ]
         }
     });
