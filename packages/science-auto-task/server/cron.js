@@ -215,6 +215,20 @@ SyncedCron.add({
         } else {
             console.log('watch email task ran but email list was empty, no emails sent.');
         }
+
+        var searchLogs = SearchLog.find({count: {$gte: Config.searchKeywordFrequency}}).fetch();
+        if (searchLogs.length) {
+            var emailConfig = EmailConfig.findOne({key: "keywordFrequency"});
+            var emailContent = createEmailSearchFrequencyContent(searchLogs);
+
+            Email.send({
+                to: Users.findOne({username: Config.sysAdmin}).emails[0].address,
+                from: 'publish@scichina.org',
+                subject: emailConfig ? emailConfig.subject : 'Search Keyword Frequency Reached',
+                html: emailConfig ? emailConfig.body + emailContent : emailContent
+
+            });
+        }
     }
 });
 
@@ -254,6 +268,15 @@ var createEmailCitedArticleContent = function (citations) {
             else
                 content += "<li><a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a></li>" + "\n\n";
         })
+    });
+    return content + "</ul>";
+};
+
+var createEmailSearchFrequencyContent = function (searchLogs) {
+    var content = "<ul>";
+    searchLogs.forEach(function (entry) {
+        SearchLog.update({_id: entry._id}, {$set: {count: 0}});
+        content += "<li>" + entry.str + "</li>" + "\n\n";
     });
     return content + "</ul>";
 };

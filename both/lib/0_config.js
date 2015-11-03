@@ -116,5 +116,7 @@ Config = {
     url: {
         ScholarOne: "#",
         Editors: "#"
-    }
+    },
+    searchKeywordFrequency: 3000,
+    sysAdmin: "admin"
 };
