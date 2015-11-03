@@ -7,8 +7,19 @@ div.articleDetails li {
     list-style-position: inside;
     padding-left: 1em;
 }
+.articleTitle{
+    padding-left:3em;
+}
+.articleAccessKeyImage{
+    position: absolute;
+    padding-top: 4px;
+}
+.articleDetails ul,ol {
+    padding-left: 2em;
+}
 ol.affiliationList li {
     text-indent: -1em;
+    padding-left: 0em;
 }
 
 .indent {
