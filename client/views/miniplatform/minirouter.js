@@ -6,13 +6,18 @@ Meteor.subscribe('news_recommend');
 Meteor.subscribe('files');
 Meteor.subscribe('column');
 Meteor.subscribe('column_views');
-
+Meteor.subscribe('images');
 //访问路径
 Router.map(function () {
     //新闻平台首页
     this.route("newsPlatform", {
         path: "/miniplatform",
-        layoutTemplate: "miniLayout"
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images')
+            ]
+        }
     });
 
     //作者中心
@@ -37,7 +42,12 @@ Router.map(function () {
     //出版合作
     this.route("cooperation", {
         path: "/miniplatform/cooperation",
-        layoutTemplate: "miniLayout"
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images')
+            ]
+        }
     });
 
     //新闻中心

@@ -59,10 +59,10 @@
                         {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
                     {{/if}}
                     {{#if checkPermissionToJournal "delete-journal,resource" publisher _id}}
-                        <a href="#" class="fa fa-trash"></a>
+                        <!--<a href="#" class="fa fa-trash"></a>-->
                     {{/if}}
                 </div>
-                <h3>{{> imageName}}&nbsp;&nbsp;
+                <h3>{{> accessKeyImage}}&nbsp;&nbsp;
                     <a href="{{getJournalUrl title}}">
                         {{translateThis titleCn title}}
                     </a>
@@ -110,7 +110,7 @@
     {{/autoForm}}
 </template>
 
-<template name="imageName">
+<template name="accessKeyImage">
     {{#if accessKeyIs "1"}}
         <img src="/icon_access_fc.gif">
     {{/if}}

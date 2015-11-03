@@ -28,7 +28,7 @@ Template.PublicationList.helpers({
     }
 });
 
-Template.imageName.helpers({
+Template.accessKeyImage.helpers({
     accessKeyIs: function (accessKey) {
         return this.accessKey === accessKey;
     }

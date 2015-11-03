@@ -2,47 +2,54 @@
     {{> journalBanner journal=journalId}}
     {{> figModal}}
     {{> tableModal}}
-	{{> referenceModal}}
+    {{> referenceModal}}
     <div class="row articleHeading">
-        <div class="col-xs-9">
-            {{> imageName}}
+        <div class="col-xs-12">
+            <div class="pull-right">
+                {{#if can "modify-article" "resource" }}
+                    {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
+                {{/if}}
+            </div>
+            {{> accessKeyImage}}
             {{#if can "modify-article" "resource" }}
                 {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
             {{/if}}
             <span style="font-size:24px;font-weight: bold;">
                 {{translateThis title.cn title.en}}
             </span>
-            {{#if can "modify-article" "resource" }}
-                {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
-            {{/if}}
+        </div>
+    </div>
+    <br>
+
+    <div class="row articleDetails">
+        <div class="col-xs-9">
             <ul>
                 <li>
                     <p>
                         {{#each authors}}
-                            <span  class="separate-comma">{{> authorPopButton}}<sup>{{emailRef}}</sup></span>
+                            <span class="separate-comma">{{> authorPopButton}}<sup>{{emailRef}}</sup></span>
                         {{/each}}
                     </p>
                 </li>
                 <li>
                     <p>{{> affiliation}}</p>
                 </li>
-                <li>
-                    <ul>
-                        {{#each authorNotes}}
-	                        <li>
-	                        {{#if note}}
-		                        {{label}} {{{note}}}
-	                        {{else}}
+                {{#each authorNotes}}
+                    <li>
+                        <p>
+                            {{#if note}}
+                                {{label}} {{{note}}}
+                            {{else}}
                                 {{label}} <a href="mailto:{{email}}">{{email}}</a>
-	                        {{/if}}
-	                        </li>
-                        {{/each}}
-                    </ul>
-                </li>
+                            {{/if}}
+                        </p>
+                    </li>
+                {{/each}}
                 <li>
                     <p>
                         {{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}});
-                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+                                class="fa fa-external-link"></i></a>
                     </p>
                 </li>
                 <li>
