@@ -12,12 +12,10 @@
             <ol style="padding-left:10px;">
                 {{# each affiliations}}
                     <li>
-	                    <span style="float:left;margin-right:10px"><b>{{formatId}}</b></span>
-	                    <span style="float:left;width:90%">{{translateThis affText.cn affText.en}}</span>
+	                    <span><b>{{formatId}}</b> {{translateThis affText.cn affText.en}}</span>
                     </li>
                 {{/each}}
             </ol>
-            <br>
         </div>
     {{/if}}
 </template>
