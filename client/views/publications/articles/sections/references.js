@@ -9,7 +9,6 @@ var contentType={
 Template.singleReferenceTemplate.helpers({
 	formatAuthors:function(){
 		var authorStr="";
-		console.log('aa');
 		_.each(this.authors,function(author){
 			authorStr += author.surName + " " + author.givenName + ", "
 		});
@@ -85,6 +84,6 @@ Template.singleReferenceTemplate.helpers({
 		if(this.lastPage){
 			content+= content?("-"+this.lastPage):this.lastPage;
 		}
-		return content && (": "+content + ".")
+		return content && (": "+content + "")
 	}
 })
