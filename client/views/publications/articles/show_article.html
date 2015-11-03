@@ -1,8 +1,5 @@
 <template name="showArticle">
     {{> journalBanner journal=journalId}}
-    {{> figModal}}
-    {{> tableModal}}
-    {{> referenceModal}}
     <div class="row articleHeading">
         <div class="col-xs-12">
             <div class="pull-right">
@@ -10,19 +7,24 @@
                     {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
                 {{/if}}
             </div>
-            {{> accessKeyImage}}
-            {{#if can "modify-article" "resource" }}
-                {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
-            {{/if}}
-            <span style="font-size:24px;font-weight: bold;">
-                {{translateThis title.cn title.en}}
-            </span>
+            <div class="articleAccessKeyImage">
+                {{> accessKeyImage}}
+                {{#if can "modify-article" "resource" }}
+                    {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
+                {{/if}}
+            </div>
+
+            <div class="articleTitle">
+                <span style="font-size:24px;font-weight: bold;">
+                    {{translateThis title.cn title.en}}
+                </span>
+            </div>
         </div>
     </div>
     <br>
 
     <div class="row articleDetails">
-        <div class="col-xs-9">
+        <div class="col-xs-10">
             <ul>
                 <li>
                     <p>
@@ -53,22 +55,25 @@
                     </p>
                 </li>
                 <li>
-                    <p>{{_ "Language"}}:&nbsp;{{Language language}}
+                    <div class="pull-right">
                         {{#if can "modify-article" "resource" }}
                             {{>jkafModal template="updateArticleLanguageModalForm" doc=this id="updateArticleLanguageForm"}}
                         {{/if}}
+                    </div>
+                    <p>{{_ "Language"}}:&nbsp;{{Language language}}
+
                     </p>
                 </li>
-	            {{#if pacs}}
-		            <li>
-			            <p>
-				            {{> pacsTemplate}}
-			            </p>
-		            </li>
-	            {{/if}}
+                {{#if pacs}}
+                    <li>
+                        <p>
+                            {{> pacsTemplate}}
+                        </p>
+                    </li>
+                {{/if}}
             </ul>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <br>
 
             <div class="container-fluid">
@@ -76,7 +81,8 @@
                     {{#if pdfId}}
                         <li class="pdf">
                             <a target="_blank" class="pdfDownload" href="/downloadPdf/{{pdfId}}">
-                                <img style="height:50px" src="/pdf.png"/> {{_ "Download"}} PDF
+                                <img style="height:50px" src="/pdf.png"/>
+                                <p>{{_ "Download"}} PDF</p>
                             </a>
                         </li>
                     {{/if}}
@@ -101,6 +107,10 @@
         </div>
     </div>
     {{> articleOptions}}
+
+    {{> figModal}}
+    {{> tableModal}}
+    {{> referenceModal}}
 </template>
 
 <template name="articlePage">

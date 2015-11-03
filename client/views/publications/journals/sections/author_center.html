@@ -7,7 +7,7 @@
 </template>
 
 <template name="publicationPdfContent">
-    <div class="part" style="margin-top: 10px">
+    <div class="dotted">
         {{#each authorResources}}
             <div class="col-xs-5"><strong>{{translateThis authorTitle.cn authorTitle.en}} >> </strong><br><p>{{{translateThis authorDescription.cn authorDescription.en}}}{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterTitleModalForm}}{{/if}}</p></div>
             <div class="col-xs-3" style="margin-top: 20px"><img src="{{getImageHelper authorPicture}}" height="105" width="120">{{#if can "modify-journal" "resource"  }}{{> updateAuthorCenterPictureModalForm}}{{/if}}</div>

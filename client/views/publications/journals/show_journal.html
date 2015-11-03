@@ -18,7 +18,10 @@
 </template>
 
 <template name="journalBanner">
-    <h2><img src="{{getJournalBannerById journal}}" width="750" height="94" alt="{{translateThis titleCn title}}"></h2>
+    {{#if hasJournalBanner}}
+        <h2><img src="{{getJournalBannerById journal}}" width="750" height="94" alt="{{translateThis titleCn title}}">
+        </h2>
+    {{/if}}
 </template>
 
 <template name="journalOptions">
