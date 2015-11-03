@@ -22,5 +22,12 @@ Template.keywordsPanel.helpers({
         return _.sortBy(result, function (obj) {
             return -obj.score;
         });
+    },
+    searchLink: function(){
+        var option = {
+            query:this.word,
+            setting:{from:'keyword'}
+        };
+        return SolrQuery.makeUrl(option);
     }
 })
