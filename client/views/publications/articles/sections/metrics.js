@@ -2,19 +2,35 @@
  * Call the function to built the chart when the template is rendered
  */
 Template.MetricsTemplate.rendered = function () {
-    buildHitCounterChart();
-    buildLocationChart();
-    buildHitCounterGraph();
+    var article = Articles.findOne({articledoi: Router.current().params.articleDoi}, {fields: {_id: 1}});
+    if (!article || !article._id)return;
+
+    buildHitCounterChart(article._id);
+    buildHitCounterGraph(article._id);
+    
+    //TODO: consider only calling if location report data is older than a day?
+    Meteor.call("getLocationReport", "fulltext", article._id, function (err, arr) {
+        var data = new Array();
+        var colors = ['#DDDF0D', '#DD000D', '#00DF0D', '#DDDFFF'];
+        var index = 0;
+        _.each(arr, function (obj) {
+            var color = colors[index % colors.length];
+            index++;
+            if (obj.name) {
+                data.push({
+                    name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
+                    y: obj.locationCount,
+                    color: color
+                });
+            }
+        });
+        buildLocationChart(data);
+    });
 }
 
 
-var chart;
-var buildHitCounterChart = function () {
-    var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-    var article = Articles.findOne({doi: currentDoi});
-    if (!article)return;
-    var articleId = article._id;
-    if (!articleId)return;
+var buildHitCounterChart = function (articleId) {
+    var chart;
     var data = new Array();
     data.push({
         name: TAPi18n.__('Abstract Views'),
@@ -79,32 +95,9 @@ var buildHitCounterChart = function () {
 };
 
 
-var buildLocationChart = function () {
-    var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-    var article = Articles.findOne({doi: currentDoi});
-    if (!article)return;
-    var articleId = article._id;
-    if (!articleId)return;
-    var data = [];
-    //TODO: consider only calling if location report data is older than a day?
-    Meteor.call("getLocationReport", "fulltext", articleId, function (err, arr) {
-        var colors = ['#DDDF0D', '#DD000D', '#00DF0D', '#DDDFFF'];
-        var index = 0;
-        _.each(arr, function (obj) {
-            var color = colors[index % colors.length];
-            index++;
-            if (obj.name) {
-                data.push({
-                    name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
-                    y: obj.locationCount,
-                    color: color
-                });
-            }
-        });
-        Session.set('locationReportData', data);
-    });
-
-    chart = $('#container').highcharts({
+var buildLocationChart = function (data) {
+    var chart;
+    chart = $('#container-location').highcharts({
 
         chart: {
             plotBackgroundColor: null,
@@ -143,20 +136,13 @@ var buildLocationChart = function () {
         series: [{
             type: 'pie',
             name: 'views',
-            data: Session.get('locationReportData')
+            data: data
         }]
     });
 };
 
 
-function buildHitCounterGraph() {
-    var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
-    var article = Articles.findOne({doi: currentDoi});
-    if (!article)return;
-    var articleId = article._id;
-    if (!articleId)return;
-    var data = new Array();
-
+function buildHitCounterGraph(articleId) {
     var currentDate = new Date;
     var a = new Array();
     var f = new Array();
@@ -181,7 +167,6 @@ function buildHitCounterGraph() {
         m.unshift(month[currentDate.getMonth() % 12] + currentDate.getFullYear());
         currentDate.setMonth(currentDate.getMonth() - 1);
     }
-    ;
 
     $.each(a, function (index, el) {
         var value = el + f[index];

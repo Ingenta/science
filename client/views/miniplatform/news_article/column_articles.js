@@ -16,18 +16,24 @@ Template.columnViewsDetails.helpers({
     },
     columnViewsTitle: function () {
         var viewsId =  Session.get('tabColumn');
-        if(viewsId===undefined)return;
-        return ColumnViews.findOne({_id: viewsId}).title;
+        if(viewsId){
+            var views = ColumnViews.findOne({_id: viewsId});
+            if(views)return views.title;
+        }
     },
     columnViewsIntroduction: function () {
         var viewsId =  Session.get('tabColumn');
-        if(viewsId===undefined)return;
-        return ColumnViews.findOne({_id: viewsId}).abstract;
+        if(viewsId){
+          var views = ColumnViews.findOne({_id: viewsId});
+          if(views)return views.abstract;
+        }
     },
     columnViewsContent: function () {
         var viewsId =  Session.get('tabColumn');
-        if(viewsId===undefined)return;
-        return ColumnViews.findOne({_id: viewsId}).content;
+        if(viewsId){
+            var views = ColumnViews.findOne({_id: viewsId});
+            if(views)return views.content;
+        }
     },
     hide: function () {
         var columnId = Router.current().params.columnId;
