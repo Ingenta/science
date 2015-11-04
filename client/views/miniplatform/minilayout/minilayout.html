@@ -77,9 +77,11 @@
                 {{else}}
                     {{_ "No results found!"}}
                 {{/each}}
+                <div class="pull-right">
                 {{#if can  "add-news-link" "resource"}}
                     <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addIndexNewsLinkModal"></span>{{> addIndexNewsLinkModalForm}}
                 {{/if}}
+                </div>
             </p>
             <p class="mt20">网站主管：010  64034113   sys@scihina.org </p>
             <p>中Copyright  2011  Science China  PressCo.,Ltd.《中国科学社》杂志社有限公司 </p>
