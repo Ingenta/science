@@ -32,6 +32,13 @@ Template.layoutNewsShow.helpers({
 Template.layoutNewsShow.events({
     'mouseenter .index': function (event) {
         var index = $(event.currentTarget).attr('index');
-        $('#myCarousel').carousel(parseInt(index))
+        $('#carousel-example-generic').carousel(parseInt(index))
     }
 });
+
+Template.layoutNewsShow.rendered = function() {
+    $('.carousel').carousel({
+        interval: 8000,
+        wrap:true
+    });
+}

@@ -1,23 +1,20 @@
 <template name="layoutNewsShow">
     <div class="shuff mt25">
-        <div class="row">
-            <div id="myCarousel" class="carousel slide">
-                <!-- 轮播（Carousel）指标 -->
-                <ol class="carousel-indicators">
-                    {{#each layoutNewsShow "extend"}}
-                        <li data-target="#myCarousel" data-slide-to="{{index}}" class="{{class}}"></li>
-                    {{/each}}
-                </ol>
-                <!-- 轮播（Carousel）项目 -->
-                <div class="carousel-inner">
-                    {{#each layoutNewsShow "extend"}}
-                        <div class="item {{class}}">
-                            <a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 770px;height: 222px"/></a>
-                        </div>
-                    {{else}}
-                        <a href="/"><img src="/defeat_scp.jpg" style="width: 770px;height: 222px"/></a>
-                    {{/each}}
-                </div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {{#each layoutNewsShow "extend"}}
+                    <li data-target="#carousel-example-generic" data-slide-to="{{index}}" class="{{class}}"></li>
+                {{/each}}
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                {{#each layoutNewsShow "extend"}}
+                    <div class="item {{class}}">
+                        <a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 770px;height: 222px"/></a>
+                        <div class="carousel-caption">{{title}}</div>
+                    </div>
+                {{/each}}
             </div>
         </div>
     </div>
