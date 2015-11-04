@@ -16,5 +16,11 @@ Template.newsSearchShowPage.helpers({
             mongoDbArr.push({abstract: {$regex: q, $options: "i"}});
             return NewsCenter.find({$or: mongoDbArr},{sort: sort});
         }
+    },
+    whichUrl: function () {
+        if (this.link) {
+            return this.link;
+        }
+        return "/miniplatform/newsCenter/" + this._id;
     }
 });

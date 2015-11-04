@@ -63,7 +63,8 @@ NewsCenterSchema = new SimpleSchema({
         type: Date
     },
     pageView: {
-        type: String,
+        type:Number,
+        defaultValue: 0,
         optional: true
     }
 });

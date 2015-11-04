@@ -8,45 +8,45 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="enterBtn" style="margin-left: 20px">
-                    <strong>企业新闻</strong>
+                    <strong style="font-size: 18px">企业新闻</strong>
                     <div class="pull-right">
                         {{#if can "add-news-contact" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
                     </div><hr>
                     <div>
-                        <ul>
-                            {{#each enterpriseNews}}
+                        {{#each enterpriseNews}}
+                            <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
-                            {{else}}
-                                {{_ "No results found!"}}
-                            {{/each}}
-                        </ul>
+                            </ul>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
                     </div><hr>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="editBtn" style="margin-left: 20px">
-                    <strong>编辑园地</strong>
+                    <strong style="font-size: 18px">编辑园地</strong>
                     <div class="pull-right">
                         {{#if can "add-news-contact" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
                     </div><hr>
                     <div>
-                        <ul>
-                            {{#each editFields}}
+                        {{#each editFields}}
+                            <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
-                            {{else}}
-                                {{_ "No results found!"}}
-                            {{/each}}
-                        </ul>
+                            </ul>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
                     </div><hr>
                 </div>
             </div>

@@ -2,17 +2,14 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="cooperation"}}
-            <div class="row">
-                <strong>《中国科学》杂志社和以下机构达成了战略合作：</strong>
-                {{#if can  "add-news-link" "resource"}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
-                {{/if}}
-            </div>
-            <hr>
             <div class="row" style="margin-left: 10px">
+                <h4>《中国科学》杂志社和以下机构达成了战略合作：
+                    {{#if can  "add-news-link" "resource"}}
+                        <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
+                    {{/if}}
+                </h4><hr>
                 {{> cooperationList}}
             </div>
-            <hr>
         </div>
     </div>
 </template>
