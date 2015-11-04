@@ -143,6 +143,26 @@ Template.showArticle.helpers({
 		if (num2 == "2") {
 			return TAPi18n.__("Chinese");
 		}
+	},
+	refs: function(){
+		var allrefs=[];
+		if(!_.isEmpty(this.affs)){
+			_.each(this.affs,function(aff){
+				var match = /\d/.exec(aff);
+				if(!_.isEmpty(match)){
+					allrefs.push(match[0]);
+				}
+			})
+			if(!_.isEmpty(allrefs)){
+				allrefs=_.sortBy(allrefs,function(i){return i});
+			}
+		}
+		if(this.email){
+			allrefs.push("*");
+		}
+		if(!_.isEmpty(allrefs)){
+			return allrefs;
+		}
 	}
 });
 

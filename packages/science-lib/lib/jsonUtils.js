@@ -21,10 +21,10 @@ Science.JSON.MergeObject=function(a, b){
  * @param equelFunc 判断是否重复的表达式 可选
  * @constructor
  */
-Science.JSON.UniqueArray=function(id, equelFunc){
+Science.JSON.UniqueArray=function(id, equelFunc, start){
 	var id = id || "_index";
 	var arr=[];
-	var index=0;
+	var index=start || 0;
 	var func = equelFunc || _.isEqual;
 	this.push = function(obj){
 		var existObj = this.exists(obj);
@@ -47,7 +47,11 @@ Science.JSON.UniqueArray=function(id, equelFunc){
 		return _.find(arr,function(insideObj){
 			return func(_.omit(insideObj,id),obj);
 		});
+	};
+	this.count = function(){
+		return arr.length;
 	}
+
 };
 /**
  * 不重复数组的另一种实现方式

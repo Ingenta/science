@@ -25,26 +25,6 @@ Template.authorPopButton.helpers({
         if(Template.currentData().name)
             return Template.currentData().name;
         return TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en ;
-    },
-    refs: function(){
-        var allrefs=[];
-        if(!_.isEmpty(this.affs)){
-            _.each(this.affs,function(aff){
-                var match = /\d/.exec(aff);
-                if(!_.isEmpty(match)){
-                    allrefs.push(match[0]);
-                }
-            })
-            if(!_.isEmpty(allrefs)){
-                allrefs=_.sortBy(allrefs,function(i){return i});
-            }
-        }
-        if(this.email){
-            allrefs.push("*");
-        }
-        if(!_.isEmpty(allrefs)){
-            return allrefs;
-        }
     }
 })
 
