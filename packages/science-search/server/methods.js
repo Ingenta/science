@@ -133,6 +133,7 @@ SolrUtils = {
 
 Meteor.methods({
 	"search": function (params) {
+		SolrClient.triggerBeforeSearch(params);
 		var myFuture   = new Future();
 		var options    = {
 			"facet"           : true,
@@ -171,9 +172,6 @@ Meteor.methods({
 			else
 				myFuture.throw(err);
 		});
-		if(params.st && params.st.from == 'bar'){
-			SearchLog.upsert({str: params.q}, {$inc: {count: 1}});
-		}
 		return myFuture.wait();
 	}
 });

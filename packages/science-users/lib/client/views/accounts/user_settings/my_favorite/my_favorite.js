@@ -22,10 +22,14 @@ Template.favoriteArticle.helpers({
 });
 
 Template.favoriteArticle.events({
-    "click .btn-delete-article": function () {
-        var articleId = this._id;
+    'click .fa-trash': function (e) {
+        e.articleId = this._id
         confirmDelete(e,function(){
-            Articles.remove({_id:articleId});
-        });
+            var tempArray = Meteor.user().favorite;
+            var resultArray = _.filter(tempArray, function(element){
+                return element.articleId !== e.articleId
+            })
+            Users.update({_id: Meteor.userId()},{$set: {'favorite': resultArray}});
+        })
     }
 })
