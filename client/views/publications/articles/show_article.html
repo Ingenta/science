@@ -29,7 +29,11 @@
                 <li>
                     <p>
                         {{#each authors}}
-                            <span class="separate-comma">{{> authorPopButton}}<sup>{{emailRef}}</sup></span>
+                            <span class="separate-comma">{{> authorPopButton}}
+	                            {{#if refs}}
+		                            <sup>{{refs}}</sup>
+	                            {{/if}}
+                            </span>
                         {{/each}}
                     </p>
                 </li>
@@ -40,9 +44,9 @@
                     <li>
                         <p>
                             {{#if note}}
-                                {{label}} {{{note}}}
+                                {{getLabel}} {{{note}}}
                             {{else}}
-                                {{label}} <a href="mailto:{{email}}">{{email}}</a>
+                                {{getLabel}} <a href="mailto:{{email}}">{{email}}</a>
                             {{/if}}
                         </p>
                     </li>

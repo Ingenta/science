@@ -28,23 +28,23 @@ PastDataImport = function () {
 	var getAuthors = function(authorsArr){
 		if(!_.isEmpty(authorsArr)){
 			var authors = [];
-			var affiliations = new Science.JSON.UniqueArray("id",isSameAffiliation);
-			var authorNotes = new Science.JSON.UniqueArray("label");
+			var affiliations = new Science.JSON.UniqueArray("id",isSameAffiliation,1);
+			var authorNotes = new Science.JSON.UniqueArray("id",undefined,1);
 			_.each(authorsArr,function(obj){
-				var author={affRef:[]};
+				var author={affs:[]};
 				if(obj.affiliation){
 					var affCnArr = obj.affiliation.cn.split("#");
 					var affEnArr = obj.affiliation.en?obj.affiliation.en.split("#"):affCnArr;//如果没有英文工作单位信息，用中文代替。
 					for(var i=0;i<affCnArr.length;i++){
 						var index = affiliations.push({affText:{cn:affCnArr[i],en:affEnArr[i]}});
-						author.affRef.push(index);
+						author.affs.push(index);
 					};
-					author.affRef= _.uniq(author.affRef);
+					author.affs= _.uniq(author.affs);
 				}
 
 				if(obj.isPrimary === 'true' && obj.email){
 					var index = authorNotes.push({email:obj.email});
-					author.emailRef=index;
+					author.email=index;
 				}
 
 				author.surname={en:obj.firstname,cn:obj.firstname};
@@ -60,6 +60,15 @@ PastDataImport = function () {
 				authors.push(author);
 
 			});
+			//为了与新数据格式保持一致,当只有一个地址(工作单位?)时,不显示地址上标
+			//以下内容为此功能的实现.
+			if(affiliations.count()<=1){
+				authors= _.map(authors,function(author){
+					delete author.affs;
+					return author;
+				})
+			}
+			//------------end-------------
 			return {authors:authors,affiliations:affiliations.getArray(),authorNotes:authorNotes.getArray()};
 		}
 	};
