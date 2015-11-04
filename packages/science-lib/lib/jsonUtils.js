@@ -68,3 +68,15 @@ Science.JSON.UniqueList = function(keyGenerator){
 		return _list.hasOwnProperty(key);
 	};
 };
+
+Science.JSON.try2GetRightLangVal=function(obj,fieldArr,lang){
+	if(_.isEmpty(obj))
+		return;
+	var langArr = fieldArr || ["cn","en"];
+	//当前语言设置优先级 参数lang > TAPi18n > 默认值zh-CN
+	var currLang = lang || (TAPi18n && TAPi18n.getLanguage()) || "zh-CN";
+	var index = currLang=='zh-CN'?0:1;
+	//若没有当前语种的内容，则使用另一种语种内容
+	var content= obj[langArr[index]] || obj[langArr[1-index]];
+	return content;
+}
