@@ -60,7 +60,8 @@ Router.map(function () {
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
-                Meteor.subscribe('news')
+                Meteor.subscribe('news'),
+                Meteor.subscribe('suggestedMostRead')
             ]
         }
     });

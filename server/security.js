@@ -32,3 +32,4 @@ NewsRecommend.permit(['insert', 'update', 'remove']).apply();
 Column.permit(['insert', 'update', 'remove']).apply();
 ColumnViews.permit(['insert', 'update', 'remove']).apply();
 JournalAC.permit(['insert', 'update', 'remove']).apply();
+SuggestedArticles.permit(['insert', 'update', 'remove']).apply();
