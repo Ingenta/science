@@ -7,17 +7,6 @@ Template.layoutNewsShow.helpers({
                 picItem.class = index == 0 ? "active" : "";
                 return picItem;
             });
-            if (Session.get("renderd")) {
-                $(".carousel-inner .item").removeClass("next").removeClass("left");
-                var item = $(".carousel-inner .item");
-                if (item && item.length) {
-                    $(item[0]).addClass('active');
-                }
-                var indicators = $(".carousel-indicators li");
-                if (indicators && indicators.length) {
-                    $(indicators[0]).addClass('active');
-                }
-            }
         }
         return n;
     },
