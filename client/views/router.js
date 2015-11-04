@@ -151,7 +151,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('suggestedMostRead')
             ]
         }
     });
