@@ -16,7 +16,7 @@ Template.mostReadArticleList.helpers({
             }
         });
         //get only the top 4 if there is a suggestion
-        if (suggestedArticle)return _.first(mostReadArticles, [4]);
+        if (suggestedArticle && !this.journalId)return _.first(mostReadArticles, [4]);
         return _.first(mostReadArticles, [5]);
     },
     mostReadCount: function () {
