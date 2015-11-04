@@ -105,6 +105,7 @@ PastDataImport = function () {
 								newOne.published=article.publishDate;
 								newOne.topic=getTopic(article.subspecialty);
 								newOne.articleType=article.property.en;
+								newOne.abstract = article.abstract;
 								var authors=getAuthors(article.authors);
 								if(authors){
 									_.extend(newOne,authors);
