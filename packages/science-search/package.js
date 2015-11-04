@@ -28,7 +28,8 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'server/solr.js',
-    'server/methods.js'
+    'server/methods.js',
+    'server/hooks.js'
   ],'server');
 
   api.addFiles([

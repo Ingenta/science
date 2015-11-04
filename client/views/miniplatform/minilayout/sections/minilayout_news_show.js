@@ -2,16 +2,12 @@ Template.layoutNewsShow.helpers({
     layoutNewsShow: function (type) {
         var n = NewsCenter.find({recommend:"2"},{sort: {createDate: -1}, limit: 3});
         if (type == 'extend') {
-            n = n.map(function (newsItem, index) {
-                newsItem.index = index;
-                newsItem.class = index == 0 ? "active" : "";
-                return newsItem;
+            n = n.map(function (picItem, index) {
+                picItem.index = index;
+                picItem.class = index == 0 ? "active" : "";
+                return picItem;
             });
             if (Session.get("renderd")) {
-                var nums = $(".index-num");
-                _.each(nums, function (item, index) {
-                    $(item).attr('index', index);
-                });
                 $(".carousel-inner .item").removeClass("next").removeClass("left");
                 var item = $(".carousel-inner .item");
                 if (item && item.length) {
@@ -38,8 +34,4 @@ Template.layoutNewsShow.events({
         var index = $(event.currentTarget).attr('index');
         $('#myCarousel').carousel(parseInt(index))
     }
-});
-
-Template.layoutNewsShow.onRendered(function () {
-    Session.set("renderd", true);
 });
