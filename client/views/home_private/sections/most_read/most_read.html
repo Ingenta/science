@@ -1,0 +1,19 @@
+<template name="mostReadArticleList">
+    <h4>{{_ "Most read articles"}}{{>suggestedMostReadButtons}}</h4>
+    <ul class="list-unstyled simple-list">
+        {{>suggestedMostReadElement}}
+        {{#each mostReadArticles}}
+            <li>
+                <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
+            </li>
+        {{else}}
+            {{_ "No articles found!"}}
+        {{/each}}
+    </ul>
+    {{#if mostReadCount}}
+        <div align="right"><a href="/mostReadArticles/{{this.journalId}}">
+            <button>+{{_ "more"}}</button>
+        </a></div>
+    {{/if}}
+    {{> suggestedMostReadModalForm}}
+</template>

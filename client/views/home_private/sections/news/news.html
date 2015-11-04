@@ -1,0 +1,98 @@
+<template name="NewsList">
+    <div class="row">
+        <div class="col-xs-6">
+            <div id="myCarousel" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    {{#each news "extend"}}
+                        <li data-target="#myCarousel" data-slide-to="{{index}}" class="{{class}}"></li>
+                    {{/each}}
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    {{#each news "extend"}}
+                        <div class="item {{class}}">
+                            <img src="{{getImageHelper picture}}" width="340" height="240">
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="container-fluid">
+                {{#each news}}
+                    {{> SingleNews}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{>addNewsButton}}
+</template>
+
+<template name="addNewsButton">
+    {{#if can "manager-homepage" "news" }}
+        {{> addNewsForm}}
+        {{#if hasMostThreeNews}}
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
+                    <span class="fa fa-plus">
+                        {{_ "Add new"}}
+                    </span>
+            </button>
+        {{/if}}
+    {{/if}}
+</template>
+
+<template name="SingleNews">
+    <div class="row index index-num" index="{{index}}">
+        <div class="pull-right">
+            {{#if can "manager-homepage" "news" }}
+                {{> updateNewsModalForm}}
+                {{#if hasMoreThanOneNews}}
+                    <a href="#" class="fa fa-trash"></a>
+                {{/if}}
+            {{/if}}
+        </div>
+        <div class="row">
+            <h5><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></h5>
+        </div>
+        <div class="over-height">
+            <small>
+                {{{translateThis abstract.cn abstract.en}}}
+            </small>
+        </div>
+    </div>
+    <!--<hr>-->
+</template>
+
+<template name="updateNewsModalForm">
+    {{#afModal class="fa fa-pencil" title="Update" collection="News" doc=_id operation="update" omitFields="createDate,types,about,publications"}}
+    {{/afModal}}
+</template>
+
+<template name="addNewsForm">
+    <div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addNewsModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addNewsModalForm" collection="News" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="author"}}
+                        {{> afQuickField name="abstract"}}
+                        {{> afQuickField name="content"}}
+                        {{> afQuickField name="url"}}
+                        {{> afQuickField name="picture"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
