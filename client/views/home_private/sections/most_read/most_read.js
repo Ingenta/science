@@ -10,7 +10,7 @@ Template.mostReadArticleList.helpers({
         var mostReadArticles = [];
         var suggestedArticle = SuggestedArticles.findOne();
         most.forEach(function (id) {
-            if (id._id.articleId !== suggestedArticle.articleId) {
+            if (!suggestedArticle || id._id.articleId !== suggestedArticle.articleId) {
                 var article = Articles.findOne({_id: id._id.articleId});
                 article && mostReadArticles.push(article);
             }

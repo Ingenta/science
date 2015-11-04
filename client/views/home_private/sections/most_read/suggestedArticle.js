@@ -27,8 +27,8 @@ Template.suggestedMostReadButtons.helpers({
 Template.suggestedMostReadButtons.events({
     'click .fa-trash': function () {
         if (!SuggestedArticles.findOne())return;
-        var articleId = SuggestedArticles.findOne().articleId;
-        SuggestedArticles.remove({_id: articleId});
+        var id = SuggestedArticles.findOne()._id;
+        SuggestedArticles.remove({_id: id});
     }
 })
 Template.suggestedMostReadElement.helpers({
