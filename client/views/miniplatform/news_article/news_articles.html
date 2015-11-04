@@ -24,7 +24,7 @@
                     <ul class="list-unstyled">
                         <h6 class="text-uppercase bg-eee" align="center">最新资讯</h6>
                         {{#each latestNews}}
-                            <li><p><a href="{{whichUrl}}">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a></p></li>
+                            <li><p><a href="{{whichUrl}}" target="_self">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a></p></li>
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}

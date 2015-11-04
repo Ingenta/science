@@ -17,7 +17,7 @@
                             {{#each enterpriseNews}}
                                 <li>
                                     <p>
-                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -38,7 +38,7 @@
                             {{#each editFields}}
                                 <li>
                                     <p>
-                                        <a href="{{whichUrl}}" target="_blank">{{title}}({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
                                         {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>

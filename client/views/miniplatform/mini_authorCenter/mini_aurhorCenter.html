@@ -2,12 +2,13 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="author center"}}
-            <hr>
             <div class="row" style="margin-left: 10px">
-                <h4>《中国科学》杂志社</h4><hr>
+                <h4>《中国科学》杂志社下所属期刊：</h4><hr>
                 {{#each hasJournal}}
                     <div class="col-xs-6">
-                        <a href="{{getJournalUrl}}">{{titleCn}}</a>
+                        <p>
+                            <a style="font-size: 15px;" href="{{getJournalUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 65px;height: 72px"/>&nbsp;&nbsp;&nbsp;&nbsp;{{titleCn}}</a>
+                        </p>
                     </div>
                 {{else}}
                     {{_ "No publications found!"}}

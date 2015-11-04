@@ -120,7 +120,12 @@ Router.map(function () {
     //新闻中心详情页
     this.route("newsCenterDetails", {
         path: "/miniplatform/newsCenter/:newsCenterId",
-        layoutTemplate: "miniLayout"
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('news_center')
+            ]
+        }
     });
 
     //专栏详情页
