@@ -158,11 +158,15 @@ Template.showArticle.helpers({
 			}
 		}
 		if(this.email){
-			allrefs.push("*");
+			var note = _.find(Router.current().data().authorNotes,function(note){return note.id==this.email});
+			allrefs.push((note && note.label) || "*");
 		}
 		if(!_.isEmpty(allrefs)){
 			return allrefs;
 		}
+	},
+	getLabel:function(){
+		return this.label || "*";
 	}
 });
 
