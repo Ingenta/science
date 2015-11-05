@@ -83,7 +83,7 @@ Science.XPath.ParseHelper = {
 			})
 		}else if(!successLang && options && options.planb) {
 			//若两种语言均不能取到值并且存在Plan B .... ,再用planb试试.. , planb应当是一个正常的xpath表达式
-			var content = this.handler(planB, ele);
+			var content = this.handler(options.planb, ele);
 			if(content){
 				_.each(this.langNames,function(val,key){
 					obj[key]=content;
