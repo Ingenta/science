@@ -31,9 +31,11 @@
     {{/if}}
 </template>
 <template name="suggestedMostReadButtons">
-    {{#unless hasSuggestedArticle}}
-        {{>suggestedArticleAdd}}
-    {{else}}
-        <a href="#" class="fa fa-trash"></a>
-    {{/unless}}
+    {{#if isHomePage}}
+        {{#unless hasSuggestedArticle}}
+            {{>suggestedArticleAdd}}
+        {{else}}
+            <a href="#" class="fa fa-trash"></a>
+        {{/unless}}
+    {{/if}}
 </template>

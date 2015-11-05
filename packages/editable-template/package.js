@@ -11,10 +11,6 @@ Package.describe({
 });
 var both = ['server','client'];
 
-Npm.depends({
-  'juice':"1.6.0"
-});
-
 Package.onUse(function(api) {
   api.versionsFrom('1.2.0.4-logging.0');
 

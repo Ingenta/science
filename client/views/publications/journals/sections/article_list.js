@@ -8,7 +8,8 @@ Template.articleListTree.helpers({
     },
     issueList: function (journalId, volume) {
         if (journalId && volume) {
-            return Issues.find({'journalId': journalId, 'volume': volume}, {sort: {'issue': -1}});
+            var issues = Issues.find({'journalId': journalId, 'volume': volume}).fetch();
+            return _.sortBy(issues, function(oneIssue){ return parseInt(oneIssue.issue,10); }).reverse();
         } else {
             throw new Error("Lack of query conditions， 缺少查询条件!journalId:'" + journalId + "',volume:'" + volume);
         }

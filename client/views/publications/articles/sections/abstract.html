@@ -1,106 +1,85 @@
+<template name="AbstractContentAndKeywords">
+    <div class="row">
+        <div class="col-xs-9">
+            <div class="interesting-content">
+                {{{getAbstract}}}
+            </div>
+        </div>
+        {{#if can "modify-article" "resource"  }}
+            {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
+        {{/if}}
+        <div class="col-xs-3">
+            {{#each getKeywords}}
+                <p class="title_style">
+                    <a href="/keywords/{{word}}">{{word}}</a>
+                </p>
+
+                <p class="data" style="width:{{ percent }}%">{{getScoreByKeyword this}}
+
+                </p>
+            {{/each}}
+            {{> keywordsPanel}}
+            <!--{{> sectionSelector sections=sections}}-->
+        </div>
+    </div>
+</template>
 <template name="AbstractTemplate">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-9">
-	            <div class="interesting-content text-justify">
-		            {{{getAbstract}}}
-	            </div>
-            </div>
-	        {{#if can "modify-article" "resource"  }}
-	            {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
+    {{>AbstractContentAndKeywords}}
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-xs-3">
+            {{#if received}}
+                <small><strong>{{_ "Received"}} </strong>
+                    {{moFormat received 'll'}}
+                </small>
             {{/if}}
-            <div class="col-xs-3">
-                {{> keywordsPanel}}
-            </div>
         </div>
-        <br>
-        <!--<div class="row">-->
-        <!--© 2013 American Institute of Physics-->
-        <!--</div>-->
-        <br>
-
-        <div class="row">
-            <div class="col-xs-3">
-                {{#if received}}
-                    <small><strong>{{_ "Received"}} </strong>
-                        {{moFormat received 'll'}}
-                    </small>
-                {{/if}}
-            </div>
-            <div class="col-xs-3">
-                {{#if accepted}}
-                    <small><strong>{{_ "Accepted Date"}} </strong>
-                        {{moFormat accepted 'll'}}
-                    </small>
-                {{/if}}
-            </div>
-            <div class="col-xs-3">
-                {{#if published}}
-                    <small><strong>{{_ "Published online"}} </strong>
-                        {{moFormat published 'll'}}
-                    </small>
-                {{/if}}
-            </div>
-
+        <div class="col-xs-3">
+            {{#if accepted}}
+                <small><strong>{{_ "Accepted Date"}} </strong>
+                    {{moFormat accepted 'll'}}
+                </small>
+            {{/if}}
         </div>
-	    {{#if fundings}}
-	        {{> fundingTemplating}}
-		{{/if}}
-	    <!--<div class="row">-->
-        <!--<h6>{{_ "Acknowledgments"}}:</h6>-->
-        <!--This study was supported by the National Development Programming of Key Fundamental Researches of China-->
-        <!--(Grant-->
-        <!--No. 2010CB227004), the National Natural Science Foundation of China (Grant No. 20906024), and the-->
-        <!--Fundamental-->
-        <!--Research Funds for the Central Universities (Grant No. WB1014022). Especially, we add our thanks to the-->
-        <!--anonymous reviewers for their helpful suggestions on the quality improvement of our paper.-->
-        <!--</div>-->
-        <!--<div class="row articleOutline">-->
-        <!--<h6>Article Outline:</h6>-->
-        <!--<ul>-->
-            <!--{{#each sections}}-->
-        <!--<li> {{label}} {{{title}}}</li>-->
-        <!--<ul>-->
-            <!--{{#each sections}}-->
-            <!--<li>{{label}} {{{title}}}</li>-->
-            <!--<ul>-->
-                <!--{{#each sections}}-->
-                <!--<li>{{label}} {{{title}}}</li>-->
-                    <!--{{/each}}-->
-            <!--</ul>-->
-                <!--{{/each}}-->
-        <!--</ul>-->
-            <!--{{/each}}-->
-        <!--</ul>-->
-        <!--</div>-->
-        <hr>
-        <div class="row">
-            <div class="col-xs-6">
-                {{> mostReadArticleList journalId=getJournalIdFromSession}}
-            </div>
-            <div class="col-xs-6">
-                {{> mostCitedArticleList journalId=getJournalIdFromSession}}
-            </div>
+        <div class="col-xs-3">
+            {{#if published}}
+                <small><strong>{{_ "Published online"}} </strong>
+                    {{moFormat published 'll'}}
+                </small>
+            {{/if}}
+        </div>
+    </div>
+    {{#if fundings}}
+        {{> fundingTemplating}}
+    {{/if}}
+    <hr>
+    <div class="row">
+        <div class="col-xs-6">
+            {{> mostReadArticleList journalId=getJournalIdFromSession}}
+        </div>
+        <div class="col-xs-6">
+            {{> mostCitedArticleList journalId=getJournalIdFromSession}}
         </div>
     </div>
 </template>
 
 <template name="updateArticleAbstractModalForm">
-	{{#autoForm schema="ArticleAbstractSchema" collection="Articles" id="updateArticleAbstractForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-		{{> afFieldInput name="abstract"}}
-		<button type="submit" class="btn btn-primary">update</button>
-	{{/autoForm}}
+    {{#autoForm schema="ArticleAbstractSchema" collection="Articles" id="updateArticleAbstractForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
+        {{> afFieldInput name="abstract"}}
+        <button type="submit" class="btn btn-primary">update</button>
+    {{/autoForm}}
 </template>
 
 <template name="fundingTemplating">
-	<div class="row">
-		<div class="col-xs-9">
-			<h4>{{_ "funding"}}</h4>
-			<ul class="list-unstyled simple-list">
-				{{#each fundings3}}
-				<li>{{source}}</li>
-				{{/each}}
-			</ul>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-xs-9">
+            <h4>{{_ "funding"}}</h4>
+            <ul class="list-unstyled simple-list">
+                {{#each fundings3}}
+                    <li>{{source}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </template>

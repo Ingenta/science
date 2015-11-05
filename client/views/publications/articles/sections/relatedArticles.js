@@ -1,21 +1,21 @@
 Template.relatedArticles.onRendered(function(){
-	if(_.isEmpty(this.data.topic))
-		return;
+	var topics= _.compact(this.data.topic);
+	var fq={};
+	if(this.data._id)
+		fq.not_id=this.data._id;
+	if(!_.isEmpty(topics)){
+		fq.topic = {
+			operator: "OR",
+			val     : topics
+		};
+	}
+	var title = Science.JSON.try2GetRightLangVal(this.data.title);
 	var query = {
-		q:this.data.title.cn || "" + " " + this.data.title.en || "",
-		fq: {
-			topic: {
-				operator: "OR",
-				val     : this.data.topic
-			},
-			not_id:this.data._id
-		},
-		st:{
-			facet:false,
-			hl:false,
-			fl:"_id"
-		}
+		q: title.replace(":","\\:"),
+		fq:fq,
+		st:{rows: 10}
 	};
+	console.log(query);
 	Meteor.call("search", query, function (err, result) {
 		var ok = err ? false : result.responseHeader.status == 0;
 		if (ok) {
