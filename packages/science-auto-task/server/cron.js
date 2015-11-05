@@ -47,9 +47,9 @@ SyncedCron.add({
 });
 
 SyncedCron.add({
-    name: "SendWatchEmail",
+    name: "SendAlertEmail",
     schedule: function (parser) {
-        return parser.text("at 4:00 am");
+        return parser.text(Config.AutoTasks.Send_Alert_Email.rate || "at 4:00 am");
     },
     job: function () {
         var outgoingList = [];
@@ -204,31 +204,18 @@ SyncedCron.add({
 
                 }
 
-                Email.send({
-                    to: oneEmail.email,
-                    from: 'publish@scichina.org',
-                    subject: emailSubject,
-                    html: emailContent
-                });
+                //Email.send({
+                //    to: oneEmail.email,
+                //    from: 'publish@scichina.org',
+                //    subject: emailSubject,
+                //    html: emailContent
+                //});
                 //Users.update({_id: oneEmail.userId}, {lastSentDate: today});
             });
         } else {
             console.log('watch email task ran but email list was empty, no emails sent.');
         }
-
-        var searchLogs = SearchLog.find({count: {$gte: Config.searchKeywordFrequency}}).fetch();
-        if (searchLogs.length) {
-            var emailConfig = EmailConfig.findOne({key: "keywordFrequency"});
-            var emailContent = createEmailSearchFrequencyContent(searchLogs);
-
-            Email.send({
-                to: Users.findOne({username: Config.sysAdmin}).emails[0].address,
-                from: 'publish@scichina.org',
-                subject: emailConfig ? emailConfig.subject : 'Search Keyword Frequency Reached',
-                html: emailConfig ? emailConfig.body + emailContent : emailContent
-
-            });
-        }
+        Science.Email.searchFrequencyEmail();
     }
 });
 
@@ -268,15 +255,6 @@ var createEmailCitedArticleContent = function (citations) {
             else
                 content += "<li><a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a></li>" + "\n\n";
         })
-    });
-    return content + "</ul>";
-};
-
-var createEmailSearchFrequencyContent = function (searchLogs) {
-    var content = "<ul>";
-    searchLogs.forEach(function (entry) {
-        SearchLog.update({_id: entry._id}, {$set: {count: 0}});
-        content += "<li>" + entry.str + "</li>" + "\n\n";
     });
     return content + "</ul>";
 };
