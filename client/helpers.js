@@ -50,7 +50,7 @@ Template.registerHelper('urlToJournalById', function (id) {
 
 Template.registerHelper('getImageHelper', function (pictureId) {
     var noPicture = "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
-    var imgObj=Images && pictureId && Images.findOne({_id: pictureId});
+    var imgObj = Images && pictureId && Images.findOne({_id: pictureId});
     return (imgObj && imgObj.url()) || noPicture;
 });
 
@@ -96,6 +96,16 @@ pluralize = function (n, thing, options) {
     else
         return n + ' ' + plural;
 }
+getMostReadSuggestion = function (currentJournalId) {
+    //add suggestion if journalId not set or its journalId equals current
+    var suggestedArticle = SuggestedArticles.findOne();
+    if (!suggestedArticle)return;
+    var article = Articles.findOne({_id: suggestedArticle.articleId});
+    if (!article) return;
+    if (!currentJournalId) return article;
+    if (article.journalId !== currentJournalId) return;
+    return article;
+}
 
 Template.registerHelper('pluralize', pluralize);
 
@@ -112,10 +122,10 @@ Template.registerHelper("highlight", function (keyword, str) {
 Template.registerHelper('checkPermissionToJournal', function (permissions, publisherId, journalId) {
     if (!Meteor.user()) return false;
     if (Permissions.isAdmin()) return true;
-    
-    if (Meteor.user().publisherId){
+
+    if (Meteor.user().publisherId) {
         if (Meteor.user().publisherId !== publisherId) return false;
-        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
+        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) {
             //if (!journalId) return false;
             if (!_.contains(Meteor.user().journalId, journalId)) return false;
         }

@@ -125,10 +125,26 @@ Meteor.startup(function () {
                 s: "《中国科学》杂志社平台 账号激活邮件 Confirm Your Email Address",
                 b: "<p>欢迎使用《中国科学》杂志社平台，请点击下方的链接以激活您的账号 Welcome to the China Science Publishing, please click the link below to activate your account.</p>"
             },
-            {key: "emailThis", s: "Email This", b: "a"},
-            {key: "watchJournal", s: "Watch this journal", b: "a"},
-            {key: "watchTopic", s: "Watch this topic", b: "a"},
-            {key: "watchArticle", s: "Watch this article", b: "a"}
+            {
+                key: "emailThis",
+                s: "《中国科学》杂志社平台 个人推荐 Email This",
+                b: "<p>The following content has been recommended to you.</p>"
+            },
+            {
+                key: "watchJournal",
+                s: "《中国科学》杂志社平台 期刊关注 Watch this journal",
+                b: "<p>You are watching a journal of which the following articles have been added.</p>"
+            },
+            {
+                key: "watchTopic",
+                s: "《中国科学》杂志社平台 主题关注 Watch this topic",
+                b: "<p>You are watching a topic of which the following articles have been added.</p>"
+            },
+            {
+                key: "watchArticle",
+                s: "《中国科学》杂志社平台 文章关注 Watch this article",
+                b: "<p>You are watching an article of which the following changes have been made.</p>"
+            }
         ];
         _.each(emails, function (email) {
             EmailConfig.insert({
@@ -138,45 +154,45 @@ Meteor.startup(function () {
             });
         });
     }
-    if(JET.store.find().count()===0){
-        var templateFolder = process.cwd()+"/assets/app/template/";
-        if(!Science.FSE.existsSync(templateFolder))
+    if (JET.store.find().count() === 0) {
+        var templateFolder = process.cwd() + "/assets/app/template/";
+        if (!Science.FSE.existsSync(templateFolder))
             return;
 
         var files = Science.FSE.readdirSync(templateFolder);
-        if(_.isEmpty(files))
+        if (_.isEmpty(files))
             return;
 
         var templates = {};
-        _.each(files,function(file){
-            var content = Science.FSE.readFileSync(templateFolder+file,"utf-8");
-            var name=Science.String.getFileNameWithOutExt(file);
+        _.each(files, function (file) {
+            var content = Science.FSE.readFileSync(templateFolder + file, "utf-8");
+            var name = Science.String.getFileNameWithOutExt(file);
             var ext = Science.String.getExt(file);
-            if(!templates[name]){
-                templates[name]={};
+            if (!templates[name]) {
+                templates[name] = {};
             }
-            templates[name][ext]=ext==="json"?JSON.parse(content):content;
+            templates[name][ext] = ext === "json" ? JSON.parse(content) : content;
         });
-        _.each(templates,function(content,key){
-            if(content.html){
+        _.each(templates, function (content, key) {
+            if (content.html) {
                 JET.store.insert({
-                    name:key,
-                    description:key,
-                    content:content.html,
-                    previewData:content.json
+                    name: key,
+                    description: key,
+                    content: content.html,
+                    previewData: content.json
                 })
             }
         })
     }
 
-    if(pacs.find().count()===0){
+    if (pacs.find().count() === 0) {
         console.log("fixture for PACS");
-        var pacsFile = process.cwd()+"/assets/app/pacs.json";
-        if(!Science.FSE.existsSync(pacsFile))
+        var pacsFile = process.cwd() + "/assets/app/pacs.json";
+        if (!Science.FSE.existsSync(pacsFile))
             return;
-        var content = Science.FSE.readFileSync(pacsFile,"utf-8");
+        var content = Science.FSE.readFileSync(pacsFile, "utf-8");
         var pacsArr = JSON.parse(content);
-        _.each(pacsArr,function(obj){
+        _.each(pacsArr, function (obj) {
             pacs.insert(obj);
         })
     }
