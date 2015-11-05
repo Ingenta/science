@@ -6,9 +6,7 @@ Template.mostReadArticle.events({
 
 Template.mostReadArticle.helpers({
     mostReadArticles: function () {
-        var journalId;
-        if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.volume")
-            journalId = Router.current().data()._id;
+        var journalId = Router.current().params.journalId;
         Meteor.call("getMostRead", journalId, function (err, result) {
             Session.set("mostRead", result);
         });
@@ -20,7 +18,7 @@ Template.mostReadArticle.helpers({
         var suggestion = getMostReadSuggestion();
         if (suggestion)allId.push(suggestion._id);
         _.each(most, function (item) {
-            if (suggestion) {
+            if (!suggestion || item._id.articleId !== suggestion._id) {
                 var article = Articles.findOne({_id: item._id.articleId});
                 article && allId.push(item._id.articleId);
             }
