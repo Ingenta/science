@@ -6,26 +6,23 @@ Template.mostReadArticle.events({
 
 Template.mostReadArticle.helpers({
     mostReadArticles: function () {
-        if (!Session.get("mostRead")) {
-            Meteor.call("getMostRead", Meteor.userId(), this.journalId, function (err, result) {
-                Session.set("mostRead", result);
-            });
-        }
+        var journalId = Router.current().params.journalId;
+        Meteor.call("getMostRead", journalId, function (err, result) {
+            Session.set("mostRead", result);
+        });
+
         var most = Session.get("mostRead");
         if (!most)return;
         // 获取更多Id
         var allId = [];
-        var suggestedArticle = SuggestedArticles.findOne();
-        if (suggestedArticle) {
-            allId.push(suggestedArticle.articleId);
-        }
+        var suggestion = getMostReadSuggestion();
+        if (suggestion)allId.push(suggestion._id);
         _.each(most, function (item) {
-            if(suggestedArticle&&!this.journalId) {
+            if (!suggestion || item._id.articleId !== suggestion._id) {
                 var article = Articles.findOne({_id: item._id.articleId});
                 article && allId.push(item._id.articleId);
             }
         });
-        console.log(allId)
         // 返回article信息，并排序
         if (!Session.get("sort"))return _.map(allId, function (id) {
             return Articles.findOne({_id: id})

@@ -22,6 +22,9 @@ Template.suggestedMostReadButtons.helpers({
     hasSuggestedArticle: function () {
         if (!SuggestedArticles.findOne())return;
         return true;
+    },
+    isHomePage: function () {
+        return Router.current().route.getName() === "home";
     }
 })
 Template.suggestedMostReadButtons.events({

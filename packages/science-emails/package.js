@@ -24,6 +24,7 @@ Package.onUse(function(api) {
             'aldeed:autoform',
         ],both);
 
+    api.addFiles('server/main.js', 'server');
     api.addFiles('server/emails.js', 'server');
 
     api.addFiles('client/router.js','client');
