@@ -2,6 +2,16 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="newsCenter"}}
+            <div class="row" style="margin-left: 10px">
+                {{#each recruitInfo}}
+                    <strong><a style="font-size: 16px;color: red" href="{{whichUrl}}" target="_blank">{{title}}</a></strong>
+                    {{#if can  "modify-news-center" "resource"}}{{> updateRecruitmentModalForm}}{{/if}}
+                    {{#if can  "delete-news-center" "resource"}}<a href="#" id="recruitDel" class="fa fa-trash"></a>{{/if}}
+                {{/each}}
+                {{#if can "add-news-center" "resource"}}
+                    <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecruitmentModal"></span>{{> addRecruitmentModalForm}}
+                {{/if}}<hr>
+            </div>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">新闻>></a></li>
                 <li role="presentation"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">杂志社动态>></a></li>
@@ -18,7 +28,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
                                         {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if can  "delete-news-center" "resource"}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -41,7 +51,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
                                         {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if can  "delete-news-center" "resource"}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -64,7 +74,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
                                         {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if can  "delete-news-center" "resource"}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -84,6 +94,36 @@
 
 <template name="updateMiniNewsCenterModalForm">
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsCenter" doc=_id operation="update" omitFields="pageView,createDate,types"}}{{/afModal}}
+</template>
+
+<template name="updateRecruitmentModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsCenter" doc=_id operation="update" omitFields="picture,author,recommend,pageView,createDate,types"}}{{/afModal}}
+</template>
+
+<template name="addRecruitmentModalForm">
+    <div class="modal fade" id="addRecruitmentModal" tabindex="-1" role="dialog" aria-labelledby="addRecruitmentModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addRecruitmentModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addRecruitmentModalForm" collection="NewsCenter" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="abstract"}}
+                        {{> afQuickField name="content"}}
+                        {{> afQuickField name="link"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="addMiniNewsModalForm">

@@ -17,7 +17,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
                                         {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -38,7 +38,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}&nbsp;&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
                                         {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>

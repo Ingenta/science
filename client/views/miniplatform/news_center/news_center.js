@@ -20,6 +20,12 @@ Template.newsCenter.helpers({
         }
         return myNewsCenterPagination.find({types:"3"},{itemsPerPage: numPerPage},{sort: {createDate: -1}});
     },
+    recruitInfo: function () {
+        return NewsCenter.find({types:"4"},{limit:1});
+    },
+    hide: function () {
+        return NewsCenter.find({types:"4"}).count()<1 ? "": "hide";
+    },
     whichUrl: function () {
         if (this.link) {
             return this.link;
@@ -29,6 +35,12 @@ Template.newsCenter.helpers({
 });
 
 Template.newsCenter.events({
+    'click #recruitDel': function (e) {
+        var nid = this._id;
+        confirmDelete(e,function(){
+            NewsCenter.remove({_id:nid});
+        })
+    },
     'click #newsDel': function (e) {
         var nid = this._id;
         confirmDelete(e,function(){
@@ -89,6 +101,20 @@ AutoForm.addHooks(['addMiniPublishingModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "3";
+            doc.createDate = new Date();
+            return doc;
+        }
+    }
+}, true);
+
+AutoForm.addHooks(['addRecruitmentModalForm'], {
+    onSuccess: function () {
+        $("#addRecruitmentModal").modal('hide');
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+    },
+    before: {
+        insert: function (doc) {
+            doc.types = "4";
             doc.createDate = new Date();
             return doc;
         }
