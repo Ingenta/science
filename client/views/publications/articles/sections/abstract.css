@@ -125,7 +125,5 @@ xref[ref-type='table'] {
 }
 
 #fulltext-viewer p, .interesting-content p {
-    font-size:14px;
-    text-align: justify;
     -webkit-text-size-adjust:none;
 }
