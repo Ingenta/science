@@ -60,7 +60,7 @@ Router.map(function () {
 				});
 				text = text.substring(0, text.length - 5) + "\",\n   title = \"" + obj.title.cn + "\",\n   journal = \"" + obj.journal.titleCn;
 			}
-			text += "\",\n   year = \"" + obj.year + "\",\n   volume = \"" + obj.volume + "\",\n   number = \"" + obj.issue + "\",\n   eid = " + (obj.elocationId || "") + ",\n   pages = \"" + (obj.startPage || "") + "-" + (obj.endPage || "") + "\",\n   url = \"" + Meteor.absoluteUrl() + name1 + "\",\n   doi = \"http://dx.doi.org/" + obj.doi + "\" \n}\n\n";
+			text += "\",\n   year = \"" + obj.year + "\",\n   volume = \"" + obj.volume + "\",\n   number = \"" + obj.issue + "\",\n   eid = " + (obj.elocationId || "") + ",\n   pages = \"" + (obj.startPage || "") + "-" + (obj.endPage || "") + "\",\n   url = \"" + Config.rootUrl + name1 + "\",\n   doi = \"http://dx.doi.org/" + obj.doi + "\" \n}\n\n";
 
 			var filename = this.params.articleDoi + '.bib';
 			var headers  = {
@@ -96,7 +96,7 @@ Router.map(function () {
 			obj.keywords.forEach(function (keyword) {
 				text += "%K " + keyword + "\n";
 			});
-			text += "%U " + Meteor.absoluteUrl() + name1 + "\n";
+			text += "%U " + Config.rootUrl + name1 + "\n";
 
 			var filename = this.params.articleDoi + '.enw';
 			var headers  = {
@@ -127,7 +127,7 @@ Router.map(function () {
 				});
 				text += "YR " + obj.year + "\nT1 " + (obj.title.cn || obj.title.en) + "\nJF " + (obj.journal.titleCn || obj.journal.title);
 			}
-			text += "\nVO " + obj.volume + "\nIS " + obj.issue + "\nSP " + (obj.elocationId || "") + "\nOP " + (obj.startPage ? obj.startPage + "-" + obj.endPage : "") + "\nDO http://dx.doi.org/" + obj.doi + "\nUL " + Meteor.absoluteUrl() + name1 + "\n\n";
+			text += "\nVO " + obj.volume + "\nIS " + obj.issue + "\nSP " + (obj.elocationId || "") + "\nOP " + (obj.startPage ? obj.startPage + "-" + obj.endPage : "") + "\nDO http://dx.doi.org/" + obj.doi + "\nUL " + Config.rootUrl + name1 + "\n\n";
 
 			var filename = this.params.articleDoi + '.ref';
 			var headers  = {
