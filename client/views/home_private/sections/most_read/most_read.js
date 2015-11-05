@@ -3,6 +3,8 @@ Template.mostReadArticleList.helpers({
         var journalId;
         if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.volume")
             journalId = Router.current().data()._id;
+        if (Router.current().route.getName() === "article.show")
+            journalId = Router.current().data().journalId;
         Meteor.call("getMostRead", journalId, function (err, result) {
             Session.set("mostRead", result);
         });
