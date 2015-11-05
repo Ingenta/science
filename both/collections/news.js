@@ -56,6 +56,11 @@ NewsSchema = new SimpleSchema({
     publications: {
         type: String,
         optional: true
+    },
+    pageView: {
+        type:Number,
+        defaultValue: 0,
+        optional: true
     }
 });
 Meteor.startup(function () {
