@@ -12,8 +12,10 @@ Template.searchResultForAddToSpecialTopics.events({
         $("input.articleCkd:checked").each(function (index, item) {
             newest.push($(item).val());
         });
-        var addedArticles = Session.get("addedArticles");
+        var addedArticles = Session.get("addedArticlesTo");
+//        console.log(addedArticles);
         newest          = _.union(newest, addedArticles);
+//        console.log(newest);
         SpecialTopics.update({_id: Router.current().params.specialTopicsId}, {$set: {articles: newest}});
 	}
 });

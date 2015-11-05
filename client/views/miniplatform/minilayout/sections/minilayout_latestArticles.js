@@ -2,6 +2,9 @@ Template.layoutLatestArticles.helpers({
     recommendArticles: function () {
         return NewsRecommend.find({}, {limit: 6});
     },
+    hide: function () {
+        return NewsRecommend.find().count()<6 ? "": "hide";
+    },
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var article = Articles.findOne({_id: Aid});

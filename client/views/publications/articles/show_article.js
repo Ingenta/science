@@ -157,7 +157,7 @@ Template.showArticle.helpers({
 				allrefs=_.sortBy(allrefs,function(i){return i});
 			}
 		}
-		if(this.email){
+		if(this.email && Router.current().data){
 			var note = _.find(Router.current().data().authorNotes,function(note){return note.id==this.email});
 			allrefs.push((note && note.label) || "*");
 		}

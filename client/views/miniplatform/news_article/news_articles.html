@@ -2,14 +2,14 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             <div class="row">
-                <h3>新闻中心>>新闻详情</h3>
+                <h3>新闻详情</h3>
             </div>
             <div class="row">
                 <div id="subcontent" class="col-xs-8">
                     <div class="container-fluid">
                         <div class="row" style="margin-top: 20px;">
                             {{#each newsDetails}}
-                                <div align="center"><span style="font-size:21px;">{{title}}</span>
+                                <div align="center"><span style="font-size:21px;">{{{title}}}</span>
                                     {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                 </div><br>
                                 <p class="text-center">发布时间：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;作者：{{author}}</p><br>

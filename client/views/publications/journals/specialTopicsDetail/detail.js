@@ -1,8 +1,8 @@
 Template.specialTopicsDetailHeader.helpers({
     collInfo: function () {
         var coll = SpecialTopics.findOne({_id: Router.current().params.specialTopicsId});
-        if(!coll || !coll.articles)return;
-        Session.set("addedArticles", coll.articles ? coll.articles : []);
+        if(!coll)return;
+        Session.set("addedArticlesTo", coll.articles ? coll.articles : []);
         return coll;
     },
     publisherName:function(){
