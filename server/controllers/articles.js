@@ -13,7 +13,8 @@ Meteor.methods({
     'getClientIP': function () {
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
     },
-    'getMostRead': function (uid, journalId) {
+    'getMostRead': function (journalId, limit) {
+        if (!limit)limit = 20;
         var a = undefined;
         if (journalId)
             a = ArticleViews.aggregate([{
@@ -26,14 +27,14 @@ Meteor.methods({
                     count: {$sum: 1}
                 }
             }, {$sort: {count: -1}}
-                , {$limit: 20}]);
+                , {$limit: limit}]);
         else a = ArticleViews.aggregate([{
             $group: {
                 _id: {articleId: '$articleId'},
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            , {$limit: 20}]);
+            , {$limit: limit}]);
         if (!a)return;
         return a;
     },

@@ -171,7 +171,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articles'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('suggestedMostRead')
             ]
         }
     });
@@ -399,7 +400,8 @@ Router.map(function () {
                 Meteor.subscribe('medias'),
                 Meteor.subscribe('files'),
                 Meteor.subscribe('topics'),
-                Meteor.subscribe('specialTopics')
+                Meteor.subscribe('specialTopics'),
+                Meteor.subscribe('suggestedMostRead')
             ]
         }
 
@@ -486,7 +488,8 @@ Router.map(function () {
                 Meteor.subscribe('about'),
                 Meteor.subscribe('about_articles'),
                 Meteor.subscribe('medias'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('suggestedMostRead')
             ]
         }
 
