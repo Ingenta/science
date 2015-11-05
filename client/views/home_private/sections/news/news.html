@@ -12,7 +12,7 @@
                 <div class="carousel-inner">
                     {{#each news "extend"}}
                         <div class="item {{class}}">
-                            <img src="{{getImageHelper picture}}" width="340" height="240">
+                            <img src="{{getImageHelper picture}}" style="width: 340px;height: 240px"/>
                         </div>
                     {{/each}}
                 </div>
@@ -65,7 +65,7 @@
 </template>
 
 <template name="updateNewsModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="News" doc=_id operation="update" omitFields="createDate,types,about,publications"}}
+    {{#afModal class="fa fa-pencil" title="Update" collection="News" doc=_id operation="update" omitFields="pageView,createDate,types,about,publications"}}
     {{/afModal}}
 </template>
 

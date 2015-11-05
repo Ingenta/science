@@ -1,3 +1,5 @@
+var parserHelper = Science.XPath.ParseHelper;
+
 ScienceXML = {};
 ScienceXML.FileExists = function (path) {
     if (!path)return false;
@@ -91,7 +93,6 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
         authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
-
         //通讯作者信息
         var noteAttr = xpath.select("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
         if(!_.isEmpty(noteAttr)){
@@ -118,7 +119,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     authorNotesNodes.forEach(function (note) {
         var noteLabel = xpath.select("child::label/text()", note).toString();
         var email = xpath.select("descendant::ext-link/text()", note).toString();
-        var noteContent = xpath.select('child::p',note);
+        var multiLangNote=parserHelper.getMultiVal("child::p[@lang='{lang}']",note,{planb:"child::p",handler:parserHelper.handler.xml});
+
         var id = xpath.select("attribute::id",note)[0].value;
         if (noteLabel === undefined) {
             results.errors.push("No noteLabel found");
@@ -126,11 +128,14 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.errors.push("No email found");
         } else {
             var entry = {id:id, label: noteLabel, email: email};
-            if(!_.isEmpty(noteContent)){
-                var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g,email);
-                noteContent = noteContent.toString().trim().replace(/<ext-link[^<]+<\/ext-link>/,mailTag);
-                noteContent = noteContent.replace(/<\/?p>/g,"");
-                entry.note=noteContent;
+            if(!_.isEmpty(multiLangNote)){
+                entry.note={};
+                _.each(multiLangNote,function(noteContent,key){
+                    var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g,email);
+                    noteContent = noteContent.toString().trim().replace(/<ext-link[^<]+<\/ext-link>/,mailTag);
+                    noteContent = noteContent.replace(/<\/?p[^>]*>/g,"");
+                    entry.note[key]=noteContent;
+                })
             }
             results.authorNotes.push(entry);
         }
