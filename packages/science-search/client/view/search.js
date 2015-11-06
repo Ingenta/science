@@ -41,6 +41,7 @@ Template.SolrSearchResults.helpers({
             for(var i=0;i<fields.length;i++){
                 var filter = {filterOptions:[]};
                 if(fields[i]=='all_topics'){
+                    filter.name="topic";
                     filter.filterTitle=TAPi18n.__("FILTER BY Topic");
                     var facetTopic = facets[fields[i]];
                     for(var j=0;j<facetTopic.length;j+=2){
@@ -59,6 +60,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='publisher'){
+                    filter.name="publisher";
                     filter.filterTitle=TAPi18n.__("FILTER BY Publisher");
                     var facetPublisher = facets[fields[i]];
                     for(var j=0;j<facetPublisher.length;j+=2){
@@ -75,6 +77,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='facet_all_authors_cn' && TAPi18n.getLanguage()==='zh-CN'){
+                    filter.name="author";
                     filter.filterTitle=TAPi18n.__("FILTER BY Author");
                     var facetAuthor = facets[fields[i]];
                     for(var j=0;j<facetAuthor.length;j+=2){
@@ -90,6 +93,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='facet_all_authors_en' && TAPi18n.getLanguage()==='en'){
+                    filter.name="author";
                     filter.filterTitle=TAPi18n.__("FILTER BY Author");
                     var facetAuthor = facets[fields[i]];
                     for(var j=0;j<facetAuthor.length;j+=2){
@@ -105,6 +109,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='journalId'){
+                    filter.name="journal";
                     filter.filterTitle=TAPi18n.__("FILTER BY Publications");
                     var facetJournal = facets[fields[i]];
                     for(var j=0;j<facetJournal.length;j+=2){
@@ -121,6 +126,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='year'){
+                    filter.name="pubyear";
                     filter.filterTitle=TAPi18n.__("FILTER BY Release Date");
                     var facetYear = facets[fields[i]];
                     for(var j=0;j<facetYear.length;j+=2){
@@ -136,6 +142,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='pacsCodes'){
+                    filter.name="pacs";
                     filter.filterTitle=TAPi18n.__("FILTER BY PACS");
                     var facetpacs = facets[fields[i]];
                     for(var j=0;j<facetpacs.length;j+=2){
@@ -151,6 +158,7 @@ Template.SolrSearchResults.helpers({
                     }
                     results.push(filter);
                 }else if(fields[i]=='contentType'){
+                    filter.name="contentType";
                     filter.filterTitle=TAPi18n.__("FILTER BY Content Properties");
                     var facetType = facets[fields[i]];
                     for(var j=0;j<facetType.length;j+=2){

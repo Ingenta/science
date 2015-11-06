@@ -13,7 +13,7 @@ Template.singleReferenceTemplate.helpers({
 			authorStr += author.surName + " " + author.givenName + ", "
 		});
 		if(this.etal){
-			authorStr+=this.etal+".";
+			authorStr+=this.etal+". ";
 		}else{
 			if(authorStr.length>2){
 				authorStr=authorStr.substr(0,authorStr.length-2)+". ";
@@ -21,11 +21,14 @@ Template.singleReferenceTemplate.helpers({
 		}
 		return authorStr;
 	},
+	formatTitle:function(){
+		return this.title && (this.title + ". ");
+	},
 	formatContentType:function(){
 		if(this.type && contentType[this.type]){
-			return "["+contentType[this.type.toLowerCase().trim()] + "].";
+			return "["+contentType[this.type.toLowerCase().trim()] + "]. ";
 		}
-		return "."
+		return ". "
 	},
 	link:function(){
 		if(this.href){
