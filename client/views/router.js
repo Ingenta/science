@@ -99,7 +99,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
+                Meteor.subscribe('articlesWithoutFulltext')
             ]
         }
     });
@@ -119,7 +119,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
+                Meteor.subscribe('articlesWithoutFulltext')
             ]
         }
     });
@@ -147,7 +147,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('files'),
                 Meteor.subscribe('suggestedMostRead')
@@ -167,7 +167,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('files'),
                 Meteor.subscribe('suggestedMostRead')
@@ -187,7 +187,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('files')
             ]
@@ -206,7 +206,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('files')
             ]
@@ -225,7 +225,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('files')
             ]
@@ -256,7 +256,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
+                Meteor.subscribe('articlesWithoutFulltext')
             ]
         }
     });
@@ -391,7 +391,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('about'),
                 Meteor.subscribe('about_articles'),
                 Meteor.subscribe('allCollections'),
@@ -423,7 +423,7 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('specialTopics')
@@ -481,7 +481,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('about'),
                 Meteor.subscribe('about_articles'),

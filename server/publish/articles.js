@@ -1,6 +1,11 @@
 Meteor.publish('articles', function () {
     return Articles.find();
 });
+Meteor.publish('articlesWithoutFulltext', function () {
+    return Articles.find({}, {
+        fields: {sections: 0}
+    })
+});
 
 Meteor.publish('oneArticle', function (id) {
     return Articles.find({_id:id});
