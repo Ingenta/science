@@ -59,11 +59,11 @@ Meteor.methods({
         };
     },
     'getLocationReport': function (action, articleId) {
-        var countryViews = [];
+        var countryViews = {};
         var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
         ArticleViews.aggregate([{
             $group: {
-                _id: {articleId: articleId, ip: '$ip'},
+                _id: {articleId: articleId, action: action, ip: '$ip'},
                 count: {$sum: 1}
             }
         }]).forEach(function (item) {
@@ -75,15 +75,20 @@ Meteor.methods({
                         startIpLong: {$lte: currentUserIPNumber},
                         endIpLong: {$gte: currentUserIPNumber}
                     },
-                    {fields: {country: 1}}
+                    {fields: {country: 1, countryCode2: 1}}
                 );
                 if (country) {
-                    countryViews.push({name: country.country, locationCount: item.count});
+                    if (countryViews[country.countryCode2]) {
+                        countryViews[country.countryCode2].locationCount += item.count;
+                    } else {
+                        countryViews[country.countryCode2] = {name: country.country, locationCount: item.count}
+                    }
                 } else {
                     other.locationCount += item.count;
                 }
             }
         });
+        countryViews = _.values(countryViews);
         if (other.locationCount > 0)
             countryViews.push(other);
         return countryViews;
