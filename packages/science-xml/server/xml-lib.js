@@ -108,6 +108,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.authorNotes.push(entry);
         }
     });
+    //debugger;  等客户修改他们的数据结构后继续
+    //var affNodes = xpath.select("//contrib-group/descendant::aff",doc)
 
     var affNodes = xpath.select("//contrib-group/aff-alternatives", doc);
     if (_.isEmpty(affNodes)) {
