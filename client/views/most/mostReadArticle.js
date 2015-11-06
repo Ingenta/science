@@ -15,7 +15,7 @@ Template.mostReadArticle.helpers({
         if (!most)return;
         // 获取更多Id
         var allId = [];
-        var suggestion = getMostReadSuggestion();
+        var suggestion = getMostReadSuggestion(journalId);
         if (suggestion)allId.push(suggestion._id);
         _.each(most, function (item) {
             if (!suggestion || item._id.articleId !== suggestion._id) {

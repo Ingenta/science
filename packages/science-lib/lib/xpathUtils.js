@@ -103,6 +103,7 @@ _.extend(Science.XPath.ParseHelper,{
 	 */
 	handler:{
 		simple:Science.XPath.ParseHelper.getSimpleVal,
-		xml:Science.XPath.ParseHelper.getXmlString
+		xml:Science.XPath.ParseHelper.getXmlString,
+		attribute:Science.XPath.ParseHelper.getAttribute
 	}
 })

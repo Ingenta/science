@@ -131,11 +131,9 @@ Template.registerHelper('checkPermissionToJournal', function (permissions, publi
         }
     }
     permissions = permissions.split(';');
-    //console.log(permissions);
     var flag = false;
     permissions.forEach(function (onePermission) {
         onePermission = onePermission.split(',');
-        //console.log(onePermission);
         if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
     });
     return flag;
