@@ -20,7 +20,6 @@ Template.addMediaForm.events({
 		after: function (error, fileObj) {
 			if (!error) {
 				uploadingFile.set(fileObj._id);
-				console.log("Inserted", fileObj.name());
 			}
 		}
 	})
