@@ -4,12 +4,19 @@ Meteor.publish('articles', function () {
 Meteor.publish('articlesWithoutFulltext', function () {
     return Articles.find({}, {
         fields: {sections: 0}
-    })
+    });
 });
 
 Meteor.publish('oneArticle', function (id) {
     return Articles.find({_id: id});
 });
+
+Meteor.publish('oneJournalArticles', function (id) {
+    return Articles.find({journalId: id}, {
+        fields: {sections: 0, figures: 0, references: 0}
+    });
+});
+
 
 Meteor.publish('mostRecentArticles', function () {
     return [
