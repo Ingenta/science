@@ -13,9 +13,7 @@ Template.searchResultForAddToSpecialTopics.events({
             newest.push($(item).val());
         });
         var addedArticles = Session.get("addedArticlesTo");
-//        console.log(addedArticles);
         newest          = _.union(newest, addedArticles);
-//        console.log(newest);
         SpecialTopics.update({_id: Router.current().params.specialTopicsId}, {$set: {articles: newest}});
 	}
 });

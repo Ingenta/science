@@ -512,7 +512,6 @@ Router.map(function () {
         waitOn: function () {
             var artData = this.data();
             var artId;
-            if (!artData)artData = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi})
             if (artData)artId = artData._id;
             return [
                 Meteor.subscribe('images'),
@@ -530,7 +529,6 @@ Router.map(function () {
         onBeforeAction: function () {
             if (Session.get("ipInChina") === undefined) {
                 Meteor.call("ipInChina", function (err, result) {
-                    //console.log(result.number);
                     console.log(result.country ? result.country.country.cn : "No country found!");
                     Session.set("ipInChina", result.code);
                 })

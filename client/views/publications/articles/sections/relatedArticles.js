@@ -15,7 +15,6 @@ Template.relatedArticles.onRendered(function(){
 		fq:fq,
 		st:{rows: 10}
 	};
-	console.log(query);
 	Meteor.call("search", query, function (err, result) {
 		var ok = err ? false : result.responseHeader.status == 0;
 		if (ok) {

@@ -8,7 +8,7 @@ Meteor.publish('articlesWithoutFulltext', function () {
 });
 
 Meteor.publish('oneArticle', function (id) {
-    return Articles.find({_id:id});
+    return Articles.find({_id: id});
 });
 
 Meteor.publish('mostRecentArticles', function () {
