@@ -27,7 +27,6 @@ Meteor.subscribe('images');
 Meteor.subscribe('advertisement');
 Meteor.subscribe('publishers');
 Meteor.subscribe('publications');
-Meteor.subscribe('articles');
 Meteor.subscribe('articleViews');
 Meteor.subscribe('recommend');
 Meteor.subscribe('institutions');
@@ -57,7 +56,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('mostRecentArticles'),
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
