@@ -68,7 +68,10 @@ Science.XPath.ParseHelper = {
 		var obj = {};
 		var failedLang=[];
 		var successLang;
-		var handler = options && options.handler || this.handler.simple;
+		var handler = (options && options.handler) || Science.XPath.ParseHelper.handler.simple;
+		if(!_.isFunction(handler)){
+			console.error("handler is not a function, but you shouldn't see this message");
+		}
 		_.each(this.langNames,function(val,key){
 			obj[key]=handler(xp.replace('{lang}',val),ele);
 			if(!obj[key])
@@ -83,7 +86,7 @@ Science.XPath.ParseHelper = {
 			})
 		}else if(!successLang && options && options.planb) {
 			//若两种语言均不能取到值并且存在Plan B .... ,再用planb试试.. , planb应当是一个正常的xpath表达式
-			var content = this.handler(options.planb, ele);
+			var content = handler(options.planb, ele);
 			if(content){
 				_.each(this.langNames,function(val,key){
 					obj[key]=content;
