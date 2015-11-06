@@ -1,16 +1,19 @@
 <template name="solrFilterItem">
+	{{#if filterOptions}}
 	<h5 class="bg-eee">{{filterTitle}}</h5>
-	<ul class="list-unstyled list-ul">
-		{{#if filterOptions}}
-			{{#each filterOptions}}
-				<li class="search-cond {{class}}">
-					<a href="#">
-						{{translateThis cname name}}({{count}})
-					</a>
-				</li>
-			{{/each}}
-		{{else}}
-			{{_ "No results found!"}}
+	<ul data-show="5" class="list-unstyled list-ul slimScroll">
+		{{#each getFilterOptions}}
+			<li class="search-cond {{class}}">
+				<a class="filter-me" href="#">
+					{{translateThis cname name}}({{count}})
+				</a>
+			</li>
+		{{/each}}
+		{{#if isTooMany}}
+		<li class="fa fa-chevron-down">
+			<a class="show-more" href="#">{{_ "more"}}</a>
+		</li>
 		{{/if}}
 	</ul>
+	{{/if}}
 </template>

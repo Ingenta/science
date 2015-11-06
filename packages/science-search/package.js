@@ -22,7 +22,8 @@ Package.onUse(function(api) {
 
   api.use([
     'templating',
-    'reactive-var'
+    'reactive-var',
+    'rochal:slimscroll'
   ],'client');
 
 
