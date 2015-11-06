@@ -10,7 +10,7 @@
             <div class="serach">
                 <div class="navbar-form pull-right" role="search">
                     <div class="input-group">
-                        <select id="searchSelect" style="float:left;height:38px;"><option value ="resource">文章资源</option><option value ="local">门户信息</option></select><input id="searchInput" style="float:right;width:300px;" type="text" class="form-control" placeholder="搜索">
+                        <select id="searchSelect" style="float:left;height:32px;"><option value ="resource">文章资源</option><option value ="local">门户信息</option></select><input id="searchInput" style="float:right;width:300px;" type="text" class="form-control" placeholder="搜索">
             <span class="input-group-btn">
                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
             </span>
@@ -23,19 +23,19 @@
     <!-- nav 开始 -->
     <div class="navMini">
         <ul>
-            <li id="nav-item-dropdown" class="dropdown {{menuClass 'magazineProfile'}}">
-                <a data-toggle="dropdown"  class="dropdown-toggle">关于我们<b class="caret"></b></a>
+            <li id="nav-item-dropdown" class="dropdown {{menuClass 'magazineProfile'}}{{menuClass 'council'}}{{menuClass 'memorabilia'}}{{menuClass 'enterpriseCulture'}}">
+                <a data-toggle="dropdown">关于我们<b class="caret"></b></a>
                 <ul id="dropdown-nav-items" class="dropdown-menu" style="min-width: 132px">
-                    <li>
+                    <li class="{{menuClass 'magazineProfile'}}">
                         <a href="{{pathFor 'magazineProfile'}}" >杂志社简介</a>
                     </li>
-                    <li>
+                    <li class="{{menuClass 'council'}}">
                         <a href="{{pathFor 'council'}}" >理事会</a>
                     </li>
-                    <li>
+                    <li class="{{menuClass 'memorabilia'}}">
                         <a href="{{pathFor 'memorabilia'}}" >两刊大事记</a>
                     </li>
-                    <li>
+                    <li class="{{menuClass 'enterpriseCulture'}}">
                         <a href="{{pathFor 'enterpriseCulture'}}" >企业文化</a>
                     </li>
                 </ul>

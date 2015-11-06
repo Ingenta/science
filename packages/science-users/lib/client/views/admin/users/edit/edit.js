@@ -166,7 +166,6 @@ Template.AdminUsersEditEditForm.helpers({
         return Session.get("journalId");
     },
     "isPublisherAdmin": function () {
-        //console.log(Permissions.getUserRoles());
         return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user") && this.admin_user._id !== Meteor.userId();
     }
 

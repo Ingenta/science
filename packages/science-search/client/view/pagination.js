@@ -37,7 +37,6 @@ Template.btPagination.helpers({
 	},
 	page:function(name){
 		var currPage = Template.instance().data.currPage;
-		console.log(currPage);
 		var total = Template.instance().data.total;
 		var row = Template.instance().data.rows || 10;
 		var totalPage = Math.ceil(total / row);
