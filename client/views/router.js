@@ -25,14 +25,13 @@ Meteor.subscribe('pages');
 Meteor.subscribe('news');
 Meteor.subscribe('images');
 Meteor.subscribe('advertisement');
-Meteor.subscribe('publishers');
-Meteor.subscribe('publications');
 Meteor.subscribe('articleViews');
 Meteor.subscribe('recommend');
 Meteor.subscribe('institutions');
 Meteor.subscribe('mostCited');
 Meteor.subscribe('specialTopics');
 Meteor.subscribe('searchHistory');
+Meteor.subscribe('articleUrls');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -55,13 +54,39 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
                 Meteor.subscribe('mostRecentArticles'),
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
                 Meteor.subscribe('suggestedMostRead')
+            ]
+        }
+    });
+
+    this.route("publishers", {
+        parent: "home",
+        title: function () {
+            return TAPi18n.__("Publishers");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publishers')
+            ]
+        }
+    });
+
+    this.route("publications", {
+        parent: "home",
+        title: function () {
+            return TAPi18n.__("Publications");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('publishers')
             ]
         }
     });
@@ -99,19 +124,6 @@ Router.map(function () {
         }
     });
 
-    this.route("publications", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Publications");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('images'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers')
-            ]
-        }
-    });
 
     this.route('cooperationCenter', {
         template: "cooperationCenter",
@@ -122,19 +134,6 @@ Router.map(function () {
         }
     });
 
-    this.route("publishers", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Publishers");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications')
-            ]
-        }
-    });
 
     this.route('mostReadArticles', {
         template: "mostReadArticle",
@@ -416,9 +415,9 @@ Router.map(function () {
                 return journal;
             }
         },
-        template      : "addArticleForSpecialTopics",
-        name          : "specialTopics.selectArticles",
-        parent        : "home",
+        template: "addArticleForSpecialTopics",
+        name: "specialTopics.selectArticles",
+        parent: "home",
         title: function () {
             return TAPi18n.__("addSpecialTopicsToCollection");
         },
@@ -511,13 +510,17 @@ Router.map(function () {
         parent: "journal.name.volume",
         name: "article.show",
         waitOn: function () {
+            var artData = this.data();
+            var artId;
+            if (!artData)artData = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi})
+            if (artData)artId = artData._id;
             return [
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articleViews'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('articles'),
+                Meteor.subscribe('oneArticle', artId),
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml'),
                 Meteor.subscribe('pdfs'),
@@ -528,13 +531,13 @@ Router.map(function () {
             if (Session.get("ipInChina") === undefined) {
                 Meteor.call("ipInChina", function (err, result) {
                     //console.log(result.number);
-                    console.log(result.country?result.country.country.cn:"No country found!");
+                    console.log(result.country ? result.country.country.cn : "No country found!");
                     Session.set("ipInChina", result.code);
                 })
             }
             this.next();
         },
-        onStop:function(){
+        onStop: function () {
             Meteor.clearInterval(Session.get("dynamicRender"));
         }
     });
