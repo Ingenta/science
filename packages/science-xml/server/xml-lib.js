@@ -52,46 +52,14 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
     var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
     _.each(authorNodes,function (author) {
-        var authorObj = {};
-        var surnamePart = {};
-        var givenPart = {};
         var fullnamePart ={};
 
-        //var authorAffNodes = xpath.select("child::xref[@ref-type='aff']/text()", author);
-        //authorAffNodes.forEach(function (aff) {
-        //    var rid = xpath.select("attribute::rid", aff)[0];
-        //});
-        var hasAlternatives = xpath.select("child::name-alternatives", author);
-        if (_.isEmpty(hasAlternatives)) {
-            var enNode = xpath.select("child::name[@name-style='western']", author);
-            if(!_.isEmpty(enNode)){
-                var cnNode = xpath.select("child::name[@name-style='eastern']", author);
-                surnamePart.en=xpath.select("child::surname/text()",enNode[0]).toString();
-                givenPart.en=xpath.select("child::given-names/text()",enNode[0]).toString();
-                if(_.isEmpty(cnNode)){
-                    surnamePart.cn=surnamePart.en;
-                    givenPart.cn=givenPart.en;
-                }else{
-                    surnamePart.cn= ScienceXML.getSimpleValueByXPath("child::surname/text()",cnNode[0]);
-                    givenPart.cn= ScienceXML.getSimpleValueByXPath("child::given-names/text()",cnNode[0]);
-                }
-            }else{
-                var surname = xpath.select("child::name/surname/text()", author).toString();
-                var given = xpath.select("child::name/given-names/text()", author).toString();
-                surnamePart = {en: surname, cn: surname};
-                givenPart = {en: given, cn: given};
-            }
-        }else {
-            surnamePart.en = xpath.select("child::name-alternatives/name[@lang='en']/surname/text()", author).toString();
-            givenPart.en = xpath.select("child::name-alternatives/name[@lang='en']/given-names/text()", author).toString();
-            surnamePart.cn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/surname/text()", author).toString();
-            givenPart.cn = xpath.select("child::name-alternatives/name[@lang='zh-Hans']/given-names/text()", author).toString();
-
-        }
+        var surnamePart=parserHelper.getMultiVal("descendant::name[@lang='{lang}']/surname",author,{planb:"descendant::name/surname"});
+        var givenPart=parserHelper.getMultiVal("descendant::name[@lang='{lang}']/given-names",author,{planb:"descendant::name/given-names"});
         fullnamePart.en = surnamePart.en + " " + givenPart.en;
         fullnamePart.cn = surnamePart.cn + " " + givenPart.cn;
 
-        authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
+        var authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
         //通讯作者信息
         var noteAttr = xpath.select("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
