@@ -68,7 +68,7 @@ Science.XPath.ParseHelper = {
 		var obj = {};
 		var failedLang=[];
 		var successLang;
-		var handler = (options && options.handler) || Science.XPath.ParseHelper.handler.simple;
+		var handler = (options && options.handler) || this.handler.simple;
 		if(!_.isFunction(handler)){
 			console.error("handler is not a function, but you shouldn't see this message");
 		}
