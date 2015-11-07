@@ -10,25 +10,16 @@ Router.configure({
 
 Meteor.subscribe("current_user_data");
 Meteor.subscribe("issues");
-Meteor.subscribe("about");
+Meteor.subscribe("volumes");
 Meteor.subscribe("tag");
 Meteor.subscribe("file_excel");
 Meteor.subscribe("journal_ad");
-Meteor.subscribe("volumes");
-Meteor.subscribe("about_articles");
-Meteor.subscribe("editorial_member");
-Meteor.subscribe("editorial_board");
 Meteor.subscribe("meeting_info");
-Meteor.subscribe("author_center");
-Meteor.subscribe('articleXml');
 Meteor.subscribe('pages');
-Meteor.subscribe('news');
 Meteor.subscribe('images');
 Meteor.subscribe('advertisement');
-Meteor.subscribe('articleViews');
 Meteor.subscribe('institutions');
 Meteor.subscribe('mostCited');
-Meteor.subscribe('specialTopics');
 Meteor.subscribe('searchHistory');
 Meteor.subscribe('articleUrls');
 
@@ -54,7 +45,6 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('mostRecentArticles'),
-                Meteor.subscribe('articleViews'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
@@ -155,10 +145,13 @@ Router.map(function () {
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('specialTopics'),
                 Meteor.subscribe('suggestedMostRead'),
-                Meteor.subscribe('recommend')
+                Meteor.subscribe('recommend'),
+                Meteor.subscribe('specialTopics'),
+                Meteor.subscribe("editorial_member"),
+                Meteor.subscribe("editorial_board"),
+                Meteor.subscribe("author_center")
             ]
         }
-
     });
 
     this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue', {
@@ -189,10 +182,6 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('about'),
-                Meteor.subscribe('about_articles'),
-                Meteor.subscribe('medias'),
-                Meteor.subscribe('files'),
                 Meteor.subscribe('suggestedMostRead')
             ]
         }
@@ -449,7 +438,6 @@ Router.map(function () {
         },
         controller: "AdminUsersEditController"
     });
-
 
 
     this.route('/specialTopics/:specialTopicsId', {

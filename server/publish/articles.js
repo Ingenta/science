@@ -23,7 +23,7 @@ Meteor.publish('mostRecentArticles', function () {
         Articles.find({}, {
             sort: {createdAt: -1},
             limit: 10,
-            fields: {abstract: 0, authors: 0, sections: 0, figures: 0, references: 0}
+            fields: {title: 1, journalId: 1, doi: 1, issueId: 1}
         }),
         Publishers.find(),
         Publications.find()
