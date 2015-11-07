@@ -213,7 +213,7 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articleViews'),
+                Meteor.subscribe('articleViewsByArticleId', artId),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('oneArticle', artId),
                 Meteor.subscribe('keywords'),
