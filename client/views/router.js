@@ -19,7 +19,6 @@ Meteor.subscribe('pages');
 Meteor.subscribe('images');
 Meteor.subscribe('advertisement');
 Meteor.subscribe('institutions');
-Meteor.subscribe('mostCited');
 Meteor.subscribe('searchHistory');
 Meteor.subscribe('articleUrls');
 
@@ -48,7 +47,8 @@ Router.map(function () {
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
-                Meteor.subscribe('suggestedMostRead')
+                Meteor.subscribe('suggestedMostRead'),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
@@ -149,7 +149,8 @@ Router.map(function () {
                 Meteor.subscribe('specialTopics'),
                 Meteor.subscribe("editorial_member"),
                 Meteor.subscribe("editorial_board"),
-                Meteor.subscribe("author_center")
+                Meteor.subscribe("author_center"),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
@@ -218,7 +219,8 @@ Router.map(function () {
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml'),
                 Meteor.subscribe('pdfs'),
-                Meteor.subscribe('emailConfig')
+                Meteor.subscribe('emailConfig'),
+                Meteor.subscribe('mostCited')
             ]
         },
         onBeforeAction: function () {
@@ -306,7 +308,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
@@ -325,7 +328,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
