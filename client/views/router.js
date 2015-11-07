@@ -246,39 +246,12 @@ Router.map(function () {
         }
     });
 
-    this.route('/keywords/:keywordsQuery', {
-        template: "SearchResults",
-        parent: "keywords",
-        title: ":keywordsQuery",
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext')
-            ]
-        }
-    });
-
     this.route("author", {
         parent: "home",
         title: function () {
             return TAPi18n.__("Author");
         }
     });
-
-    this.route('/author/:authorQuery', {
-        template: "SearchResults",
-        parent: "home",
-        title: ":authorQuery",
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext')
-            ]
-        }
-    });
-
 
     this.route('cooperationCenter', {
         template: "cooperationCenter",
@@ -402,20 +375,6 @@ Router.map(function () {
         }
     });
 
-    this.route('/s/:searchQuery', {
-        template: "SearchResults",
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Search");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext')
-            ]
-        }
-    });
 
     this.route('/news/:newsId', {
         template: "showNewsArticle",
