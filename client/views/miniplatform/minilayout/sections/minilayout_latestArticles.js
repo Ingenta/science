@@ -12,21 +12,20 @@ Template.layoutLatestArticles.helpers({
             var title = iscn ? article.title.cn : article.title.en;
             return title;
         }
-        return;
     },
     publishDate: function (Apid) {
         var article = Articles.findOne({_id: Apid});
         if(article)return article.published.format("yyyy-MM-dd");
-        return;
     },
     ArticleUrl: function (Arid) {
         var article = Articles.findOne({_id: Arid});
         if (article){
-            var publisher = Publishers.findOne({_id:article.publisher});
             var publication = Publications.findOne({_id: article.journalId});
-            return "/publisher/" +publisher.name+ "/journal/" + publication.title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
+            if(publication){
+                var publisher = Publishers.findOne({_id:publication.publisher});
+                return "/publisher/" +publisher.name+ "/journal/" + publication.title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
+            }
         }
-        return;
     }
 });
 
