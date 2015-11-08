@@ -494,37 +494,37 @@ Router.map(function () {
 
     });
 
-    this.route("testTemplate", {
-        path: "/testTemplate"
-    });
-    this.route("editseaTemp", {
-        path: "/editseaTemp"
-    });
-    this.route("searchResult", {
-        path: "/searchResult"
-    });
-    this.route("loginNew", {
-        path: "/loginNew"
-    });
-    this.route("userAgreement", {
-        path: "/userAgreement"
-    });
-    this.route("publishCont", {
-        path: "/publishCont"
-    });
-    this.route("publishRecommed", {
-        path: "/publishRecommed"
-    });
-    this.route("publishAuthor", {
-        path: "/publishAuthor"
-    });
-    this.route("personal1", {
-        path: "/personal1"
-    });
-    this.route("news", {
-        path: "/news"
-    });
-    this.route("edit_author", {
-        path: "/edit_author"
-    });
+    //this.route("testTemplate", {
+    //    path: "/testTemplate"
+    //});
+    //this.route("editseaTemp", {
+    //    path: "/editseaTemp"
+    //});
+    //this.route("searchResult", {
+    //    path: "/searchResult"
+    //});
+    //this.route("loginNew", {
+    //    path: "/loginNew"
+    //});
+    //this.route("userAgreement", {
+    //    path: "/userAgreement"
+    //});
+    //this.route("publishCont", {
+    //    path: "/publishCont"
+    //});
+    //this.route("publishRecommed", {
+    //    path: "/publishRecommed"
+    //});
+    //this.route("publishAuthor", {
+    //    path: "/publishAuthor"
+    //});
+    //this.route("personal1", {
+    //    path: "/personal1"
+    //});
+    //this.route("news", {
+    //    path: "/news"
+    //});
+    //this.route("edit_author", {
+    //    path: "/edit_author"
+    //});
 });
