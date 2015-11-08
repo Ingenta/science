@@ -13,10 +13,10 @@ Template.layoutLatestArticles.helpers({
             return title;
         }
     },
-    publishDate: function (Apid) {
-        var article = Articles.findOne({_id: Apid});
-        if(article)return article.published.format("yyyy-MM-dd");
-    },
+    //publishDate: function (Apid) {
+    //    var article = Articles.findOne({_id: Apid});
+    //    if(article)return article.published.format("yyyy-MM-dd");
+    //},
     ArticleUrl: function (Arid) {
         var article = Articles.findOne({_id: Arid});
         if (article){
