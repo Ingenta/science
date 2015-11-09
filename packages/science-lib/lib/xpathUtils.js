@@ -22,6 +22,27 @@ Science.XPath.ParseHelper = {
 	},
 	/**
 	 * 同步方法
+	 * 使用xpath从dom元素中获取节点集
+	 * @param xp
+	 * @param ele
+	 * @returns
+	 */
+	getNodes:function(xp, ele){
+		return Science.XPath.select(xp,ele);
+	},
+	/**
+	 * 同步方法
+	 * 使用xpath从dom元素中获取匹配的第一个节点
+	 * @param xp
+	 * @param ele
+	 * @returns {*}
+	 */
+	getFirstNode:function(xp,ele){
+		var nodes = this.getNodes(xp,ele);
+		return nodes && nodes[0];
+	},
+	/**
+	 * 同步方法
 	 * 使用xpath从dom元素中获取单值
 	 * @param xp
 	 * @param ele
@@ -49,14 +70,25 @@ Science.XPath.ParseHelper = {
 	},
 	/**
 	 * 同步方法
-	 * 获取dom元素的属性值
+	 * 获取第一个匹配的dom元素的属性值
 	 * @param xp
 	 * @param ele
 	 * @returns {void|*}
 	 */
-	getAttribute:function(xp,ele){
-		var attr = xpath.select(xp,ele);
-		return attr && attr[0].value;
+	getFirstAttribute:function(xp,ele){
+		var attrs = this.getAttributes(xp,ele);
+		return attrs && attrs[0];
+	},
+	/**
+	 * 同步方法
+	 * 获取全部匹配的dom元素的属性值
+	 * @param xp
+	 * @param ele
+	 * @returns {void|*}
+	 */
+	getAttributes:function(xp,ele){
+		var attrNodes = xpath.select(xp,ele);
+		return !_.isEmpty(attrNodes) && _.pluck(attrNodes,"value");
 	},
 	/**
 	 * 获取双语字段值
@@ -104,6 +136,6 @@ _.extend(Science.XPath.ParseHelper,{
 	handler:{
 		simple:Science.XPath.ParseHelper.getSimpleVal,
 		xml:Science.XPath.ParseHelper.getXmlString,
-		attribute:Science.XPath.ParseHelper.getAttribute
+		attribute:Science.XPath.ParseHelper.getFirstAttribute
 	}
 })

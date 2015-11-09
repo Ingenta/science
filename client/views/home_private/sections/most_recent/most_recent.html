@@ -3,7 +3,7 @@
     <ul class="list-unstyled simple-list">
         {{#each latestUploadedArticles}}
             <li>
-                <h5><a href={{urlToArticleById _id}}>{{translateThis title.cn title.en}}</a></h5>
+                <h5><a href={{urlToArticleById _id}}>{{{translateThis title.cn title.en}}}</a></h5>
             </li>
         {{else}}
             {{_ "No articles found!"}}
