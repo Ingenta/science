@@ -7,6 +7,12 @@ Meteor.publish('articlesWithoutFulltext', function () {
     });
 });
 
+Meteor.publish('articleSearchResults', function () {
+    return Articles.find({}, {
+        fields: {sections: 0, figures: 0, references: 0, authorNotes: 0, affiliations: 0, fundings: 0}
+    });
+});
+
 Meteor.publish('oneArticle', function (id) {
     return Articles.find({_id: id});
 });
@@ -23,7 +29,7 @@ Meteor.publish('mostRecentArticles', function () {
         Articles.find({}, {
             sort: {createdAt: -1},
             limit: 10,
-            fields: {abstract: 0, authors: 0, sections: 0, figures: 0, references: 0}
+            fields: {title: 1, journalId: 1, doi: 1, issueId: 1}
         }),
         Publishers.find(),
         Publications.find()

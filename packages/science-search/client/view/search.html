@@ -14,18 +14,23 @@
         {{> relatedTopicLists}}
     {{/if}}
     {{> secSearch}}
-    <div class="dotted">
-        <label>{{_ "Sort Results By"}}:</label>
-        <label class="radio-inline">
-            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
+
+    <label class="control-label" for="resultsSort">
+        {{_ "Sort Results By"}}
+    </label>
+
+    <div class="btn-group" data-toggle="buttons" id="resultsSort">
+        <label class="btn btn-primary active">
+            <input class="datesort" type="radio" name="options" value="" autocomplete="off" checked> {{_ "Relevance"}}
         </label>
-        <label class="radio-inline">
-            <input class="datesort" type="radio" name="sort" value="year desc"> {{_ "Newest First"}}
+        <label class="btn btn-primary">
+            <input class="datesort" type="radio" name="options" value="year desc" autocomplete="off"> {{_ "Newest First"}}
         </label>
-        <label class="radio-inline">
-            <input class="datesort" type="radio" name="sort" value="year asc"> {{_ "Oldest First"}}
+        <label class="btn btn-primary">
+            <input class="datesort" type="radio" name="options" value="year asc" autocomplete="off"> {{_ "Oldest First"}}
         </label>
     </div>
+
 	<div class="row">
 		<div class="col-xs-4">
 			{{#each filters}}

@@ -33,16 +33,3 @@ Router.route("topics/:topicsId/", {
         ]
     }
 });
-
-Router.route('/topic/:topicQuery', {
-    template: "SearchResults",
-    parent: "topics",
-    title: ":topicQuery",
-    waitOn: function () {
-        return [
-            Meteor.subscribe('publishers'),
-            Meteor.subscribe('publications'),
-            Meteor.subscribe('articles')
-        ]
-    }
-});

@@ -11,7 +11,7 @@
                 <ul class="list-unstyled">
                     <h6 class="text-uppercase bg-eee">{{_ "FILTER BY Publisher"}}:</h6>
                     {{#if selectedPublisher}}
-                        <li><a class="clearPublisher"> &lt; {{_ "Any Publisher"}}</a></li>
+                        <li><a class="clearPublisher" href="#"> &lt; {{_ "Any Publisher"}}</a></li>
                         {{#each publishers}}
                             <li style="color: #CCC;">
                                 {{> onePublisherInFilterList}}
@@ -20,7 +20,7 @@
                     {{else}}
                         {{#each publishers}}
                             <li>
-                                <a class="filterButton" data-pubid="{{_id}}">
+                                <a class="filterButton" data-pubid="{{_id}}" href="#">
                                     {{> onePublisherInFilterList}}
                                 </a>
                             </li>
@@ -56,11 +56,11 @@
             {{/if}}
         </div>
         <div class="pull-right">
-            <a class="resetAlphabetFilter">{{_ "All"}}</a>&nbsp;
+            <a class="resetAlphabetFilter" href="#">{{_ "All"}}</a>&nbsp;
             {{#each letterInTheAlphabet}}
-                <a href="#" class="letterFilter">{{this}}</a>&nbsp;
+                <a class="letterFilter" href="#">{{this}}</a>&nbsp;
             {{/each}}
-            <a class="resetOtherFilter">{{_ "Other"}}</a>
+            <a class="resetOtherFilter" href="#">{{_ "Other"}}</a>
         </div>
         <br>
     </div>

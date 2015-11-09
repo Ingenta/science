@@ -10,25 +10,15 @@ Router.configure({
 
 Meteor.subscribe("current_user_data");
 Meteor.subscribe("issues");
-Meteor.subscribe("about");
+Meteor.subscribe("volumes");
 Meteor.subscribe("tag");
 Meteor.subscribe("file_excel");
 Meteor.subscribe("journal_ad");
-Meteor.subscribe("volumes");
-Meteor.subscribe("about_articles");
-Meteor.subscribe("editorial_member");
-Meteor.subscribe("editorial_board");
 Meteor.subscribe("meeting_info");
-Meteor.subscribe("author_center");
-Meteor.subscribe('articleXml');
 Meteor.subscribe('pages');
-Meteor.subscribe('news');
 Meteor.subscribe('images');
 Meteor.subscribe('advertisement');
-Meteor.subscribe('articleViews');
 Meteor.subscribe('institutions');
-Meteor.subscribe('mostCited');
-Meteor.subscribe('specialTopics');
 Meteor.subscribe('searchHistory');
 Meteor.subscribe('articleUrls');
 
@@ -54,11 +44,11 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('mostRecentArticles'),
-                Meteor.subscribe('articleViews'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
-                Meteor.subscribe('suggestedMostRead')
+                Meteor.subscribe('suggestedMostRead'),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
@@ -155,10 +145,14 @@ Router.map(function () {
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('specialTopics'),
                 Meteor.subscribe('suggestedMostRead'),
-                Meteor.subscribe('recommend')
+                Meteor.subscribe('recommend'),
+                Meteor.subscribe('specialTopics'),
+                Meteor.subscribe("editorial_member"),
+                Meteor.subscribe("editorial_board"),
+                Meteor.subscribe("author_center"),
+                Meteor.subscribe('mostCited')
             ]
         }
-
     });
 
     this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue', {
@@ -189,10 +183,6 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('about'),
-                Meteor.subscribe('about_articles'),
-                Meteor.subscribe('medias'),
-                Meteor.subscribe('files'),
                 Meteor.subscribe('suggestedMostRead')
             ]
         }
@@ -223,13 +213,14 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articleViews'),
+                Meteor.subscribe('articleViewsByArticleId', artId),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('oneArticle', artId),
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml'),
                 Meteor.subscribe('pdfs'),
-                Meteor.subscribe('emailConfig')
+                Meteor.subscribe('emailConfig'),
+                Meteor.subscribe('mostCited')
             ]
         },
         onBeforeAction: function () {
@@ -246,39 +237,12 @@ Router.map(function () {
         }
     });
 
-    this.route('/keywords/:keywordsQuery', {
-        template: "SearchResults",
-        parent: "keywords",
-        title: ":keywordsQuery",
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext')
-            ]
-        }
-    });
-
     this.route("author", {
         parent: "home",
         title: function () {
             return TAPi18n.__("Author");
         }
     });
-
-    this.route('/author/:authorQuery', {
-        template: "SearchResults",
-        parent: "home",
-        title: ":authorQuery",
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext')
-            ]
-        }
-    });
-
 
     this.route('cooperationCenter', {
         template: "cooperationCenter",
@@ -344,7 +308,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
@@ -363,7 +328,8 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('mostCited')
             ]
         }
     });
@@ -402,20 +368,6 @@ Router.map(function () {
         }
     });
 
-    this.route('/s/:searchQuery', {
-        template: "SearchResults",
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Search");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext')
-            ]
-        }
-    });
 
     this.route('/news/:newsId', {
         template: "showNewsArticle",
@@ -492,7 +444,6 @@ Router.map(function () {
     });
 
 
-
     this.route('/specialTopics/:specialTopicsId', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
@@ -543,37 +494,37 @@ Router.map(function () {
 
     });
 
-    this.route("testTemplate", {
-        path: "/testTemplate"
-    });
-    this.route("editseaTemp", {
-        path: "/editseaTemp"
-    });
-    this.route("searchResult", {
-        path: "/searchResult"
-    });
-    this.route("loginNew", {
-        path: "/loginNew"
-    });
-    this.route("userAgreement", {
-        path: "/userAgreement"
-    });
-    this.route("publishCont", {
-        path: "/publishCont"
-    });
-    this.route("publishRecommed", {
-        path: "/publishRecommed"
-    });
-    this.route("publishAuthor", {
-        path: "/publishAuthor"
-    });
-    this.route("personal1", {
-        path: "/personal1"
-    });
-    this.route("news", {
-        path: "/news"
-    });
-    this.route("edit_author", {
-        path: "/edit_author"
-    });
+    //this.route("testTemplate", {
+    //    path: "/testTemplate"
+    //});
+    //this.route("editseaTemp", {
+    //    path: "/editseaTemp"
+    //});
+    //this.route("searchResult", {
+    //    path: "/searchResult"
+    //});
+    //this.route("loginNew", {
+    //    path: "/loginNew"
+    //});
+    //this.route("userAgreement", {
+    //    path: "/userAgreement"
+    //});
+    //this.route("publishCont", {
+    //    path: "/publishCont"
+    //});
+    //this.route("publishRecommed", {
+    //    path: "/publishRecommed"
+    //});
+    //this.route("publishAuthor", {
+    //    path: "/publishAuthor"
+    //});
+    //this.route("personal1", {
+    //    path: "/personal1"
+    //});
+    //this.route("news", {
+    //    path: "/news"
+    //});
+    //this.route("edit_author", {
+    //    path: "/edit_author"
+    //});
 });

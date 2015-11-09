@@ -9,7 +9,7 @@ Router.route('/search', {
 		return [
 			Meteor.subscribe('publishers'),
 			Meteor.subscribe('publications'),
-			Meteor.subscribe('articles'),
+			Meteor.subscribe('articleSearchResults'),
 			Meteor.subscribe('keywords'),
 			Meteor.subscribe('topics')
 		]

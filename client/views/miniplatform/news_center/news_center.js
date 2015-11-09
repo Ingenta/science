@@ -26,6 +26,15 @@ Template.newsCenter.helpers({
     hide: function () {
         return NewsCenter.find({types:"4"}).count()<1 ? "": "hide";
     },
+    newsCount: function () {
+        return NewsCenter.find({types:"1"}).count()>10;
+    },
+    magazinesCount: function () {
+        return NewsCenter.find({types:"2"}).count()>10;
+    },
+    publishingCount: function () {
+        return NewsCenter.find({types:"3"}).count()>10;
+    },
     whichUrl: function () {
         if (this.link) {
             return this.link;

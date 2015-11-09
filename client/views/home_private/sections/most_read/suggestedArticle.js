@@ -28,10 +28,13 @@ Template.suggestedMostReadButtons.helpers({
     }
 })
 Template.suggestedMostReadButtons.events({
-    'click .fa-trash': function () {
+    'click .fa-trash': function (e) {
         if (!SuggestedArticles.findOne())return;
         var id = SuggestedArticles.findOne()._id;
-        SuggestedArticles.remove({_id: id});
+        confirmDelete(e, function () {
+            SuggestedArticles.remove({_id: id});
+        })
+
     }
 })
 Template.suggestedMostReadElement.helpers({
