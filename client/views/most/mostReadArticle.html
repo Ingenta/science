@@ -1,21 +1,24 @@
+<template name="sortByDateControl">
+    <label class="control-label" for="resultsSort">
+        {{_ "Sort Results By"}}
+    </label>
+
+    <div class="btn-group" data-toggle="buttons" id="resultsSort">
+        <label class="btn btn-primary active">
+            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
+        </label>
+        <label class="btn btn-primary">
+            <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
+        </label>
+        <label class="btn btn-primary">
+            <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
+        </label>
+    </div>
+</template>
 <template name="mostReadArticle">
     <h3 class="dotted"><b>{{_ "Most read articles to date"}}</b></h3>
     <div class="dotted">
-        <label class="control-label" for="resultsSort">
-            {{_ "Sort Results By"}}
-        </label>
-
-        <div class="btn-group" data-toggle="buttons" id="resultsSort">
-            <label class="btn btn-primary active">
-                <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
-            </label>
-            <label class="btn btn-primary">
-                <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
-            </label>
-            <label class="btn btn-primary">
-                <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
-            </label>
-        </div>
+        {{>sortByDateControl}}
     </div>
 
     <div class="dotted">
