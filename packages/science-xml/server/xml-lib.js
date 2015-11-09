@@ -255,17 +255,16 @@ ScienceXML.getAbstract = function (results, doc) {
 
 ScienceXML.getContentType = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var contentType = xpath.select("//article/@article-type", doc);
-    if(!_.isEmpty(contentType)){
-        if (contentType[0].value !== undefined)
-            results.contentType = contentType[0].value.trim().toLowerCase();
+    var contentType = parserHelper.getFirstAttribute("//article/@article-type", doc);
+    if(!contentType){
+        contentType=parserHelper.getSimpleVal("//article-meta/article-type",doc);
+    }
+    if(contentType){
+        contentType=contentType.trim().toLowerCase();
+        var trans = _.contains(Config.parser.contentTypeDic.article,contentType) ? "article":"other";
+        results.contentType=trans;
     }else{
-        contentType=ScienceXML.getSimpleValueByXPath("//article-meta/article-type",doc);
-        if(contentType){
-            results.contentType = contentType.trim().toLowerCase();
-        }else{
-            results.errors.push("No content type found");
-        }
+        results.errors.push("No content type found");
     }
     return results;
 }
