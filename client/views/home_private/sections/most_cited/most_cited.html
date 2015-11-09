@@ -3,15 +3,15 @@
     <ul class="list-unstyled simple-list">
         {{#each mostCitedArticles}}
             <li>
-                <h5><a href={{urlToArticleById articleId}}>{{translateThis title.cn title.en}}</a></h5>
+                <h5><a href={{urlToArticleById articleId}}>{{{translateThis title.cn title.en}}}</a></h5>
             </li>
         {{else}}
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
     {{#if mostCiteCount}}
-        <div align="right"><a href="/mostCiteArticles/{{this.journalId}}">
-            <button>+{{_ "more"}}</button>
+        <div align="right"><a href="/mostCitedArticles/{{this.journalId}}">
+            <button>+ {{_ "more"}}</button>
         </a></div>
     {{/if}}
 </template>

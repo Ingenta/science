@@ -1,14 +1,12 @@
 <template name="UserSettingsMyFavorite">
-   {{> pageElement key="favorite"}}
-   {{_ "result"}}:{{count}}
-    <hr>
-   <div>
-       {{#each favorite}}
+    {{> pageElement key="favorite"}}
+    <div>
+        {{#each favorite}}
             {{> SingleFavorite}}
-       {{else}}
+        {{else}}
             {{_ "Favorite Is Empty"}}
-       {{/each}}
-   </div>
+        {{/each}}
+    </div>
 </template>
 
 <template name="SingleFavorite">
@@ -21,16 +19,23 @@
 
     <ul class="dotted list-unstyled">
         <li>
-            <h4><div class="resultsList">{{> accessKeyImage}}<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}<a href="#" class="fa fa-trash "></a></a></div></h4>
+            <div class="pull-right"><a href="#" class="fa fa-trash "></a></div>
+            <h4>
+                <div class="resultsList">{{> accessKeyImage}}<a
+                        href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a></div>
+
+            </h4>
             <ul class="list-unstyled">
                 <li>
                     {{#each authors}}
-                    {{> authorPopButton}}
+                        {{> authorPopButton}}
                     {{/each}}
                 </li>
                 <li>
-                    <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
-                    <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+                    <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}}
+                    ({{year}})
+                    <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+                            class="fa fa-external-link"></i></a>
                 </li>
                 <li>{{_ "Language"}} : {{_ "Chinese"}}</li>
                 {{> abstractDetails}}
@@ -39,7 +44,16 @@
         <div class="bdsharebuttonbox pull-right">
             <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
             <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a></div>
-        <script>window._bd_share_config = {"common": {"bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16"}, "share": {}};
+        <script>window._bd_share_config = {
+            "common": {
+                "bdSnsKey": {},
+                "bdText": "",
+                "bdMini": "2",
+                "bdPic": "",
+                "bdStyle": "0",
+                "bdSize": "16"
+            }, "share": {}
+        };
         with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
         </script>
     </ul>

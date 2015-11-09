@@ -121,5 +121,10 @@ Config = {
         Editors: "#"
     },
     searchKeywordFrequency: 3000,
-    sysAdmin: "admin"
+    sysAdmin: "admin",
+    parser:{
+        contentTypeDic:{
+            article:["article","论文","research paper"]
+        }
+    }
 };

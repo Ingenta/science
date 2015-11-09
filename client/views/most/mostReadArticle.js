@@ -1,5 +1,5 @@
-Template.mostReadArticle.events({
-    'click .datesort': function (event) {
+Template.sortByDateControl.events({
+    'change input.datesort': function (event) {
         Session.set("sort", event.target.value);
     }
 });

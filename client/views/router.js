@@ -21,6 +21,7 @@ Meteor.subscribe('advertisement');
 Meteor.subscribe('institutions');
 Meteor.subscribe('searchHistory');
 Meteor.subscribe('articleUrls');
+Meteor.subscribe('emailConfig');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -294,7 +295,7 @@ Router.map(function () {
         }
     });
 
-    this.route('/mostCiteArticles', {
+    this.route('/mostCitedArticles', {
         template: "mostCiteArticle",
         title: function () {
             return TAPi18n.__("Most cited by");
@@ -314,7 +315,7 @@ Router.map(function () {
         }
     });
 
-    this.route('/mostCiteArticles/:journalId', {
+    this.route('/mostCitedArticles/:journalId', {
         template: "mostCiteArticle",
         title: function () {
             return TAPi18n.__("Most cited by");

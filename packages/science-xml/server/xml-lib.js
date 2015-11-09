@@ -49,8 +49,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.authors = [];
     results.authorNotes = [];
     results.affiliations = [];
-
-    var authorNodes = xpath.select("//contrib[@contrib-type='author']", doc);
+    var authorNodes = parserHelper.getNodes("//contrib[@contrib-type='author']", doc);
     _.each(authorNodes,function (author) {
         var fullnamePart ={};
 
@@ -62,19 +61,16 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         var authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
 
         //通讯作者信息
-        var noteAttr = xpath.select("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
-        if(!_.isEmpty(noteAttr)){
-            authorObj.email=noteAttr[0].value;
+        var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
+        if(noteAttr){
+            authorObj.email=noteAttr;
             console.log('email')
         }
 
         //工作单位信息
-        var affAttrs = xpath.select("child::xref[@ref-type='aff']/attribute::rid", author);
+        var affAttrs = parserHelper.getAttributes("child::xref[@ref-type='aff']/attribute::rid", author);
         if(!_.isEmpty(affAttrs)){
-            var affs = _.pluck(affAttrs,"value");
-            if(!_.isEmpty(affs)){
-                authorObj.affs = affs;
-            }
+            authorObj.affs = affAttrs;
         }
 
         results.authors.push(authorObj);
@@ -83,13 +79,13 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         results.errors.push("No author found");
     }
 
-    var authorNotesNodes = xpath.select("//author-notes/fn[@id]", doc);
+    var authorNotesNodes = parserHelper.getNodes("//author-notes/fn[@id]", doc);
     authorNotesNodes.forEach(function (note) {
-        var noteLabel = xpath.select("child::label/text()", note).toString();
-        var email = xpath.select("descendant::ext-link/text()", note).toString();
+        var noteLabel = parserHelper.getSimpleVal("child::label", note);
+        var email = parserHelper.getSimpleVal("descendant::ext-link", note);
         var multiLangNote=parserHelper.getMultiVal("child::p[@lang='{lang}']",note,{planb:"child::p",handler:parserHelper.handler.xml});
 
-        var id = xpath.select("attribute::id",note)[0].value;
+        var id = parserHelper.getFirstAttribute("attribute::id",note);
         if (noteLabel === undefined) {
             results.errors.push("No noteLabel found");
         } else if (email === undefined) {
@@ -111,7 +107,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     //debugger;  等客户修改他们的数据结构后继续
     //var affNodes = xpath.select("//contrib-group/descendant::aff",doc)
 
-    var affNodes = xpath.select("//contrib-group/aff-alternatives", doc);
+    var affNodes = parserHelper.getNodes("//contrib-group/aff-alternatives", doc);
     if (_.isEmpty(affNodes)) {
         affNodes = xpath.select("//contrib-group/aff",doc);
         _.each(affNodes,function(affNode){
@@ -259,17 +255,16 @@ ScienceXML.getAbstract = function (results, doc) {
 
 ScienceXML.getContentType = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var contentType = xpath.select("//article/@article-type", doc);
-    if(!_.isEmpty(contentType)){
-        if (contentType[0].value !== undefined)
-            results.contentType = contentType[0].value.trim().toLowerCase();
+    var contentType = parserHelper.getFirstAttribute("//article/@article-type", doc);
+    if(!contentType){
+        contentType=parserHelper.getSimpleVal("//article-meta/article-type",doc);
+    }
+    if(contentType){
+        contentType=contentType.trim().toLowerCase();
+        var trans = _.contains(Config.parser.contentTypeDic.article,contentType) ? "article":"other";
+        results.contentType=trans;
     }else{
-        contentType=ScienceXML.getSimpleValueByXPath("//article-meta/article-type",doc);
-        if(contentType){
-            results.contentType = contentType.trim().toLowerCase();
-        }else{
-            results.errors.push("No content type found");
-        }
+        results.errors.push("No content type found");
     }
     return results;
 }

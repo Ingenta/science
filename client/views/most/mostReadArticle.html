@@ -1,20 +1,26 @@
-<template name="mostReadArticle">
-    <h3 class="dotted"><b>{{_ "Most read articles to date"}}&nbsp;:</b></h3>
-    <div class="dotted">
-        <label>{{_ "Sort Results By"}}：</label>
-        <label class="radio-inline">
+<template name="sortByDateControl">
+    <label class="control-label" for="resultsSort">
+        {{_ "Sort Results By"}}
+    </label>
+
+    <div class="btn-group" data-toggle="buttons" id="resultsSort">
+        <label class="btn btn-primary active">
             <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
         </label>
-        <label class="radio-inline">
+        <label class="btn btn-primary">
             <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
         </label>
-        <label class="radio-inline">
+        <label class="btn btn-primary">
             <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
         </label>
     </div>
-    <!--<div class="dotted">-->
-        <!--<h4><b>{{_ "This platform up to read the article within view"}}：</b></h4>-->
-    <!--</div>-->
+</template>
+<template name="mostReadArticle">
+    <h3 class="dotted"><b>{{_ "Most read articles to date"}}</b></h3>
+    <div class="dotted">
+        {{>sortByDateControl}}
+    </div>
+
     <div class="dotted">
         {{#each mostReadArticles}}
             <ul class="dotted list-unstyled">
