@@ -1,22 +1,18 @@
 Template.UserSettingsMyFavorite.helpers({
-    favorite : function(){
+    favorite: function () {
         var user = Users.findOne({_id: Meteor.userId()});
         return user.favorite;
-    },
-    count : function () {
-        if(Users.findOne().favorite)
-        return Users.findOne().favorite.length;
     }
 })
 
 Template.SingleFavorite.helpers({
-    article: function(){
+    article: function () {
         return Articles.findOne({_id: this.articleId});
     }
 })
 
 Template.favoriteArticle.helpers({
-    query      : function () {
+    query: function () {
         return Router.current().params.searchQuery;
     }
 });
@@ -24,12 +20,12 @@ Template.favoriteArticle.helpers({
 Template.favoriteArticle.events({
     'click .fa-trash': function (e) {
         e.articleId = this._id
-        confirmDelete(e,function(){
+        confirmDelete(e, function () {
             var tempArray = Meteor.user().favorite;
-            var resultArray = _.filter(tempArray, function(element){
+            var resultArray = _.filter(tempArray, function (element) {
                 return element.articleId !== e.articleId
             })
-            Users.update({_id: Meteor.userId()},{$set: {'favorite': resultArray}});
+            Users.update({_id: Meteor.userId()}, {$set: {'favorite': resultArray}});
         })
     }
 })
