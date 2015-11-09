@@ -48,10 +48,15 @@ Science.XPath.ParseHelper = {
 	 * @param ele
 	 * @returns {void|*|string}
 	 */
-	getSimpleVal:function(xp,ele){
+	getSimpleVal:function(xp,ele,planb){
 		var val = xpath.select(xp,ele);
-		if(_.isEmpty(val) || _.isEmpty(val[0].childNodes))
-			return;
+		if(_.isEmpty(val) || _.isEmpty(val[0].childNodes)){
+			if(planb){
+				return this.getSimpleVal(planb,ele);
+			}else{
+				return;
+			}
+		}
 		var datas = _.pluck(val[0].childNodes,"data");
 		return datas.join("").trim();
 	},
