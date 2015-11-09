@@ -1,5 +1,5 @@
 var pageSetting = new ReactiveDict();
-var itemLimit = 10
+var itemLimit = 10;
 Template.solrFilterItem.events({
 	'click .filter-me':function(e){
 		e.preventDefault();
@@ -25,18 +25,24 @@ Template.solrFilterItem.helpers({
 	getFilterOptions:function() {
 		if(_.isEmpty(this.filterOptions))
 			return;
-		var scount = pageSetting.get(this.name);
+		var scount = pageSetting.get(this.name) || itemLimit;
 		console.log(scount);
 		return _.first(this.filterOptions,scount);
 	},
 	isTooMany:function(){
-		return pageSetting.get(this.name)>-1 && this.filterOptions.length> itemLimit;
+		return pageSetting.get(this.name)!=-1 && this.filterOptions.length> itemLimit;
 	}
 });
 
-Template.solrFilterItem.onCreated(function(){
+Template.solrFilterItem.onRendered(function(){
 	var filterName = this.data.name;
 	if(!filterName)
 		return;
-	pageSetting.set(filterName,pageSetting.get(filterName) || itemLimit);
+	var currLimit = pageSetting.get(filterName);
+	console.log(currLimit);
+	if(currLimit==-1){
+		Template.instance().$(".slimScroll").slimScroll({
+			height:'200px'
+		});
+	}
 });

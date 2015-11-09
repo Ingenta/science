@@ -15,6 +15,7 @@ Router.route('/search', {
 		]
 	},
 	onBeforeAction:function(){
+		$(".slimScrollDiv").remove();
 		SolrQuery.callSearchMethod();
 		this.next();
 	}
