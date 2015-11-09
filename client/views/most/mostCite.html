@@ -1,35 +1,43 @@
 <template name="mostCiteArticle">
     <h3 class="dotted"><b>{{_ "Most cited by to view"}}&nbsp;:</b></h3>
+
     <div class="dotted">
-        <label>{{_ "Sort Results By"}}：</label>
-        <label class="radio-inline">
-            <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
+        <label class="control-label" for="resultsSort">
+            {{_ "Sort Results By"}}
         </label>
-        <label class="radio-inline">
-            <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
-        </label>
-        <label class="radio-inline">
-            <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
-        </label>
-    </div>
-    <div class="dotted">
-        <h4><b>{{_ "This platform in the most cited article view"}}：</b></h4>
+
+        <div class="btn-group" data-toggle="buttons" id="resultsSort">
+            <label class="btn btn-primary active">
+                <input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}
+            </label>
+            <label class="btn btn-primary">
+                <input class="datesort" type="radio" name="sort" value="-1"> {{_ "Newest First"}}
+            </label>
+            <label class="btn btn-primary">
+                <input class="datesort" type="radio" name="sort" value="1"> {{_ "Oldest First"}}
+            </label>
+        </div>
     </div>
     <div class="dotted">
         {{#each mostCitedArticles}}
             <ul class="dotted list-unstyled">
                 <li>
-                    <h4><div class="resultsList">{{> accessKeyImage}}<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a></div></h4>
+                    <h4>
+                        <div class="resultsList">{{> accessKeyImage}}<a
+                                href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a></div>
+                    </h4>
 
                     <ul class="list-unstyled">
                         <li>
                             {{#each authors}}
-                            {{> authorPopButton}}
+                                {{> authorPopButton}}
                             {{/each}}
                         </li>
                         <li>
-                            <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
-                            <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
+                            <a href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
+                            <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                            <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+                                    class="fa fa-external-link"></i></a>
                         </li>
                         {{> abstractDetails}}
                     </ul>
