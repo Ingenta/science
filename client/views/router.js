@@ -21,6 +21,7 @@ Meteor.subscribe('advertisement');
 Meteor.subscribe('institutions');
 Meteor.subscribe('searchHistory');
 Meteor.subscribe('articleUrls');
+Meteor.subscribe('emailConfig');
 
 Router.onBeforeAction(function () {
     // loading indicator here

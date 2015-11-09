@@ -1,5 +1,5 @@
 Template.mostCiteArticle.events({
-    'click .datesort': function (event) {
+    'change input.datesort': function (event) {
         Session.set("sort", event.target.value);
     }
 });
