@@ -194,7 +194,8 @@ Meteor.startup(function () {
         parent: "user_settings",
         waitOn: function () {
             return [
-                Meteor.subscribe('publications')
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articleSearchResults')
             ]
         }
     });
