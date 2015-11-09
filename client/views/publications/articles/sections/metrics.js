@@ -11,16 +11,13 @@ Template.MetricsTemplate.rendered = function () {
     //TODO: consider only calling if location report data is older than a day?
     Meteor.call("getLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
-        var colors = ['#DDDF0D', '#DD000D', '#00DF0D', '#DDDFFF'];
         var index = 0;
         _.each(arr, function (obj) {
-            var color = colors[index % colors.length];
             index++;
             if (obj.name) {
                 data.push({
                     name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
-                    y: obj.locationCount,
-                    color: color
+                    y: obj.locationCount
                 });
             }
         });
@@ -30,27 +27,23 @@ Template.MetricsTemplate.rendered = function () {
 
 
 var buildHitCounterChart = function (articleId) {
-    var chart;
     var data = new Array();
     data.push({
         name: TAPi18n.__('Abstract Views'),
-        y: ArticleViews.find({action: "abstract", articleId: articleId}).count(),
-        color: '#55BF3B'
+        y: ArticleViews.find({action: "abstract", articleId: articleId}).count()
     });
 
     data.push({
         name: TAPi18n.__('Full text Views'),
-        y: ArticleViews.find({action: "fulltext", articleId: articleId}).count(),
-        color: '#DDDF0D'
+        y: ArticleViews.find({action: "fulltext", articleId: articleId}).count()
     });
 
     data.push({
         name: TAPi18n.__('PDF Downloads'),
-        y: ArticleViews.find({action: "pdfDownload", articleId: articleId}).count(),
-        color: '#DF5353'
+        y: ArticleViews.find({action: "pdfDownload", articleId: articleId}).count()
     });
 
-    chart = $('#container-pie').highcharts({
+    $('#container-pie').highcharts({
 
         chart: {
             plotBackgroundColor: null,
@@ -96,8 +89,7 @@ var buildHitCounterChart = function (articleId) {
 
 
 var buildLocationChart = function (data) {
-    var chart;
-    chart = $('#container-location').highcharts({
+    $('#container-location').highcharts({
 
         chart: {
             plotBackgroundColor: null,
