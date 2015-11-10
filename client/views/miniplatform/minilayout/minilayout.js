@@ -1,4 +1,11 @@
 Template.miniLayout.helpers({
+    collectionsLink: function () {
+        var publisher = Publishers.findOne({agree:true});
+        if(publisher){
+            Session.set("activeTab", "Collections");
+            return "/publisher/" + publisher.name;
+        }
+    },
     myLinks: function () {
         return NewsLink.find({types:"1"});
     },

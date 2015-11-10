@@ -30,6 +30,9 @@ NewsRecommendSchema = new SimpleSchema({
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
             }
         }
+    },
+    createDate: {
+        type: Date
     }
 });
 Meteor.startup(function () {
