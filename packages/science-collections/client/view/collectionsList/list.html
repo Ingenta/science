@@ -5,7 +5,9 @@
                 {{> oneCollection}}
             {{/each}}
             {{> Paginator_UI collections}}
-            {{> displayPerPage}}
+            {{#if collectionPageCount}}
+                {{> displayPerPage}}
+            {{/if}}
         </div>
     </div>
 </template>
