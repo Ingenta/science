@@ -510,84 +510,60 @@ ScienceXML.getKeywords= function(xp,dom){
     return _.uniq(allkeywords);
 }
 
-ScienceXML.getReferences=function(doc){
+ScienceXML.getReferences=function(results,doc){
     var refs = [];
-    var refNodes = xpath.select("//back/ref-list/ref", doc);
+    var refNodes = parserHelper.getNodes("//back/ref-list/ref", doc);
     var index=1;
     _.each(refNodes,function (refNode) {
         var ref = {};
         ref.index=index++;
-        var ele=xpath.select("child::element-citation",refNode)[0];
-        var idAttr = xpath.select("attribute::id",ele);
-        if(!_.isEmpty(idAttr)){
-            ref.id=idAttr[0].value;
-        }
-        var typeAttr=xpath.select("attribute::publication-type",ele);
-        if(!_.isEmpty(typeAttr)){
-            ref.type=typeAttr[0].value;
-        }
-        //提取引文作者信息 开始
-        var authorNodes = xpath.select("descendant::person-group/name",refNode);
-        if(authorNodes){
-            var authors = [];
-            _.each(authorNodes,function(authorNode){
-                var author = {};
-                var surnameNode=xpath.select("child::surname/text()",authorNode);
-                if(!_.isEmpty(surnameNode)){
-                    author.surName=surnameNode.toString()
-                }
-                var givenNode=xpath.select("child::given-names/text()",authorNode);
-                if(!_.isEmpty(givenNode)){
-                    author.givenName=givenNode.toString()
-                }
-                authors.push(author);
-            })
-            //若从引文信息中提取到了作者信息，将作者信息放入引文信息中
-            if(!_.isEmpty(authors)){
-                ref.authors = authors;
-                //检查是否有更多被省略的作者(若存在etal标签，可判定有被省略的作者)
-                if(xpath.select("descendant::person-group/etal",refNode).length){
-                    ref.etal=true;
+        var ele=parserHelper.getFirstNode("child::element-citation",refNode);
+        if(!ele){
+            results.errors.push("can't find element-citation node " + ref.index);
+        }else{
+            ref.id = parserHelper.getFirstAttribute("attribute::id",ele);
+            ref.type=parserHelper.getFirstAttribute("attribute::publication-type",ele);
+            //提取引文作者信息 开始
+            var authorNodes = parserHelper.getNodes("descendant::person-group/name",refNode);
+            if(authorNodes){
+                var authors = [];
+                _.each(authorNodes,function(authorNode){
+                    var author = {};
+                    author.surName=parserHelper.getSimpleVal("child::surname",authorNode);
+                    author.givenName=parserHelper.getSimpleVal("child::given-names",authorNode);
+                    authors.push(author);
+                });
+                //若从引文信息中提取到了作者信息，将作者信息放入引文信息中
+                if(!_.isEmpty(authors)){
+                    ref.authors = authors;
+                    //检查是否有更多被省略的作者(若存在etal标签，可判定有被省略的作者)
+                    if(parserHelper.getFirstNode("descendant::person-group/etal",refNode)){
+                        ref.etal=true;
+                    }
                 }
             }
-        }
-        //提取引文作者信息 完成
-        var titleNode = xpath.select("child::element-citation/article-title",refNode);
-        if(!_.isEmpty(titleNode)){
-            var textNodes = xpath.select("descendant::text()",titleNode[0]);
-            var title = "";
-            _.each(textNodes,function(t){
-                title+= " " + t.toString();
-            })
-            ref.title=title.trim();
-        }
-        if(!ref.title){
-            ref.title="not found";
-        }
-        ref.publisherLoc=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-loc",refNode);
-        ref.publisherName=ScienceXML.getSimpleValueByXPath("child::element-citation/publisher-name",refNode);
-        ref.year=ScienceXML.getSimpleValueByXPath("child::element-citation/year",refNode);
-        ref.volume = ScienceXML.getSimpleValueByXPath("child::element-citation/volume",refNode);
-        ref.issue = ScienceXML.getSimpleValueByXPath("child::element-citation/issue",refNode);
-        ref.firstPage=ScienceXML.getSimpleValueByXPath("child::element-citation/fpage",refNode);
-        ref.lastPage=ScienceXML.getSimpleValueByXPath("child::element-citation/lpage",refNode);
-        ref.doi=ScienceXML.getSimpleValueByXPath("child::element-citation/pub-id[@pub-id-type='doi']",refNode);
-
-        var sourceNodes = xpath.select("child::element-citation/source",refNode);
-        if(!_.isEmpty(sourceNodes)){
-            var uriNodes = xpath.select("child::uri",sourceNodes[0]);
-            if(!_.isEmpty(uriNodes)){
-                var xlinkSelect = xpath.useNamespaces({"xlink":"http://www.w3.org/1999/xlink"});
-                var hrefAttr = xlinkSelect("attribute::xlink:href",uriNodes[0]);
-                if(!_.isEmpty(hrefAttr)){
-                    ref.href=hrefAttr[0].value;
-                    ref.source = xpath.select("child::text()",uriNodes[0]).toString();
-                }
-            }else{
-                ref.source=xpath.select("child::text()",sourceNodes[0]).toString();
+            //提取引文作者信息 完成
+            var titleNode = parserHelper.getFirstNode("child::element-citation/article-title",refNode);
+            if(titleNode){
+                var textNodes = xpath.select("descendant::text()",titleNode);
+                var title = "";
+                _.each(textNodes,function(t){
+                    title+= " " + t.toString();
+                });
+                ref.title=title.replace(/\r\n/g," ").trim();
             }
+            ref.publisherLoc=parserHelper.getSimpleVal("child::element-citation/publisher-loc",refNode);
+            ref.publisherName=parserHelper.getSimpleVal("child::element-citation/publisher-name",refNode);
+            ref.year=parserHelper.getSimpleVal("child::element-citation/year",refNode);
+            ref.volume = parserHelper.getSimpleVal("child::element-citation/volume",refNode);
+            ref.issue = parserHelper.getSimpleVal("child::element-citation/issue",refNode);
+            ref.firstPage=parserHelper.getSimpleVal("child::element-citation/fpage",refNode);
+            ref.lastPage=parserHelper.getSimpleVal("child::element-citation/lpage",refNode);
+            ref.doi=parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='doi']",refNode);
+            ref.source=parserHelper.getSimpleVal("child::element-citation/source",refNode) || parserHelper.getSimpleVal("child::element-citation/source/uri",refNode);
+            ref.href=parserHelper.getFirstAttribute("child::element-citation/source/uri/@xlink:href",refNode,{"xlink":"http://www.w3.org/1999/xlink"});
+            refs.push(ref);
         }
-        refs.push(ref);
     });
     return refs;
 };
