@@ -77,3 +77,6 @@ ol.affiliationList li {
     padding: 0px;
     border: 1px solid #cccccc;
 }
+.separate-comma sup {
+    margin-left: -3px;
+}
