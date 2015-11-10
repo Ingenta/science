@@ -14,6 +14,9 @@ Template.searchResultForAddToSpecialTopics.events({
         });
         var addedArticles = Session.get("addedArticlesTo");
         newest          = _.union(newest, addedArticles);
+        if(!SpecialTopics.articles){
+            SpecialTopics.articles=[];
+        }
         SpecialTopics.update({_id: Router.current().params.specialTopicsId}, {$set: {articles: newest}});
 	}
 });
@@ -21,6 +24,7 @@ Template.searchResultForAddToSpecialTopics.events({
 
 Template.oneArticleOfResultSpecialTopics.helpers({
     isSelected: function () {
-        return _.contains(this.specialTopics, Router.current().params.specialTopicsId);
+        var addedArticles = Session.get("addedArticlesTo");
+        return _.contains(addedArticles, this._id);
     }
 });
