@@ -37,7 +37,9 @@
                             {{_ "No publications found!"}}
                         {{/each}}
                         {{> Paginator_UI publications}}
-                        {{> displayPerPage}}
+                        {{#if filterPublicationPageCount}}
+                            {{> displayPerPage}}
+                        {{/if}}
                         <br>
                     </div>
                 </div>
