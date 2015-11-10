@@ -1,6 +1,7 @@
 var altmetricData = new ReactiveVar();
 
 Template.altmetric.onCreated(function(){
+	altmetricData.set(undefined);
 	var doi  = Template.currentData().doi;
 	console.log(doi);
 	if(doi){
