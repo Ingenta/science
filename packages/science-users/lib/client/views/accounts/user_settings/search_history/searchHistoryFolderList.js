@@ -5,7 +5,7 @@ Template.searchHistoryFolderList.helpers({
 });
 
 Template.searchHistoryFolderList.events({
-    'click .fa-trash': function (e) {
+    'click .remove-folder': function (e) {
         e.folderName = this.folderName;
         confirmDelete(e,function(){
             var tempArray = Meteor.user().history.saved;
@@ -18,16 +18,21 @@ Template.searchHistoryFolderList.events({
 });
 
 Template.eachWords.events({
-    'click .fa-trash':function(e){
-//        e.word = this.word;
-//        confirmDelete(e,function(){
-//        var tempArray = Meteor.user().history.saved;
-//        var resultArray = _.filter(tempArray, function (element) {
-//            return element.word !== e.word
-//        });
-//            console.log(resultArray);
-//             Users.update({_id: Meteor.userId()}, {$set: {"history.saved":resultArray}});
-//        })
+    'click .remove-word':function(e){
+        var that = this;
+        confirmDelete(e,function(){
+            var folderName = $(e.target).closest("li").attr("id");
+            var history = Meteor.user().history;
+            var index=_.findIndex(history.saved,function(item){
+                return item.folderName===folderName;
+            });
+            history.saved[index].words=_.filter(history.saved[index].words,function(item){
+                return item.word!==that.word
+            });
+            history.unsave = history.unsave || [];
+            history.unsave.push(that)
+            Users.update({_id: Meteor.userId()}, {$set: {"history":history}});
+        })
     }
 });
 

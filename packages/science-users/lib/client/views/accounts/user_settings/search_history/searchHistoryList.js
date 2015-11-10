@@ -19,7 +19,7 @@ Template.searchHistoryList.helpers({
 })
 
 Template.searchHistoryList.events({
-    'click .fa-trash': function (e) {
+    'click .remove-unsave': function (e) {
         e.word = this.word;
         confirmDelete(e,function(){
             var tempArray = Meteor.user().history.unsave;
@@ -33,6 +33,7 @@ Template.searchHistoryList.events({
         e.stopPropagation();
         $(e.target).closest("ul").dropdown('toggle');
         var keyword=$(e.target).closest("ul").data().keyword;
+        var from=$(e.target).closest("ul").data().from;
         var tempArray = Meteor.user().history.unsave;
         var resultArray = _.filter(tempArray, function (element) {
             return element.word !== keyword
@@ -43,7 +44,7 @@ Template.searchHistoryList.events({
                 if(!item.words){
                     item.words=[];
                 }
-                item.words.push({word:keyword,createOn:new Date()});
+                item.words.push({word:keyword,createOn:new Date(),from:from});
             }
             return item;
         });

@@ -14,7 +14,8 @@ this.Column.allow({
 
 ColumnSchema = new SimpleSchema({
     title: {
-        type: String
+        type: String,
+        unique: true
     },
     types: {
         type: String

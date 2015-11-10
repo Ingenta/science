@@ -14,7 +14,8 @@ this.NewsCenter.allow({
 
 NewsCenterSchema = new SimpleSchema({
     title: {
-        type: String
+        type: String,
+        unique: true
     },
     author: {
         type: String,

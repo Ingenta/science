@@ -32,7 +32,9 @@ Template.cooperationCenter.events({
 Template.updateAdCenterModalForm.helpers({
     getJournals: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var publications = Publications.find({publisher: this.publisher}).fetch();
+        var adv = JournalAC.find({types: "1",publisher: this.publisher,_id:{$ne:this._id}}).fetch();
+        var adId = _.pluck(adv,"journalId");
+        var publications = Publications.find({publisher: this.publisher,_id:{$nin:adId}}).fetch();
         if(publications)
         var result = [];
         _.each(publications, function (item) {
@@ -48,7 +50,9 @@ Template.addAdCenterModalForm.helpers({
         var viewsId =  Session.get('PublisherId');
         if(viewsId)
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var publications = Publications.find({publisher: viewsId}).fetch();
+        var adv = JournalAC.find({types: "1",publisher: viewsId}).fetch();
+        var adId = _.pluck(adv,"journalId");
+        var publications = Publications.find({publisher: viewsId,_id:{$nin:adId}}).fetch();
         if(publications)
         var result = [];
         _.each(publications, function (item) {

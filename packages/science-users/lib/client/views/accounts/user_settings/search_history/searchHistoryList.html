@@ -26,7 +26,7 @@
                 {{time}}
             </td>
             <td>
-                <a href="#" class="fa fa-trash"></a>
+                <a href="#" class="fa fa-trash remove-unsave"></a>
             </td>
             <td>
                 <div class="dropdown">
@@ -34,7 +34,7 @@
                         {{_ "Save"}}
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" data-keyword="{{word}}">
+                    <ul class="dropdown-menu" data-keyword="{{word}}" data-from="{{from}}">
                         {{#each folder}}
                             <li class="folder">
                                 <a href="#">{{folderName}}</a>
