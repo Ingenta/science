@@ -8,24 +8,15 @@
                 <h2>
                     {{translateThis chinesename name}}
                 </h2>
+                {{#if i18n_isCurrentLanguage 'en'}}
+                    {{description}}
+                {{else}}
+                    {{chinesedescription}}
+                {{/if}}
+                {{> PublisherWebsite}}
             </div>
         </div>
         <br/>
-
-        <div class="row">
-
-            {{#if i18n_isCurrentLanguage 'en'}}
-                {{description}}
-            {{else}}
-                {{chinesedescription}}
-            {{/if}}
-
-        </div>
-        <br/>
-
-        <div class="row">
-            {{> PublisherWebsite}}
-        </div>
         <br/>
 
         <div class="row">
@@ -37,10 +28,13 @@
 
 <template name="PublisherWebsite">
     {{#if website}}
-        <a href="{{website}}">
-            {{_ "Home page for"}}
-            {{translateThis chinesename name}}
-            <i class="fa fa-external-link"></i></a>
+        <p>
+            <a href="{{website}}">
+                {{_ "Home page for"}}
+                {{translateThis chinesename name}}
+                <i class="fa fa-external-link"></i></a>
+        </p>
+
     {{/if}}
 </template>
 
