@@ -82,7 +82,7 @@ var removeArticleFromArray = function (array, articleId) {
 };
 
 Template.showArticle.onRendered(function () {
-	delayRender()
+	delayRender();
 	TAPi18n.addChangeHook('dynamicRender',delayRender);
 	var rva = Session.get("recentViewedArticles");
 	if (!rva) {
@@ -95,6 +95,10 @@ Template.showArticle.onRendered(function () {
 	rva.unshift({_id: this.data._id});//add a article to array[0]
 	Session.set("recentViewedArticles", rva);
 
+
+	if(!_.isEmpty(this.data.affiliations) && this.data.affiliations.length==1){
+		Session.set("hideAffLabel",true);
+	}
 	//Rating Start
 	var aid = this.data._id;
 
