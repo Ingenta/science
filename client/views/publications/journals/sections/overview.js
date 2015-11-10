@@ -59,7 +59,7 @@ Template.TagList.helpers({
 Template.recommendArticles.helpers({
     recommendArticles: function () {
         var journalId = Session.get('currentJournalId');
-        return Recommend.find({publications: journalId}, {limit: 5});
+        return Recommend.find({publications: journalId},{sort: {createDate: -1}, limit: 5});
     },
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
@@ -76,11 +76,7 @@ Template.recommendArticles.helpers({
     },
     hasMoreThanFiveRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
-        if (5 < Recommend.find({publications: journalId}).count()) {
-            return true;
-        } else {
-            return false;
-        }
+        if (journalId)return Recommend.find({publications: journalId}).count() > 5;
     }
 });
 
@@ -101,6 +97,7 @@ AutoForm.addHooks(['addRecommendModalForm'], {
     before: {
         insert: function (doc) {
             doc.publications = Session.get('currentJournalId');
+            doc.createDate = new Date();
             return doc;
         }
     }
