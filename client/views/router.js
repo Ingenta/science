@@ -295,7 +295,7 @@ Router.map(function () {
         }
     });
 
-    this.route('/mostCiteArticles', {
+    this.route('/mostCitedArticles', {
         template: "mostCiteArticle",
         title: function () {
             return TAPi18n.__("Most cited by");
@@ -315,7 +315,7 @@ Router.map(function () {
         }
     });
 
-    this.route('/mostCiteArticles/:journalId', {
+    this.route('/mostCitedArticles/:journalId', {
         template: "mostCiteArticle",
         title: function () {
             return TAPi18n.__("Most cited by");

@@ -82,6 +82,20 @@ Template.FilterList.helpers({
     },
     selectedPublisher: function () {
         return Session.get('filterPublisher');
+    },
+    filterPublicationPageCount: function () {
+        var pubId = Session.get('filterPublisher');
+        var first = Session.get('pubFirstLetter');
+        var q = {};
+        pubId && (q.publisher = pubId);
+        var reg;
+        if (first && first == "other") {
+            reg = "[^A-Z]"
+        } else {
+            reg = "^" + first;
+        }
+        first && (q.shortTitle = {$regex: reg, $options: "i"});
+        return myPubPagination.find(q).count()>10;
     }
 });
 

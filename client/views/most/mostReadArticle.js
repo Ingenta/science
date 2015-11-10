@@ -1,4 +1,4 @@
-Template.mostReadArticle.events({
+Template.sortByDateControl.events({
     'change input.datesort': function (event) {
         Session.set("sort", event.target.value);
     }

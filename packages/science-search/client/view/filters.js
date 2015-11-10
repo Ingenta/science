@@ -26,7 +26,6 @@ Template.solrFilterItem.helpers({
 		if(_.isEmpty(this.filterOptions))
 			return;
 		var scount = pageSetting.get(this.name) || itemLimit;
-		console.log(scount);
 		return _.first(this.filterOptions,scount);
 	},
 	isTooMany:function(){
@@ -39,7 +38,6 @@ Template.solrFilterItem.onRendered(function(){
 	if(!filterName)
 		return;
 	var currLimit = pageSetting.get(filterName);
-	console.log(currLimit);
 	if(currLimit==-1){
 		Template.instance().$(".slimScroll").slimScroll({
 			height:'200px'
