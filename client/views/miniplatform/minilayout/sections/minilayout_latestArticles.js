@@ -39,16 +39,16 @@ Template.addLatestArticlesModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var publisher = Publishers.findOne({agree:true});
-        if(publisher){
-            var articles = Articles.find({publisher:publisher._id}).fetch();
-            var result = [];
-            _.each(articles, function (item) {
-                var name = iscn ? item.title.cn : item.title.en;
-                result.push({label: name, value: item._id});
-            });
-            return result;
-        }
-        return;
+        if(publisher)
+        var rec = NewsRecommend.find().fetch();
+        var recId = _.pluck(rec,"ArticlesId");
+        var articles = Articles.find({publisher:publisher._id,_id:{$nin:recId}}).fetch();
+        var result = [];
+        _.each(articles, function (item) {
+            var name = iscn ? item.title.cn : item.title.en;
+            result.push({label: name, value: item._id});
+        });
+        return result;
     }
 });
 
@@ -56,16 +56,16 @@ Template.updateLatestArticlesModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var publisher = Publishers.findOne({agree:true});
-        if(publisher){
-            var articles = Articles.find({publisher:publisher._id}).fetch();
-            var result = [];
-            _.each(articles, function (item) {
-                var name = iscn ? item.title.cn : item.title.en;
-                result.push({label: name, value: item._id});
-            });
-            return result;
-        }
-        return;
+        if(publisher)
+        var rec = NewsRecommend.find({_id:{$ne:this._id}}).fetch();
+        var recId = _.pluck(rec,"ArticlesId");
+        var articles = Articles.find({publisher:publisher._id,_id:{$nin:recId}}).fetch();
+        var result = [];
+        _.each(articles, function (item) {
+            var name = iscn ? item.title.cn : item.title.en;
+            result.push({label: name, value: item._id});
+        });
+        return result;
     }
 });
 

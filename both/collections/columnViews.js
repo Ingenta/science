@@ -15,7 +15,7 @@ this.ColumnViews.allow({
 ColumnViewsSchema = new SimpleSchema({
     title: {
         type: String,
-        optional: true
+        unique: true
     },
     abstract: {
         type: String,
