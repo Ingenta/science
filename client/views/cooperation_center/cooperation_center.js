@@ -6,18 +6,13 @@ Template.cooperationCenter.helpers({
         return JournalAC.find({types: "1",publisher: pId});
     },
     titleValue: function (id) {
-        if(id===undefined)return;
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var publication = Publications.findOne({_id: id});
-        var title = iscn ? publication.titleCn : publication.title;
-    return title;
+        if(publication)return iscn ? publication.titleCn : publication.title;
     },
     pdfValue:function(){
-        if(this.fileId===undefined){
-            return null;
-        }
         var file = Collections.Files.findOne({_id:this.fileId});
-        return file.url();
+        if(file)return file.url();
     }
 });
 
@@ -36,10 +31,9 @@ Template.cooperationCenter.events({
 
 Template.updateAdCenterModalForm.helpers({
     getJournals: function () {
-        var viewsId =  Session.get('PublisherId');
-        if(viewsId===undefined)return;
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var publications = Publications.find({publisher: viewsId}).fetch();
+        var publications = Publications.find({publisher: this.publisher}).fetch();
+        if(publications)
         var result = [];
         _.each(publications, function (item) {
             var name = iscn ? item.titleCn : item.title;
@@ -52,9 +46,10 @@ Template.updateAdCenterModalForm.helpers({
 Template.addAdCenterModalForm.helpers({
     getJournals: function () {
         var viewsId =  Session.get('PublisherId');
-        if(viewsId===undefined)return;
+        if(viewsId)
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var publications = Publications.find({publisher: viewsId}).fetch();
+        if(publications)
         var result = [];
         _.each(publications, function (item) {
             var name = iscn ? item.titleCn : item.title;

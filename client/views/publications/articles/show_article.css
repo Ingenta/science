@@ -60,3 +60,20 @@ ol.affiliationList li {
     content:",";
     margin:auto 3px;
 }
+.sectionDivider.title:not(#sec-__start__) {
+    color: #39392A;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 1.3em;
+    padding: 5px 0 5px 10px;
+    text-transform: uppercase;
+}
+.subtitle {
+    color: #39392A;
+    font-family: verdana, arial, helvetica, sans-serif;
+    padding: 5px 0 5px 10px;
+}
+.sectionDivider:not(#sec-__start__) {
+    background-color: #EEEEEE;
+    padding: 0px;
+    border: 1px solid #cccccc;
+}
