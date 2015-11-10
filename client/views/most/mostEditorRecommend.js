@@ -1,9 +1,3 @@
-Template.mostRecommendArticles.events({
-    'change input.datesort': function (event) {
-        Session.set("sort", event.target.value);
-    }
-});
-
 Template.mostRecommendArticles.helpers({
     mostRecommendArticles: function () {
         var journalId = Session.get('currentJournalId');

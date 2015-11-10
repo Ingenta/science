@@ -6,6 +6,10 @@
     "FILTER BY Release Date": "Filter by Date",
     "FILTER BY Topic": "Filter by topic",
     "FILTER BY PACS":"Filter by PACS",
+    "Free Content": "Free",
+    "Open Access Content": "Open Access",
+    "Subscribed Content": "Subscribed",
+    "Free Trial Content": "Free Trial",
     "Reports": "Statistics",
     "volumeItem": "Volume %s",
     "issueItem": "Issue %s",
@@ -944,7 +948,7 @@
     "Recent_search":"Recent Searches",
     "PACS":"PACS number:",
     "PACS_plural":"PACS numbers:",
-    "funding":"Fund",
+    "funding":"Funded by",
     "contentType":{
         "article":"Article"
     },

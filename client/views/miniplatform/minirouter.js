@@ -16,7 +16,13 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
-                Meteor.subscribe('news_center')
+                Meteor.subscribe('news_recommend'),
+                Meteor.subscribe('column'),
+                Meteor.subscribe('news_link'),
+                Meteor.subscribe('news_center'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles')
             ]
         }
     });
@@ -27,18 +33,18 @@ Router.map(function () {
         layoutTemplate: "miniLayout"
     });
 
-    //作者中心详情
-    this.route("journalArticle", {
-        path: "/miniplatform/authorCentered/:journalTitle",
-        layoutTemplate: "miniLayout",
-        data: function () {
-            var journal = Publications.findOne({title: this.params.journalTitle});
-            if (journal) {
-                Session.set('currentJournalId', journal._id);
-                return journal;
-            }
-        }
-    });
+    ////作者中心详情
+    //this.route("journalArticle", {
+    //    path: "/miniplatform/authorCentered/:journalTitle",
+    //    layoutTemplate: "miniLayout",
+    //    data: function () {
+    //        var journal = Publications.findOne({title: this.params.journalTitle});
+    //        if (journal) {
+    //            Session.set('currentJournalId', journal._id);
+    //            return journal;
+    //        }
+    //    }
+    //});
 
     //出版合作
     this.route("cooperation", {
@@ -108,7 +114,16 @@ Router.map(function () {
     //更多最新文章
     this.route("dynamicArticleShow", {
         path: "/miniplatform/dynamicArticleShow",
-        layoutTemplate: "miniLayout"
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('news_link'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('articles')
+            ]
+        }
     });
 
     //关于我们-企业文化-详情页

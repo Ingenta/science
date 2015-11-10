@@ -1,9 +1,3 @@
-Template.mostCiteArticle.events({
-    'change input.datesort': function (event) {
-        Session.set("sort", event.target.value);
-    }
-});
-
 Template.mostCiteArticle.helpers({
     mostCitedArticles: function () {
         var citedAr = undefined;
