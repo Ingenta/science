@@ -44,7 +44,10 @@ RecommendSchema = new SimpleSchema({
     },
     publications: {
         type: String
-    }
+    },
+    createDate: {
+        type: Date
+}
 });
 Meteor.startup(function () {
     RecommendSchema.i18n("schemas.recommend");

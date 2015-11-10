@@ -1,9 +1,6 @@
 Template.layoutLatestArticles.helpers({
     recommendArticles: function () {
-        return NewsRecommend.find({}, {limit: 6});
-    },
-    hide: function () {
-        return NewsRecommend.find().count()<6 ? "": "hide";
+        return NewsRecommend.find({},{sort: {createDate: -1}, limit: 6});
     },
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
@@ -13,10 +10,10 @@ Template.layoutLatestArticles.helpers({
             return title;
         }
     },
-    //publishDate: function (Apid) {
-    //    var article = Articles.findOne({_id: Apid});
-    //    if(article)return article.published.format("yyyy-MM-dd");
-    //},
+    publishDate: function (Apid) {
+        var article = Articles.findOne({_id: Apid});
+        if(article)return article.published.format("yyyy-MM-dd");
+    },
     ArticleUrl: function (Arid) {
         var article = Articles.findOne({_id: Arid});
         if (article){
@@ -76,5 +73,11 @@ AutoForm.addHooks(['addLatestArticlesModalForm'], {
     onSuccess: function () {
         $("#addLatestArticlesModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+    },
+    before: {
+        insert: function (doc) {
+            doc.createDate = new Date();
+            return doc;
+        }
     }
 }, true);
