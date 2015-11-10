@@ -11,6 +11,7 @@ Template.AbstractTemplate.helpers({
 });
 Template.AbstractContentAndKeywords.helpers({
 	getAbstract:function(){
+		if(!this.abstract)return TAPi18n.__("There is no abstract available for this article.");
 		if(_.isString(this.abstract))
 			return this.abstract;
 		else if(_.isObject(this.abstract)){
