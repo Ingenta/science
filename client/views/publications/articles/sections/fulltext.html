@@ -5,21 +5,21 @@
             {{#mathjax}}
                 {{#each sections}}
                     <div>
-                        <h3 id="sec-{{clearStr title}}">{{label}} {{{handledTitle}}}</h3>
+                        <h3 id="sec-{{clearStr title}}" class="sectionDivider title">{{label}} {{{handledTitle}}}</h3>
                     </div>
                     <p>
                         {{{body.html}}}
                     </p>
                     {{#each sections}}
                         <div>
-                            <h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+                            <h4 id="sec-{{clearStr title}}" class="subtitle">{{label}} {{{title}}}</h4>
                         </div>
                         <p>
                             {{{body.html}}}
                         </p>
                         {{#each sections}}
                             <div>
-                                <h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+                                <h5 id="sec-{{clearStr title}}" class="subtitle">{{label}} {{{title}}}</h5>
                             </div>
                             <p>
                                 {{{body.html}}}
@@ -125,7 +125,7 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">Reference</h4>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-unstyled simple-list text-justify">
+                    <ul class="list-unstyled">
                         {{#each referencesArr}}
                             {{> singleReferenceTemplate}}
                         {{/each}}

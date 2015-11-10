@@ -18,6 +18,5 @@ Template.ShowPublisher.helpers({
     notUrl: function () {
         var publisherId = Session.get("currentPublisherId");
         if (Publishers.findOne({_id: publisherId}).agree)return "/miniplatform";
-        return;
     }
 });

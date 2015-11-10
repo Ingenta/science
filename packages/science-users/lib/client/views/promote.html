@@ -1,14 +1,16 @@
 <template name="sidebarAd">
     {{#if isADPage}}
         {{#each advertisement}}
-            {{#if permissionCheck "modify-global-advertisement,modify-journal-advertisement"}}
-                {{> updateAdvertisementModalForm}}
-            {{/if}}
-            {{#if permissionCheck "delete-global-advertisement,delete-journal-advertisement"}}
-                <a href="#" class="fa fa-trash"></a>
-            {{/if}}
+            <div class="pull-right">
+                {{#if permissionCheck "modify-global-advertisement,modify-journal-advertisement"}}
+                    {{> updateAdvertisementModalForm}}
+                {{/if}}
+                {{#if permissionCheck "delete-global-advertisement,delete-journal-advertisement"}}
+                    <a href="#" class="fa fa-trash"></a>
+                {{/if}}
+            </div>
             <li>
-                <a href="{{whichLink}}" target="_blank"><img src="{{getImageHelper whichPictures}}" width="135" height="142"></a>
+                <a href="{{whichLink}}" target="_blank"><img src="{{getImageHelper whichPictures}}" width="100%"></a>
             </li>
             <br>
         {{/each}}

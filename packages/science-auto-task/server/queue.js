@@ -31,7 +31,7 @@ Science.Queue.Citation.taskHandler = function(data,next){
 				}else if (!spResult || !spResult.length){
 					AutoTasks.update({_id:data.taskId},{$inc:{success:1}});
 				}else{
-					Articles.update({doi:data.doi},{$set:{citations:spResult}});
+					Articles.update({doi:data.doi},{$set:{citations:spResult, citationCount:spResult.length}});
 					SubTasks.update({_id:data.id},{$set:{status:"success",from:"springer"}});
 					AutoTasks.update({_id:data.taskId},{$inc:{success:1},$set:{processing:Science.Queue.Citation.processing()}});
 
@@ -42,7 +42,7 @@ Science.Queue.Citation.taskHandler = function(data,next){
 				}
 			}))
 		}else{
-			Articles.update({doi:data.doi},{$set:{citations:crResult}});
+			Articles.update({doi:data.doi},{$set:{citations:crResult, citationCount:crResult.length}});
 			SubTasks.update({_id:data.id},{$set:{status:"success",from:"crossref"}});
 			AutoTasks.update({_id:data.taskId},{$inc:{success:1}});
 
@@ -59,12 +59,12 @@ Science.Queue.Citation.onEnded = function(){
 	AutoTasks.update({_id:Science.Queue.Citation.taskId},{$set:{status:"ended",processing:0}});
 
 	MostCited.remove({});
-	var citations = Articles.find({citations: {$exists: true}}, {$sort: {'citations.size': -1}, limit: 20});
+	var citations = Articles.find({citations: {$exists: true}}, {sort: {'citationCount': -1}, limit: 20, fields: {_id:1, title:1, citationCount:1, journalId: 1}}).fetch();
 	citations.forEach(function (item) {
 	    MostCited.insert({
 	        articleId: item._id,
 	        title: item.title,
-	        count: item.citations.length,
+	        count: item.citationCount,
 	        journalId: item.journalId
 	    });
 	});

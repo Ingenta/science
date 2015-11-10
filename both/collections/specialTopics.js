@@ -27,6 +27,10 @@ SpecialTopicsSchema  = new SimpleSchema({
     },
     abstract:{
         type:Science.schemas.MultipleTextOptionalSchema
+    },
+    articles:{
+        type:[String],
+        optional: true
     }
 });
 
