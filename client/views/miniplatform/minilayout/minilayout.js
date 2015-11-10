@@ -2,7 +2,7 @@ Template.miniLayout.helpers({
     collectionsLink: function () {
         var publisher = Publishers.findOne({agree:true});
         if(publisher){
-            Session.set("activeTab", "Collections");
+            Session.set("activeTab", "collections");
             return "/publisher/" + publisher.name;
         }
     },

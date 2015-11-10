@@ -45,7 +45,7 @@
 </template>
 
 <template name="publisherOptions">
-    {{#publisherTabs name="" tabs=tabs activeTab="journals"}}
+    {{#publisherTabs name="" tabs=tabs activeTab=activeTab}}
         {{#tabContent slug="journals"}}
             {{> JournalTabInPublisher}}
         {{/tabContent}}
