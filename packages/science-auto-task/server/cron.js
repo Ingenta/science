@@ -128,7 +128,6 @@ SyncedCron.add({
                         articleIds: tempArray
                     });
                 })
-
             }
             if (oneUser.profile.interestedOfArticles && oneUser.profile.interestedOfArticles.length > 0) {
                 var tempArray = Articles.find({
@@ -140,6 +139,12 @@ SyncedCron.add({
                     fields: {_id: 1, title: 1}
                 }).fetch();
 
+                if (tempArray.length) outgoingList.push({
+                    userId: oneUser._id,
+                    email: oneUser.emails[0].address,
+                    articleIds: tempArray
+                });
+
                 var citations = Citations.find({
                     $and: [
                         {articleId: {$in: oneUser.profile.interestedOfArticles}},
@@ -147,11 +152,10 @@ SyncedCron.add({
                     ]
                 }).fetch();
 
-                if (tempArray.length || citations.length) outgoingList.push({
+                if(citations.length) outgoingList.push({
                     userId: oneUser._id,
                     email: oneUser.emails[0].address,
-                    articleIds: tempArray.length ? tempArray : undefined,
-                    citations: citations.length ? citations : undefined
+                    citations: citations
                 });
             }
         });
@@ -162,46 +166,52 @@ SyncedCron.add({
             outgoingList.forEach(function (oneEmail) {
                 var emailSubject = "";
                 var emailContent = "";
-                var emailConfig = undefined;
+                //var emailConfig = undefined;
+                var emailTemplate = "";
                 if (oneEmail.issue) {
                     //this is an issue watch
                     emailSubject = "Issue Watch";
-                    emailConfig = EmailConfig.findOne({key: "watchJournal"});
-                    if (emailConfig) {
-                        emailSubject = emailConfig.subject;
-                        emailContent = emailConfig.body;
-                    }
+                    //emailConfig = EmailConfig.findOne({key: "watchJournal"});
+                    //if (emailConfig) {
+                    //    emailSubject = emailConfig.subject;
+                    //    emailContent = emailConfig.body;
+                    //}
                     issueToArticles[oneEmail.issue._id].forEach(function (article) {
                         emailContent += createEmailArticleListContent(article);
                     });
                 } else if (oneEmail.topicId) {
                     //this is a topic watch
                     emailSubject = "Topic Watch";
-                    emailConfig = EmailConfig.findOne({key: "watchTopic"});
-                    if (emailConfig) {
-                        emailSubject = emailConfig.subject;
-                        emailContent = emailConfig.body;
-                    }
+                    //emailConfig = EmailConfig.findOne({key: "watchTopic"});
+                    //if (emailConfig) {
+                    //    emailSubject = emailConfig.subject;
+                    //    emailContent = emailConfig.body;
+                    //}
                     oneEmail.articleIds.forEach(function (article) {
                         emailContent += createEmailArticleListContent(article);
                     })
+                } else if(oneEmail.citations){
+                    //this is cited alert
+                    emailSubject = "Cited Alert";
+                    //emailConfig = EmailConfig.findOne({key: "citedAlert"});
+                    //if (emailConfig) {
+                    //    emailSubject = emailConfig.subject;
+                    //    emailContent = emailConfig.body;
+                    //}
+                    emailContent += createEmailCitedArticleContent(oneEmail.citations);
                 } else {
                     //this is an article watch
                     emailSubject = "Article Watch";
-                    emailConfig = EmailConfig.findOne({key: "watchArticle"});
-                    if (emailConfig) {
-                        emailSubject = emailConfig.subject;
-                        emailContent = emailConfig.body;
-                    }
+                    //emailConfig = EmailConfig.findOne({key: "watchArticle"});
+                    //if (emailConfig) {
+                    //    emailSubject = emailConfig.subject;
+                    //    emailContent = emailConfig.body;
+                    //}
                     if(oneEmail.articleIds){
                         oneEmail.articleIds.forEach(function (article) {
                             emailContent += createEmailArticleListContent(article);
                         })
                     }
-                    if(oneEmail.citations){
-                        emailContent += createEmailCitedArticleContent(oneEmail.citations);
-                    }
-
                 }
 
                 //Email.send({
