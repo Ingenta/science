@@ -17,11 +17,5 @@ Template.specialTopicsDetailHeader.helpers({
             return this.articles.length;
         }
         return 0;
-    },
-    name:function(){
-        var top = Topics.findOne();
-        if(top){
-            return TAPi18n.getLanguage()=='zh-CN'?top.name:top.englishName;
-        }
     }
 })
