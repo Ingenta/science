@@ -178,6 +178,12 @@
             "banner": {
                 "label": "Choose Image for Banner"
             },
+            "scholarOneCode":{
+                "label":"Scholar One Code"
+            },
+            "magtechCode":{
+                "label":"Magtech Code"
+            },
             "tabSelections": {
                 "label": "Choose tabs",
                 "options": {

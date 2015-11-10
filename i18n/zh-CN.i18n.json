@@ -418,6 +418,12 @@
       "banner": {
         "label": "选择横幅图片"
       },
+      "scholarOneCode":{
+        "label":"英文投稿平台代号"
+      },
+      "magtechCode":{
+        "label":"中文投稿平台代号"
+      },
       "tabSelections": {
         "label": "选择标签页",
         "options": {

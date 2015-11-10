@@ -169,6 +169,14 @@ PublicationsSchema = new SimpleSchema({
             }
         }
     },
+    scholarOneCode:{
+        type: String,
+        optional:true
+    },
+    magtechCode:{
+        type: String,
+        optional:true
+    },
     tabSelections: {
         type: [String],
         optional: true,
