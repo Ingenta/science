@@ -1,45 +1,27 @@
 <template name="articlesInCollection">
-	<ul class="list-unstyled">
-		{{#each articles}}
-			{{> singleArticleInColl}}
-			{{else}}
-			{{_ "No articles found!"}}
-		{{/each}}
-	</ul>
+    <ul class="list-unstyled">
+        {{#each articles}}
+            {{> singleArticleInColl}}
+        {{else}}
+            {{_ "No articles found!"}}
+        {{/each}}
+    </ul>
 </template>
 
 <template name="singleArticleInColl">
-	<li>
-		<div class="row">
-			<ul class="dotted list-unstyled">
-				{{#if can "delete-pulisher-collections" "collections" }}
-				<li class="manage-btn">
-					<button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
-				</li>
-				{{/if}}
-				<li style="float:left">
-					<h4>
-						<div class="resultsList">{{> accessKeyImage}}
-							<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a>
-						</div>
-					</h4>
+    <li>
+        <div class="row dotted">
+            <div class="col-xs-2 text-center">
+                <br>
+                <br>
+                {{#if can "delete-pulisher-collections" "collections" }}
+                    <button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
+                {{/if}}
+            </div>
 
-					<ul class="list-unstyled">
-						<li>
-							{{#each authors}}
-								{{> authorPopButton}}
-							{{/each}}
-						</li>
-						<li>
-							<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}}
-							({{year}})
-							<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
-									class="fa fa-external-link"></i></a>
-						</li>
-					</ul>
-				</li>
-				<li style="clear:both"></li>
-			</ul>
-		</div>
-	</li>
+            <div class="col-xs-10">
+                {{>standardArticleListing}}
+            </div>
+        </div>
+    </li>
 </template>
