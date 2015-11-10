@@ -1,57 +1,37 @@
 <template name="searchResultForAddToCollection">
-	<div>
-		<div class="row pull-right">
-			<button class="btn btn-success addSelectedArticleToCollection">
-				{{_ "Add articles to collection"}}
-			</button>
-		</div>
-		<div class="btn-group" data-toggle="buttons">
-			<ul class="article-list list-unstyled">
-				{{#each articles}}
-					{{> oneArticleOfResult}}
-				{{else}}
-					{{_ "No articles found!"}}
-				{{/each}}
-			</ul>
-		</div>
-	</div>
+    <div>
+        <div class="row pull-right">
+            <button class="btn btn-success addSelectedArticleToCollection">
+                {{_ "Add articles to collection"}}
+            </button>
+        </div>
+        <div class="btn-group" data-toggle="buttons">
+            <ul class="article-list list-unstyled">
+                {{#each articles}}
+                    {{> oneArticleOfResult}}
+                {{else}}
+                    {{_ "No articles found!"}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </template>
 
 
 <template name="oneArticleOfResult">
-	<div class="row dotted">
+    <div class="row dotted">
+        <div class="col-xs-2 text-center">
+            <br>
+            <br>
+            <label class="btn btn-primary btn-xs">
+                <input value="{{_id}}" class="articleCkd" style="position:absolute;clip:rect(0,0,0,0);"
+                       type="checkbox" autocomplete="false">{{_ "select"}}
+            </label>
 
-		<div class="col-xs-2 text-center">
-			<br>
-			<br>
-			<label class="btn btn-primary btn-xs">
-				<input value="{{_id}}" class="articleCkd" style="position:absolute;clip:rect(0,0,0,0);"
-				       type="checkbox" autocomplete="false">{{_ "select"}}
-			</label>
+        </div>
 
-		</div>
-
-		<div class="col-xs-10">
-			<h4>
-				<div class="resultsList">{{> accessKeyImage}}
-					<a href="{{urlToArticleById _id}}">{{translateThis title.cn title.en}}</a>
-				</div>
-			</h4>
-
-			<ul class="list-unstyled">
-				<li>
-					{{#each authors}}
-						{{> authorPopButton}}
-					{{/each}}
-				</li>
-				<li>
-					<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
-					<b>{{volume}}</b>, {{elocationId}}
-					({{year}})
-					<a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
-							class="fa fa-external-link"></i></a>
-				</li>
-			</ul>
-		</div>
-	</div>
+        <div class="col-xs-10">
+            {{>standardArticleListing}}
+        </div>
+    </div>
 </template>

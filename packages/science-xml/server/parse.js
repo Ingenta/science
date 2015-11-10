@@ -168,7 +168,7 @@ ScienceXML.parseXml = function (path) {
     console.log('parsed publisher');
 
     //      GET REFERENCES
-    results.references = ScienceXML.getReferences(doc);
+    results.references = ScienceXML.getReferences(results,doc);
     console.log('parsed references');
 
     //      GET ABSTRACT AND FULL TEXT

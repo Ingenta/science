@@ -58,7 +58,7 @@ Science.XPath.ParseHelper = {
 			}
 		}
 		var datas = _.pluck(val[0].childNodes,"data");
-		return datas.join("").trim();
+		return datas.join("").replace(/\r\n/g," ").trim();
 	},
 	/**
 	 * 同步方法
@@ -78,9 +78,14 @@ Science.XPath.ParseHelper = {
 	 * 获取第一个匹配的dom元素的属性值
 	 * @param xp
 	 * @param ele
+	 * @param [nameSpace]
 	 * @returns {void|*}
 	 */
-	getFirstAttribute:function(xp,ele){
+	getFirstAttribute:function(xp,ele,nameSpace){
+		if(nameSpace){
+			var attrs=xpath.useNamespaces(nameSpace)(xp,ele);
+			return !_.isEmpty(attrs)? attrs[0].value:undefined;
+		}
 		var attrs = this.getAttributes(xp,ele);
 		return attrs && attrs[0];
 	},
