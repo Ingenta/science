@@ -1,19 +1,21 @@
 Template.articlesInSpecialTopics.helpers({
     articles: function () {
-        var currentTopic = Router.current().params.specialTopicsId;
-        if (currentTopic)
-            return Articles.find({specialTopics: currentTopic});
+        var addedArticles = Session.get("addedArticlesTo");
+        if (!addedArticles || !addedArticles.length)
+            return [];
+
+        return Articles.find({_id: {$in: addedArticles}});
     }
 })
 
 Template.singleArticleInSpecialTopics.events({
     "click button.btn-danger": function (e) {
         e.preventDefault();
-        var that=this;
-        var topicsId = Router.current().params.specialTopicsId;
+        var articleId = this._id;
         confirmDelete(e,function(){
-            var withOutThis = _.without(that.specialTopics, topicsId);
-            Articles.update({_id: that._id}, {$set: {specialTopics: withOutThis}});
+            var addedArticles = Session.get("addedArticlesTo");
+            var withOutThis = _.without(addedArticles,articleId);
+            SpecialTopics.update({_id: Router.current().params.specialTopicsId}, {$set: {articles: withOutThis}});
         });
     }
 });
