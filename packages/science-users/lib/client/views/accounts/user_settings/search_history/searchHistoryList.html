@@ -6,21 +6,29 @@
                 {{_ "Search Information"}}
             </th>
             <th>
+                {{_ "Search Mode"}}
+            </th>
+            <th>
                 {{_ "Search time"}}
             </th>
             <th>
                 {{_ "Delete search history"}}
             </th>
+            {{#if hasFolderOne}}
             <th>
                 {{_ "Save to Folder"}}
             </th>
+            {{/if}}
         </tr>
         </thead>
         <tbody>
         {{#each searchHistory}}
         <tr>
             <td class="keywordContainer">
-              <a href="{{searchUrl}}">{{word}}</a>|{{form}}
+              <a href="{{searchUrl}}">{{word}}</a>
+            </td>
+            <td>
+                {{form}}
             </td>
             <td>
                 {{time}}
@@ -28,6 +36,7 @@
             <td>
                 <a href="#" class="fa fa-trash remove-unsave"></a>
             </td>
+            {{#if hasFolderTwo}}
             <td>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,16 +45,16 @@
                     </button>
                     <ul class="dropdown-menu" data-keyword="{{word}}" data-from="{{from}}">
                         {{#each folder}}
-                            <li class="folder">
-                                <a href="#">{{folderName}}</a>
-                            </li>
+                        <li class="folder">
+                            <a href="#">{{folderName}}</a>
+                        </li>
                         {{/each}}
                     </ul>
                 </div>
             </td>
+            {{/if}}
         </tr>
         {{/each}}
         </tbody>
     </table>
-    <!--<button type="button" class="btn" style="text-align:right">{{_ "Cancel"}}</button>-->
 </template>

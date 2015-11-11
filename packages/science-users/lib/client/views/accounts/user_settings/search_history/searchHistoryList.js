@@ -15,6 +15,12 @@ Template.searchHistoryList.helpers({
     },
     searchUrl:function(){
         return SolrQuery.makeUrl({query:this.word,setting:{from:"history"}});
+    },
+    hasFolderOne:function(){
+        return Meteor.user().history.saved;
+    },
+    hasFolderTwo:function(){
+        return Meteor.user().history.saved;
     }
 })
 
