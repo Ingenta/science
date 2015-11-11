@@ -93,12 +93,6 @@ Template.PublicationList.events({
     }
 });
 
-Template.SinglePublication.helpers({
-    getJournalUrl: function (title) {
-        return Router.current().url + "/journal/" + title;
-    }
-});
-
 Template.addPublicationForm.helpers({
     getTopics: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
@@ -137,7 +131,6 @@ AutoForm.addHooks(['addPublicationModalForm'], {
 
 Template.displayPublication.events({
     'click .fa-eye': function (event) {
-        //Publications.update({_id:this._id},{$set:{visible:2}});
         Publications.update({_id: this._id}, {$set: {visible: 0}});
     },
     'click .fa-eye-slash': function (event) {

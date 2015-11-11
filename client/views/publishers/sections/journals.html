@@ -51,7 +51,7 @@
 <template name="SinglePublication">
     <div class="row">
         <div class="col-xs-3">
-            <a href="{{getJournalUrl title}}"><img src="{{getImageHelper picture}}" width="105"/></a>
+            <a href="{{urlToJournalById _id}}"><img src="{{getImageHelper picture}}" width="105"/></a>
         </div>
         <div class="col-xs-9">
             <div class="row">
@@ -65,7 +65,7 @@
                     {{/if}}
                 </div>
                 <h3>{{> accessKeyImage}}&nbsp;&nbsp;
-                    <a href="{{getJournalUrl title}}">
+                    <a href="{{urlToJournalById _id}}">
                         {{translateThis titleCn title}}
                     </a>
                 </h3>
