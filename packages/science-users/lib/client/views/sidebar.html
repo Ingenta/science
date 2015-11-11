@@ -52,10 +52,10 @@
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
         {{/if}}
-        <hr>
-        <li><a href="{{scholarOne}}">{{_ "ScholarOne Login"}}</a></li>
-        <li><a href="{{editors}}">{{_ "Editors Login"}}</a></li>
-        <hr>
+    </ul>
+	{{> otherPlatformloginButtons}}
+	<hr>
+	<ul class="list-unstyled">
         {{#if showAccessKey}}
             <h4>{{_ "Access Key"}} :</h4>
             <li><img src="/icon_access_fc.gif"> {{_ "Free Content"}}</li>

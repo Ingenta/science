@@ -954,5 +954,6 @@
     "contentType":{
         "article":"Article"
     },
-    "clickToView":"Click to view"
+    "clickToView":"Click to view",
+    "Reset":"重置"
 }

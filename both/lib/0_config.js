@@ -116,15 +116,15 @@ Config = {
     },
     rootUrl: Meteor.absoluteUrl(),
     mainPublish: "hSsscs85HXuu2qTfJ",
-    url: {
-        ScholarOne: "#",
-        Editors: "#"
-    },
     searchKeywordFrequency: 3000,
     sysAdmin: "admin",
     parser:{
         contentTypeDic:{
             article:["article","论文","research paper"]
         }
+    },
+    otherPlatformLoginUrl:{
+        scholarone:"http://mc03.manuscriptcentral.com/",
+        editors:"http://ees.scichina.com/user/login.action?pageCode="
     }
 };
