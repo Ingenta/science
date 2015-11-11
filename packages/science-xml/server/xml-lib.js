@@ -70,7 +70,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         //工作单位信息
         var affAttrs = parserHelper.getAttributes("child::xref[@ref-type='aff']/attribute::rid", author);
         if(!_.isEmpty(affAttrs)){
-            authorObj.affs = affAttrs;
+            authorObj.affs = _.uniq(affAttrs);
         }
 
         results.authors.push(authorObj);
@@ -104,38 +104,35 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.authorNotes.push(entry);
         }
     });
-    //debugger;  等客户修改他们的数据结构后继续
-    //var affNodes = xpath.select("//contrib-group/descendant::aff",doc)
 
     var affNodes = parserHelper.getNodes("//contrib-group/aff-alternatives", doc);
     if (_.isEmpty(affNodes)) {
-        affNodes = xpath.select("//contrib-group/aff",doc);
+        affNodes = parserHelper.getNodes("//contrib-group/aff",doc);
         _.each(affNodes,function(affNode){
             var affiliation = {id:undefined,affText:{}};
-            var idAttr = xpath.select("attribute::id",affNode);
-            if(!_.isEmpty(idAttr) && idAttr[0].value){
-                affiliation.id=idAttr[0].value;
-            }
-            var labels=xpath.select("child::label",affNode);
-            if(!_.isEmpty(labels)){
-                var addr= xpath.select("child::text()",labels[labels.length-1]);
-                affiliation.affText.en = !_.isEmpty(addr) && addr.toString().replace(/\s+/g,' ').trim();
-            }
-            !_.isEmpty(affiliation) && results.affiliations.push(affiliation);
+            affiliation.id = parserHelper.getFirstAttribute("attribute::id",affNode);
+            affiliation.label=parserHelper.getSimpleVal("child::label[1]",affNode);
+            affiliation.affText.en=parserHelper.getSimpleVal("child::label[last()]",affNode);
+            results.affiliations.push(affiliation);
         })
     } else {
-        _.each(affNodes,function (affiliation) {
-            var affTextEn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='en']", affiliation);
-            var affTextCn = ScienceXML.getValueByXPathIgnoringXml("child::aff[@lang='zh-Hans']", affiliation);
-            var id = xpath.select("attribute::id", affiliation)[0];
-            //if one doesn't exist copy the other one.
-            var oneAffiliation = {};
-            if (!affTextCn)affTextCn = affTextEn;
-            if (!affTextEn)affTextEn = affTextCn;
+        var index=1;
+        _.each(affNodes,function (affNode) {
+            var affiliation = {id:undefined,affText:{}};
+            affiliation.id=parserHelper.getFirstAttribute("attribute::id",affNode);
+            affiliation.label=parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[1]",affNode);
 
-            if (!id) oneAffiliation = {affText:{en: affTextEn, cn: affTextCn}};
-            else oneAffiliation = {id: id.value, affText:{en: affTextEn, cn: affTextCn}};
-            results.affiliations.push(oneAffiliation);
+            // -------临时逻辑 开始--------
+            // 若取到了中文标签但是没取到英文标签,用序号做英文标签.
+            // 待中国科学方正确调整了affiliation数据,测试通过后应当删除这段代码
+            if((affiliation.label.cn && !affiliation.label.en) || (!affiliation.label.en && affiliation.label.en.length>2)){
+                affiliation.label.en=String(index);
+            }
+            index++;
+            // -------临时逻辑 结束----------
+
+            affiliation.affText = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
+            results.affiliations.push(affiliation);
         });
     }
     console.log('parse author done');

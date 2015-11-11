@@ -3,10 +3,6 @@ Template.layoutPublications.helpers({
         var publisher = Publishers.findOne({agree:true});
         if(publisher)return Publications.find({publisher:publisher._id});
     },
-    getJournalUrl:function(){
-        var publisher = Publishers.findOne({agree:true});
-        if(publisher)return "/publisher/"+publisher.name+"/journal/"+this.title;
-    },
     publisherUrl: function(){
         var publisher = Publishers.findOne({agree:true});
         if(publisher)return "/publisher/"+publisher.name;
