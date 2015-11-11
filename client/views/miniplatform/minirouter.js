@@ -33,19 +33,6 @@ Router.map(function () {
         layoutTemplate: "miniLayout"
     });
 
-    ////作者中心详情
-    //this.route("journalArticle", {
-    //    path: "/miniplatform/authorCentered/:journalTitle",
-    //    layoutTemplate: "miniLayout",
-    //    data: function () {
-    //        var journal = Publications.findOne({title: this.params.journalTitle});
-    //        if (journal) {
-    //            Session.set('currentJournalId', journal._id);
-    //            return journal;
-    //        }
-    //    }
-    //});
-
     //出版合作
     this.route("cooperation", {
         path: "/miniplatform/cooperation",
