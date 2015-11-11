@@ -156,6 +156,32 @@ Router.map(function () {
         }
     });
 
+    this.route('/publisher/:publisherName/journal/:journalTitle/specialTopics/:specialTopicsId', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({title: this.params.journalTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return journal;
+            }
+        },
+        template: "addArticleForSpecialTopics",
+        name: "specialTopics.selectArticles",
+        parent: "journal.name",
+        title: function () {
+            return TAPi18n.__("Special Topics");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('articlesWithoutFulltext'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('specialTopics')
+            ]
+        }
+    });
+
     this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
@@ -237,6 +263,33 @@ Router.map(function () {
             Meteor.clearInterval(Session.get("dynamicRender"));
         }
     });
+
+
+
+    this.route('/publisher/:publisherName/journal/:journalTitle/guide/:guideId', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({title: this.params.journalTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return journal;
+            }
+        },
+        template: "ShowGuidelines",
+        title: function () {
+            return TAPi18n.__("Guide for Authors");
+        },
+        parent: "journal.name",
+        name: "guidelines.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe("author_center")
+            ]
+        }
+
+    });
+
 
     this.route("author", {
         parent: "home",
@@ -445,55 +498,7 @@ Router.map(function () {
     });
 
 
-    this.route('/specialTopics/:specialTopicsId', {
-        data: function () {
-            var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
-            if (journal) {
-                Session.set('currentJournalId', journal._id);
-                Session.set('currentPublisherId', pub._id);
-                return journal;
-            }
-        },
-        template: "addArticleForSpecialTopics",
-        name: "specialTopics.selectArticles",
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("addSpecialTopicsToCollection");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('specialTopics')
-            ]
-        }
-    });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle/guide/:guideId', {
-        data: function () {
-            var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
-            if (journal) {
-                Session.set('currentJournalId', journal._id);
-                Session.set('currentPublisherId', pub._id);
-                return journal;
-            }
-        },
-        template: "ShowGuidelines",
-        title: function () {
-            return TAPi18n.__("Guide for Authors");
-        },
-        parent: "journal.name",
-        name: "guidelines.show",
-        waitOn: function () {
-            return [
-                Meteor.subscribe("author_center")
-            ]
-        }
-
-    });
 
     //this.route("testTemplate", {
     //    path: "/testTemplate"

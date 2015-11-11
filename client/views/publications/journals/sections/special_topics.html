@@ -31,7 +31,7 @@
                             <td>
                                 {{#if permissionCheck "add-article-to-special-issue,remove-article-from-special-issue"}}
                                     <a class="fa fa-plus"
-                                       href="{{pathFor 'specialTopics.selectArticles' specialTopicsId=_id}}"></a>
+                                       href="{{getUrlToSpecialTopicManagement _id}}"></a>
                                 {{/if}}
                                 &nbsp;&nbsp;
                                 {{#if permissionCheck "modify-special-issue"}}
@@ -80,5 +80,5 @@
 </template>
 
 <template name="updateSpecialTopicsModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="SpecialTopics" doc=_id operation="update"}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="SpecialTopics" doc=_id operation="update" omitFields="articles,IssueId"}}{{/afModal}}
 </template>

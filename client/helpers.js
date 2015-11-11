@@ -6,7 +6,7 @@ var getJournalComponentByArticle = function (article) {
     if (!article)return;
     return getJournalComponentByJournalId(article.journalId);
 }
-var getJournalComponentByJournalId = function (id) {
+getJournalComponentByJournalId = function (id) {
     var journal = Publications.findOne({_id: id});
     if (!journal)return;
     var pub = Publishers.findOne({_id: journal.publisher});
