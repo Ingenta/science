@@ -99,15 +99,13 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-xs-1">
-        </div>
         <div class="col-xs-6">
             {{> articlePage}}
         </div>
         <div class="col-xs-3">
             <div class="raty">{{_ "Rating"}} </div>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-3">
             {{> shareTemplate}}
         </div>
     </div>
@@ -153,7 +151,9 @@
 <template name="shareTemplate">
     <div class="bdsharebuttonbox pull-right">
         <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
-        <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a></div>
+        <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>
+        <a title="分享到fb" class="bds_fbook" href="#" data-cmd="fbook"></a>
+        <a title="分享到twi" class="bds_twi" href="#" data-cmd="twi"></a></div>
     <script>window._bd_share_config = {
         "common": {
             "bdSnsKey": {},
