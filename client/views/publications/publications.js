@@ -1,10 +1,3 @@
-Template.onePublication.helpers({
-    getUrlToJournal: function (id, title) {
-        var name = Publishers.findOne({_id: id}).name
-        return "/publisher/" + name + "/journal/" + title;
-    }
-});
-
 Template.onePublication.events({
     'click .fa-trash': function (e) {
         var id = this._id;
