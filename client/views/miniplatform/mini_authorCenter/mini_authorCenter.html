@@ -4,10 +4,10 @@
             {{> pageElement key="author center"}}
             <div class="row" style="margin-left: 10px">
                 <h4>《中国科学》杂志社下所属期刊：</h4><hr>
-                {{#each hasJournal}}
+                {{#each journalsInPublisher}}
                     <div class="col-xs-6">
                         <p>
-                            <a style="font-size: 15px;" href="{{getJournalUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 65px;height: 72px"/>&nbsp;&nbsp;&nbsp;&nbsp;{{titleCn}}</a>
+                            <a style="font-size: 15px;" href="{{urlToJournalById _id}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 65px;height: 72px"/>&nbsp;&nbsp;&nbsp;&nbsp;{{titleCn}}</a>
                         </p>
                     </div>
                 {{else}}
