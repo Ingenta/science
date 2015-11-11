@@ -38,9 +38,9 @@ Template.ShowJournal.helpers({
 Template.journalOptions.helpers({
     tabs: function () {
         var tabList = [];
-        var currentTitle = Router.current().params.journalTitle;
+        var currentTitle = Router.current().params.journalShortTitle;
         if (!currentTitle)return;
-        var journalTabSelections = Publications.findOne({title: currentTitle}).tabSelections;
+        var journalTabSelections = Publications.findOne({shortTitle: currentTitle}).tabSelections;
         _.each(journalTabSelections, function (t) {
             tabList.push({name: TAPi18n.__(t), slug: t});
         });
@@ -53,8 +53,8 @@ Template.journalOptions.helpers({
         return Session.get('activeTab');
     },
     journalContext: function () {
-        var currentTitle = Router.current().params.journalTitle;
-        return Publications.findOne({title: currentTitle});
+        var currentTitle = Router.current().params.journalShortTitle;
+        return Publications.findOne({shortTitle: currentTitle});
     }
 });
 

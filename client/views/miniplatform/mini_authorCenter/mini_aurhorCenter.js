@@ -6,6 +6,6 @@ Template.authorCentered.helpers({
     getJournalUrl:function(){
         var publisher = Publishers.findOne({_id:this.publisher});
         Session.set("activeTab", "Author Center");
-        if(publisher)return "/publisher/" +publisher.name+ "/journal/" + this.title;
+        if(publisher)return "/publisher/" +publisher.name+ "/journal/" + this.shortTitle;
     }
 });
