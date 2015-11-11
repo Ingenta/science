@@ -84,13 +84,13 @@
             {{/if}}
         </div>
         <div class="col-xs-3">
-            <a href="{{getUrlToJournal publisher title}}"><img src="{{getImageHelper picture}}" width="105"/></a>
+            <a href="{{urlToJournalById _id}}"><img src="{{getImageHelper picture}}" width="105"/></a>
         </div>
         <div class="col-xs-9">
             <ul class="list-unstyled">
                 <li>
                     <h4>
-                        <a href="{{getUrlToJournal publisher title}}">
+                        <a href="{{urlToJournalById _id}}">
                             {{> accessKeyImage}} {{translateThis titleCn title}}
                         </a>
                     </h4>

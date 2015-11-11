@@ -112,10 +112,10 @@ Router.map(function () {
         }
     });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle', {
+    this.route('/publisher/:publisherName/journal/:journalShortTitle', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
+            var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
             if (journal) {
                 Session.set('currentJournalId', journal._id);
                 Session.set('currentPublisherId', pub._id);
@@ -124,11 +124,12 @@ Router.map(function () {
         },
         template: "ShowJournal",
         title: function () {
-            if (TAPi18n.getLanguage() === "en") return ":journalTitle";
             var id = Session.get('currentJournalId');
             var p = Publications.findOne({_id: id});
-            if (p) return p.titleCn || p.title;
-            return ":journalTitle";
+            if (!p)return ":journalShortTitle";
+            if (TAPi18n.getLanguage() === "en")return p.title || p.titleCn;
+            return p.titleCn || p.title;
+
         },
         parent: "publisher.name",
         name: "journal.name",
@@ -156,10 +157,36 @@ Router.map(function () {
         }
     });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue', {
+    this.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
+            var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return journal;
+            }
+        },
+        template: "addArticleForSpecialTopics",
+        name: "specialTopics.selectArticles",
+        parent: "journal.name",
+        title: function () {
+            return TAPi18n.__("Special Topics");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('articlesWithoutFulltext'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('specialTopics')
+            ]
+        }
+    });
+
+    this.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
             Session.set("activeTab", "Browse");
             if (journal) {
                 var i = Issues.findOne({journalId: journal._id, volume: this.params.volume, issue: this.params.issue});
@@ -190,10 +217,10 @@ Router.map(function () {
 
     });
 
-    this.route('/publisher/:publisherName/journal/:journalTitle/:volume/:issue/:publisherDoi/:articleDoi', {
+    this.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue/:publisherDoi/:articleDoi', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
+            var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
             if (pub) {
                 journal && Session.set('currentJournalId', journal._id);
                 pub && Session.set('currentPublisherId', pub._id);
@@ -237,6 +264,32 @@ Router.map(function () {
             Meteor.clearInterval(Session.get("dynamicRender"));
         }
     });
+
+
+    this.route('/publisher/:publisherName/journal/:journalShortTitle/guide/:guideId', {
+        data: function () {
+            var pub = Publishers.findOne({name: this.params.publisherName});
+            var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+            if (journal) {
+                Session.set('currentJournalId', journal._id);
+                Session.set('currentPublisherId', pub._id);
+                return journal;
+            }
+        },
+        template: "ShowGuidelines",
+        title: function () {
+            return TAPi18n.__("Guide for Authors");
+        },
+        parent: "journal.name",
+        name: "guidelines.show",
+        waitOn: function () {
+            return [
+                Meteor.subscribe("author_center")
+            ]
+        }
+
+    });
+
 
     this.route("author", {
         parent: "home",
@@ -444,56 +497,6 @@ Router.map(function () {
         controller: "AdminUsersEditController"
     });
 
-
-    this.route('/specialTopics/:specialTopicsId', {
-        data: function () {
-            var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
-            if (journal) {
-                Session.set('currentJournalId', journal._id);
-                Session.set('currentPublisherId', pub._id);
-                return journal;
-            }
-        },
-        template: "addArticleForSpecialTopics",
-        name: "specialTopics.selectArticles",
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("addSpecialTopicsToCollection");
-        },
-        waitOn: function () {
-            return [
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('specialTopics')
-            ]
-        }
-    });
-
-    this.route('/publisher/:publisherName/journal/:journalTitle/guide/:guideId', {
-        data: function () {
-            var pub = Publishers.findOne({name: this.params.publisherName});
-            var journal = Publications.findOne({title: this.params.journalTitle});
-            if (journal) {
-                Session.set('currentJournalId', journal._id);
-                Session.set('currentPublisherId', pub._id);
-                return journal;
-            }
-        },
-        template: "ShowGuidelines",
-        title: function () {
-            return TAPi18n.__("Guide for Authors");
-        },
-        parent: "journal.name",
-        name: "guidelines.show",
-        waitOn: function () {
-            return [
-                Meteor.subscribe("author_center")
-            ]
-        }
-
-    });
 
     //this.route("testTemplate", {
     //    path: "/testTemplate"

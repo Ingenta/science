@@ -6,12 +6,12 @@ var getJournalComponentByArticle = function (article) {
     if (!article)return;
     return getJournalComponentByJournalId(article.journalId);
 }
-var getJournalComponentByJournalId = function (id) {
+getJournalComponentByJournalId = function (id) {
     var journal = Publications.findOne({_id: id});
     if (!journal)return;
     var pub = Publishers.findOne({_id: journal.publisher});
     if (!pub)return;
-    return "/publisher/" + pub.name + "/journal/" + journal.title;
+    return "/publisher/" + pub.name + "/journal/" + journal.shortTitle;
 }
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
@@ -19,7 +19,7 @@ var getIssueComponentByArticle = function (article) {
     return "/" + issue.volume + "/" + issue.issue;
 }
 
-var journalIdToName = function (id) {
+journalIdToName = function (id) {
     var journal = Publications.findOne({_id: id});
     return journal && (TAPi18n.getLanguage() === "zh-CN" ? journal.titleCn : journal.title);
 }
