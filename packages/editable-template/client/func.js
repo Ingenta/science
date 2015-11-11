@@ -1,17 +1,6 @@
 /**
  * Created by jiangkai on 15/10/21.
  */
-JET.initEditor = function () {
-	JET.editor().summernote({
-		height: 300,
-		lang  : "zh-CN"//not work
-	});
-};
-
-
-JET.editor = function () {
-	return $(JET.selector);
-};
 
 JET.compile = function (name,content) {
 	var result = false;
@@ -36,7 +25,7 @@ JET.compile = function (name,content) {
 
 JET.preview=function(options){
 	JET.compile(JET.tempName,options.content);
-	JET.previewTemplate.set(options.content);
+	Session.set("etTemplate",options.content);
 };
 
 JET.save = function (options) {

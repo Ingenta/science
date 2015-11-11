@@ -2,58 +2,60 @@
  * Created by jiangkai on 15/10/21.
  */
 'use strict'
-
 Template.etEditor.onRendered(function(){
-	JET.editor().summernote({
-		height: 200,
-		lang: "zh-CN"//not work
+	JET.dataEditor=CodeMirror.fromTextArea(this.find("#etData"), {
+		lineNumbers: true,
+		mode: "javascript" // set any of supported language modes here
 	});
-});
+	JET.templateEditor=CodeMirror.fromTextArea(this.find("#etTemplate"), {
+		lineNumbers: true,
+		mode: "handlebars" // set any of supported language modes here
+	});
+})
 
-var getOptions = function(){
+var getOptions = function(e,t){
 	var options={};
-	var dataStr = Template.instance().$("#etData").val();
+	var dataStr = JET.dataEditor.getValue();
 	var userData ;
-	options.name=Template.instance().$("#etName").val();
-	options.description=Template.instance().$("#etDescription").val();
+	options.name=t.find("#etName").value;
+	options.description=t.find("#etDescription").value;
 	if(dataStr){
 		try{
 			userData = JSON.parse(dataStr);
-		}catch(e){
-			sweetAlert("Error","json格式有误:\n"+ e.message,"error");
+		}catch(err){
+			sweetAlert("Error","json格式有误:\n"+ err.message,"error");
 			return;
 		}
-		JET.previewData.set(userData);
+		Session.set("etData",userData);
 		options.previewData=userData;
 	}
-	options.content=JET.editor().code().trim();
+	options.content=JET.templateEditor.getValue().trim();
 	return options;
 };
 
 Template.etEditor.events({
-	'click .preview':function(){
-		var options = getOptions();
+	'click .preview':function(e,t){
+		var options = getOptions(e,t);
 		JET.preview(options);
 	},
-	'click .save':function(){
-		var options = getOptions();
+	'click .save':function(e,t){
+		var options = getOptions(e,t);
 		JET.save(options);
 	},
-	'keyup #etName':function(){
-		var inputName = Template.instance().$("#etName").val();
+	'keyup #etName':function(e,t){
+		var inputName = t.find("#etName").value;
 		if(JET.verifyName(inputName) && inputName !== JET.name){
-			var instance = Template.instance();
 			var obj = JET.store.findOne({name:inputName});
 			if(obj){
-				instance.$("#etDescription").val(obj.description);
+				t.find("#etDescription").value=obj.description;
 				if(obj.previewData){
-					instance.$("#etData").val(JSON.stringify(obj.previewData));
+					JET.dataEditor.setValue(JSON.stringify(obj.previewData));
 				}
-				JET.editor().code(obj.content)
+				JET.templateEditor.setValue(obj.content);
 			}else{
-				instance.$("#etDescription").val("");
-				instance.$("#etData").val("");
-				JET.editor().code("");
+				t.find("#etDescription").value="";
+				JET.dataEditor.setValue("");
+				JET.templateEditor.setValue("");
 			}
 		}
 	}

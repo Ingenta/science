@@ -513,4 +513,7 @@ Router.map(function () {
     this.route("edit_author", {
         path: "/edit_author"
     });
+    this.route("test2", {
+        path: "/test2"
+    });
 });

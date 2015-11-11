@@ -3,10 +3,10 @@
  */
 Template.etPreview.helpers({
 	getTemplate:function(){
-		var temp = JET.previewTemplate.get();
+		var temp = Session.get("etTemplate");
 		return temp?JET.tempName:"_etStart";
 	},
 	getData:function(){
-		return JET.previewData.get();
+		return Session.get("etData");
 	}
 })

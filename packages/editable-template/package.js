@@ -27,8 +27,8 @@ Package.onUse(function(api) {
     'templating',
     'reactive-var',
     'spacebars-compiler',
-    'summernote:summernote',
-    'kevohagan:sweetalert'
+    'kevohagan:sweetalert',
+    'perak:codemirror'
   ],'client');
 
   api.use([
@@ -59,6 +59,7 @@ Package.onUse(function(api) {
   ],'client');
 
   api.export('JET');
+  api.export('CodeMirror')
 });
 
 Package.onTest(function(api) {
