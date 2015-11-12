@@ -7,7 +7,12 @@ EmailConfigSchema = new SimpleSchema({
         type: String
     },
     body: {
-        type: String
+        type: String,
+        autoform: {
+            afFieldInput: {
+                type: 'summernote'
+            }
+        }
     }
 });
 
