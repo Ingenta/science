@@ -254,6 +254,13 @@
   "No Cover Description": "无封面描述",
   "Username already exists.": "用户名已经存在",
 
+  "forgotPassword": "重置您的密码",
+  "registration": "欢迎使用",
+  "verifyEmail": "账号激活邮件",
+  "emailThis": "个人推荐",
+  "watchJournal": "期刊关注",
+  "watchTopic": "主题关注",
+  "watchArticle": "文章关注",
 
 
 

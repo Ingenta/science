@@ -16,7 +16,7 @@
         <tbody id="dataview-table-items">
         {{#each emailConfigurations}}
             <tr>
-                <td>{{key}}</td>
+                <td>{{_ key}}</td>
                 <td>{{subject}}</td>
                 <td>{{>jkafModal template="updateEmailConfig" doc=this}}</td>
             </tr>
