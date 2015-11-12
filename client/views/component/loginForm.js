@@ -16,7 +16,7 @@ Template.loginForm.helpers({
 		if (TAPi18n.getLanguage() === "en"){
 			var url = Config.otherPlatformLoginUrl.scholarone;
 			if(!url) return;
-			return url+"/"+pageCode;
+			return url+pageCode;
 		}
 		if(TAPi18n.getLanguage() === "zh-CN"){
 			var url = Config.otherPlatformLoginUrl.editors;
@@ -26,7 +26,7 @@ Template.loginForm.helpers({
 	},
 	registerUrl: function(){
 		var pageCode = Session.get("optionVal");
-		if (TAPi18n.getLanguage() === "en") return Config.otherPlatformLoginUrl.scholarone+"/"+pageCode;
+		if (TAPi18n.getLanguage() === "en") return Config.otherPlatformLoginUrl.scholarone+pageCode;
 		return Config.otherPlatformRegisterUrl.editors;
 	},
 	codeValue: function(){
@@ -49,7 +49,10 @@ Template.loginForm.helpers({
 				}
 			}
 		}
-	}
+	},
+	isDisplayLogin: function(){
+		if (TAPi18n.getLanguage() === "zh-CN") return true;
+	},
 });
 
 Template.otherPlatformloginButtons.helpers({
