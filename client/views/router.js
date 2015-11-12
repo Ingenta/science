@@ -145,6 +145,7 @@ Router.map(function () {
                 Meteor.subscribe('medias'),
                 Meteor.subscribe('files'),
                 Meteor.subscribe('topics'),
+                Meteor.subscribe('news'),
                 Meteor.subscribe('specialTopics'),
                 Meteor.subscribe('suggestedMostRead'),
                 Meteor.subscribe('recommend'),
@@ -211,6 +212,7 @@ Router.map(function () {
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articlesWithoutFulltext'),
                 Meteor.subscribe('issues'),
+                Meteor.subscribe('news'),
                 Meteor.subscribe('suggestedMostRead')
             ]
         }
