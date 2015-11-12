@@ -10,6 +10,7 @@
                 {{_ "Name"}}
             </th>
             <th>
+
                 {{_ "Action"}}
             </th>
         </tr>
@@ -26,7 +27,7 @@
                 {{/if}}
             </td>
         </tr>
-        <li class="list-unstyled"  id="{{folderName}}">
+        <li class="collapse"  id="{{folderName}}">
             {{#each words}}
                 {{> eachWords}}
             {{/each}}

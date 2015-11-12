@@ -275,7 +275,7 @@ Router.map(function () {
 					}
 
 
-					var html     = JET.render('pdf', {data: data});
+					var html     = JET.render('pdf',data);
 
 					wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>', Meteor.bindEnvironment(function (code, signal) {
 
