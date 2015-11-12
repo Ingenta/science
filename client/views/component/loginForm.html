@@ -1,18 +1,28 @@
 <template name="loginForm">
 	<form method="post" action="{{loginUrl}}">
+        <div class="form-group">
+            <label for="login-form-username">{{_ "Journal name"}}</label>
+            <select id="login-form-journal" class="form-control">
+                <option>{{_ "Please select more journal name"}}</option>
+                {{#each publicationList}}
+                    <option value="{{codeValue}}" {{isChecked}}>{{translateThis titleCn title}}</option>
+                {{/each}}
+            </select>
+        </div>
 		<div class="form-group">
-			<label for="login-form-username">Email address</label>
+			<label for="login-form-username">{{_ "User Name"}}</label>
 			<input type="text" id="login-form-username" class="form-control" placeholder="{{_ "User Name"}}">
 		</div>
 		<div class="form-group">
-			<label for="login-form-password">Password</label>
+			<label for="login-form-password">{{_ "Password"}}</label>
 			<input type="password" id="login-form-password" class="form-control" placeholder="{{_ "Password"}}">
 		</div>
-
 		<div class="form-inline">
-			<button type="button" class="btn btn-default">{{_ "Register"}}</button>
-			<button type="submit" class="btn btn-default">{{_ "Login"}}</button>
-			<button type="reset" class="btn btn-default">{{_ "reset"}}</button>
+			<a href="{{registerUrl}}" target="_blank"><button type="button" class="btn btn-link">{{_ "Register"}}</button></a>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-primary">{{_ "Login"}}</button>
+                <button type="reset" class="btn btn-primary">{{_ "resetSecSearch"}}</button>
+            </div>
 		</div>
 	</form>
 </template>
@@ -20,7 +30,23 @@
 <template name="otherPlatformloginButtons">
 	<hr>
 	<ul class="list-unstyled">
-		<li><a data-target="scholarone" href="#">{{_ "ScholarOne Login"}}</a></li>
-		<li><a data-target="editors" href="#">{{_ "Editors Login"}}</a></li>
+        {{#if displayIl8n}}
+		    <li><a data-toggle="modal" data-target="#myModalLogin">{{_ "ScholarOne Login"}}</a></li>
+        {{else}}
+		    <li><a data-toggle="modal" data-target="#myModalLogin">{{_ "Editors Login"}}</a></li>
+        {{/if}}
 	</ul>
+    <div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLoginLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLoginLabel">{{_ "Please sign in"}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{> loginForm}}
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

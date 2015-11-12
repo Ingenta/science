@@ -127,5 +127,16 @@ Config = {
     otherPlatformLoginUrl:{
         scholarone:"http://mc03.manuscriptcentral.com/",
         editors:"http://ees.scichina.com/user/login.action?pageCode="
+    },
+    otherPlatformRegisterUrl:{
+        scholarone:"http://mc03.manuscriptcentral.com/scpma",
+        editors:"http://ees.scichina.com/user/registuser_scichina.action"
+    },
+    displayJournalLogin: {
+        journal: [
+            'journal.name.volume',
+            'article.show',
+            'journal.name'
+        ]
     }
 };
