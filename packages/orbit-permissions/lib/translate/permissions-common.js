@@ -250,6 +250,24 @@ OrbitPermissions = {
 	},
 	removeAdmins: function(users, callback) {
 		return this.revoke(users, globals.admin_role, callback);
+	},
+	getPermissionsDescriptions: function() {
+		var fallback_language, language, permissions;
+		language = helpers.getLanguage();
+		fallback_language = helpers.getFallbackLanguage();
+		permissions = {};
+		this._loopPermissions(function(package_name, permission_name, permission_description) {
+			var description;
+			description = permission_description[fallback_language];
+			if (language in permission_description) {
+				description = permission_description[language];
+			}
+			if(permission_description.selfCheck){
+				description.selfCheck=permission_description.selfCheck
+			}
+			return permissions[package_name + ":" + permission_name] = description;
+		});
+		return permissions;
 	}
 };
 
