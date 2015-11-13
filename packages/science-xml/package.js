@@ -18,14 +18,15 @@ Package.onUse(function (api) {
         both);
     api.addFiles('both/routes.js',both);
     api.addFiles('both/uploadLog.js', both);
-
+    api.use('arthuryyx:ftp','server')
     api.addFiles([
         'server/xml-lib.js',
         'server/science-xml.js',
         'server/creator.js',
         'server/parse.js',
         'server/tasks.js',
-        'server/interface.js'
+        'server/interface.js',
+        'server/ftpScan.js'
     ],'server');
 
     api.addFiles('client/views/upload.html', 'client');

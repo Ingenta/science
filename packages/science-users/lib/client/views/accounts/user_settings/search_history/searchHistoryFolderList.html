@@ -18,20 +18,32 @@
         <tbody>
         {{#each historyFolder}}
         <tr>
-            <td>
-                <a data-toggle="collapse" data-target="#{{folderName}}">{{folderName}}</a>
-            </td>
-            <td>
-                {{#if can "delete-searchHistory" "resource" }}
-                     <a href="#" class="fa fa-trash remove-folder"></a>
-                {{/if}}
+            <td colspan="2">
+                <div class="row" data-toggle="collapse" data-target="#{{folderName}}">
+                    <div class="col-md-10">
+                        <a>{{folderName}}</a>
+                    </div>
+                    <div class="col-md-2">
+                        {{#if can "delete-searchHistory" "resource" }}
+                            <a href="#" class="fa fa-trash remove-folder"></a>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="row collapse" id="{{folderName}}">
+                    <table class="table table-striped">
+                        <tbody>
+                        {{#each words}}
+                        <tr>
+                            <td colspan="2">
+                            {{> eachWords}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
             </td>
         </tr>
-        <li class="collapse"  id="{{folderName}}">
-            {{#each words}}
-                {{> eachWords}}
-            {{/each}}
-        </li>
         {{/each}}
         </tbody>
     </table>
@@ -63,12 +75,12 @@
 </template>
 
 <template name="eachWords">
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-9" style="padding-left:40px;">
             {{word}}
-        </td>
-        <td>
+        </div>
+        <div class="col-md-2" style="padding-left:53px;">
             <a href="#" class="fa fa-trash remove-word"></a>
-        </td>
-    </tr>
+        </div>
+    </div>
 </template>
