@@ -16,7 +16,7 @@ Science.Email.searchFrequencyEmail = function () {
             to: Users.findOne({username: Config.sysAdmin}).emails[0].address,
             from: 'publish@scichina.org',
             subject: emailConfig ? emailConfig.subject : 'Search Keyword Frequency Reached',
-            html: JET.render('searchFrequency', {"searchLogs": searchLogs, "scpbannerurl": Meteor.absoluteUrl()+ "email/logo.png"})
+            html: JET.render('searchFrequency', {"searchLogs": searchLogs, "scpbannerurl": Meteor.absoluteUrl()+ "email/logo.png", "rootUrl": Config.rootUrl})
 
         });
         console.log("email sent");
