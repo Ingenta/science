@@ -1,1 +1,9 @@
-{"searchLogs":[{"str":"AAA","count":111}]}
+{
+  "searchLogs": [
+    {
+      "str": "AAA",
+      "count": 111
+    }
+  ],
+  "scpbannerurl": "/email/logo.png"
+}
