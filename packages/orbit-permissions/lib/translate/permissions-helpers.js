@@ -1,6 +1,4 @@
-var helpers;
-
-helpers = share.helpers = {
+OrbitPermissionsHelpers = {
 	dashToWhiteSpace: function(s) {
 		return s.replace(/-/g, " ");
 	},
@@ -18,7 +16,7 @@ helpers = share.helpers = {
 		default_description = {};
 		fb_lang = globals.fallback_language;
 		default_description[fb_lang] = {
-			name: helpers.ucfirst(helpers.dashToWhiteSpace(symbol_name))
+			name: OrbitPermissionsHelpers.ucfirst(OrbitPermissionsHelpers.dashToWhiteSpace(symbol_name))
 		};
 		if (!_.isObject(input_description)) {
 			description = default_description;
@@ -59,7 +57,7 @@ helpers = share.helpers = {
 		}
 		return _.reduce(users, (function(memo, user) {
 			var uid;
-			if ((uid = helpers.getUserId(user)) != null) {
+			if ((uid = OrbitPermissionsHelpers.getUserId(user)) != null) {
 				memo.push(uid);
 			}
 			return memo;

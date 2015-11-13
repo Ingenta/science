@@ -240,6 +240,7 @@ OrbitPermissions.Registrar = (package_name="project") ->
   package_roles = Roles[package_name]
 
   @.definePermission = (permission_name, description) ->
+    debugger
     if not helpers.isDashSeparated(permission_name)
       throw new Meteor.Error 403, "Permission name should be all lowercase dash-separated"
 

@@ -1,8 +1,4 @@
-var OrbitPermissions, helpers;
-
-OrbitPermissions = share.OrbitPermissions;
-
-helpers = share.helpers;
+var helpers = OrbitPermissionsHelpers;
 
 if (Package.templating) {
 	Package.templating.Template.registerHelper(globals.helper_name, function(permission, package_name) {

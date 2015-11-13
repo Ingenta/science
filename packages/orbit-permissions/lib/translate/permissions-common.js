@@ -1,7 +1,7 @@
-var OrbitPermissions, Permissions, Roles, helpers, permissionsDep, rolesDep,
+var Permissions, Roles, helpers, permissionsDep, rolesDep,
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-helpers = share.helpers;
+helpers = OrbitPermissionsHelpers;
 
 Permissions = {};
 
@@ -11,7 +11,7 @@ Roles = {};
 
 rolesDep = new Tracker.Dependency;
 
-OrbitPermissions = share.OrbitPermissions = {
+OrbitPermissions = {
 	custom_roles: new Meteor.Collection(globals.custom_roles_collection_name),
 	_reloadCustomRoles: function() {
 		var custom_roles;

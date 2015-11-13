@@ -1,3 +1,4 @@
+debugger
 helpers = share.helpers =
   dashToWhiteSpace: (s) -> s.replace /-/g, " "
 

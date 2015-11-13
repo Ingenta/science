@@ -1,7 +1,3 @@
-var OrbitPermissions;
-
-OrbitPermissions = share.OrbitPermissions;
-
 Meteor.publish(null, function() {
 	return OrbitPermissions.custom_roles.find({});
 });
