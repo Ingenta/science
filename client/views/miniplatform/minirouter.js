@@ -22,7 +22,7 @@ Router.map(function () {
                 Meteor.subscribe('news_center'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
+                Meteor.subscribe('articlesWithoutFulltext')
             ]
         }
     });
@@ -108,7 +108,7 @@ Router.map(function () {
                 Meteor.subscribe('news_link'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('articles')
+                Meteor.subscribe('articlesWithoutFulltext')
             ]
         }
     });
