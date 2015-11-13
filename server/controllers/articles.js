@@ -2,7 +2,7 @@ var Future = Npm.require('fibers/future');
 
 Meteor.methods({
     'distinctVolume': function (journalId) {
-        result = Issues.distinct("volume", {"journalId": journalId});
+        var result = Issues.distinct("volume", {"journalId": journalId});
         console.dir(result);
         return result;
     },

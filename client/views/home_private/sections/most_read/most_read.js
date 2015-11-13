@@ -27,8 +27,7 @@ Template.mostReadArticleList.helpers({
         return _.first(mostReadArticles, 5);
     },
     mostReadCount: function () {
-        if (Session.get("mostRead"))
-            if (5 < Session.get("mostRead").length) return true;
+        if (Session.get("mostRead") && 5 < Session.get("mostRead").length)return true;
         return false;
     }
 });
