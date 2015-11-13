@@ -58,3 +58,45 @@ FTP.prototype.getSingleFile = function (options, targetFile, callback) {
 		pasvTimeout:2000
 	});
 };
+
+FTP.prototype.listFiles=function(options,callback){
+	var self = this;
+	var _listFiles=function(){
+		self.list(function(err, list) {
+			if (err) {
+				callback && callback(err);
+				return;
+			}
+			var fileList=[];
+			if(options.ext){
+				fileList =  _.filter(list,function(item){
+					return item.name.toLowerCase().endWith(options.ext)
+				})
+			}else{
+				fileList=list;
+			}
+			self.end();
+			callback(null,fileList);
+		});
+	}
+	self.on("ready",function(){
+		if(options.targetFolder){
+			self.cwd(options.targetFolder,function(err,currentWorkDir){
+				_listFiles();
+			})
+		}else{
+			_listFiles();
+		}
+	});
+	self.on('error', function(e){
+		callback && callback(e);
+		self.end();
+	});
+	self.connect({
+		host    : options.host,
+		user    : options.user,
+		password: options.password,
+		connTimeout:2000,
+		pasvTimeout:2000
+	});
+}
