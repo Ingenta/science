@@ -18,6 +18,9 @@ _.extend(OrbitPermissions, {
 			if (language in permission_description) {
 				description = permission_description[language];
 			}
+			if(permission_description.selfCheck){
+				description.selfCheck=permission_description.selfCheck
+			}
 			return permissions[package_name + ":" + permission_name] = description;
 		});
 		return permissions;
