@@ -162,6 +162,7 @@ science-emails@0.0.1
 science-external-interface@0.0.1
 science-institution@0.0.1
 science-lib@0.0.1
+science-logger@0.0.1
 science-parser@0.0.1
 science-permissions@0.0.1
 science-reports@0.0.1
