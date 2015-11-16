@@ -90,9 +90,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
         Meteor.bindEnvironment(
             function (error) {
                 if (error) {
-                    console.log("Error extracting ZIP file: " + error);//report error
-                    //THIS DOESNT REALLY WORK
-                    //TODO: test this condition
+                    logger.error("Error extracting ZIP file: " + error);//report error
                     return;
                 }
                 //set extract task to success, cleanup and start next task
@@ -102,8 +100,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                     Meteor.bindEnvironment(
                         function (err, file) {
                             if (err) {
-                                console.log(err);
-                                //TODO: test this condition
+                                logger.error(err);
                                 return;
                             }
                             var xmlFileName = "";
@@ -144,7 +141,7 @@ Tasks.parse = function (logId, pathToXml) {
     try {
         var result = ScienceXML.parseXml(pathToXml);
         log.errors = result.errors;
-        if (log.errors.length) {
+        if (!_.isEmpty(log.errors)) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
@@ -163,7 +160,7 @@ Tasks.parse = function (logId, pathToXml) {
 Tasks.insertArticlePdf = function (logId, result) {
     var log = UploadLog.findOne({_id: logId});
     if (!ScienceXML.FileExists(log.pdf)) {
-        console.log("pdf missing");
+        logger.info("pdf not found in archive");
         Tasks.insertArticleImages(logId, result);
         return;
     }
@@ -201,17 +198,17 @@ Tasks.insertArticleImages = function (logId, result) {
                     return !g.use;
                 });
             if (onlineOne) {
-                console.dir(onlineOne);
+                logger.info(onlineOne);
                 var figName = onlineOne.href;
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
-                    console.log("image missing: " + figName);
+                    logger.warn("image missing: " + figName);
                 }
                 else {
                     ArticleXml.insert(figLocation, function (err, fileObj) {
-                        if(err)
-                            console.dir(err);
-                        else{
+                        if (err)
+                            logger.error(err);
+                        else {
                             fig.imageId = fileObj._id;
                             UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                             if (_.last(result.figures) === fig) {
@@ -294,8 +291,8 @@ var insertKeywords = function (a) {
 
 var insertArticle = function (a) {
     var journal = Publications.findOne({_id: a.journalId});
-    if (!journal){
-        console.log("Parser didn't fail on missing journal as it should.");
+    if (!journal) {
+        logger.error("Parser should have failed if journal was missing but somehow it didn't.");
         return;
     } //should never happen.
 
@@ -319,16 +316,16 @@ var insertArticle = function (a) {
             issue: a.issue,
             year: a.year,
             month: a.month,
-            createDate:new Date()
+            createDate: new Date()
         });
     }
     //确保article有一个关联的issue
     a.issueId = issue._id || issue;
 
     //将PACS代号转换为PACS名称.
-    if(!_.isEmpty(a.pacs)){
-        var matchs = pacs.find({pacsCode:{$in: a.pacs}}).fetch();
-        a.pacs=matchs;
+    if (!_.isEmpty(a.pacs)) {
+        var matchs = pacs.find({pacsCode: {$in: a.pacs}}).fetch();
+        a.pacs = matchs;
     }
 
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
@@ -349,7 +346,6 @@ var insertArticle = function (a) {
         }
     });
     a.journalInfo = journalInfo;
-
 
 
     //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml

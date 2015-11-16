@@ -5,6 +5,13 @@ var getArticleDoiFromFullDOI = function (fullDOI) {
     if (!articleDOI) return fullDOI;
     return articleDOI;
 }
+var isValidDoi = function (doi) {
+    if (!doi) return false;
+    if (doi.split('/').length !== 2) return false;
+    if (_.isEmpty(doi.split('/')[0].trim())) return false;
+    if (_.isEmpty(doi.split('/')[1].trim())) return false;
+    return true;
+}
 
 ScienceXML.parseXml = function (path) {
     var results = {};
@@ -13,7 +20,7 @@ ScienceXML.parseXml = function (path) {
 
     //Step 2: Validate and parse the file
     results.errors = ScienceXML.validateXml(xml);
-    if (results.errors.length) {
+    if (!_.isEmpty(results.errors)) {
         return results;
     }
 
@@ -25,10 +32,13 @@ ScienceXML.parseXml = function (path) {
     if (doi === undefined) results.errors.push("No doi found");
     else {
         doi = doi.trim();
-        results.doi = doi;
-        results.articledoi = getArticleDoiFromFullDOI(doi);
+        if (!isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
+        else {
+            results.doi = doi;
+            results.articledoi = getArticleDoiFromFullDOI(doi);
+        }
     }
-    console.log('doi:' + results.doi)
+    logger.info('doi: ' + results.doi)
     //    解析完xml再做重复DOI检查，蒋凯2015-9-30
     //    CHECK IF EXISTING ARTICLE
     //var existingArticle = Articles.findOne({doi: results.doi});
@@ -58,34 +68,34 @@ ScienceXML.parseXml = function (path) {
             }
         }
     }
-    console.log('parsed title');
+    logger.info('parsed title');
 
     ScienceXML.getContentType(results, doc);
-    console.log('parsed content type');
+    logger.info('parsed content type');
 
     var ack = ScienceXML.getValueByXPathIncludingXml("//back/ack", doc);
     if (ack !== undefined) results.acknowledgements = ack;
-    console.log('parsed acknowledgements');
+    logger.info('parsed acknowledgements');
 
     var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
     if (volume === undefined) results.errors.push("No volume found");
     else results.volume = volume;
-    console.log('parsed volume');
+    logger.info('parsed volume');
 
     var issue = ScienceXML.getSimpleValueByXPath("//issue", doc);
     if (issue === undefined) results.errors.push("No issue found");
     else results.issue = issue;
-    console.log('parsed issue');
+    logger.info('parsed issue');
 
     var month = ScienceXML.getSimpleValueByXPath("//pub-date/month", doc);
     if (month === undefined) results.errors.push("No month found");
     else results.month = month;
-    console.log('parsed month');
+    logger.info('parsed month');
 
     var year = ScienceXML.getSimpleValueByXPath("//pub-date/year", doc);
     if (year === undefined) results.errors.push("No year found");
     else results.year = year;
-    console.log('parsed year');
+    logger.info('parsed year');
 
     //var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subj-group/subject", doc);
     //if (topic === undefined) {
@@ -102,48 +112,48 @@ ScienceXML.parseXml = function (path) {
     //}
 
     var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
-    console.log(topic);
+    logger.info(topic);
     if (topic) {
         var topicEneity = Topics.findOne({"englishName": topic});
         if (topicEneity) results.topic = topicEneity._id;
     }
-    console.log('parsed topic');
+    logger.info('parsed topic');
 
     //var keywords = xpath.select("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc).toString();
     //keywords = keywords.split(',');
     //if (keywords === undefined) results.errors.push("No keywords found");
     //else results.keywords = keywords;
 
-    var keywordsCn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()",doc);
-    var keywordsEn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()",doc);
-    if(_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)){
-        keywordsEn=ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec']/kwd/text()",doc);
-        if(_.isEmpty(keywordsEn)){
+    var keywordsCn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()", doc);
+    var keywordsEn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()", doc);
+    if (_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)) {
+        keywordsEn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
+        if (_.isEmpty(keywordsEn)) {
             results.errors.push("No keywords found");
-        }else{
-            results.keywords= {en:keywordsEn};
+        } else {
+            results.keywords = {en: keywordsEn};
         }
-    }else{
+    } else {
         results.keywords = {
-            cn:keywordsCn,
-            en:keywordsEn
+            cn: keywordsCn,
+            en: keywordsEn
         }
     }
-    console.log('parsed keyword');
+    logger.info('parsed keyword');
 
     var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
     if (elocationId !== undefined) results.elocationId = elocationId;
-    console.log('parsed elocationId');
+    logger.info('parsed elocationId');
 
     var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
     if (essn !== undefined) results.essn = essn;
-    console.log('parsed eissn');
+    logger.info('parsed eissn');
 
     //    GET JOURNAL AND PUBLISHER BY NAME (consider changing journal to find my doi)
     var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-title", doc);
     if (journalTitle === undefined) results.errors.push("No journal title found");
     else results.journalTitle = journalTitle;
-    console.log('parsed journal\'s title');
+    logger.info('parsed journal\'s title');
 
     var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
     if (issn === undefined) {
@@ -157,7 +167,7 @@ ScienceXML.parseXml = function (path) {
             results.publisher = journal.publisher;
         }
     }
-    console.log('parsed issn');
+    logger.info('parsed issn');
 
 
     var publisherName = ScienceXML.getSimpleValueByXPath("//publisher-name", doc);
@@ -165,56 +175,56 @@ ScienceXML.parseXml = function (path) {
     else {
         results.publisherName = publisherName;
     }
-    console.log('parsed publisher');
+    logger.info('parsed publisher');
 
     //      GET REFERENCES
-    results.references = ScienceXML.getReferences(results,doc);
-    console.log('parsed references');
+    results.references = ScienceXML.getReferences(results, doc);
+    logger.info('parsed references');
 
     //      GET ABSTRACT AND FULL TEXT
     results.sections = [];
     results = ScienceXML.getAbstract(results, doc);
-    console.log('parsed abstract');
+    logger.info('parsed abstract');
 
 
     results = ScienceXML.getFullText(results, doc);
-    console.log('parsed fulltext');
+    logger.info('parsed fulltext');
 
     //          GET AUTHORS, NOTES AND AFFILIATIONS
     ScienceXML.getAuthorInfo(results, doc);
 
-    var received = ScienceXML.getDateFromHistory(["Received","received"], doc);
+    var received = ScienceXML.getDateFromHistory(["Received", "received"], doc);
     if (received) results.received = received
     var accepted = ScienceXML.getDateFromHistory(["accepted"], doc);
     if (accepted) results.accepted = accepted
-    var published = ScienceXML.getDateFromHistory(["published online","published"], doc);
+    var published = ScienceXML.getDateFromHistory(["published online", "published"], doc);
     if (published) results.published = published
 
-    console.log('parsed date');
+    logger.info('parsed date');
 
 
-    var figuresInFloatGroup=ScienceXML.getFigures(doc);
-    if(!_.isEmpty(figuresInFloatGroup)){
+    var figuresInFloatGroup = ScienceXML.getFigures(doc);
+    if (!_.isEmpty(figuresInFloatGroup)) {
         results.figures = results.figures || [];
-        results.figures = _.union(results.figures,figuresInFloatGroup);
+        results.figures = _.union(results.figures, figuresInFloatGroup);
     }
-    console.log('parsed figures');
+    logger.info('parsed figures');
 
     results.tables = ScienceXML.getTables(doc);
-    console.log('parsed tables');
+    logger.info('parsed tables');
 
     var pacsArr = ScienceXML.getPACS(doc);
-    console.log('parsed PACS');
+    logger.info('parsed PACS');
 
-    if(!_.isEmpty(pacsArr)){
-        results.pacs=pacsArr;
+    if (!_.isEmpty(pacsArr)) {
+        results.pacs = pacsArr;
     }
 
-    var fundings= ScienceXML.getFunding(doc);
-    if(!_.isEmpty(fundings)){
+    var fundings = ScienceXML.getFunding(doc);
+    if (!_.isEmpty(fundings)) {
         results.fundings = fundings;
     }
-    console.log("parsed fundings");
+    logger.info("parsed fundings");
     return results;
 }
 

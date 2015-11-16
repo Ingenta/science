@@ -10,10 +10,6 @@ Config = {
         tmpDir: '/tmp/uploads/tmp',
         uploadDir: '/tmp/uploads'
     },
-    uploadMediaDir: {
-        tmpDir: '/tmp/uploads/tmp',
-        uploadDir: '/tmp/uploads'
-    },
     uploadPdfDir: '/tmp/pdf',
     uploadExcelDir: '/tmp/excel',
     ftp: {
@@ -50,12 +46,6 @@ Config = {
         'article.show',
         'solrsearch'
     ],
-    solrCore: {
-        host: "192.168.99.100",
-        port: "8983",
-        core: "/articles",
-        path: "/solr"
-    },
     Media: {
         allowType: ['mp3', 'mp4', 'ppt', 'pptx'],
         maxSize: 200 //MB
@@ -121,15 +111,16 @@ Config = {
     parser:{
         contentTypeDic:{
             article:["article","论文","research paper"],
-            editorial:["editorial","评述"]
+            editorial:["editorial","评述"],
+            forum:["论坛","Forum"]
         }
     },
-    otherPlatformLoginUrl:{
-        scholarone:"https://mc03.manuscriptcentral.com/",
-        editors:"http://ees.scichina.com/user/login.action?pageCode="
+    otherPlatformLoginUrl: {
+        scholarone: "https://mc03.manuscriptcentral.com/",
+        editors: "http://ees.scichina.com/user/login.action?pageCode="
     },
-    otherPlatformRegisterUrl:{
-        editors:"http://ees.scichina.com/user/registuser_scichina.action"
+    otherPlatformRegisterUrl: {
+        editors: "http://ees.scichina.com/user/registuser_scichina.action"
     },
     displayJournalLogin: {
         journal: [
@@ -139,3 +130,5 @@ Config = {
         ]
     }
 };
+if (Config.isDevMode)
+    logger.info("Dev Platform: " + process.platform);
