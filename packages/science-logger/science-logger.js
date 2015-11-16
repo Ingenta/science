@@ -1,37 +1,55 @@
-
+developmentLogLevel = "silly";
+productionLogLevel = "silly";
 // Write your package code here!
-if(Meteor.isServer) {
+if (Meteor.isServer) {
     winston = Npm.require('winston');
     MongoDBlogger = Npm.require('winston-mongodb').MongoDB;
-    //set logger level to full outside of development
+
+    winston.level = productionLogLevel;
+    var isDev = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
+    if (isDev)winston.level = developmentLogLevel;
+
     var mongoOptions = {
         handleExceptions: true,
-        level: 'warn',
-        host: '192.168.1.10',
-        db: 'meteor',
+        level: winston.level,
+        //host: '192.168.1.10',
+        db: process.env.MONGO_URL,
         port: 27071,
         collection: 'log',
         errorTimeout: 10000,
         timeout: 50000
     };
-    winston.level = "silly";
-    var isDev = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
-    if(isDev)winston.level = "warn";
+    var fileDebugOptions = {
+        silent: false,
+        colorize: true,
+        timestamp: true,
+        maxFiles: 5,
+        json: true,
+        filename: '/tmp/debug.log',
+        level: winston.level,
+        maxsize: 500000
+    };
+    var fileExceptionOptions = {
+        silent: false,
+        colorize: false,
+        timestamp: true,
+        filename: '/tmp/exception.log',
+        maxsize: 500000,
+        maxFiles: 5,
+        json: true
+    };
+
     logger = new (winston.Logger)({
         transports: [
             new (winston.transports.Console)(),
-            new (winston.transports.File)({ filename: '/tmp/somefile.log' })
+            new (winston.transports.File)(fileDebugOptions),
+            new (winston.transports.MongoDB)(mongoOptions)
+        ],
+        exceptionHandlers: [
+            new (winston.transports.Console)(),
+            new (winston.transports.File)(fileExceptionOptions)
         ]
     });
-    //logger.add(ScienceLog.transports.MongoDB,mongoOptions);
-
-    //logger.error('user error connected');
-    //
-    //
-
-    //logger.add(MongoDBlogger, mongoOptions);
-    //logger.warn('user warning connected', {userId: userId});
-    //logger.error('user error connected', {userId: userId});
     //Meteor.publish('user', function() {
     //    var userId = this.userId;
     //    logger.info('user connected', {userId: userId});
