@@ -13,7 +13,6 @@ Meteor.subscribe("issues");
 Meteor.subscribe("volumes");
 Meteor.subscribe("tag");
 Meteor.subscribe("file_excel");
-Meteor.subscribe("journal_ad");
 Meteor.subscribe("meeting_info");
 Meteor.subscribe('pages');
 Meteor.subscribe('images');
@@ -320,6 +319,15 @@ Router.map(function () {
         name: "cooperationCenter",
         title: function () {
             return TAPi18n.__("Ad Center");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('images'),
+                Meteor.subscribe('files'),
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publications'),
+                Meteor.subscribe("journal_ad")
+            ]
         }
     });
 
