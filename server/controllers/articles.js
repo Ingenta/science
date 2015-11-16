@@ -6,7 +6,9 @@ Meteor.methods({
     },
     'grabSessions': function (id) {
         var c = UserStatus.connections.findOne({userId: id});
-        return c.ipAddr;
+        if (c && c.ipAddr)
+            return c.ipAddr;
+        return "";
     },
     'getClientIP': function () {
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
