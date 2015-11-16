@@ -16,6 +16,7 @@ getJournalComponentByJournalId = function (id) {
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
     var issue = Issues.findOne({_id: article.issueId});
+    if(!issue)return;
     return "/" + issue.volume + "/" + issue.issue;
 }
 
