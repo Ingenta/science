@@ -121,7 +121,8 @@ Config = {
     parser:{
         contentTypeDic:{
             article:["article","论文","research paper"],
-            editorial:["editorial","评述"]
+            editorial:["editorial","评述"],
+            forum:["论坛","Forum"]
         }
     },
     otherPlatformLoginUrl:{
