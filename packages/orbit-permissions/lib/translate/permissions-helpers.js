@@ -64,7 +64,8 @@ OrbitPermissionsHelpers = {
 		}), []);
 	},
 	isValidOrbitPermissionsSymbol: function(role) {
-		return /^[a-z0-9][a-z0-9\-]*:[a-z0-9][a-z0-9\-]*$/.test(role);
+		var roleName = _.isObject(role)?role.role:role;
+		return /^[a-z0-9][a-z0-9\-]*:[a-z0-9][a-z0-9\-]*$/.test(roleName);
 	},
 	verifyRolesArray: function(roles) {
 		var i, len, role;

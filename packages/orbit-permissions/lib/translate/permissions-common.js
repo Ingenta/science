@@ -151,8 +151,8 @@ OrbitPermissions = {
 		}
 		return user_roles;
 	},
-	userCan: function(permission, package_name, user) {
-		var i, len, message, ref, ref1, ref2, ref3, role, role_name, role_package;
+	userCan: function(permission, package_name, user, range) {
+		var i, len, message, ref, ref1, ref2, ref3, userRole, role_name, role_package;
 		if (package_name == null) {
 			message = "OrbitPermissions.UserCan(): You must specify package_name";
 			console.log("Error: " + message);
@@ -161,17 +161,55 @@ OrbitPermissions = {
 		rolesDep.depend();
 		package_name = helpers.sterilizePackageName(package_name);
 		ref = this.getUserRoles(user);
-		for (i = 0, len = ref.length; i < len; i++) {
-			role = ref[i];
-			if (role === globals.admin_role) {
+
+		var definedPermission = Permissions && Permissions[package_name] && Permissions[package_name][permission];
+		//若权限定义中包含了一个鉴权方法,则调用该鉴权方法来判断用户是否具备某权限.
+		if(definedPermission && definedPermission.selfCheck && _.isFunction(definedPermission.selfCheck)) {
+			return definedPermission.selfCheck(user, range);
+		}
+		if(!_.isEmpty(ref)){
+			//若用户拥有超级管理员权限,直接返回true
+			if(_.find(ref,function(r){ return r===globals.admin_role; })){
 				return true;
 			}
-			ref1 = role.split(":"), role_package = ref1[0], role_name = ref1[1];
-			if (((ref2 = Roles[role_package]) != null ? ref2[role_name] : void 0) != null) {
-				if (ref3 = package_name + ":" + permission, indexOf.call(Roles[role_package][role_name].permissions, ref3) >= 0) {
-					return true;
+		}
+		if(_.isEmpty(range)){
+			// 遍历用户的所有角色
+			for (i = 0, len = ref.length; i < len; i++) {
+				userRole = ref[i];
+				// 若权限是字符串类型,遍历用户的所有角色下的权限,若有任意一个权限名称与参数中的权限名称一致即认为用户具备该操作的权限.
+				if(_.isString(userRole)){
+					ref1 = userRole.split(":"), role_package = ref1[0], role_name = ref1[1];
+					if (((ref2 = Roles[role_package]) != null ? ref2[role_name] : void 0) != null) {
+						if (ref3 = package_name + ":" + permission, indexOf.call(Roles[role_package][role_name].permissions, ref3) >= 0) {
+							return true;
+						}
+					}
+				}else if(_.isObject(userRole)){
+					// 用户信息中只包含了角色的名称和角色的适用范围,
+					// 所以需要先查询得出详细的角色信息(角色包含哪些权限)
+					ref1 = userRole.role.split(":"), role_package = ref1[0], role_name = ref1[1];
+					var currDefineRole  = Roles[role_package] && Roles[role_package][role_name];
+					//检查用户是否具备目标权限
+					if(indexOf.call(currDefineRole.permissions,package_name+":"+permission)>=0){
+						//如果未约束角色的有效范围,认为用户拥有该权限
+						if(_.isEmpty(userRole.range)){
+							return true;
+						}
+					}
 				}
 			}
+		}else{
+			//若自鉴权方法检查通过或权限定义中不包含鉴权方法(但约束了权限的有效范围),则使用以下的一般规则进行鉴权
+			//即:待鉴权用户(user)的所有包含权限(package_name:permission)的角色的权限范围,是否能够完全的包含待检查的范围(range)
+			var fullRange = OrbitPermissions.getPermissionRange(user,package_name+":"+permission);
+			var flag = true;
+			_.each(range,function(val,key){
+				var interSec = _.intersection(fullRange[key],val);
+				if(interSec.length<val.length)
+					flag=false;
+			})
+			return flag;
 		}
 		return false;
 	},
@@ -268,6 +306,39 @@ OrbitPermissions = {
 			return permissions[package_name + ":" + permission_name] = description;
 		});
 		return permissions;
+	},
+	getPermissionRange:function(userId,permission){
+		var userRoles = OrbitPermissions.getUserRoles(userId);
+		if(_.isEmpty(userRoles)){
+			return;
+		}
+		var definedRoles = [];
+		_.each(Roles,function(role,key){
+			var roleName = _.keys(role)[0];
+			var r = role[roleName];
+			if(r && !_.isEmpty(r.permissions)){
+				if(_.contains(r.permissions,permission)){
+					var obj= _.clone(r);
+					obj.role=key+":"+roleName;
+					definedRoles.push(obj);
+				}
+			}
+		});
+		var filterUserRoles = [];
+		_.each(userRoles,function(ur){
+			var urkey= _.isObject(ur)?ur.role:ur;
+			if(_.find(definedRoles,function(dr){
+						return dr.role===urkey;
+					}))
+				filterUserRoles.push(ur);
+		})
+		return _.reduce(_.pluck(filterUserRoles,'range'),function(memo,obj){
+			_.each(obj,function(val,key){
+				if(!_.isEmpty(val))
+					memo[key]=memo[key]?_.union(val,memo[key]):val
+			})
+			return memo;
+		},{})
 	}
 };
 
@@ -307,6 +378,11 @@ OrbitPermissions.Registrar = function(package_name) {
 		if (!helpers.isDashSeparated(role_name)) {
 			throw new Meteor.Error(403, "Role name should be all lowercase dash-separated");
 		}
+		//console.log('package-roles:-----')
+		//console.dir(package_roles)
+		//console.log('role-name:------');
+		//console.log(role_name);
+
 		if (role_name in package_roles) {
 			if (permissions != null) {
 				throw new Meteor.Error(403, "For security reasons package role's permissions can't be changed.");

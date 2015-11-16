@@ -84,3 +84,20 @@ Science.JSON.try2GetRightLangVal=function(obj,fieldArr,lang){
 	var content= obj[langArr[index]] || obj[langArr[1-index]];
 	return content;
 }
+/**
+ * 合并数组中的多个对象 ,如
+ * [{a:[1,2],b:[1]},{a:[2,3],c:[1]}]
+ * 合并后
+ * {a:[1,2,3],b:[1],c:[1]}
+ * @param ranges
+ * @returns
+ */
+Science.JSON.mergeRanges=function(ranges){
+	return _.reduce(ranges,function(memo,obj){
+		_.each(obj,function(val,key) {
+			if (!_.isEmpty(val))
+				memo[key] = memo[key] ? _.union(val, memo[key]) : val;
+		})
+		return memo;
+	},{})
+}

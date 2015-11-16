@@ -62,7 +62,7 @@ Package.onTest(function(api) {
   api.addFiles('test/both/permissions.coffee', both);
 
 
-  api.addFiles('test/server/definePermissions.js',server);
+  api.addFiles('test/server/definePermissions.js',both);
 
   api.addFiles('test/both/permissions-registrar.coffee', both);
   api.addFiles('test/client/permissions-registrar.coffee', client);
@@ -72,7 +72,7 @@ Package.onTest(function(api) {
 
   api.addFiles('test/server/custom-roles.coffee', server);
   api.addFiles('test/client/custom-roles.coffee', client);
-  //
+
   api.addFiles('test/templates/test-can-helper-templates.html', client);
 
   api.export('OrbitPermissions');
