@@ -69,7 +69,7 @@ Template.recommendArticles.helpers({
     },
     ArticleUrl: function (Arid) {
         var journalId = Session.get('currentJournalId');
-        var title = Publications.findOne({_id: journalId}).title;
+        var title = Publications.findOne({_id: journalId}).shortTitle;
         var article = Articles.findOne({_id: Arid});
         if (article)
             return title + "/" + article.volume + "/" + article.issue + "/" + article.doi;

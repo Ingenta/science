@@ -1,0 +1,146 @@
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    html body {
+        font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 22px;
+        color: #333;
+        background: #f8faef url(../images/topbg.gif) repeat-x;
+    }
+    a {
+        color: #036cb0;
+        text-decoration: none;
+    }
+    .oh {
+        overflow: hidden;
+    }
+    .mt10 {
+        margin-top: 10px;
+    }
+    .big {
+        width: 610px;
+        margin: 0 auto;
+    }
+    .top {
+        background: #036cb0;
+        color: #fff;
+        height: 88px;
+        font-size: 28px;
+        line-height: 88px;
+        padding: 0 20px;
+        font-family: Arial;
+    }
+    .top img {
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    .logo {
+        background: #68a7d0;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 20px;
+        font-family: Arial;
+        font-size: 14px;
+    }
+    .logo a {
+        color: #333;
+        padding: 0 5px;
+    }
+    .img-ico {
+        padding-left: 50px;
+        background: #fff;
+    }
+    .content {
+        background: #f6f6f6;
+    }
+    .new-list {
+        width: 350px;
+        float: left;
+        background: #fff;
+        padding: 25px 20px;
+    }
+    .meau-list {
+        width: 200px;
+        float: right;
+        font-family: Arial;
+    }
+    .new-list h1 {
+        font-size: 22px;
+        color: #036cb0;
+        margin-bottom: 8px;
+        font-weight: normal;
+    }
+    .new-list h2 {
+        font-size: 16px;
+        color: #036cb0;
+        font-weight: normal;
+        margin-top: 15px;
+    }
+    .new-list h3 {
+        font-size: 14px;
+        color: #036cb0;
+        font-weight: normal;
+    }
+    .new-list h4 {
+        font-size: 14px;
+        color: #777;
+        font-weight: normal;
+    }
+    .new-list h5 {
+        font-size: 12px;
+        color: #777;
+        font-weight: normal;
+    }
+    .border-div {
+        border-bottom: 1px solid #e5e5e5;
+        padding: 10px 0;
+    }
+    .meau-list h1 {
+        font-size: 20px;
+        color: #036cb0;
+        margin-top: 25px;
+    }
+    .meau-list h2 {
+        font-size: 14px;
+        color: #777;
+        line-height: 20px;
+    }
+    .meau-list p {
+        color: #999;
+    }
+    .cont-bottom {
+        padding: 15px 20px;
+        font-family: Arial;
+        line-height: 20px;
+    }
+    .cont-bottom p {
+        margin-bottom: 8px;
+    }
+</style>
+
+<div class="content">
+    <div class="oh">
+        <div class="new-list">
+            <h1>{{journal.titleCn}}</h1>
+            <h4>{{issue.year}}年 {{issue.volume}}卷 {{issue.issue}}期</h4>
+            <h4>发布日期：{{issue.year}}年 {{issue.month}}月{{issue.day}}{{#if issue.day}}日{{/if}}</h4>
+
+            <div class="border-div">
+                <p>{{journal.description.cn}}</p>
+            </div>
+            {{#each articleList}}
+                <h2><a href="{{this.url}}">{{this.title.cn}}</a></h2>
+                <h3>
+                    {{#each this.authors}}
+                        {{this.fullname.en}},
+                    {{/each}}
+                </h3>
+            {{/each}}
+        </div>
+        {{> emailJournalNewsBar}}
+    </div>
+    {{> emailFooter}}
+</div>

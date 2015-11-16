@@ -1,6 +1,25 @@
 //Meteor.publish('articles', function () {
 //    return Articles.find();
 //});
+var minimumArticle = {
+    title: 1,
+    journalId: 1,
+    doi: 1,
+    issueId: 1
+};
+var articleWithMetadata = {
+    title: 1,
+    journalId: 1,
+    doi: 1,
+    issueId: 1,
+    volume: 1,
+    elocationId: 1,
+    year: 1,
+    abstract: 1,
+    authors: 1,
+    accessKey: 1
+};
+
 Meteor.publish('articlesWithoutFulltext', function () {
     return Articles.find({}, {
         fields: {sections: 0}
@@ -9,7 +28,7 @@ Meteor.publish('articlesWithoutFulltext', function () {
 
 Meteor.publish('articleSearchResults', function () {
     return [Articles.find({}, {
-        fields: {sections: 0, figures: 0, references: 0, authorNotes: 0, affiliations: 0, fundings: 0}
+        fields: articleWithMetadata
     }),
         Publishers.find(),
         Publications.find()
@@ -27,22 +46,48 @@ Meteor.publish('oneJournalArticles', function (id) {
 });
 
 
-Meteor.publish('mostRecentArticles', function () {
+//TODO publish just enough for english and chinese title, and url content
+Meteor.publish('homepageMostRecentArticles', function () {
     return [
         Articles.find({}, {
             sort: {createdAt: -1},
             limit: 10,
-            fields: {title: 1, journalId: 1, doi: 1, issueId: 1}
+            fields: minimumArticle
         }),
-        Publishers.find(),
-        Publications.find()
+        Publishers.find({}, {
+            fields: {name: 1}
+        }),
+        Publications.find({}, {
+            fields: {publisher: 1, shortTitle: 1}
+        }),
+        Issues.find({}, {
+            fields: {volume: 1, issue: 1}
+        })
+    ]
+});
+Meteor.publish('fullMostRecentArticles', function () {
+    return [
+        Articles.find({}, {
+            sort: {createdAt: -1},
+            limit: 10,
+            fields: articleWithMetadata
+        }),
+        Publishers.find({}, {
+            fields: {name: 1}
+        }),
+        Publications.find({}, {
+            fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
+        }),
+        Issues.find({}, {
+            fields: {volume: 1, issue: 1}
+        })
     ]
 });
 
 Meteor.publish('articleUrls', function () {
     return [
         Articles.find({}, {
-            fields: {title: 1, journalId: 1, doi: 1, issueId: 1}
+            fields: minimumArticle
         }),
         Publishers.find(),
         Publications.find()
