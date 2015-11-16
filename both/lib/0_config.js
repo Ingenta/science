@@ -6,12 +6,14 @@ Config = {
         "password": "123123",
         "email": "admin@scp.com"
     },
-    uploadXmlDir: {
-        tmpDir: '/tmp/uploads/tmp',
-        uploadDir: '/tmp/uploads'
+    tempFiles: {
+        uploadXmlDir: {
+            tmpDir: '/tmp/uploads/tmp',
+            uploadDir: '/tmp/uploads'
+        },
+        uploadPdfDir: '/tmp/pdf',
+        uploadExcelDir: '/tmp/excel',
     },
-    uploadPdfDir: '/tmp/pdf',
-    uploadExcelDir: '/tmp/excel',
     ftp: {
         downloadDir: "/tmp/downloads"
     },
@@ -108,11 +110,11 @@ Config = {
     mainPublish: "hSsscs85HXuu2qTfJ",
     searchKeywordFrequency: 3000,
     sysAdmin: "admin",
-    parser:{
-        contentTypeDic:{
-            article:["article","论文","research paper"],
-            editorial:["editorial","评述"],
-            forum:["论坛","Forum"]
+    parser: {
+        contentTypeDic: {
+            article: ["article", "论文", "research paper"],
+            editorial: ["editorial", "评述"],
+            forum: ["论坛", "Forum"]
         }
     },
     otherPlatformLoginUrl: {
