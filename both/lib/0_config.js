@@ -1,11 +1,6 @@
 Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
 Config = {
     isDevMode: Meteor.isDevelopment,
-    "defaultAdmin": {
-        "username": "admin",
-        "password": "123123",
-        "email": "admin@scp.com"
-    },
     tempFiles: {
         uploadXmlDir: {
             tmpDir: '/tmp/uploads/tmp',
@@ -132,5 +127,13 @@ Config = {
         ]
     }
 };
-if (Config.isDevMode)
-    logger.info("Dev Platform: " + process.platform);
+if (Meteor.isServer) {
+    Config.defaultAdmin = {
+        "username": "admin",
+        "password": "123123",
+        "email": "admin@scp.com"
+    }
+    if (Config.isDevMode)
+        logger.info("Dev Platform: " + process.platform);
+}
+
