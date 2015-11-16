@@ -5,6 +5,13 @@ var getArticleDoiFromFullDOI = function (fullDOI) {
     if (!articleDOI) return fullDOI;
     return articleDOI;
 }
+var isValidDoi = function (doi) {
+    if (!doi) return false;
+    if (doi.split('/').length !== 2) return false;
+    if (_.isEmpty(doi.split('/')[0].trim())) return false;
+    if (_.isEmpty(doi.split('/')[1].trim())) return false;
+    return true;
+}
 
 ScienceXML.parseXml = function (path) {
     var results = {};
@@ -25,10 +32,13 @@ ScienceXML.parseXml = function (path) {
     if (doi === undefined) results.errors.push("No doi found");
     else {
         doi = doi.trim();
-        results.doi = doi;
-        results.articledoi = getArticleDoiFromFullDOI(doi);
+        if (!isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
+        else {
+            results.doi = doi;
+            results.articledoi = getArticleDoiFromFullDOI(doi);
+        }
     }
-    console.log('doi:' + results.doi)
+    logger.info('doi: ' + results.doi)
     //    解析完xml再做重复DOI检查，蒋凯2015-9-30
     //    CHECK IF EXISTING ARTICLE
     //var existingArticle = Articles.findOne({doi: results.doi});
