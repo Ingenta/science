@@ -27,9 +27,7 @@ Router.route("topics/:topicsId/", {
     waitOn: function () {
         return [
             Meteor.subscribe('topics'),
-            Meteor.subscribe('articleSearchResults'),
-            Meteor.subscribe('publications'),
-            Meteor.subscribe('publishers')
+            Meteor.subscribe('articleSearchResults')
         ]
     }
 });
