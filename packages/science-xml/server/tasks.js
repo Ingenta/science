@@ -198,7 +198,7 @@ Tasks.insertArticleImages = function (logId, result) {
                     return !g.use;
                 });
             if (onlineOne) {
-                logger.error(onlineOne);
+                logger.info(onlineOne);
                 var figName = onlineOne.href;
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
