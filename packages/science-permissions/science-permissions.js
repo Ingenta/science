@@ -89,9 +89,9 @@ Meteor.startup(function () {
         queryArr.push({'emails.address': da.email});
         queryArr.push({'username': da.username});
         if (!Users.findOne({$or: queryArr})) {
-            console.info("create default user '" + da.username + "'");
+            logger.warn("create default user '" + da.username + "'");
             var userId = Accounts.createUser(da)
-            console.info("set admin role for user '" + da.username + "'");
+            logger.warn("set admin role for user '" + da.username + "'");
             Permissions.delegate(userId, ["permissions:admin"]);
         }
     }

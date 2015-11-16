@@ -1,6 +1,6 @@
-Meteor.publish('articles', function () {
-    return Articles.find();
-});
+//Meteor.publish('articles', function () {
+//    return Articles.find();
+//});
 Meteor.publish('articlesWithoutFulltext', function () {
     return Articles.find({}, {
         fields: {sections: 0}
@@ -8,9 +8,12 @@ Meteor.publish('articlesWithoutFulltext', function () {
 });
 
 Meteor.publish('articleSearchResults', function () {
-    return Articles.find({}, {
+    return [Articles.find({}, {
         fields: {sections: 0, figures: 0, references: 0, authorNotes: 0, affiliations: 0, fundings: 0}
-    });
+    }),
+        Publishers.find(),
+        Publications.find()
+    ]
 });
 
 Meteor.publish('oneArticle', function (id) {

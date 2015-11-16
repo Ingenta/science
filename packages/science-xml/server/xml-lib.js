@@ -19,7 +19,6 @@ ScienceXML.RemoveFile = function (path) {
     if (path) {
         FSE.remove(path, function (err) {
             if (err) return console.error(err)
-            //console.log('successfully deleted:' + path)
         });
     }
 }
@@ -50,32 +49,32 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.authorNotes = [];
     results.affiliations = [];
     var authorNodes = parserHelper.getNodes("//contrib[@contrib-type='author']", doc);
-    _.each(authorNodes,function (author) {
-        var fullnamePart ={};
+    _.each(authorNodes, function (author) {
+        var fullnamePart = {};
 
-        var surnamePart=parserHelper.getMultiVal("descendant::name[@lang='{lang}']/surname",author,{planb:"descendant::name/surname"});
-        var givenPart=parserHelper.getMultiVal("descendant::name[@lang='{lang}']/given-names",author,{planb:"descendant::name/given-names"});
+        var surnamePart = parserHelper.getMultiVal("descendant::name[@lang='{lang}']/surname", author, {planb: "descendant::name/surname"});
+        var givenPart = parserHelper.getMultiVal("descendant::name[@lang='{lang}']/given-names", author, {planb: "descendant::name/given-names"});
         fullnamePart.en = surnamePart.en + " " + givenPart.en;
         fullnamePart.cn = surnamePart.cn + " " + givenPart.cn;
 
-        var authorObj = {given: givenPart, surname: surnamePart,fullname:fullnamePart};
+        var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
 
         //通讯作者信息
         var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
-        if(noteAttr){
-            authorObj.email=noteAttr;
-            console.log('email')
+        if (noteAttr) {
+            authorObj.email = noteAttr;
+            logger.info('parse email done')
         }
 
         //工作单位信息
         var affAttrs = parserHelper.getAttributes("child::xref[@ref-type='aff']/attribute::rid", author);
-        if(!_.isEmpty(affAttrs)){
+        if (!_.isEmpty(affAttrs)) {
             authorObj.affs = _.uniq(affAttrs);
         }
 
         results.authors.push(authorObj);
     });
-    if (results.authors.length === 0) {
+    if (_.isEmpty(results.authors)) {
         results.errors.push("No author found");
     }
 
@@ -83,22 +82,25 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     authorNotesNodes.forEach(function (note) {
         var noteLabel = parserHelper.getSimpleVal("child::label", note);
         var email = parserHelper.getSimpleVal("descendant::ext-link", note);
-        var multiLangNote=parserHelper.getMultiVal("child::p[@lang='{lang}']",note,{planb:"child::p",handler:parserHelper.handler.xml});
+        var multiLangNote = parserHelper.getMultiVal("child::p[@lang='{lang}']", note, {
+            planb: "child::p",
+            handler: parserHelper.handler.xml
+        });
 
-        var id = parserHelper.getFirstAttribute("attribute::id",note);
+        var id = parserHelper.getFirstAttribute("attribute::id", note);
         if (noteLabel === undefined) {
             results.errors.push("No noteLabel found");
         } else if (email === undefined) {
             results.errors.push("No email found");
         } else {
-            var entry = {id:id, label: noteLabel, email: email};
-            if(!_.isEmpty(multiLangNote)){
-                entry.note={};
-                _.each(multiLangNote,function(noteContent,key){
-                    var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g,email);
-                    noteContent = noteContent.toString().trim().replace(/<ext-link[^<]+<\/ext-link>/,mailTag);
-                    noteContent = noteContent.replace(/<\/?p[^>]*>/g,"");
-                    entry.note[key]=noteContent;
+            var entry = {id: id, label: noteLabel, email: email};
+            if (!_.isEmpty(multiLangNote)) {
+                entry.note = {};
+                _.each(multiLangNote, function (noteContent, key) {
+                    var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, email);
+                    noteContent = noteContent.toString().trim().replace(/<ext-link[^<]+<\/ext-link>/, mailTag);
+                    noteContent = noteContent.replace(/<\/?p[^>]*>/g, "");
+                    entry.note[key] = noteContent;
                 })
             }
             results.authorNotes.push(entry);
@@ -107,26 +109,26 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
     var affNodes = parserHelper.getNodes("//contrib-group/aff-alternatives", doc);
     if (_.isEmpty(affNodes)) {
-        affNodes = parserHelper.getNodes("//contrib-group/aff",doc);
-        _.each(affNodes,function(affNode){
-            var affiliation = {id:undefined,affText:{}};
-            affiliation.id = parserHelper.getFirstAttribute("attribute::id",affNode);
-            affiliation.label=parserHelper.getSimpleVal("child::label[1]",affNode);
-            affiliation.affText.en=parserHelper.getSimpleVal("child::label[last()]",affNode);
+        affNodes = parserHelper.getNodes("//contrib-group/aff", doc);
+        _.each(affNodes, function (affNode) {
+            var affiliation = {id: undefined, affText: {}};
+            affiliation.id = parserHelper.getFirstAttribute("attribute::id", affNode);
+            affiliation.label = parserHelper.getSimpleVal("child::label[1]", affNode);
+            affiliation.affText.en = parserHelper.getSimpleVal("child::label[last()]", affNode);
             results.affiliations.push(affiliation);
         })
     } else {
-        var index=1;
-        _.each(affNodes,function (affNode) {
-            var affiliation = {id:undefined,affText:{}};
-            affiliation.id=parserHelper.getFirstAttribute("attribute::id",affNode);
-            affiliation.label=parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[1]",affNode);
+        var index = 1;
+        _.each(affNodes, function (affNode) {
+            var affiliation = {id: undefined, affText: {}};
+            affiliation.id = parserHelper.getFirstAttribute("attribute::id", affNode);
+            affiliation.label = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[1]", affNode);
 
             // -------临时逻辑 开始--------
             // 若取到了中文标签但是没取到英文标签,用序号做英文标签.
             // 待中国科学方正确调整了affiliation数据,测试通过后应当删除这段代码
-            if((affiliation.label.cn && !affiliation.label.en) || (!affiliation.label.en && affiliation.label.en.length>2)){
-                affiliation.label.en=String(index);
+            if ((affiliation.label.cn && !affiliation.label.en) || (!affiliation.label.en || affiliation.label.en.length > 2)) {
+                affiliation.label.en = String(index);
             }
             index++;
             // -------临时逻辑 结束----------
@@ -135,7 +137,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.affiliations.push(affiliation);
         });
     }
-    console.log('parse author done');
+    logger.info('parse author done');
     return results;
 }
 
@@ -144,20 +146,20 @@ ScienceXML.getSubSection = function (subSectionNodes) {
     subSectionNodes.forEach(function (subSection) {
         var thisSection = ScienceXML.getOneSectionHtmlFromSectionNode(subSection);
         var childSectionNodes = xpath.select("child::sec", subSection);
-        if (!childSectionNodes.length)thisSubSection.push(thisSection);
+        if (_.isEmpty(childSectionNodes))thisSubSection.push(thisSection);
         else {
-	        var subSecs = ScienceXML.getSubSection(childSectionNodes);
-	        var figures=[];
-	        if(!_.isEmpty(subSecs)){
-		        var figures=[];
-		        for(var i=0;i<subSecs.length;i++){
-			        if(!_.isEmpty(subSecs[i].body.figures)){
-				        figures= _.union(figures,subSecs[i].body.figures);
-				        delete subSecs[i].body.figures;
-			        }
-		        }
-                thisSection.body.figures=figures
-	        }
+            var subSecs = ScienceXML.getSubSection(childSectionNodes);
+            var figures = [];
+            if (!_.isEmpty(subSecs)) {
+                var figures = [];
+                for (var i = 0; i < subSecs.length; i++) {
+                    if (!_.isEmpty(subSecs[i].body.figures)) {
+                        figures = _.union(figures, subSecs[i].body.figures);
+                        delete subSecs[i].body.figures;
+                    }
+                }
+                thisSection.body.figures = figures
+            }
             thisSubSection.push({
                 label: thisSection.label,
                 title: thisSection.title,
@@ -170,27 +172,27 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 }
 
 var getParagraphs = function (paragraphNodes) {
-	var paragraphs = {html: "", tex: [], figures:[]};
-	paragraphNodes.forEach(function (paragraph) {
-		if(paragraph.tagName==='fig'){
+    var paragraphs = {html: "", tex: [], figures: []};
+    paragraphNodes.forEach(function (paragraph) {
+        if (paragraph.tagName === 'fig') {
             //兼容中国科学插图数据处理
-			var fig = getFigure(paragraph);
-			if(fig){
-				paragraphs.figures.push(fig);
-				var ref = '<p style="display:none"><xref original="true" ref-type="fig" rid="'+fig.id+'">'+fig.label+'</xref></p>';
-				paragraphs.html+=ref;
-			}
-		}else{
-			var parseResult = ScienceXML.handlePara(paragraph);
-			var sectionText = new serializer().serializeToString(parseResult.paraNode);
-			paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(sectionText));
+            var fig = getFigure(paragraph);
+            if (fig) {
+                paragraphs.figures.push(fig);
+                var ref = '<p style="display:none"><xref original="true" ref-type="fig" rid="' + fig.id + '">' + fig.label + '</xref></p>';
+                paragraphs.html += ref;
+            }
+        } else {
+            var parseResult = ScienceXML.handlePara(paragraph);
+            var sectionText = new serializer().serializeToString(parseResult.paraNode);
+            paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(sectionText));
 
-			if (parseResult.formulas && parseResult.formulas.length) {
-				paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
-			}
-		}
-	});
-	return paragraphs;
+            if (parseResult.formulas && parseResult.formulas.length) {
+                paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
+            }
+        }
+    });
+    return paragraphs;
 }
 
 ScienceXML.getParagraphsFromASectionNode = function (section) {
@@ -207,39 +209,39 @@ ScienceXML.getOneSectionHtmlFromSectionNode = function (section) {
 };
 
 ScienceXML.getFullText = function (results, doc) {
-	// 先检查body下是否有不包含在sec节点中的p节点，如果有的话，
-	// 将这些p节点提取出来作为一个新的章节放到章节列表的顶部
-	var ghostSec, normalSecs = [];
-	var pUnderBody           = xpath.select("//body/p | //body/fig", doc);
-	if (!_.isEmpty(pUnderBody)) {
-		var ghostContent = getParagraphs(pUnderBody);
-		ghostSec         = ghostContent && {label: undefined, title: "__start__", body: ghostContent};
-	}
-	// 取出body下的正常章节信息
-	var sectionNodes = xpath.select("//body/sec", doc);
-	if (!_.isEmpty(sectionNodes)) {
-		//调用递归方法按层级关系取得所有章节信息
-		normalSecs = ScienceXML.getSubSection(sectionNodes);
-	}
-	// 若开头存在无sec内容，合并
-	if (ghostSec) {
-		normalSecs = _.union(ghostSec, normalSecs);
-	}
-	// 兼容中国科学插图
-	// 将文内插图取出统一放到文章的figures节点中
-	if(!_.isEmpty(normalSecs)){
-		var figures=[];
-		for(var i=0;i<normalSecs.length;i++){
-			if(!_.isEmpty(normalSecs[i].body.figures)){
-				figures= _.union(figures,normalSecs[i].body.figures);
-				delete normalSecs[i].body.figures;
-			}
-		}
-		results.figures=figures;
-	}
+    // 先检查body下是否有不包含在sec节点中的p节点，如果有的话，
+    // 将这些p节点提取出来作为一个新的章节放到章节列表的顶部
+    var ghostSec, normalSecs = [];
+    var pUnderBody = xpath.select("//body/p | //body/fig", doc);
+    if (!_.isEmpty(pUnderBody)) {
+        var ghostContent = getParagraphs(pUnderBody);
+        ghostSec = ghostContent && {label: undefined, title: "__start__", body: ghostContent};
+    }
+    // 取出body下的正常章节信息
+    var sectionNodes = xpath.select("//body/sec", doc);
+    if (!_.isEmpty(sectionNodes)) {
+        //调用递归方法按层级关系取得所有章节信息
+        normalSecs = ScienceXML.getSubSection(sectionNodes);
+    }
+    // 若开头存在无sec内容，合并
+    if (ghostSec) {
+        normalSecs = _.union(ghostSec, normalSecs);
+    }
+    // 兼容中国科学插图
+    // 将文内插图取出统一放到文章的figures节点中
+    if (!_.isEmpty(normalSecs)) {
+        var figures = [];
+        for (var i = 0; i < normalSecs.length; i++) {
+            if (!_.isEmpty(normalSecs[i].body.figures)) {
+                figures = _.union(figures, normalSecs[i].body.figures);
+                delete normalSecs[i].body.figures;
+            }
+        }
+        results.figures = figures;
+    }
 
-	results.sections=normalSecs;
-	return results;
+    results.sections = normalSecs;
+    return results;
 };
 
 ScienceXML.getAbstract = function (results, doc) {
@@ -253,14 +255,14 @@ ScienceXML.getAbstract = function (results, doc) {
 ScienceXML.getContentType = function (results, doc) {
     if (!results.errors) results.errors = [];
     var contentType = parserHelper.getFirstAttribute("//article/@article-type", doc);
-    if(!contentType){
-        contentType=parserHelper.getSimpleVal("//article-meta/article-type",doc);
+    if (!contentType) {
+        contentType = parserHelper.getSimpleVal("//article-meta/article-type", doc);
     }
-    if(contentType){
-        contentType=contentType.trim().toLowerCase();
-        var trans = _.contains(Config.parser.contentTypeDic.article,contentType) ? "article":"other";
-        results.contentType=trans;
-    }else{
+    if (contentType) {
+        contentType = contentType.trim().toLowerCase();
+        var trans = _.contains(Config.parser.contentTypeDic.article, contentType) ? "article" : "other";
+        results.contentType = trans;
+    } else {
         results.errors.push("No content type found");
     }
     return results;
@@ -281,7 +283,7 @@ ScienceXML.replaceNewLines = function (input) {
 ScienceXML.getSimpleValueByXPath = function (xp, doc) {
     var titleNodes = xpath.select(xp, doc);
     if (_.isEmpty(titleNodes))return;
-    if(!titleNodes[0].firstChild) return;
+    if (!titleNodes[0].firstChild) return;
     var text = titleNodes[0].firstChild.data;
     return ScienceXML.replaceNewLines(text);
 }
@@ -325,11 +327,11 @@ ScienceXML.validateXml = function (xml) {
 
 ScienceXML.getDateFromHistory = function (types, doc) {
     var result;
-    _.each(types,function(type){
+    _.each(types, function (type) {
         var day = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/day", doc);
         var month = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/month", doc);
         var year = ScienceXML.getValueByXPathIncludingXml("//history/date[@date-type='" + type + "']/year", doc);
-        if (day && month && year){
+        if (day && month && year) {
             result = new Date(Date.parse(year + '/ ' + month + '/' + day));
             return;
         }
@@ -337,68 +339,68 @@ ScienceXML.getDateFromHistory = function (types, doc) {
     return result;
 };
 
-var getFigure = function(fig){
-	var figure = {};
-	var id = xpath.select("./@id", fig);
-	if (id && id.length) {
-		figure.id = id[0].value;
-	}
-	var position = xpath.select("./@position", fig);
-	if (position && position.length) {
-		figure.position = position[0].value;
-	}
+var getFigure = function (fig) {
+    var figure = {};
+    var id = xpath.select("./@id", fig);
+    if (id && id.length) {
+        figure.id = id[0].value;
+    }
+    var position = xpath.select("./@position", fig);
+    if (position && position.length) {
+        figure.position = position[0].value;
+    }
 
-	var label = xpath.select("child::label/text()", fig);
-	if (!label || !label.length) {
-		var labelNode = xpath.select("child::caption/title",fig);//兼容中国科学的数据 T-T
-        if(!_.isEmpty(labelNode)){
-            var textNodes = xpath.select("descendant::text()",labelNode[0]);
-            if(!_.isEmpty(textNodes)){
-                var l = _.pluck(textNodes,"data").join(" ").trim();
-                if(l)
+    var label = xpath.select("child::label/text()", fig);
+    if (!label || !label.length) {
+        var labelNode = xpath.select("child::caption/title", fig);//兼容中国科学的数据 T-T
+        if (!_.isEmpty(labelNode)) {
+            var textNodes = xpath.select("descendant::text()", labelNode[0]);
+            if (!_.isEmpty(textNodes)) {
+                var l = _.pluck(textNodes, "data").join(" ").trim();
+                if (l)
                     label = [l];
             }
         }
-	}
-	if (label && label.length) {
-		figure.label = label[0].toString();
-	}
+    }
+    if (label && label.length) {
+        figure.label = label[0].toString();
+    }
 
-	var caption = xpath.select("child::caption/p", fig);
-	if (caption && caption.length) {
-		figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
-	}
+    var caption = xpath.select("child::caption/p", fig);
+    if (caption && caption.length) {
+        figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+    }
     //中国科学数据中无此项
-	//var graphicLinks = xpath.select("child::graphic", fig);
-	//if (graphicLinks && graphicLinks.length) {
-	//	figure.links = [];
-	//	graphicLinks.forEach(function (gl) {
-	//		var glId = xpath.select("./@id", gl);
-	//		if (glId && glId.length) {
-	//			figure.links.push(glId[0].value);
-	//		}
-	//	})
-	//}
+    //var graphicLinks = xpath.select("child::graphic", fig);
+    //if (graphicLinks && graphicLinks.length) {
+    //	figure.links = [];
+    //	graphicLinks.forEach(function (gl) {
+    //		var glId = xpath.select("./@id", gl);
+    //		if (glId && glId.length) {
+    //			figure.links.push(glId[0].value);
+    //		}
+    //	})
+    //}
 
-	var graphics = xpath.select("descendant::graphic", fig);
-	if (graphics && graphics.length) {
-		figure.graphics = [];
-		//var xlinkSelect = xpath.useNamespaces({"xlink":
-		// "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
-		graphics.forEach(function (grap) {
-			var g = {};
-			var suse = xpath.select("./@specific-use", grap);
-			if (suse && suse.length) {
-				g.use = suse[0].value;
-			}
-			var href = xpath.select('@href', grap);
-			if (href && href.length) {
-				g.href = href[0].value && href[0].value.replace('\\','/');//兼容windows的分隔符\
-			}
-			figure.graphics.push(g);
-		})
-	}
-	return figure;
+    var graphics = xpath.select("descendant::graphic", fig);
+    if (graphics && graphics.length) {
+        figure.graphics = [];
+        //var xlinkSelect = xpath.useNamespaces({"xlink":
+        // "http://www.w3.org/1999/xlink"});//新的xml模板中去掉了xlink命名空间，不再需要
+        graphics.forEach(function (grap) {
+            var g = {};
+            var suse = xpath.select("./@specific-use", grap);
+            if (suse && suse.length) {
+                g.use = suse[0].value;
+            }
+            var href = xpath.select('@href', grap);
+            if (href && href.length) {
+                g.href = href[0].value && href[0].value.replace('\\', '/');//兼容windows的分隔符\
+            }
+            figure.graphics.push(g);
+        })
+    }
+    return figure;
 };
 
 ScienceXML.getFigures = function (doc) {
@@ -407,7 +409,7 @@ ScienceXML.getFigures = function (doc) {
         var figures = [];
         figNodes.forEach(function (fig) {
             var figure = getFigure(fig);
-	        figure && figures.push(figure);
+            figure && figures.push(figure);
         });
         return figures;
     }
@@ -494,101 +496,101 @@ ScienceXML.handlePara = function (paragraph) {
 };
 
 
-ScienceXML.getKeywords= function(xp,dom){
+ScienceXML.getKeywords = function (xp, dom) {
     var keywords = xpath.select(xp, dom);
     var allkeywords = [];
-    if(keywords && keywords.length){
-        _.each(keywords,function(kw){
-            var skw=kw.toString().split(/\s*[,，]\s*/);
-            allkeywords=_.union(allkeywords,skw);
+    if (keywords && keywords.length) {
+        _.each(keywords, function (kw) {
+            var skw = kw.toString().split(/\s*[,，]\s*/);
+            allkeywords = _.union(allkeywords, skw);
 
         })
     }
     return _.uniq(allkeywords);
 }
 
-ScienceXML.getReferences=function(results,doc){
+ScienceXML.getReferences = function (results, doc) {
     var refs = [];
     var refNodes = parserHelper.getNodes("//back/ref-list/ref", doc);
-    var index=1;
-    _.each(refNodes,function (refNode) {
+    var index = 1;
+    _.each(refNodes, function (refNode) {
         var ref = {};
-        ref.index=index++;
-        var ele=parserHelper.getFirstNode("child::element-citation",refNode);
-        if(!ele){
+        ref.index = index++;
+        var ele = parserHelper.getFirstNode("child::element-citation", refNode);
+        if (!ele) {
             results.errors.push("can't find element-citation node " + ref.index);
-        }else{
-            ref.id = parserHelper.getFirstAttribute("attribute::id",ele);
-            ref.type=parserHelper.getFirstAttribute("attribute::publication-type",ele);
+        } else {
+            ref.id = parserHelper.getFirstAttribute("attribute::id", ele);
+            ref.type = parserHelper.getFirstAttribute("attribute::publication-type", ele);
             //提取引文作者信息 开始
-            var authorNodes = parserHelper.getNodes("descendant::person-group/name",refNode);
-            if(authorNodes){
+            var authorNodes = parserHelper.getNodes("descendant::person-group/name", refNode);
+            if (authorNodes) {
                 var authors = [];
-                _.each(authorNodes,function(authorNode){
+                _.each(authorNodes, function (authorNode) {
                     var author = {};
-                    author.surName=parserHelper.getSimpleVal("child::surname",authorNode);
-                    author.givenName=parserHelper.getSimpleVal("child::given-names",authorNode);
+                    author.surName = parserHelper.getSimpleVal("child::surname", authorNode);
+                    author.givenName = parserHelper.getSimpleVal("child::given-names", authorNode);
                     authors.push(author);
                 });
                 //若从引文信息中提取到了作者信息，将作者信息放入引文信息中
-                if(!_.isEmpty(authors)){
+                if (!_.isEmpty(authors)) {
                     ref.authors = authors;
                     //检查是否有更多被省略的作者(若存在etal标签，可判定有被省略的作者)
-                    if(parserHelper.getFirstNode("descendant::person-group/etal",refNode)){
-                        ref.etal=true;
+                    if (parserHelper.getFirstNode("descendant::person-group/etal", refNode)) {
+                        ref.etal = true;
                     }
                 }
             }
             //提取引文作者信息 完成
-            var titleNode = parserHelper.getFirstNode("child::element-citation/article-title",refNode);
-            if(titleNode){
-                var textNodes = xpath.select("descendant::text()",titleNode);
+            var titleNode = parserHelper.getFirstNode("child::element-citation/article-title", refNode);
+            if (titleNode) {
+                var textNodes = xpath.select("descendant::text()", titleNode);
                 var title = "";
-                _.each(textNodes,function(t){
-                    title+= " " + t.toString();
+                _.each(textNodes, function (t) {
+                    title += " " + t.toString();
                 });
-                ref.title=title.replace(/\r\n/g," ").trim();
+                ref.title = title.replace(/\r\n/g, " ").trim();
             }
-            ref.publisherLoc=parserHelper.getSimpleVal("child::element-citation/publisher-loc",refNode);
-            ref.publisherName=parserHelper.getSimpleVal("child::element-citation/publisher-name",refNode);
-            ref.year=parserHelper.getSimpleVal("child::element-citation/year",refNode);
-            ref.volume = parserHelper.getSimpleVal("child::element-citation/volume",refNode);
-            ref.issue = parserHelper.getSimpleVal("child::element-citation/issue",refNode);
-            ref.firstPage=parserHelper.getSimpleVal("child::element-citation/fpage",refNode);
-            ref.lastPage=parserHelper.getSimpleVal("child::element-citation/lpage",refNode);
-            ref.doi=parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='doi']",refNode);
-            ref.source=parserHelper.getSimpleVal("child::element-citation/source",refNode) || parserHelper.getSimpleVal("child::element-citation/source/uri",refNode);
-            ref.href=parserHelper.getFirstAttribute("child::element-citation/source/uri/@xlink:href",refNode,{"xlink":"http://www.w3.org/1999/xlink"});
+            ref.publisherLoc = parserHelper.getSimpleVal("child::element-citation/publisher-loc", refNode);
+            ref.publisherName = parserHelper.getSimpleVal("child::element-citation/publisher-name", refNode);
+            ref.year = parserHelper.getSimpleVal("child::element-citation/year", refNode);
+            ref.volume = parserHelper.getSimpleVal("child::element-citation/volume", refNode);
+            ref.issue = parserHelper.getSimpleVal("child::element-citation/issue", refNode);
+            ref.firstPage = parserHelper.getSimpleVal("child::element-citation/fpage", refNode);
+            ref.lastPage = parserHelper.getSimpleVal("child::element-citation/lpage", refNode);
+            ref.doi = parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='doi']", refNode);
+            ref.source = parserHelper.getSimpleVal("child::element-citation/source", refNode) || parserHelper.getSimpleVal("child::element-citation/source/uri", refNode);
+            ref.href = parserHelper.getFirstAttribute("child::element-citation/source/uri/@xlink:href", refNode, {"xlink": "http://www.w3.org/1999/xlink"});
             refs.push(ref);
         }
     });
     return refs;
 };
 
-ScienceXML.getPACS = function(doc){
-    var pacsNodes = xpath.select("//kwd-group[@kwd-group-type='pacs-codes']/compound-kwd/compound-kwd-part[@content-type='code']/text()",doc);
-    if(_.isEmpty(pacsNodes))
+ScienceXML.getPACS = function (doc) {
+    var pacsNodes = xpath.select("//kwd-group[@kwd-group-type='pacs-codes']/compound-kwd/compound-kwd-part[@content-type='code']/text()", doc);
+    if (_.isEmpty(pacsNodes))
         return
     var codes = [];
-    _.each(pacsNodes,function(node){
+    _.each(pacsNodes, function (node) {
         var code = node && node.data
-        if(code && code.trim()){
+        if (code && code.trim()) {
             codes.push(code.trim());
         }
     })
     return codes;
 }
 
-ScienceXML.getFunding=function(doc){
-    var fundingNodes = xpath.select("//funding-group/award-group",doc);
-    if(_.isEmpty(fundingNodes)){
+ScienceXML.getFunding = function (doc) {
+    var fundingNodes = xpath.select("//funding-group/award-group", doc);
+    if (_.isEmpty(fundingNodes)) {
         return;
     }
     var fundingObjects = [];
-    _.each(fundingNodes,function(fundNode){
+    _.each(fundingNodes, function (fundNode) {
         var funding = {};
-        funding.source=ScienceXML.getSimpleValueByXPath("child::funding-source",fundNode);
-        funding.contract = ScienceXML.getSimpleValueByXPath("child::award-id[@award-type='contract']",fundNode);
+        funding.source = ScienceXML.getSimpleValueByXPath("child::funding-source", fundNode);
+        funding.contract = ScienceXML.getSimpleValueByXPath("child::award-id[@award-type='contract']", fundNode);
         fundingObjects.push(funding);
     })
     return fundingObjects;
