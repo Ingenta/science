@@ -43,12 +43,14 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publishers'),
-                Meteor.subscribe('mostRecentArticles'),
+                Meteor.subscribe('homepageMostRecentArticles'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
                 Meteor.subscribe('suggestedMostRead'),
-                Meteor.subscribe('mostCited')
+                Meteor.subscribe('mostCited'),
+                Meteor.subscribe('mostRead')
+
             ]
         }
     });
@@ -257,6 +259,7 @@ Router.map(function () {
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
                 Meteor.subscribe('articleViewsByArticleId', artId),
+                Meteor.subscribe('oneIssueArticlesByArticleId',artId),
                 Meteor.subscribe('issues'),
                 Meteor.subscribe('oneArticle', artId),
                 Meteor.subscribe('keywords'),
@@ -342,12 +345,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('issues'),
                 Meteor.subscribe('files'),
-                Meteor.subscribe('suggestedMostRead')
+                Meteor.subscribe('mostRead')
             ]
         }
     });
@@ -362,12 +361,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('issues'),
-                Meteor.subscribe('files'),
-                Meteor.subscribe('suggestedMostRead')
+                Meteor.subscribe('mostRead',this.params.journalId)
             ]
         }
     });
