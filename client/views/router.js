@@ -238,6 +238,7 @@ Router.map(function () {
             if (pub) {
                 journal && Session.set('currentJournalId', journal._id);
                 pub && Session.set('currentPublisherId', pub._id);
+                Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi);
                 return Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
             }
         },
@@ -258,7 +259,7 @@ Router.map(function () {
                 Meteor.subscribe('articleViewsByArticleId', artId),
                 Meteor.subscribe('oneIssueArticlesByArticleId',artId),
                 Meteor.subscribe('issues'),
-                Meteor.subscribe('oneArticle', artId),
+                Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml'),
                 Meteor.subscribe('pdfs'),
