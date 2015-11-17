@@ -1,3 +1,28 @@
+getMostReadByJournal = function(journalId, limit){
+    if (!limit)limit = 20;
+    var a = undefined;
+    if (journalId)
+        a = ArticleViews.aggregate([{
+            $match: {
+                journalId: journalId
+            }
+        }, {
+            $group: {
+                _id: {articleId: '$articleId'},
+                count: {$sum: 1}
+            }
+        }, {$sort: {count: -1}}
+            , {$limit: limit}]);
+    else a = ArticleViews.aggregate([{
+        $group: {
+            _id: {articleId: '$articleId'},
+            count: {$sum: 1}
+        }
+    }, {$sort: {count: -1}}
+        , {$limit: limit}]);
+    if (!a)return;
+    return a;
+}
 Meteor.methods({
     'distinctVolume': function (journalId) {
         var result = Issues.distinct("volume", {"journalId": journalId});
@@ -13,30 +38,8 @@ Meteor.methods({
     'getClientIP': function () {
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
     },
-    'getMostRead': function (journalId, limit) {
-        if (!limit)limit = 20;
-        var a = undefined;
-        if (journalId)
-            a = ArticleViews.aggregate([{
-                $match: {
-                    journalId: journalId
-                }
-            }, {
-                $group: {
-                    _id: {articleId: '$articleId'},
-                    count: {$sum: 1}
-                }
-            }, {$sort: {count: -1}}
-                , {$limit: limit}]);
-        else a = ArticleViews.aggregate([{
-            $group: {
-                _id: {articleId: '$articleId'},
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            , {$limit: limit}]);
-        if (!a)return;
-        return a;
+    'getMostRead': function (journalId) {
+        return getMostReadByJournal(journalId);
     },
     'countSession': function () {
         var c = UserStatus.connections.find().count();
