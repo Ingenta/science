@@ -121,19 +121,12 @@
     }
 </style>
 
-<div class="content">
-    <div class="oh">
-        <div class="new-list">
-            <h1>{{journal.titleCn}}</h1>
-            <h4>{{issue.year}}年 {{issue.volume}}卷 {{issue.issue}}期</h4>
-            <h4>发布日期：{{issue.year}}年 {{issue.month}}月{{issue.day}}{{#if issue.day}}日{{/if}}</h4>
-
-            <div class="border-div">
-                <p>{{journal.description.cn}}</p>
-            </div>
-            {{> emailArticleList}}
-        </div>
-        {{> emailJournalNewsBar}}
-    </div>
-    {{> emailFooter}}
-</div>
+{{#each articleList}}
+    <h2><a href="{{url}}">{{title.cn}}</a></h2>
+    <h3>
+        {{#each authors}}
+            {{fullname.en}},
+        {{/each}}
+    </h3>
+    <h5>{{journal.titleCn}}, {{year}}, {{volume}}({{issue}}): {{elocationId}} </h5>
+{{/each}}
