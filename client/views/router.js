@@ -43,7 +43,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publishers'),
-                Meteor.subscribe('mostRecentArticles'),
+                Meteor.subscribe('homepageMostRecentArticles'),
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
