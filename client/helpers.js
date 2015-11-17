@@ -1,3 +1,8 @@
+urlToArticleByArticleById = function(articleId){
+    if (!articleId)return;
+    return urlToArticleByArticleObject(Articles.findOne({_id: articleId}));
+}
+
 var urlToArticleByArticleObject = function (article) {
     if (!article)return;
     return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
@@ -35,8 +40,7 @@ Template.registerHelper('urlToArticle', function (title) {
 });
 
 Template.registerHelper('urlToArticleById', function (id) {
-    var article = Articles.findOne({_id: id});
-    return urlToArticleByArticleObject(article);
+    return urlToArticleByArticleById(id);
 });
 
 Template.registerHelper('urlToJournal', function (title) {
