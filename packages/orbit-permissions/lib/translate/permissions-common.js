@@ -164,8 +164,8 @@ OrbitPermissions = {
 
 		var definedPermission = Permissions && Permissions[package_name] && Permissions[package_name][permission];
 		//若权限定义中包含了一个鉴权方法,则调用该鉴权方法来判断用户是否具备某权限.
-		if(definedPermission && definedPermission.selfCheck && _.isFunction(definedPermission.selfCheck)) {
-			return definedPermission.selfCheck(user, range);
+		if(definedPermission && definedPermission.options && _.isFunction(definedPermission.options.checkFunc)) {
+			return definedPermission.options.checkFunc(user, range);
 		}
 		if(!_.isEmpty(ref)){
 			//若用户拥有超级管理员权限,直接返回true
@@ -300,12 +300,28 @@ OrbitPermissions = {
 			if (language in permission_description) {
 				description = permission_description[language];
 			}
-			if(permission_description.selfCheck){
-				description.selfCheck=permission_description.selfCheck
+			if(permission_description.options){
+				description.options=permission_description.options
 			}
 			return permissions[package_name + ":" + permission_name] = description;
 		});
 		return permissions;
+	},
+	getRolesDescriptions: function() {
+		var fallback_language, language, roles;
+		language = helpers.getLanguage();
+		fallback_language = helpers.getFallbackLanguage();
+		roles = {};
+		this._loopRoles(function(package_name, role_name, role_permissions, role_description) {
+			var description;
+			description = role_description[fallback_language];
+			if (language in role_description) {
+				description = role_description[language];
+			}
+			description.options = role_description.options;
+			return roles[package_name + ":" + role_name] = description;
+		});
+		return roles;
 	},
 	getPermissionRange:function(userId,permission){
 		var userRoles = OrbitPermissions.getUserRoles(userId);
@@ -378,10 +394,6 @@ OrbitPermissions.Registrar = function(package_name) {
 		if (!helpers.isDashSeparated(role_name)) {
 			throw new Meteor.Error(403, "Role name should be all lowercase dash-separated");
 		}
-		//console.log('package-roles:-----')
-		//console.dir(package_roles)
-		//console.log('role-name:------');
-		//console.log(role_name);
 
 		if (role_name in package_roles) {
 			if (permissions != null) {
