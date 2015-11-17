@@ -38,6 +38,9 @@ Meteor.publish('oneArticle', function (id) {
     return Articles.find({_id: id});
 });
 
+Meteor.publish('oneArticleByDoi', function (doi) {
+    return Articles.find({doi: doi});
+});
 
 
 Meteor.publish('articleUrls', function () {

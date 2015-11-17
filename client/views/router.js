@@ -46,7 +46,6 @@ Router.map(function () {
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
-                Meteor.subscribe('suggestedMostRead'),
                 Meteor.subscribe('mostCited'),
                 Meteor.subscribe('mostRead')
             ]
@@ -231,7 +230,7 @@ Router.map(function () {
         }
 
     });
-
+    //TODO: allow first visit to this page, issues: don't know which article to subscribe to.
     this.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue/:publisherDoi/:articleDoi', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});

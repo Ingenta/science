@@ -2,6 +2,9 @@ Meteor.publish('mostRead', function (journalId) {
     var result = getMostReadByJournal(journalId);
     result = _.pluck(result, '_id');
     result = _.pluck(result, 'articleId');
+    var suggestion = getMostReadSuggestion(journalId);
+    if(suggestion)result.push(suggestion);
+    //TODO add suggested article to find in filter
     return [
         Articles.find({_id: {$in: result}}, {
             fields: articleWithMetadata
