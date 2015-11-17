@@ -48,7 +48,9 @@ Router.map(function () {
                 Meteor.subscribe('images'),
                 Meteor.subscribe('news'),
                 Meteor.subscribe('suggestedMostRead'),
-                Meteor.subscribe('mostCited')
+                Meteor.subscribe('mostCited'),
+                Meteor.subscribe('mostRead')
+
             ]
         }
     });
@@ -342,12 +344,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('issues'),
                 Meteor.subscribe('files'),
-                Meteor.subscribe('suggestedMostRead')
+                Meteor.subscribe('mostRead')
             ]
         }
     });
@@ -362,12 +360,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('issues'),
-                Meteor.subscribe('files'),
-                Meteor.subscribe('suggestedMostRead')
+                Meteor.subscribe('mostRead',this.params.journalId)
             ]
         }
     });
