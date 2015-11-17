@@ -92,6 +92,9 @@ Template.AdminRolesInsertForm.events({
 						cn: {
 							name   : values.nameCN.trim(),
 							summary: values.summaryCN
+						},
+						options:{
+							level:values.level
 						}
 					}, function (err, id) {
 						if (err) {

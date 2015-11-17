@@ -55,8 +55,19 @@ _.extend(Permissions, {
                 callback(e);
         }
 
+    },
+    level:{
+        global:"global",
+        publisher:"publisher",
+        journal:"journal",
+        institution:"institution"
     }
 });
+
+globalLevel=[Permissions.level.global];
+publisherLevel=[Permissions.level.global,Permissions.level.publisher];
+journalLevel=[Permissions.level.global,Permissions.level.publisher,Permissions.level.journal];
+institutionLevel=[Permissions.level.global,Permissions.level.institution];
 
 if (Meteor.isClient) {
     _.extend(Permissions, {

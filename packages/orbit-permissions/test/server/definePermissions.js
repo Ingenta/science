@@ -43,10 +43,10 @@ Tinytest.add('Permissions Registrar - 定义含有依赖关系的包角色', fun
 	})
 
 	if(!OrbitPermissions.getRoles()["testpackage1:role-test2"])
-		registrar.defineRole("role-test2",["testpackage1:perm-test"],{cn:{name:"testrole",summary:"test role"},options:{dependency:["publisher"]}});
+		registrar.defineRole("role-test2",["testpackage1:perm-test"],{cn:{name:"testrole",summary:"test role"},options:{level:["publisher"]}});
 
 	var roleDesc=OrbitPermissions.getRolesDescriptions()["testpackage1:role-test2"];
-	test.equal(roleDesc.options.dependency[0],"publisher");
+	test.equal(roleDesc.options.level[0],"publisher");
 });
 
 
@@ -60,10 +60,10 @@ if(Meteor.isServer){
 		//定义角色
 		if(!OrbitPermissions.getRoles()["testpackage:role-test"]){
 			//若已经定义过该角色,则不再重复定义
-			registrar.defineRole("role-test",["testpackage:perm-test"],{cn:{name:"rolecn"},en:{name:"roleen"},options:{dependency:["publisher"]}});
+			registrar.defineRole("role-test",["testpackage:perm-test"],{cn:{name:"rolecn"},en:{name:"roleen"},options:{level:["publisher"]}});
 		}
 		var userId = addUsers(['test@test.com'])[0];
-		OrbitPermissions.delegate(userId,[{"role":"testpackage:role-test",range:{publisher:["publishera","publisherb"]}}]);
+		OrbitPermissions.delegate(userId,[{"role":"testpackage:role-test",scope:{publisher:["publishera","publisherb"]}}]);
 		var a = OrbitPermissions.userCan("perm-test","testpackage",userId,{publisher:["publishera"]});
 		test.equal(a,true);
 	});

@@ -1261,5 +1261,6 @@
   "clickToView":"点击查看",
   "Rating": "评分",
   "Reset":"重置",
-  "Search Mode":"搜索方式"
+  "Search Mode":"搜索方式",
+  "roleScope":"角色功能范围"
 }

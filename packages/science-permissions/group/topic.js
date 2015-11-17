@@ -6,19 +6,31 @@ topicPermissions = new Permissions.Registrar('topic');
 topicPermissions
 	.definePermission("add-topic", {
 		en: {name: "add topic", summary: "can add topic"},
-		cn: {name: "添加分类", summary: "您可以添加新分类到系统中"}
+		cn: {name: "添加分类", summary: "您可以添加新分类到系统中"},
+		options:{
+			level:globalLevel
+		}
 	})
 	.definePermission("modify-topic", {
 		en: {name: "modify topic", summary: "can modify topic"},
-		cn: {name: "编辑分类", summary: "可以编辑分类信息"}
+		cn: {name: "编辑分类", summary: "可以编辑分类信息"},
+		options:{
+			level:globalLevel
+		}
 	})
 	.definePermission("delete-topic", {
 		en: {name: "delete topic", summary: "can delete topic"},
-		cn: {name: "删除分类", summary: "您可以删除分类信息"}
+		cn: {name: "删除分类", summary: "您可以删除分类信息"},
+		options:{
+			level:globalLevel
+		}
 	})
     .definePermission("add-article-to-topic", {
         en: {name: "add article to topic", summary: "can add article to topic"},
-        cn: {name: "为分类添加文章", summary: "您可以为分类添加文章"}
+        cn: {name: "为分类添加文章", summary: "您可以为分类添加文章"},
+	    options:{
+		    level:globalLevel
+	    }
     });
 
 // 定义预定义角色及其权限
@@ -32,5 +44,8 @@ topicPermissions
 		cn: {
 			name   : "分类管理",
 			summary: "可以增删改查分类的角色"
+		},
+		options:{
+			level:globalLevel
 		}
 	});

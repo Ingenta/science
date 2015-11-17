@@ -964,5 +964,6 @@
                 "label": "Choose file"
             }
         }
-    }
+    },
+    "roleScope":"Scope of the functionality"
 }
