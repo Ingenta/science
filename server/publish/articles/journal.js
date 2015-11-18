@@ -8,6 +8,6 @@ Meteor.publish('oneIssueArticlesByArticleId', function (id) {
     var art = Articles.findOne({_id: id});
     if(!art)return;
     return Articles.find({issueId: art.issueId}, {
-        fields: {doi: 1, elocationId: 1}
+        fields: {doi: 1, elocationId: 1, issueId: 1}
     });
 });
