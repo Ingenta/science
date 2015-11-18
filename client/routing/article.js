@@ -13,7 +13,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     title: function () {
         return TAPi18n.__("Article");
     },
-    parent: "journal.name.volume",
+    parent: "journal.name.toc",
     name: "article.show",
     waitOn: function () {
         var artData = this.data();
@@ -24,12 +24,13 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneIssueArticlesByArticleId',artId),
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
-            Meteor.subscribe('relatedArticles', Session.get("relatedArticlesIdList")),
+            //TODO fix this without reloading the page
+            //Meteor.subscribe('relatedArticles', Session.get("relatedArticlesIdList")),
             Meteor.subscribe('keywords'),
             Meteor.subscribe('articleXml'),
             Meteor.subscribe('pdfs'),
             Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead')
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
     },
     onBeforeAction: function () {

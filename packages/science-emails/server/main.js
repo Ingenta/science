@@ -42,7 +42,8 @@ Science.Email.watchJournalEmail = function (oneEmail) {
             "rootUrl": Config.rootUrl,
             "issue": oneEmail.issue,
             "journal": oneEmail.journal,
-            "articleList": oneEmail.articleList
+            "articleList": oneEmail.articleList,
+            "journalNews": oneEmail.journalNews
         })
     });
     console.log("email sent");

@@ -2,6 +2,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     data: function () {
         var pub = Publishers.findOne({name: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        if (!Session.get("activeTab"))
+            Session.set("activeTab", this.params.query.activeTab || "Browse");
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
@@ -34,8 +36,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe("editorial_member"),
             Meteor.subscribe("editorial_board"),
             Meteor.subscribe("author_center"),
+            Meteor.subscribe("meeting_info"),
+            Meteor.subscribe("news"),
+            Meteor.subscribe("tag"),
             Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead')
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
     }
 });
@@ -56,7 +61,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         }
     },
     template: "ShowJournal",
-    name: "journal.name.volume",
+    name: "journal.name.toc",
     parent: "journal.name",
     title: function () {
         return TAPi18n.__("volumeItem", Router.current().params.volume) + ", " + TAPi18n.__("issueItem", Router.current().params.issue)
@@ -65,19 +70,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         return [
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
-            Meteor.subscribe('about'),
-            Meteor.subscribe('about_articles'),
-            Meteor.subscribe('allCollections'),
-            Meteor.subscribe('medias'),
-            Meteor.subscribe('files'),
-            Meteor.subscribe('specialTopics'),
-            Meteor.subscribe('recommend'),
-            Meteor.subscribe("editorial_member"),
-            Meteor.subscribe("editorial_board"),
-            Meteor.subscribe("author_center"),
-            Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead')
+            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'))
         ]
     }
 
@@ -106,7 +99,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
         ]
     }
 });
-
 
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/:guideId', {

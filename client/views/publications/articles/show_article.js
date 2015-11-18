@@ -222,7 +222,8 @@ Template.showArticle.events({
 
 Template.articlePage.helpers({
     preValue: function () {
-        var previousValue = Articles.findOne({doi: {$lt: this.doi}}, {$sort: {doi: -1}});
+        var curIssue = Session.get("currentIssueId");
+        var previousValue = Articles.findOne({issueId:curIssue, elocationId: {$lt: this.elocationId}}, {$sort: {elocationId: 1}});
         if (previousValue) {
             var preVal = previousValue.doi.substring(previousValue.doi.lastIndexOf("/") + 1);
             return preVal;
@@ -230,7 +231,8 @@ Template.articlePage.helpers({
         return false;
     },
     nextValue: function () {
-        var nextValue = Articles.findOne({doi: {$gt: this.doi}}, {$sort: {doi: -1}});
+        var curIssue = Session.get("currentIssueId");
+        var nextValue = Articles.findOne({issueId:curIssue, elocationId: {$gt: this.elocationId}}, {$sort: {elocationId: 1}});
         if (nextValue) {
             var nextVal = nextValue.doi.substring(nextValue.doi.lastIndexOf("/") + 1);
             return nextVal;
