@@ -104,7 +104,9 @@ SyncedCron.add({
                         }, {
                             fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, 'journal.titleCn': 1}
                         }).fetch();
-                        issueToArticles[oneIssue._id] = generateArticleLinks(articles);
+
+                        var journalUrl = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
+                        issueToArticles[oneIssue._id] = generateArticleLinks(articles, journalUrl);
                     }
 
                     if(!journalNews[oneIssue.journalId]) {
@@ -185,6 +187,7 @@ SyncedCron.add({
                     //    emailContent = emailConfig.body;
                     //}
                     oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {fields: {title: 1, titleCn: 1, description: 1}});
+                    oneEmail.issue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneEmail.issue._id).substring(1));
                     oneEmail.articleList = issueToArticles[oneEmail.issue._id];
                     oneEmail.journalNews = journalNews[oneEmail.issue.journalId];
                     Science.Email.watchJournalEmail(oneEmail);
@@ -249,10 +252,11 @@ Meteor.startup(function () {
         SyncedCron.start();
 });
 
-var generateArticleLinks = function (articles) {
+var generateArticleLinks = function (articles, journalUrl) {
     articles.forEach(function (article) {
         if (article._id)
             article.url =Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        article.journal.url = journalUrl;
     });
     return articles;
 };
