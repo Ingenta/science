@@ -180,8 +180,8 @@
                 "options": {
                     "1": "Quarterly Publication",
                     "2": "Monthly Publication",
-                    "3": "Semimonthly Publication",
-                    "4": "The ten-day Publication"
+                    "3": "Bi-monthly Publication",
+                    "4": "Ten-day Publication"
                 }
             },
             "included": {
