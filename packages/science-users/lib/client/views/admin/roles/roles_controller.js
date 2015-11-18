@@ -12,11 +12,6 @@ this.AdminRolesController = RouteController.extend({
 		/*BEFORE_FUNCTION*/
 		this.next();
 	},
-
-	action: function() {
-		if(this.isReady()) { this.render(); } else { this.render("Admin"); this.render("loading", { to: "AdminSubcontent" });}
-		/*ACTION_FUNCTION*/
-	},
 	data: function() {
 
 
@@ -25,8 +20,5 @@ this.AdminRolesController = RouteController.extend({
 			admin_users: Users.find({}, {})
 		};
 		/*DATA_FUNCTION*/
-	},
-
-	onAfterAction: function() {
 	}
 });
