@@ -12,8 +12,10 @@ Template.suggestedMostReadModalForm.helpers({
         if (!articles)return;
         var result = [];
         _.each(articles, function (item) {
-            var name = isChinese ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
+            if(item.title) {
+                var name = isChinese ? item.title.cn : item.title.en;
+                result.push({label: name, value: item._id});
+            }
         });
         return result;
     }
@@ -50,6 +52,7 @@ Template.suggestedMostReadElement.helpers({
         if (!SuggestedArticles.findOne())return;
         var articleId = SuggestedArticles.findOne().articleId;
         var a = Articles.findOne({_id: articleId});
+        if(!a)return;
         return TAPi18n.getLanguage() === 'zh-CN' ? a.title.cn : a.title.en;
     }
 })

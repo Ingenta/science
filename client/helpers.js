@@ -20,9 +20,10 @@ getJournalComponentByJournalId = function (id) {
 }
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
-    var issue = Issues.findOne({_id: article.issueId});
-    if(!issue)return;
-    return "/" + issue.volume + "/" + issue.issue;
+    //commented out to aboid subscribing to all issues, because currently issue name are not editable this will not affect anything
+    //var issue = Issues.findOne({_id: article.issueId});
+    //if(!issue)return;
+    return "/" + article.volume + "/" + article.issue;
 }
 
 journalIdToName = function (id) {
