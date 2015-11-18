@@ -24,6 +24,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneIssueArticlesByArticleId',artId),
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
+            Meteor.subscribe('relatedArticles', Session.get("relatedArticlesIdList")),
             Meteor.subscribe('keywords'),
             Meteor.subscribe('articleXml'),
             Meteor.subscribe('pdfs'),
