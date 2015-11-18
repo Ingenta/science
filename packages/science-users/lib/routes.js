@@ -146,7 +146,7 @@ Meteor.startup(function () {
             return TAPi18n.__("Edit user");
         },
         parent: "admin.users",
-        waitOn:function(){
+        waitOn: function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('institutions')
@@ -200,7 +200,7 @@ Meteor.startup(function () {
         parent: "user_settings",
         waitOn: function () {
             return [
-                Meteor.subscribe('articleSearchResults')
+                Meteor.subscribe('myFavouriteArticles', Meteor.userId())
             ]
         }
     });
