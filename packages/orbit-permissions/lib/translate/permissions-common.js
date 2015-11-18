@@ -270,18 +270,6 @@ OrbitPermissions = {
 			}
 
 		}
-
-		//for (package_name in Permissions) {
-		//	results.push({name:package_name,permissions:(function () {
-		//		var results1;
-		//		results1 = [];
-		//		for (permission in Permissions[package_name]) {
-		//			var cbResult =cb(package_name, permission, Permissions[package_name][permission])
-		//			cbResult && results1.push({name:package_name+":"+permission,description:cbResult});
-		//		}
-		//		return results1;
-		//	})()});
-		//}
 		return results;
 	},
 	_loopRoles                : function (cb) {
@@ -360,7 +348,7 @@ OrbitPermissions = {
 		var fallback_language, language, permissions;
 		language          = helpers.getLanguage();
 		fallback_language = helpers.getFallbackLanguage();
-		var permissions       = this._loopPermissions2(function (package_name, permission_name, permission_description) {
+		permissions       = this._loopPermissions2(function (package_name, permission_name, permission_description) {
 			var description ;
 			description = permission_description[fallback_language];
 
@@ -392,6 +380,27 @@ OrbitPermissions = {
 			if(!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level,level)))
 				return;
 			return roles[package_name + ":" + role_name] = description;
+		});
+		return roles;
+	},
+	getRolesDescriptions2      : function (level) {
+		var fallback_language, language, roles;
+		language          = helpers.getLanguage();
+		fallback_language = helpers.getFallbackLanguage();
+		roles = [];
+		_.each(Roles,function(pkg_roles,pkg_name){
+			var roles1 = {pkg:pkg_name,roles:[]}
+			_.each(pkg_roles,function(role,role_name){
+				if(_.isEmpty(level) || !_.isEmpty(_.intersection(role.description.options.level,level))){
+					var role1 = {};
+					role1.description = role.description[language] || role.description[fallback_language];
+					role1.description.options = role.description.options;
+					role1.permissions = role.permissions;
+					role1.name=pkg_name +":"+role_name;
+					roles1.roles.push(role1);
+				}
+			})
+			!_.isEmpty(roles1.roles) && roles.push(roles1);
 		});
 		return roles;
 	},

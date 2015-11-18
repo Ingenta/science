@@ -25,7 +25,7 @@
                     {{infoMessage}}
                 </div>
             {{/if}}
-            {{#if admin_user.institutionId}}
+            {{#if currUser.institutionId}}
                 <div class="form-group">
                     <label>
                         {{_ "Institution"}}
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             {{/if}}
-            {{#if admin_user.publisherId}}
+            {{#if currUser.publisherId}}
                 <div class="form-group">
                     <label>
                         {{_ "Publisher"}}
@@ -80,7 +80,7 @@
                 </label>
 
                 <div class="input-div">
-                    <input type="text" name="username" value="{{admin_user.username}}" class="form-control"
+                    <input type="text" name="username" value="{{currUser.username}}" class="form-control"
                            autofocus="autofocus" required="required" data-type="string">
 					<span id="help-text" class="help-block">
 					</span>
@@ -137,13 +137,15 @@
             {{_ "Role"}}
         </label>
         <div class="input-div">
-            {{#each usersRoles}}
+            {{#each getRoles}}
+	            {{#each roles}}
                 <div class="radio">
                     <label>
-                        <input type="checkbox" value="{{this}}" name="roles" data-type="array" {{itemIsChecked}} {{itemIsDisabled}}>
-                        {{i18nName}}
+                        <input type="checkbox" value="{{name}}" name="roles" data-type="array" {{itemIsChecked}}>
+                        {{description.name}}
                     </label>
                 </div>
+	            {{/each}}
             {{/each}}
             <span id="help-text" class="help-block"></span>
 			<span id="error-text" class="help-block"></span>
