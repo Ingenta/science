@@ -54,6 +54,7 @@ SyncedCron.add({
     job: function () {
         var outgoingList = [];
         var issueToArticles = {};
+        var journalNews = {};
 
         var today = moment().startOf('day');
         var yesterday = moment(today).subtract(1, 'days').toDate();
@@ -103,7 +104,13 @@ SyncedCron.add({
                         }, {
                             fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, 'journal.titleCn': 1}
                         }).fetch();
-                        issueToArticles[oneIssue._id] = generateArticleLinks(articles);
+
+                        var journalUrl = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
+                        issueToArticles[oneIssue._id] = generateArticleLinks(articles, journalUrl);
+                    }
+
+                    if(!journalNews[oneIssue.journalId]) {
+                        journalNews[oneIssue.journalId] = journalIdToNews(oneIssue.journalId);
                     }
 
                     if (issueToArticles[oneIssue._id].length) outgoingList.push({
@@ -180,7 +187,9 @@ SyncedCron.add({
                     //    emailContent = emailConfig.body;
                     //}
                     oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {fields: {title: 1, titleCn: 1, description: 1}});
+                    oneEmail.issue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneEmail.issue._id).substring(1));
                     oneEmail.articleList = issueToArticles[oneEmail.issue._id];
+                    oneEmail.journalNews = journalNews[oneEmail.issue.journalId];
                     Science.Email.watchJournalEmail(oneEmail);
 
                 } else if (oneEmail.topicId) {
@@ -243,12 +252,28 @@ Meteor.startup(function () {
         SyncedCron.start();
 });
 
-var generateArticleLinks = function (articles) {
+var generateArticleLinks = function (articles, journalUrl) {
     articles.forEach(function (article) {
         if (article._id)
             article.url =Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        article.journal.url = journalUrl;
     });
     return articles;
+};
+
+var journalIdToNews = function (journalId) {
+    var news = {};
+    news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    news.meetingInfo = Meeting.find({publications: journalId, about: 'c1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+
+    news.newsCenter.forEach(function (item) {
+        if(!item.url) item.url = Config.rootUrl + "news/" + item._id
+    });
+    news.meetingInfo.forEach(function (item) {
+        item.startDate = moment(item.startDate).format( "MMM Do YYYY");
+    });
+    return news;
 };
 
 var createEmailArticleListContent = function (article) {
