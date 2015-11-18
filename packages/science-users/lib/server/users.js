@@ -184,8 +184,8 @@ Meteor.methods({
                                 "profile.realname": workbookJson[i].realname,
                                 "profile.institution": workbookJson[i].institution,
                                 "profile.fieldOfResearch": workbookJson[i].field,
-                                "profile.interestedOfJournals": journal,
-                                "profile.interestedOfTopics": topic,
+                                "profile.journalsOfInterest": journal,
+                                "profile.topicsOfInterest": topic,
                                 "profile.phone": workbookJson[i].phone,
                                 "profile.address": workbookJson[i].address,
                                 "profile.weChat": workbookJson[i].weChat

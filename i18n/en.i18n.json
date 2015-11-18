@@ -687,10 +687,10 @@
                 "fieldOfResearch": {
                     "label": "Field of research"
                 },
-                "interestedOfJournals": {
+                "journalsOfInterest": {
                     "label": "Journals of interest"
                 },
-                "interestedOfTopics": {
+                "topicsOfInterest": {
                     "label": "Topics of interest"
                 },
                 "phone": {

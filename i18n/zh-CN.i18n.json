@@ -833,10 +833,10 @@
         "fieldOfResearch": {
           "label": "您的研究领域"
         },
-        "interestedOfJournals": {
+        "journalsOfInterest": {
           "label": "您关注的期刊名称"
         },
-        "interestedOfTopics": {
+        "topicsOfInterest": {
           "label": "您关注的学科"
         },
         "phone": {

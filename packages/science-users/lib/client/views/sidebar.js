@@ -67,7 +67,7 @@ Template.LayoutSideBar.helpers({
         if (Meteor.userId() && article) {
             var wat = [];
             if (Meteor.user().profile) {
-                wat = Meteor.user().profile.interestedOfArticles || [];
+                wat = Meteor.user().profile.articlesOfInterest || [];
             }
             return _.contains(wat, article._id) ? TAPi18n.__("Watched") : TAPi18n.__("Article Watch");
         } else {
@@ -79,7 +79,7 @@ Template.LayoutSideBar.helpers({
         var journal = Publications.findOne({shortTitle: currentTitle});
         if (Meteor.userId() && journal) {
             if (!Meteor.user().profile)return TAPi18n.__("Journal Watch");
-            var pro = Meteor.user().profile.interestedOfJournals || [];
+            var pro = Meteor.user().profile.journalsOfInterest || [];
             return _.contains(pro, journal._id) ? TAPi18n.__("Watched") : TAPi18n.__("Journal Watch");
         } else {
             return TAPi18n.__("Journal Watch");
@@ -120,14 +120,14 @@ Template.LayoutSideBar.events({
         if (Meteor.userId()) {
             var wat = [];
             if (Meteor.user().profile) {
-                wat = Meteor.user().profile.interestedOfArticles || [];
+                wat = Meteor.user().profile.articlesOfInterest || [];
             }
             if (_.contains(wat, article._id)) {
                 wat = _.without(wat, article._id)
             } else {
                 wat.push(article._id)
             }
-            Users.update({_id: Meteor.userId()}, {$set: {'profile.interestedOfArticles': wat}});
+            Users.update({_id: Meteor.userId()}, {$set: {'profile.articlesOfInterest': wat}});
         }
     },
     "click .watch": function () {
@@ -136,14 +136,14 @@ Template.LayoutSideBar.events({
         if (Meteor.userId()) {
             var pro = [];
             if (Meteor.user().profile) {
-                pro = Meteor.user().profile.interestedOfJournals || [];
+                pro = Meteor.user().profile.journalsOfInterest || [];
             }
             if (_.contains(pro, journal._id)) {
                 pro = _.without(pro, journal._id)
             } else {
                 pro.push(journal._id)
             }
-            Users.update({_id: Meteor.userId()}, {$set: {"profile.interestedOfJournals": pro}});
+            Users.update({_id: Meteor.userId()}, {$set: {"profile.journalsOfInterest": pro}});
         }
     }
 })

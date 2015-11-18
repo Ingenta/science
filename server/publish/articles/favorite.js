@@ -21,8 +21,8 @@ Meteor.publish('myWatchedArticles', function (userId) {
     var thisUser = Users.findOne({_id: userId});
     if (!thisUser)return;
     if (!thisUser.profile)return;
-    if (!thisUser.profile.interestedOfArticles)return;
-    var watched = thisUser.profile.interestedOfArticles;
+    if (!thisUser.profile.articlesOfInterest)return;
+    var watched = thisUser.profile.articlesOfInterest;
     return [
         Articles.find({_id: {$in: watched}}, {
             fields: articleWithMetadata

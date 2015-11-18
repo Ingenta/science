@@ -73,9 +73,9 @@ SyncedCron.add({
                         ]
                     }, {
                         $or: [
-                            {'profile.interestedOfArticles': {$exists: 1}},
-                            {'profile.interestedOfJournals': {$exists: 1}},
-                            {'profile.interestedOfTopics': {$exists: 1}}
+                            {'profile.articlesOfInterest': {$exists: 1}},
+                            {'profile.journalsOfInterest': {$exists: 1}},
+                            {'profile.topicsOfInterest': {$exists: 1}}
                         ]
                     }
                 ]
@@ -88,10 +88,10 @@ SyncedCron.add({
                 else if (oneUser.emailFrequency == 'monthly') oneUser.lastSentDate = lastMonth;
                 else oneUser.lastSentDate = new Date();
             }
-            if (oneUser.profile.interestedOfJournals && oneUser.profile.interestedOfJournals.length > 0) {
+            if (oneUser.profile.journalsOfInterest && oneUser.profile.journalsOfInterest.length > 0) {
                 Issues.find({
                     $and: [
-                        {journalId: {$in: oneUser.profile.interestedOfJournals}},
+                        {journalId: {$in: oneUser.profile.journalsOfInterest}},
                         {createDate: {$gt: oneUser.lastSentDate}}
                     ]
                 }).forEach(function (oneIssue) {
@@ -120,8 +120,8 @@ SyncedCron.add({
                     });
                 });
             }
-            if (oneUser.profile.interestedOfTopics && oneUser.profile.interestedOfTopics.length > 0) {
-                oneUser.profile.interestedOfTopics.forEach(function (oneTopic) {
+            if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
+                oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
                     var tempArray = Articles.find({
                         $and: [
                             {topic: {$in: [oneTopic]}},
@@ -139,10 +139,10 @@ SyncedCron.add({
                     });
                 })
             }
-            if (oneUser.profile.interestedOfArticles && oneUser.profile.interestedOfArticles.length > 0) {
+            if (oneUser.profile.articlesOfInterest && oneUser.profile.articlesOfInterest.length > 0) {
                 var tempArray = Articles.find({
                     $and: [
-                        {_id: {$in: oneUser.profile.interestedOfArticles}},
+                        {_id: {$in: oneUser.profile.articlesOfInterest}},
                         {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
                 }, {
@@ -157,7 +157,7 @@ SyncedCron.add({
 
                 var citations = Citations.find({
                     $and: [
-                        {articleId: {$in: oneUser.profile.interestedOfArticles}},
+                        {articleId: {$in: oneUser.profile.articlesOfInterest}},
                         {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
                 }).fetch();
