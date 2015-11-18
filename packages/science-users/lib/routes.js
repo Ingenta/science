@@ -217,7 +217,8 @@ Meteor.startup(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('topics')
+                Meteor.subscribe('topics'),
+                Meteor.subscribe('myWatchedArticles', Meteor.userId())
             ]
         }
     });
