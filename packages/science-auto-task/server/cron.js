@@ -186,7 +186,9 @@ SyncedCron.add({
                     //    emailSubject = emailConfig.subject;
                     //    emailContent = emailConfig.body;
                     //}
-                    oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {fields: {title: 1, titleCn: 1, description: 1}});
+                    oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {fields: {title: 1, titleCn: 1, description: 1, scholarOneCode: 1, magtechCode: 1}});
+                    oneEmail.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneEmail.issue.journalId).substring(1));
+                    oneEmail.journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneEmail.issue.journalId);
                     oneEmail.issue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneEmail.issue._id).substring(1));
                     oneEmail.articleList = issueToArticles[oneEmail.issue._id];
                     oneEmail.journalNews = journalNews[oneEmail.issue.journalId];
