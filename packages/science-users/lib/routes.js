@@ -145,7 +145,13 @@ Meteor.startup(function () {
         title: function () {
             return TAPi18n.__("Edit user");
         },
-        parent: "admin.users"
+        parent: "admin.users",
+        waitOn:function(){
+            return [
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('institutions')
+            ]
+        }
     });
     Router.route("user_settings", {
         path: "/user_settings",

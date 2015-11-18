@@ -151,7 +151,7 @@ Template.AdminUsersEditEditForm.helpers({
         return Institutions.findOne({_id: this.admin_user.institutionId}).name;
     },
     "getPublisherNameById": function () {
-        return Publishers.findOne({_id: this.admin_user.publisherId}, {chinesename: 1, name: 1});
+        return Publishers.findOne({_id: this.admin_user.publisherId}, {fields:{chinesename: 1, name: 1}});
     //},
     //"canEditRoles": function () {
     //    return "publisher" === Session.get("activeTab") || "admin" === Session.get("activeTab");
