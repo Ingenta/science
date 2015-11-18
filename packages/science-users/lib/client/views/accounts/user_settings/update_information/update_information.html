@@ -15,7 +15,7 @@
         {{> columeTitle titleName="Please update your registered information (optional)"}}
 		{{#autoForm schema=getUserProfileSchema doc=current_user_data collection="Users" id="updateUserProfiles" type="update"}}
 			<fieldset>
-				{{> afQuickField name='profile.realname'}}
+				{{> afQuickField name='profile.realName'}}
 				{{> afQuickField name='profile.institution'}}
 				{{> afQuickField name='profile.fieldOfResearch'}}
 				{{> afQuickField name='profile.journalsOfInterest' options=publicationList}}

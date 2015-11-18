@@ -1,5 +1,5 @@
 userProfileSchema  = new SimpleSchema({
-	realname  : {
+	realName  : {
 		type  : String,
 		optional: true
 	},

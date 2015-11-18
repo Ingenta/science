@@ -678,7 +678,7 @@
         },
         "users": {
             "profile": {
-                "realname": {
+                "realName": {
                     "label": "Real name"
                 },
                 "institution": {

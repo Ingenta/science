@@ -181,7 +181,7 @@ Meteor.methods({
                         }
                         Users.update({_id: id}, {
                             $set: {
-                                "profile.realname": workbookJson[i].realname,
+                                "profile.realName": workbookJson[i].realName,
                                 "profile.institution": workbookJson[i].institution,
                                 "profile.fieldOfResearch": workbookJson[i].field,
                                 "profile.journalsOfInterest": journal,
