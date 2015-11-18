@@ -1,9 +1,10 @@
 <template name="mostReadArticleList">
-    <h4>{{_ "Most read articles"}}
+    <div>
+        <span style="font-size:17px;">{{_ "Most read articles"}}</span>&nbsp;&nbsp;
         {{#if can "manage-top-most-read" "platform" }}
             {{>suggestedMostReadButtons}}
         {{/if}}
-    </h4>
+    </div>
     <ul class="list-unstyled simple-list">
         {{#each mostReadArticlesTopFive}}
             <li>
