@@ -3,15 +3,24 @@ publisherPermissions = new Permissions.Registrar('publisher');
 publisherPermissions
     .definePermission("add-publisher", {
         en: {name: "add publisher", summary: "can add publisher"},
-        cn: {name: "添加出版商", summary: "您可以添加新出版商到系统中"}
+        cn: {name: "添加出版商", summary: "您可以添加新出版商到系统中"},
+        options:{
+            level:globalLevel
+        }
     })
     .definePermission("modify-publisher", {
         en: {name: "modify publisher", summary: "can modify publisher"},
-        cn: {name: "编辑出版商", summary: "可以编辑出版商信息"}
+        cn: {name: "编辑出版商", summary: "可以编辑出版商信息"},
+        options:{
+            level:globalLevel
+        }
     })
     .definePermission("delete-publisher", {
         en: {name: "delete publisher", summary: "can delete publisher"},
-        cn: {name: "删除出版商", summary: "您可以删除出版商信息"}
+        cn: {name: "删除出版商", summary: "您可以删除出版商信息"},
+        options:{
+            level:globalLevel
+        }
     });
 
 publisherPermissions
@@ -63,5 +72,8 @@ publisherPermissions
         cn: {
             name: "出版商管理员 (出版商)",
             summary: "只能修改出版社信息的角色"
+        },
+        options:{
+            level:publisherLevel
         }
     });

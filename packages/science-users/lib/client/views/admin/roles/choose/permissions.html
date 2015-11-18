@@ -19,23 +19,7 @@
 		{{#with currRole}}
 			<form id="form" role="form">
 				<div class="form-group">
-					<hr>
-					<ul class="list-unstyled">
-						<li>
-							<input type="checkbox" name="permiss" value="permissions:get-users-roles"
-							       class="perm-li" {{isUserHasThisPerm "permissions:get-users-roles"}}/> {{_ "permissions-get-users-roles"}}
-						</li>
-						<li>
-							<input type="checkbox" name="permiss" value="permissions:edit-custom-roles"
-							       class="perm-li" {{isUserHasThisPerm "permissions:edit-custom-roles"}}/> {{_ "permissions-edit-custom-roles"}}
-						</li>
-						<li>
-							<input type="checkbox" name="permiss" value="permissions:delegate-and-revoke"
-							       class="perm-li" {{isUserHasThisPerm "permissions:delegate-and-revoke"}}/> {{_ "permissions-delegate-and-revoke"}}
-						</li>
-					</ul>
-
-					{{#each pkgPermissionsGroupPrefixs}}
+					{{#each pkgPermissions}}
 						{{> singleGroup}}
 					{{/each}}
 					<hr>
@@ -62,10 +46,10 @@
 <template name="singleGroup">
 	<hr>
 	<ul class="list-unstyled">
-		{{#each pkgPermissionsGroup}}
+		{{#each permissions}}
 			<li>
 				<input type="checkbox" name="permiss" class="perm-li"
-				       value="{{this}}" {{isUserHasThisPerm this}}/> {{geti18nName this}}
+				       value="{{name}}" {{isUserHasThisPerm name}}/> {{description.name}}
 			</li>
 		{{/each}}
 	</ul>
