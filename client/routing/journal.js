@@ -58,7 +58,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         }
     },
     template: "ShowJournal",
-    name: "journal.name.volume",
+    name: "journal.name.toc",
     parent: "journal.name",
     title: function () {
         return TAPi18n.__("volumeItem", Router.current().params.volume) + ", " + TAPi18n.__("issueItem", Router.current().params.issue)
