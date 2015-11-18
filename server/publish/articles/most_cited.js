@@ -12,9 +12,6 @@ Meteor.publish('mostCited', function (journalId) {
         }),
         Publications.find({}, {
             fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
-        }),
-        Issues.find({}, {
-            fields: {volume: 1, issue: 1}
         })
     ]
 });

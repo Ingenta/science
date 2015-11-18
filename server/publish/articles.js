@@ -2,13 +2,13 @@ minimumArticle = {
     title: 1,
     journalId: 1,
     doi: 1,
-    issueId: 1
+    issue: 1
 };
 articleWithMetadata = {
     title: 1,
     journalId: 1,
     doi: 1,
-    issueId: 1,
+    issue: 1,
     volume: 1,
     elocationId: 1,
     year: 1,
