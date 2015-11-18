@@ -101,7 +101,7 @@ SyncedCron.add({
                             issue: oneIssue.issue,
                             pubStatus: 'normal'
                         }, {
-                            fields: {_id: 1, title: 1, authors: 1}
+                            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, 'journal.titleCn': 1}
                         }).fetch();
                         issueToArticles[oneIssue._id] = generateArticleLinks(articles);
                     }
@@ -249,7 +249,6 @@ var generateArticleLinks = function (articles) {
             article.url =Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
     });
     return articles;
-    //return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
 };
 
 var createEmailArticleListContent = function (article) {

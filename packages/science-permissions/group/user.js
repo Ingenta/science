@@ -6,19 +6,31 @@ userPermissions = new Permissions.Registrar('user');
 userPermissions
 	.definePermission("add-user", {
 		en: {name: "add user", summary: "can add user"},
-		cn: {name: "添加用户", summary: "您可以添加新用户到系统中"}
+		cn: {name: "添加用户", summary: "您可以添加新用户到系统中"},
+		options:{
+			level:globalLevel
+		}
 	})
 	.definePermission("modify-user", {
 		en: {name: "modify user", summary: "can modify user"},
-		cn: {name: "编辑用户", summary: "可以编辑用户信息"}
+		cn: {name: "编辑用户", summary: "可以编辑用户信息"},
+		options:{
+			level:globalLevel
+		}
 	})
 	.definePermission("delete-user", {
 		en: {name: "delete user", summary: "can delete user"},
-		cn: {name: "删除用户", summary: "您可以删除用户信息"}
+		cn: {name: "删除用户", summary: "您可以删除用户信息"},
+		options:{
+			level:globalLevel
+		}
 	})
 	.definePermission("list-user", {
 		en: {name: "list users", summary: "view users list"},
-		cn: {name: "用户列表", summary: "您可以查看用户列表"}
+		cn: {name: "用户列表", summary: "您可以查看用户列表"},
+		options:{
+			level:globalLevel
+		}
 	//})
 	//.definePermission("add-user", {
 	//	en: {name: "add user", summary: "can add user"},
@@ -41,5 +53,8 @@ userPermissions
 		cn: {
 			name   : "用户管理",
 			summary: "可以增删改查用户的角色"
+		},
+		options:{
+			level:globalLevel
 		}
 	});

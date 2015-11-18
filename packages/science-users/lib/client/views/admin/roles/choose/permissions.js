@@ -4,13 +4,9 @@ Template.AdminRolesChooseForm.helpers({
 		Session.set("currRole",cr);
 		return cr;
 	},
-	"pkgPermissionsGroupPrefixs": function () {
-		var keys       = Permissions.getPermissions();
-		var permsGroup = _.groupBy(keys, function (str) {
-			return str.split(':')[0];
-		});
-		delete permsGroup.permissions;// 前面已经显示过角色管理权限，所以删除掉
-		return Object.keys(permsGroup);
+	"pkgPermissions": function () {
+		var level = this.description.options.level;
+		return Permissions.getPermissionsDescriptions2(level);
 	},
 	"isUserHasThisPerm"  : function (permName) {
 		return Session.get("currRole").permissions.indexOf(permName) > -1 ? "checked" : "";
@@ -28,9 +24,6 @@ Template.singleGroup.helpers({
 	},
 	"isUserHasThisPerm"  : function (permName) {
 		return Session.get("currRole").permissions.indexOf(permName) > -1 ? "checked" : "";
-	},
-	"geti18nName":  function(permCode){
-		return Permissions.getPermissionsByCode(permCode).name;
 	}
 });
 
