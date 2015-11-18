@@ -35,7 +35,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe("editorial_board"),
             Meteor.subscribe("author_center"),
             Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead')
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
     }
 });
@@ -77,7 +77,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe("editorial_board"),
             Meteor.subscribe("author_center"),
             Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead')
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
     }
 

@@ -1,5 +1,5 @@
-Meteor.publish('mostRead', function (journalId) {
-    var result = getMostReadByJournal(journalId);
+Meteor.publish('mostRead', function (journalId, limit) {
+    var result = getMostReadByJournal(journalId, limit);
     result = _.pluck(result, '_id');
     result = _.pluck(result, 'articleId');
     var suggestion = getMostReadSuggestion(journalId);

@@ -12,7 +12,7 @@ Router.route("home", {
             Meteor.subscribe('images'),
             Meteor.subscribe('news'),
             Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead')
+            Meteor.subscribe('mostRead', undefined, 5)
         ]
     }
 });
