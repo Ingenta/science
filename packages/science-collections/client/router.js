@@ -33,7 +33,7 @@ Router.route("/collections/:collId/", {
 	waitOn        : function () {
 		return [
 			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('articleSearchResults')
+			Meteor.subscribe('fullMostRecentArticles')
 		]
 	}
 });
@@ -48,7 +48,7 @@ Router.route("/collections/:collId/articles/", {
 	waitOn        : function () {
 		return [
 			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('articleSearchResults')
+			Meteor.subscribe('fullMostRecentArticles')
 		]
 	}
 });

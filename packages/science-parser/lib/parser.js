@@ -52,6 +52,22 @@ Parser = function(filepath,options,callback){
 					author.email=parseHelper.getSimpleVal("child::email",authorNode);
 					article.authors.push(author);
 				});
+				article.citations = [];
+				var citationNodes = parseHelper.getNodes("child::citation",articleNode);
+				_.each(citationNodes,function(citationNode){
+					var citation = {};
+					citation.no=parseHelper.getFirstAttribute("attribute::no",citationNode);
+					citation.fullContent= parseHelper.getSimpleVal("child::citation_full",citationNode);
+					if(citation.fullContent)
+						citation.fullContent=citation.fullContent.trim().replace('&lt;','<');
+					citation.title = parseHelper.getSimpleVal("child::citation_title",citationNode);
+					citation.journal=parseHelper.getSimpleVal("child::citation_journal",citationNode);
+					citation.year = parseHelper.getSimpleVal("child::citation_year",citationNode);
+					citation.volume = parseHelper.getSimpleVal("child::citation_volume",citationNode);
+					citation.startPage = parseHelper.getSimpleVal("child::citation_startpage",citationNode);
+					citation.endPage=parseHelper.getSimpleVal("child::citation_endpage",citationNode);
+					article.citations.push(citation);
+				})
 				issue.articles.push(article);
 			})
 		});

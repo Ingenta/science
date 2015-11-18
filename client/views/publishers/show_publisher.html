@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-3">
-                <a href="{{notUrl}}"><img src="{{getImageHelper picture}}" width="137"/></a>
+                <a href="{{notUrl}}" target="_blank"><img src="{{getImageHelper picture}}" width="137"/></a>
             </div>
             <div class="col-xs-9">
                 <h2>
@@ -29,7 +29,7 @@
 <template name="PublisherWebsite">
     {{#if website}}
         <p>
-            <a href="{{website}}">
+            <a href="{{website}}" target="_blank">
                 {{_ "Home page for"}}
                 {{translateThis chinesename name}}
                 <i class="fa fa-external-link"></i></a>

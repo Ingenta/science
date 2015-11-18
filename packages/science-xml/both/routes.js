@@ -12,7 +12,7 @@ Router.route("admin.upload", {
 		return [
 			Meteor.subscribe('uploadLog'),
 			Meteor.subscribe('uploadTasks'),
-			Meteor.subscribe('articleUrls')
+			Meteor.subscribe('fullMostRecentArticles')
 		]
 	}
 });
