@@ -12,9 +12,13 @@
 	<li style="overflow:hidden">
 		<span style="float:left;margin-right:10px;">[{{index}}]</span>
 		<span style="float:left; width:92%;">
-			{{formatAuthors}}{{formatTitle}}{{formatSource}}{{formatRange}}
-			{{{link}}}
-			{{{googleScholar}}}
+			{{#if fullContent}}
+				{{{fullContent}}}
+			{{else}}
+				{{formatAuthors}}{{formatTitle}}{{formatSource}}{{formatRange}}
+				{{{link}}}
+				{{{googleScholar}}}
+			{{/if}}
 		</span>
 	</li>
 </template>
