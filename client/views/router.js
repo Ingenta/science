@@ -131,9 +131,8 @@ Router.map(function () {
         name: "journal.name",
         waitOn: function () {
             return [
-                Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
+                Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
+                Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
                 Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
                 Meteor.subscribe('about'),
                 Meteor.subscribe('about_articles'),
@@ -143,13 +142,13 @@ Router.map(function () {
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('news'),
                 Meteor.subscribe('specialTopics'),
-                Meteor.subscribe('suggestedMostRead'),
                 Meteor.subscribe('recommend'),
                 Meteor.subscribe('specialTopics'),
                 Meteor.subscribe("editorial_member"),
                 Meteor.subscribe("editorial_board"),
                 Meteor.subscribe("author_center"),
-                Meteor.subscribe('mostCited')
+                Meteor.subscribe('mostCited'),
+                Meteor.subscribe('mostRead')
             ]
         }
     });
@@ -172,9 +171,7 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers'),
+                Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
                 Meteor.subscribe('specialTopics')
             ]
         }
@@ -203,9 +200,8 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
+                Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
+                Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
                 Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
                 Meteor.subscribe('about'),
                 Meteor.subscribe('about_articles'),
@@ -215,20 +211,17 @@ Router.map(function () {
                 Meteor.subscribe('topics'),
                 Meteor.subscribe('news'),
                 Meteor.subscribe('specialTopics'),
-                Meteor.subscribe('suggestedMostRead'),
                 Meteor.subscribe('recommend'),
                 Meteor.subscribe('specialTopics'),
                 Meteor.subscribe("editorial_member"),
                 Meteor.subscribe("editorial_board"),
                 Meteor.subscribe("author_center"),
                 Meteor.subscribe('mostCited'),
-                Meteor.subscribe('articlesWithoutFulltext'),
-                Meteor.subscribe('issues')
+                Meteor.subscribe('mostRead')
             ]
         }
 
     });
-    //TODO: allow first visit to this page, issues: don't know which article to subscribe to.
     this.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue/:publisherDoi/:articleDoi', {
         data: function () {
             var pub = Publishers.findOne({name: this.params.publisherName});
@@ -251,18 +244,15 @@ Router.map(function () {
             var artId;
             if (artData)artId = artData._id;
             return [
-                Meteor.subscribe('images'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
                 Meteor.subscribe('articleViewsByArticleId', artId),
                 Meteor.subscribe('oneIssueArticlesByArticleId',artId),
-                Meteor.subscribe('issues'),
+                Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
                 Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
                 Meteor.subscribe('keywords'),
                 Meteor.subscribe('articleXml'),
                 Meteor.subscribe('pdfs'),
-                Meteor.subscribe('emailConfig'),
-                Meteor.subscribe('mostCited')
+                Meteor.subscribe('mostCited'),
+                Meteor.subscribe('mostRead')
             ]
         },
         onBeforeAction: function () {
