@@ -67,19 +67,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         return [
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
-            Meteor.subscribe('about'),
-            Meteor.subscribe('about_articles'),
-            Meteor.subscribe('allCollections'),
-            Meteor.subscribe('medias'),
-            Meteor.subscribe('files'),
-            Meteor.subscribe('specialTopics'),
-            Meteor.subscribe('recommend'),
-            Meteor.subscribe("editorial_member"),
-            Meteor.subscribe("editorial_board"),
-            Meteor.subscribe("author_center"),
-            Meteor.subscribe('mostCited'),
-            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
+            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'))
         ]
     }
 
