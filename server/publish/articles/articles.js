@@ -2,13 +2,15 @@ minimumArticle = {
     title: 1,
     journalId: 1,
     doi: 1,
-    issue: 1
+    issue: 1,
+    issueId: 1,
 };
 articleWithMetadata = {
     title: 1,
     journalId: 1,
     doi: 1,
     issue: 1,
+    issueId: 1,
     volume: 1,
     elocationId: 1,
     year: 1,
@@ -19,11 +21,6 @@ articleWithMetadata = {
     citationCount: 1//needed for most cited
 };
 
-Meteor.publish('articlesWithoutFulltext', function () {
-    return Articles.find({}, {
-        fields: {sections: 0}
-    });
-});
 
 Meteor.publish('articleSearchResults', function () {
     return [Articles.find({}, {
@@ -40,15 +37,4 @@ Meteor.publish('oneArticle', function (id) {
 
 Meteor.publish('oneArticleByDoi', function (doi) {
     return Articles.find({doi: doi});
-});
-
-
-Meteor.publish('articleUrls', function () {
-    return [
-        Articles.find({}, {
-            fields: minimumArticle
-        }),
-        Publishers.find(),
-        Publications.find()
-    ]
 });
