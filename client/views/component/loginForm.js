@@ -52,7 +52,7 @@ Template.loginForm.helpers({
 	},
 	isDisplayLogin: function(){
 		if (TAPi18n.getLanguage() === "zh-CN") return true;
-	},
+	}
 });
 
 Template.otherPlatformloginButtons.helpers({
