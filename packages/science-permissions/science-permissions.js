@@ -57,17 +57,17 @@ _.extend(Permissions, {
 
     },
     level:{
-        global:"global",
+        admin:"admin",
         publisher:"publisher",
         journal:"journal",
         institution:"institution"
     }
 });
 
-globalLevel=[Permissions.level.global];
-publisherLevel=[Permissions.level.global,Permissions.level.publisher];
-journalLevel=[Permissions.level.global,Permissions.level.publisher,Permissions.level.journal];
-institutionLevel=[Permissions.level.global,Permissions.level.institution];
+adminLevel=[Permissions.level.admin];
+publisherLevel=[Permissions.level.admin,Permissions.level.publisher];
+journalLevel=[Permissions.level.admin,Permissions.level.publisher,Permissions.level.journal];
+institutionLevel=[Permissions.level.admin,Permissions.level.institution];
 
 if (Meteor.isClient) {
     _.extend(Permissions, {

@@ -1,6 +1,9 @@
 Meteor.methods({
-    "createUserAccount": function (options) {
+    "createUserAccount": function (options,additional) {
         var userId = Accounts.createUser(options);
+        if(userId){
+
+        }
         Accounts.sendEnrollmentEmail(userId, options.email, function(err){
             if (err){
                 console.log("email didn't get sent");

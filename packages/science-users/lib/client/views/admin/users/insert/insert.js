@@ -61,16 +61,32 @@ Template.AdminUsersInsert.events({
             },
             function (values) {
                 Permissions.check("add-user", "user");
-                if (Router.current().params.insId) values.institutionId = Router.current().params.insId;//机构帐号标签页才需要设值
+                var urlQuery=Router.current().params.query;
+                if(urlQuery){
+
+                    if(urlQuery.level)
+                        values.level=urlQuery.level;
+
+                    if(urlQuery.institutionId)
+                        values.institutionId=urlQuery.institutionId;
+
+                    if(values.level==='institution' && !values.institutionId){
+                        errorAction("Missing institution id");
+                        return false;
+                    }
+                }
+                var level=Router.current().params.query && Router.current().params.query.level;
+                values.level=level || "normal";
                 Meteor.call("createUserAccount", values, function (e, userId) {
                     if (e) {
                         errorAction(e.message);
-                    }
-                    else {
-                        if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
-                        if (values.institutionId) {
-                            Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
-                        }
+                    }else{
+                        if (values.level === "admin")
+                            Permissions.delegate(userId, ["permissions:admin"]);
+                        if (values.level === 'publisher' && values.publisherId)
+                            Permissions.delegate(userId,[{"role":"publisher:publisher-manager-from-user",scope:{publisher:[values.publisherId]}}])
+                        if (values.level === 'institution' && values.institutionId)
+                            Permissions.delegate(userId,[{"role":"institution:institution-manager-from-user",scope:{institution:[values.institutionId]}}]);
                         submitAction();
                     }
                 });
@@ -91,12 +107,7 @@ Template.AdminUsersInsert.events({
         } else {
             Router.go("admin.users", {});
         }
-    },
-    "change #form-select-publisher": function (e) {
-        e.preventDefault();
-        Session.set("publisherId", $(e.target).val());
     }
-
 });
 
 Template.AdminUsersInsert.helpers({
