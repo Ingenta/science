@@ -9,9 +9,6 @@ Router.configure({
 });
 
 Meteor.subscribe("current_user_data");
-Meteor.subscribe("tag");
-Meteor.subscribe("file_excel");
-Meteor.subscribe("meeting_info");
 Meteor.subscribe('pages');
 Meteor.subscribe('images');
 Meteor.subscribe('advertisement');

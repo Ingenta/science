@@ -26,7 +26,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
             //TODO fix this without reloading the page
             //Meteor.subscribe('relatedArticles', Session.get("relatedArticlesIdList")),
-            Meteor.subscribe('keywords'),
+            Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
             Meteor.subscribe('articleXml'),
             Meteor.subscribe('pdfs'),
             Meteor.subscribe('mostCited'),

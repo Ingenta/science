@@ -36,6 +36,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe("editorial_member"),
             Meteor.subscribe("editorial_board"),
             Meteor.subscribe("author_center"),
+            Meteor.subscribe("meeting_info"),
+            Meteor.subscribe("news"),
+            Meteor.subscribe("tag"),
             Meteor.subscribe('mostCited'),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
