@@ -1,0 +1,46 @@
+{
+  "issue": {
+    "volume": "45",
+    "issue": "9",
+    "year": "2015",
+    "month": "9"
+  },
+  "journal": {
+    "title": "china",
+    "titleCn": "中国科学 物理学 力学 天文学",
+    "description": {
+      "cn": "主要报道凝聚态物理、原子分子物理、光物理和声学, 理论物理、粒子物理、核物"
+    }
+  },
+  "articleList": [
+    {
+      "title": {
+        "cn": "直流驱动氩气等离子体刷的放电特性研究",
+        "en": "Discharge characteristics of a brush-shaped argon plasma plume driven by a direct-current voltage"
+      },
+      "url": "http://localhost:3000/ublisher/kexuechubanshe/journal/math/45/9/10.1360/SSPMA2015-00175",
+      "authors": [
+        {
+          "fullname": {
+            "en": "LI XueChen",
+            "cn": " "
+          }
+        },
+        {
+          "fullname": {
+            "en": "LI JiYuan",
+            "cn": " "
+          }
+        },
+        {
+          "fullname": {
+            "en": "ZHANG ChunYan",
+            "cn": " "
+          }
+        }
+      ]
+    }
+  ]
+}
+
+

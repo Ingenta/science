@@ -55,8 +55,19 @@ _.extend(Permissions, {
                 callback(e);
         }
 
+    },
+    level:{
+        global:"global",
+        publisher:"publisher",
+        journal:"journal",
+        institution:"institution"
     }
 });
+
+globalLevel=[Permissions.level.global];
+publisherLevel=[Permissions.level.global,Permissions.level.publisher];
+journalLevel=[Permissions.level.global,Permissions.level.publisher,Permissions.level.journal];
+institutionLevel=[Permissions.level.global,Permissions.level.institution];
 
 if (Meteor.isClient) {
     _.extend(Permissions, {
@@ -89,9 +100,9 @@ Meteor.startup(function () {
         queryArr.push({'emails.address': da.email});
         queryArr.push({'username': da.username});
         if (!Users.findOne({$or: queryArr})) {
-            console.info("create default user '" + da.username + "'");
+            logger.warn("create default user '" + da.username + "'");
             var userId = Accounts.createUser(da)
-            console.info("set admin role for user '" + da.username + "'");
+            logger.warn("set admin role for user '" + da.username + "'");
             Permissions.delegate(userId, ["permissions:admin"]);
         }
     }

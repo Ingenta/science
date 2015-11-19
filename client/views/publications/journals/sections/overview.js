@@ -32,11 +32,11 @@ Template.journalSummary.helpers({
             return title;
         }
         if (num == "3") {
-            var title = iscn ? "半月刊" : "Semimonthly Publication";
+            var title = iscn ? "半月刊" : "Bi-monthly Publication";
             return title;
         }
         if (num == "4") {
-            var title = iscn ? "旬刊" : "The ten-day Publication";
+            var title = iscn ? "旬刊" : "Ten-day Publication";
             return title;
         }
     },
@@ -69,7 +69,7 @@ Template.recommendArticles.helpers({
     },
     ArticleUrl: function (Arid) {
         var journalId = Session.get('currentJournalId');
-        var title = Publications.findOne({_id: journalId}).title;
+        var title = Publications.findOne({_id: journalId}).shortTitle;
         var article = Articles.findOne({_id: Arid});
         if (article)
             return title + "/" + article.volume + "/" + article.issue + "/" + article.doi;

@@ -31,5 +31,8 @@ resourcePermissions
         cn: {
             name: "期刊管理员 (出版商)",
             summary: "期刊管理员"
+        },
+        options:{
+            level:journalLevel
         }
     });

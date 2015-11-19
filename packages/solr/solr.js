@@ -13,7 +13,7 @@ Solr = function(options) {
 
 Solr.createClient = function(options) {
 	var solr = new Solr(options);
-	console.log(options);
+	logger.info(options);
 	return solr;
 };
 

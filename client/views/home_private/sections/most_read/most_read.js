@@ -1,7 +1,7 @@
 Template.mostReadArticleList.helpers({
     mostReadArticlesTopFive: function () {
         var journalId;
-        if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.volume")
+        if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
             journalId = Router.current().data()._id;
         if (Router.current().route.getName() === "article.show")
             journalId = Router.current().data().journalId;
@@ -27,8 +27,7 @@ Template.mostReadArticleList.helpers({
         return _.first(mostReadArticles, 5);
     },
     mostReadCount: function () {
-        if (Session.get("mostRead"))
-            if (5 < Session.get("mostRead").length) return true;
+        if (Session.get("mostRead") && 5 < Session.get("mostRead").length)return true;
         return false;
     }
 });

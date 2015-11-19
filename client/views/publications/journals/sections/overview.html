@@ -75,9 +75,12 @@
 </template>
 
 <template name="recommendArticles">
-    <h4>{{_ "Editors Recommend"}}&nbsp;&nbsp;&nbsp;{{#if can "add-pulisher-collections" "collections" }}
-        <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}{{/if}}
-    </h4>
+    <div>
+        <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
+        {{#if can "add-pulisher-collections" "collections" }}
+            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}
+        {{/if}}
+    </div>
     {{#each recommendArticles}}
         <h5><a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>&nbsp;&nbsp;{{titles ArticlesId}}</a>
             {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</h5>

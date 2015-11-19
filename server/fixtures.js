@@ -144,6 +144,11 @@ Meteor.startup(function () {
                 key: "watchArticle",
                 s: "《中国科学》杂志社平台 文章关注 Watch this article",
                 b: "<p>You are watching an article of which the following changes have been made.</p>"
+            },
+            {
+                key: "keywordFrequency",
+                s: "高频词语提醒",
+                b: "not used"
             }
         ];
         _.each(emails, function (email) {

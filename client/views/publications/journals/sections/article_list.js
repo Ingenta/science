@@ -47,7 +47,7 @@ Template.articleListRight.helpers({
         var pubStatus = Template.currentData().pubStatus;
         var curIssue = Session.get("currentIssueId");
         if (curIssue) {
-            return Articles.find({issueId: curIssue, pubStatus: pubStatus}, {sort: {title: 1}});
+            return Articles.find({issueId: curIssue, pubStatus: pubStatus},{sort: {elocationId: -1}});
         } else {
             var journalId = Session.get('currentJournalId');
             //return Articles.find({journalId: journalId}, {sort: {issue: -1}}); this shows all articles, uncomment for testing, below only shows latest issue as AIP

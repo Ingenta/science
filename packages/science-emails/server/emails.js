@@ -34,8 +34,8 @@ Meteor.methods({
 
         var user = Meteor.user().emails[0].address;
         if (Meteor.user().profile)
-            if (Meteor.user().profile.realname)
-                user = Meteor.user().profile.realname;
+            if (Meteor.user().profile.realName)
+                user = Meteor.user().profile.realName;
 
         if (values.reasons === undefined)values.reasons = "";
 

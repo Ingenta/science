@@ -145,7 +145,13 @@ Meteor.startup(function () {
         title: function () {
             return TAPi18n.__("Edit user");
         },
-        parent: "admin.users"
+        parent: "admin.users",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('institutions')
+            ]
+        }
     });
     Router.route("user_settings", {
         path: "/user_settings",
@@ -194,8 +200,7 @@ Meteor.startup(function () {
         parent: "user_settings",
         waitOn: function () {
             return [
-                Meteor.subscribe('publications'),
-                Meteor.subscribe('articleSearchResults')
+                Meteor.subscribe('myFavouriteArticles', Meteor.userId())
             ]
         }
     });
@@ -212,7 +217,8 @@ Meteor.startup(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('topics')
+                Meteor.subscribe('topics'),
+                Meteor.subscribe('myWatchedArticles', Meteor.userId())
             ]
         }
     });

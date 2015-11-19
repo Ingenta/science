@@ -73,6 +73,23 @@ PastDataImport = function () {
 		}
 	};
 
+	var getReference = function(refs){
+		if(_.isEmpty(refs))
+			return;
+		return _.map(refs,function(ref){
+			var r = {};
+			r.index=ref.no;
+			r.id=ref.no;
+			r.title=ref.title;
+			r.year=ref.year;
+			r.volume=ref.volume;
+			r.firstPage=ref.startPage;
+			r.lastPage=ref.endPage;
+			r.fullContent=ref.fullContent;
+			return r;
+		})
+	}
+
 	Science.FSE.readdir(folder,Meteor.bindEnvironment( function (err, fileList) {
 		if (err)
 			throw err;
@@ -113,17 +130,20 @@ PastDataImport = function () {
 								newOne.accepted=article.acceptDate;
 								newOne.published=article.publishDate;
 								newOne.topic=getTopic(article.subspecialty);
-								newOne.articleType=article.property.en;
+								newOne.articleType=article.articleType;
 								newOne.abstract = article.abstract;
 								var authors=getAuthors(article.authors);
-								if(authors){
+								if(!_.isEmpty(authors)){
 									_.extend(newOne,authors);
 								}
 								newOne.keywords=article.indexing;
 								newOne.pubStatus="normal";
 								newOne.accessKey=journal.accessKey;
 								newOne.language=article.language=='zh_CN'?2:1;
-
+								var refs = getReference(article.citations);
+								if(!_.isEmpty(refs)){
+									_.extend(newOne,refs);
+								}
 								var existArticle = Articles.findOne({doi: newOne.doi});
 								if(existArticle){
 									Articles.update({_id:existArticle._id},{$set:newOne});

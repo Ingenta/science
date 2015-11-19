@@ -1,17 +1,14 @@
 Template.recentReadAndSearchContainer.helpers({
-	recentReads:function(){
+	recentlyRead:function(){
 		return Users.recent.read();
 	},
-	recentSearchs:function(){
+	recentlySearched:function(){
 		return Users.recent.search();
 	},
 	searchUrl:function(){
 		return SolrQuery.makeUrl({query:this.toString(),setting:{from:"history"}});
 	},
-	article:function(){
-		return Articles.findOne({_id:this.toString()});
-	},
-	anyThingNeedShow:function(name){
+	anyRecentUse:function(name){
 		if(!name)
 			return !(_.isEmpty(Users.recent.read())
 					&& _.isEmpty(Users.recent.search())

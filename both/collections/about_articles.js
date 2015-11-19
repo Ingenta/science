@@ -17,7 +17,7 @@ AboutArticlesSchema = new SimpleSchema({
         type: Science.schemas.MultiLangSchema
     },
     description: {
-        type:Science.schemas.MultipleTextAreaSchema
+        type: Science.schemas.MultipleTextAreaSchema
     },
     about: {
         type: String

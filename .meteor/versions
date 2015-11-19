@@ -124,6 +124,7 @@ mpowaga:string-template@0.1.0
 mrt:cookies@0.3.0
 mrt:flash-messages@1.0.1
 mrt:jquery-raty@2.7.2
+mrt:jquery-ui@1.9.2
 mrt:mathjax@0.6.3
 mrt:moment@2.8.1
 msavin:mongol@1.6.1
@@ -162,6 +163,7 @@ science-emails@0.0.1
 science-external-interface@0.0.1
 science-institution@0.0.1
 science-lib@0.0.1
+science-logger@0.0.2
 science-parser@0.0.1
 science-permissions@0.0.1
 science-reports@0.0.1
@@ -169,6 +171,7 @@ science-search@0.0.1
 science-topics@0.0.1
 science-users@0.0.1
 science-xml@0.0.1
+sebdah:autocompletion@0.2.0
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4

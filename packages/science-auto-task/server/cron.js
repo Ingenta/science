@@ -62,6 +62,7 @@ SyncedCron.add({
     job: function () {
         var outgoingList = [];
         var issueToArticles = {};
+        var journalNews = {};
 
         var today = moment().startOf('day');
         var yesterday = moment(today).subtract(1, 'days').toDate();
@@ -80,9 +81,9 @@ SyncedCron.add({
                         ]
                     }, {
                         $or: [
-                            {'profile.interestedOfArticles': {$exists: 1}},
-                            {'profile.interestedOfJournals': {$exists: 1}},
-                            {'profile.interestedOfTopics': {$exists: 1}}
+                            {'profile.articlesOfInterest': {$exists: 1}},
+                            {'profile.journalsOfInterest': {$exists: 1}},
+                            {'profile.topicsOfInterest': {$exists: 1}}
                         ]
                     }
                 ]
@@ -95,22 +96,31 @@ SyncedCron.add({
                 else if (oneUser.emailFrequency == 'monthly') oneUser.lastSentDate = lastMonth;
                 else oneUser.lastSentDate = new Date();
             }
-            if (oneUser.profile.interestedOfJournals && oneUser.profile.interestedOfJournals.length > 0) {
+            if (oneUser.profile.journalsOfInterest && oneUser.profile.journalsOfInterest.length > 0) {
                 Issues.find({
                     $and: [
-                        {journalId: {$in: oneUser.profile.interestedOfJournals}},
+                        {journalId: {$in: oneUser.profile.journalsOfInterest}},
                         {createDate: {$gt: oneUser.lastSentDate}}
                     ]
                 }).forEach(function (oneIssue) {
-                    if (!issueToArticles[oneIssue._id])
-                        issueToArticles[oneIssue._id] = Articles.find({
+                    if (!issueToArticles[oneIssue._id]){
+                        var articles = Articles.find({
                             journalId: oneIssue.journalId,
                             volume: oneIssue.volume,
                             issue: oneIssue.issue,
                             pubStatus: 'normal'
                         }, {
-                            fields: {_id: 1, title: 1}
+                            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, 'journal.titleCn': 1}
                         }).fetch();
+
+                        var journalUrl = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
+                        issueToArticles[oneIssue._id] = generateArticleLinks(articles, journalUrl);
+                    }
+
+                    if(!journalNews[oneIssue.journalId]) {
+                        journalNews[oneIssue.journalId] = journalIdToNews(oneIssue.journalId);
+                    }
+
                     if (issueToArticles[oneIssue._id].length) outgoingList.push({
                         userId: oneUser._id,
                         email: oneUser.emails[0].address,
@@ -118,8 +128,8 @@ SyncedCron.add({
                     });
                 });
             }
-            if (oneUser.profile.interestedOfTopics && oneUser.profile.interestedOfTopics.length > 0) {
-                oneUser.profile.interestedOfTopics.forEach(function (oneTopic) {
+            if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
+                oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
                     var tempArray = Articles.find({
                         $and: [
                             {topic: {$in: [oneTopic]}},
@@ -137,10 +147,10 @@ SyncedCron.add({
                     });
                 })
             }
-            if (oneUser.profile.interestedOfArticles && oneUser.profile.interestedOfArticles.length > 0) {
+            if (oneUser.profile.articlesOfInterest && oneUser.profile.articlesOfInterest.length > 0) {
                 var tempArray = Articles.find({
                     $and: [
-                        {_id: {$in: oneUser.profile.interestedOfArticles}},
+                        {_id: {$in: oneUser.profile.articlesOfInterest}},
                         {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
                 }, {
@@ -155,7 +165,7 @@ SyncedCron.add({
 
                 var citations = Citations.find({
                     $and: [
-                        {articleId: {$in: oneUser.profile.interestedOfArticles}},
+                        {articleId: {$in: oneUser.profile.articlesOfInterest}},
                         {createdAt: {$gt: oneUser.lastSentDate}}
                     ]
                 }).fetch();
@@ -175,18 +185,23 @@ SyncedCron.add({
                 var emailSubject = "";
                 var emailContent = "";
                 //var emailConfig = undefined;
-                var emailTemplate = "";
+                //var emailTemplate = "";
                 if (oneEmail.issue) {
                     //this is an issue watch
-                    emailSubject = "Issue Watch";
+                    //emailSubject = "Journal Watch";
                     //emailConfig = EmailConfig.findOne({key: "watchJournal"});
                     //if (emailConfig) {
                     //    emailSubject = emailConfig.subject;
                     //    emailContent = emailConfig.body;
                     //}
-                    issueToArticles[oneEmail.issue._id].forEach(function (article) {
-                        emailContent += createEmailArticleListContent(article);
-                    });
+                    oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {fields: {title: 1, titleCn: 1, description: 1, scholarOneCode: 1, magtechCode: 1}});
+                    oneEmail.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneEmail.issue.journalId).substring(1));
+                    oneEmail.journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneEmail.issue.journalId);
+                    oneEmail.issue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneEmail.issue._id).substring(1));
+                    oneEmail.articleList = issueToArticles[oneEmail.issue._id];
+                    oneEmail.journalNews = journalNews[oneEmail.issue.journalId];
+                    Science.Email.watchJournalEmail(oneEmail);
+
                 } else if (oneEmail.topicId) {
                     //this is a topic watch
                     emailSubject = "Topic Watch";
@@ -247,9 +262,31 @@ Meteor.startup(function () {
         SyncedCron.start();
 });
 
+var generateArticleLinks = function (articles, journalUrl) {
+    articles.forEach(function (article) {
+        if (article._id)
+            article.url =Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        article.journal.url = journalUrl;
+    });
+    return articles;
+};
+
+var journalIdToNews = function (journalId) {
+    var news = {};
+    news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    news.meetingInfo = Meeting.find({publications: journalId, about: 'c1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+
+    news.newsCenter.forEach(function (item) {
+        if(!item.url) item.url = Config.rootUrl + "news/" + item._id
+    });
+    news.meetingInfo.forEach(function (item) {
+        item.startDate = moment(item.startDate).format( "MMM Do YYYY");
+    });
+    return news;
+};
 
 var createEmailArticleListContent = function (article) {
-    if (!article)return article.title.cn;
     if (!article._id)return article.title.cn;
     var url = Science.URL.articleDetail(article._id);
     if (!url)return article.title.cn;

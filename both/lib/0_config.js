@@ -1,21 +1,14 @@
 Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
 Config = {
     isDevMode: Meteor.isDevelopment,
-    "defaultAdmin": {
-        "username": "admin",
-        "password": "123123",
-        "email": "admin@scp.com"
+    tempFiles: {
+        uploadXmlDir: {
+            tmpDir: '/tmp/uploads/tmp',
+            uploadDir: '/tmp/uploads'
+        },
+        uploadPdfDir: '/tmp/pdf',
+        uploadExcelDir: '/tmp/excel',
     },
-    uploadXmlDir: {
-        tmpDir: '/tmp/uploads/tmp',
-        uploadDir: '/tmp/uploads'
-    },
-    uploadMediaDir: {
-        tmpDir: '/tmp/uploads/tmp',
-        uploadDir: '/tmp/uploads'
-    },
-    uploadPdfDir: '/tmp/pdf',
-    uploadExcelDir: '/tmp/excel',
     ftp: {
         downloadDir: "/tmp/downloads",
         connectOptions:{
@@ -30,7 +23,7 @@ Config = {
     },
     ADPages: {
         journal: [
-            'journal.name.volume',
+            'journal.name.toc',
             'article.show',
             'journal.name'
         ],
@@ -45,7 +38,7 @@ Config = {
     },
     NewsPage: {
         journal: [
-            'journal.name.volume',
+            'journal.name.toc',
             'journal.name'
         ],
         global: [
@@ -59,12 +52,6 @@ Config = {
         'article.show',
         'solrsearch'
     ],
-    solrCore: {
-        host: "192.168.99.100",
-        port: "8983",
-        core: "/articles",
-        path: "/solr"
-    },
     Media: {
         allowType: ['mp3', 'mp4', 'ppt', 'pptx'],
         maxSize: 200 //MB
@@ -130,24 +117,35 @@ Config = {
     mainPublish: "hSsscs85HXuu2qTfJ",
     searchKeywordFrequency: 3000,
     sysAdmin: "admin",
-    parser:{
-        contentTypeDic:{
-            article:["article","论文","research paper"],
-            editorial:["editorial","评述"]
+    parser: {
+        contentTypeDic: {
+            article: ["article", "论文", "research paper"],
+            editorial: ["editorial", "评述"],
+            forum: ["论坛", "Forum"]
         }
     },
-    otherPlatformLoginUrl:{
-        scholarone:"https://mc03.manuscriptcentral.com/",
-        editors:"http://ees.scichina.com/user/login.action?pageCode="
+    otherPlatformLoginUrl: {
+        scholarone: "https://mc03.manuscriptcentral.com/",
+        editors: "http://ees.scichina.com/user/login.action?pageCode="
     },
-    otherPlatformRegisterUrl:{
-        editors:"http://ees.scichina.com/user/registuser_scichina.action"
+    otherPlatformRegisterUrl: {
+        editors: "http://ees.scichina.com/user/registuser_scichina.action"
     },
     displayJournalLogin: {
         journal: [
-            'journal.name.volume',
+            'journal.name.toc',
             'article.show',
             'journal.name'
         ]
     }
 };
+if (Meteor.isServer) {
+    Config.defaultAdmin = {
+        "username": "admin",
+        "password": "123123",
+        "email": "admin@scp.com"
+    }
+    if (Config.isDevMode)
+        logger.info("Dev Platform: " + process.platform);
+}
+

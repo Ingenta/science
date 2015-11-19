@@ -23,20 +23,27 @@ Package.onUse(function(api) {
   api.addFiles('lib/async.js', client);
   
   api.addFiles('lib/globals.js', both);
-  api.addFiles('lib/permissions-helpers.coffee', both);
-  api.addFiles('lib/permissions-common.coffee', both);
-  api.addFiles('lib/permissions-client.coffee', client);
-  api.addFiles('lib/permissions-server.coffee', server);
+  api.addFiles('lib/translate/core.js',both);
+  api.addFiles('lib/translate/permissions-helpers.js', both);
+  api.addFiles('lib/translate/permissions-common.js', both);
+  api.addFiles('lib/translate/permissions-client.js', client);
+  api.addFiles('lib/translate/permissions-server.js', server);
+  //api.addFiles('lib/permissions-helpers.coffee', both);
+  //api.addFiles('lib/permissions-common.coffee', both);
+  //api.addFiles('lib/permissions-client.coffee', client);
+  //api.addFiles('lib/permissions-server.coffee', server);
 
   api.export('OrbitPermissions');
 });
 
 Package.onTest(function(api) {
   api.versionsFrom('METEOR@1.0');
-
+  api.use('underscore', both);
+  api.use('tracker', both);
   api.use('coffeescript', both);
   api.use('tinytest');
   api.use('templating');
+  api.use('accounts-base');
   api.use('accounts-password');
   api.use('orbit:permissions');
   api.use('tap:i18n@1.0.7');
@@ -53,6 +60,9 @@ Package.onTest(function(api) {
   api.addFiles('test/both/package-permissions.coffee', both);
 
   api.addFiles('test/both/permissions.coffee', both);
+
+
+  api.addFiles('test/server/definePermissions.js',both);
 
   api.addFiles('test/both/permissions-registrar.coffee', both);
   api.addFiles('test/client/permissions-registrar.coffee', client);

@@ -7,9 +7,7 @@ Router.route('/search', {
 	},
 	waitOn: function () {
 		return [
-			Meteor.subscribe('publishers'),
-			Meteor.subscribe('publications'),
-			Meteor.subscribe('articleSearchResults'),
+			Meteor.subscribe('fullMostRecentArticles'),
 			Meteor.subscribe('keywords'),
 			Meteor.subscribe('topics')
 		]

@@ -1,3 +1,8 @@
+urlToArticleByArticleById = function(articleId){
+    if (!articleId)return;
+    return urlToArticleByArticleObject(Articles.findOne({_id: articleId}));
+}
+
 var urlToArticleByArticleObject = function (article) {
     if (!article)return;
     return getJournalComponentByArticle(article) + getIssueComponentByArticle(article) + "/" + article.doi;
@@ -15,8 +20,10 @@ getJournalComponentByJournalId = function (id) {
 }
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
-    var issue = Issues.findOne({_id: article.issueId});
-    return "/" + issue.volume + "/" + issue.issue;
+    //commented out to aboid subscribing to all issues, because currently issue name are not editable this will not affect anything
+    //var issue = Issues.findOne({_id: article.issueId});
+    //if(!issue)return;
+    return "/" + article.volume + "/" + article.issue;
 }
 
 journalIdToName = function (id) {
@@ -34,8 +41,7 @@ Template.registerHelper('urlToArticle', function (title) {
 });
 
 Template.registerHelper('urlToArticleById', function (id) {
-    var article = Articles.findOne({_id: id});
-    return urlToArticleByArticleObject(article);
+    return urlToArticleByArticleById(id);
 });
 
 Template.registerHelper('urlToJournal', function (title) {
@@ -95,16 +101,6 @@ pluralize = function (n, thing, options) {
         return plural;
     else
         return n + ' ' + plural;
-}
-getMostReadSuggestion = function (currentJournalId) {
-    //add suggestion if journalId not set or its journalId equals current
-    var suggestedArticle = SuggestedArticles.findOne();
-    if (!suggestedArticle)return;
-    var article = Articles.findOne({_id: suggestedArticle.articleId});
-    if (!article) return;
-    if (!currentJournalId) return article;
-    if (article.journalId !== currentJournalId) return;
-    return article;
 }
 
 Template.registerHelper('pluralize', pluralize);

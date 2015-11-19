@@ -20,7 +20,7 @@ Template.layoutLatestArticles.helpers({
             var publication = Publications.findOne({_id: article.journalId});
             if(publication){
                 var publisher = Publishers.findOne({_id:publication.publisher});
-                return "/publisher/" +publisher.name+ "/journal/" + publication.title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
+                return "/publisher/" +publisher.name+ "/journal/" + publication.shortTitle + "/" + article.volume + "/" + article.issue + "/" + article.doi;
             }
         }
     }

@@ -46,7 +46,6 @@
   "Next Article": "下一篇",
   "Table of Contents": "目录",
   "Manager": "主管单位",
-  "Publisher": "出版单位",
   "Period": "刊期",
   "Editor": "主编",
   "Journal label": "期刊收录类型",
@@ -225,8 +224,8 @@
   "Edit user": "修改用户信息",
   "Blocked": "锁定",
   "Admin": "管理员",
-  "ScholarOne Login": "ScholarOne登录",
-  "Editors Login": "协同编辑登录",
+  "Submission and review Login": "ScholarOne登录",
+  "Editors Login": "投审稿登录",
   "Create": "新建",
   "Update": "修改",
   "Delete": "删除",
@@ -824,7 +823,7 @@
     },
     "users": {
       "profile": {
-        "realname": {
+        "realName": {
           "label": "您的真实姓名"
         },
         "institution": {
@@ -833,10 +832,10 @@
         "fieldOfResearch": {
           "label": "您的研究领域"
         },
-        "interestedOfJournals": {
+        "journalsOfInterest": {
           "label": "您关注的期刊名称"
         },
-        "interestedOfTopics": {
+        "topicsOfInterest": {
           "label": "您关注的学科"
         },
         "phone": {
@@ -1127,7 +1126,6 @@
   "permissions-get-users-roles": "查看角色列表",
   "permissions-edit-custom-roles": "设置自定义角色",
   "permissions-delegate-and-revoke": "设置用户角色",
-  "Status": "状态",
   "Enable": "启用",
   "Disable": "禁用",
   "email_not_verified": "邮箱未验证",
@@ -1261,5 +1259,6 @@
   "clickToView":"点击查看",
   "Rating": "评分",
   "Reset":"重置",
-  "Search Mode":"搜索方式"
+  "Search Mode":"搜索方式",
+  "roleScope":"角色功能范围"
 }
