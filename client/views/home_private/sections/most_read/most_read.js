@@ -1,7 +1,7 @@
 Template.mostReadArticleList.helpers({
     mostReadArticlesTopFive: function () {
         var journalId;
-        if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.volume")
+        if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
             journalId = Router.current().data()._id;
         if (Router.current().route.getName() === "article.show")
             journalId = Router.current().data().journalId;

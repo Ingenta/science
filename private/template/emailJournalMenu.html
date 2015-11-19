@@ -122,9 +122,15 @@
 </style>
 
 <div class="logo">
-    <a href="#">Submit Your Manuscript</a>|
-    <a href="#">Author Guidelines</a>|
-    <a href="#">Current Issue</a>|
-    <a href="#">Most Read</a>|
+    {{#if journal.magtechCode}}
+        <a href="http://ees.scichina.com/user/login.action?pageCode={{journal.magtechCode}}">Submit Your Manuscript</a>|
+    {{else}}
+        {{#if journal.scholarOneCode}}
+            <a href="https://mc03.manuscriptcentral.com/{{journal.scholarOneCode}}">Submit Your Manuscript</a>|
+        {{/if}}
+    {{/if}}
+    <a href="{{journal.url}}?activeTab=Author Center">Author Guidelines</a>|
+    <a href="{{issue.url}}">Current Issue</a>|
+    <a href="{{journal.mostRead}}">Most Read</a>|
 </div>
 <div class="img-ico"><img src="{{emailIcoUrl}}"></div>

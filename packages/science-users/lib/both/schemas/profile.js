@@ -1,5 +1,5 @@
 userProfileSchema  = new SimpleSchema({
-	realname  : {
+	realName  : {
 		type  : String,
 		optional: true
 	},
@@ -11,7 +11,7 @@ userProfileSchema  = new SimpleSchema({
 		type: String,
 		optional: true
 	},
-	interestedOfJournals:{
+	journalsOfInterest:{
 		type: [String],
 		optional: true,
 		autoform:{
@@ -22,7 +22,7 @@ userProfileSchema  = new SimpleSchema({
 			}
 		}
 	},
-	interestedOfTopics:{
+	topicsOfInterest:{
 		type: [String],
 		optional: true,
 		autoform:{

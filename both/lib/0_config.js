@@ -14,7 +14,7 @@ Config = {
     },
     ADPages: {
         journal: [
-            'journal.name.volume',
+            'journal.name.toc',
             'article.show',
             'journal.name'
         ],
@@ -29,7 +29,7 @@ Config = {
     },
     NewsPage: {
         journal: [
-            'journal.name.volume',
+            'journal.name.toc',
             'journal.name'
         ],
         global: [
@@ -121,7 +121,7 @@ Config = {
     },
     displayJournalLogin: {
         journal: [
-            'journal.name.volume',
+            'journal.name.toc',
             'article.show',
             'journal.name'
         ]

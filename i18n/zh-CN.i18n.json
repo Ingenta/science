@@ -46,7 +46,6 @@
   "Next Article": "下一篇",
   "Table of Contents": "目录",
   "Manager": "主管单位",
-  "Publisher": "出版单位",
   "Period": "刊期",
   "Editor": "主编",
   "Journal label": "期刊收录类型",
@@ -824,7 +823,7 @@
     },
     "users": {
       "profile": {
-        "realname": {
+        "realName": {
           "label": "您的真实姓名"
         },
         "institution": {
@@ -833,10 +832,10 @@
         "fieldOfResearch": {
           "label": "您的研究领域"
         },
-        "interestedOfJournals": {
+        "journalsOfInterest": {
           "label": "您关注的期刊名称"
         },
-        "interestedOfTopics": {
+        "topicsOfInterest": {
           "label": "您关注的学科"
         },
         "phone": {
@@ -1127,7 +1126,6 @@
   "permissions-get-users-roles": "查看角色列表",
   "permissions-edit-custom-roles": "设置自定义角色",
   "permissions-delegate-and-revoke": "设置用户角色",
-  "Status": "状态",
   "Enable": "启用",
   "Disable": "禁用",
   "email_not_verified": "邮箱未验证",
