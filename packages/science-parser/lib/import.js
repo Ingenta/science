@@ -1,5 +1,5 @@
 PastDataImport = function () {
-	var folder = "/Users/jiangkai/WORK/ImportPastData/";
+	var folder = "/Users/jack/ImportPastData/";
 
 	var issueCreator = new ScienceXML.IssueCreator();
 
@@ -33,8 +33,10 @@ PastDataImport = function () {
 			_.each(authorsArr,function(obj){
 				var author={affs:[]};
 				if(obj.affiliation){
-					var affCnArr = obj.affiliation.cn.split("#");
+					var affCnArr = obj.affiliation.cn?obj.affiliation.cn.split("#"):[];
 					var affEnArr = obj.affiliation.en?obj.affiliation.en.split("#"):affCnArr;//如果没有英文工作单位信息，用中文代替。
+					if(_.isEmpty(affCnArr) )
+						affCnArr=affEnArr;
 					for(var i=0;i<affCnArr.length;i++){
 						var index = affiliations.push({affText:{cn:affCnArr[i],en:affEnArr[i]}});
 						author.affs.push(index);

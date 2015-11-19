@@ -46,8 +46,22 @@ Science.Email.watchJournalEmail = function (oneEmail) {
             "journalNews": oneEmail.journalNews
         })
     });
-    console.log("email sent");
-    //Users.update({_id: oneEmail.userId}, {lastSentDate: today});
+};
+
+Science.Email.watchTopicEmail = function (oneEmail) {
+    Email.send({
+        to: oneEmail.email,
+        from: 'publish@scichina.org',
+        subject: oneEmail.topic.name + "下有文章更新",
+        html: JET.render('watchTopic', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "emailIcoUrl": Config.rootUrl + "email/ico.png",
+            "rootUrl": Config.rootUrl,
+            "topic": oneEmail.topic,
+            "articleList": oneEmail.articleList,
+            "homePageNews": oneEmail.homePageNews
+        })
+    });
 };
 
 Science.Email.test = function (template, theData){
