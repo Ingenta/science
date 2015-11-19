@@ -13,7 +13,15 @@ SyncedCron.add({
         });
     }
 });
-
+SyncedCron.add({
+    name: 'FTPSCAN',
+    schedule: function (parser) {
+        return parser.text(Config.AutoTasks.FTPSCAN.rate || "every 5 minutes");//默认每5分钟检查一次
+    },
+    job: function () {
+    Tasks.scanFTP();
+    }
+});
 SyncedCron.add({
     name: "CitationsUpdate",
     schedule: function (parser) {
