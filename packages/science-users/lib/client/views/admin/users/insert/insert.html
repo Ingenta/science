@@ -1,17 +1,5 @@
 <template name="AdminUsersInsert">
 	<div class="container-fluid" id="content">
-		<div class="row" id="title_row">
-			<div class="col-xs-12">
-				<div id="page_menu" class="pull-right">
-				</div>
-			</div>
-		</div>
-		{{> AdminUsersInsertInsertForm}}
-	</div>
-</template>
-
-<template name="AdminUsersInsertInsertForm">
-	<div class="">
         {{> columeTitle titleName="Add new user"}}
 		<form id="form" role="form">
 			{{#if errorMessage}}
