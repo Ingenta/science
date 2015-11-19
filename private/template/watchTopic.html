@@ -121,33 +121,7 @@
     }
 </style>
 
-<div class="meau-list">
-    <h1>新闻中心</h1>
-    {{#each journalNews.newsCenter}}
-        <div class="mt10">
-            {{#if url}}
-                <h2><a href="{{url}}">{{title.cn}}</a></h2>
-            {{/if}}
-            <p>{{abstract.cn}}</p>
-        </div>
-    {{/each}}
-    <h1>出版动态</h1>
-    {{#each journalNews.publishingDynamic}}
-        <div class="mt10">
-            <h2><a href="{{url}}">{{title.cn}}</a></h2>
-            <p>{{abstract.cn}}</p>
-        </div>
-    {{/each}}
-    <h1>会议信息</h1>
-    {{#each journalNews.meetingInfo}}
-        <div class="mt10">
-            {{#if url}}
-                <h2><a href="{{url}}">{{title.cn}}</a></h2>
-            {{else}}
-                <h2>{{title.cn}}</h2>
-            {{/if}}
-            <p>{{startDate}}</p>
-            <p>{{address.cn}}</p>
-        </div>
-    {{/each}}
+<div class="big">
+    {{> scpBanner}}
+    {{> watchTopicContent}}
 </div>

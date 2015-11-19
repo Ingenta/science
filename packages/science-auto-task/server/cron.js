@@ -55,6 +55,7 @@ SyncedCron.add({
         var outgoingList = [];
         var issueToArticles = {};
         var journalNews = {};
+        var homePageNews = homepageNews();
 
         var today = moment().startOf('day');
         var yesterday = moment(today).subtract(1, 'days').toDate();
@@ -122,20 +123,21 @@ SyncedCron.add({
             }
             if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
                 oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
-                    var tempArray = Articles.find({
+                    var articleList = Articles.find({
                         $and: [
                             {topic: {$in: [oneTopic]}},
                             {createdAt: {$gt: oneUser.lastSentDate}},
                             {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_first'}]}
                         ]
                     }, {
-                        fields: {_id: 1, title: 1}
+                        fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, journalId: 1, 'journal.titleCn': 1}
                     }).fetch();
-                    if (tempArray.length) outgoingList.push({
+                    articleList = generateArticleLinks (articleList);
+                    if (articleList.length) outgoingList.push({
                         userId: oneUser._id,
                         email: oneUser.emails[0].address,
-                        topicId: oneTopic,
-                        articleIds: tempArray
+                        topic: oneTopic,
+                        articleList: articleList
                     });
                 })
             }
@@ -194,17 +196,20 @@ SyncedCron.add({
                     oneEmail.journalNews = journalNews[oneEmail.issue.journalId];
                     Science.Email.watchJournalEmail(oneEmail);
 
-                } else if (oneEmail.topicId) {
+                } else if (oneEmail.topic) {
                     //this is a topic watch
-                    emailSubject = "Topic Watch";
+                    //emailSubject = "Topic Watch";
                     //emailConfig = EmailConfig.findOne({key: "watchTopic"});
                     //if (emailConfig) {
                     //    emailSubject = emailConfig.subject;
                     //    emailContent = emailConfig.body;
                     //}
-                    oneEmail.articleIds.forEach(function (article) {
-                        emailContent += createEmailArticleListContent(article);
-                    })
+                    oneEmail.topic = Topics.findOne({_id: oneEmail.topic});
+                    oneEmail.homePageNews = homePageNews;
+                    Science.Email.watchTopicEmail(oneEmail);
+                    //oneEmail.articleIds.forEach(function (article) {
+                    //    emailContent += createEmailArticleListContent(article);
+                    //})
                 } else if(oneEmail.citations){
                     //this is cited alert
                     emailSubject = "Cited Alert";
@@ -235,6 +240,7 @@ SyncedCron.add({
                 //    subject: emailSubject,
                 //    html: emailContent
                 //});
+                console.log("email sent");
                 //Users.update({_id: oneEmail.userId}, {lastSentDate: today});
             });
         } else {
@@ -257,8 +263,11 @@ Meteor.startup(function () {
 var generateArticleLinks = function (articles, journalUrl) {
     articles.forEach(function (article) {
         if (article._id)
-            article.url =Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
-        article.journal.url = journalUrl;
+            article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        if(journalUrl)
+            article.journal.url = journalUrl;
+        else
+            article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
     });
     return articles;
 };
@@ -268,12 +277,21 @@ var journalIdToNews = function (journalId) {
     news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {createDate: -1}, limit: 3}).fetch();
     news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {sort: {createDate: -1}, limit: 3}).fetch();
     news.meetingInfo = Meeting.find({publications: journalId, about: 'c1'}, {sort: {createDate: -1}, limit: 3}).fetch();
-
+    var rootUrl = Config.rootUrl;
     news.newsCenter.forEach(function (item) {
-        if(!item.url) item.url = Config.rootUrl + "news/" + item._id
+        if(!item.url) item.url = rootUrl + "news/" + item._id
     });
     news.meetingInfo.forEach(function (item) {
         item.startDate = moment(item.startDate).format( "MMM Do YYYY");
+    });
+    return news;
+};
+
+var homepageNews = function () {
+    var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
+    var rootUrl = Config.rootUrl;
+    news.forEach(function (item) {
+        if(!item.url) item.url = rootUrl + "news/" + item._id
     });
     return news;
 };
