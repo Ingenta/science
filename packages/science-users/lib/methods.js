@@ -1,6 +1,9 @@
 Meteor.methods({
-    "createUserAccount": function (options) {
+    "createUserAccount": function (options,additional) {
         var userId = Accounts.createUser(options);
+        if(userId){
+
+        }
         Accounts.sendEnrollmentEmail(userId, options.email, function(err){
             if (err){
                 console.log("email didn't get sent");
@@ -44,6 +47,8 @@ Meteor.methods({
         if (options.journalId) {
             userOptions.journalId = options.journalId;
         }
+        //增加用户级别设置
+        userOptions.level = options.level || 'normal';
 
         if (userOptions) {
             Users.update(userId, {$set: userOptions});

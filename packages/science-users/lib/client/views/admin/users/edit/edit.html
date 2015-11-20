@@ -140,10 +140,12 @@
             {{#each getRoles}}
 	            {{#each roles}}
                 <div class="radio">
+	                {{#with roleInfo}}
                     <label>
-                        <input type="checkbox" value="{{name}}" name="roles" data-type="array" {{itemIsChecked}}>
-                        {{description.name}}
+                        <input type="checkbox" value="{{code}}" name="roles" data-type="array" {{checked}}>
+                        {{name}}
                     </label>
+	                {{/with}}
                 </div>
 	            {{/each}}
             {{/each}}

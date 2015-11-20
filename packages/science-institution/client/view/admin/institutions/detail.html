@@ -61,7 +61,7 @@
             {{/tabContent}}
 
             {{#tabContent slug="account"}}
-                {{>AdminUsers admin_users=getUsers}}
+                {{>AdminUsersView level='institution' additional=institutionOptions}}
             {{/tabContent}}
         {{/with}}
     {{/institutionTabs}}

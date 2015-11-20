@@ -8,6 +8,10 @@ Router.route("/admin/institutions/", {
     title: function () {
         return TAPi18n.__("Institution");
     },
+    onBeforeAction:function(){
+        Session.set("user-search-string-for-institution","");
+        this.next();
+    },
     waitOn: function () {
         return [
             //Meteor.subscribe('institutions')

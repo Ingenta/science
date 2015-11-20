@@ -65,12 +65,17 @@ Science.XPath.ParseHelper = {
 	 * 使用xpath取得dom元素的内容
 	 * @param xp
 	 * @param ele
+	 * @param onlyInside
 	 * @returns
 	 */
-	getXmlString:function(xp,ele){
+	getXmlString:function(xp,ele,onlyInside){
 		var val = xpath.select(xp,ele);
 		if(_.isEmpty(val))
 			return;
+		if(onlyInside){
+			var reg =new RegExp('^<\\s*?'+val[0].tagName+'[^>]*>|<\\s*?\/\\s*?'+val[0].tagName+'\\s*?>$','g');
+			return val[0].toString().replace(reg,'');
+		}
 		return val[0].toString();
 	},
 	/**

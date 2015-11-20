@@ -1,45 +1,12 @@
 var pageSession = new ReactiveDict();
 
 Template.AdminUsersInsert.rendered = function () {
-
-};
-Template.AdminUsersInsert.onRendered(function () {
-    Session.set("publisherId", "");
-});
-Template.AdminUsersInsert.events({});
-
-Template.AdminUsersInsert.helpers({});
-
-Template.AdminUsersInsertInsertForm.rendered = function () {
-
-
     pageSession.set("adminUsersInsertInsertFormInfoMessage", "");
     pageSession.set("adminUsersInsertInsertFormErrorMessage", "");
-
-    $(".input-group.date").each(function () {
-        var format = $(this).find("input[type='text']").attr("data-format");
-
-        if (format) {
-            format = format.toLowerCase();
-        }
-        else {
-            format = "mm/dd/yyyy";
-        }
-
-        $(this).datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            todayBtn: true,
-            forceParse: false,
-            keyboardNavigation: false,
-            format: format
-        });
-    });
-
     $("input[autofocus]").focus();
 };
 
-Template.AdminUsersInsertInsertForm.events({
+Template.AdminUsersInsert.events({
     "submit": function (e, t) {
         e.preventDefault();
         pageSession.set("adminUsersInsertInsertFormInfoMessage", "");
@@ -94,16 +61,32 @@ Template.AdminUsersInsertInsertForm.events({
             },
             function (values) {
                 Permissions.check("add-user", "user");
-                if (Router.current().params.insId) values.institutionId = Router.current().params.insId;//机构帐号标签页才需要设值
+                var urlQuery=Router.current().params.query;
+                if(urlQuery){
+
+                    if(urlQuery.level)
+                        values.level=urlQuery.level;
+
+                    if(urlQuery.institutionId)
+                        values.institutionId=urlQuery.institutionId;
+
+                    if(values.level==='institution' && !values.institutionId){
+                        errorAction("Missing institution id");
+                        return false;
+                    }
+                }
+                var level=Router.current().params.query && Router.current().params.query.level;
+                values.level=level || "normal";
                 Meteor.call("createUserAccount", values, function (e, userId) {
                     if (e) {
                         errorAction(e.message);
-                    }
-                    else {
-                        if (Session.get("activeTab") === "admin") Permissions.delegate(userId, ["permissions:admin"]);
-                        if (values.institutionId) {
-                            Permissions.delegate(userId, ["institution:institution-manager-from-user"]);
-                        }
+                    }else{
+                        if (values.level === "admin")
+                            Permissions.delegate(userId, ["permissions:admin"]);
+                        if (values.level === 'publisher' && values.publisherId)
+                            Permissions.delegate(userId,[{"role":"publisher:publisher-manager-from-user",scope:{publisher:[values.publisherId]}}])
+                        if (values.level === 'institution' && values.institutionId)
+                            Permissions.delegate(userId,[{"role":"institution:institution-manager-from-user",scope:{institution:[values.institutionId]}}]);
                         submitAction();
                     }
                 });
@@ -124,25 +107,10 @@ Template.AdminUsersInsertInsertForm.events({
         } else {
             Router.go("admin.users", {});
         }
-    },
-    "click #form-close-button": function (e, t) {
-        e.preventDefault();
-
-        /*CLOSE_REDIRECT*/
-    },
-    "click #form-back-button": function (e, t) {
-        e.preventDefault();
-
-        /*BACK_REDIRECT*/
-    },
-    "change #form-select-publisher": function (e) {
-        e.preventDefault();
-        Session.set("publisherId", $(e.target).val());
     }
-
 });
 
-Template.AdminUsersInsertInsertForm.helpers({
+Template.AdminUsersInsert.helpers({
     "infoMessage": function () {
         return pageSession.get("adminUsersInsertInsertFormInfoMessage");
     },
@@ -159,13 +127,13 @@ Template.AdminUsersInsertInsertForm.helpers({
         return "publisher.account.insert" === Router.current().route.getName();
     },
     "getInstitutions": function () {
-        return Institutions.find({}, {name: 1});
+        return Institutions.find({}, {fields:{name: 1}});
     },
     "getPublishers": function () {
-        return Publishers.find({}, {chinesename: 1, name: 1});
+        return Publishers.find({}, {fields:{chinesename: 1, name: 1}});
     },
     "getJournals": function () {
-        return Publications.find({publisher: Session.get("publisherId")}, {titleCn: 1, title: 1});
+        return Publications.find({publisher: Session.get("publisherId")}, {fields:{titleCn: 1, title: 1}});
     }
 
 });
