@@ -32,14 +32,24 @@ Template.loginForm.events({
 
 Template.loginForm.helpers({
 	loginUrl:function(){
-		var pageCode = Session.get("pubValue")
-		if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone+pageCode;
-		return Config.otherPlatformLoginUrl.editors+pageCode;
+		var pageCode = Session.get("pubValue");
+		if(pageCode===undefined){
+			if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone;
+			return Config.otherPlatformLoginUrl.editors;
+		}else{
+			if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone+pageCode;
+			return Config.otherPlatformLoginUrl.editors+pageCode;
+		}
 	},
 	registerUrl: function(){
-		var pageCode = Session.get("pubValue")
-		if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone+pageCode;
-		return Config.otherPlatformRegisterUrl.editors;
+		var pageCode = Session.get("pubValue");
+		if(pageCode===undefined){
+			if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone;
+			return Config.otherPlatformRegisterUrl.editors;
+		}else{
+			if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone+pageCode;
+			return Config.otherPlatformRegisterUrl.editors;
+		}
 	},
 	isDisplayLogin: function(){
 		if (TAPi18n.getLanguage() === "zh-CN") return true;

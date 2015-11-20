@@ -23,10 +23,12 @@ SpecialTopicsSchema  = new SimpleSchema({
         }
     },
     guest_editor:{
-        type:Science.schemas.MultiLangSchema
+        type:Science.schemas.MultipleTextOptionalSchema,
+        optional: true
     },
     abstract:{
-        type:Science.schemas.MultipleTextOptionalSchema
+        type:Science.schemas.MultipleTextOptionalSchema,
+        optional: true
     },
     articles:{
         type:[String],

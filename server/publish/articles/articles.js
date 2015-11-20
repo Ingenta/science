@@ -4,6 +4,7 @@ minimumArticle = {
     doi: 1,
     issue: 1,
     issueId: 1,
+    published: 1
 };
 articleWithMetadata = {
     title: 1,
@@ -38,3 +39,11 @@ Meteor.publish('oneArticle', function (id) {
 Meteor.publish('oneArticleByDoi', function (doi) {
     return Articles.find({doi: doi});
 });
+Meteor.publish('recommendedMiniPlatformArticles', function () {
+    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}}).fetch();
+    var articleIds = _.pluck(recommended, "ArticlesId");
+    return Articles.find({_id: {$in: articleIds}}, {
+        fields: minimumArticle
+    });
+});
+

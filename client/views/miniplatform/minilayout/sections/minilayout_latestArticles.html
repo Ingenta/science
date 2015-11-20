@@ -16,7 +16,7 @@
                 <div class="fl w350">
                     <div class="h50">
                         <p><a href="{{ArticleUrl ArticlesId}}" target="_blank">{{titles ArticlesId}}</a></p>
-                        <p class="col777">({{publishDate ArticlesId}})</p>
+                        <p class="col777">{{publishDate ArticlesId}}</p>
                     </div>
                     <p class="tr">
                         {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}

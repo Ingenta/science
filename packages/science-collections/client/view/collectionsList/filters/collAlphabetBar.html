@@ -3,11 +3,11 @@
 		<div class="col-xs-3">
 		</div>
 		<div class="pull-right">
-			<a class="resetAlphabetFilter">{{_ "All"}}</a>&nbsp;
-			{{#each letterInTheAlphabet}}
-				<a href="#" class="letterFilter">{{this}}</a>&nbsp;
-			{{/each}}
-            <a class="resetOtherFilter">{{_ "Other"}}</a>
+            <a class="resetAlphabetFilter" href="#">{{_ "All"}}</a>&nbsp;
+            {{#each letterInTheAlphabet}}
+                <a class="letterFilter" href="#">{{this}}</a>&nbsp;
+            {{/each}}
+            <a class="resetOtherFilter" href="#">{{_ "Other"}}</a>
 		</div>
 		<br>
 	</div>
