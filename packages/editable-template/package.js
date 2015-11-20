@@ -23,7 +23,8 @@ Package.onUse(function(api) {
     'templating',
     'reactive-var',
     'spacebars-compiler',
-    'kevohagan:sweetalert'
+    'kevohagan:sweetalert',
+    'science-lib'
   ],'client');
 
   api.use([

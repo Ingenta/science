@@ -5,7 +5,8 @@ JET.reCompile=function(name,content){
 JET.render = function (name, data) {
 	data = data || {};
 	if (!Template[name]) {
-		return "Tempalte not found:"+ name;
+		logger.error("Email Template not found:"+ name)
+		return "Email Template not found:"+ name;
 	}
 	if(!data && Config.isDevMode){
 		var tempObj = JET.store.findOne({name: name});
