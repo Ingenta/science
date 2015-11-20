@@ -3,185 +3,42 @@
     {{> accountOptions}}
 </template>
 
-<template name="AdminUsers">
-    <div class="container-fluid" id="content">
-        <div class="row" id="title_row">
-            <div class="col-xs-12">
-                <div id="page_menu" class="pull-right">
-                </div>
-            </div>
-        </div>
-        {{> AdminUsersView}}
-    </div>
-</template>
-
-<template name="AdminUsersView">
-    <div id="data_view" class="">
-        <form id="dataview-controls" class="form-inline">
-            <div id="dataview-controls-insert" class="form-group ">
-                <button type="submit" id="dataview-insert-button" class="btn btn-success">
-                    <span class="fa fa-plus">
-                        {{_ "Add new"}}
-                    </span>
-                </button>
-                {{#if isShowButton}}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUploadExcelModal">
-                    <span class="fa fa-plus">
-                        {{_ "Batch Add"}}
-                    </span>
-                    </button>
-                {{/if}}
-            </div>
-            <div id="dataview-controls-search">
-                {{#if isNotEmpty}}
-                    <div id="dataview-controls-search-group" class="form-group">
-                        <label class="sr-only" for="search">
-                            {{_ "Search"}}
-                        </label>
-                        <input type="text" class="form-control" id="dataview-search-input" placeholder="{{_ 'Search'}}"
-                               name="search" value="{{searchString}}" autofocus="autofocus">
-                        <button type="button" id="dataview-search-button" class="btn btn-primary">
-                            <span class="fa fa-search"></span>
-                        </button>
-                    </div>
-                {{/if}}
-            </div>
-        </form>
-        {{#if isNotEmpty}}
-            {{#if isNotFound}}
-                <div class="alert alert-warning">
-                    "{{searchString}}" not found.
-                </div>
-            {{else}}
-                <div id="dataview-data">
-                    {{#if viewAsTable}} {{> AdminUsersViewTable}} {{/if}}
-                </div>
-            {{/if}}
-        {{else}}
-            <div class="alert alert-info">
-                {{_ "No users yet"}}
-            </div>
-        {{/if}}
-    </div>
-</template>
-
-<template name="AdminUsersViewTable">
-    <table id="dataview-table" class="table table-striped table-hover">
-        <thead id="dataview-table-header">
-        <tr id="dataview-table-header-row">
-            <th class="th-sortable" data-sort="username">
-                {{_ "User Name"}}
-            </th>
-            <th class="th-sortable">
-                {{_ "E-mail"}}
-            </th>
-            <th class="th-sortable">
-                {{_ "Role"}}
-            </th>
-            <th class="th-sortable">
-                {{_ "Status"}}
-            </th>
-            <th>
-                &nbsp;
-            </th>
-        </tr>
-        </thead>
-        <tbody id="dataview-table-items">
-        {{#each tableItems}} {{> AdminUsersViewTableItems}} {{/each}}
-        </tbody>
-    </table>
-</template>
-
-<template name="AdminUsersViewTableItems">
-    <tr id="dataview-table-items-row">
-        <td>
-            {{username}}
-        </td>
-        <td>
-            {{#each emails}}
-                {{address}}
-            {{/each}}
-        </td>
-        <td>
-            {{#each orbit_roles}}
-                <span>[ {{geti18nName this}} ]</span>
-            {{/each}}
-        </td>
-        <td>
-            {{#if disable}}{{_ "Disable"}}{{else}}{{_ "Enable"}}{{/if}}
-        </td>
-        <td class="td-icon">
-            {{#if can "user-modify" "user"}}
-                <span id="edit-button" class="fa fa-pencil " title="Edit"></span>
-            {{/if}}
-        </td>
-    </tr>
+<template name="accountTabs">
+	<div class="accountTabs-container">
+		{{#if activeTab}}
+			{{trackActiveTab activeTab}}
+		{{/if}}
+		{{trackTabs tabs}}
+		<ul class="nav nav-tabs" role="tablist">
+			{{#each tabs}}
+				<li role="presentation" class="tab-item {{isActiveTab slug}}">
+					<a role="tab" data-toggle="tab" href="#">{{name}}</a>
+				</li>
+			{{/each}}
+		</ul>
+		<div class="tabs-content-container">
+			{{> UI.contentBlock context=__context__ }}
+		</div>
+	</div>
 </template>
 
 <template name="accountOptions">
-    {{#accountTabs name="" tabs=tabs activeTab=activeTab}}
-        {{#tabContent slug="admin"}}
-            {{> AdminUsers admin_users=getAdmins}}
-        {{/tabContent}}
+	{{#accountTabs name="" tabs=tabs activeTab=activeTab}}
+		{{#tabContent slug="admin"}}
+			{{> AdminUsersView level="admin"}}
+		{{/tabContent}}
 
-        {{#tabContent slug="normal"}}
-            {{> AdminUsers admin_users=getNormals}}
-        {{/tabContent}}
+		{{#tabContent slug="normal"}}
+			{{> AdminUsersView level="normal"}}
+		{{/tabContent}}
 
-        {{#tabContent slug="publisher"}}
-            {{> AdminUsers admin_users=getPublishers}}
-        {{/tabContent}}
+		{{#tabContent slug="publisher"}}
+			{{> AdminUsersView level="publisher"}}
+		{{/tabContent}}
 
-        {{#tabContent slug="institution"}}
-            {{> AdminUsers admin_users=getInstitution}}
-        {{/tabContent}}
-    {{/accountTabs}}
-    {{> addUploadExcelModalForm}}
-</template>
-
-<template name="accountTabs">
-
-    <div class="accountTabs-container">
-
-        {{#if activeTab}}
-            {{trackActiveTab activeTab}}
-        {{/if}}
-
-        {{trackTabs tabs}}
-
-        <ul class="nav nav-tabs" role="tablist">
-            {{#each tabs}}
-                <li role="presentation" class="tab-item {{isActiveTab slug}}">
-                    <a role="tab" data-toggle="tab" href="#">{{name}}</a>
-                </li>
-            {{/each}}
-        </ul>
-
-        <div class="tabs-content-container">
-            {{> UI.contentBlock context=__context__ }}
-        </div>
-    </div>
-</template>
-
-<template name="addUploadExcelModalForm">
-    <div class="modal fade" id="addUploadExcelModal" tabindex="-1" role="dialog" aria-labelledby="addUploadExcelModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addUploadExcelModalLabel">{{_ "Batch Add"}}</h4>
-                </div>
-                {{#autoForm id="addUploadExcelModalForm" collection="fileExcel" type="insert"}}
-                <div class="modal-body">
-                    {{> afQuickField name="fileId"}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-                </div>
-                {{/autoForm}}
-            </div>
-        </div>
-    </div>
+		{{#tabContent slug="institution"}}
+			{{> AdminUsersView level="institution"}}
+		{{/tabContent}}
+	{{/accountTabs}}
+	{{> addUploadExcelModalForm}}
 </template>

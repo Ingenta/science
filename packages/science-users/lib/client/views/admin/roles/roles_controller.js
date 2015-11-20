@@ -13,8 +13,6 @@ this.AdminRolesController = RouteController.extend({
 		this.next();
 	},
 	data: function() {
-
-
 		return {
 			params: this.params || {},
 			admin_users: Users.find({}, {})

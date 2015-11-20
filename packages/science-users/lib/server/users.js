@@ -63,7 +63,8 @@ Meteor.publish(null, function () {
             publisherId: 1,
             journalId: 1,
             emailFrequency: 1,
-            history: 1
+            history: 1,
+            level:1
         };
         if (!Permissions.userCan("list-user", "user", this.userId)) {
             if (Permissions.userCan("add-user", "user", this.userId)) {
@@ -116,6 +117,8 @@ Accounts.onCreateUser(function (options, user) {
         user.publisherId = options.publisherId;
     if (options.journalId)
         user.journalId = options.journalId;
+    if (options.level)
+        user.level = options.level
     return user;
 });
 Meteor.methods({

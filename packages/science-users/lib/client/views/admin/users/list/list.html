@@ -1,0 +1,132 @@
+<template name="AdminUsersView">
+	<div id="data_view" class="container-fluid">
+		{{> userButtons}}
+		{{#if isNotEmpty}}
+			<div id="dataview-data">
+				<table id="dataview-table" class="table table-striped table-hover">
+					<thead id="dataview-table-header">
+					<tr id="dataview-table-header-row">
+						<th class="th-sortable" data-sort="username">{{_ "User Name"}}</th>
+						<th class="th-sortable">{{_ "E-mail"}}</th>
+						<th class="th-sortable">{{_ "Role"}}</th>
+						<th class="th-sortable">{{_ "Status"}}</th>
+						<th>&nbsp;</th>
+					</tr>
+					</thead>
+					<tbody id="dataview-table-items">
+					{{#each userDatas}}
+						{{> AdminUsersViewTableItems}}
+					{{/each}}
+					</tbody>
+				</table>
+			</div>
+		{{else}}
+			<div class="alert alert-info">
+				{{_ "No users yet"}}
+			</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="AdminUsersViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>{{username}}</td>
+		<td>
+			{{#each emails}}
+				{{address}}
+			{{/each}}
+		</td>
+		<td>
+			{{#each orbit_roles}}
+				{{> userRolesView}}
+			{{/each}}
+		</td>
+		<td>
+			{{#if disable}}{{_ "Disable"}}{{else}}{{_ "Enable"}}{{/if}}
+		</td>
+		<td class="td-icon">
+			{{#if can "user-modify" "user"}}
+				<span id="edit-button" class="fa fa-pencil " title="Edit"></span>
+			{{/if}}
+		</td>
+	</tr>
+</template>
+
+<template name="userRolesView">
+	<span>
+		[
+		{{#if isNormalType}}
+			{{this}}
+		{{else}}
+			<a class="role-scope" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" href="#">{{name}}</a>
+		{{/if}}
+		]
+	</span>
+</template>
+
+<template name="permissionScopeView">
+	{{#with scope}}
+		<div style="width:300px">
+		{{#if publisher}}
+			<dl>
+				<dt><b>{{_ "publisher"}}</b></dt>
+				{{#each publisher}}
+				<dd>{{publisherName}}</dd>
+				{{/each}}
+			</dl>
+		{{/if}}
+		{{#if journal}}
+			<dl>
+				<dt><b>{{_ "journal"}}</b></dt>
+				{{#each journal}}
+					<dd>{{journalName}}</dd>
+				{{/each}}
+			</dl>
+		{{/if}}
+		{{#if institution}}
+			<dl>
+				<dt><b>{{_ "institution"}}</b></dt>
+				{{#each institution}}
+					<dd>{{institutionName}}</dd>
+				{{/each}}
+			</dl>
+		{{/if}}
+		</div>
+	{{/with}}
+</template>
+
+<template name="userButtons">
+	<form id="dataview-controls" class="form-inline">
+		<div id="dataview-controls-insert" class="form-group ">
+			<button type="submit" id="dataview-insert-button" class="btn btn-success">
+                <span class="fa fa-plus">
+	                {{_ "Add new"}}
+                </span>
+			</button>
+			{{#if isNormalTab}}
+				{{> importUserButton}}
+			{{/if}}
+		</div>
+
+		{{#if isNotEmpty}}
+			<div id="dataview-controls-search">
+				<div id="dataview-controls-search-group" class="form-group">
+					<label class="sr-only" for="search">
+						{{_ "Search"}}
+					</label>
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="{{_ 'Search'}}"
+					       name="search" value="{{searchString}}" autofocus="autofocus">
+					<button type="button" id="dataview-search-button" class="btn btn-primary">
+						<span class="fa fa-search"></span>
+					</button>
+				</div>
+
+			</div>
+		{{/if}}
+	</form>
+	{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+	{{/if}}
+</template>

@@ -528,25 +528,25 @@ OrbitPermissions.custom_roles.find({}).observe({
 	.definePermission("edit-custom-roles", {
 		cn     : {name: "编辑自定义角色", summary: "可编辑自定义角色的权限"},
 		en: {name: "can modify custom roles", summary: "can modify custom roles"},
-		options: {level: ["global"]}
+		options: {level: ["admin"]}
 	})
 	.definePermission("get-users-roles", {
 		cn     : {name: "查看用户角色信息", summary: "可查看用户角色信息"},
 		en: {name: "get users roles", summary: "get users roles"},
-		options: {level: ["global"]}
+		options: {level: ["admin"]}
 	})
 	.definePermission("delegate-and-revoke",{
 		cn     : {name: "角色委派与收回", summary: "可设置和取消用户的角色"},
 		en: {name: "delefate and revoke user's role", summary: "delefate and revoke user's role"},
-		options: {level: ["global"]}
+		options: {level: ["admin"]}
 	})
 	.defineRole("permissions-manager", ["edit-custom-roles", "get-users-roles", "delegate-and-revoke"],{
 		cn: {name: "权限管理员", summary: "可以编辑自定义角色,可为用户设置平台角色"},
 		en: {name: "permissions manager", summary: "permissions manager"},
-		options: {level: ["global"]}
+		options: {level: ["admin"]}
 	})
 	.defineRole("admin", [], {
 		cn     : {name: "超级管理员", summary: "拥有所有平台权限"},
 		en: {name: "Super admin", summary: "have all permissions"},
-		options: {level: ["global"]}
+		options: {level: ["admin"]}
 	});

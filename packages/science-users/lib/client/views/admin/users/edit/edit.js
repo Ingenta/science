@@ -179,17 +179,23 @@ Template.userEditRoles.helpers({
         var userLevel = [];
         user.publisherId && userLevel.push(OrbitPermissions.level.publisher);
         user.institutionId && userLevel.push(OrbitPermissions.level.institution);
-        OrbitPermissions.isAdmin(user._id) && userLevel.push(OrbitPermissions.level.global);
+        OrbitPermissions.isAdmin(user._id) && userLevel.push(OrbitPermissions.level.admin);
         return OrbitPermissions.getRolesDescriptions2(userLevel);
     },
-    "itemIsChecked": function () {
-        var cu = Router.current().data().currUser.orbit_roles;
+    "roleInfo": function () {
+        var info={
+            code:this.name,
+            name:this.description.name
+        };
+        var user = Router.current().data().currUser;
+        var cu = Permissions.getUserRoles(user._id)
         if (cu) {
-            return cu.indexOf(this.name) > -1 ? "checked" : "";
+            var role = _.find(cu,function(c){
+                return c===info.code || c.role===info.code;
+            })
+            if(role)
+                info.checked="checked"
         }
-        return "";
-    },
-    "i18nName": function () {
-        return Permissions.getRoleDescByCode(this).name;
+        return info;
     }
 });

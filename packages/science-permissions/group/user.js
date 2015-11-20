@@ -8,28 +8,28 @@ userPermissions
 		en: {name: "add user", summary: "can add user"},
 		cn: {name: "添加用户", summary: "您可以添加新用户到系统中"},
 		options:{
-			level:globalLevel
+			level:adminLevel
 		}
 	})
 	.definePermission("modify-user", {
 		en: {name: "modify user", summary: "can modify user"},
 		cn: {name: "编辑用户", summary: "可以编辑用户信息"},
 		options:{
-			level:globalLevel
+			level:adminLevel
 		}
 	})
 	.definePermission("delete-user", {
 		en: {name: "delete user", summary: "can delete user"},
 		cn: {name: "删除用户", summary: "您可以删除用户信息"},
 		options:{
-			level:globalLevel
+			level:adminLevel
 		}
 	})
 	.definePermission("list-user", {
 		en: {name: "list users", summary: "view users list"},
 		cn: {name: "用户列表", summary: "您可以查看用户列表"},
 		options:{
-			level:globalLevel
+			level:adminLevel
 		}
 	//})
 	//.definePermission("add-user", {
@@ -55,6 +55,6 @@ userPermissions
 			summary: "可以增删改查用户的角色"
 		},
 		options:{
-			level:globalLevel
+			level:adminLevel
 		}
 	});

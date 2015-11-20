@@ -5,21 +5,21 @@ advertisementPermissions
         en: {name: "add global　advertisement", summary: "can add global　advertisement"},
         cn: {name: "添加平台广告", summary: "您可以添加新平台广告到系统中"},
         options:{
-            level:globalLevel
+            level:adminLevel
         }
     })
     .definePermission("modify-global-advertisement", {
         en: {name: "modify　global advertisement", summary: "can modify global　advertisement"},
         cn: {name: "编辑平台广告", summary: "可以编辑平台广告信息"},
         options:{
-            level:globalLevel
+            level:adminLevel
         }
     })
     .definePermission("delete-global-advertisement", {
         en: {name: "delete global　advertisement", summary: "can delete global　advertisement"},
         cn: {name: "删除平台广告", summary: "您可以删除平台广告信息"},
         options:{
-            level:globalLevel
+            level:adminLevel
         }
     })
 

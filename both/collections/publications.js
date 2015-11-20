@@ -20,7 +20,8 @@ PublicationsSchema = new SimpleSchema({
         type: String
     },
     shortTitle: {
-        type: String
+        type: String,
+        unique: true
     },
     issn: {
         type: String,
@@ -33,7 +34,8 @@ PublicationsSchema = new SimpleSchema({
         type: Date
     },
     chiefEditor: {
-        type: Science.schemas.MultipleTextOptionalSchema
+        type: Science.schemas.MultipleTextOptionalSchema,
+        optional: true
     },
     competentOrganization: {
         type: Science.schemas.MultipleTextOptionalSchema,

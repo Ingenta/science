@@ -542,15 +542,8 @@ ScienceXML.getReferences = function (results, doc) {
                 }
             }
             //提取引文作者信息 完成
-            var titleNode = parserHelper.getFirstNode("child::element-citation/article-title", refNode);
-            if (titleNode) {
-                var textNodes = xpath.select("descendant::text()", titleNode);
-                var title = "";
-                _.each(textNodes, function (t) {
-                    title += " " + t.toString();
-                });
-                ref.title = title.replace(/\r\n/g, " ").trim();
-            }
+            ref.title = parserHelper.getXmlString("child::element-citation/article-title", refNode,true);
+            ref.title=ref.title && ref.title.replace(/\r\n/g, " ").trim();
             ref.publisherLoc = parserHelper.getSimpleVal("child::element-citation/publisher-loc", refNode);
             ref.publisherName = parserHelper.getSimpleVal("child::element-citation/publisher-name", refNode);
             ref.year = parserHelper.getSimpleVal("child::element-citation/year", refNode);

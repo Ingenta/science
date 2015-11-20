@@ -5,21 +5,21 @@ publisherPermissions
         en: {name: "add publisher", summary: "can add publisher"},
         cn: {name: "添加出版商", summary: "您可以添加新出版商到系统中"},
         options:{
-            level:globalLevel
+            level:adminLevel
         }
     })
     .definePermission("modify-publisher", {
         en: {name: "modify publisher", summary: "can modify publisher"},
         cn: {name: "编辑出版商", summary: "可以编辑出版商信息"},
         options:{
-            level:globalLevel
+            level:adminLevel
         }
     })
     .definePermission("delete-publisher", {
         en: {name: "delete publisher", summary: "can delete publisher"},
         cn: {name: "删除出版商", summary: "您可以删除出版商信息"},
         options:{
-            level:globalLevel
+            level:adminLevel
         }
     });
 

@@ -1,8 +1,9 @@
 Meteor.publish('myFavouriteArticles', function (userId) {
+    var favorites = [];
     var thisUser = Users.findOne({_id: userId});
-    if (!thisUser)return;
-    if (!thisUser.favorite)return;
-    var favorites = _.pluck(thisUser.favorite, "articleId")
+    if (thisUser)
+        if (thisUser.favorite)
+            favorites = _.pluck(thisUser.favorite, "articleId")
     return [
         Articles.find({_id: {$in: favorites}}, {
             fields: articleWithMetadata
@@ -18,11 +19,12 @@ Meteor.publish('myFavouriteArticles', function (userId) {
 });
 
 Meteor.publish('myWatchedArticles', function (userId) {
+    var watched = [];
     var thisUser = Users.findOne({_id: userId});
-    if (!thisUser)return;
-    if (!thisUser.profile)return;
-    if (!thisUser.profile.articlesOfInterest)return;
-    var watched = thisUser.profile.articlesOfInterest;
+    if (thisUser)
+        if (thisUser.profile)
+            if (thisUser.profile.articlesOfInterest)
+                watched = thisUser.profile.articlesOfInterest;
     return [
         Articles.find({_id: {$in: watched}}, {
             fields: articleWithMetadata
