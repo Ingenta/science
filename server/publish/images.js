@@ -10,6 +10,5 @@ Meteor.publish('oneArticleFigures', function (articleDoi) {
     var thisArticleImageIds = [];
     var ids = _.pluck(a.figures, "imageId");
     if (ids)thisArticleImageIds = ids;
-    console.log(_.pluck(a.figures, "imageId"))
     return ArticleXml.find({_id: {$in: thisArticleImageIds}}, {sort: {'uploadedAt': -1}});
 });
