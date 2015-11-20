@@ -35,6 +35,7 @@
                         {{#with getInstitutionNameById}}
                             <input type="text" value="{{translateThis this.cn this.en}}" class="form-control"
                                    disabled="disabled">
+	                        <input type="hidden" value="{{_id}}" name="institutionId"/>
                         {{/with}}
                     </div>
                 </div>
@@ -49,6 +50,7 @@
                         {{#with getPublisherNameById}}
                             <input type="text" value="{{translateThis this.chinesename this.name}}" class="form-control"
                                    disabled="disabled">
+	                        <input type="hidden" value="{{_id}}" name="publisherId"/>
                         {{/with}}
                     </div>
                 </div>

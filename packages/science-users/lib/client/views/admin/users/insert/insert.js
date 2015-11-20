@@ -82,11 +82,11 @@ Template.AdminUsersInsert.events({
                         errorAction(e.message);
                     }else{
                         if (values.level === "admin")
-                            Permissions.delegate(userId, ["permissions:admin"]);
+                            Permissions.setRoles(userId, ["permissions:admin"]);
                         if (values.level === 'publisher' && values.publisherId)
-                            Permissions.delegate(userId,[{"role":"publisher:publisher-manager-from-user",scope:{publisher:[values.publisherId]}}])
+                            Permissions.setRoles(userId,[{"role":"publisher:publisher-manager-from-user",scope:{publisher:[values.publisherId]}}])
                         if (values.level === 'institution' && values.institutionId)
-                            Permissions.delegate(userId,[{"role":"institution:institution-manager-from-user",scope:{institution:[values.institutionId]}}]);
+                            Permissions.setRoles(userId,[{"role":"institution:institution-manager-from-user",scope:{institution:[values.institutionId]}}]);
                         submitAction();
                     }
                 });

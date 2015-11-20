@@ -48,7 +48,9 @@ Meteor.methods({
             userOptions.journalId = options.journalId;
         }
         //增加用户级别设置
-        userOptions.level = options.level || 'normal';
+        if(options.level){
+            userOptions.level = options.level;
+        }
 
         if (userOptions) {
             Users.update(userId, {$set: userOptions});

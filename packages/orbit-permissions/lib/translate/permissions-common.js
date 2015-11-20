@@ -17,8 +17,8 @@ Roles = {};
 rolesDep = new Tracker.Dependency;
 
 OrbitPermissions = {
-	custom_roles              : new Meteor.Collection(globals.custom_roles_collection_name),
-	_reloadCustomRoles        : function () {
+	custom_roles               : new Meteor.Collection(globals.custom_roles_collection_name),
+	_reloadCustomRoles         : function () {
 		var custom_roles;
 		custom_roles = {};
 		_.each(OrbitPermissions.custom_roles.find({}).fetch(), function (role) {
@@ -31,7 +31,7 @@ OrbitPermissions = {
 		rolesDep.changed();
 		return this;
 	},
-	defineCustomRole          : function (role_name, permissions, description, callback) {
+	defineCustomRole           : function (role_name, permissions, description, callback) {
 		var role;
 		if (description == null) {
 			description = {};
@@ -62,7 +62,7 @@ OrbitPermissions = {
 		}
 		return this;
 	},
-	undefineCustomRole        : function (role_name, callback) {
+	undefineCustomRole         : function (role_name, callback) {
 		var role;
 		if (!helpers.isDashSeparated(role_name)) {
 			throw new Meteor.Error(403, "Role name should be all lowercase dash-separated");
@@ -81,7 +81,7 @@ OrbitPermissions = {
 		}
 		return this;
 	},
-	_modifyUsersRoles         : function (op, users, roles, callback) {
+	_modifyUsersRoles          : function (op, users, roles, callback) {
 		var update;
 		if (op !== "delegate" && op !== "revoke") {
 			throw new Meteor.Error(403, "Unknow operation");
@@ -126,13 +126,59 @@ OrbitPermissions = {
 		}
 		return this;
 	},
-	delegate                  : function (users, roles, callback) {
-		return this._modifyUsersRoles("delegate", users, roles, callback);
+	_overrideUserRoles         : function (users, roles, callback) {
+		var update;
+		if (users == null) {
+			throw new Meteor.Error(403, "Missing 'users' param");
+		}
+		if (roles == null) {
+			throw new Meteor.Error(403, "Missing 'roles' param");
+		}
+		users = helpers.sterilizeUsersArray(users);
+		roles = helpers.verifyRolesArray(helpers.sterilizeRolesArray(roles));
+		if (Meteor.isServer || this.throwIfUserCant("delegate-and-revoke", "permissions")) {
+
+			update                                = {
+				$set: {}
+			};
+			update.$set[globals.roles_field_name] = roles;
+			if (Meteor.isClient) {
+				async.each(users, (function (user, callback) {
+					return Meteor.users.update({
+						_id: user
+					}, update, callback);
+				}), callback);
+			} else {
+				Meteor.users.update({
+					_id: {
+						$in: users
+					}
+				}, update, {
+					multi: true
+				}, callback);
+			}
+		}
+		return this;
 	},
-	revoke                    : function (users, roles, callback) {
-		return this._modifyUsersRoles("revoke", users, roles, callback);
+	//为用户设置角色(由于用户角色已经重新定义,不应该继续使用该方法)
+	//delegate                   : function (users, roles, callback) {
+	//	return this._modifyUsersRoles("delegate", users, roles, callback);
+	//},
+	/**
+	 * 设置用户角色(分派或收回均可)
+	 * @param users
+	 * @param roles
+	 * @param callback
+	 * @returns {*}
+	 */
+	setRoles                  : function (users, roles, callback) {
+		return this._overrideUserRoles(users, roles, callback);
 	},
-	getUserRoles              : function (user) {
+	//收回用户的角色(由于用户角色已经重新定义,不应该继续使用该方法)
+	//revoke                     : function (users, roles, callback) {
+	//	return this._modifyUsersRoles("revoke", users, roles, callback);
+	//},
+	getUserRoles               : function (user) {
 		var user_roles;
 		if (Meteor.isClient) {
 			if (user != null) {
@@ -156,7 +202,7 @@ OrbitPermissions = {
 		}
 		return user_roles;
 	},
-	userCan                   : function (permission, package_name, user, scope) {
+	userCan                    : function (permission, package_name, user, scope) {
 		var i, len, message, ref, ref1, ref2, ref3, userRole, role_name, role_package;
 		if (package_name == null) {
 			message = "OrbitPermissions.UserCan(): You must specify package_name";
@@ -220,13 +266,13 @@ OrbitPermissions = {
 		}
 		return false;
 	},
-	throwIfUserCant           : function (permission, package_name, user) {
+	throwIfUserCant            : function (permission, package_name, user) {
 		if (!this.userCan(permission, package_name, user)) {
 			throw new Meteor.Error(401, "Insufficient permissions");
 		}
 		return true;
 	},
-	_loopPermissions          : function (cb) {
+	_loopPermissions           : function (cb) {
 		var package_name, permission, results;
 		if (!_.isFunction(cb)) {
 			return;
@@ -240,7 +286,7 @@ OrbitPermissions = {
 				var results1;
 				results1 = [];
 				for (permission in Permissions[package_name]) {
-					var cbResult =cb(package_name, permission, Permissions[package_name][permission])
+					var cbResult = cb(package_name, permission, Permissions[package_name][permission])
 					cbResult && results1.push(cbResult);
 				}
 				return results1;
@@ -262,17 +308,17 @@ OrbitPermissions = {
 			var results1;
 			results1 = [];
 			for (permission in Permissions[package_name]) {
-				var cbResult =cb(package_name, permission, Permissions[package_name][permission])
-				cbResult && results1.push({name:package_name + ":" + permission,description:cbResult});
+				var cbResult = cb(package_name, permission, Permissions[package_name][permission])
+				cbResult && results1.push({name: package_name + ":" + permission, description: cbResult});
 			}
-			if(!_.isEmpty(results1)){
-				results.push({name:package_name,permissions:results1})
+			if (!_.isEmpty(results1)) {
+				results.push({name: package_name, permissions: results1})
 			}
 
 		}
 		return results;
 	},
-	_loopRoles                : function (cb) {
+	_loopRoles                 : function (cb) {
 		var package_name, permissions, results, role_data, role_name;
 		if (!_.isFunction(cb)) {
 			return;
@@ -286,8 +332,8 @@ OrbitPermissions = {
 				var results1;
 				results1 = [];
 				for (role_name in Roles[package_name]) {
-					role_data   = Roles[package_name][role_name];
-					permissions = role_data.permissions.slice();
+					role_data    = Roles[package_name][role_name];
+					permissions  = role_data.permissions.slice();
 					var cbResult = cb(package_name, role_name, permissions, role_data.description)
 					cbResult && results1.push(cbResult);
 				}
@@ -296,7 +342,7 @@ OrbitPermissions = {
 		}
 		return results;
 	},
-	getPermissions            : function () {
+	getPermissions             : function () {
 		var permissions;
 		permissions = [];
 		this._loopPermissions(function (package_name, permission_name, permission_description) {
@@ -304,7 +350,7 @@ OrbitPermissions = {
 		});
 		return permissions;
 	},
-	getRoles                  : function () {
+	getRoles                   : function () {
 		var roles;
 		roles = {};
 		this._loopRoles(function (package_name, role_name, role_permissions, role_description) {
@@ -312,17 +358,17 @@ OrbitPermissions = {
 		});
 		return roles;
 	},
-	isAdmin                   : function (user) {
+	isAdmin                    : function (user) {
 		var ref;
 		return ref = globals.admin_role, indexOf.call(this.getUserRoles(user), ref) >= 0;
 	},
-	addAdmins                 : function (users, callback) {
+	addAdmins                  : function (users, callback) {
 		return this.delegate(users, globals.admin_role, callback);
 	},
-	removeAdmins              : function (users, callback) {
+	removeAdmins               : function (users, callback) {
 		return this.revoke(users, globals.admin_role, callback);
 	},
-	getPermissionsDescriptions: function (level) {
+	getPermissionsDescriptions : function (level) {
 		var fallback_language, language, permissions;
 		language          = helpers.getLanguage();
 		fallback_language = helpers.getFallbackLanguage();
@@ -336,7 +382,7 @@ OrbitPermissions = {
 			}
 			if (permission_description.options) {
 				description.options = permission_description.options
-				if(!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level,level)))
+				if (!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level, level)))
 					return;
 			}
 
@@ -349,7 +395,7 @@ OrbitPermissions = {
 		language          = helpers.getLanguage();
 		fallback_language = helpers.getFallbackLanguage();
 		permissions       = this._loopPermissions2(function (package_name, permission_name, permission_description) {
-			var description ;
+			var description;
 			description = permission_description[fallback_language];
 
 			if (language in permission_description) {
@@ -357,7 +403,7 @@ OrbitPermissions = {
 			}
 			if (permission_description.options) {
 				description.options = permission_description.options
-				if(!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level,level)))
+				if (!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level, level)))
 					return;
 			}
 
@@ -365,7 +411,7 @@ OrbitPermissions = {
 		});
 		return permissions;
 	},
-	getRolesDescriptions      : function (level) {
+	getRolesDescriptions       : function (level) {
 		var fallback_language, language, roles;
 		language          = helpers.getLanguage();
 		fallback_language = helpers.getFallbackLanguage();
@@ -377,34 +423,42 @@ OrbitPermissions = {
 				description = role_description[language];
 			}
 			description.options = role_description.options;
-			if(!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level,level)))
+			if (!_.isEmpty(level) && _.isEmpty(_.intersection(description.options.level, level)))
 				return;
 			return roles[package_name + ":" + role_name] = description;
 		});
 		return roles;
 	},
-	getRolesDescriptions2      : function (level) {
+	getRolesDescriptions2      : function (level, needPkgLevel) {
+		if(typeof level === 'string')
+			level= [level];
 		var fallback_language, language, roles;
 		language          = helpers.getLanguage();
 		fallback_language = helpers.getFallbackLanguage();
-		roles = [];
-		_.each(Roles,function(pkg_roles,pkg_name){
-			var roles1 = {pkg:pkg_name,roles:[]}
-			_.each(pkg_roles,function(role,role_name){
-				if(_.isEmpty(level) || !_.isEmpty(_.intersection(role.description.options.level,level))){
-					var role1 = {};
-					role1.description = role.description[language] || role.description[fallback_language];
+		roles             = [];
+		_.each(Roles, function (pkg_roles, pkg_name) {
+			var roles1 = [];
+			_.each(pkg_roles, function (role, role_name) {
+				if (_.isEmpty(level) || !_.isEmpty(_.intersection(role.description.options.level, level))) {
+					var role1                 = {};
+					role1.description         = role.description[language] || role.description[fallback_language];
 					role1.description.options = role.description.options;
-					role1.permissions = role.permissions;
-					role1.name=pkg_name +":"+role_name;
-					roles1.roles.push(role1);
+					role1.permissions         = role.permissions;
+					role1.name                = pkg_name + ":" + role_name;
+					roles1.push(role1);
 				}
 			})
-			!_.isEmpty(roles1.roles) && roles.push(roles1);
+			if(!_.isEmpty(roles1)){
+				if(needPkgLevel){
+					roles.push({pkg: pkg_name, roles: roles1})
+				}else{
+					roles=roles.concat(roles1)
+				}
+			}
 		});
 		return roles;
 	},
-	getPermissionRange        : function (userId, permission) {
+	getPermissionRange         : function (userId, permission) {
 		var userRoles = OrbitPermissions.getUserRoles(userId);
 		if (_.isEmpty(userRoles)) {
 			return;
@@ -535,13 +589,13 @@ OrbitPermissions.custom_roles.find({}).observe({
 		en: {name: "get users roles", summary: "get users roles"},
 		options: {level: ["admin"]}
 	})
-	.definePermission("delegate-and-revoke",{
+	.definePermission("delegate-and-revoke", {
 		cn     : {name: "角色委派与收回", summary: "可设置和取消用户的角色"},
 		en: {name: "delefate and revoke user's role", summary: "delefate and revoke user's role"},
 		options: {level: ["admin"]}
 	})
-	.defineRole("permissions-manager", ["edit-custom-roles", "get-users-roles", "delegate-and-revoke"],{
-		cn: {name: "权限管理员", summary: "可以编辑自定义角色,可为用户设置平台角色"},
+	.defineRole("permissions-manager", ["edit-custom-roles", "get-users-roles", "delegate-and-revoke"], {
+		cn     : {name: "权限管理员", summary: "可以编辑自定义角色,可为用户设置平台角色"},
 		en: {name: "permissions manager", summary: "permissions manager"},
 		options: {level: ["admin"]}
 	})

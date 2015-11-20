@@ -94,7 +94,7 @@ Template.userRolesView.helpers({
 		return !this.scope
 	},
 	name:function(){
-		return Permissions.getRoleDescByCode(this.role).name
+		return Permissions.getRoleDescByCode(this.role || this).name
 	}
 })
 
