@@ -95,15 +95,15 @@ Template.showArticle.onRendered(function () {
     rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
 
-
     if (!_.isEmpty(this.data.affiliations) && this.data.affiliations.length == 1) {
         Session.set("hideAffLabel", true);
     }
     //Rating Start
-    var aid = Session.get("currentArticleId");
+    var aid = this.data._id;
 
     Tracker.autorun(function () {
         var a = Articles.findOne({_id: aid});
+        debugger;
         if (!a)return;
         var arr = a.rating || [];
         $('.raty').raty({
