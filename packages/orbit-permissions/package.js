@@ -23,11 +23,11 @@ Package.onUse(function(api) {
   api.addFiles('lib/async.js', client);
   
   api.addFiles('lib/globals.js', both);
-  api.addFiles('lib/translate/core.js',both);
-  api.addFiles('lib/translate/permissions-helpers.js', both);
-  api.addFiles('lib/translate/permissions-common.js', both);
-  api.addFiles('lib/translate/permissions-client.js', client);
-  api.addFiles('lib/translate/permissions-server.js', server);
+  api.addFiles('lib/core.js',both);
+  api.addFiles('lib/permissions-helpers.js', both);
+  api.addFiles('lib/permissions-common.js', both);
+  api.addFiles('lib/permissions-client.js', client);
+  api.addFiles('lib/permissions-server.js', server);
   //api.addFiles('lib/permissions-helpers.coffee', both);
   //api.addFiles('lib/permissions-common.coffee', both);
   //api.addFiles('lib/permissions-client.coffee', client);

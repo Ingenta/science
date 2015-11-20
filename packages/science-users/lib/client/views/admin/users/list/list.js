@@ -166,7 +166,6 @@ Template.userButtons.events({
 		var query={query:"level="+this.level};
 		if(this.additional && this.additional.institutionId)
 			query.query=query.query+ "&institutionId="+this.additional.institutionId;
-		console.log(query)
 		Router.go(Router.current().route.getName() + ".insert", {insId: Router.current().params.insId, pubId: Router.current().params.pubId},query);
 	}
 })
