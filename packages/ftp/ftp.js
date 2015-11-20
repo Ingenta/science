@@ -100,3 +100,26 @@ FTP.prototype.listFiles=function(options,callback){
 		pasvTimeout:2000
 	});
 }
+
+FTP.prototype.moveFtpFiles = function(options,callback){
+	var self = this;
+		self.on("ready",function(){
+			self.rename(options.oldPath,options.newPath,function(err){
+				if (err) {
+					callback && callback(err);
+					return;
+				}
+			})
+		});
+		self.on('error', function(e){
+			callback && callback(e);
+			self.end();
+		});
+		self.connect({
+			host    : options.host,
+			user    : options.user,
+			password: options.password,
+			connTimeout:2000,
+			pasvTimeout:2000
+		});
+}

@@ -93,10 +93,20 @@ Template.AdminUsersEditEditForm.events({
                 Meteor.call("updateUserAccount", Router.current().data().currUser._id, values, function (e) {
                     if (e) errorAction(e.message); else submitAction();
                 });
-                var allRoles = Object.keys(Permissions.getRoles());
-                var revokeRoles = _.difference(allRoles, roles);//从所有角色中去掉需要设置的角色，即为需要取消的角色
-                !_.isEmpty(revokeRoles) && Permissions.revoke(Router.current().data().currUser._id, revokeRoles);
-                !_.isEmpty(roles) && Permissions.delegate(Router.current().data().currUser._id, roles, function (err) {
+                var rolesAtThisLevel = Permissions.getRolesDescriptions2(Router.current().data().currUser.level,false)
+                var rolesForSet= _.map(roles,function(role){
+                    var scope={};
+                    if(values.publisherId) scope.publisher = [values.publisherId];
+                    if(values.journalId) scope.journal=[values.journalId];
+                    if(values.institutionId) scope.institution=[values.institutionId];
+                    var r = rolesAtThisLevel[role];
+                    if(!_.isEmpty(scope)){
+                        return {"role":role,scope:scope};
+                    }else{
+                        return role;
+                    }
+                });
+                !_.isEmpty(rolesForSet) && Permissions.setRoles(Router.current().data().currUser._id, rolesForSet, function (err) {
                     if (err) {
                         console.log(err);
                     }
@@ -180,7 +190,7 @@ Template.userEditRoles.helpers({
         user.publisherId && userLevel.push(OrbitPermissions.level.publisher);
         user.institutionId && userLevel.push(OrbitPermissions.level.institution);
         OrbitPermissions.isAdmin(user._id) && userLevel.push(OrbitPermissions.level.admin);
-        return OrbitPermissions.getRolesDescriptions2(userLevel);
+        return OrbitPermissions.getRolesDescriptions2(userLevel,true);
     },
     "roleInfo": function () {
         var info={
