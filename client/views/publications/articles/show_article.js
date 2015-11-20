@@ -103,7 +103,6 @@ Template.showArticle.onRendered(function () {
 
     Tracker.autorun(function () {
         var a = Articles.findOne({_id: aid});
-        debugger;
         if (!a)return;
         var arr = a.rating || [];
         $('.raty').raty({
