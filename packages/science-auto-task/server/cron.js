@@ -87,7 +87,7 @@ SyncedCron.add({
                 if (oneUser.emailFrequency == 'daily') oneUser.lastSentDate = yesterday;
                 else if (oneUser.emailFrequency == 'weekly') oneUser.lastSentDate = lastWeek;
                 else if (oneUser.emailFrequency == 'monthly') oneUser.lastSentDate = lastMonth;
-                else oneUser.lastSentDate = new Date();
+                else oneUser.lastSentDate = today.toDate();
             }
             if (oneUser.profile.journalsOfInterest && oneUser.profile.journalsOfInterest.length > 0) {
                 Issues.find({
@@ -241,12 +241,13 @@ SyncedCron.add({
                 //    html: emailContent
                 //});
                 console.log("email sent");
-                //Users.update({_id: oneEmail.userId}, {lastSentDate: today});
+                //Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
             });
         } else {
             console.log('watch email task ran but email list was empty, no emails sent.');
         }
         Science.Email.searchFrequencyEmail();
+        //Science.Email.authorCitationAlert();
     }
 });
 
