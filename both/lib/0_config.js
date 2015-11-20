@@ -10,7 +10,16 @@ Config = {
         uploadExcelDir: '/tmp/excel',
     },
     ftp: {
-        downloadDir: "/tmp/downloads"
+        downloadDir: "/tmp/downloads",
+        connectOptions:{
+            host:"127.0.0.1",
+            user:"liu",
+            password:"123456",
+            port:21,
+            connTimeout:10000,
+            pasvTimeout:10000
+        },
+        moveToDir : "/newFile"
     },
     ADPages: {
         journal: [
@@ -61,6 +70,9 @@ Config = {
         },
         Send_Alert_Email: {
             rate: "at 3:00 am"
+        },
+        FTPSCAN:{
+            rate:"every 5 minutes"
         }
     },
     fieldsWhichFromXml: [

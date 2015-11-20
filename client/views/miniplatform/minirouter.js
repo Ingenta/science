@@ -14,7 +14,7 @@ Router.map(function () {
                 Meteor.subscribe('news_center'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('fullMostRecentArticles')
+                Meteor.subscribe('recommendedMiniPlatformArticles')
             ]
         }
     });

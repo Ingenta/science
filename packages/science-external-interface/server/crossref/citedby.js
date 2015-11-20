@@ -16,6 +16,7 @@ Science.Interface.CrossRef.getCitedBy = function (doi, callback) {
 					var jc               = {journal: {}, issn: {}, contributors: []};
 					jc.journal.title     = Science.XPath.select("child::journal_title/text()", item).toString();
 					jc.journal.abbr      = Science.XPath.select("child::journal_abbreviation/text()", item).toString();
+					jc.articleTitle     = Science.XPath.select("child::article_title/text()", item).toString();
 					jc.issn.print        = Science.XPath.select("child::issn[type='print']/text()", item).toString();
 					jc.issn.electronic   = Science.XPath.select("child::issn[type='electronic']/text()", item).toString();
 					var contributorNodes = Science.XPath.select("child::contributors/contributor", item);

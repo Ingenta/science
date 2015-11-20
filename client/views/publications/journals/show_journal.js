@@ -7,7 +7,6 @@ ReactiveTabs.createInterface({
             Router.current().params.issue = undefined;
             Router.go("journal.name", Router.current().params)
         }
-        Session.set('activeTab', slug);
     }
 });
 

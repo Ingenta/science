@@ -27,17 +27,7 @@
             {{/if}}
             <li><a href="{{pathFor 'logout'}}"><i class="fa fa-sign-out"></i> {{_ "Log Out"}}</a></li>
             {{#if isArticlePage}}
-                <li><a class="exportCitations" href="" data-toggle="collapse" data-target="#collapseOne"><span
-                        class="fa fa-arrow-circle-o-right"></span> {{_ "Export Citations"}}</a></li>
-                <div id="collapseOne" class="collapse">
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/bibtex/{{getCurrentDoi}}" target="_blank">BibTeX</a></li>
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/endnote/{{getCurrentDoi}}" target="_blank">Endnote</a></li>
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">Plain Text</a>
-                    </li>
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">RefWorks</a>
-                    </li>
-                    <li>&nbsp;&nbsp;&nbsp;<a href="/citation/pubmed/{{getCurrentDoi}}" target="_blank">PubMed</a></li>
-                </div>
+                {{>exportCitationSidebar}}
                 <li><a class="favorite" href=""><i class="fa fa-star"></i> {{favoriteName}}</a></li>
                 <li><a class="watchArticle" href=""><i class="fa fa-eye"></i> {{articleWatchState}}</a></li>
                 <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i
@@ -51,11 +41,14 @@
                 <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
             </li>
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
+            {{#if isArticlePage}}
+                {{>exportCitationSidebar}}
+            {{/if}}
         {{/if}}
     </ul>
-	{{> otherPlatformloginButtons}}
-	<hr>
-	<ul class="list-unstyled">
+    {{> otherPlatformloginButtons}}
+    <hr>
+    <ul class="list-unstyled">
         {{#if showAccessKey}}
             <h4>{{_ "Access Key"}} :</h4>
             <li><img src="/icon_access_fc.gif"> {{_ "Free Content"}}</li>
@@ -68,5 +61,17 @@
     </ul>
     {{>sendEmailModalForm}}
 </template>
-
+<template name="exportCitationSidebar">
+    <li><a class="exportCitations" href="#" data-toggle="collapse" data-target="#collapseOne"><span
+            class="fa fa-arrow-circle-o-right"></span> {{_ "Export Citations"}}</a></li>
+    <div id="collapseOne" class="collapse">
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/bibtex/{{getCurrentDoi}}" target="_blank">BibTeX</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/endnote/{{getCurrentDoi}}" target="_blank">Endnote</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">Plain Text</a>
+        </li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">RefWorks</a>
+        </li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/pubmed/{{getCurrentDoi}}" target="_blank">PubMed</a></li>
+    </div>
+</template>
 

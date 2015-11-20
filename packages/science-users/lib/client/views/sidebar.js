@@ -1,3 +1,8 @@
+Template.exportCitationSidebar.helpers({
+    getCurrentDoi: function () {
+        return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+    }
+})
 Template.LayoutSideBar.helpers({
     institutionLogo: function () {
         var logo = undefined;
@@ -45,9 +50,6 @@ Template.LayoutSideBar.helpers({
         if (Router.current() && Router.current().route)
             if (Router.current().route.getName() == "journal.name" || Router.current().route.getName() == "journal.name.toc")
                 return true;
-    },
-    getCurrentDoi: function () {
-        return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
     },
     favoriteName: function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
