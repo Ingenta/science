@@ -122,13 +122,18 @@
                             <h4 class="modal-title" id="myModalLabel">{{_ "Journal name"}}</h4>
                         </div>
                         <div class="modal-body">
-                                <div><input type="checkbox" id="ck_journal"> {{_ "All the options"}}</div>
-                                {{#each publicationList}}
-                                    <div><input type="checkbox" name="journal" value={{_id}}> {{translateThis titleCn title}}</div>
-                                {{else}}
-                                    {{_ "No results found!"}}
-                                {{/each}}
-                                <div align="right"><button id="journalBtn" type="submit" class="btn btn-primary btn-sm">{{_ "Submit"}}</button></div>
+                            <div class="form-inline form-group">
+                                <label>{{_ "Journal name"}}</label>
+                                <input type="text" id="filterJournalName" class="form-control">
+                                <button type="button" id="filterJournalBtn" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>
+                            </div><hr>
+                            <div><input type="checkbox" id="ck_journal"> {{_ "All the options"}}</div>
+                            {{#each publicationList}}
+                                <div><input type="checkbox" name="journal" value={{_id}}> {{translateThis titleCn title}}</div>
+                            {{else}}
+                                {{_ "No results found!"}}
+                            {{/each}}
+                            <div align="right"><button id="journalBtn" type="submit" class="btn btn-primary btn-sm">{{_ "Submit"}}</button></div>
                         </div>
                     </div>
                 </div>

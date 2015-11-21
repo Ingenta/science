@@ -10,6 +10,7 @@ Template.AdvancedSearch.onRendered(function() {
     $("input[name='topic']").prop({disabled:true});
     $("input[name='contentType']").prop({disabled:true});
     $("input[name='tag']").prop({disabled:true});
+    Session.set("JournalNameValue", undefined);
 });
 
 Template.AdvancedSearch.helpers({
@@ -17,6 +18,13 @@ Template.AdvancedSearch.helpers({
         return Publishers.find();
     },
     publicationList: function () {
+        var q = Session.get("JournalNameValue");
+        if (q) {
+            var mongoDbArr = [];
+            mongoDbArr.push({'title': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'titleCn': {$regex: q, $options: "i"}});
+            return Publications.find({$or: mongoDbArr});
+        }
         return Publications.find();
     },
     topicList: function () {
@@ -28,6 +36,10 @@ Template.AdvancedSearch.helpers({
 });
 
 Template.AdvancedSearch.events({
+    'mousedown #filterJournalBtn': function () {
+        var title = $('#filterJournalName').val();
+        Session.set("JournalNameValue", title);
+    },
     "click #ck_publisher": function () {
         if(document.getElementById("ck_publisher").checked){
             $("input[id='ck_publisher']").prop({checked:true});
