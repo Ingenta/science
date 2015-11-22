@@ -13,6 +13,22 @@ Template.UploadLogModal.helpers({
         var logId = Session.get('uploadLogId');
         if (logId)
             return UploadLog.findOne({_id: logId}).errors;
+    },
+    importSucceeded: function () {
+        var logId = Session.get('uploadLogId');
+        var log = UploadLog.findOne({_id: logId});
+        if (!log)return false;
+        if (log.articleId)return true;
+    }
+});
+
+Template.UploadLogModal.events({
+    "click .goToArticle": function (e) {
+        $('#uploadLogModal').modal('hide');
+        var logId = Session.get('uploadLogId');
+        var log = UploadLog.findOne({_id: logId});
+        if (!log)return false;
+        Router.go(log.articleUrl);
     }
 });
 
