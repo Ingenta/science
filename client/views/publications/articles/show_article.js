@@ -218,9 +218,9 @@ Template.showArticle.events({
         })
     }
 });
-
-Template.articlePage.helpers({
-    preValue: function () {
+//TODO: decide what to do when elocation is null
+Template.articlePageNavigation.helpers({
+    previousArticle: function () {
         var curIssue = Session.get("currentIssueId");
         var previousValue = Articles.findOne({issueId:curIssue, elocationId: {$lt: this.elocationId}}, {$sort: {elocationId: 1}});
         if (previousValue) {
@@ -229,7 +229,7 @@ Template.articlePage.helpers({
         }
         return false;
     },
-    nextValue: function () {
+    nextArticle: function () {
         var curIssue = Session.get("currentIssueId");
         var nextValue = Articles.findOne({issueId:curIssue, elocationId: {$gt: this.elocationId}}, {$sort: {elocationId: 1}});
         if (nextValue) {

@@ -30,9 +30,9 @@
                     <p>
                         {{#each authors}}
                             <span class="separate-comma">{{> authorPopButton}}
-	                            {{#if refs}}
-		                            <sup>{{refs}}</sup>
-	                            {{/if}}
+                                {{#if refs}}
+                                    <sup>{{refs}}</sup>
+                                {{/if}}
                             </span>
                         {{/each}}
                     </p>
@@ -86,11 +86,12 @@
                         <li class="pdf">
                             <a target="_blank" class="pdfDownload" href="/downloadPdf/{{pdfId}}">
                                 <img style="height:50px" src="/pdf.png"/>
+
                                 <p>{{_ "Download"}} PDF</p>
                             </a>
                         </li>
                     {{/if}}
-	                {{> altmetric doi=doi}}
+                    {{> altmetric doi=doi}}
                 </div>
             </div>
             <br>
@@ -116,22 +117,20 @@
     {{> referenceModal}}
 </template>
 
-<template name="articlePage">
-    <div class="clear articlenav std-display">
-        <div class="flat navigate-resources bobby" style="overflow:hidden;">
-            <h6 style="float:left;">
+<template name="articlePageNavigation">
+    <div class="text-center">
               <span style="color: darkgray">
                 <i class="fa fa-chevron-left"></i>
-                  {{#if preValue}}
-                      <a href="{{preValue}}">
+                  {{#if previousArticle}}
+                      <a href="{{previousArticle}}">
                           <b>{{_ "Previous Article"}}</b>
                       </a>
                   {{else}}
                       <b>{{_ "Previous Article"}}</b>
                   {{/if}}
-                   | <a href="../"><b>{{_ "Table of Contents"}}</b></a> |
-                  {{#if nextValue}}
-                      <a href="{{nextValue}}">
+                  | <a href="../"><b>{{_ "Table of Contents"}}</b></a> |
+                  {{#if nextArticle}}
+                      <a href="{{nextArticle}}">
                           <b>{{_ "Next Article"}}</b>
                       </a>
                   {{else}}
@@ -139,11 +138,7 @@
                   {{/if}}
                   <i class="fa fa-chevron-right"></i>
             </span>
-            </h6>
 
-        </div>
-        <div class="socialMediaCommenting">
-        </div>
     </div>
     <br>
 </template>
