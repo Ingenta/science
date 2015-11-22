@@ -175,9 +175,9 @@ OrbitPermissions = {
 		return this._overrideUserRoles(users, roles, callback);
 	},
 	//收回用户的角色(由于用户角色已经重新定义,不应该继续使用该方法)
-	//revoke                     : function (users, roles, callback) {
-	//	return this._modifyUsersRoles("revoke", users, roles, callback);
-	//},
+	revoke                     : function (users, roles, callback) {
+		return this._modifyUsersRoles("revoke", users, roles, callback);
+	},
 	getUserRoles               : function (user) {
 		var user_roles;
 		if (Meteor.isClient) {
