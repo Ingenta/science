@@ -13,7 +13,8 @@ Package.onUse(function (api) {
             'templating',
             'jackkav:xpath',
             'science-lib',
-            'science-topics'
+            'science-topics',
+            'didstopia:admzip'
         ],
         both);
     api.addFiles('both/routes.js',both);
