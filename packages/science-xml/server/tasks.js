@@ -203,11 +203,14 @@ Tasks.insertArticleImages = function (logId, result) {
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
                     logger.warn("image missing: " + figName);
+                    log.errors.push("image missing: " + figName);
                 }
                 else {
                     ArticleXml.insert(figLocation, function (err, fileObj) {
-                        if (err)
+                        if (err) {
                             logger.error(err);
+                            log.errors.push(err.toString());
+                        }
                         else {
                             fig.imageId = fileObj._id;
                             UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
@@ -222,7 +225,11 @@ Tasks.insertArticleImages = function (logId, result) {
             }
         });
     }
-
+    //Don't insert the article if any images fail to import
+    if (!_.isEmpty(log.errors)) {
+        Tasks.fail(taskId, logId, log.errors);
+        return;
+    }
     Tasks.insertArticleTask(logId, result);
 }
 
