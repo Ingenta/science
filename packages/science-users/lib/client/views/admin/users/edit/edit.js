@@ -91,26 +91,31 @@ Template.AdminUsersEditEditForm.events({
                 var roles = values.roles;
                 delete values.roles;
                 Meteor.call("updateUserAccount", Router.current().data().currUser._id, values, function (e) {
-                    if (e) errorAction(e.message); else submitAction();
-                });
-                var rolesAtThisLevel = Permissions.getRolesDescriptions2(Router.current().data().currUser.level,false)
-                var rolesForSet= _.map(roles,function(role){
-                    var scope={};
-                    if(values.publisherId) scope.publisher = [values.publisherId];
-                    if(values.journalId) scope.journal=[values.journalId];
-                    if(values.institutionId) scope.institution=[values.institutionId];
-                    var r = rolesAtThisLevel[role];
-                    if(!_.isEmpty(scope)){
-                        return {"role":role,scope:scope};
-                    }else{
-                        return role;
+                    if (e) errorAction(e.message);
+                    else{
+                        debugger;
+                        var rolesAtThisLevel = Permissions.getRolesDescriptions2(Router.current().data().currUser.level,false)
+                        var rolesForSet= _.map(roles,function(role){
+                            var scope={};
+                            if(values.publisherId) scope.publisher = [values.publisherId];
+                            if(values.journalId) scope.journal=[values.journalId];
+                            if(values.institutionId) scope.institution=[values.institutionId];
+                            var r = rolesAtThisLevel[role];
+                            if(!_.isEmpty(scope)){
+                                return {"role":role,scope:scope};
+                            }else{
+                                return role;
+                            }
+                        });
+                        Permissions.setRoles(Router.current().data().currUser._id, rolesForSet, function (err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                        submitAction();
                     }
                 });
-                !_.isEmpty(rolesForSet) && Permissions.setRoles(Router.current().data().currUser._id, rolesForSet, function (err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
+
             }
         );
 

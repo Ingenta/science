@@ -36,6 +36,17 @@ Template.oneSolrArticle.helpers({
 	},
 	class:function(){
 		//return "fa fa-language";
+	},
+	articleUrl:function(){
+		console.dir(this);
+		var journal = Publications.findOne({_id: this.journalId},{fields:{shortTitle:1,publisher:1}});
+		if (!journal)return;
+		var pub = Publishers.findOne({_id: journal.publisher},{fields:{name:1}});
+		if (!pub)return;
+		if(!this.volume) return;
+		if(!this.issue) return;
+		if(!this.doi) return;
+		return "/publisher/" + pub.name + "/journal/" + journal.shortTitle+"/"+this.volume + "/"+this.issue+"/"+this.doi;
 	}
 });
 

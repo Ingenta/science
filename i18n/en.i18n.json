@@ -965,5 +965,11 @@
             }
         }
     },
-    "roleScope":"Scope of the functionality"
+    "roleScope":"Scope of the functionality",
+    "level":{
+        "admin":"admin",
+        "publisher":"publisher",
+        "journal":"journal",
+        "institution":"institution"
+    }
 }

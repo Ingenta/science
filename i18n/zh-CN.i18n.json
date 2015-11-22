@@ -1261,5 +1261,11 @@
   "Rating": "评分",
   "Reset":"重置",
   "Search Mode":"搜索方式",
-  "roleScope":"角色功能范围"
+  "roleScope":"角色功能范围",
+  "level":{
+    "admin":"整站",
+    "publisher":"出版社",
+    "journal":"期刊",
+    "institution":"机构"
+  }
 }

@@ -132,7 +132,7 @@ PastDataImport = function () {
 								newOne.accepted=article.acceptDate;
 								newOne.published=article.publishDate;
 								newOne.topic=getTopic(article.subspecialty);
-								newOne.articleType=article.articleType;
+								newOne.contentType=article.contentType;
 								newOne.abstract = article.abstract;
 								var authors=getAuthors(article.authors);
 								if(!_.isEmpty(authors)){
