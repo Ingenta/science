@@ -12,7 +12,7 @@ institutionPermissions
         en: {name: "modify institution", summary: "can modify institution"},
         cn: {name: "编辑机构", summary: "可以编辑机构信息"},
         options:{
-            level:adminLevel
+            level:institutionLevel
         }
     })
     .definePermission("delete-institution", {
@@ -24,16 +24,18 @@ institutionPermissions
     });
 
 institutionPermissions
-    //.defineRole("institution-manager-from-admin", ["add-institution", "modify-institution", "delete-institution"], {
-    //    en: {
-    //        name: "institution manager (platform)",
-    //        summary: "system admin of institution"
-    //    },
-    //    cn: {
-    //        name: "机构管理（平台）",
-    //        summary: "可以增删改机构信息的角色"
-    //    }
-    //})
+    .defineRole("institution-manager-from-admin", ["add-institution", "modify-institution", "delete-institution"], {
+        en: {
+            name: "institution manager (platform)",
+            summary: "system admin of institution"
+        },
+        cn: {
+            name: "机构管理（平台）",
+            summary: "可以增删改机构信息的角色"
+        },options:{
+            level:adminLevel
+        }
+    })
     .defineRole("institution-manager-from-user", ["modify-institution"], {
         en: {
             name: "institution manager (institution)",
