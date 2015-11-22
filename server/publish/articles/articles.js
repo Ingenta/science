@@ -4,6 +4,7 @@ minimumArticle = {
     doi: 1,
     issue: 1,
     issueId: 1,
+    volume: 1,
     published: 1
 };
 articleWithMetadata = {
