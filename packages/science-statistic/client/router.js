@@ -1,11 +1,11 @@
 Router.route("/statistic/", {
-    template      : "Admin",
-    name          : "admin.statistic",
-    parent        : "admin",
+    template: "Admin",
+    name: "admin.statistic",
+    parent: "admin",
     yieldTemplates: {
-        'reports': { to: 'AdminSubcontent'}
+        'statistic': {to: 'AdminSubcontent'}
     },
-    title         : function () {
+    title: function () {
         return TAPi18n.__("Statistical Management");
-    },
+    }
 });

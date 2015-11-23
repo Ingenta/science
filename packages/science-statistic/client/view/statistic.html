@@ -1,0 +1,40 @@
+<template name="statistic">
+    <div class="container-fluid">
+        <div class="form-inline form-group">
+            <label for="filter-publisher">{{_ "publisher"}}</label>
+            <select id="filter-publisher" class="form-control js-example-basic-multiple" style="width: 100%" multiple="multiple" placeholder="111111">
+                {{#each publisherList}}
+                    <option value="{{_id}}">{{translateThis chinesename name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-inline form-group">
+            <label for="filter-editorial">{{_ "Editorial Department"}}</label>
+            <select id="filter-editorial" class="form-control js-example-basic-multiple" style="width: 100%" multiple="multiple">
+                <option value="">《科学通报》编辑部</option>
+                <option value="">《中国科学 数学》编辑部</option>
+                <option value="">《中国科学 化学》编辑部</option>
+                <option value="">《中国科学 信息科学》编辑部</option>
+                <option value="">《中国科学 生命科学》编辑部</option>
+                <option value="">《中国科学 化学》编辑部</option>
+            </select>
+        </div>
+        <div class="form-inline form-group">
+            <label for="filter-journal">{{_ "Journals"}}</label>
+            <select id="filter-journal" class="form-control js-example-basic-multiple" style="width: 100%" multiple="multiple">
+                {{#each publicationList}}
+                    <option value="{{_id}}">{{translateThis titleCn title}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-inline form-group">
+            <label for="filter-institutions">{{_ "Institution"}}</label>
+            <select id="filter-institutions" class="form-control js-example-basic-multiple" style="width: 100%" multiple="multiple">
+                {{#each institutionsList}}
+                    <option value="{{_id}}">{{translateThis name.cn name.en}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+    <hr>
+</template>
