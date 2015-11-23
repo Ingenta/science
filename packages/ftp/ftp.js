@@ -1,8 +1,10 @@
 FTP = Npm.require('ftp');
 FSE = Npm.require('fs-extra');
 
-FTP.prototype.getSingleFile = function (options, targetFile, callback) {
-	var self = this;
+Science.FTP = {};
+
+Science.FTP.getSingleFile = function (options, targetFile, callback) {
+	var self = new FTP()
 	var originalSize;
 
 	var streamClose = function () {
@@ -59,8 +61,8 @@ FTP.prototype.getSingleFile = function (options, targetFile, callback) {
 	});
 };
 
-FTP.prototype.listFiles=function(options,callback){
-	var self = this;
+Science.FTP.listFiles=function(options,callback){
+	var self = new FTP();
 	var _listFiles=function(){
 		self.list(function(err, list) {
 			if (err) {
@@ -101,8 +103,8 @@ FTP.prototype.listFiles=function(options,callback){
 	});
 }
 
-FTP.prototype.moveFtpFiles = function(options,callback){
-	var self = this;
+Science.FTP.moveFtpFiles = function(options,callback){
+	var self = new FTP();
 		self.on("ready",function(){
 			self.rename(options.oldPath,options.newPath,function(err){
 				if (err) {

@@ -1,0 +1,95 @@
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html body {
+        font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 22px;
+        color: #333;
+        background: #f8faef url(../images/topbg.gif) repeat-x;
+    }
+
+    a {
+        color: #036cb0;
+        text-decoration: none;
+    }
+
+    .oh {
+        overflow: hidden;
+    }
+
+    .mt10 {
+        margin-top: 10px;
+    }
+
+    .big {
+        width: 610px;
+        margin: 0 auto;
+    }
+
+    .top {
+        background: #036cb0;
+        color: #fff;
+        height: 88px;
+        font-size: 28px;
+        line-height: 88px;
+        padding: 0 20px;
+        font-family: Arial;
+    }
+
+    .top img {
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    .blue {
+        color: #036cb0;
+    }
+
+    .ziduan {
+        background: #fff;
+        padding: 15px;
+        border-bottom: 2px solid #5c5c5c;
+    }
+
+    .ziduan p {
+        text-indent: 24px;
+        margin-top: 8px;
+    }
+
+    .yinyong {
+        background: #fff;
+    }
+
+    .part {
+        padding: 15px;
+    }
+
+    .grey {
+        background: #f6f6f6;
+        padding: 15px;
+    }
+
+    .grey p {
+        margin-bottom: 8px;
+    }
+</style>
+
+<div class="big">
+    {{> scpBanner}}
+    <div class="ziduan">
+        <h3>您好</h3>
+        <p>您的朋友{{user}}向您推荐了一篇文章。</p>
+        {{#if reason}}
+            <h3>推荐理由: </h3>
+            <p>{{reason}}</p>
+        {{/if}}
+    </div>
+    <div class="yinyong">
+        {{> emailArticleList}}
+    </div>
+    {{> emailFooter}}
+</div>

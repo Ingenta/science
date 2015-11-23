@@ -1,6 +1,6 @@
 Science.Email = {};
 
-Science.Email.authorCitationAlert = function () {
+Science.Email.authorCitationAlertEmail = function () {
     Citations.aggregate([{
         $match: {
             createdAt: {$gt: moment().startOf('day').toDate()}
@@ -32,7 +32,7 @@ Science.Email.authorCitationAlert = function () {
                 to: address.email,
                 from: 'publish@scichina.org',
                 subject: emailConfig ? emailConfig.subject : 'Article has been cited',
-                html: JET.render('authorCitationEmail', {
+                html: JET.render('citationAlertEmail', {
                     "article": article,
                     "authorName": authorName,
                     "citations": item.citations,
@@ -108,6 +108,37 @@ Science.Email.watchTopicEmail = function (oneEmail) {
             "homePageNews": oneEmail.homePageNews
         })
     });
+};
+
+Science.Email.watchArticleCitationAlertEmail = function (oneEmail) {
+    oneEmail.citations.forEach(function (item) {
+        var emailConfig = EmailConfig.findOne({key: "articleCitedAlert"});
+        var article = Articles.findOne({_id: item._id}, {
+            fields: {
+                title: 1,
+                authors: 1,
+                authorNotes: 1,
+                year: 1,
+                volume: 1,
+                issue: 1,
+                elocationId: 1,
+                'journal.titleCn': 1
+            }
+        });
+        Email.send({
+            to: oneEmail.email,
+            from: 'publish@scichina.org',
+            subject: emailConfig ? emailConfig.subject : 'Article has been cited',
+            html: JET.render('citationAlertEmail', {
+                "article": article,
+                "userName": oneEmail.userName,
+                "citations": item.citations,
+                "scpLogoUrl": Config.rootUrl + "email/logo.png",
+                "emailIcoUrl": Config.rootUrl + "email/ico.png",
+                "rootUrl": Config.rootUrl
+            })
+        });
+    })
 };
 
 Science.Email.test = function (template, theData) {

@@ -16,10 +16,12 @@ Npm.depends({
 });
 
 Package.onUse(function (api) {
+    api.use([
+        'science-lib'
+    ],'server')
+
     api.versionsFrom('1.1.0.2');
     api.addFiles('ftp.js', 'server');
-    api.export('FTP');
-    api.export('FSE');
 });
 
 Package.onTest(function (api) {

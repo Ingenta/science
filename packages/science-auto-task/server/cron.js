@@ -16,7 +16,7 @@ SyncedCron.add({
 SyncedCron.add({
     name: 'FTPSCAN',
     schedule: function (parser) {
-        return parser.text(Config.AutoTasks.FTPSCAN.rate || "every 5 minutes");//默认每5分钟检查一次
+        return parser.text(Config.AutoTasks.FTPSCAN.rate || "every 30 minutes");//默认每30分钟检查一次
     },
     job: function () {
     Tasks.scanFTP();
@@ -128,6 +128,7 @@ SyncedCron.add({
                         issue: oneIssue
                     });
                 });
+                //
             }
             if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
                 oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
@@ -150,30 +151,45 @@ SyncedCron.add({
                 })
             }
             if (oneUser.profile.articlesOfInterest && oneUser.profile.articlesOfInterest.length > 0) {
-                var tempArray = Articles.find({
-                    $and: [
-                        {_id: {$in: oneUser.profile.articlesOfInterest}},
-                        {createdAt: {$gt: oneUser.lastSentDate}}
-                    ]
+                //var tempArray = Articles.find({
+                //    $and: [
+                //        {_id: {$in: oneUser.profile.articlesOfInterest}},
+                //        {createdAt: {$gt: oneUser.lastSentDate}}
+                //    ]
+                //}, {
+                //    fields: {_id: 1, title: 1}
+                //}).fetch();
+
+                //if (tempArray.length) outgoingList.push({
+                //    userId: oneUser._id,
+                //    email: oneUser.emails[0].address,
+                //    articleIds: tempArray
+                //});
+
+                //var citations = Citations.find({
+                //    $and: [
+                //        {articleId: {$in: oneUser.profile.articlesOfInterest}},
+                //        {createdAt: {$gt: oneUser.lastSentDate}}
+                //    ]
+                //}).fetch();
+
+                var citations = Citations.aggregate([{
+                    $match: {
+                        $and: [
+                            {articleId: {$in: oneUser.profile.articlesOfInterest}},
+                            {createdAt: {$gt: oneUser.lastSentDate}}
+                        ]
+                    }
                 }, {
-                    fields: {_id: 1, title: 1}
-                }).fetch();
-
-                if (tempArray.length) outgoingList.push({
-                    userId: oneUser._id,
-                    email: oneUser.emails[0].address,
-                    articleIds: tempArray
-                });
-
-                var citations = Citations.find({
-                    $and: [
-                        {articleId: {$in: oneUser.profile.articlesOfInterest}},
-                        {createdAt: {$gt: oneUser.lastSentDate}}
-                    ]
-                }).fetch();
+                    $group: {
+                        _id: "$articleId",
+                        citations: {$push: "$citation"}
+                    }
+                }]);
 
                 if(citations.length) outgoingList.push({
                     userId: oneUser._id,
+                    userName: oneUser.username,
                     email: oneUser.emails[0].address,
                     citations: citations
                 });
@@ -220,13 +236,14 @@ SyncedCron.add({
                     //})
                 } else if(oneEmail.citations){
                     //this is cited alert
-                    emailSubject = "Cited Alert";
+                    //emailSubject = "Cited Alert";
                     //emailConfig = EmailConfig.findOne({key: "citedAlert"});
                     //if (emailConfig) {
                     //    emailSubject = emailConfig.subject;
                     //    emailContent = emailConfig.body;
                     //}
-                    emailContent += createEmailCitedArticleContent(oneEmail.citations);
+                    //emailContent += createEmailCitedArticleContent(oneEmail.citations);
+                    Science.Email.watchArticleCitationAlertEmail(oneEmail);
                 } else {
                     //this is an article watch
                     emailSubject = "Article Watch";
@@ -255,7 +272,7 @@ SyncedCron.add({
             console.log('watch email task ran but email list was empty, no emails sent.');
         }
         Science.Email.searchFrequencyEmail();
-        //Science.Email.authorCitationAlert();
+        //Science.Email.authorCitationAlertEmail();
     }
 });
 
@@ -312,23 +329,23 @@ var createEmailArticleListContent = function (article) {
     return "<a href=\"" + Meteor.absoluteUrl(url.substring(1)) + "\">" + article.title.cn + "</a>" + "\n\n";
 };
 
-var createEmailCitedArticleContent = function (citations) {
-    var citationMap = {};
-    citations.forEach(function (oneCitation) {
-        if(citationMap[oneCitation.doi])
-            citationMap[oneCitation.doi].push(oneCitation.citation);
-        else
-            citationMap[oneCitation.doi] = [oneCitation.citation];
-    });
-    var content = "";
-    Object.keys(citationMap).forEach(function (doi) {
-        content += "<ul>" + createEmailArticleListContent(Articles.findOne({doi: doi}, {fields: {_id: 1, title: 1}})) + " Cited by:";
-        citationMap[doi].forEach(function (oneCitation) {
-            if (!oneCitation.doi)
-                content += "<li>" + oneCitation.journal.title + "</li>";
-            else
-                content += "<li><a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a></li>" + "\n\n";
-        })
-    });
-    return content + "</ul>";
-};
+//var createEmailCitedArticleContent = function (citations) {
+//    var citationMap = {};
+//    citations.forEach(function (oneCitation) {
+//        if(citationMap[oneCitation.doi])
+//            citationMap[oneCitation.doi].push(oneCitation.citation);
+//        else
+//            citationMap[oneCitation.doi] = [oneCitation.citation];
+//    });
+//    var content = "";
+//    Object.keys(citationMap).forEach(function (doi) {
+//        content += "<ul>" + createEmailArticleListContent(Articles.findOne({doi: doi}, {fields: {_id: 1, title: 1}})) + " Cited by:";
+//        citationMap[doi].forEach(function (oneCitation) {
+//            if (!oneCitation.doi)
+//                content += "<li>" + oneCitation.journal.title + "</li>";
+//            else
+//                content += "<li><a href=\"http://dx.doi.org/" + oneCitation.doi + "\">" + oneCitation.journal.title + "</a></li>" + "\n\n";
+//        })
+//    });
+//    return content + "</ul>";
+//};

@@ -11,17 +11,20 @@ Template.toggleField.helpers({
             return field;
         }
     }
-})
+});
 
 Template.sendEmails.helpers({
-    getCurrentUrl: function(){
+    getCurrentUrl: function () {
         return window.location.href;
+    },
+    getDoi: function () {
+        return Session.get("currentDoi");
     }
-})
+});
 
 AutoForm.addHooks(['sendEmailsModalForm'], {
     onSuccess: function () {
         $("#sendEmailModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
-})
+});
