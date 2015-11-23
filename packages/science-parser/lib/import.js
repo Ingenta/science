@@ -130,7 +130,7 @@ PastDataImport = function () {
                                 console.log("import " + article.doi + " start");
                                 var newOne = {};
                                 newOne.journalId = journal._id;
-                                newOne.journalInfo = journal;
+                                newOne.journal = journal;
                                 newOne.volume = issue.volume;
                                 newOne.issue = issue.issue;
                                 newOne.year = issue.year;
