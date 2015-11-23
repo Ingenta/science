@@ -1,7 +1,6 @@
 Tasks = {};
 
 Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
-
     if (!pathToFile || !fileName || !fileType)return;
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
     //文章的出版状态(默认是正式出版)
@@ -96,7 +95,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                 //set extract task to success, cleanup and start next task
                 UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                 //get target xml filename TODO: make this better
-                FSE.readdir(targetPath,
+                Science.FSE.readdir(targetPath,
                     Meteor.bindEnvironment(
                         function (err, file) {
                             if (err) {
@@ -203,11 +202,14 @@ Tasks.insertArticleImages = function (logId, result) {
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
                     logger.warn("image missing: " + figName);
+                    log.errors.push("image missing: " + figName);
                 }
                 else {
                     ArticleXml.insert(figLocation, function (err, fileObj) {
-                        if (err)
+                        if (err) {
                             logger.error(err);
+                            log.errors.push(err.toString());
+                        }
                         else {
                             fig.imageId = fileObj._id;
                             UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
@@ -222,7 +224,11 @@ Tasks.insertArticleImages = function (logId, result) {
             }
         });
     }
-
+    //Don't insert the article if any images fail to import
+    if (!_.isEmpty(log.errors)) {
+        Tasks.fail(taskId, logId, log.errors);
+        return;
+    }
     Tasks.insertArticleTask(logId, result);
 }
 
@@ -252,6 +258,8 @@ Tasks.insertArticleTask = function (logId, result) {
         hadError = true;
     }
     if (!hadError) {
+        var url = Science.URL.articleDetail(articleId);
+        logger.info("Import complete: "+log.name+" available at "+url);
         //cleanup and set log and tasks to done
         ScienceXML.RemoveFile(log.filePath);
         UploadTasks.update(
@@ -259,7 +267,7 @@ Tasks.insertArticleTask = function (logId, result) {
             {$set: {status: "Success"}});
         UploadLog.update(
             {_id: logId},
-            {$set: {status: "Success", articleId: articleId}}
+            {$set: {status: "Success", articleId: articleId, articleUrl: url}}
         );
     }
 }

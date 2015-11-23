@@ -2,28 +2,26 @@
 
 	<ul class="dotted list-unstyled">
 		<li>
-			{{#with article}}
-				<h4>
-					<div class="resultsList"><img src="/icon_access_oa.gif">
-						<a class="{{class}}" href="{{urlToArticleById _id}}">{{{showTitle}}}</a>
-					</div>
-				</h4>
+			<h4>
+				<div class="resultsList"><img src="/icon_access_oa.gif">
+					<a class="{{class}}" href="{{articleUrl _id}}">{{{showTitle}}}</a>
+				</div>
+			</h4>
 
-				<ul class="list-unstyled">
-					<li>
-						{{#each getAuthors}}
-							{{> authorPopButton name=this}} ,
-						{{/each}}
-					</li>
-					<li>
-						<a href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
-						<b>{{volume}}</b>, {{elocationId}} ({{year}})
-						<a href="http://dx.doi.org/{{doi}}">{{{showdoi}}} <i class="fa fa-external-link"></i></a>
-					</li>
-					<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
-					{{> abstractDetails}}
-				</ul>
-			{{/with}}
+			<ul class="list-unstyled">
+				<li>
+					{{#each getAuthors}}
+					<span class="separate-comma"> {{> authorPopButton name=this}} </span>
+					{{/each}}
+				</li>
+				<li>
+					<a href="{{urlToJournalById journalId}}">{{journalName journalId}}</a>
+					<b>{{volume}}</b>, {{elocationId}} ({{year}})
+					<a href="http://dx.doi.org/{{doi}}">{{{showdoi}}} <i class="fa fa-external-link"></i></a>
+				</li>
+				<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+				{{> abstractDetails}}
+			</ul>
 		</li>
 	</ul>
 </template>

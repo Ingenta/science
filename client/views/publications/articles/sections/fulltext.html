@@ -1,5 +1,6 @@
 <template name="FullTextTemplate">
     {{>AbstractContentAndKeywords}}
+    <!--{{> sectionSelector sections=sections}}-->
     <div class="row">
         <div id="fulltext-viewer" class="col-xs-12">
             {{#mathjax}}
@@ -34,35 +35,37 @@
 </template>
 
 <template name="sectionSelector">
-    <h4 style="display:{{displayStatus}}">{{_ "section_selector_button"}}</h4>
-    <nav id="section-index">
-        <ul id="indexsidebar" class="nav nav-stacked">
-            {{#each handledSections}}
-                <li>
-                    <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-                    <ul class="nav nav-stacked">
-                        {{#each sections}}
-                            <li>
-                                <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-                                <ul class="nav nav-stacked">
-                                    {{#each sections}}
-                                        <li>
-                                            <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
-                                        </li>
-                                    {{/each}}
-                                </ul>
-                            </li>
-                        {{/each}}
-                    </ul>
-                </li>
-            {{/each}}
-        </ul>
-    </nav>
+    <div class="article-index-toolbar">
+        <h4 style="display:{{displayStatus}}">{{_ "section_selector_button"}}</h4>
+        <nav id="section-index">
+            <ul id="indexsidebar" class="nav nav-stacked">
+                {{#each handledSections}}
+                    <li>
+                        <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+                        <ul class="nav nav-stacked">
+                            {{#each sections}}
+                                <li>
+                                    <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+                                    <ul class="nav nav-stacked">
+                                        {{#each sections}}
+                                            <li>
+                                                <a href="#sec-{{clearStr title}}">{{label}} {{{title}}}</a>
+                                            </li>
+                                        {{/each}}
+                                    </ul>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                {{/each}}
+            </ul>
+        </nav>
+    </div>
 </template>
 
 
 <template name="figModal">
-    <div class="modal fade figure-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade figure-modal" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,7 +92,7 @@
 </template>
 
 <template name="tableModal">
-    <div class="modal fade table-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade table-modal" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -116,7 +119,7 @@
 </template>
 
 <template name="referenceModal">
-    <div class="modal fade reference-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade reference-modal" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">

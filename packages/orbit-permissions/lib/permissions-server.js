@@ -15,7 +15,10 @@ Meteor.publish(null, function() {
 
 Meteor.users.allow({
 	update: function(userId, doc, fieldNames, modifier) {
-		return OrbitPermissions.userCan("delegate-and-revoke", "permissions", userId) && ((("$addToSet" in modifier) && ("orbit_roles" in modifier["$addToSet"])) || (("$pullAll" in modifier) && ("orbit_roles" in modifier["$pullAll"])));
+		return OrbitPermissions.userCan("delegate-and-revoke", "permissions", userId)
+				&& ((("$addToSet" in modifier) && ("orbit_roles" in modifier["$addToSet"]))
+					|| (("$pullAll" in modifier) && ("orbit_roles" in modifier["$pullAll"]))
+					|| (("$set" in modifier) && ("orbit_roles" in modifier["$set"])));
 	}
 });
 

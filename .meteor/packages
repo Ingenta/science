@@ -54,7 +54,6 @@ arthuryyx:ftp
 mrt:mathjax
 tomi:upload-jquery
 tomi:upload-server
-didstopia:admzip
 mathjax
 science-collections
 vazco:universe-autoform-select
@@ -79,7 +78,7 @@ yogiben:autoform-modals-up
 science-author-center
 science-external-interface
 science-auto-task
-
+natestrauser:select2
 tsega:bootstrap3-datetimepicker
 science-parser
 standard-minifiers
@@ -107,4 +106,3 @@ jackjiang:editable-template
 classcraft:meteor-wkhtmltopdf
 richsilv:owl-carousel
 udondan:slick
-sebdah:autocompletion

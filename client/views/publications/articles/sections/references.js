@@ -13,7 +13,7 @@ Template.singleReferenceTemplate.helpers({
 			authorStr += author.surName + " " + author.givenName + ", "
 		});
 		if(this.etal){
-			authorStr+=this.etal+". ";
+			authorStr+="et al. ";
 		}else{
 			if(authorStr.length>2){
 				authorStr=authorStr.substr(0,authorStr.length-2)+". ";

@@ -40,6 +40,7 @@
   "To": "至",
   "Other": "其它",
   "Reports": "统计",
+  "Statistical Management": "统计管理",
   "Caption": "解说词",
   "Share": "在线分享",
   "Previous Article": "上一篇",
@@ -1260,5 +1261,11 @@
   "Rating": "评分",
   "Reset":"重置",
   "Search Mode":"搜索方式",
-  "roleScope":"角色功能范围"
+  "roleScope":"角色功能范围",
+  "level":{
+    "admin":"整站",
+    "publisher":"出版社",
+    "journal":"期刊",
+    "institution":"机构"
+  }
 }

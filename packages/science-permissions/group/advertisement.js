@@ -56,6 +56,6 @@ advertisementPermissions
             summary: "广告编辑"
         },
         options:{
-            level:publisherLevel
+            level:journalLevel
         }
     });

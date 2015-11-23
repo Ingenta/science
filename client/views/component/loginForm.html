@@ -1,9 +1,13 @@
-<template name="loginForm" xmlns="http://www.w3.org/1999/html">
+<template name="loginForm">
 	<form method="post" action="{{loginUrl}}" target="_blank">
         <input type="hidden" value="1" name="doLogin">
         <div class="form-group">
             <label for="login-form-journal">{{_ "Journal name"}}</label>
-            <input type="text" id="login-form-journal" class="form-control">
+            <select id="login-form-journal" class="form-control js-example-basic-single" style="width:100%;border: 1px solid #cccccc;">
+                {{#each publicationsList}}
+                    <option value="{{codeValue}}">{{translateThis titleCn title}}</option>
+                {{/each}}
+            </select>
         </div>
         {{#if isDisplayLogin}}
             <div class="form-group">
@@ -34,7 +38,7 @@
 		    <li><a data-toggle="modal" href="#" data-target="#myModalLogin">{{_ "Editors Login"}}</a></li>
         {{/if}}
 	</ul>
-    <div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLoginLabel" aria-hidden="true">
+    <div class="modal fade" id="myModalLogin" role="dialog" aria-labelledby="myModalLoginLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
