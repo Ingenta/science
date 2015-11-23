@@ -129,6 +129,7 @@ PastDataImport = function () {
 								newOne.title=article.title;
 								newOne.publisher=journal.publisher;
 								newOne.startPage=article.startPage;
+								newOne.elocationId=article.startPage;
 								newOne.accepted=article.acceptDate;
 								newOne.published=article.publishDate;
 								newOne.topic=getTopic(article.subspecialty);
