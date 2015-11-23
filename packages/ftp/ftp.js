@@ -106,23 +106,23 @@ Science.FTP.listFiles=function(options,callback){
 
 Science.FTP.moveFtpFiles = function(options,callback){
 	var self = new FTP();
-		self.on("ready",function(){
-			self.rename(options.oldPath,options.newPath,function(err){
-				if (err) {
-					callback && callback(err);
-					return;
-				}
-			})
-		});
-		self.on('error', function(e){
-			callback && callback(e);
-			self.end();
-		});
-		self.connect({
-			host    : options.host,
-			user    : options.user,
-			password: options.password,
-			connTimeout:2000,
-			pasvTimeout:2000
-		});
+	self.on("ready",function(){
+		self.rename(options.oldPath,options.newPath,function(err){
+			if (err) {
+				callback && callback(err);
+				return;
+			}
+		})
+	});
+	self.on('error', function(e){
+		callback && callback(e);
+		self.end();
+	});
+	self.connect({
+		host    : options.host,
+		user    : options.user,
+		password: options.password,
+		connTimeout:2000,
+		pasvTimeout:2000
+	});
 }
