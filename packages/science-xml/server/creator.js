@@ -8,8 +8,8 @@ ScienceXML.IssueCreator = function () {
 		if (obj.journalId && obj.volume && obj.issue) {
 			if (!tasks.exists(obj)) {
 				tasks.push(obj);
-				var volume = Volumes.upsert({journalId: obj.journalId, volume: obj.volume},{journalId: obj.journalId, volume: obj.volume});
-
+				 Volumes.upsert({journalId: obj.journalId, volume: obj.volume},{journalId: obj.journalId, volume: obj.volume});
+				var volume = Volumes.findOne({journalId: obj.journalId, volume: obj.volume})._id;
 				var issue = Issues.findOne({journalId: obj.journalId, volume: obj.volume, issue: obj.issue});
 				issue     = (issue && issue._id) || Issues.insert({
 						journalId: obj.journalId,
