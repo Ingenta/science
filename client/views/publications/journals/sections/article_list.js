@@ -22,13 +22,13 @@ Template.journalNavigationPanel.events({
     },
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
+        var volume = $(event.target).data().volume;
+        var issue = $(event.target).data().issue;
         issueId && Session.set("currentIssueId", issueId);
-        //if url contains issue and volume, router.go to journal page
-        if (Router.current().params.volume && Router.current().params.issue) {
-            Router.current().params.volume = undefined;
-            Router.current().params.issue = undefined;
-            Router.go("journal.name", Router.current().params)
-        }
+        //if url contains issue, router.go
+            Router.current().params.volume = volume;
+            Router.current().params.issue = issue;
+            Router.go("journal.name.toc", Router.current().params)
     }
 });
 

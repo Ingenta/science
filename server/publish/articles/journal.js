@@ -1,5 +1,5 @@
-Meteor.publish('oneJournalArticles', function (id) {
-    return Articles.find({journalId: id}, {
+Meteor.publish('oneJournalArticles', function (id,issueId) {
+    return Articles.find({journalId: id, issueId: issueId}, {
         fields: {sections: 0, figures: 0, references: 0}
     });
 });
