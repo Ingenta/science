@@ -1,4 +1,4 @@
-developmentLogLevel = "silly";
+developmentLogLevel = "info";
 productionLogLevel = "silly";
 // Write your package code here!
 if (Meteor.isServer) {
@@ -8,10 +8,10 @@ if (Meteor.isServer) {
     winston.level = productionLogLevel;
     var isDev = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
     if (isDev)winston.level = developmentLogLevel;
-
+    //only log warnings and errors to mongo
     var mongoOptions = {
         handleExceptions: true,
-        level: winston.level,
+        level: "warn",
         //host: '192.168.1.10',
         db: process.env.MONGO_URL,
         port: 27071,

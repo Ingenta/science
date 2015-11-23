@@ -26,19 +26,20 @@
 </template>
 
 <template name="uploadForm">
-	<p>
-		<div class="btn-group" data-toggle="buttons">
-			<label class="btn btn-primary active">
-				<input type="radio" name="pubStatus" value="normal" autocomplete="off" checked> {{_ "pubStatus.normal" }}
-			</label>
-			<label class="btn btn-primary">
-				<input type="radio" name="pubStatus" value="online_frist" autocomplete="off"> {{_ "pubStatus.onlineFirst" }}
-			</label>
-			<label class="btn btn-primary">
-				<input type="radio" name="pubStatus" value="preset" autocomplete="off"> {{_ "pubStatus.preset" }}
-			</label>
-		</div>
-	</p>
+    <p>
+
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary active">
+            <input type="radio" name="pubStatus" value="normal" autocomplete="off" checked> {{_ "pubStatus.normal" }}
+        </label>
+        <label class="btn btn-primary">
+            <input type="radio" name="pubStatus" value="online_frist" autocomplete="off"> {{_ "pubStatus.onlineFirst" }}
+        </label>
+        <label class="btn btn-primary">
+            <input type="radio" name="pubStatus" value="preset" autocomplete="off"> {{_ "pubStatus.preset" }}
+        </label>
+    </div>
+    </p>
     {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true dynamicField='pubStatus'}}
 </template>
 
@@ -52,10 +53,15 @@
         </td>
         <td>
             {{#if articleId}}
-                <a class="btn btn-success"
-                        href="{{urlToArticleById articleId}}">{{_ "Success"}}</a>
+                <!--<a class="btn btn-success"-->
+                   <!--href="{{urlToArticleById articleId}}">{{_ "Success"}}</a>-->
+                <button type="button" class="btn btn-success task-detail" data-toggle="modal"
+                        data-target="#uploadLogModal">
+                    {{_ status}}
+                </button>
             {{else}}
-                <button type="button" class="btn btn-primary task-detail" data-toggle="modal" data-target="#uploadLogModal">
+                <button type="button" class="btn btn-primary task-detail" data-toggle="modal"
+                        data-target="#uploadLogModal">
                     {{_ status}}
                 </button>
             {{/if}}
@@ -65,7 +71,7 @@
 
 
 <template name="UploadLogModal">
-    <div class="modal fade" id="uploadLogModal" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal" id="uploadLogModal" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -98,12 +104,18 @@
                     <ul class="list-unstyled">
                         {{#each errors}}
                             <li class="bg-danger">{{this}}</li>
-                        {{else}}
-                            <li class="bg-success">{{_ "Success"}}</li>
                         {{/each}}
+                        {{#if importSucceeded}}
+                            <li class="bg-success">{{_ "Success"}}</li>
+                        {{/if}}
                     </ul>
                 </div>
                 <div class="modal-footer">
+                    {{#if importSucceeded}}
+                        <button type="button" class="btn btn-primary goToArticle">
+                            {{_ "Go to article"}}
+                        </button>
+                    {{/if}}
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
                 </div>
             </div>

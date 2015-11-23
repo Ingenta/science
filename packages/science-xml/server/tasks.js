@@ -258,6 +258,8 @@ Tasks.insertArticleTask = function (logId, result) {
         hadError = true;
     }
     if (!hadError) {
+        var url = Science.URL.articleDetail(articleId);
+        logger.info("Import complete: "+log.name+" available at "+url);
         //cleanup and set log and tasks to done
         ScienceXML.RemoveFile(log.filePath);
         UploadTasks.update(
@@ -265,7 +267,7 @@ Tasks.insertArticleTask = function (logId, result) {
             {$set: {status: "Success"}});
         UploadLog.update(
             {_id: logId},
-            {$set: {status: "Success", articleId: articleId}}
+            {$set: {status: "Success", articleId: articleId, articleUrl: url}}
         );
     }
 }

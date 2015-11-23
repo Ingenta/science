@@ -99,11 +99,15 @@ PastDataImport = function () {
 			if (file && file.toLowerCase().endWith(".xml")) {
 				Parser(folder+file,{}, Meteor.bindEnvironment(function (err, issue) {
 					if (err)
-						console.dir(err) ;
-					if (issue && !_.isEmpty(issue.articles)) {
+					    logger.error(err)
+					if (!(issue && !_.isEmpty(issue.articles))){
+						logger.warn("articles not found in historical issue xml")
+					}else {
 						var journal =  Publications.findOne({issn: issue.issn.replace('-','')},{fields:{title:1,titleCn:1,issn:1,EISSN:1,CN:1,publisher:1}});
 
-						if (journal) {
+						if (!journal){
+							logger.warn("journal does not exist with issn: "+issue.issn);
+						}else {
 
 							var vi = issueCreator.createIssue({
 								journalId:journal._id,
@@ -129,6 +133,7 @@ PastDataImport = function () {
 								newOne.title=article.title;
 								newOne.publisher=journal.publisher;
 								newOne.startPage=article.startPage;
+								newOne.elocationId=article.startPage;
 								newOne.accepted=article.acceptDate;
 								newOne.published=article.publishDate;
 								newOne.topic=getTopic(article.subspecialty);
@@ -143,26 +148,22 @@ PastDataImport = function () {
 								newOne.accessKey=journal.accessKey;
 								newOne.language=article.language=='zh_CN'?2:1;
 								var refs = getReference(article.citations);
-								if(!_.isEmpty(refs)){
-									_.extend(newOne,refs);
-								}
-								var existArticle = Articles.findOne({doi: newOne.doi});
-								if(existArticle){
-									Articles.update({_id:existArticle._id},{$set:newOne});
-									console.log("update "+newOne.doi + " successfully");
+                                if(!_.isEmpty(refs)){
+                                    _.extend(newOne,refs);
+                                }
+                                var existArticle = Articles.findOne({doi: newOne.doi});
+                                if(existArticle){
+                                    Articles.update({_id:existArticle._id},{$set:newOne});
+                                    console.log("update "+newOne.doi + " successfully");
 
-								}else{
-									Articles.insert(newOne);
-									console.log("import "+newOne.doi + " successfully");
-								}
+                                }else{
+                                    Articles.insert(newOne);
+                                    console.log("import "+newOne.doi + " successfully");
+                                }
 
-							})
-						} else {
-							console.log("journal not exists");
-						}
-					}else{
-						console.log("article not found")
-					}
+                            })
+                        }
+                    }
 				}));
 			}
 		})

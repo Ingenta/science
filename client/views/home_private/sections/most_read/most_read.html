@@ -14,7 +14,7 @@
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
-    {{#if mostReadCount}}
+    {{#if hasFiveOrMoreMostReadArticles}}
         <div align="right"><a href="/mostReadArticles/{{this.journalId}}">
             <button>+ {{_ "more"}}</button>
         </a></div>
