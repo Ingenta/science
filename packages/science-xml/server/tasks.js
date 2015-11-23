@@ -1,7 +1,6 @@
 Tasks = {};
 
 Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
-
     if (!pathToFile || !fileName || !fileType)return;
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
     //文章的出版状态(默认是正式出版)
@@ -96,7 +95,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                 //set extract task to success, cleanup and start next task
                 UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                 //get target xml filename TODO: make this better
-                FSE.readdir(targetPath,
+                Science.FSE.readdir(targetPath,
                     Meteor.bindEnvironment(
                         function (err, file) {
                             if (err) {

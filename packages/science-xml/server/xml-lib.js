@@ -3,21 +3,21 @@ var parserHelper = Science.XPath.ParseHelper;
 ScienceXML = {};
 ScienceXML.FileExists = function (path) {
     if (!path)return false;
-    if (FSE.existsSync(path)) {
+    if (Science.FSE.existsSync(path)) {
         return true;
     }
     return false;
 }
 ScienceXML.FolderExists = function (path) {
     if (!path)return false;
-    if (FSE.ensureDirSync(path)) {
+    if (Science.FSE.ensureDirSync(path)) {
         return true;
     }
     return false;
 }
 ScienceXML.RemoveFile = function (path) {
     if (path) {
-        FSE.remove(path, function (err) {
+        Science.FSE.remove(path, function (err) {
             if (err) return console.error(err)
         });
     }
@@ -41,7 +41,7 @@ ScienceXML.getFileContentsFromRemotePath = function (path) {
     return getLocationSync(fullPath);
 }
 ScienceXML.getFileContentsFromLocalPath = function (path) {
-    return FSE.readFileSync(path, "utf8");
+    return Science.FSE.readFileSync(path, "utf8");
 }
 
 ScienceXML.getAuthorInfo = function (results, doc) {
