@@ -1,15 +1,15 @@
 Tasks.scanFTP = function(){
-    var ftp = new FTP();
+    //var ftp = new FTP();
     var listOptions = {
         ext:"zip",
-        targetFolder:"file"
+        targetFolder:"/file"
     };
-    ftp.listFiles(Science.JSON.MergeObject(Config.ftp.connectOptions,listOptions),function(err,list){
+    Science.FTP.listFiles(Science.JSON.MergeObject(Config.ftp.connectOptions,listOptions),Meteor.bindEnvironment(function(err,list){
         if(_.isEmpty(list)){
             return
         }
         _.each(list,function(file){
-            ftp.getSingleFile(Science.JSON.MergeObject(Config.ftp.connectOptions,{sourcePath:listOptions.targetFolder + "/"+ file.name}),Config.ftp.downloadDir + "/"+ file.name,function(err){
+            Science.FTP.getSingleFile(Science.JSON.MergeObject(Config.ftp.connectOptions,{sourcePath:listOptions.targetFolder + "/"+ file.name}),Config.ftp.downloadDir + "/"+ file.name,Meteor.bindEnvironment(function(err){
                 if(err){
                     console.dir(err)
                     console.dir("Download fail:"+listOptions.targetFolder + "/"+ file.name)
@@ -17,16 +17,19 @@ Tasks.scanFTP = function(){
                 }
                 var moveOptions={
                     oldPath: listOptions.targetFolder + "/"+ file.name,
-                    newPath: Config.ftp.moveToDir
+                    newPath: Config.ftp.moveToDir+"/"+file.name
                 }
-                ftp.moveFtpFiles(Science.JSON.MergeObject(Config.ftp.connectOptions,moveOptions),function(err){
+                console.dir(moveOptions);
+                Science.FTP.moveFtpFiles(Science.JSON.MergeObject(Config.ftp.connectOptions,moveOptions),function(err){
+                    console.log('move ftp files');
+                    console.dir(err);
                     if(err){
                         console.dir(err)
                         console.dir("Move fail:" + err)
                     }
                 })
-                Tasks.startJob(Config.downloadDir + "/"+ file.name,file.name,"application/zip")
-            })
+                Tasks.startJob(Config.ftp.downloadDir + "/"+ file.name,file.name,"application/zip")
+            }))
         })
-    });
+    }));
 }

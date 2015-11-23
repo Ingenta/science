@@ -46,6 +46,6 @@ Router.route('/api', function () {
 
 		res.end();
 	};
-	(new FTP()).getSingleFile(req.body, targetPath, Meteor.bindEnvironment(downloadCallback));
+	Science.FTP.getSingleFile(req.body, targetPath, Meteor.bindEnvironment(downloadCallback));
 
 }, {where: 'server'});
