@@ -72,7 +72,7 @@ Config = {
             rate: "at 3:00 am"
         },
         FTPSCAN:{
-            rate:"every 5 minutes"
+            rate:"every 30 minutes"
         }
     },
     fieldsWhichFromXml: [
