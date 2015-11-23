@@ -21,12 +21,13 @@ Package.onUse(function (api) {
 		"science-institution",
 		"science-reports",
 		'aldeed:simple-schema',
-		'aldeed:autoform',
-		"vazco:universe-autoform-select"
+		'aldeed:autoform'
 	], ['server', 'client']);
 
 	api.use([
-		"reactive-var"
+		"reactive-var",
+		"vazco:universe-autoform-select",
+		"natestrauser:select2"
 	], 'client')
 
 	api.addFiles([

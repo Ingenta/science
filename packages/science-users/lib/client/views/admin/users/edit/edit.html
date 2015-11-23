@@ -1,158 +1,183 @@
 <template name="AdminUsersEdit">
-    <div class="container-fluid" id="content">
-        <div class="row" id="title_row">
-            <div class="col-xs-12">
-                <div id="page_menu" class="pull-right">
-                </div>
-            </div>
-        </div>
-        {{> AdminUsersEditEditForm}}
-    </div>
+	<div class="container-fluid" id="content">
+		<div class="row" id="title_row">
+			<div class="col-xs-12">
+				<div id="page_menu" class="pull-right">
+				</div>
+			</div>
+		</div>
+		{{> AdminUsersEditEditForm}}
+	</div>
 </template>
 
 <template name="AdminUsersEditEditForm">
-    <div class="">
-        {{> columeTitle titleName="Edit user"}}
-        <form id="form" role="form">
-            {{#if errorMessage}}
-                <div class="alert alert-warning">
-                    {{errorMessage}}
-                </div>
-            {{/if}}
+	<div class="">
+		{{> columeTitle titleName="Edit user"}}
+		<form id="form" role="form">
+			{{#if errorMessage}}
+				<div class="alert alert-warning">
+					{{errorMessage}}
+				</div>
+			{{/if}}
 
-            {{#if infoMessage}}
-                <div class="alert alert-success">
-                    {{infoMessage}}
-                </div>
-            {{/if}}
-            {{#if currUser.institutionId}}
-                <div class="form-group">
-                    <label>
-                        {{_ "Institution"}}
-                    </label>
+			{{#if infoMessage}}
+				<div class="alert alert-success">
+					{{infoMessage}}
+				</div>
+			{{/if}}
+			{{#if currUser.institutionId}}
+				<div class="form-group">
+					<label>
+						{{_ "Institution"}}
+					</label>
 
-                    <div class="input-div">
-                        {{#with getInstitutionNameById}}
-                            <input type="text" value="{{translateThis this.cn this.en}}" class="form-control"
-                                   disabled="disabled">
-	                        <input type="hidden" value="{{_id}}" name="institutionId"/>
-                        {{/with}}
-                    </div>
-                </div>
-            {{/if}}
-            {{#if currUser.publisherId}}
-                <div class="form-group">
-                    <label>
-                        {{_ "Publisher"}}
-                    </label>
+					<div class="input-div">
+						{{#with getInstitutionNameById}}
+							<input type="text" value="{{translateThis this.cn this.en}}" class="form-control"
+							       disabled="disabled">
+							<input type="hidden" value="{{_id}}" name="institutionId"/>
+						{{/with}}
+					</div>
+				</div>
+			{{/if}}
+			{{#if currUser.publisherId}}
+				<div class="form-group">
+					<label>
+						{{_ "Publisher"}}
+					</label>
 
-                    <div class="input-div">
-                        {{#with getPublisherNameById}}
-                            <input type="text" value="{{translateThis this.chinesename this.name}}" class="form-control"
-                                   disabled="disabled">
-	                        <input type="hidden" value="{{_id}}" name="publisherId"/>
-                        {{/with}}
-                    </div>
-                </div>
-                {{#if isPublisherAdmin}}
-                    <div class="form-group  field-profile-journal">
-                        <label for="journalId">
-                            {{_ "Journals"}}
-                        </label>
-                        <div class="input-div">
-                            <select multiple name="journalId" class="form-control" required="required">
-                                {{setJournalId}}
-                                {{#each getJournals}}
-                                    <option value="{{_id}}" {{optionIsSelected getJournalId _id}}>
-                                        {{translateThis titleCn title}}
-                                    </option>
-                                {{/each}}
-                            </select>
+					<div class="input-div">
+						{{#with getPublisherNameById}}
+							<input type="text" value="{{translateThis this.chinesename this.name}}" class="form-control"
+							       disabled="disabled">
+							<input type="hidden" value="{{_id}}" name="publisherId"/>
+						{{/with}}
+					</div>
+				</div>
+				{{#if isPublisherAdmin}}
+					<div class="form-group  field-profile-journal">
+						<label for="journalId">
+							{{_ "Journals"}}
+						</label>
+
+						<div class="input-div">
+							<select multiple name="journalId" class="form-control" required="required">
+								{{setJournalId}}
+								{{#each getJournals}}
+									<option value="{{_id}}" {{optionIsSelected getJournalId _id}}>
+										{{translateThis titleCn title}}
+									</option>
+								{{/each}}
+							</select>
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
-                        </div>
-                    </div>
-                {{/if}}
-            {{/if}}
-            <div class="form-group  field-name">
-                <label for="username">
-                    {{_ "User Name"}}
-                </label>
+						</div>
+					</div>
+				{{/if}}
+			{{/if}}
+			<div class="form-group  field-name">
+				<label for="username">
+					{{_ "User Name"}}
+				</label>
 
-                <div class="input-div">
-                    <input type="text" name="username" value="{{currUser.username}}" class="form-control"
-                           autofocus="autofocus" required="required" data-type="string">
+				<div class="input-div">
+					<input type="text" name="username" value="{{currUser.username}}" class="form-control"
+					       autofocus="autofocus" required="required" data-type="string">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
-                </div>
-            </div>
-            <div class="form-group  field-email">
-                <label for="email">
-                    {{_ "E-mail"}}
-                </label>
+				</div>
+			</div>
+			<div class="form-group  field-email">
+				<label for="email">
+					{{_ "E-mail"}}
+				</label>
 
-                <div class="input-div">
-                    <input type="text" name="email" value="{{emailAddress}}" class="form-control" required="required"
-                           data-type="email">
+				<div class="input-div">
+					<input type="text" name="email" value="{{emailAddress}}" class="form-control" required="required"
+					       data-type="email">
 					<span id="help-text" class="help-block">
 					</span>
 					<span id="error-text" class="help-block">
 					</span>
-                </div>
-            </div>
-            <div class="form-group  field-status">
-                <label for="status">
-                    {{_ "Status"}}
-                </label>
+				</div>
+			</div>
+			<div class="form-group  field-status">
+				<label for="status">
+					{{_ "Status"}}
+				</label>
 
-                <div class="input-div">
-                    <input type="checkbox" name="disable" {{disableStatus}}>
-                    <label for="disable">{{_ "Disable"}}</label>
-                </div>
-            </div>
-            {{#if can "delegate-and-revoke" "permissions"}}
-                {{> userEditRoles}}
-            {{/if}}
-            <div class="form-group">
-                <div class="submit-div">
-                    <button id="form-submit-button" class="btn btn-success" type="submit">
+				<div class="input-div">
+					<input type="checkbox" name="disable" {{disableStatus}}>
+					<label for="disable">{{_ "Disable"}}</label>
+				</div>
+			</div>
+			{{#if can "delegate-and-revoke" "permissions"}}
+				{{> userEditRoles}}
+			{{/if}}
+			<div class="form-group">
+				<div class="submit-div">
+					<button id="form-submit-button" class="btn btn-success" type="submit">
                         <span class="fa fa-check">
-                            {{_ "Save"}}
+	                        {{_ "Save"}}
                         </span>
-                    </button>
-                    <a href="#" id="form-cancel-button" class="btn btn-default">
-                        {{_ "Cancel"}}
-                    </a>
-                </div>
-            </div>
-        </form>
-    </div>
+					</button>
+					<a href="#" id="form-cancel-button" class="btn btn-default">
+						{{_ "Cancel"}}
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
 </template>
 
 <template name="userEditRoles">
-    <div class="form-group  field-roles">
-        <label for="roles">
-            {{_ "Role"}}
-        </label>
-        <div class="input-div">
-            {{#each getRoles}}
-	            {{#each roles}}
-                <div class="radio">
-	                {{#with roleInfo}}
-                    <label>
-                        <input type="checkbox" value="{{code}}" name="roles" data-type="array" {{checked}}>
-                        {{name}}
-                    </label>
-	                {{/with}}
-                </div>
-	            {{/each}}
-            {{/each}}
-            <span id="help-text" class="help-block"></span>
-			<span id="error-text" class="help-block"></span>
-        </div>
-    </div>
+	<div class="form-group  field-roles">
+		<label for="roles">
+			{{_ "Role"}}
+		</label>
+		<div class="panel-group" aria-multiselectable="true">
+			{{#each getRoles}}
+				{{#each roles}}
+					{{#with roleInfo}}
+						{{> singleRoleForDelegate}}
+					{{/with}}
+				{{/each}}
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="singleRoleForDelegate">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<input type="checkbox" value="{{code}}" name="roles" data-type="array" {{checked}}>
+			{{name}}
+			{{#if isNotGlobalRole}}
+			<a href="#" data-target="#collapse-{{clearStrForSel code}}" class="coll-trigger">设置范围</a>
+			{{/if}}
+		</div>
+		{{#if isNotGlobalRole}}
+		<div id="collapse-{{clearStrForSel code}}" class="panel-collapse collapse">
+			<div class="panel-body">
+				<div>
+					{{#if isPublisherRole}}
+						{{> publisherForDelegate}}
+					{{/if}}
+				</div>
+			</div>
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="publisherForDelegate">
+	<select multiple class="delegate-publisher" style="width:100%">
+		{{#each publishers}}
+			<option value="{{_id}}">{{translateThis chinesename name}}</option>
+		{{/each}}
+	</select>
 </template>
