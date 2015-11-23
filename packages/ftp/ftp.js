@@ -8,7 +8,6 @@ Science.FTP.getSingleFile = function (options, targetFile, callback) {
 	var originalSize;
 
 	var streamClose = function () {
-		console.log('streamClose')
 		var downloadedSize = FSE.statSync(targetFile).size;
 		var err;
 		if (originalSize !== downloadedSize)
