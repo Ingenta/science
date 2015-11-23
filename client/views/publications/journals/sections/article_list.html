@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-3">
             {{> journalCoverSummary}}
-            {{> articleListTree}}
+            {{> journalNavigationPanel}}
         </div>
         <div class="col-xs-9">
             {{> articleListRight pubStatus="normal"}}
@@ -11,14 +11,14 @@
     </div>
 </template>
 
-<template name="articleListTree">
+<template name="journalNavigationPanel">
     <ul class="list-unstyled">
-        {{#each volumeList _id}}
+        {{#each volumeInJournal _id}}
             <li class="volume">
                 <span class="volume-toggle"><i class="fa fa-plus"></i> {{_ "volumeItem" volume }}</span>
             </li>
             <div id="vol_{{_id}}" class="issues">
-                {{#each issueList journalId volume}}
+                {{#each issueInVolume journalId volume}}
                     <div class="issue" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
                         {{_ "issueItem" issue }}（{{year}}, {{month}}）
                     </div>
