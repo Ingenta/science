@@ -1,22 +1,19 @@
-Template.articleListTree.helpers({
-    volumeList: function (journalId) {
+Template.journalNavigationPanel.helpers({
+    volumeInJournal: function (journalId) {
         if (journalId) {
-            return Volumes.find({'journalId': journalId}, {sort: {'volume': -1}});
-        } else {
-            throw new Error("Lack of query conditions， 缺少查询条件!journalId:'+journalId+'");
+            var v = Volumes.find({'journalId': journalId}).fetch();
+            return _.sortBy(v, function(oneVolume){ return parseInt(oneVolume.volume,10); }).reverse();
         }
     },
-    issueList: function (journalId, volume) {
+    issueInVolume: function (journalId, volume) {
         if (journalId && volume) {
             var issues = Issues.find({'journalId': journalId, 'volume': volume}).fetch();
             return _.sortBy(issues, function(oneIssue){ return parseInt(oneIssue.issue,10); }).reverse();
-        } else {
-            throw new Error("Lack of query conditions， 缺少查询条件!journalId:'" + journalId + "',volume:'" + volume);
         }
     }
 });
 
-Template.articleListTree.events({
+Template.journalNavigationPanel.events({
     "click .volume": function (event) {
         var toggleOption = ["fa-plus", "fa-minus"];
         var remove = $(event.currentTarget).find("i.fa-plus").length ? 0 : 1;
@@ -49,9 +46,12 @@ Template.articleListRight.helpers({
         if (curIssue) {
             return Articles.find({issueId: curIssue, pubStatus: pubStatus},{sort: {elocationId: -1}});
         } else {
+            //Get the newest issue to display by default
             var journalId = Session.get('currentJournalId');
-            //return Articles.find({journalId: journalId}, {sort: {issue: -1}}); this shows all articles, uncomment for testing, below only shows latest issue as AIP
-            var lastIssue = Issues.findOne({'journalId': journalId}, {sort: {'volume': -1, 'issue': -1}});
+            var issues = Issues.find({'journalId': journalId}).fetch();
+            var highestVolume = _.max(issues, function(i){ return parseInt(i.volume,10); }).volume;
+            var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
+            var lastIssue =  _.max(issuesInThisVolume, function(i){ return parseInt(i.issue,10); });
             if (lastIssue) Session.set("currentIssueId", lastIssue._id);
         }
     },
