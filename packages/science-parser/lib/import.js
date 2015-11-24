@@ -127,7 +127,7 @@ PastDataImport = function () {
                             });
 
                             _.each(issue.articles, function (article) {
-                                console.log("import " + article.doi + " start");
+                                logger.info("import " + article.doi + " started");
                                 var newOne = {};
                                 newOne.journalId = journal._id;
                                 newOne.journal = journal;
@@ -163,11 +163,11 @@ PastDataImport = function () {
                                 var existArticle = Articles.findOne({doi: newOne.doi});
                                 if (existArticle) {
                                     Articles.update({_id: existArticle._id}, {$set: newOne});
-                                    console.log("update " + newOne.doi + " successfully");
+                                    logger.info("update " + newOne.doi + " successful");
 
                                 } else {
                                     Articles.insert(newOne);
-                                    console.log("import " + newOne.doi + " successfully");
+                                    logger.info("import " + newOne.doi + " successful");
                                 }
 
                             })
