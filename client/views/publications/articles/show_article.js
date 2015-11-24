@@ -219,14 +219,13 @@ Template.showArticle.events({
     }
 });
 
-var getNextPage = function (curIssue, ascending) {
-    var articlesInThisIssue = Articles.find({issueId: curIssue}).fetch();
+var getNextPage = function (issue, page, ascending) {
+    var articlesInThisIssue = Articles.find({issueId: issue},{fields:{elocationId:1,doi:1}}).fetch();
     var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
         return parseInt(a.elocationId, 10);
     });
     var dois = _.pluck(articlesOrderedByPage, "elocationId");
-    var thisArticleDoi = Router.current().data().elocationId
-    var positionInList = _.indexOf(dois, thisArticleDoi, true);
+    var positionInList = _.indexOf(dois, page, true);
     var nextPageIndex = ascending ? positionInList + 1 : positionInList - 1;
     if (!articlesOrderedByPage[nextPageIndex]) return false;
     var nextDoi = articlesOrderedByPage[nextPageIndex].doi;
@@ -234,12 +233,12 @@ var getNextPage = function (curIssue, ascending) {
 }
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        var curIssue = Router.current().data().issueId;
-        return getNextPage(curIssue, false);
+        var curIssue = this.issueId;
+        return getNextPage(curIssue, this.elocationId, false);
     },
     nextArticle: function () {
-        var curIssue = Router.current().data().issueId;
-        return getNextPage(curIssue, true);
+        var curIssue = this.issueId;
+        return getNextPage(curIssue, this.elocationId, true);
     }
 });
 
