@@ -59,7 +59,7 @@ Template.TagList.helpers({
 Template.recommendArticles.helpers({
     recommendArticles: function () {
         var journalId = Session.get('currentJournalId');
-        return Recommend.find({publications: journalId},{sort: {createDate: -1}, limit: 5});
+        return EditorsRecommend.find({publications: journalId},{sort: {createDate: -1}, limit: 5});
     },
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
@@ -76,7 +76,7 @@ Template.recommendArticles.helpers({
     },
     hasMoreThanFiveRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
-        if (journalId)return Recommend.find({publications: journalId}).count() > 5;
+        if (journalId)return EditorsRecommend.find({publications: journalId}).count() > 5;
     }
 });
 
@@ -84,7 +84,7 @@ Template.recommendArticles.events({
     'click .fa-trash': function (e) {
         var id = this._id;
         confirmDelete(e, function () {
-            Recommend.remove({_id: id});
+            EditorsRecommend.remove({_id: id});
         })
     }
 });
@@ -107,7 +107,7 @@ Template.addRecommendModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var journalId = Session.get('currentJournalId');
-        var jouRec = Recommend.find({publications: journalId}).fetch();
+        var jouRec = EditorsRecommend.find({publications: journalId}).fetch();
         var jouId = _.pluck(jouRec,"ArticlesId");
         var articles = Articles.find({journalId: journalId,_id:{$nin:jouId}}).fetch();
         var result = [];
@@ -123,7 +123,7 @@ Template.updateRecommendModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var journalId = Session.get('currentJournalId');
-        var jouRec = Recommend.find({publications: journalId,_id:{$ne:this._id}}).fetch();
+        var jouRec = EditorsRecommend.find({publications: journalId,_id:{$ne:this._id}}).fetch();
         var jouId = _.pluck(jouRec,"ArticlesId");
         var articles = Articles.find({journalId: journalId,_id:{$nin:jouId}}).fetch();
         var result = [];
