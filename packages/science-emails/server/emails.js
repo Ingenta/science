@@ -68,7 +68,6 @@ Meteor.methods({
                     "reason": values.reasons,
                     "articleList": [article],
                     "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                    "emailIcoUrl": Config.rootUrl + "email/ico.png",
                     "rootUrl": Config.rootUrl
                 })
             });
