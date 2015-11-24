@@ -9,6 +9,9 @@ Config = {
         uploadPdfDir: '/tmp/pdf',
         uploadExcelDir: '/tmp/excel',
     },
+    staticFiles:{
+        uploadFiguresDir: '/tmp/figures'
+    },
     ftp: {
         downloadDir: "/tmp/downloads",
         connectOptions:{

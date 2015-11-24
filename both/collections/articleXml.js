@@ -1,5 +1,6 @@
-FiguresStore = new FS.Collection("articleXml", {
-    stores: [new FS.Store.GridFS("articleXml", {})]
+FiguresStore = new FS.Collection("figures", {
+    stores: [new FS.Store.FileSystem("figures", {})],
+    path: Config.staticFiles.uploadFiguresDir
 });
 FiguresStore.allow({
     insert: function (userId, doc) {
