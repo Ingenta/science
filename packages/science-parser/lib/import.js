@@ -1,5 +1,6 @@
-PastDataImport = function () {
-    var folder = "/Users/jack/ImportPastData/";
+PastDataImport = function (path) {
+    var folder = path || "/Users/jack/ImportPastData/";
+    logger.info("working folder is: "+folder);
 
     var issueCreator = new ScienceXML.IssueCreator();
 
@@ -180,7 +181,10 @@ PastDataImport = function () {
 };
 
 
-Meteor.startup(function () {
-    //PastDataImport();
+Meteor.methods({
+    PastDataImportMethod:function(path){
+        logger.info("Client request for historical data import");
+        PastDataImport(path);
+    }
 })
 
