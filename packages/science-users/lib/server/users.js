@@ -23,8 +23,11 @@ Meteor.startup(function () {
     // Note: if you need to return HTML instead, use Accounts.emailTemplates.verifyEmail.html
 
     Accounts.emailTemplates.verifyEmail.html = function (user, url) {
-        return EmailConfig.findOne({key: "verifyEmail"}).body
-            + "<a href='" + url + "'>" + url + "</a>";
+        return JET.render('userEmail', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "rootUrl": Config.rootUrl,
+            "content": EmailConfig.findOne({key: "verifyEmail"}).body + "<a href='" + url + "'>" + url + "</a>"
+        })
     };
 
     Accounts.emailTemplates.resetPassword.subject = function (user) {
@@ -32,8 +35,11 @@ Meteor.startup(function () {
     };
 
     Accounts.emailTemplates.resetPassword.html = function (user, url) {
-        return EmailConfig.findOne({key: "forgotPassword"}).body
-            + "<a href='" + url + "'>" + url + "</a>";
+        return JET.render('userEmail', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "rootUrl": Config.rootUrl,
+            "content": EmailConfig.findOne({key: "forgotPassword"}).body + "<a href='" + url + "'>" + url + "</a>"
+        })
     };
 
     Accounts.emailTemplates.enrollAccount.subject = function (user) {
@@ -41,8 +47,11 @@ Meteor.startup(function () {
     };
 
     Accounts.emailTemplates.enrollAccount.html = function (user, url) {
-        return EmailConfig.findOne({key: "registration"}).body
-            + "<a href='" + url + "'>" + url + "</a>";
+        return JET.render('userEmail', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "rootUrl": Config.rootUrl,
+            "content": EmailConfig.findOne({key: "registration"}).body + "<a href='" + url + "'>" + url + "</a>"
+        })
     };
 
 });
