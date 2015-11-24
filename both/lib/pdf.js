@@ -1,5 +1,5 @@
 var pdfStore = new FS.Store.FileSystem("pdfs", {
-    path: Config.tempFiles.uploadPdfDir
+    path: Config.staticFiles.uploadPdfDir
 });
 
 Collections.Pdfs = new FS.Collection("pdfs", {

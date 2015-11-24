@@ -1,7 +1,7 @@
 Meteor.startup(function () {
     if (Meteor.isServer) {
         //确保pdf处理中间过程需要的文件夹存在
-        Science.FSE.ensureDir(Config.tempFiles.uploadPdfDir + "/handle/", function (err) {
+        Science.FSE.ensureDir(Config.staticFiles.uploadPdfDir + "/handle/", function (err) {
             if (err)
                 throw new Meteor.Error(err);
         });
@@ -209,7 +209,7 @@ Router.map(function () {
                         topic: 1
                     }
                 });
-                var adPdf = Config.tempFiles.uploadPdfDir + "/handle/" + (new Date()).getTime() + ".pdf";
+                var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + (new Date()).getTime() + ".pdf";
                 //准备需要添加到pdf中的数据
                 var lang = this.params.query.lang || "en";
 
@@ -284,8 +284,8 @@ Router.map(function () {
                             .replace("{time}", new Date().format("yyyy-MM-dd hh:mm:ss"))
                             .replace("{url}", Config.rootUrl + Science.URL.articleDetail(article._id) || "");
                         var params = [
-                            "-i", Config.tempFiles.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
-                            "-o", Config.tempFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, //处理完成后保存的文件位置
+                            "-i", Config.staticFiles.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
+                            "-o", Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, //处理完成后保存的文件位置
                             "-s", adPdf,       //广告页位置
                             "-f", footmark
                         ];
@@ -306,7 +306,7 @@ Router.map(function () {
                                     console.log('------STDERR--------');
                                 }
                                 if (!error) {
-                                    Science.FSE.exists(Config.tempFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, function (result) {
+                                    Science.FSE.exists(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, function (result) {
                                         if (result) {
                                             var headers = {
                                                 'Content-Type': pdf.copies.pdfs.type,
@@ -314,7 +314,7 @@ Router.map(function () {
                                             };
 
                                             response.writeHead(200, headers);
-                                            response.end(Science.FSE.readFileSync(Config.tempFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key));
+                                            response.end(Science.FSE.readFileSync(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key));
                                         }
                                     });
                                 } else {
