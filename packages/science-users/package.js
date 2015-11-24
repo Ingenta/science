@@ -21,12 +21,13 @@ Package.onUse(function (api) {
 		"science-institution",
 		"science-reports",
 		'aldeed:simple-schema',
-		'aldeed:autoform',
-		"vazco:universe-autoform-select"
+		'aldeed:autoform'
 	], ['server', 'client']);
 
 	api.use([
-		"reactive-var"
+		"reactive-var",
+		"vazco:universe-autoform-select",
+		"natestrauser:select2"
 	], 'client')
 
 	api.addFiles([
@@ -104,6 +105,8 @@ Package.onUse(function (api) {
 		'lib/client/views/admin/users/details/details.html',
 		'lib/client/views/admin/users/details/details.js',
 		'lib/client/views/admin/users/details/details_controller.js',
+		'lib/client/views/admin/users/edit/roleSelector/selector.html',
+		'lib/client/views/admin/users/edit/roleSelector/selector.js',
 		'lib/client/views/admin/users/edit/edit.html',
 		'lib/client/views/admin/users/edit/edit.js',
 		'lib/client/views/admin/users/edit/edit_controller.js',
