@@ -30,17 +30,17 @@ var buildHitCounterChart = function (articleId) {
     var data = new Array();
     data.push({
         name: TAPi18n.__('Abstract Views'),
-        y: ArticleViews.find({action: "abstract", articleId: articleId}).count()
+        y: PageViews.find({action: "abstract", articleId: articleId}).count()
     });
 
     data.push({
         name: TAPi18n.__('Full text Views'),
-        y: ArticleViews.find({action: "fulltext", articleId: articleId}).count()
+        y: PageViews.find({action: "fulltext", articleId: articleId}).count()
     });
 
     data.push({
         name: TAPi18n.__('PDF Downloads'),
-        y: ArticleViews.find({action: "pdfDownload", articleId: articleId}).count()
+        y: PageViews.find({action: "pdfDownload", articleId: articleId}).count()
     });
 
     $('#container-pie').highcharts({
@@ -146,12 +146,12 @@ function buildHitCounterGraph(articleId) {
     for (i = 1; i <= 12; i++) {
         var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        a.unshift(ArticleViews.find({
+        a.unshift(PageViews.find({
             action: "abstract",
             articleId: articleId,
             when: {$gte: startDate, $lt: endDate}
         }).count());
-        f.unshift(ArticleViews.find({
+        f.unshift(PageViews.find({
             action: "fulltext",
             articleId: articleId,
             when: {$gte: startDate, $lt: endDate}

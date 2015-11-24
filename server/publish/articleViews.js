@@ -1,6 +1,6 @@
 Meteor.publish('articleViews', function() {
-    return ArticleViews.find();
+    return PageViews.find();
 });
 Meteor.publish('articleViewsByArticleId', function(id) {
-    return ArticleViews.find({articleId:id});
+    return PageViews.find({articleId:id});
 });

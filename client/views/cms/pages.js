@@ -1,13 +1,13 @@
 Template.pageElement.helpers({
     setHomePageElement: function (key) {
-        var element = Pages.findOne({key: key});
+        var element = PageHeadings.findOne({key: key});
         if (!element) {
             return
         }
         Session.set("thisPageElement", element.key);
     },
     getPageTitle: function (key) {
-        var element = Pages.findOne({key: key});
+        var element = PageHeadings.findOne({key: key});
         if (!element) {
             return
         }
@@ -17,7 +17,7 @@ Template.pageElement.helpers({
         return element.title.en;
     },
     getPageDescription: function (key) {
-        var element = Pages.findOne({key: key});
+        var element = PageHeadings.findOne({key: key});
         if (!element)return;
         if (!element.description)return;
         if (TAPi18n.getLanguage() === "zh-CN")
@@ -32,7 +32,7 @@ Template.pageElement.helpers({
 Template.updateHomePagesModalForm.helpers({
     getPageId: function (key) {
         var key = Session.get("thisPageElement")
-        var element = Pages.findOne({key: key});
+        var element = PageHeadings.findOne({key: key});
         if (!element) {
             return
         }
@@ -43,7 +43,7 @@ Template.updateHomePagesModalForm.helpers({
 Template.updatePagesModalForm.helpers({
     getPageId: function (key) {
         var key = Session.get("thisPageElement")
-        var element = Pages.findOne({key: key});
+        var element = PageHeadings.findOne({key: key});
         if (!element) {
             return
         }

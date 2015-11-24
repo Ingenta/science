@@ -1,4 +1,4 @@
-this.Pages = new Meteor.Collection("pages");
+this.PageHeadings = new Meteor.Collection("pageHeadings");
 
 PagesSchema = new SimpleSchema({
     key: {
@@ -16,5 +16,5 @@ PagesSchema = new SimpleSchema({
 });
 Meteor.startup(function () {
     PagesSchema.i18n("schemas.pages");
-    Pages.attachSchema(PagesSchema);
+    PageHeadings.attachSchema(PagesSchema);
 });

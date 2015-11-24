@@ -37,7 +37,7 @@ ReactiveTabs.createInterface({
         if (!article)return;
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                ArticleViews.insert({
+                PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     journalId: article.journalId,
@@ -48,7 +48,7 @@ ReactiveTabs.createInterface({
             });
         } else if (slug === 'full text') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                ArticleViews.insert({
+                PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     journalId: article.journalId,
@@ -209,7 +209,7 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
-        ArticleViews.insert({
+        PageViews.insert({
             articleId: this._id,
             userId: Meteor.userId(),
             journalId: this.journalId,

@@ -2,7 +2,7 @@ getMostReadByJournal = function (journalId, limit) {
     if (!limit)limit = 20;
     var a = undefined;
     if (journalId)
-        a = ArticleViews.aggregate([{
+        a = PageViews.aggregate([{
             $match: {
                 journalId: journalId
             }
@@ -13,7 +13,7 @@ getMostReadByJournal = function (journalId, limit) {
             }
         }, {$sort: {count: -1}}
             , {$limit: limit}]);
-    else a = ArticleViews.aggregate([{
+    else a = PageViews.aggregate([{
         $group: {
             _id: {articleId: '$articleId'},
             count: {$sum: 1}
@@ -90,7 +90,7 @@ Meteor.methods({
     'getLocationReport': function (action, articleId) {
         var countryViews = {};
         var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
-        ArticleViews.aggregate([{
+        PageViews.aggregate([{
             $group: {
                 _id: {articleId: articleId, action: action, ip: '$ip'},
                 count: {$sum: 1}
