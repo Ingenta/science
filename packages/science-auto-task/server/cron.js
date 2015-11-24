@@ -276,11 +276,11 @@ SyncedCron.add({
                 //    subject: emailSubject,
                 //    html: emailContent
                 //});
-                console.log("email sent");
+                logger.silly("email sent");
                 //Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
             });
         } else {
-            console.log('watch email task ran but email list was empty, no emails sent.');
+            logger.silly('watch email task ran but email list was empty, no emails sent.');
         }
         Science.Email.searchFrequencyEmail();
         //Science.Email.authorCitationAlertEmail();
