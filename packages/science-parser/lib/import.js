@@ -158,7 +158,7 @@ PastDataImport = function () {
                                 newOne.language = article.language == 'zh_CN' ? 2 : 1;
                                 var refs = getReference(article.citations);
                                 if (!_.isEmpty(refs)) {
-                                    _.extend(newOne, refs);
+                                    newOne.references = refs;
                                 }
                                 var existArticle = Articles.findOne({doi: newOne.doi});
                                 if (existArticle) {
