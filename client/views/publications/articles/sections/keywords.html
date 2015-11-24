@@ -1,13 +1,17 @@
 <template name="keywordsPanel">
-<div>
-	<h4>{{_ "Keywords"}}</h4>
-	{{#each getKeywords}}
-		<p class="title_style">
-			<span class="name_style"><a href="{{searchLink}}">{{word}}</a></span>
-		</p>
-		<p class="data" style="width:{{ percent }}%">
+    <div>
+        {{#if getKeywords}}
+            <h4>{{_ "Keywords"}}</h4>
+        {{/if}}
+        {{#each getKeywords}}
+            <p class="title_style">
+                <span class="name_style">
+                    <a href="{{searchLink}}">{{word}}</a>
+                </span>
+            </p>
 
-		</p>
-	{{/each}}
-</div>
+            <p class="data" style="width:{{ percent }}%">
+            </p>
+        {{/each}}
+    </div>
 </template>
