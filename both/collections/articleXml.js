@@ -1,7 +1,7 @@
-ArticleXml = new FS.Collection("articleXml", {
+FiguresStore = new FS.Collection("articleXml", {
     stores: [new FS.Store.GridFS("articleXml", {})]
 });
-ArticleXml.allow({
+FiguresStore.allow({
     insert: function (userId, doc) {
         return true;
     },
