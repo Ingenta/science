@@ -150,34 +150,3 @@
 		</div>
 	</div>
 </template>
-
-<template name="singleRoleForDelegate">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<input type="checkbox" value="{{code}}" name="roles" data-type="array" {{checked}}>
-			{{name}}
-			{{#if isNotGlobalRole}}
-			<a href="#" data-target="#collapse-{{clearStrForSel code}}" class="coll-trigger">设置范围</a>
-			{{/if}}
-		</div>
-		{{#if isNotGlobalRole}}
-		<div id="collapse-{{clearStrForSel code}}" class="panel-collapse collapse">
-			<div class="panel-body">
-				<div>
-					{{#if isPublisherRole}}
-						{{> publisherForDelegate}}
-					{{/if}}
-				</div>
-			</div>
-		</div>
-		{{/if}}
-	</div>
-</template>
-
-<template name="publisherForDelegate">
-	<select multiple class="delegate-publisher" style="width:100%">
-		{{#each publishers}}
-			<option value="{{_id}}">{{translateThis chinesename name}}</option>
-		{{/each}}
-	</select>
-</template>
