@@ -21,7 +21,7 @@ Template.AbstractContentAndKeywords.helpers({
 });
 
 
-Template.fundingTemplating.helpers({
+Template.fundingInfo.helpers({
 	"fundings3":function(){
 		return _.first(this.fundings,3);
 	}

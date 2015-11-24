@@ -41,7 +41,7 @@ Science.Email.authorCitationAlertEmail = function () {
                     "rootUrl": Config.rootUrl
                 })
             });
-            console.log("email sent");
+            logger.silly("citation alert email sent");
         });
     })
 };
@@ -70,7 +70,7 @@ Science.Email.searchFrequencyEmail = function () {
             })
 
         });
-        console.log("email sent");
+        logger.silly("search frequency email sent");
         searchLogs.forEach(function (entry) {
             SearchLog.update({_id: entry._id}, {$set: {count: 0}});
         });
@@ -148,5 +148,5 @@ Science.Email.test = function (template, theData) {
         subject: 'test',
         html: JET.render(template, theData)
     });
-    console.log('waitting for email');
+    console.log('waiting for email');
 };

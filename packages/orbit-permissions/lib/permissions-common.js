@@ -206,7 +206,7 @@ OrbitPermissions = {
 		var i, len, message, ref, ref1, ref2, ref3, userRole, role_name, role_package;
 		if (package_name == null) {
 			message = "OrbitPermissions.UserCan(): You must specify package_name";
-			console.log("Error: " + message);
+			logger.error("Error: " + message);
 			throw new Meteor.Error(401, message);
 		}
 		rolesDep.depend();

@@ -11,6 +11,12 @@ EmailsSchema  = new SimpleSchema({
         autoform:{
             type: "hidden"
         }
+    },
+    doi:{
+        type:String,
+        autoform:{
+            type: "hidden"
+        }
     }
 });
 

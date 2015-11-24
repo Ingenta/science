@@ -6,9 +6,7 @@ Meteor.methods({
         }
         Accounts.sendEnrollmentEmail(userId, options.email, function(err){
             if (err){
-                console.log("email didn't get sent");
-            } else {
-                console.log('success');
+                logger.error("email didn't get sent");
             }
         });
         return userId;

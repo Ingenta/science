@@ -25,7 +25,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         return [
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
+            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId')),
             Meteor.subscribe('about'),
             Meteor.subscribe('about_articles'),
             Meteor.subscribe('allCollections'),
@@ -70,7 +70,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         return [
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'))
+            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId'))
         ]
     }
 

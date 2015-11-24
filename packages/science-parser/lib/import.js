@@ -127,10 +127,10 @@ PastDataImport = function () {
                             });
 
                             _.each(issue.articles, function (article) {
-                                console.log("import " + article.doi + " start");
+                                logger.info("import " + article.doi + " started");
                                 var newOne = {};
                                 newOne.journalId = journal._id;
-                                newOne.journalInfo = journal;
+                                newOne.journal = journal;
                                 newOne.volume = issue.volume;
                                 newOne.issue = issue.issue;
                                 newOne.year = issue.year;
@@ -158,16 +158,16 @@ PastDataImport = function () {
                                 newOne.language = article.language == 'zh_CN' ? 2 : 1;
                                 var refs = getReference(article.citations);
                                 if (!_.isEmpty(refs)) {
-                                    _.extend(newOne, refs);
+                                    newOne.references = refs;
                                 }
                                 var existArticle = Articles.findOne({doi: newOne.doi});
                                 if (existArticle) {
                                     Articles.update({_id: existArticle._id}, {$set: newOne});
-                                    console.log("update " + newOne.doi + " successfully");
+                                    logger.info("update " + newOne.doi + " successful");
 
                                 } else {
                                     Articles.insert(newOne);
-                                    console.log("import " + newOne.doi + " successfully");
+                                    logger.info("import " + newOne.doi + " successful");
                                 }
 
                             })

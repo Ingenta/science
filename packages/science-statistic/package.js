@@ -12,6 +12,13 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
+  api.use([
+    'templating',
+    'iron:router',
+    'science-lib',
+    'science-permissions',
+  ], client);
+
   api.addFiles('science-statistic.js');
 
   api.addFiles([
