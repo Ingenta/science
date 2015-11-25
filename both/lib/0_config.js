@@ -60,7 +60,7 @@ Config = {
         maxSize: 200 //MB
     },
     AutoTasks: {
-        start: true,
+        start: process.env.RUN_TASKS,
         DOI_Register: {
             savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
             recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
