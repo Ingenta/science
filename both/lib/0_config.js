@@ -6,20 +6,23 @@ Config = {
             tmpDir: '/tmp/uploads/tmp',
             uploadDir: '/tmp/uploads'
         },
-        uploadPdfDir: '/tmp/pdf',
-        uploadExcelDir: '/tmp/excel',
+        uploadExcelDir: '/tmp/excel'
+    },
+    staticFiles: {
+        uploadFiguresDir: Meteor.isDevelopment ? '/tmp/figures' : '~/app/static/figures',
+        uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdf' : '~/app/static/pdf'
     },
     ftp: {
         downloadDir: "/tmp/downloads",
-        connectOptions:{
-            host:"127.0.0.1",
-            user:"liu",
-            password:"123456",
-            port:21,
-            connTimeout:10000,
-            pasvTimeout:10000
+        connectOptions: {
+            host: "127.0.0.1",
+            user: "liu",
+            password: "123456",
+            port: 21,
+            connTimeout: 10000,
+            pasvTimeout: 10000
         },
-        moveToDir : "/newFile"
+        moveToDir: "/newFile"
     },
     ADPages: {
         journal: [
@@ -71,8 +74,8 @@ Config = {
         Send_Alert_Email: {
             rate: "at 3:00 am"
         },
-        FTPSCAN:{
-            rate:"every 30 minutes"
+        FTPSCAN: {
+            rate: "every 30 minutes"
         }
     },
     fieldsWhichFromXml: [

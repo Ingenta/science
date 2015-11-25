@@ -37,30 +37,12 @@
         vertical-align: middle;
         margin-right: 10px;
     }
-    .logo {
-        background: #68a7d0;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 20px;
-        font-family: Arial;
-        font-size: 14px;
-    }
-    .logo a {
-        color: #333;
-        padding: 0 5px;
-    }
-    .img-ico {
-        padding-left: 50px;
-        background: #fff;
-    }
     .content {
         background: #f6f6f6;
     }
     .new-list {
-        width: 350px;
-        float: left;
         background: #fff;
-        padding: 25px 20px;
+        padding: 25px 65px;
     }
     .meau-list {
         width: 200px;
@@ -121,12 +103,15 @@
     }
 </style>
 
-{{#each articleList}}
-    <h2><a href="{{url}}">{{title.cn}}</a></h2>
-    <h3>
-        {{#each authors}}
-            {{fullname.en}},
-        {{/each}}
-    </h3>
-    <h5><a href="{{journal.url}}">{{journal.titleCn}}</a>, {{year}}, {{volume}}({{issue}}){{#if elocationId}}: {{elocationId}}{{/if}} </h5>
-{{/each}}
+<div class="big">
+    {{> scpBanner}}
+    <div>
+        <img src="{{onlineUrl}}">
+    </div>
+    <div class="content">
+        <div class="new-list">
+            {{> emailArticleList}}
+        </div>
+        {{> emailFooter}}
+    </div>
+</div>

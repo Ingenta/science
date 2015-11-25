@@ -75,7 +75,7 @@ Template.FullTextTemplate.events({
 Template.figure.helpers({
     getFigById: function (id) {
         if (!id)return;
-        var fig = ArticleXml.findOne({_id: id});
+        var fig = FiguresStore.findOne({_id: id});
         if (!fig)return;
         return fig.url();
     }
@@ -91,7 +91,7 @@ Template.figModal.helpers({
     getFigFromSession: function () {
         var fig = Session.get("fig");
         if (!fig || !fig.imageId)return;
-        var a = ArticleXml.findOne({_id: fig.imageId});
+        var a = FiguresStore.findOne({_id: fig.imageId});
         if (!a)return;
         return a.url();
     }

@@ -1,0 +1,57 @@
+<template name="singleRoleForDelegate">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<input type="checkbox" value="{{code}}" class="roles" {{checked}}>
+			{{name}}
+			{{#if isNotGlobalRole}}
+				<a href="#" data-target="#collapse-{{clearStrForSel code}}" class="coll-trigger">设置范围</a>
+			{{/if}}
+		</div>
+		{{#if isNotGlobalRole}}
+			<div id="collapse-{{clearStrForSel code}}" class="panel-collapse collapse">
+				<div class="panel-body">
+					{{#if isPublisherRole}}
+						<div class="row">
+							<div class="col-xs-12">{{> publisherForDelegate}}</div>
+						</div>
+					{{/if}}
+					{{#if isJournalRole}}
+						<div class="row">
+							<div class="col-xs-12">{{> journalForDelegate}}</div>
+						</div>
+					{{/if}}
+					<br>
+					{{#if isInstitutionRole}}
+						<div class="row">
+							<div class="col-xs-12">{{> institutionForDelegate}}</div>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="publisherForDelegate">
+	<select multiple class="delegate-publisher" style="width:100%">
+		{{#each publishers}}
+			<option value="{{_id}}">{{translateThis chinesename name}}</option>
+		{{/each}}
+	</select>
+</template>
+
+<template name="journalForDelegate">
+	<select multiple class="delegate-journal" style="width:100%">
+		{{#each journals}}
+			<option value="{{_id}}">{{translateThis titleCn title}}</option>
+		{{/each}}
+	</select>
+</template>
+
+<template name="institutionForDelegate">
+	<select multiple class="delegate-institution" style="width:100%">
+		{{#each institutions}}
+			<option value="{{_id}}">{{translateThis name.cn name.en}}</option>
+		{{/each}}
+	</select>
+</template>

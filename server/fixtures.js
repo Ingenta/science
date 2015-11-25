@@ -75,7 +75,7 @@ Meteor.startup(function () {
         });
     }
 
-    if (Pages.find().count() === 0) {
+    if (PageHeadings.find().count() === 0) {
         var names = [
             {key: "homepage", e: "", c: ""},
             {key: "publisher", e: "Publishers", c: "出版商"},
@@ -101,7 +101,7 @@ Meteor.startup(function () {
             {key: "enterpriseCulture", e: "Enterprise Culture", c: "企业文化"}
         ];
         _.each(names, function (name) {
-            Pages.insert({
+            PageHeadings.insert({
                 key: name.key,
                 title: {cn: name.c, en: name.e}
             });
@@ -191,7 +191,7 @@ Meteor.startup(function () {
     }
 
     if (pacs.find().count() === 0) {
-        console.log("fixture for PACS");
+        logger.info("importing PACS data from /assets/app/pacs.json");
         var pacsFile = process.cwd() + "/assets/app/pacs.json";
         if (!Science.FSE.existsSync(pacsFile))
             return;

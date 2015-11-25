@@ -127,8 +127,23 @@ SyncedCron.add({
                         email: oneUser.emails[0].address,
                         issue: oneIssue
                     });
+
+                    var articleList = Articles.find({
+                        $and: [
+                            {journalId: {$in: [oneIssue.journalId]}},
+                            {createdAt: {$gt: oneUser.lastSentDate}},
+                            {$or: [{pubStatus: 'online_first'}, {pubStatus: 'preset'}]}
+                        ]
+                    }, {
+                        fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, journalId: 1, 'journal.titleCn': 1}
+                    }).fetch();
+                    articleList = generateArticleLinks (articleList);
+                    if (articleList.length) outgoingList.push({
+                        userId: oneUser._id,
+                        email: oneUser.emails[0].address,
+                        articleList: articleList
+                    });
                 });
-                //
             }
             if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
                 oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
@@ -246,17 +261,13 @@ SyncedCron.add({
                     Science.Email.watchArticleCitationAlertEmail(oneEmail);
                 } else {
                     //this is an article watch
-                    emailSubject = "Article Watch";
+                    //emailSubject = "Article Watch";
                     //emailConfig = EmailConfig.findOne({key: "watchArticle"});
                     //if (emailConfig) {
                     //    emailSubject = emailConfig.subject;
                     //    emailContent = emailConfig.body;
                     //}
-                    if(oneEmail.articleIds){
-                        oneEmail.articleIds.forEach(function (article) {
-                            emailContent += createEmailArticleListContent(article);
-                        })
-                    }
+                    Science.Email.availableOnline(oneEmail);
                 }
 
                 //Email.send({
@@ -265,11 +276,11 @@ SyncedCron.add({
                 //    subject: emailSubject,
                 //    html: emailContent
                 //});
-                console.log("email sent");
+                logger.silly("email sent");
                 //Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
             });
         } else {
-            console.log('watch email task ran but email list was empty, no emails sent.');
+            logger.silly('watch email task ran but email list was empty, no emails sent.');
         }
         Science.Email.searchFrequencyEmail();
         //Science.Email.authorCitationAlertEmail();

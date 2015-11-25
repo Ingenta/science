@@ -8,7 +8,7 @@ Template.relatedTopicLists.helpers({
 		}
 	},
 	pageDesc:function(){
-		var p = Pages.findOne({key:'topic'});
+		var p = PageHeadings.findOne({key:'topic'});
 		if(p && p.description)
 			return TAPi18n.getLanguage()==='zh-CN'? p.description.cn: p.description.en;
 		return "";

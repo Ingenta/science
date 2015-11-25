@@ -1,6 +1,6 @@
-this.Recommend = new Meteor.Collection("recommend");
+this.EditorsRecommend = new Meteor.Collection("recommend");
 
-this.Recommend.allow({
+this.EditorsRecommend.allow({
     insert: function (userId, doc) {
         return Permissions.userCan("add-recommend", "resource", userId);
     },
@@ -51,5 +51,5 @@ RecommendSchema = new SimpleSchema({
 });
 Meteor.startup(function () {
     RecommendSchema.i18n("schemas.recommend");
-    Recommend.attachSchema(RecommendSchema);
+    EditorsRecommend.attachSchema(RecommendSchema);
 });

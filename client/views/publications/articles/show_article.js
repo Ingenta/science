@@ -37,7 +37,7 @@ ReactiveTabs.createInterface({
         if (!article)return;
         if (slug === 'abstract') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                ArticleViews.insert({
+                PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     journalId: article.journalId,
@@ -48,7 +48,7 @@ ReactiveTabs.createInterface({
             });
         } else if (slug === 'full text') {
             Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
-                ArticleViews.insert({
+                PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     journalId: article.journalId,
@@ -209,7 +209,7 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
-        ArticleViews.insert({
+        PageViews.insert({
             articleId: this._id,
             userId: Meteor.userId(),
             journalId: this.journalId,
@@ -218,25 +218,27 @@ Template.showArticle.events({
         })
     }
 });
-//TODO: decide what to do when elocation is null
+
+var getNextPage = function (issue, page, ascending) {
+    var articlesInThisIssue = Articles.find({issueId: issue},{fields:{elocationId:1,doi:1}}).fetch();
+    var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
+        return parseInt(a.elocationId, 10);
+    });
+    var dois = _.pluck(articlesOrderedByPage, "elocationId");
+    var positionInList = _.indexOf(dois, page, true);
+    var nextPageIndex = ascending ? positionInList + 1 : positionInList - 1;
+    if (!articlesOrderedByPage[nextPageIndex]) return false;
+    var nextDoi = articlesOrderedByPage[nextPageIndex].doi;
+    return nextDoi.substring(nextDoi.lastIndexOf("/") + 1);
+}
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        var curIssue = Session.get("currentIssueId");
-        var previousValue = Articles.findOne({issueId:curIssue, elocationId: {$lt: this.elocationId}}, {$sort: {elocationId: 1}});
-        if (previousValue) {
-            var preVal = previousValue.doi.substring(previousValue.doi.lastIndexOf("/") + 1);
-            return preVal;
-        }
-        return false;
+        var curIssue = this.issueId;
+        return getNextPage(curIssue, this.elocationId, false);
     },
     nextArticle: function () {
-        var curIssue = Session.get("currentIssueId");
-        var nextValue = Articles.findOne({issueId:curIssue, elocationId: {$gt: this.elocationId}}, {$sort: {elocationId: 1}});
-        if (nextValue) {
-            var nextVal = nextValue.doi.substring(nextValue.doi.lastIndexOf("/") + 1);
-            return nextVal;
-        }
-        return false;
+        var curIssue = this.issueId;
+        return getNextPage(curIssue, this.elocationId, true);
     }
 });
 

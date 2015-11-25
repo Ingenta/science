@@ -47,7 +47,7 @@ var generationXML = function(options,callback){
 
 	if(articles.count()==0){
 		AutoTasks.update({_id:options.taskId},{$set:{status:"aborted",total:0}});
-		console.log("Not found any article for DOI register");
+		logger.verbose("Not found any article for DOI register");
 		return;
 	}
 	options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"splicing",total:articles.count()}});
@@ -125,7 +125,7 @@ var post2CrossRef =function(taskId,filepath){
 			return console.error('request to crossref for register failed:', err);
 		}
 		taskId && AutoTasks.update({_id:taskId},{$set:{status:"success"}});//已提交
-		console.log('request to crossref for register successfully');
+		logger.verbose('request to crossref for register successfully');
 		var condition=Config.AutoTasks.DOI_Register.condition || 1;
 		condition = new Date().addDays(0-condition);
 		Articles.update({$or:[
@@ -133,7 +133,7 @@ var post2CrossRef =function(taskId,filepath){
 			{"stamps.rdoi":{$lte:condition}} //较早前进行过注册的
 		]},{$set:{"stamps.rdoi":new Date()}},
 			{multi:true});//将本次注册的所有文章的DOI注册时间更新为当前时间。
-		console.log('update register time stamp successfully');
+		logger.verbose('update register time stamp successfully');
 	}))
 };
 

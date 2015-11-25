@@ -44,6 +44,29 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         ]
     }
 });
+Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
+    data: function () {
+        var pub = Publishers.findOne({name: this.params.publisherName});
+        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        if (journal) {
+            Session.set('currentJournalId', journal._id);
+            Session.set('currentPublisherId', pub._id);
+            return journal;
+        }
+    },
+    template: "addArticleForSpecialTopics",
+    name: "specialTopics.selectArticles",
+    parent: "journal.name",
+    title: function () {
+        return TAPi18n.__("Special Topics");
+    },
+    waitOn: function () {
+        return [
+            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
+            Meteor.subscribe('specialTopics')
+        ]
+    }
+});
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue', {
     data: function () {
@@ -76,29 +99,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
 
 });
 
-Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
-    data: function () {
-        var pub = Publishers.findOne({name: this.params.publisherName});
-        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        if (journal) {
-            Session.set('currentJournalId', journal._id);
-            Session.set('currentPublisherId', pub._id);
-            return journal;
-        }
-    },
-    template: "addArticleForSpecialTopics",
-    name: "specialTopics.selectArticles",
-    parent: "journal.name",
-    title: function () {
-        return TAPi18n.__("Special Topics");
-    },
-    waitOn: function () {
-        return [
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
-            Meteor.subscribe('specialTopics')
-        ]
-    }
-});
 
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/:guideId', {

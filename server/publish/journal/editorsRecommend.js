@@ -1,3 +1,3 @@
 Meteor.publish('recommend', function() {
-    return Recommend.find();
+    return EditorsRecommend.find();
 });

@@ -37,11 +37,10 @@ Science.Email.authorCitationAlertEmail = function () {
                     "authorName": authorName,
                     "citations": item.citations,
                     "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                    "emailIcoUrl": Config.rootUrl + "email/ico.png",
                     "rootUrl": Config.rootUrl
                 })
             });
-            console.log("email sent");
+            logger.silly("citation alert email sent");
         });
     })
 };
@@ -65,12 +64,11 @@ Science.Email.searchFrequencyEmail = function () {
             html: JET.render('searchFrequency', {
                 "searchLogs": searchLogs,
                 "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                "emailIcoUrl": Config.rootUrl + "email/ico.png",
                 "rootUrl": Config.rootUrl
             })
 
         });
-        console.log("email sent");
+        logger.silly("search frequency email sent");
         searchLogs.forEach(function (entry) {
             SearchLog.update({_id: entry._id}, {$set: {count: 0}});
         });
@@ -94,6 +92,20 @@ Science.Email.watchJournalEmail = function (oneEmail) {
     });
 };
 
+Science.Email.availableOnline = function (oneEmail) {
+    Email.send({
+        to: oneEmail.email,
+        from: 'publish@scichina.org',
+        subject: "Available Oneline Now",
+        html: JET.render('availableOnline', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "onlineUrl": Config.rootUrl + "email/online.jpg",
+            "rootUrl": Config.rootUrl,
+            "articleList": oneEmail.articleList,
+        })
+    });
+};
+
 Science.Email.watchTopicEmail = function (oneEmail) {
     Email.send({
         to: oneEmail.email,
@@ -101,7 +113,6 @@ Science.Email.watchTopicEmail = function (oneEmail) {
         subject: oneEmail.topic.name + "下有文章更新",
         html: JET.render('watchTopic', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
-            "emailIcoUrl": Config.rootUrl + "email/ico.png",
             "rootUrl": Config.rootUrl,
             "topic": oneEmail.topic,
             "articleList": oneEmail.articleList,
@@ -134,7 +145,6 @@ Science.Email.watchArticleCitationAlertEmail = function (oneEmail) {
                 "userName": oneEmail.userName,
                 "citations": item.citations,
                 "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                "emailIcoUrl": Config.rootUrl + "email/ico.png",
                 "rootUrl": Config.rootUrl
             })
         });
@@ -148,5 +158,5 @@ Science.Email.test = function (template, theData) {
         subject: 'test',
         html: JET.render(template, theData)
     });
-    console.log('waitting for email');
+    console.log('waiting for email');
 };

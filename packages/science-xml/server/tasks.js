@@ -205,7 +205,7 @@ Tasks.insertArticleImages = function (logId, result) {
                     log.errors.push("image missing: " + figName);
                 }
                 else {
-                    ArticleXml.insert(figLocation, function (err, fileObj) {
+                    FiguresStore.insert(figLocation, function (err, fileObj) {
                         if (err) {
                             logger.error(err);
                             log.errors.push(err.toString());
