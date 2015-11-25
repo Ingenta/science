@@ -327,5 +327,36 @@ Router.map(function () {
                 });
             }
         }
-    })
+    });
+    this.route('downloadExcel', {
+        where: 'server',
+        path: '/download-data',
+        action: function () {
+            var data = Articles.find().fetch();
+            var fields = [
+                {
+                    key: '_id',
+                    title: 'ID'
+                },
+                {
+                    key: 'title.en',
+                    title: 'Title'
+                },
+                {
+                    key: 'abstract',
+                    title: 'Abstract'
+                }
+            ];
+
+            var title = 'aa';
+            var file = Excel.export(title, fields, data);
+            var headers = {
+                'Content-type': 'application/vnd.openxmlformats',
+                'Content-Disposition': 'attachment; filename=' + title + '.xlsx'
+            };
+
+            this.response.writeHead(200, headers);
+            this.response.end(file, 'binary');
+        }
+    });
 });
