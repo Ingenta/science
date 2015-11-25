@@ -14,7 +14,6 @@ Template.mostReadArticleList.helpers({
         return _.map(mostReadArticleIdList, function (id) {
             return Articles.findOne({_id: id})
         });
-        ;
     },
     hasFiveOrMoreMostReadArticles: function () {
         if (Session.get("mostReadIds") && Session.get("mostReadIds").length >= 5)return true;
