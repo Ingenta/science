@@ -973,5 +973,6 @@
         "institution":"institution",
         "normal":"normal user"
     },
+    "userLevel":"User level",
     "no roles can use to this user":"No roles can use to this user"
 }

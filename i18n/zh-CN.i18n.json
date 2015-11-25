@@ -1270,5 +1270,6 @@
     "institution":"机构",
     "normal":"普通用户"
   },
+  "userLevel":"可被设置的用户级别",
   "no roles can use to this user":"没有可用于该用户的角色"
 }
