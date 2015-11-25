@@ -1,0 +1,41 @@
+<template name="AdminLogs">
+    <div class="container-fluid">
+
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <td style="width:17%">{{_ "Time"}}</td>
+                <td>{{_ "Message"}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each recentLogs}}
+                <tr class="{{getLevelClass level}}">
+                    <td>{{moFormat timestamp "lll"}}</td>
+                    <td>
+                        {{#if message}}
+                            {{#if meta}}
+                                <a tabindex="0" class="metaLogPopOver" role="button" data-toggle="popover"
+                                   data-trigger="focus" href="#"
+                                   title="{{message}}" data-content="{{metaToString meta}}">
+                                    {{message}}
+                                </a>
+                            {{else}}
+                                {{message}}
+                            {{/if}}
+                        {{else}}
+                            <a tabindex="0" class="metaLogPopOver" role="button" data-toggle="popover"
+                               data-trigger="focus" href="#"
+                               title="{{_ "Click Here"}}" data-content="{{metaToString meta}}">
+                                {{_ "Click Here"}}
+                            </a>
+                        {{/if}}
+                    </td>
+                </tr>
+            {{else}}
+                No logs
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
