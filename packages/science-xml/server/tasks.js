@@ -159,7 +159,7 @@ Tasks.parse = function (logId, pathToXml) {
 Tasks.insertArticlePdf = function (logId, result) {
     var log = UploadLog.findOne({_id: logId});
     if (!ScienceXML.FileExists(log.pdf)) {
-        logger.info("pdf not found in archive");
+        logger.info("pdf not found in archive: "+log.name);
         Tasks.insertArticleImages(logId, result);
         return;
     }
@@ -201,7 +201,7 @@ Tasks.insertArticleImages = function (logId, result) {
                 var figName = onlineOne.href;
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
-                    logger.warn("image missing: " + figName);
+                    logger.warn("image missing from import: " + log.name, figName);
                     log.errors.push("image missing: " + figName);
                 }
                 else {
@@ -259,7 +259,7 @@ Tasks.insertArticleTask = function (logId, result) {
     }
     if (!hadError) {
         var url = Science.URL.articleDetail(articleId);
-        logger.info("Import complete: "+log.name+" available at "+url);
+        logger.info("Import complete: " + log.name + " available at " + url);
         //cleanup and set log and tasks to done
         ScienceXML.RemoveFile(log.filePath);
         UploadTasks.update(
@@ -339,7 +339,7 @@ var insertArticle = function (a) {
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
     if (existArticle) {
-        var sets = _.pick(a, Config.fieldsWhichFromXml);
+        var sets = _.pick(a, Config.fieldsFromXmlToUpdate);
         Articles.update({_id: existArticle._id}, {$set: sets});
         return existArticle._id;
     }
