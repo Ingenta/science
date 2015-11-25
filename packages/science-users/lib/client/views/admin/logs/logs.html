@@ -1,5 +1,24 @@
 <template name="AdminLogs">
     <div class="container-fluid">
-        hello there
+        <table class="table table-bordered table-condensed">
+            <thead>
+            <tr>
+                <td>{{_ "Time"}}</td>
+                <td>{{_ "Level"}}</td>
+                <td>{{_ "Message"}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each recentLogs}}
+                <tr>
+                    <td>{{moFormat timestamp "lll"}}</td>
+                    <td>{{level}}</td>
+                    <td>{{message}}</td>
+                </tr>
+            {{else}}
+                No logs
+            {{/each}}
+            </tbody>
+        </table>
     </div>
 </template>
