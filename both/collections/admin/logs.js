@@ -1,0 +1,1 @@
+this.Logs = new Meteor.Collection("log");
