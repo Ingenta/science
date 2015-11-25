@@ -19,7 +19,7 @@ SyncedCron.add({
         return parser.text(Config.AutoTasks.FTPSCAN.rate || "every 30 minutes");//默认每30分钟检查一次
     },
     job: function () {
-    Tasks.scanFTP();
+        Tasks.scanFTP();
     }
 });
 SyncedCron.add({
@@ -104,21 +104,30 @@ SyncedCron.add({
                         {createDate: {$gt: oneUser.lastSentDate}}
                     ]
                 }).forEach(function (oneIssue) {
-                    if (!issueToArticles[oneIssue._id]){
+                    if (!issueToArticles[oneIssue._id]) {
                         var articles = Articles.find({
                             journalId: oneIssue.journalId,
                             volume: oneIssue.volume,
                             issue: oneIssue.issue,
                             pubStatus: 'normal'
                         }, {
-                            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, 'journal.titleCn': 1}
+                            fields: {
+                                _id: 1,
+                                title: 1,
+                                authors: 1,
+                                year: 1,
+                                volume: 1,
+                                issue: 1,
+                                elocationId: 1,
+                                'journal.titleCn': 1
+                            }
                         }).fetch();
 
                         var journalUrl = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
                         issueToArticles[oneIssue._id] = generateArticleLinks(articles, journalUrl);
                     }
 
-                    if(!journalNews[oneIssue.journalId]) {
+                    if (!journalNews[oneIssue.journalId]) {
                         journalNews[oneIssue.journalId] = journalIdToNews(oneIssue.journalId);
                     }
 
@@ -135,9 +144,19 @@ SyncedCron.add({
                             {$or: [{pubStatus: 'online_first'}, {pubStatus: 'preset'}]}
                         ]
                     }, {
-                        fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, journalId: 1, 'journal.titleCn': 1}
+                        fields: {
+                            _id: 1,
+                            title: 1,
+                            authors: 1,
+                            year: 1,
+                            volume: 1,
+                            issue: 1,
+                            elocationId: 1,
+                            journalId: 1,
+                            'journal.titleCn': 1
+                        }
                     }).fetch();
-                    articleList = generateArticleLinks (articleList);
+                    articleList = generateArticleLinks(articleList);
                     if (articleList.length) outgoingList.push({
                         userId: oneUser._id,
                         email: oneUser.emails[0].address,
@@ -154,9 +173,19 @@ SyncedCron.add({
                             {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_first'}]}
                         ]
                     }, {
-                        fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, journalId: 1, 'journal.titleCn': 1}
+                        fields: {
+                            _id: 1,
+                            title: 1,
+                            authors: 1,
+                            year: 1,
+                            volume: 1,
+                            issue: 1,
+                            elocationId: 1,
+                            journalId: 1,
+                            'journal.titleCn': 1
+                        }
                     }).fetch();
-                    articleList = generateArticleLinks (articleList);
+                    articleList = generateArticleLinks(articleList);
                     if (articleList.length) outgoingList.push({
                         userId: oneUser._id,
                         email: oneUser.emails[0].address,
@@ -202,7 +231,7 @@ SyncedCron.add({
                     }
                 }]);
 
-                if(citations.length) outgoingList.push({
+                if (citations.length) outgoingList.push({
                     userId: oneUser._id,
                     userName: oneUser.username,
                     email: oneUser.emails[0].address,
@@ -227,7 +256,15 @@ SyncedCron.add({
                     //    emailSubject = emailConfig.subject;
                     //    emailContent = emailConfig.body;
                     //}
-                    oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {fields: {title: 1, titleCn: 1, description: 1, scholarOneCode: 1, magtechCode: 1}});
+                    oneEmail.journal = Publications.findOne({_id: oneEmail.issue.journalId}, {
+                        fields: {
+                            title: 1,
+                            titleCn: 1,
+                            description: 1,
+                            scholarOneCode: 1,
+                            magtechCode: 1
+                        }
+                    });
                     oneEmail.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneEmail.issue.journalId).substring(1));
                     oneEmail.journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneEmail.issue.journalId);
                     oneEmail.issue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneEmail.issue._id).substring(1));
@@ -249,7 +286,7 @@ SyncedCron.add({
                     //oneEmail.articleIds.forEach(function (article) {
                     //    emailContent += createEmailArticleListContent(article);
                     //})
-                } else if(oneEmail.citations){
+                } else if (oneEmail.citations) {
                     //this is cited alert
                     //emailSubject = "Cited Alert";
                     //emailConfig = EmailConfig.findOne({key: "citedAlert"});
@@ -293,6 +330,11 @@ var abortUnfinishTask = function () {
 
 Meteor.startup(function () {
     abortUnfinishTask();
+    SyncedCron.config({
+        logger: function (opts) {
+            logger.log(opts.level, opts.message, opts.tag)
+        }
+    });
     if (Config.AutoTasks.start)
         SyncedCron.start();
 });
@@ -301,7 +343,7 @@ var generateArticleLinks = function (articles, journalUrl) {
     articles.forEach(function (article) {
         if (article._id)
             article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
-        if(journalUrl)
+        if (journalUrl)
             article.journal.url = journalUrl;
         else
             article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
@@ -312,14 +354,17 @@ var generateArticleLinks = function (articles, journalUrl) {
 var journalIdToNews = function (journalId) {
     var news = {};
     news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {createDate: -1}, limit: 3}).fetch();
-    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {
+        sort: {createDate: -1},
+        limit: 3
+    }).fetch();
     news.meetingInfo = Meeting.find({publications: journalId, about: 'c1'}, {sort: {createDate: -1}, limit: 3}).fetch();
     var rootUrl = Config.rootUrl;
     news.newsCenter.forEach(function (item) {
-        if(!item.url) item.url = rootUrl + "news/" + item._id
+        if (!item.url) item.url = rootUrl + "news/" + item._id
     });
     news.meetingInfo.forEach(function (item) {
-        item.startDate = moment(item.startDate).format( "MMM Do YYYY");
+        item.startDate = moment(item.startDate).format("MMM Do YYYY");
     });
     return news;
 };
@@ -328,7 +373,7 @@ var homepageNews = function () {
     var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
     var rootUrl = Config.rootUrl;
     news.forEach(function (item) {
-        if(!item.url) item.url = rootUrl + "news/" + item._id
+        if (!item.url) item.url = rootUrl + "news/" + item._id
     });
     return news;
 };
