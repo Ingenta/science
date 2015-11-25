@@ -65,7 +65,7 @@ AutoForm.addHooks(['addNewsModalForm'], {
     },
     before: {
         insert: function (doc) {
-            var newPage = _.contains(Config.NewsPage.journal, Router.current().route.getName());
+            var newPage = _.contains(Config.Routes.NewsPage.journal, Router.current().route.getName());
             var type = newPage ? 2 : 1;
             doc.types = type;
             doc.createDate = new Date();

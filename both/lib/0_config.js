@@ -1,4 +1,6 @@
 Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
+
+IsTaskRunner = Meteor.isServer ? process.env.RUN_TASKS : false;
 Config = {
     isDevMode: Meteor.isDevelopment,
     tempFiles: {
@@ -24,43 +26,52 @@ Config = {
         },
         moveToDir: "/newFile"
     },
-    ADPages: {
-        journal: [
-            'journal.name.toc',
-            'article.show',
-            'journal.name'
-        ],
-        global: [
-            'home',
-            'topics',
-            'authorCenter',
-            'publishers',
+    Routes: {
+        ADPages: {
+            journal: [
+                'journal.name.toc',
+                'article.show',
+                'journal.name'
+            ],
+            global: [
+                'home',
+                'topics',
+                'authorCenter',
+                'publishers',
+                'publications',
+                'collections'
+            ]
+        },
+        NewsPage: {
+            journal: [
+                'journal.name.toc',
+                'journal.name'
+            ],
+            global: [
+                'home'
+            ]
+        },
+        AccessKey: [
+            'publisher.name',
             'publications',
-            'collections'
-        ]
-    },
-    NewsPage: {
-        journal: [
-            'journal.name.toc',
-            'journal.name'
+            'journal.name',
+            'article.show',
+            'solrsearch'
         ],
-        global: [
-            'home'
-        ]
+        displayJournalLogin: {
+            journal: [
+                'journal.name.toc',
+                'article.show',
+                'journal.name'
+            ]
+        }
     },
-    AccessKey: [
-        'publisher.name',
-        'publications',
-        'journal.name',
-        'article.show',
-        'solrsearch'
-    ],
     Media: {
         allowType: ['mp3', 'mp4', 'ppt', 'pptx'],
         maxSize: 200 //MB
     },
     AutoTasks: {
-        start: true,
+        start: IsTaskRunner,
         DOI_Register: {
             savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
             recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
@@ -78,7 +89,7 @@ Config = {
             rate: "every 30 minutes"
         }
     },
-    fieldsWhichFromXml: [
+    fieldsFromXmlToUpdate: [
         "title",
         "abstract",
         "journalId",
@@ -133,13 +144,6 @@ Config = {
     },
     otherPlatformRegisterUrl: {
         editors: "http://ees.scichina.com/user/registuser_scichina.action"
-    },
-    displayJournalLogin: {
-        journal: [
-            'journal.name.toc',
-            'article.show',
-            'journal.name'
-        ]
     }
 };
 if (Meteor.isServer) {
@@ -148,7 +152,5 @@ if (Meteor.isServer) {
         "password": "123123",
         "email": "admin@scp.com"
     }
-    if (Config.isDevMode)
-        logger.info("Dev Platform: " + process.platform);
 }
 

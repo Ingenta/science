@@ -1,5 +1,10 @@
-<div>
+{{> cssStyle}}
+
+<div class="big">
     {{> scpBanner}}
-    <p>{{{content}}}</p>
+    <div class="part">
+        <p>{{content.body}}</p>
+        <a href="{{content.url}}">{{content.url}}</a>
+    </div>
     {{> emailFooter}}
 </div>

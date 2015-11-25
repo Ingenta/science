@@ -339,7 +339,7 @@ var insertArticle = function (a) {
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
     if (existArticle) {
-        var sets = _.pick(a, Config.fieldsWhichFromXml);
+        var sets = _.pick(a, Config.fieldsFromXmlToUpdate);
         Articles.update({_id: existArticle._id}, {$set: sets});
         return existArticle._id;
     }
