@@ -176,11 +176,8 @@ Template.userEditRoles.helpers({
 			console.error("Missing currUser!");
 			return
 		}
-		var userLevel = [];
-		user.publisherId && userLevel.push(OrbitPermissions.level.publisher);
-		user.institutionId && userLevel.push(OrbitPermissions.level.institution);
-		OrbitPermissions.isAdmin(user._id) && userLevel.push(OrbitPermissions.level.admin);
-		return OrbitPermissions.getRolesDescriptions2(userLevel, true);
+		var level = user.level || Permissions.level.normal;
+		return OrbitPermissions.getRolesDescriptions2(level, true);
 	},
 	"roleInfo": function () {
 		var user = Router.current().data().currUser;
