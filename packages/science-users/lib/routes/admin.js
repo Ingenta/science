@@ -128,3 +128,19 @@ Router.route("admin.tag", {
         ]
     }
 });
+Router.route("admin.logs", {
+    path: "/admin/logs",
+    title: function () {
+        return TAPi18n.__("Logs");
+    },
+    parent: "admin",
+    template: "Admin",
+    yieldTemplates: {
+        'AdminLogs': {to: 'AdminSubcontent'}
+    },
+    waitOn: function () {
+        return [
+            Meteor.subscribe("latestFiftyLogs")
+        ]
+    }
+});
