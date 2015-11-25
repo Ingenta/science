@@ -1,4 +1,6 @@
 Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
+
+IsTaskRunner = Meteor.isServer ? process.env.RUN_TASKS : false;
 Config = {
     isDevMode: Meteor.isDevelopment,
     tempFiles: {
@@ -24,7 +26,7 @@ Config = {
         },
         moveToDir: "/newFile"
     },
-    Routes:{
+    Routes: {
         ADPages: {
             journal: [
                 'journal.name.toc',
@@ -69,7 +71,7 @@ Config = {
         maxSize: 200 //MB
     },
     AutoTasks: {
-        start: process.env.RUN_TASKS,
+        start: IsTaskRunner,
         DOI_Register: {
             savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
             recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
