@@ -209,7 +209,6 @@ OrbitPermissions = {
 		return user_roles;
 	},
 	userCan                    : function (permission, package_name, user, scope) {
-		console.log('aaa')
 		var i, len, message, ref, ref1, ref2, ref3, userRole, role_name, role_package;
 		if (package_name == null) {
 			message = "OrbitPermissions.UserCan(): You must specify package_name";

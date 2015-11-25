@@ -9,8 +9,13 @@ var getSearchStrKey = function(){
 };
 var getQuery = function(searchStr){
 	var query={};
-	if(this.level)
-		_.extend(query,{level:this.level})
+	if(this.level){
+		if(this.level===Permissions.level.publisher)
+			_.extend(query,{level:{$in:[Permissions.level.publisher,Permissions.level.journal]}})
+		else
+			_.extend(query,{level:this.level})
+	}
+
 	if(!_.isEmpty(this.scope))
 		_.extend(query,this.scope);
 	if(searchStr)
@@ -26,6 +31,7 @@ Template.AdminUsersView.helpers({
 		return Session.get(getSearchStrKey.call(this));
 	},
 	"userDatas": function() {
+		debugger;
 		var searchStr = Session.get(getSearchStrKey.call(this));
 		var query = getQuery.call(this,searchStr);
 		return Meteor.users.find(query)
@@ -52,7 +58,6 @@ Template.AdminUsersViewTableItems.events({
 	},
 	"click #edit-button": function(e) {
 		e.preventDefault();
-		console.log('click')
 		if (!Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope)){
 			sweetAlert({
 				title             : TAPi18n.__("Warning"),
@@ -180,7 +185,8 @@ Template.userButtons.events({
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
-		var query={query:"level="+this.level};
+		var newUserLevel = Meteor.user().level === Permissions.level.publisher ? Permissions.level.journal:this.level;
+		var query={query:"level="+newUserLevel};
 		if(this.scope && this.scope.institutionId)
 			query.query=query.query+ "&institutionId="+this.scope.institutionId;
 		if(this.scope && this.scope.publisherId)

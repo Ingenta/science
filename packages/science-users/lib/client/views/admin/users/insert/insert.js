@@ -77,6 +77,7 @@ Template.AdminUsersInsert.events({
 					}
 				}
 				var level    = Router.current().params.query && Router.current().params.query.level;
+				debugger
 				values.level = level || "normal";
 				Meteor.call("createUserAccount", values, function (e, userId) {
 					if (e) {
@@ -94,6 +95,11 @@ Template.AdminUsersInsert.events({
 								"role": "institution:institution-manager-from-user",
 								scope : {institution: [values.institutionId]}
 							}]);
+						if(values.level === Permissions.level.journal && values.journalId)
+							Permissions.setRoles(userId,[{
+								"role": "journal-manager-publisher:publication",
+								scope : {journal: [values.journalId]}
+							}])
 						submitAction();
 					}
 				});
