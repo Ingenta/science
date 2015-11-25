@@ -1,3 +1,5 @@
 Meteor.publish('latestFiftyLogs', function() {
-    return Logs.find({}, {limit: 50});
+    return Logs.find({}, {
+        sort: {timestamp: -1},
+        limit: 50});
 });
