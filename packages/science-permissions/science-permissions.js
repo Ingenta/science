@@ -23,7 +23,7 @@ _.extend(Permissions, {
     getRoleDescByCode: function (code) {
         return Permissions.getRolesDescriptions()[code];
     },
-    check: function (perm, pkg) {
+    check: function (perm, pkg, scope) {
         if (Meteor.user() && Meteor.user().disable) {
             console.log("account disabled");
             Meteor.logout();
@@ -36,7 +36,7 @@ _.extend(Permissions, {
             return;
         }
         if (perm && pkg)
-            Permissions.throwIfUserCant(perm, pkg);
+            Permissions.throwIfUserCant(perm, pkg, scope);
     },
     undefineCustomRoleAndRevoke: function (role, callback) {
         try {

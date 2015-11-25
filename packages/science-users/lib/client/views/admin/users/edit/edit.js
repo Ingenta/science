@@ -56,7 +56,12 @@ Template.AdminUsersEditEditForm.events({
 
 			},
 			function (values) {
-				Permissions.check("modify-user", "user");
+				var scope={};
+				if(values.publisherId)
+					scope.publisher=values.publisherId;
+				if(values.institutionId)
+					scope.institution = values.institutionId;
+				Permissions.check("modify-user", "user", scope);
 				var getScopeVals = function(selector){
 					var scopeEle = $(selector);
 					if(scopeEle.length){

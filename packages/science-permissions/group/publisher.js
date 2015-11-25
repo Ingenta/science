@@ -1,6 +1,13 @@
 publisherPermissions = new Permissions.Registrar('publisher');
 
 publisherPermissions
+    .definePermission("use-publisher-panel",{
+        en: {name: "use publisher panel", summary: "use publisher panel"},
+        cn: {name: "可以使用管理员面板", summary: "可以使用管理员面板"},
+        options:{
+            level:publisherLevel
+        }
+    })
     .definePermission("add-publisher", {
         en: {name: "add publisher", summary: "can add publisher"},
         cn: {name: "添加出版商", summary: "您可以添加新出版商到系统中"},
@@ -12,7 +19,7 @@ publisherPermissions
         en: {name: "modify publisher", summary: "can modify publisher"},
         cn: {name: "编辑出版商", summary: "可以编辑出版商信息"},
         options:{
-            level:adminLevel
+            level:publisherLevel
         }
     })
     .definePermission("delete-publisher", {
@@ -28,6 +35,7 @@ publisherPermissions
         "permissions:delegate-and-revoke",
         "permissions:get-users-roles",
 
+        "use-publisher-panel",
         "modify-publisher",
 
         "user:add-user",

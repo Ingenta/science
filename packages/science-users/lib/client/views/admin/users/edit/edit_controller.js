@@ -8,10 +8,14 @@ this.AdminUsersEditController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
-		if (Router.current().route.getName() === "publisher.account.edit" && _.contains(Users.findOne({_id: this.params.userId}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this.params.userId !== Meteor.userId())
+		var scope = {};
+		var user = Users.findOne({_id:this.params.userId},{fields:{publisherId:1,institutionId:1}});
+		if(user.publisherId)
+			scope.publisher=user.publisherId;
+		if(user.institutionId)
+			scope.institution=user.institutionId;
+		if (!Permissions.userCan("modify-user","user",Meteor.userId(),scope))
 			Router.go("home");
-		Permissions.check("modify-user","user");
-		/*BEFORE_FUNCTION*/
 		this.next();
 	},
 

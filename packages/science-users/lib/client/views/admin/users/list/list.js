@@ -1,20 +1,33 @@
+var getSearchStrKey = function(){
+	var obj=Science.JSON.MergeObject({},{level:this.level},this.scope);
+	var searchStrKey = _.reduce(obj,function(mem,val,key){
+		if(val)
+			return mem+"-"+key+"-"+val
+		return mem;
+	},"user-search-string");
+	return searchStrKey;
+};
+var getQuery = function(searchStr){
+	var query={};
+	if(this.level)
+		_.extend(query,{level:this.level})
+	if(!_.isEmpty(this.scope))
+		_.extend(query,this.scope);
+	if(searchStr)
+		_.extend(query,{username:{$regex:searchStr}});
+	return query;
+}
+
 Template.AdminUsersView.helpers({
-
 	"isNotEmpty": function() {
-
-		return Meteor.users.find({level:this.level}).count()
+		return Meteor.users.find(getQuery.call(this)).count()
 	},
-
 	"searchString": function() {
-		return Session.get("user-search-string-for-"+this.level);
+		return Session.get(getSearchStrKey.call(this));
 	},
 	"userDatas": function() {
-		var searchStr = Session.get("user-search-string-for-"+this.level)
-		var query={level:this.level};
-		if(this.additional && this.additional.institutionId)
-			query.institutionId=this.additional.institutionId;
-		if(searchStr)
-			query.username={$regex:searchStr};
+		var searchStr = Session.get(getSearchStrKey.call(this));
+		var query = getQuery.call(this,searchStr);
 		return Meteor.users.find(query)
 	}
 });
@@ -39,7 +52,8 @@ Template.AdminUsersViewTableItems.events({
 	},
 	"click #edit-button": function(e) {
 		e.preventDefault();
-		if (Router.current().route.getName() === "publisher.account" && _.contains(Users.findOne({_id: this._id}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this._id !== Meteor.userId()){
+		console.log('click')
+		if (!Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope)){
 			sweetAlert({
 				title             : TAPi18n.__("Warning"),
 				text              : TAPi18n.__("Permission denied"),
@@ -86,6 +100,9 @@ Template.AdminUsersViewTableItems.helpers({
 			return "";
 		}
 		return Permissions.getRoleDescByCode(code).name;
+	},
+	"scope":function(){
+		return Router.current().data().scope;
 	}
 });
 
@@ -130,10 +147,10 @@ Template.userButtons.helpers({
 		return this.level === "normal"
 	},
 	"isNotEmpty":function(){
-		return Meteor.users.find({level:this.level}).count()
+		return Meteor.users.find(getQuery.call(this)).count()
 	},
 	"searchString":function(){
-		return Session.get("user-search-string-for-"+this.level)
+		return Session.get(getSearchStrKey.call(this))
 	}
 })
 
@@ -143,7 +160,7 @@ Template.userButtons.events({
 		e.preventDefault();
 		var inputEle = t.find("#dataview-search-input");
 		var searchStr = (inputEle && inputEle.value) || "";
-		Session.set("user-search-string-for-"+this.level,searchStr)
+		Session.set(getSearchStrKey.call(this),searchStr)
 	},
 
 	"keydown #dataview-search-input": function(e, t) {
@@ -152,20 +169,22 @@ Template.userButtons.events({
 		if(e.which === 13)//enter
 		{
 			e.preventDefault();
-			Session.set("user-search-string-for-"+this.level,searchStr)
+			Session.set(getSearchStrKey.call(this),searchStr)
 		}
 		if(e.which === 27)//esc
 		{
 			e.preventDefault();
-			Session.set("user-search-string-for-"+this.level,searchStr)
+			Session.set(getSearchStrKey.call(this),"")
 		}
 	},
 
 	"click #dataview-insert-button": function(e, t) {
 		e.preventDefault();
 		var query={query:"level="+this.level};
-		if(this.additional && this.additional.institutionId)
-			query.query=query.query+ "&institutionId="+this.additional.institutionId;
+		if(this.scope && this.scope.institutionId)
+			query.query=query.query+ "&institutionId="+this.scope.institutionId;
+		if(this.scope && this.scope.publisherId)
+			query.query=query.query+ "&publisherId="+this.scope.publisherId;
 		Router.go(Router.current().route.getName() + ".insert", {insId: Router.current().params.insId, pubId: Router.current().params.pubId},query);
 	}
 })

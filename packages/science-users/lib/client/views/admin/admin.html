@@ -1,83 +1,69 @@
 <template name="Admin">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12" id="content">
-                <div class="row" id="title_row">
-                    <div class="col-xs-12">
-                        <div id="page_menu" class="pull-right">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            {{#if can "list-user" "user"}}<!--canUseAdminPanel-->
-                <div id="menu" class="col-xs-2">
-                    <h2>
-                    </h2>
-                    {{> AdminSideMenu}}
-                </div>
-            {{/if}}
-            <div id="subcontent" class="col-xs-10">
-                {{> yield region='AdminSubcontent'}}
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid">
+		{{#if isAdmin}}<!--canUseAdminPanel-->
+			<div id="menu" class="col-xs-2">
+				{{> AdminSideMenu}}
+			</div>
+			<div id="subcontent" class="col-xs-10">
+				{{> yield region='AdminSubcontent'}}
+			</div>
+		{{/if}}
+	</div>
 </template>
 
 <template name="AdminSideMenu">
-    <ul id="menu-items" class="nav nav-stacked nav-pills">
-        {{#if can "list-user" "user"}}<!--canUseAdminPanel-->
-            <li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
-                <a href="{{pathFor 'admin.users'}}">
-                    {{_ "Account"}}
-                </a>
-            </li>
-        {{/if}}
-        {{#if can "get-users-roles" "permissions"}}
-            <li id="menu-item-simple" class="{{menuItemClass 'admin.roles'}}">
-                <a href="{{pathFor 'admin.roles'}}">
-                    {{_ "Roles"}}
-                </a>
-            </li>
-        {{/if}}
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
-            <a href="{{pathFor 'admin.upload'}}">
-                {{_ "Upload"}}
-            </a>
-        </li>
-        {{#if can "add-institution" "institution"}}
-            <li id="menu-item-simple" class="{{menuItemClass 'admin.institutions'}}">
-                <a href="{{pathFor 'admin.institutions'}}">
-                    {{_ "Institution"}}
-                </a>
-            </li>
-        {{/if}}
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.reports'}}">
-            <a href="{{pathFor 'admin.reports'}}">
-                {{_ "Reports"}}
-            </a>
-        </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.email'}}">
-            <a href="{{pathFor 'admin.email'}}">
-                {{_ "Email"}}
-            </a>
-        </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.tag'}}">
-            <a href="{{pathFor 'admin.tag'}}">
-                {{_ "Journal Tags"}}
-            </a>
-        </li>
+	<ul id="menu-items" class="nav nav-stacked nav-pills">
+		{{#if can "list-user" "user"}}<!--canUseAdminPanel-->
+			<li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
+				<a href="{{pathFor 'admin.users'}}">
+					{{_ "Account"}}
+				</a>
+			</li>
+		{{/if}}
+		{{#if can "get-users-roles" "permissions"}}
+			<li id="menu-item-simple" class="{{menuItemClass 'admin.roles'}}">
+				<a href="{{pathFor 'admin.roles'}}">
+					{{_ "Roles"}}
+				</a>
+			</li>
+		{{/if}}
+		<li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
+			<a href="{{pathFor 'admin.upload'}}">
+				{{_ "Upload"}}
+			</a>
+		</li>
+		{{#if can "add-institution" "institution"}}
+			<li id="menu-item-simple" class="{{menuItemClass 'admin.institutions'}}">
+				<a href="{{pathFor 'admin.institutions'}}">
+					{{_ "Institution"}}
+				</a>
+			</li>
+		{{/if}}
+		<li id="menu-item-simple" class="{{menuItemClass 'admin.reports'}}">
+			<a href="{{pathFor 'admin.reports'}}">
+				{{_ "Reports"}}
+			</a>
+		</li>
+		<li id="menu-item-simple" class="{{menuItemClass 'admin.email'}}">
+			<a href="{{pathFor 'admin.email'}}">
+				{{_ "Email"}}
+			</a>
+		</li>
+		<li id="menu-item-simple" class="{{menuItemClass 'admin.tag'}}">
+			<a href="{{pathFor 'admin.tag'}}">
+				{{_ "Journal Tags"}}
+			</a>
+		</li>
 		<li id="menu-item-simple" class="{{menuItemClass 'admin.autotask'}}">
-		    <a href="{{pathFor 'admin.autotask'}}">
-			    {{_ "AutoTask"}}
-		    </a>
-	    </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.statistic'}}">
-            <a href="{{pathFor 'admin.statistic'}}">
-                {{_ "Statistical Management"}}
-            </a>
-        </li>
-    </ul>
+			<a href="{{pathFor 'admin.autotask'}}">
+				{{_ "AutoTask"}}
+			</a>
+		</li>
+		<li id="menu-item-simple" class="{{menuItemClass 'admin.statistic'}}">
+			<a href="{{pathFor 'admin.statistic'}}">
+				{{_ "Statistical Management"}}
+			</a>
+		</li>
+	</ul>
 </template>
 

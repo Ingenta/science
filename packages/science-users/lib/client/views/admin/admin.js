@@ -1,13 +1,7 @@
-Template.Admin.rendered = function() {
-	
-};
-
-Template.Admin.events({
-	
-});
-
 Template.Admin.helpers({
-	
+	"isAdmin":function(){
+		return Permissions.isAdmin();
+	}
 });
 
 Template.AdminSideMenu.rendered = function() {
@@ -24,11 +18,3 @@ Template.AdminSideMenu.rendered = function() {
 
 	
 };
-
-Template.AdminSideMenu.events({
-	
-});
-
-Template.AdminSideMenu.helpers({
-	
-});

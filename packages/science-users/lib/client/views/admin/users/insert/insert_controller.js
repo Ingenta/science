@@ -8,5 +8,8 @@ this.AdminUsersInsertController = RouteController.extend({
     onBeforeAction: function () {
         Permissions.check("add-user", "user");
         this.next();
+    },
+    data:function(){
+        return {};
     }
 });

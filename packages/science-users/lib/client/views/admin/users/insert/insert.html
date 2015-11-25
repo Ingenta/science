@@ -33,6 +33,9 @@
                 </div>
             {{/if}}
             {{#if isPublisher}}
+	            {{#if publisherId}}
+		            <input name="publisherId" type="hidden" value="{{publisherId}}">
+	            {{else}}
                 <div class="form-group  field-profile-publisher">
                     <label for="publisherId">
                         {{_ "Publisher"}}
@@ -50,24 +53,7 @@
 					</span>
                     </div>
                 </div>
-                {{#if isPublisherAdmin}}
-                    <div class="form-group  field-profile-journal">
-                        <label for="journalId">
-                            {{_ "Journals"}}
-                        </label>
-                        <div class="input-div">
-                            <select multiple name="journalId" class="form-control" required="required">
-                                {{#each getJournals}}
-                                    <option value={{this._id}}>{{translateThis this.titleCn this.title}}</option>
-                                {{/each}}
-                            </select>
-                        <span id="help-text" class="help-block">
-                        </span>
-                        <span id="error-text" class="help-block">
-                        </span>
-                        </div>
-                    </div>
-                {{/if}}
+	            {{/if}}
             {{/if}}
 			<div class="form-group  field-profile-name">
 				<label for="username">
