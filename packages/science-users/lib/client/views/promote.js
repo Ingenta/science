@@ -9,7 +9,7 @@ Template.sidebarAd.helpers({
     },
     advertisement: function () {
         //判断当前路径是不是期刊或者期刊下属的页面
-        var isJournalPage = _.contains(Config.ADPages.journal, Router.current().route.getName());
+        var isJournalPage = _.contains(Config.Routes.ADPages.journal, Router.current().route.getName());
         var type = isJournalPage ? "2" : "1";
         var query = {types: type};
         if (isJournalPage) {
@@ -19,12 +19,12 @@ Template.sidebarAd.helpers({
     },
     isADPage: function () {
         if (!Router.current().route)return false;
-        return _.contains(Config.ADPages.global, Router.current().route.getName())
-            || _.contains(Config.ADPages.journal, Router.current().route.getName());
+        return _.contains(Config.Routes.ADPages.global, Router.current().route.getName())
+            || _.contains(Config.Routes.ADPages.journal, Router.current().route.getName());
     },
     AdCount: function () {
         if (!Router.current().route)return 0;
-        var isJournalPage = _.contains(Config.ADPages.journal, Router.current().route.getName());
+        var isJournalPage = _.contains(Config.Routes.ADPages.journal, Router.current().route.getName());
         var type = isJournalPage ? "2" : "1";
         var query = {types: type};
         if (isJournalPage) {
@@ -45,7 +45,7 @@ Template.sidebarAd.helpers({
 
         if(!Meteor.user().publisherId) return false;
         if (Meteor.user().publisherId !== Session.get('currentPublisherId')) return false;
-        if(!_.contains(Config.ADPages.journal, Router.current().route.getName())) return false;
+        if(!_.contains(Config.Routes.ADPages.journal, Router.current().route.getName())) return false;
 
         if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
             if (!_.contains(Meteor.user().journalId, Session.get('currentJournalId'))) return false;
@@ -70,7 +70,7 @@ AutoForm.addHooks(['addAdvertisementModalForm'], {
     },
     before: {
         insert: function (doc) {
-            var isJournalPage = _.contains(Config.ADPages.journal, Router.current().route.getName());
+            var isJournalPage = _.contains(Config.Routes.ADPages.journal, Router.current().route.getName());
             var type = isJournalPage ? 2 : 1;
             doc.types = type;
             doc.publications = Session.get('currentJournalId');

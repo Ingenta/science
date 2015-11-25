@@ -24,37 +24,46 @@ Config = {
         },
         moveToDir: "/newFile"
     },
-    ADPages: {
-        journal: [
-            'journal.name.toc',
-            'article.show',
-            'journal.name'
-        ],
-        global: [
-            'home',
-            'topics',
-            'authorCenter',
-            'publishers',
+    Routes:{
+        ADPages: {
+            journal: [
+                'journal.name.toc',
+                'article.show',
+                'journal.name'
+            ],
+            global: [
+                'home',
+                'topics',
+                'authorCenter',
+                'publishers',
+                'publications',
+                'collections'
+            ]
+        },
+        NewsPage: {
+            journal: [
+                'journal.name.toc',
+                'journal.name'
+            ],
+            global: [
+                'home'
+            ]
+        },
+        AccessKey: [
+            'publisher.name',
             'publications',
-            'collections'
-        ]
-    },
-    NewsPage: {
-        journal: [
-            'journal.name.toc',
-            'journal.name'
+            'journal.name',
+            'article.show',
+            'solrsearch'
         ],
-        global: [
-            'home'
-        ]
+        displayJournalLogin: {
+            journal: [
+                'journal.name.toc',
+                'article.show',
+                'journal.name'
+            ]
+        }
     },
-    AccessKey: [
-        'publisher.name',
-        'publications',
-        'journal.name',
-        'article.show',
-        'solrsearch'
-    ],
     Media: {
         allowType: ['mp3', 'mp4', 'ppt', 'pptx'],
         maxSize: 200 //MB
@@ -78,7 +87,7 @@ Config = {
             rate: "every 30 minutes"
         }
     },
-    fieldsWhichFromXml: [
+    fieldsFromXmlToUpdate: [
         "title",
         "abstract",
         "journalId",
@@ -133,13 +142,6 @@ Config = {
     },
     otherPlatformRegisterUrl: {
         editors: "http://ees.scichina.com/user/registuser_scichina.action"
-    },
-    displayJournalLogin: {
-        journal: [
-            'journal.name.toc',
-            'article.show',
-            'journal.name'
-        ]
     }
 };
 if (Meteor.isServer) {
@@ -148,7 +150,5 @@ if (Meteor.isServer) {
         "password": "123123",
         "email": "admin@scp.com"
     }
-    if (Config.isDevMode)
-        logger.info("Dev Platform: " + process.platform);
 }
 

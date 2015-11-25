@@ -99,7 +99,7 @@ AutoForm.addHooks(['addNewsCenterModalForm'], {
     },
     before: {
         insert: function (doc) {
-            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
+            var newPage=_.contains(Config.Routes.NewsPage.journal,Router.current().route.getName());
             var type =newPage?2:1;
             doc.types = type;
             doc.createDate = new Date();
@@ -117,7 +117,7 @@ AutoForm.addHooks(['addPublishingDynamicForm'], {
     },
     before: {
         insert: function (doc) {
-            var newPage=_.contains(Config.NewsPage.journal,Router.current().route.getName());
+            var newPage=_.contains(Config.Routes.NewsPage.journal,Router.current().route.getName());
             var type =newPage?2:1;
             doc.types = type;
             doc.createDate = new Date();
