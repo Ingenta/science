@@ -1,6 +1,5 @@
 Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
 
-IsTaskRunner = Meteor.isServer ? process.env.RUN_TASKS : false;
 Config = {
     isDevMode: Meteor.isDevelopment,
     tempFiles: {
@@ -14,6 +13,7 @@ Config = {
         uploadFiguresDir: Meteor.isDevelopment ? '/tmp/figures' : '~/app/static/figures',
         uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdf' : '~/app/static/pdf'
     },
+
     ftp: {
         downloadDir: "/tmp/downloads",
         connectOptions: {
@@ -69,25 +69,6 @@ Config = {
     Media: {
         allowType: ['mp3', 'mp4', 'ppt', 'pptx'],
         maxSize: 200 //MB
-    },
-    AutoTasks: {
-        start: IsTaskRunner,
-        DOI_Register: {
-            savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
-            recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
-            rootUrl: "http://phys.scichina.com:8083/sciG/CN/",//必须以/结束 ，必须
-            rate: "at 1:00 am",//提交注册请求的频率，默认每晚1点
-            condition: 1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
-        },
-        Citation: {
-            rate: "at 1:00 am except on Sat" //提交注册请求的频率，默认每周六凌晨1点"
-        },
-        Send_Alert_Email: {
-            rate: "at 3:00 am"
-        },
-        FTPSCAN: {
-            rate: "every 30 minutes"
-        }
     },
     fieldsFromXmlToUpdate: [
         "title",
@@ -151,6 +132,25 @@ if (Meteor.isServer) {
         "username": "admin",
         "password": "123123",
         "email": "admin@scp.com"
+    }
+    Config.AutoTasks = {
+        start: process.env.RUN_TASKS,
+            DOI_Register: {
+            savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
+                recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
+                rootUrl: "http://phys.scichina.com:8083/sciG/CN/",//必须以/结束 ，必须
+                rate: "at 1:00 am",//提交注册请求的频率，默认每晚1点
+                condition: 1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
+        },
+        Citation: {
+            rate: "at 1:00 am except on Sat" //提交注册请求的频率，默认每周六凌晨1点"
+        },
+        Send_Alert_Email: {
+            rate: "at 3:00 am"
+        },
+        FTPSCAN: {
+            rate: "every 30 minutes"
+        }
     }
 }
 
