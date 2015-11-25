@@ -1,19 +1,17 @@
 <template name="AdminLogs">
     <div class="container-fluid">
 
-        <table class="table table-bordered table-condensed">
+        <table class="table table-condensed">
             <thead>
             <tr>
-                <td>{{_ "Time"}}</td>
-                <td>{{_ "Level"}}</td>
+                <td style="width:17%">{{_ "Time"}}</td>
                 <td>{{_ "Message"}}</td>
             </tr>
             </thead>
             <tbody>
             {{#each recentLogs}}
-                <tr>
+                <tr class="{{getLevelClass level}}">
                     <td>{{moFormat timestamp "lll"}}</td>
-                    <td>{{level}}</td>
                     <td>
                         {{#if message}}
                             {{#if meta}}
