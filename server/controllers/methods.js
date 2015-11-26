@@ -51,12 +51,15 @@ createMostReadList = function (journalId, limit) {
 }
 //TODO: test connection failed with log
 //TODO: move to config
+var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
+var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
+var geoipHost = isDev ? localDevServer : "http://freegeopip";
 getMyLocationFromGeoIPServer = function (ip) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    var result = getLocationSync("http://ubuntu.local:9090/json/" + ip)
+    var result = getLocationSync(geoipHost+":9090/json/" + ip)
     if (Meteor.isDevelopment) {
         console.log("dev mode pretending to be baidu")
-        result = getLocationSync("http://ubuntu.local:9090/json/baidu.com");
+        result = getLocationSync(geoipHost+":9090/json/baidu.com");
     }
     if (!result)return;
     return EJSON.parse(result);
