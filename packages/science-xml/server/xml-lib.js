@@ -26,9 +26,8 @@ ScienceXML.getLocationAsync = function (path, cb) {
     cb && cb(null, HTTP.get(path).content);
 }
 
-ScienceXML.getLocationAsyncWithTimeOut = function (path, timeout, cb) {
-    if (!timeout)timeout = 2000;
-    cb && cb(null, HTTP.get(path, {timeout: timeout}).content);
+ScienceXML.getLocationAsyncWithTimeOut = function (path, cb) {
+    cb && cb(null, HTTP.get(path, {timeout: 2000}).content);
 }
 ScienceXML.getFileContentsFromFullPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);

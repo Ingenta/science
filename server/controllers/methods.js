@@ -53,21 +53,22 @@ createMostReadList = function (journalId, limit) {
 //TODO: move to config
 var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
 var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
+var port = isDev ? "9090" : "8080"
 var geoipHost = isDev ? localDevServer : "http://freegeoip";
-var geoipUrl = geoipHost + ":9090/json/";
+var geoipUrl = geoipHost + ":" + port + "/json/";
 getMyLocationFromGeoIPServer = function (ip) {
     var urlToCheck = geoipUrl + ip
     if (Meteor.isDevelopment) {
         //pretend to be baidu in dev mode because of internal office ip not resolving correctly
         urlToCheck = geoipUrl + "baidu.com";
     }
-    try{
-        var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsyncWithTimeOut);
+    try {
+        var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
         var result = getLocationSync(urlToCheck);
         if (!result)return;
         return EJSON.parse(result);
-    }catch(err) {
-        logger.error("connection failed to geoip at: "+geoipUrl);
+    } catch (err) {
+        logger.error("connection failed to geoip at: " + geoipUrl);
         return;
     }
 
