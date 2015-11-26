@@ -5,7 +5,7 @@
             <select id="publisherSelect" data-queryField="publisherId" class="queryField" placeholder="Publisher name" style="width: 90%;">
                 <option value="">{{_ "select publisher"}}</option>
                 {{#each publishers}}
-                <option value="{{_id}}">{{name}}</option>
+                <option value="{{_id}}">{{translateThis chinesename name}}</option>
                 {{/each}}
             </select>
         </li>
@@ -14,7 +14,7 @@
 			<select id="journalSelect" data-queryField="journalId" class="queryField" placeholder="Journal name" style="width: 90%;">
 				<option value="">{{_ "select journal"}}</option>
 				{{#each journals}}
-					<option value="{{_id}}">{{title}}</option>
+					<option value="{{_id}}">{{translateThis titleCn title}}</option>
 				{{/each}}
 			</select>
 		</li>
