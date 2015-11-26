@@ -48,6 +48,10 @@ Template.ResetPassword.events({
 Template.ResetPassword.helpers({
     errorMessage: function () {
         return pageSession.get("errorMessage");
+    },
+    isEnrollAccount: function () {
+        if (window.location.href.indexOf("enroll-account")!==-1)return true;
+        return false;
     }
 
 });
