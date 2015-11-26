@@ -58,7 +58,7 @@ getMyLocationFromGeoIPServer = function (ip) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
     var result = getLocationSync(geoipHost+":9090/json/" + ip)
     if (Meteor.isDevelopment) {
-        console.log("dev mode pretending to be baidu")
+        //console.log("dev mode pretending to be baidu")
         result = getLocationSync(geoipHost+":9090/json/baidu.com");
     }
     if (!result)return;
