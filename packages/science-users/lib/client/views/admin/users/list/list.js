@@ -31,7 +31,6 @@ Template.AdminUsersView.helpers({
 		return Session.get(getSearchStrKey.call(this));
 	},
 	"userDatas": function() {
-		debugger;
 		var searchStr = Session.get(getSearchStrKey.call(this));
 		var query = getQuery.call(this,searchStr);
 		return Meteor.users.find(query)

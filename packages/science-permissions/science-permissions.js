@@ -104,7 +104,7 @@ Meteor.startup(function () {
             logger.warn("create default user '" + da.username + "'");
             var userId = Accounts.createUser(da)
             logger.warn("set admin role for user '" + da.username + "'");
-            Permissions.delegate(userId, ["permissions:admin"]);
+            Permissions.setRoles(userId, ["permissions:admin"]);
         }
     }
 });

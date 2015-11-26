@@ -131,6 +131,7 @@ if (Meteor.isServer) {
     Config.defaultAdmin = {
         "username": "admin",
         "password": "123123",
+        "level":"admin",
         "email": "admin@scp.com"
     }
     Config.AutoTasks = {
