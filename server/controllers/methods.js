@@ -53,7 +53,7 @@ createMostReadList = function (journalId, limit) {
 //TODO: move to config
 var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
 var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
-var geoipHost = isDev ? localDevServer : "http://freegeopip";
+var geoipHost = isDev ? localDevServer : "http://freegeoip";
 getMyLocationFromGeoIPServer = function (ip) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
     var result = getLocationSync(geoipHost + ":9090/json/" + ip)
