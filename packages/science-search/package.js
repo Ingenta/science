@@ -30,7 +30,8 @@ Package.onUse(function(api) {
   api.addFiles([
     'server/solr.js',
     'server/methods.js',
-    'server/hooks.js'
+    'server/hooks.js',
+    'server/ajax.js'
   ],'server');
 
   api.addFiles([
@@ -55,7 +56,9 @@ Package.onUse(function(api) {
     'client/view/pagination.html',
     'client/view/pagination.js',
     'client/view/stylesheets/search.css',
-    'client/utils.js'
+    'client/utils.js',
+    'client/view/component/articleSelector.html',
+    'client/view/component/articleSelector.js'
   ],'client');
 
   api.export('SolrQuery','client');

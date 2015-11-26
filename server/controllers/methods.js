@@ -49,21 +49,28 @@ createMostReadList = function (journalId, limit) {
     });
     return _.uniq(allIds); //This removes any duplicates after initial
 }
-//TODO: test connection failed with log
 //TODO: move to config
 var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
 var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
+var port = isDev ? "9090" : "8080";
 var geoipHost = isDev ? localDevServer : "http://freegeoip";
-var geoipUrl = geoipHost + ":9090/json/";
+var geoipUrl = geoipHost + ":" + port + "/json/";
 getMyLocationFromGeoIPServer = function (ip) {
-    var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    var result = getLocationSync(geoipUrl + ip)
+    var urlToCheck = geoipUrl + ip;
     if (Meteor.isDevelopment) {
-        //console.log("dev mode pretending to be baidu")
-        result = getLocationSync(geoipUrl + "baidu.com");
+        //pretend to be baidu in dev mode because of internal office ip not resolving correctly
+        urlToCheck = geoipUrl + "baidu.com";
     }
-    if (!result)return;
-    return EJSON.parse(result);
+    try {
+        var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
+        var result = getLocationSync(urlToCheck);
+        if (!result)return;
+        return EJSON.parse(result);
+    } catch (err) {
+        logger.error("connection failed to geoip at: " + geoipUrl);
+    }
+
+
 }
 getMyLocationFromLocalDatabase = function (ip) {
     var currentUserIPNumber = Science.ipToNumber(ip);
@@ -100,10 +107,9 @@ Meteor.methods({
     'getLocationByCurrentIP': function () {
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
         var result = getMyLocationFromGeoIPServer(ip);
-        if (!result) {
-            logger.warn("connection failed to geoip at: " + geoipHost);
+        if (!result)
             result = getMyLocationFromLocalDatabase(ip);
-        }
+
         if (!result)return;
         return result;
     },

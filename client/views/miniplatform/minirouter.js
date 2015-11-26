@@ -1,6 +1,3 @@
-//数据库表
-Meteor.subscribe('images');
-Meteor.subscribe('news_link');
 //访问路径
 Router.map(function () {
     //新闻平台首页
@@ -14,7 +11,8 @@ Router.map(function () {
                 Meteor.subscribe('news_center'),
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('recommendedMiniPlatformArticles')
+                Meteor.subscribe('recommendedMiniPlatformArticles'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -26,7 +24,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications')
+                Meteor.subscribe('publications'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -34,7 +33,12 @@ Router.map(function () {
     //出版合作
     this.route("cooperation", {
         path: "/miniplatform/cooperation",
-        layoutTemplate: "miniLayout"
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                Meteor.subscribe('news_link')
+            ]
+        }
     });
 
     //新闻中心
@@ -43,7 +47,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_center')
+                Meteor.subscribe('news_center'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -54,7 +59,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_contact')
+                Meteor.subscribe('news_contact'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -65,7 +71,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_contact')
+                Meteor.subscribe('news_contact'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -76,7 +83,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_contact')
+                Meteor.subscribe('news_contact'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -87,7 +95,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_contact')
+                Meteor.subscribe('news_contact'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -98,7 +107,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_contact')
+                Meteor.subscribe('news_contact'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -110,7 +120,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('news_contact'),
-                Meteor.subscribe('files')
+                Meteor.subscribe('files'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -121,7 +132,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_center')
+                Meteor.subscribe('news_center'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -132,7 +144,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_center')
+                Meteor.subscribe('news_center'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -145,7 +158,8 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('fullMostRecentArticles')
+                Meteor.subscribe('fullMostRecentArticles'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -156,7 +170,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_contact')
+                Meteor.subscribe('news_contact'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -167,7 +182,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_center')
+                Meteor.subscribe('news_center'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -179,7 +195,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('column'),
-                Meteor.subscribe('column_views')
+                Meteor.subscribe('column_views'),
+                Meteor.subscribe('news_link')
             ]
         }
     });
@@ -190,7 +207,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('news_center')
+                Meteor.subscribe('news_center'),
+                Meteor.subscribe('news_link')
             ]
         }
     });

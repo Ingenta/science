@@ -23,7 +23,11 @@ ScienceXML.RemoveFile = function (path) {
     }
 }
 ScienceXML.getLocationAsync = function (path, cb) {
-    cb && cb(null, HTTP.get(path,{timeout:5000}).content);
+    cb && cb(null, HTTP.get(path).content);
+}
+
+ScienceXML.getLocationAsyncWithTimeOut = function (path, cb) {
+    cb && cb(null, HTTP.get(path, {timeout: 2000}).content);
 }
 ScienceXML.getFileContentsFromFullPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
@@ -542,8 +546,8 @@ ScienceXML.getReferences = function (results, doc) {
                 }
             }
             //提取引文作者信息 完成
-            ref.title = parserHelper.getXmlString("child::element-citation/article-title", refNode,true);
-            ref.title=ref.title && ref.title.replace(/\r\n/g, " ").trim();
+            ref.title = parserHelper.getXmlString("child::element-citation/article-title", refNode, true);
+            ref.title = ref.title && ref.title.replace(/\r\n/g, " ").trim();
             ref.publisherLoc = parserHelper.getSimpleVal("child::element-citation/publisher-loc", refNode);
             ref.publisherName = parserHelper.getSimpleVal("child::element-citation/publisher-name", refNode);
             ref.year = parserHelper.getSimpleVal("child::element-citation/year", refNode);

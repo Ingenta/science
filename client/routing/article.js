@@ -29,20 +29,19 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
             Meteor.subscribe('pdfs'),
-            Meteor.subscribe('mostCited'),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
     },
     onBeforeAction: function () {
-        if (!Session.get("ipInChina")) {
+        //if (!Session.get("ipInChina")) {
             Meteor.call("getLocationByCurrentIP", function (err, result) {
-                if(!result)console.log("localhost user detected");
+                if(!result)console.log("ip not found.");
                 else {
-                    console.log("Your location has been detected as: "+result.country_name ? result.country_name : result);//"No country found!");
+                    console.log("Your location has been detected as: "+JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
                     Session.set("ipInChina", result.country_code==="CN");
                 }
             })
-        }
+        //}
         this.next();
     },
     onStop: function () {

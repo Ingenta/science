@@ -236,10 +236,12 @@ var getNextPage = function (issue, page, ascending) {
 }
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
+        if(!this.elocationId)return false;
         var curIssue = this.issueId;
         return getNextPage(curIssue, this.elocationId, false);
     },
     nextArticle: function () {
+        if(!this.elocationId)return false;
         var curIssue = this.issueId;
         return getNextPage(curIssue, this.elocationId, true);
     }
