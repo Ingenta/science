@@ -49,15 +49,14 @@ createMostReadList = function (journalId, limit) {
     });
     return _.uniq(allIds); //This removes any duplicates after initial
 }
-//TODO: test connection failed with log
 //TODO: move to config
 var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
 var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
-var port = isDev ? "9090" : "8080"
+var port = isDev ? "9090" : "8080";
 var geoipHost = isDev ? localDevServer : "http://freegeoip";
 var geoipUrl = geoipHost + ":" + port + "/json/";
 getMyLocationFromGeoIPServer = function (ip) {
-    var urlToCheck = geoipUrl + ip
+    var urlToCheck = geoipUrl + ip;
     if (Meteor.isDevelopment) {
         //pretend to be baidu in dev mode because of internal office ip not resolving correctly
         urlToCheck = geoipUrl + "baidu.com";
@@ -69,7 +68,6 @@ getMyLocationFromGeoIPServer = function (ip) {
         return EJSON.parse(result);
     } catch (err) {
         logger.error("connection failed to geoip at: " + geoipUrl);
-        return;
     }
 
 
@@ -109,10 +107,9 @@ Meteor.methods({
     'getLocationByCurrentIP': function () {
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
         var result = getMyLocationFromGeoIPServer(ip);
-        if (!result) {
-            logger.warn("connection failed to geoip at: " + geoipHost);
+        if (!result)
             result = getMyLocationFromLocalDatabase(ip);
-        }
+
         if (!result)return;
         return result;
     },
