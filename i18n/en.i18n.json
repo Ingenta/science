@@ -118,6 +118,7 @@
     },
     "clickToView":"Click to view",
     "Reset":"重置",
+    "Statistical Management": "Reports",
     "schemas": {
         "publications": {
             "title": {

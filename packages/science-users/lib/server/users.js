@@ -26,7 +26,10 @@ Meteor.startup(function () {
         return JET.render('userEmail', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "rootUrl": Config.rootUrl,
-            "content": EmailConfig.findOne({key: "verifyEmail"}).body + "<a href='" + url + "'>" + url + "</a>"
+            "content": {
+                "body": EmailConfig.findOne({key: "verifyEmail"}).body,
+                "url": url
+            }
         })
     };
 
@@ -38,7 +41,10 @@ Meteor.startup(function () {
         return JET.render('userEmail', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "rootUrl": Config.rootUrl,
-            "content": EmailConfig.findOne({key: "forgotPassword"}).body + "<a href='" + url + "'>" + url + "</a>"
+            "content": {
+                "body": EmailConfig.findOne({key: "forgotPassword"}).body,
+                "url": url
+            }
         })
     };
 
@@ -50,7 +56,10 @@ Meteor.startup(function () {
         return JET.render('userEmail', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "rootUrl": Config.rootUrl,
-            "content": EmailConfig.findOne({key: "registration"}).body + "<a href='" + url + "'>" + url + "</a>"
+            "content": {
+                "body": EmailConfig.findOne({key: "registration"}).body,
+                "url": url
+            }
         })
     };
 
