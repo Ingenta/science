@@ -8,7 +8,15 @@ Router.route('/ajax/search', function () {
 	_.each(params,function(v,k){
 		params[k] = JSON.parse(v)
 	})
+	params.st = params.st || {start:1,rows:10};
+	if(params.page){
+		params.st.start=params.page * 10 + 1;
+	}
 	var result = SolrUtils.search(params);
+	result.page = Math.ceil(result.response.start / 10)
+	_.each(result.response.docs,function(item){
+		item.id=item._id;
+	})
 	res.write(JSON.stringify(result));
 	res.end();
 },{where:"server"});
