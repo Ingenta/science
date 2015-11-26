@@ -3,7 +3,7 @@ Router.route('/api', function () {
 	var res            = this.response;
 	var result = {};
 	res.writeHead(200,{
-		'Content-Type': 'applications/json'
+		'Content-Type': 'application/json; charset=utf-8'
 	});
 	if(req.method !=='POST'){
 		result.result="failed";
