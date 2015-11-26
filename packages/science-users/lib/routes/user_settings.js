@@ -45,7 +45,7 @@ Router.route("user_settings.my_favorite", {
     parent: "user_settings",
     waitOn: function () {
         return [
-            Meteor.subscribe('myFavouriteArticles', Meteor.userId())
+            Meteor.subscribe('myFavouriteArticles')
         ]
     }
 });
@@ -63,7 +63,7 @@ Router.route("user_settings.my_watch", {
         return [
             Meteor.subscribe('publications'),
             Meteor.subscribe('topics'),
-            Meteor.subscribe('myWatchedArticles', Meteor.userId())
+            Meteor.subscribe('myWatchedArticles')
         ]
     }
 });

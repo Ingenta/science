@@ -3,7 +3,7 @@
  */
 //client side only
 
-Meteor.subscribe("allEditableTemplate");
+
 
 JET.previewTemplate = new ReactiveVar("");
 

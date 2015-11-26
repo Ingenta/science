@@ -7,16 +7,17 @@ Router.configure({
     progressDelay: 100,
     progressSpinner: false
 });
+var subs = new SubsManager();
 
-Meteor.subscribe("current_user_data");
-Meteor.subscribe('pages');
-Meteor.subscribe('images');
-Meteor.subscribe('advertisement');
-Meteor.subscribe('institutions');
-Meteor.subscribe('searchHistory');
-Meteor.subscribe('emailConfig');
-Meteor.subscribe('publishers');
-Meteor.subscribe('publications');
+subs.subscribe("current_user_data");
+subs.subscribe('pages');
+subs.subscribe('images');
+subs.subscribe('advertisement');
+subs.subscribe('institutions');
+subs.subscribe('searchHistory');
+subs.subscribe('emailConfig');
+subs.subscribe('publishers');
+subs.subscribe('publications');
 
 Router.onBeforeAction(function () {
     // loading indicator here
