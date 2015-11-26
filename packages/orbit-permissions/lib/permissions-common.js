@@ -171,10 +171,9 @@ OrbitPermissions = {
 		}
 		return this;
 	},
-	//为用户设置角色(由于用户角色已经重新定义,不应该继续使用该方法)
-	//delegate                   : function (users, roles, callback) {
-	//	return this._modifyUsersRoles("delegate", users, roles, callback);
-	//},
+	delegate                   : function (users, roles, callback) {
+		return this._modifyUsersRoles("delegate", users, roles, callback);
+	},
 	/**
 	 * 设置用户角色(分派或收回均可)
 	 * @param users

@@ -77,7 +77,7 @@ Template.AdminUsersInsert.events({
 					}
 				}
 				var level    = Router.current().params.query && Router.current().params.query.level;
-				debugger
+
 				values.level = level || "normal";
 				Meteor.call("createUserAccount", values, function (e, userId) {
 					if (e) {
