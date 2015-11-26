@@ -30,4 +30,18 @@ Template.keywordsPanel.helpers({
         };
         return SolrQuery.makeUrl(option);
     }
+});
+Template.keywordsPanel.events({
+    'click a': function(){
+        var word = this.word;
+        Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            PageViews.insert({
+                userId: Meteor.userId(),
+                keywords: word,
+                when: new Date(),
+                action: "keyword",
+                ip: session
+            });
+        });
+    }
 })

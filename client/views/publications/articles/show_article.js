@@ -209,13 +209,16 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
-        PageViews.insert({
-            articleId: this._id,
-            userId: Meteor.userId(),
-            journalId: this.journalId,
-            when: new Date(),
-            action: "pdfDownload"
-        })
+        Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            PageViews.insert({
+                articleId: this._id,
+                userId: Meteor.userId(),
+                journalId: this.journalId,
+                when: new Date(),
+                action: "pdfDownload",
+                ip: session
+            });
+        });
     }
 });
 
