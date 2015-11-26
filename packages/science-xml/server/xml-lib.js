@@ -23,7 +23,7 @@ ScienceXML.RemoveFile = function (path) {
     }
 }
 ScienceXML.getLocationAsync = function (path, cb) {
-    cb && cb(null, HTTP.get(path).content);
+    cb && cb(null, HTTP.get(path,{timeout:5000}).content);
 }
 ScienceXML.getFileContentsFromFullPath = function (path) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);

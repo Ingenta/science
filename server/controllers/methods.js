@@ -49,6 +49,32 @@ createMostReadList = function (journalId, limit) {
     });
     return _.uniq(allIds); //This removes any duplicates after initial
 }
+//TODO: test connection failed with log
+//TODO: move to config
+var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
+var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
+var geoipHost = isDev ? localDevServer : "http://freegeoip";
+var geoipUrl = geoipHost + ":9090/json/";
+getMyLocationFromGeoIPServer = function (ip) {
+    var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
+    var result = getLocationSync(geoipUrl + ip)
+    if (Meteor.isDevelopment) {
+        //console.log("dev mode pretending to be baidu")
+        result = getLocationSync(geoipUrl + "baidu.com");
+    }
+    if (!result)return;
+    return EJSON.parse(result);
+}
+getMyLocationFromLocalDatabase = function (ip) {
+    var currentUserIPNumber = Science.ipToNumber(ip);
+    var result = IP2Country.findOne({
+        startIpLong: {$lte: currentUserIPNumber},
+        endIpLong: {$gte: currentUserIPNumber}
+    });
+    if (!result)return;
+    return {ip: currentIP, country_code: result.countryCode2, country_name: result.country.en}
+}
+
 Meteor.methods({
     'distinctVolume': function (journalId) {
         var result = Issues.distinct("volume", {"journalId": journalId});
@@ -71,21 +97,15 @@ Meteor.methods({
         var c = UserStatus.connections.find().count();
         return c;
     },
-    'ipInChina': function () {
-        var currentUserIPNumber = Science.ipToNumber(this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress);
-        var item = IP2Country.findOne({
-            startIpLong: {$lte: currentUserIPNumber},
-            endIpLong: {$gte: currentUserIPNumber}
-        });
-        return IP2Country.findOne({
-            startIpLong: {$lte: currentUserIPNumber},
-            endIpLong: {$gte: currentUserIPNumber},
-            countryCode2: "CN"
-        }) ? {code: false, number: currentUserIPNumber, country: item} : {
-            code: true,
-            number: currentUserIPNumber,
-            country: item
-        };
+    'getLocationByCurrentIP': function () {
+        var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
+        var result = getMyLocationFromGeoIPServer(ip);
+        if (!result) {
+            logger.warn("connection failed to geoip at: " + geoipHost);
+            result = getMyLocationFromLocalDatabase(ip);
+        }
+        if (!result)return;
+        return result;
     },
     'getLocationReport': function (action, articleId) {
         var countryViews = {};

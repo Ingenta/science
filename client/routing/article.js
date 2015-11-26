@@ -34,10 +34,13 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         ]
     },
     onBeforeAction: function () {
-        if (Session.get("ipInChina") === undefined) {
-            Meteor.call("ipInChina", function (err, result) {
-                console.log(result.country ? result.country.country.cn : "No country found!");
-                Session.set("ipInChina", result.code);
+        if (!Session.get("ipInChina")) {
+            Meteor.call("getLocationByCurrentIP", function (err, result) {
+                if(!result)console.log("localhost user detected");
+                else {
+                    console.log("Your location has been detected as: "+result.country_name ? result.country_name : result);//"No country found!");
+                    Session.set("ipInChina", result.country_code==="CN");
+                }
             })
         }
         this.next();
