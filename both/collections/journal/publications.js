@@ -34,8 +34,7 @@ PublicationsSchema = new SimpleSchema({
         type: Date
     },
     chiefEditor: {
-        type: Science.schemas.MultipleTextOptionalSchema,
-        optional: true
+        type: Science.schemas.MultipleTextRequiredSchema,
     },
     competentOrganization: {
         type: Science.schemas.MultipleTextOptionalSchema,
