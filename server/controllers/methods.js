@@ -56,14 +56,22 @@ var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
 var geoipHost = isDev ? localDevServer : "http://freegeoip";
 var geoipUrl = geoipHost + ":9090/json/";
 getMyLocationFromGeoIPServer = function (ip) {
-    var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    var result = getLocationSync(geoipUrl + ip)
+    var urlToCheck = geoipUrl + ip
     if (Meteor.isDevelopment) {
-        //console.log("dev mode pretending to be baidu")
-        result = getLocationSync(geoipUrl + "baidu.com");
+        //pretend to be baidu in dev mode because of internal office ip not resolving correctly
+        urlToCheck = geoipUrl + "baidu.com";
     }
-    if (!result)return;
-    return EJSON.parse(result);
+    try{
+        var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsyncWithTimeOut);
+        var result = getLocationSync(urlToCheck);
+        if (!result)return;
+        return EJSON.parse(result);
+    }catch(err) {
+        logger.error("connection failed to geoip at: "+geoipUrl);
+        return;
+    }
+
+
 }
 getMyLocationFromLocalDatabase = function (ip) {
     var currentUserIPNumber = Science.ipToNumber(ip);
