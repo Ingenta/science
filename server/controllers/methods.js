@@ -54,12 +54,13 @@ createMostReadList = function (journalId, limit) {
 var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
 var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
 var geoipHost = isDev ? localDevServer : "http://freegeoip";
+var geoipUrl = geoipHost + ":9090/json/";
 getMyLocationFromGeoIPServer = function (ip) {
     var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
-    var result = getLocationSync(geoipHost + ":9090/json/" + ip)
+    var result = getLocationSync(geoipUrl + ip)
     if (Meteor.isDevelopment) {
         //console.log("dev mode pretending to be baidu")
-        result = getLocationSync(geoipHost + ":9090/json/baidu.com");
+        result = getLocationSync(geoipUrl + "baidu.com");
     }
     if (!result)return;
     return EJSON.parse(result);
