@@ -66,7 +66,7 @@ Meteor.startup(function () {
 });
 
 //override default publish
-Meteor.publish(null, function () {
+Meteor.publish(null, function (scope) {
     if (this.userId) {
         var query = {};
         var fields = {
@@ -84,12 +84,20 @@ Meteor.publish(null, function () {
             history: 1,
             level:1
         };
-        if (!Permissions.userCan("list-user", "user", this.userId)) {
-            if (Permissions.userCan("add-user", "user", this.userId)) {
-                query.publisherId = Users.findOne({_id: this.userId}).publisherId;
-            } else {
-                query._id = this.userId;
-            }
+        var scope = Permissions.getPermissionRange(this.userId,"user:list-user");
+        if (Permissions.userCan("list-user", "user", this.userId, scope)) {
+            var scopeQuery = []
+            _.each(scope,function(val,key){
+                val = _.isArray(val)?val:[val];
+                if(key==='publisher')
+                    scopeQuery.push({publisherId : {$in:val}});
+                else if(key==='institution')
+                    scopeQuery.push({institutionId : {$in:val}});
+            })
+            if(!_.isEmpty(scopeQuery))
+                query.$or=scopeQuery;
+        } else {
+            query._id = this.userId;
         }
         return Meteor.users.find(query, {fields: fields});
     } else {

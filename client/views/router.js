@@ -217,12 +217,9 @@ Router.map(function () {
     });
 
     this.route('/publisher/account/:pubId', {
-        template: "Admin",
+        template: "publisherAccountTemplate",
         name: "publisher.account",
         parent: "home",
-        yieldTemplates: {
-            'publisherAccountTemplate': {to: 'AdminSubcontent'}
-        },
         title: function () {
             return TAPi18n.__("Publisher");
         },
@@ -233,19 +230,19 @@ Router.map(function () {
             ]
         },
         onBeforeAction: function () {
-            Permissions.check("add-user", "user");
+            Permissions.check("use-publisher-panel", "publisher",{publisher:this.params.pubId});
             /*BEFORE_FUNCTION*/
             this.next();
         },
         data: function () {
             return {
-                admin_users: Users.find({publisherId: this.params.pubId})
+                scope: {publisher: [this.params.pubId]}
             };
         }
     });
 
     this.route("/publisher/account/insert/:pubId", {
-        template: "Admin",
+        template: "AdminUsersInsert",
         name: "publisher.account.insert",
         parent: "publisher.account",
         title: function () {
@@ -254,14 +251,18 @@ Router.map(function () {
         waitOn: function () {
             Session.set("activeTab", "publisher");
             return [
-                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publishers')
             ]
         },
-        controller: "AdminUsersInsertController"
+
+        onBeforeAction: function () {
+            Permissions.check("add-user", "user",{publisher:this.params.pubId});
+            this.next();
+        }
     });
 
     this.route("/publisher/account/edit/:userId", {
-        template: "Admin",
+        template: "AdminUsersEdit",
         name: "publisher.account.edit",
         parent: "publisher.account",
         title: function () {
@@ -270,10 +271,26 @@ Router.map(function () {
         waitOn: function () {
             Session.set("activeTab", "publisher");
             return [
-                Meteor.subscribe('publishers'),
+                Meteor.subscribe('publishers')
             ]
         },
-        controller: "AdminUsersEditController"
+        onBeforeAction: function() {
+            var scope = {};
+            var user = Users.findOne({_id:this.params.userId},{fields:{publisherId:1,institutionId:1}});
+            if(user.publisherId)
+                scope.publisher=user.publisherId;
+            if(user.institutionId)
+                scope.institution=user.institutionId;
+            if (!Permissions.userCan("modify-user","user",Meteor.userId(),scope))
+                Router.go('home')
+            this.next();
+        },
+        data: function() {
+            return {
+                params: this.params || {},
+                currUser: Users.findOne({_id:this.params.userId}, {})
+            };
+        }
     });
 
 

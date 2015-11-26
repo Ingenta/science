@@ -1,28 +1,14 @@
 <template name="Admin">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12" id="content">
-                <div class="row" id="title_row">
-                    <div class="col-xs-12">
-                        <div id="page_menu" class="pull-right">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            {{#if can "list-user" "user"}}<!--canUseAdminPanel-->
-                <div id="menu" class="col-xs-2">
-                    <h2>
-                    </h2>
-                    {{> AdminSideMenu}}
-                </div>
-            {{/if}}
-            <div id="subcontent" class="col-xs-10">
-                {{> yield region='AdminSubcontent'}}
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid">
+		{{#if isAdmin}}<!--canUseAdminPanel-->
+			<div id="menu" class="col-xs-2">
+				{{> AdminSideMenu}}
+			</div>
+			<div id="subcontent" class="col-xs-10">
+				{{> yield region='AdminSubcontent'}}
+			</div>
+		{{/if}}
+	</div>
 </template>
 
 <template name="AdminSideMenu">

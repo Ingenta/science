@@ -23,7 +23,7 @@ _.extend(Permissions, {
     getRoleDescByCode: function (code) {
         return Permissions.getRolesDescriptions()[code];
     },
-    check: function (perm, pkg) {
+    check: function (perm, pkg, scope) {
         if (Meteor.user() && Meteor.user().disable) {
             console.log("account disabled");
             Meteor.logout();
@@ -36,7 +36,7 @@ _.extend(Permissions, {
             return;
         }
         if (perm && pkg)
-            Permissions.throwIfUserCant(perm, pkg);
+            Permissions.throwIfUserCant(perm, pkg, scope);
     },
     undefineCustomRoleAndRevoke: function (role, callback) {
         try {
@@ -60,7 +60,8 @@ _.extend(Permissions, {
         admin:"admin",
         publisher:"publisher",
         journal:"journal",
-        institution:"institution"
+        institution:"institution",
+        normal:"normal"
     }
 });
 
@@ -68,7 +69,7 @@ adminLevel=[Permissions.level.admin];
 publisherLevel=[Permissions.level.admin,Permissions.level.publisher];
 journalLevel=[Permissions.level.admin,Permissions.level.publisher,Permissions.level.journal];
 institutionLevel=[Permissions.level.admin,Permissions.level.institution];
-
+normalLevel=[Permissions.level.admin,Permissions.level.publisher,Permissions.level.journal,Permissions.level.institution,Permissions.level.normal];
 if (Meteor.isClient) {
     _.extend(Permissions, {
         getCustomRoles2: function (id) {  // better way

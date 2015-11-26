@@ -136,7 +136,18 @@ OrbitPermissions = {
 		}
 		users = helpers.sterilizeUsersArray(users);
 		roles = helpers.verifyRolesArray(helpers.sterilizeRolesArray(roles));
-		if (Meteor.isServer || this.throwIfUserCant("delegate-and-revoke", "permissions")) {
+		var unionScope;
+		if(Meteor.isClient){
+			var allScope = _.pluck(roles,"scope");
+			unionScope=_.reduce(allScope,function(mem,item){
+				_.each(item,function(arr,key){
+					if(!_.isEmpty(arr))
+						mem[key]=mem[key]?_.union(mem[key],arr):arr
+				})
+				return mem;
+			},{})
+		}
+		if (Meteor.isServer || this.throwIfUserCant("delegate-and-revoke", "permissions",unionScope)) {
 
 			update                                = {
 				$set: {}
@@ -178,16 +189,11 @@ OrbitPermissions = {
 	revoke                     : function (users, roles, callback) {
 		return this._modifyUsersRoles("revoke", users, roles, callback);
 	},
-	getUserRoles               : function (user) {
+	getUserRoles               : function (user,scope) {
 		var user_roles;
 		if (Meteor.isClient) {
-			if (user != null) {
-				if (!this.userCan("get-users-roles", "permissions")) {
-					throw new Meteor.Error(401, "Can't query permissions of other users");
-				}
-			} else {
+			if(!user)
 				user = Meteor.user();
-			}
 		}
 		if (user == null) {
 			return [];
@@ -211,11 +217,16 @@ OrbitPermissions = {
 		}
 		rolesDep.depend();
 		package_name = helpers.sterilizePackageName(package_name);
-		ref          = this.getUserRoles(user);
+
+		ref = this.getUserRoles(user);
+
+
 
 		var definedPermission = Permissions && Permissions[package_name] && Permissions[package_name][permission];
 		//若权限定义中包含了一个鉴权方法,则调用该鉴权方法来判断用户是否具备某权限.
 		if (definedPermission && definedPermission.options && _.isFunction(definedPermission.options.checkFunc)) {
+			if(!user && Meteor.isClient)
+				user = Meteor.userId();
 			return definedPermission.options.checkFunc(user, scope);
 		}
 		if (!_.isEmpty(ref)) {
@@ -258,6 +269,7 @@ OrbitPermissions = {
 			var fullScope = OrbitPermissions.getPermissionRange(user, package_name + ":" + permission);
 			var flag      = true;
 			_.each(scope, function (val, key) {
+				val = _.isString(val)?[val]:val;
 				var interSec = _.intersection(fullScope[key], val);
 				if (interSec.length < val.length)
 					flag = false;
@@ -266,8 +278,8 @@ OrbitPermissions = {
 		}
 		return false;
 	},
-	throwIfUserCant            : function (permission, package_name, user) {
-		if (!this.userCan(permission, package_name, user)) {
+	throwIfUserCant            : function (permission, package_name, scope) {
+		if (!this.userCan(permission, package_name,undefined, scope)) {
 			throw new Meteor.Error(401, "Insufficient permissions");
 		}
 		return true;
@@ -459,7 +471,17 @@ OrbitPermissions = {
 		return roles;
 	},
 	getPermissionRange         : function (userId, permission) {
-		var userRoles = OrbitPermissions.getUserRoles(userId);
+		if(!userId && Meteor.isClient)
+			userId = Meteor.userId();
+		var user = helpers.getUserObject(userId);
+		if (user == null) {
+			return [];
+		}
+		var userRoles = user[globals.roles_field_name];
+		if (!_.isArray(userRoles)) {
+			userRoles = [];
+		}
+
 		if (_.isEmpty(userRoles)) {
 			return;
 		}

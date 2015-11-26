@@ -37,7 +37,7 @@ Template.institutionOptions.helpers({
     getUsers: function () {
         return Users.find({institutionId: Router.current().params.insId}, {});
     },
-    institutionOptions:function(){
+    scope:function(){
         return {institutionId:Router.current().params.insId};
     }
 });

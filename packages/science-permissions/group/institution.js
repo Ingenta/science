@@ -36,7 +36,7 @@ institutionPermissions
             level:adminLevel
         }
     })
-    .defineRole("institution-manager-from-user", ["modify-institution"], {
+    .defineRole("institution-manager-from-user", ["modify-institution","user:list-user"], {
         en: {
             name: "institution manager (institution)",
             summary: "institution manager"

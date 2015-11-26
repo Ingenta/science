@@ -14,5 +14,8 @@ this.AdminUsersController = RouteController.extend({
         Session.set("user-search-string-for-normal","");
         Permissions.check("list-user", "user");
         this.next();
+    },
+    data:function(){
+        return {};
     }
 });

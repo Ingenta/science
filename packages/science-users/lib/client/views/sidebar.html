@@ -20,7 +20,7 @@
             {{/if}}
             {{#if canUsePublisherPanel}}
                 <li>
-                    <a href="{{pathFor 'publisher.account' pubId=currentUser.publisherId}}">
+                    <a href="{{pathFor 'publisher.account' pubId=currentUser.publisherId query='level=normal'}}">
                         {{_ "Publisher"}}
                     </a>
                 </li>

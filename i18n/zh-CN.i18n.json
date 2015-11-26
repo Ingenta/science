@@ -1266,9 +1266,12 @@
   "Search Mode":"搜索方式",
   "roleScope":"角色功能范围",
   "level":{
-    "admin":"整站",
+    "admin":"超级管理员",
     "publisher":"出版社",
     "journal":"期刊",
-    "institution":"机构"
-  }
+    "institution":"机构",
+    "normal":"普通用户"
+  },
+  "userLevel":"可被设置的用户级别",
+  "no roles can use to this user":"没有可用于该用户的角色"
 }

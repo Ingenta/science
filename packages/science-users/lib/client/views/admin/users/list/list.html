@@ -45,7 +45,7 @@
 			{{#if disable}}{{_ "Disable"}}{{else}}{{_ "Enable"}}{{/if}}
 		</td>
 		<td class="td-icon">
-			{{#if can "user-modify" "user"}}
+			{{#if can "modify-user" "user" scope}}
 				<span id="edit-button" class="fa fa-pencil " title="Edit"></span>
 			{{/if}}
 		</td>
