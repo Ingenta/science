@@ -48,6 +48,7 @@ Meteor.methods({
             fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, journalId: 1, 'journal.titleCn': 1}
         });
         article.url = values.url;
+        if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
 
         var emailSubject = user + ' has sent you an article';
