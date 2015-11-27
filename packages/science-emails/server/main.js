@@ -96,7 +96,7 @@ Science.Email.availableOnline = function (oneEmail) {
     Email.send({
         to: oneEmail.email,
         from: 'publish@scichina.org',
-        subject: "Available Oneline Now",
+        subject: "Available Online Now",
         html: JET.render('availableOnline', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "onlineUrl": Config.rootUrl + "email/online.jpg",

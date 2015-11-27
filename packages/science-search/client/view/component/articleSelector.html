@@ -1,5 +1,27 @@
 <template name="solrArticleSelector">
-	<select style="width:100%" id="saSelector">
+	<select id="{{id}}" style="width:100%" class="solr-article-select">
 		<option value="" selected="selected">select2/select2</option>
 	</select>
+</template>
+
+<template name="solrArticleMarkup">
+	<ul class="dotted list-unstyled">
+		<li>
+			<div class="resultsList"><img src="/icon_access_oa.gif">
+				<h7>{{{showTitle}}}</h7>
+			</div>
+			<ul class="list-unstyled">
+				<li>
+					{{#each getAuthors}}
+						<span class="separate-comma"> {{> authorPopButton name=this}} </span>
+					{{/each}}
+				</li>
+				<li>
+					{{journalName journalId}}
+					<b>{{volume}}</b>, {{elocationId}} ({{year}}) , {{doi}}
+				</li>
+				<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
+			</ul>
+		</li>
+	</ul>
 </template>

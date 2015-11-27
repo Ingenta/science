@@ -17,7 +17,7 @@ NewsRecommendSchema = new SimpleSchema({
         type: String,
         unique: true,
         autoform: {
-            type: 'universe-select'
+            type: 'select2'
         }
     },
     picture: {

@@ -136,10 +136,12 @@ SyncedCron.add({
                         email: oneUser.emails[0].address,
                         issue: oneIssue
                     });
+                });
 
+                oneUser.profile.journalsOfInterest.forEach(function (journalId) {
                     var articleList = Articles.find({
                         $and: [
-                            {journalId: {$in: [oneIssue.journalId]}},
+                            {journalId: {$in: [journalId]}},
                             {createdAt: {$gt: oneUser.lastSentDate}},
                             {$or: [{pubStatus: 'online_first'}, {pubStatus: 'preset'}]}
                         ]

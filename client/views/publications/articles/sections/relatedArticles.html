@@ -1,9 +1,7 @@
 <template name="relatedArticles">
 	<ul class="article-list list-unstyled">
 		{{#each relatedList}}
-			{{#with article _id}}
-				{{> oneArticle}}
-			{{/with}}
+			{{> oneSolrArticleNoHighlight}}
 		{{else}}
 			{{_ "No articles found!"}}
 		{{/each}}

@@ -63,5 +63,45 @@ QueryUtils = {
 				delete params.st.from;
 		}
 		return params;
+	},
+	formatRepo            : function (repo) {
+		if (repo.loading) return repo.text;
+		var markup = Blaze.toHTMLWithData(Template.solrArticleMarkup, repo);
+		return markup;
+	},
+	formatRepoSelection: function (repo) {
+		return repo["title.cn"];
+	},
+	select2Options:function() {
+		return {
+			placeholder       : TAPi18n.__("Choose"),
+			ajax              : {
+				url           : "/ajax/search",
+				dataType      : 'json',
+				delay         : 250,
+				data          : function (params) {
+					var queryObj  = {};
+					queryObj.q    = JSON.stringify(params.term);
+					queryObj.page = params.page;
+					return queryObj;
+				},
+				processResults: function (data, params) {
+					params.page = params.page || 1;
+					return {
+						results   : data.response.docs,
+						pagination: {
+							more: (params.page * 10) < data.response.numFound
+						}
+					};
+				},
+				cache         : true
+			},
+			escapeMarkup      : function (markup) {
+				return markup;
+			}, // let our custom formatter work
+			minimumInputLength: 1,
+			templateResult    : QueryUtils.formatRepo, // omitted for brevity, see the source of this page
+			templateSelection : QueryUtils.formatRepoSelection // omitted for brevity, see the source of this page
+		}
 	}
 }

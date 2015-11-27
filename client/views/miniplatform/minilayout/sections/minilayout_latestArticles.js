@@ -12,7 +12,8 @@ Template.layoutLatestArticles.helpers({
     },
     publishDate: function (Apid) {
         var article = Articles.findOne({_id: Apid});
-        if(article)return article.published.format("yyyy-MM-dd");
+        if(article && article.published)
+            return article.published && article.published.format("yyyy-MM-dd")
     },
     ArticleUrl: function (Arid) {
         var article = Articles.findOne({_id: Arid});
@@ -36,19 +37,8 @@ Template.layoutLatestArticles.events({
 });
 
 Template.addLatestArticlesModalForm.helpers({
-    getArticles: function () {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var publisher = Publishers.findOne({agree:true});
-        if(publisher)
-        var rec = NewsRecommend.find().fetch();
-        var recId = _.pluck(rec,"ArticlesId");
-        var articles = Articles.find({publisher:publisher._id,_id:{$nin:recId}}).fetch();
-        var result = [];
-        _.each(articles, function (item) {
-            var name = iscn ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
-        });
-        return result;
+    s2Opts :function(){
+        return SolrQuery.select2Options();
     }
 });
 
@@ -73,6 +63,7 @@ AutoForm.addHooks(['addLatestArticlesModalForm'], {
     onSuccess: function () {
         $("#addLatestArticlesModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe("recommendedMiniPlatformArticles");
     },
     before: {
         insert: function (doc) {

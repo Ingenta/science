@@ -1,87 +1,87 @@
 SolrQuery = {
-    lastQuery:null,
-	session         : new ReactiveDict(),
-	get             : function (key) {
+	lastQuery             : null,
+	session               : new ReactiveDict(),
+	get                   : function (key) {
 		return SolrQuery.session.get(key);
 	},
-	set             : function (key, val) {
+	set                   : function (key, val) {
 		SolrQuery.session.set(key, val);
 		return SolrQuery;
 	},
-	add             : function (key, val) {
+	add                   : function (key, val) {
 		var arr = SolrQuery.get(key) || [];
 		arr.push(val);
-		SolrQuery.set(key,arr);
+		SolrQuery.set(key, arr);
 		return SolrQuery;
 	},
-	setting:function(key,val){
+	setting               : function (key, val) {
 		var setting = SolrQuery.get("setting");
-		if(!setting)
+		if (!setting)
 			setting = {};
-		if(key===undefined)
+		if (key === undefined)
 			return setting;
-		if(val===undefined){
+		if (val === undefined) {
 			return setting[key];
-		}else{
-			setting[key]=val;
-			SolrQuery.set("setting",setting);
+		} else {
+			setting[key] = val;
+			SolrQuery.set("setting", setting);
 			return setting;
 		}
 	},
-	params:function(key,val){
+	params                : function (key, val) {
 		var params = SolrQuery.get("params");
-		if(!params)
+		if (!params)
 			params = {};
-		if(key===undefined)
+		if (key === undefined)
 			return params;
-		if(val===undefined){
+		if (val === undefined) {
 			return params[key];
-		}else{
-			if(_.isEmpty(val)){
+		} else {
+			if (_.isEmpty(val)) {
 				delete params[key];
-			}else{
-				params[key]=val;
+			} else {
+				params[key] = val;
 			}
-			SolrQuery.set("params",params);
+			SolrQuery.set("params", params);
 			return params;
 		}
 	},
-	setQuery        : function (val) {
-		SolrQuery.params("q",val);
+	setQuery              : function (val) {
+		SolrQuery.params("q", val);
 	},
-	toggleFilterQuery  : function (field,val,isAdd) {
-		var params = SolrQuery.params();
+	toggleFilterQuery     : function (field, val, isAdd) {
+		var params     = SolrQuery.params();
 		var currFilter = params.fq && params.fq[field] || [];
-		if(isAdd){
-			currFilter = _.union(currFilter,[val]);
-		}else{
-			currFilter = _.without(currFilter,val);
+		if (isAdd) {
+			currFilter = _.union(currFilter, [val]);
+		} else {
+			currFilter = _.without(currFilter, val);
 		}
-		if(!params.fq){
-			params.fq={};
+		if (!params.fq) {
+			params.fq = {};
 		}
-		params.fq[field]=currFilter;
+		params.fq[field] = currFilter;
 		SolrQuery.params("fq", params.fq);
 	},
-	changeFilterQuery  : function (field,val) {
-		var params = SolrQuery.params();
-		params.fq[field]=[val];
+	changeFilterQuery     : function (field, val) {
+		var params       = SolrQuery.params();
+		params.fq[field] = [val];
 		SolrQuery.params("fq", params.fq);
 	},
-	addSecondQuery  : function (val) {
+	addSecondQuery        : function (val) {
 		var sq = SolrQuery.params("sq") || [];
-		sq= _.union(sq,[val]);
-		SolrQuery.params("sq",sq);
+		sq     = _.union(sq, [val]);
+		SolrQuery.params("sq", sq);
 	},
-	makeUrl         : function (option) {
-		var queryStr   = JSON.stringify(option ? option.query : SolrQuery.params("q"));
-		var fqStr   = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
-		var sqStr   = JSON.stringify(option ? option.secondQuery : SolrQuery.params("sq"));
-		var setting =(option ? option.setting : SolrQuery.params("st")) || {};
-		if(!setting.start)
-			setting.start=0;
-		if(!setting.rows)
-			setting.rows=10;
+	makeUrl               : function (option) {
+		var queryStr = JSON.stringify(option ? option.query : SolrQuery.params("q"));
+		var fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
+		var sqStr    = JSON.stringify(option ? option.secondQuery : SolrQuery.params("sq"));
+		var setting  = (option ? option.setting : SolrQuery.params("st")) || {};
+		if (!setting.start)
+			setting.start = 0;
+		if (!setting.rows)
+			setting.rows = 10;
 		var settingStr = JSON.stringify(setting);
 		var qString    = "";
 		if (queryStr) {
@@ -96,9 +96,9 @@ SolrQuery = {
 		if (settingStr) {
 			qString += "&st=" + settingStr;
 		}
-		qString +="&stamp="+new Date().getTime();
-		if(qString){
-			qString= "?"+qString.substr(1)
+		qString += "&stamp=" + new Date().getTime();
+		if (qString) {
+			qString = "?" + qString.substr(1)
 		}
 
 		return "/search" + qString;
@@ -107,7 +107,7 @@ SolrQuery = {
 	 * 搜索方法，主要通过调用这个方法来进行搜索
 	 * @param option
 	 */
-	search          : function (option) {
+	search                : function (option) {
 		var url = SolrQuery.makeUrl(option);
 		Router.go(url);
 	},
@@ -115,24 +115,24 @@ SolrQuery = {
 	 * 兴趣检索
 	 * @param event
 	 */
-	interstingSearch: function (event) {
+	interstingSearch      : function (event) {
 		event.stopPropagation();
 		event.preventDefault();
 		var content = Science.dom.getSelContent();
 		if (content) {
 			var trimContent = content.trim();
 			if (trimContent.length > 2 && trimContent.length < 100) {
-				var journalId   = Session.get('currentJournalId');
+				var journalId = Session.get('currentJournalId');
 				var articleId = Router.current().data() && Router.current().data()._id;
-				var fq={};
-				if(journalId)
+				var fq        = {};
+				if (journalId)
 					fq.journalId = journalId;
-				if(articleId)
-					fq.not_id=articleId;
+				if (articleId)
+					fq.not_id = articleId;
 				var query = {
-					q:trimContent,
-					fq:fq,
-					st:{rows: 5}
+					q : trimContent,
+					fq: fq,
+					st: {rows: 5}
 				};
 				Meteor.call("search", query, function (err, result) {
 					var ok = err ? false : result.responseHeader.status == 0;
@@ -146,7 +146,7 @@ SolrQuery = {
 	/**
 	 * 清空所有搜索选项
 	 */
-	reset           : function () {
+	reset                 : function () {
 		_.each(SolrQuery.session.keys, function (val, key) {
 			SolrQuery.session.set(key, null);
 		});
@@ -154,45 +154,45 @@ SolrQuery = {
 	/**
 	 * 清空二次检索条件
 	 */
-	resetSecQuery   : function () {
-		SolrQuery.params("sq",[]);
+	resetSecQuery         : function () {
+		SolrQuery.params("sq", []);
 	},
 	/**
 	 * 若两次检索时间间隔小于0.5秒,拒绝请求
 	 * @returns {null|boolean}
 	 */
-    searchLimit:function(){
-        var result=(SolrQuery.lastQuery && (new Date()-SolrQuery.lastQuery)<500)
-        SolrQuery.lastQuery=new Date();
-        return result;
-    },
-	callSearchMethod: function () {
-        if(SolrQuery.searchLimit()){
-            return;
-        }
+	searchLimit           : function () {
+		var result          = (SolrQuery.lastQuery && (new Date() - SolrQuery.lastQuery) < 500)
+		SolrQuery.lastQuery = new Date();
+		return result;
+	},
+	callSearchMethod      : function () {
+		if (SolrQuery.searchLimit()) {
+			return;
+		}
 		SolrQuery.reset();
 		var params = QueryUtils.parseUrl();
-		if(!_.isEmpty(params.q) && _.isString(params.q)){
+		if (!_.isEmpty(params.q) && _.isString(params.q)) {
 			Users.recent.search(params.q);
-            var setting = params.st || {};
-			var q=(_.contains(["bar","history"],setting.from)) ? params.q : "";
+			var setting = params.st || {};
+			var q       = (_.contains(["bar", "history"], setting.from)) ? params.q : "";
 			$("#searchInput").val(q);
-            if (Meteor.userId()) {
-                var his = !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave:[]}
-                var obj= _.find(his, function(arr,key){
-                    return _.find(arr,function(item){
-                        return item.word===q;
-                    })
-                });
-                if(!obj){
-                    his.unsave=his.unsave || [];
-                    his.unsave.push({word: q, from:setting.from, createOn: new Date()})
-                    Users.update({_id: Meteor.userId()}, {$set: {"history": his}});
-                }
-            }
+			if (Meteor.userId()) {
+				var his = !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave: []}
+				var obj = _.find(his, function (arr, key) {
+					return _.find(arr, function (item) {
+						return item.word === q;
+					})
+				});
+				if (!obj) {
+					his.unsave = his.unsave || [];
+					his.unsave.push({word: q, from: setting.from, createOn: new Date()})
+					Users.update({_id: Meteor.userId()}, {$set: {"history": his}});
+				}
+			}
 		}
 		Meteor.call("search", params, function (err, result) {
-			SolrQuery.session.set("params",params);
+			SolrQuery.session.set("params", params);
 			var ok = err ? false : result.responseHeader.status == 0;
 			SolrQuery.session.set("ok", ok);
 			if (ok) {
