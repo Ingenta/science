@@ -1,6 +1,5 @@
-/*
- * Call the function to built the chart when the template is rendered
- */
+//TODO: distinct chart data on userid
+//TODO: consider only calling if location report data is older than a day?
 Template.MetricsTemplate.rendered = function () {
     var article = Articles.findOne({articledoi: Router.current().params.articleDoi}, {fields: {_id: 1}});
     if (!article || !article._id)return;
@@ -8,7 +7,7 @@ Template.MetricsTemplate.rendered = function () {
     buildHitCounterChart(article._id);
     buildHitCounterGraph(article._id);
     
-    //TODO: consider only calling if location report data is older than a day?
+
     Meteor.call("getLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
         var index = 0;
