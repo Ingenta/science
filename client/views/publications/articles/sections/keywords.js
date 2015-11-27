@@ -34,7 +34,7 @@ Template.keywordsPanel.helpers({
 Template.keywordsPanel.events({
     'click a': function(){
         var word = this.word;
-        Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             PageViews.insert({
                 userId: Meteor.userId(),
                 keywords: word,

@@ -88,12 +88,6 @@ Meteor.methods({
         console.dir(result);
         return result;
     },
-    'grabSessions': function (id) {
-        var c = UserStatus.connections.findOne({userId: id});
-        if (c && c.ipAddr)
-            return c.ipAddr;
-        return "";
-    },
     'getClientIP': function () {
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
     },
