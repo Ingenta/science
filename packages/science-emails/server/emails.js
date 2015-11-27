@@ -37,11 +37,8 @@ Meteor.methods({
             if (Meteor.user().profile.realName)
                 user = Meteor.user().profile.realName;
 
-        //if (values.reasons === undefined)values.reasons = "";
+        if (values.reasons === undefined)values.reasons = "";
 
-        //var reason = values.reasons + ' \n\n'
-
-        //Images.findOne({_id: journal.banner}).url()
         var article = Articles.findOne({
             doi: values.doi
         }, {
@@ -51,12 +48,6 @@ Meteor.methods({
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
 
         var emailSubject = user + ' has sent you an article';
-        //var emailBody = reason + 'Click the link below to check it out. \n\n' + values.url;
-        //var emailThisContent = EmailConfig.findOne({key: "emailThis"});
-        //if (emailThisContent) {
-        //    if (emailThisContent.subject)emailSubject = emailThisContent.subject;
-        //    if (emailThisContent.body)emailBody = emailThisContent.body + '\n\n' + emailBody;
-        //}
 
         Meteor.defer(function () {
             Email.send({

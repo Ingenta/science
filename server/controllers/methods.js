@@ -95,8 +95,10 @@ Meteor.methods({
         return createMostReadList(journalId, limit);
     },
     'countSession': function () {
-        var c = UserStatus.connections.find().count();
-        return c;
+        return UserStatus.connections.find().count();
+    },
+    'totalArticles': function () {
+        return Articles.find().count();
     },
     'getLocationByCurrentIP': function () {
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
