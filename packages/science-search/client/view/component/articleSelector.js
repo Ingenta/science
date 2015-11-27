@@ -1,5 +1,5 @@
 Template.solrArticleSelector.onRendered(function(){
-	this.$(".solr-article-select").select2(SolrQuery.select2OPtions);
+	this.$(".solr-article-select").select2(SolrQuery.select2Options());
 })
 
 

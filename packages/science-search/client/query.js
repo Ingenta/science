@@ -209,5 +209,8 @@ SolrQuery = {
 				}
 			}
 		});
+	},
+	select2Options:function(){
+		return QueryUtils.select2Options();
 	}
 };
