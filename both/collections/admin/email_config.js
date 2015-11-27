@@ -23,7 +23,8 @@ Meteor.startup(function () {
 
 EmailsSchema  = new SimpleSchema({
     recipient:{
-        type:String
+        type:String,
+        regEx: SimpleSchema.RegEx.Email
     },
     reasons:{
         type:String,
