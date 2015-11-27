@@ -114,9 +114,11 @@ Template.LayoutSideBar.events({
             }
             Users.update({_id: Meteor.userId()}, {$set: {favorite: fav}});
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
+                    institutionId:user.institutionId,
                     journalId: article.journalId,
                     when: new Date(),
                     action: "favorite",
@@ -140,9 +142,11 @@ Template.LayoutSideBar.events({
             }
             Users.update({_id: Meteor.userId()}, {$set: {'profile.articlesOfInterest': wat}});
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
+                    institutionId:user.institutionId,
                     journalId: article.journalId,
                     when: new Date(),
                     action: "watchArticle",
@@ -166,8 +170,10 @@ Template.LayoutSideBar.events({
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.journalsOfInterest": pro}});
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     userId: Meteor.userId(),
+                    institutionId:user.institutionId,
                     journalId: journal._id,
                     when: new Date(),
                     action: "watchJournal",
