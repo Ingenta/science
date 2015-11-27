@@ -88,12 +88,6 @@ Meteor.methods({
         console.dir(result);
         return result;
     },
-    'grabSessions': function (id) {
-        var c = UserStatus.connections.findOne({userId: id});
-        if (c && c.ipAddr)
-            return c.ipAddr;
-        return "";
-    },
     'getClientIP': function () {
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
     },
@@ -101,8 +95,10 @@ Meteor.methods({
         return createMostReadList(journalId, limit);
     },
     'countSession': function () {
-        var c = UserStatus.connections.find().count();
-        return c;
+        return UserStatus.connections.find().count();
+    },
+    'totalArticles': function () {
+        return Articles.find().count();
     },
     'getLocationByCurrentIP': function () {
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;

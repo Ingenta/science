@@ -36,10 +36,12 @@ ReactiveTabs.createInterface({
         var article = Router.current().data && Router.current().data();
         if (!article)return;
         if (slug === 'abstract') {
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
+                    institutionId:user.institutionId,
                     journalId: article.journalId,
                     when: new Date(),
                     action: "abstract",
@@ -47,10 +49,12 @@ ReactiveTabs.createInterface({
                 });
             });
         } else if (slug === 'full text') {
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
+                    institutionId:user.institutionId,
                     journalId: article.journalId,
                     when: new Date(),
                     action: "fulltext",
@@ -209,10 +213,12 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
-        Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+            var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 articleId: this._id,
                 userId: Meteor.userId(),
+                institutionId:user.institutionId,
                 journalId: this.journalId,
                 when: new Date(),
                 action: "pdfDownload",
