@@ -332,7 +332,7 @@ Router.map(function () {
         where: 'server',
         path: '/download-data',
         action: function () {
-            var data = Articles.find().fetch();
+            var data = PageViews.find().fetch();
             var fields = [
                 {
                     key: '_id',
@@ -347,8 +347,7 @@ Router.map(function () {
                     title: 'Abstract'
                 }
             ];
-
-            var title = 'aa';
+            var title = "statistic";
             var file = Excel.export(title, fields, data);
             var headers = {
                 'Content-type': 'application/vnd.openxmlformats',

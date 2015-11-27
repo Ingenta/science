@@ -34,13 +34,16 @@ Template.keywordsPanel.helpers({
 Template.keywordsPanel.events({
     'click a': function(){
         var word = this.word;
+        var datetime = new Date();
+        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 userId: Meteor.userId(),
                 institutionId:user.institutionId,
                 keywords: word,
-                when: new Date(),
+                when: datetime,
+                dateCode: dateCode,
                 action: "keyword",
                 ip: session
             });
