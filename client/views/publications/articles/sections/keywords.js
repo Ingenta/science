@@ -35,8 +35,10 @@ Template.keywordsPanel.events({
     'click a': function(){
         var word = this.word;
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+            var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 userId: Meteor.userId(),
+                institutionId:user.institutionId,
                 keywords: word,
                 when: new Date(),
                 action: "keyword",
