@@ -22,6 +22,7 @@ Package.onUse(function(api) {
 
   api.use([
     'templating',
+    'tap:i18n',
     'reactive-var',
     'rochal:slimscroll'
   ],'client');
@@ -35,8 +36,10 @@ Package.onUse(function(api) {
   ],'server');
 
   api.addFiles([
+    'client/utils.js',
     'client/query.js',
     'client/router.js',
+    'client/helper.js',
     'client/view/quickSearch.html',
     'client/view/quickSearch.js',
     'client/view/search.html',
@@ -56,7 +59,6 @@ Package.onUse(function(api) {
     'client/view/pagination.html',
     'client/view/pagination.js',
     'client/view/stylesheets/search.css',
-    'client/utils.js',
     'client/view/component/articleSelector.html',
     'client/view/component/articleSelector.js'
   ],'client');
