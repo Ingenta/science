@@ -29,9 +29,11 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+            var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 articleId: article._id,
                 userId: Meteor.userId(),
+                institutionId:user.institutionId,
                 journalId: article.journalId,
                 when: new Date(),
                 action: "emailThis",

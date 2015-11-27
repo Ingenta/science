@@ -264,11 +264,16 @@ ScienceXML.getContentType = function (results, doc) {
     }
     if (contentType) {
         contentType = contentType.trim().toLowerCase();
-        var trans = _.contains(Config.parser.contentTypeDic.article, contentType) ? "article" : "other";
-        results.contentType = trans;
+        var trans ="other";
+        _.each(Config.parser.contentTypeDic,function(dic,key){
+            if (_.contains(dic, contentType))
+                trans=key;
+        })
+        results.contentType = trans
     } else {
         results.errors.push("No content type found");
     }
+
     return results;
 }
 
