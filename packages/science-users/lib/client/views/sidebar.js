@@ -113,7 +113,7 @@ Template.LayoutSideBar.events({
                 fav.push({articleId: article._id, createOn: new Date()})
             }
             Users.update({_id: Meteor.userId()}, {$set: {favorite: fav}});
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
@@ -139,7 +139,7 @@ Template.LayoutSideBar.events({
                 wat.push(article._id)
             }
             Users.update({_id: Meteor.userId()}, {$set: {'profile.articlesOfInterest': wat}});
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
@@ -165,7 +165,7 @@ Template.LayoutSideBar.events({
                 pro.push(journal._id)
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.journalsOfInterest": pro}});
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 PageViews.insert({
                     userId: Meteor.userId(),
                     journalId: journal._id,

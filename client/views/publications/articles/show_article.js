@@ -36,7 +36,7 @@ ReactiveTabs.createInterface({
         var article = Router.current().data && Router.current().data();
         if (!article)return;
         if (slug === 'abstract') {
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
@@ -49,7 +49,7 @@ ReactiveTabs.createInterface({
                 });
             });
         } else if (slug === 'full text') {
-            Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
@@ -213,7 +213,7 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
-        Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 articleId: this._id,

@@ -28,7 +28,7 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
-        Meteor.call("grabSessions", Meteor.userId(), function (err, session) {
+        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             PageViews.insert({
                 articleId: article._id,
                 userId: Meteor.userId(),

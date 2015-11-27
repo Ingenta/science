@@ -4,20 +4,38 @@
 //    })
 //}
 Template.reports.helpers({
-    topGenresChart : function() {
+    totalConcurrentUsers: function () {
+        return Users.userStatusSessions.find().count();
+    },
+    totalRegisteredUsers: function () {
+        return Users.find().count();
+    },
+    totalPublishers: function () {
+        return Publishers.find().count();
+    },
+    totalJournals: function () {
+        return Publications.find().count();
+    },
+    totalArticles: function () {
+        Meteor.call("totalArticles", function (e, r) {
+            if (!e)return Session.set("totalArticles", r);
+        });
+        return Session.get("totalArticles");
+    },
+    topGenresChart: function () {
         return {
             chart: {
                 type: 'spline',
                 animation: Highcharts.svg, // don't animate in old IE
                 marginRight: 10,
                 events: {
-                    load: function() {
+                    load: function () {
 
                         // set up the updating of the chart each second
                         var series = this.series[0];
-                        setInterval(function() {
+                        setInterval(function () {
                             var x = (new Date()).getTime(), // current time
-                                y= Users.userStatusSessions.find().count()
+                                y = Users.userStatusSessions.find().count()
                             series.addPoint([x, y], true, true);
                         }, 1000);
                     }
@@ -27,9 +45,9 @@ Template.reports.helpers({
                 text: "Total users"
             },
             tooltip: {
-                formatter: function() {
-                    return '<b>'+ this.series.name +'</b><br>'+
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br>'+
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br>' +
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br>' +
                         Highcharts.numberFormat(this.y, 2);
                 }
 
@@ -57,7 +75,7 @@ Template.reports.helpers({
             series: [{
                 type: 'spline',
                 name: 'genre',
-                data: (function() {
+                data: (function () {
                     var data = [],
                         time = (new Date()).getTime(),
                         i;
