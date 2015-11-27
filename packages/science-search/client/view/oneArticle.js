@@ -25,7 +25,7 @@ Template.oneSolrArticle.helpers({
 			else if(!isLangCn && hl["title.en"])
 				return hl["title.en"];
 		}
-		return isLangCn?this.title.cn:this.title.en;
+		return isLangCn?this["title.cn"]:this["title.en"];
 	},
 	showdoi:function(){
 		var hl = SolrQuery.session.get("highlight")[this._id];

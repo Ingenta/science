@@ -1,6 +1,6 @@
 function formatRepo (repo) {
 	if (repo.loading) return repo.text;
-	var markup = repo["title.cn"];
+	var markup = Blaze.toHTMLWithData(Template.solrArticleMarkup,repo);
 	return markup;
 }
 
@@ -9,7 +9,7 @@ function formatRepoSelection (repo) {
 }
 
 Template.solrArticleSelector.onRendered(function(){
-	$("#saSelector").select2({
+	this.$(".solr-article-select").select2({
 		ajax: {
 			url: "/ajax/search",
 			dataType: 'json',
@@ -41,4 +41,15 @@ Template.solrArticleSelector.onRendered(function(){
 		templateResult: formatRepo, // omitted for brevity, see the source of this page
 		templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
 	});
+})
+
+
+Template.solrArticleMarkup.helpers({
+	id:function(){
+		return this.id;
+	},
+	showTitle:function(){
+		var isLangCn = TAPi18n.getLanguage()==="zh-CN";
+		return isLangCn?this["title.cn"]:this["title.en"];
+	}
 })
