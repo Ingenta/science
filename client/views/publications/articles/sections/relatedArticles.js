@@ -26,8 +26,5 @@ Template.relatedArticles.onRendered(function(){
 Template.relatedArticles.helpers({
 	'relatedList':function(){
 		return Session.get("relatedArticlesIdList");
-	},
-	'article':function(){
-		return Articles.findOne({_id:this._id},{fields:{fulltext:0}})
 	}
 });

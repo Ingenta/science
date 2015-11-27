@@ -5,9 +5,7 @@ Template.oneSolrArticle.helpers({
 		if(hl && hl[isLangCn?"all_authors_cn":"all_authors_en"]){
 			return hl[isLangCn?"all_authors_cn":"all_authors_en"];
 		}else{
-			return _.map(this.authors,function(author){
-				return author.fullname[isLangCn?"cn":"en"];
-			});
+			return this["all_authors_"+isLangCn?"cn":"en"];
 		}
 	},
 	query      : function () {
@@ -38,7 +36,6 @@ Template.oneSolrArticle.helpers({
 		//return "fa fa-language";
 	},
 	articleUrl:function(){
-		console.dir(this);
 		var journal = Publications.findOne({_id: this.journalId},{fields:{shortTitle:1,publisher:1}});
 		if (!journal)return;
 		var pub = Publishers.findOne({_id: journal.publisher},{fields:{name:1}});
