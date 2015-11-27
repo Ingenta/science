@@ -34,7 +34,6 @@
 <template name="updateLatestArticlesModalForm">
     {{#autoForm doc=this collection="NewsRecommend" id="updateLatestArticlesModal" type="update" buttonContent=getUpdateButtonContent}}
     <fieldset>
-        {{> afQuickField name="ArticlesId" options=getArticles }}
         {{> afQuickField name="picture"}}
     </fieldset>
     <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
@@ -53,7 +52,7 @@
                 </div>
                 {{#autoForm id="addLatestArticlesModalForm" collection="NewsRecommend" type="insert"}}
                 <div class="modal-body">
-                    {{> afQuickField name="ArticlesId" options=getArticles }}
+                    {{> afQuickField name="ArticlesId" select2Options=searchOptionForSelect2 style="width:100%"}}
                     {{> afQuickField name="picture"}}
                 </div>
                 <div class="modal-footer">

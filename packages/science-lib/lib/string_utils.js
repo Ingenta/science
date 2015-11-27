@@ -156,6 +156,13 @@ Science.String.getFileNameWithOutExt = function(str){
     return lastIndex>-1?name.substr(0,lastIndex):name;
 };
 
+Science.String.toDate=function(str){
+    if(!str) return;
+    var p = Date.parse(str);
+    if(!p) return;
+    return new Date(p);
+}
+
 Science.escapeRegEx = Science.String.escapeRegEx;
 Science.replaceSubstrings = Science.String.replaceSubstrings;
 Science.clearTags =Science.String.clearTags ;
