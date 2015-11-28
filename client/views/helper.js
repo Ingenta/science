@@ -38,6 +38,7 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
                 userId: Meteor.userId(),
                 institutionId:user.institutionId,
                 journalId: article.journalId,
+                publisher: article.publisher,
                 when: datetime,
                 dateCode: dateCode,
                 action: "emailThis",

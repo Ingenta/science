@@ -44,6 +44,7 @@ ReactiveTabs.createInterface({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     institutionId:user.institutionId,
+                    publisher: article.publisher,
                     journalId: article.journalId,
                     when: datetime,
                     dateCode: dateCode,
@@ -60,6 +61,7 @@ ReactiveTabs.createInterface({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     institutionId: user.institutionId,
+                    publisher: article.publisher,
                     journalId: article.journalId,
                     when: datetime,
                     dateCode: dateCode,
@@ -219,15 +221,18 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
+        var article = Router.current().data && Router.current().data();
+        if (!article)return;
         var datetime = new Date();
         var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
-                articleId: this._id,
+                articleId: article._id,
                 userId: Meteor.userId(),
                 institutionId:user.institutionId,
-                journalId: this.journalId,
+                publisher: article.publisher,
+                journalId: article.journalId,
                 when: datetime,
                 dateCode: dateCode,
                 action: "pdfDownload",

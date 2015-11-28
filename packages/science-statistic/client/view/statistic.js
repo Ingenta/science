@@ -44,7 +44,12 @@ Template.statistic.events({
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
         var templateType = $("#templateType").val();
-        Router.go('/download-data',{},{query:"publisher="+publisher + "&publications="+publication+"&institution="+institution+"&startDate="+startDate+"&endDate="+endDate+"&templateType="+templateType});
+        if(templateType===undefined){
+            alert(TAPi18n.__( "Choose statistics template"));
+        }else{
+            window.location.href = "/download-data?publisher="+publisher + "&publications="+publication+"&institution="+institution+"&startDate="+startDate+"&endDate="+endDate+"&templateType="+templateType
+        }
+        //Router.go('/download-data',{},{query:q});
     },
     'mousedown .select2-search__field': function(){
         var publisherId = $("#filter-publisher").val();
