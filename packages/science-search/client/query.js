@@ -210,7 +210,7 @@ SolrQuery = {
 			}
 		});
 	},
-	select2Options:function(){
-		return QueryUtils.select2Options();
+	select2Options:function(filter){
+		return QueryUtils.select2Options(filter);
 	}
 };

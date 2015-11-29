@@ -72,7 +72,7 @@ QueryUtils = {
 	formatRepoSelection: function (repo) {
 		return repo["title.cn"];
 	},
-	select2Options:function() {
+	select2Options:function(filter) {
 		return {
 			placeholder       : TAPi18n.__("Choose"),
 			ajax              : {
@@ -83,6 +83,9 @@ QueryUtils = {
 					var queryObj  = {};
 					queryObj.q    = JSON.stringify(params.term);
 					queryObj.page = params.page;
+					if(!_.isEmpty(filter)){
+						queryObj.fq = JSON.stringify(filter);
+					}
 					return queryObj;
 				},
 				processResults: function (data, params) {
