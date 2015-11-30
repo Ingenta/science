@@ -430,6 +430,9 @@
       "banner": {
         "label": "选择横幅图片"
       },
+      "adBanner": {
+        "label": "选择PDF广告横幅图片"
+      },
       "scholarOneCode":{
         "label":"英文投稿平台代号"
       },

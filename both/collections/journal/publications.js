@@ -170,6 +170,17 @@ PublicationsSchema = new SimpleSchema({
             }
         }
     },
+    adBanner: {
+    type: String,
+        optional: true,
+        autoform: {
+        afFieldInput: {
+            type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
+        }
+    }
+},
     scholarOneCode:{
         type: String,
         optional:true

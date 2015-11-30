@@ -1,7 +1,7 @@
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug) {
-        Session.set("activeTab","")
+        Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (slug !== "Browse" && Router.current().route.getName() === "journal.name.toc") {
             Router.current().params.volume = undefined;
@@ -27,7 +27,22 @@ Template.journalBanner.helpers({
         return true;
     }
 });
-
+Template.journalAdBanner.helpers({
+    getJournalAdBannerById: function (journalId) {
+        if (!journalId)return;
+        var journal = Publications.findOne({_id: journalId});
+        if (!journal) return;
+        if (!journal.adBanner) return;
+        return Images.findOne({_id: journal.adBanner}).url();
+    },
+    hasJournalAdBanner: function (journalId) {
+        if (!journalId)return;
+        var journal = Publications.findOne({_id: journalId});
+        if (!journal) return;
+        if (!journal.adBanner) return;
+        return true;
+    }
+});
 Template.ShowJournal.helpers({
     initPage: function (id, publisher) {
         Session.set('currentJournalId', id);
