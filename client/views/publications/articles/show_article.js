@@ -43,7 +43,7 @@ ReactiveTabs.createInterface({
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
-                    institutionId: user.institutionId,
+                    institutionId: user.institutionId ? user.institutionId : "",
                     publisher: article.publisher,
                     journalId: article.journalId,
                     when: datetime,
@@ -60,7 +60,7 @@ ReactiveTabs.createInterface({
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
-                    institutionId: user.institutionId,
+                    institutionId: user.institutionId ? user.institutionId : "",
                     publisher: article.publisher,
                     journalId: article.journalId,
                     when: datetime,
