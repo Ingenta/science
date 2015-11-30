@@ -327,35 +327,5 @@ Router.map(function () {
             }
         }
     });
-    this.route('downloadExcel', {
-        where: 'server',
-        path: '/download-data',
-        action: function () {
-            var filterName = {};
-            if(this.request.query.publisher){
-                filterName.publisher = this.request.query.publisher;
-            }
-            if(this.request.query.publications){
-                filterName.journalId = this.request.query.publications;
-            }
-            if(this.request.query.institution){
-                filterName.institutionId = this.request.query.institution;
-            }
-            if(this.request.query.reportType){
-                filterName.action = this.request.query.reportType;
-            }
-            var data = PageViews.find(filterName).fetch();
-            var fields = [{key: 'keywords',title: 'keyword'},{key: 'dateCode',title: 'Date'}];
-            //console.dir(data);
-            var title = "statistic";
-            var file = Excel.export(title, fields, data);
-            var headers = {
-                'Content-type': 'application/vnd.openxmlformats',
-                'Content-Disposition': 'attachment; filename=' + title + '.xlsx'
-            };
 
-            this.response.writeHead(200, headers);
-            this.response.end(file, 'binary');
-        }
-    });
 });
