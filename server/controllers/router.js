@@ -215,7 +215,6 @@ Router.map(function () {
 
                 var journalInfo = Publications.findOne({_id: article.journal._id});
                 var publisherInfo = Publishers.findOne({_id: article.publisher});
-                var adObj = Advertisement.findOne({publications: journalInfo._id});
                 var langArr = ["en", "cn"];
                 var getdata = function (data, lang, specialArr) {
                     var index = lang === 'en' ? 0 : 1;
@@ -229,8 +228,8 @@ Router.map(function () {
                 if (journalInfo.banner) {
                     data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
                 }
-                if (!_.isEmpty(adObj)) {
-                    data.ad = host + Images.findOne({_id: adObj.pictures}).url();
+                if (journalInfo.adBanner) {
+                    data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
                 }
                 data.title = getdata(article.title, lang);
                 data.authors = _.map(article.authors.fullname, function (fname) {
