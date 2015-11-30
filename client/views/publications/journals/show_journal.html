@@ -1,12 +1,14 @@
 <template name="ShowJournal">
 
     {{ initPage _id publisher}}
-    <div class="pull-right">
-        {{#if can "modify-journal" "resource" }}
-            {{> updatePublicationBannerModalForm}}
-        {{/if}}
+    <div class="row">
+        <div class="pull-right">
+            {{#if can "modify-journal" "resource" }}
+                {{> updatePublicationBannerModalForm}}
+            {{/if}}
+        </div>
+        {{> journalBanner journal=_id}}
     </div>
-    {{> journalBanner journal=_id}}
     <br>
     {{#if can "modify-journal" "resource"  }}
         <div class="pull-right">
