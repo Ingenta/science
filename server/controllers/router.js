@@ -332,27 +332,22 @@ Router.map(function () {
         where: 'server',
         path: '/download-data',
         action: function () {
-            //var filterName = [];
-            //if(this.request.query.publisher){
-            //    filterName.push({publisher: this.request.query.publisher})
-            //}
-            //if(this.request.query.publications){
-            //    filterName.push({journalId: this.request.query.publications})
-            //}
-            //if(this.request.query.institution){
-            //    filterName.push({institution: this.request.query.institution})
-            //}
-            var data = PageViews.find({publisher:this.request.query.publisher},{journalId:this.request.query.publications},{institutionId:this.request.query.institution},{action:this.request.query.templateType}).fetch();
-            var fields = [
-                {
-                    key: 'keywords',
-                    title: 'keyword'
-                },
-                {
-                    key: 'dateCode',
-                    title: 'Date'
-                }
-            ];
+            var filterName = {};
+            if(this.request.query.publisher){
+                filterName.publisher = this.request.query.publisher;
+            }
+            if(this.request.query.publications){
+                filterName.journalId = this.request.query.publications;
+            }
+            if(this.request.query.institution){
+                filterName.institutionId = this.request.query.institution;
+            }
+            if(this.request.query.templateType){
+                filterName.action = this.request.query.templateType;
+            }
+            var data = PageViews.find(filterName).fetch();
+            var fields = [{key: 'keywords',title: 'keyword'},{key: 'dateCode',title: 'Date'}];
+            //console.dir(data);
             var title = "statistic";
             var file = Excel.export(title, fields, data);
             var headers = {
