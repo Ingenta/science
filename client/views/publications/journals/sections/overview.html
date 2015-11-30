@@ -20,14 +20,6 @@
             {{> latestUploadedArticleList journalId=getJournalIdFromSession}}
         </div>
     </div>
-    <div class="row">
-        <div class="pull-right">
-            {{#if can "modify-journal" "resource" }}
-                {{> updatePublicationAdBannerModalForm}}
-            {{/if}}
-        </div>
-        {{> journalAdBanner journal=_id}}
-    </div>
 </template>
 <template name="journalCoverSummary">
     <div class="pull-right">

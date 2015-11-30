@@ -27,13 +27,6 @@
     {{/if}}
 </template>
 
-<template name="journalAdBanner">
-    {{#if hasJournalAdBanner journal}}
-        <div class="journal-banner">
-            <img src="{{getJournalAdBannerById journal}}" width="100%">
-        </div>
-    {{/if}}
-</template>
 
 <template name="journalOptions">
     {{#journalTabs name="" tabs=tabs activeTab=activeTab}}
