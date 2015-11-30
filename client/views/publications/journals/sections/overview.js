@@ -40,7 +40,7 @@ Template.journalSummary.helpers({
             return title;
         }
     },
-    Language: function (num2) {
+    articleLanguage: function (num2) {
         if (num2 == "1") {
             return TAPi18n.__("English");
         }

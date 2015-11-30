@@ -153,7 +153,7 @@ Template.showArticle.helpers({
         console.log(id);
         return Collections.Pdfs.findOne({_id: id}).url() + "&download=true";
     },
-    Language: function (num2) {
+    articleLanguage: function (num2) {
         if (num2 == "1") {
             return TAPi18n.__("English");
         }
@@ -241,7 +241,7 @@ Template.showArticle.events({
         });
     }
 });
-/
+
 var getNextPage = function (issue, page, ascending) {
     var articlesInThisIssue = Articles.find({issueId: issue}, {fields: {elocationId: 1, doi: 1}}).fetch();
     var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
