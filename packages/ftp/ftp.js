@@ -65,6 +65,7 @@ Science.FTP.listFiles=function(options,callback){
 	var self = new FTP();
 	var _listFiles=function(){
 		self.list(function(err, list) {
+			console.dir("list");
 			if (err) {
 				callback && callback(err);
 				return;
@@ -106,7 +107,9 @@ Science.FTP.listFiles=function(options,callback){
 Science.FTP.moveFtpFiles = function(options,callback){
 	var self = new FTP();
 	self.on("ready",function(){
+		console.dir("start");
 		self.rename(options.oldPath,options.newPath,function(err){
+			console.dir("remove");
 			if (err) {
 				callback && callback(err);
 				return;
