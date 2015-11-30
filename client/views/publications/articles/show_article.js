@@ -37,13 +37,13 @@ ReactiveTabs.createInterface({
         if (!article)return;
         if (slug === 'abstract') {
             var datetime = new Date();
-            var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+            var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
-                    institutionId:user.institutionId,
+                    institutionId: user.institutionId,
                     publisher: article.publisher,
                     journalId: article.journalId,
                     when: datetime,
@@ -54,7 +54,7 @@ ReactiveTabs.createInterface({
             });
         } else if (slug === 'full text') {
             var datetime = new Date();
-            var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+            var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
@@ -224,13 +224,13 @@ Template.showArticle.events({
         var article = Router.current().data && Router.current().data();
         if (!article)return;
         var datetime = new Date();
-        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+        var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 articleId: article._id,
                 userId: Meteor.userId(),
-                institutionId:user.institutionId,
+                institutionId: user.institutionId ? user.institutionId : "",
                 publisher: article.publisher,
                 journalId: article.journalId,
                 when: datetime,
@@ -241,9 +241,9 @@ Template.showArticle.events({
         });
     }
 });
-
+/
 var getNextPage = function (issue, page, ascending) {
-    var articlesInThisIssue = Articles.find({issueId: issue},{fields:{elocationId:1,doi:1}}).fetch();
+    var articlesInThisIssue = Articles.find({issueId: issue}, {fields: {elocationId: 1, doi: 1}}).fetch();
     var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
         return parseInt(a.elocationId, 10);
     });
@@ -256,12 +256,12 @@ var getNextPage = function (issue, page, ascending) {
 }
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        if(!this.elocationId)return false;
+        if (!this.elocationId)return false;
         var curIssue = this.issueId;
         return getNextPage(curIssue, this.elocationId, false);
     },
     nextArticle: function () {
-        if(!this.elocationId)return false;
+        if (!this.elocationId)return false;
         var curIssue = this.issueId;
         return getNextPage(curIssue, this.elocationId, true);
     }

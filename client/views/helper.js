@@ -36,7 +36,7 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
             PageViews.insert({
                 articleId: article._id,
                 userId: Meteor.userId(),
-                institutionId:user.institutionId,
+                institutionId:user.institutionId ? user.institutionId : "",
                 journalId: article.journalId,
                 publisher: article.publisher,
                 when: datetime,

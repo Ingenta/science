@@ -43,7 +43,7 @@ Template.keywordsPanel.events({
             PageViews.insert({
                 articleId: article._id,
                 userId: Meteor.userId(),
-                institutionId:user.institutionId,
+                institutionId:user.institutionId ? user.institutionId : "",
                 publisher: article.publisher,
                 journalId: article.journalId,
                 keywords: word,

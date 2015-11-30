@@ -119,7 +119,7 @@ Template.LayoutSideBar.events({
                     PageViews.insert({
                         articleId: article._id,
                         userId: Meteor.userId(),
-                        institutionId:user.institutionId,
+                        institutionId:user.institutionId ? user.institutionId : "",
                         journalId: article.journalId,
                         publisher: article.publisher,
                         when: datetime,
@@ -152,7 +152,7 @@ Template.LayoutSideBar.events({
                     PageViews.insert({
                         articleId: article._id,
                         userId: Meteor.userId(),
-                        institutionId:user.institutionId,
+                        institutionId:user.institutionId ? user.institutionId : "",
                         journalId: article.journalId,
                         publisher: article.publisher,
                         when: datetime,
@@ -184,7 +184,7 @@ Template.LayoutSideBar.events({
                     var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
                     PageViews.insert({
                         userId: Meteor.userId(),
-                        institutionId:user.institutionId,
+                        institutionId:user.institutionId ? user.institutionId : "",
                         journalId: journal._id,
                         publisher: journal.publisher,
                         when: datetime,

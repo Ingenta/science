@@ -51,7 +51,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 userId: Meteor.userId(),
-                institutionId:user.institutionId,
+                institutionId:user.institutionId ? user.institutionId : "",
                 journalId: journal._id,
                 publisher: journal.publisher,
                 when: datetime,
@@ -123,7 +123,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
                 userId: Meteor.userId(),
-                institutionId:user.institutionId,
+                institutionId:user.institutionId ? user.institutionId : "",
                 journalId: journal._id,
                 publisher: journal.publisher,
                 when: datetime,
