@@ -1,4 +1,3 @@
-
 QueryUtils = {
 	getFilterQuery: function (queryObj) {
 		var fqObj;

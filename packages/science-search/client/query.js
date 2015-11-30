@@ -219,7 +219,6 @@ SolrQuery = {
 				dataType      : 'json',
 				delay         : 250,
 				data          : function (params) {
-					console.log('data----')
 					var queryObj  = {};
 					queryObj.q    = JSON.stringify(params.term);
 					queryObj.page = params.page;

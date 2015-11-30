@@ -11,7 +11,7 @@
 				</div>
 				<div class="modal-body">
 					<h6>{{_ "Choose"}}</h6>
-					{{> solrArticleSelector id="saSelector"}}
+					{{> solrArticleSelector}}
 				</div>
 				<div class="modal-footer">
 					<button id="saveSuggestedMostRead" class="btn btn-primary">{{_ "Create"}}</button>
@@ -37,5 +37,6 @@
 		{{else}}
 			<a href="#" class="fa fa-trash"></a>
 		{{/unless}}
+		{{> suggestedMostReadModalForm}}
 	{{/if}}
 </template>

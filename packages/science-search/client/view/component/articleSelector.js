@@ -4,14 +4,11 @@ Template.solrArticleSelector.onRendered(function(){
 	if(!_.isEmpty(userOptions)){
 		options=Science.JSON.MergeObject(userOptions,options)
 	}
-	this.$(".solr-article-select").select2(options);
+	Science.dom.recordSelect2(this.$(".solr-article-select").select2(options));
 })
 
 
 Template.solrArticleMarkup.helpers({
-	id:function(){
-		return this.id;
-	},
 	showTitle:function(){
 		var isLangCn = TAPi18n.getLanguage()==="zh-CN";
 		return isLangCn?this["title.cn"]:this["title.en"];

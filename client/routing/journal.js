@@ -61,6 +61,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             });
         });
         this.next();
+    },
+    onStop:function(){
+        Science.dom.clearSelect2Record();
     }
 });
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {

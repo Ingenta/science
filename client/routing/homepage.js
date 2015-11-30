@@ -14,5 +14,8 @@ Router.route("home", {
             Meteor.subscribe('mostCited'),
             Meteor.subscribe('mostRead', undefined, 5)
         ]
+    },
+    onStop:function(){
+        Science.dom.clearSelect2Record();
     }
 });

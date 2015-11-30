@@ -35,6 +35,9 @@ Router.route("/collections/:collId/", {
 			Meteor.subscribe('allCollections'),
 			Meteor.subscribe('fullMostRecentArticles')
 		]
+	},
+	onStop : function(){
+		Science.dom.clearSelect2Record()
 	}
 });
 

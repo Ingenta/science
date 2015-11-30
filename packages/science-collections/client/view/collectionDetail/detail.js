@@ -19,3 +19,9 @@ Template.collDetailHeader.helpers({
 		return 0;
 	}
 })
+
+Template.collDetail.helpers({
+	s2OptWithFilter:function(){
+		return SolrQuery.select2Options({"publisherId":Session.get("currentPublisherId")})
+	}
+})
