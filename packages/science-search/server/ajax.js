@@ -8,9 +8,9 @@ Router.route('/ajax/search', function () {
 	_.each(params,function(v,k){
 		params[k] = JSON.parse(v)
 	})
-	params.st = params.st || {start:1,rows:10};
+	params.st = params.st || {start:0,rows:10};
 	if(params.page){
-		params.st.start=params.page * 10 + 1;
+		params.st.start=params.page * 10;
 	}
 	var result = SolrUtils.search(params);
 	result.page = Math.ceil(result.response.start / 10)
