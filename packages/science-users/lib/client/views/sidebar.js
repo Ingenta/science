@@ -33,13 +33,13 @@ Template.LayoutSideBar.helpers({
         else return;
     },
     canUseAdminPanel: function () {
-        return Meteor.user().level===Permissions.level.admin;
+        return Meteor.user().level === Permissions.level.admin;
     },
     canUseInstitutionPanel: function () {
-        return Meteor.user().level===Permissions.level.institution;
+        return Meteor.user().level === Permissions.level.institution;
     },
     canUsePublisherPanel: function () {
-        return Meteor.user().level===Permissions.level.publisher;
+        return Meteor.user().level === Permissions.level.publisher;
     },
     isArticlePage: function () {
         if (Router.current() && Router.current().route)
@@ -102,7 +102,7 @@ Template.LayoutSideBar.events({
     "click .favorite": function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
-        if (Meteor.userId()) {
+        if (Meteor.userId() && article) {
             var fav = Meteor.user().favorite || [];
             var existObj = _.find(fav, function (obj) {
                 return obj.articleId == article._id;
@@ -112,21 +112,8 @@ Template.LayoutSideBar.events({
             } else {
                 fav.push({articleId: article._id, createOn: new Date()})
 
-                Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                    var user = Users.findOne({_id: Meteor.userId()});
-                    var datetime = new Date();
-                    var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
-                    PageViews.insert({
-                        articleId: article._id,
-                        userId: Meteor.userId(),
-                        institutionId:user.institutionId ? user.institutionId : "",
-                        journalId: article.journalId,
-                        publisher: article.publisher,
-                        when: datetime,
-                        dateCode: dateCode,
-                        action: "favorite",
-                        ip: session
-                    });
+                Meteor.call("insertAudit", Meteor.userId(), "favourite", article.publisher, article.journalId, article._id, function (err, response) {
+                    if (err) console.log(err);
                 });
             }
             Users.update({_id: Meteor.userId()}, {$set: {favorite: fav}});
@@ -135,7 +122,7 @@ Template.LayoutSideBar.events({
     "click .watchArticle": function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
-        if (Meteor.userId()) {
+        if (Meteor.userId() && article) {
             var wat = [];
             if (Meteor.user().profile) {
                 wat = Meteor.user().profile.articlesOfInterest || [];
@@ -145,27 +132,14 @@ Template.LayoutSideBar.events({
             } else {
                 wat.push(article._id)
 
-                Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                    var user = Users.findOne({_id: Meteor.userId()});
-                    var datetime = new Date();
-                    var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
-                    PageViews.insert({
-                        articleId: article._id,
-                        userId: Meteor.userId(),
-                        institutionId:user.institutionId ? user.institutionId : "",
-                        journalId: article.journalId,
-                        publisher: article.publisher,
-                        when: datetime,
-                        dateCode: dateCode,
-                        action: "watchArticle",
-                        ip: session
-                    });
+                Meteor.call("insertAudit", Meteor.userId(), "watchArticle", article.publisher, article.journalId, article._id, function (err, response) {
+                    if (err) console.log(err);
                 });
             }
             Users.update({_id: Meteor.userId()}, {$set: {'profile.articlesOfInterest': wat}});
         }
     },
-    "click .watch": function () {
+    "click .watchJournal": function () {
         var currentTitle = Router.current().params.journalShortTitle;
         var journal = Publications.findOne({shortTitle: currentTitle});
         if (Meteor.userId()) {
@@ -176,22 +150,10 @@ Template.LayoutSideBar.events({
             if (_.contains(pro, journal._id)) {
                 pro = _.without(pro, journal._id)
             } else {
-                pro.push(journal._id)
+                pro.push(journal._id);
 
-                Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                    var user = Users.findOne({_id: Meteor.userId()});
-                    var datetime = new Date();
-                    var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
-                    PageViews.insert({
-                        userId: Meteor.userId(),
-                        institutionId:user.institutionId ? user.institutionId : "",
-                        journalId: journal._id,
-                        publisher: journal.publisher,
-                        when: datetime,
-                        dateCode: dateCode,
-                        action: "watchJournal",
-                        ip: session
-                    });
+                Meteor.call("insertAudit", Meteor.userId(), "watchJournal", journal.publisher, journal._id, function (err, response) {
+                    if (err) console.log(err);
                 });
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.journalsOfInterest": pro}});
