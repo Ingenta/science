@@ -104,33 +104,7 @@ AutoForm.addHooks(['addRecommendModalForm'], {
 }, true);
 
 Template.addRecommendModalForm.helpers({
-    getArticles: function () {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var journalId = Session.get('currentJournalId');
-        var jouRec = EditorsRecommend.find({publications: journalId}).fetch();
-        var jouId = _.pluck(jouRec,"ArticlesId");
-        var articles = Articles.find({journalId: journalId,_id:{$nin:jouId}}).fetch();
-        var result = [];
-        _.each(articles, function (item) {
-            var name = iscn ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
-        });
-        return result;
-    }
-});
-
-Template.updateRecommendModalForm.helpers({
-    getArticles: function () {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var journalId = Session.get('currentJournalId');
-        var jouRec = EditorsRecommend.find({publications: journalId,_id:{$ne:this._id}}).fetch();
-        var jouId = _.pluck(jouRec,"ArticlesId");
-        var articles = Articles.find({journalId: journalId,_id:{$nin:jouId}}).fetch();
-        var result = [];
-        _.each(articles, function (item) {
-            var name = iscn ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
-        });
-        return result;
+    s2OptWithFilter:function(){
+        return SolrQuery.select2Options({"journalId":Session.get("currentJournalId")})
     }
 });

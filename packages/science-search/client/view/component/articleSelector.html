@@ -4,6 +4,12 @@
 	</select>
 </template>
 
+<template name="solrArticleFilter">
+	{{#Multiselect name='solrFilterMS' setting=setting options=options selected=selectedOptions  }}
+		<option value="{{ _id }}" {{ attrs }}>{{ caption }}</option>
+	{{/Multiselect}}
+</template>
+
 <template name="solrArticleMarkup">
 	<ul class="dotted list-unstyled">
 		<li>

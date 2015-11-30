@@ -209,5 +209,42 @@ SolrQuery = {
 				}
 			}
 		});
+	},
+	select2Options:function(filter) {
+		SolrQuery.set("s2optFilter",filter);
+		return {
+			placeholder       : TAPi18n.__("Choose"),
+			ajax              : {
+				url           : "/ajax/search",
+				dataType      : 'json',
+				delay         : 250,
+				data          : function (params) {
+					console.log('data----')
+					var queryObj  = {};
+					queryObj.q    = JSON.stringify(params.term);
+					queryObj.page = params.page;
+					if(!_.isEmpty(SolrQuery.get("s2optFilter"))){
+						queryObj.fq = JSON.stringify(SolrQuery.get("s2optFilter"));
+					}
+					return queryObj;
+				},
+				processResults: function (data, params) {
+					params.page = params.page || 1;
+					return {
+						results   : data.response.docs,
+						pagination: {
+							more: (params.page * 10) < data.response.numFound
+						}
+					};
+				},
+				cache         : true
+			},
+			escapeMarkup      : function (markup) {
+				return markup;
+			}, // let our custom formatter work
+			minimumInputLength: 1,
+			templateResult    : QueryUtils.formatRepo, // omitted for brevity, see the source of this page
+			templateSelection : QueryUtils.formatRepoSelection // omitted for brevity, see the source of this page
+		}
 	}
 };

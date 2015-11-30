@@ -32,7 +32,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe('medias'),
             Meteor.subscribe('files'),
             Meteor.subscribe('specialTopics'),
-            Meteor.subscribe('recommend'),
+            Meteor.subscribe('recommend',Session.get('currentJournalId')),
             Meteor.subscribe("editorial_member"),
             Meteor.subscribe("editorial_board"),
             Meteor.subscribe("author_center"),

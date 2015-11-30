@@ -10,3 +10,9 @@ Router.route("test2",{
 Meteor.startup(function(){
 
 })
+
+Template.test2.helpers({
+	s2opt:function(){
+		return Session.get("option")
+	}
+})
