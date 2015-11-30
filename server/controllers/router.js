@@ -332,23 +332,28 @@ Router.map(function () {
         where: 'server',
         path: '/download-data',
         action: function () {
-            var data = Articles.find().fetch();
+            //var filterName = [];
+            //if(this.request.query.publisher){
+            //    filterName.push({publisher: this.request.query.publisher})
+            //}
+            //if(this.request.query.publications){
+            //    filterName.push({journalId: this.request.query.publications})
+            //}
+            //if(this.request.query.institution){
+            //    filterName.push({institution: this.request.query.institution})
+            //}
+            var data = PageViews.find({publisher:this.request.query.publisher},{journalId:this.request.query.publications},{institutionId:this.request.query.institution},{action:this.request.query.templateType}).fetch();
             var fields = [
                 {
-                    key: '_id',
-                    title: 'ID'
+                    key: 'keywords',
+                    title: 'keyword'
                 },
                 {
-                    key: 'title.en',
-                    title: 'Title'
-                },
-                {
-                    key: 'abstract',
-                    title: 'Abstract'
+                    key: 'dateCode',
+                    title: 'Date'
                 }
             ];
-
-            var title = 'aa';
+            var title = "statistic";
             var file = Excel.export(title, fields, data);
             var headers = {
                 'Content-type': 'application/vnd.openxmlformats',

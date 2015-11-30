@@ -111,20 +111,25 @@ Template.LayoutSideBar.events({
                 fav = _.without(fav, existObj)
             } else {
                 fav.push({articleId: article._id, createOn: new Date()})
+
+                Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                    var user = Users.findOne({_id: Meteor.userId()});
+                    var datetime = new Date();
+                    var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+                    PageViews.insert({
+                        articleId: article._id,
+                        userId: Meteor.userId(),
+                        institutionId:user.institutionId,
+                        journalId: article.journalId,
+                        publisher: article.publisher,
+                        when: datetime,
+                        dateCode: dateCode,
+                        action: "favorite",
+                        ip: session
+                    });
+                });
             }
             Users.update({_id: Meteor.userId()}, {$set: {favorite: fav}});
-            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                var user = Users.findOne({_id: Meteor.userId()});
-                PageViews.insert({
-                    articleId: article._id,
-                    userId: Meteor.userId(),
-                    institutionId:user.institutionId,
-                    journalId: article.journalId,
-                    when: new Date(),
-                    action: "favorite",
-                    ip: session
-                });
-            });
         }
     },
     "click .watchArticle": function () {
@@ -139,20 +144,25 @@ Template.LayoutSideBar.events({
                 wat = _.without(wat, article._id)
             } else {
                 wat.push(article._id)
+
+                Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                    var user = Users.findOne({_id: Meteor.userId()});
+                    var datetime = new Date();
+                    var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+                    PageViews.insert({
+                        articleId: article._id,
+                        userId: Meteor.userId(),
+                        institutionId:user.institutionId,
+                        journalId: article.journalId,
+                        publisher: article.publisher,
+                        when: datetime,
+                        dateCode: dateCode,
+                        action: "watchArticle",
+                        ip: session
+                    });
+                });
             }
             Users.update({_id: Meteor.userId()}, {$set: {'profile.articlesOfInterest': wat}});
-            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                var user = Users.findOne({_id: Meteor.userId()});
-                PageViews.insert({
-                    articleId: article._id,
-                    userId: Meteor.userId(),
-                    institutionId:user.institutionId,
-                    journalId: article.journalId,
-                    when: new Date(),
-                    action: "watchArticle",
-                    ip: session
-                });
-            });
         }
     },
     "click .watch": function () {
@@ -167,19 +177,24 @@ Template.LayoutSideBar.events({
                 pro = _.without(pro, journal._id)
             } else {
                 pro.push(journal._id)
+
+                Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+                    var user = Users.findOne({_id: Meteor.userId()});
+                    var datetime = new Date();
+                    var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+                    PageViews.insert({
+                        userId: Meteor.userId(),
+                        institutionId:user.institutionId,
+                        journalId: journal._id,
+                        publisher: journal.publisher,
+                        when: datetime,
+                        dateCode: dateCode,
+                        action: "watchJournal",
+                        ip: session
+                    });
+                });
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.journalsOfInterest": pro}});
-            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                var user = Users.findOne({_id: Meteor.userId()});
-                PageViews.insert({
-                    userId: Meteor.userId(),
-                    institutionId:user.institutionId,
-                    journalId: journal._id,
-                    when: new Date(),
-                    action: "watchJournal",
-                    ip: session
-                });
-            });
         }
     }
 })

@@ -280,6 +280,9 @@
             "banner": {
                 "label": "Choose Image for Banner"
             },
+            "adBanner": {
+                "label": "Choose Image for Banner inside PDF"
+            },
             "scholarOneCode":{
                 "label":"Scholar One Code"
             },

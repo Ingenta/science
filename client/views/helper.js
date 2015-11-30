@@ -26,8 +26,11 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
     onSuccess: function () {
         $("#sendEmailModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
         var article = Articles.findOne({doi: currentDoi});
+        var datetime = new Date();
+        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
@@ -35,7 +38,9 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
                 userId: Meteor.userId(),
                 institutionId:user.institutionId,
                 journalId: article.journalId,
-                when: new Date(),
+                publisher: article.publisher,
+                when: datetime,
+                dateCode: dateCode,
                 action: "emailThis",
                 ip: session
             });

@@ -1,5 +1,6 @@
 {
   "more": "更多",
+  "Choose statistics template": "选择统计模版",
   "Activate account": "激活用户",
   "Editorial Department": "编辑部",
   "Start Date":"开始日期",
@@ -428,6 +429,9 @@
       },
       "banner": {
         "label": "选择横幅图片"
+      },
+      "adBanner": {
+        "label": "选择PDF广告横幅图片"
       },
       "scholarOneCode":{
         "label":"英文投稿平台代号"

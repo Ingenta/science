@@ -36,27 +36,35 @@ ReactiveTabs.createInterface({
         var article = Router.current().data && Router.current().data();
         if (!article)return;
         if (slug === 'abstract') {
+            var datetime = new Date();
+            var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
                     institutionId:user.institutionId,
+                    publisher: article.publisher,
                     journalId: article.journalId,
-                    when: new Date(),
+                    when: datetime,
+                    dateCode: dateCode,
                     action: "abstract",
                     ip: session
                 });
             });
         } else if (slug === 'full text') {
+            var datetime = new Date();
+            var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
             Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
                 var user = Users.findOne({_id: Meteor.userId()});
                 PageViews.insert({
                     articleId: article._id,
                     userId: Meteor.userId(),
-                    institutionId:user.institutionId,
+                    institutionId: user.institutionId,
+                    publisher: article.publisher,
                     journalId: article.journalId,
-                    when: new Date(),
+                    when: datetime,
+                    dateCode: dateCode,
                     action: "fulltext",
                     ip: session
                 });
@@ -213,14 +221,20 @@ Template.articleOptions.helpers({
 
 Template.showArticle.events({
     'click .pdfDownload': function () {
+        var article = Router.current().data && Router.current().data();
+        if (!article)return;
+        var datetime = new Date();
+        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
         Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
             var user = Users.findOne({_id: Meteor.userId()});
             PageViews.insert({
-                articleId: this._id,
+                articleId: article._id,
                 userId: Meteor.userId(),
                 institutionId:user.institutionId,
-                journalId: this.journalId,
-                when: new Date(),
+                publisher: article.publisher,
+                journalId: article.journalId,
+                when: datetime,
+                dateCode: dateCode,
                 action: "pdfDownload",
                 ip: session
             });

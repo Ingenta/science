@@ -1,12 +1,14 @@
 <template name="ShowJournal">
 
     {{ initPage _id publisher}}
-    <div class="pull-right">
-        {{#if can "modify-journal" "resource" }}
-            {{> updatePublicationBannerModalForm}}
-        {{/if}}
+    <div class="row">
+        <div class="pull-right">
+            {{#if can "modify-journal" "resource" }}
+                {{> updatePublicationBannerModalForm}}
+            {{/if}}
+        </div>
+        {{> journalBanner journal=_id}}
     </div>
-    {{> journalBanner journal=_id}}
     <br>
     {{#if can "modify-journal" "resource"  }}
         <div class="pull-right">
@@ -21,6 +23,14 @@
     {{#if hasJournalBanner journal}}
         <div class="journal-banner">
             <img src="{{getJournalBannerById journal}}" alt="{{translateThis titleCn title}}" width="100%">
+        </div>
+    {{/if}}
+</template>
+
+<template name="journalAdBanner">
+    {{#if hasJournalAdBanner journal}}
+        <div class="journal-banner">
+            <img src="{{getJournalAdBannerById journal}}" width="100%">
         </div>
     {{/if}}
 </template>
@@ -141,6 +151,11 @@
 
 <template name="updatePublicationBannerModalForm">
     {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="banner" buttonContent=getUpdateButtonContent}}
+    {{/afModal}}
+</template>
+
+<template name="updatePublicationAdBannerModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="adBanner" buttonContent=getUpdateButtonContent}}
     {{/afModal}}
 </template>
 

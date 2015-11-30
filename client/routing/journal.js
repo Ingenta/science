@@ -42,6 +42,25 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe('mostCited'),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
+    },
+    onBeforeAction: function () {
+        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        var datetime = new Date();
+        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+            var user = Users.findOne({_id: Meteor.userId()});
+            PageViews.insert({
+                userId: Meteor.userId(),
+                institutionId:user.institutionId,
+                journalId: journal._id,
+                publisher: journal.publisher,
+                when: datetime,
+                dateCode: dateCode,
+                action: "journalBrowse",
+                ip: session
+            });
+        });
+        this.next();
     }
 });
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
@@ -95,8 +114,26 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId'))
         ]
+    },
+    onBeforeAction: function () {
+        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        var datetime = new Date();
+        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
+        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
+            var user = Users.findOne({_id: Meteor.userId()});
+            PageViews.insert({
+                userId: Meteor.userId(),
+                institutionId:user.institutionId,
+                journalId: journal._id,
+                publisher: journal.publisher,
+                when: datetime,
+                dateCode: dateCode,
+                action: "journalBrowse",
+                ip: session
+            });
+        });
+        this.next();
     }
-
 });
 
 
