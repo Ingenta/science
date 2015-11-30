@@ -758,9 +758,6 @@
       },
       "behalfPicture": {
         "label": "选择代表图片"
-      },
-      "defaultPicture": {
-        "label": "选择默认图片"
       }
     },
     "editorialMember": {

@@ -136,7 +136,6 @@
                     <div class="modal-body">
                         {{> afQuickField name="ArticlesId" select2Options=s2OptWithFilter style="width:100%"}}
                         {{> afQuickField name="behalfPicture"}}
-                        {{> afQuickField name="defaultPicture"}}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -151,7 +150,6 @@
     {{#autoForm doc=this collection="EditorsRecommend" id="updateRecommend" type="update" buttonContent=getUpdateButtonContent}}
         <fieldset>
             {{> afQuickField name="behalfPicture"}}
-            {{> afQuickField name="defaultPicture"}}
         </fieldset>
         <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
     {{/autoForm}}
