@@ -36,38 +36,12 @@ ReactiveTabs.createInterface({
         var article = Router.current().data && Router.current().data();
         if (!article)return;
         if (slug === 'abstract') {
-            var datetime = new Date();
-            var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
-            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                var user = Users.findOne({_id: Meteor.userId()});
-                PageViews.insert({
-                    articleId: article._id,
-                    userId: Meteor.userId(),
-                    institutionId: user.institutionId ? user.institutionId : "",
-                    publisher: article.publisher,
-                    journalId: article.journalId,
-                    when: datetime,
-                    dateCode: dateCode,
-                    action: "abstract",
-                    ip: session
-                });
+            Meteor.call("insertAudit", Meteor.userId(), "abstract", article.publisher, article.journalId, article._id, function (err, response) {
+                if (err) console.log(err);
             });
         } else if (slug === 'full text') {
-            var datetime = new Date();
-            var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
-            Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-                var user = Users.findOne({_id: Meteor.userId()});
-                PageViews.insert({
-                    articleId: article._id,
-                    userId: Meteor.userId(),
-                    institutionId: user.institutionId ? user.institutionId : "",
-                    publisher: article.publisher,
-                    journalId: article.journalId,
-                    when: datetime,
-                    dateCode: dateCode,
-                    action: "fulltext",
-                    ip: session
-                });
+            Meteor.call("insertAudit", Meteor.userId(), "fulltext", article.publisher, article.journalId, article._id, function (err, response) {
+                if (err) console.log(err);
             });
             if (!_.isEmpty(article.keywords)) {
                 var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn));
@@ -223,21 +197,8 @@ Template.showArticle.events({
     'click .pdfDownload': function () {
         var article = Router.current().data && Router.current().data();
         if (!article)return;
-        var datetime = new Date();
-        var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
-        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-            var user = Users.findOne({_id: Meteor.userId()});
-            PageViews.insert({
-                articleId: article._id,
-                userId: Meteor.userId(),
-                institutionId: user.institutionId ? user.institutionId : "",
-                publisher: article.publisher,
-                journalId: article.journalId,
-                when: datetime,
-                dateCode: dateCode,
-                action: "pdfDownload",
-                ip: session
-            });
+        Meteor.call("insertAudit", Meteor.userId(), "pdfDownload", article.publisher, article.journalId, article._id, function (err, response) {
+            if (err) console.log(err);
         });
     }
 });
