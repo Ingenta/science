@@ -341,8 +341,8 @@ Router.map(function () {
             if(this.request.query.institution){
                 filterName.institutionId = this.request.query.institution;
             }
-            if(this.request.query.templateType){
-                filterName.action = this.request.query.templateType;
+            if(this.request.query.reportType){
+                filterName.action = this.request.query.reportType;
             }
             var data = PageViews.find(filterName).fetch();
             var fields = [{key: 'keywords',title: 'keyword'},{key: 'dateCode',title: 'Date'}];
