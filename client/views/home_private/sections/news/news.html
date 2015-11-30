@@ -30,7 +30,7 @@
 </template>
 
 <template name="addNewsButton">
-    {{#if can "manager-homepage" "news" }}
+    {{#if can "add-homepage-news" "news" }}
         {{> addNewsForm}}
         {{#if hasMostThreeNews}}
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewsModal">
@@ -45,8 +45,10 @@
 <template name="SingleNews">
     <div class="row index index-num" index="{{index}}">
         <div class="pull-right">
-            {{#if can "manager-homepage" "news" }}
+            {{#if can "edit-homepage-news" "news" }}
                 {{> updateNewsModalForm}}
+            {{/if}}
+            {{#if can "delete-homepage-news" "news" }}
                 {{#if hasMoreThanOneNews}}
                     <a href="#" class="fa fa-trash"></a>
                 {{/if}}

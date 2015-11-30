@@ -35,23 +35,9 @@ Template.keywordsPanel.events({
     'click a': function(){
         var article = Router.current().data && Router.current().data();
         if (!article)return;
-        var word = this.word;
-        var datetime = new Date();
-        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
-        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-            var user = Users.findOne({_id: Meteor.userId()});
-            PageViews.insert({
-                articleId: article._id,
-                userId: Meteor.userId(),
-                institutionId:user.institutionId,
-                publisher: article.publisher,
-                journalId: article.journalId,
-                keywords: word,
-                when: datetime,
-                dateCode: dateCode,
-                action: "keyword",
-                ip: session
-            });
+        var keywords = this.word;
+        Meteor.call("insertAudit", Meteor.userId(), "keyword", article.publisher, article.journalId, article._id, keywords, function (err, response) {
+            if (err) console.log(err);
         });
     }
 })

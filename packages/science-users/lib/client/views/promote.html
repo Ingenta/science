@@ -2,10 +2,10 @@
     {{#if isADPage}}
         {{#each advertisement}}
             <div class="pull-right">
-                {{#if permissionCheck "modify-global-advertisement,modify-journal-advertisement"}}
+                {{#if can "add-homepage-advertisement" "advertisement"}}
                     {{> updateAdvertisementModalForm}}
                 {{/if}}
-                {{#if permissionCheck "delete-global-advertisement,delete-journal-advertisement"}}
+                {{#if can "delete-homepage-advertisement" "advertisement"}}
                     <a href="#" class="fa fa-trash"></a>
                 {{/if}}
             </div>
@@ -15,7 +15,7 @@
             <br>
         {{/each}}
         {{#if AdCount}}
-            {{#if permissionCheck "add-global-advertisement,add-journal-advertisement"}}
+            {{#if can "modify-homepage-advertisement" "advertisement"}}
                 {{> addAdvertisementModalForm}}
             {{/if}}
         {{/if}}

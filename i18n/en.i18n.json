@@ -608,9 +608,6 @@
             },
             "behalfPicture": {
                 "label": "Choose file"
-            },
-            "defaultPicture": {
-                "label": "Choose the default file"
             }
         },
         "editorialMember": {

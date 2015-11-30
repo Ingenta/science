@@ -45,20 +45,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     },
     onBeforeAction: function () {
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        var datetime = new Date();
-        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
-        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-            var user = Users.findOne({_id: Meteor.userId()});
-            PageViews.insert({
-                userId: Meteor.userId(),
-                institutionId:user.institutionId,
-                journalId: journal._id,
-                publisher: journal.publisher,
-                when: datetime,
-                dateCode: dateCode,
-                action: "journalBrowse",
-                ip: session
-            });
+        Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
+            if (err) console.log(err);
         });
         this.next();
     },
@@ -120,20 +108,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     },
     onBeforeAction: function () {
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        var datetime = new Date();
-        var dateCode = datetime.getUTCFullYear()*100+(datetime.getUTCMonth()+1);
-        Meteor.call("getClientIP", Meteor.userId(), function (err, session) {
-            var user = Users.findOne({_id: Meteor.userId()});
-            PageViews.insert({
-                userId: Meteor.userId(),
-                institutionId:user.institutionId,
-                journalId: journal._id,
-                publisher: journal.publisher,
-                when: datetime,
-                dateCode: dateCode,
-                action: "journalBrowse",
-                ip: session
-            });
+        Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
+            if (err) console.log(err);
         });
         this.next();
     }

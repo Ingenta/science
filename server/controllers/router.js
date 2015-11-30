@@ -215,7 +215,6 @@ Router.map(function () {
 
                 var journalInfo = Publications.findOne({_id: article.journal._id});
                 var publisherInfo = Publishers.findOne({_id: article.publisher});
-                var adObj = Advertisement.findOne({publications: journalInfo._id});
                 var langArr = ["en", "cn"];
                 var getdata = function (data, lang, specialArr) {
                     var index = lang === 'en' ? 0 : 1;
@@ -229,8 +228,8 @@ Router.map(function () {
                 if (journalInfo.banner) {
                     data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
                 }
-                if (!_.isEmpty(adObj)) {
-                    data.ad = host + Images.findOne({_id: adObj.pictures}).url();
+                if (journalInfo.adBanner) {
+                    data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
                 }
                 data.title = getdata(article.title, lang);
                 data.authors = _.map(article.authors.fullname, function (fname) {
@@ -328,40 +327,5 @@ Router.map(function () {
             }
         }
     });
-    this.route('downloadExcel', {
-        where: 'server',
-        path: '/download-data',
-        action: function () {
-            //var filterName = [];
-            //if(this.request.query.publisher){
-            //    filterName.push({publisher: this.request.query.publisher})
-            //}
-            //if(this.request.query.publications){
-            //    filterName.push({journalId: this.request.query.publications})
-            //}
-            //if(this.request.query.institution){
-            //    filterName.push({institution: this.request.query.institution})
-            //}
-            var data = PageViews.find({publisher:this.request.query.publisher},{journalId:this.request.query.publications},{institutionId:this.request.query.institution},{action:this.request.query.templateType}).fetch();
-            var fields = [
-                {
-                    key: 'keywords',
-                    title: 'keyword'
-                },
-                {
-                    key: 'dateCode',
-                    title: 'Date'
-                }
-            ];
-            var title = "statistic";
-            var file = Excel.export(title, fields, data);
-            var headers = {
-                'Content-type': 'application/vnd.openxmlformats',
-                'Content-Disposition': 'attachment; filename=' + title + '.xlsx'
-            };
 
-            this.response.writeHead(200, headers);
-            this.response.end(file, 'binary');
-        }
-    });
 });

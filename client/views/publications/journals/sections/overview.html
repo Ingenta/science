@@ -20,14 +20,6 @@
             {{> latestUploadedArticleList journalId=getJournalIdFromSession}}
         </div>
     </div>
-    <div class="row">
-        <div class="pull-right">
-            {{#if can "modify-journal" "resource" }}
-                {{> updatePublicationAdBannerModalForm}}
-            {{/if}}
-        </div>
-        {{> journalAdBanner journal=_id}}
-    </div>
 </template>
 <template name="journalCoverSummary">
     <div class="pull-right">
@@ -36,8 +28,11 @@
         {{/if}}
     </div>
     <p><img src="{{getImageHelper picture}}" width="137"/></p>
+
     <p>ISSN: {{issnFormat issn}}</p>
+
     <p>E-ISSN: {{EISSN}}</p>
+
     <p>CN: {{CN}}</p>
 </template>
 <template name="journalSummary">
@@ -48,21 +43,30 @@
         <div class="col-xs-9">
             <div class="row">
                 <h4>{{translateThis titleCn title}}</h4>
+
                 <div class="dotted">
                     <div class="col-xs-6">
-                        <p>{{_ "Manager"}}&nbsp;:&nbsp;&nbsp;{{translateThis competentOrganization.cn competentOrganization.en}}</p>
+                        <p>{{_ "Manager"}}
+                            &nbsp;:&nbsp;&nbsp;{{translateThis competentOrganization.cn competentOrganization.en}}</p>
+
                         <p>{{_ "Publisher"}}&nbsp;:&nbsp;&nbsp;{{Title publisher}}</p>
+
                         <p>{{_ "Period"}}&nbsp;:&nbsp;&nbsp;{{Frequency frequencyPublication}}</p>
+
                         <p>{{_ "Editor"}}&nbsp;:&nbsp;&nbsp;{{translateThis chiefEditor.cn chiefEditor.en}}</p>
                     </div>
                     <div class="col-xs-6">
                         <p>{{_ "Co-ordinator"}}&nbsp;:&nbsp;&nbsp;{{translateThis sponsor.cn sponsor.en}}</p>
+
                         <p>{{_ "Journal label"}}&nbsp;:&nbsp;&nbsp;{{> TagList}}</p>
-                        <p>{{_ "Language"}}&nbsp;:&nbsp;&nbsp;{{Language language}}</p>
+
+                        <p>{{_ "Language"}}&nbsp;:&nbsp;&nbsp;{{articleLanguage language}}</p>
+
                         <p>{{_ "Release Date"}}&nbsp;:&nbsp;&nbsp;{{formatDate publicationDate "YYYY-MM-DD"}}</p>
                     </div>
                 </div>
                 <h5>{{_ "Description"}}</h5>
+
                 <div class="pull-right">
                     {{#if can "modify-journal" "resource"  }}
                         {{> updatePublicationDescriptionModalForm}}
@@ -85,38 +89,57 @@
 <template name="recommendArticles">
     <div>
         <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
-        {{#if can "add-pulisher-collections" "collections" }}
-            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}
+        {{#if can "add-publisher-collections" "collections" }}
+            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal"
+                  data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}
         {{/if}}
     </div>
     {{#each recommendArticles}}
-        <h5><a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/>&nbsp;&nbsp;{{titles ArticlesId}}</a>
-            {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}{{/if}}&nbsp;&nbsp;{{#if can "delete-recommend" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}</h5>
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/></a>
+            </div>
+            <div class="col-xs-9">
+                <div class="pull-right">
+                    {{#if can "modify-recommend" "resource"  }}
+                        {{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}
+                    {{/if}}
+                    {{#if can "delete-recommend" "resource"  }}
+                        <a href="#" class="fa fa-trash"></a>
+                    {{/if}}
+                </div>
+                <a href="{{ArticleUrl ArticlesId}}">{{titles ArticlesId}}</a>
+            </div>
+        </div>
+        <hr>
     {{else}}
         {{_ "No articles found!"}}
     {{/each}}
     {{#if hasMoreThanFiveRecommendedArticles}}
-        <div align="right"><a href="/mostEditorRecommend"><button>+{{_ "more"}}</button></a></div>
+        <div align="right"><a href="/mostEditorRecommend">
+            <button>+{{_ "more"}}</button>
+        </a></div>
     {{/if}}
 </template>
 
 <template name="addRecommendModalForm">
-    <div class="modal fade" id="addRecommendModal" role="dialog" aria-labelledby="addRecommendModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addRecommendModal" role="dialog" aria-labelledby="addRecommendModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="addRecommendModalLabel">{{_ "Add new"}}</h4>
                 </div>
                 {{#autoForm id="addRecommendModalForm" collection="EditorsRecommend" type="insert"}}
-                <div class="modal-body">
-	                {{> afQuickField name="ArticlesId" select2Options=s2OptWithFilter style="width:100%"}}
-                    {{> afQuickField name="behalfPicture"}}
-                    {{> afQuickField name="defaultPicture"}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-                </div>
+                    <div class="modal-body">
+                        {{> afQuickField name="ArticlesId" select2Options=s2OptWithFilter style="width:100%"}}
+                        {{> afQuickField name="behalfPicture"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
                 {{/autoForm}}
             </div>
         </div>
@@ -127,8 +150,7 @@
     {{#autoForm doc=this collection="EditorsRecommend" id="updateRecommend" type="update" buttonContent=getUpdateButtonContent}}
         <fieldset>
             {{> afQuickField name="behalfPicture"}}
-            {{> afQuickField name="defaultPicture"}}
         </fieldset>
-    <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
     {{/autoForm}}
 </template>
