@@ -1,8 +1,6 @@
 <template name="HomePrivate">
     <div class="container-fluid">
-        {{#if can "edit-page-description" "platform"}}
-            {{> pageElement key="homepage"}}
-        {{/if}}
+        {{> pageElement key="homepage"}}
     </div>
     <br>
     {{> NewsList}}
