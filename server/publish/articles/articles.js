@@ -50,8 +50,10 @@ Meteor.publish('recommendedMiniPlatformArticles', function () {
 
 Meteor.publish('articlesInCollection',function(collId){
     var coll = ArticleCollections.findOne({_id:collId})
-    if(coll)
-        return Articles.find({_id:{$in:coll.articles}},{fields:articleWithMetadata})
+    if(coll && !_.isEmpty(coll.articles)){
+        return Articles.find({_id:{$in:coll.articles}},{fields:articleWithMetadata});
+    }
+    return Articles.find({_id:"null"});//return null 会导致客户端一直等待.
 })
 
 Meteor.publish('oneArticleMeta', function (id) {
