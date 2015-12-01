@@ -42,15 +42,29 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
         {
             key: 'total',
             title: 'TOTAL',
-            width: 10
+            width: 10,
+            type: 'number'
         },
         {
             key: 'months',
-            title: 'DATE',
+            title: '11月',
             width: 10,
+            type: 'number',
             transform: function (val, doc) {
-                console.log(doc)
-                return val[0].total;
+                var x = _.findWhere(val, {_id: 11})
+                if (x)
+                    return x.total
+            }
+        },
+        {
+            key: 'months',
+            title: '12月',
+            width: 10,
+            type: 'number',
+            transform: function (val, doc) {
+                var x = _.findWhere(val, {_id: 12})
+                if (x)
+                    return x.total
             }
         }
     ];
