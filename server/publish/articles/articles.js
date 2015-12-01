@@ -48,3 +48,12 @@ Meteor.publish('recommendedMiniPlatformArticles', function () {
     });
 });
 
+Meteor.publish('articlesInCollection',function(collId){
+    var coll = ArticleCollections.findOne({_id:collId})
+    if(coll)
+        return Articles.find({_id:{$in:coll.articles}},{fields:articleWithMetadata})
+})
+
+Meteor.publish('oneArticleMeta', function (id) {
+    return Articles.find({_id: id},{fields:articleWithMetadata});
+});
