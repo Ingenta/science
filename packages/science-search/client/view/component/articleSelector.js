@@ -7,7 +7,6 @@ Template.solrArticleSelector.onRendered(function(){
 	Science.dom.recordSelect2(this.$(".solr-article-select").select2(options));
 })
 
-
 Template.solrArticleMarkup.helpers({
 	showTitle:function(){
 		var isLangCn = TAPi18n.getLanguage()==="zh-CN";
