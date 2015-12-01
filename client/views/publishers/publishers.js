@@ -22,6 +22,9 @@ Template.updatePublisherModalForm.helpers({
 Template.SinglePublisher.helpers({
     hasNoJournals: function (id) {
         return Publications.find({"publisher": id}).count() !== 0;
+    },
+    canModifyPublisher: function (id) {
+        return Permissions.userCan("modify-publisher", "publisher", Meteor.userId(), {publisher: id});
     }
 });
 
