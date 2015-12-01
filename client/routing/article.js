@@ -2,6 +2,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     data: function () {
         var pub = Publishers.findOne({name: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        Session.set("activeTab", "full text");
         if (pub) {
             journal && Session.set('currentJournalId', journal._id);
             pub && Session.set('currentPublisherId', pub._id);

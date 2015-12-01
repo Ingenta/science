@@ -43,13 +43,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
     },
-    onBeforeAction: function () {
-        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
-            if (err) console.log(err);
-        });
-        this.next();
-    },
     onStop:function(){
         Science.dom.clearSelect2Record();
     }
@@ -105,13 +98,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId'))
         ]
-    },
-    onBeforeAction: function () {
-        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
-            if (err) console.log(err);
-        });
-        this.next();
     }
 });
 
