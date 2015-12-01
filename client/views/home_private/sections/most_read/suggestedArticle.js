@@ -37,7 +37,7 @@ Template.suggestedMostReadElement.helpers({
 
 Template.suggestedMostReadModalForm.events({
     "click #saveSuggestedMostRead":function(e,t){
-        var articleId = t.$("#saSelector").select2('val');
+        var articleId = t.$("#saSelectorForMostRead").select2('val');
         SuggestedArticles.insert({articleId:articleId});
         $("#suggestedArticlesModal").modal('hide');
     }
