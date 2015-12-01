@@ -115,23 +115,23 @@ Template.registerHelper("highlight", function (keyword, str) {
     return str.split(keyword).join("<span class='highlight'>" + keyword + "</span>")
 });
 
-Template.registerHelper('checkPermissionToJournal', function (permissions, publisherId, journalId) {
-    if (!Meteor.user()) return false;
-    if (Permissions.isAdmin()) return true;
-
-    if (Meteor.user().publisherId) {
-        if (Meteor.user().publisherId !== publisherId) return false;
-        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) {
-            //if (!journalId) return false;
-            if (!_.contains(Meteor.user().journalId, journalId)) return false;
-        }
-    }
-    permissions = permissions.split(';');
-    var flag = false;
-    permissions.forEach(function (onePermission) {
-        onePermission = onePermission.split(',');
-        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
-    });
-    return flag;
-
+Template.registerHelper('permissionCheckWithScope', function (permission, package_name, scope_key, scope_value) {
+//    if (!Meteor.user()) return false;
+//    if (Permissions.isAdmin()) return true;
+//
+//    if (Meteor.user().publisherId) {
+//        if (Meteor.user().publisherId !== publisherId) return false;
+//        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) {
+//            //if (!journalId) return false;
+//            if (!_.contains(Meteor.user().journalId, journalId)) return false;
+//        }
+//    }
+//    permissions = permissions.split(';');
+//    var flag = false;
+//    permissions.forEach(function (onePermission) {
+//        onePermission = onePermission.split(',');
+//        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
+//    });
+//    return flag;
+    return Permissions.userCan(permission, package_name, Meteor.userId(), {scope_key: scope_value});
 });
