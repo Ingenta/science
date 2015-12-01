@@ -15,14 +15,14 @@ resourcePermissions
         "collections:add-journal-collection",
         "collections:modify-journal-collection",
         "collections:delete-journal-collection",
-        "collections:add-article-to-journal-collection",
-        "collections:remove-article-from-journal-collection",
+        //"collections:add-article-to-journal-collection",
+        //"collections:remove-article-from-journal-collection",
 
         "collections:add-special-issue",
         "collections:modify-special-issue",
         "collections:delete-special-issue",
-        "collections:add-article-to-special-issue",
-        "collections:remove-article-from-special-issue"
+        //"collections:add-article-to-special-issue",
+        //"collections:remove-article-from-special-issue"
     ], {
         en: {
             name: "journal manager (publisher)",

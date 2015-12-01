@@ -133,5 +133,22 @@ Template.registerHelper('permissionCheckWithScope', function (permission, packag
 //        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
 //    });
 //    return flag;
-    return Permissions.userCan(permission, package_name, Meteor.userId(), {scope_key: scope_value});
+    var scope = {};
+    scope[scope_key] = scope_value;
+    return Permissions.userCan(permission, package_name, Meteor.userId(), scope);
+});
+
+Template.registerHelper('collectionPermissionCheck', function(permissions){
+    permissions = permissions.split(',');
+    if(Router.current().route.getName() == "collections") {
+        return false;
+    }
+    else if(Router.current().route.getName() == "publisher.name"){
+        var onePermission = _.intersection(permissions, ["add-publisher-collection", "modify-publisher-collection", "delete-publisher-collection"])[0];
+        return (Permissions.userCan(onePermission, 'collections', Meteor.userId(), {publisher: Session.get('currentPublisherId')}));
+    }
+    else if(Router.current().route.getName() == "journal.name") {
+        var onePermission = _.intersection(permissions, ["add-journal-collection", "modify-journal-collection", "delete-journal-collection"])[0];
+        return Permissions.userCan(onePermission, 'collections', Meteor.userId(), {journal: Session.get('currentJournalId')});
+    }
 });
