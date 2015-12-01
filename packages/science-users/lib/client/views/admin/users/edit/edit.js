@@ -170,8 +170,10 @@ Template.AdminUsersEditEditForm.helpers({
 	},
 	"isPublisherAdmin"      : function () {
 		return _.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user") && Router.current().data().currUser._id !== Meteor.userId();
+	},
+	"canEditRoles"      : function (publisherId) {
+		return Permissions.userCan("delegate-and-revoke", "permissions", Meteor.userId(), {publisher: publisherId});
 	}
-
 });
 
 Template.userEditRoles.helpers({
