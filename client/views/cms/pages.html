@@ -7,18 +7,18 @@
             <h2>{{getPageTitle key}}</h2>
         {{/unless}}
         {{#if isHomePage key}}
-            <div class="pull-right">
-                {{#if can "list-user" "user"}}
+            {{#if can "edit-page-description" "platform"}}
+                <div class="pull-right">
                     {{> updateHomePagesModalForm}}
-                {{/if}}
-            </div>
+                </div>
+            {{/if}}
         {{/if}}
         {{#unless isHomePage key}}
-            <div class="pull-right">
-                {{#if can "list-user" "user"}}
+            {{#if can "edit-page-description" "platform"}}
+                <div class="pull-right">
                     {{> updatePagesModalForm}}
-                {{/if}}
-            </div>
+                </div>
+            {{/if}}
         {{/unless}}
     </div>
     <div class="row">

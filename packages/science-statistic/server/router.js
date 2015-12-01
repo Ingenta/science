@@ -16,15 +16,21 @@ Router.route('downloadExcel', {
         if (this.request.query.institution && this.request.query.institution!=='null') {
             query.institutionId = this.request.query.institution;
         }
+        if (this.request.query.startDate && this.request.query.startDate!=='null') {
+            var startDate = this.request.query.startDate;
+        }
+        if (this.request.query.endDate && this.request.query.endDate!=='null') {
+            var endDate = this.request.query.endDate;
+        }
 
         var reportType = this.request.query.reportType;
         var file;
         var fileName = "statistic";
         if (reportType === "keyword") {
-            fileName = "Keyword Report";
+            fileName = "Keyword_Report";
             file = Science.Reports.getKeywordReportFile(query, fileName);
         } else if (reportType === "journalBrowse") {
-            fileName = "Journal Report";
+            fileName = "Journal_Report";
             file = Science.Reports.getJournalReportFile(query, fileName);
         } else return;
         var headers = {
