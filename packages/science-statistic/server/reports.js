@@ -22,47 +22,31 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
     console.dir(data);
     var fields = [
         {
-            key: '_id',
-            title: 'TIELE',
-            transform: function(val, doc) {
-                var publications = Publications.findOne({_id:val});
-                if(publications)return publications.title;
-            }
+            key: 'title',
+            title: 'TIELE'
         },
         {
-            key: '_id',
-            title: 'ISSN',
-            transform: function(val, doc) {
-                var publications = Publications.findOne({_id:val});
-                if(publications)return publications.issn;
-            }
+            key: 'issn',
+            title: 'ISSN'
         },
         {
-            key: '_id',
-            title: 'EISSN',
-            transform: function(val, doc) {
-                var publications = Publications.findOne({_id:val});
-                if(publications)return publications.EISSN;
-            }
+            key: 'issn',
+            title: 'EISSN'
         },
         {
-            key: '_id',
-            title: 'PUBLISHER',
-            transform: function(val, doc) {
-                var publications = Publications.findOne({_id:val});
-                if(publications){
-                    var publisher = Publishers.findOne({_id:publications.publisher});
-                    if(publisher)return publisher.name;
-                }
-            }
+            key: 'publisher',
+            title: 'PUBLISHER'
         },
         {
             key: 'total',
             title: 'CLICK TIMES TOTAL'
         },
         {
-            key: 'dateCode',
-            title: 'DATE'
+            key: 'months',
+            title: 'DATE',
+            transform: function(val, doc) {
+            return val.total;
+        }
         }
     ];
     //console.dir(data);
@@ -73,7 +57,11 @@ Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
     var audit = PageViews.aggregate([
         {
-            $match: {action: "journalBrowse"}
+            $match: {
+                $and: [
+                    {action: "journalBrowse"},{when:{$gte:query.startDate, $lte:query.endDate}}
+                ]
+            }
         },
         {
             $group: {_id: '$journalId', total: {$sum: 1}}
@@ -91,7 +79,8 @@ Science.Reports.getJournalReportData = function (query) {
                 {$match: {
                     $and: [
                         {action: "journalBrowse"},
-                        {journalId: x._id}
+                        {journalId: x._id},
+                        {when:{$gte:query.startDate, $lte:query.endDate}}
                     ]
                 }},
                 { $project : { month_viewed : { $month : "$when" } } } ,
