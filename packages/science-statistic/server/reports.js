@@ -55,6 +55,8 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
 
 Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
+    if (!query.startDate)query.startDate = '2010-01';
+    if (!query.endDate)query.endDate = new Date();
     var audit = PageViews.aggregate([
         {
             $match: {
@@ -65,16 +67,17 @@ Science.Reports.getJournalReportData = function (query) {
         },
         {
             $group: {_id: '$journalId', total: {$sum: 1}}
-        }, {$sort: {total: -1}}
-
-    ]);
+        },
+        {
+            $sort: {total: -1}
+        }]);
     //for each result get metadate then pull monthly data
     _.each(audit, function (x) {
         var journal = Publications.findOne({_id: x._id});
-        x.publisher = Publishers.findOne({_id:journal.publisher}).name;
+        x.publisher = Publishers.findOne({_id: journal.publisher}).name;
         x.title = journal.title;
         x.issn = journal.issn;
-        var months =PageViews.aggregate(
+        var months = PageViews.aggregate(
             [
                 {$match: {
                     $and: [

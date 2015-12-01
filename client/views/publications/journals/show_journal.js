@@ -8,15 +8,17 @@ ReactiveTabs.createInterface({
             Router.current().params.issue = undefined;
             Router.go("journal.name", Router.current().params)
         }
-        var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
-        if (slug === 'Overview') {
-            Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
-                if (err) console.log(err);
-            });
-        } else if (slug === 'Browse') {
-            Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
-                if (err) console.log(err);
-            });
+        if(Router.current().params.journalShortTitle){
+            var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
+            if (slug === 'Overview') {
+                Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
+                    if (err) console.log(err);
+                });
+            } else if (slug === 'Browse') {
+                Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
+                    if (err) console.log(err);
+                });
+            }
         }
     }
 });
