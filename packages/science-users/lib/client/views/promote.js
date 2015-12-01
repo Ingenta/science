@@ -34,24 +34,18 @@ Template.sidebarAd.helpers({
             return false;
         }
         return true;
-    //},
-    //permissionCheck: function (permissions) {
-    //    if(!Meteor.user()) return false;
-    //    if(Permissions.isAdmin()) return true;
-    //
-    //    permissions = permissions.split(',');
-    //    var onePermission = _.intersection(permissions, ["add-global-advertisement", "modify-global-advertisement", "delete-global-advertisement"])[0];
-    //    if(Permissions.userCan(onePermission, 'advertisement')) return true;
-    //
-    //    if(!Meteor.user().publisherId) return false;
-    //    if (Meteor.user().publisherId !== Session.get('currentPublisherId')) return false;
-    //    if(!_.contains(Config.Routes.ADPages.journal, Router.current().route.getName())) return false;
-    //
-    //    if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
-    //        if (!_.contains(Meteor.user().journalId, Session.get('currentJournalId'))) return false;
-    //    }
-    //    onePermission = _.intersection(permissions, ["add-journal-advertisement", "modify-journal-advertisement", "delete-journal-advertisement"])[0];
-    //    return Permissions.userCan(onePermission, 'advertisement');
+    },
+    permissionCheck: function (permissions) {
+        permissions = permissions.split(',');
+        if(_.contains(Config.Routes.ADPages.journal, Router.current().route.getName())){
+            //journal page
+            var onePermission = _.intersection(permissions, ["add-journal-advertisement", "modify-journal-advertisement", "delete-journal-advertisement"])[0];
+            return Permissions.userCan(onePermission, 'advertisement', Meteor.userId(), {journal: Session.get('currentJournalId')});
+        } else {
+            //homepage
+            var onePermission = _.intersection(permissions, ["add-homepage-advertisement", "modify-homepage-advertisement", "delete-homepage-advertisement"])[0];
+            return Permissions.userCan(onePermission, 'advertisement');
+        }
     }
 });
 
