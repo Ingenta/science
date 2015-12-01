@@ -47,7 +47,7 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
         },
         {
             key: 'months',
-            title: '11月',
+            title: '2015-11',
             width: 10,
             type: 'number',
             transform: function (val, doc) {
@@ -58,7 +58,7 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
         },
         {
             key: 'months',
-            title: '12月',
+            title: '2015-12',
             width: 10,
             type: 'number',
             transform: function (val, doc) {
