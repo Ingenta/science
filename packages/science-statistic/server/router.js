@@ -16,11 +16,8 @@ Router.route('downloadExcel', {
         if (this.request.query.institution && this.request.query.institution!=='null') {
             query.institutionId = this.request.query.institution;
         }
-        if (this.request.query.startDate && this.request.query.startDate!=='null') {
-            query.startDate = new Date(this.request.query.startDate);
-        }
-        if (this.request.query.endDate && this.request.query.endDate!=='null') {
-            query.endDate = new Date(this.request.query.endDate);
+        if (this.request.query.startDate && this.request.query.startDate!=='null'&&this.request.query.endDate && this.request.query.endDate!=='null') {
+            query.when = {$gte:new Date(this.request.query.startDate), $lte:new Date(this.request.query.endDate)};
         }
         var reportType = this.request.query.reportType;
         var file;

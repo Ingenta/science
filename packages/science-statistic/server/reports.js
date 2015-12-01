@@ -60,14 +60,10 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
 
 Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
-    if (!query.startDate)query.startDate = new Date('2010-01');
-    if (!query.endDate)query.endDate = new Date();
     var audit = PageViews.aggregate([
         {
             $match: {
-                $and: [
-                    {action: "journalBrowse"}, {when: {$gte: query.startDate, $lte: query.endDate}}
-                ]
+                $and: [query]
             }
         },
         {
@@ -82,15 +78,12 @@ Science.Reports.getJournalReportData = function (query) {
         x.publisher = Publishers.findOne({_id: journal.publisher}).name;
         x.title = journal.title;
         x.issn = journal.issn;
+        query.journalId = x._id;
         var months = PageViews.aggregate(
             [
                 {
                     $match: {
-                        $and: [
-                            {action: "journalBrowse"},
-                            {journalId: x._id},
-                            {when: {$gte: query.startDate, $lte: query.endDate}}
-                        ]
+                        $and: [query]
                     }
                 },
                 {$project: {month_viewed: {$month: "$when"}}},
