@@ -17,10 +17,10 @@ Router.route('downloadExcel', {
             query.institutionId = this.request.query.institution;
         }
         if (this.request.query.startDate && this.request.query.startDate!=='null') {
-            var startDate = this.request.query.startDate;
+            query.startDate = this.request.query.startDate;
         }
         if (this.request.query.endDate && this.request.query.endDate!=='null') {
-            var endDate = this.request.query.endDate;
+            query.endDate = this.request.query.endDate;
         }
 
         var reportType = this.request.query.reportType;
