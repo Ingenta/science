@@ -81,7 +81,6 @@ iron:router@1.0.12
 iron:url@1.0.11
 jackjiang:autoform-modals@0.0.3
 jackjiang:editable-template@0.0.1
-jackjiang:meteor-multi-select@0.0.1
 jackjiang:solr@0.0.2
 jackkav:xpath@0.0.11
 jquery@1.11.4

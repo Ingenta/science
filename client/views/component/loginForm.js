@@ -1,8 +1,6 @@
 Template.loginForm.rendered = function () {
-	$(document).ready(function() {
-		$(".js-example-basic-single").select2({
-			placeholder: TAPi18n.__( "Please select more journal name")
-		});
+	$(".js-example-basic-single").select2({
+		placeholder: TAPi18n.__( "Please select more journal name")
 	});
 };
 
