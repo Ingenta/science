@@ -4,7 +4,7 @@
         {{#with publisher}}
             <div class="row">
                 <div class="col-xs-12">
-                    {{#if checkPermissionToJournal "add-journal,resource" _id ""}}
+                    {{#if permissionCheckWithScope "add-journal" "resource" "publisher" _id}}
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#addPublicationModal">
                             {{_ "Add new"}} <i class="fa fa-plus"></i>
@@ -56,11 +56,11 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="pull-right">
-                    {{#if checkPermissionToJournal "modify-journal,resource" publisher _id}}
+                    {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                         {{> displayPublication}}
                         {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
                     {{/if}}
-                    {{#if checkPermissionToJournal "delete-journal,resource" publisher _id}}
+                    {{#if permissionCheckWithScope "delete-journal" "resource" "publisher" publisher}}
                         <!--<a href="#" class="fa fa-trash"></a>-->
                     {{/if}}
                 </div>

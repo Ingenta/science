@@ -115,23 +115,40 @@ Template.registerHelper("highlight", function (keyword, str) {
     return str.split(keyword).join("<span class='highlight'>" + keyword + "</span>")
 });
 
-Template.registerHelper('checkPermissionToJournal', function (permissions, publisherId, journalId) {
-    if (!Meteor.user()) return false;
-    if (Permissions.isAdmin()) return true;
+Template.registerHelper('permissionCheckWithScope', function (permission, package_name, scope_key, scope_value) {
+//    if (!Meteor.user()) return false;
+//    if (Permissions.isAdmin()) return true;
+//
+//    if (Meteor.user().publisherId) {
+//        if (Meteor.user().publisherId !== publisherId) return false;
+//        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) {
+//            //if (!journalId) return false;
+//            if (!_.contains(Meteor.user().journalId, journalId)) return false;
+//        }
+//    }
+//    permissions = permissions.split(';');
+//    var flag = false;
+//    permissions.forEach(function (onePermission) {
+//        onePermission = onePermission.split(',');
+//        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
+//    });
+//    return flag;
+    var scope = {};
+    scope[scope_key] = scope_value;
+    return Permissions.userCan(permission, package_name, Meteor.userId(), scope);
+});
 
-    if (Meteor.user().publisherId) {
-        if (Meteor.user().publisherId !== publisherId) return false;
-        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) {
-            //if (!journalId) return false;
-            if (!_.contains(Meteor.user().journalId, journalId)) return false;
-        }
+Template.registerHelper('collectionPermissionCheck', function(permissions){
+    permissions = permissions.split(',');
+    if(Router.current().route.getName() == "collections") {
+        return false;
     }
-    permissions = permissions.split(';');
-    var flag = false;
-    permissions.forEach(function (onePermission) {
-        onePermission = onePermission.split(',');
-        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
-    });
-    return flag;
-
+    else if(Router.current().route.getName() == "publisher.name"){
+        var onePermission = _.intersection(permissions, ["add-publisher-collection", "modify-publisher-collection", "delete-publisher-collection"])[0];
+        return (Permissions.userCan(onePermission, 'collections', Meteor.userId(), {publisher: Session.get('currentPublisherId')}));
+    }
+    else if(Router.current().route.getName() == "journal.name") {
+        var onePermission = _.intersection(permissions, ["add-journal-collection", "modify-journal-collection", "delete-journal-collection"])[0];
+        return Permissions.userCan(onePermission, 'collections', Meteor.userId(), {journal: Session.get('currentJournalId')});
+    }
 });

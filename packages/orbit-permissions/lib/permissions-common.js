@@ -613,7 +613,7 @@ OrbitPermissions.custom_roles.find({}).observe({
 	.definePermission("delegate-and-revoke", {
 		cn     : {name: "角色委派与收回", summary: "可设置和取消用户的角色"},
 		en: {name: "delefate and revoke user's role", summary: "delefate and revoke user's role"},
-		options: {level: ["admin"]}
+		options: {level: ["admin","publisher"]}
 	})
 	.defineRole("permissions-manager", ["edit-custom-roles", "get-users-roles", "delegate-and-revoke"], {
 		cn     : {name: "权限管理员", summary: "可以编辑自定义角色,可为用户设置平台角色"},
