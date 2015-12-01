@@ -45,7 +45,7 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
             key: 'months',
             title: 'DATE',
             transform: function(val, doc) {
-            return val.total;
+            return val[0].total;
         }
         }
     ];
