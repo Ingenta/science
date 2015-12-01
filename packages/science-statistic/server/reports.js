@@ -24,9 +24,9 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
         {
             key: 'journalId',
             title: 'Title',
-            transform: function(val, doc) {
-                var publications = Publications.findOne({_id:val});
-                if(publications)return publications.title;
+            transform: function (val, doc) {
+                var publications = Publications.findOne({_id: val});
+                if (publications)return publications.title;
             }
         },
         {
@@ -42,30 +42,35 @@ Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
     var audit = PageViews.aggregate([
         {
-            $match: {action: "journalBrowse"}
+            $match: {
+                $and: [{action: "journalBrowse"}, {when: {$gt: new Date("2015-01-01"), $lt: new Date("2016-01-01")}}]
+            }
         },
         {
             $group: {_id: '$journalId', total: {$sum: 1}}
-        }, {$sort: {total: -1}}
-
-    ]);
+        },
+        {
+            $sort: {total: -1}
+        }]);
     //for each result get metadate then pull monthly data
     _.each(audit, function (x) {
         var journal = Publications.findOne({_id: x._id});
-        x.publisher = Publishers.findOne({_id:journal.publisher}).name;
+        x.publisher = Publishers.findOne({_id: journal.publisher}).name;
         x.title = journal.title;
         x.issn = journal.issn;
-        var months =PageViews.aggregate(
+        var months = PageViews.aggregate(
             [
-                {$match: {
-                    $and: [
-                        {action: "journalBrowse"},
-                        {journalId: x._id}
-                    ]
-                }},
-                { $project : { month_viewed : { $month : "$when" } } } ,
-                { $group : { _id : "$month_viewed" , total : { $sum : 1 } } },
-                { $sort : { "_id.month_viewed" : -1 } }
+                {
+                    $match: {
+                        $and: [
+                            {action: "journalBrowse"},
+                            {journalId: x._id}
+                        ]
+                    }
+                },
+                {$project: {month_viewed: {$month: "$when"}}},
+                {$group: {_id: "$month_viewed", total: {$sum: 1}}},
+                {$sort: {"_id.month_viewed": -1}}
             ]
         )
 
