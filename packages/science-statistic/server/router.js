@@ -16,12 +16,17 @@ Router.route('downloadExcel', {
         if (this.request.query.institution && this.request.query.institution!=='null') {
             query.institutionId = this.request.query.institution;
         }
-        if (this.request.query.startDate && this.request.query.startDate!=='null') {
-            var startDate = this.request.query.startDate;
-        }
-        if (this.request.query.endDate && this.request.query.endDate!=='null') {
-            var endDate = this.request.query.endDate;
-        }
+        //if (this.request.query.startDate && this.request.query.startDate!=='null') {
+        //    var date1 = this.request.query.startDate.subscribe();
+        //    var date2 = this.request.query.startDate;
+        //    var startCode = startDate.getUTCFullYear() * 100 + (startDate.getUTCMonth() + 1);
+        //    console.dir(startDate);
+        //}
+        //if (this.request.query.endDate && this.request.query.endDate!=='null') {
+        //    var endDate = this.request.query.endDate;
+        //    var endCode = endDate.getUTCFullYear() * 100 + (endDate.getUTCMonth() + 1);
+        //    console.dir(endDate);
+        //}
 
         var reportType = this.request.query.reportType;
         var file;
