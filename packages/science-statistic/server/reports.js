@@ -55,7 +55,7 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
 
 Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
-    if (!query.startDate)query.startDate = '2010-01';
+    if (!query.startDate)query.startDate = new Date('2010-01');
     if (!query.endDate)query.endDate = new Date();
     var audit = PageViews.aggregate([
         {
