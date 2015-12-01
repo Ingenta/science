@@ -19,34 +19,39 @@ Science.Reports.getKeywordReportFile = function (query, fileName) {
 Science.Reports.getJournalReportFile = function (query, fileName) {
     console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
+    //console.dir(data);
     var fields = [
         {
             key: 'title',
-            title: 'TIELE'
-        },
-        {
-            key: 'issn',
-            title: 'ISSN'
-        },
-        {
-            key: 'issn',
-            title: 'EISSN'
+            title: 'TITLE'
         },
         {
             key: 'publisher',
             title: 'PUBLISHER'
         },
         {
+            key: 'issn',
+            title: 'ISSN',
+            width: 10
+        },
+        {
+            key: 'issn',
+            title: 'EISSN',
+            width: 10
+        },
+        {
             key: 'total',
-            title: 'CLICK TIMES TOTAL'
+            title: 'TOTAL',
+            width: 10
         },
         {
             key: 'months',
             title: 'DATE',
-            transform: function(val, doc) {
-            return val[0].total;
-        }
+            width: 10,
+            transform: function (val, doc) {
+                console.log(doc)
+                return val[0].total;
+            }
         }
     ];
     //console.dir(data);
@@ -61,7 +66,7 @@ Science.Reports.getJournalReportData = function (query) {
         {
             $match: {
                 $and: [
-                    {action: "journalBrowse"},{when:{$gte:query.startDate, $lte:query.endDate}}
+                    {action: "journalBrowse"}, {when: {$gte: query.startDate, $lte: query.endDate}}
                 ]
             }
         },
@@ -79,16 +84,18 @@ Science.Reports.getJournalReportData = function (query) {
         x.issn = journal.issn;
         var months = PageViews.aggregate(
             [
-                {$match: {
-                    $and: [
-                        {action: "journalBrowse"},
-                        {journalId: x._id},
-                        {when:{$gte:query.startDate, $lte:query.endDate}}
-                    ]
-                }},
-                { $project : { month_viewed : { $month : "$when" } } } ,
-                { $group : { _id : "$month_viewed" , total : { $sum : 1 } } },
-                { $sort : { "_id.month_viewed" : -1 } }
+                {
+                    $match: {
+                        $and: [
+                            {action: "journalBrowse"},
+                            {journalId: x._id},
+                            {when: {$gte: query.startDate, $lte: query.endDate}}
+                        ]
+                    }
+                },
+                {$project: {month_viewed: {$month: "$when"}}},
+                {$group: {_id: "$month_viewed", total: {$sum: 1}}},
+                {$sort: {"_id.month_viewed": -1}}
             ]
         )
 
