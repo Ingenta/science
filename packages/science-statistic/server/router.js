@@ -20,11 +20,15 @@ Router.route('downloadExcel', {
         if (this.request.query.startDate && this.request.query.startDate !== 'null' && this.request.query.endDate && this.request.query.endDate !== 'null') {
             query.when = {$gte: new Date(this.request.query.startDate), $lte: new Date(this.request.query.endDate)};
         }
-        if (this.request.query.startDate && this.request.query.startDate !== 'null')
+        if (this.request.query.startDate && this.request.query.startDate !== 'null') {
             start = new Date(this.request.query.startDate);
-        if (this.request.query.endDate && this.request.query.endDate !== 'null')
+            query.when = {$gte: new Date(this.request.query.startDate)};
+        }
+
+        if (this.request.query.endDate && this.request.query.endDate !== 'null') {
             end = new Date(this.request.query.endDate);
-        
+            query.when = {$lte: new Date(this.request.query.endDate)};
+        }
         var reportType = this.request.query.reportType;
         var file;
         var fileName = "statistic";
