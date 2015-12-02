@@ -33,11 +33,15 @@ Router.route("/collections/:collId/", {
 	waitOn        : function () {
 		return [
 			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('fullMostRecentArticles')
+			Meteor.subscribe('fullMostRecentArticles'),
+			Meteor.subscribe('articlesInCollection',this.params.collId)
 		]
 	},
 	onStop : function(){
 		Science.dom.clearSelect2Record()
+	},
+	data:function(){
+		return {collInfo:ArticleCollections.findOne({_id: this.params.collId})};
 	}
 });
 

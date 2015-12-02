@@ -1,30 +1,6 @@
 Template.collections.helpers({
 	isCollection: function() {
 		return Router.current().route.getName() == "collections";
-	},
-	permissionCheck: function (permissions) {
-		if(!Meteor.user()) return false;
-		if(Permissions.isAdmin()) return true;
-		//var onePermission = _.intersection(permissions, ["add-big-collections", "modify-big-collections", "delete-big-collections"])[0];
-		//if(Permissions.userCan(onePermission, 'collections')) return true;
-		if(Router.current().route.getName() == "collections") return false;
-
-		permissions = permissions.split(',');
-		if(!Meteor.user().publisherId) return false;
-		if (Meteor.user().publisherId !== Session.get('currentPublisherId')) return false;
-
-		if(Router.current().route.getName() == "publisher.name"){
-			onePermission = _.intersection(permissions, ["add-publisher-collection", "modify-publisher-collection", "delete-publisher-collection"])[0];
-			return (Permissions.userCan(onePermission, 'collections'));
-		}
-
-		if(Router.current().route.getName() != "journal.name") return false;
-
-		if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")){
-			if (!_.contains(Meteor.user().journalId, Session.get('currentJournalId'))) return false;
-		}
-		onePermission = _.intersection(permissions, ["add-journal-collection", "modify-journal-collection", "delete-journal-collection"])[0];
-		return Permissions.userCan(onePermission, 'collections');
 	}
 });
 

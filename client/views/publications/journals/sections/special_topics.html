@@ -29,12 +29,10 @@
                             </td>
                             <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
                             <td>
-                                {{#if permissionCheck "add-article-to-special-issue,remove-article-from-special-issue"}}
+                                {{#if permissionCheck "modify-special-issue"}}
                                     <a class="fa fa-plus"
                                        href="{{getUrlToSpecialTopicManagement _id}}"></a>
-                                {{/if}}
                                 &nbsp;&nbsp;
-                                {{#if permissionCheck "modify-special-issue"}}
                                     {{> updateSpecialTopicsModalForm}}
                                 {{/if}}
                                 &nbsp;&nbsp;
