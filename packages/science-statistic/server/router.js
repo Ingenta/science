@@ -3,6 +3,7 @@ Router.route('downloadExcel', {
     path: '/download-data',
     action: function () {
         var query = {};
+        var start, end;
         if (!this.request.query.reportType) return;
         else {
             query.action = this.request.query.reportType;
@@ -18,6 +19,8 @@ Router.route('downloadExcel', {
         }
         if (this.request.query.startDate && this.request.query.startDate !== 'null' && this.request.query.endDate && this.request.query.endDate !== 'null') {
             query.when = {$gte: new Date(this.request.query.startDate), $lte: new Date(this.request.query.endDate)};
+            start = new Date(this.request.query.startDate);
+            end = new Date(this.request.query.endDate)
         }
         var reportType = this.request.query.reportType;
         var file;
@@ -27,11 +30,11 @@ Router.route('downloadExcel', {
             file = Science.Reports.getKeywordReportFile(query, fileName);
         } else if (reportType === "journalBrowse") {
             fileName = "Journal_Home_Page_Report";
-            file = Science.Reports.getJournalReportFile(query, fileName);
+            file = Science.Reports.getJournalReportFile(query, fileName, start, end);
         } else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
-            'Content-Disposition': 'attachment; filename='+ new Date().toISOString().slice(0, 10) +"_"+ fileName + '.xlsx'
+            'Content-Disposition': 'attachment; filename=' + new Date().toISOString().slice(0, 10) + "_" + fileName + '.xlsx'
         };
 
         this.response.writeHead(200, headers);
