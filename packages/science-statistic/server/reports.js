@@ -19,36 +19,42 @@ Science.Reports.getKeywordReportFile = function (query, fileName) {
 Science.Reports.getJournalReportFile = function (query, fileName) {
     console.dir(query);
     var data = Science.Reports.getJournalReportDataNew(query);
-    //console.dir(data);
+    console.dir(data);
+    var fields = Science.Reports.getJournalReportFields();
+    return Excel.export(fileName, fields, data);
+}
+
+Science.Reports.getJournalReportFields = function () {
     var fields = [
         {
             key: 'title',
-            title: '出版物'
+            title: '出版物',
+            width: 17
         },
         {
             key: 'publisher',
-            title: '出版商'
+            title: '出版商',
+            width: 15
         },
         {
             key: 'issn',
             title: 'ISSN',
-            width: 12
+            width: 8
         },
         {
             key: 'EISSN',
             title: 'EISSN',
-            width: 12
+            width: 8
         },
         {
             key: 'total',
             title: '首页点击次数',
-            width: 7,
+            width: 10,
             type: 'number'
         }
     ];
     //if we take now year-month, then create and array of each going back 12 months then each
-
-    _.each(['201509', '201510','201511', '201512'], function (item) {
+    _.each(['201509', '201510', '201511', '201512'], function (item) {
         fields.push({
             key: 'journalBrowse',
             title: item,
@@ -61,11 +67,7 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
         })
 
     })
-
-    //console.dir(data);
-    return Excel.export(fileName, fields, data);
 }
-
 Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
     var audit = PageViews.aggregate([
@@ -109,7 +111,6 @@ Science.Reports.getJournalReportDataNew = function (query) {
     var myFuture = new Future();
     var allJournals = Publications.find().fetch();
     var allPublisher = Publishers.find().fetch();
-    console.log(query);
     PageViews.rawCollection().group(
         {journalId: true},
         query,
@@ -131,8 +132,7 @@ Science.Reports.getJournalReportDataNew = function (query) {
                 x.issn = journal.issn;
                 _.extend(item, x);
             })
-            return myFuture.return(result)
-            console.dir(result);
+            return myFuture.return(result);
 
         }
     );
