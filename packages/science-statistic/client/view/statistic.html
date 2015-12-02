@@ -41,9 +41,15 @@
         <hr>
         <div class="form-inline form-group">
             <select id="reportType" class="form-control js-multiple4" style="width: 80%">
+                <option value="journalBrowse">期刊首页统计模版</option>
+                <option value="watchJournal">期刊关注统计模版</option>
+                <option value="fulltext">文章全文浏览统计模版</option>
+                <option value="abstract">文章摘要浏览统计模版</option>
+                <option value="pdfDownload">文章下载统计模版</option>
                 <option value="keyword">高频关键词统计模版</option>
-                <option value="journalBrowse">期刊统计模版</option>
-                <option value="download">文章下载前十统计模版</option>
+                <option value="favourite">文章收藏统计模版</option>
+                <option value="watchArticle">文章关注统计模版</option>
+                <option value="emailThis">文章推荐统计模版</option>
             </select>
             <div class="pull-right">
                 <button type="button" class="btn btn-primary btn-sm">{{_ "Download"}}</button>
