@@ -75,11 +75,11 @@
 <template name="onePublication">
     <div class="row dotted-publication-item">
         <div class="pull-right">
-            {{#if can "modify-journal" "resource" }}
+            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                 {{> displayPublication}}
                 {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
             {{/if}}
-            {{#if can "delete-journal" "resource" }}
+            {{#if permissionCheckWithScope "delete-journal" "resource"  "publisher" publisher}}
                 <a href="#" class="fa fa-trash"></a>
             {{/if}}
         </div>
