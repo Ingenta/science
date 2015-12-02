@@ -26,12 +26,12 @@ Router.route('downloadExcel', {
             fileName = "Keyword_Report";
             file = Science.Reports.getKeywordReportFile(query, fileName);
         } else if (reportType === "journalBrowse") {
-            fileName = "Journal_Report";
+            fileName = "Journal_Home_Page_Report";
             file = Science.Reports.getJournalReportFile(query, fileName);
         } else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
-            'Content-Disposition': 'attachment; filename='+ new Date().toISOString().slice(0, 10) + fileName + '.xlsx'
+            'Content-Disposition': 'attachment; filename='+ new Date().toISOString().slice(0, 10) +"_"+ fileName + '.xlsx'
         };
 
         this.response.writeHead(200, headers);
