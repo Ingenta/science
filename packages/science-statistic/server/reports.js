@@ -5,11 +5,11 @@ Science.Reports.getKeywordReportFile = function (query, fileName) {
     var fields = [
         {
             key: 'keywords',
-            title: 'keyword'
+            title: '高频词'
         },
         {
             key: 'dateCode',
-            title: 'Date'
+            title: '次数'
         }
     ];
     console.dir(data);
@@ -23,25 +23,25 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
     var fields = [
         {
             key: 'title',
-            title: 'TITLE'
+            title: '出版物'
         },
         {
             key: 'publisher',
-            title: 'PUBLISHER'
+            title: '出版商'
         },
         {
             key: 'issn',
             title: 'ISSN',
-            width: 10
+            width: 12
         },
         {
-            key: 'issn',
+            key: 'EISSN',
             title: 'EISSN',
-            width: 10
+            width: 12
         },
         {
             key: 'total',
-            title: 'TOTAL',
+            title: '首页点击次数',
             width: 7,
             type: 'number'
         }
@@ -61,6 +61,7 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
         })
 
     })
+
     //console.dir(data);
     return Excel.export(fileName, fields, data);
 }
@@ -85,6 +86,7 @@ Science.Reports.getJournalReportData = function (query) {
         x.publisher = Publishers.findOne({_id: journal.publisher}).name;
         x.title = journal.title;
         x.issn = journal.issn;
+        x.EISSN = journal.EISSN;
         query.journalId = x._id;
         var months = PageViews.aggregate(
             [
@@ -98,7 +100,6 @@ Science.Reports.getJournalReportData = function (query) {
                 {$sort: {"_id.month_viewed": -1}}
             ]
         )
-
         x.months = months;
     })
     return audit;
