@@ -1,10 +1,4 @@
 Template.collDetailHeader.helpers({
-	collInfo: function () {
-		var coll = ArticleCollections.findOne({_id: Router.current().params.collId});
-		Session.set("publisherId", coll.publisherId);
-		Session.set("addedArticles", coll.articles ? coll.articles : []);
-		return coll;
-	},
 	publisherName:function(){
 		var pub = Publishers.findOne(this.publisherId);
 		if(pub){
@@ -17,11 +11,5 @@ Template.collDetailHeader.helpers({
 			return this.articles.length;
 		}
 		return 0;
-	}
-})
-
-Template.collDetail.helpers({
-	s2OptWithFilter:function(){
-		return SolrQuery.select2Options({"publisherId":Session.get("currentPublisherId")})
 	}
 })

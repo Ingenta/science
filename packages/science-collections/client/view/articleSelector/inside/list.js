@@ -1,6 +1,6 @@
 Template.articlesInCollection.helpers({
 	articles:function() {
-		var addedArticles = Session.get("addedArticles");
+		var addedArticles = this.collInfo.articles;
 		if (!addedArticles || !addedArticles.length)
 			return [];
 
@@ -13,8 +13,8 @@ Template.singleArticleInColl.events({
 		e.preventDefault();
 		var articleId = this._id;
 		confirmDelete(e,function(){
-			var addedArticles = Session.get("addedArticles");
-			var withOutThis = _.without(addedArticles,articleId);
+			var insideArticles = Router.current().data().collInfo.articles;
+			var withOutThis = _.without(insideArticles,articleId);
 			ArticleCollections.update({_id: Router.current().params.collId}, {$set: {articles: withOutThis}});
 		})
 	}
