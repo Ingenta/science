@@ -12,7 +12,6 @@
 					<li>{{_ "articlesCount"}}: {{articleCount}}</li>
                     <li>{{_ "Description"}}: {{translateThis description.cn description.en}}</li>
 				</ul>
-
 			</div>
 		</div>
 	{{/with}}
@@ -21,6 +20,8 @@
 <template name="collDetail">
 	{{> collDetailHeader}}
 	<hr>
-	{{> saSelectorForColl}}
+	{{#if can "modify-publisher-collection" "collections" }}
+		{{> saSelectorForColl}}
+	{{/if}}
 	{{> articlesInCollection}}
 </template>
