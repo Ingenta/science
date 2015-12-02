@@ -31,7 +31,7 @@ Router.route('downloadExcel', {
         } else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats',
-            'Content-Disposition': 'attachment; filename=' + fileName + '.xlsx'
+            'Content-Disposition': 'attachment; filename=' + new Date().toISOString().slice(0, 10) + fileName + '.xlsx'
         };
 
         this.response.writeHead(200, headers);
