@@ -1,4 +1,21 @@
 Science.Reports = {};
+//-------------------------日期循环----------------------------------
+Science.Reports.getLastTwelveMonths = function (start, end) {
+    var result = [];
+    if (!end)end = new Date();
+    if (!start)start = new Date(end).addMonths(-11);
+    var startYear = start.getYear() + 1900;
+    var endYear = end.getYear() + 1900;
+    for (var year = startYear; year <= endYear; year++) {
+        var currStartMonth = startYear == year ? start.getMonth() + 1 : 1;
+        var currEndMonth = year == endYear ? end.getMonth() + 1 : 12;
+        for (var month = currStartMonth; month <= currEndMonth; month++) {
+            result.push(year.toString() + month.toString())
+        }
+    }
+    return result;
+}
+
 //------------------------------模版生成------------------------------
 Science.Reports.getKeywordReportFile = function (query, fileName) {
     console.dir(query);
@@ -8,11 +25,12 @@ Science.Reports.getKeywordReportFile = function (query, fileName) {
     return Excel.export(fileName, fields, data);
 }
 
-Science.Reports.getJournalReportFile = function (query, fileName) {
+Science.Reports.getJournalReportFile = function (query, fileName, start, end) {
     console.dir(query);
     var data = Science.Reports.getJournalReportDataNew(query);
     console.dir(data);
-    var fields = Science.Reports.getJournalReportFields();
+    var monthRange = Science.Reports.getLastTwelveMonths(start, end);
+    var fields = Science.Reports.getJournalReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 }
 
@@ -34,7 +52,7 @@ Science.Reports.getKeywordReportFields = function () {
     return fields;
 }
 
-Science.Reports.getJournalReportFields = function () {
+Science.Reports.getJournalReportFields = function (monthRange) {
     var fields = [
         {
             key: 'title',
@@ -63,11 +81,11 @@ Science.Reports.getJournalReportFields = function () {
         }
     ];
     //if we take now year-month, then create and array of each going back 12 months then each
-    _.each(['201509', '201510', '201511', '201512'], function (item) {
+    _.each(monthRange, function (item) {
         fields.push({
             key: 'journalBrowse',
-            title: item,
-            width: 8,
+            title: item.slice(0,4)+"-"+item.slice(4),
+            width: 7,
             type: 'number',
             transform: function (val, doc) {
                 if(val.months[item]===undefined)return 0;
