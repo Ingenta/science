@@ -11,17 +11,20 @@
 <template name="singleArticleInColl">
     <li>
         <div class="row dotted">
-            <div class="col-xs-2 text-center">
-                <br>
-                <br>
-                {{#if can "delete-pulisher-collections" "collections" }}
-                    <button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
-                {{/if}}
-            </div>
-
-            <div class="col-xs-10">
-                {{>standardArticleListing}}
-            </div>
+	        {{#if can "modify-publisher-collection" "collections" }}
+	            <div class="col-xs-2 text-center">
+	                <br>
+	                <br>
+	                 <button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
+	            </div>
+	            <div class="col-xs-10">
+	                {{>standardArticleListing}}
+	            </div>
+	        {{else}}
+		        <div class="col-xs-12">
+			        {{>standardArticleListing}}
+		        </div>
+	        {{/if}}
         </div>
     </li>
 </template>

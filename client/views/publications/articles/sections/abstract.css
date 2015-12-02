@@ -1,10 +1,14 @@
 div.articleOutline li {
     list-style-type: none;
 }
-
+.article-index-toolbar{
+    position: absolute;
+    left: -180px;
+    width: 180px;
+}
 #indexsidebar.affix {
     top: 20px;
-    width:350px;
+    width:180px;
 }
 
 /* sidebar */

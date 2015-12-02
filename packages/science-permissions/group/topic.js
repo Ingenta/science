@@ -42,7 +42,7 @@ topicPermissions
 			summary: "manager for topic"
 		},
 		cn: {
-			name   : "分类管理",
+			name   : "主题管理",
 			summary: "可以增删改查分类的角色"
 		},
 		options:{

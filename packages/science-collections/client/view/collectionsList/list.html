@@ -19,11 +19,10 @@
         </div>
         <div class="col-xs-9">
             <div class="pull-right">
-                {{#if collectionPermissionCheck "modify-publisher-collection,modify-journal-collection" }}
-                    <a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
+                {{#if collectionPermissionCheck "modify-publisher-collection,modify-journal-collection" publisherId journalId}}
                     {{> updateCollectionForm}}
                 {{/if}}
-                {{#if collectionPermissionCheck "delete-publisher-collection,delete-journal-collection" }}
+                {{#if collectionPermissionCheck "delete-publisher-collection,delete-journal-collection" publisherId journalId}}
                     <a href="#" class="fa fa-trash" collId="{{_id}}"></a>
                 {{/if}}
             </div>

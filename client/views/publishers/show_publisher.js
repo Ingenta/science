@@ -11,6 +11,9 @@ Template.publisherOptions.helpers({
     },
     activeTab: function () {
         return Session.get('activeTab');
+    },
+    getPublisherId: function () {
+        return Router.current().data()._id;
     }
 });
 
