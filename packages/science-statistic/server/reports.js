@@ -1,112 +1,168 @@
 Science.Reports = {};
-Science.Reports.getKeywordReportFile = function (query, fileName) {
-    console.dir(query);
-    var data = PageViews.find(query).fetch();
-    var fields = [
-        {
-            key: 'keywords',
-            title: 'keyword'
-        },
-        {
-            key: 'dateCode',
-            title: 'Date'
+//-------------------------日期循环----------------------------------
+Science.Reports.getLastTwelveMonths = function (start, end) {
+    var result = [];
+    if (!end)end = new Date();
+    if (!start)start = new Date(end).addMonths(-11);
+    var startYear = start.getYear() + 1900;
+    var endYear = end.getYear() + 1900;
+    for (var year = startYear; year <= endYear; year++) {
+        var currStartMonth = startYear == year ? start.getMonth() + 1 : 1;
+        var currEndMonth = year == endYear ? end.getMonth() + 1 : 12;
+        for (var month = currStartMonth; month <= currEndMonth; month++) {
+            result.push(year.toString() + month.toString())
         }
-    ];
+    }
+    return result;
+}
+
+//------------------------------模版生成------------------------------
+Science.Reports.getKeywordReportFile = function (query, fileName, start, end) {
+    console.dir(query);
+    var data = Science.Reports.getKeywordReportData(query);
     console.dir(data);
+    var monthRange = Science.Reports.getLastTwelveMonths(start, end);
+    var fields = Science.Reports.getKeywordReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 }
 
-Science.Reports.getJournalReportFile = function (query, fileName) {
+Science.Reports.getJournalReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getJournalReportData(query);
-    //console.dir(data);
+    var data = Science.Reports.getJournalReportDataNew(query);
+    console.dir(data);
+    var monthRange = Science.Reports.getLastTwelveMonths(start, end);
+    var fields = Science.Reports.getJournalReportFields(monthRange);
+    return Excel.export(fileName, fields, data);
+}
+
+//-----------------------------数据范围------------------------------
+Science.Reports.getKeywordReportFields = function (monthRange) {
+    var fields = [
+        {
+            key: 'keywords',
+            title: '高频词',
+            width: 25
+        },
+        {
+            key: 'total',
+            title: '次数',
+            width: 8,
+            type: 'number'
+        }
+    ];
+    _.each(monthRange, function (item) {
+        fields.push({
+            key: 'keyword',
+            title: item.slice(0,4)+"-"+item.slice(4),
+            width: 8,
+            type: 'number',
+            transform: function (val, doc) {
+                console.dir(doc);
+                console.dir(val);
+                if(val.months[item]===undefined)return 0;
+                return val.months[item];
+            }
+        })
+    });
+    return fields;
+}
+
+Science.Reports.getJournalReportFields = function (monthRange) {
     var fields = [
         {
             key: 'title',
-            title: 'TITLE'
+            title: '出版物'
         },
         {
             key: 'publisher',
-            title: 'PUBLISHER'
+            title: '出版商',
+            width: 25
         },
         {
             key: 'issn',
             title: 'ISSN',
-            width: 10
+            width: 12
         },
         {
-            key: 'issn',
+            key: 'EISSN',
             title: 'EISSN',
-            width: 10
+            width: 12
         },
         {
             key: 'total',
-            title: 'TOTAL',
-            width: 10,
+            title: '首页点击次数',
+            width: 15,
             type: 'number'
-        },
-        {
-            key: 'months',
-            title: '2015-11',
-            width: 10,
-            type: 'number',
-            transform: function (val, doc) {
-                var x = _.findWhere(val, {_id: 11})
-                if (x)
-                    return x.total
-            }
-        },
-        {
-            key: 'months',
-            title: '2015-12',
-            width: 10,
-            type: 'number',
-            transform: function (val, doc) {
-                var x = _.findWhere(val, {_id: 12})
-                if (x)
-                    return x.total
-            }
         }
     ];
-    //console.dir(data);
-    return Excel.export(fileName, fields, data);
+    //if we take now year-month, then create and array of each going back 12 months then each
+    _.each(monthRange, function (item) {
+        fields.push({
+            key: 'journalBrowse',
+            title: item.slice(0,4)+"-"+item.slice(4),
+            width: 8,
+            type: 'number',
+            transform: function (val, doc) {
+                if(val.months[item]===undefined)return 0;
+                return val.months[item];
+            }
+        })
+    });
+    return fields;
 }
 
-Science.Reports.getJournalReportData = function (query) {
-    //get each view by journal counting each reoccurence
-    var audit = PageViews.aggregate([
-        {
-            $match: {
-                $and: [query]
-            }
-        },
-        {
-            $group: {_id: '$journalId', total: {$sum: 1}}
-        },
-        {
-            $sort: {total: -1}
-        }]);
-    //for each result get metadate then pull monthly data
-    _.each(audit, function (x) {
-        var journal = Publications.findOne({_id: x._id});
-        x.publisher = Publishers.findOne({_id: journal.publisher}).name;
-        x.title = journal.title;
-        x.issn = journal.issn;
-        query.journalId = x._id;
-        var months = PageViews.aggregate(
-            [
-                {
-                    $match: {
-                        $and: [query]
-                    }
-                },
-                {$project: {month_viewed: {$month: "$when"}}},
-                {$group: {_id: "$month_viewed", total: {$sum: 1}}},
-                {$sort: {"_id.month_viewed": -1}}
-            ]
-        )
+//----------------------------数据方法-------------------------------------
+Future = Npm.require('fibers/future');
 
-        x.months = months;
-    })
-    return audit;
+Science.Reports.getKeywordReportData = function (query) {
+    var myFuture = new Future();
+    PageViews.rawCollection().group(
+        {keywords: true},
+        query,
+        {total: 0},
+        function (doc, result) {
+            result.total++;
+            if (!result[doc.action])
+                result[doc.action] = {months: {}};
+            if (!result[doc.action].months[doc.dateCode])
+                result[doc.action].months[doc.dateCode] = 0;
+            result[doc.action].months[doc.dateCode] = result[doc.action].months[doc.dateCode] + 1
+        },
+        function (err, result) {
+            return myFuture.return(result);
+        }
+    );
+    return myFuture.wait();
+}
+
+Science.Reports.getJournalReportDataNew = function (query) {
+    var myFuture = new Future();
+    var allJournals = Publications.find().fetch();
+    var allPublisher = Publishers.find().fetch();
+    PageViews.rawCollection().group(
+        {journalId: true},
+        query,
+        {total: 0},
+        function (doc, result) {
+            result.total++;
+            if (!result[doc.action])
+                result[doc.action] = {months: {}};
+            if (!result[doc.action].months[doc.dateCode])
+                result[doc.action].months[doc.dateCode] = 0;
+            result[doc.action].months[doc.dateCode] = result[doc.action].months[doc.dateCode] + 1
+        },
+        function (err, result) {
+            _.each(result, function (item) {
+                var journal = _.findWhere(allJournals, {_id: item.journalId})
+                var x = {};
+                x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
+                x.title = journal.title;
+                x.issn = journal.issn;
+                x.EISSN = journal.EISSN;
+                _.extend(item, x);
+            })
+            return myFuture.return(result);
+        }
+    );
+    return myFuture.wait();
 }
