@@ -67,6 +67,7 @@ Science.Reports.getJournalReportFields = function () {
         })
 
     })
+    return fields;
 }
 Science.Reports.getJournalReportData = function (query) {
     //get each view by journal counting each reoccurence
