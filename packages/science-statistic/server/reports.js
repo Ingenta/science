@@ -1,25 +1,26 @@
 Science.Reports = {};
 Science.Reports.getKeywordReportFile = function (query, fileName) {
     console.dir(query);
-    var data = PageViews.find(query).fetch();
+    var data = Science.Reports.getKeywordReportData(query);
+    console.dir(data);
     var fields = [
         {
             key: 'keywords',
             title: '高频词'
         },
         {
-            key: 'dateCode',
-            title: '次数'
+            key: 'total',
+            title: '次数',
+            type: 'number'
         }
     ];
-    console.dir(data);
     return Excel.export(fileName, fields, data);
 }
 
 Science.Reports.getJournalReportFile = function (query, fileName) {
     console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    //console.dir(data);
+    console.dir(data);
     var fields = [
         {
             key: 'title',
@@ -47,6 +48,38 @@ Science.Reports.getJournalReportFile = function (query, fileName) {
     ];
     //console.dir(data);
     return Excel.export(fileName, fields, data);
+}
+
+Science.Reports.getKeywordReportData = function (query) {
+    var audit = PageViews.aggregate([
+        {
+            $match: {
+                $and: [query]
+            }
+        },
+        {
+            $group: {_id: '$keywords', total: {$sum: 1}}
+        },
+        {
+            $sort: {total: -1}
+        }]);
+    _.each(audit, function (x) {
+        x.keywords = x._id;
+        var months = PageViews.aggregate(
+            [
+                {
+                    $match: {
+                        $and: [query]
+                    }
+                },
+                {$project: {month_viewed: {$month: "$when"}}},
+                {$group: {_id: "$month_viewed", total: {$sum: 1}}},
+                {$sort: {"_id.month_viewed": -1}}
+            ]
+        )
+        x.months = months;
+    })
+    return audit;
 }
 
 Science.Reports.getJournalReportData = function (query) {
