@@ -30,7 +30,7 @@ Router.route('downloadExcel', {
             file = Science.Reports.getJournalReportFile(query, fileName);
         } else return;
         var headers = {
-            'Content-type': 'application/vnd.openxmlformats',
+            'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
             'Content-Disposition': 'attachment; filename=' + fileName + '.xlsx'
         };
 
