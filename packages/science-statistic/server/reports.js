@@ -17,11 +17,12 @@ Science.Reports.getLastTwelveMonths = function (start, end) {
 }
 
 //------------------------------模版生成------------------------------
-Science.Reports.getKeywordReportFile = function (query, fileName) {
+Science.Reports.getKeywordReportFile = function (query, fileName, start, end) {
     console.dir(query);
     var data = Science.Reports.getKeywordReportData(query);
     console.dir(data);
-    var fields = Science.Reports.getKeywordReportFields();
+    var monthRange = Science.Reports.getLastTwelveMonths(start, end);
+    var fields = Science.Reports.getKeywordReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 }
 
@@ -35,7 +36,7 @@ Science.Reports.getJournalReportFile = function (query, fileName, start, end) {
 }
 
 //-----------------------------数据范围------------------------------
-Science.Reports.getKeywordReportFields = function () {
+Science.Reports.getKeywordReportFields = function (monthRange) {
     var fields = [
         {
             key: 'keywords',
@@ -49,6 +50,20 @@ Science.Reports.getKeywordReportFields = function () {
             type: 'number'
         }
     ];
+    _.each(monthRange, function (item) {
+        fields.push({
+            key: 'keyword',
+            title: item.slice(0,4)+"-"+item.slice(4),
+            width: 8,
+            type: 'number',
+            transform: function (val, doc) {
+                console.dir(doc);
+                console.dir(val);
+                if(val.months[item]===undefined)return 0;
+                return val.months[item];
+            }
+        })
+    });
     return fields;
 }
 
@@ -85,14 +100,14 @@ Science.Reports.getJournalReportFields = function (monthRange) {
         fields.push({
             key: 'journalBrowse',
             title: item.slice(0,4)+"-"+item.slice(4),
-            width: 7,
+            width: 8,
             type: 'number',
             transform: function (val, doc) {
                 if(val.months[item]===undefined)return 0;
                 return val.months[item];
             }
         })
-    })
+    });
     return fields;
 }
 

@@ -34,7 +34,7 @@ Router.route('downloadExcel', {
         var fileName = "statistic";
         if (reportType === "keyword") {
             fileName = "Keyword_Report";
-            file = Science.Reports.getKeywordReportFile(query, fileName);
+            file = Science.Reports.getKeywordReportFile(query, fileName, start, end);
         } else if (reportType === "journalBrowse") {
             fileName = "Journal_Home_Page_Report";
             file = Science.Reports.getJournalReportFile(query, fileName, start, end);
