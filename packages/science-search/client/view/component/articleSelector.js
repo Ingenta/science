@@ -1,8 +1,7 @@
 Template.solrArticleSelector.onRendered(function(){
-	var options = SolrQuery.select2Options();
-	var userOptions = !_.isEmpty(this.data) && this.data.select2Options;
-	if(!_.isEmpty(userOptions)){
-		options=Science.JSON.MergeObject(userOptions,options)
+	var options = !_.isEmpty(this.data) && this.data.select2Options;
+	if(_.isEmpty(options)){
+		options = SolrQuery.select2Options();
 	}
 	Science.dom.recordSelect2(this.$(".solr-article-select").select2(options));
 })

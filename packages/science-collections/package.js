@@ -46,6 +46,8 @@ Package.onUse(function (api) {
 		'client/view/collectionsList/filters/collLeftFilters.js',
 		'client/view/collectionsList/filters/collPublishersFilter.html',
 		'client/view/collectionsList/filters/collPublishersFilter.js',
+		'client/view/articleSelector/solrSelector.html',
+		'client/view/articleSelector/solrSelector.js',
 		'client/view/articleSelector/tabs.html',
 		'client/view/articleSelector/tabs.js',
 		'client/view/articleSelector/addArticle.html',
