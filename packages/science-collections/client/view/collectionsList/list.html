@@ -20,7 +20,6 @@
         <div class="col-xs-9">
             <div class="pull-right">
                 {{#if collectionPermissionCheck "modify-publisher-collection,modify-journal-collection" }}
-                    <a class="fa fa-plus" href="{{pathFor 'collections.selectArticles' collId=_id}}"></a>
                     {{> updateCollectionForm}}
                 {{/if}}
                 {{#if collectionPermissionCheck "delete-publisher-collection,delete-journal-collection" }}
