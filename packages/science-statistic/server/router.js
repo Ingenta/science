@@ -42,8 +42,8 @@ Router.route('downloadExcel', {
             fileName = "Journal__Browse_Report";
             file = Science.Reports.getJournalBrowseReportFile(query, fileName, start, end);
         }else if (reportType === "watchJournal") {
-                fileName = "Journal_Watch_Report";
-                file = Science.Reports.getJournalWatchReportFile(query, fileName, start, end);
+            fileName = "Journal_Watch_Report";
+            file = Science.Reports.getJournalWatchReportFile(query, fileName, start, end);
         } else if (reportType === "fulltext") {
             fileName = "Article_Full_Text_Report";
             file = Science.Reports.getArticleFulltextReportFile(query, fileName, start, end);

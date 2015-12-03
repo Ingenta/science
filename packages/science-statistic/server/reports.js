@@ -1,12 +1,11 @@
 Science.Reports = {};
-
 //-------------------------日期循环----------------------------------
 Science.Reports.getLastTwelveMonths = function (start, end) {
     var result = [];
     if (!end)end = new Date();
     if (!start)start = new Date(end).addMonths(-11);
-    var startYear = start.getYear() + 1900;
-    var endYear = end.getYear() + 1900;
+    var startYear = start.getFullYear();
+    var endYear = end.getFullYear();
     for (var year = startYear; year <= endYear; year++) {
         var currStartMonth = startYear == year ? start.getMonth() + 1 : 1;
         var currEndMonth = year == endYear ? end.getMonth() + 1 : 12;
@@ -16,7 +15,6 @@ Science.Reports.getLastTwelveMonths = function (start, end) {
     }
     return result;
 };
-
 //------------------------------模版生成------------------------------
 //keyword
 Science.Reports.getKeywordReportFile = function (query, fileName, start, end) {
@@ -81,7 +79,6 @@ Science.Reports.getPDFDownloadReportFile = function (query, fileName, start, end
     var fields = Science.Reports.getPDFDownloadReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
-
 //favourite
 Science.Reports.getArticleFavouriteReportFile = function (query, fileName, start, end) {
     console.dir(query);
@@ -91,7 +88,6 @@ Science.Reports.getArticleFavouriteReportFile = function (query, fileName, start
     var fields = Science.Reports.getArticleFavouriteReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
-
 //watchArticle
 Science.Reports.getArticleWatchReportFile = function (query, fileName, start, end) {
     console.dir(query);
@@ -101,7 +97,6 @@ Science.Reports.getArticleWatchReportFile = function (query, fileName, start, en
     var fields = Science.Reports.getArticleWatchReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
-
 //emailThis
 Science.Reports.getArticleRecommendReportFile = function (query, fileName, start, end) {
     console.dir(query);
@@ -166,6 +161,7 @@ Science.Reports.getJournalArticleRecommendReportFile = function (query, fileName
     return Excel.export(fileName, fields, data);
 };
 //----------------------------数据方法-------------------------------------
+
 Future = Npm.require('fibers/future');
 
 Science.Reports.getKeywordReportData = function (query) {
@@ -246,37 +242,6 @@ Science.Reports.getArticleReportDataNew = function (query) {
                 x.doi = article.doi;
                 x.issue = article.issue;
                 x.volume = article.volume;
-                _.extend(item, x);
-            })
-            return myFuture.return(result);
-        })
-    );
-    return myFuture.wait();
-};
-
-Science.Reports.getUsersJournalHomePageReportData = function (query) {
-    var myFuture = new Future();
-    var allJournals = Publications.find().fetch();
-    var allPublisher = Publishers.find().fetch();
-    PageViews.rawCollection().group(
-        {userId: true},
-        query,
-        {total: 0},
-        function (doc, result) {
-            result.total++;
-            if (!result[doc.action])
-                result[doc.action] = {months: {}};
-            if (!result[doc.action].months[doc.dateCode])
-                result[doc.action].months[doc.dateCode] = 0;
-            result[doc.action].months[doc.dateCode] = result[doc.action].months[doc.dateCode] + 1
-        },
-        Meteor.bindEnvironment(function (err, result) {
-            _.each(result, function (item) {
-                var users = Users.find({_id: item.userId},{fields:{username:1,emails:1,issue:1}});
-                var journal = _.findWhere(allJournals, {_id: item.journalId})
-                var x = {};
-                x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
-                x.title = journal.title;
                 _.extend(item, x);
             })
             return myFuture.return(result);
