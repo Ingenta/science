@@ -10,13 +10,13 @@ Template.showInstitution.helpers({
     "getInstitutionNameById": function () {
         if(Router.current().params.insId)
             return Institutions.findOne({_id: Router.current().params.insId}).name;
-    },
-    isInstitutionAdmin: function () {
-        return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
-    },
-    info: function () {
-        var obj = Institutions.findOne({_id: Router.current().params.insId});
-        return obj;
+    //},
+    //isInstitutionAdmin: function () {
+    //    return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
+    //},
+    //info: function () {
+    //    var obj = Institutions.findOne({_id: Router.current().params.insId});
+    //    return obj;
     }
 });
 
@@ -32,12 +32,13 @@ Template.institutionOptions.helpers({
     },
     info: function () {
         var obj = Institutions.findOne({_id: Router.current().params.insId});
+        obj.scope = {institution: obj._id};
         return obj;
     },
     getUsers: function () {
         return Users.find({institutionId: Router.current().params.insId}, {});
     },
-    scope:function(){
+    getScope:function(){
         return {institutionId:Router.current().params.insId};
     }
 });
