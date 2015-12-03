@@ -109,6 +109,56 @@ Meteor.methods({
         if (!result)return;
         return result;
     },
+    'getArticlePageViewsPieChartData': function (articleId) {
+        var data = new Array();
+        data.push({
+            name: TAPi18n.__('Abstract Views'),
+            y: PageViews.find({action: "abstract", articleId: articleId}).count()
+        });
+
+        data.push({
+            name: TAPi18n.__('Full text Views'),
+            y: PageViews.find({action: "fulltext", articleId: articleId}).count()
+        });
+
+        data.push({
+            name: TAPi18n.__('PDF Downloads'),
+            y: PageViews.find({action: "pdfDownload", articleId: articleId}).count()
+        });
+        return data;
+    },
+    'getArticlePageViewsGraphData': function (articleId) {
+        var currentDate = new Date;
+        var a = new Array();
+        var f = new Array();
+        var c = new Array();
+        var m = [];
+        var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        for (var i = 1; i <= 12; i++) {
+            var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            a.unshift(PageViews.find({
+                action: "abstract",
+                articleId: articleId,
+                when: {$gte: startDate, $lt: endDate}
+            }).count());
+            f.unshift(PageViews.find({
+                action: "fulltext",
+                articleId: articleId,
+                when: {$gte: startDate, $lt: endDate}
+            }).count());
+            m.unshift(month[currentDate.getMonth() % 12] + currentDate.getFullYear());
+            currentDate.setMonth(currentDate.getMonth() - 1);
+        }
+
+        _.each(a, function (index, el) {
+            var value = el + f[index];
+            c.push(value);
+        });
+        var result =  {abstract: a, fulltext: f, total: c, months: m};
+        return result;
+    },
     'getLocationReport': function (action, articleId) {
         var countryViews = {};
         var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
@@ -160,7 +210,7 @@ Meteor.methods({
         PageViews.insert({
             articleId: articleId,
             userId: userId,
-            institutionId: user ? user.institutionId: null,
+            institutionId: user ? user.institutionId : null,
             publisher: publisherId,
             journalId: journalId,
             keywords: keywords,
