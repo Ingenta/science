@@ -37,7 +37,28 @@ Router.route('downloadExcel', {
             file = Science.Reports.getKeywordReportFile(query, fileName, start, end);
         } else if (reportType === "journalBrowse") {
             fileName = "Journal_Home_Page_Report";
-            file = Science.Reports.getJournalReportFile(query, fileName, start, end);
+            file = Science.Reports.getJournalBrowseReportFile(query, fileName, start, end);
+        }else if (reportType === "watchJournal") {
+                fileName = "Journal_Watch_Report";
+                file = Science.Reports.getJournalWatchReportFile(query, fileName, start, end);
+        } else if (reportType === "fulltext") {
+            fileName = "Article_Full_Text_Report";
+            file = Science.Reports.getArticleFulltextReportFile(query, fileName, start, end);
+        } else if (reportType === "abstract") {
+            fileName = "Article_Abstract_Report";
+            file = Science.Reports.getArticleAbstractReportFile(query, fileName, start, end);
+        } else if (reportType === "pdfDownload") {
+            fileName = "Article_PDFDownload_Report";
+            file = Science.Reports.getPDFDownloadReportFile(query, fileName, start, end);
+        } else if (reportType === "favourite") {
+            fileName = "Article_Favourite_Report";
+            file = Science.Reports.getArticleFavouriteReportFile(query, fileName, start, end);
+        } else if (reportType === "watchArticle") {
+            fileName = "Article_Watch_Report";
+            file = Science.Reports.getArticleWatchReportFile(query, fileName, start, end);
+        } else if (reportType === "emailThis") {
+            fileName = "Article_Recommend_Report";
+            file = Science.Reports.getArticleRecommendReportFile(query, fileName, start, end);
         } else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',

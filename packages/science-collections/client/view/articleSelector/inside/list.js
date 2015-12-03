@@ -4,8 +4,26 @@ Template.articlesInCollection.helpers({
 		if (!addedArticles || !addedArticles.length)
 			return [];
 		return Articles.find({_id:{$in:addedArticles}});
+		var publisherId = this.collInfo.publisherId;
+		var journalId = this.collInfo.journalId;
+		var articleList =  Articles.find({_id:{$in:addedArticles}}).fetch();
+		articleList.forEach(function (oneArticle) {	
+			oneArticle.publisherIdFromColl = publisherId;
+			oneArticle.journalIdFromColl = journalId;
+		});
+		return articleList;
 	}
-})
+});
+
+Template.singleArticleInColl.helpers({
+	permissionCheck: function (publisherId, journalId) {
+		if (journalId) {
+			return Permissions.userCan("remove-article-from-journal-collection", 'collections', Meteor.userId(), {journal: journalId});
+		} else {
+			return Permissions.userCan("remove-article-from-publisher-collection", 'collections', Meteor.userId(), {publisher: publisherId});
+		}
+	}
+});
 
 Template.singleArticleInColl.events({
 	"click button.btn-danger":function(e){

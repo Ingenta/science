@@ -141,12 +141,12 @@ Template.registerHelper('permissionCheckWithScope', function (permission, packag
 Template.registerHelper('collectionPermissionCheck', function(permissions, publisherId, journalId){
     permissions = permissions.split(',');
     if (!publisherId) {
-        return (Permissions.userCan("add-publisher-collection", 'collections'));
+        return Permissions.userCan("add-publisher-collection", 'collections');
     } else if (journalId) {
         var onePermission = _.intersection(permissions, ["add-journal-collection", "modify-journal-collection", "delete-journal-collection"])[0];
         return Permissions.userCan(onePermission, 'collections', Meteor.userId(), {journal: journalId});
     } else {
         var onePermission = _.intersection(permissions, ["add-publisher-collection", "modify-publisher-collection", "delete-publisher-collection"])[0];
-        return (Permissions.userCan(onePermission, 'collections', Meteor.userId(), {publisher: publisherId}));
+        return Permissions.userCan(onePermission, 'collections', Meteor.userId(), {publisher: publisherId});
     }
 });
