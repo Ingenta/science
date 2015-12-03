@@ -279,7 +279,7 @@ OrbitPermissions = {
 	},
 	throwIfUserCant            : function (permission, package_name, scope) {
 		if (!this.userCan(permission, package_name,undefined, scope)) {
-			throw new Meteor.Error(401, "Insufficient permissions");
+			throw new Meteor.Error(401, "Insufficient permissions: " + permission);
 		}
 		return true;
 	},

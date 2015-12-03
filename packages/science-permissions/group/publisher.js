@@ -34,6 +34,7 @@ publisherPermissions
     .defineRole("publisher-manager-from-user", [
         "permissions:delegate-and-revoke",
         "permissions:get-users-roles",
+        "platform:use-publisher-panel",
 
         "use-publisher-panel",
         "modify-publisher",

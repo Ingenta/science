@@ -33,13 +33,13 @@ Template.LayoutSideBar.helpers({
         else return;
     },
     canUseAdminPanel: function () {
-        return Meteor.user().level === Permissions.level.admin;
+        return Meteor.user().level === Permissions.level.admin && Permissions.userCan("use-admin-panel", 'platform');
     },
     canUseInstitutionPanel: function () {
-        return Meteor.user().level === Permissions.level.institution;
+        return Meteor.user().level === Permissions.level.institution && Permissions.userCan("use-institution-panel", 'platform', Meteor.userId(), {institution: Meteor.user().institutionId});
     },
     canUsePublisherPanel: function () {
-        return Meteor.user().level === Permissions.level.publisher;
+        return Meteor.user().level === Permissions.level.publisher && Permissions.userCan("use-publisher-panel", 'platform', Meteor.userId(), {publisher: Meteor.user().publisherId});
     },
     isArticlePage: function () {
         if (Router.current() && Router.current().route)

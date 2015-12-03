@@ -1,25 +1,27 @@
 <template name="showInstitution">
-    <div class="row">
-        <div class="container-fluid">
-            {{#with getInstitutionNameById}}
-                <h3>{{translateThis this.cn this.en}}</h3>
-            {{/with}}
-        </div>
-        {{#unless isInstitutionAdmin}}
-            {{> institutionOptions}}
-        {{/unless}}
-        {{#if isInstitutionAdmin}}
-            {{#with info}}
-                <div class="container-fluid">
-                    <div class="pull-right">
-                        {{#if can "modify-institution" "institution" }}
-                            {{> updateInstitutionForm}}
-                        {{/if}}
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid">
+                {{#with getInstitutionNameById}}
+                    <h3>{{translateThis this.cn this.en}}</h3>
+                {{/with}}
+            </div>
+            {{#unless isInstitutionAdmin}}
+                {{> institutionOptions}}
+            {{/unless}}
+            {{#if isInstitutionAdmin}}
+                {{#with info}}
+                    <div class="container-fluid">
+                        <div class="pull-right">
+                            {{#if can "modify-institution" "institution" }}
+                                {{> updateInstitutionForm}}
+                            {{/if}}
+                        </div>
+                        {{>institutionDetail}}
                     </div>
-                    {{>institutionDetail}}
-                </div>
-            {{/with}}
-        {{/if}}
+                {{/with}}
+            {{/if}}
+        </div>
     </div>
 </template>
 
