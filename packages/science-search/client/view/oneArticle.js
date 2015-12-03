@@ -44,6 +44,13 @@ Template.oneSolrArticle.helpers({
 		if(!this.issue) return;
 		if(!this.doi) return;
 		return "/publisher/" + pub.name + "/journal/" + journal.shortTitle+"/"+this.volume + "/"+this.issue+"/"+this.doi;
+	},
+	showAbstract:function(){
+		var hl = SolrQuery.session.get("highlight")[this._id];
+		if(hl && hl["abstract"]){
+			return hl["abstract"];
+		}
+		return this.abstract;
 	}
 });
 
