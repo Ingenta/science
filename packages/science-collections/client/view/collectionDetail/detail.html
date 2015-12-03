@@ -20,7 +20,7 @@
 <template name="collDetail">
 	{{> collDetailHeader}}
 	<hr>
-	{{#if can "modify-publisher-collection" "collections" }}
+	{{#if permissionCheck collInfo.publisherId collInfo.journalId}}
 		{{> saSelectorForColl}}
 	{{/if}}
 	{{> articlesInCollection}}
