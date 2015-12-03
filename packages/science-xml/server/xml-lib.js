@@ -250,9 +250,15 @@ ScienceXML.getFullText = function (results, doc) {
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc);
-    if (!abstract)  results.errors.push("No abstract found");
-    else results.abstract = abstract;
+    var abstract = parserHelper.getXmlString("//abstract",doc,true);
+    if (!abstract)
+        results.errors.push("No abstract found");
+    else {
+        abstract = abstract.trim()
+        if(abstract.startWith("<p>") && abstract.endWith("</p>"))
+            abstract = abstract.slice(3,-4)
+        results.abstract = abstract;
+    }
     return results;
 };
 
