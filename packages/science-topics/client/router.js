@@ -18,7 +18,7 @@ Router.route("/topics/", {
 });
 
 Router.route("topics/:topicsId/", {
-    template      : "addArticleForTopics",
+    template      : "topicsDetail",
     name          : "topics.selectArticles",
     parent        : "topics",
     title: function () {
@@ -27,7 +27,8 @@ Router.route("topics/:topicsId/", {
     waitOn: function () {
         return [
             Meteor.subscribe('topics'),
-            Meteor.subscribe('fullMostRecentArticles')
+            Meteor.subscribe('fullMostRecentArticles'),
+            Meteor.subscribe('articlesInTopic',this.params.topicsId)
         ]
     }
 });

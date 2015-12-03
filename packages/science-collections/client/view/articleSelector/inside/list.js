@@ -3,7 +3,6 @@ Template.articlesInCollection.helpers({
 		var addedArticles = this.collInfo.articles;
 		if (!addedArticles || !addedArticles.length)
 			return [];
-
 		return Articles.find({_id:{$in:addedArticles}});
 	}
 })

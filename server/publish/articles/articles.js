@@ -20,9 +20,9 @@ articleWithMetadata = {
     authors: 1,
     accessKey: 1,
     published: 1,//needed for most cited
-    citationCount: 1//needed for most cited
+    citationCount: 1,//needed for most cited
+    topic:1
 };
-
 
 Meteor.publish('articleSearchResults', function () {
     return [Articles.find({}, {
@@ -59,3 +59,7 @@ Meteor.publish('articlesInCollection',function(collId){
 Meteor.publish('oneArticleMeta', function (id) {
     return Articles.find({_id: id},{fields:articleWithMetadata});
 });
+
+Meteor.publish('articlesInTopic',function(topicsId){
+    return Articles.find({topic: topicsId},{fields:articleWithMetadata});
+})
