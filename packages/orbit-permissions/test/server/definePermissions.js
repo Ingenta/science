@@ -67,4 +67,22 @@ if(Meteor.isServer){
 		var a = OrbitPermissions.userCan("perm-test","testpackage",userId,{publisher:["publishera"]});
 		test.equal(a,true);
 	});
+
+
+	Tinytest.add('Permissions Registrar - 合并用户的权限范围', function(test) {
+		var registrar = new OrbitPermissions.Registrar("testpackage2").definePermission("perm-test", {
+			cn:{name:"aaaaaaa",summary:"bbbbbbbbb"},
+			en:{name:"cccccccc",summary:"dddddddd"}
+		});
+		registrar.defineRole("permtestrole1",["testpackage2:perm-test"],{cn:{name:"tr1",summary:"tr1"},en:{name:"tr1",summary:"tr1"},options:{level:["publisher"]}});
+		registrar.defineRole("permtestrole2",["testpackage2:perm-test"],{cn:{name:"tr1",summary:"tr1"},en:{name:"tr1",summary:"tr1"},options:{level:["publisher"]}});
+
+		var uId = addUsers(['test1@test.com'])[0];
+		OrbitPermissions.delegate(uId,[{"role":"testpackage2:permtestrole1",scope:{publisher:"1"}}]);
+		OrbitPermissions.delegate(uId,[{"role":"testpackage2:permtestrole2",scope:{publisher:"2"}}]);
+		var scope=OrbitPermissions.getPermissionRange(uId,"testpackage2:perm-test");
+
+		test.equal(_.sortBy(scope.publisher,function(item){return item;}),["1","2"]);
+	});
+
 }

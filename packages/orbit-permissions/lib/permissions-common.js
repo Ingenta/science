@@ -188,7 +188,7 @@ OrbitPermissions = {
 	revoke                     : function (users, roles, callback) {
 		return this._modifyUsersRoles("revoke", users, roles, callback);
 	},
-	getUserRoles               : function (user,scope) {
+	getUserRoles               : function (user) {
 		var user_roles;
 		if (Meteor.isClient) {
 			if(!user)
@@ -485,16 +485,16 @@ OrbitPermissions = {
 			return;
 		}
 		var definedRoles = [];
-		_.each(Roles, function (role, key) {
-			var roleName = _.keys(role)[0];
-			var r        = role[roleName];
-			if (r && !_.isEmpty(r.permissions)) {
-				if (_.contains(r.permissions, permission)) {
-					var obj  = _.clone(r);
-					obj.role = key + ":" + roleName;
-					definedRoles.push(obj);
+		_.each(Roles, function (roles, pkgName) {
+			_.each(roles,function(roleDef,roleName){
+				if (roleDef && !_.isEmpty(roleDef.permissions)) {
+					if (_.contains(roleDef.permissions, permission)) {
+						var obj  = _.clone(roleDef);
+						obj.role = pkgName + ":" + roleName;
+						definedRoles.push(obj);
+					}
 				}
-			}
+			})
 		});
 		var filterUserRoles = [];
 		_.each(userRoles, function (ur) {
