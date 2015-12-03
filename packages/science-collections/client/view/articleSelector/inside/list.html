@@ -11,13 +11,12 @@
 <template name="singleArticleInColl">
     <li>
         <div class="row dotted">
-	        {{#if can "modify-publisher-collection" "collections" }}
-	            <div class="col-xs-2 text-center">
-	                <br>
+            {{#if permissionCheck publisherIdFromColl journalIdFromColl}}
+	            <div class="col-xs-1 text-center">
 	                <br>
 	                 <button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
 	            </div>
-	            <div class="col-xs-10">
+	            <div class="col-xs-11">
 	                {{>standardArticleListing}}
 	            </div>
 	        {{else}}

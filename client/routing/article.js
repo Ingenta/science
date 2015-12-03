@@ -21,12 +21,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         var artId;
         if (artData)artId = artData._id;
         return [
-            Meteor.subscribe('articleViewsByArticleId', artId),
             Meteor.subscribe('oneIssueArticlesByArticleId',artId),
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
-            //TODO fix this without reloading the page
-            //Meteor.subscribe('relatedArticles', Session.get("relatedArticlesIdList")),
             Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
             Meteor.subscribe('pdfs'),
