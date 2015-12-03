@@ -14,4 +14,25 @@ platformPermissions
         options: {
             level: adminLevel
         }
+    })
+    .definePermission("use-admin-panel", {
+        en: {name: "access to admin panel", summary: "access to admin panel"},
+        cn: {name: "使用系统管理页面", summary: "使用系统管理页面"},
+        options: {
+            level: adminLevel
+        }
+    })
+    .definePermission("use-institution-panel", {
+        en: {name: "access to institution panel", summary: "access to institution panel"},
+        cn: {name: "使用机构管理页面", summary: "使用机构管理页面"},
+        options: {
+            level: institutionLevel
+        }
+    })
+    .definePermission("use-publisher-panel", {
+        en: {name: "access to publisher panel", summary: "access to publisher panel"},
+        cn: {name: "使用出版商管理页面", summary: "使用出版商管理页面"},
+        options: {
+            level: publisherLevel
+        }
     });

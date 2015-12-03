@@ -61,16 +61,15 @@
     </ul>
     {{>sendEmailModalForm}}
 </template>
+
 <template name="exportCitationSidebar">
     <li><a class="exportCitations" href="#" data-toggle="collapse" data-target="#collapseOne"><span
             class="fa fa-arrow-circle-o-right"></span> {{_ "Export Citations"}}</a></li>
     <div id="collapseOne" class="collapse">
         <li>&nbsp;&nbsp;&nbsp;<a href="/citation/bibtex/{{getCurrentDoi}}" target="_blank">BibTeX</a></li>
         <li>&nbsp;&nbsp;&nbsp;<a href="/citation/endnote/{{getCurrentDoi}}" target="_blank">Endnote</a></li>
-        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">Plain Text</a>
-        </li>
-        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">RefWorks</a>
-        </li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{getCurrentDoi}}" target="_blank">Plain Text</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{getCurrentDoi}}" target="_blank">RefWorks</a></li>
         <li>&nbsp;&nbsp;&nbsp;<a href="/citation/pubmed/{{getCurrentDoi}}" target="_blank">PubMed</a></li>
     </div>
 </template>
