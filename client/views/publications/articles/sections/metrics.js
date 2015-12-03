@@ -4,9 +4,13 @@ Template.MetricsTemplate.rendered = function () {
     var article = Articles.findOne({articledoi: Router.current().params.articleDoi}, {fields: {_id: 1}});
     if (!article || !article._id)return;
 
-    buildHitCounterChart(article._id);
-    buildHitCounterGraph(article._id);
-    
+    Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
+        buildHitCounterChart(response);
+    });
+
+    Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
+        buildHitCounterGraph(response);
+    });
 
     Meteor.call("getLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
@@ -25,22 +29,7 @@ Template.MetricsTemplate.rendered = function () {
 }
 
 
-var buildHitCounterChart = function (articleId) {
-    var data = new Array();
-    data.push({
-        name: TAPi18n.__('Abstract Views'),
-        y: PageViews.find({action: "abstract", articleId: articleId}).count()
-    });
-
-    data.push({
-        name: TAPi18n.__('Full text Views'),
-        y: PageViews.find({action: "fulltext", articleId: articleId}).count()
-    });
-
-    data.push({
-        name: TAPi18n.__('PDF Downloads'),
-        y: PageViews.find({action: "pdfDownload", articleId: articleId}).count()
-    });
+var buildHitCounterChart = function (data) {
 
     $('#container-pie').highcharts({
 
@@ -133,36 +122,8 @@ var buildLocationChart = function (data) {
 };
 
 
-function buildHitCounterGraph(articleId) {
-    var currentDate = new Date;
-    var a = new Array();
-    var f = new Array();
-    var c = new Array();
+function buildHitCounterGraph(data) {
 
-    var m = [];
-    var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    for (i = 1; i <= 12; i++) {
-        var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        a.unshift(PageViews.find({
-            action: "abstract",
-            articleId: articleId,
-            when: {$gte: startDate, $lt: endDate}
-        }).count());
-        f.unshift(PageViews.find({
-            action: "fulltext",
-            articleId: articleId,
-            when: {$gte: startDate, $lt: endDate}
-        }).count());
-        m.unshift(month[currentDate.getMonth() % 12] + currentDate.getFullYear());
-        currentDate.setMonth(currentDate.getMonth() - 1);
-    }
-
-    $.each(a, function (index, el) {
-        var value = el + f[index];
-        c.push(value);
-    });
 
     $('#container-area').highcharts({
         chart: {
@@ -180,7 +141,7 @@ function buildHitCounterGraph(articleId) {
         },
 
         xAxis: {
-            categories: m
+            categories: data.months
         },
         plotOptions: {
             line: {
@@ -200,13 +161,13 @@ function buildHitCounterGraph(articleId) {
         },
         series: [{
             name: 'abstract',
-            data: a
+            data: data.abstract
         }, {
             name: 'fulltext',
-            data: f
+            data: data.fulltext
         }, {
             name: 'combined',
-            data: c
+            data: data.total
         }]
     });
 }

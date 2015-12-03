@@ -66,7 +66,7 @@ Meteor.startup(function () {
 });
 
 //override default publish
-Meteor.publish(null, function (scope) {
+Meteor.publish(null, function () {
     if (this.userId) {
         var query = {};
         var fields = {
@@ -94,6 +94,7 @@ Meteor.publish(null, function (scope) {
                 else if(key==='institution')
                     scopeQuery.push({institutionId : {$in:val}});
             })
+            scopeQuery.push({_id:this.userId});
             if(!_.isEmpty(scopeQuery))
                 query.$or=scopeQuery;
         } else {

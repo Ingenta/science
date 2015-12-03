@@ -12,4 +12,14 @@ Template.collDetailHeader.helpers({
 		}
 		return 0;
 	}
-})
+});
+
+Template.collDetail.helpers({
+	permissionCheck: function (publisherId, journalId) {
+		if (journalId) {
+			return Permissions.userCan("add-article-to-journal-collection", 'collections', Meteor.userId(), {journal: journalId});
+		} else {
+			return Permissions.userCan("add-article-to-publisher-collection", 'collections', Meteor.userId(), {publisher: publisherId});
+		}
+	}
+});

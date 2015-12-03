@@ -39,6 +39,8 @@ Package.onUse(function (api) {
     api.addFiles('client/views/topicsDetail/detail.js', 'client');
     api.addFiles('client/views/tabs.html', 'client');
     api.addFiles('client/views/tabs.js', 'client');
+    api.addFiles('client/views/solrSelector.html', 'client');
+    api.addFiles('client/views/solrSelector.js', 'client');
     api.addFiles('client/views/inside/list.html', 'client');
     api.addFiles('client/views/inside/list.js', 'client');
     api.addFiles('client/views/select/query.html', 'client');
