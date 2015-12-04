@@ -270,7 +270,7 @@ OrbitPermissions = {
 			_.each(scope, function (val, key) {
 				val = _.isString(val)?[val]:val;
 				var interSec = _.intersection(fullScope[key], val);
-				if (interSec.length < val.length)
+				if (_.isArray(val) && interSec.length < val.length)
 					flag = false;
 			})
 			return flag;
