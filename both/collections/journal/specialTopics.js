@@ -16,6 +16,9 @@ SpecialTopicsSchema  = new SimpleSchema({
     title:{
         type:Science.schemas.MultiLangSchema
     },
+    journalId:{
+        type: String
+    },
     IssueId: {
         type: String,
         autoform: {
