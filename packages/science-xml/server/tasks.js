@@ -110,7 +110,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 }
                             });
                             if (!xmlFileName) {
-                                Tasks.failSimple(taskId, logId, "xml not found inside zip file");
+                                Tasks.failSimple(taskId, logId, "xml not found inside root of zip file");
                                 return;
                             }
 
@@ -169,7 +169,7 @@ Tasks.insertArticlePdf = function (logId, result) {
         status: "Started",
         logId: logId
     });
-    Collections.Pdfs.insert(log.pdf, function (err, fileObj) {
+    PdfStore.insert(log.pdf, function (err, fileObj) {
         result.pdfId = fileObj._id;
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
         UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});

@@ -1,3 +1,3 @@
 Meteor.publish("pdfs", function() {
-	return Collections.Pdfs.find();
+	return PdfStore.find();
 });
