@@ -3,13 +3,13 @@
     <div class="row articleHeading">
         <div class="col-xs-12">
             <div class="pull-right">
-                {{#if can "modify-article" "resource" }}
+                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
                     {{>jkafModal template="updateArticleTitleModalForm" doc=this id="updateArticleTitleForm"}}
                 {{/if}}
             </div>
             <div class="articleAccessKeyImage">
                 {{> accessKeyImage}}
-                {{#if can "modify-article" "resource" }}
+                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
                     {{>jkafModal template="updateArticleAccessKeyModalForm" doc=this id="updateArticleAccessKeyForm"}}
                 {{/if}}
             </div>
@@ -59,13 +59,10 @@
                     </p>
                 </li>
                 <li>
-                    <div class="pull-right">
-                        {{#if can "modify-article" "resource" }}
+                    <p>{{_ "Language"}}:&nbsp;{{articleLanguage language}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
                             {{>jkafModal template="updateArticleLanguageModalForm" doc=this id="updateArticleLanguageForm"}}
                         {{/if}}
-                    </div>
-                    <p>{{_ "Language"}}:&nbsp;{{articleLanguage language}}
-
                     </p>
                 </li>
                 {{#if pacs}}
