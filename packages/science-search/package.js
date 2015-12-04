@@ -24,7 +24,6 @@ Package.onUse(function (api) {
 		'templating',
 		'tap:i18n',
 		'reactive-var',
-		'rochal:slimscroll',
 		'natestrauser:select2'
 		//'jackjiang:meteor-multi-select'
 	], 'client');

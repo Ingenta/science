@@ -151,6 +151,7 @@ SolrUtils = {
             "hl.preserveMulti": true,
             "hl.simple.pre": "<span class='highlight'>",
             "hl.simple.post": "</span>",
+            "hl.fragsize":0,
             "wt": "json"
         };
         var userParams = _.clone(params) || {q: "*"};

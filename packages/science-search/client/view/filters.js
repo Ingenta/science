@@ -6,12 +6,10 @@ Template.solrFilterItem.events({
 		SolrQuery.toggleFilterQuery(this.field,this.val,!this.selStatus);
 		Router.go(SolrQuery.makeUrl());
 	},
-	'click .show-more':function(e){
+	'click .show-more':function(e,t){
 		e.preventDefault();
 		pageSetting.set(this.name,-1);// no limited
-		Template.instance().$(".slimScroll").slimScroll({
-			height:'200px'
-		})
+		t.$(".slimScroll").addClass('scroll-me');
 	}
 });
 
@@ -39,8 +37,6 @@ Template.solrFilterItem.onRendered(function(){
 		return;
 	var currLimit = pageSetting.get(filterName);
 	if(currLimit==-1){
-		Template.instance().$(".slimScroll").slimScroll({
-			height:'200px'
-		});
+		Template.instance().$(".slimScroll").addClass('scroll-me');
 	}
 });

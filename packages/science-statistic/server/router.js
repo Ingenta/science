@@ -35,12 +35,15 @@ Router.route('downloadExcel', {
         if (reportType === "keyword") {
             fileName = "Keyword_Report";
             file = Science.Reports.getKeywordReportFile(query, fileName, start, end);
-        } else if (reportType === "journalBrowse") {
-            fileName = "Journal_Home_Page_Report";
+        } else if (reportType === "journalOverview") {
+            fileName = "Journal_Home_Page_Click_Report";
+            file = Science.Reports.getJournalOverviewReportFile(query, fileName, start, end);
+        }else if (reportType === "journalBrowse") {
+            fileName = "Journal__Browse_Report";
             file = Science.Reports.getJournalBrowseReportFile(query, fileName, start, end);
         }else if (reportType === "watchJournal") {
-                fileName = "Journal_Watch_Report";
-                file = Science.Reports.getJournalWatchReportFile(query, fileName, start, end);
+            fileName = "Journal_Watch_Report";
+            file = Science.Reports.getJournalWatchReportFile(query, fileName, start, end);
         } else if (reportType === "fulltext") {
             fileName = "Article_Full_Text_Report";
             file = Science.Reports.getArticleFulltextReportFile(query, fileName, start, end);
@@ -59,7 +62,31 @@ Router.route('downloadExcel', {
         } else if (reportType === "emailThis") {
             fileName = "Article_Recommend_Report";
             file = Science.Reports.getArticleRecommendReportFile(query, fileName, start, end);
-        } else return;
+        } else if (reportType === "journalAbstract") {
+            query.action = "abstract";
+            fileName = "Journal_Article_Abstract_Report";
+            file = Science.Reports.getJournalAbstractReportFile(query, fileName, start, end);
+        }else if (reportType === "journalFulltext") {
+            query.action = "fulltext";
+            fileName = "Journal_Article_Fulltext_Report";
+            file = Science.Reports.getJournalFulltextReportFile(query, fileName, start, end);
+        }else if (reportType === "journalDownload") {
+            query.action = "pdfDownload";
+            fileName = "Journal_Article_DownLoad_Report";
+            file = Science.Reports.getJournalDownloadReportFile(query, fileName, start, end);
+        }else if (reportType === "journalFavourite") {
+            query.action = "favourite";
+            fileName = "Journal_Article_Favourite_Report";
+            file = Science.Reports.getJournalArticleFavouriteReportFile(query, fileName, start, end);
+        }else if (reportType === "journalWatchArticle") {
+            query.action = "watchArticle";
+            fileName = "Journal_Article_Watch_Report";
+            file = Science.Reports.getJournalArticleWatchReportFile(query, fileName, start, end);
+        }else if (reportType === "journalEmailThis") {
+            query.action = "emailThis";
+            fileName = "Journal_Article_Recommend_Report";
+            file = Science.Reports.getJournalArticleRecommendReportFile(query, fileName, start, end);
+        }else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
             'Content-Disposition': 'attachment; filename=' + new Date().toISOString().slice(0, 10) + "_" + fileName + '.xlsx'

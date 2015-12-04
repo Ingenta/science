@@ -79,8 +79,13 @@ Router.route("/institution/detail/:insId/", {
         ]
     },
     onBeforeAction: function () {
-        Permissions.check("modify-institution", "institution");
+        Permissions.check("modify-institution", "institution", {institution: this.params.insId});
         /*BEFORE_FUNCTION*/
         this.next();
+    },
+    data: function () {
+        return {
+            scope: {institution: [this.params.insId]}
+        };
     }
 });

@@ -153,16 +153,21 @@ ScienceXML.getSubSection = function (subSectionNodes) {
         if (_.isEmpty(childSectionNodes))thisSubSection.push(thisSection);
         else {
             var subSecs = ScienceXML.getSubSection(childSectionNodes);
-            var figures = [];
             if (!_.isEmpty(subSecs)) {
                 var figures = [];
+                var tables = [];
                 for (var i = 0; i < subSecs.length; i++) {
                     if (!_.isEmpty(subSecs[i].body.figures)) {
                         figures = _.union(figures, subSecs[i].body.figures);
                         delete subSecs[i].body.figures;
                     }
+                    if (!_.isEmpty(subSecs[i].body.tables)) {
+                        tables = _.union(tables,subSecs[i].body.tables);
+                        delete subSecs[i].body.tables;
+                    }
                 }
-                thisSection.body.figures = figures
+                thisSection.body.figures = figures;
+                thisSection.body.tables = tables;
             }
             thisSubSection.push({
                 label: thisSection.label,
@@ -176,7 +181,7 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 }
 
 var getParagraphs = function (paragraphNodes) {
-    var paragraphs = {html: "", tex: [], figures: []};
+    var paragraphs = {html: "", tex: [], figures: [], tables:[]};
     paragraphNodes.forEach(function (paragraph) {
         if (paragraph.tagName === 'fig') {
             //兼容中国科学插图数据处理
@@ -184,6 +189,13 @@ var getParagraphs = function (paragraphNodes) {
             if (fig) {
                 paragraphs.figures.push(fig);
                 var ref = '<p style="display:none"><xref original="true" ref-type="fig" rid="' + fig.id + '">' + fig.label + '</xref></p>';
+                paragraphs.html += ref;
+            }
+        } else if(paragraph.tagName === 'table-wrap'){
+            var table = getTable(paragraph);
+            if(table){
+                paragraphs.tables.push(table);
+                var ref = '<p style="display:none"><xref original="true" ref-type="table" rid="' + table.id + '">' + table.label + '</xref></p>';
                 paragraphs.html += ref;
             }
         } else {
@@ -200,7 +212,7 @@ var getParagraphs = function (paragraphNodes) {
 }
 
 ScienceXML.getParagraphsFromASectionNode = function (section) {
-    var paragraphNodes = xpath.select("child::p | child::fig", section);
+    var paragraphNodes = xpath.select("child::p | child::fig | child::table-wrap[@id]", section);
     //var paragraphNodes = xpath.select("child::p", section);
     return getParagraphs(paragraphNodes);
 };
@@ -235,13 +247,19 @@ ScienceXML.getFullText = function (results, doc) {
     // 将文内插图取出统一放到文章的figures节点中
     if (!_.isEmpty(normalSecs)) {
         var figures = [];
+        var tables = [];
         for (var i = 0; i < normalSecs.length; i++) {
             if (!_.isEmpty(normalSecs[i].body.figures)) {
                 figures = _.union(figures, normalSecs[i].body.figures);
                 delete normalSecs[i].body.figures;
             }
+            if (!_.isEmpty(normalSecs[i].body.tables)) {
+                tables = _.union(tables, normalSecs[i].body.tables);
+                delete normalSecs[i].body.tables;
+            }
         }
         results.figures = figures;
+        results.tables = tables
     }
 
     results.sections = normalSecs;
@@ -250,9 +268,15 @@ ScienceXML.getFullText = function (results, doc) {
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstract = ScienceXML.getValueByXPathIncludingXml("//abstract", doc);
-    if (!abstract)  results.errors.push("No abstract found");
-    else results.abstract = abstract;
+    var abstract = parserHelper.getXmlString("//abstract",doc,true);
+    if (!abstract)
+        results.errors.push("No abstract found");
+    else {
+        abstract = abstract.trim()
+        if(abstract.startWith("<p>") && abstract.endWith("</p>"))
+            abstract = abstract.slice(3,-4)
+        results.abstract = abstract;
+    }
     return results;
 };
 
@@ -425,33 +449,22 @@ ScienceXML.getFigures = function (doc) {
     return null;
 };
 
+var getTable = function (tableWrapNode) {
+    var table = {};
+    table.id = parserHelper.getFirstAttribute("./@id",tableWrapNode);
+    table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
+    table.label=parserHelper.getSimpleVal("child::label | child::caption/p/bold/xref",tableWrapNode);
+    table.caption = parserHelper.getSimpleVal("child::caption/p",tableWrapNode);
+    table.table = parserHelper.getXmlString("child::table",tableWrapNode);
+    return table;
+};
+
 ScienceXML.getTables = function (doc) {
     var tbNodes = xpath.select("//floats-group/table-wrap", doc);
     if (tbNodes && tbNodes.length) {
         var tables = [];
         tbNodes.forEach(function (tb) {
-            var table = {};
-            var id = xpath.select("./@id", tb);
-            if (id && id.length) {
-                table.id = id[0].value;
-            }
-            var position = xpath.select("./@position", tb);
-            if (position && position.length) {
-                table.position = position[0].value;
-            }
-            var label = xpath.select("child::label/text()", tb);
-            if (label && label.length) {
-                table.label = label[0].toString();
-            }
-            var caption = xpath.select("child::caption/p/text()", tb);
-            if (caption && caption.length) {
-                table.caption = caption[0].toString();
-            }
-            var tableNodes = xpath.select("child::table", tb);
-            if (tableNodes && tableNodes.length) {
-                table.table = tableNodes[0].toString();
-            }
-            tables.push(table);
+            tables.push(getTable(tb));
         });
         return tables;
     }

@@ -210,7 +210,12 @@ ScienceXML.parseXml = function (path) {
     }
     logger.info('parsed figures');
 
-    results.tables = ScienceXML.getTables(doc);
+
+    var tablesInFloatGroup = ScienceXML.getTables(doc);
+    if (!_.isEmpty(tablesInFloatGroup)) {
+        results.tables = results.tables || [];
+        results.tables = _.union(results.tables, tablesInFloatGroup);
+    }
     logger.info('parsed tables');
 
     var pacsArr = ScienceXML.getPACS(doc);
