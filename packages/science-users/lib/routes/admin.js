@@ -109,9 +109,6 @@ Router.route("admin.users.edit", {
             Meteor.subscribe('publishers'),
             Meteor.subscribe('institutions')
         ]
-    },
-    data: function () {
-        return {scope: {publisher: Users.findOne(Router.current().param.userId).publisherId}};
     }
 });
 Router.route("admin.tag", {

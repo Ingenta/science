@@ -190,7 +190,7 @@ Router.map(function () {
         where: 'server',
         path: '/downloadPdf/:pdfId',
         action: function () {
-            var pdf = Collections.Pdfs.findOne({_id: this.params.pdfId});
+            var pdf = PdfStore.findOne({_id: this.params.pdfId});
             if (pdf) {
                 var response = this.response;
                 var request = this.request;
@@ -224,7 +224,7 @@ Router.map(function () {
                     return data[langArr[index]] || data[langArr[1 - index]];
                 };
                 var data = {};
-                var host = Config.isDevMode ? Config.rootUrl : "http://localhost/";
+                var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
                 if (journalInfo.banner) {
                     data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
                 }

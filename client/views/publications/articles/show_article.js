@@ -46,9 +46,7 @@ ReactiveTabs.createInterface({
             if (!_.isEmpty(article.keywords)) {
                 var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn));
                 if (!_.isEmpty(keywords)) {
-                    _.each(Keywords.find({name: {$in: keywords}}, {fields: {_id: 1}}).fetch(), function (k) {
-                        Keywords.update({_id: k._id}, {$inc: {"score": 2}}, {multi: true});
-                    });
+                    Meteor.call('updateKeywordScore',keywords,2,function(err,result){});
                 }
             }
             Users.recent.read(article);
@@ -125,7 +123,7 @@ Template.showArticle.onRendered(function () {
 Template.showArticle.helpers({
     getPdfById: function (id) {
         console.log(id);
-        return Collections.Pdfs.findOne({_id: id}).url() + "&download=true";
+        return PdfStore.findOne({_id: id}).url() + "&download=true";
     },
     articleLanguage: function (num2) {
         if (num2 == "1") {

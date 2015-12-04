@@ -1,4 +1,5 @@
 Template.statistic.rendered = function () {
+    //TODO switch this out for the datepicker and fix the wierd layout and remove the datetimepicker package
     this.$('.datetimepicker').datetimepicker({format: 'YYYY-MM'});
     $(document).ready(function() {
         $(".js-multiple1").select2({

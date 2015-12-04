@@ -36,6 +36,7 @@ Template.keywordsPanel.events({
         var article = Router.current().data && Router.current().data();
         if (!article)return;
         var keywords = this.word;
+        Meteor.call('updateKeywordScore',keywords,5,function(err,result){});
         Meteor.call("insertAudit", Meteor.userId(), "keyword", article.publisher, article.journalId, article._id, keywords, function (err, response) {
             if (err) console.log(err);
         });

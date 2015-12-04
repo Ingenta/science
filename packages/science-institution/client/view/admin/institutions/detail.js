@@ -10,13 +10,14 @@ Template.showInstitution.helpers({
     "getInstitutionNameById": function () {
         if(Router.current().params.insId)
             return Institutions.findOne({_id: Router.current().params.insId}).name;
-    //},
-    //isInstitutionAdmin: function () {
-    //    return _.contains(Permissions.getUserRoles(), "institution:institution-manager-from-user");
-    //},
-    //info: function () {
-    //    var obj = Institutions.findOne({_id: Router.current().params.insId});
-    //    return obj;
+    },
+    displayOption: function () {
+        return Router.current().route.getName() === "admin.institutions.detail";
+    },
+    info: function () {
+        var obj = Institutions.findOne({_id: Router.current().params.insId});
+        obj.scope =  this.scope;
+        return obj;
     }
 });
 

@@ -1,11 +1,7 @@
-var pdfStore = new FS.Store.FileSystem("pdfs", {
+PdfStore = new FS.Collection("pdfs", {
+    stores: [new FS.Store.FileSystem("pdfs", {})],
     path: Config.staticFiles.uploadPdfDir
 });
-
-Collections.Pdfs = new FS.Collection("pdfs", {
-    stores: [pdfStore]
-});
-
 
 if (Meteor.isServer) {
     function trueFunc(userId) {
@@ -17,7 +13,7 @@ if (Meteor.isServer) {
         return true;
     };
 
-    Collections.Pdfs.allow({
+    PdfStore.allow({
         insert: trueFunc,
         update: trueFunc,
         remove: trueFunc,

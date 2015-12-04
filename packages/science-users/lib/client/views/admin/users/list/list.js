@@ -111,12 +111,13 @@ Template.AdminUsersViewTableItems.helpers({
 });
 
 Template.userRolesView.helpers({
-	isNormalType:function(){
-		return !this.scope
-	},
-	name:function(){
-		return Permissions.getRoleDescByCode(this.role || this).name
-	}
+    isNormalType: function () {
+        return !this.scope
+    },
+    name: function () {
+        var roleDescription = Permissions.getRoleDescByCode(this.role || this);
+        return roleDescription && roleDescription.name;
+    }
 })
 
 Template.userRolesView.events({

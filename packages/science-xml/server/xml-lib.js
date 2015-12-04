@@ -188,14 +188,14 @@ var getParagraphs = function (paragraphNodes) {
             var fig = getFigure(paragraph);
             if (fig) {
                 paragraphs.figures.push(fig);
-                var ref = '<p style="display:none"><xref original="true" ref-type="fig" rid="' + fig.id + '">' + fig.label + '</xref></p>';
+                var ref = '<p><xref original="true" ref-type="fig" rid="' + fig.id + '">' + fig.label + '</xref></p>';
                 paragraphs.html += ref;
             }
         } else if(paragraph.tagName === 'table-wrap'){
             var table = getTable(paragraph);
             if(table){
                 paragraphs.tables.push(table);
-                var ref = '<p style="display:none"><xref original="true" ref-type="table" rid="' + table.id + '">' + table.label + '</xref></p>';
+                var ref = '<p><xref original="true" ref-type="table" rid="' + table.id + '">' + table.label + '</xref></p>';
                 paragraphs.html += ref;
             }
         } else {
