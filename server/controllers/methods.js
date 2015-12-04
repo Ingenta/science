@@ -1,27 +1,32 @@
 getMostReadByJournal = function (journalId, limit) {
     if (!limit)limit = 20;
-    var a = undefined;
-    if (journalId)
-        a = PageViews.aggregate([{
+    var mostRead;
+    if (journalId) {
+        mostRead = PageViews.aggregate([{
             $match: {
                 journalId: journalId
             }
         }, {
             $group: {
-                _id: {articleId: '$articleId'},
+                _id: '$articleId',
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
             , {$limit: limit}]);
-    else a = PageViews.aggregate([{
-        $group: {
-            _id: {articleId: '$articleId'},
-            count: {$sum: 1}
-        }
-    }, {$sort: {count: -1}}
-        , {$limit: limit}]);
-    if (!a)return;
-    return a;
+    }
+    else {
+        mostRead = PageViews.aggregate([{
+            $group: {
+                _id: '$articleId',
+                count: {$sum: 1}
+            }
+        }, {$sort: {count: -1}}
+            , {$limit: limit}]);
+    }
+    if (!mostRead)return;
+    return _.filter(mostRead, function (notNull) {
+        return notNull._id;
+    });
 }
 getMostReadSuggestion = function (currentJournalId) {
     //add suggestion if journalId not set or its journalId equals current
@@ -45,7 +50,7 @@ createMostReadList = function (journalId, limit) {
         allIds.push(suggestion._id);
     }
     _.each(most, function (item) {
-        allIds.push(item._id.articleId);
+        allIds.push(item._id);
     });
     return _.uniq(allIds); //This removes any duplicates after initial
 }
