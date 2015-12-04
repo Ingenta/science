@@ -63,3 +63,12 @@ Meteor.publish('oneArticleMeta', function (id) {
 Meteor.publish('articlesInTopic',function(topicsId){
     return Articles.find({topic: topicsId},{fields:articleWithMetadata});
 })
+
+
+Meteor.publish('articlesInSpecTopic',function(stid){
+    var stopic = SpecialTopics.findOne({_id:stid})
+    if(stopic && !_.isEmpty(stopic.articles)){
+        return Articles.find({_id:{$in:stopic.articles}},{fields:articleWithMetadata});
+    }
+    return Articles.find({_id:"null"});//return null 会导致客户端一直等待.
+})

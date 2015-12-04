@@ -1,10 +1,11 @@
 Template.articlesInSpecialTopics.helpers({
     articles: function () {
-        var addedArticles = Session.get("addedArticlesTo");
-        if (!addedArticles || !addedArticles.length)
-            return [];
-
-        return Articles.find({_id: {$in: addedArticles}});
+        if(_.isEmpty(this.articles))
+            return ;
+        return Articles.find({_id: {$in: this.articles}});
+    },
+    scope:function(){
+        return {journal:Router.current().data().journalId}
     }
 })
 
@@ -19,3 +20,9 @@ Template.singleArticleInSpecialTopics.events({
         });
     }
 });
+
+Template.singleArticleInSpecialTopics.helpers({
+    scope:function(){
+        return {journal:Router.current().data().journalId}
+    }
+})

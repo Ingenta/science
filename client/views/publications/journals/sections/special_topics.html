@@ -25,14 +25,11 @@
                         <tr>
                             <td>{{year}}</td>
                             <td>
-                                <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
+                                <a href="{{pathFor 'specialTopics.selectArticles' data=getData}}">{{translateThis title.cn title.en}}</a>
                             </td>
                             <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
                             <td>
                                 {{#if permissionCheck "modify-special-issue"}}
-                                    <a class="fa fa-plus"
-                                       href="{{getUrlToSpecialTopicManagement _id}}"></a>
-                                &nbsp;&nbsp;
                                     {{> updateSpecialTopicsModalForm}}
                                 {{/if}}
                                 &nbsp;&nbsp;

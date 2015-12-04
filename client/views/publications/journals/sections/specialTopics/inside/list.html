@@ -1,8 +1,11 @@
 <template name="articlesInSpecialTopics">
+	{{#if can "modify-issue" "specialissue" scope}}
+		{{> saSelectorForST}}
+	{{/if}}
 	<ul class="list-unstyled">
 		{{#each articles}}
 			{{> singleArticleInSpecialTopics}}
-			{{else}}
+		{{else}}
 			{{_ "No articles found!"}}
 		{{/each}}
 	</ul>
@@ -10,18 +13,21 @@
 
 <template name="singleArticleInSpecialTopics">
 	<li>
-        <div class="row dotted">
-            <div class="col-xs-2 text-center">
-                <br>
-                <br>
-                {{#if can "delete-pulisher-collections" "collections" }}
-                    <button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
-                {{/if}}
-            </div>
-
-            <div class="col-xs-10">
-                {{>standardArticleListing}}
-            </div>
-        </div>
+		<div class="row dotted">
+			{{#if can "modify-issue" "specialissue" scope}}
+				<div class="col-xs-2 text-center">
+					<br>
+					<br>
+					<button class="btn btn-danger btn-xs">{{_ "remove"}}</button>
+				</div>
+				<div class="col-xs-10">
+					{{>standardArticleListing}}
+				</div>
+			{{else}}
+				<div class="col-xs-12">
+					{{>standardArticleListing}}
+				</div>
+			{{/if}}
+		</div>
 	</li>
 </template>

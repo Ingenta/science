@@ -33,7 +33,7 @@ Template.SpecialTopics.events({
 
 Template.SpecialTopics.helpers({
     specialTopics: function () {
-        return SpecialTopics.find();
+        return SpecialTopics.find({journalId:Router.current().data().journalId});
     },
     year: function () {
         var id = Session.get("currentJournalId");
@@ -69,6 +69,9 @@ Template.SpecialTopics.helpers({
         var journalPart = getJournalComponentByJournalId(journalId);
         if (!journalPart)return;
         return journalPart + "/specialTopics/" + specialTopicId;
+    },
+    getData:function(){
+        return _.extend({specialTopicsId:this._id},Router.current().params);
     }
 })
 
