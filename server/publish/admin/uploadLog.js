@@ -1,4 +1,4 @@
-Meteor.publish('uploadPage', function () {
+Meteor.publish('uploadPage', function () {//TODO this should use one collection for all tasks and subtasks not two
     return [
         UploadLog.find({}, {
             sort: {uploadedAt: -1},

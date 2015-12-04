@@ -1,5 +1,5 @@
 getMostReadByJournal = function (journalId, limit) {
-    if (!limit)limit = 20;
+    if (!limit)limit = 20;//TODO: fix this so it filters out null article ids in the aggregate query
     var mostRead;
     if (journalId) {
         mostRead = PageViews.aggregate([{
@@ -103,11 +103,6 @@ getLocationByIP = function (ip) {
 }
 
 Meteor.methods({
-    'distinctVolume': function (journalId) {
-        var result = Issues.distinct("volume", {"journalId": journalId});
-        console.dir(result);
-        return result;
-    },
     'getClientIP': function () {
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
     },
