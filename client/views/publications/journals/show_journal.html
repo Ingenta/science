@@ -3,14 +3,14 @@
     {{ initPage _id publisher}}
     <div class="row">
         <div class="pull-right">
-            {{#if can "modify-journal" "resource" }}
+            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                 {{> updatePublicationBannerModalForm}}
             {{/if}}
         </div>
         {{> journalBanner journal=_id}}
     </div>
     <br>
-    {{#if can "modify-journal" "resource"  }}
+    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
         <div class="pull-right">
             {{> updateJournalTabsModalForm}}
         </div>
@@ -30,78 +30,55 @@
 
 <template name="journalOptions">
     {{#journalTabs name="" tabs=tabs activeTab=activeTab}}
-
-        {{#tabContent slug="Overview"}}
-            {{#with journalContext}}
+        {{#with journalContext}}
+            {{#tabContent slug="Overview"}}
                 {{> JournalOverview}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Browse"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Browse"}}
                 {{> articleList}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="About"}}
-            {{#with journalContext}}
+            {{#tabContent slug="About"}}
                 {{> aboutTopics}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Editorial Board"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Editorial Board"}}
                 {{> aboutTitle}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="News"}}
-            {{#with journalContext}}
+            {{#tabContent slug="News"}}
                 {{> newContent}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Media"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Media"}}
                 {{> mediaList}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Special Topics"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Special Topics"}}
                 {{> SpecialTopics}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Collections"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Collections"}}
                 {{> collections publisherId=publisher journalId=_id}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Accepted"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Accepted"}}
                 {{> articleListRight pubStatus="preset"}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Online First"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Online First"}}
                 {{> articleListRight pubStatus="online_frist"}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="MOOP"}}
-            {{#with journalContext}}
+            {{#tabContent slug="MOOP"}}
                 {{> mediaList}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
 
-        {{#tabContent slug="Author Center"}}
-            {{#with journalContext}}
+            {{#tabContent slug="Author Center"}}
                 {{> authorCenterList}}
-            {{/with}}
-        {{/tabContent}}
+            {{/tabContent}}
+        {{/with}}
     {{/journalTabs}}
 </template>
 

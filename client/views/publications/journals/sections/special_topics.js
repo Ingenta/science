@@ -33,7 +33,7 @@ Template.SpecialTopics.events({
 
 Template.SpecialTopics.helpers({
     specialTopics: function () {
-        return SpecialTopics.find();
+        return SpecialTopics.find({journalId: this._id});
     },
     year: function () {
         var id = Session.get("currentJournalId");

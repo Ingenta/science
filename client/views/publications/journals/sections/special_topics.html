@@ -1,14 +1,15 @@
 <template name="SpecialTopics">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                {{#if permissionCheck 'add-special-issue'}}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addSpecialTopicsModal">
+        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#addSpecialTopicsModal">
                         {{_ "Add new"}} <i class="fa fa-plus"></i>
                     </button>
-                {{/if}}
+                </div>
             </div>
-        </div>
+        {{/if}}
         <div class="row">
             <div class="col-xs-12">
                 <table class="table table-bordered">
@@ -29,14 +30,11 @@
                             </td>
                             <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
                             <td>
-                                {{#if permissionCheck "modify-special-issue"}}
-                                    <a class="fa fa-plus"
-                                       href="{{getUrlToSpecialTopicManagement _id}}"></a>
-                                &nbsp;&nbsp;
+                                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                                    <a class="fa fa-plus" href="{{getUrlToSpecialTopicManagement _id}}"></a>
+                                    &nbsp;&nbsp;
                                     {{> updateSpecialTopicsModalForm}}
-                                {{/if}}
-                                &nbsp;&nbsp;
-                                {{#if permissionCheck "delete-special-issue"}}
+                                    &nbsp;&nbsp;
                                     <a href="#" class="fa fa-trash"></a>
                                 {{/if}}
                             </td>
