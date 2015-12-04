@@ -33,3 +33,11 @@ a.fa-trash {
 #iron-router-progress.spinner:before {
     border-color : #06a4d1;
 }
+
+.resultsList a {
+    display: block;
+    margin-left: 28px;
+}
+.resultsList img {
+    position: absolute;
+}

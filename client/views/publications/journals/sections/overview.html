@@ -3,7 +3,7 @@
     <hr>
     <div class="row">
         <div class="col-xs-6">
-            {{> recommendArticles}}
+            {{> recommendArticles journalId=getJournalIdFromSession}}
         </div>
         <div class="col-xs-6">
             <div class="row">
@@ -23,7 +23,7 @@
 </template>
 <template name="journalCoverSummary">
     <div class="pull-right">
-        {{#if can "modify-journal" "resource"  }}
+        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
             {{> updatePublicationPictureModalForm}}
         {{/if}}
     </div>
@@ -68,7 +68,7 @@
                 <h5>{{_ "Description"}}</h5>
 
                 <div class="pull-right">
-                    {{#if can "modify-journal" "resource"  }}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                         {{> updatePublicationDescriptionModalForm}}
                     {{/if}}
                 </div>
@@ -89,26 +89,26 @@
 <template name="recommendArticles">
     <div>
         <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
-        {{#if can "add-publisher-collections" "collections" }}
-            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal"
-                  data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}
+        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>
+            {{> addRecommendModalForm}}
         {{/if}}
     </div>
-    {{#each recommendArticles}}
+    {{#each editorRecommendedArticles}}
         <div class="row">
             <div class="col-xs-3">
-                <a href="{{ArticleUrl ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/></a>
+                <a href="{{urlToArticleById ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/></a>
             </div>
             <div class="col-xs-9">
                 <div class="pull-right">
-                    {{#if can "modify-recommend" "resource"  }}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}
                         {{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}
                     {{/if}}
-                    {{#if can "delete-recommend" "resource"  }}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}
                         <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </div>
-                <a href="{{ArticleUrl ArticlesId}}">{{titles ArticlesId}}</a>
+                <a href="{{urlToArticleById ArticlesId}}">{{titles ArticlesId}}</a>
             </div>
         </div>
         <hr>
@@ -116,7 +116,7 @@
         {{_ "No articles found!"}}
     {{/each}}
     {{#if hasMoreThanFiveRecommendedArticles}}
-        <div align="right"><a href="/mostEditorRecommend">
+        <div align="right"><a href="/mostEditorRecommend/{{this.journalId}}">
             <button>+{{_ "more"}}</button>
         </a></div>
     {{/if}}

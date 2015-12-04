@@ -4,8 +4,12 @@
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
                 {{#each abouts}}
                     <div class="pull-right row aboutEditButtons">
-                        {{#if can "modify-about" "resource" }}{{> updateAboutTitleModalForm}}{{/if}}
-                        {{#if can "delete-about" "resource" }}<a href="#" class="fa fa-trash about"></a>{{/if}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}
+                            {{> updateAboutTitleModalForm}}
+                        {{/if}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}
+                            <a href="#" class="fa fa-trash about"></a>
+                        {{/if}}
                     </div>
 
                     <li class="{{isActive _id}}">
@@ -17,7 +21,9 @@
                     {{_ "No content found!"}}
                 {{/each}}
                 <div class="pull-right">
-                    {{#if can "add-about" "resource" }}{{> addAboutTitleModalForm}}{{/if}}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+                        {{> addAboutTitleModalForm}}
+                    {{/if}}
                 </div>
             </ul>
         </div>

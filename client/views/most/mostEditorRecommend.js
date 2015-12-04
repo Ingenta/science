@@ -2,11 +2,12 @@ Template.mostRecommendArticles.helpers({
     mostRecommendArticles: function () {
         var sort = {};
         var pubSort = {};
-        if(Session.get("sort"))
-            sort={"createDate":Session.get("sort")};
+        if (Session.get("sort")) {
+            sort = {"createDate": Session.get("sort")};
             pubSort = {"published": Session.get("sort")};
-        var journalId = Session.get('currentJournalId');
-        var editorRecommends = EditorsRecommend.find({publications: journalId},{sort:sort, limit: 20}).fetch();
+        }
+        var journalId = Router.current().params.journalId;
+        var editorRecommends = EditorsRecommend.find({publications: journalId}, {sort: sort, limit: 20}).fetch();
         // 获取更多Id
         var allId = [];
         _.each(editorRecommends, function (item) {
@@ -21,7 +22,7 @@ Template.mostRecommendArticles.helpers({
 });
 
 Template.mostRecommendArticles.onRendered(function () {
-    if (Session.get('sort')===undefined) {
+    if (Session.get('sort') === undefined) {
         Session.set('sort', "1");
     }
 });

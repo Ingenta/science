@@ -10,8 +10,7 @@ Router.route("admin.upload", {
 	},
 	waitOn:function () {
 		return [
-			Meteor.subscribe('uploadLog'),
-			Meteor.subscribe('uploadTasks')
+			Meteor.subscribe('uploadPage')
 		]
 	}
 });

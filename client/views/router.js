@@ -173,7 +173,7 @@ Router.map(function () {
         }
     });
 
-    this.route('mostEditorRecommend', {
+    this.route('mostEditorRecommend/:journalId', {
         template: "mostRecommendArticles",
         title: function () {
             return TAPi18n.__("Editors Recommend");
@@ -182,8 +182,7 @@ Router.map(function () {
         name: "mostEditor.show",
         waitOn: function () {
             return [
-                Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId')),
-                Meteor.subscribe('recommend')
+                Meteor.subscribe('editorRecommends', this.params.journalId)
             ]
         }
     });

@@ -18,7 +18,7 @@ Template.mostReadArticle.helpers({
         })
 
         var sort = {"published": Session.get("sort")};
-        return Articles.find({_id: {$in: allId}}, {sort: sort});
+        return Articles.find({_id: {$in: mostReadArticleIdList}}, {sort: sort});
 
     },
     query: function () {

@@ -2,14 +2,15 @@
     <div class="row">
         <div class="col-xs-9">
             <h3 class="sectionDivider title">{{_ "Abstract"}}</h3>
-
+            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                <div class="pull-right">
+                    {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
+                </div>
+            {{/if}}
             <div class="interesting-content">
                 {{{getAbstract}}}
             </div>
         </div>
-        {{#if can "modify-article" "resource"  }}
-            {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
-        {{/if}}
         <div class="col-xs-3">
             {{#each getKeywords}}
                 <p class="title_style">
