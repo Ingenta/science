@@ -1,6 +1,7 @@
 accounts-base@1.2.2
 accounts-password@1.1.4
 aldeed:autoform@5.7.1
+aldeed:autoform-bs-datepicker@1.1.1
 aldeed:autoform-select2@2.0.2
 aldeed:collection2@2.5.0
 aldeed:simple-schema@1.4.0
@@ -168,7 +169,6 @@ science-lib@0.0.1
 science-logger@0.0.2
 science-parser@0.0.1
 science-permissions@0.0.1
-science-reports@0.0.1
 science-search@0.0.1
 science-statistic@0.0.0
 science-topics@0.0.1
@@ -183,7 +183,7 @@ spiderable@1.0.9
 srp@1.0.4
 standard-app-packages@1.0.6
 standard-minifiers@1.0.2
-summernote:standalone@0.7.0
+summernote:standalone@0.6.16
 tap:i18n@1.7.0
 tap:i18n-ui@0.7.0
 templates:tabs@2.2.0
@@ -192,6 +192,7 @@ templating-tools@1.0.0
 tomi:upload-jquery@2.1.7
 tomi:upload-server@1.3.3
 tracker@1.0.9
+tsega:bootstrap3-datetimepicker@4.17.37_1
 udondan:slick@1.3.11_1
 ui@1.0.8
 underscore@1.0.4

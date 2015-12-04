@@ -160,6 +160,26 @@ Science.Reports.getJournalArticleRecommendReportFile = function (query, fileName
     var fields = Science.Reports.getJournalArticleRecommendReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
+//journalSumArticleBrowse
+Science.Reports.getJournalArticleBrowseReportFile = function (query, fileName) {
+    var type =['fulltext','abstract','pdfDownload'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getJournalArticleReportData(query);
+    var fields = Science.Reports.getJournalArticleBrowseReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//journalSumArticleFavouriteWatch
+Science.Reports.getJournalArticleFavouriteWatchReportFile = function (query, fileName) {
+    var type =['favourite','watchArticle','emailThis'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getJournalArticleReportData(query);
+    var fields = Science.Reports.getJournalArticleFavouriteWatchReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
 //----------------------------数据方法-------------------------------------
 
 Future = Npm.require('fibers/future');
@@ -249,6 +269,35 @@ Science.Reports.getArticleReportDataNew = function (query) {
     );
     return myFuture.wait();
 };
+
+Science.Reports.getJournalArticleReportData = function(query){
+    var myFuture = new Future();
+    var allJournals = Publications.find().fetch();
+    var allPublisher = Publishers.find().fetch();
+    PageViews.rawCollection().group(
+        {journalId: true},
+        query,
+        {},
+        function (doc, result) {
+            if (!result[doc.action])
+                result[doc.action] = 0;
+            result[doc.action]++;
+        },
+        function (err, result) {
+            _.each(result, function (item) {
+                var journal = _.findWhere(allJournals, {_id: item.journalId})
+                var x = {};
+                x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
+                x.title = journal.title;
+                x.issn = journal.issn;
+                x.EISSN = journal.EISSN;
+                _.extend(item, x);
+            })
+            return myFuture.return(result);
+        }
+    );
+    return myFuture.wait();
+}
 //-----------------------------数据范围------------------------------
 Science.Reports.getKeywordReportFields = function (monthRange) {
     var fields = [
@@ -987,10 +1036,98 @@ Science.Reports.getJournalArticleRecommendReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
     });
+    return fields;
+};
+
+Science.Reports.getJournalArticleBrowseReportFields = function (monthRange) {
+    var fields = [
+        {
+            key: 'title',
+            title: '期刊名称'
+        },
+        {
+            key: 'publisher',
+            title: '出版商',
+            width: 25
+        },
+        {
+            key: 'issn',
+            title: 'ISSN',
+            width: 12
+        },
+        {
+            key: 'EISSN',
+            title: 'EISSN',
+            width: 12
+        },
+        {
+            key: 'fulltext',
+            title: '全文浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'abstract',
+            title: '摘要浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'pdfDownload',
+            title: '全文下载',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getJournalArticleFavouriteWatchReportFields = function (monthRange) {
+    var fields = [
+        {
+            key: 'title',
+            title: '期刊名称'
+        },
+        {
+            key: 'publisher',
+            title: '出版商',
+            width: 25
+        },
+        {
+            key: 'issn',
+            title: 'ISSN',
+            width: 12
+        },
+        {
+            key: 'EISSN',
+            title: 'EISSN',
+            width: 12
+        },
+        {
+            key: 'favourite',
+            title: '收藏',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchArticle',
+            title: '关注',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'emailThis',
+            title: '个人推荐',
+            width: 20,
+            type: 'number'
+        }
+    ];
     return fields;
 };

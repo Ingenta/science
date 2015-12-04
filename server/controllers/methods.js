@@ -109,7 +109,7 @@ Meteor.methods({
     'getMostRead': function (journalId, limit) {
         return createMostReadList(journalId, limit);
     },
-    'countSession': function () {
+    'totalConnections': function () {
         return UserStatus.connections.find().count();
     },
     'totalArticles': function () {

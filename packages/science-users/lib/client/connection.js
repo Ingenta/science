@@ -1,1 +1,0 @@
-Users.userStatusSessions = new Mongo.Collection("user_status_sessions")

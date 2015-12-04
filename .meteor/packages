@@ -59,7 +59,7 @@ vazco:universe-autoform-select
 science-users
 science-statistic
 science-institution
-science-reports
+aldeed:autoform-bs-datepicker
 jackjiang:solr
 science-search
 wylio:mandrill
@@ -78,6 +78,7 @@ science-author-center
 science-external-interface
 science-auto-task
 natestrauser:select2
+tsega:bootstrap3-datetimepicker
 science-parser
 standard-minifiers
 meteor-base
