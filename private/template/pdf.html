@@ -3,24 +3,25 @@
 	<div style="height:auto"><img style="width:100%" src="{{banner}}"></div>
 	{{/if}}
 	<div style="height:20%">
-		<h3>{{title}}</h3>
+		<h4>{{title}}</h4>
 		<div>
 			{{#each authors}}
 				<span>{{this}}</span>,
 			{{/each}}
 		</div>
-		<div>Citation: {{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); doi: {{doi}}</div>
-		<div>View online: <a href="{{fulltexturl}}">{{fulltextUrl}}</a></div>
-		<div>View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
-		<div>Published by the {{publisher}}</div>
+		<div style="font-size:13px">Citation: {{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); doi: {{doi}}</div>
+		<div style="font-size:13px">View online: <a href="{{fulltexturl}}">{{fulltextUrl}}</a></div>
+		<div style="font-size:13px">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
+		<div style="font-size:13px">Published by the {{publisher}}</div>
 	</div>
 	<hr>
-	<div style="height:45%"><h4>Articles you may be interested in</h4>
+	<div style="height:50%">
+		<h5>Articles you may be interested in</h5>
 		<ul style="padding: 0px">
 			{{#each similar}}
 				<li style="list-style: none">
-					<div><a href="{{fulltextUrl}}">{{title}}</a></div>
-					<div>{{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); {{doi}}</div>
+					<div style="font-size:14px"><a href="{{fulltextUrl}}">{{title}}</a></div>
+					<div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); {{doi}}</div>
 				</li>
 			{{/each}}
 		</ul>
