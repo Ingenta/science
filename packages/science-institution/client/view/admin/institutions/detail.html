@@ -6,7 +6,18 @@
                     <h3>{{translateThis this.cn this.en}}</h3>
                 {{/with}}
             </div>
-            {{> institutionOptions}}
+            {{#if displayOption}}
+                {{> institutionOptions}}
+            {{else}}
+                {{#with info}}
+                    {{#if can "modify-institution" "institution" scope}}
+                        <div class="pull-right">
+                            {{> updateInstitutionForm}}
+                        </div>
+                    {{/if}}
+                    {{>institutionDetail}}
+                {{/with}}
+            {{/if}}
         </div>
     </div>
 </template>

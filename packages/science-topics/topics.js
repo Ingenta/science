@@ -16,9 +16,8 @@ this.Topics.allow({
 });
 
 TopicsSchema = new SimpleSchema({
-    name: {
+    name: {//DON'T MAKE THIS UNIQUE
         type: String,
-        unique: true,
         max: 32
     },
     englishName: {
