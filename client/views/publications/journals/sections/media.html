@@ -1,8 +1,8 @@
 <template name="mediaList">
-	{{#if can "modify-journal" "resource"}}
-	{{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success" title="Add new"}}
-        {{_ "Add new"}} <i class="fa fa-plus"></i>
-    {{/jkafModal}}
+    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+        {{#jkafModal template="addMediaForm" id="addMediaForm" class="btn btn-success" title="Add new"}}
+            {{_ "Add new"}} <i class="fa fa-plus"></i>
+        {{/jkafModal}}
 	{{/if}}
 	<ul class="list-unstyled">
 		{{#each medias}}
@@ -13,11 +13,11 @@
 
 					</div>
 					<div class="col-xs-7">
-						{{#if can "modify-journal" "resource"}}
-						<div class="pull-right">
-							{{> jkafModal template="updateMediaForm" doc=this }}
-							<a href="#" class="fa fa-trash"></a>
-						</div>
+                        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                            <div class="pull-right">
+                                {{> jkafModal template="updateMediaForm" doc=this }}
+                                <a href="#" class="fa fa-trash"></a>
+                            </div>
 						{{/if}}
 						<h4>{{translateThis title.cn title.en}}</h4>
 

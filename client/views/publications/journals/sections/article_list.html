@@ -32,7 +32,7 @@
     {{#if normal}}
         <h4>{{getIssueTitle}}</h4>
         {{#with issueContext}}
-            {{#if can "modify-journal" "resource" }}
+            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
                 <div class="pull-right">
                     {{> updateIssueDescriptionModalForm}}
                 </div>
@@ -58,7 +58,7 @@
 </template>
 
 <template name="HistoricalJournalTable">
-    {{#if can "modify-article" "resource" }}
+    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
         {{#unless historicalJournal}}
             <div class="pull-left">
                 {{_ "No historical journal found!"}}

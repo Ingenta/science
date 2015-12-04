@@ -23,7 +23,7 @@
 </template>
 <template name="journalCoverSummary">
     <div class="pull-right">
-        {{#if can "modify-journal" "resource"  }}
+        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
             {{> updatePublicationPictureModalForm}}
         {{/if}}
     </div>
@@ -68,7 +68,7 @@
                 <h5>{{_ "Description"}}</h5>
 
                 <div class="pull-right">
-                    {{#if can "modify-journal" "resource"  }}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                         {{> updatePublicationDescriptionModalForm}}
                     {{/if}}
                 </div>
@@ -89,9 +89,9 @@
 <template name="recommendArticles">
     <div>
         <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
-        {{#if can "add-publisher-collections" "collections" }}
-            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal"
-                  data-target="#addRecommendModal"></span>{{> addRecommendModalForm}}
+        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+            <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>
+            {{> addRecommendModalForm}}
         {{/if}}
     </div>
     {{#each editorRecommendedArticles}}
@@ -101,10 +101,10 @@
             </div>
             <div class="col-xs-9">
                 <div class="pull-right">
-                    {{#if can "modify-recommend" "resource"  }}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}
                         {{>jkafModal template="updateRecommendModalForm" doc=this id="updateRecommend"}}
                     {{/if}}
-                    {{#if can "delete-recommend" "resource"  }}
+                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}
                         <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </div>
