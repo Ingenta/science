@@ -10,8 +10,8 @@ Config = {
         uploadExcelDir: '/tmp/excel'
     },
     staticFiles: {
-        uploadFiguresDir: Meteor.isDevelopment ? '/tmp/figures' : '~/app/static/figures',
-        uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdf' : '~/app/static/pdf'
+        uploadFiguresDir: Meteor.isDevelopment ? '/tmp/figures' : '~/app/cfs/files/figures',
+        uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdf' : '~/app/cfs/files/pdf'
     },
 
     ftp: {
