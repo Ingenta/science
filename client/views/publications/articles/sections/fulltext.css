@@ -15,3 +15,6 @@
 #fulltext-viewer table{
     width:100%;
 }
+#fulltext-viewer xref[original=true] {
+    display: none;
+}

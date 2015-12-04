@@ -116,6 +116,10 @@ xref[ref-type='table'] {
 
 .att-table{
     width:100%;
+    text-align:center;
+}
+.att-table table{
+    width:100%;
 }
 
 .data {

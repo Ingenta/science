@@ -113,6 +113,9 @@ Template.tableModal.helpers({
         return Session.get("table").table;
     }
 });
+Template.tableModal.onRendered(function(){
+    Template.instance().$('table').addClass('table table-striped')
+})
 
 Template.referenceModal.helpers({
     "referencesArr": function(){
