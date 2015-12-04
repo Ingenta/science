@@ -82,6 +82,14 @@ getMyLocationFromLocalDatabase = function (ip) {
     return {ip: currentIP, country_code: result.countryCode2, country_name: result.country.en}
 }
 
+getLocationByIP = function(ip){
+    var result = getMyLocationFromGeoIPServer(ip);
+    if (!result)
+        result = getMyLocationFromLocalDatabase(ip);
+    if (!result)return;
+    return result;
+}
+
 Meteor.methods({
     'distinctVolume': function (journalId) {
         var result = Issues.distinct("volume", {"journalId": journalId});
@@ -102,12 +110,7 @@ Meteor.methods({
     },
     'getLocationByCurrentIP': function () {
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
-        var result = getMyLocationFromGeoIPServer(ip);
-        if (!result)
-            result = getMyLocationFromLocalDatabase(ip);
-
-        if (!result)return;
-        return result;
+        return getLocationByIP(ip);
     },
     'getArticlePageViewsPieChartData': function (articleId) {
         var data = new Array();
