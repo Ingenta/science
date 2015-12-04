@@ -94,17 +94,17 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         var id = parserHelper.getFirstAttribute("attribute::id", note);
         if (noteLabel === undefined) {
             results.errors.push("No noteLabel found");
-        } else if (email === undefined) {
-            results.errors.push("No email found");
         } else {
-            var entry = {id: id, label: noteLabel, email: email};
+            var entry = {id: id, label: noteLabel};
+            if(email)  entry.email = email;
             if (!_.isEmpty(multiLangNote)) {
                 entry.note = {};
                 _.each(multiLangNote, function (noteContent, key) {
-                    var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, email);
-                    noteContent = noteContent.toString().trim().replace(/<ext-link[^<]+<\/ext-link>/, mailTag);
-                    noteContent = noteContent.replace(/<\/?p[^>]*>/g, "");
-                    entry.note[key] = noteContent;
+                    if(entry.email){
+                        var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, email);
+                        noteContent = noteContent.toString().replace(/<ext-link[^<]+<\/ext-link>/, mailTag);
+                    }
+                    entry.note[key] = noteContent.trim().replace(/<\/?p[^>]*>/g, "");
                 })
             }
             results.authorNotes.push(entry);

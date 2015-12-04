@@ -19,7 +19,6 @@ Package.onUse(function (api) {
 		"accounts-password",
 		"perak:user-roles",
 		"science-institution",
-		"science-reports",
 		'aldeed:simple-schema',
 		'aldeed:autoform'
 	], ['server', 'client']);
@@ -36,7 +35,6 @@ Package.onUse(function (api) {
 
 	api.addFiles([
 		'lib/client/share.js',
-		'lib/client/connection.js',
 		'lib/client/recentBehavior.js',
 		'lib/client/views/accounts/forgot_password/forgot_password.html',
 		'lib/client/views/accounts/forgot_password/forgot_password.js',

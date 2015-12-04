@@ -73,6 +73,12 @@ Template.SpecialTopics.helpers({
 })
 
 AutoForm.addHooks(['addSpecialTopicsModalForm'], {
+    before: {
+        insert: function (doc) {
+            doc.journalId = Router.current().data()._id;
+            return doc;
+        }
+    },
     onSuccess: function () {
         $("#addSpecialTopicsModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
