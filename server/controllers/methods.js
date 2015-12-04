@@ -55,7 +55,7 @@ var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
 var port = isDev ? "9090" : "8080";
 var geoipHost = isDev ? localDevServer : "http://freegeoip";
 var geoipUrl = geoipHost + ":" + port + "/json/";
-getMyLocationFromGeoIPServer = function (ip) {
+getLocationFromGeoIPServer = function (ip) {
     var urlToCheck = geoipUrl + ip;
     if (Meteor.isDevelopment) {
         //pretend to be baidu in dev mode because of internal office ip not resolving correctly
@@ -72,14 +72,29 @@ getMyLocationFromGeoIPServer = function (ip) {
 
 
 }
-getMyLocationFromLocalDatabase = function (ip) {
+getLocationFromLocalDatabase = function (ip) {
     var currentUserIPNumber = Science.ipToNumber(ip);
     var result = IP2Country.findOne({
         startIpLong: {$lte: currentUserIPNumber},
         endIpLong: {$gte: currentUserIPNumber}
     });
     if (!result)return;
-    return {ip: currentIP, country_code: result.countryCode2, country_name: result.country.en}
+    return {
+        ip: ip,
+        country_code: result.countryCode2,
+        country_name: result.country.en,
+        country_chinese_name: result.country.cn,
+        region_name: result.province.en,
+        region_chinese_name: result.province.cn
+    }
+}
+
+getLocationByIP = function (ip) {
+    var result = getLocationFromGeoIPServer(ip);
+    if (!result)
+        result = getLocationFromLocalDatabase(ip);
+    if (!result)return;
+    return result;
 }
 
 Meteor.methods({
@@ -102,12 +117,7 @@ Meteor.methods({
     },
     'getLocationByCurrentIP': function () {
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
-        var result = getMyLocationFromGeoIPServer(ip);
-        if (!result)
-            result = getMyLocationFromLocalDatabase(ip);
-
-        if (!result)return;
-        return result;
+        return getLocationByIP(ip);
     },
     'getArticlePageViewsPieChartData': function (articleId) {
         var data = new Array();
@@ -156,7 +166,7 @@ Meteor.methods({
             var value = el + f[index];
             c.push(value);
         });
-        var result =  {abstract: a, fulltext: f, total: c, months: m};
+        var result = {abstract: a, fulltext: f, total: c, months: m};
         return result;
     },
     'getLocationReport': function (action, articleId) {
