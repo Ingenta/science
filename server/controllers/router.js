@@ -224,7 +224,7 @@ Router.map(function () {
                     return data[langArr[index]] || data[langArr[1 - index]];
                 };
                 var data = {};
-                var host = Config.isDevMode ? Config.rootUrl : "http://localhost/";
+                var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
                 if (journalInfo.banner) {
                     data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
                 }
