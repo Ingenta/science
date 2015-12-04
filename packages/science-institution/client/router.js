@@ -85,7 +85,7 @@ Router.route("/institution/detail/:insId/", {
     },
     data: function () {
         return {
-            scope: {institution: [this.params.insId]}
+            scope: {institution: this.params.insId}
         };
     }
 });
