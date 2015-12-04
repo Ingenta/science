@@ -11,7 +11,7 @@ Config = {
     },
     staticFiles: {
         uploadFiguresDir: Meteor.isDevelopment ? '/tmp/figures' : '~/app/cfs/files/figures',
-        uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdf' : '~/app/cfs/files/pdf'
+        uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdfs' : '~/app/cfs/files/pdfs'
     },
 
     ftp: {
