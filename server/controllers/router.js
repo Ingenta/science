@@ -190,7 +190,7 @@ Router.map(function () {
         where: 'server',
         path: '/downloadPdf/:pdfId',
         action: function () {
-            var pdf = Collections.Pdfs.findOne({_id: this.params.pdfId});
+            var pdf = PdfStore.findOne({_id: this.params.pdfId});
             if (pdf) {
                 var response = this.response;
                 var request = this.request;
