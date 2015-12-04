@@ -57,7 +57,7 @@ Template.TagList.helpers({
 });
 
 Template.recommendArticles.helpers({
-    recommendArticles: function () {
+    editorRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
         return EditorsRecommend.find({publications: journalId},{sort: {createDate: -1}, limit: 5});
     },
@@ -66,13 +66,6 @@ Template.recommendArticles.helpers({
         var article = Articles.findOne({_id: Aid});
         var title = iscn ? article.title.cn : article.title.en;
         return title;
-    },
-    ArticleUrl: function (Arid) {
-        var journalId = Session.get('currentJournalId');
-        var title = Publications.findOne({_id: journalId}).shortTitle;
-        var article = Articles.findOne({_id: Arid});
-        if (article)
-            return title + "/" + article.volume + "/" + article.issue + "/" + article.doi;
     },
     hasMoreThanFiveRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
