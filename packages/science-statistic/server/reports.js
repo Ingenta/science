@@ -200,6 +200,66 @@ Science.Reports.getArticleFavouriteWatchReportFile = function (query, fileName) 
     console.dir(data);
     return Excel.export(fileName, fields, data);
 };
+//UsersJournal
+Science.Reports.getUsersJournalReportFile = function (query, fileName) {
+    var type =['journalOverview','journalBrowse','watchJournal'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getUserActionData(query);
+    var fields = Science.Reports.getUsersJournalReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//UsersArticle
+Science.Reports.getUsersArticleReportFile = function (query, fileName) {
+    var type =['fulltext','abstract','pdfDownload','favourite','watchArticle','emailThis'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getUserActionData(query);
+    var fields = Science.Reports.getUsersArticleReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//InstitutionJournal
+Science.Reports.getInstitutionJournalReportFile = function (query, fileName) {
+    var type =['journalOverview','journalBrowse','watchJournal'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getInstitutionActionData(query);
+    var fields = Science.Reports.getInstitutionJournalReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//InstitutionArticle
+Science.Reports.getInstitutionArticleReportFile = function (query, fileName) {
+    var type =['fulltext','abstract','pdfDownload','favourite','watchArticle','emailThis'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getInstitutionActionData(query);
+    var fields = Science.Reports.getInstitutionArticleReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//RegionalJournal
+Science.Reports.getRegionalJournalReportFile = function (query, fileName) {
+    var type =['journalOverview','journalBrowse','watchJournal'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getRegionalData(query);
+    var fields = Science.Reports.getRegionalJournalReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//RegionalArticle
+Science.Reports.getRegionalArticleReportFile = function (query, fileName) {
+    var type =['fulltext','abstract','pdfDownload','favourite','watchArticle','emailThis'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getRegionalData(query);
+    var fields = Science.Reports.getRegionalArticleReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
 //----------------------------数据方法-------------------------------------
 
 Future = Npm.require('fibers/future');
@@ -289,6 +349,106 @@ Science.Reports.getArticleReportData = function (query) {
     );
     return myFuture.wait();
 };
+
+Science.Reports.getUserActionData = function(query){
+    var myFuture = new Future();
+    PageViews.rawCollection().group(
+        {userId: true},
+        query,
+        {},
+        function (doc, result) {
+            if (!result[doc.action])
+                result[doc.action] = 0;
+            result[doc.action]++;
+        },
+        Meteor.bindEnvironment( function (err, result) {
+            _.each(result, function (item) {
+                var users = Users.findOne({_id: item.userId},{fields:{username:1,emails:1,profile:1,level:1}});
+                var x = {};
+                x.name = users.username;
+                x.emails = users.emails.address;
+                x.institutionName = users.profile.institution;
+                if(users.level=="admin"){
+                    x.userType = "超级管理员";
+                }else if(users.level=="publisher"){
+                    x.userType = "出版商用户";
+                }else if(users.level=="institution"){
+                    x.userType = "机构用户";
+                }else{
+                    x.userType = "普通用户";
+                }
+                _.extend(item, x);
+            })
+            return myFuture.return(result);
+        })
+    );
+    return myFuture.wait();
+}
+
+Science.Reports.getInstitutionActionData = function(query){
+    var myFuture = new Future();
+    PageViews.rawCollection().group(
+        {institutionId: true},
+        query,
+        {},
+        function (doc, result) {
+            if (!result[doc.action])
+                result[doc.action] = 0;
+            result[doc.action]++;
+        },
+        Meteor.bindEnvironment( function (err, result) {
+            _.each(result, function (item) {
+                var institution = Institutions.findOne({_id: item.institutionId},{fields:{name:1,number:1,type:1}});
+                var x = {};
+                x.name = institution.name.cn;
+                x.number = institution.number;
+                if(institution.type=="1"){
+                    x.type = "图书馆";
+                }else if(institution.type=="2"){
+                    x.type = "出版商";
+                }else if(institution.type=="3"){
+                    x.type = "编辑部";
+                }else if(institution.type=="4"){
+                    x.type = "大学";
+                }else if(institution.type=="5"){
+                    x.type = "研究机构";
+                }else if(institution.type=="6"){
+                    x.type = "其他";
+                }else{
+                    x.type = "";
+                }
+                _.extend(item, x);
+            })
+            return myFuture.return(result);
+        })
+    );
+    return myFuture.wait();
+}
+
+Science.Reports.getRegionalData = function(query){
+    var myFuture = new Future();
+    PageViews.rawCollection().group(
+        {ip: true},
+        query,
+        {},
+        function (doc, result) {
+            if (!result[doc.action])
+                result[doc.action] = 0;
+            result[doc.action]++;
+        },
+        Meteor.bindEnvironment( function (err, result) {
+            _.each(result, function (item) {
+                var regional = getLocationByIP(item.ip);
+                console.dir(regional)
+                var x = {};
+                //x.title = "";
+                _.extend(item, x);
+            })
+            return myFuture.return(result);
+        })
+    );
+    return myFuture.wait();
+}
 
 Science.Reports.getJournalArticleReportDataNew = function(query){
     var myFuture = new Future();
@@ -1124,7 +1284,7 @@ Science.Reports.getJournalArticleRecommendReportFields = function (monthRange) {
     return fields;
 };
 
-Science.Reports.getJournalArticleBrowseReportFields = function (monthRange) {
+Science.Reports.getJournalArticleBrowseReportFields = function () {
     var fields = [
         {
             key: 'title',
@@ -1167,7 +1327,7 @@ Science.Reports.getJournalArticleBrowseReportFields = function (monthRange) {
     return fields;
 };
 
-Science.Reports.getJournalArticleFavouriteWatchReportFields = function (monthRange) {
+Science.Reports.getJournalArticleFavouriteWatchReportFields = function () {
     var fields = [
         {
             key: 'title',
@@ -1210,7 +1370,7 @@ Science.Reports.getJournalArticleFavouriteWatchReportFields = function (monthRan
     return fields;
 };
 
-Science.Reports.getArticleBrowseReportFields = function (monthRange) {
+Science.Reports.getArticleBrowseReportFields = function () {
     var fields = [
         {
             key: 'title',
@@ -1262,7 +1422,7 @@ Science.Reports.getArticleBrowseReportFields = function (monthRange) {
     return fields;
 };
 
-Science.Reports.getArticleFavouriteWatchReportFields = function (monthRange) {
+Science.Reports.getArticleFavouriteWatchReportFields = function () {
     var fields = [
         {
             key: 'title',
@@ -1291,6 +1451,282 @@ Science.Reports.getArticleFavouriteWatchReportFields = function (monthRange) {
             key: 'volume',
             title: '卷号',
             width: 8
+        },
+        {
+            key: 'favourite',
+            title: '收藏',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchArticle',
+            title: '关注',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'emailThis',
+            title: '个人推荐',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getUsersJournalReportFields = function () {
+    var fields = [
+        {
+            key: 'userType',
+            title: '用户类型'
+        },
+        {
+            key: 'name',
+            title: '用户名',
+            width: 20
+        },
+        {
+            key: 'emails',
+            title: '用户邮箱'
+        },
+        {
+            key: 'institutionName',
+            title: '所属机构',
+            width: 25
+        },
+        {
+            key: 'journalOverview',
+            title: '期刊首页浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'journalBrowse',
+            title: '期刊目录浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchJournal',
+            title: '期刊关注',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getUsersArticleReportFields = function () {
+    var fields = [
+        {
+            key: 'userType',
+            title: '用户类型'
+        },
+        {
+            key: 'name',
+            title: '用户名',
+            width: 20
+        },
+        {
+            key: 'emails',
+            title: '用户邮箱'
+        },
+        {
+            key: 'institutionName',
+            title: '所属机构',
+            width: 25
+        },
+        {
+            key: 'fulltext',
+            title: '全文浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'abstract',
+            title: '摘要浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'pdfDownload',
+            title: '全文下载',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'favourite',
+            title: '收藏',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchArticle',
+            title: '关注',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'emailThis',
+            title: '个人推荐',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getInstitutionJournalReportFields = function () {
+    var fields = [
+        {
+            key: 'number',
+            title: '机构编号'
+        },
+        {
+            key: 'type',
+            title: '机构类型',
+            width: 20
+        },
+        {
+            key: 'name',
+            title: '机构名称'
+        },
+        {
+            key: 'journalOverview',
+            title: '期刊首页浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'journalBrowse',
+            title: '期刊目录浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchJournal',
+            title: '期刊关注',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getInstitutionArticleReportFields = function () {
+    var fields = [
+        {
+            key: 'number',
+            title: '机构编号'
+        },
+        {
+            key: 'type',
+            title: '机构类型',
+            width: 20
+        },
+        {
+            key: 'name',
+            title: '机构名称'
+        },
+        {
+            key: 'fulltext',
+            title: '全文浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'abstract',
+            title: '摘要浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'pdfDownload',
+            title: '全文下载',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'favourite',
+            title: '收藏',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchArticle',
+            title: '关注',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'emailThis',
+            title: '个人推荐',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getRegionalJournalReportFields = function () {
+    var fields = [
+        {
+            key: 'number',
+            title: '国别'
+        },
+        {
+            key: 'name',
+            title: '省区'
+        },
+        {
+            key: 'journalOverview',
+            title: '期刊首页浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'journalBrowse',
+            title: '期刊目录浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchJournal',
+            title: '期刊关注',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getRegionalArticleReportFields = function () {
+    var fields = [
+        {
+            key: 'number',
+            title: '国别'
+        },
+        {
+            key: 'name',
+            title: '省区'
+        },
+        {
+            key: 'fulltext',
+            title: '全文浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'abstract',
+            title: '摘要浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'pdfDownload',
+            title: '全文下载',
+            width: 20,
+            type: 'number'
         },
         {
             key: 'favourite',

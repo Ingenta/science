@@ -90,14 +90,32 @@ Router.route('downloadExcel', {
             fileName = "Journal_Article_Browse_Download_Report";
             file = Science.Reports.getJournalArticleBrowseReportFile(query, fileName);
         }else if (reportType === "journalArticleFavourite") {
-            fileName = "Journal_Article_Favourite_Watch_Recommend__Report";
+            fileName = "Journal_Article_Favourite_Watch_Recommend_Report";
             file = Science.Reports.getJournalArticleFavouriteWatchReportFile(query, fileName);
         }else if (reportType === "articleBrowse") {
-            fileName = "Article_Browse_Download__Report";
+            fileName = "Article_Browse_Download_Report";
             file = Science.Reports.getArticleBrowseReportFile(query, fileName);
         }else if (reportType === "articleFavourite") {
-            fileName = "Article_Favourite_Watch_Recommend__Report";
+            fileName = "Article_Favourite_Watch_Recommend_Report";
             file = Science.Reports.getArticleFavouriteWatchReportFile(query, fileName);
+        }else if (reportType === "userJournal") {
+            fileName = "Users_Journal_Action_Report";
+            file = Science.Reports.getUsersJournalReportFile(query, fileName);
+        }else if (reportType === "userArticle") {
+            fileName = "Users_Article_Action_Report";
+            file = Science.Reports.getUsersArticleReportFile(query, fileName);
+        }else if (reportType === "institutionJournal") {
+            fileName = "Institution_Journal_Action_Report";
+            file = Science.Reports.getInstitutionJournalReportFile(query, fileName);
+        }else if (reportType === "institutionArticle") {
+            fileName = "Institution_Article_Action_Report";
+            file = Science.Reports.getInstitutionArticleReportFile(query, fileName);
+        }else if (reportType === "regionalJournal") {
+            fileName = "Journal_Regional_Report";
+            file = Science.Reports.getRegionalJournalReportFile(query, fileName);
+        }else if (reportType === "regionalArticle") {
+            fileName = "Article_Regional_Report";
+            file = Science.Reports.getRegionalArticleReportFile(query, fileName);
         }else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
