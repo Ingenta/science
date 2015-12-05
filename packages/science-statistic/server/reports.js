@@ -55,7 +55,7 @@ Science.Reports.getJournalWatchReportFile = function (query, fileName, start, en
 //fulltext
 Science.Reports.getArticleFulltextReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getArticleReportDataNew(query);
+    var data = Science.Reports.getArticleReportData(query);
     console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getArticleFulltextReportFields(monthRange);
@@ -64,7 +64,7 @@ Science.Reports.getArticleFulltextReportFile = function (query, fileName, start,
 //abstract
 Science.Reports.getArticleAbstractReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getArticleReportDataNew(query);
+    var data = Science.Reports.getArticleReportData(query);
     console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getArticleAbstractReportFields(monthRange);
@@ -73,7 +73,7 @@ Science.Reports.getArticleAbstractReportFile = function (query, fileName, start,
 //pdfDownload
 Science.Reports.getPDFDownloadReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getArticleReportDataNew(query);
+    var data = Science.Reports.getArticleReportData(query);
     console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getPDFDownloadReportFields(monthRange);
@@ -82,7 +82,7 @@ Science.Reports.getPDFDownloadReportFile = function (query, fileName, start, end
 //favourite
 Science.Reports.getArticleFavouriteReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getArticleReportDataNew(query);
+    var data = Science.Reports.getArticleReportData(query);
     console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getArticleFavouriteReportFields(monthRange);
@@ -91,7 +91,7 @@ Science.Reports.getArticleFavouriteReportFile = function (query, fileName, start
 //watchArticle
 Science.Reports.getArticleWatchReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getArticleReportDataNew(query);
+    var data = Science.Reports.getArticleReportData(query);
     console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getArticleWatchReportFields(monthRange);
@@ -100,7 +100,7 @@ Science.Reports.getArticleWatchReportFile = function (query, fileName, start, en
 //emailThis
 Science.Reports.getArticleRecommendReportFile = function (query, fileName, start, end) {
     console.dir(query);
-    var data = Science.Reports.getArticleReportDataNew(query);
+    var data = Science.Reports.getArticleReportData(query);
     console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getArticleRecommendReportFields(monthRange);
@@ -165,7 +165,7 @@ Science.Reports.getJournalArticleBrowseReportFile = function (query, fileName) {
     var type =['fulltext','abstract','pdfDownload'];
     query.action = {$in:type};
     console.dir(query);
-    var data = Science.Reports.getJournalArticleReportData(query);
+    var data = Science.Reports.getJournalArticleReportDataNew(query);
     var fields = Science.Reports.getJournalArticleBrowseReportFields();
     console.dir(data);
     return Excel.export(fileName, fields, data);
@@ -175,8 +175,28 @@ Science.Reports.getJournalArticleFavouriteWatchReportFile = function (query, fil
     var type =['favourite','watchArticle','emailThis'];
     query.action = {$in:type};
     console.dir(query);
-    var data = Science.Reports.getJournalArticleReportData(query);
+    var data = Science.Reports.getJournalArticleReportDataNew(query);
     var fields = Science.Reports.getJournalArticleFavouriteWatchReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//ArticleBrowseDownload
+Science.Reports.getArticleBrowseReportFile = function (query, fileName) {
+    var type =['fulltext','abstract','pdfDownload'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getArticleReportDataNew(query);
+    var fields = Science.Reports.getArticleBrowseReportFields();
+    console.dir(data);
+    return Excel.export(fileName, fields, data);
+};
+//ArticleFavouriteWatch
+Science.Reports.getArticleFavouriteWatchReportFile = function (query, fileName) {
+    var type =['favourite','watchArticle','emailThis'];
+    query.action = {$in:type};
+    console.dir(query);
+    var data = Science.Reports.getArticleReportDataNew(query);
+    var fields = Science.Reports.getArticleFavouriteWatchReportFields();
     console.dir(data);
     return Excel.export(fileName, fields, data);
 };
@@ -237,7 +257,7 @@ Science.Reports.getJournalReportData = function (query) {
     return myFuture.wait();
 };
 
-Science.Reports.getArticleReportDataNew = function (query) {
+Science.Reports.getArticleReportData = function (query) {
     var myFuture = new Future();
     var allPublisher = Publishers.find().fetch();
     PageViews.rawCollection().group(
@@ -270,7 +290,7 @@ Science.Reports.getArticleReportDataNew = function (query) {
     return myFuture.wait();
 };
 
-Science.Reports.getJournalArticleReportData = function(query){
+Science.Reports.getJournalArticleReportDataNew = function(query){
     var myFuture = new Future();
     var allJournals = Publications.find().fetch();
     var allPublisher = Publishers.find().fetch();
@@ -298,6 +318,36 @@ Science.Reports.getJournalArticleReportData = function(query){
     );
     return myFuture.wait();
 }
+
+Science.Reports.getArticleReportDataNew = function (query) {
+    var myFuture = new Future();
+    var allPublisher = Publishers.find().fetch();
+    PageViews.rawCollection().group(
+        {articleId: true},
+        query,
+        {},
+        function (doc, result) {
+            if (!result[doc.action])
+                result[doc.action] = 0;
+            result[doc.action]++;
+        },
+        Meteor.bindEnvironment( function (err, result) {
+            _.each(result, function (item) {
+                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
+                var x = {};
+                x.journal = article.journal.title;
+                x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).name;
+                x.title = article.title.en;
+                x.doi = article.doi;
+                x.issue = article.issue;
+                x.volume = article.volume;
+                _.extend(item, x);
+            })
+            return myFuture.return(result);
+        })
+    );
+    return myFuture.wait();
+};
 //-----------------------------数据范围------------------------------
 Science.Reports.getKeywordReportFields = function (monthRange) {
     var fields = [
@@ -320,9 +370,9 @@ Science.Reports.getKeywordReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                console.dir(doc);
-                console.dir(val);
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -366,7 +416,9 @@ Science.Reports.getJournalOverviewReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -410,7 +462,9 @@ Science.Reports.getJournalBrowseReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -454,7 +508,9 @@ Science.Reports.getJournalWatchReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -507,7 +563,9 @@ Science.Reports.getArticleFulltextReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -560,7 +618,9 @@ Science.Reports.getArticleAbstractReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -613,7 +673,9 @@ Science.Reports.getPDFDownloadReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -666,7 +728,9 @@ Science.Reports.getArticleFavouriteReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -719,7 +783,9 @@ Science.Reports.getArticleWatchReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -772,7 +838,9 @@ Science.Reports.getArticleRecommendReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -816,7 +884,9 @@ Science.Reports.getJournalAbstractReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -860,7 +930,9 @@ Science.Reports.getJournalFulltextReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -904,7 +976,9 @@ Science.Reports.getJournalDownloadReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -948,7 +1022,9 @@ Science.Reports.getJournalArticleFavouriteReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -992,7 +1068,9 @@ Science.Reports.getJournalArticleWatchReportFields = function (monthRange) {
             width: 8,
             type: 'number',
             transform: function (val, doc) {
-                if(val.months[item]===undefined)return 0;
+                if(!val)return 0;
+                if(!val.months)return 0;
+                if(!val.months[item])return 0;
                 return val.months[item];
             }
         })
@@ -1109,6 +1187,110 @@ Science.Reports.getJournalArticleFavouriteWatchReportFields = function (monthRan
             key: 'EISSN',
             title: 'EISSN',
             width: 12
+        },
+        {
+            key: 'favourite',
+            title: '收藏',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'watchArticle',
+            title: '关注',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'emailThis',
+            title: '个人推荐',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getArticleBrowseReportFields = function (monthRange) {
+    var fields = [
+        {
+            key: 'title',
+            title: '文章标题'
+        },
+        {
+            key: 'doi',
+            title: 'DOI',
+            width: 25
+        },
+        {
+            key: 'journal',
+            title: '期刊名称'
+        },
+        {
+            key: 'publisher',
+            title: '出版商',
+            width: 25
+        },
+        {
+            key: 'issue',
+            title: '期号',
+            width: 8
+        },
+        {
+            key: 'volume',
+            title: '卷号',
+            width: 8
+        },
+        {
+            key: 'fulltext',
+            title: '全文浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'abstract',
+            title: '摘要浏览',
+            width: 20,
+            type: 'number'
+        },
+        {
+            key: 'pdfDownload',
+            title: '全文下载',
+            width: 20,
+            type: 'number'
+        }
+    ];
+    return fields;
+};
+
+Science.Reports.getArticleFavouriteWatchReportFields = function (monthRange) {
+    var fields = [
+        {
+            key: 'title',
+            title: '文章标题'
+        },
+        {
+            key: 'doi',
+            title: 'DOI',
+            width: 25
+        },
+        {
+            key: 'journal',
+            title: '期刊名称'
+        },
+        {
+            key: 'publisher',
+            title: '出版商',
+            width: 25
+        },
+        {
+            key: 'issue',
+            title: '期号',
+            width: 8
+        },
+        {
+            key: 'volume',
+            title: '卷号',
+            width: 8
         },
         {
             key: 'favourite',

@@ -92,6 +92,12 @@ Router.route('downloadExcel', {
         }else if (reportType === "journalArticleFavourite") {
             fileName = "Journal_Article_Favourite_Watch_Recommend__Report";
             file = Science.Reports.getJournalArticleFavouriteWatchReportFile(query, fileName);
+        }else if (reportType === "articleBrowse") {
+            fileName = "Article_Browse_Download__Report";
+            file = Science.Reports.getArticleBrowseReportFile(query, fileName);
+        }else if (reportType === "articleFavourite") {
+            fileName = "Article_Favourite_Watch_Recommend__Report";
+            file = Science.Reports.getArticleFavouriteWatchReportFile(query, fileName);
         }else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
