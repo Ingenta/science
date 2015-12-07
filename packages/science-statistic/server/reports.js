@@ -202,9 +202,10 @@ Science.Reports.getRegionalData = function(query){
         },
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
-                var regional = getLocationByIP(item.ip);
-                console.dir(regional)
+                var regional = getLocationFromLocalDatabase(item.ip);
                 var x = {};
+                x.country = regional.country_chinese_name;
+                x.region = regional.region_chinese_name;
                 _.extend(item, x);
             })
             return myFuture.return(result);
