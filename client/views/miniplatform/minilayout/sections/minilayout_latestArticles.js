@@ -35,7 +35,7 @@ Template.addLatestArticlesModalForm.helpers({
 Template.updateLatestArticlesModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var publisher = Publishers.findOne({name : Config.miniplatformPublisherName});
+        var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
         if(publisher)
         var rec = NewsRecommend.find({_id:{$ne:this._id}}).fetch();
         var recId = _.pluck(rec,"ArticlesId");

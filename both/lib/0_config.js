@@ -126,7 +126,7 @@ Config = {
     otherPlatformRegisterUrl: {
         editors: "http://ees.scichina.com/user/registuser_scichina.action"
     },
-    miniplatformPublisherName:"China Science Publishing"
+    defaultPublisherShortName:"scp"
 };
 if (Meteor.isServer) {
     Config.defaultAdmin = {
