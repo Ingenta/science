@@ -46,24 +46,21 @@ advertisementPermissions
     });
 
 advertisementPermissions
-    .defineRole("platform-advertisement-manager", [
+    .defineRole("homepage-advertisement-manager", [
         "add-homepage-advertisement",
         "modify-homepage-advertisement",
-        "delete-homepage-advertisement",
-        "add-journal-advertisement",
-        "modify-journal-advertisement",
-        "delete-journal-advertisement"
+        "delete-homepage-advertisement"
     ], {
         en: {
-            name: "advertisement manager",
-            summary: "advertisement manager"
+            name: "homepage advertisement manager",
+            summary: "homepage advertisement manager"
         },
         cn: {
-            name: "平台广告编辑",
-            summary: "平台广告编辑"
+            name: "首页广告编辑",
+            summary: "首页广告编辑"
         },
         options: {
-            level: journalLevel
+            level: adminLevel
         }
     })
     .defineRole("publisher-advertisement-manager", [
@@ -81,6 +78,6 @@ advertisementPermissions
             summary: "期刊广告编辑"
         },
         options: {
-            level: adminLevel
+            level: journalLevel
         }
     });
