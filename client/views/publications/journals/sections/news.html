@@ -10,7 +10,7 @@
         <div class="tab-content col-xs-9">
             <div class="tab-pane active" id="a1"><div class="part"><strong>{{_ "News Center"}}</strong>
                 <div class="pull-right">
-                    {{#if permissionCheckWithScope "add-journal-news" "news" "journal" journalId}}
+                    {{#if permissionCheckWithScope "add-journal-news" "news" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsCenterModal"></span>{{> addNewsCenterModalForm}}
                     {{/if}}
                 </div>
@@ -19,14 +19,14 @@
             </div>
             <div class="tab-pane" id="b1"><div class="part"><strong>{{_ "Publishing Dynamic"}}</strong>
                 <div class="pull-right">
-                    {{#if permissionCheckWithScope "add-journal-news" "news" "journal" journalId}}
+                    {{#if permissionCheckWithScope "add-journal-news" "news" "journal" _id}}
                         <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addPublishingDynamicModal"></span>{{> addPublishingDynamicForm}}
                     {{/if}}
                 </div>
             </div><hr>
                 {{> pubDynamicList}}
             </div>
-            <div class="tab-pane" id="c1"><div class="part"><strong>{{_ "Meeting Information"}}</strong><div class="pull-right">{{#if permissionCheckWithScope "add-journal-news" "news" "journal" journalId}}{{> addMeetingInfoModalForm}}{{/if}}</div></div><hr>
+            <div class="tab-pane" id="c1"><div class="part"><strong>{{_ "Meeting Information"}}</strong><div class="pull-right">{{#if permissionCheckWithScope "add-journal-news" "news" "journal" _id}}{{> addMeetingInfoModalForm}}{{/if}}</div></div><hr>
                 {{> meetingInfoList}}
             </div>
         </div>
@@ -39,8 +39,8 @@
         <a href="{{whichUrl}}" target="_blank"><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
 
         <div class="pull-right">
-            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" journalId}}{{> updateNewsCenterModalForm}}{{/if}}
-            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" journalId}}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateNewsCenterModalForm}}{{/if}}
+            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
         <p>
@@ -58,8 +58,8 @@
         <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
 
         <div class="pull-right">
-            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" journalId}}{{> updatePublishingDynamicModalForm}}{{/if}}
-            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" journalId}}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
+            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
         <p>
@@ -77,8 +77,8 @@
         <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}&nbsp;：</strong></a>
 
         <div class="pull-right">
-            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" journalId}}{{> updateMeetingInfoModalForm}}{{/if}}
-            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" journalId}}<a href="#" class="fa fa-trash"></a>{{/if}}
+            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateMeetingInfoModalForm}}{{/if}}
+            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
         <p>
