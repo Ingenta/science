@@ -34,7 +34,7 @@ ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
         var article = Router.current().data && Router.current().data();
-        if (!article)return;
+        if (!article && !article.doi)return;
         if (slug === 'abstract') {
             Meteor.call("insertAudit", Meteor.userId(), "abstract", article.publisher, article.journalId, article._id, function (err, response) {
                 if (err) console.log(err);
