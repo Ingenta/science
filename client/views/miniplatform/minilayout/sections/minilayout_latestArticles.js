@@ -14,16 +14,6 @@ Template.layoutLatestArticles.helpers({
         var article = Articles.findOne({_id: Apid});
         if(article && article.published)
             return article.published && article.published.format("yyyy-MM-dd")
-    },
-    ArticleUrl: function (Arid) {
-        var article = Articles.findOne({_id: Arid});
-        if (article){
-            var publication = Publications.findOne({_id: article.journalId});
-            if(publication){
-                var publisher = Publishers.findOne({_id:publication.publisher});
-                return "/publisher/" +publisher.name+ "/journal/" + publication.shortTitle + "/" + article.volume + "/" + article.issue + "/" + article.doi;
-            }
-        }
     }
 });
 
