@@ -12,7 +12,15 @@ Package.onUse(function (api) {
         'nicolaslopezj:excel-export'
     ], both);
 
-    api.addFiles(['server/router.js','server/reports.js'], 'server');
+    api.addFiles(['server/router.js',
+        'server/reports.js',
+        'server/reports/article.js',
+        'server/reports/institution.js',
+        'server/reports/journal.js',
+        'server/reports/keyword.js',
+        'server/reports/region.js',
+        'server/reports/user.js'
+    ], 'server');
 
     api.addFiles([
         'client/view/statistic.html',
