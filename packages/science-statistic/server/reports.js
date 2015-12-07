@@ -205,6 +205,8 @@ Science.Reports.getRegionalData = function(query){
                 var regional = getLocationFromLocalDatabase(item.ip);
                 console.dir(regional)
                 var x = {};
+                x.country = regional.country_chinese_name;
+                x.region = regional.region_chinese_name;
                 _.extend(item, x);
             })
             return myFuture.return(result);
@@ -276,16 +278,3 @@ Science.Reports.getArticleReportDataNew = function (query) {
     return myFuture.wait();
 };
 //-----------------------------数据范围------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -21,11 +21,11 @@ Science.Reports.getRegionalArticleReportFile = function (query, fileName) {
 Science.Reports.getRegionalJournalReportFields = function () {
     var fields = [
         {
-            key: 'number',
+            key: 'country',
             title: '国别'
         },
         {
-            key: 'name',
+            key: 'region',
             title: '省区'
         },
         {
@@ -53,11 +53,11 @@ Science.Reports.getRegionalJournalReportFields = function () {
 Science.Reports.getRegionalArticleReportFields = function () {
     var fields = [
         {
-            key: 'number',
+            key: 'country',
             title: '国别'
         },
         {
-            key: 'name',
+            key: 'region',
             title: '省区'
         },
         {
