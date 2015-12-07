@@ -2,20 +2,16 @@
 Science.Reports.getInstitutionJournalReportFile = function (query, fileName) {
     var type =['journalOverview','journalBrowse','watchJournal'];
     query.action = {$in:type};
-    console.dir(query);
     var data = Science.Reports.getInstitutionActionData(query);
     var fields = Science.Reports.getInstitutionJournalReportFields();
-    console.dir(data);
     return Excel.export(fileName, fields, data);
 };
 //InstitutionArticle
 Science.Reports.getInstitutionArticleReportFile = function (query, fileName) {
     var type =['fulltext','abstract','pdfDownload','favourite','watchArticle','emailThis'];
     query.action = {$in:type};
-    console.dir(query);
     var data = Science.Reports.getInstitutionActionData(query);
     var fields = Science.Reports.getInstitutionArticleReportFields();
-    console.dir(data);
     return Excel.export(fileName, fields, data);
 };
 Science.Reports.getInstitutionJournalReportFields = function () {

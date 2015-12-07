@@ -1,8 +1,6 @@
 //keyword
 Science.Reports.getKeywordReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getKeywordReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getKeywordReportFields(monthRange);
     return Excel.export(fileName, fields, data);

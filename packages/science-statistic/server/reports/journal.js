@@ -1,26 +1,20 @@
 //overview
 Science.Reports.getJournalOverviewReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalOverviewReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //browse
 Science.Reports.getJournalBrowseReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalBrowseReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //watchJournal
 Science.Reports.getJournalWatchReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalWatchReportFields(monthRange);
     return Excel.export(fileName, fields, data);
@@ -28,54 +22,42 @@ Science.Reports.getJournalWatchReportFile = function (query, fileName, start, en
 
 //journalArticleAbstract
 Science.Reports.getJournalAbstractReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalAbstractReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //journalArticleFulltext
 Science.Reports.getJournalFulltextReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalFulltextReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //journalArticlePDFDownload
 Science.Reports.getJournalDownloadReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalDownloadReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //journalArticleFavourite
 Science.Reports.getJournalArticleFavouriteReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalArticleFavouriteReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //journalArticleWatch
 Science.Reports.getJournalArticleWatchReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalArticleWatchReportFields(monthRange);
     return Excel.export(fileName, fields, data);
 };
 //journalArticleEmailThis
 Science.Reports.getJournalArticleRecommendReportFile = function (query, fileName, start, end) {
-    console.dir(query);
     var data = Science.Reports.getJournalReportData(query);
-    console.dir(data);
     var monthRange = Science.Reports.getLastTwelveMonths(start, end);
     var fields = Science.Reports.getJournalArticleRecommendReportFields(monthRange);
     return Excel.export(fileName, fields, data);
@@ -84,20 +66,16 @@ Science.Reports.getJournalArticleRecommendReportFile = function (query, fileName
 Science.Reports.getJournalArticleBrowseReportFile = function (query, fileName) {
     var type =['fulltext','abstract','pdfDownload'];
     query.action = {$in:type};
-    console.dir(query);
     var data = Science.Reports.getJournalArticleReportDataNew(query);
     var fields = Science.Reports.getJournalArticleBrowseReportFields();
-    console.dir(data);
     return Excel.export(fileName, fields, data);
 };
 //journalSumArticleFavouriteWatch
 Science.Reports.getJournalArticleFavouriteWatchReportFile = function (query, fileName) {
     var type =['favourite','watchArticle','emailThis'];
     query.action = {$in:type};
-    console.dir(query);
     var data = Science.Reports.getJournalArticleReportDataNew(query);
     var fields = Science.Reports.getJournalArticleFavouriteWatchReportFields();
-    console.dir(data);
     return Excel.export(fileName, fields, data);
 };
 Science.Reports.getJournalOverviewReportFields = function (monthRange) {
