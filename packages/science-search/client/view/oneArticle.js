@@ -35,15 +35,15 @@ Template.oneSolrArticle.helpers({
 	class:function(){
 		//return "fa fa-language";
 	},
-	articleUrl:function(){
+	articleUrl:function(){//TODO: use helper
 		var journal = Publications.findOne({_id: this.journalId},{fields:{shortTitle:1,publisher:1}});
 		if (!journal)return;
-		var pub = Publishers.findOne({_id: journal.publisher},{fields:{name:1}});
+		var pub = Publishers.findOne({_id: journal.publisher},{fields:{shortname:1}});
 		if (!pub)return;
 		if(!this.volume) return;
 		if(!this.issue) return;
 		if(!this.doi) return;
-		return "/publisher/" + pub.name + "/journal/" + journal.shortTitle+"/"+this.volume + "/"+this.issue+"/"+this.doi;
+		return "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle+"/"+this.volume + "/"+this.issue+"/"+this.doi;
 	},
 	showAbstract:function(){
 		var hl = SolrQuery.session.get("highlight")[this._id];

@@ -16,7 +16,7 @@ getJournalComponentByJournalId = function (id) {
     if (!journal)return;
     var pub = Publishers.findOne({_id: journal.publisher});
     if (!pub)return;
-    return "/publisher/" + pub.name + "/journal/" + journal.shortTitle;
+    return "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
 }
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
