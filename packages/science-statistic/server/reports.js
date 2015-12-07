@@ -202,7 +202,7 @@ Science.Reports.getRegionalData = function(query){
         },
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
-                var regional = getLocationByIP(item.ip);
+                var regional = getLocationFromLocalDatabase(item.ip);
                 console.dir(regional)
                 var x = {};
                 _.extend(item, x);
