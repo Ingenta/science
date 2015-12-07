@@ -2,7 +2,7 @@ Template.saSelectorForColl.events({
 	'click button':function(e,t){
 		e.preventDefault();
 		var newOne = t.$("#saSelectorForCollection").select2('val');
-		var newest          = _.union(newOne, this.collInfo.articles);
+		var newest          = _.compact(_.union(newOne, this.collInfo.articles));
 		ArticleCollections.update({_id: Router.current().params.collId}, {$set: {articles: newest}});
 		Meteor.subscribe("oneArticleMeta",newOne)
 	}

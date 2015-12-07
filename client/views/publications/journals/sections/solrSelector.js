@@ -2,7 +2,7 @@ Template.saSelectorForST.events({
 	'click button':function(e,t){
 		e.preventDefault();
 		var newOne = t.$("#saSelectorForSTopic").select2('val');
-		var newest          = _.union(newOne, this.articles);
+		var newest          = _.compact(_.union(newOne, this.articles));
 		SpecialTopics.update({_id: this._id}, {$set: {articles: newest}});
 		Meteor.subscribe("oneArticleMeta",newOne)
 	}
