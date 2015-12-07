@@ -366,7 +366,7 @@ Science.Reports.getUserActionData = function(query){
                 var users = Users.findOne({_id: item.userId},{fields:{username:1,emails:1,profile:1,level:1}});
                 var x = {};
                 x.name = users.username;
-                x.emails = users.emails.address;
+                x.emails = users.emails[0].address;
                 x.institutionName = users.profile.institution;
                 if(users.level=="admin"){
                     x.userType = "超级管理员";
