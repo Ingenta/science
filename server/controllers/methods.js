@@ -6,7 +6,7 @@ Meteor.methods({
         return createMostReadList(journalId, limit);
     },
     'totalConnections': function () {
-        return UserStatus.connections.find().count();
+        return UserStatus.connections.find({userAgent:{$exists:true}}).count();
     },
     'totalArticles': function () {
         return Articles.find().count();
