@@ -1,6 +1,6 @@
 Template.miniLayout.helpers({
     collectionsLink: function () {
-        var publisher = Publishers.findOne({agree:true});
+        var publisher = Publishers.findOne({name: Config.miniplatformPublisherName});
         if(publisher){
             Session.set("activeTab", "collections");
             return "/publisher/" + publisher.name;

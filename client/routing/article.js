@@ -1,6 +1,6 @@
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue/:publisherDoi/:articleDoi', {
     data: function () {
-        var pub = Publishers.findOne({name: this.params.publisherName});
+        var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
         Session.set("activeTab", "full text");
         if (pub) {

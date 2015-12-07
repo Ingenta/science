@@ -279,16 +279,3 @@ Science.Reports.getArticleReportDataNew = function (query) {
     return myFuture.wait();
 };
 //-----------------------------数据范围------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-

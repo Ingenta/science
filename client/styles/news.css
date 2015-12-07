@@ -1,0 +1,7 @@
+#news-slick {
+    margin-bottom:0px
+}
+
+#news-slick>ul.slick-dots {
+    bottom:0px;
+}

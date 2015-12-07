@@ -5,7 +5,7 @@ Template.collections.helpers({
 });
 
 Template.addCollectionForm.helpers({
-	getpublishers:function(){
+	getpublishers:function(){//TODO: figure out what this does if anything
 		var iscn=TAPi18n.getLanguage()==='zh-CN';
 		var pubs = Publishers.find({},{chinesename:1,name:1}).fetch();
 		var result = [];

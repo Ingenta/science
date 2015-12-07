@@ -3,7 +3,7 @@
     <hr>
     <div class="row">
         <div class="col-xs-6">
-            {{> recommendArticles journalId=getJournalIdFromSession}}
+            {{> editorRecommendedArticles journalId=getJournalIdFromSession}}
         </div>
         <div class="col-xs-6">
             <div class="row">
@@ -86,7 +86,7 @@
     {{/each}}
 </template>
 
-<template name="recommendArticles">
+<template name="editorRecommendedArticles">
     <div>
         <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
         {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
@@ -94,7 +94,7 @@
             {{> addRecommendModalForm}}
         {{/if}}
     </div>
-    {{#each editorRecommendedArticles}}
+    {{#each editorRecommendedArticle}}
         <div class="row">
             <div class="col-xs-3">
                 <a href="{{urlToArticleById ArticlesId}}"><img src="{{getImageHelper behalfPicture}}" width="75" height="79"/></a>

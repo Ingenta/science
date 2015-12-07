@@ -9,6 +9,10 @@ PublishersSchema = new SimpleSchema({
         type: String,
         unique: true
     },
+    shortname: {
+        type: String,
+        unique: true
+    },
     website: {
         type: String,
         optional: true,
@@ -39,10 +43,6 @@ PublishersSchema = new SimpleSchema({
             }
         },
         label: 'Choose file'
-    },
-    agree: {
-        type: Boolean,
-        defaultValue: false
     }
 });
 Meteor.startup(function () {
