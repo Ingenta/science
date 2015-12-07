@@ -9,6 +9,9 @@ PublishersSchema = new SimpleSchema({
         type: String,
         unique: true
     },
+    shortname: {
+        type: String
+    },
     website: {
         type: String,
         optional: true,

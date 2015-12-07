@@ -56,14 +56,15 @@ Template.TagList.helpers({
     }
 });
 
-Template.recommendArticles.helpers({
-    editorRecommendedArticles: function () {
+Template.editorRecommendedArticles.helpers({
+    editorRecommendedArticle: function () {
         var journalId = Session.get('currentJournalId');
         return EditorsRecommend.find({publications: journalId},{sort: {createDate: -1}, limit: 5});
     },
-    titles: function (Aid) {
+    titles: function (articleId) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var article = Articles.findOne({_id: Aid});
+        var article = Articles.findOne({_id: articleId});
+        if(!article)return;
         var title = iscn ? article.title.cn : article.title.en;
         return title;
     },
@@ -73,7 +74,7 @@ Template.recommendArticles.helpers({
     }
 });
 
-Template.recommendArticles.events({
+Template.editorRecommendedArticles.events({
     'click .fa-trash': function (e) {
         var id = this._id;
         confirmDelete(e, function () {
