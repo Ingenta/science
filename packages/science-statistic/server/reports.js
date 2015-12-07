@@ -203,6 +203,7 @@ Science.Reports.getRegionalData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var regional = getLocationFromLocalDatabase(item.ip);
+                console.dir(regional)
                 var x = {};
                 x.country = regional.country_chinese_name;
                 x.region = regional.region_chinese_name;
@@ -277,16 +278,3 @@ Science.Reports.getArticleReportDataNew = function (query) {
     return myFuture.wait();
 };
 //-----------------------------数据范围------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
