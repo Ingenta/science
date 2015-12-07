@@ -150,7 +150,7 @@ Science.Reports.getUserActionData = function(query){
 Science.Reports.getInstitutionActionData = function(query){
     var myFuture = new Future();
     PageViews.rawCollection().group(
-        {institutionId: true},
+        {institutionId:true},
         query,
         {},
         function (doc, result) {
@@ -203,10 +203,12 @@ Science.Reports.getRegionalData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var regional = getLocationFromLocalDatabase(item.ip);
-                var x = {};
-                x.country = regional.country_chinese_name;
-                x.region = regional.region_chinese_name;
-                _.extend(item, x);
+                if(regional){
+                    var x = {};
+                    x.country = regional.country_chinese_name;
+                    x.region = regional.region_chinese_name;
+                    _.extend(item, x);
+                }
             })
             return myFuture.return(result);
         })
