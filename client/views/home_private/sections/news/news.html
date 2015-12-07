@@ -1,21 +1,13 @@
 <template name="NewsList">
     <div class="row">
         <div class="col-xs-6">
-            <div id="myCarousel" class="carousel slide">
-                <!-- 轮播（Carousel）指标 -->
-                <ol class="carousel-indicators">
-                    {{#each news "extend"}}
-                        <li data-target="#myCarousel" data-slide-to="{{index}}" class="{{class}}"></li>
-                    {{/each}}
-                </ol>
+            <div id="news-slick">
                 <!-- 轮播（Carousel）项目 -->
-                <div class="carousel-inner">
-                    {{#each news "extend"}}
-                        <div class="item {{class}}">
-                            <img src="{{getImageHelper picture}}" style="width: 340px;height: 240px"/>
-                        </div>
-                    {{/each}}
-                </div>
+                {{#each news}}
+                    <div>
+                        <img src="{{getImageHelper picture}}" style="width:100%;height:auto"/>
+                    </div>
+                {{/each}}
             </div>
         </div>
         <div class="col-xs-6">
@@ -43,7 +35,7 @@
 </template>
 
 <template name="SingleNews">
-    <div class="row index index-num" index="{{index}}">
+    <div class="row index index-num">
         <div class="pull-right">
             {{#if can "edit-homepage-news" "news" }}
                 {{> updateNewsModalForm}}

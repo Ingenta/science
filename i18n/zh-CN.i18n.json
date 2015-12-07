@@ -497,7 +497,7 @@
         "label": "出版商中文名字",
         "placeholder": "中国科学出版社"
       },
-      "urlname": {
+      "shortname": {
         "label": "简称",
         "placeholder": "SCP"
       },
