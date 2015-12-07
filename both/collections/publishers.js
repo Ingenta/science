@@ -39,10 +39,6 @@ PublishersSchema = new SimpleSchema({
             }
         },
         label: 'Choose file'
-    },
-    agree: {
-        type: Boolean,
-        defaultValue: false
     }
 });
 Meteor.startup(function () {
