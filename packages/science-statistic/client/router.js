@@ -7,11 +7,6 @@ Router.route("/statistic/", {
     },
     title: function () {
         return TAPi18n.__("Statistical Management");
-    },
-    waitOn: function () {
-        return [
-            Meteor.subscribe('institutions'),
-        ]
     }
 });
 Router.route("/reports/", {

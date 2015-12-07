@@ -304,12 +304,14 @@ Science.Reports.getJournalReportData = function (query) {
         function (err, result) {
             _.each(result, function (item) {
                 var journal = _.findWhere(allJournals, {_id: item.journalId})
-                var x = {};
-                x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
-                x.title = journal.title;
-                x.issn = journal.issn;
-                x.EISSN = journal.EISSN;
-                _.extend(item, x);
+                if(journal){
+                    var x = {};
+                    x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
+                    x.title = journal.title;
+                    x.issn = journal.issn;
+                    x.EISSN = journal.EISSN;
+                    _.extend(item, x);
+                }
             })
             return myFuture.return(result);
         }
@@ -335,14 +337,16 @@ Science.Reports.getArticleReportData = function (query) {
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
-                var x = {};
-                x.journal = article.journal.title;
-                x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).name;
-                x.title = article.title.en;
-                x.doi = article.doi;
-                x.issue = article.issue;
-                x.volume = article.volume;
-                _.extend(item, x);
+                if(article){
+                    var x = {};
+                    x.journal = article.journal.title;
+                    x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).name;
+                    x.title = article.title.en;
+                    x.doi = article.doi;
+                    x.issue = article.issue;
+                    x.volume = article.volume;
+                    _.extend(item, x);
+                }
             })
             return myFuture.return(result);
         })
@@ -364,20 +368,22 @@ Science.Reports.getUserActionData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var users = Users.findOne({_id: item.userId},{fields:{username:1,emails:1,profile:1,level:1}});
-                var x = {};
-                x.name = users.username;
-                x.emails = users.emails.address;
-                x.institutionName = users.profile.institution;
-                if(users.level=="admin"){
-                    x.userType = "超级管理员";
-                }else if(users.level=="publisher"){
-                    x.userType = "出版商用户";
-                }else if(users.level=="institution"){
-                    x.userType = "机构用户";
-                }else{
-                    x.userType = "普通用户";
+                if(users){
+                    var x = {};
+                    x.name = users.username;
+                    x.emails = users.emails[0].address;
+                    x.institutionName = users.profile.institution;
+                    if(users.level=="admin"){
+                        x.userType = "超级管理员";
+                    }else if(users.level=="publisher"){
+                        x.userType = "出版商用户";
+                    }else if(users.level=="institution"){
+                        x.userType = "机构用户";
+                    }else{
+                        x.userType = "普通用户";
+                    }
+                    _.extend(item, x);
                 }
-                _.extend(item, x);
             })
             return myFuture.return(result);
         })
@@ -399,25 +405,27 @@ Science.Reports.getInstitutionActionData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var institution = Institutions.findOne({_id: item.institutionId},{fields:{name:1,number:1,type:1}});
-                var x = {};
-                x.name = institution.name.cn;
-                x.number = institution.number;
-                if(institution.type=="1"){
-                    x.type = "图书馆";
-                }else if(institution.type=="2"){
-                    x.type = "出版商";
-                }else if(institution.type=="3"){
-                    x.type = "编辑部";
-                }else if(institution.type=="4"){
-                    x.type = "大学";
-                }else if(institution.type=="5"){
-                    x.type = "研究机构";
-                }else if(institution.type=="6"){
-                    x.type = "其他";
-                }else{
-                    x.type = "";
+                if(institution){
+                    var x = {};
+                    x.name = institution.name.cn;
+                    x.number = institution.number;
+                    if(institution.type=="1"){
+                        x.type = "图书馆";
+                    }else if(institution.type=="2"){
+                        x.type = "出版商";
+                    }else if(institution.type=="3"){
+                        x.type = "编辑部";
+                    }else if(institution.type=="4"){
+                        x.type = "大学";
+                    }else if(institution.type=="5"){
+                        x.type = "研究机构";
+                    }else if(institution.type=="6"){
+                        x.type = "其他";
+                    }else{
+                        x.type = "";
+                    }
+                    _.extend(item, x);
                 }
-                _.extend(item, x);
             })
             return myFuture.return(result);
         })
@@ -441,7 +449,6 @@ Science.Reports.getRegionalData = function(query){
                 var regional = getLocationByIP(item.ip);
                 console.dir(regional)
                 var x = {};
-                //x.title = "";
                 _.extend(item, x);
             })
             return myFuture.return(result);
@@ -465,13 +472,15 @@ Science.Reports.getJournalArticleReportDataNew = function(query){
         },
         function (err, result) {
             _.each(result, function (item) {
-                var journal = _.findWhere(allJournals, {_id: item.journalId})
-                var x = {};
-                x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
-                x.title = journal.title;
-                x.issn = journal.issn;
-                x.EISSN = journal.EISSN;
-                _.extend(item, x);
+                var journal = _.findWhere(allJournals, {_id: item.journalId});
+                if(journal){
+                    var x = {};
+                    x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).name;
+                    x.title = journal.title;
+                    x.issn = journal.issn;
+                    x.EISSN = journal.EISSN;
+                    _.extend(item, x);
+                }
             })
             return myFuture.return(result);
         }
@@ -494,14 +503,16 @@ Science.Reports.getArticleReportDataNew = function (query) {
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
-                var x = {};
-                x.journal = article.journal.title;
-                x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).name;
-                x.title = article.title.en;
-                x.doi = article.doi;
-                x.issue = article.issue;
-                x.volume = article.volume;
-                _.extend(item, x);
+                if(article){
+                    var x = {};
+                    x.journal = article.journal.title;
+                    x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).name;
+                    x.title = article.title.en;
+                    x.doi = article.doi;
+                    x.issue = article.issue;
+                    x.volume = article.volume;
+                    _.extend(item, x);
+                }
             })
             return myFuture.return(result);
         })
