@@ -102,5 +102,15 @@ OrbitPermissionsHelpers = {
 	},
 	ucfirst: function(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
+	},
+	mergeRanges: function(){
+		return _.reduce(arguments,function(memo,obj){
+			_.each(obj,function(val,key) {
+				val = _.isArray(val)?val:(val?[val]:[]);
+				if (!_.isEmpty(val))
+					memo[key] = memo[key] ? _.union(val, memo[key]) : val;
+			})
+			return memo;
+		},{})
 	}
 };
