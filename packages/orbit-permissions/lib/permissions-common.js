@@ -499,10 +499,18 @@ OrbitPermissions = {
 		var filterUserRoles = [];
 		_.each(userRoles, function (ur) {
 			var urkey = _.isObject(ur) ? ur.role : ur;
-			if (_.find(definedRoles, function (dr) {
+			var dr = _.find(definedRoles, function (dr) {
 					return dr.role === urkey;
-				}))
+				})
+			if(dr){
+				if(_.isFunction(dr.description.options.subScope)){
+					var subscope = dr.description.options.subScope.call(ur);
+					if(!_.isEmpty(subscope)){
+						ur.scope = helpers.mergeRanges(ur.scope,subscope);
+					}
+				}
 				filterUserRoles.push(ur);
+			}
 		})
 		return _.reduce(_.pluck(filterUserRoles, 'scope'), function (memo, obj) {
 			_.each(obj, function (val, key) {
