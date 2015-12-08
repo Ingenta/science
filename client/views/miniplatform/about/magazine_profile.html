@@ -1,7 +1,7 @@
 <template name="magazineProfile">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            {{> pageElement key="magazineProfile"}}
+            {{> pageElement key="magazineProfile" isMiniPlatform=true}}
             <div class="row">
                 {{#if can  "add-news-contact" "resource"}}
                 <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMagazineProfileModal"></span>{{> addMagazineProfileModalForm}}

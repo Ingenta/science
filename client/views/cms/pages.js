@@ -1,5 +1,5 @@
 Template.pageElement.helpers({
-    setHomePageElement: function (key) {
+    setPageElement: function (key) {
         var element = PageHeadings.findOne({key: key});
         if (!element) {
             return
@@ -23,15 +23,12 @@ Template.pageElement.helpers({
         if (TAPi18n.getLanguage() === "zh-CN")
             return element.description.cn;
         return element.description.en;
-    },
-    isHomePage: function (key) {
-        return "homepage" == key;
     }
 });
 
-Template.updateHomePagesModalForm.helpers({
+Template.updatePageElementWithoutTitleModalForm.helpers({
     getPageId: function (key) {
-        var key = Session.get("thisPageElement")
+        var key = Session.get("thisPageElement");
         var element = PageHeadings.findOne({key: key});
         if (!element) {
             return
@@ -40,9 +37,9 @@ Template.updateHomePagesModalForm.helpers({
     }
 });
 
-Template.updatePagesModalForm.helpers({
+Template.updatePageElementWithTitleModalForm.helpers({
     getPageId: function (key) {
-        var key = Session.get("thisPageElement")
+        var key = Session.get("thisPageElement");
         var element = PageHeadings.findOne({key: key});
         if (!element) {
             return

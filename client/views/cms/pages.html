@@ -1,37 +1,41 @@
 <template name="pageElement">
     <div class="row">
-        {{#if isHomePage key}}
-            {{setHomePageElement key}}
-        {{/if}}
-        {{#unless isHomePage key}}
+        {{#if withoutTitle}}
+            {{setPageElement key}}
+            {{#if can "edit-page-description" "platform"}}
+                <div class="pull-right">
+                    {{> updatePageElementWithoutTitleModalForm}}
+                </div>
+            {{/if}}
+        {{else}}
             <h2>{{getPageTitle key}}</h2>
-        {{/unless}}
-        {{#if isHomePage key}}
-            {{#if can "edit-page-description" "platform"}}
+            {{#if isMiniPlatform}}
+                {{#if miniPlatformPermission}}
                 <div class="pull-right">
-                    {{> updateHomePagesModalForm}}
+                    {{> updatePageElementWithTitleModalForm}}
                 </div>
+            {{/if}}
+            {{else}}
+                {{#if can "edit-page-description" "platform"}}
+                    <div class="pull-right">
+                        {{> updatePageElementWithTitleModalForm}}
+                    </div>
+                {{/if}}
             {{/if}}
         {{/if}}
-        {{#unless isHomePage key}}
-            {{#if can "edit-page-description" "platform"}}
-                <div class="pull-right">
-                    {{> updatePagesModalForm}}
-                </div>
-            {{/if}}
-        {{/unless}}
+
     </div>
     <div class="row">
         <p>{{{getPageDescription key}}}</p>
     </div>
 </template>
 
-<template name="updateHomePagesModalForm">
+<template name="updatePageElementWithoutTitleModalForm">
     {{#afModal class="fa fa-pencil" collection="PageHeadings" operation="update" doc=getPageId prompt=getPrompt buttonContent=getUpdateButtonContent omitFields="key,title"}}
     {{/afModal}}
 </template>
 
-<template name="updatePagesModalForm">
+<template name="updatePageElementWithTitleModalForm">
     {{#afModal class="fa fa-pencil" collection="PageHeadings" operation="update" doc=getPageId prompt=getPrompt buttonContent=getUpdateButtonContent omitFields="key"}}
     {{/afModal}}
 </template>
