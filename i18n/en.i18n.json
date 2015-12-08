@@ -347,8 +347,8 @@
                 "label": "Chinese Publisher Name",
                 "placeholder": "中国科学出版社"
             },
-            "urlname": {
-                "label": "Abbreviation",
+            "shortname": {
+                "label": "Abbreviated Publisher Name",
                 "placeholder": "SCP"
             },
             "website": {
@@ -357,9 +357,6 @@
             },
             "picture": {
                 "label": "Choose file"
-            },
-            "agree": {
-                "label": "Whether the link to 'Science China Press' news platform?"
             }
         },
         "topics": {

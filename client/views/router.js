@@ -61,7 +61,7 @@ Router.map(function () {
 
     this.route('/publisher/:publisherName', {
         data: function () {
-            var pub = Publishers.findOne({name: this.params.publisherName});
+            var pub = Publishers.findOne({shortname: this.params.publisherName});
             if (pub) {
                 Session.set('currentPublisherId', pub._id);
                 Session.set('filterPublisher', pub._id);

@@ -497,7 +497,7 @@
         "label": "出版商中文名字",
         "placeholder": "中国科学出版社"
       },
-      "urlname": {
+      "shortname": {
         "label": "简称",
         "placeholder": "SCP"
       },
@@ -507,9 +507,6 @@
       },
       "picture": {
         "label": "选择图片"
-      },
-      "agree": {
-        "label": "是否链接到《中国科学》杂志社新闻平台?"
       }
     },
     "topics": {

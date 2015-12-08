@@ -1,4 +1,4 @@
-urlToArticleByArticleById = function(articleId){
+urlToArticleByArticleById = function (articleId) {
     if (!articleId)return;
     return urlToArticleByArticleObject(Articles.findOne({_id: articleId}));
 }
@@ -12,22 +12,22 @@ var getJournalComponentByArticle = function (article) {
     return getJournalComponentByJournalId(article.journalId);
 }
 getJournalComponentByJournalId = function (id) {
-    var journal = Publications.findOne({_id: id});
+    var journal = Publications.findOne({_id: id}, {fields: {shortTitle: 1, publisher: 1}});
     if (!journal)return;
-    var pub = Publishers.findOne({_id: journal.publisher});
+    var pub = Publishers.findOne({_id: journal.publisher}, {fields: {shortname: 1}});
     if (!pub)return;
-    return "/publisher/" + pub.name + "/journal/" + journal.shortTitle;
+    return "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
 }
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
-    //commented out to aboid subscribing to all issues, because currently issue name are not editable this will not affect anything
+    //commented out to avoid subscribing to all issues, because currently issue name are not editable this will not affect anything
     //var issue = Issues.findOne({_id: article.issueId});
     //if(!issue)return;
     return "/" + article.volume + "/" + article.issue;
 }
 
 journalIdToName = function (id) {
-    var journal = Publications.findOne({_id: id});
+    var journal = Publications.findOne({_id: id}, {fields: {titleCn: 1, title: 1}});
     return journal && (TAPi18n.getLanguage() === "zh-CN" ? journal.titleCn : journal.title);
 }
 
@@ -125,7 +125,7 @@ Template.registerHelper('miniPlatformPermission', function () {
     return Permissions.userCan("manage-news-platform", "platform", Meteor.userId(), {publisher: Science.defaultPublisherId});
 });
 
-Template.registerHelper('collectionPermissionCheck', function(permissions, publisherId, journalId){
+Template.registerHelper('collectionPermissionCheck', function (permissions, publisherId, journalId) {
     permissions = permissions.split(',');
     if (!publisherId) {
         return Permissions.userCan("add-publisher-collection", 'collections');

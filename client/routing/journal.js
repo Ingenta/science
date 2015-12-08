@@ -1,6 +1,6 @@
 Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     data: function () {
-        var pub = Publishers.findOne({name: this.params.publisherName});
+        var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
         //if (!Session.get("activeTab"))
         //    Session.set("activeTab", this.params.query.activeTab || "Browse");
@@ -68,7 +68,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue', {
     data: function () {
-        var pub = Publishers.findOne({name: this.params.publisherName});
+        var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
         Session.set("activeTab", "Browse");
         if (journal) {
@@ -100,7 +100,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/:guideId', {
     data: function () {
-        var pub = Publishers.findOne({name: this.params.publisherName});
+        var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
         if (journal) {
             Session.set('currentJournalId', journal._id);

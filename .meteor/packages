@@ -103,7 +103,6 @@ spacebars-compiler
 netanelgilad:excel
 jackjiang:editable-template
 classcraft:meteor-wkhtmltopdf
-richsilv:owl-carousel
-udondan:slick
 meteorhacks:subs-manager
 aldeed:autoform-select2
+timbrandin:slick

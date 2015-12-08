@@ -109,7 +109,6 @@ Config = {
         + "Downloaded to IP: {ip} On: {time} {url}"
     },
     rootUrl: Meteor.absoluteUrl(),
-    mainPublish: "hSsscs85HXuu2qTfJ",
     searchKeywordFrequency: 3000,
     sysAdmin: "admin",
     parser: {
@@ -125,7 +124,8 @@ Config = {
     },
     otherPlatformRegisterUrl: {
         editors: "http://ees.scichina.com/user/registuser_scichina.action"
-    }
+    },
+    defaultPublisherShortName:"scp"
 };
 if (Meteor.isServer) {
     Config.defaultAdmin = {

@@ -10,7 +10,7 @@ Meteor.publish('myFavouriteArticles', function () {
                 fields: articleWithMetadata
             }),
             Publishers.find({}, {
-                fields: {name: 1}
+                fields: {shortname: 1}
             }),
             Publications.find({}, {
                 fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
@@ -35,7 +35,7 @@ Meteor.publish('myWatchedArticles', function () {
                 fields: articleWithMetadata
             }),
             Publishers.find({}, {
-                fields: {name: 1}
+                fields: {shortname: 1}
             }),
             Publications.find({}, {
                 fields: {publisher: 1, shortTitle: 1}
