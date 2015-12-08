@@ -44,7 +44,7 @@ platformPermissions
         }
     });
 
-resourcePermissions
+platformPermissions
 	.defineRole("news-platform-manager", ["manage-news-platform"], {
 		en: {
 			name: "news platform manager",

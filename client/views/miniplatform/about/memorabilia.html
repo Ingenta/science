@@ -3,7 +3,7 @@
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="memorabilia" isMiniPlatform=true}}
             <div class="row">
-                {{#if can  "add-news-contact" "resource"}}
+                {{#if miniPlatformPermission}}
                 <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMemorabiliaModal"></span>{{> addMemorabiliaModalForm}}
                 {{/if}}
             </div>
@@ -17,8 +17,8 @@
     {{#each memorabilias}}
         <div class="partContent">
             <div align="center"><span style="font-size:24px;">{{title}}</span>
-                {{#if can  "modify-news-contact" "resource"}}{{> updateMemorabiliaModalForm}}{{/if}}
-                {{#if can  "delete-news-contact" "resource"}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}</div><br>
+                {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
+                {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{content}}}</p>
         </div>
     {{else}}

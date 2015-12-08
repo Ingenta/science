@@ -8,7 +8,7 @@
             {{#each cultureDetails}}
                 <div class="partContent">
                     <div align="center"><span style="font-size:21px;">{{title}}</span>
-                        {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}</div><br>
+                        {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}</div><br>
                     <p>{{{content}}}</p>
                 </div>
             {{else}}
