@@ -286,10 +286,18 @@ Router.map(function () {
             this.next();
         },
         data: function() {
-            return {
+            var result =  {
                 params: this.params || {},
                 currUser: Users.findOne({_id:this.params.userId}, {})
             };
+            var urs = Permissions.getUserRoles();
+            var publisherManagerOne = _.find(urs,function(ur){
+                return ur.role == 'publisher:publisher-manager-from-user';
+            })
+            if(publisherManagerOne && publisherManagerOne.scope){
+                result.publisherScope = publisherManagerOne.scope.publisher;
+            }
+            return result;
         }
     });
 

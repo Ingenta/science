@@ -105,8 +105,9 @@ Template.AdminUsersViewTableItems.helpers({
 		}
 		return Permissions.getRoleDescByCode(code).name;
 	},
-	"scope":function(){
-		return Router.current().data().scope;
+	"canModify":function(){
+		return Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope)
+				&& (this._id !== Meteor.userId()) //用户不可以在用户管理页中修改自己的信息
 	}
 });
 

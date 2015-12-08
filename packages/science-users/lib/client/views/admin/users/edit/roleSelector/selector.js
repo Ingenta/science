@@ -1,3 +1,4 @@
+var pageSession = new ReactiveDict();
 
 Template.singleRoleForDelegate.helpers({
 
@@ -27,15 +28,40 @@ Template.singleRoleForDelegate.events({
 	}
 })
 
+Template.publisherForDelegate.events({
+    'change .delegate-publisher':function(e,t){
+	    pageSession.set(this.code.replace(':','-'),Template.instance().$(e.target).select2('val'));
+
+    }
+})
+
 Template.publisherForDelegate.helpers({
 	"publishers": function () {
-		return Publishers.find();
+		var query = {};
+		if(!_.isEmpty(Router.current().data().publisherScope)){
+			query._id = {$in:Router.current().data().publisherScope}
+		}
+		return Publishers.find(query);
 	}
 })
 
 Template.journalForDelegate.helpers({
 	"journals": function(){
-		return Publications.find();
+		var corsor,journalIdArrs;
+		var publisherId = pageSession.get(this.code.replace(':','-')) || Router.current().data().publisherScope;
+		if(!_.isEmpty(publisherId))
+			corsor = Publications.find({publisher:{$in:publisherId}});
+		if(Template.instance().view.isRendered && Template.instance().$('.delegate-journal').data('select2')){
+			var selected = Template.instance().$('.delegate-journal').select2('val');
+			if(!_.isEmpty(selected)){
+				journalIdArrs = corsor?_.pluck(corsor.fetch(),"_id"):[];
+				var intSec = _.intersection(journalIdArrs,selected);
+				if(intSec.length<selected.length){
+					Template.instance().$('.delegate-journal').val(intSec).trigger('change')
+				}
+			}
+		}
+		return corsor;
 	}
 })
 
@@ -50,26 +76,22 @@ Template.publisherForDelegate.onRendered(function () {
 		placeholder: "请选择出版商"
 	});
 	var data = Template.currentData();
-	if (_.isEmpty(data.userRoles)) {
-		p.val(null).trigger('change');
-		return;
-	}
+	var ur;
+	if (!_.isEmpty(data.userRoles)) {
+		var match = _.find(data.userRoles, function (role) {
+			return role === data.code || role.role === data.code;
+		})
 
-	var match = _.find(data.userRoles, function (role) {
-		return role === data.code || role.role === data.code;
-	})
-	if (!match) {
-		p.val(null).trigger('change');
-		return;
-	};
-	if(typeof match ==='string'){
-		p.val([match]).trigger('change');
-		return;
+		if (!match) {
+			ur=null;
+		}else if(typeof match ==='string'){
+			ur=[match]
+		}else{
+			ur = match.scope.publisher || null;
+		}
 	}
-
-	var ur = match.scope.publisher || null;
 	p.val(ur).trigger('change');
-	return;
+	pageSession.set(data.code.replace(':','-'),ur)
 })
 
 Template.journalForDelegate.onRendered(function () {
