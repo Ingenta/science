@@ -1,10 +1,10 @@
 <template name="cooperation">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            {{> pageElement key="cooperation"}}
+            {{> pageElement key="cooperation" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
                 <h4>《中国科学》杂志社和以下机构达成了战略合作：
-                    {{#if can  "add-news-link" "resource"}}
+                    {{#if miniPlatformPermission}}
                         <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsLinkModal"></span>{{> addNewsLinkModalForm}}
                     {{/if}}
                 </h4><hr>
@@ -18,8 +18,8 @@
     {{#each cooperationLists}}
         <div class="col-xs-4" style="height: 80px">
             <a href="{{link}}" target="_blank" title="{{remark}}"><img src="{{getImageHelper picture}}" height="60" width="235"></a>
-            {{#if can  "modify-news-link" "resource"}}{{> updateNewsLinkModalForm}}{{/if}}
-            {{#if can  "delete-news-link" "resource"}}<a href="#" id="coopDel" class="fa fa-trash"></a>{{/if}}
+            {{#if miniPlatformPermission}}{{> updateNewsLinkModalForm}}{{/if}}
+            {{#if miniPlatformPermission}}<a href="#" id="coopDel" class="fa fa-trash"></a>{{/if}}
         </div>
     {{else}}
         {{_ "No results found!"}}

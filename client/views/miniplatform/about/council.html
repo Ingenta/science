@@ -1,9 +1,9 @@
 <template name="council">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            {{> pageElement key="council"}}
+            {{> pageElement key="council" isMiniPlatform=true}}
             <div class="row">
-                {{#if can  "add-news-contact" "resource"}}
+                {{#if miniPlatformPermission}}
                 <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addCouncilModal"></span>{{> addCouncilModalForm}}
                 {{/if}}
             </div>
@@ -17,8 +17,8 @@
     {{#each councils}}
         <div class="partContent">
             <div align="center"><span style="font-size:24px;">{{title}}</span>
-                {{#if can  "modify-news-contact" "resource"}}{{> updateCouncilModalForm}}{{/if}}
-                {{#if can  "delete-news-contact" "resource"}}<a href="#" id="couDel" class="fa fa-trash"></a>{{/if}}</div><br>
+                {{#if miniPlatformPermission}}{{> updateCouncilModalForm}}{{/if}}
+                {{#if miniPlatformPermission}}<a href="#" id="couDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{content}}}</p>
         </div>
     {{else}}

@@ -3,7 +3,7 @@
         <div class="mainTitle">
             <p class="fl w300">
                 <span class="mr20">最新出版文章</span>
-                {{#if can "add-journalAC" "resource" }}
+                {{#if miniPlatformPermission}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addLatestArticlesModal"></span>{{> addLatestArticlesModalForm}}
                 {{/if}}
             </p>
@@ -19,8 +19,8 @@
                         <p class="col777">{{publishDate ArticlesId}}</p>
                     </div>
                     <p class="tr">
-                        {{#if can "modify-recommend" "resource"  }}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
-                        {{#if can "delete-recommend" "resource"  }}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
+                        {{#if miniPlatformPermission}}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
+                        {{#if miniPlatformPermission}}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
                     </p>
                 </div>
             </div>

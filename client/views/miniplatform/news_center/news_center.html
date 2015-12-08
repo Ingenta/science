@@ -1,14 +1,14 @@
 <template name="newsCenter">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            {{> pageElement key="newsCenter"}}
+            {{> pageElement key="newsCenter" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
                 {{#each recruitInfo}}
                     <strong><a style="font-size: 16px;color: red" href="{{whichUrl}}" target="_blank">{{title}}</a></strong>
-                    {{#if can  "modify-news-center" "resource"}}{{> updateRecruitmentModalForm}}{{/if}}
-                    {{#if can  "delete-news-center" "resource"}}<a href="#" id="recruitDel" class="fa fa-trash"></a>{{/if}}
+                    {{#if miniPlatformPermission}}{{> updateRecruitmentModalForm}}{{/if}}
+                    {{#if miniPlatformPermission}}<a href="#" id="recruitDel" class="fa fa-trash"></a>{{/if}}
                 {{/each}}
-                {{#if can "add-news-center" "resource"}}
+                {{#if miniPlatformPermission}}
                     <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecruitmentModal"></span>{{> addRecruitmentModalForm}}
                 {{/if}}<hr>
             </div>
@@ -21,7 +21,7 @@
                 <div role="tabpanel" class="tab-pane active" id="newsBtn" style="margin-left: 20px">
                     <strong style="font-size: 18px">新闻</strong>
                     <div class="pull-right">
-                        {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}
+                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}
                     </div><hr>
                     <div>
                         {{#each miniNews}}
@@ -29,8 +29,8 @@
                                 <li>
                                     <p>
                                         <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
-                                        {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                                        {{#if can  "delete-news-center" "resource"}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
+                                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
                             </ul>
@@ -46,7 +46,7 @@
                 <div role="tabpanel" class="tab-pane" id="magazineBtn" style="margin-left: 20px">
                     <strong style="font-size: 18px">杂志社动态</strong>
                     <div class="pull-right">
-                        {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
+                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
                     </div><hr>
                     <div>
                         {{#each miniMagazines}}
@@ -54,8 +54,8 @@
                                 <li>
                                     <p>
                                         <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
-                                        {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                                        {{#if can  "delete-news-center" "resource"}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
+                                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
                             </ul>
@@ -71,7 +71,7 @@
                 <div role="tabpanel" class="tab-pane" id="publishingBtn" style="margin-left: 20px">
                     <strong style="font-size: 18px">出版动态</strong>
                     <div class="pull-right">
-                        {{#if can "add-news-center" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
+                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
                     </div><hr>
                     <div>
                         {{#each miniPublishing}}
@@ -79,8 +79,8 @@
                                 <li>
                                     <p>
                                         <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
-                                        {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                                        {{#if can  "delete-news-center" "resource"}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
+                                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
                             </ul>

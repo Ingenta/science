@@ -35,4 +35,26 @@ platformPermissions
         options: {
             level: publisherLevel
         }
+    })
+    .definePermission("manage-news-platform", {
+        en: {name: "manage news platform", summary: "manage news platform"},
+        cn: {name: "管理新闻平台", summary: "管理新闻平台"},
+        options: {
+            level: publisherLevel
+        }
     });
+
+platformPermissions
+	.defineRole("news-platform-manager", ["manage-news-platform"], {
+		en: {
+			name: "news platform manager",
+			summary: "news platform manager"
+		},
+		cn: {
+			name: "新闻平台管理员",
+			summary: "新闻平台管理员"
+		},
+        options:{
+            level:publisherLevel
+        }
+	});
