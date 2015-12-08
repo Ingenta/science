@@ -77,13 +77,13 @@
                 <span class="colBlue">友情链接：</span>
                 {{#each myLinks}}
                     <a href="{{link}}" target="_blank" title="{{remark}}"><img src="{{getImageHelper picture}}" height="30" width="100"/></a>
-                    {{#if can  "modify-news-link" "resource"}}{{> updateIndexNewsLinkModalForm}}{{/if}}
-                    {{#if can  "delete-news-link" "resource"}}<a href="#" id="myLink" class="fa fa-trash"></a>{{/if}}
+                    {{#if miniPlatformPermission}}{{> updateIndexNewsLinkModalForm}}{{/if}}
+                    {{#if miniPlatformPermission}}<a href="#" id="myLink" class="fa fa-trash"></a>{{/if}}
                 {{else}}
                     {{_ "No results found!"}}
                 {{/each}}
                 <div class="pull-right">
-                {{#if can  "add-news-link" "resource"}}
+                {{#if miniPlatformPermission}}
                     <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addIndexNewsLinkModal"></span>{{> addIndexNewsLinkModalForm}}
                 {{/if}}
                 </div>

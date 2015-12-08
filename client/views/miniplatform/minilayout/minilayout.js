@@ -3,7 +3,7 @@ Template.miniLayout.helpers({
         var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
         if(publisher){
             Session.set("activeTab", "collections");
-            return "/publisher/" + publisher.name;
+            return "/publisher/" + publisher.shortname;
         }
     },
     myLinks: function () {

@@ -10,7 +10,7 @@
                         <div class="row" style="margin-top: 20px;">
                             {{#each newsDetails}}
                                 <div align="center"><span style="font-size:21px;">{{{title}}}</span>
-                                    {{#if can  "modify-news-center" "resource"}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                    {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                 </div><br>
                                 <p class="text-center">发布时间：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;作者：{{author}}</p><br>
                                 <p>{{{content}}}</p>

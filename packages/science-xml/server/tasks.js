@@ -159,7 +159,7 @@ Tasks.parse = function (logId, pathToXml) {
 Tasks.insertArticlePdf = function (logId, result) {
     var log = UploadLog.findOne({_id: logId});
     if (!ScienceXML.FileExists(log.pdf)) {
-        logger.info("pdf not found in archive: "+log.name);
+        logger.info("pdf not found in archive: " + log.name);
         Tasks.insertArticleImages(logId, result);
         return;
     }
@@ -176,7 +176,14 @@ Tasks.insertArticlePdf = function (logId, result) {
         Tasks.insertArticleImages(logId, result);
     });
 }
-
+var readyToStartArticleImport = function (log, logId, taskId, result) {
+    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+    Tasks.insertArticleTask(logId, result);
+    if (log.extractTo)
+        Meteor.setTimeout(function () {
+            ScienceXML.RemoveFile(log.extractTo);
+        }, 20000)
+}
 Tasks.insertArticleImages = function (logId, result) {
     var taskId = UploadTasks.insert({
         action: "Insert Images",
@@ -187,7 +194,7 @@ Tasks.insertArticleImages = function (logId, result) {
 
     var log = UploadLog.findOne({_id: logId});
     if (!result.figures) {
-        if (log.extractTo)Meteor.setTimeout(ScienceXML.RemoveFile(log.extractTo), 20000);
+        readyToStartArticleImport(log, logId, taskId, result);
     }
     else {
         result.figures.forEach(function (fig) {
@@ -196,8 +203,11 @@ Tasks.insertArticleImages = function (logId, result) {
             onlineOne = onlineOne || _.find(fig.graphics, function (g) {
                     return !g.use;
                 });
-            if (onlineOne) {
-                logger.info(onlineOne);
+            if (!onlineOne) {
+                if (_.last(result.figures) === fig) {
+                    readyToStartArticleImport(log, logId, taskId, result)
+                }
+            } else {
                 var figName = onlineOne.href;
                 var figLocation = log.extractTo + "/" + figName;
                 if (!ScienceXML.FileExists(figLocation)) {
@@ -212,11 +222,8 @@ Tasks.insertArticleImages = function (logId, result) {
                         }
                         else {
                             fig.imageId = fileObj._id;
-                            UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
                             if (_.last(result.figures) === fig) {
-                                Meteor.setTimeout(function () {
-                                    ScienceXML.RemoveFile(log.extractTo);
-                                }, 20000)
+                                readyToStartArticleImport(log, logId, taskId, result);
                             }
                         }
                     });
@@ -229,7 +236,6 @@ Tasks.insertArticleImages = function (logId, result) {
         Tasks.fail(taskId, logId, log.errors);
         return;
     }
-    Tasks.insertArticleTask(logId, result);
 }
 
 

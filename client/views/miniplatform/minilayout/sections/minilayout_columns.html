@@ -4,37 +4,37 @@
             {{#each firstColumn}}
                 <a href="{{ColumnUrl}}">{{title}}</a>
                 <p class="tr mr10">
-                    {{#if can  "modify-column" "resource"}}{{> updateColumnModalForm}}{{/if}}
-                    {{#if can  "delete-column" "resource"}}<a href="#" id="meetingDel" class="fa fa-trash"></a>{{/if}}
+                    {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
+                    {{#if miniPlatformPermission}}<a href="#" id="meetingDel" class="fa fa-trash"></a>{{/if}}
                 </p>
             {{else}}
                 {{_ "No results found!"}}
             {{/each}}
-            {{#if can "add-column" "resource"}}<span class="fa fa-plus {{firstHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addXianMeetingModal"></span>{{> addXianMeetingModalForm}}{{/if}}
+            {{#if miniPlatformPermission}}<span class="fa fa-plus {{firstHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addXianMeetingModal"></span>{{> addXianMeetingModalForm}}{{/if}}
         </div>
         <div class="part part2">
             {{#each secondColumn}}
                 <a href="{{ColumnUrl}}">{{title}}</a>
                 <p class="tr mr10">
-                    {{#if can  "modify-column" "resource"}}{{> updateColumnModalForm}}{{/if}}
-                    {{#if can  "delete-column" "resource"}}<a href="#" id="fundDel" class="fa fa-trash"></a>{{/if}}
+                    {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
+                    {{#if miniPlatformPermission}}<a href="#" id="fundDel" class="fa fa-trash"></a>{{/if}}
                 </p>
             {{else}}
                 {{_ "No results found!"}}
             {{/each}}
-            {{#if can "add-column" "resource"}}<span class="fa fa-plus {{secondHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addFundsModal"></span>{{> addFundsModalForm}}{{/if}}
+            {{#if miniPlatformPermission}}<span class="fa fa-plus {{secondHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addFundsModal"></span>{{> addFundsModalForm}}{{/if}}
         </div>
         <div class="part part3">
             {{#each thirdColumn}}
                 <a href="{{ColumnUrl}}">{{title}}</a>
                 <p class="tr mr10">
-                    {{#if can  "modify-column" "resource"}}{{> updateColumnModalForm}}{{/if}}
-                    {{#if can  "delete-column" "resource"}}<a href="#" id="forumDel" class="fa fa-trash"></a>{{/if}}
+                    {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
+                    {{#if miniPlatformPermission}}<a href="#" id="forumDel" class="fa fa-trash"></a>{{/if}}
                 </p>
             {{else}}
                 {{_ "No results found!"}}
             {{/each}}
-            {{#if can "add-column" "resource"}}<span class="fa fa-plus {{thirdHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addForumColumnModal"></span>{{> addForumColumnModalForm}}{{/if}}
+            {{#if miniPlatformPermission}}<span class="fa fa-plus {{thirdHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addForumColumnModal"></span>{{> addForumColumnModalForm}}{{/if}}
         </div>
     </div>
 </template>

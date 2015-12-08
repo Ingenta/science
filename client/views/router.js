@@ -18,6 +18,7 @@ subs.subscribe('searchHistory');
 subs.subscribe('emailConfig');
 subs.subscribe('publishers');
 subs.subscribe('publications');
+subs.subscribe('tag');
 
 Router.onBeforeAction(function () {
     // loading indicator here
