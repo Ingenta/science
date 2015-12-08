@@ -1,10 +1,10 @@
 Template.layoutPublications.helpers({
     hasJournal: function(){
-        var publisher = Publishers.findOne({name : Config.miniplatformPublisherName});
+        var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
         if(publisher)return Publications.find({publisher:publisher._id});
     },
     publisherUrl: function(){
-        var publisher = Publishers.findOne({name : Config.miniplatformPublisherName});
+        var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
         if(publisher)return "/publisher/"+publisher.name;
     }
 });

@@ -357,9 +357,6 @@
             },
             "picture": {
                 "label": "Choose file"
-            },
-            "agree": {
-                "label": "Whether the link to 'Science China Press' news platform?"
             }
         },
         "topics": {

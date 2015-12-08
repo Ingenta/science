@@ -1,7 +1,7 @@
 <template name="newsCenter">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            {{> pageElement key="newsCenter"}}
+            {{> pageElement key="newsCenter" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
                 {{#each recruitInfo}}
                     <strong><a style="font-size: 16px;color: red" href="{{whichUrl}}" target="_blank">{{title}}</a></strong>
