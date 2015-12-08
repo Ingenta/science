@@ -10,7 +10,7 @@
                 <div role="tabpanel" class="tab-pane active" id="enterBtn" style="margin-left: 20px">
                     <strong style="font-size: 18px">企业新闻</strong>
                     <div class="pull-right">
-                        {{#if can "add-news-contact" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
+                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
                     </div><hr>
                     <div>
                         {{#each enterpriseNews}}
@@ -18,8 +18,8 @@
                                 <li>
                                     <p>
                                         <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
-                                        {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
-                                        {{#if can  "delete-news-contact" "resource"}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
+                                        {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
                             </ul>
@@ -31,7 +31,7 @@
                 <div role="tabpanel" class="tab-pane" id="editBtn" style="margin-left: 20px">
                     <strong style="font-size: 18px">编辑园地</strong>
                     <div class="pull-right">
-                        {{#if can "add-news-contact" "resource"}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
+                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
                     </div><hr>
                     <div>
                         {{#each editFields}}
@@ -39,8 +39,8 @@
                                 <li>
                                     <p>
                                         <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
-                                        {{#if can  "modify-news-contact" "resource"}}{{> updateEnterpriseCultureModalForm}}{{/if}}
-                                        {{#if can  "delete-news-contact" "resource"}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
+                                        {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
                                 </li>
                             </ul>

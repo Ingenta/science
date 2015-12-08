@@ -83,6 +83,17 @@ publisherPermissions
             summary: "只能修改出版社信息的角色"
         },
         options:{
-            level:publisherLevel
+            level:publisherLevel,
+            subScope:function(){
+                var result = {};
+                if(this.scope && !_.isEmpty(this.scope.publisher)){
+                    var parr = _.isArray(this.scope.publisher)?this.scope.publisher:[this.scope.publisher];
+                    var journals = Publications.find({publisher:{$in:parr}},{fields:{_id:1}}).fetch()
+                    if(!_.isEmpty(journals)){
+                        result.journal = _.pluck(journals,"_id");
+                    }
+                }
+                return result;
+            }
         }
     });

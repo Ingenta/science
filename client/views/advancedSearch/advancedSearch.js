@@ -1,16 +1,30 @@
 Template.AdvancedSearch.onRendered(function() {
     this.$('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD'});
-    $("input[id='ck_publisher']").prop({checked:true});
-    $("input[id='ck_journal']").prop({checked:true});
-    $("input[id='ck_topic']").prop({checked:true});
-    $("input[id='ck_contentType']").prop({checked:true});
-    $("input[id='ck_tag']").prop({checked:true});
-    $("input[name='publisher']").prop({disabled:true});
-    $("input[name='journal']").prop({disabled:true});
-    $("input[name='topic']").prop({disabled:true});
-    $("input[name='contentType']").prop({disabled:true});
-    $("input[name='tag']").prop({disabled:true});
-    Session.set("JournalNameValue", undefined);
+    $(document).ready(function() {
+        $(".js-multiple1").select2({
+            placeholder: TAPi18n.__( "Publisher name")
+        });
+    });
+    $(document).ready(function() {
+        $(".js-multiple2").select2({
+            placeholder: TAPi18n.__( "Journal name")
+        });
+    });
+    $(document).ready(function() {
+        $(".js-multiple3").select2({
+            placeholder: TAPi18n.__( "The topic name")
+        });
+    });
+    $(document).ready(function() {
+        $(".js-multiple4").select2({
+            placeholder: TAPi18n.__( "Article Content Type")
+        });
+    });
+    $(document).ready(function() {
+        $(".js-multiple5").select2({
+            placeholder: TAPi18n.__( "Journal label")
+        });
+    });
 });
 
 Template.AdvancedSearch.helpers({
@@ -18,13 +32,8 @@ Template.AdvancedSearch.helpers({
         return Publishers.find();
     },
     publicationList: function () {
-        var q = Session.get("JournalNameValue");
-        if (q) {
-            var mongoDbArr = [];
-            mongoDbArr.push({'title': {$regex: q, $options: "i"}});
-            mongoDbArr.push({'titleCn': {$regex: q, $options: "i"}});
-            return Publications.find({$or: mongoDbArr});
-        }
+        var publisherId = Session.get("publisherId");
+        if(publisherId)return Publications.find({publisher:{$in: publisherId}});
         return Publications.find();
     },
     topicList: function () {
@@ -36,69 +45,9 @@ Template.AdvancedSearch.helpers({
 });
 
 Template.AdvancedSearch.events({
-    'mousedown #filterJournalBtn': function () {
-        var title = $('#filterJournalName').val();
-        Session.set("JournalNameValue", title);
-    },
-    "click #ck_publisher": function () {
-        if(document.getElementById("ck_publisher").checked){
-            $("input[id='ck_publisher']").prop({checked:true});
-            $("input[name='publisher']").prop({disabled:true});
-        }else{
-            $("input[id='ck_publisher']").prop({checked:false});
-            $("input[name='publisher']").prop({disabled:false});
-        }
-    },
-    'click #ck_journal': function () {
-        if(document.getElementById("ck_journal").checked){
-            $("input[id='ck_journal']").prop({checked:true});
-            $("input[name='journal']").prop({disabled:true});
-        }else{
-            $("input[id='ck_journal']").prop({checked:false});
-            $("input[name='journal']").prop({disabled:false});
-        }
-    },
-    'click #ck_topic': function () {
-        if(document.getElementById("ck_topic").checked){
-            $("input[id='ck_topic']").prop({checked:true});
-            $("input[name='topic']").prop({disabled:true});
-        }else{
-            $("input[id='ck_topic']").prop({checked:false});
-            $("input[name='topic']").prop({disabled:false});
-        }
-    },
-    'click #ck_contentType': function () {
-        if(document.getElementById("ck_contentType").checked){
-            $("input[id='ck_contentType']").prop({checked:true});
-            $("input[name='contentType']").prop({disabled:true});
-        }else{
-            $("input[id='ck_contentType']").prop({checked:false});
-            $("input[name='contentType']").prop({disabled:false});
-        }
-    },
-    'click #ck_tag': function () {
-        if(document.getElementById("ck_tag").checked){
-            $("input[id='ck_tag']").prop({checked:true});
-            $("input[name='tag']").prop({disabled:true});
-        }else{
-            $("input[id='ck_tag']").prop({checked:false});
-            $("input[name='tag']").prop({disabled:false});
-        }
-    },
-    'click #publisherBtn': function (e) {
-        $("#myModal").modal('hide');
-    },
-    'click #journalBtn': function (e) {
-        $("#myModal1").modal('hide');
-    },
-    'click #topicBtn': function (e) {
-        $("#myModal2").modal('hide');
-    },
-    'click #contentTypeBtn': function (e) {
-        $("#myModal3").modal('hide');
-    },
-    'click #tagBtn': function (e) {
-        $("#myModal4").modal('hide');
+    'mousedown .select2-search__field': function(){
+        var publisherId = $("#filter-publisher").val();
+        Session.set("publisherId", publisherId);
     },
     'click .searchBtn': function () {
         // 检索条件
@@ -140,53 +89,26 @@ Template.AdvancedSearch.events({
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
         //选择检索控制筛选条件
-        var str1 = document.getElementsByName("publisher");
-        var str2 = document.getElementsByName("journal");
-        var str3 = document.getElementsByName("topic");
-        var str4 = document.getElementsByName("contentType");
-        var str5 = document.getElementsByName("tag");
+        var publisher = $("#filter-publisher").val();
+        var journal = $("#filter-journal").val();
+        var topic = $("#filter-topic").val();
+        var contentType = $("#filter-contentType").val();
+        var tag = $("#filter-tag").val();
         var filterQuery = {};
 
         if(startDate||endDate){
             filterQuery["publishDate"] ={start:startDate,end:endDate};
         }
 
-        if(0<str1.length){
-            for (i = 0; i < str1.length; i++) {
-                if (str1[i].checked) {
-                    filterQuery["publisher"] =[str1[i].value];
-                }
-            }
+        if(publisher){
+            filterQuery["publisher"] = publisher;
         }
-        if(0<str2.length){
-            for (i = 0; i < str2.length; i++) {
-                if (str2[i].checked) {
-                    filterQuery["journalId"] =[str2[i].value];
-                }
-            }
+        if(journal){
+            filterQuery["journalId"] = journal;
         }
-        if(0<str3.length){
-            for (i = 0; i < str3.length; i++) {
-                if (str3[i].checked) {
-                    filterQuery["topic"] =[str3[i].value];
-                }
-            }
+        if(topic){
+            filterQuery["topic"] = topic;
         }
-        //if(0<str4.length){
-        //    for (i = 0; i < str4.length; i++) {
-        //        if (str4[i].checked) {
-        //            filterQuery.push({key:"publisher",val:str4[i].value});
-        //        }
-        //    }
-        //}
-        //if(0<str5.length){
-        //    for (i = 0; i < str5.length; i++) {
-        //        if (str5[i].checked) {
-        //            filterQuery.push({key:"publisher",val:str5[i].value});
-        //        }
-        //    }
-        //}
-
         //---------------------------------------结果排序------------------------------------------
 
         //结果排序
