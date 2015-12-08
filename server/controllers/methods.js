@@ -64,6 +64,10 @@ Meteor.methods({
             action: action,
             ip: this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress
         });
+    },
+    getDefaultPublisherId: function () {
+        var defaultPublisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
+        if(defaultPublisher) return defaultPublisher._id;
     }
 });
 
