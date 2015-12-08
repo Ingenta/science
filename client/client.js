@@ -3,7 +3,7 @@ this.Helpers = {};
 
 Meteor.startup(function () {
     TimeSync.loggingEnabled = false;
-    var defaultPublisher = Publishers.findOne({name: Config.defaulPublisherShortName});
+    var defaultPublisher = Publishers.findOne({name: Config.defaultPublisherShortName});
     if(defaultPublisher) Science.defaultPublisherId = defaultPublisher._id;
 });
 
