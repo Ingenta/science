@@ -73,11 +73,10 @@ Router.map(function () {
         template: "ShowPublisher",
         parent: "publishers",
         title: function () {
-            if (TAPi18n.getLanguage() === "en") return ":publisherName";
             var id = Session.get('currentPublisherId');
             var p = Publishers.findOne({_id: id});
-            if (p) return p.chinesename || p.name;
-            return ":publisherName";
+            if (TAPi18n.getLanguage() === "en")return p.name || p.chinesename;
+            return p.chinesename || p.name;
         },
         name: "publisher.name",
         waitOn: function () {
