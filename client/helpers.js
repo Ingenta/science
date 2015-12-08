@@ -116,26 +116,13 @@ Template.registerHelper("highlight", function (keyword, str) {
 });
 
 Template.registerHelper('permissionCheckWithScope', function (permission, package_name, scope_key, scope_value) {
-//    if (!Meteor.user()) return false;
-//    if (Permissions.isAdmin()) return true;
-//
-//    if (Meteor.user().publisherId) {
-//        if (Meteor.user().publisherId !== publisherId) return false;
-//        if (!_.contains(Permissions.getUserRoles(), "publisher:publisher-manager-from-user")) {
-//            //if (!journalId) return false;
-//            if (!_.contains(Meteor.user().journalId, journalId)) return false;
-//        }
-//    }
-//    permissions = permissions.split(';');
-//    var flag = false;
-//    permissions.forEach(function (onePermission) {
-//        onePermission = onePermission.split(',');
-//        if (Permissions.userCan(onePermission[0], onePermission[1])) flag = true;
-//    });
-//    return flag;
     var scope = {};
     scope[scope_key] = scope_value;
     return Permissions.userCan(permission, package_name, Meteor.userId(), scope);
+});
+
+Template.registerHelper('miniPlatformPermission', function () {
+    return Permissions.userCan("manage-news-platform", "platform", Meteor.userId(), {publisher: Science.defaultPublisherId});
 });
 
 Template.registerHelper('collectionPermissionCheck', function(permissions, publisherId, journalId){
