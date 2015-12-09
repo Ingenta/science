@@ -46,7 +46,7 @@ QueryUtils = {
 		pointEle.popover({
 			html    : true,
 			content : htmlContent,
-			title   : TAPi18n.__("interstingSearch"),
+			title   : TAPi18n.__("interestingSearch"),
 			trigger : "focus",
 			template: templateContent
 		});
