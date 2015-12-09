@@ -133,7 +133,10 @@ if (Meteor.isServer) {
         "password": "123123",
         "level":"admin",
         "email": "admin@scp.com"
-    }
+    };
+    Config.mailServer = {
+        "address": "publish@scichina.org"
+    };
     Config.AutoTasks = {
         start: process.env.RUN_TASKS,
             DOI_Register: {

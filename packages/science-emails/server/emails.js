@@ -53,7 +53,7 @@ Meteor.methods({
         Meteor.defer(function () {
             Email.send({
                 to: values.recipient,
-                from: 'publish@scichina.org',
+                from: Config.mailServer.address,
                 subject: emailSubject,
                 html: JET.render('emailThis', {
                     "user": user,
