@@ -279,13 +279,13 @@ SyncedCron.add({
 
 
                 logger.silly("email sent");
-                //Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
+                Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
             });
         } else {
             logger.silly('watch email task ran but email list was empty, no emails sent.');
         }
         Science.Email.searchFrequencyEmail();
-        //Science.Email.authorCitationAlertEmail();
+        Science.Email.authorCitationAlertEmail();
     }
 });
 
