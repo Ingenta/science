@@ -41,3 +41,7 @@ a.fa-trash {
 .resultsList img {
     position: absolute;
 }
+
+.journalTitle {
+    color: black;
+}
