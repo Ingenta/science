@@ -137,3 +137,11 @@ Template.registerHelper('collectionPermissionCheck', function (permissions, publ
         return Permissions.userCan(onePermission, 'collections', Meteor.userId(), {publisher: publisherId});
     }
 });
+
+Template.registerHelper('formatissn',function(issn){
+    if(!issn) return issn;
+    if(!_.isString(issn)) return issn;
+    if(issn.indexOf('-')>0) return issn;
+    if(issn.length==8)
+        return issn.slice(0,4) + "-" + issn.slice(4);
+})
