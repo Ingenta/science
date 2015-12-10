@@ -149,7 +149,7 @@ if (Meteor.isServer) {
         Citation: {
             rate: "at 1:00 am except on Sat" //提交注册请求的频率，默认每周六凌晨1点"
         },
-        Send_Alert_Email: {
+        Postman: {
             rate: "at 3:00 am"
         },
         FTPSCAN: {

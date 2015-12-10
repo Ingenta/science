@@ -1181,7 +1181,7 @@
   "pubStatus": {
     "normal": "正常",
     "onlineFirst": "优先出版",
-    "preset": "预出版"
+    "accepted": "预出版"
   },
   "mediaFile": "文件",
   "Please choose a media file": "请选择一个媒体文件！",

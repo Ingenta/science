@@ -31,7 +31,11 @@ Package.onUse(function(api) {
   api.addFiles([
       'server/queue.js',
       'server/publish.js',
-      'server/cron.js'
+      'server/cron.js',
+      'server/cronTasks/Postman.js',
+      'server/cronTasks/FTPScan.js',
+      'server/cronTasks/DOIRegister.js',
+      'server/cronTasks/CitationUpdate.js'
   ],'server');
 
   api.addFiles([

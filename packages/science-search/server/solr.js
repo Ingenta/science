@@ -147,7 +147,7 @@ SolrUtils = {
             "facet": true,
             "facet.field": ["publisher", "journalId", "all_topics", "facet_all_authors_cn", "facet_all_authors_en", "year", "pacsCodes", "contentType"],
             "hl": true,
-            "hl.fl": "title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics,doi,abstract",
+            "hl.fl": "title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics,doi,abstract,accessKey",
             "hl.preserveMulti": true,
             "hl.simple.pre": "<span class='highlight'>",
             "hl.simple.post": "</span>",

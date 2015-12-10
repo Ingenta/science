@@ -1,6 +1,5 @@
 PdfStore = new FS.Collection("pdfs", {
-    stores: [new FS.Store.FileSystem("pdfs", {})],
-    path: Config.staticFiles.uploadPdfDir
+    stores: [new FS.Store.FileSystem("pdfs", {path: Config.staticFiles.uploadPdfDir})],
 });
 
 if (Meteor.isServer) {

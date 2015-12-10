@@ -170,11 +170,20 @@ Tasks.insertArticlePdf = function (logId, result) {
         logId: logId
     });
     PdfStore.insert(log.pdf, function (err, fileObj) {
+        if(err){
+            logger.error(err);
+            log.errors.push(err);
+        }
+        logger.info("pdf imported")
         result.pdfId = fileObj._id;
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
         UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
         Tasks.insertArticleImages(logId, result);
     });
+    if (!_.isEmpty(log.errors)) {
+        Tasks.fail(taskId, logId, log.errors);
+        return;
+    }
 }
 var readyToStartArticleImport = function (log, logId, taskId, result) {
     UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});

@@ -73,7 +73,7 @@
     "pubStatus": {
         "normal": "Normal",
         "onlineFirst": "Online first",
-        "preset": "Preset"
+        "accepted": "Accepted"
     },
     "mediaFile": "File",
     "Please choose a media file": "Please choose a media file",
