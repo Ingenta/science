@@ -1,7 +1,11 @@
 {{> cssStyle}}
 
 <div class="big">
-    {{> scpBanner}}
+    {{#if journal.banner}}
+        <div><img src="{{journal.banner}}" class="big"></div>
+    {{else}}
+        {{> scpBanner}}
+    {{/if}}
     {{> emailJournalMenu}}
     {{> watchJournalContent}}
 </div>

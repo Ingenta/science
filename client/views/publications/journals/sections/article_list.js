@@ -10,6 +10,9 @@ Template.journalNavigationPanel.helpers({
             var issues = Issues.find({'journalId': journalId, 'volume': volume}).fetch();
             return _.sortBy(issues, function(oneIssue){ return parseInt(oneIssue.issue,10); }).reverse();
         }
+    },
+    formatMonth:function(){
+        return this.month?(", "+this.month):"";
     }
 });
 

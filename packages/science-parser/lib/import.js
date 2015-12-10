@@ -113,7 +113,7 @@ PastDataImport = function (path) {
                                 EISSN: 1,
                                 CN: 1,
                                 publisher: 1,
-                                accessKey:1
+
                             }
                         });
 
