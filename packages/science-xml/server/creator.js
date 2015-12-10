@@ -61,5 +61,7 @@ ScienceXML.testIssueCreator = function (countOfIssue) {
         groupOut[key] = val.length;
     })
     console.log(_.size(groupInput)=== _.size(groupOut)?"数量相同":"数量不相同");
+    Volumes.remove({journalId:{$in:journalArr}});
+    Issues.remove({journalId:{$in:journalArr}});
     return {input:groupInput,output:groupOut};
 }
