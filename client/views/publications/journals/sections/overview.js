@@ -6,14 +6,6 @@ Template.JournalOverview.helpers({
     }
 });
 
-Template.journalCoverSummary.helpers({
-    issnFormat: function (issn) {
-        if (!issn) return;
-        if (issn.length !== 8) return issn;
-        return issn.substr(0, 4) + "-" + issn.substr(4, 4);
-    }
-});
-
 Template.journalSummary.helpers({
     Title: function (id) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
