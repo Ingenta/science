@@ -75,6 +75,7 @@ Router.map(function () {
         title: function () {
             var id = Session.get('currentPublisherId');
             var p = Publishers.findOne({_id: id});
+            if(!p)return this.params.publisherName;
             if (TAPi18n.getLanguage() === "en")return p.name || p.chinesename;
             return p.chinesename || p.name;
         },
