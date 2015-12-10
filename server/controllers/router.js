@@ -251,6 +251,7 @@ Router.map(function () {
                         all_topics: topicArr.join(" OR ")
                     }
                 }
+                query.st={rows:5};
 
 
                 SolrClient.query(query, function (err, result) {
