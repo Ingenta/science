@@ -19,7 +19,8 @@ Package.onUse(function (api) {
         'server/reports/journal.js',
         'server/reports/keyword.js',
         'server/reports/region.js',
-        'server/reports/user.js'
+        'server/reports/user.js',
+        'server/reports/cited.js'
     ], 'server');
 
     api.addFiles([

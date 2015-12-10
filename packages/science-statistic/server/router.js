@@ -116,6 +116,12 @@ Router.route('downloadExcel', {
         }else if (reportType === "regionalArticle") {
             fileName = "Article_Regional_Report";
             file = Science.Reports.getRegionalArticleReportFile(query, fileName);
+        }else if (reportType === "journalCited") {
+            fileName = "Journal_Cited_Report";
+            file = Science.Reports.getCitedJournalReportFile(query, fileName);
+        }else if (reportType === "articleCited") {
+            fileName = "Article_Cited_Report";
+            file = Science.Reports.getCitedArticleReportFile(query, fileName);
         }else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',
