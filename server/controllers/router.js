@@ -289,7 +289,7 @@ Router.map(function () {
                             "-f", footmark
                         ];
                         //预出版的文章pdf上需要加上“Accepted”字样的水印
-                        if (article.pubStatus === 'preset') {
+                        if (article.pubStatus === 'accepted') {
                             params = _.union(params, ["-w", Config.pdf.watermark]);
                         }
                         Science.Pdf(params, function (error, stdout, stderr) {

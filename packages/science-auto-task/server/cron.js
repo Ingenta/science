@@ -143,7 +143,7 @@ SyncedCron.add({
                         $and: [
                             {journalId: {$in: [journalId]}},
                             {createdAt: {$gt: oneUser.lastSentDate}},
-                            {$or: [{pubStatus: 'online_first'}, {pubStatus: 'preset'}]}
+                            {$or: [{pubStatus: 'online_first'}, {pubStatus: 'accepted'}]}
                         ]
                     }, {
                         fields: {
