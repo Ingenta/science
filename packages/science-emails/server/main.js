@@ -75,20 +75,66 @@ Science.Email.searchFrequencyEmail = function () {
     }
 };
 
-Science.Email.watchJournalEmail = function (oneEmail) {
-    Email.send({
-        to: oneEmail.email,
-        from: Config.mailServer.address,
-        subject: "《" + oneEmail.journal.titleCn + "》更新第" + oneEmail.issue.issue + "期",
-        html: JET.render('watchJournal', {
+Science.Email.tableOfContentEmail = function (yesterday) {
+    Issues.find({createDate: {$gt: yesterday}}).forEach(function (oneIssue) {
+        var articleList = Articles.find({
+            journalId: oneIssue.journalId,
+            volume: oneIssue.volume,
+            issue: oneIssue.issue,
+            pubStatus: 'normal'
+        }, {
+            fields: {
+                _id: 1,
+                title: 1,
+                authors: 1,
+                year: 1,
+                volume: 1,
+                issue: 1,
+                elocationId: 1,
+                'journal.titleCn': 1
+            }
+        }).fetch();
+        if (!articleList.length) return;
+
+        var journal = Publications.findOne({_id: oneIssue.journalId}, {
+            fields: {
+                title: 1,
+                titleCn: 1,
+                description: 1,
+                banner: 1,
+                scholarOneCode: 1,
+                magtechCode: 1
+            }
+        });
+        if(!journal) return;
+
+        journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
+        journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
+        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url().substring(1));
+        generateArticleLinks(articleList, journal.url);
+
+        oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
+
+        var journalNews = journalIdToNews(oneIssue.journalId);
+
+        var content = JET.render('watchJournal', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "emailIcoUrl": Config.rootUrl + "email/ico.png",
             "rootUrl": Config.rootUrl,
-            "issue": oneEmail.issue,
-            "journal": oneEmail.journal,
-            "articleList": oneEmail.articleList,
-            "journalNews": oneEmail.journalNews
-        })
+            "issue": oneIssue,
+            "journal": journal,
+            "articleList": articleList,
+            "journalNews": journalNews
+        });
+
+        Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}}).forEach(function (oneUser) {
+            Email.send({
+                to: oneUser.emails[0].address,
+                from: Config.mailServer.address,
+                subject: journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                html: content
+            });
+        });
     });
 };
 
@@ -159,4 +205,33 @@ Science.Email.test = function (template, theData) {
         html: JET.render(template, theData)
     });
     console.log('waiting for email');
+};
+
+var generateArticleLinks = function (articles, journalUrl) {
+    articles.forEach(function (article) {
+        if (article._id)
+            article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        if (journalUrl)
+            article.journal.url = journalUrl;
+        else
+            article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
+    });
+};
+
+var journalIdToNews = function (journalId) {
+    var news = {};
+    news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {
+        sort: {createDate: -1},
+        limit: 3
+    }).fetch();
+    news.meetingInfo = Meeting.find({publications: journalId, about: 'c1'}, {sort: {createDate: -1}, limit: 3}).fetch();
+    var rootUrl = Config.rootUrl;
+    news.newsCenter.forEach(function (item) {
+        if (!item.url) item.url = rootUrl + "news/" + item._id
+    });
+    news.meetingInfo.forEach(function (item) {
+        item.startDate = moment(item.startDate).format("MMM Do YYYY");
+    });
+    return news;
 };
