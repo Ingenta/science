@@ -122,7 +122,6 @@ Template.showArticle.onRendered(function () {
 
 Template.showArticle.helpers({
     getPdfById: function (id) {
-        console.log(id);
         return PdfStore.findOne({_id: id}).url() + "&download=true";
     },
     articleLanguage: function (num2) {
