@@ -20,7 +20,7 @@
             <div id="vol_{{_id}}" class="issues">
                 {{#each issueInVolume journalId volume}}
                     <div class="issue" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
-                        {{_ "issueItem" issue }}（{{year}}, {{month}}）
+                        {{_ "issueItem" issue }}（{{year}}{{formatMonth}}）
                     </div>
                 {{/each}}
             </div>
