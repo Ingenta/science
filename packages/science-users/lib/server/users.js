@@ -127,7 +127,7 @@ Accounts.urls.enrollAccount = function (token) {
 Accounts.validateLoginAttempt(function (attempt) {
     if (Config && Config.isDevMode)//开发模式不检查邮箱是否已验证
         return true;
-    if (attempt.user.emails[0].address === "admin@scp.com")//admin user can't be blocked and doesn't need verification
+    if (attempt.user && attempt.user.username === "admin")//admin user can't be blocked and doesn't need verification
         return true;
     if (attempt.user && attempt.user.disable) {
         throw new Meteor.Error(403, 'user_blocked');
