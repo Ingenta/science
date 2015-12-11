@@ -29,8 +29,6 @@ ScienceXML.IssueCreator = function () {
                         createDate: new Date()
                     })
                 }
-
-
                 return {
                     journalId: obj.journalId,
                     volumeId: volume,

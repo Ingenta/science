@@ -15,7 +15,8 @@ Package.onUse(function(api) {
 
   api.use([
     'underscore',
-    'science-lib'
+    'science-lib',
+    'cfs:power-queue',
   ],'server');
   api.addFiles([
     'lib/parser.js',

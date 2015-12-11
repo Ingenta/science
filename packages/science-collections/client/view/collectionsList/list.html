@@ -32,7 +32,11 @@
                         <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
                     </h4>
                 </li>
-                <li>{{_ "createAt"}}: {{formatDate createdAt "YYYY-MM-DD"}}</li>
+                <li>{{_ "Publisher"}} <a href="{{urlToPublisherById publisherId}}">{{publisherNameById publisherId}}</a></li>
+                {{#if journalId}}
+                    <li>{{_ "Journal"}} <a href="{{urlToJournalById journalId}}">{{journalName journalId}}</a></li>
+                {{/if}}
+                <li>{{_ "createAt"}} {{formatDate createdAt "YYYY-MM-DD"}}</li>
             </ul>
             {{> collectionDesc}}
         </div>
