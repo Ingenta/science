@@ -194,7 +194,7 @@ Router.map(function () {
             if (pdf) {
                 var response = this.response;
                 var request = this.request;
-
+                //get this article by pdf id
                 var article = Articles.findOne({pdfId: this.params.pdfId}, {
                     fields: {
                         doi: 1,
@@ -209,7 +209,8 @@ Router.map(function () {
                         topic: 1
                     }
                 });
-                var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + (new Date()).getTime() + ".pdf";
+                //create path to expected first page of pdf
+                var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.pdfId + (new Date()).getTime() + ".pdf";
                 //准备需要添加到pdf中的数据
                 var lang = this.params.query.lang || "en";
 
@@ -224,6 +225,7 @@ Router.map(function () {
                     return data[langArr[index]] || data[langArr[1 - index]];
                 };
                 var data = {};
+                //create path to journal banner and advert banner
                 var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
                 if (journalInfo.banner) {
                     data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
@@ -231,6 +233,8 @@ Router.map(function () {
                 if (journalInfo.adBanner) {
                     data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
                 }
+
+                //parse article metadata
                 data.title = getdata(article.title, lang);
                 data.authors = _.map(article.authors.fullname, function (fname) {
                     return getdata(fname, lang);
@@ -243,7 +247,7 @@ Router.map(function () {
                 data.fulltextUrl = "http://dx.doi.org/" + article.doi;
                 data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
 
-
+                //create related article query
                 var query = {q: data.title, wt: "json"};
                 var topicArr = _.compact(article.topic);
                 if (!_.isEmpty(topicArr)) {
@@ -251,9 +255,9 @@ Router.map(function () {
                         all_topics: topicArr.join(" OR ")
                     }
                 }
-                query.st={rows:5};
+                query.st = {rows: 5};
 
-
+                //get related articles
                 SolrClient.query(query, function (err, result) {
 
                     if (!err) {
