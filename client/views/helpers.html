@@ -1,5 +1,5 @@
 <template name="toggleField">
-    {{#if field}}
+    {{#if notEmptyField}}
         <p>
             <i class="fa fa-plus" data-toggle="collapse" data-target="#toggle{{_id}}"></i>
             <a href="#" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
@@ -15,7 +15,7 @@
 </template>
 
 <template name="toggleFieldBrowse">
-    {{#if field}}
+    {{#if notEmptyField}}
         <p>
             <i class="fa fa-plus" data-toggle="collapse" data-target="#toggle{{_id}}"></i>
             <a href="#" type="button" data-toggle="collapse" data-target="#toggle{{_id}}"
@@ -24,7 +24,7 @@
 
         <div class="collapse" id="toggle{{_id}}">
             <ul class="list-unstyled">
-                <li>{{{field}}}</li>
+                <li>{{{getContent field}}}</li>
             </ul>
             <!--<ul class="list-unstyled">-->
                 <!--<li><a class="emailThis" href="" data-toggle="modal" data-doi="{{doi}}" data-target="#sendEmailModal"><i class="fa fa-envelope"></i> {{_ "Email This"}}</a></li>-->
