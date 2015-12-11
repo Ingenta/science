@@ -335,7 +335,10 @@ Science.Reports.getArticleCitedReportData = function (query) {
         var article = Articles.findOne({_id: x._id}, {sort: {'citationCount': -1}, fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citationCount:1}});
         if(article){
             x.journal = article.journal.titleCn;
-            x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
+            var publisher = Publishers.findOne({_id: article.publisher})
+            if(publisher){
+                x.publisher = publisher.chinesename;
+            }
             x.title = article.title.cn;
             x.doi = article.doi;
             x.issue = article.issue;
