@@ -301,65 +301,16 @@ Science.Reports.getArticleReportDataNew = function (query) {
 };
 
 Science.Reports.getJournalCitedReportData = function (query) {
-    var myFuture = new Future();
-    var allJournals = Publications.find().fetch();
-    var allPublisher = Publishers.find().fetch();
-    Articles.rawCollection().group(
-        {journalId: true},
-        query,
-        {total: 0},
-        function (doc, result) {
-            if (!result[doc.citations])
-            result[doc.citations]++;
-        },
-        function (err, result) {
-            _.each(result, function (item) {
-                var journal = _.findWhere(allJournals, {_id: item.journalId})
-                if(journal){
-                    var x = {};
-                    x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).chinesename;
-                    x.title = journal.titleCn;
-                    x.issn = journal.issn;
-                    x.EISSN = journal.EISSN;
-                    _.extend(item, x);
-                }
-            })
-            return myFuture.return(result);
+    var citations = Articles.aggregate([{
+        $match: {
+            $and: [query]
         }
-    );
-    return myFuture.wait();
-};
-
-Science.Reports.getArticleCitedReportData = function (query) {
-    var myFuture = new Future();
-    var allPublisher = Publishers.find().fetch();
-    Articles.rawCollection().group(
-        {articleId: true},
-        query,
-        {},
-        function (doc, result) {
-            if (!result[doc.citations])
-                result[doc.citations] = 0;
-            result[doc.citations]++;
-        },
-        Meteor.bindEnvironment( function (err, result) {
-            _.each(result, function (item) {
-                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citationCount:1}});
-                if(article){
-                    var x = {};
-                    x.journal = article.journal.titleCn;
-                    x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
-                    x.title = article.title.cn;
-                    x.doi = article.doi;
-                    x.issue = article.issue;
-                    x.volume = article.volume;
-                    x.citationCount = article.citationCount;
-                    _.extend(item, x);
-                }
-            })
-            return myFuture.return(result);
-        })
-    );
-    return myFuture.wait();
+    }, {
+        $group: {
+            _id: "$journalId",
+            total: {$sum: "$citationCount"}
+        }
+    }]);
+    return citations
 };
 //-----------------------------数据范围------------------------------
