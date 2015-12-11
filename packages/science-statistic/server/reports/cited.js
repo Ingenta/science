@@ -26,21 +26,21 @@ Science.Reports.getCitedArticleReportFile = function (query, fileName) {
 Science.Reports.getCitedJournalReportFields = function () {
     var fields = [
         {
-            key: '_id',
+            key: 'title',
             title: '期刊名称'
         },
         {
-            key: '_id',
+            key: 'publisher',
             title: '出版商',
             width: 25
         },
         {
-            key: '_id',
+            key: 'issn',
             title: 'ISSN',
             width: 12
         },
         {
-            key: '_id',
+            key: 'EISSN',
             title: 'EISSN',
             width: 12
         },

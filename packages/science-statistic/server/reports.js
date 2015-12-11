@@ -306,11 +306,20 @@ Science.Reports.getJournalCitedReportData = function (query) {
             $and: [query]
         }
     }, {
-        $group: {
-            _id: "$journalId",
-            total: {$sum: "$citationCount"}
-        }
+        $group: {_id: "$journalId",total: {$sum: "$citationCount"}}
+    },{
+        $sort: {total: -1}
     }]);
-    return citations
+    _.each(citations, function (x) {
+        var journal = Publications.findOne({_id: x._id});
+        if(journal){
+            x.publisher = Publishers.findOne({_id: journal.publisher}).name;
+            x.title = journal.title;
+            x.issn = journal.issn;
+            x.EISSN = journal.EISSN;
+        }
+    })
+    return citations;
+
 };
 //-----------------------------数据范围------------------------------
