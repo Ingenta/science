@@ -330,9 +330,11 @@ Science.Reports.getArticleCitedReportData = function (query) {
         }
     }, {
         $group: {_id: "$_id"}
+    },{
+        $sort: {citationCount: -1}
     }]);
     _.each(citations, function (x) {
-        var article = Articles.findOne({_id: x._id}, {sort: {'citationCount': -1}, fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citationCount:1}});
+        var article = Articles.findOne({_id: x._id}, {fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citationCount:1}});
         if(article){
             x.journal = article.journal.titleCn;
             var publisher = Publishers.findOne({_id: article.publisher})
