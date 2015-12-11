@@ -18,6 +18,11 @@ getJournalComponentByJournalId = function (id) {
     if (!pub)return;
     return "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
 }
+var getPublisherComponentByPublisherId = function (id) {
+    var pub = Publishers.findOne({_id: id}, {fields: {shortname: 1}});
+    if (!pub)return;
+    return "/publisher/" + pub.shortname;
+}
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
     //commented out to avoid subscribing to all issues, because currently issue name are not editable this will not affect anything
@@ -31,9 +36,19 @@ journalIdToName = function (id) {
     return journal && (TAPi18n.getLanguage() === "zh-CN" ? journal.titleCn : journal.title);
 }
 
+publisherIdToName = function (id) {
+    var pub = Publishers.findOne({_id: id}, {fields: {chinesename: 1, name: 1}});
+    return pub && (TAPi18n.getLanguage() === "zh-CN" ? pub.chinesename : pub.name);
+}
+
 Template.registerHelper('journalName', function (id) {
     return journalIdToName(id);
 });
+
+Template.registerHelper('publisherNameById', function (id) {
+    return publisherIdToName(id);
+});
+
 
 Template.registerHelper('urlToArticle', function (title) {
     var article = Articles.findOne({'title.en': title});
@@ -52,7 +67,9 @@ Template.registerHelper('urlToJournal', function (title) {
 Template.registerHelper('urlToJournalById', function (id) {
     return getJournalComponentByJournalId(id);
 });
-
+Template.registerHelper('urlToPublisherById', function (id) {
+    return getPublisherComponentByPublisherId(id);
+});
 
 Template.registerHelper('getImageHelper', function (pictureId) {
     var noPicture = "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
