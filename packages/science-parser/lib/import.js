@@ -1,8 +1,8 @@
 PastDataImport = function (path) {
-    var folder = path || "/Users/jack/ImportPastData/";
-    logger.info("working folder is: "+folder);
 
     var issueCreator = new ScienceXML.IssueCreator();
+    var folder = path || "/Users/jack/ImportPastData/";
+    logger.info("working folder is: "+folder);
 
     var getDoiSecondPart = function (doi) {
         if (doi) {
@@ -94,88 +94,101 @@ PastDataImport = function (path) {
         })
     }
 
+    var importQueue = new PowerQueue({
+        maxProcessing: 1,//1并发
+        maxFailures: 1 //不重试
+    })
+
+    importQueue.errorHandler = function(data){
+
+    };
+
+    importQueue.taskHandler = function(data,next){
+         Parser(data.filepath, {}, Meteor.bindEnvironment(function (err, issue) {
+            if (err)
+                logger.error(err)
+            if (!(issue && !_.isEmpty(issue.articles))) {
+                logger.warn("articles not found in historical issue xml")
+            } else {
+                var journal = Publications.findOne({issn: issue.issn.replace('-', '')}, {
+                    fields: {
+                        title: 1,
+                        titleCn: 1,
+                        issn: 1,
+                        EISSN: 1,
+                        CN: 1,
+                        publisher: 1
+                    }
+                });
+
+                if (!journal) {
+                    logger.warn("journal does not exist with issn: " + issue.issn);
+                } else {
+                    var vi = issueCreator.createIssue({
+                        journalId: journal._id,
+                        volume: issue.volume,
+                        issue: issue.issue,
+                        year: issue.year,
+                        month: issue.month
+                    });
+
+                    _.each(issue.articles, function (article) {
+                        logger.info("import " + article.doi + " started");
+                        var newOne = {};
+                        newOne.journalId = journal._id;
+                        newOne.journal = journal;
+                        newOne.volume = issue.volume;
+                        newOne.issue = issue.issue;
+                        newOne.year = issue.year;
+
+                        newOne.volumeId = vi.volumeId;
+                        newOne.issueId = vi.issueId;
+                        newOne.doi = article.doi;
+                        newOne.articledoi = getDoiSecondPart(article.doi);
+                        newOne.title = article.title;
+                        newOne.publisher = journal.publisher;
+                        newOne.startPage = article.startPage;
+                        newOne.elocationId = article.startPage;
+                        newOne.accepted = Science.String.toDate(article.acceptDate);
+                        newOne.published = Science.String.toDate(article.publishDate);
+                        newOne.topic = getTopic(article.subspecialty);
+                        newOne.contentType = article.contentType;
+                        newOne.abstract = article.abstract;
+                        var authors = getAuthors(article.authors);
+                        if (!_.isEmpty(authors)) {
+                            _.extend(newOne, authors);
+                        }
+                        newOne.keywords = article.indexing;
+                        newOne.pubStatus = "normal";
+                        newOne.accessKey = journal.accessKey;
+                        newOne.language = article.language == 'zh_CN' ? 2 : 1;
+                        var refs = getReference(article.citations);
+                        if (!_.isEmpty(refs)) {
+                            newOne.references = refs;
+                        }
+                        var existArticle = Articles.findOne({doi: newOne.doi});
+                        if (existArticle) {
+                            Articles.update({_id: existArticle._id}, {$set: newOne});
+                            logger.info("update " + newOne.doi + " successful");
+
+                        } else {
+                            Articles.insert(newOne);
+                            logger.info("import " + newOne.doi + " successful");
+                        }
+
+                    })
+                }
+            }
+            next();
+        }));
+    };
+
     Science.FSE.readdir(folder, Meteor.bindEnvironment(function (err, fileList) {
         if (err)
             throw err;
         _.each(fileList, function (file) {
             if (file && file.toLowerCase().endWith(".xml")) {
-                Parser(folder + file, {}, Meteor.bindEnvironment(function (err, issue) {
-                    if (err)
-                        logger.error(err)
-                    if (!(issue && !_.isEmpty(issue.articles))) {
-                        logger.warn("articles not found in historical issue xml")
-                    } else {
-                        var journal = Publications.findOne({issn: issue.issn.replace('-', '')}, {
-                            fields: {
-                                title: 1,
-                                titleCn: 1,
-                                issn: 1,
-                                EISSN: 1,
-                                CN: 1,
-                                publisher: 1,
-
-                            }
-                        });
-
-                        if (!journal) {
-                            logger.warn("journal does not exist with issn: " + issue.issn);
-                        } else {
-                            var vi = issueCreator.createIssue({
-                                journalId: journal._id,
-                                volume: issue.volume,
-                                issue: issue.issue,
-                                year: issue.year,
-                                month: issue.month
-                            });
-
-                            _.each(issue.articles, function (article) {
-                                logger.info("import " + article.doi + " started");
-                                var newOne = {};
-                                newOne.journalId = journal._id;
-                                newOne.journal = journal;
-                                newOne.volume = issue.volume;
-                                newOne.issue = issue.issue;
-                                newOne.year = issue.year;
-
-                                newOne.volumeId = vi.volumeId;
-                                newOne.issueId = vi.issueId;
-                                newOne.doi = article.doi;
-                                newOne.articledoi = getDoiSecondPart(article.doi);
-                                newOne.title = article.title;
-                                newOne.publisher = journal.publisher;
-                                newOne.startPage = article.startPage;
-                                newOne.elocationId = article.startPage;
-                                newOne.accepted = Science.String.toDate(article.acceptDate);
-                                newOne.published = Science.String.toDate(article.publishDate);
-                                newOne.topic = getTopic(article.subspecialty);
-                                newOne.contentType = article.contentType;
-                                newOne.abstract = article.abstract;
-                                var authors = getAuthors(article.authors);
-                                if (!_.isEmpty(authors)) {
-                                    _.extend(newOne, authors);
-                                }
-                                newOne.keywords = article.indexing;
-                                newOne.pubStatus = "normal";
-                                newOne.accessKey = journal.accessKey;
-                                newOne.language = article.language == 'zh_CN' ? 2 : 1;
-                                var refs = getReference(article.citations);
-                                if (!_.isEmpty(refs)) {
-                                    newOne.references = refs;
-                                }
-                                var existArticle = Articles.findOne({doi: newOne.doi});
-                                if (existArticle) {
-                                    Articles.update({_id: existArticle._id}, {$set: newOne});
-                                    logger.info("update " + newOne.doi + " successful");
-
-                                } else {
-                                    Articles.insert(newOne);
-                                    logger.info("import " + newOne.doi + " successful");
-                                }
-
-                            })
-                        }
-                    }
-                }));
+                importQueue.add({filepath:folder + file});
             }
         })
     }))
