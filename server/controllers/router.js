@@ -282,7 +282,7 @@ Router.map(function () {
                     var html = JET.render('pdf', data);
 
                     wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>', Meteor.bindEnvironment(function (code, signal) {
-
+                        if(code)logger.error(code);
                         var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
                         var footmark = Config.pdf.footmark.replace("{ip}", ip || "unknown")
                             .replace("{time}", new Date().format("yyyy-MM-dd hh:mm:ss"))
