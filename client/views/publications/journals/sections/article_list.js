@@ -13,6 +13,13 @@ Template.journalNavigationPanel.helpers({
     },
     formatMonth:function(){
         return this.month?(", "+this.month):"";
+    },
+    unionYear:function(){
+        var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume},{$fields:{year:1}}).fetch();
+        var years = _.pluck(issues,'year');
+        years = _.uniq(years.join(", ").split(/, ?/)).sort();
+        if(!_.isEmpty(years))
+            return "("+years.join(", ") +")"
     }
 });
 
@@ -63,7 +70,9 @@ Template.articleListRight.helpers({
         if (!curIssue) return;
         var i = Issues.findOne({_id: curIssue});
         if (!i)return;
-        var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year + "/" + i.month;
+        var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", " + i.year;
+        if(i.month)
+            title+="/" + i.month;
         return title;
 
 
