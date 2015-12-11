@@ -14,9 +14,14 @@ var getJournalComponentByArticle = function (article) {
 getJournalComponentByJournalId = function (id) {
     var journal = Publications.findOne({_id: id}, {fields: {shortTitle: 1, publisher: 1}});
     if (!journal)return;
-    var pub = Publishers.findOne({_id: journal.publisher}, {fields: {shortname: 1}});
+    var pub = getPublisherComponentByPublisherId(journal.publisher);
     if (!pub)return;
-    return "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
+    return pub + "/journal/" + journal.shortTitle;
+}
+var getPublisherComponentByPublisherId = function (id) {
+    var pub = Publishers.findOne({_id: id}, {fields: {shortname: 1}});
+    if (!pub)return;
+    return "/publisher/" + pub.shortname;
 }
 var getIssueComponentByArticle = function (article) {
     if (!article)return;
@@ -31,9 +36,19 @@ journalIdToName = function (id) {
     return journal && (TAPi18n.getLanguage() === "zh-CN" ? journal.titleCn : journal.title);
 }
 
+publisherIdToName = function (id) {
+    var pub = Publishers.findOne({_id: id}, {fields: {chinesename: 1, name: 1}});
+    return pub && (TAPi18n.getLanguage() === "zh-CN" ? pub.chinesename : pub.name);
+}
+
 Template.registerHelper('journalName', function (id) {
     return journalIdToName(id);
 });
+
+Template.registerHelper('publisherNameById', function (id) {
+    return publisherIdToName(id);
+});
+
 
 Template.registerHelper('urlToArticle', function (title) {
     var article = Articles.findOne({'title.en': title});
@@ -52,7 +67,9 @@ Template.registerHelper('urlToJournal', function (title) {
 Template.registerHelper('urlToJournalById', function (id) {
     return getJournalComponentByJournalId(id);
 });
-
+Template.registerHelper('urlToPublisherById', function (id) {
+    return getPublisherComponentByPublisherId(id);
+});
 
 Template.registerHelper('getImageHelper', function (pictureId) {
     var noPicture = "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
@@ -138,10 +155,10 @@ Template.registerHelper('collectionPermissionCheck', function (permissions, publ
     }
 });
 
-Template.registerHelper('formatissn',function(issn){
-    if(!issn) return issn;
-    if(!_.isString(issn)) return issn;
-    if(issn.indexOf('-')>0) return issn;
-    if(issn.length==8)
-        return issn.slice(0,4) + "-" + issn.slice(4);
+Template.registerHelper('formatissn', function (issn) {
+    if (!issn) return issn;
+    if (!_.isString(issn)) return issn;
+    if (issn.indexOf('-') > 0) return issn;
+    if (issn.length == 8)
+        return issn.slice(0, 4) + "-" + issn.slice(4);
 })
