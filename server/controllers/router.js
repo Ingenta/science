@@ -286,7 +286,7 @@ Router.map(function () {
                         var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
                         var footmark = Config.pdf.footmark.replace("{ip}", ip || "unknown")
                             .replace("{time}", new Date().format("yyyy-MM-dd hh:mm:ss"))
-                            .replace("{url}", Config.rootUrl + Science.URL.articleDetail(article._id) || "");
+                            .replace("{url}", Config.rootUrl + Science.URL.articleDetail(article._id).substring(1) || "");
                         var params = [
                             "-i", Config.staticFiles.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
                             "-o", Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, //处理完成后保存的文件位置
@@ -312,13 +312,26 @@ Router.map(function () {
                                 if (!error) {
                                     Science.FSE.exists(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, function (result) {
                                         if (result) {
+                                            var filePath = Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key;
+                                            var stat = null;
+                                            try {
+                                                stat = Science.FSE.statSync(filePath);
+                                            } catch (_error) {
+                                                logger.error(_error);
+                                                response.statusCode = 404;
+                                                response.end();
+                                                return;
+                                            }
                                             var headers = {
                                                 'Content-Type': pdf.copies.pdfs.type,
-                                                'Content-Disposition': "attachment; filename=" + pdf.copies.pdfs.name
+                                                'Content-Disposition': "attachment; filename=" + pdf.copies.pdfs.name,
+                                                'Content-Length': stat.size
                                             };
 
                                             response.writeHead(200, headers);
-                                            response.end(Science.FSE.readFileSync(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key));
+
+                                            Science.FSE.createReadStream(filePath).pipe(response);
+                                            //response.end(Science.FSE.readFileSync(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key));
                                         }
                                     });
                                 } else {
@@ -334,3 +347,4 @@ Router.map(function () {
     });
 
 });
+

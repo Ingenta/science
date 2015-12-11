@@ -1,4 +1,25 @@
 Template.toggleField.helpers({
+    notEmptyField:function(){
+        return !_.isEmpty(this.field) && (this.field.cn || this.field.en);
+    },
+    getContent: function (field) {
+        if (typeof field == "object") {
+            if (TAPi18n.getLanguage() === "zh-CN") {
+                if (!field.cn)return field.en;
+                return field.cn;
+            }
+            if (!field.en)return field.cn;
+            return field.en;
+        } else {
+            return field;
+        }
+    }
+});
+
+Template.toggleFieldBrowse.helpers({
+    notEmptyField:function(){
+        return !_.isEmpty(this.field) && (this.field.cn || this.field.en);
+    },
     getContent: function (field) {
         if (typeof field == "object") {
             if (TAPi18n.getLanguage() === "zh-CN") {
