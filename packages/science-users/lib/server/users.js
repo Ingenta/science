@@ -146,8 +146,7 @@ Accounts.onCreateUser(function (options, user) {
         user.publisherId = options.publisherId;
     if (options.journalId)
         user.journalId = options.journalId;
-    if (options.level)
-        user.level = options.level
+    user.level = options.level || Permissions.level.normal
     return user;
 });
 Meteor.methods({
