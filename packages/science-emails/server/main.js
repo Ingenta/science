@@ -138,17 +138,51 @@ Science.Email.tableOfContentEmail = function (yesterday) {
     });
 };
 
-Science.Email.availableOnline = function (oneEmail) {
-    Email.send({
-        to: oneEmail.email,
-        from: Config.mailServer.address,
-        subject: "Available Online Now",
-        html: JET.render('availableOnline', {
+Science.Email.availableOnline = function (lastWeek) {
+    Articles.aggregate([{
+        $match: {
+            $and: [
+                {pubStatus: 'online_first'},
+                {createdAt: {$gt: lastWeek}}
+            ]
+        }
+    }, {
+        $group: {
+            _id: "$journalId",
+            articleList: {$push:  {
+                _id: "$_id",
+                title: "$title",
+                authors: "$authors",
+                year: "$year:",
+                volume: "$volume",
+                issue: "$issue",
+                elocationId: "$elocationId",
+                journalId: "$journalId",
+                journal: "$journal"
+            }}
+        }
+    }]).forEach(function (obj) {
+        var journal = {};
+        journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
+        journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
+        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url().substring(1));
+        generateArticleLinks(obj.articleList, journal.url);
+
+        var content = JET.render('availableOnline', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "onlineUrl": Config.rootUrl + "email/online.jpg",
             "rootUrl": Config.rootUrl,
-            "articleList": oneEmail.articleList,
-        })
+            "journal": journal,
+            "articleList": obj.articleList
+        });
+        Users.find({'profile.journalsOfInterest': {$in: [obj._id]}}).forEach(function (oneUser) {
+            Email.send({
+                to: oneUser.emails[0].address,
+                from: Config.mailServer.address,
+                subject: "Available Online Now",
+                html: content
+            });
+        });
     });
 };
 

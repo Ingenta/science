@@ -87,33 +87,33 @@ SyncedCron.add({
                 //    });
                 //});
                 //get all the data for available online
-                oneUser.profile.journalsOfInterest.forEach(function (journalId) {
-                    var articleList = Articles.find({
-                        $and: [
-                            {journalId: {$in: [journalId]}},
-                            {createdAt: {$gt: oneUser.lastSentDate}},
-                            {$or: [{pubStatus: 'online_first'}, {pubStatus: 'accepted'}]}
-                        ]
-                    }, {
-                        fields: {
-                            _id: 1,
-                            title: 1,
-                            authors: 1,
-                            year: 1,
-                            volume: 1,
-                            issue: 1,
-                            elocationId: 1,
-                            journalId: 1,
-                            'journal.titleCn': 1
-                        }
-                    }).fetch();
-                    articleList = generateArticleLinks(articleList);
-                    if (articleList.length) outgoingList.push({
-                        userId: oneUser._id,
-                        email: oneUser.emails[0].address,
-                        articleList: articleList
-                    });
-                });
+                //oneUser.profile.journalsOfInterest.forEach(function (journalId) {
+                //    var articleList = Articles.find({
+                //        $and: [
+                //            {journalId: {$in: [journalId]}},
+                //            {createdAt: {$gt: oneUser.lastSentDate}},
+                //            {$or: [{pubStatus: 'online_first'}, {pubStatus: 'accepted'}]}
+                //        ]
+                //    }, {
+                //        fields: {
+                //            _id: 1,
+                //            title: 1,
+                //            authors: 1,
+                //            year: 1,
+                //            volume: 1,
+                //            issue: 1,
+                //            elocationId: 1,
+                //            journalId: 1,
+                //            'journal.titleCn': 1
+                //        }
+                //    }).fetch();
+                //    articleList = generateArticleLinks(articleList);
+                //    if (articleList.length) outgoingList.push({
+                //        userId: oneUser._id,
+                //        email: oneUser.emails[0].address,
+                //        articleList: articleList
+                //    });
+                //});
             }
             //check topic watch and get all data
             if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
@@ -219,24 +219,24 @@ SyncedCron.add({
                     //this is a topic watch
                     oneEmail.topic = Topics.findOne({_id: oneEmail.topic});
                     oneEmail.homePageNews = homePageNews;
-                    Science.Email.watchTopicEmail(oneEmail);
+                    //Science.Email.watchTopicEmail(oneEmail);
                 } else if (oneEmail.citations) {
                     //this is cited alert
-                    Science.Email.watchArticleCitationAlertEmail(oneEmail);
+                    //Science.Email.watchArticleCitationAlertEmail(oneEmail);
                 } else {
                     //this is an article watch
-                    Science.Email.availableOnline(oneEmail);
+                    //Science.Email.availableOnline(oneEmail);
                 }
 
 
                 logger.silly("email sent");
-                Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
+                //Users.update({_id: oneEmail.userId}, {lastSentDate: today.toDate()});
             });
         } else {
             logger.silly('watch email task ran but email list was empty, no emails sent.');
         }
-        Science.Email.searchFrequencyEmail();
-        Science.Email.authorCitationAlertEmail();
+        //Science.Email.searchFrequencyEmail();
+        //Science.Email.authorCitationAlertEmail();
     }
 });
 
