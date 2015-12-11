@@ -11,7 +11,7 @@ Science.Reports.getCitedJournalReportFile = function (query, fileName) {
 Science.Reports.getCitedArticleReportFile = function (query, fileName) {
     query.citations = {$exists: true};
     console.dir(query);
-    var data = Science.Reports.getArticleCitedReportData(query);
+    var data = Articles.find(query, {sort: {'citationCount': -1}, limit: 20, fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citationCount:1}}).fetch();
     var fields = Science.Reports.getCitedArticleReportFields();
     console.dir(data);
     return Excel.export(fileName, fields, data);
@@ -51,7 +51,7 @@ Science.Reports.getCitedJournalReportFields = function () {
 Science.Reports.getCitedArticleReportFields = function () {
     var fields = [
         {
-            key: 'title',
+            key: 'title.cn',
             title: '文章标题'
         },
         {
@@ -60,13 +60,18 @@ Science.Reports.getCitedArticleReportFields = function () {
             width: 25
         },
         {
-            key: 'journal',
+            key: 'journal.titleCn',
             title: '期刊名称'
         },
         {
             key: 'publisher',
             title: '出版商',
-            width: 25
+            width: 25,
+            transform: function(val, doc) {
+                var publisher = Publishers.findOne({_id: val});
+                if(publisher)return publisher.chinesename;
+                return;
+            }
         },
         {
             key: 'issue',

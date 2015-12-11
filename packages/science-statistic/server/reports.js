@@ -333,6 +333,7 @@ Science.Reports.getJournalCitedReportData = function (query) {
 Science.Reports.getArticleCitedReportData = function (query) {
     var myFuture = new Future();
     var allPublisher = Publishers.find().fetch();
+
     Articles.rawCollection().group(
         {articleId: true},
         query,
