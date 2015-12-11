@@ -194,6 +194,9 @@ Router.map(function () {
             if (pdf) {
                 var response = this.response;
                 var request = this.request;
+                var outputFileName = Guid.create() + ".pdf"
+                var outputPath = Config.staticFiles.uploadPdfDir + "/handle/" + outputFileName;
+                console.log(outputPath)
                 //get this article by pdf id
                 var article = Articles.findOne({pdfId: this.params.pdfId}, {
                     fields: {
@@ -289,7 +292,7 @@ Router.map(function () {
                             .replace("{url}", Config.rootUrl + Science.URL.articleDetail(article._id).substring(1) || "");
                         var params = [
                             "-i", Config.staticFiles.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
-                            "-o", Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, //处理完成后保存的文件位置
+                            "-o", outputPath, //处理完成后保存的文件位置
                             "-s", adPdf,       //广告页位置
                             "-f", footmark
                         ];
@@ -298,7 +301,7 @@ Router.map(function () {
                             params = _.union(params, ["-w", Config.pdf.watermark]);
                         }
                         Science.Pdf(params, function (error, stdout, stderr) {
-                                //Science.FSE.remove(adPdf);
+                                Science.FSE.remove(adPdf);
                                 if (stdout) {
                                     console.log('------STDOUT--------');
                                     console.dir(stdout);
@@ -312,10 +315,10 @@ Router.map(function () {
                                 if (!error) {
                                     Science.FSE.exists(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, function (result) {
                                         if (result) {
-                                            var filePath = Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key;
+
                                             var stat = null;
                                             try {
-                                                stat = Science.FSE.statSync(filePath);
+                                                stat = Science.FSE.statSync(outputPath);
                                             } catch (_error) {
                                                 logger.error(_error);
                                                 response.statusCode = 404;
@@ -330,8 +333,7 @@ Router.map(function () {
 
                                             response.writeHead(200, headers);
 
-                                            Science.FSE.createReadStream(filePath).pipe(response);
-                                            //response.end(Science.FSE.readFileSync(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key));
+                                            Science.FSE.createReadStream(outputPath).pipe(response);
                                         }
                                     });
                                 } else {
