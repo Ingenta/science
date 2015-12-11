@@ -124,22 +124,35 @@ Science.Reports.getUserActionData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var users = Users.findOne({_id: item.userId},{fields:{username:1,emails:1,profile:1,level:1}});
+                var x = {};
                 if(users){
-                    var x = {};
                     x.name = users.username;
-                    x.emails = users.emails[0].address;
-                    x.institutionName = users.profile.institution;
+                    if(users.emails){
+                        if(users.emails[0].address){
+                            x.emails = users.emails[0].address;
+                        }
+                    }
+                    if(users.profile){
+                        if(users.profile.institution){
+                            x.institutionName = users.profile.institution;
+                        }
+                    }
                     if(users.level=="admin"){
                         x.userType = "超级管理员";
-                    }else if(users.level=="publisher"){
-                        x.userType = "出版商用户";
+                    }else if(users.level=="publisher") {
+                        x.userType = "出版商管理员";
+                    }else if(users.level=="journal"){
+                        x.userType = "期刊管理员";
                     }else if(users.level=="institution"){
                         x.userType = "机构用户";
                     }else{
                         x.userType = "普通用户";
                     }
-                    _.extend(item, x);
+
+                }else{
+                    x.userType = "游客";
                 }
+                _.extend(item, x);
             })
             return myFuture.return(result);
         })
@@ -161,8 +174,8 @@ Science.Reports.getInstitutionActionData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var institution = Institutions.findOne({_id: item.institutionId},{fields:{name:1,number:1,type:1}});
+                var x = {};
                 if(institution){
-                    var x = {};
                     x.name = institution.name.cn;
                     x.number = institution.number;
                     if(institution.type=="1"){
@@ -180,8 +193,12 @@ Science.Reports.getInstitutionActionData = function(query){
                     }else{
                         x.type = "";
                     }
-                    _.extend(item, x);
+                }else{
+                    x.name = "无";
+                    x.number = "无";
+                    x.type = "无";
                 }
+                _.extend(item, x);
             })
             return myFuture.return(result);
         })
@@ -203,12 +220,16 @@ Science.Reports.getRegionalData = function(query){
         Meteor.bindEnvironment( function (err, result) {
             _.each(result, function (item) {
                 var regional = getLocationFromLocalDatabase(item.ip);
+                var x = {};
                 if(regional){
-                    var x = {};
+
                     x.country = regional.country_chinese_name;
                     x.region = regional.region_chinese_name;
-                    _.extend(item, x);
+                }else{
+                    x.country = "未知";
+                    x.region = "未知";
                 }
+                _.extend(item, x);
             })
             return myFuture.return(result);
         })

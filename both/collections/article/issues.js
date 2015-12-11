@@ -14,7 +14,8 @@ IssuesSchema = new SimpleSchema({
         type: String
     },
     month: {
-        type: String
+        type: String,
+        optional:true
     },
     description: {
         type: String,
