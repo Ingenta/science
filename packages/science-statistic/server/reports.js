@@ -329,6 +329,8 @@ Science.Reports.getArticleCitedReportData = function (query) {
             $and: [query]
         }
     }, {
+        $project : {citationCount : 1 }
+    },{
         $group: {_id: "$_id"}
     },{
         $sort: {citationCount: -1}
