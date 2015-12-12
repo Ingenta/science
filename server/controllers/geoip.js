@@ -6,10 +6,6 @@ var geoipHost = isDev ? localDevServer : "http://freegeoip";
 var geoipUrl = geoipHost + ":" + port + "/json/";
 getLocationFromGeoIPServer = function (ip) {
     var urlToCheck = geoipUrl + ip;
-    if (Meteor.isDevelopment) {
-        //pretend to be baidu in dev mode because of internal office ip not resolving correctly
-        urlToCheck = geoipUrl + "baidu.com";
-    }
     try {
         var getLocationSync = Meteor.wrapAsync(ScienceXML.getLocationAsync);
         var result = getLocationSync(urlToCheck);
@@ -39,6 +35,10 @@ getLocationFromLocalDatabase = function (ip) {
 }
 
 getLocationByIP = function (ip) {
+    if (Meteor.isDevelopment) {
+        //pretend to be baidu in dev mode because of internal office ip not resolving correctly
+        ip = "180.149.132.47"; //180.149.132.47 = baidu.com
+    }
     var result = getLocationFromGeoIPServer(ip);
     if (!result)
         result = getLocationFromLocalDatabase(ip);
