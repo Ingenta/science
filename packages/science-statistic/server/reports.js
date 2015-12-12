@@ -322,31 +322,4 @@ Science.Reports.getJournalCitedReportData = function (query) {
     return citations;
 
 };
-
-Science.Reports.getArticleCitedReportData = function (query) {
-    var citations = Articles.aggregate([{
-        $match: {
-            $and: [query]
-        }
-    }, {
-        $group: {_id: "$_id"}
-    }]);
-    _.each(citations, function (x) {
-        var article = Articles.findOne({_id: x._id}, {sort: {'citationCount': -1}, fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citationCount:1}});
-        if(article){
-            x.journal = article.journal.titleCn;
-            var publisher = Publishers.findOne({_id: article.publisher})
-            if(publisher){
-                x.publisher = publisher.chinesename;
-            }
-            x.title = article.title.cn;
-            x.doi = article.doi;
-            x.issue = article.issue;
-            x.volume = article.volume;
-            x.citationCount = article.citationCount;
-        }
-    })
-    return citations;
-
-};
 //-----------------------------数据范围------------------------------
