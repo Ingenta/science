@@ -12,7 +12,7 @@ getLocationFromGeoIPServer = function (ip) {
         if (!result)return;
         return EJSON.parse(result);
     } catch (err) {
-        logger.error("connection failed to geoip at: " + geoipUrl);
+        logger.warning("connection to geoip failed at: " + geoipUrl);
     }
 
 
