@@ -57,7 +57,7 @@ Science.Reports.getCitedJournalReportFields = function () {
 Science.Reports.getCitedArticleReportFields = function () {
     var fields = [
         {
-            key: 'title',
+            key: 'title.cn',
             title: '文章标题'
         },
         {
