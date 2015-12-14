@@ -117,6 +117,7 @@ xref[ref-type='table'] {
 .att-table{
     width:100%;
     text-align:center;
+    margin:15px 0px;
 }
 .att-table table{
     width:100%;
@@ -129,7 +130,7 @@ xref[ref-type='table'] {
     margin-bottom: 5px;
 }
 .title_style{
-    margin: 0 0 0px;
+    margin: 0px 0px;
 }
 
 #fulltext-viewer p, .interesting-content p {
