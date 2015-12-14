@@ -130,7 +130,6 @@ mpowaga:string-template@0.1.0
 mrt:cookies@0.3.0
 mrt:flash-messages@1.0.1
 mrt:jquery-raty@2.7.2
-mrt:mathjax@0.6.3
 mrt:moment@2.8.1
 msavin:mongol@1.6.2
 multiply:iron-router-progress@1.0.2
