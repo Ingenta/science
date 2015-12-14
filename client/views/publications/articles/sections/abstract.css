@@ -117,6 +117,7 @@ xref[ref-type='table'] {
 .att-table{
     width:100%;
     text-align:center;
+    margin:15px 0px;
 }
 .att-table table{
     width:100%;

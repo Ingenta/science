@@ -62,6 +62,8 @@ Template.FilterList.helpers({
     publications: function () {
         var pubId = Session.get('filterPublisher');
         var first = Session.get('pubFirstLetter');
+        var topicId = Session.get('filterTopics');
+        topicId = _.isArray(topicId)?topicId:[topicId];
         var numPerPage = Session.get('PerPage');
         if (numPerPage === undefined) {
             numPerPage = 10;
@@ -75,6 +77,9 @@ Template.FilterList.helpers({
             reg = "^" + first;
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
+        if(!_.isEmpty(topicId)){
+            q.topicId={$in:topicId}
+        }
         Session.set("totalPublicationResults", Publications.find(q).count());
         var pubs = myPubPagination.find(q, {itemsPerPage: numPerPage});
         return pubs;
@@ -82,9 +87,25 @@ Template.FilterList.helpers({
     selectedPublisher: function () {
         return Session.get('filterPublisher');
     },
+    unionTopics:function(){
+        var journals=Publications.find({},{fields:{topicId:1}}).fetch();
+        var topics = _.uniq(_.compact(_.flatten(_.pluck(journals,"topicId"))));
+        return Topics.find({_id:{$in:topics}});
+    },
+    countOfTopic:function(){
+        return Publications.find({topicId:this._id}).count();
+    },
+    selectedTopics:function(){
+        return Session.get('filterTopics');
+    },
+    ftClass:function(){
+        return _.contains(Session.get('filterTopics'),this._id)?"fa fa-mail-reply":"fa fa-mail-forward";
+    },
     filterPublicationPageCount: function () {
         var pubId = Session.get('filterPublisher');
         var first = Session.get('pubFirstLetter');
+        var topicId = Session.get('filterTopics');
+        topicId = _.isArray(topicId)?topicId:[topicId];
         var q = {};
         pubId && (q.publisher = pubId);
         var reg;
@@ -94,14 +115,28 @@ Template.FilterList.helpers({
             reg = "^" + first;
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
+        if(!_.isEmpty(_.compact(topicId))){
+            q.topicId={$in:topicId}
+        }
         return myPubPagination.find(q).count()>10;
     }
 });
 
 Template.FilterList.events({
-    'click .filterButton': function (event) {
-        var f = $(event.target).data().pubid;
+    'click .filterPublisherButton': function (event) {
+        var f = $(event.target).data().id;
         Session.set('filterPublisher', f);
+        Session.set('PerPage', 10);
+    },
+    'click .filterTopicButton': function (event) {
+        var f = $(event.target).data().id;
+        var ft=Session.get('filterTopics')||[];
+        if(_.contains(ft,f)){
+            ft= _.without(ft,f);
+        }else{
+            ft.push(f);
+        }
+        Session.set('filterTopics', ft);
         Session.set('PerPage', 10);
     },
     'click .clearPublisher': function (event) {
@@ -117,5 +152,6 @@ Template.FilterList.events({
 Template.FilterList.onRendered(function () {
     Session.set('filterPublisher', undefined);
     Session.set('pubFirstLetter', undefined);
+    Session.set('filterTopics',undefined);
     Session.set('PerPage', 10);
 });
