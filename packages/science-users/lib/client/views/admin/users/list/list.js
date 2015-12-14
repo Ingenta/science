@@ -71,30 +71,6 @@ Template.AdminUsersViewTableItems.events({
 		}
 		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
-	},
-	"click #delete-button": function(e, t) {
-		e.preventDefault();
-		Permissions.check("delete-user","user");
-		var me = this;
-		bootbox.dialog({
-			message: "Delete? Are you sure?",
-			title: "Delete",
-			animate: false,
-			buttons: {
-				success: {
-					label: "Yes",
-					className: "btn-success",
-					callback: function() {
-						Users.remove({ _id: me._id });
-					}
-				},
-				danger: {
-					label: "No",
-					className: "btn-default"
-				}
-			}
-		});
-		return false;
 	}
 });
 

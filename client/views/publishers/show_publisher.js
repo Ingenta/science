@@ -16,3 +16,12 @@ Template.publisherOptions.helpers({
         return Router.current().data()._id;
     }
 });
+
+Template.ShowPublisher.helpers({
+    newsUrl: function () {
+        var shortName = Router.current().params.publisherName;
+        if(shortName==Config.defaultPublisherShortName){
+            return "/miniplatform";
+        }
+    }
+});
