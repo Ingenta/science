@@ -138,7 +138,6 @@ Template.showArticle.helpers({
             _.each(this.affs, function (aff) {
                 var match = /\d/.exec(aff);
                 var labelInId = !_.isEmpty(match) && match[0];
-                console.log('aa')
                 var currAffObj = _.find(affObjs,function(ao){
                     return ao.id==aff;
                 })
