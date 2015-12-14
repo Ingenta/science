@@ -29,8 +29,10 @@ Template.autoformModals.rendered = function() {
 		}
 	};
 	$('#afModal').on('shown.bs.modal', function() {
-		AutoForm.resetForm(Session.get('cmFormId') || defaultFormId);
 		return $(window).bind('keyup', onEscKey);
+	});
+	$('#afModal').on('show.bs.modal', function() {
+		AutoForm.resetForm(Session.get('cmFormId') || defaultFormId);
 	});
 	$('#afModal').on('hidden.bs.modal', function() {
 		var i, key, len, results, sessionKeys;

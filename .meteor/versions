@@ -1,11 +1,11 @@
 accounts-base@1.2.2
 accounts-password@1.1.4
 adain:meteor-guid@1.0.1
-aldeed:autoform@5.7.1
+aldeed:autoform@5.8.0
 aldeed:autoform-bs-datepicker@1.1.1
 aldeed:autoform-select2@2.0.2
-aldeed:collection2@2.5.0
-aldeed:simple-schema@1.4.0
+aldeed:collection2@2.6.0
+aldeed:simple-schema@1.5.0
 aldeed:template-extension@3.4.3
 amplify@1.0.0
 arthuryyx:ftp@0.3.10
@@ -135,7 +135,7 @@ mrt:moment@2.8.1
 msavin:mongol@1.6.2
 multiply:iron-router-progress@1.0.2
 natestrauser:select2@4.0.0_1
-netanelgilad:excel@0.2.4
+netanelgilad:excel@0.2.5
 nicolaslopezj:excel-export@1.0.0
 npm-bcrypt@0.7.8_2
 npm-container@1.2.0
@@ -202,6 +202,5 @@ url@1.0.5
 vazco:universe-autoform-select@0.1.18
 webapp@1.2.3
 webapp-hashing@1.0.5
-wylio:mandrill@1.0.1
 yogiben:autoform-file@0.2.9
 yogiben:autoform-modals-up@0.3.7
