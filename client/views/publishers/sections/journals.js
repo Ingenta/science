@@ -54,29 +54,6 @@ Template.displayPublication.helpers({
     }
 });
 
-Template.updatePublicationModalForm.helpers({
-    getTitle: function () {
-        return TAPi18n.__("Update");
-    },
-    getTopics: function () {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var topics = Topics.find({}, {name: 1, englishName: 1}).fetch();
-        var result = [];
-        _.each(topics, function (item) {
-            var name = iscn ? item.name : item.englishName;
-            result.push({label: name, value: item._id});
-        });
-        return result;
-    },
-    getTags: function () {
-        var tags = Tags.find({}).fetch();
-        var result = [];
-        _.each(tags, function (item) {
-            result.push({label: item.tagNumber, value: item._id});
-        });
-        return result;
-    }
-});
 Template.SinglePublication.events({
     'click .fa-trash': function (e) {
         var id = this._id;
@@ -85,6 +62,12 @@ Template.SinglePublication.events({
         })
     }
 });
+
+Template.SinglePublication.helpers({
+    getModalTitle:function(){
+        return TAPi18n.__("Update");
+    }
+})
 
 Template.PublicationList.events({
     'click .perPage': function (event) {

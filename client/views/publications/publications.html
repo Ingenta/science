@@ -77,7 +77,9 @@
         <div class="pull-right">
             {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                 {{> displayPublication}}
-                {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
+                {{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"
+                fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,scholarOneCode,magtechCode,tabSelections,historicalJournal" buttonContent=getUpdateButtonContent}}
+                {{/afModal}}
             {{/if}}
             {{#if permissionCheckWithScope "delete-journal" "resource"  "publisher" publisher}}
                 <a href="#" class="fa fa-trash"></a>

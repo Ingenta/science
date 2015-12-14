@@ -19,6 +19,7 @@ subs.subscribe('emailConfig');
 subs.subscribe('publishers');
 subs.subscribe('publications');
 subs.subscribe('tag');
+subs.subscribe('topics');
 
 Router.onBeforeAction(function () {
     // loading indicator here

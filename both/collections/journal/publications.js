@@ -12,6 +12,29 @@ this.Publications.allow({
     }
 });
 
+
+
+var getTags = function(){
+    var tags = Tags.find({}).fetch();
+    var result = [];
+    _.each(tags, function (item) {
+        result.push({label: item.tagNumber, value: item._id});
+    });
+    return result;
+}
+
+var getTopics= function () {
+    console.log('aa');
+    var iscn = TAPi18n.getLanguage() === 'zh-CN';
+    var topics = Topics.find({}, {name: 1, englishName: 1}).fetch();
+    var result = [];
+    _.each(topics, function (item) {
+        var name = iscn ? item.name : item.englishName;
+        result.push({label: name, value: item._id});
+    });
+    return result;
+}
+
 PublicationsSchema = new SimpleSchema({
     title: {
         type: String
@@ -70,7 +93,8 @@ PublicationsSchema = new SimpleSchema({
             type: "universe-select",
             afFieldInput: {
                 multiple: true,
-                create: false
+                create: false,
+                options: getTags
             }
         }
     },
@@ -84,7 +108,8 @@ PublicationsSchema = new SimpleSchema({
             type: "universe-select",
             afFieldInput: {
                 multiple: true,
-                create: false
+                create: false,
+                options: getTopics
             }
         }
     },
