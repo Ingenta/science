@@ -9,7 +9,6 @@ aldeed:simple-schema@1.5.0
 aldeed:template-extension@3.4.3
 amplify@1.0.0
 arthuryyx:ftp@0.3.10
-arthuryyx:simple-schema-i18n@0.1.9
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -68,6 +67,7 @@ fortawesome:fontawesome@4.5.0
 fourseven:scss@2.0.1_5
 geojson-utils@1.0.4
 gwendall:autoform-i18n@0.1.9_1
+gwendall:simple-schema-i18n@0.2.1
 hitchcott:paginator@0.2.3
 hot-code-push@1.0.0
 html-tools@1.0.5
