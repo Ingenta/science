@@ -77,7 +77,7 @@ Template.FilterList.helpers({
             reg = "^" + first;
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
-        if(!_.isEmpty(topicId)){
+        if(!_.isEmpty(_.compact(topicId))){
             q.topicId={$in:topicId}
         }
         Session.set("totalPublicationResults", Publications.find(q).count());
