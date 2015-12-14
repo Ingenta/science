@@ -46,7 +46,8 @@ ReactiveTabs.createInterface({
             if (!_.isEmpty(article.keywords)) {
                 var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn));
                 if (!_.isEmpty(keywords)) {
-                    Meteor.call('updateKeywordScore',keywords,2,function(err,result){});
+                    Meteor.call('updateKeywordScore', keywords, 2, function (err, result) {
+                    });
                 }
             }
             Users.recent.read(article);
@@ -185,6 +186,7 @@ Template.articleOptions.helpers({
         return Session.get('activeTab');
     },
     ipRedirect: function () {
+        if (Permissions.isAdmin())return false;
         if (this.language === "2") return false;
         return Session.get("ipInChina");
     }
