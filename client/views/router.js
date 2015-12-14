@@ -19,7 +19,6 @@ subs.subscribe('emailConfig');
 subs.subscribe('publishers');
 subs.subscribe('publications');
 subs.subscribe('tag');
-subs.subscribe('topics');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -56,7 +55,8 @@ Router.map(function () {
             return [
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers')
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('topics')
             ]
         }
     });
