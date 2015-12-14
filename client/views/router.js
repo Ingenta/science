@@ -55,7 +55,8 @@ Router.map(function () {
             return [
                 Meteor.subscribe('images'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('publishers')
+                Meteor.subscribe('publishers'),
+                Meteor.subscribe('topics')
             ]
         }
     });

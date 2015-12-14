@@ -130,4 +130,3 @@ Helpers.integerToTrueFalse = function (i) {
 _.each(Helpers, function (helper, key) {
     Handlebars.registerHelper(key, helper);
 });
-

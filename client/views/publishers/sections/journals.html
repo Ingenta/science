@@ -58,7 +58,9 @@
                 <div class="pull-right">
                     {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                         {{> displayPublication}}
-                        {{>jkafModal template="updatePublicationModalForm" doc=this id="updatePublicationsModal"}}
+                        {{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"
+                        fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,scholarOneCode,magtechCode,tabSelections,historicalJournal" buttonContent=getUpdateButtonContent}}
+                        {{/afModal}}
                     {{/if}}
                     {{#if permissionCheckWithScope "delete-journal" "resource" "publisher" publisher}}
                         <!--<a href="#" class="fa fa-trash"></a>-->
@@ -86,34 +88,6 @@
     {{#if visibleIs "0"}}
         <span class="fa fa-eye-slash" style="cursor: pointer"></span>
     {{/if}}
-</template>
-
-<template name="updatePublicationModalForm">
-    {{#autoForm doc=this collection="Publications" id="updatePublicationsModal" type="update" buttonContent=getUpdateButtonContent}}
-        <fieldset>
-            {{> afQuickField name="title"}}
-            {{> afQuickField name="titleCn"}}
-            {{> afQuickField name="shortTitle"}}
-            {{> afQuickField type="hidden" name="createdBy" value=currentUser.username}}
-            {{> afQuickField name="chiefEditor"}}
-            {{> afQuickField name="competentOrganization"}}
-            {{> afQuickField name="sponsor"}}
-            {{> afQuickField name="frequencyPublication"}}
-            {{> afQuickField name="included" options=getTags}}
-            {{> afQuickField name="description"}}
-            {{> afQuickField name="topicId" options=getTopics}}
-            {{> afQuickField name="accessKey"}}
-            {{> afQuickField name="visible"}}
-            {{> afQuickField name="picture"}}
-            {{> afQuickField name="banner"}}
-            {{> afQuickField name="adBanner"}}
-	        {{> afQuickField name="scholarOneCode"}}
-	        {{> afQuickField name="magtechCode"}}
-            {{> afFieldInput name="tabSelections"}}
-            {{> afQuickField name="historicalJournal"}}
-        </fieldset>
-        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
-    {{/autoForm}}
 </template>
 
 <template name="accessKeyImage">

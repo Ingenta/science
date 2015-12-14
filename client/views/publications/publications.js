@@ -7,6 +7,12 @@ Template.onePublication.events({
     }
 });
 
+Template.onePublication.helpers({
+    getModalTitle:function(){
+        return TAPi18n.__("update");
+    }
+})
+
 Template.onePublisherInFilterList.helpers({
     count: function (id) {
         var first = Session.get('firstLetter');
