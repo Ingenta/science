@@ -11,7 +11,7 @@ Template.cooperationCenter.helpers({
         if(publication)return iscn ? publication.titleCn : publication.title;
     },
     pdfValue:function(){
-        var file = Collections.Files.findOne({_id:this.fileId});
+        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
         if(file)return file.url();
     }
 });

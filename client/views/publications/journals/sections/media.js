@@ -4,12 +4,12 @@ Template.addMediaForm.helpers({
 	uploadedFiles: function() {
 		var curId=uploadingFile.get();
 
-		return curId && Collections.Files.find({_id:curId});
+		return curId && Collections.JournalMediaFileStore.find({_id:curId});
 	}
 });
 
 Template.addMediaForm.events({
-	'change input.any': FS.EventHandlers.insertFiles(Collections.Files, {
+	'change input.any': FS.EventHandlers.insertFiles(Collections.JournalMediaFileStore, {
 		metadata: function (fileObj) {
 			return {
 				owner: Meteor.userId(),
@@ -32,7 +32,7 @@ Template.mediaList.helpers({
 			return Collections.Medias.find({"journalId":jid});
 	},
 	dynamicTemp:function(){
-		var file = Collections.Files.findOne({_id:this.fileId});
+		var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
 		if(file){
 			var ftype=file.original.type;
 			switch (ftype){
@@ -46,7 +46,7 @@ Template.mediaList.helpers({
 		}
 	},
 	getdata:function(){
-		var file = Collections.Files.findOne({_id:this.fileId});
+		var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
 		return file;
 	}
 });

@@ -12,7 +12,7 @@ Template.subscriptionList.helpers({
         if(this.fileId===undefined){
             return null;
         }
-        var file = Collections.Files.findOne({_id:this.fileId});
+        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
         return file.url()+"&download=true";
     }
 });
