@@ -20,12 +20,22 @@
                     {{else}}
                         {{#each publishers}}
                             <li>
-                                <a class="filterButton" data-pubid="{{_id}}" href="#">
+                                <a class="filterPublisherButton" data-id="{{_id}}" href="#">
                                     {{> onePublisherInFilterList}}
                                 </a>
                             </li>
                         {{/each}}
                     {{/if}}
+                </ul>
+                <ul class="list-unstyled">
+                    <h6 class="text-uppercase bg-eee">{{_ "FILTER BY Topic"}}:</h6>
+                        {{#each unionTopics}}
+                            <li class="{{ftClass}}">
+                                <a class="filterTopicButton" data-id="{{_id}}" href="#">
+                                    {{translateThis name englishName}}({{countOfTopic}})
+                                </a>
+                            </li>
+                        {{/each}}
                 </ul>
             </div>
             <div id="subcontent" class="col-xs-9">

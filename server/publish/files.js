@@ -1,3 +1,3 @@
 Meteor.publish("files", function() {
-	return Collections.Files.find();
+	return Collections.JournalMediaFileStore.find();
 });

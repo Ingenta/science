@@ -13,7 +13,7 @@ Template.accountOptions.helpers({
 			{name: TAPi18n.__("Admin"), slug: 'admin'},
 			{name: TAPi18n.__("Normal User"), slug: 'normal'},
 			{name: TAPi18n.__("Publisher"), slug: 'publisher'},
-			{name: TAPi18n.__("Institution"), slug: 'institution'}
+			{name: TAPi18n.__("Institutional Users"), slug: 'institution'}
 		];
 	},
 	activeTab: function () {

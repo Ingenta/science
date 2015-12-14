@@ -4,17 +4,36 @@
     height: 14px;
     margin-bottom: 5px;
 }
-.title_style{
+
+.title_style {
     margin: 0 0 0px;
 }
-#fulltext-viewer xref{
-    cursor:pointer;
+
+#fulltext-viewer xref {
+    cursor: pointer;
     text-decoration: underline;
     color: blue;
 }
-#fulltext-viewer table{
-    width:100%;
-}
+
 #fulltext-viewer xref[original=true] {
     display: none;
+}
+
+.att-table table {
+    width: 100%;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+}
+
+.att-table table thead {
+    border-bottom: 2px solid;
+}
+
+.att-table table thead tr {
+    border-bottom: 1px solid;
+}
+
+.att-table table thead tr p {
+    padding: 1px 0px;
+    margin: 0px 0px;
 }

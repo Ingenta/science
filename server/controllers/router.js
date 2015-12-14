@@ -313,9 +313,8 @@ Router.map(function () {
                                     console.log('------STDERR--------');
                                 }
                                 if (!error) {
-                                    Science.FSE.exists(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, function (result) {
+                                    Science.FSE.exists(outputPath, function (result) {
                                         if (result) {
-
                                             var stat = null;
                                             try {
                                                 stat = Science.FSE.statSync(outputPath);
