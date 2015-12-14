@@ -40,6 +40,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
                 }
             })
         }
+        if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) {
+            Session.set("hideAffLabel", true);
+        }else{
+            Session.set("hideAffLabel",false);
+        }
         this.next();
     },
     onStop: function () {
