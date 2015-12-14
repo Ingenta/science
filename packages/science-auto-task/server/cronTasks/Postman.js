@@ -117,34 +117,34 @@ SyncedCron.add({
             }
             //check topic watch and get all data
             if (oneUser.profile.topicsOfInterest && oneUser.profile.topicsOfInterest.length > 0) {
-                oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
-                    var articleList = Articles.find({
-                        $and: [
-                            {topic: {$in: [oneTopic]}},
-                            {createdAt: {$gt: oneUser.lastSentDate}},
-                            {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_first'}]}
-                        ]
-                    }, {
-                        fields: {
-                            _id: 1,
-                            title: 1,
-                            authors: 1,
-                            year: 1,
-                            volume: 1,
-                            issue: 1,
-                            elocationId: 1,
-                            journalId: 1,
-                            'journal.titleCn': 1
-                        }
-                    }).fetch();
-                    articleList = generateArticleLinks(articleList);
-                    if (articleList.length) outgoingList.push({
-                        userId: oneUser._id,
-                        email: oneUser.emails[0].address,
-                        topic: oneTopic,
-                        articleList: articleList
-                    });
-                })
+                //oneUser.profile.topicsOfInterest.forEach(function (oneTopic) {
+                //    var articleList = Articles.find({
+                //        $and: [
+                //            {topic: {$in: [oneTopic]}},
+                //            {createdAt: {$gt: oneUser.lastSentDate}},
+                //            {$or: [{pubStatus: 'normal'}, {pubStatus: 'online_first'}]}
+                //        ]
+                //    }, {
+                //        fields: {
+                //            _id: 1,
+                //            title: 1,
+                //            authors: 1,
+                //            year: 1,
+                //            volume: 1,
+                //            issue: 1,
+                //            elocationId: 1,
+                //            journalId: 1,
+                //            'journal.titleCn': 1
+                //        }
+                //    }).fetch();
+                //    articleList = generateArticleLinks(articleList);
+                //    if (articleList.length) outgoingList.push({
+                //        userId: oneUser._id,
+                //        email: oneUser.emails[0].address,
+                //        topic: oneTopic,
+                //        articleList: articleList
+                //    });
+                //})
             }
             //check watch article and get all citations from article this user is watching
             if (oneUser.profile.articlesOfInterest && oneUser.profile.articlesOfInterest.length > 0) {
@@ -170,26 +170,26 @@ SyncedCron.add({
                 //    ]
                 //}).fetch();
 
-                var citations = Citations.aggregate([{
-                    $match: {
-                        $and: [
-                            {articleId: {$in: oneUser.profile.articlesOfInterest}},
-                            {createdAt: {$gt: oneUser.lastSentDate}}
-                        ]
-                    }
-                }, {
-                    $group: {
-                        _id: "$articleId",
-                        citations: {$push: "$citation"}
-                    }
-                }]);
-
-                if (citations.length) outgoingList.push({
-                    userId: oneUser._id,
-                    userName: oneUser.username,
-                    email: oneUser.emails[0].address,
-                    citations: citations
-                });
+                //var citations = Citations.aggregate([{
+                //    $match: {
+                //        $and: [
+                //            {articleId: {$in: oneUser.profile.articlesOfInterest}},
+                //            {createdAt: {$gt: oneUser.lastSentDate}}
+                //        ]
+                //    }
+                //}, {
+                //    $group: {
+                //        _id: "$articleId",
+                //        citations: {$push: "$citation"}
+                //    }
+                //}]);
+                //
+                //if (citations.length) outgoingList.push({
+                //    userId: oneUser._id,
+                //    userName: oneUser.username,
+                //    email: oneUser.emails[0].address,
+                //    citations: citations
+                //});
             }
         });
 
@@ -217,8 +217,8 @@ SyncedCron.add({
 
                 } else if (oneEmail.topic) {
                     //this is a topic watch
-                    oneEmail.topic = Topics.findOne({_id: oneEmail.topic});
-                    oneEmail.homePageNews = homePageNews;
+                    //oneEmail.topic = Topics.findOne({_id: oneEmail.topic});
+                    //oneEmail.homePageNews = homePageNews;
                     //Science.Email.watchTopicEmail(oneEmail);
                 } else if (oneEmail.citations) {
                     //this is cited alert
@@ -270,11 +270,11 @@ SyncedCron.add({
 //    return news;
 //};
 
-var homepageNews = function () {
-    var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
-    var rootUrl = Config.rootUrl;
-    news.forEach(function (item) {
-        if (!item.url) item.url = rootUrl + "news/" + item._id
-    });
-    return news;
-};
+//var homepageNews = function () {
+//    var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
+//    var rootUrl = Config.rootUrl;
+//    news.forEach(function (item) {
+//        if (!item.url) item.url = rootUrl + "news/" + item._id
+//    });
+//    return news;
+//};

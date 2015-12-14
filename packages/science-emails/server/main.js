@@ -75,8 +75,10 @@ Science.Email.searchFrequencyEmail = function () {
     }
 };
 
-Science.Email.tableOfContentEmail = function (yesterday) {
-    Issues.find({createDate: {$gt: yesterday}}).forEach(function (oneIssue) {
+Science.Email.tableOfContentEmail = function (date) {
+    Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
+        var userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
+        if(!userList.count()) return;
         var articleList = Articles.find({
             journalId: oneIssue.journalId,
             volume: oneIssue.volume,
@@ -94,7 +96,7 @@ Science.Email.tableOfContentEmail = function (yesterday) {
                 'journal.titleCn': 1
             }
         }).fetch();
-        if (!articleList.length) return;
+        if (!articleList || !articleList.length) return;
 
         var journal = Publications.findOne({_id: oneIssue.journalId}, {
             fields: {
@@ -127,7 +129,7 @@ Science.Email.tableOfContentEmail = function (yesterday) {
             "journalNews": journalNews
         });
 
-        Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}}).forEach(function (oneUser) {
+        userList.forEach(function (oneUser) {
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
@@ -138,12 +140,12 @@ Science.Email.tableOfContentEmail = function (yesterday) {
     });
 };
 
-Science.Email.availableOnline = function (lastWeek) {
+Science.Email.availableOnline = function (date) {
     Articles.aggregate([{
         $match: {
             $and: [
                 {pubStatus: 'online_first'},
-                {createdAt: {$gt: lastWeek}}
+                {createdAt: {$gt: date}}
             ]
         }
     }, {
@@ -155,13 +157,16 @@ Science.Email.availableOnline = function (lastWeek) {
                 authors: "$authors",
                 year: "$year:",
                 volume: "$volume",
-                issue: "$issue",
+                //issue: "$issue",
                 elocationId: "$elocationId",
                 journalId: "$journalId",
                 journal: "$journal"
             }}
         }
     }]).forEach(function (obj) {
+        var userList = Users.find({'profile.journalsOfInterest': {$in: [obj._id]}});
+        if(!userList.count()) return;
+        if (!obj.articleList || !obj.articleList.length) return;
         var journal = {};
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
         journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
@@ -175,7 +180,7 @@ Science.Email.availableOnline = function (lastWeek) {
             "journal": journal,
             "articleList": obj.articleList
         });
-        Users.find({'profile.journalsOfInterest': {$in: [obj._id]}}).forEach(function (oneUser) {
+        userList.forEach(function (oneUser) {
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
@@ -186,25 +191,63 @@ Science.Email.availableOnline = function (lastWeek) {
     });
 };
 
-Science.Email.watchTopicEmail = function (oneEmail) {
-    Email.send({
-        to: oneEmail.email,
-        from: Config.mailServer.address,
-        subject: oneEmail.topic.name + "下有文章更新",
-        html: JET.render('watchTopic', {
+Science.Email.watchTopicEmail = function (date) {
+    var homePageNews = homepageNews();
+    Topics.find().forEach(function (oneTopic) {
+        var userList = Users.find({'profile.topicsOfInterest': {$in: [oneTopic._id]}});
+        if(!userList.count()) return;
+        var articleList = Articles.find({
+            $and: [
+                {topic: {$in: [oneTopic._id]}},
+                {createdAt: {$gt: date}},
+                {pubStatus: 'normal'}
+            ]
+        }, {
+            fields: {
+                _id: 1,
+                title: 1,
+                authors: 1,
+                year: 1,
+                volume: 1,
+                issue: 1,
+                elocationId: 1,
+                journalId: 1,
+                'journal.titleCn': 1
+            }
+        }).fetch();
+        if (!articleList || !articleList.length) return;
+        generateArticleLinks(articleList);
+
+        var content = JET.render('watchTopic', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "rootUrl": Config.rootUrl,
-            "topic": oneEmail.topic,
-            "articleList": oneEmail.articleList,
-            "homePageNews": oneEmail.homePageNews
-        })
+            "topic": oneTopic,
+            "articleList": articleList,
+            "homePageNews": homePageNews
+        });
+        userList.forEach(function (oneUser) {
+            Email.send({
+                to: oneUser.emails[0].address,
+                from: Config.mailServer.address,
+                subject: oneTopic.name + "下有文章更新",
+                html: content
+            });
+        });
     });
 };
 
-Science.Email.watchArticleCitationAlertEmail = function (oneEmail) {
-    oneEmail.citations.forEach(function (item) {
-        var emailConfig = EmailConfig.findOne({key: "articleCitedAlert"});
-        var article = Articles.findOne({_id: item._id}, {
+Science.Email.watchArticleCitedAlertEmail = function (date) {
+    Citations.aggregate([{
+        $match: {createdAt: {$gt: date}}
+    }, {
+        $group: {
+            _id: "$articleId",
+            citations: {$push: "$citation"}
+        }
+    }]).forEach(function (articleCitations) {
+        var userList = Users.find({'profile.articlesOfInterest': {$in: [articleCitations._id]}});
+        if(!userList.count()) return;
+        var article = Articles.findOne({_id: articleCitations._id}, {
             fields: {
                 title: 1,
                 authors: 1,
@@ -213,33 +256,38 @@ Science.Email.watchArticleCitationAlertEmail = function (oneEmail) {
                 volume: 1,
                 issue: 1,
                 elocationId: 1,
+                journalId: 1,
                 'journal.titleCn': 1
             }
         });
-        Email.send({
-            to: oneEmail.email,
-            from: Config.mailServer.address,
-            subject: emailConfig ? emailConfig.subject : 'Article has been cited',
-            html: JET.render('citationAlertEmail', {
-                "article": article,
-                "userName": oneEmail.userName,
-                "citations": item.citations,
-                "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                "rootUrl": Config.rootUrl
-            })
+        if (!article) return;
+        article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        if(!article.journal) article.journal = {};
+        if (article.journalId) {
+            article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
+            article.journal.banner = Publications.findOne({_id: article.journalId},{fields: {banner: 1}}).banner;
+            if (article.journal.banner) article.journal.banner = Meteor.absoluteUrl(Images.findOne({_id: article.journal.banner}).url().substring(1));
+        }
+        var content = JET.render('citationAlertEmail', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "rootUrl": Config.rootUrl,
+            "article": article,
+            "userName": "USERNAME",
+            "citations": articleCitations.citations
+
         });
-    })
+        userList.forEach(function (oneUser) {
+            Email.send({
+                to: oneUser.emails[0].address,
+                from: Config.mailServer.address,
+                subject: 'Article cited alert',
+                html: content.replace(/USERNAME/, oneUser.username)
+            });
+        });
+    });
 };
 
-Science.Email.test = function (template, theData) {
-    Email.send({
-        to: "dongdong.yang@digitalpublishing.cn",
-        from: Config.mailServer.address,
-        subject: 'test',
-        html: JET.render(template, theData)
-    });
-    console.log('waiting for email');
-};
+
 
 var generateArticleLinks = function (articles, journalUrl) {
     articles.forEach(function (article) {
@@ -266,6 +314,15 @@ var journalIdToNews = function (journalId) {
     });
     news.meetingInfo.forEach(function (item) {
         item.startDate = moment(item.startDate).format("MMM Do YYYY");
+    });
+    return news;
+};
+
+var homepageNews = function () {
+    var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
+    var rootUrl = Config.rootUrl;
+    news.forEach(function (item) {
+        if (!item.url) item.url = rootUrl + "news/" + item._id
     });
     return news;
 };
