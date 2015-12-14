@@ -149,6 +149,11 @@ Meteor.startup(function () {
                 key: "keywordFrequency",
                 s: "高频词语提醒",
                 b: "not used"
+            },
+            {
+                key: "availableOnline",
+                s: "预出版",
+                b: "not used"
             }
         ];
         _.each(emails, function (email) {

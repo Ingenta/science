@@ -25,6 +25,8 @@
     "watchJournal": "Watch Journal",
     "watchTopic": "Watch Topic",
     "watchArticle": "Watch Article",
+    "keywordFrequency": "Keyword Frequency",
+    "availableOnline": "Available Online",
 
     "roles": "Roles",
     "roleName": "Role Name",
