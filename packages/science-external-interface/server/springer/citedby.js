@@ -27,6 +27,7 @@ Science.Interface.Springer.getCitedBy = function (doi, callback) {
 					jc.issue             = Science.XPath.select("child::issue/text()", item).toString();
 					jc.firstPage         = Science.XPath.select("child::first_page/text()", item).toString();
 					jc.doi               = Science.XPath.select("child::doi/text()", item).toString();
+					jc.year				 = Science.XPath.select("child::year",item).toString();
 					result.push(jc);
 				})
 				callback(null, result);
