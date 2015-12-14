@@ -19,21 +19,21 @@
     display: none;
 }
 
-#fulltext-viewer table {
+.att-table table {
     width: 100%;
     border-top: 3px solid;
     border-bottom: 3px solid;
 }
 
-#fulltext-viewer table thead {
+.att-table table thead {
     border-bottom: 2px solid;
 }
 
-#fulltext-viewer table thead tr {
+.att-table table thead tr {
     border-bottom: 1px solid;
 }
 
-#fulltext-viewer table thead tr p {
+.att-table table thead tr p {
     padding: 1px 0px;
     margin: 0px 0px;
 }
