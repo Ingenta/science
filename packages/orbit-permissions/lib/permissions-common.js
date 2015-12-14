@@ -254,7 +254,7 @@ OrbitPermissions = {
 					ref1 = userRole.role.split(":"), role_package = ref1[0], role_name = ref1[1];
 					var currDefineRole = Roles[role_package] && Roles[role_package][role_name];
 					//检查用户是否具备目标权限
-					if (indexOf.call(currDefineRole.permissions, package_name + ":" + permission) >= 0) {
+					if (currDefineRole && indexOf.call(currDefineRole.permissions, package_name + ":" + permission) >= 0) {
 						//如果未约束角色的有效范围,认为用户拥有该权限
 						if (_.isEmpty(userRole.scope)) {
 							return true;
