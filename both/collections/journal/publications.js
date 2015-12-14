@@ -24,7 +24,6 @@ var getTags = function(){
 }
 
 var getTopics= function () {
-    console.log('aa');
     var iscn = TAPi18n.getLanguage() === 'zh-CN';
     var topics = Topics.find({}, {name: 1, englishName: 1}).fetch();
     var result = [];
