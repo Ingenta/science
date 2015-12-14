@@ -124,7 +124,7 @@ Template.UserSettingsUpdateInformationForm.helpers({
     },
     topicList: function () {
         var iscn=TAPi18n.getLanguage()==='zh-CN';
-        var topics = Topics.find({parentId:undefined},{name:1,englishName:1}).fetch();
+        var topics = Topics.find({},{name:1,englishName:1}).fetch();
         var result = [];
         _.each(topics,function(item){
             var name = iscn?item.name:item.englishName;
