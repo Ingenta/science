@@ -1,9 +1,9 @@
 Science.Email = {};
 
-Science.Email.authorCitationAlertEmail = function () {
+Science.Email.authorCitationAlertEmail = function (date) {
     Citations.aggregate([{
         $match: {
-            createdAt: {$gt: moment().startOf('day').toDate()}
+            createdAt: {$gt: date}
         }
     }, {
         $group: {
