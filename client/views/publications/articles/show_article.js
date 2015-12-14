@@ -137,9 +137,10 @@ Template.showArticle.helpers({
         if (!_.isEmpty(this.affs)) {
             _.each(this.affs, function (aff) {
                 var match = /\d/.exec(aff);
-                var labelInId = !_.isEmpty(match) && match[0]
+                var labelInId = !_.isEmpty(match) && match[0];
+                console.log('aa')
                 var currAffObj = _.find(affObjs,function(ao){
-                    return ao.id=aff;
+                    return ao.id==aff;
                 })
                 var labelInData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage()=="zh-CN"?"cn":"en"]
                 allrefs.push(labelInData || labelInId)

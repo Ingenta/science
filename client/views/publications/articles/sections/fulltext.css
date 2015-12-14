@@ -19,8 +19,10 @@
     display: none;
 }
 
-.att-table table {
+#fulltext-viewer table {
     width: 100%;
+}
+.att-table table {
     border-top: 3px solid;
     border-bottom: 3px solid;
 }
