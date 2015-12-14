@@ -291,12 +291,3 @@ Handlebars.registerHelper("optionIsSelected", function(desiredValue, itemValue) 
 
 	return desiredValue == itemValue ? "selected" : "";
 });
-
-this.bootboxDialog = function(template, data, options) {
-	var div = document.createElement("div");
-//	UI.insert(UI.renderWithData(template, data), div);
-	Blaze.renderWithData(template, data, div);
-
-	options.message = div;
-	bootbox.dialog(options);
-};

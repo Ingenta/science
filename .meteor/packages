@@ -35,12 +35,6 @@ monbro:iron-router-breadcrumb
 multiply:iron-router-progress
 
 fortawesome:fontawesome
-matb33:collection-hooks
-
-mizzao:bootboxjs
-
-rajit:bootstrap3-datepicker
-
 
 
 aldeed:autoform
@@ -54,6 +48,7 @@ yogiben:autoform-file
 
 jackjiang:autoform-modals
 yogiben:autoform-modals-up
+rajit:bootstrap3-datepicker
 tsega:bootstrap3-datetimepicker
 vazco:universe-autoform-select
 aldeed:autoform-bs-datepicker
@@ -63,8 +58,6 @@ gwendall:autoform-i18n
 gwendall:simple-schema-i18n
 tap:i18n
 tap:i18n-ui
-
-mrt:flash-messages
 
 science-lib
 science-topics
@@ -87,7 +80,19 @@ cfs:gridfs
 cfs:ui
 cfs:autoform
 
+meteorhacks:aggregate
+meteorhacks:kadira
+meteorhacks:subs-manager
+orbit:permissions
+eluck:accounts-lockout
+
+mathjax
+jackjiang:solr
+
 templates:tabs
+mrt:flash-messages
+kevohagan:sweetalert
+matb33:collection-hooks
 
 mrt:moment
 monbro:last-software-release-date
@@ -100,26 +105,16 @@ maazalik:highcharts
 mizzao:user-status
 mizzao:timesync
 
-meteorhacks:aggregate
-meteorhacks:kadira
-meteorhacks:subs-manager
-orbit:permissions
-eluck:accounts-lockout
 arthuryyx:ftp
-
-mathjax
 
 tomi:upload-jquery
 tomi:upload-server
-jackjiang:solr
+
 barbatus:stars-rating
-kevohagan:sweetalert
-ostrio:files
 mrt:jquery-raty
 meteortoys:toykit
 msavin:mongol
 
-netanelgilad:excel
 jackjiang:editable-template
 classcraft:meteor-wkhtmltopdf
 timbrandin:slick

@@ -21,7 +21,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         var artId;
         if (artData)artId = artData._id;
         return [
-            Meteor.subscribe('oneIssueArticlesByArticleId',artId),
+            Meteor.subscribe('oneIssueArticlesByArticleId', artId),
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
@@ -31,15 +31,15 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         ]
     },
     onBeforeAction: function () {
-        //if (!Session.get("ipInChina")) {
+        if (!Session.get("ipInChina")) {
             Meteor.call("getLocationByCurrentIP", function (err, result) {
-                if(!result)console.log("ip not found.");
+                if (!result)console.log("ip not found.");
                 else {
-                    console.log("Your location has been detected as: "+JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-                    Session.set("ipInChina", result.country_code==="CN");
+                    console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+                    Session.set("ipInChina", result.country_code === "CN");
                 }
             })
-        //}
+        }
         this.next();
     },
     onStop: function () {

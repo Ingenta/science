@@ -258,7 +258,7 @@ Router.map(function () {
                         all_topics: topicArr.join(" OR ")
                     }
                 }
-                query.st = {rows: 5};
+                query.rows = 5;
 
                 //get related articles
                 SolrClient.query(query, function (err, result) {
@@ -285,7 +285,11 @@ Router.map(function () {
                     var html = JET.render('pdf', data);
 
                     wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>', Meteor.bindEnvironment(function (code, signal) {
-                        if(code)logger.error(code);
+                        if(code){
+                            //logger.error(code);
+                            console.dir(code);
+                            console.dir(signal);
+                        }
                         var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
                         var footmark = Config.pdf.footmark.replace("{ip}", ip || "unknown")
                             .replace("{time}", new Date().format("yyyy-MM-dd hh:mm:ss"))
@@ -313,9 +317,8 @@ Router.map(function () {
                                     console.log('------STDERR--------');
                                 }
                                 if (!error) {
-                                    Science.FSE.exists(Config.staticFiles.uploadPdfDir + "/handle/" + pdf.copies.pdfs.key, function (result) {
+                                    Science.FSE.exists(outputPath, function (result) {
                                         if (result) {
-
                                             var stat = null;
                                             try {
                                                 stat = Science.FSE.statSync(outputPath);

@@ -114,7 +114,6 @@ meteorspark:util@0.2.0
 meteortoys:toykit@2.2.1
 minifiers@1.1.7
 minimongo@1.0.10
-mizzao:bootboxjs@4.4.0
 mizzao:timesync@0.3.4
 mizzao:user-status@0.6.6
 mobile-experience@1.0.1
@@ -143,8 +142,6 @@ observe-sequence@1.0.7
 ongoworks:security@1.3.0
 orbit:permissions@0.1.1
 ordered-dict@1.0.4
-ostrio:cookies@2.0.1
-ostrio:files@1.3.14
 perak:user-roles@1.0.10
 percolate:synced-cron@1.3.0
 promise@0.5.1

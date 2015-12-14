@@ -20,7 +20,7 @@ Meeting.permit(['insert', 'update', 'remove']).apply();
 AuthorCenter.permit(['insert', 'update', 'remove']).apply();
 EmailConfig.permit(['insert', 'update', 'remove']).apply();
 Tags.permit(['insert', 'update', 'remove']).apply();
-//Collections.Files.permit(['insert', 'update', 'remove']).apply();
+//Collections.JournalMediaFileStore.permit(['insert', 'update', 'remove']).apply();
 Collections.Medias.permit(['insert', 'update', 'remove']).apply();
 SpecialTopics.permit(['insert', 'update', 'remove']).apply();
 fileExcel.permit(['insert', 'update', 'remove']).apply();

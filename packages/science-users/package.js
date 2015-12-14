@@ -23,6 +23,11 @@ Package.onUse(function (api) {
 		'aldeed:autoform'
 	], ['server', 'client']);
 
+
+	api.use([
+		"netanelgilad:excel"
+	], 'server')
+
 	api.use([
 		"reactive-var",
 		"vazco:universe-autoform-select",

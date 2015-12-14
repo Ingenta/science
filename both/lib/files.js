@@ -1,4 +1,4 @@
-Collections.Files = new FS.Collection("files",{
+Collections.JournalMediaFileStore = new FS.Collection("files",{
 	stores:[new FS.Store.GridFS("any")],
 	chunkSize: 4 * 1024 * 1024
 });
@@ -15,7 +15,7 @@ if(Meteor.isServer){
 		return true;
 	};
 
-	Collections.Files.allow({
+	Collections.JournalMediaFileStore.allow({
 		insert: trueFunc,
 		update: trueFunc,
 		remove: trueFunc,
