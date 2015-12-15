@@ -4,7 +4,25 @@ EmailConfigSchema = new SimpleSchema({
         type: String
     },
     frequency: {
-        type: String
+        type: String,
+        optional: true,
+        label: "Frequency",
+        autoform: {
+            options: [
+                {
+                    label: "On",
+                    value: "on"
+                },
+                {
+                    label: "Off",
+                    value: "off"
+                }
+            ]
+        }
+    },
+    isAlert: {
+        type: String,
+        optional: true
     },
     subject: {
         type: String
