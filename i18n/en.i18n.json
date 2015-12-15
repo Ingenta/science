@@ -975,5 +975,7 @@
     },
     "userLevel":"User level",
     "no roles can use to this user":"No roles can use to this user",
-    "IntroductionInFulltext":"Introduction"
+    "IntroductionInFulltext":"Introduction",
+    "Logs":"Logs",
+    "Site Statistics":"Site Statistics"
 }

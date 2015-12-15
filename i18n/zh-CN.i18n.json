@@ -1276,5 +1276,7 @@
   "Institutional Users":"机构用户",
   "userLevel":"可被设置的用户级别",
   "no roles can use to this user":"没有可用于该用户的角色",
-  "IntroductionInFulltext":"引言"
+  "IntroductionInFulltext":"引言",
+  "Logs":"日志",
+  "Site Statistics":"统计"
 }
