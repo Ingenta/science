@@ -202,7 +202,7 @@ Tasks.insertArticleImages = function (logId, result) {
     });
 
     var log = UploadLog.findOne({_id: logId});
-    if (!result.figures) {
+    if (_.isEmpty(result.figures)) {
         readyToStartArticleImport(log, logId, taskId, result);
     }
     else {
