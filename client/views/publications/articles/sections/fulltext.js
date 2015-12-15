@@ -19,7 +19,10 @@ Template.FullTextTemplate.onRendered(function () {
 
 Template.FullTextTemplate.helpers({
     handledTitle:function(){
-        return this.title==='__start__'?"":this.title;
+        return this.title==='__start__'?"&nbsp;":this.title;
+    },
+    anyReference:function(){
+        return !_.isEmpty(Template.currentData().references);
     }
 })
 

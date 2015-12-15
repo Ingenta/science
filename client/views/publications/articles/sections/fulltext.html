@@ -29,7 +29,11 @@
                     {{/each}}
                 {{/each}}
             {{/mathjax}}
-            {{> ReferencesTemplate}}
+            {{#if anyReference}}
+                <br>
+                <div class="sectionDivider title">{{_ "References"}}</div>
+                {{> ReferencesTemplate}}
+            {{/if}}
         </div>
     </div>
 </template>
