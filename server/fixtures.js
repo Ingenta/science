@@ -132,21 +132,25 @@ Meteor.startup(function () {
             },
             {
                 key: "watchJournal",
+                type: "alert",
                 s: "《中国科学》杂志社平台 期刊关注 Watch this journal",
                 b: "<p>You are watching a journal of which the following articles have been added.</p>"
             },
             {
                 key: "watchTopic",
+                type: "alert",
                 s: "《中国科学》杂志社平台 主题关注 Watch this topic",
                 b: "<p>You are watching a topic of which the following articles have been added.</p>"
             },
             {
                 key: "watchArticle",
+                type: "alert",
                 s: "《中国科学》杂志社平台 文章关注 Watch this article",
                 b: "<p>You are watching an article of which the following changes have been made.</p>"
             },
             {
                 key: "keywordFrequency",
+                type: "alert",
                 s: "高频词语提醒",
                 b: "not used"
             },
@@ -156,9 +160,11 @@ Meteor.startup(function () {
                 b: "not used"
             }
         ];
+
         _.each(emails, function (email) {
             EmailConfig.insert({
                 key: email.key,
+                isAlert: email.type,
                 subject: email.s,
                 body: email.b
             });

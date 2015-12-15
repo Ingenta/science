@@ -4,6 +4,13 @@ Template.AdminEmail.helpers({
     }
 });
 
+Template.updateEmailConfig.helpers({
+    isAlert: function () {
+        if (this.isAlert)return true;
+        return false;
+    }
+});
+
 AutoForm.addHooks(['test123'], {
     onSuccess: function () {
         $("#jkafModal").modal('hide');
