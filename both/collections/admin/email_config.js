@@ -3,6 +3,9 @@ EmailConfigSchema = new SimpleSchema({
     key: {
         type: String
     },
+    frequency: {
+        type: String
+    },
     subject: {
         type: String
     },
