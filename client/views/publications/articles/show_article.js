@@ -80,9 +80,7 @@ Template.showArticle.onRendered(function () {
     rva.unshift({_id: this.data._id});//add a article to array[0]
     Session.set("recentViewedArticles", rva);
 
-    if (!_.isEmpty(this.data.affiliations) && this.data.affiliations.length == 1) {
-        Session.set("hideAffLabel", true);
-    }
+
     //Rating Start
     var aid = this.data._id;
 
@@ -134,18 +132,20 @@ Template.showArticle.helpers({
         }
     },
     refs: function () {
+        var affObjs=Router.current().data().affiliations;
         var allrefs = [];
         if (!_.isEmpty(this.affs)) {
             _.each(this.affs, function (aff) {
                 var match = /\d/.exec(aff);
-                if (!_.isEmpty(match)) {
-                    allrefs.push(match[0]);
-                }
+                var labelInId = !_.isEmpty(match) && match[0];
+                var currAffObj = _.find(affObjs,function(ao){
+                    return ao.id==aff;
+                })
+                var labelInData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage()=="zh-CN"?"cn":"en"]
+                allrefs.push(labelInData || labelInId)
             })
             if (!_.isEmpty(allrefs)) {
-                allrefs = _.sortBy(allrefs, function (i) {
-                    return i
-                });
+                allrefs = allrefs.sort();
             }
         }
         if (this.email && Router.current().data) {

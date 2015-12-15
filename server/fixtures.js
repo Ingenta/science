@@ -153,6 +153,11 @@ Meteor.startup(function () {
                 type: "alert",
                 s: "高频词语提醒",
                 b: "not used"
+            },
+            {
+                key: "availableOnline",
+                s: "预出版",
+                b: "not used"
             }
         ];
 

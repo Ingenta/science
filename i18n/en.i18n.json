@@ -25,6 +25,8 @@
     "watchJournal": "Watch Journal",
     "watchTopic": "Watch Topic",
     "watchArticle": "Watch Article",
+    "keywordFrequency": "Keyword Frequency",
+    "availableOnline": "Available Online",
 
     "roles": "Roles",
     "roleName": "Role Name",
@@ -972,5 +974,8 @@
         "normal":"normal user"
     },
     "userLevel":"User level",
-    "no roles can use to this user":"No roles can use to this user"
+    "no roles can use to this user":"No roles can use to this user",
+    "IntroductionInFulltext":"Introduction",
+    "Logs":"Logs",
+    "Site Statistics":"Site Statistics"
 }

@@ -74,8 +74,8 @@ Science.JSON.UniqueList = function(keyGenerator){
 };
 
 Science.JSON.try2GetRightLangVal=function(obj,fieldArr,lang){
-	if(_.isEmpty(obj))
-		return;
+	if(_.isEmpty(obj) || _.isString(obj))
+		return obj;
 	var langArr = fieldArr || ["cn","en"];
 	//当前语言设置优先级 参数lang > TAPi18n > 默认值zh-CN
 	var currLang = lang || (TAPi18n && TAPi18n.getLanguage()) || "zh-CN";

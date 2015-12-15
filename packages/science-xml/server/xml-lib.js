@@ -453,7 +453,7 @@ var getTable = function (tableWrapNode) {
     var table = {};
     table.id = parserHelper.getFirstAttribute("./@id",tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
-    table.label=parserHelper.getSimpleVal("child::label | child::caption/p/bold/xref",tableWrapNode);
+    table.label=parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label",tableWrapNode);
     table.caption = parserHelper.getSimpleVal("child::caption/p",tableWrapNode);
     table.table = parserHelper.getXmlString("child::table",tableWrapNode);
     return table;
