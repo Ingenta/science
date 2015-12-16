@@ -21,10 +21,10 @@ Package.onUse(function(api) {
       'science-lib',
       'cfs:power-queue',
       'science-external-interface',
-      'percolate:synced-cron',
+      'percolate:synced-cron@1.2.2',
       'cfs:micro-queue',
       'cfs:reactive-list'
-  ]);
+  ],both);
 
   api.addFiles([
       'both/collection.js'

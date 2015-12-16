@@ -18,6 +18,7 @@ Package.onUse(function (api) {
 		'templating',
 		'iron:router',
 		'aldeed:simple-schema',
+		'gwendall:autoform-i18n',
 		'aldeed:autoform',
 		'hitchcott:paginator',
 		'science-lib',
