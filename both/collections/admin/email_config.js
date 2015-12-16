@@ -34,6 +34,10 @@ EmailConfigSchema = new SimpleSchema({
                 type: 'summernote'
             }
         }
+    },
+    lastSentDate: {
+        type: Date,
+        optional: true
     }
 });
 
