@@ -12,19 +12,35 @@ SyncedCron.add({
         //var lastMonth = moment(today).subtract(1, 'months').toDate();
         today = today.toDate();
 
-        if(!EmailConfig.findOne({key: "availableOnline"}).lastSentDate || EmailConfig.findOne({key: "availableOnline"}).lastSentDate.getTime() <= lastWeek.getTime()){
-            Science.Email.availableOnline(lastWeek);
-            EmailConfig.update({key: "availableOnline"}, {$set:{lastSentDate: new Date()}});
+        if(EmailConfig.findOne({key: "availableOnline"}).frequency == 'on') {
+            if(!EmailConfig.findOne({key: "availableOnline"}).lastSentDate || EmailConfig.findOne({key: "availableOnline"}).lastSentDate.getTime() <= lastWeek.getTime()){
+                Science.Email.availableOnline(lastWeek);
+                EmailConfig.update({key: "availableOnline"}, {$set:{lastSentDate: today}});
+            }
         }
-        if(!EmailConfig.findOne({key: "watchTopic"}).lastSentDate || EmailConfig.findOne({key: "watchTopic"}).lastSentDate.getTime() <= lastWeek.getTime()){
-            Science.Email.watchTopicEmail(lastWeek);
-            EmailConfig.update({key: "watchTopic"}, {$set:{lastSentDate: new Date()}});
-        }
-        Science.Email.searchFrequencyEmail();
-        Science.Email.tableOfContentEmail(yesterday);
-        Science.Email.authorCitationAlertEmail(today);
-        Science.Email.watchArticleCitedAlertEmail(today);
 
+        if(EmailConfig.findOne({key: "watchTopic"}).frequency == 'on') {
+            if(!EmailConfig.findOne({key: "watchTopic"}).lastSentDate || EmailConfig.findOne({key: "watchTopic"}).lastSentDate.getTime() <= lastWeek.getTime()){
+                Science.Email.watchTopicEmail(lastWeek);
+                EmailConfig.update({key: "watchTopic"}, {$set:{lastSentDate: today}});
+            }
+        }
+
+        if(EmailConfig.findOne({key: "keywordFrequency"}).frequency == 'on') {
+            Science.Email.searchFrequencyEmail();
+        }
+
+        if(EmailConfig.findOne({key: "watchJournal"}).frequency == 'on') {
+            Science.Email.tableOfContentEmail(yesterday);
+        }
+
+        if(EmailConfig.findOne({key: "articleCitedAlert"}).frequency == 'on') {
+            Science.Email.authorCitationAlertEmail(today);
+        }
+
+        if(EmailConfig.findOne({key: "watchArticle"}).frequency == 'on') {
+            Science.Email.watchArticleCitedAlertEmail(today);
+        }
         logger.silly('Postman ends.');
     }
 });

@@ -156,7 +156,14 @@ Meteor.startup(function () {
             },
             {
                 key: "availableOnline",
-                s: "预出版",
+                type: "alert",
+                s: "优先出版",
+                b: "not used"
+            },
+            {
+                key: "articleCitedAlert",
+                type: "alert",
+                s: "文章引用提醒",
                 b: "not used"
             }
         ];
