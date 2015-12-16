@@ -25,7 +25,6 @@ Package.onUse(function (api) {
         'templating',
         'meteor-platform',
         'standard-app-packages',
-        'dburles:collection-helpers',
         'reactive-dict',
         'iron:router',
         'matb33:collection-hooks',

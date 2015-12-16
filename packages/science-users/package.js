@@ -18,6 +18,7 @@ Package.onUse(function (api) {
 		"accounts-base",
 		"accounts-password",
 		"perak:user-roles",
+		"science-permissions",
 		"science-institution",
 		'aldeed:simple-schema',
 		'aldeed:autoform'
