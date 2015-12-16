@@ -13,7 +13,7 @@ Package.describe({
 both = ['server', 'client'];
 
 Package.onUse(function (api) {
-    api.versionsFrom('1.1.0.2');
+    api.versionsFrom('1.2.1');
     api.use([
         'underscore',
         'orbit:permissions',

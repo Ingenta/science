@@ -3,7 +3,7 @@ Package.describe({
 });
 var both = ['client', 'server'];
 Package.onUse(function (api) {
-    api.versionsFrom('1.1.0.3');
+    api.versionsFrom('1.2.1')
     api.use([
         'templating',
         'iron:router',

@@ -12,7 +12,7 @@ Package.describe({
 var both = ['server', 'client'];
 
 Package.onUse(function (api) {
-    api.versionsFrom('1.2.0.4-logging.0');
+    api.versionsFrom('1.2.1')
 
     api.use([
         'matb33:collection-hooks'
