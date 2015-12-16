@@ -13,7 +13,7 @@ Package.describe({
 var both=['server','client'];
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.1.0.3');
+  api.versionsFrom('1.2.1');
 
   api.use([
       'templating',
@@ -21,10 +21,10 @@ Package.onUse(function(api) {
       'science-lib',
       'cfs:power-queue',
       'science-external-interface',
-      'percolate:synced-cron',
+      'percolate:synced-cron@1.2.2',
       'cfs:micro-queue',
       'cfs:reactive-list'
-  ]);
+  ],both);
 
   api.addFiles([
       'both/collection.js'

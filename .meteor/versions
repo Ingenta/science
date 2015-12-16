@@ -4,7 +4,7 @@ adain:meteor-guid@1.0.1
 aldeed:autoform@5.8.1
 aldeed:autoform-bs-datepicker@1.1.1
 aldeed:autoform-select2@2.0.2
-aldeed:collection2@2.6.0
+aldeed:collection2@2.6.1
 aldeed:simple-schema@1.5.0
 aldeed:template-extension@3.4.3
 amplify@1.0.0
@@ -48,7 +48,6 @@ check@1.1.0
 classcraft:meteor-wkhtmltopdf@0.3.1
 coffeescript@1.0.11
 copleykj:livestamp@1.1.7
-dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
 ddp-client@1.2.1
@@ -197,7 +196,7 @@ tsega:bootstrap3-datetimepicker@4.17.37_1
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
-vazco:universe-autoform-select@0.1.18
+vazco:universe-autoform-select@0.1.20
 webapp@1.2.3
 webapp-hashing@1.0.5
 yogiben:autoform-file@0.2.9

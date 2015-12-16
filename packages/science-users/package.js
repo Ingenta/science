@@ -11,13 +11,14 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
-	api.versionsFrom('1.1.0.2');
+	api.versionsFrom('1.2.1');
 
 	api.use([
 		"science-lib",
 		"accounts-base",
 		"accounts-password",
 		"perak:user-roles",
+		"science-permissions",
 		"science-institution",
 		'aldeed:simple-schema',
 		'aldeed:autoform'

@@ -19,13 +19,12 @@ Npm.depends({
 });
 
 Package.onUse(function (api) {
-    api.versionsFrom('1.2.0.1');
+    api.versionsFrom('1.2.1');
     //最好能在引用的包后面加上版本号，以免系统自动更新新版本的包，造成不稳定的情况
     var packages = [
         'templating',
         'meteor-platform',
         'standard-app-packages',
-        'dburles:collection-helpers',
         'reactive-dict',
         'iron:router',
         'matb33:collection-hooks',
@@ -43,6 +42,7 @@ Package.onUse(function (api) {
     api.imply(packages);
     api.addAssets('pdf.jar', 'server');
     api.addFiles([
+        'lib/0_config.js',
         'lib/core.js',
         'lib/string_utils.js',
         'lib/jsonUtils.js',
@@ -66,7 +66,10 @@ Package.onUse(function (api) {
     ], 'client');
 
     api.export(
-        'Science'
+        [
+            'Science',
+            'Config'
+        ]
     )
 });
 

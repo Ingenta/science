@@ -455,7 +455,7 @@ var getTable = function (tableWrapNode) {
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
     table.label=parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label",tableWrapNode);
     table.caption = parserHelper.getSimpleVal("child::caption/p",tableWrapNode);
-    table.table = parserHelper.getXmlString("child::table",tableWrapNode);
+    table.table = parserHelper.getXmlString("child::table",tableWrapNode).replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
 };
 
