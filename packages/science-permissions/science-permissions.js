@@ -100,7 +100,7 @@ Meteor.startup(function () {
         var queryArr = [];
         queryArr.push({'emails.address': da.email});
         queryArr.push({'username': da.username});
-        if (!Users.findOne({$or: queryArr})) {
+        if (!Meteor.users.findOne({$or: queryArr})) {
             logger.warn("create default user '" + da.username + "'");
             var userId = Accounts.createUser(da)
             logger.warn("set admin role for user '" + da.username + "'");

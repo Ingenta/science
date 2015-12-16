@@ -42,6 +42,7 @@ Package.onUse(function (api) {
     api.imply(packages);
     api.addAssets('pdf.jar', 'server');
     api.addFiles([
+        'lib/0_config.js',
         'lib/core.js',
         'lib/string_utils.js',
         'lib/jsonUtils.js',
@@ -65,7 +66,10 @@ Package.onUse(function (api) {
     ], 'client');
 
     api.export(
-        'Science'
+        [
+            'Science',
+            'Config'
+        ]
     )
 });
 
