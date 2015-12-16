@@ -42,12 +42,42 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         }
         if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) {
             Session.set("hideAffLabel", true);
-        }else{
-            Session.set("hideAffLabel",false);
+        } else {
+            Session.set("hideAffLabel", false);
         }
         this.next();
     },
     onStop: function () {
         Meteor.clearInterval(Session.get("dynamicRender"));
+    }
+});
+
+Router.route('/doi/:publisherDoi/:articleDoi', function () {
+    var article = Articles.findOne(
+        {doi: this.params.publisherDoi + "/" + this.params.articleDoi},
+        {fields: {
+            journalId: 1,
+            publisher: 1,
+            volume: 1,
+            issue: 1
+        }}
+    );
+    if (article) {
+        var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
+        var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
+    }
+    this.redirect('article.show', {
+        publisherName: pub.shortname,
+        journalShortTitle: journal.shortTitle,
+        volume: article.volume,
+        issue: article.issue,
+        publisherDoi: this.params.publisherDoi,
+        articleDoi: this.params.articleDoi
+    });
+}, {
+    waitOn: function () {
+        return [
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
+        ]
     }
 });
