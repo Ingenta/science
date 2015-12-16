@@ -10,7 +10,8 @@ Package.on_use(function (api) {
 	api.use([
 	    'deps',
 	    'templating',
-	    'session']
+	    'session',
+		'tap:i18n']
 	  , 'client');
 
     api.add_files(['client/banner.css','client/banner.html','client/banner.js'], 'client');

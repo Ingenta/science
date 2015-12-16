@@ -34,7 +34,7 @@ Meteor.startup(function(){
 				return defaultText;
 		},
 		'reconnectBeforeCountdownText': function(event, template){
-			var defaultText = TAPi18n.__("Automatically attempting to reconnect in"};
+			var defaultText = TAPi18n.__("Automatically attempting to reconnect in");
 			if(Meteor.settings && Meteor.settings.public && Meteor.settings.public.connectionBanner && Meteor.settings.public.connectionBanner.reconnectBeforeCountdownText)
 				return Meteor.settings.public.connectionBanner.reconnectBeforeCountdownText;
 			else
@@ -77,5 +77,7 @@ Meteor.startup(function(){
 		}
 		Session.set('MeteorConnection-isConnected', isConnected);
 	});
-});
+
+})
+;
 	
