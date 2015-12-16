@@ -151,7 +151,6 @@ Template.autoformModals.helpers(helpers);
 
 Template.afModal.events({
 	'click *': function(e, t) {
-		console.log('aa')
 		var html;
 		e.preventDefault();
 		html = t.$('*').html();
