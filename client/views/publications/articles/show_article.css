@@ -61,7 +61,7 @@ ol.affiliationList li {
     margin:0px 3px 0px 0px;
     display: inline-table;
 }
-.sectionDivider.title:not(#sec-__start__) {
+.sectionDivider.title {
     color: #39392A;
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 1.3em;
@@ -73,7 +73,7 @@ ol.affiliationList li {
     font-family: verdana, arial, helvetica, sans-serif;
     padding: 5px 0 5px 10px;
 }
-.sectionDivider:not(#sec-__start__) {
+.sectionDivider {
     background-color: #EEEEEE;
     padding: 0px;
     border: 1px solid #cccccc;

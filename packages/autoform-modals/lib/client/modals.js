@@ -31,8 +31,10 @@ Template.autoformModals.rendered = function() {
 	$('#afModal').on('shown.bs.modal', function() {
 		return $(window).bind('keyup', onEscKey);
 	});
-	$('#afModal').on('show.bs.modal', function() {
-		AutoForm.resetForm(Session.get('cmFormId') || defaultFormId);
+	$('#afModal').on('show.bs.modal', function(e) {
+		if(e.target.id=='afModal'){
+			AutoForm.resetForm(Session.get('cmFormId') || defaultFormId);
+		}
 	});
 	$('#afModal').on('hidden.bs.modal', function() {
 		var i, key, len, results, sessionKeys;

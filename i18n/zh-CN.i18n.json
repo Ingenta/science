@@ -1,4 +1,8 @@
 {
+  "Connection to Server Lost!": "连接到服务器丢失！",
+  "Click to try reconnecting now": "现在点击重新尝试",
+  "Automatically attempting to reconnect in": "自动尝试重新连接",
+  "seconds": "秒",
   "more": "更多",
   "Choose statistics template": "选择统计模版",
   "Activate account": "激活用户",
@@ -128,8 +132,8 @@
   "Prepare Manuscript": "准备手稿",
   "Submit  Manuscript": "提交稿件",
   "Collections": "文章集",
-  "Received": "稿件接收时间",
-  "Accepted Date": "稿件收录时间",
+  "Received": "接收时间",
+  "Accepted Date": "收录时间",
   "Published online": "发布时间",
   "Accepted": "预出版",
   "Online First": "优先出版",
@@ -1275,5 +1279,8 @@
   },
   "Institutional Users":"机构用户",
   "userLevel":"可被设置的用户级别",
-  "no roles can use to this user":"没有可用于该用户的角色"
+  "no roles can use to this user":"没有可用于该用户的角色",
+  "IntroductionInFulltext":"引言",
+  "Logs":"日志",
+  "Site Statistics":"统计"
 }

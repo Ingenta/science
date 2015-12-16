@@ -166,8 +166,8 @@ ScienceXML.getSubSection = function (subSectionNodes) {
                         delete subSecs[i].body.tables;
                     }
                 }
-                thisSection.body.figures = figures;
-                thisSection.body.tables = tables;
+                thisSection.body.figures = _.compact(_.union(thisSection.body.figures,figures));
+                thisSection.body.tables = _.compact(_.union(thisSection.body.tables,tables));
             }
             thisSubSection.push({
                 label: thisSection.label,
