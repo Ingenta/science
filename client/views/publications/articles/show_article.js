@@ -9,7 +9,10 @@ var delayRender = function () {
         }
         var figs = Router.current().data().figures;
         _.each(figs, function (fig) {
-            var refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
+            var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
+            if(_.isEmpty(refs)){
+                refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
+            }
             if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }

@@ -5,11 +5,13 @@ Package.describe({
     git: '',
     documentation: 'README.md'
 });
-both = ['client','server'];
+both = ['client', 'server'];
 Package.onUse(function (api) {
-    api.versionsFrom('1.1.0.2');
+    api.versionsFrom('1.2.1');
     api.use(
         [
+            'tomi:upload-jquery',
+            'tomi:upload-server',
             'templating',
             'jackkav:xpath',
             'science-lib',
@@ -17,9 +19,9 @@ Package.onUse(function (api) {
             'didstopia:admzip'
         ],
         both);
-    api.addFiles('both/routes.js',both);
+    api.addFiles('both/routes.js', both);
     api.addFiles('both/uploadLog.js', both);
-    api.use('arthuryyx:ftp','server')
+    api.use('arthuryyx:ftp', 'server')
     api.addFiles([
         'server/xml-lib.js',
         'server/science-xml.js',
@@ -28,7 +30,7 @@ Package.onUse(function (api) {
         'server/tasks.js',
         'server/interface.js',
         'server/ftpScan.js'
-    ],'server');
+    ], 'server');
 
     api.addFiles('client/views/upload.html', 'client');
     api.addFiles('client/views/upload.js', 'client');

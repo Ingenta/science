@@ -1,6 +1,7 @@
 Science.Email = {};
 
 Science.Email.authorCitationAlertEmail = function (date) {
+    var emailConfig = EmailConfig.findOne({key: "articleCitedAlert"});
     Citations.aggregate([{
         $match: {
             createdAt: {$gt: date}
@@ -11,7 +12,6 @@ Science.Email.authorCitationAlertEmail = function (date) {
             citations: {$push: "$citation"}
         }
     }]).forEach(function (item) {
-        var emailConfig = EmailConfig.findOne({key: "articleCitedAlert"});
         var article = Articles.findOne({_id: item._id}, {
             fields: {
                 title: 1,
@@ -76,6 +76,7 @@ Science.Email.searchFrequencyEmail = function () {
 };
 
 Science.Email.tableOfContentEmail = function (date) {
+    var emailConfig = EmailConfig.findOne({key: "watchJournal"});
     Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
         var userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
         if(!userList.count()) return;
@@ -133,7 +134,7 @@ Science.Email.tableOfContentEmail = function (date) {
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
-                subject: journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
                 html: content
             });
         });
@@ -141,6 +142,7 @@ Science.Email.tableOfContentEmail = function (date) {
 };
 
 Science.Email.availableOnline = function (date) {
+    var emailConfig = EmailConfig.findOne({key: "availableOnline"});
     Articles.aggregate([{
         $match: {
             $and: [
@@ -184,7 +186,7 @@ Science.Email.availableOnline = function (date) {
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
-                subject: "Available Online Now",
+                subject: emailConfig ? emailConfig.subject : "Available Online Now",
                 html: content
             });
         });
@@ -192,6 +194,7 @@ Science.Email.availableOnline = function (date) {
 };
 
 Science.Email.watchTopicEmail = function (date) {
+    var emailConfig = EmailConfig.findOne({key: "watchTopic"});
     var homePageNews = homepageNews();
     Topics.find().forEach(function (oneTopic) {
         var userList = Users.find({'profile.topicsOfInterest': {$in: [oneTopic._id]}});
@@ -229,7 +232,7 @@ Science.Email.watchTopicEmail = function (date) {
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
-                subject: oneTopic.name + "下有文章更新",
+                subject: emailConfig ? emailConfig.subject : oneTopic.name + "下有文章更新",
                 html: content
             });
         });
@@ -237,6 +240,7 @@ Science.Email.watchTopicEmail = function (date) {
 };
 
 Science.Email.watchArticleCitedAlertEmail = function (date) {
+    var emailConfig = EmailConfig.findOne({key: "watchArticle"});
     Citations.aggregate([{
         $match: {createdAt: {$gt: date}}
     }, {
@@ -280,7 +284,7 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
-                subject: 'Article cited alert',
+                subject: emailConfig ? emailConfig.subject : 'Article cited alert',
                 html: content.replace(/USERNAME/, oneUser.username)
             });
         });

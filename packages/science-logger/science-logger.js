@@ -38,18 +38,22 @@ if (Meteor.isServer) {
         maxFiles: 5,
         json: true
     };
-
-    logger = new (winston.Logger)({
-        transports: [
-            new (winston.transports.Console)(),
-            new (winston.transports.File)(fileDebugOptions),
-            new (winston.transports.MongoDB)(mongoOptions)
-        ],
-        exceptionHandlers: [
-            new (winston.transports.Console)(),
-            new (winston.transports.File)(fileExceptionOptions)
-        ]
-    });
+    if (isDev){
+        logger = new (winston.Logger)();
+    }
+    else {
+        logger = new (winston.Logger)({
+            transports: [
+                new (winston.transports.Console)(),
+                new (winston.transports.File)(fileDebugOptions),
+                new (winston.transports.MongoDB)(mongoOptions)
+            ],
+            exceptionHandlers: [
+                new (winston.transports.Console)(),
+                new (winston.transports.File)(fileExceptionOptions)
+            ]
+        });
+    }
     //Meteor.publish('user', function() {
     //    var userId = this.userId;
     //    logger.info('user connected', {userId: userId});

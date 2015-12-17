@@ -13,13 +13,9 @@ Package.describe({
 both = ['client', 'server']
 
 Package.onUse(function (api) {
-    api.versionsFrom('1.1.0.2');
+    api.versionsFrom('1.2.1')
     api.use(
         [
-//            'templating',
-//
-//            'aldeed:autoform'
-
             'templating',
             'iron:router',
             'aldeed:simple-schema',
@@ -28,7 +24,6 @@ Package.onUse(function (api) {
             'science-lib',
             'science-permissions',
             'templates:tabs'
-
         ],
         both);
 
