@@ -135,7 +135,10 @@ if (Meteor.isServer) {
         "email": "admin@scp.com"
     };
     Config.mailServer = {
-        "address": "publish@scichina.org"
+        address: "test@scichina.org",
+        password: 'Test123123',
+        server: 'smtp.bestedm.org',
+        port: 25
     };
     Config.AutoTasks = {
         start: process.env.RUN_TASKS,
