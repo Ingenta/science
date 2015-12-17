@@ -69,7 +69,6 @@ Router.map(function () {
                 Session.set('filterPublisher', pub._id);
                 return pub;
             }
-
         },
         template: "ShowPublisher",
         parent: "publishers",

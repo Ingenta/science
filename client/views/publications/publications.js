@@ -2,16 +2,16 @@ Template.onePublication.events({
     'click .fa-trash': function (e) {
         var id = this._id;
         confirmDelete(e, function () {
-            Publications.remove({_id: id});
+            Publications.update({_id: id}, {$set: {visible: 0}});
         })
     }
 });
 
 Template.onePublication.helpers({
     getModalTitle:function(){
-        return TAPi18n.__("update");
+        return TAPi18n.__("Update");
     }
-})
+});
 
 Template.onePublisherInFilterList.helpers({
     count: function (id) {
