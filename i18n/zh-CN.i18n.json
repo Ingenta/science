@@ -665,7 +665,8 @@
         "placeholder": "http://"
       },
       "defaultLink": {
-        "label": "默认链接"
+        "label": "默认链接",
+        "placeholder": "http://"
       },
       "endDate": {
         "label": "截止日期"

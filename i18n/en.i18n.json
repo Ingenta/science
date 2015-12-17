@@ -511,7 +511,8 @@
                 "placeholder": "http://"
             },
             "defaultLink": {
-                "label": "The default link"
+                "label": "The default link",
+                "placeholder": "http://"
             },
             "endDate": {
                 "label": "Expiration date"
