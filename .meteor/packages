@@ -16,40 +16,43 @@ standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
-standard-app-packages
-less
-accounts-base
-accounts-password
+
+spacebars
+spacebars-compiler
 email
 http
-logging
-reload
 random
 ejson
-spacebars
 check
-reactive-var
-spiderable
-spacebars-compiler
 npm-container
 reactive-dict
+reactive-var
+spiderable
 
+# accounts
+accounts-base
+accounts-password
+ongoworks:security@1.1.0
+orbit:permissions
+eluck:accounts-lockout
+
+# router
 iron:router
 monbro:iron-router-breadcrumb
 multiply:iron-router-progress
+meteorhacks:subs-manager
 
+# style
+less
 fortawesome:fontawesome
 
-
+# forms
 aldeed:autoform
 aldeed:collection2
 aldeed:simple-schema
 aldeed:autoform-select2
-
 natestrauser:select2
-
 yogiben:autoform-file
-
 jackjiang:autoform-modals
 yogiben:autoform-modals-up
 rajit:bootstrap3-datepicker
@@ -57,12 +60,12 @@ tsega:bootstrap3-datetimepicker
 vazco:universe-autoform-select
 aldeed:autoform-bs-datepicker
 mpowaga:autoform-summernote
-
 gwendall:autoform-i18n
 gwendall:simple-schema-i18n
 tap:i18n
 tap:i18n-ui
 
+# libs
 science-lib
 science-topics
 science-xml
@@ -77,48 +80,50 @@ science-emails
 science-users
 science-statistic
 science-institution
+arthuryyx:ftp
+mathjax
+jackjiang:solr
 
+# file handling
 cfs:filesystem
 cfs:standard-packages
 cfs:gridfs
 cfs:ui
 cfs:autoform
+cfs:graphicsmagick
+adain:meteor-guid
 
+# collections
 meteorhacks:aggregate
-meteorhacks:kadira
-meteorhacks:subs-manager
-orbit:permissions
-eluck:accounts-lockout
+matb33:collection-hooks
 
-mathjax
-jackjiang:solr
-
+# ui plugins
 templates:tabs
 mrt:flash-messages
 kevohagan:sweetalert
-matb33:collection-hooks
+barbatus:stars-rating
+mrt:jquery-raty
+hitchcott:paginator
+maazalik:highcharts
+mizzao:user-status
+mizzao:timesync
 
+# date plugins
 mrt:moment
 monbro:last-software-release-date
 rzymek:moment-locale-zh-cn
 lbee:moment-helpers
 
-hitchcott:paginator
-ongoworks:security@1.1.0
-maazalik:highcharts
-mizzao:user-status
-mizzao:timesync
-
-arthuryyx:ftp
-
-barbatus:stars-rating
-mrt:jquery-raty
-meteortoys:toykit
-msavin:mongol
-
+# pdf
 jackjiang:editable-template
 classcraft:meteor-wkhtmltopdf
 timbrandin:slick
-cfs:graphicsmagick
-adain:meteor-guid
+
+# debug
+meteortoys:toykit
+msavin:mongol
+meteorhacks:kadira
 natestrauser:connection-banner
+
+
+
