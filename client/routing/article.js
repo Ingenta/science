@@ -45,6 +45,10 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         } else {
             Session.set("hideAffLabel", false);
         }
+
+        if(!Science.Cookies.get('mjx.menu')){
+            Science.Cookies.set('mjx.menu',"renderer:CommonHTML")
+        }
         this.next();
     },
     onStop: function () {
