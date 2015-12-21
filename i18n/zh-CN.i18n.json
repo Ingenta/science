@@ -1284,5 +1284,11 @@
   "no roles can use to this user":"没有可用于该用户的角色",
   "IntroductionInFulltext":"引言",
   "Logs":"日志",
-  "Site Statistics":"统计"
+  "Site Statistics":"统计",
+  "System statistics":"系统统计",
+  "Total registered users":"总注册用户",
+  "Total connections":"总连接数",
+  "Total publishers":"总出版商数",
+  "Total journals":"总期刊数",
+  "Total articles":"总文章数"
 }
