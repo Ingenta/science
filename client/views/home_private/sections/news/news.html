@@ -59,7 +59,7 @@
 </template>
 
 <template name="updateNewsModalForm">
-    {{#afModal class="fa fa-pencil" title="Update" collection="News" doc=_id operation="update" omitFields="pageView,createDate,types,about,publications"}}
+    {{#afModal class="fa fa-pencil" title=getTitle collection="News" doc=_id operation="update" buttonContent=getUpdateButtonContent omitFields="pageView,createDate,types,about,publications"}}
     {{/afModal}}
 </template>
 

@@ -84,3 +84,9 @@ Template.addNewsButton.helpers({
         return News.find({types: "1"}).count() < 3;
     }
 });
+
+Template.updateNewsModalForm.helpers({
+    getTitle: function () {
+        return TAPi18n.__("Update");
+    }
+});
