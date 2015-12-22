@@ -1294,5 +1294,12 @@
   "fulltext":"全文",
   "combined":"综合",
   "abstract":"摘要",
-  "Close":"关闭"
+  "Close":"关闭",
+  "PasswordNotMatch":"您的新密码和确定密码不匹配",
+  "OldPassword":"请输入旧密码",
+  "NewPassword":"请输入新密码",
+  "ConfirmNewPas":"请确认您的新密码",
+  "NewPasSet":"您的新密码设置",
+  "Incorrect password" : "密码错误",
+  "Choose file":"选择文件"
 }

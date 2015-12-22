@@ -28,19 +28,19 @@ Template.UserSettingsChangePass.events({
 
 		if(old_password == "")
 		{
-			pageSession.set("errorMessage", "Please enter your old password.");
+			pageSession.set("errorMessage", TAPi18n.__("OldPassword"));
 			t.find('#old_password').focus();
 			return false;
 		}
 		if(new_password == "")
 		{
-			pageSession.set("errorMessage", "Please enter your new password.");
+			pageSession.set("errorMessage", TAPi18n.__("NewPassword."));
 			t.find('#new_password').focus();
 			return false;
 		}
 		if(confirm_pass == "")
 		{
-			pageSession.set("errorMessage", "Please confirm your new password.");
+			pageSession.set("errorMessage", TAPi18n.__("ConfirmNewPas"));
 			t.find('#confirm_pass').focus();
 			return false;
 		}
@@ -48,7 +48,7 @@ Template.UserSettingsChangePass.events({
 		// check new password
 		if(new_password != confirm_pass)
 		{
-			pageSession.set("errorMessage", "Your new password and confirm password doesn't match.");
+			pageSession.set("errorMessage",TAPi18n.__("PasswordNotMatch"));
 			t.find('#new_password').focus();
 			return false;
 		}
@@ -61,7 +61,7 @@ Template.UserSettingsChangePass.events({
 				return false;
 			} else {
 				pageSession.set("errorMessage", "");
-				pageSession.set("infoMessage", "Your new password is set.");
+				pageSession.set("infoMessage", TAPi18n.__("NewPasSet"));
 				t.find('#old_password').value = "";
 				t.find('#new_password').value = "";
 				t.find('#confirm_pass').value = "";
