@@ -57,12 +57,16 @@ Template.FullTextTemplate.events({
             })
             if(reference){
                 var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
-                var refIndexs = Science.String.parseToNumbers(indexStr);
-                if(!_.isEmpty(refIndexs)){
-                    Session.set("refs",refIndexs);
-                    $(".reference-modal").modal('show');
-                    return;
+                if(/^\d{1,3}(\s*?,\s*?\d{1,3})*$/.test(indexStr)){
+                    var refIndexs = Science.String.parseToNumbers(indexStr);
+                    if(!_.isEmpty(refIndexs)){
+                        Session.set("refs",refIndexs);
+                    }
+                }else{
+                    Session.set("refs",[reference.index]);
                 }
+                $(".reference-modal").modal('show');
+                return;
             }
             Science.dom.scollToElement("#"+rid);
         }
