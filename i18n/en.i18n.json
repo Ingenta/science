@@ -979,5 +979,12 @@
     "no roles can use to this user":"No roles can use to this user",
     "IntroductionInFulltext":"Introduction",
     "Logs":"Logs",
-    "Site Statistics":"Site Statistics"
+    "Site Statistics":"Site Statistics",
+    "PasswordNotMatch":"Your new password and confirm password doesn't match.",
+    "OldPassword":"Please enter your old password.",
+    "NewPassword":"Please enter your new password.",
+    "ConfirmNewPas":"Please confirm your new password.",
+    "NewPasSet":"Your new password is set.",
+    "Incorrect password":"Incorrect password",
+    "Choose file":"Choose file"
 }
