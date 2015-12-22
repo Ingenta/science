@@ -50,12 +50,12 @@ Template.Login.events({
 			}
 			else{
 				pageSession.set("errorMessage", "");
-				Router.go("home",{});
+				history.back();
+				//Router.go("home",{});
 			}
 		});
 		return false; 
 	}
-	
 });
 
 Template.Login.helpers({
