@@ -1290,5 +1290,9 @@
   "Total connections":"总连接数",
   "Total publishers":"总出版商数",
   "Total journals":"总期刊数",
-  "Total articles":"总文章数"
+  "Total articles":"总文章数",
+  "fulltext":"全文",
+  "combined":"综合",
+  "abstract":"摘要",
+  "Close":"关闭"
 }

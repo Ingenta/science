@@ -160,13 +160,13 @@ function buildHitCounterGraph(data) {
             borderWidth: 0
         },
         series: [{
-            name: 'abstract',
+            name:  TAPi18n.__("abstract"),
             data: data.abstract
         }, {
-            name: 'fulltext',
+            name: TAPi18n.__("fulltext"),
             data: data.fulltext
         }, {
-            name: 'combined',
+            name: TAPi18n.__("combined"),
             data: data.total
         }]
     });
