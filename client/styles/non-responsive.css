@@ -222,6 +222,6 @@ body,
     border-top: 1px solid #eee;
 }
 
-.text-justify{
-    text-align:justify;
+.ad-container {
+    padding: 0px 40px;
 }
