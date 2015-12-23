@@ -17,7 +17,7 @@
         <div class="part">
             <h4>被引用文章：</h4>
             <p>
-                <a href="{{article.url}}">{{article.title.cn}}</a>, <span>{{#each article.authors}}<span class="separate-comma">{{fullname.en}}</span>{{/each}}</span><br>
+                <a href="{{article.url}}">{{{article.title.cn}}}</a>, <span>{{#each article.authors}}<span class="separate-comma">{{fullname.en}}</span>{{/each}}</span><br>
                 <a href="{{article.journal.url}}">{{article.journal.titleCn}}</a>, {{article.year}}, {{article.volume}}({{article.issue}}){{#if article.elocationId}}: {{article.elocationId}}{{/if}}
             </p>
         </div>
