@@ -1,6 +1,6 @@
 <template name="aboutTitle">
     <div class="tabbable">
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
                 {{#each abouts}}
                     <div class="pull-right row aboutEditButtons">
@@ -27,7 +27,7 @@
                 </div>
             </ul>
         </div>
-        <div class="tab-content col-xs-9">
+        <div class="tab-content col-xs-8">
             <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
         </div>
     </div>
@@ -65,12 +65,12 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-xs-4">
                     <img src="{{getImageHelper picture}}" width="133" height="180"/>
 
                     <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
                 </div>
-                <div class="col-xs-9">
+                <div class="col-xs-8">
                     {{#if workUnits}}
                         {{_ "Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
                     {{/if}}
