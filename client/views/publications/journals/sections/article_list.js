@@ -20,6 +20,12 @@ Template.journalNavigationPanel.helpers({
         years = _.uniq(years.join(", ").split(/, ?/)).sort();
         if(!_.isEmpty(years))
             return "("+years.join(", ") +")"
+    },
+    class:function(){
+        return this._id===Session.get("currentVolumeId")?"fa-minus":"fa-plus";
+    },
+    issueDisplay:function(){
+        return this._id===Session.get("currentVolumeId")?"block":"none";
     }
 });
 
@@ -42,6 +48,27 @@ Template.journalNavigationPanel.events({
     }
 });
 
+var getLastIssue = function(){
+    //Get the newest issue to display by default
+    var journalId = Session.get('currentJournalId');
+    var issues = Issues.find({'journalId': journalId}).fetch();
+    var highestVolume = _.max(issues, function(i){ return parseInt(i.volume,10); }).volume;
+    var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
+    return  _.max(issuesInThisVolume, function(i){ return parseInt(i.issue,10); });
+}
+Template.journalNavigationPanel.onRendered(function(){
+    console.log('alas')
+    var lastIssue;
+    if(Session.get("currentIssueId"))
+        lastIssue = Issues.findOne({'_id':Session.get("currentIssueId")});
+    else
+        lastIssue = getLastIssue();
+    if(!lastIssue) return;
+    var currVolume = Volumes.findOne({journalId:lastIssue.journalId,volume:lastIssue.volume});
+    if(!currVolume) return;
+    Session.set("currentVolumeId",currVolume._id)
+})
+
 
 Template.articleListRight.helpers({
     resetArticlesFilter: function () {
@@ -56,12 +83,7 @@ Template.articleListRight.helpers({
         if (curIssue) {
             return Articles.find({issueId: curIssue, pubStatus: pubStatus},{sort: {elocationId: -1}});
         } else {
-            //Get the newest issue to display by default
-            var journalId = Session.get('currentJournalId');
-            var issues = Issues.find({'journalId': journalId}).fetch();
-            var highestVolume = _.max(issues, function(i){ return parseInt(i.volume,10); }).volume;
-            var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
-            var lastIssue =  _.max(issuesInThisVolume, function(i){ return parseInt(i.issue,10); });
+            var lastIssue =  getLastIssue();
             if (lastIssue) Session.set("currentIssueId", lastIssue._id);
         }
     },
