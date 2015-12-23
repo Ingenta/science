@@ -57,7 +57,6 @@ var getLastIssue = function(){
     return  _.max(issuesInThisVolume, function(i){ return parseInt(i.issue,10); });
 }
 Template.journalNavigationPanel.onRendered(function(){
-    console.log('alas')
     var lastIssue;
     if(Session.get("currentIssueId"))
         lastIssue = Issues.findOne({'_id':Session.get("currentIssueId")});
