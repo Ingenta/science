@@ -117,6 +117,13 @@
         font-weight: normal;
     }
 
+    .new-list p {
+        line-height: 18px;
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
     .border-div {
         border-bottom: 1px solid #e5e5e5;
         padding: 10px 0;
@@ -189,5 +196,11 @@
     .indent {
         margin-left: 10px;
         margin-right: 10px;
+    }
+
+    .separate-comma:not(:last-child):after {
+        content: ", ";
+        margin: 0px 3px 0px 0px;
+        display: inline-table;
     }
 </style>
