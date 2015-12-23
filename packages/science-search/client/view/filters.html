@@ -5,8 +5,9 @@
 		{{#each getFilterOptions}}
 			<li class="search-cond {{class}}">
 				<a class="filter-me" href="#">
-					{{translateThis cname name}}({{count}})
+					{{translateThis cname name}}
 				</a>
+                <span class="pull-right">[{{count}}]</span>
 			</li>
 		{{/each}}
 		{{#if isTooMany}}
