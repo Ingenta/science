@@ -12,7 +12,7 @@
                 <tr>
                     <td>
                         <a href="{{urlToArticleById _id}}">
-                            <a>{{translateThis title.cn title.en}}</a>
+                            <a>{{{translateThis title.cn title.en}}}</a>
                         </a>
                     </td>
                     <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedArticle"
