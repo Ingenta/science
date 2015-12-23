@@ -1,7 +1,7 @@
 <template name="solrFilterItem">
 	{{#if filterOptions}}
 	<h5 class="bg-eee">{{filterTitle}}</h5>
-	<ul data-show="5" class="list-unstyled list-ul slimScroll">
+	<ul data-show="5" class="slimScroll list-unstyled">
 		{{#each getFilterOptions}}
 			<li class="search-cond {{class}}">
 				<a class="filter-me" href="#">

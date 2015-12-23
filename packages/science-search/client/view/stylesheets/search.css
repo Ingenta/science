@@ -3,7 +3,8 @@
 }
 
 li.search-cond {
-    width: 90%
+    width: 90%;
+    margin-top:5px;
 }
 
 .quick-search {
@@ -47,4 +48,9 @@ li.search-cond {
 
 .filter-selected {
     font-weight:bold;
+    font-size:13px;
+}
+.slimScroll {
+    padding:0px 0px 0px 10px !important;
+    font-size:12px;
 }
