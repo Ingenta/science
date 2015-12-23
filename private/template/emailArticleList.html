@@ -1,9 +1,15 @@
 {{#each articleList}}
-    <h2><a href="{{url}}">{{title.cn}}</a></h2>
-    <h3>
-        {{#each authors}}
-            {{fullname.en}},
-        {{/each}}
-    </h3>
-    <h5><a href="{{journal.url}}">{{journal.titleCn}}</a>, {{year}}, {{volume}}({{issue}}){{#if elocationId}}: {{elocationId}}{{/if}} </h5>
+    <p>
+        <a href="{{url}}">{{{title.cn}}}</a>
+        <br>
+        <span>
+            {{#each authors}}
+                <span class="separate-comma">
+                    {{fullname.en}}
+                </span>
+            {{/each}}
+        </span>
+        <br>
+        <a href="{{journal.url}}">{{journal.titleCn}}</a>, {{year}}, {{volume}}({{issue}}){{#if elocationId}}: {{elocationId}}{{/if}}
+    </p>
 {{/each}}

@@ -56,9 +56,10 @@ Template.editorRecommendedArticles.helpers({
     titles: function (articleId) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var article = Articles.findOne({_id: articleId});
-        if(!article)return;
-        var title = iscn ? article.title.cn : article.title.en;
-        return title;
+        if(article){
+            var title = iscn ? article.title.cn : article.title.en;
+            return title;
+        }
     },
     hasMoreThanFiveRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
@@ -79,6 +80,7 @@ AutoForm.addHooks(['addRecommendModalForm'], {
     onSuccess: function () {
         $("#addRecommendModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId'));
     },
     before: {
         insert: function (doc) {

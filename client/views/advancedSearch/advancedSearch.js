@@ -109,6 +109,9 @@ Template.AdvancedSearch.events({
         if(topic){
             filterQuery["topic"] = topic;
         }
+        if(contentType){
+            filterQuery["contentType"] = contentType;
+        }
         //---------------------------------------结果排序------------------------------------------
 
         //结果排序
