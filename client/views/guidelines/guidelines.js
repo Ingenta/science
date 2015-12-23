@@ -1,8 +1,9 @@
 Template.ShowGuidelines.helpers({
     authorTitle: function () {
         var guideId = Router.current().params.guideId;
+        var journalId = Session.get('currentJournalId');
         var guide = AuthorCenter.findOne({_id:guideId});
-        return AuthorCenter.find({type:guide.type,url:null});
+        return AuthorCenter.find({type:guide.type,url:null,publications:journalId});
     },
     authorCenters:function(){
         var guideId = Router.current().params.guideId;
