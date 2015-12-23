@@ -44,3 +44,7 @@ li.search-cond {
     max-height: 200px;
     overflow: auto
 }
+
+.filter-selected {
+    font-weight:bold;
+}
