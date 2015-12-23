@@ -15,10 +15,16 @@ Meteor.publish(null, function() {
 
 Meteor.users.allow({
 	update: function(userId, doc, fieldNames, modifier) {
-		return OrbitPermissions.userCan("delegate-and-revoke", "permissions", userId)
-				&& ((("$addToSet" in modifier) && ("orbit_roles" in modifier["$addToSet"]))
-					|| (("$pullAll" in modifier) && ("orbit_roles" in modifier["$pullAll"]))
-					|| (("$set" in modifier) && ("orbit_roles" in modifier["$set"])));
+		if(OrbitPermissions.isAdmin(userId)){
+			return true;
+		}
+		if (("$set" in modifier) && ("orbit_roles" in modifier["$set"]) && OrbitPermissions.isUserHavePerm(userId,"permissions:delegate-and-revoke")) {
+			var scope = OrbitPermissions.getPermissionRange(userId,"permissions:delegate-and-revoke");
+			return OrbitPermissions.userCan("delegate-and-revoke", "permissions", userId, scope)
+		}
+		return OrbitPermissions.userCan("delegate-and-revoke", "permissions", userId) &&
+			((("$addToSet" in modifier) && ("orbit_roles" in modifier["$addToSet"]))
+			|| (("$pullAll" in modifier) && ("orbit_roles" in modifier["$pullAll"])))
 	}
 });
 

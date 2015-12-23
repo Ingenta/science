@@ -268,10 +268,12 @@ OrbitPermissions = {
 			var fullScope = OrbitPermissions.getPermissionRange(user, package_name + ":" + permission);
 			var flag      = true;
 			_.each(scope, function (val, key) {
-				val = _.isString(val)?[val]:val;
-				var interSec = _.intersection(fullScope[key], val);
-				if (_.isArray(val) && interSec.length < val.length)
-					flag = false;
+				if(val !=='any'){
+					val=_.isString(val)?[val]:val;
+					var interSec = _.intersection(fullScope[key], val);
+					if (_.isArray(val) && interSec.length < val.length)
+						flag = false;
+				}
 			})
 			return flag;
 		}
@@ -468,6 +470,29 @@ OrbitPermissions = {
 			}
 		});
 		return roles;
+	},
+	isUserHavePerm:function(userId,permission){
+		if(!userId && Meteor.isClient)
+			userId = Meteor.userId();
+		var user = helpers.getUserObject(userId);
+		if (user == null) {
+			return false;
+		}
+		var userRoles = user[globals.roles_field_name];
+		if (!_.isArray(userRoles)) {
+			userRoles = [];
+		}
+
+		if (_.isEmpty(userRoles)) {
+			return;
+		}
+		return !!_.find(Roles, function (roles, pkgName) {
+			return _.find(roles,function(roleDef,roleName){
+				if (roleDef && !_.isEmpty(roleDef.permissions)) {
+					return _.contains(roleDef.permissions, permission)
+				}
+			})
+		});
 	},
 	getPermissionRange         : function (userId, permission) {
 		if(!userId && Meteor.isClient)
