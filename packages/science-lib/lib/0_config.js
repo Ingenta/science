@@ -150,7 +150,7 @@ if (Meteor.isServer) {
                 condition: 1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
         },
         Citation: {
-            rate: "at 17:50 am" //提交注册请求的频率，默认每周六凌晨1点"
+            rate: "at 5:50 pm" //提交注册请求的频率，默认每周六凌晨1点"
         },
         Postman: {
             rate: "at 3:00 am"
