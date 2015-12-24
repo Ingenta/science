@@ -129,7 +129,7 @@ Template.referenceModal.helpers({
             return;
         var refs = _.filter(allRefs,function(ref){
             return _.find(currRefs,function(cr){
-                return cr==ref;
+                return cr==ref.index;
             });
         });
         return refs;
