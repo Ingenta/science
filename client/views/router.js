@@ -149,7 +149,7 @@ Router.map(function () {
     this.route('/mostCitedArticles', {
         template: "mostCiteArticle",
         title: function () {
-            return TAPi18n.__("Most cited by");
+            return TAPi18n.__("Most cited");
         },
         parent: "home",
         name: "mostCite.show",
@@ -163,7 +163,7 @@ Router.map(function () {
     this.route('/mostCitedArticles/:journalId', {
         template: "mostCiteArticle",
         title: function () {
-            return TAPi18n.__("Most cited by");
+            return TAPi18n.__("Most cited");
         },
         parent: "home",
         name: "mostCite.showWithJournalId",
