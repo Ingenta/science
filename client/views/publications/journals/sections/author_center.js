@@ -39,6 +39,15 @@ Template.guideArticles.helpers({
     }
 });
 
+Template.guideArticles.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            AuthorCenter.remove({_id:id});
+        })
+    }
+});
+
 Template.addManuscriptModalForm.helpers({
     getManuscript:function(){
         var iscn=TAPi18n.getLanguage()==='zh-CN';

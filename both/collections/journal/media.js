@@ -22,7 +22,13 @@ MediasSchema  = new SimpleSchema({
 		autoform:{
 			type: "hidden"
 		}
-
+	},
+	doi:{
+		type:String,
+		optional:true,
+		autoform:{
+			type: "hidden"
+		}
 	}
 });
 

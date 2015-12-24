@@ -68,6 +68,10 @@ Meteor.methods({
     getDefaultPublisherId: function () {
         var defaultPublisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
         if(defaultPublisher) return defaultPublisher._id;
+    },
+    updateMostCited:function(){
+        updateMostCited && updateMostCited();
+        return true;
     }
 });
 
