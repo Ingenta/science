@@ -1,0 +1,59 @@
+<template name="articleMedia">
+    <div class="row">
+        <div style="margin-left: 4%">
+            <div>
+                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+                    {{#jkafModal template="addArticleMediaForm" id="addArticleMediaForm" class="btn btn-success" title="Add new"}}
+                        {{_ "Add new"}} <i class="fa fa-plus"></i>
+                    {{/jkafModal}}
+                {{/if}}
+            </div><br>
+            <div>
+                <ul class="list-unstyled">
+                    {{#each medias}}
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    {{> Template.dynamic template=dynamicTemp data=getdata}}
+
+                                </div>
+                                <div class="col-xs-7">
+                                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                                        <div class="pull-right">
+                                            {{> jkafModal template="updateMediaForm" doc=this }}
+                                            <a href="#" class="fa fa-trash"></a>
+                                        </div>
+                                    {{/if}}
+                                    <h4>{{translateThis title.cn title.en}}</h4>
+
+                                    <p>{{translateThis description.cn description.en}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="addArticleMediaForm">
+    <!--{{> quickForm id="addArticleMediaModalForm" type="insert" collection=Collections.Medias}}-->
+    {{#autoForm collection=Collections.Medias title="Add" id="addArticleMediaModalForm" type="insert"}}
+        <div class="modal-body">
+            {{> afObjectField name="title"}}
+            {{> afObjectField name="description"}}
+            <input name="fileId" type="file" class="any"/>
+            {{#each uploadedFiles}}
+                {{> uploadedFile}}
+            {{/each}}
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+        </div>
+    {{/autoForm}}
+</template>
+
+<template name="updateArticleMediaForm">
+    {{> quickForm id="updateArticleMediaForm" doc=this type="update" collection=Collections.Medias omitFields='fileId'}}
+</template>

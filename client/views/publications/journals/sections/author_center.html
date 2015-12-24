@@ -58,6 +58,9 @@
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateAuthorCenterModalForm}}
                         {{/if}}
+                        {{#if can "delete-author-center" "resource"  }}
+                            <a href="#" class="fa fa-trash"></a>
+                        {{/if}}
                     </li>
                 </ul>
             {{else}}
@@ -75,9 +78,12 @@
                 {{/if}}
             </div>
             {{#each manuscript}}
-                <p> >> {{{translateThis title.cn title.en}}}
+                <p> >> {{{translateThis title.cn title.en}}}111
                     {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                         {{> updateSubmitManuscriptModalForm}}
+                    {{/if}}
+                    {{#if can "delete-author-center" "resource"  }}
+                        <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </p>
                 {{#each childList}}
@@ -85,6 +91,9 @@
                         <li><a href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
                             {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
+                            {{/if}}
+                            {{#if can "delete-author-center" "resource"  }}
+                                <a href="#" class="fa fa-trash"></a>
                             {{/if}}
                         </li>
                     </ul>
@@ -110,6 +119,9 @@
                     <li><a href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateSubmitManuscriptModalForm}}
+                        {{/if}}
+                        {{#if can "delete-author-center" "resource"  }}
+                            <a href="#" class="fa fa-trash"></a>
                         {{/if}}
                     </li>
                 </ul>
