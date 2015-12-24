@@ -191,8 +191,8 @@ Template.articleOptions.helpers({
         return Session.get('activeTab');
     },
     ipRedirect: function () {
-        if (Permissions.isAdmin())return false;
-        if (this.language === "2") return false;
+        if (Permissions.isAdmin())return true;
+        if (this.language === "2") return true;
         return Session.get("ipInChina");
     }
 });
