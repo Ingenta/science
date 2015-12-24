@@ -54,3 +54,19 @@ createMostReadList = function (journalId, limit) {
     });
     return _.uniq(allIds); //This removes any duplicates after initial
 }
+
+updateMostCited = function(){
+    var citations = Articles.find({citations: {$exists: true}}, {sort: {'citationCount': -1}, limit: 20, fields: {_id:1, title:1, citationCount:1, journalId: 1}}).fetch();
+    if(!_.isEmpty(citations)){
+
+        MostCited.remove({});
+        citations.forEach(function (item) {
+            MostCited.insert({
+                articleId: item._id,
+                title: item.title,
+                count: item.citationCount,
+                journalId: item.journalId
+            });
+        });
+    }
+}

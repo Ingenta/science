@@ -57,15 +57,5 @@ Science.Queue.Citation.taskHandler = function(data,next){
 
 Science.Queue.Citation.onEnded = function(){
 	AutoTasks.update({_id:Science.Queue.Citation.taskId},{$set:{status:"ended",processing:0}});
-
-	MostCited.remove({});
-	var citations = Articles.find({citations: {$exists: true}}, {sort: {'citationCount': -1}, limit: 20, fields: {_id:1, title:1, citationCount:1, journalId: 1}}).fetch();
-	citations.forEach(function (item) {
-	    MostCited.insert({
-	        articleId: item._id,
-	        title: item.title,
-	        count: item.citationCount,
-	        journalId: item.journalId
-	    });
-	});
+	updateMostCited && updateMostCited();
 };
