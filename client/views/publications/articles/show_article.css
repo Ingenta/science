@@ -9,6 +9,9 @@ div.articleDetails li {
 }
 .articleTitle{
     padding-left:3em;
+    padding-top:10px;
+    padding-bottom:7px;
+    font-family:Arial, "Helvetica Neue", "黑体", Helvetica, sans-serif;
 }
 .articleAccessKeyImage{
     position: absolute;

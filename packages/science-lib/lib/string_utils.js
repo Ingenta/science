@@ -116,7 +116,7 @@ Science.String.parseToNumbers=function(str){
     var resultArr = [];
     _.each(parts,function(part){
         var tPart = part.trim();
-        var range = tPart.split(/[-－–]/);
+        var range = tPart.split(/[~-－––]/);
         if(!_.isEmpty(range)){
             if(range.length===2){
                 var n1=Number(range[0]);
