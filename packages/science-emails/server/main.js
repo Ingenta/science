@@ -331,7 +331,28 @@ var homepageNews = function () {
     var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
     var rootUrl = Config.rootUrl;
     news.forEach(function (item) {
+        item.abstract.cn = cutString(item.abstract.cn, 415);
         if (!item.url) item.url = rootUrl + "news/" + item._id
     });
     return news;
+};
+
+var cutString = function(str,len,suffix){
+    if(!str) return "";
+    if(len<= 0) return "";
+    if(!suffix) suffix = "...";
+    var templen=0;
+    for(var i=0;i<str.length;i++){
+        if(str.charCodeAt(i)>255){
+            templen+=2;
+        }else{
+            templen++
+        }
+        if(templen == len){
+            return str.substring(0,i+1)+suffix;
+        }else if(templen >len){
+            return str.substring(0,i)+suffix;
+        }
+    }
+    return str;
 };
