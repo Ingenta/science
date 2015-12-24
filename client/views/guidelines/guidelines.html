@@ -17,7 +17,7 @@
                         {{#each authorCenters}}
                             <div align="center">
                                 <span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
-                                {{#if can "modify-author-center" "resource"  }}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
                                 {{#if can "delete-author-center" "resource"  }}<a href="#" class="fa fa-trash"></a>{{/if}}
                             </div><br>
                             <p>{{{translateThis content.cn content.en}}}</p>
