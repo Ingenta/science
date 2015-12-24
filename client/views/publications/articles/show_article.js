@@ -17,10 +17,12 @@ var delayRender = function () {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }
             if (refs && refs.length) {
-                var closestP = $(refs[0]).closest("p")[0];
-                Blaze.renderWithData(Template.figure, fig, closestP);
-                closestP.show();
-                //$(refs[0]).remove();
+                var closestP = $(refs[0]).closest("p");
+                if(closestP.length){
+                    Blaze.renderWithData(Template.figure, fig, closestP[0]);
+                    closestP.show();
+                    //$(refs[0]).remove();
+                }
             }
         });
 
