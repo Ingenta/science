@@ -43,7 +43,7 @@
     {{#each aboutArticle}}
         <div class="part">
             <p>
-                <strong>{{translateThis title.cn title.en}}&nbsp;: </strong>
+                <strong>{{{translateThis title.cn title.en}}}&nbsp;: </strong>
 
             <div class="pull-right">
                 {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}

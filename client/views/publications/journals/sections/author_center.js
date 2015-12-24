@@ -35,7 +35,7 @@ Template.guideArticles.helpers({
         }
         var journalId = Session.get('currentJournalId');
         var publication = Publications.findOne({_id:journalId});
-        return publication.title+"/guide/"+this._id;
+        return publication.shortTitle+"/guide/Manuscript/"+this._id;
     }
 });
 

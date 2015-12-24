@@ -15,9 +15,9 @@
     <ul class="list-unstyled">
         {{#each volumeInJournal _id}}
             <li class="volume">
-                <span class="volume-toggle"><i class="fa fa-plus"></i> {{_ "volumeItem" volume }}{{unionYear}}</span>
+                <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }}{{unionYear}}</span>
             </li>
-            <div id="vol_{{_id}}" class="issues">
+            <div id="vol_{{_id}}" class="issues" style="display:{{issueDisplay}}">
                 {{#each issueInVolume journalId volume}}
                     <div class="issue" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
                         {{_ "issueItem" issue }} {{formatMonth}}

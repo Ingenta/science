@@ -47,7 +47,13 @@ Meteor.publish('recommendedMiniPlatformArticles', function () {
         fields: minimumArticle
     });
 });
-
+Meteor.publish('recommendedJournalArticles', function (val) {
+    var recommended = EditorsRecommend.find({publications:val}, {fields: {ArticlesId: 1}}).fetch();
+    var articleIds = _.pluck(recommended, "ArticlesId");
+    return Articles.find({_id: {$in: articleIds}}, {
+        fields: minimumArticle
+    });
+});
 Meteor.publish('articlesInCollection',function(collId){
     var coll = ArticleCollections.findOne({_id:collId})
     if(coll && !_.isEmpty(coll.articles)){

@@ -21,9 +21,14 @@ Science.Email.authorCitationAlertEmail = function (date) {
                 volume: 1,
                 issue: 1,
                 elocationId: 1,
+                journalId: 1,
                 'journal.titleCn': 1
             }
         });
+        if(!article) return;
+        article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        if(!article.journal) article.journal = {};
+        if(article.journalId) article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1))
         article.authorNotes.forEach(function (address) {
             var authorName = _.find(article.authors, function (obj) {
                 return obj.email === address.id;

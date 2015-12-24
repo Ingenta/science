@@ -99,7 +99,7 @@ Template.FilterList.helpers({
         return Session.get('filterTopics');
     },
     ftClass:function(){
-        return _.contains(Session.get('filterTopics'),this._id)?"fa fa-mail-reply":"fa fa-mail-forward";
+        return _.contains(Session.get('filterTopics'),this._id)?"filter-selected":"";
     },
     filterPublicationPageCount: function () {
         var pubId = Session.get('filterPublisher');
