@@ -60,7 +60,7 @@ Template.FullTextTemplate.events({
                         Session.set("refs",refIndexs);
                     }
                 }else{
-                    var reference = _.find(Template.currentData().tables, function (table) {
+                    var reference = _.find(Template.currentData().references, function (table) {
                         return table.id == rid;
                     });
                     if(reference && reference.index)
