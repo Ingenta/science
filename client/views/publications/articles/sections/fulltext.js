@@ -128,7 +128,9 @@ Template.referenceModal.helpers({
         if(_.isEmpty(allRefs) || _.isEmpty(currRefs))
             return;
         var refs = _.filter(allRefs,function(ref){
-            return _.contains(currRefs,ref.index);
+            return _.find(currRefs,function(cr){
+                return cr==ref;
+            });
         });
         return refs;
     }
