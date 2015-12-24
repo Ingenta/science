@@ -127,7 +127,6 @@ Science.Email.tableOfContentEmail = function (date) {
 
         var content = JET.render('watchJournal', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
-            "emailIcoUrl": Config.rootUrl + "email/ico.png",
             "rootUrl": Config.rootUrl,
             "issue": oneIssue,
             "journal": journal,

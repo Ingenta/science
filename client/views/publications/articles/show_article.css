@@ -84,3 +84,9 @@ ol.affiliationList li {
 .separate-comma sup {
     margin-left: -3px;
 }
+.pacs-table {
+    margin-left:10px;
+}
+.pacs-table>tr{
+    border-bottom: 1px #aaa dashed;
+}
