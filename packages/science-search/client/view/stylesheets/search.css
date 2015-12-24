@@ -54,3 +54,6 @@ li.search-cond {
     padding:0px 0px 0px 10px !important;
     font-size:12px;
 }
+.filter-count {
+    color: grey;
+}
