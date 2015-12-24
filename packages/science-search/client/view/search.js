@@ -164,8 +164,8 @@ Template.SolrSearchResults.helpers({
                     for(var j=0;j<facetType.length;j+=2){
                         if(facetType[j+1]>0){
                             filter.filterOptions.push({
-                                name:TAPi18n.__("contentType."+facetType[j],"zh-CN"),
-                                cname:TAPi18n.__("contentType."+facetType[j],"en"),
+                                name:TAPi18n.__("contentType."+facetType[j],"zh-CN").replace("contentType.",""),
+                                cname:TAPi18n.__("contentType."+facetType[j],"en").replace("contentType.",""),
                                 count:facetType[j+1],
                                 field:"contentType",
                                 val:facetType[j]
