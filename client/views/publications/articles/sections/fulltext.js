@@ -52,10 +52,7 @@ Template.FullTextTemplate.events({
                 return;
             }
             //----引用文献
-            var reference = _.find(Template.currentData().references,function(ref){
-                return ref.id == rid;
-            })
-            if(reference){
+            if(rid.startWith('REF')){
                 var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
                 if(/^\d{1,3}(\s*?,\s*?\d{1,3})*$/.test(indexStr)){
                     var refIndexs = Science.String.parseToNumbers(indexStr);
@@ -131,7 +128,9 @@ Template.referenceModal.helpers({
         if(_.isEmpty(allRefs) || _.isEmpty(currRefs))
             return;
         var refs = _.filter(allRefs,function(ref){
-            return _.contains(currRefs,ref.index);
+            return _.find(currRefs,function(cr){
+                return cr==ref;
+            });
         });
         return refs;
     }

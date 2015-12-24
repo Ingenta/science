@@ -2,7 +2,7 @@ var drId;
 var delayRender = function () {
     if (drId) return;
     drId = Meteor.setTimeout(function () {
-        console.log('dr..')
+        console.log('dr..');
 
         if (!Router.current().data || !Router.current().data() || !Router.current().data().figures) {
             return;
@@ -17,8 +17,12 @@ var delayRender = function () {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }
             if (refs && refs.length) {
-                Blaze.renderWithData(Template.figure, fig, $(refs[0]).closest("p")[0]);
-                //$(refs[0]).remove();
+                var closestP = $(refs[0]).closest("p");
+                if(closestP.length){
+                    Blaze.renderWithData(Template.figure, fig, closestP[0]);
+                    closestP.show();
+                    //$(refs[0]).remove();
+                }
             }
         });
 
