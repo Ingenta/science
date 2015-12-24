@@ -1301,5 +1301,6 @@
   "ConfirmNewPas":"请确认您的新密码",
   "NewPasSet":"您的新密码设置",
   "Incorrect password" : "密码错误",
-  "Choose file":"选择文件"
+  "Choose file":"选择文件",
+  "email_not_verified":"您的邮箱尚未注册"
 }
