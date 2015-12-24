@@ -54,13 +54,17 @@ Template.FullTextTemplate.events({
             //----引用文献
             if(rid.startWith('REF')){
                 var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
-                if(/^\d{1,3}(\s*?,\s*?\d{1,3})*$/.test(indexStr)){
+                if(/^\d{1,3}(\s*?[~-－––,，]\s*?\d{1,3})*$/.test(indexStr)){
                     var refIndexs = Science.String.parseToNumbers(indexStr);
                     if(!_.isEmpty(refIndexs)){
                         Session.set("refs",refIndexs);
                     }
                 }else{
-                    Session.set("refs",[reference.index]);
+                    var reference = _.find(Template.currentData().tables, function (table) {
+                        return table.id == rid;
+                    });
+                    if(reference && reference.index)
+                        Session.set("refs",[reference.index]);
                 }
                 $(".reference-modal").modal('show');
                 return;
