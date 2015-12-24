@@ -6,6 +6,9 @@ this.AuthorCenter.allow({
     },
     update: function (userId, doc) {
         return Permissions.userCan("modify-author-center", "resource", userId);
+    },
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-author-center", "resource", userId);
     }
 });
 

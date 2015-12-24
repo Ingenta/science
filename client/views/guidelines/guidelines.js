@@ -35,5 +35,11 @@ Template.ShowGuidelines.events({
     'click .leftButton': function (event) {
         var guides = $(event.target).data().guideid;
         Session.set('guideId', guides);
+    },
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            AuthorCenter.remove({_id:id});
+        })
     }
 });
