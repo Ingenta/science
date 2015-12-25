@@ -1,13 +1,11 @@
 <template name="Admin">
     <div class="container-fluid">
-        {{#if isAdmin}}<!--canUseAdminPanel-->
-            <div id="menu" class="col-xs-2" style="padding-left: 0px">
-                {{> AdminSideMenu}}
-            </div>
-            <div id="subcontent" class="col-xs-10">
-                {{> yield region='AdminSubcontent'}}
-            </div>
-        {{/if}}
+        <div id="menu" class="col-xs-2" style="padding-left: 0px">
+            {{> AdminSideMenu}}
+        </div>
+        <div id="subcontent" class="col-xs-10">
+            {{> yield region='AdminSubcontent'}}
+        </div>
     </div>
 </template>
 
