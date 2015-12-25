@@ -1,0 +1,21 @@
+<template name="Institution">
+    <div class="container-fluid">
+        <div id="menu" class="col-xs-2" style="padding-left: 0px">
+            {{> InstitutionSideMenu}}
+        </div>
+        <div id="subcontent" class="col-xs-10">
+            {{> yield region='InstitutionSubcontent'}}
+        </div>
+    </div>
+</template>
+
+<template name="InstitutionSideMenu">
+    <ul id="menu-items" class="nav nav-stacked nav-pills">
+        <li id="menu-item-simple" class="{{menuItemClass 'institution.detail'}}">
+            <a href="{{pathFor 'institution.detail' insId=currentUser.institutionId}}">
+                {{_ "Institution"}}
+            </a>
+        </li>
+    </ul>
+</template>
+
