@@ -1,5 +1,5 @@
-this.InstitutionController = RouteController.extend({
-	template: "Institution",
+this.InstitutionPanelController = RouteController.extend({
+	template: "InstitutionPanel",
 
 	onBeforeAction: function() {
 		/*BEFORE_FUNCTION*/
