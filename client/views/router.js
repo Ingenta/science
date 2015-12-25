@@ -218,9 +218,12 @@ Router.map(function () {
     });
 
     this.route('/publisher/account/:pubId', {
-        template: "publisherAccountTemplate",
+        template: "PublisherPanel",
         name: "publisher.account",
         parent: "home",
+        yieldTemplates: {
+            'publisherAccountTemplate': {to: 'PublisherSubcontent'}
+        },
         title: function () {
             return TAPi18n.__("Publisher");
         },
@@ -243,9 +246,12 @@ Router.map(function () {
     });
 
     this.route("/publisher/account/insert/:pubId", {
-        template: "AdminUsersInsert",
+        template: "PublisherPanel",
         name: "publisher.account.insert",
         parent: "publisher.account",
+        yieldTemplates: {
+            'AdminUsersInsert': {to: 'PublisherSubcontent'}
+        },
         title: function () {
             return TAPi18n.__("Add new user");
         },
@@ -263,9 +269,12 @@ Router.map(function () {
     });
 
     this.route("/publisher/account/edit/:userId", {
-        template: "AdminUsersEdit",
+        template: "PublisherPanel",
         name: "publisher.account.edit",
         parent: "publisher.account",
+        yieldTemplates: {
+            'AdminUsersEdit': {to: 'PublisherSubcontent'}
+        },
         title: function () {
             return TAPi18n.__("Edit user");
         },
@@ -283,7 +292,7 @@ Router.map(function () {
             if(user.institutionId)
                 scope.institution=user.institutionId;
             if (!Permissions.userCan("modify-user","user",Meteor.userId(),scope))
-                Router.go('home')
+                Router.go('home');
             this.next();
         },
         data: function() {
@@ -294,7 +303,7 @@ Router.map(function () {
             var urs = Permissions.getUserRoles();
             var publisherManagerOne = _.find(urs,function(ur){
                 return ur.role == 'publisher:publisher-manager-from-user';
-            })
+            });
             if(publisherManagerOne && publisherManagerOne.scope){
                 result.publisherScope = publisherManagerOne.scope.publisher;
             }
@@ -302,6 +311,36 @@ Router.map(function () {
         }
     });
 
+    this.route("/publisherPanel/:pubId", {
+        name:"publisherPanel",
+        controller: "publisherPanelController",
+        parent: "home",
+        title: function () {
+            return TAPi18n.__("Publisher");
+        }
+    });
+
+    this.route("/publisher/upload/:pubId", {
+        template: "PublisherPanel",
+        name: "publisher.upload",
+        parent: "publisherPanel",
+        yieldTemplates: {
+            'AdminUpload': {to: 'PublisherSubcontent'}
+        },
+        title: function () {
+            return TAPi18n.__("Upload");
+        },
+        waitOn: function () {
+            return [
+                Meteor.subscribe('uploadPage')
+                //Meteor.subscribe('publishers')
+            ]
+        }
+        //onBeforeAction: function () {
+        //    Permissions.check("add-user", "user",{publisher:this.params.pubId});
+        //    this.next();
+        //}
+    });
 
     //this.route("testTemplate", {
     //    path: "/testTemplate"
