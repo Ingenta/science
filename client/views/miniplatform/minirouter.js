@@ -183,6 +183,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('news_center'),
+                Meteor.subscribe('files'),
                 Meteor.subscribe('news_link')
             ]
         }

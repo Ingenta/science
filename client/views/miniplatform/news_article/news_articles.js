@@ -11,6 +11,17 @@ Template.newsCenterDetails.helpers({
             return this.link;
         }
         return "/miniplatform/newsCenter/" + this._id;
+    },
+    fields:function(){
+        if(this.fileId)return true;
+        return false;
+    },
+    wordValue:function(){
+        if(this.fileId===undefined){
+            return null;
+        }
+        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
+        return file.url()+"&download=true";
     }
 });
 

@@ -212,6 +212,7 @@ Router.map(function () {
         name: "news.show",
         waitOn: function () {
             return [
+                Meteor.subscribe('files'),
                 Meteor.subscribe('news')
             ]
         }

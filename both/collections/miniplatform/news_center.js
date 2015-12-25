@@ -58,10 +58,20 @@ NewsCenterSchema = new SimpleSchema({
         }
     },
     types: {
-        type: String
+        type: String,
+        optional: true
+    },
+    fileId: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "cfs-file",
+            collection: "files"
+        }
     },
     createDate: {
-        type: Date
+        type: Date,
+        optional: true
     },
     pageView: {
         type:Number,

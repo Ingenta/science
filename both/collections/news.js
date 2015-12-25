@@ -17,7 +17,8 @@ NewsSchema = new SimpleSchema({
         type: Science.schemas.MultiLangSchema
     },
     createDate: {
-        type: Date
+        type: Date,
+        optional: true
     },
     author: {
         type: Science.schemas.MultipleTextOptionalSchema,
@@ -47,7 +48,16 @@ NewsSchema = new SimpleSchema({
         }
     },
     types: {
-        type: String
+        type: String,
+        optional: true
+    },
+    fileId: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "cfs-file",
+            collection: "files"
+        }
     },
     about: {
         type: String,

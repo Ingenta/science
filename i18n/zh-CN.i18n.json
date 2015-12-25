@@ -637,6 +637,9 @@
       },
       "picture": {
         "label": "选择图片"
+      },
+      "fileId": {
+        "label": "上传附件"
       }
     },
     "pages": {
@@ -1085,6 +1088,9 @@
       },
       "picture": {
         "label": "新闻配图"
+      },
+      "fileId": {
+        "label": "上传附件"
       }
     },
     "newsRecommend": {
