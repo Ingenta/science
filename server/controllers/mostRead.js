@@ -56,17 +56,20 @@ createMostReadList = function (journalId, limit) {
 }
 
 updateMostCited = function(){
-    var citations = Articles.find({citations: {$exists: true}}, {sort: {'citationCount': -1}, limit: 20, fields: {_id:1, title:1, citationCount:1, journalId: 1}}).fetch();
-    if(!_.isEmpty(citations)){
-
-        MostCited.remove({});
-        citations.forEach(function (item) {
-            MostCited.insert({
-                articleId: item._id,
-                title: item.title,
-                count: item.citationCount,
-                journalId: item.journalId
+    MostCited.remove({});
+    Publications.find().forEach(function (journal) {
+        var citations = Articles.find(
+            {citations: {$exists: true}, journalId: journal._id}, {sort: {'citationCount': -1}, limit: 20, fields: {_id:1, title:1, citationCount:1, journalId: 1}}
+        ).fetch();
+        if(!_.isEmpty(citations)){
+            citations.forEach(function (item) {
+                MostCited.insert({
+                    articleId: item._id,
+                    title: item.title,
+                    count: item.citationCount,
+                    journalId: item.journalId
+                });
             });
-        });
-    }
-}
+        }
+    });
+};

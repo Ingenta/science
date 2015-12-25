@@ -66,10 +66,22 @@ Router.route("/admin/institutions/detail/edit/:userId", {
     controller: "AdminUsersEditController",
 });
 
-Router.route("/institution/detail/:insId/", {
-    template: "showInstitution",
-    name: "institution.detail",
+Router.route("/institutionPanel/:insId", {
+    name:"institutionPanel",
+    controller: "InstitutionPanelController",
     parent: "home",
+    title: function () {
+        return TAPi18n.__("Institution");
+    }
+});
+
+Router.route("/institution/detail/:insId/", {
+    template: "InstitutionPanel",
+    name: "institution.detail",
+    parent: "institutionPanel",
+    yieldTemplates: {
+        'showInstitution': {to: 'InstitutionSubcontent'}
+    },
     title: function () {
         return TAPi18n.__("Institution Detail");
     },

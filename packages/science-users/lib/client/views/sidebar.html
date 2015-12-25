@@ -13,14 +13,14 @@
             {{/if}}
             {{#if canUseInstitutionPanel}}
                 <li>
-                    <a href="{{pathFor 'institution.detail' insId=currentUser.institutionId}}">
+                    <a href="{{pathFor 'institutionPanel' insId=currentUser.institutionId}}">
                         {{_ "Institution"}}
                     </a>
                 </li>
             {{/if}}
             {{#if canUsePublisherPanel}}
                 <li>
-                    <a href="{{pathFor 'publisher.account' pubId=currentUser.publisherId query='level=normal'}}">
+                    <a href="{{pathFor 'publisherPanel' pubId=currentUser.publisherId}}">
                         {{_ "Publisher"}}
                     </a>
                 </li>

@@ -35,12 +35,15 @@ Package.onUse(function(api) {
   api.addFiles([
     'client/paginator.js',
     'client/router.js',
-    'client/view/admin/institutions/institutions.html',
-    'client/view/admin/institutions/institutions.js',
-    'client/view/admin/institutions/list.html',
-    'client/view/admin/institutions/list.js',
-    'client/view/admin/institutions/detail.html',
-    'client/view/admin/institutions/detail.js'
+    'client/view/institutions/institutions.html',
+    'client/view/institutions/institutions.js',
+    'client/view/institutions/list.html',
+    'client/view/institutions/list.js',
+    'client/view/institutions/detail.html',
+    'client/view/institutions/detail.js',
+    'client/view/admin/institution.html',
+    'client/view/admin/institution.js',
+    'client/view/admin/institution_controller.js'
   ], 'client')
 });
 

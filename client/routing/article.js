@@ -29,7 +29,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('pdfs'),
             Meteor.subscribe('medias'),
             Meteor.subscribe('files'),
-            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
+            Meteor.subscribe('mostCited', Session.get('currentJournalId'), 5)
         ]
     },
     onBeforeAction: function () {
