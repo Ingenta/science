@@ -1247,7 +1247,7 @@
   "interestingSearch":"兴趣检索",
   "searchInJournal":"搜索: '__keyword__' ,在 __journal__ 中",
   "viewResult":"查看本刊中所有__count__个结果",
-  "Year of publication":"出版年份",
+  "Year of publication(volume)(issue)":"出版年份(卷期)",
   "Topic name":"专题名称",
   "Guest Editor":"特邀编辑",
   "searchByResults":"继续检索",

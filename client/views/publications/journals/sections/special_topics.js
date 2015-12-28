@@ -36,10 +36,9 @@ Template.SpecialTopics.helpers({
         return SpecialTopics.find({journalId:this._id});
     },
     year: function () {
-        var id = Session.get("currentJournalId");
-        var issue = Issues.findOne({journalId: id});
+        var issue = Issues.findOne({_id: this.IssueId});
         if (issue)
-            return issue.year;
+            return issue.year+" "+issue.volume+"("+issue.issue+")";
     },
     name: function () {
         var id = Session.get("specialTopicsId");
