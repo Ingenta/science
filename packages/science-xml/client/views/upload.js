@@ -1,5 +1,12 @@
 Template.AdminUpload.helpers({
     uploadHistory: function () {
+        if(Session.get('searchValue')){
+            var tagName = Session.get('searchValue');
+            var mongoDbArr = [];
+            mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
+             return UploadLog.find({$or: mongoDbArr});
+        }
         return UploadLog.find({}, {sort: {'uploadedAt': -1}});
     }
 });
@@ -35,5 +42,12 @@ Template.UploadLogModal.events({
 Template.uploadTableRow.events({
     "click .task-detail": function (e) {
         Session.set('uploadLogId', this._id);
+    }
+});
+
+Template.uploadForm.events({
+    'click .btn': function () {
+        var query = $('#searchValue').val();
+        Session.set('searchValue', query);
     }
 });
