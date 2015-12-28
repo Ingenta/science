@@ -144,6 +144,11 @@ Tasks.parse = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
+        if(!Tasks.checkPubStatus(result.doi, log.pubStatus)){
+            log.errors.push("Already exist more close to the final version of the data, can not override");
+            Tasks.fail(taskId,logId,log.errors);
+            return;
+        }
         //set parse task to success and start next task
         UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
 
@@ -155,6 +160,19 @@ Tasks.parse = function (logId, pathToXml) {
     }
 }
 
+Tasks.checkPubStatus = function(doi, currStatus){
+    var statusOrder = {"normal":0,"online_frist":1,"accepted":2};
+
+    if(statusOrder[currStatus]===undefined)
+        return false;
+
+    var articleObj = Articles.findOne({doi:doi},{fields:{pubStatus:1}});
+    if(!articleObj || !articleObj.pubStatus)
+        return true;
+
+    return statusOrder[currStatus] <= statusOrder[articleObj.pubStatus]
+
+}
 
 Tasks.insertArticlePdf = function (logId, result) {
     var log = UploadLog.findOne({_id: logId});

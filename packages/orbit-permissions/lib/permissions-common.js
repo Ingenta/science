@@ -236,7 +236,7 @@ OrbitPermissions = {
 				return true;
 			}
 		}
-		if (_.isEmpty(scope)) {
+		if (!scope) {
 			// 遍历用户的所有角色
 			for (i = 0, len = ref.length; i < len; i++) {
 				userRole = ref[i];
