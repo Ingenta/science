@@ -40,7 +40,8 @@ Template.AdminUsersView.helpers({
 Template.AdminUsersViewTableItems.events({
 	"click td": function(e, t) {
 		e.preventDefault();
-		if (Router.current().route.getName() === "publisher.account" && _.contains(Users.findOne({_id: this._id}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this._id !== Meteor.userId()){
+		//if (Router.current().route.getName() === "publisher.account" && _.contains(Users.findOne({_id: this._id}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this._id !== Meteor.userId()){
+		if (!(Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope) && this._id !== Meteor.userId())){
 			sweetAlert({
 				title             : TAPi18n.__("Warning"),
 				text              : TAPi18n.__("Permission denied"),
@@ -82,8 +83,7 @@ Template.AdminUsersViewTableItems.helpers({
 		return Permissions.getRoleDescByCode(code).name;
 	},
 	"canModify":function(){
-		return Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope)
-				&& (this._id !== Meteor.userId()) //用户不可以在用户管理页中修改自己的信息
+		return Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope) && (this._id !== Meteor.userId()); //用户不可以在用户管理页中修改自己的信息
 	}
 });
 
@@ -95,7 +95,7 @@ Template.userRolesView.helpers({
         var roleDescription = Permissions.getRoleDescByCode(this.role || this);
         return roleDescription && roleDescription.name;
     }
-})
+});
 
 Template.userRolesView.events({
 	//'click a.role-scope': function (e) {
@@ -115,14 +115,14 @@ Template.userRolesView.events({
 	//'hidden.bs.popover a.role-scope': function (event) {
 	//	$(event.target).popover('destroy');
 	//}
-})
+});
 
 Template.permissionScopeView.helpers({
 	publisherName:function(){
 		var obj=Publishers.findOne({_id:this.toString()},{fields:{name:1,chinesename:1}});
 		return TAPi18n.getLanguage()==='zh-CN'?obj.chinesename:obj.name;
 	}
-})
+});
 
 Template.userButtons.helpers({
 	"isNormalTab": function() {
@@ -134,7 +134,7 @@ Template.userButtons.helpers({
 	"searchString":function(){
 		return Session.get(getSearchStrKey.call(this))
 	}
-})
+});
 
 Template.userButtons.events({
 
