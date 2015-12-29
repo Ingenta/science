@@ -140,7 +140,7 @@ Tasks.parse = function (logId, pathToXml) {
         logId: logId
     });
     try {
-        var result = ScienceXML.parseXml(pathToXml);
+        var result = ScienceXML.parseXml(pathToXml,log.pubStatus);
         log.errors = result.errors;
         if (!_.isEmpty(log.errors)) {
             Tasks.fail(taskId, logId, log.errors);

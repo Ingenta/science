@@ -40,6 +40,10 @@
         </label>
     </div>
     </p>
+    <div class="form-group form-inline">
+        <input id="searchValue" type="text" class="form-control">
+        <button class="btn btn-info btn-sm">{{_ "search"}}</button>
+    </div>
     {{> upload_bootstrap fileTypes='.xml,.zip' multiple=true}}
 </template>
 
