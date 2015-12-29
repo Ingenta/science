@@ -1,6 +1,16 @@
 Template.AdminUpload.helpers({
     uploadHistory: function () {
-        return UploadLog.find({}, {sort: {'uploadedAt': -1}});
+        if(Router.current().route.getName() == "publisher.upload") {
+            if(!Meteor.user().publisherId) return;
+            return UploadLog.find(
+                {$or: [
+                    {publisherId: Meteor.user().publisherId},
+                    {creator: Meteor.userId()}
+                ]
+                }, {sort: {'uploadedAt': -1}}
+            );
+        }
+        else return UploadLog.find({}, {sort: {'uploadedAt': -1}});
     }
 });
 Template.UploadLogModal.helpers({

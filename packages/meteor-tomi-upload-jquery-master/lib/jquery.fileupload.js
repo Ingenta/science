@@ -438,6 +438,8 @@
 
     _initXHRData: function (options) {
       options.formData.pubStatus=$("input[name='pubStatus']:checked").val();
+      options.formData.creator=Meteor.userId();
+      options.formData.publisherId=Meteor.user().publisherId;
       var that = this,
         formData,
         file = options.files[0],

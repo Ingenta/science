@@ -9,6 +9,8 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     var logId = UploadLog.insert({
         name: fileName,
         pubStatus: pubstatus,
+        creator: formFields.creator,
+        publisherId: formFields.publisherId,
         uploadedAt: new Date(),
         status: "Started",
         filePath: pathToFile,
