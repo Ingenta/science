@@ -411,6 +411,8 @@ ul.tree-view ul.tree-view {
 }
 /* Сƽ̨��ʽ */
 .miniPlatform{
+  .mt8{margin-top:8px;}
+  .mt12{margin-top:12px;}
   .h50{height:50px;}
   .w80{width:80px;}
   .w300{width:300px;}
@@ -424,7 +426,7 @@ ul.tree-view ul.tree-view {
   .mb5{margin-bottom:5px;}
   .mr10{margin-right:10px;}
   .mr20{margin-right:20px;}
-  ol,ul{list-style:none;}
+  ol,ul{list-style:none; padding:0;}
   a{
 	text-decoration:none;
 	color:#333;
@@ -481,13 +483,13 @@ ul.tree-view ul.tree-view {
   .navMini{
 	width:1000px;
 	margin:0 auto;
-//	overflow:hidden;
+	overflow:hidden;
 	margin-bottom:20px;
   }
   .navMini li{
 	width:132px;
-	height:56px;
-	line-height:56px;
+	height:42px;
+	line-height:42px;
 	float:left;
 	margin-right:5px;
 	text-align:center;
@@ -508,7 +510,7 @@ ul.tree-view ul.tree-view {
 	background:none;
   }
   .dropdown-menu > li > a {
-   line-height:56px;
+   line-height:38px;
   }
   .navMini .curLi a,.navMini li a:hover,#dropdown-nav-items .curLi a,#dropdown-nav-items li a:hover{
 	color:#fff;
@@ -544,9 +546,9 @@ ul.tree-view ul.tree-view {
 	border-bottom:1px solid #7a7a7b;
   }
   .lookList{
-	width:928px;
+	width:1000px;
 	float:left;
-	height:172px;
+	height:240px;
 	border:1px solid #d7d7d7;
   }
   .banNext{
@@ -565,11 +567,12 @@ ul.tree-view ul.tree-view {
   }
   .part{
 	border:1px solid #d7d7d7;
-	height:63px;
+	height:67px;
 	margin-bottom:10px;
 	padding-left:45px;
 	font-size:14px;
 	padding-top:15px;
+	margin-top:6px;
   }
 
   .partContent{
@@ -677,34 +680,37 @@ ul.tree-view ul.tree-view {
 	right:0;
   }
   .bookPart{
-	width:255px;
+	width:200px;
 	float:left;
-	margin:0 15px;
-	height:133px;
+	text-align:center;
+	height:200px;
   }
   .bookPart h1{
 	font-size: 14px;
 	margin-top: 15px;
   }
   .bookPart img{
-	float:left;
-	margin-right:10px;
+	display:initial;
   }
   .bookPart1{
 	border-right:none;
   }
   #carousel {
-	width:872px;
+	width:1000px;
 	position: relative;
 	top:25px;
-	height:135px;
-	left:27px;
   }
   #carousel div {
-	width:872px;
+	width:1000px;
   }
   .slick-prev:before, .slick-next:before {
 	color:silver;
+  }
+  .dropdown-menu{
+	margin:0;
+	padding:0;
+	background:none;
+	border:none;
   }
   #container{width:580px;padding:10px;margin:0 auto;position:relative;z-index:0;}
   #slides{position:absolute;padding-top:15px;margin-left:30px;z-index:100;background:#fff;}
