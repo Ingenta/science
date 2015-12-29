@@ -480,6 +480,9 @@
             },
             "picture": {
                 "label": "Choose file"
+            },
+            "fileId": {
+                "label": "Choose file"
             }
         },
         "pages": {
@@ -927,6 +930,9 @@
                 "placeholder": "http://"
             },
             "picture": {
+                "label": "Choose file"
+            },
+            "fileId": {
                 "label": "Choose file"
             }
         },

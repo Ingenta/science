@@ -1,4 +1,4 @@
-Template.AdminSideMenu.rendered = function() {
+Template.InstitutionSideMenu.rendered = function() {
 	$(".menu-item-collapse .dropdown-toggle").each(function() {
 		if($(this).find("li.active")) {
 			$(this).removeClass("collapsed");

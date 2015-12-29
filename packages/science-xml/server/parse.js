@@ -13,7 +13,7 @@ var isValidDoi = function (doi) {
     return true;
 }
 
-ScienceXML.parseXml = function (path) {
+ScienceXML.parseXml = function (path, pubStatus) {
     var results = {};
     //Step 1: get the file
     var xml = ScienceXML.getFileContentsFromLocalPath(path);
@@ -78,22 +78,22 @@ ScienceXML.parseXml = function (path) {
     logger.info('parsed acknowledgements');
 
     var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
-    if (volume === undefined) results.errors.push("No volume found");
+    if (volume === undefined && pubStatus==='normal') results.errors.push("No volume found");
     else results.volume = volume;
     logger.info('parsed volume');
 
     var issue = ScienceXML.getSimpleValueByXPath("//issue", doc);
-    if (issue === undefined) results.errors.push("No issue found");
+    if (issue === undefined && pubStatus==='normal') results.errors.push("No issue found");
     else results.issue = issue;
     logger.info('parsed issue');
 
     var month = ScienceXML.getSimpleValueByXPath("//pub-date/month", doc);
-    if (month === undefined) results.errors.push("No month found");
+    if (month === undefined && pubStatus==='normal') results.errors.push("No month found");
     else results.month = month;
     logger.info('parsed month');
 
     var year = ScienceXML.getSimpleValueByXPath("//pub-date/year", doc);
-    if (year === undefined) results.errors.push("No year found");
+    if (year === undefined && pubStatus==='normal') results.errors.push("No year found");
     else results.year = year;
     logger.info('parsed year');
 

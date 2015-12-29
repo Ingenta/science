@@ -48,7 +48,8 @@ NewsContactSchema = new SimpleSchema({
         optional: true
     },
     createDate: {
-        type: Date
+        type: Date,
+        optional: true
     }
 });
 Meteor.startup(function () {

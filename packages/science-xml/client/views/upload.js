@@ -1,6 +1,23 @@
 Template.AdminUpload.helpers({
     uploadHistory: function () {
-        return UploadLog.find({}, {sort: {'uploadedAt': -1}});
+        if(Session.get('searchValue')){
+            var tagName = Session.get('searchValue');
+            var mongoDbArr = [];
+            mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
+             return UploadLog.find({$or: mongoDbArr});
+        }
+        if(Router.current().route.getName() == "publisher.upload") {
+            if(!Meteor.user().publisherId) return;
+            return UploadLog.find(
+                {$or: [
+                    {publisherId: Meteor.user().publisherId},
+                    {creator: Meteor.userId()}
+                ]
+                }, {sort: {'uploadedAt': -1}}
+            );
+        }
+        else return UploadLog.find({}, {sort: {'uploadedAt': -1}});
     }
 });
 Template.UploadLogModal.helpers({
@@ -35,5 +52,12 @@ Template.UploadLogModal.events({
 Template.uploadTableRow.events({
     "click .task-detail": function (e) {
         Session.set('uploadLogId', this._id);
+    }
+});
+
+Template.uploadForm.events({
+    'click .btn': function () {
+        var query = $('#searchValue').val();
+        Session.set('searchValue', query);
     }
 });

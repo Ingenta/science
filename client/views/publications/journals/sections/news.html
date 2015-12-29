@@ -119,6 +119,7 @@
                     {{> afQuickField name="abstract"}}
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -130,7 +131,7 @@
 </template>
 
 <template name="updateNewsCenterModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,author,abstract,content,url" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,author,abstract,content,url,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
 
@@ -150,6 +151,7 @@
                     {{> afQuickField name="url"}}
                     {{> afQuickField name="abstract"}}
                     {{> afQuickField name="picture"}}
+                    {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -161,7 +163,7 @@
 </template>
 
 <template name="updatePublishingDynamicModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,abstract,picture" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,abstract,picture,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
 

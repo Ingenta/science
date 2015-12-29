@@ -5,7 +5,7 @@ Institutions.allow({
         return Permissions.userCan("add-institution", "institution", userId);
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-institution", "institution", userId);
+        return Permissions.userCan("modify-institution", "institution", userId, {institution: doc._id});
     },
     remove: function (userId, doc) {
         return Permissions.userCan("delete-institution", "institution", userId);

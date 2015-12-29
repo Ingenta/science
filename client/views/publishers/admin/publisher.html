@@ -1,0 +1,26 @@
+<template name="publisherPanel">
+    <div class="container-fluid">
+        <div id="menu" class="col-xs-2" style="padding-left: 0px">
+            {{> PublisherSideMenu}}
+        </div>
+        <div id="subcontent" class="col-xs-10">
+            {{> yield region='PublisherSubcontent'}}
+        </div>
+    </div>
+</template>
+
+<template name="PublisherSideMenu">
+    <ul id="menu-items" class="nav nav-stacked nav-pills">
+        <li id="menu-item-simple" class="{{menuItemClass 'publisher.account'}}">
+            <a href="{{pathFor 'publisher.account' pubId=currentUser.publisherId query='level=normal'}}">
+                {{_ "Publisher"}}
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'publisher.upload'}}">
+            <a href="{{pathFor 'publisher.upload' pubId=currentUser.publisherId}}">
+                {{_ "Upload"}}
+            </a>
+        </li>
+    </ul>
+</template>
+

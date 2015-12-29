@@ -4,6 +4,9 @@
             <div align="center"><span style="font-size:24px;">{{{translateThis title.cn title.en}}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{> updateNewsCenterModalForm}}{{/if}}</div><br>
             <p class="text-center">{{_ "Published online"}}：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{translateThis author.cn author.en}}</p><br>
             <p align="text-center" style="margin-left: 1.5%">{{{translateThis content.cn content.en}}}</p>
+            {{#if fields}}
+                <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{_ "Download The Attachment"}}</a></p>
+            {{/if}}
         </div>
     {{else}}
         {{_ "No content found!"}}
