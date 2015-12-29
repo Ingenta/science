@@ -9,7 +9,6 @@
                                 <a href="{{urlToJournalById _id}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 87px;height: 115px"/></a>
                                 <h1><a href="{{urlToJournalById _id}}" target="_blank">{{titleCn}}</a></h1>
                                 <p>主编：{{chiefEditor.cn}}</p>
-                                <p>出版日期：{{formatDate publicationDate "YYYY-MM-DD"}}</p>
                             </div>
                         {{else}}
                             {{_ "No publications found!"}}
