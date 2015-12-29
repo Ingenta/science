@@ -1,18 +1,15 @@
 <template name="layoutPublications">
     <div class="banner">
         <div class="oh">
-            <div class="lookBan"><a href="{{publisherUrl}}">查看<br />全部<br />刊物</a></div>
                 <div class="lookList">
                     <div id="carousel">
                         <!-- 代码 开始 -->
                         {{#each hasJournal}}
                             <div class="bookPart oh">
                                 <a href="{{urlToJournalById _id}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 87px;height: 115px"/></a>
-                                <div class="h90">
-                                    <h1><a href="{{urlToJournalById _id}}" target="_blank">{{titleCn}}</a></h1>
-                                    <p>主编：{{chiefEditor.cn}}</p>
-                                    <p>出版日期：{{formatDate publicationDate "YYYY-MM-DD"}}</p>
-                                </div>
+                                <h1><a href="{{urlToJournalById _id}}" target="_blank">{{titleCn}}</a></h1>
+                                <p>主编：{{chiefEditor.cn}}</p>
+                                <p>出版日期：{{formatDate publicationDate "YYYY-MM-DD"}}</p>
                             </div>
                         {{else}}
                             {{_ "No publications found!"}}
