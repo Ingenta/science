@@ -11,16 +11,20 @@
 
 <template name="PublisherSideMenu">
     <ul id="menu-items" class="nav nav-stacked nav-pills">
-        <li id="menu-item-simple" class="{{menuItemClass 'publisher.account'}}">
-            <a href="{{pathFor 'publisher.account' pubId=getPublisherId query='level=normal'}}">
-                {{_ "Publisher"}}
-            </a>
-        </li>
-        <li id="menu-item-simple" class="{{menuItemClass 'publisher.upload'}}">
-            <a href="{{pathFor 'publisher.upload' pubId=getPublisherId}}">
-                {{_ "Upload"}}
-            </a>
-        </li>
+        {{#if can "list-user" "user" getScope}}
+            <li id="menu-item-simple" class="{{menuItemClass 'publisher.account'}}">
+                <a href="{{pathFor 'publisher.account' pubId=getPublisherId query='level=normal'}}">
+                    {{_ "Publisher"}}
+                </a>
+            </li>
+        {{/if}}
+        {{#if can "add-article" "resource" getScope}}
+            <li id="menu-item-simple" class="{{menuItemClass 'publisher.upload'}}">
+                <a href="{{pathFor 'publisher.upload' pubId=getPublisherId}}">
+                    {{_ "Upload"}}
+                </a>
+            </li>
+        {{/if}}
     </ul>
 </template>
 

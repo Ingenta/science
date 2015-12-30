@@ -14,5 +14,8 @@ Template.PublisherSideMenu.rendered = function() {
 Template.PublisherSideMenu.helpers({
 	getPublisherId: function () {
 		return Router.current().params.pubId;
+	},
+	getScope: function () {
+		return {publisher: Router.current().params.pubId};
 	}
 });
