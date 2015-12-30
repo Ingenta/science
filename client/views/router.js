@@ -235,7 +235,7 @@ Router.map(function () {
             ]
         },
         onBeforeAction: function () {
-            Permissions.check("use-publisher-panel", "publisher",{publisher:this.params.pubId});
+            Permissions.check("use-publisher-panel", "platform",{publisher:this.params.pubId});
             /*BEFORE_FUNCTION*/
             this.next();
         },

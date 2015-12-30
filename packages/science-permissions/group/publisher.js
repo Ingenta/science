@@ -1,13 +1,6 @@
 publisherPermissions = new Permissions.Registrar('publisher');
 
 publisherPermissions
-    .definePermission("use-publisher-panel",{
-        en: {name: "use publisher panel", summary: "use publisher panel"},
-        cn: {name: "可以使用管理员面板", summary: "可以使用管理员面板"},
-        options:{
-            level:publisherLevel
-        }
-    })
     .definePermission("add-publisher", {
         en: {name: "add publisher", summary: "can add publisher"},
         cn: {name: "添加出版商", summary: "您可以添加新出版商到系统中"},
@@ -36,7 +29,6 @@ publisherPermissions
         "permissions:get-users-roles",
         "platform:use-publisher-panel",
 
-        "use-publisher-panel",
         "modify-publisher",
 
         "user:add-user",

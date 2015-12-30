@@ -129,7 +129,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
 
                         }));
             }));
-}
+};
 
 Tasks.parse = function (logId, pathToXml) {
     var log = UploadLog.findOne({_id: logId});
@@ -146,6 +146,11 @@ Tasks.parse = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
+        if(!Tasks.checkPermission(result.journalId, log.creator)){
+            log.errors.push("Upload article permission denied");
+            Tasks.fail(taskId,logId,log.errors);
+            return;
+        }
         if(!Tasks.checkPubStatus(result.doi, log.pubStatus)){
             log.errors.push("Already exist more close to the final version of the data, can not override");
             Tasks.fail(taskId,logId,log.errors);
@@ -160,7 +165,11 @@ Tasks.parse = function (logId, pathToXml) {
         log.errors.push(e.toString());
         Tasks.fail(taskId, logId, log.errors);
     }
-}
+};
+
+Tasks.checkPermission = function(journalId, userId){
+    return Permissions.userCan('add-article', 'resource', userId, {journal: journalId});
+};
 
 Tasks.checkPubStatus = function(doi, currStatus){
     var statusOrder = {"normal":0,"online_frist":1,"accepted":2};
@@ -174,7 +183,7 @@ Tasks.checkPubStatus = function(doi, currStatus){
 
     return statusOrder[currStatus] <= statusOrder[articleObj.pubStatus]
 
-}
+};
 
 Tasks.insertArticlePdf = function (logId, result) {
     var log = UploadLog.findOne({_id: logId});
