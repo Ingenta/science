@@ -94,29 +94,29 @@ Template.articleListRight.helpers({
         var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", ";
         if(i.month){
             if("1"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="January" + "," + i.year;
+                title+="January" + " " + i.year;
             }else if("2"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="February" + "," + i.year;
+                title+="February" + " " + i.year;
             }else if("3"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="March" + "," + i.year;
+                title+="March" + " " + i.year;
             }else if("4"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="April" + "," + i.year;
+                title+="April" + " " + i.year;
             }else if("5"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="May" + "," + i.year;
+                title+="May" + " " + i.year;
             }else if("6"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="June" + "," + i.year;
+                title+="June" + " " + i.year;
             }else if("7"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="July" + "," + i.year;
+                title+="July" + " " + i.year;
             }else if("8"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="August" + "," + i.year;
+                title+="August" + " " + i.year;
             }else if("9"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="September" + "," + i.year;
+                title+="September" + " " + i.year;
             }else if("10"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="October" + "," + i.year;
+                title+="October" + " " + i.year;
             }else if("11"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="November" + "," + i.year;
+                title+="November" + " " + i.year;
             }else if("12"==i.month&&TAPi18n.getLanguage() === "en"){
-                title+="December" + "," + i.year;
+                title+="December" + " " + i.year;
             }else{
                 title+=i.year + "年" + i.month + "月";
             }
