@@ -57,7 +57,8 @@ Package.onUse(function (api) {
         'lib/xpathUtils.js',
         'lib/xss.js',
         'lib/pdf.js',
-        'lib/SSR.js'
+        'lib/SSR.js',
+        'lib/data.js'
     ], 'server');
 
     api.addFiles([

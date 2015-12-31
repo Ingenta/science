@@ -287,17 +287,10 @@ ScienceXML.getContentType = function (results, doc) {
         contentType = parserHelper.getSimpleVal("//article-meta/article-type", doc);
     }
     if (contentType) {
-        contentType = contentType.trim().toLowerCase();
-        var trans ="other";
-        _.each(Config.parser.contentTypeDic,function(dic,key){
-            if (_.contains(dic, contentType))
-                trans=key;
-        })
-        results.contentType = trans
+        results.contentType = Science.data.tranContentType(contentType)
     } else {
         results.errors.push("No content type found");
     }
-
     return results;
 }
 
