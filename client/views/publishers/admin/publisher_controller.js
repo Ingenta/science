@@ -7,7 +7,12 @@ this.publisherPanelController = RouteController.extend({
 	},
 
 	action: function() {
-		this.redirect('publisher.account', {pubId: this.params.pubId, query: 'level=normal'});
+		if(Permissions.userCan("list-user", "user", Meteor.userId(), {publisher: Router.current().params.pubId}))
+			this.redirect('publisher.account', {pubId: this.params.pubId, query: 'level=normal'});
+		else if(Permissions.userCan("add-article", "resource", Meteor.userId(), {publisher: Router.current().params.pubId}))
+			this.redirect('publisher.upload', {pubId: this.params.pubId});
+		else
+			this.next();
 		/*ACTION_FUNCTION*/
 	},
 

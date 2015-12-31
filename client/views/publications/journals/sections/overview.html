@@ -89,7 +89,7 @@
 <template name="editorRecommendedArticles">
     <div>
         <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
-        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
             <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>
             {{> addRecommendModalForm}}
         {{/if}}
@@ -108,7 +108,7 @@
                         <a href="#" class="fa fa-trash"></a>
                     {{/if}}
                 </div>
-                <a href="{{urlToArticleById ArticlesId}}">{{titles ArticlesId}}</a>
+                <a href="{{urlToArticleById ArticlesId}}">{{{titles ArticlesId}}}</a>
             </div>
         </div>
         <hr>

@@ -2,6 +2,8 @@ resourcePermissions = new Permissions.Registrar('publication');
 
 resourcePermissions
     .defineRole("journal-manager-publisher", [
+        "platform:use-publisher-panel",
+
         "resource:modify-journal",
 
         "resource:add-article",
