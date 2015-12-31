@@ -114,9 +114,22 @@ Config = {
     parser: {
         contentTypeDic: {
             article: ["article", "论文", "research paper"],
-            editorial: ["editorial",],
-            forum: ["论坛", "Forum"],
-            reviews:[ "评述","reviews"]
+            reviews:[ "评述","reviews"],
+            letters:["快讯","letters"],
+            editorials:["社论","editorials"],
+            highlights:["亮点","highlights"],
+            forums:["论坛","forums"],
+            progress:["进展","progress"],
+            communications:["信息交流","communications"],
+            perspectives:["观点","perspectives"],
+            correspondance:["争鸣","correspondance"],
+            interview:["科学访谈","interview"],
+            comments:["评论","comments"],
+            newsAndViews:["点评","news & views"],
+            briefReport:["简报","brief report"],
+            scienceNews:["科学新闻","science news"],
+            bookReview:["书评","book review"],
+            mooPaper:["MOO论文","moo paper"]
         }
     },
     otherPlatformLoginUrl: {
