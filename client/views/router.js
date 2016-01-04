@@ -9,6 +9,7 @@ Router.configure({
 });
 HomePageSubs = new SubsManager();
 CollectionSubs = new SubsManager();
+MiniPlatformSubs = new SubsManager();
 
 HomePageSubs.subscribe("current_user_data");
 HomePageSubs.subscribe('pages');
