@@ -50,7 +50,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         }
 
         if(!Science.Cookies.get('mjx.menu')){
-            Science.Cookies.set('mjx.menu',"renderer:CommonHTML")
+            Science.Cookies.set('mjx.menu',"renderer:PreviewHTML")
         }
         this.next();
     },
