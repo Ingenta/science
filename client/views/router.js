@@ -270,7 +270,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 Meteor.subscribe('files'),
-                Meteor.subscribe('news')
+                HomePageSubs.subscribe('news')
             ]
         }
     });
