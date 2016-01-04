@@ -21,7 +21,7 @@ this.UserSettingsUpdateInformationController = RouteController.extend({
 		
 
 		var subs = [
-			Meteor.subscribe("current_user_data")
+			HomePageSubs.subscribe("current_user_data")
 		];
 		var ready = true;
 		_.each(subs, function(sub) {

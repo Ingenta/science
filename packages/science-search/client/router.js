@@ -7,9 +7,8 @@ Router.route('/search', {
 	},
 	waitOn: function () {
 		return [
-			Meteor.subscribe('fullMostRecentArticles'),
-			Meteor.subscribe('keywords'),
-			Meteor.subscribe('topics')
+			ArticleSubs.subscribe('keywords'),
+			HomePageSubs.subscribe('topics')
 		]
 	},
 	onBeforeAction:function(){

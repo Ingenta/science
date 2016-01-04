@@ -44,7 +44,7 @@ Meteor.publish('recommendedMiniPlatformArticles', function () {
     var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
-        fields: minimumArticle
+        fields: articleWithMetadata
     });
 });
 Meteor.publish('recommendedJournalArticles', function (val) {

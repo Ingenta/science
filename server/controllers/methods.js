@@ -44,25 +44,28 @@ Meteor.methods({
             return;
         var arr = (typeof keywords === 'string') ? [keywords] : keywords;
         var sc = score || 1;
-
-        Keywords.update({name: {$in: arr}}, {$inc: {"score": sc}}, {multi: true});
+        Meteor.defer(function () {
+            Keywords.update({name: {$in: arr}}, {$inc: {"score": sc}}, {multi: true});
+        });
         return true;
     },
     'insertAudit': function (userId, action, publisherId, journalId, articleId, keywords) {
         var datetime = new Date();
         var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
         var user = Users.findOne({_id: userId});
-        PageViews.insert({
-            articleId: articleId,
-            userId: userId,
-            institutionId: user ? user.institutionId : null,
-            publisher: publisherId,
-            journalId: journalId,
-            keywords: keywords,
-            when: datetime,
-            dateCode: dateCode,
-            action: action,
-            ip: this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress
+        Meteor.defer(function () {
+            PageViews.insert({
+                articleId: articleId,
+                userId: userId,
+                institutionId: user ? user.institutionId : null,
+                publisher: publisherId,
+                journalId: journalId,
+                keywords: keywords,
+                when: datetime,
+                dateCode: dateCode,
+                action: action,
+                ip: this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress
+            });
         });
     },
     getDefaultPublisherId: function () {
