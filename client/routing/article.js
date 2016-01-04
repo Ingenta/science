@@ -26,7 +26,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
-            Meteor.subscribe('pdfs'),
+            ArticleSubs.subscribe('pdfs'),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
