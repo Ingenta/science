@@ -11,7 +11,7 @@ Template.layoutPublications.helpers({
 
 Template.layoutPublications.rendered = function() {
     $('#carousel').slick({
-        slidesToShow: 5,
+        slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000
