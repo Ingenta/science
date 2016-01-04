@@ -9,8 +9,8 @@ Router.map(function () {
                 Meteor.subscribe('news_recommend'),
                 Meteor.subscribe('column'),
                 Meteor.subscribe('news_center'),
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('publications'),
                 Meteor.subscribe('recommendedMiniPlatformArticles'),
                 Meteor.subscribe('news_link')
             ]
@@ -23,8 +23,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('publications'),
                 Meteor.subscribe('news_link')
             ]
         }
@@ -156,8 +156,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                Meteor.subscribe('publishers'),
-                Meteor.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('publications'),
                 Meteor.subscribe('recommendedMiniPlatformArticles'),
                 Meteor.subscribe('news_link')
             ]

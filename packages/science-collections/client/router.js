@@ -8,8 +8,8 @@ Router.route("/collections/", {
 	waitOn        : function () {
 		return [
 			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('images'),
-			Meteor.subscribe('publishers')
+			HomePageSubs.subscribe('images'),
+			HomePageSubs.subscribe('publishers')
 		]
 	},
 	onBeforeAction: function () {

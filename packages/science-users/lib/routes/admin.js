@@ -106,8 +106,8 @@ Router.route("admin.users.edit", {
     parent: "admin.users",
     waitOn: function () {
         return [
-            Meteor.subscribe('publishers'),
-            Meteor.subscribe('institutions')
+            HomePageSubs.subscribe('publishers'),
+            HomePageSubs.subscribe('institutions')
         ]
     }
 });
@@ -123,8 +123,8 @@ Router.route("admin.tag", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe("tag"),
-            Meteor.subscribe('pages')
+            HomePageSubs.subscribe("tag"),
+            HomePageSubs.subscribe('pages')
         ]
     }
 });

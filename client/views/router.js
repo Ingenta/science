@@ -7,20 +7,20 @@ Router.configure({
     progressDelay: 100,
     progressSpinner: false
 });
-var subs = new SubsManager();
+HomePageSubs = new SubsManager();
 
-subs.subscribe("current_user_data");
-subs.subscribe('pages');
-subs.subscribe('images');
-subs.subscribe('advertisement');
-subs.subscribe('institutions');
-subs.subscribe('searchHistory');
-subs.subscribe('emailConfig');
-subs.subscribe('publishers');
-subs.subscribe('publications');
-subs.subscribe('tag');
-subs.subscribe('topics');
-subs.subscribe('news');
+HomePageSubs.subscribe("current_user_data");
+HomePageSubs.subscribe('pages');
+HomePageSubs.subscribe('images');
+HomePageSubs.subscribe('advertisement');
+HomePageSubs.subscribe('institutions');
+HomePageSubs.subscribe('searchHistory');
+HomePageSubs.subscribe('emailConfig');
+HomePageSubs.subscribe('publishers');
+HomePageSubs.subscribe('publications');
+HomePageSubs.subscribe('tag');
+HomePageSubs.subscribe('topics');
+HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -39,10 +39,10 @@ Router.route("home", {
     },
     waitOn: function () {
         return [
-            subs.subscribe('publishers'),
-            subs.subscribe('topics'),
-            subs.subscribe('images'),
-            subs.subscribe('news'),
+            HomePageSubs.subscribe('publishers'),
+            HomePageSubs.subscribe('topics'),
+            HomePageSubs.subscribe('images'),
+            HomePageSubs.subscribe('news'),
             Meteor.subscribe('homepageMostRecentArticles'),
             Meteor.subscribe('mostCited'),
             Meteor.subscribe('mostRead', undefined, 5)
@@ -62,7 +62,7 @@ Router.route("/topics/", {
     },
     waitOn: function () {
         return [
-            subs.subscribe('topics')
+            HomePageSubs.subscribe('topics')
         ]
     },
     onBeforeAction: function () {
@@ -81,7 +81,7 @@ Router.route("topics/:topicsId/", {
     },
     waitOn: function () {
         return [
-            subs.subscribe('topics'),
+            HomePageSubs.subscribe('topics'),
             Meteor.subscribe('articlesInTopic',this.params.topicsId)
         ]
     }
@@ -97,8 +97,8 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                subs.subscribe('images'),
-                subs.subscribe('publishers')
+                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publishers')
             ]
         }
     });
@@ -110,10 +110,10 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                subs.subscribe('images'),
-                subs.subscribe('publications'),
-                subs.subscribe('publishers'),
-                subs.subscribe('topics')
+                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('topics')
             ]
         }
     });
@@ -139,11 +139,11 @@ Router.map(function () {
         name: "publisher.name",
         waitOn: function () {
             return [
-                subs.subscribe('images'),
-                subs.subscribe('publications'),
-                subs.subscribe('publishers'),
+                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
                 Meteor.subscribe('allCollections'),
-                subs.subscribe('topics')
+                HomePageSubs.subscribe('topics')
             ]
         }
     });
@@ -165,10 +165,10 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                subs.subscribe('images'),
+                HomePageSubs.subscribe('images'),
                 Meteor.subscribe('files'),
-                subs.subscribe('publishers'),
-                subs.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('publications'),
                 Meteor.subscribe("journal_ad")
             ]
         }
@@ -252,9 +252,9 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                subs.subscribe('publications'),
-                subs.subscribe('publishers'),
-                subs.subscribe('topics')
+                HomePageSubs.subscribe('publications'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('topics')
             ]
         }
     });
@@ -288,7 +288,7 @@ Router.map(function () {
         waitOn: function () {
             Session.set("activeTab", "publisher");
             return [
-                subs.subscribe('publishers')
+                HomePageSubs.subscribe('publishers')
             ]
         },
         onBeforeAction: function () {
@@ -316,7 +316,7 @@ Router.map(function () {
         waitOn: function () {
             Session.set("activeTab", "publisher");
             return [
-                subs.subscribe('publishers')
+                HomePageSubs.subscribe('publishers')
             ]
         },
 
@@ -339,7 +339,7 @@ Router.map(function () {
         waitOn: function () {
             Session.set("activeTab", "publisher");
             return [
-                subs.subscribe('publishers')
+                HomePageSubs.subscribe('publishers')
             ]
         },
         onBeforeAction: function() {
