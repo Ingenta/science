@@ -8,7 +8,7 @@ Router.route('/search', {
 	waitOn: function () {
 		return [
 			Meteor.subscribe('keywords'),
-			Meteor.subscribe('topics')
+			HomePageSubs.subscribe('topics')
 		]
 	},
 	onBeforeAction:function(){

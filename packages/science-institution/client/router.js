@@ -14,7 +14,7 @@ Router.route("/admin/institutions/", {
     },
     waitOn: function () {
         return [
-            //Meteor.subscribe('institutions')
+            HomePageSubs.subscribe('institutions')
         ]
     }
 });
@@ -31,7 +31,7 @@ Router.route("/admin/institutions/detail/:insId/", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('institutions'),
+            HomePageSubs.subscribe('institutions'),
         ]
     }
 });
@@ -45,7 +45,7 @@ Router.route("/admin/institutions/detail/insert/:insId", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('institutions'),
+            HomePageSubs.subscribe('institutions'),
         ]
     },
     controller: "AdminUsersInsertController",
@@ -60,7 +60,7 @@ Router.route("/admin/institutions/detail/edit/:userId", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('institutions'),
+            HomePageSubs.subscribe('institutions'),
         ]
     },
     controller: "AdminUsersEditController",
@@ -87,7 +87,7 @@ Router.route("/institution/detail/:insId/", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('institutions'),
+            HomePageSubs.subscribe('institutions'),
         ]
     },
     onBeforeAction: function () {
