@@ -158,7 +158,7 @@ Router.map(function () {
             return [
                 Meteor.subscribe('publishers'),
                 Meteor.subscribe('publications'),
-                Meteor.subscribe('fullMostRecentArticles'),
+                Meteor.subscribe('recommendedMiniPlatformArticles'),
                 Meteor.subscribe('news_link')
             ]
         }

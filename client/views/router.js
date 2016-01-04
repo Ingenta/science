@@ -82,7 +82,6 @@ Router.route("topics/:topicsId/", {
     waitOn: function () {
         return [
             subs.subscribe('topics'),
-            Meteor.subscribe('fullMostRecentArticles'),
             Meteor.subscribe('articlesInTopic',this.params.topicsId)
         ]
     }

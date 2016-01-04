@@ -33,7 +33,6 @@ Router.route("/collections/:collId/", {
 	waitOn        : function () {
 		return [
 			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('fullMostRecentArticles'),
 			Meteor.subscribe('articlesInCollection',this.params.collId)
 		]
 	},
@@ -45,18 +44,4 @@ Router.route("/collections/:collId/", {
 	}
 });
 
-Router.route("/collections/:collId/articles/", {
-	template      : "addArticleForCollection",
-	name          : "collections.selectArticles",
-	parent        : "collections",
-	title         : function () {
-		return TAPi18n.__("addArticleToCollection");
-	},
-	waitOn        : function () {
-		return [
-			Meteor.subscribe('allCollections'),
-			Meteor.subscribe('fullMostRecentArticles')
-		]
-	}
-});
 
