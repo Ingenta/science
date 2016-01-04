@@ -6,7 +6,7 @@ Meteor.methods({
         return createMostReadList(journalId, limit);
     },
     'totalConnections': function () {
-        return UserStatus.connections.find({userAgent:{$exists:true}}).count();
+        return UserStatus.connections.find({userAgent: {$exists: true}}).count();
     },
     'totalArticles': function () {
         return Articles.find().count();
@@ -37,7 +37,7 @@ Meteor.methods({
         return getArticlePageViewsGraphData(articleId);
     },
     'getLocationReport': function (action, articleId) {
-        return getArticlePageLocationReport(action,articleId);
+        return getArticlePageLocationReport(action, articleId);
     },
     'updateKeywordScore': function (keywords, score) {
         if (_.isEmpty(keywords))
@@ -53,26 +53,24 @@ Meteor.methods({
         var datetime = new Date();
         var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
         var user = Users.findOne({_id: userId});
-        Meteor.defer(function () {
-            PageViews.insert({
-                articleId: articleId,
-                userId: userId,
-                institutionId: user ? user.institutionId : null,
-                publisher: publisherId,
-                journalId: journalId,
-                keywords: keywords,
-                when: datetime,
-                dateCode: dateCode,
-                action: action,
-                ip: this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress
-            });
+        PageViews.insert({
+            articleId: articleId,
+            userId: userId,
+            institutionId: user ? user.institutionId : null,
+            publisher: publisherId,
+            journalId: journalId,
+            keywords: keywords,
+            when: datetime,
+            dateCode: dateCode,
+            action: action,
+            ip: this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress
         });
     },
     getDefaultPublisherId: function () {
         var defaultPublisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
-        if(defaultPublisher) return defaultPublisher._id;
+        if (defaultPublisher) return defaultPublisher._id;
     },
-    updateMostCited:function(){
+    updateMostCited: function () {
         updateMostCited && updateMostCited();
         return true;
     }
