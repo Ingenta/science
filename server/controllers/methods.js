@@ -6,7 +6,7 @@ Meteor.methods({
         return createMostReadList(journalId, limit);
     },
     'totalConnections': function () {
-        return UserStatus.connections.find({userAgent:{$exists:true}}).count();
+        return UserStatus.connections.find({userAgent: {$exists: true}}).count();
     },
     'totalArticles': function () {
         return Articles.find().count();
@@ -37,7 +37,7 @@ Meteor.methods({
         return getArticlePageViewsGraphData(articleId);
     },
     'getLocationReport': function (action, articleId) {
-        return getArticlePageLocationReport(action,articleId);
+        return getArticlePageLocationReport(action, articleId);
     },
     'updateKeywordScore': function (keywords, score) {
         if (_.isEmpty(keywords))
@@ -68,9 +68,9 @@ Meteor.methods({
     },
     getDefaultPublisherId: function () {
         var defaultPublisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
-        if(defaultPublisher) return defaultPublisher._id;
+        if (defaultPublisher) return defaultPublisher._id;
     },
-    updateMostCited:function(){
+    updateMostCited: function () {
         updateMostCited && updateMostCited();
         return true;
     }
