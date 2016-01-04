@@ -10,6 +10,8 @@ Router.configure({
 HomePageSubs = new SubsManager();
 CollectionSubs = new SubsManager();
 MiniPlatformSubs = new SubsManager();
+JournalSubs = new SubsManager();
+ArticleSubs = new SubsManager();
 
 HomePageSubs.subscribe("current_user_data");
 HomePageSubs.subscribe('pages');
@@ -45,8 +47,8 @@ Router.route("home", {
             HomePageSubs.subscribe('topics'),
             HomePageSubs.subscribe('images'),
             HomePageSubs.subscribe('news'),
-            Meteor.subscribe('homepageMostRecentArticles'),
-            Meteor.subscribe('mostCited'),
+            HomePageSubs.subscribe('homepageMostRecentArticles'),
+            HomePageSubs.subscribe('mostCited'),
             Meteor.subscribe('mostRead', undefined, 5)
         ]
     },
@@ -168,10 +170,10 @@ Router.map(function () {
         waitOn: function () {
             return [
                 HomePageSubs.subscribe('images'),
-                Meteor.subscribe('files'),
+                JournalSubs.subscribe('files'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
-                Meteor.subscribe("journal_ad")
+                JournalSubs.subscribe("journal_ad")
             ]
         }
     });
@@ -214,7 +216,7 @@ Router.map(function () {
         name: "mostCite.show",
         waitOn: function () {
             return [
-                Meteor.subscribe('mostCited')
+                HomePageSubs.subscribe('mostCited')
             ]
         }
     });
@@ -271,7 +273,7 @@ Router.map(function () {
         name: "news.show",
         waitOn: function () {
             return [
-                Meteor.subscribe('files'),
+                JournalSubs.subscribe('files'),
                 HomePageSubs.subscribe('news')
             ]
         }

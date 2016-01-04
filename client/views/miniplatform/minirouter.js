@@ -120,7 +120,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_contact'),
-                Meteor.subscribe('files'),
+                JournalSubs.subscribe('files'),
                 MiniPlatformSubs.subscribe('news_link')
             ]
         }
@@ -183,7 +183,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_center'),
-                Meteor.subscribe('files'),
+                JournalSubs.subscribe('files'),
                 MiniPlatformSubs.subscribe('news_link')
             ]
         }

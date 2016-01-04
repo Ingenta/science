@@ -26,19 +26,19 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId')),
-            Meteor.subscribe('about'),
-            Meteor.subscribe('about_articles'),
+            JournalSubs.subscribe('about'),
+            JournalSubs.subscribe('about_articles'),
             CollectionSubs.subscribe('allCollections'),
-            Meteor.subscribe('medias'),
-            Meteor.subscribe('files'),
-            Meteor.subscribe('specialTopics'),
+            JournalSubs.subscribe('medias'),
+            JournalSubs.subscribe('files'),
+            JournalSubs.subscribe('specialTopics'),
             Meteor.subscribe('editorRecommends',Session.get('currentJournalId')),
-            Meteor.subscribe("editorial_member"),
-            Meteor.subscribe("editorial_board"),
-            Meteor.subscribe("author_center"),
-            Meteor.subscribe("meeting_info"),
-            Meteor.subscribe("news"),
-            Meteor.subscribe('mostCited'),
+            JournalSubs.subscribe("editorial_member"),
+            JournalSubs.subscribe("editorial_board"),
+            JournalSubs.subscribe("author_center"),
+            JournalSubs.subscribe("meeting_info"),
+            HomePageSubs.subscribe("news"),
+            HomePageSubs.subscribe('mostCited'),
             Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId')),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]
@@ -60,7 +60,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
     waitOn: function () {
         return [
             Meteor.subscribe('articlesInSpecTopic', this.params.specialTopicsId),
-            Meteor.subscribe('specialTopics'),
+            JournalSubs.subscribe('specialTopics'),
             Meteor.subscribe('oneJournalIssues',Session.get("currentJournalId"))
         ]
     }
@@ -116,7 +116,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscr
     name: "guidelines.show",
     waitOn: function () {
         return [
-            Meteor.subscribe("author_center")
+            JournalSubs.subscribe("author_center")
         ]
     }
 
