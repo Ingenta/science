@@ -8,6 +8,7 @@ Router.configure({
     progressSpinner: false
 });
 HomePageSubs = new SubsManager();
+CollectionSubs = new SubsManager();
 
 HomePageSubs.subscribe("current_user_data");
 HomePageSubs.subscribe('pages');
@@ -142,7 +143,7 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                Meteor.subscribe('allCollections'),
+                CollectionSubs.subscribe('allCollections'),
                 HomePageSubs.subscribe('topics')
             ]
         }

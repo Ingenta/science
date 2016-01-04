@@ -7,7 +7,7 @@ Router.route("/collections/", {
 	},
 	waitOn        : function () {
 		return [
-			Meteor.subscribe('allCollections'),
+			CollectionSubs.subscribe('allCollections'),
 			HomePageSubs.subscribe('images'),
 			HomePageSubs.subscribe('publishers')
 		]
@@ -32,7 +32,7 @@ Router.route("/collections/:collId/", {
 	},
 	waitOn        : function () {
 		return [
-			Meteor.subscribe('allCollections'),
+			CollectionSubs.subscribe('allCollections'),
 			Meteor.subscribe('articlesInCollection',this.params.collId)
 		]
 	},

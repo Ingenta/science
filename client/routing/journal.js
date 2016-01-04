@@ -28,7 +28,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId')),
             Meteor.subscribe('about'),
             Meteor.subscribe('about_articles'),
-            Meteor.subscribe('allCollections'),
+            CollectionSubs.subscribe('allCollections'),
             Meteor.subscribe('medias'),
             Meteor.subscribe('files'),
             Meteor.subscribe('specialTopics'),
