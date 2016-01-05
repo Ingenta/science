@@ -12,7 +12,7 @@
 #fulltext-viewer xref {
     cursor: pointer;
     text-decoration: underline;
-    color: #3399f3;
+    color: #1a6594;
 }
 
 #fulltext-viewer xref[original=true] {
