@@ -254,11 +254,3 @@
         <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>
-
-<template name="updateArticleLanguageModalForm">
-    {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleLanguageForm" doc=this
-    type="update" buttonContent=getUpdateButtonContent}}
-        {{> afQuickField name="language"}}
-        <button type="submit" class="btn btn-primary">update</button>
-    {{/autoForm}}
-</template>
