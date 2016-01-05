@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <td>{{_ "Table Of Contents"}}</td>
-            <td>{{_"Action"}}</td>
+            <td style="width: 12%">{{_ "Action"}}</td>
         </tr>
         </thead>
         <tbody>
@@ -15,19 +15,13 @@
                             <a>{{translateThis titleCn title}}</a>
                         </a>
                     </td>
-                    <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedJournal"
-                                                                  value={{_id}}>{{/if}}
+                    <td>
+                        {{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedJournal" value={{_id}}>{{/if}}
                     </td>
                 </tr>
             {{/with}}
         {{else}}
-            <tr>
-                <td>
-                    {{_ "Journal Watch Is Empty"}}
-                </td>
-                <td>
-                </td>
-            </tr>
+            {{_ "Journal Watch Is Empty"}}
         {{/each}}
         </tbody>
     </table>
