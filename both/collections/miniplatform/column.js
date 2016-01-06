@@ -17,6 +17,16 @@ ColumnSchema = new SimpleSchema({
         type: String,
         unique: true
     },
+    picture: {
+        type: String,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png'
+            }
+        }
+    },
     types: {
         type: String
     }
