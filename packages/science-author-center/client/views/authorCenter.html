@@ -30,7 +30,8 @@
             <div class="row">
                     {{#each hasJournal _id}}
                         <div class="col-xs-6">
-                            {{> SingleJournal}}<hr>
+                            <hr>
+                            {{> SingleJournal}}
                         </div>
                      {{else}}
                         {{_ "No publications found!"}}
