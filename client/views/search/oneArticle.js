@@ -1,6 +1,9 @@
 Template.oneArticle.helpers({
 	"query": function () {
 		return Router.current().params.searchQuery;
+	},
+	"contentType": function(){
+		return TAPi18n.__("contentType." + this.contentType).replace("contentType.","");
 	}
 });
 

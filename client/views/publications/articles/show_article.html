@@ -39,17 +39,19 @@
                 <li>
                     <p>{{> affiliation}}</p>
                 </li>
-                {{#each authorNotes}}
+                {{#if authorNotes}}
                     <li>
-                        <p>
-                            {{#if note}}
-                                {{getLabel}} {{{translateThis note.cn note.en}}}
-                            {{else}}
-                                {{getLabel}} <a href="mailto:{{email}}">{{email}}</a>
-                            {{/if}}
-                        </p>
+                        {{#each authorNotes}}
+                            <p>
+                                {{#if note}}
+                                    {{getLabel}} {{{translateThis note.cn note.en}}}
+                                {{else}}
+                                    {{getLabel}} <a href="mailto:{{email}}">{{email}}</a>
+                                {{/if}}
+                            </p>
+                        {{/each}}
                     </li>
-                {{/each}}
+                {{/if}}
                 <li>
                     <p>
                         {{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}});
