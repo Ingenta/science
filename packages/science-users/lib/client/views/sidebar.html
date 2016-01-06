@@ -49,6 +49,7 @@
     {{> otherPlatformloginButtons}}
     <hr>
     <ul class="list-unstyled">
+        {{> sidebarAd}}
         {{#if showAccessKey}}
             <h4>{{_ "Access Key"}} :</h4>
             <li><img src="/icon_access_fc.gif"> {{_ "Free Content"}}</li>
@@ -57,7 +58,6 @@
             <li><img src="/icon_access_ft.gif"> {{_ "Free Trial Content"}}</li>
             <hr>
         {{/if}}
-        {{> sidebarAd}}
     </ul>
     {{>sendEmailModalForm}}
 </template>
