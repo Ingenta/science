@@ -93,3 +93,6 @@ ol.affiliationList li {
 .pacs-table>tr{
     border-bottom: 1px #aaa dashed;
 }
+.name_style{
+    font-weight:bold;
+}
