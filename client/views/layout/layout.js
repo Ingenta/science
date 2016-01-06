@@ -59,6 +59,9 @@ Template.PublicLayoutRightMenu.rendered = function () {
 Template.layout.helpers({
 	developerModeEnabled:function(){
 		return Meteor.isDevelopment;
+	},
+	currYear:function(){
+		return new Date().getYear()+1900;
 	}
 });
 
