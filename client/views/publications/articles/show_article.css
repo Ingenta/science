@@ -61,7 +61,7 @@ ol.affiliationList li {
 
 .separate-comma:not(:last-child):after{
     content:",";
-    margin:0px 3px 0px 0px;
+    margin:0px 3px 0px -3px;
     display: inline-table;
 }
 .sectionDivider.title {
