@@ -1,5 +1,5 @@
 <template name="layoutNewsShow">
-    <div class="shuff mt25">
+    <div class="shuff">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -11,11 +11,11 @@
             <div class="carousel-inner" role="listbox">
                 {{#each layoutNewsShow "extend"}}
                     <div class="item {{class}}">
-                        <a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 770px;height: 222px"/></a>
+                        <a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" style="width: 770px;height: 160px"/></a>
                         <div class="carousel-caption">{{title}}</div>
                     </div>
                 {{else}}
-                    <img src="/defeat_scp.jpg" style="width: 770px;height: 222px"/>
+                    <img src="/defeat_scp.jpg" style="width: 770px;height: 160px"/>
                 {{/each}}
             </div>
         </div>
