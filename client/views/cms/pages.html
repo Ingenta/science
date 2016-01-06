@@ -8,7 +8,7 @@
                 </div>
             {{/if}}
         {{else}}
-            <h2>{{getPageTitle key}}</h2>
+            {{#if getPageTitle key}} <h2>{{getPageTitle key}}</h2>{{/if}}
             {{#if isMiniPlatform}}
                 {{#if miniPlatformPermission}}
                 <div class="pull-right">
