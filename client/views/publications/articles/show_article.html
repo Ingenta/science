@@ -57,13 +57,6 @@
                                 class="fa fa-external-link"></i></a>
                     </p>
                 </li>
-                <li>
-                    <p>{{_ "Language"}}:&nbsp;{{articleLanguage language}}
-                        <!--{{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}-->
-                            <!--{{>jkafModal template="updateArticleLanguageModalForm" doc=this id="updateArticleLanguageForm"}}-->
-                        <!--{{/if}}-->
-                    </p>
-                </li>
                 {{#if pacs}}
                     <li>
                         <p>
@@ -258,14 +251,6 @@
     {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleAccessKeyForm" doc=this
     type="update" buttonContent=getUpdateButtonContent}}
         {{> afQuickField name="accessKey"}}
-        <button type="submit" class="btn btn-primary">update</button>
-    {{/autoForm}}
-</template>
-
-<template name="updateArticleLanguageModalForm">
-    {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleLanguageForm" doc=this
-    type="update" buttonContent=getUpdateButtonContent}}
-        {{> afQuickField name="language"}}
         <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>

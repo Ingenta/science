@@ -85,13 +85,13 @@ div.articleOutline li {
 xref[ref-type='fig'] {
     cursor: pointer;
     text-decoration: underline;
-    color: #3399f3;
+    color: #1a6594;
 }
 
 xref[ref-type='table'] {
     cursor: pointer;
     text-decoration: underline;
-    color: #3399f3;
+    color: #1a6594;
 }
 
 .figure {
