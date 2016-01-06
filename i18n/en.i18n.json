@@ -963,6 +963,9 @@
         "column": {
             "title": {
                 "label": "Column name"
+            },
+            "picture": {
+                "label": "Choose file"
             }
         },
         "columnViews": {

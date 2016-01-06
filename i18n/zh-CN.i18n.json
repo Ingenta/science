@@ -1107,6 +1107,9 @@
     "column": {
       "title": {
         "label": "专栏名称"
+      },
+      "picture": {
+        "label": "选择代表图片"
       }
     },
     "columnViews": {
