@@ -6,3 +6,6 @@ div.issues {
     width:100%;
     max-height:200px
 }
+ul.article-list > ul {
+    padding-bottom: 7px;
+}

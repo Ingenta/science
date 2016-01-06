@@ -55,7 +55,7 @@ AutoForm.addHooks(['addLatestArticlesModalForm'], {
     onSuccess: function () {
         $("#addLatestArticlesModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
-        Meteor.subscribe("recommendedMiniPlatformArticles");
+        MiniPlatformSubs.subscribe("recommendedMiniPlatformArticles");
     },
     before: {
         insert: function (doc) {

@@ -12,7 +12,7 @@
 #fulltext-viewer xref {
     cursor: pointer;
     text-decoration: underline;
-    color: #3399f3;
+    color: #1a6594;
 }
 
 #fulltext-viewer xref[original=true] {
@@ -21,6 +21,10 @@
 
 #fulltext-viewer table {
     width: 100%;
+}
+
+#fulltext-viewer x{
+    margin:5px;
 }
 .att-table table {
     border-top: 3px solid;

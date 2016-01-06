@@ -8,12 +8,14 @@
                 <h2>
                     {{translateThis chinesename name}}
                 </h2>
-                {{#if i18n_isCurrentLanguage 'en'}}
-                    {{description}}
-                {{else}}
-                    {{chinesedescription}}
-                {{/if}}
-                {{> PublisherWebsite}}
+                <p>
+                    {{#if i18n_isCurrentLanguage 'en'}}
+                        {{description}}
+                    {{else}}
+                        {{chinesedescription}}
+                    {{/if}}
+                </p>
+                <p>{{> PublisherWebsite}}</p>
             </div>
         </div>
         <br/>

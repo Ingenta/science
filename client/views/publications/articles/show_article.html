@@ -39,29 +39,24 @@
                 <li>
                     <p>{{> affiliation}}</p>
                 </li>
-                {{#each authorNotes}}
+                {{#if authorNotes}}
                     <li>
-                        <p>
-                            {{#if note}}
-                                {{getLabel}} {{{translateThis note.cn note.en}}}
-                            {{else}}
-                                {{getLabel}} <a href="mailto:{{email}}">{{email}}</a>
-                            {{/if}}
-                        </p>
+                        {{#each authorNotes}}
+                            <p>
+                                {{#if note}}
+                                    {{getLabel}} {{{translateThis note.cn note.en}}}
+                                {{else}}
+                                    {{getLabel}} <a href="mailto:{{email}}">{{email}}</a>
+                                {{/if}}
+                            </p>
+                        {{/each}}
                     </li>
-                {{/each}}
+                {{/if}}
                 <li>
                     <p>
                         {{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} ({{year}});
                         <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
                                 class="fa fa-external-link"></i></a>
-                    </p>
-                </li>
-                <li>
-                    <p>{{_ "Language"}}:&nbsp;{{articleLanguage language}}
-                        <!--{{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}-->
-                            <!--{{>jkafModal template="updateArticleLanguageModalForm" doc=this id="updateArticleLanguageForm"}}-->
-                        <!--{{/if}}-->
                     </p>
                 </li>
                 {{#if pacs}}
@@ -258,14 +253,6 @@
     {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleAccessKeyForm" doc=this
     type="update" buttonContent=getUpdateButtonContent}}
         {{> afQuickField name="accessKey"}}
-        <button type="submit" class="btn btn-primary">update</button>
-    {{/autoForm}}
-</template>
-
-<template name="updateArticleLanguageModalForm">
-    {{#autoForm schema="ArticleSchema" collection="Articles" id="updateArticleLanguageForm" doc=this
-    type="update" buttonContent=getUpdateButtonContent}}
-        {{> afQuickField name="language"}}
         <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>

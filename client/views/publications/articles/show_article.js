@@ -130,14 +130,6 @@ Template.showArticle.helpers({
     getPdfById: function (id) {
         return PdfStore.findOne({_id: id}).url() + "&download=true";
     },
-    articleLanguage: function (num2) {
-        if (num2 == "1") {
-            return TAPi18n.__("English");
-        }
-        if (num2 == "2") {
-            return TAPi18n.__("Chinese");
-        }
-    },
     refs: function () {
         var affObjs=Router.current().data().affiliations;
         var allrefs = [];

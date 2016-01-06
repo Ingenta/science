@@ -351,28 +351,31 @@ var insertArticle = function (a) {
     a.accessKey = journal.accessKey;
     a.language = journal.language;
 
-    var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
-    if (!volume) {
-        volume = Volumes.insert({
-            journalId: a.journalId,
-            volume: a.volume
-        });
-    }
-    a.volumeId = volume._id || volume;
+    if(a.pubStatus=='normal'){
+        var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
+        if (!volume) {
+            volume = Volumes.insert({
+                journalId: a.journalId,
+                volume: a.volume
+            });
+        }
+        a.volumeId = volume._id || volume;
 
-    var issue = Issues.findOne({journalId: a.journalId, volume: a.volume, issue: a.issue});
-    if (!issue) {
-        issue = Issues.insert({
-            journalId: a.journalId,
-            volume: a.volume,
-            issue: a.issue,
-            year: a.year,
-            month: a.month,
-            createDate: new Date()
-        });
+        var issue = Issues.findOne({journalId: a.journalId, volume: a.volume, issue: a.issue});
+        if (!issue) {
+            issue = Issues.insert({
+                journalId: a.journalId,
+                volume: a.volume,
+                issue: a.issue,
+                year: a.year,
+                month: a.month,
+                createDate: new Date()
+            });
+        }
+        //确保article有一个关联的issue
+        a.issueId = issue._id || issue;
     }
-    //确保article有一个关联的issue
-    a.issueId = issue._id || issue;
+
 
     //将PACS代号转换为PACS名称.
     if (!_.isEmpty(a.pacs)) {

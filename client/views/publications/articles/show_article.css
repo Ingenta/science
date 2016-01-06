@@ -7,6 +7,9 @@ div.articleDetails li {
     list-style-position: inside;
     padding-left: 1em;
 }
+div.articleDetails li p {
+    margin:0
+}
 .articleTitle{
     padding-left:3em;
     padding-top:10px;
@@ -15,7 +18,7 @@ div.articleDetails li {
 }
 .articleAccessKeyImage{
     position: absolute;
-    padding-top: 4px;
+    padding-top: 10px;
 }
 .articleDetails ul,ol {
     padding-left: 2em;
@@ -61,7 +64,7 @@ ol.affiliationList li {
 
 .separate-comma:not(:last-child):after{
     content:",";
-    margin:0px 3px 0px 0px;
+    margin:0px 3px 0px -3px;
     display: inline-table;
 }
 .sectionDivider.title {

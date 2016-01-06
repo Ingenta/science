@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <td>{{_ "Table Of Contents"}}</td>
-            <td>{{_"Action"}}</td>
+            <td style="width: 12%">{{_ "Action"}}</td>
         </tr>
         </thead>
         <tbody>
@@ -19,13 +19,7 @@
                 </tr>
             {{/with}}
         {{else}}
-            <tr>
-                <td>
-                {{_ "Topic Watch Is Empty"}}
-                </td>
-                <td>
-                </td>
-            </tr>
+            {{_ "Topic Watch Is Empty"}}
         {{/each}}
         </tbody>
     </table>

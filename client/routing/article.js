@@ -26,9 +26,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
-            Meteor.subscribe('pdfs'),
-            Meteor.subscribe('medias'),
-            Meteor.subscribe('files'),
+            ArticleSubs.subscribe('pdfs'),
+            JournalSubs.subscribe('medias'),
+            JournalSubs.subscribe('files'),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
             Meteor.subscribe('mostCited', Session.get('currentJournalId'), 5)
         ]
@@ -50,7 +50,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         }
 
         if(!Science.Cookies.get('mjx.menu')){
-            Science.Cookies.set('mjx.menu',"renderer:CommonHTML")
+            Science.Cookies.set('mjx.menu',"renderer:PreviewHTML")
         }
         this.next();
     },
@@ -85,8 +85,8 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
     waitOn: function () {
         return [
             Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
-            Meteor.subscribe('medias'),
-            Meteor.subscribe('files')
+            JournalSubs.subscribe('medias'),
+            JournalSubs.subscribe('files')
         ]
     }
 });

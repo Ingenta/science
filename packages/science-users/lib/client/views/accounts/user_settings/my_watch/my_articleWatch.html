@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <td>{{_ "Table Of Contents"}}</td>
-            <td>{{_ "Action"}}</td>
+            <td style="width: 12%">{{_ "Action"}}</td>
         </tr>
         </thead>
         <tbody>
@@ -15,18 +15,13 @@
                             <a>{{{translateThis title.cn title.en}}}</a>
                         </a>
                     </td>
-                    <td>{{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedArticle"
-                                                                  value={{_id}}>{{/if}}</td>
+                    <td>
+                        {{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}
+                    </td>
                 </tr>
             {{/with}}
         {{else}}
-            <tr>
-                <td>
-                    {{_ "Article Watch Is Empty"}}
-                </td>
-                <td>
-                </td>
-            </tr>
+            {{_ "Article Watch Is Empty"}}
         {{/each}}
         </tbody>
     </table>

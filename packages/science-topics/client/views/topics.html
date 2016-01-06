@@ -1,13 +1,13 @@
 <template name="Topics">
     <div class="container-fluid">
         {{> pageElement key="topic"}}
-        <div class="row">
             {{#if can "add-topic" "topic"}}
+            <div class="row">
                 {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
                     {{_ "Add new"}} <i class="fa fa-plus"></i>
                 {{/jkafModal}}
+            </div>
             {{/if}}
-        </div>
         <hr>
         <div class="row topics">
             {{> TopicList}}

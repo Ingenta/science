@@ -31,8 +31,8 @@ Router.route("user_settings.update_information", {
     parent: "user_settings",
     waitOn: function () {
         return [
-            Meteor.subscribe('topics'),
-            Meteor.subscribe('publications')
+            HomePageSubs.subscribe('topics'),
+            HomePageSubs.subscribe('publications')
         ]
     }
 });
@@ -61,8 +61,8 @@ Router.route("user_settings.my_watch", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('publications'),
-            Meteor.subscribe('topics'),
+            HomePageSubs.subscribe('publications'),
+            HomePageSubs.subscribe('topics'),
             Meteor.subscribe('myWatchedArticles')
         ]
     }
@@ -77,12 +77,6 @@ Router.route("user_settings.my_emails", {
     template: "UserSettings",
     title: function () {
         return TAPi18n.__("My emails");
-    },
-    waitOn: function () {
-        return [
-            //Meteor.subscribe('publications'),
-            //Meteor.subscribe('topics')
-        ]
     }
 });
 
@@ -95,10 +89,5 @@ Router.route("user_settings.search_history", {
     template: "UserSettings",
     title: function () {
         return TAPi18n.__("Search History");
-    },
-    waitOn: function () {
-        return [
-//                Meteor.subscribe('publications'),
-        ]
     }
 });
