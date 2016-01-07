@@ -165,6 +165,33 @@ PastDataImport = function (path,pdfFolder) {
         }
     }
 
+
+    var insertKeywords = function (a) {
+        if (!a)return;
+        if (a.cn) {
+            a.cn.forEach(function (name) {
+                if (!Keywords.findOne({name: name})) {
+                    Keywords.insert({
+                        lang: "cn",
+                        name: name,
+                        score: 0
+                    });
+                }
+            })
+        }
+        if (a.en) {
+            a.en.forEach(function (name) {
+                if (!Keywords.findOne({name: name})) {
+                    Keywords.insert({
+                        lang: "en",
+                        name: name,
+                        score: 0
+                    });
+                }
+            })
+        }
+    }
+
     var importQueue = new PowerQueue({
         maxProcessing: 1,//1并发
         maxFailures: 1 //不重试
@@ -231,6 +258,7 @@ PastDataImport = function (path,pdfFolder) {
                             _.extend(newOne, authors);
                         }
                         newOne.keywords = article.indexing;
+                        insertKeywords(newOne.keywords);
                         newOne.pubStatus = "normal";
                         newOne.accessKey = journal.accessKey;
                         newOne.language = article.language == 'zh_CN' ? 2 : 1;
