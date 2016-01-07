@@ -9,7 +9,7 @@
             </p>
             <p class="fr mt8"><a href="{{pathFor 'dynamicArticleShow'}}"><img src="/goAll.png"/></a></p>
         </div>
-        <!-- 一个部分开始 -->
+        <!-- 推荐文章部分开始 -->
         {{#each recommendArticles}}
             <div class="contPart">
                 <div class="fl w80"><a href="{{urlToArticleById ArticlesId}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
@@ -25,9 +25,21 @@
                 </div>
             </div>
         {{else}}
-            {{_ "No articles found!"}}
         {{/each}}
-        <!-- 一个部分结束 -->
+        <!-- 推荐文章部分结束 -->
+
+        <!-- 最新文章部分开始 -->
+        {{#each lastArticle}}
+            <div class="contPart">
+                <div class="fl w350">
+                    <div class="h50">
+                        <p><a href="{{urlToArticleById _id}}" target="_blank">{{{translateThis title.cn title.en}}}</a></p>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+        {{/each}}
+        <!-- 最新文章部分结束 -->
     </div>
 </template>
 
