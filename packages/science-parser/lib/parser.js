@@ -36,7 +36,7 @@ Parser = function (filepath, options, callback) {
                 article.pages = parseHelper.getSimpleVal("child::pages", articleNode);
                 article.startPage = parseHelper.getSimpleVal("child::start_page", articleNode);
                 article.endPage = parseHelper.getSimpleVal("child::endPage | child::end_page", articleNode);
-                article.pdf = parseHelper.getFirstAttribute("child::galley/file/href/attribute::src", articleNode);
+                article.pdf = parseHelper.getFirstAttribute("child::galley/file/href[@mime_type='application/pdf']/attribute::src", articleNode);
                 article.publishDate = parseHelper.getSimpleVal("child::publish_date", articleNode);
                 article.acceptDate = parseHelper.getSimpleVal("child::accept_date", articleNode);
                 article.authors = [];
