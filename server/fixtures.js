@@ -1,49 +1,14 @@
 Meteor.startup(function () {
 
-    Topics.remove({})
+    //Topics.remove({})
     if (Topics.find().count() === 0) {
-        var names = [
-            {
-                "level1cn": "数学",
-                "level1en": "Mathematics",
-                "level2cn": "",
-                "level2en": "",
-                "level3cn": "",
-                "level3en": ""
-            },
-            {
-                "level1cn": "数学",
-                "level1en": "Mathematics",
-                "level2cn": "数理逻辑与基础",
-                "level2en": "Mathematical Logic And Foundations",
-                "level3cn": "",
-                "level3en": ""
-            },
-            {
-                "level1cn": "数学",
-                "level1en": "Mathematics",
-                "level2cn": "数理逻辑与基础",
-                "level2en": "Mathematical Logic And Foundations",
-                "level3cn": "一般逻辑",
-                "level3en": "General logic"
-            },
-            {
-                "level1cn": "数学",
-                "level1en": "Mathematics",
-                "level2cn": "数理逻辑与基础",
-                "level2en": "Mathematical Logic And Foundations",
-                "level3cn": "模型论",
-                "level3en": "Model theory"
-            },
-            {
-                "level1cn": "数学",
-                "level1en": "Mathematics",
-                "level2cn": "数理逻辑与基础",
-                "level2en": "Mathematical Logic And Foundations",
-                "level3cn": "可计算性与递归论",
-                "level3en": "Computability and recursion theory"
-            }
-        ];
+        logger.info("importing PACS data from /assets/app/topics.json");
+        var topicsFile = process.cwd() + "/assets/app/topics.json";
+        if (!Science.FSE.existsSync(topicsFile))
+            return;
+        var content = Science.FSE.readFileSync(topicsFile, "utf-8");
+        var names = JSON.parse(content);
+
         _.each(names, function (name) {
             //if it a parent node insert it first
             //then insert its children
