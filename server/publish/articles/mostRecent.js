@@ -3,6 +3,7 @@ Meteor.publish('homepageMostRecentArticles', function (publisherId,count) {
     var query = {};
     if(publisherId)
         query.publisher=publisherId;
+    console.dir(publisherId);
     return [
         Articles.find(query, {
             sort: {createdAt: -1},

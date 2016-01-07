@@ -2,6 +2,12 @@
 Router.map(function () {
     //新闻平台首页
     this.route("newsPlatform", {
+        data: function () {
+            var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
+            if (publisher) {
+                Session.set('publisherId', publisher._id);
+            }
+        },
         path: "/miniplatform",
         layoutTemplate: "miniLayout",
         waitOn: function () {
@@ -13,7 +19,7 @@ Router.map(function () {
                 HomePageSubs.subscribe('publications'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles'),
                 MiniPlatformSubs.subscribe('news_link'),
-                MiniPlatformSubs.subscribe('homepageMostRecentArticles')
+                MiniPlatformSubs.subscribe('homepageMostRecentArticles',Session.get("publisherId"),6)
             ]
         }
     });
