@@ -14,7 +14,7 @@ Template.homePageTopicList.helpers({
             {name: "大气科学", englishName: "Atmospheric sciences"},
             {name: "海洋科学", englishName: "Oceanography"},
             {name: "材料科学与工程", englishName: "Materials Science and Engineering"},
-            {name: "机械工程", englishName: "Materials Science and Engineering"},
+            {name: "机械工程", englishName: "Mechanical Engineering"},
             {name: "航空航天科学", englishName: "Aviation & Aerospace"},
             {name: "信息和通信工程", englishName: "Information & Communication Engineering"},
             {name: "计算机科学与技术", englishName: "Computer Science & Technology"},
