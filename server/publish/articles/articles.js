@@ -5,7 +5,8 @@ minimumArticle = {
     issue: 1,
     issueId: 1,
     volume: 1,
-    published: 1
+    published: 1,
+    publisher:1
 };
 articleWithMetadata = {
     title: 1,
@@ -21,7 +22,8 @@ articleWithMetadata = {
     accessKey: 1,
     published: 1,//needed for most cited
     citationCount: 1,//needed for most cited
-    topic:1
+    topic:1,
+    publisher:1
 };
 
 Meteor.publish('articleSearchResults', function () {

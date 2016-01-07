@@ -38,7 +38,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe("author_center"),
             JournalSubs.subscribe("meeting_info"),
             HomePageSubs.subscribe("news"),
-            HomePageSubs.subscribe('mostCited'),
+            HomePageSubs.subscribe('mostCited',Session.get('currentJournalId')),
             Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId')),
             Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
         ]

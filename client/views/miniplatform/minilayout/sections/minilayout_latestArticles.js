@@ -2,6 +2,15 @@ Template.layoutLatestArticles.helpers({
     recommendArticles: function () {
         return NewsRecommend.find({},{sort: {createDate: -1}, limit: 6});
     },
+    lastArticle: function () {
+        var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
+        var list = NewsRecommend.find({},{sort: {createDate: -1}});
+        if(list.count()<6){
+            return Articles.find({publisher: publisher._id}, {sort: {createdAt: -1}, limit: (6-list.count())});
+        }else{
+            return;
+        }
+    },
     titles: function (Aid) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var article = Articles.findOne({_id: Aid});

@@ -1,8 +1,12 @@
-Meteor.publish('homepageMostRecentArticles', function () {
+Meteor.publish('homepageMostRecentArticles', function (publisherId,count) {
+    var c=count || 10;
+    var query = {};
+    if(publisherId)
+        query.publisher=publisherId;
     return [
-        Articles.find({}, {
+        Articles.find(query, {
             sort: {createdAt: -1},
-            limit: 10,
+            limit: c,
             fields: minimumArticle
         }),
         Publishers.find({}, {

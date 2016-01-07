@@ -12,7 +12,8 @@ Router.map(function () {
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('news_link'),
+                MiniPlatformSubs.subscribe('homepageMostRecentArticles')
             ]
         }
     });
