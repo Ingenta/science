@@ -1,0 +1,7170 @@
+[
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "一般逻辑",
+    "level3en": "General logic"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "模型论",
+    "level3en": "Model theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "可计算性与递归论",
+    "level3en": "Computability and recursion theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "集合论",
+    "level3en": "Set theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "证明论和构造性数学",
+    "level3en": "Proof theory and constructive mathematics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数理逻辑与基础",
+    "level2en": "Mathematical Logic And Foundations",
+    "level3cn": "代数逻辑",
+    "level3en": "Algebraic logic"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "组合论",
+    "level2en": "Combinatorics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "组合论",
+    "level2en": "Combinatorics",
+    "level3cn": "计数组合论",
+    "level3en": "Enumerative combinatorics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "组合论",
+    "level2en": "Combinatorics",
+    "level3cn": "设计与构形",
+    "level3en": "Designs and configurations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "组合论",
+    "level2en": "Combinatorics",
+    "level3cn": "图论",
+    "level3en": "Graph theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "组合论",
+    "level2en": "Combinatorics",
+    "level3cn": "极值组合论",
+    "level3en": "Extremal combinatorics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "组合论",
+    "level2en": "Combinatorics",
+    "level3cn": "代数组合论",
+    "level3en": "Algebraic combinatorics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "有序集",
+    "level3en": "Ordered sets"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "格",
+    "level3en": "Lattices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "模格，有余（补）格",
+    "level3en": "Modular lattices, complemented lattices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "分配格",
+    "level3en": "Distributive lattices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "布尔（Boolean）代数（布尔环）",
+    "level3en": "Boolean algebras (Boolean rings)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序，格，有序的代数结构",
+    "level2en": "Order, Lattices, Ordered Algebraic Structures",
+    "level3cn": "有序结构",
+    "level3en": "Ordered structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般代数系统",
+    "level2en": "General Algebraic Systems",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般代数系统",
+    "level2en": "General Algebraic Systems",
+    "level3cn": "代数结构",
+    "level3en": "Algebraic structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般代数系统",
+    "level2en": "General Algebraic Systems",
+    "level3cn": "簇",
+    "level3en": "Varieties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般代数系统",
+    "level2en": "General Algebraic Systems",
+    "level3cn": "其它代数类",
+    "level3en": "Other classes of algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "初等数论",
+    "level3en": "Elementary number theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "序列与集合",
+    "level3en": "Sequences and sets"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "多项式与矩阵",
+    "level3en": "Polynomials and matrices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "丢番图方程",
+    "level3en": "Diophantine equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "型和线性代数群",
+    "level3en": "Forms and linear algebraic groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "不连续群和自守形式",
+    "level3en": "Discontinuous groups and automorphic forms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "算数代数几何（丢番图几何）",
+    "level3en": "Arithmetic algebraic geometry (Diophantine geometry)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "数的几何",
+    "level3en": "Geometry of numbers"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "丢番图逼近",
+    "level3en": "Diophantine approximation, transcendental number theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "概率论：分布模型l；算法测度理论",
+    "level3en": "Probabilistic theory: distribution modulo 1; metric theory of algorithms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "指数和特征和",
+    "level3en": "Exponential sums and character sums"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "ζ函数和L函数",
+    "level3en": "Zeta and L-functions: analytic theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "乘法数论",
+    "level3en": "Multiplicative number theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "堆垒数论",
+    "level3en": "Additive number theory; partitions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "代数数论：整体域",
+    "level3en": "Algebraic number theory: global fields"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "代数数论：局部域和p进域",
+    "level3en": "Algebraic number theory: local and p-adic fields"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "有限域和有限交换环",
+    "level3en": "Finite fields and commutative rings (number-theoretic aspects)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "与逻辑的联系",
+    "level3en": "Connections with logic"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "计算数论",
+    "level3en": "Computational number theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数论",
+    "level2en": "Number Theory",
+    "level3cn": "数论的其它应用",
+    "level3en": "Miscellaneous applications of number theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "实域和复域",
+    "level3en": "Real and complex fields"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "一般域论",
+    "level3en": "General field theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "域扩张",
+    "level3en": "Field extensions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "同调方法（域论）",
+    "level3en": "Homological methods (field theory)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "微分代数与差分代数",
+    "level3en": "Differential and difference algebra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "拓扑域",
+    "level3en": "Topological fields"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "域推广",
+    "level3en": "Generalizations of fields"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "与逻辑的联系",
+    "level3en": "Connections with logic"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "域论和多项式",
+    "level2en": "Field Theory And Polynomials",
+    "level3cn": "域论和多项式的计算",
+    "level3en": "Computational aspects of field theory and polynomials"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "一般交换环理论",
+    "level3en": "General commutative ring theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "环扩张及相关课题",
+    "level3en": "Ring extensions and related topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "模和理想理论",
+    "level3en": "Theory of modules and ideals"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "（上）同调方法",
+    "level3en": "Homological methods"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "链条件，有限性条件",
+    "level3en": "Chain conditions, finiteness conditions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "算数环与其它特殊环",
+    "level3en": "Arithmetic rings and other special rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "整环",
+    "level3en": "Integral domains"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "局部环与半局部环",
+    "level3en": "Local rings and semilocal rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "拓扑环和模",
+    "level3en": "Topological rings and modules"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "逻辑应用于交换代数",
+    "level3en": "Applications of logic to commutative algebra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "有限交换环",
+    "level3en": "Finite commutative rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "微分代数",
+    "level3en": "Differential algebra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "交换环和交换代数",
+    "level2en": "Commutative Algebra",
+    "level3cn": "交换代数计算",
+    "level3en": "Computational aspects and applications"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "基础",
+    "level3en": "Foundations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "局部理论",
+    "level3en": "Local theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "循环与子概型",
+    "level3en": "Cycles and subschemes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "族，纤维化",
+    "level3en": "Families, fibrations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "映射与对应",
+    "level3en": "Birational geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "(上）同调理论",
+    "level3en": "(Co)homology theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "算术问题，丢番图几何",
+    "level3en": "Arithmetic problems. Diophantine geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "曲线",
+    "level3en": "Curves"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "曲面与高维簇",
+    "level3en": "Surfaces and higher-dimensional varieties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "阿贝尔（Abel）簇和概型",
+    "level3en": "Abelian varieties and schemes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "代数群",
+    "level3en": "Algebraic groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "特殊簇",
+    "level3en": "Special varieties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "射影与枚举几何",
+    "level3en": "Projective and enumerative geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "实代数与实解析几何",
+    "level3en": "Real algebraic and real analytic geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "代数几何的计算",
+    "level3en": "Computational aspects in algebraic geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "仿射几何",
+    "level3en": "Affine geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数几何",
+    "level2en": "Algebraic Geometry",
+    "level3cn": "Tropical 几何",
+    "level3en": "Tropical geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "线性代数和多重线性代数，矩阵论",
+    "level2en": "Linear And Multilinear Algebra; Matrix Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "线性代数和多重线性代数，矩阵论",
+    "level2en": "Linear And Multilinear Algebra; Matrix Theory",
+    "level3cn": "基础线性代数",
+    "level3en": "Basic linear algebra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "线性代数和多重线性代数，矩阵论",
+    "level2en": "Linear And Multilinear Algebra; Matrix Theory",
+    "level3cn": "特殊矩阵",
+    "level3en": "Special matrices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "一般问题与杂题",
+    "level3en": "General and miscellaneous"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "模，双模和理想",
+    "level3en": "Modules, bimodules and ideals"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "同调方法",
+    "level3en": "Homological methods"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "环和代数的表示理论",
+    "level3en": "Representation theory of rings and algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "整环（order）和算数，可分代数，Azumaya代数",
+    "level3en": "Algebras and orders"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "除环与半阿丁（Artin）环",
+    "level3en": "Division rings and semisimple Artin rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "局部环与推广",
+    "level3en": "Local rings and generalizations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "环的根与根性质",
+    "level3en": "Radicals and radical properties of rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "链条件，增长条件和其它有限性形式",
+    "level3en": "Chain conditions, growth conditions, and other forms of finiteness"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "具有多项式恒等式的环",
+    "level3en": "Rings with polynomial identity"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "各种结构下的环与代数",
+    "level3en": "Rings and algebras arising under various constructions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "Hopf 代数，量子群及相关课题",
+    "level3en": "Hopf algebras, quantum groups and related topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "元素的条件",
+    "level3en": "Conditions on elements"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "具有附加结构的环和代数",
+    "level3en": "Rings and algebras with additional structure"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "推广",
+    "level3en": "Generalizations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "结合环与结合代数",
+    "level2en": "Associative Rings And Algebras",
+    "level3cn": "结合环的计算",
+    "level3en": "Computational aspects of associative rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "非结合环与非结合代数",
+    "level2en": "Nonassociative Rings And Algebras",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "非结合环与非结合代数",
+    "level2en": "Nonassociative Rings And Algebras",
+    "level3cn": "一般非结合环",
+    "level3en": "General nonassociative rings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "非结合环与非结合代数",
+    "level2en": "Nonassociative Rings And Algebras",
+    "level3cn": "李代数和李超代数",
+    "level3en": "Lie algebras and Lie superalgebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "非结合环与非结合代数",
+    "level2en": "Nonassociative Rings And Algebras",
+    "level3cn": "约当（Jordan）代数（代数，三元组和对）",
+    "level3en": "Jordan algebras (algebras, triples and pairs)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "非结合环与非结合代数",
+    "level2en": "Nonassociative Rings And Algebras",
+    "level3cn": "其它非结合环与代数",
+    "level3en": "Other nonassociative rings and algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "范畴与函子的一般理论",
+    "level3en": "General theory of categories and functors"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "特殊范畴",
+    "level3en": "Special categories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "范畴与理论",
+    "level3en": "Categories and theories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "有结构的范畴",
+    "level3en": "Categories with structure"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "阿贝尔范畴",
+    "level3en": "Abelian categories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "范畴与几何",
+    "level3en": "Categories and geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "范畴论，同调代数",
+    "level2en": "Category Theory; Homological Algebra",
+    "level3cn": "同调代数",
+    "level3en": "Homological algebra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "Grothendiek群和K0",
+    "level3en": "Grothendieck groups and K0"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "Whitehead群和K1",
+    "level3en": "Whitehead groups and K1"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "Steinberg群和K2",
+    "level3en": "Steinberg groups and K2"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "高等代数K-理论",
+    "level3en": "Higher algebraic K-theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "几何中的K-理论",
+    "level3en": "K-theory in geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "数论中的K-理论",
+    "level3en": "K-theory in number theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "型的K-理论",
+    "level3en": "K-theory of forms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "来自拓扑的障碍",
+    "level3en": "Obstructions from topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "K-理论与算子代数",
+    "level3en": "K-theory and operator algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "拓扑K-理论",
+    "level3en": "Topological K-theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "K-理论",
+    "level2en": "K-Theory",
+    "level3cn": "K－理论的各种应用",
+    "level3en": "Miscellaneous applications of K-theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "基础",
+    "level3en": "Foundations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "置换群",
+    "level3en": "Permutation groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "群表示理论",
+    "level3en": "Representation theory of groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "抽象有限群",
+    "level3en": "Abstract finite groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "无限群或有限群的结构与分类",
+    "level3en": "Structure and classification of infinite or finite groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "无限群或有限群的特殊方面",
+    "level3en": "Special aspects of infinite or finite groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "线性代数群（典型群）",
+    "level3en": "Linear algebraic groups and related topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "其它矩阵群",
+    "level3en": "Other groups of matrices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "与同调代数和范畴论的联系",
+    "level3en": "Connections with homological algebra and category theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "阿贝尔群",
+    "level3en": "Abelian groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "广群（即所有射是同构的小范围）",
+    "level3en": "Groupoids"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "半群",
+    "level3en": "Semigroups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "群的其它推广",
+    "level3en": "Other generalizations of groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "群论及推广",
+    "level2en": "Group Theory And Generalizations",
+    "level3cn": "群论中的概率方法",
+    "level3en": "Probabilistic methods in group theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "拓扑与微分代数系统",
+    "level3en": "Topological and differentiable algebraic systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "局部紧阿贝尔群（LCA）",
+    "level3en": "Locally compact abelian groups (LCA groups)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "紧群",
+    "level3en": "Compact groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "局部紧群及其代数",
+    "level3en": "Locally compact groups and their algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "李群",
+    "level3en": "Lie groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "拓扑群，李（Lie）群",
+    "level2en": "Topological Groups, Lie Groups",
+    "level3cn": "非紧变换群",
+    "level3en": "Noncompact transformation groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "实函数",
+    "level2en": "Real Functions",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "实函数",
+    "level2en": "Real Functions",
+    "level3cn": "一元函数",
+    "level3en": "Functions of one variable"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "实函数",
+    "level2en": "Real Functions",
+    "level3cn": "多元函数",
+    "level3en": "Functions of several variables"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "实函数",
+    "level2en": "Real Functions",
+    "level3cn": "多项式，有理函数",
+    "level3en": "Polynomials, rational functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "实函数",
+    "level2en": "Real Functions",
+    "level3cn": "不等式",
+    "level3en": "Inequalities"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "实函数",
+    "level2en": "Real Functions",
+    "level3cn": "杂题",
+    "level3en": "Miscellaneous topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "测度与积分",
+    "level2en": "Measure And Integration",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "测度与积分",
+    "level2en": "Measure And Integration",
+    "level3cn": "经典测度论",
+    "level3en": "Classical measure theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "测度与积分",
+    "level2en": "Measure And Integration",
+    "level3cn": "集函数，抽象空间取值的测度与积分",
+    "level3en": "Set functions, measures and integrals with values in abstract spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "测度与积分",
+    "level2en": "Measure And Integration",
+    "level3cn": "有附加结构的空间上的集函数与测度",
+    "level3en": "Set functions and measures on spaces with additional structure"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "测度与积分",
+    "level2en": "Measure And Integration",
+    "level3cn": "测度论的遍历理论",
+    "level3en": "Measure-theoretic ergodic theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "测度与积分",
+    "level2en": "Measure And Integration",
+    "level3cn": "测度论中的杂题",
+    "level3en": "Miscellaneous topics in measure theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "一般性质",
+    "level3en": "General properties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "级数展开",
+    "level3en": "Series expansions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "几何函数论",
+    "level3en": "Geometric function theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "整函数与亚纯函数",
+    "level3en": "Entire and meromorphic functions, and related topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "复域分析的杂题",
+    "level3en": "Miscellaneous topics of analysis in the complex domain"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "黎曼曲面",
+    "level3en": "Riemann surfaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "广义函数论",
+    "level3en": "Generalized function theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "解析函数空间与代数",
+    "level3en": "Spaces and algebras of analytic functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "圆盘上的函数论",
+    "level3en": "Function theory on the disc"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "通用全纯函数",
+    "level3en": "Universal holomorphic functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "单复变函数",
+    "level2en": "Functions Of A Complex Variable",
+    "level3cn": "度量空间上的分析",
+    "level3en": "Analysis on metric spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "位势论",
+    "level2en": "Potential Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "位势论",
+    "level2en": "Potential Theory",
+    "level3cn": "二维理论",
+    "level3en": "Two-dimensional theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "位势论",
+    "level2en": "Potential Theory",
+    "level3cn": "高维理论",
+    "level3en": "Higher-dimensional theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "位势论",
+    "level2en": "Potential Theory",
+    "level3cn": "其它推广",
+    "level3en": "Other generalizations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "位势论",
+    "level2en": "Potential Theory",
+    "level3cn": "公理位势论",
+    "level3en": "Axiomatic potential theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "位势论",
+    "level2en": "Potential Theory",
+    "level3cn": "度量空间的位势论",
+    "level3en": "Potential theory on metric spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "多复变量全纯函数",
+    "level3en": "Holomorphic functions of several complex variables"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "局部解析几何",
+    "level3en": "Local analytic geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "解析空间",
+    "level3en": "Analytic spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "解析延拓",
+    "level3en": "Analytic continuation"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "全纯凸性",
+    "level3en": "Holomorphic convexity"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "几何凸性",
+    "level3en": "Geometric convexity"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "解析结构的变形",
+    "level3en": "Deformations of analytic structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "全纯映射与对应",
+    "level3en": "Holomorphic mappings and correspondences"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "紧解析空间",
+    "level3en": "Compact analytic spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "解析空间的推广",
+    "level3en": "Generalizations of analytic spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "全纯纤维空间",
+    "level3en": "Holomorphic fiber spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "有一组自同构的复空间",
+    "level3en": "Complex spaces with a group of automorphisms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "自守函数",
+    "level3en": "Automorphic functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "非阿基米德（Archimedean）复分析",
+    "level3en": "Non-Archimedean analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "复流形",
+    "level3en": "Complex manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "奇异性",
+    "level3en": "Singularities"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "伪凸域",
+    "level3en": "Pseudoconvex domains"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "多重位势论",
+    "level3en": "Pluripotential theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "CR流形",
+    "level3en": "CR manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "多复变量与解析空间",
+    "level2en": "Several Complex Variables And Analytic Spaces",
+    "level3cn": "多复变微分算子",
+    "level3en": "Differential operators in several variables"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "特殊函数",
+    "level2en": "Special Functions",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "特殊函数",
+    "level2en": "Special Functions",
+    "level3cn": "初等经典函数",
+    "level3en": "Elementary classical functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "特殊函数",
+    "level2en": "Special Functions",
+    "level3cn": "超几何函数",
+    "level3en": "Hypergeometric functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "特殊函数",
+    "level2en": "Special Functions",
+    "level3cn": "基本超几何函数",
+    "level3en": "Basic hypergeometric functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "特殊函数",
+    "level2en": "Special Functions",
+    "level3cn": "其它特殊函数",
+    "level3en": "Other special functions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "特殊函数",
+    "level2en": "Special Functions",
+    "level3cn": "计算方面",
+    "level3en": "Computational aspects"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "一般理论",
+    "level3en": "General theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "边值问题",
+    "level3en": "Boundary value problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "定性理论",
+    "level3en": "Qualitative theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "稳定性理论",
+    "level3en": "Stability theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "渐近理论",
+    "level3en": "Asymptotic theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "随机性的方程与系统",
+    "level3en": "Equations and systems with randomness"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "抽象空间的微分方程",
+    "level3en": "Differential equations in abstract spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "控制问题",
+    "level3en": "Control problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "泛函微分方程与微分差分方程",
+    "level3en": "Functional-differential and differential-difference equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "常微分算子",
+    "level3en": "Ordinary differential operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "复域中的微分方程",
+    "level3en": "Differential equations in the complex domain"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "常微分方程",
+    "level2en": "Ordinary Differential Equations",
+    "level3cn": "时间尺度或测度链上的动力学方程",
+    "level3en": "Dynamic equations on time scales or measure chains"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "一般理论",
+    "level3en": "General topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "解的定性问题",
+    "level3en": "Qualitative properties of solutions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "解的表示",
+    "level3en": "Representations of solutions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "偏微分方程的广义解",
+    "level3en": "Generalized solutions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "常系数方程与方程组",
+    "level3en": "Equations and systems with constant coefficients"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "一般一阶方程与方程组",
+    "level3en": "General first-order equations and systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "一般高阶方程与方程组",
+    "level3en": "General higher-order equations and systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "接近椭圆型方程与方程组",
+    "level3en": "Close-to-elliptic equations and systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "椭圆型偏微分方程",
+    "level3en": "Elliptic equations and systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "抛物型方程与方程组",
+    "level3en": "Parabolic equations and systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "双曲型偏微分方程",
+    "level3en": "Hyperbolic equations and systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "特殊类型的偏微分方程",
+    "level3en": "Equations and systems of special type"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "超定方程组",
+    "level3en": "Overdetermined systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "偏微分算子的谱理论与特征值问题",
+    "level3en": "Spectral theory and eigenvalue problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "数理方程及在其它领域的应用",
+    "level3en": "Equations of mathematical physics and other areas of application"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "涉及偏微分方程的杂题",
+    "level3en": "Miscellaneous topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "偏微分方程",
+    "level2en": "Partial Differential Equations",
+    "level3cn": "伪微分算子与偏微分算子的其它推广",
+    "level3en": "Pseudodifferential operators and other generalizations of partial differential operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "遍历理论",
+    "level3en": "Ergodic theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "拓扑动力学",
+    "level3en": "Topological dynamics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "光滑动力系统",
+    "level3en": "Smooth dynamical systems: general theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "双曲特性的动力系统",
+    "level3en": "Dynamical systems with hyperbolic behavior"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "低维动力系统",
+    "level3en": "Low-dimensional dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "复动力系统",
+    "level3en": "Complex dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "局部和非局部分歧理论",
+    "level3en": "Local and nonlocal bifurcation theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "随机动力系统",
+    "level3en": "Random dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "有限维哈密顿（Hamilton），拉格朗（Lagrang），联系，以及非完整系统",
+    "level3en": "Finite-dimensional Hamiltonian, Lagrangian, contact, and nonholonomic systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "无有限维哈密顿（Hamilton）系统",
+    "level3en": "Infinite-dimensional Hamiltonian systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "无限维损耗动力系统",
+    "level3en": "Infinite-dimensional dissipative dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "逼近法和动力系统的数值处理",
+    "level3en": "Approximation methods and numerical treatment of dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "应用",
+    "level3en": "Applications"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "动力学系统与遍历理论",
+    "level2en": "Dynamical Systems And Ergodic Theory",
+    "level3cn": "算数和非Archimedes动力系统",
+    "level3en": "Arithmetic and non-Archimedean dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "差分与泛函方程",
+    "level2en": "Difference And Functional Equations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "差分与泛函方程",
+    "level2en": "Difference And Functional Equations",
+    "level3cn": "差分方程",
+    "level3en": "Difference equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "差分与泛函方程",
+    "level2en": "Difference And Functional Equations",
+    "level3cn": "泛函方程和不等式",
+    "level3en": "Functional equations and inequalities"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "无穷极限过程的收敛与发散",
+    "level3en": "Convergence and divergence of infinite limiting processes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "多重序列与级数",
+    "level3en": "Multiple sequences and series"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "一般可求和性方法",
+    "level3en": "General summability methods"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "可求和性的直接定理",
+    "level3en": "Direct theorems on summability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "反演定理",
+    "level3en": "Inversion theorems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "绝对和强可求和性",
+    "level3en": "Absolute and strong summability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "可求和性的特殊方法",
+    "level3en": "Special methods of summability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "可求和性中的泛函分析",
+    "level3en": "Functional analytic methods in summability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "序列，级数，可〔求〕和性",
+    "level2en": "Sequences, Series, Summability",
+    "level3cn": "抽象结构中的可求和性",
+    "level3en": "Summability in abstract structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "逼近与展开",
+    "level2en": "Approximations And Expansions",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "逼近与展开",
+    "level2en": "Approximations And Expansions",
+    "level3cn": "逼近与展开",
+    "level3en": "Approximations and expansions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "傅立叶（Fourier）分析",
+    "level2en": "Harmonic Analysis On Euclidean Spaces",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "傅立叶（Fourier）分析",
+    "level2en": "Harmonic Analysis On Euclidean Spaces",
+    "level3cn": "单变量傅立叶分析",
+    "level3en": "Harmonic analysis in one variable"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "傅立叶（Fourier）分析",
+    "level2en": "Harmonic Analysis On Euclidean Spaces",
+    "level3cn": "多变量傅立叶分析",
+    "level3en": "Harmonic analysis in several variables"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "傅立叶（Fourier）分析",
+    "level2en": "Harmonic Analysis On Euclidean Spaces",
+    "level3cn": "非三角傅立叶分析",
+    "level3en": "Nontrigonometric harmonic analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "抽象调和分析",
+    "level2en": "Abstract Harmonic Analysis",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "抽象调和分析",
+    "level2en": "Abstract Harmonic Analysis",
+    "level3cn": "抽象调和分析",
+    "level3en": "Abstract harmonic analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分变换，运算微积分",
+    "level2en": "Integral Transforms, Operational Calculus",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分变换，运算微积分",
+    "level2en": "Integral Transforms, Operational Calculus",
+    "level3cn": "积分变换，运算微积分",
+    "level3en": "Integral transforms, operational calculus"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "线性积分方程",
+    "level3en": "Linear integral equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "弗雷德霍姆（Fredholm）积分方程",
+    "level3en": "Fredholm integral equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "特征值问题",
+    "level3en": "Eigenvalue problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "Volterra积分方程",
+    "level3en": "Volterra integral equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "奇异积分方程",
+    "level3en": "Singular integral equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "线性积分方程组",
+    "level3en": "Systems of linear integral equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "非线性积分方程",
+    "level3en": "Nonlinear integral equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "各种特殊核",
+    "level3en": "Miscellaneous special kernels"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "积分－常微分方程",
+    "level3en": "Integro-ordinary differential equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "积分－偏微分方程",
+    "level3en": "Integro-partial differential equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "解的理论逼近",
+    "level3en": "Theoretical approximation of solutions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "定性特性",
+    "level3en": "Qualitative behavior"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "抽象积分方程，抽象空间中的积分方程",
+    "level3en": "Abstract integral equations, integral equations in abstract spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "积分算子",
+    "level3en": "Integral operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "逆问题",
+    "level3en": "Inverse problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "积分方程",
+    "level2en": "Integral Equations",
+    "level3cn": "随机积分方程",
+    "level3en": "Random integral equation"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "拓扑线性空间及相关结构",
+    "level3en": "Topological linear spaces and related structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "赋范线性空间与巴拿赫空间；巴拿赫格",
+    "level3en": "Normed linear spaces and Banach spaces; Banach lattices"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "内积空间及其推广",
+    "level3en": "Inner product spaces and their generalizations, Hilbert spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "线性函数空间及其对偶",
+    "level3en": "Linear function spaces and their duals"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "分布，广义函数，分布空间",
+    "level3en": "Distributions, generalized functions, distribution spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "测度，积分，导数，正则",
+    "level3en": "Measures, integration, derivative, holomorphy"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "拓扑代数，赋范环与代数，巴拿赫代数",
+    "level3en": "Topological algebras, normed rings and algebras, Banach algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "交换巴拿赫代数与交换拓扑代数",
+    "level3en": "Commutative Banach algebras and commutative topological algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "具有一个对合的拓扑（环与）代数",
+    "level3en": "Topological (rings and) algebras with an involution"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "自伴算子代数（C*代数，von Neumann（W*-)代数，等）",
+    "level3en": "Selfadjoint operator algebras"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "泛函分析中的范畴论方法",
+    "level3en": "Methods of category theory in functional analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "泛函分析的各种应用",
+    "level3en": "Miscellaneous applications of functional analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "泛函分析的其它非经典类型",
+    "level3en": "Other (nonclassical) types of functional analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "泛函分析",
+    "level2en": "Functional Analysis",
+    "level3cn": "非线性泛函分析",
+    "level3en": "Nonlinear functional analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "线性算子的一般理论",
+    "level3en": "General theory of linear operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "线性算子的特殊性",
+    "level3en": "Special classes of linear operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "作为代数系统元素的单线性算子",
+    "level3en": "Individual linear operators as elements of algebraic systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "线性算子的群和半群，其推广和应用",
+    "level3en": "Groups and semigroups of linear operators, their generalizations and applications"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "常微分算子",
+    "level3en": "Ordinary differential operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "偏微分算子",
+    "level3en": "Partial differential operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "积分算子，积分微分算子与伪微分算子",
+    "level3en": "Integral, integro-differential, and pseudodifferential operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "线性算子及其性质",
+    "level3en": "Nonlinear operators and their properties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "涉及非线性散子的方程和不等式",
+    "level3en": "Equations and inequalities involving nonlinear operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "算子线性空间和线性代数",
+    "level3en": "Linear spaces and algebras of operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "算子理论的各种应用",
+    "level3en": "Miscellaneous applications of operator theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "算子理论",
+    "level2en": "Operator Theory",
+    "level3cn": "算子理论的其它（非经典）类型",
+    "level3en": "Other (nonclassical) types of operator theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "存在性理论",
+    "level3en": "Existence theories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "最优性的充要条件",
+    "level3en": "Optimality conditions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "4哈密顿－雅可夫（Hamilton－Jacobi）理论，包括动态规划",
+    "level3en": "Hamilton-Jacobi theories, including dynamic programming"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "逐次逼近法",
+    "level3en": "Numerical methods"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "杂题",
+    "level3en": "Miscellaneous topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "流形",
+    "level3en": "Manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "算子特征值，变分法",
+    "level3en": "Variational methods for eigenvalues of operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "变分法与最优控制，最优化",
+    "level2en": "Calculus Of Variations And Optimal Control; Optimization",
+    "level3cn": "物理学的变分原理",
+    "level3en": "Variational principles of physics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "线性关联几何",
+    "level3en": "Linear incidence geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "非线性关联几何",
+    "level3en": "Nonlinear incidence geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "环几何（Hjelmslev，Barbilian，等）",
+    "level3en": "Ring geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "几何闭包系统",
+    "level3en": "Geometric closure systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "有限几何与特殊关联结构",
+    "level3en": "Finite geometry and special incidence structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "度量几何",
+    "level3en": "Metric geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "有序几何（有序关联结构）",
+    "level3en": "Ordered geometries"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "拓扑结构",
+    "level3en": "Topological geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "关联群",
+    "level3en": "Incidence groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "距离几何",
+    "level3en": "Distance geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "几何有序结构",
+    "level3en": "Geometric order structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "实几何与复几何",
+    "level3en": "Real and complex geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "解析几何与画法几何",
+    "level3en": "analytic and descriptive geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "几何学",
+    "level2en": "Geometry",
+    "level3cn": "几何与物理学",
+    "level3en": "Geometry and physics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "凸几何与离散几何",
+    "level2en": "Convex And Discrete Geometry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "凸几何与离散几何",
+    "level2en": "Convex And Discrete Geometry",
+    "level3cn": "一般凸性",
+    "level3en": "General convexity"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "凸几何与离散几何",
+    "level2en": "Convex And Discrete Geometry",
+    "level3cn": "多胞形与多面体",
+    "level3en": "Polytopes and polyhedra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "凸几何与离散几何",
+    "level2en": "Convex And Discrete Geometry",
+    "level3cn": "离散几何",
+    "level3en": "Discrete geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "微分几何",
+    "level2en": "Differential Geometry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "微分几何",
+    "level2en": "Differential Geometry",
+    "level3cn": "经典微分几何",
+    "level3en": "Classical differential geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "微分几何",
+    "level2en": "Differential Geometry",
+    "level3cn": "局部微分几何",
+    "level3en": "Local differential geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "微分几何",
+    "level2en": "Differential Geometry",
+    "level3cn": "整体微分几何",
+    "level3en": "Global differential geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "微分几何",
+    "level2en": "Differential Geometry",
+    "level3cn": "辛几何与切触几何",
+    "level3en": "Symplectic geometry, contact geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "微分几何",
+    "level2en": "Differential Geometry",
+    "level3cn": "物理学的应用",
+    "level3en": "Applications to physics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "一般理论",
+    "level3en": "Generalities"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "基本构造",
+    "level3en": "Basic constructions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "映射和由映射定义的一般空间类",
+    "level3en": "Maps and general types of spaces defined by maps"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "一般性质",
+    "level3en": "Fairly general properties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "有丰富结构的空间",
+    "level3en": "Spaces with richer structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "特殊性质",
+    "level3en": "Special properties"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "独特空间",
+    "level3en": "Peculiar spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "与其它结构的联系，应用",
+    "level3en": "Connections with other structures, applications"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "一般拓扑学",
+    "level2en": "General Topology",
+    "level3cn": "非标准拓扑",
+    "level3en": "Nonstandard topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "经典课题",
+    "level3en": "Classical topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "同调和上同调理论",
+    "level3en": "Homology and cohomology theories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "同伦理论",
+    "level3en": "Homotopy theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "同伦群",
+    "level3en": "Homotopy groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "纤维空间和纤维丛",
+    "level3en": "Fiber spaces and bundles"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "运算与障碍",
+    "level3en": "Operations and obstructions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "谱序列",
+    "level3en": "Spectral sequences"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "代数拓扑学",
+    "level2en": "Algebraic Topology",
+    "level3cn": "应用同调代数和范畴论",
+    "level3en": "Applied homological algebra and category theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "低维拓扑",
+    "level3en": "Low-dimensional topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "拓扑流形",
+    "level3en": "Topological manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "广义流形",
+    "level3en": "Generalized manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "PL－拓扑",
+    "level3en": "PL-topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "微分拓扑学",
+    "level3en": "Differential topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "拓扑变换群",
+    "level3en": "Topological transformation groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "拓扑群及相关结构的同调和同伦",
+    "level3en": "Homology and homotopy of topological groups and related structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "低维拓扑",
+    "level3en": "Low-dimensional topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "拓扑流形",
+    "level3en": "Topological manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "广义流形",
+    "level3en": "Generalized manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "PL－拓扑",
+    "level3en": "PL-topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "微分拓扑学",
+    "level3en": "Differential topology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "拓扑变换群",
+    "level3en": "Topological transformation groups"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流形与胞腔复形",
+    "level2en": "Manifolds And Cell Complexes",
+    "level3cn": "拓扑群及相关结构的同调和同伦",
+    "level3en": "Homology and homotopy of topological groups and related structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "微分流形的一般理论",
+    "level3en": "General theory of differentiable manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "无限维流形",
+    "level3en": "Infinite-dimensional manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "流形上的微积分，非线性算子",
+    "level3en": "Calculus on manifolds; nonlinear operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "映射的空间和流形（包括46E-的非线性形式）",
+    "level3en": "Spaces and manifolds of mappings"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "无限维空间中的变分问题",
+    "level3en": "Variational problems in infinite-dimensional spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "流形上的伪群和一般结构",
+    "level3en": "Pseudogroups, differentiable groupoids and general structures on manifolds"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "流形上的偏微分方程，微分算子",
+    "level3en": "Partial differential equations on manifolds; differential operators"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "奇异性理论和突变理论",
+    "level3en": "Theory of singularities and catastrophe theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "大范围分析，流形上的分析",
+    "level2en": "Global Analysis, Analysis On Manifolds",
+    "level3cn": "在物理学上的应用",
+    "level3en": "Applications to physics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "概率论基础",
+    "level3en": "Foundations of probability theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "代数结构和拓扑结构上的概率论",
+    "level3en": "Probability theory on algebraic and topological structures"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "组合概率",
+    "level3en": "Combinatorial probability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "几何概率，随机概率，随机集",
+    "level3en": "Geometric probability and stochastic geometry"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "分布论",
+    "level3en": "Distribution theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "极限定理",
+    "level3en": "Limit theorems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "随机过程",
+    "level3en": "Stochastic processes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "随机分析",
+    "level3en": "Stochastic analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "马尔可夫（Markov）过程",
+    "level3en": "Markov processes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "概率论与随机过程",
+    "level2en": "Probability Theory And Stochastic Processes",
+    "level3cn": "特殊过程",
+    "level3en": "Special processes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "基础和哲学课题",
+    "level3en": "Foundational and philosophical topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "充分性和信息",
+    "level3en": "Sufficiency and information"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "判定定理",
+    "level3en": "Decision theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "抽样理论，样本调查",
+    "level3en": "Sampling theory, sample surveys"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "分布论",
+    "level3en": "Distribution theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "参数推断",
+    "level3en": "Parametric inference"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "非参数推断",
+    "level3en": "Nonparametric inference"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "多元分析",
+    "level3en": "Multivariate analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "线性推断，回归",
+    "level3en": "Linear inference, regression"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "实验设计",
+    "level3en": "Design of experiments"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "序列法",
+    "level3en": "Sequential methods"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "随机过程推断",
+    "level3en": "Inference from stochastic processes"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "残存分析和已校对数据",
+    "level3en": "Survival analysis and censored data"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "应用",
+    "level3en": "Applications"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "统计学",
+    "level2en": "Statistics",
+    "level3cn": "统计表",
+    "level3en": "Statistical tables"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "表",
+    "level3en": "Tables"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "收敛性的加速",
+    "level3en": "Acceleration of convergence"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "概率方法",
+    "level3en": "Probabilistic methods, simulation and stochastic differential equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "数值逼近和计算几何",
+    "level3en": "Numerical approximation and computational geometry (primarily algorithms)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "复分析中的数值方法",
+    "level3en": "Numerical methods in complex analysis (potential theory, etc.)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "数值线性代数",
+    "level3en": "Numerical linear algebra"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "误差分析和区间分析",
+    "level3en": "Error analysis and interval analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "非线性代数方程或超越方程",
+    "level3en": "Nonlinear algebraic or transcendental equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "抽象空间中的数值分析",
+    "level3en": "Numerical analysis in abstract spaces"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "数学规划，最优化和变分法",
+    "level3en": "Mathematical programming, optimization and variational techniques"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "常微分方程",
+    "level3en": "Ordinary differential equations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "偏微分方程，初值和不定常的初边值问题",
+    "level3en": "Partial differential equations, initial value and time-dependent initialboundary value problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "偏微分方程，边值问题",
+    "level3en": "Partial differential equations, boundary value problems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "动力系统中的数值问题",
+    "level3en": "Numerical problems in dynamical systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "差分和泛函方程，递推关系",
+    "level3en": "Difference and functional equations, recurrence relations"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "积分方程，积分变换",
+    "level3en": "Integral equations, integral transforms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "图解法",
+    "level3en": "Graphical methods"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "傅立叶分析中的数值方法",
+    "level3en": "Numerical methods in Fourier analysis"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "计算机方面的数值算法",
+    "level3en": "Computer aspects of numerical algorithms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "数值分析",
+    "level2en": "Numerical Analysis",
+    "level3cn": "物理学上的应用",
+    "level3en": "Applications to physics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "计算机系统结构",
+    "level3en": "Computer system organization"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "软件",
+    "level3en": "Software"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "数据理论",
+    "level3en": "Theory of data"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "计算理论",
+    "level3en": "Theory of computing"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "同计算机科学有关的离散数学",
+    "level3en": "Discrete mathematics in relation to computer science"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "人工智能",
+    "level3en": "Artificial intelligence"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "计算机方法论及应用",
+    "level3en": "Computing methodologies and applications"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "计算机科学",
+    "level2en": "Computer Science",
+    "level3cn": "算法",
+    "level3en": "Algorithms"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "基础，结构方程，流变学",
+    "level3en": "Foundations, constitutive equations, rheology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "不可压缩非粘滞性流体，位势论",
+    "level3en": "Incompressible inviscid fluids"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "不可压缩粘滞性流体",
+    "level3en": "Incompressible viscous fluids"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "流体动力学的稳定性",
+    "level3en": "Hydrodynamic stability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "湍流",
+    "level3en": "Turbulence"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "一般空气动力学和压音速流",
+    "level3en": "General aerodynamics and subsonic flows"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "跨音速流",
+    "level3en": "Transonic flows"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "超音速流",
+    "level3en": "Supersonic flows"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "特超音速流",
+    "level3en": "Hypersonic flows"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "冲击波和爆炸波",
+    "level3en": "Shock waves and blast waves"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "流体力学的基本方法",
+    "level3en": "Basic methods in fluid mechanics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "不可压缩流体和空气动力学，一般问题",
+    "level3en": "Compressible fluids and gas dynamics, general"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "稀薄气流，波尔兹曼（Boltzmann）方程",
+    "level3en": "Rarefied gas flows, Boltzmann equation"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "流体动力声学，声学",
+    "level3en": "Hydro-and aero-acoustics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "扩散和对流",
+    "level3en": "Diffusion and convection"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "多空介质中的流，过滤，渗流",
+    "level3en": "Flows in porous media; filtration"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "两相流和多相流",
+    "level3en": "Two-phase and multiphase flows"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "旋转流体",
+    "level3en": "Rotating fluids"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "流中的反应效应",
+    "level3en": "Reaction effects in flows"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "磁流体动力学和电流体动力学",
+    "level3en": "Magnetohydrodynamics and electrohydrodynamics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "电磁场中的电离气流，等离子流",
+    "level3en": "x Ionized gas flow in electromagnetic fields; plasmic flow"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "量子流体动力学和相对论流体动力学",
+    "level3en": "Quantum hydrodynamics and relativistic hydrodynamics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Mechanics",
+    "level3cn": "生物流体力学",
+    "level3en": "Biological fluid mechanics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "狭义相对论",
+    "level3en": "Special relativity"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "观测问题和实验问题",
+    "level3en": "Observational and experimental questions"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "广义相对论",
+    "level3en": "General relativity"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "非爱因斯坦相对论引力理论，包括非对称场理论",
+    "level3en": "Relativistic gravitational theories other than Einstein’s, including asymmetric field theories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "统一场论，高维场论和超场论",
+    "level3en": "Unified, higher-dimensional and super field theories"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "相对论和引力理论",
+    "level2en": "Relativity And Gravitational Theory",
+    "level3cn": "宇宙论",
+    "level3en": "Cosmology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "运筹学，数学规划",
+    "level2en": "Operations Research, Mathematical Programming",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "运筹学，数学规划",
+    "level2en": "Operations Research, Mathematical Programming",
+    "level3cn": "运筹学和管理科学",
+    "level3en": "Operations research and management science"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "运筹学，数学规划",
+    "level2en": "Operations Research, Mathematical Programming",
+    "level3cn": "数学规划",
+    "level3en": "Mathematical programming"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "对策论",
+    "level3en": "Game theory"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "数理经济学",
+    "level3en": "Mathematical economics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "社会科学和行为科学",
+    "level3en": "Social and behavioral sciences: general topics"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "数理社会学（包括人类学）",
+    "level3en": "Mathematical sociology (including anthropology)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "数理心理学",
+    "level3en": "Mathematical psychology"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "其它社会科学和行为科学（数学处理）",
+    "level3en": "Other social and behavioral sciences (mathematical treatment)"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "对策论，经济学，社会科学和行为科学",
+    "level2en": "Game Theory, Economics, Social And Behavioral Sciences",
+    "level3cn": "数理金融学",
+    "level3en": "Mathematical finance"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "系统论，控制",
+    "level2en": "Systems Theory; Control",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "系统论，控制",
+    "level2en": "Systems Theory; Control",
+    "level3cn": "一般问题",
+    "level3en": "General"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "系统论，控制",
+    "level2en": "Systems Theory; Control",
+    "level3cn": "可控性，可观测性和系统结构",
+    "level3en": "Controllability, observability, and system structure"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "系统论，控制",
+    "level2en": "Systems Theory; Control",
+    "level3cn": "控制系统，引导系统",
+    "level3en": "Control systems"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "系统论，控制",
+    "level2en": "Systems Theory; Control",
+    "level3cn": "稳定性",
+    "level3en": "Stability"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "系统论，控制",
+    "level2en": "Systems Theory; Control",
+    "level3cn": "随机系统和控制",
+    "level3en": "Stochastic systems and control"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "信息和通讯，电路",
+    "level2en": "Information And Communication, Circuits",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "信息和通讯，电路",
+    "level2en": "Information And Communication, Circuits",
+    "level3cn": "通讯，信息",
+    "level3en": "Communication, information"
+  },
+  {
+    "level1cn": "数学",
+    "level1en": "Mathematics",
+    "level2cn": "信息和通讯，电路",
+    "level2en": "Information And Communication, Circuits",
+    "level3cn": "误差矫正码和误差检验码理论",
+    "level3en": "Theory of error-correcting codes and error-detecting codes"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "基础力学",
+    "level3en": "Basic Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "固体力学",
+    "level3en": "Solid Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "流体力学",
+    "level3en": "Fluid Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "实验力学",
+    "level3en": "Experimental mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "实验流体力学",
+    "level3en": "Experimental fluid mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "工程力学",
+    "level3en": "Engineering Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "应用力学",
+    "level3en": "Applied Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "爆炸力学",
+    "level3en": "Explosion Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "物理力学",
+    "level3en": "Physical Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "力学",
+    "level2en": "Mechanics",
+    "level3cn": "振动与波",
+    "level3en": "Vibration and Wave"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "测绘科学技术",
+    "level2en": "Survey & Drawing Science and Technology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "测绘科学技术",
+    "level2en": "Survey & Drawing Science and Technology",
+    "level3cn": "大地测量技术",
+    "level3en": "Geodetic Surveying"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "测绘科学技术",
+    "level2en": "Survey & Drawing Science and Technology",
+    "level3cn": "摄影测量与遥感技术",
+    "level3en": "Photogrammetry and Remote Sensing"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "测绘科学技术",
+    "level2en": "Survey & Drawing Science and Technology",
+    "level3cn": "工程测量技术",
+    "level3en": "Engineering Survey Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "测绘科学技术",
+    "level2en": "Survey & Drawing Science and Technology",
+    "level3cn": "测绘仪器",
+    "level3en": "Instrument of Surveying and Mapping"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "材料科学基础学科",
+    "level3en": "Basic Disciplines of Materials Science"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "材料物理与化学",
+    "level3en": "Physics and Chemistry of Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "金属材料",
+    "level3en": "Metallic Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "无机非金属材料",
+    "level3en": "Non-metallic Inorganic Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "高分子材料",
+    "level3en": "Polymer Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "生物材料",
+    "level3en": "Biomaterials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "复合材料",
+    "level3en": "Composite Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "纳米材料",
+    "level3en": "Nano Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "功能材料",
+    "level3en": "Functional Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "材料表面与界面",
+    "level3en": "Surface and Interface Of Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "材料失效与保护",
+    "level3en": "Defectiveness and Conservation of Materials"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "材料检测与分析技术",
+    "level3en": "Materials Examination and Analysis"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "材料科学与工程",
+    "level2en": "Materials Science and Engineering",
+    "level3cn": "材料加工工艺",
+    "level3en": "Materials Processing Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "土木工程",
+    "level2en": "Civil Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "土木工程",
+    "level2en": "Civil Engineering",
+    "level3cn": "岩土工程",
+    "level3en": "Geotechnical Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "土木工程",
+    "level2en": "Civil Engineering",
+    "level3cn": "结构工程",
+    "level3en": "Structural Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "土木工程",
+    "level2en": "Civil Engineering",
+    "level3cn": "供热、供燃气、通风及空调工程",
+    "level3en": "Heating, Gas Supply, Ventilating and Air Conditioning Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "土木工程",
+    "level2en": "Civil Engineering",
+    "level3cn": "防灾减灾工程",
+    "level3en": "Disaster Prevention and Mitigation Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "土木工程",
+    "level2en": "Civil Engineering",
+    "level3cn": "桥梁与隧道工程",
+    "level3en": "Bridge and Tunnel Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "矿山地质学",
+    "level3en": "Mine Geology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "矿山测量",
+    "level3en": "Mine Surveying"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "矿山地面工程",
+    "level3en": "Mine Ground Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "采矿工程",
+    "level3en": "Mining Engineering/Mineral Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "油气田井发工程",
+    "level3en": "Development Engineering of Oil and Gas Well"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "矿山机械工程",
+    "level3en": "Mining Equipment Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "矿山电气工程",
+    "level3en": "Mining Electrical Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "矿山工程技术",
+    "level2en": "Mine Engineering Technology",
+    "level3cn": "采矿环境工程",
+    "level3en": "Mining Environmental Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "冶金物理化学",
+    "level3en": "Physical Chemistry of Metallurgy"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "冶金反应工程",
+    "level3en": "Reaction Engineering of Metallurgy"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "冶金原料与预处理",
+    "level3en": "Material and Pretreatment of Metallurgy"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "冶金热能工程",
+    "level3en": "Thermal Engineering of Metallurgy"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "冶金技术",
+    "level3en": "Metallurgical Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "钢铁冶金",
+    "level3en": "Ferrous Metallurgy"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "有色金属冶金",
+    "level3en": "Non-ferrous Metallurgy"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "冶金工程技术",
+    "level2en": "Metallurgical Engineering",
+    "level3cn": "冶金机械及自动化",
+    "level3en": "Metallurgical Mechanism and Automation"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "机械学",
+    "level3en": "Mechanics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "机械设计",
+    "level3en": "Mechanical Design"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "铸造工艺与设备",
+    "level3en": "Casting Technique and Equipment"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "仪器仪表技术",
+    "level3en": "Technology of Instrument and Meter"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "流体传动与控制",
+    "level3en": "Turn and Control of Fluid"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "机械工程",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "机械制造自动化",
+    "level3en": "Mechanical Manufacture and Automation"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "动力与电气工程",
+    "level2en": "Dynamic and Electronic Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "动力与电气工程",
+    "level2en": "Dynamic and Electronic Engineering",
+    "level3cn": "工程热物理",
+    "level3en": "Engineering Thermophysics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "动力与电气工程",
+    "level2en": "Dynamic and Electronic Engineering",
+    "level3cn": "热工学",
+    "level3en": "Pyrology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "动力与电气工程",
+    "level2en": "Dynamic and Electronic Engineering",
+    "level3cn": "动力机械工程",
+    "level3en": "Power Machinery and Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "动力与电气工程",
+    "level2en": "Dynamic and Electronic Engineering",
+    "level3cn": "电气工程",
+    "level3en": "Electrical Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "能源化学",
+    "level3en": "Chemistry of Energy Sources"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "能源地理学",
+    "level3en": "Geography of Energy Sources"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "能源计算与测量",
+    "level3en": "Survey of Energy Sources"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "储能技术",
+    "level3en": "Technology of Energy Storage"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "节能技术",
+    "level3en": "Technology of Energy Save"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "能源科学技术",
+    "level2en": "Science and Technology of Energy Sources",
+    "level3cn": "能源系统工程",
+    "level3en": "Engineering of Energy Sources System"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "辐射物理与技术",
+    "level3en": "Radiation Physics and Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "核探测技术与核电子学",
+    "level3en": "Nuclear Detection Technology and Nuclear Electronics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "放射性计量学",
+    "level3en": "Radioactive Metrology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "核材料与工艺技术",
+    "level3en": "Nuclear Materials and Techniques"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "粒子加速器",
+    "level3en": "Particle Accelerator"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "粒子加速器物理学",
+    "level3en": "Physics of Particle Accelerator"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "裂变堆工程技术",
+    "level3en": "Engineering Technology of Fission Reactor"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "核聚变工程技术",
+    "level3en": "Engineering Technology of Nuclear Fusion"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "核动力工程技术",
+    "level3en": "Engineering of Nuclear Power"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "同位素技术",
+    "level3en": "Isotopic Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "乏燃料后处理技术",
+    "level3en": "Reprocessing Technology of Spent Nuclear Fuel"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "辐射防护技术",
+    "level3en": "Radiation Protection Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "核设施退役技术",
+    "level3en": "Ex-service Technology of Nuclear Facility"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "核科学技术",
+    "level2en": "Nuclear Science and Technology",
+    "level3cn": "放射性三废处理、处置技术",
+    "level3en": "Disposal Technology of Three Wastes"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "电子技术",
+    "level3en": "Electronics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "光电子学与激光技术",
+    "level3en": "Optoelectronics and Laser"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "半导体技术",
+    "level3en": "Semiconductor"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "信息处理技术",
+    "level3en": "Information Processing"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "通信技术",
+    "level3en": "Communication"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "广播与电视工程技术",
+    "level3en": "Broadcasting and Television Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "雷达工程",
+    "level3en": "Radar Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "电子、通信与自动控制技术",
+    "level2en": "Electrics, Communication and Automatic Control",
+    "level3cn": "自动控制技术",
+    "level3en": "Automatic Control Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "水利工程基础学科",
+    "level3en": "Basic Disciplines of Hydraulic Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "水利工程测量",
+    "level3en": "Hydraulic Engineering Survey"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "水工结构",
+    "level3en": "Hydraulic Structure"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "水力机械",
+    "level3en": "Hydraulic Machinery"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "水处理",
+    "level3en": "Water Treatment"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "河流泥沙工程学",
+    "level3en": "River Silt Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "海洋工程",
+    "level3en": "Maritime Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "水利工程",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "环境水利",
+    "level3en": "Environmental Water Resources"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "道路工程",
+    "level3en": "Road Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "公路运输",
+    "level3en": "Highway Transportation"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "铁路运输",
+    "level3en": "Railway Transportation"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "水路运输",
+    "level3en": "Water-borne Transport"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "船舶、舰船工程",
+    "level3en": "Ship Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "航空运输",
+    "level3en": "Air Transportation"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "交通运输系统工程",
+    "level3en": "Engineering of Communications and Transportation System"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "交通运输工程",
+    "level2en": "Engineering of Communications and Transportation",
+    "level3cn": "交通运输安全工程",
+    "level3en": "Engineering of Communications and Transportation Safety"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航空、航天科学技术基础学科",
+    "level3en": "Basic Disciplines of Aerospace and Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航空器结构与设计",
+    "level3en": "Aerostat Structure and Design"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航天器结构与设计",
+    "level3en": "Spacecraft Structure and Design"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航空、航天推进系统",
+    "level3en": "Propulsion System of Aviation & Aerospace"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "飞行器仪表、设备",
+    "level3en": "Instrument and Equipment of Aerocraft"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "飞行器控制、导航技术",
+    "level3en": "Control and Navigation Technology of Aerocraft"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航空、航天材料",
+    "level3en": "Materials of Aviation & Aerospace"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "飞行器制造技术",
+    "level3en": "Manufacture Technology of Aerocraft"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "飞行器实验技术",
+    "level3en": "Experimental Technology of Aerocraft"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "飞行器发射、飞行技术",
+    "level3en": "Launch and Flight Technology of Aerocraft"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航天地面设施、技术保障",
+    "level3en": "Ground-based Facility and Technical Support of Aviation"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "航空、航空系统工程",
+    "level3en": "Aerospace System Engineering"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "空气动力学",
+    "level3en": "Aerodynamics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "航空、航天科学技术",
+    "level2en": "Aviation & Aerospace",
+    "level3cn": "气动弹性力学",
+    "level3en": "Aeroelastics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "环境科学技术",
+    "level2en": "Environmental Science and Technology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "环境科学技术",
+    "level2en": "Environmental Science and Technology",
+    "level3cn": "环境科学技术基础学科",
+    "level3en": "Basic Disciplines of Environmental Science and Technology"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "环境科学技术",
+    "level2en": "Environmental Science and Technology",
+    "level3cn": "环境学",
+    "level3en": "Environics"
+  },
+  {
+    "level1cn": "技术",
+    "level1en": "Technology",
+    "level2cn": "环境科学技术",
+    "level2en": "Environmental Science and Technology",
+    "level3cn": "环境工程学",
+    "level3en": "Environmental Engineering"
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "神经科学",
+    "level2en": "Neurosciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "神经生物学",
+    "level2en": "Neurobiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生理学",
+    "level2en": "Physiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生态学",
+    "level2en": "Ecology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物物理学",
+    "level2en": "Biophysics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物信息学",
+    "level2en": "Bioinformatics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物与分子生物学",
+    "level2en": "Biochemistry and Molecular Biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "作物学",
+    "level2en": "Crop Science",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "病毒学",
+    "level2en": "Virology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "水生生物学",
+    "level2en": "Hydrobiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "免疫学",
+    "level2en": "Immunology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "遗传学",
+    "level2en": "Genetics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "药学",
+    "level2en": "Pharmacy",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "基础医学",
+    "level2en": "Basic Medicine",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "基因组学与生物信息学",
+    "level2en": "Genomics & Bioinformatics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "疾病机制研究",
+    "level2en": "Disease Mechanisms",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "分子与细胞生物学",
+    "level2en": "Molecular & Cellular Biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "细胞生物学",
+    "level2en": "Cell Biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "心理学",
+    "level2en": "Psychology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "微生物学",
+    "level2en": "Microbiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "植物科学",
+    "level2en": "Plant Sciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "交叉学科",
+    "level2en": "Interdisciplinary subjects",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "发育生物学",
+    "level2en": "Developmental biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物信息学",
+    "level2en": "Bioinformatics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "农学",
+    "level2en": "Agricultural Sciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "水生生物学",
+    "level2en": "Hydrobiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "林学",
+    "level2en": "Forestry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "预防医学",
+    "level2en": "Preventive medicine",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物医学工程学",
+    "level2en": "Biomedical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "古生物和地层学",
+    "level3en": "Stratigraphy and paleontology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "煤层地质学",
+    "level3en": "Coal petrology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "岩石学",
+    "level3en": "Petrology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "石油地质学",
+    "level3en": "Petroleum geology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "前寒武地质学",
+    "level3en": "Precambrian"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "构造地质学",
+    "level3en": "Tectonic geology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "矿物学",
+    "level3en": "Mineralogy"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地质学",
+    "level2en": "Geology",
+    "level3cn": "沉积学",
+    "level3en": "Sedimentology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球化学",
+    "level2en": "Geochemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球化学",
+    "level2en": "Geochemistry",
+    "level3cn": "主量微量元素地球化学",
+    "level3en": "Major and trace element geochemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球化学",
+    "level2en": "Geochemistry",
+    "level3cn": "放射性同位素地球化学",
+    "level3en": "Radiogenic isotope geochemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球化学",
+    "level2en": "Geochemistry",
+    "level3cn": "稳定同位素地球化学",
+    "level3en": "Stable isotope geochemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球化学",
+    "level2en": "Geochemistry",
+    "level3cn": "有机地球化学",
+    "level3en": "Organic and biogenic geochemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球物理学",
+    "level2en": "Geophysics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球物理学",
+    "level2en": "Geophysics",
+    "level3cn": "大地测量学",
+    "level3en": "Geodesy"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球物理学",
+    "level2en": "Geophysics",
+    "level3cn": "地震学",
+    "level3en": "Seismology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球物理学",
+    "level2en": "Geophysics",
+    "level3cn": "地磁学",
+    "level3en": "Geomagnetism"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球物理学",
+    "level2en": "Geophysics",
+    "level3cn": "地球动力学",
+    "level3en": "Geodynamics"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球物理学",
+    "level2en": "Geophysics",
+    "level3cn": "应用地球物理学",
+    "level3en": "Applied geophysics"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "空间物理学",
+    "level2en": "Space physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "空间物理学",
+    "level2en": "Space physics",
+    "level3cn": "电离层物理",
+    "level3en": "Ionospheric physics"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "空间物理学",
+    "level2en": "Space physics",
+    "level3cn": "磁层物理",
+    "level3en": "Magnetospheric physics"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理科学",
+    "level2en": "Geography",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理科学",
+    "level2en": "Geography",
+    "level3cn": "自然地理学",
+    "level3en": "Physical Geography"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理科学",
+    "level2en": "Geography",
+    "level3cn": "景观地理学",
+    "level3en": "Landscape Geography"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理科学",
+    "level2en": "Geography",
+    "level3cn": "土壤学",
+    "level3en": "Soil Science"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理科学",
+    "level2en": "Geography",
+    "level3cn": "遥感机理与方法",
+    "level3en": "Remote Sensing Mechanism and Methodology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理科学",
+    "level2en": "Geography",
+    "level3cn": "地理信息系统",
+    "level3en": "Geographic System Information"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "环境科学",
+    "level2en": "Environmental sciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "环境科学",
+    "level2en": "Environmental sciences",
+    "level3cn": "污染物行为过程及其环境效应",
+    "level3en": "Fate, Process and Effects of Environmental Pollutants"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "环境科学",
+    "level2en": "Environmental sciences",
+    "level3cn": "环境地球化学",
+    "level3en": "Environmental geochemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "环境科学",
+    "level2en": "Environmental sciences",
+    "level3cn": "古人类学",
+    "level3en": "Paleoanthropology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "环境科学",
+    "level2en": "Environmental sciences",
+    "level3cn": "古气候学",
+    "level3en": "Paleoclimatology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "大气科学",
+    "level2en": "Atmospheric sciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "大气科学",
+    "level2en": "Atmospheric sciences",
+    "level3cn": "（大气化学）",
+    "level3en": "Atmospheric Chemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "大气科学",
+    "level2en": "Atmospheric sciences",
+    "level3cn": "（大气物理学）",
+    "level3en": "Atmospheric Physics"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "大气科学",
+    "level2en": "Atmospheric sciences",
+    "level3cn": "（气候学）",
+    "level3en": "Climatology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "海洋物理学",
+    "level3en": "Marine Physics"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "海洋化学",
+    "level3en": "Marine Chemistry"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "海洋地质学",
+    "level3en": "Marine Geology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "海洋生物学",
+    "level3en": "Marine Biology"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "海洋遥感",
+    "level3en": "Marine Remote Sensing"
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地理学",
+    "level2en": "Geography",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "地球科学",
+    "level1en": "Earth Sciences",
+    "level2cn": "地球化学",
+    "level2en": "Geochemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "量子物理",
+    "level2en": "Quantum Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "理论物理",
+    "level2en": "Theoretical Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "理论物理",
+    "level2en": "Theoretical Physics",
+    "level3cn": "相对论与引力",
+    "level3en": "Relativity and Gravitation"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "理论物理",
+    "level2en": "Theoretical Physics",
+    "level3cn": "统计物理和复杂体系",
+    "level3en": "Statistical Physics and Complex Systems"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "热学",
+    "level2en": "Heat",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "高能物理学",
+    "level2en": "High-energy Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "原子核物理学",
+    "level2en": "Nuclear Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "原子分子物理学",
+    "level2en": "Atomic and Molecular Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "光学",
+    "level2en": "Optics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "声学",
+    "level2en": "Acoustics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "动力学与控制",
+    "level2en": "Dynamics and Control",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "弹性力学",
+    "level3en": "Elasticity Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "塑性力学",
+    "level3en": "Plastic Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "损伤力学",
+    "level3en": "Damage Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "断裂力学",
+    "level3en": "Crushing Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "疲劳",
+    "level3en": "Fatigue"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "细观力学",
+    "level3en": "Micromechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "材料力学",
+    "level3en": "Material Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "结构力学",
+    "level3en": "Structural Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "固体力学",
+    "level2en": "Solid Mechanics",
+    "level3cn": "计算固体力学",
+    "level3en": "Computation Solid Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "爆炸力学",
+    "level2en": "Mechanics of Explosion",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "物理力学",
+    "level2en": "Physical Mechanics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Dynamics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Dynamics",
+    "level3cn": "水动力学",
+    "level3en": "Hydrodynamics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Dynamics",
+    "level3cn": "空气动力学",
+    "level3en": "Aerodynamics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Dynamics",
+    "level3cn": "湍流理论",
+    "level3en": "Turbulence Theory"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Dynamics",
+    "level3cn": "渗流力学",
+    "level3en": "Permeation Fluid Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "流体力学",
+    "level2en": "Fluid Dynamics",
+    "level3cn": "计算流体力学",
+    "level3en": "Computational Fluid Mechanics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "等离子体物理学",
+    "level2en": "Plasma Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "非晶态物理",
+    "level3en": "Amorphous"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "表面与低维物理学",
+    "level3en": "Surface and Low-dimensional Systems"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "低温物理学",
+    "level3en": "Low-temperature Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "软物质物理学",
+    "level3en": "Soft Matter Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "金属物理",
+    "level3en": "Metal Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "凝聚态理论",
+    "level3en": "Condensed Matter Theory"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "半导体物理",
+    "level3en": "Semiconductor Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "超导和强关联体系",
+    "level3en": "Superconductivity and Strongly Correlated Systems"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "磁学和自旋电子学",
+    "level3en": "Magnetism and Spintronics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "介电、压电和铁电物理",
+    "level3en": "Dielectric, Piezoelectric and Ferroelectric Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "纳米与介观物理",
+    "level3en": "Nanoscale and Mesoscopic Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "凝聚态物理学",
+    "level2en": "Condensed Matter Physics",
+    "level3cn": "高压物理",
+    "level3en": "High-pressure Physics"
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "生物物理学",
+    "level2en": "Biophysics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "天体物理学",
+    "level2en": "Astrophysics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "天体测量学",
+    "level2en": "Astrometry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "天体力学",
+    "level2en": "Astromechanics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "太阳与太阳系",
+    "level2en": "Sun and Solar System",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "恒星与银河系",
+    "level2en": "Star and Galactic System",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "星系与宇宙学",
+    "level2en": "Galaxy and Cosmology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "量子信息",
+    "level2en": "Quantum Information",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "光学与光子学",
+    "level2en": "Optics & Photonics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "物理学 力学 天文学",
+    "level1en": "Physics Mechanics Astronomy",
+    "level2cn": "天文学和宇宙学",
+    "level2en": "Astronomy & Cosmology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "无机化学",
+    "level2en": "Inorganic Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "无机化学",
+    "level2en": "Inorganic Chemistry",
+    "level3cn": "物理无机化学",
+    "level3en": "Physical Inorganic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "无机化学",
+    "level2en": "Inorganic Chemistry",
+    "level3cn": "配位化学",
+    "level3en": "Coordination Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "无机化学",
+    "level2en": "Inorganic Chemistry",
+    "level3cn": "固体无机化学",
+    "level3en": "Inorganic Solid Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "无机化学",
+    "level2en": "Inorganic Chemistry",
+    "level3cn": "生物无机化学",
+    "level3en": "Bioinorganic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "有机合成",
+    "level3en": "Organic Synthesis"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "金属有机化学",
+    "level3en": "Organometallic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "天然有机化学",
+    "level3en": "Natural Organic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "物理有机化学",
+    "level3en": "Physical Organic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "药物化学",
+    "level3en": "Medicinal Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "有机化学",
+    "level2en": "Organic Chemistry",
+    "level3cn": "化学生物学",
+    "level3en": "Chemical Biology"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "结构化学",
+    "level3en": "Structural Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "理论和计算化学",
+    "level3en": "Theoretical & Computational Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "催化化学",
+    "level3en": "Catalytic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "化学动力学和热力学",
+    "level3en": "Chemical Kinetics & Thermodynamics"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "胶体与界面化学",
+    "level3en": "Colloid and Interface Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "电化学与光化学",
+    "level3en": "Electrochemistry & Photochemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "物理化学",
+    "level2en": "Physical Chemistry",
+    "level3cn": "生物物理化学",
+    "level3en": "Biophysical Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "高分子科学",
+    "level2en": "Polymer Science",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "高分子科学",
+    "level2en": "Polymer Science",
+    "level3cn": "高分子合成化学",
+    "level3en": "Polymer Synthetic Chemistry"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "高分子科学",
+    "level2en": "Polymer Science",
+    "level3cn": "功能与生物医用高分子",
+    "level3en": "Functional & Biomedical Polymer"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "高分子科学",
+    "level2en": "Polymer Science",
+    "level3cn": "高分子自组装",
+    "level3en": "Polymer Self-assembly"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "高分子科学",
+    "level2en": "Polymer Science",
+    "level3cn": "高分子物理",
+    "level3en": "Polymer Physics"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "色谱分析",
+    "level3en": "Chromatographic Analysis"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "电化学分析",
+    "level3en": "Electrochemical Analysis"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "光谱分析",
+    "level3en": "Spectrum Analysis"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "质谱分析",
+    "level3en": "Mass Spectral Analysis"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "生化分析及生物传感",
+    "level3en": "Biochemical Analysis & Biosensor"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "分析化学",
+    "level2en": "Analytical Chemistry",
+    "level3cn": "化学计量学",
+    "level3en": "Chemometrics"
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "化学工程",
+    "level2en": "Chemical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "环境化学",
+    "level2en": "Environmental Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "材料化学",
+    "level2en": "Materials  Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "理论化学",
+    "level2en": "Theoretical Chemistry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "化学",
+    "level1en": "Chemistry",
+    "level2cn": "化学生物学",
+    "level2en": "Chemical Biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "无机、复合及杂化材料",
+    "level2en": "Inorganic, composite and hybrid materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "有机材料和高分子",
+    "level2en": "Organic materials and polymers",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "金属与合金",
+    "level2en": "Metals and alloys",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "生物材料",
+    "level2en": "Biomaterials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "纳米尺度材料",
+    "level2en": "Nanoscale materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能材料",
+    "level2en": "Functional materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能材料",
+    "level2en": "Functional materials",
+    "level3cn": "电子材料",
+    "level3en": "Electronic materials"
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能材料",
+    "level2en": "Functional materials",
+    "level3cn": "磁性材料",
+    "level3en": "Magnetic materials"
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能材料",
+    "level2en": "Functional materials",
+    "level3cn": "光学材料",
+    "level3en": "Optical materials"
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能材料",
+    "level2en": "Functional materials",
+    "level3cn": "催化剂",
+    "level3en": "Catalyst"
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能材料",
+    "level2en": "Functional materials",
+    "level3cn": "膜材料",
+    "level3en": "Membrane and films"
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "能源材料",
+    "level2en": "Energy materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "理论、建模与仿真",
+    "level2en": "Theory, modelling and simulations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "仪器方法",
+    "level2en": "Instrumentation",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "高分子材料",
+    "level2en": "Macromolecular Materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "复合材料",
+    "level2en": "Composite and Hybrid Materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "无机非金属材料",
+    "level2en": "Inorganic Nonmetallic Materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "纳米材料",
+    "level2en": "Nano-Materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "无机材料",
+    "level2en": "Inorganic Materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "聚合物与塑料",
+    "level2en": "Polymers and Plastics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "功能纳米材料",
+    "level2en": "Functional and Nano-Materials",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "材料科学",
+    "level1en": "Materials Science",
+    "level2cn": "材料性能",
+    "level2en": "Materials Characterizations",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "工程力学",
+    "level2en": "Engineering Mechanics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "化学工程",
+    "level2en": "Chemical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "工程热物理",
+    "level2en": "Engineering Thermal Physics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "能源科学与技术",
+    "level2en": "Energy Science and Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "机械科学",
+    "level2en": "Mechanical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "仿生工程",
+    "level2en": "Bionic Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "能源科学",
+    "level2en": "Energy Science",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "航空航天",
+    "level2en": "Aeronautics and Astronautics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "电工科学",
+    "level2en": "Electrical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "环境科学",
+    "level2en": "Environmental Sciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "水利科学",
+    "level2en": "Hydraulic Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "工程科学",
+    "level1en": "Engineering Sciences",
+    "level2cn": "岩土工程",
+    "level2en": "Geotechnical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "",
+    "level2en": "",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "信号与信息处理",
+    "level3en": "Signal Processing"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "雷达技术",
+    "level3en": "Radar Technologies"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "通信系统",
+    "level3en": "Communication System"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "电磁场与微波技术",
+    "level3en": "Electromagnetic Field and Microwave Technologies"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "光通信技术",
+    "level3en": "Optical Network"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "信息和通信工程",
+    "level2en": "Information & Communication Engineering",
+    "level3cn": "生物电子学",
+    "level3en": "Bioelectronics"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "计算机科学理论",
+    "level3en": "Theoretical Computer Science\\Algorithm and Complexity"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "计算机软件",
+    "level3en": "Software Engineering"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "计算机网络",
+    "level3en": "Network"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "互联网",
+    "level3en": "Internet"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "传感器网络",
+    "level3en": "Sensor Network"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "分布式计算系统",
+    "level3en": "Distributed Computing and Systems"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机科学与技术",
+    "level2en": "Computer Science & Technology",
+    "level3cn": "高性能计算",
+    "level3en": "Architecture and High Performance Computer Systems"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机图形与图像",
+    "level2en": "Computer Graphics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机图形与图像",
+    "level2en": "Computer Graphics",
+    "level3cn": "计算机图形学",
+    "level3en": "Graphics"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机图形与图像",
+    "level2en": "Computer Graphics",
+    "level3cn": "几何造型",
+    "level3en": "CAD"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机图形与图像",
+    "level2en": "Computer Graphics",
+    "level3cn": "多媒体",
+    "level3en": "Multimedia"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机图形与图像",
+    "level2en": "Computer Graphics",
+    "level3cn": "可视化",
+    "level3en": "Visualizing"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "计算机图形与图像",
+    "level2en": "Computer Graphics",
+    "level3cn": "虚拟现实",
+    "level3en": "Virtual Reality"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "人工智能与模式识别",
+    "level2en": "Artificial Intelligence and Pattern Recognition",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "人工智能与模式识别",
+    "level2en": "Artificial Intelligence and Pattern Recognition",
+    "level3cn": "数据库",
+    "level3en": "Database and Knowledge-Based Systems"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "人工智能与模式识别",
+    "level2en": "Artificial Intelligence and Pattern Recognition",
+    "level3cn": "信息安全",
+    "level3en": "Information Security"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "人工智能与模式识别",
+    "level2en": "Artificial Intelligence and Pattern Recognition",
+    "level3cn": "生物信息学",
+    "level3en": "Bioinformatics"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "控制理论与控制工程",
+    "level3en": "Control Theory & Control Engineering"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "系统理论与系统工程",
+    "level3en": "System Theory & System Engineering"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "检测技术与自动化装置",
+    "level3en": "Detection Technology & Automatic Equipment"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "导航制导与控制",
+    "level3en": "Navigation, Guidance & Control"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "智能控制",
+    "level3en": "Intelligent Control"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "系统科学、控制科学与工程",
+    "level2en": "System Science, Control Science & Engineering",
+    "level3cn": "机器人",
+    "level3en": "Robot"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "集成电路与系统设计",
+    "level3en": "Integrated Circuit and System Design"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "微纳电子器件",
+    "level3en": "Micro & Nano Electron Devices"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "先进集成电路工艺",
+    "level3en": "Advanced Integrated Circuit Processing Techniques"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "功率器件与集成",
+    "level3en": "Power Devices and Integration"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "高频器件",
+    "level3en": "High Frequency Devices"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "半导体光电技术",
+    "level3en": "Semiconductor Optical and Electronic Technology"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "器件物理与可靠性",
+    "level3en": "Device Physics and Reliability"
+  },
+  {
+    "level1cn": "信息科学",
+    "level1en": "Information Sciences",
+    "level2cn": "微电子和固体电子学",
+    "level2en": "Microelectronics and Solid State Electronics",
+    "level3cn": "封装与测试技术",
+    "level3en": "Packaging and Measuring Techniques"
+  }
+]
