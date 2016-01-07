@@ -1,8 +1,8 @@
-PastDataImport = function (path) {
+PastDataImport = function (path,pdfFolder) {
 
     var issueCreator = new ScienceXML.IssueCreator();
     var folder = path || "/Users/jack/ImportPastData/";
-    logger.info("working folder is: "+folder);
+    logger.info("working folder is: " + folder);
 
     var getDoiSecondPart = function (doi) {
         if (doi) {
@@ -94,17 +94,88 @@ PastDataImport = function (path) {
         })
     }
 
+    var getFolder = function (issn) {
+        var map = {
+            "16747216": "sciA",
+            "16747283": "sciAe",
+            "16747224": "sciB",
+            "16747291": "sciBe",
+            "16747232": "sciC",
+            "16747305": "sciCe",
+            "16747240": "sciD",
+            "16747313": "sciDe",
+            "16747259": "sciE",
+            "16747321": "sciEe",
+            "16747267": "sciF",
+            "1674733X": "sciFe",
+            "16747275": "sciG",
+            "16747348": "sciGe",
+            "20958226": "sciH",
+            "0023074X": "kxtb",
+            "20959273": "kxtbe"
+        }
+        return map[issn.replace('-', '')];
+    }
+
+    var importPdf = function (issn, pdfName, callback) {
+        if(!pdfName){
+            logger.info("pdf name is empty.");
+            callback && callback();
+            return;
+        }
+        var folder = getFolder(issn);
+        if (!folder) {
+            logger.warning("can't find pdf folder of " + issn);
+            callback && callback();
+            return;
+        }
+        if(!pdfFolder){
+            callback && callback();
+            return;
+        }
+        var origPath = pdfFolder + folder + "/" + pdfName;
+        Science.FSE.exists(origPath,Meteor.bindEnvironment( function (exists) {
+            if(!exists){
+                logger.error("can't find pdf folder of " + issn);
+                callback && callback();
+            }else{
+                PdfStore.insert(origPath, function (err, fileObj) {
+                    if (err) {
+                        logger.error(err);
+                        callback && callback();
+                    }else{
+                        logger.info("pdf imported");
+                        callback && callback(fileObj._id)
+                    }
+                });
+            }
+        }))
+    }
+
+    var saveArticle = function(obj){
+        var existArticle = Articles.findOne({doi: obj.doi});
+
+        if (existArticle) {
+            Articles.update({_id: existArticle._id}, {$set: obj});
+            logger.info("update " + obj.doi + " successful");
+
+        } else {
+            Articles.insert(obj);
+            logger.info("import " + obj.doi + " successful");
+        }
+    }
+
     var importQueue = new PowerQueue({
         maxProcessing: 1,//1并发
         maxFailures: 1 //不重试
     })
 
-    importQueue.errorHandler = function(data){
+    importQueue.errorHandler = function (data) {
 
     };
 
-    importQueue.taskHandler = function(data,next){
-         Parser(data.filepath, {}, Meteor.bindEnvironment(function (err, issue) {
+    importQueue.taskHandler = function (data, next) {
+        Parser(data.filepath, {}, Meteor.bindEnvironment(function (err, issue) {
             if (err)
                 logger.error(err)
             if (!(issue && !_.isEmpty(issue.articles))) {
@@ -117,7 +188,8 @@ PastDataImport = function (path) {
                         issn: 1,
                         EISSN: 1,
                         CN: 1,
-                        publisher: 1
+                        publisher: 1,
+                        accessKey:1
                     }
                 });
 
@@ -166,16 +238,17 @@ PastDataImport = function (path) {
                         if (!_.isEmpty(refs)) {
                             newOne.references = refs;
                         }
-                        var existArticle = Articles.findOne({doi: newOne.doi});
-                        if (existArticle) {
-                            Articles.update({_id: existArticle._id}, {$set: newOne});
-                            logger.info("update " + newOne.doi + " successful");
 
-                        } else {
-                            Articles.insert(newOne);
-                            logger.info("import " + newOne.doi + " successful");
+                        if(article.pdf){
+                            var obj={};
+                            importPdf(journal.issn,article.pdf,Meteor.bindEnvironment(function(result){
+                                if(result)
+                                    newOne.pdfId=result;
+                                saveArticle(newOne);
+                            }))
+                        }else{
+                            saveArticle(newOne)
                         }
-
                     })
                 }
             }
@@ -188,7 +261,7 @@ PastDataImport = function (path) {
             throw err;
         _.each(fileList, function (file) {
             if (file && file.toLowerCase().endWith(".xml")) {
-                importQueue.add({filepath:folder + file});
+                importQueue.add({filepath: folder + file});
             }
         })
     }))
@@ -196,9 +269,9 @@ PastDataImport = function (path) {
 
 
 Meteor.methods({
-    PastDataImportMethod:function(path){
+    PastDataImportMethod: function (path,pdfFolder) {
         logger.info("Client request for historical data import");
-        PastDataImport(path);
+        PastDataImport(path,pdfFolder);
     }
 })
 
