@@ -50,7 +50,7 @@ Meteor.publish('recommendedMiniPlatformArticles', function () {
     });
 });
 Meteor.publish('recommendedJournalArticles', function (val) {
-    var recommended = EditorsRecommend.find({publications:val}, {fields: {ArticlesId: 1}}).fetch();
+    var recommended = EditorsRecommend.find({publications:val}, {fields: {ArticlesId: 1}},{limit:5}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: minimumArticle
