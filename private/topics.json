@@ -2381,7 +2381,7 @@
     "level2cn": "积分方程",
     "level2en": "Integral Equations",
     "level3cn": "随机积分方程",
-    "level3en": "Random integral equation"
+    "level3en": "Random integral equations"
   },
   {
     "level1cn": "数学",
@@ -5194,48 +5194,16 @@
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
-    "level2cn": "神经科学",
-    "level2en": "Neurosciences",
+    "level2cn": "农学",
+    "level2en": "Agricultural Sciences",
     "level3cn": "",
     "level3en": ""
   },
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
-    "level2cn": "神经生物学",
-    "level2en": "Neurobiology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "生理学",
-    "level2en": "Physiology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "生态学",
-    "level2en": "Ecology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "生物物理学",
-    "level2en": "Biophysics",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "生物信息学",
-    "level2en": "Bioinformatics",
+    "level2cn": "基础医学",
+    "level2en": "Basic Medicine",
     "level3cn": "",
     "level3en": ""
   },
@@ -5250,6 +5218,46 @@
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
+    "level2cn": "生物信息学",
+    "level2en": "Bioinformatics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物医学工程学",
+    "level2en": "Biomedical Engineering",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生物物理学",
+    "level2en": "Biophysics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "植物学",
+    "level2en": "Botany",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "细胞生物学",
+    "level2en": "Cell Biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
     "level2cn": "作物学",
     "level2en": "Crop Science",
     "level3cn": "",
@@ -5258,16 +5266,48 @@
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
-    "level2cn": "病毒学",
-    "level2en": "Virology",
+    "level2cn": "发育生物学",
+    "level2en": "Developmental biology",
     "level3cn": "",
     "level3en": ""
   },
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
-    "level2cn": "海洋科学",
-    "level2en": "Oceanography",
+    "level2cn": "疾病机制研究",
+    "level2en": "Disease Mechanisms",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生态学",
+    "level2en": "Ecology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "林学",
+    "level2en": "Forestry",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "遗传学",
+    "level2en": "Genetics",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "基因组学与生物信息学",
+    "level2en": "Genomics & Bioinformatics",
     "level3cn": "",
     "level3en": ""
   },
@@ -5290,64 +5330,8 @@
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
-    "level2cn": "遗传学",
-    "level2en": "Genetics",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "药学",
-    "level2en": "Pharmacy",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "基础医学",
-    "level2en": "Basic Medicine",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "基因组学与生物信息学",
-    "level2en": "Genomics & Bioinformatics",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "疾病机制研究",
-    "level2en": "Disease Mechanisms",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "分子与细胞生物学",
-    "level2en": "Molecular & Cellular Biology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "细胞生物学",
-    "level2en": "Cell Biology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "心理学",
-    "level2en": "Psychology",
+    "level2cn": "交叉学科",
+    "level2en": "Interdisciplinary subjects",
     "level3cn": "",
     "level3en": ""
   },
@@ -5362,56 +5346,56 @@
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
+    "level2cn": "分子与细胞生物学",
+    "level2en": "Molecular & Cellular Biology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "神经生物学",
+    "level2en": "Neurobiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "神经科学",
+    "level2en": "Neurosciences",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "海洋科学",
+    "level2en": "Oceanography",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "药学",
+    "level2en": "Pharmacy",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "生理学",
+    "level2en": "Physiology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
     "level2cn": "植物科学",
     "level2en": "Plant Sciences",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "交叉学科",
-    "level2en": "Interdisciplinary subjects",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "发育生物学",
-    "level2en": "Developmental biology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "生物信息学",
-    "level2en": "Bioinformatics",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "农学",
-    "level2en": "Agricultural Sciences",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "水生生物学",
-    "level2en": "Hydrobiology",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "生命科学与医学",
-    "level1en": "Biology",
-    "level2cn": "林学",
-    "level2en": "Forestry",
     "level3cn": "",
     "level3en": ""
   },
@@ -5426,8 +5410,24 @@
   {
     "level1cn": "生命科学与医学",
     "level1en": "Biology",
-    "level2cn": "生物医学工程学",
-    "level2en": "Biomedical Engineering",
+    "level2cn": "心理学",
+    "level2en": "Psychology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "病毒学",
+    "level2en": "Virology",
+    "level3cn": "",
+    "level3en": ""
+  },
+  {
+    "level1cn": "生命科学与医学",
+    "level1en": "Biology",
+    "level2cn": "动物学",
+    "level2en": "Zoology",
     "level3cn": "",
     "level3en": ""
   },
@@ -5790,22 +5790,6 @@
     "level2en": "Oceanography",
     "level3cn": "海洋遥感",
     "level3en": "Marine Remote Sensing"
-  },
-  {
-    "level1cn": "地球科学",
-    "level1en": "Earth Sciences",
-    "level2cn": "地理学",
-    "level2en": "Geography",
-    "level3cn": "",
-    "level3en": ""
-  },
-  {
-    "level1cn": "地球科学",
-    "level1en": "Earth Sciences",
-    "level2cn": "地球化学",
-    "level2en": "Geochemistry",
-    "level3cn": "",
-    "level3en": ""
   },
   {
     "level1cn": "物理学 力学 天文学",
@@ -6922,40 +6906,40 @@
   {
     "level1cn": "信息科学",
     "level1en": "Information Sciences",
-    "level2cn": "计算机科学与技术",
-    "level2en": "Computer Science & Technology",
-    "level3cn": "计算机网络",
-    "level3en": "Network"
+    "level2cn": "计算机网络",
+    "level2en": "Networking",
+    "level3cn": "",
+    "level3en": ""
   },
   {
     "level1cn": "信息科学",
     "level1en": "Information Sciences",
-    "level2cn": "计算机科学与技术",
-    "level2en": "Computer Science & Technology",
+    "level2cn": "计算机网络",
+    "level2en": "Networking",
     "level3cn": "互联网",
     "level3en": "Internet"
   },
   {
     "level1cn": "信息科学",
     "level1en": "Information Sciences",
-    "level2cn": "计算机科学与技术",
-    "level2en": "Computer Science & Technology",
+    "level2cn": "计算机网络",
+    "level2en": "Networking",
     "level3cn": "传感器网络",
     "level3en": "Sensor Network"
   },
   {
     "level1cn": "信息科学",
     "level1en": "Information Sciences",
-    "level2cn": "计算机科学与技术",
-    "level2en": "Computer Science & Technology",
+    "level2cn": "计算机网络",
+    "level2en": "Networking",
     "level3cn": "分布式计算系统",
     "level3en": "Distributed Computing and Systems"
   },
   {
     "level1cn": "信息科学",
     "level1en": "Information Sciences",
-    "level2cn": "计算机科学与技术",
-    "level2en": "Computer Science & Technology",
+    "level2cn": "计算机网络",
+    "level2en": "Networking",
     "level3cn": "高性能计算",
     "level3en": "Architecture and High Performance Computer Systems"
   },
