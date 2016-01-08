@@ -1,26 +1,30 @@
+var reactDic = new ReactiveDict();
+
+Template.Topics.onCreated(function(){
+    Session.set("canAdd",Permissions.userCan("add-topic","topic",Meteor.userId()));
+    Session.set("canModify",Permissions.userCan("modify-topic","topic",Meteor.userId()));
+    Session.set("canDel",Permissions.userCan("delete-topic","topic",Meteor.userId()));
+    Session.set("canAddArticle",Permissions.userCan("add-article-to-topic","topic",Meteor.userId()))
+})
+Template.Topics.onRendered(function(){
+    if(Session.get("canAdd") || Session.get("canModify") || Session.get("canDel") || Session.get("canAddArticle")){
+        Topics.find().forEach(function(oneTopic){
+            var currTag=$("#"+oneTopic._id);
+            if(!currTag.length) return;
+            var ctlpanel=currTag.find(">.control-panel");
+            ctlpanel.children().remove();
+            Blaze.renderWithData(Template.controlPanel,oneTopic,ctlpanel[0]);
+        })
+    }
+})
+
 Template.Topics.helpers({
     getAddNewStr: function () {
         return TAPi18n.__("Add new");
     }
 });
 
-Template.SingleTopic.events({
-    'click .fa-plus': function (e) {
-        e.preventDefault();
-        var id = $(e.currentTarget).parent().parent().attr('id');
-        Session.set("parentId", id);
-        e.stopPropagation();
-    },
-    'click i':function(e){
-        e.preventDefault();
-        var id = $(e.target).parent().attr('id');
-        var es = Session.get("expandStatus" + id);
-        Session.set("expandStatus" + id, !es);
-        e.stopPropagation();
-    }
-});
-
-Template.TopicList.events({
+Template.Topics.events({
     'keyup .refineSearch': function (e) {
         $(".parentTopicList li").hide();
         var term = $(e.currentTarget).val();
@@ -38,6 +42,16 @@ Template.TopicList.events({
                 recursionLi(parentLi);
             }
         }
+    }
+})
+
+Template.TopicList.events({
+    'click i':function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var id = $(e.target).parent().attr('id');
+        var es = reactDic.get("expandStatus" + id);
+        reactDic.set("expandStatus" + id, !es);
     }
 });
 
@@ -63,15 +77,25 @@ Template.updateTopicModalForm.helpers({
         return result;
     }
 })
-Template.TopicList.helpers({
-    topics: function () {
-        return Topics.find({"parentId": null});
-    }
-});
 
-Template.TopicButtons.helpers({
-    hasSubTopic: function (parentId) {
-        return Topics.find({"parentId": parentId}).count() === 0;
+Template.TopicList.helpers({
+    topics:function(){
+        return Topics.find({parentId:this.parent})
+    },
+    subTopicCount: function () {
+        if(Session.get("subTopicCount" + this._id)===undefined){
+            var stc=Topics.find({"parentId": this._id}).count();
+            Session.set("subTopicCount"+ this._id,stc);
+        }
+        return Session.get("subTopicCount" + this._id);
+    },
+    isExpand: function () {
+        var es = reactDic.get("expandStatus" + this._id) || false;
+        var subul = $("li#"+this._id+">ul");
+        if(subul.length){
+            es?subul.show():subul.hide();
+        }
+        return es;
     },
     searchUrl: function(){
         var option = {
@@ -82,27 +106,8 @@ Template.TopicButtons.helpers({
         };
         return SolrQuery.makeUrl(option);
     },
-    getAddNewStr: function () {
-        return TAPi18n.__("Add new");
-    },
-    getUpdateStr: function () {
-        return TAPi18n.__("Update");
-    }
-});
-
-Template.SingleTopic.helpers({
-    subTopicCount: function (parentId) {
-        return Topics.find({"parentId": parentId}).count();
-    },
-    subTopics: function (parentId) {
-        return Topics.find({"parentId": parentId});
-    },
-    isExpand: function (id) {
-        return Session.get("expandStatus" + id) || false;
-    },
-    isParentExpand: function (id) {
-        var topic = Topics.findOne({_id: id});
-        return Session.get("expandStatus" + topic.parentId);
+    isTop:function(){
+        return !Template.currentData()
     }
 });
 
@@ -111,6 +116,30 @@ Template.deleteTopicModalForm.helpers({
         return TAPi18n.__("Are you sure?");
     }
 });
+
+Template.controlPanel.helpers({
+    canAdd:function(){
+        return Session.get("canAdd")
+    },
+    canModify:function(){
+        return Session.get("canModify")
+    },
+    canDel:function(){
+        return Session.get("canDel") && !Session.get("subTopicCount" + this._id)
+    },
+    canAddArticle:function(){
+        return Session.get("canAddArticle")
+    }
+})
+
+Template.controlPanel.events({
+    'click .fa-plus': function (e) {
+        e.preventDefault();
+        var id = $(e.currentTarget).parent().parent().attr('id');
+        Session.set("parentId", id);
+        e.stopPropagation();
+    }
+})
 
 AutoForm.addHooks(['addTopicModalForm'], {
     onSuccess: function () {

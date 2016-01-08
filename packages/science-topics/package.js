@@ -23,7 +23,8 @@ Package.onUse(function (api) {
             'hitchcott:paginator',
             'science-lib',
             'science-permissions',
-            'templates:tabs'
+            'templates:tabs',
+            'reactive-dict'
         ],
         both);
 
