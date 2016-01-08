@@ -4,6 +4,53 @@ Parser = function (filepath, options, callback) {
     var fs = Science.FSE;
     var dom;
 
+    var convertlt = function(obj){
+        if(_.isString(obj)){
+            obj= obj && obj.replace('&lt;','<') || obj;
+        }
+        if(_.isObject(obj)){
+            obj.cn=obj.cn && obj.cn.replace('&lt;','<') || obj.cn;
+            obj.en=obj.en && obj.en.replace('&lt;','<') || obj.en;
+        }
+        return obj;
+    }
+
+    var splitStr = function(obj){
+        if(_.isString(obj)){
+            obj= obj && obj.split(';') || obj;
+        }
+        if(_.isObject(obj)){
+            obj.cn=obj.cn && obj.cn.split(';') || obj.cn;
+            obj.en=obj.cn && obj.en.split(';') || obj.en;
+        }
+        return obj;
+    }
+
+    var insertKeywords = function (a) {
+        if (!a)return;
+        if (a.cn) {
+            a.cn.forEach(function (name) {
+                if (!Keywords.findOne({name: name})) {
+                    Keywords.insert({
+                        lang: "cn",
+                        name: name,
+                        score: 0
+                    });
+                }
+            })
+        }
+        if (a.en) {
+            a.en.forEach(function (name) {
+                if (!Keywords.findOne({name: name})) {
+                    Keywords.insert({
+                        lang: "en",
+                        name: name,
+                        score: 0
+                    });
+                }
+            })
+        }
+    }
     /**
      * 异步方法
      * 解析DOM
@@ -28,15 +75,15 @@ Parser = function (filepath, options, callback) {
                 article.contentType = Science.data.tranContentType(property);
                 article.language = parseHelper.getSimpleVal("child::language", articleNode);
                 article.doi = parseHelper.getSimpleVal("child::id[@type=\"doi\"]", articleNode);
-                article.title = parseHelper.getMultiVal("child::title[@locale='{lang}']", articleNode);
-                article.subject = parseHelper.getMultiVal("child::subject[@locale='{lang}']", articleNode);
-                article.subspecialty = parseHelper.getMultiVal("child::subspecialty[@locale='{lang}']", articleNode);
-                article.abstract = parseHelper.getMultiVal("child::abstract[@locale='{lang}']", articleNode);
-                article.indexing = parseHelper.getMultiVal("child::indexing/subject[@locale='{lang}']", articleNode);
+                article.title = convertlt(parseHelper.getMultiVal("child::title[@locale='{lang}']", articleNode));
+                article.subject = splitStr(parseHelper.getMultiVal("child::subject[@locale='{lang}']", articleNode));
+                article.subspecialty = splitStr(parseHelper.getMultiVal("child::subspecialty[@locale='{lang}']", articleNode));
+                article.abstract = convertlt(parseHelper.getMultiVal("child::abstract[@locale='{lang}']", articleNode));
+                article.indexing = splitStr(convertlt(parseHelper.getMultiVal("child::indexing/subject[@locale='{lang}']", articleNode)));
                 article.pages = parseHelper.getSimpleVal("child::pages", articleNode);
                 article.startPage = parseHelper.getSimpleVal("child::start_page", articleNode);
                 article.endPage = parseHelper.getSimpleVal("child::endPage | child::end_page", articleNode);
-                article.pdf = parseHelper.getFirstAttribute("child::galley/file/href/attribute::src", articleNode);
+                article.pdf = parseHelper.getFirstAttribute("child::galley/file/href[@mime_type='application/pdf']/attribute::src", articleNode);
                 article.publishDate = parseHelper.getSimpleVal("child::publish_date", articleNode);
                 article.acceptDate = parseHelper.getSimpleVal("child::accept_date", articleNode);
                 article.authors = [];

@@ -43,14 +43,14 @@ Meteor.publish('oneArticleByDoi', function (doi) {
     return Articles.find({doi: doi});
 });
 Meteor.publish('recommendedMiniPlatformArticles', function () {
-    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}}).fetch();
+    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}},{limit:6}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: articleWithMetadata
     });
 });
 Meteor.publish('recommendedJournalArticles', function (val) {
-    var recommended = EditorsRecommend.find({publications:val}, {fields: {ArticlesId: 1}}).fetch();
+    var recommended = EditorsRecommend.find({publications:val}, {fields: {ArticlesId: 1}},{limit:5}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: minimumArticle

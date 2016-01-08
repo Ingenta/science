@@ -44,7 +44,6 @@ Router.route("home", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('publishers'),
-            HomePageSubs.subscribe('topics'),
             HomePageSubs.subscribe('images'),
             HomePageSubs.subscribe('news'),
             HomePageSubs.subscribe('homepageMostRecentArticles'),

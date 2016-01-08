@@ -17,12 +17,10 @@ this.Topics.allow({
 
 TopicsSchema = new SimpleSchema({
     name: {//DON'T MAKE THIS UNIQUE
-        type: String,
-        max: 32
+        type: String
     },
     englishName: {
-        type: String,
-        max: 64
+        type: String
     },
     parentId: {
         type: String,
