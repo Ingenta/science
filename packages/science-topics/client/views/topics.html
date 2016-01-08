@@ -1,50 +1,74 @@
 <template name="Topics">
     <div class="container-fluid">
         {{> pageElement key="topic"}}
-            {{#if can "add-topic" "topic"}}
+        {{#if can "add-topic" "topic"}}
             <div class="row">
                 {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
                     {{_ "Add new"}} <i class="fa fa-plus"></i>
                 {{/jkafModal}}
             </div>
-            {{/if}}
+        {{/if}}
         <hr>
-        <div class="row topics">
+        <div class="row topics parentTopicList">
+            <input class="refineSearch form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
             {{> TopicList}}
         </div>
     </div>
 </template>
 
 <template name="TopicList">
-    <input class="refineSearch form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
-    <ul class="list-unstyled parentTopicList">
-        {{#each topics}}
-            {{> SingleTopic}}
-        {{else}}
-            {{_ "No topics found!"}}
-        {{/each}}
-    </ul>
-</template>
+    {{#if isTop}}
+        <ul class="list-unstyled">
+            {{#each topics}}
+                <li id="{{_id}}" class="topic-li">
+                    {{#if subTopicCount}}
+                        {{#if isExpand}}
+                            <i class="fa fa-minus" type="button"></i>
+                        {{else}}
+                            <i class="fa fa-plus" type="button"></i>
+                        {{/if}}
+                    {{/if}}
+                    <a href="{{searchUrl}}">
+                        {{translateThis name englishName}}
+                    </a>
 
-<template name="SingleTopic">
-    <li id="{{_id}}" class="topic-li">
-        {{#if subTopicCount _id}}
-            {{#if isExpand _id}}
-                <i class="fa fa-minus" type="button"></i>
+                    <div class="control-panel pull-right">{{#if hasAnyPermission}}<img src="loading.gif">{{/if}}</div>
+                    <hr>
+                    {{#if subTopicCount}}
+                        {{> TopicList parent=_id}}
+                    {{/if}}
+                </li>
             {{else}}
-                <i class="fa fa-plus" type="button"></i>
-            {{/if}}
-        {{/if}}
-        {{> TopicButtons}}
-        <hr>
+                {{_ "No topics found!"}}
+            {{/each}}
+        </ul>
+    {{else}}
+        <ul style="display:none">
+            {{#each topics}}
+                <li id="{{_id}}" class="topic-li">
 
-        {{#each subTopics _id}}
-            <ul style="display:{{#if isParentExpand _id}}block{{else}}none{{/if}};">
-                {{> SingleTopic}}
-            </ul>
-        {{/each}}
+                    {{#if subTopicCount}}
+                        {{#if isExpand}}
+                            <i class="fa fa-minus" type="button"></i>
+                        {{else}}
+                            <i class="fa fa-plus" type="button"></i>
+                        {{/if}}
+                    {{/if}}
+                    <a href="{{searchUrl}}">
+                        {{translateThis name englishName}}
+                    </a>
 
-    </li>
+                    <div class="control-panel pull-right">{{#if hasAnyPermission}}<img src="loading.gif">{{/if}}</div>
+                    <hr>
+                    {{#if subTopicCount}}
+                        {{> TopicList parent=_id}}
+                    {{/if}}
+                </li>
+            {{else}}
+                {{_ "No topics found!"}}
+            {{/each}}
+        </ul>
+    {{/if}}
 </template>
 
 <template name="updateTopicModalForm">
@@ -70,25 +94,17 @@
     {{/autoForm}}
 </template>
 
-<template name="TopicButtons">
-    <a href="{{searchUrl}}">
-        {{translateThis name englishName}}
-    </a>
-
-    <div class="pull-right">
-        {{#if can "add-topic" "topic" }}
-            {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
-        {{/if}}
-        {{#if can "modify-topic" "topic" }}
-            {{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
-        {{/if}}
-        {{#if can "delete-topic" "topic" }}
-            {{#if hasSubTopic _id}}
-                {{> deleteTopicModalForm}}
-            {{/if}}
-        {{/if}}
-        {{#if can "add-article-to-topic" "topic" }}
-            <a class="fa fa-long-arrow-right" href="{{pathFor 'topics.selectArticles' topicsId=_id}}"></a>
-        {{/if}}
-    </div>
+<template name="controlPanel">
+    {{#if canAdd}}
+        {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
+    {{/if}}
+    {{#if canModify}}
+        {{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
+    {{/if}}
+    {{#if canDel}}
+        {{> deleteTopicModalForm}}
+    {{/if}}
+    {{#if canAddArticle}}
+        <a class="fa fa-long-arrow-right" href="{{pathFor 'topics.selectArticles' topicsId=_id}}"></a>
+    {{/if}}
 </template>
