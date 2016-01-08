@@ -4,6 +4,12 @@ Template.searchHistoryFolderList.helpers({
     }
 });
 
+Template.eachWords.helpers({
+    searchUrl:function(){
+        return SolrQuery.makeUrl({query:this.word,setting:{from:"history"}});
+    }
+});
+
 Template.searchHistoryFolderList.events({
     'click .remove-folder': function (e) {
         e.folderName = this.folderName;
