@@ -1,21 +1,24 @@
 var reactDic = new ReactiveDict();
 
 Template.Topics.onCreated(function(){
-    Session.set("canAdd",Permissions.userCan("add-topic","topic",Meteor.userId()));
-    Session.set("canModify",Permissions.userCan("modify-topic","topic",Meteor.userId()));
-    Session.set("canDel",Permissions.userCan("delete-topic","topic",Meteor.userId()));
-    Session.set("canAddArticle",Permissions.userCan("add-article-to-topic","topic",Meteor.userId()))
+    reactDic.set("canAdd",Permissions.userCan("add-topic","topic",Meteor.userId()));
+    reactDic.set("canModify",Permissions.userCan("modify-topic","topic",Meteor.userId()));
+    reactDic.set("canDel",Permissions.userCan("delete-topic","topic",Meteor.userId()));
+    reactDic.set("canAddArticle",Permissions.userCan("add-article-to-topic","topic",Meteor.userId()))
+    reactDic.set("anyPermission",reactDic.get("canAdd") || reactDic.get("canModify") || reactDic.get("canDel") || reactDic.get("canAddArticle"));
 })
 Template.Topics.onRendered(function(){
-    if(Session.get("canAdd") || Session.get("canModify") || Session.get("canDel") || Session.get("canAddArticle")){
-        Topics.find().forEach(function(oneTopic){
-            var currTag=$("#"+oneTopic._id);
-            if(!currTag.length) return;
-            var ctlpanel=currTag.find(">.control-panel");
-            ctlpanel.children().remove();
-            Blaze.renderWithData(Template.controlPanel,oneTopic,ctlpanel[0]);
-        })
-    }
+    Meteor.setTimeout(function(){
+        if(reactDic.get("anyPermission")){
+            Topics.find().forEach(function(oneTopic){
+                var currTag=$("#"+oneTopic._id);
+                if(!currTag.length) return;
+                var ctlpanel=currTag.find(">.control-panel");
+                ctlpanel.children().remove();
+                Blaze.renderWithData(Template.controlPanel,oneTopic,ctlpanel[0]);
+            })
+        }
+    },100)
 })
 
 Template.Topics.helpers({
@@ -108,6 +111,9 @@ Template.TopicList.helpers({
     },
     isTop:function(){
         return !Template.currentData()
+    },
+    hasAnyPermission:function(){
+        return reactDic.get("anyPermission");
     }
 });
 
@@ -119,16 +125,16 @@ Template.deleteTopicModalForm.helpers({
 
 Template.controlPanel.helpers({
     canAdd:function(){
-        return Session.get("canAdd")
+        return reactDic.get("canAdd")
     },
     canModify:function(){
-        return Session.get("canModify")
+        return reactDic.get("canModify")
     },
     canDel:function(){
-        return Session.get("canDel") && !Session.get("subTopicCount" + this._id)
+        return reactDic.get("canDel") && !Session.get("subTopicCount" + this._id)
     },
     canAddArticle:function(){
-        return Session.get("canAddArticle")
+        return reactDic.get("canAddArticle")
     }
 })
 

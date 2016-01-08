@@ -32,7 +32,7 @@
                         {{translateThis name englishName}}
                     </a>
 
-                    <div class="control-panel pull-right"><img src="loading.gif"></div>
+                    <div class="control-panel pull-right">{{#if hasAnyPermission}}<img src="loading.gif">{{/if}}</div>
                     <hr>
                     {{#if subTopicCount}}
                         {{> TopicList parent=_id}}
@@ -58,7 +58,7 @@
                         {{translateThis name englishName}}
                     </a>
 
-                    <div class="control-panel pull-right"><img src="loading.gif"></div>
+                    <div class="control-panel pull-right">{{#if hasAnyPermission}}<img src="loading.gif">{{/if}}</div>
                     <hr>
                     {{#if subTopicCount}}
                         {{> TopicList parent=_id}}
