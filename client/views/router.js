@@ -23,7 +23,7 @@ HomePageSubs.subscribe('emailConfig');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
-HomePageSubs.subscribe('topics');
+//HomePageSubs.subscribe('topics');
 HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
@@ -65,7 +65,7 @@ Router.route("/topics/", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe('topics')
+            Meteor.subscribe('topics')
         ]
     },
     onBeforeAction: function () {
@@ -84,7 +84,7 @@ Router.route("topics/:topicsId/", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe('topics'),
+            Meteor.subscribe('topics'),
             Meteor.subscribe('articlesInTopic',this.params.topicsId)
         ]
     }
