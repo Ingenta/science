@@ -1,3 +1,4 @@
+
 Template.toggleField.helpers({
     notEmptyField:function(){
         return !_.isEmpty(this.field) && (this.field.cn || this.field.en);
@@ -15,6 +16,16 @@ Template.toggleField.helpers({
         }
     }
 });
+Template.toggleField.events({
+    'hide.bs.collapse .collapse':function(e,t){
+        e.stopPropagation();
+        $(e.currentTarget).siblings('p').find("i").removeClass("fa-minus").addClass("fa-plus");
+    },
+    'show.bs.collapse .collapse':function(e,t){
+        e.stopPropagation();
+        $(e.currentTarget).siblings('p').find("i").removeClass("fa-plus").addClass("fa-minus");
+    }
+})
 
 Template.toggleFieldBrowse.helpers({
     notEmptyField:function(){
@@ -33,6 +44,17 @@ Template.toggleFieldBrowse.helpers({
         }
     }
 });
+
+Template.toggleFieldBrowse.events({
+    'hide.bs.collapse .collapse':function(e,t){
+        e.stopPropagation();
+        $(e.currentTarget).siblings('p').find("i").removeClass("fa-minus").addClass("fa-plus");
+    },
+    'show.bs.collapse .collapse':function(e,t){
+        e.stopPropagation();
+        $(e.currentTarget).siblings('p').find("i").removeClass("fa-plus").addClass("fa-minus");
+    }
+})
 
 Template.sendEmails.helpers({
     getCurrentUrl: function () {
