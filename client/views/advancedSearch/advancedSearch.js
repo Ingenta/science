@@ -1,29 +1,19 @@
 Template.AdvancedSearch.onRendered(function() {
     this.$('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD'});
-    $(document).ready(function() {
-        $(".js-multiple1").select2({
-            placeholder: TAPi18n.__( "Publisher name")
-        });
+    $(".js-multiple1").select2({
+        placeholder: TAPi18n.__( "Publisher name")
     });
-    $(document).ready(function() {
-        $(".js-multiple2").select2({
-            placeholder: TAPi18n.__( "Journal name")
-        });
+    $(".js-multiple2").select2({
+        placeholder: TAPi18n.__( "Journal name")
     });
-    $(document).ready(function() {
-        $(".js-multiple3").select2({
-            placeholder: TAPi18n.__( "The topic name")
-        });
+    $(".js-multiple3").select2({
+        placeholder: TAPi18n.__( "The topic name")
     });
-    $(document).ready(function() {
-        $(".js-multiple4").select2({
-            placeholder: TAPi18n.__( "Article Content Type")
-        });
+    $(".js-multiple4").select2({
+        placeholder: TAPi18n.__( "Article Content Type")
     });
-    $(document).ready(function() {
-        $(".js-multiple5").select2({
-            placeholder: TAPi18n.__( "Journal label")
-        });
+    $(".js-multiple5").select2({
+        placeholder: TAPi18n.__( "Journal label")
     });
 });
 
