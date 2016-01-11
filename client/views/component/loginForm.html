@@ -4,6 +4,7 @@
         <div class="form-group">
             <label for="login-form-journal">{{_ "Journal name"}}</label>
             <select id="login-form-journal" class="form-control js-example-basic-single" style="width:100%;border: 1px solid #cccccc;">
+                <option>{{_ "Please select more journal name"}}</option>
                 {{#each publicationsList}}
                     <option value="{{codeValue}}">{{translateThis titleCn title}}</option>
                 {{/each}}
