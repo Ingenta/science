@@ -96,3 +96,7 @@ ol.affiliationList li {
 .name_style{
     font-weight:bold;
 }
+
+.article-info > li {
+    font-size:12px;
+}

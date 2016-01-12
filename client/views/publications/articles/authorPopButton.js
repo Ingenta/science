@@ -5,7 +5,7 @@ Template.authorPopButton.events({
         var name = this.name || (TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en);
         var clearname=Science.clearTags(name);
         var title = Blaze.toHTMLWithData(Template.authorPopTitle,{
-            name:name
+            name:clearname
         });
         var content = Blaze.toHTMLWithData(Template.authorPopContent, {
             name:clearname
