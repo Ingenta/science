@@ -113,8 +113,8 @@ Config = {
     sysAdmin: "admin",
     parser: {
         contentTypeDic: {
-            article: ["article", "论文", "research paper"],
-            reviews:[ "评述","reviews"],
+            article: ["article", "论文", "research paper","feature article","invited article","研究述评"],
+            reviews:[ "评述","reviews","专题论述","综述","mini review","mini reviews"],
             letters:["快讯","letters"],
             editorials:["社论","editorials"],
             highlights:["亮点","highlights"],
@@ -129,7 +129,8 @@ Config = {
             briefReport:["简报","brief report"],
             scienceNews:["科学新闻","science news"],
             bookReview:["书评","book review"],
-            mooPaper:["MOO论文","moo paper"]
+            mooPaper:["MOO论文","moo paper"],
+            erratum:["勘误","retraction note","更正"]
         }
     },
     otherPlatformLoginUrl: {
