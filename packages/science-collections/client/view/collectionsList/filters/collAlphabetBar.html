@@ -5,7 +5,7 @@
 		<div class="pull-right">
             <a class="resetAlphabetFilter" href="#">{{_ "All"}}</a>&nbsp;
             {{#each letterInTheAlphabet}}
-                <a class="letterFilter" href="#">{{this}}</a>&nbsp;
+                <a class="letterFilter {{select}}" href="#">{{this}}</a>&nbsp;
             {{/each}}
             <a class="resetOtherFilter" href="#">{{_ "Other"}}</a>
 		</div>

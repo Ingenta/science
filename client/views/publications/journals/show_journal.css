@@ -9,3 +9,7 @@ div.issues {
 ul.article-list > ul {
     padding-bottom: 7px;
 }
+
+a.select-filter {
+    border-bottom: 2px #000000 solid;
+}
