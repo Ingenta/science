@@ -12,7 +12,7 @@ Template.layoutPublications.helpers({
 Template.layoutPublications.rendered = function() {
     $('#carousel').slick({
         slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToScroll: 3,
         autoplay: true,
         autoplaySpeed: 5000
     });
