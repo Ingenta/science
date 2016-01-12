@@ -29,7 +29,7 @@ Template.mediaList.helpers({
 	medias:function(){
 		var jid=Session.get("currJournalId") || this._id;
 		if(jid)
-			return Collections.Medias.find({"journalId":jid});
+			return Collections.Medias.find({"journalId":jid,doi:null});
 	},
 	dynamicTemp:function(){
 		var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});

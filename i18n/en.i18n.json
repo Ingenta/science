@@ -133,7 +133,8 @@
         "briefReport":"Brief report",
         "scienceNews":"Science News",
         "bookReview":"Book review",
-        "mooPaper":"MOO paper"
+        "mooPaper":"MOO paper",
+        "erratum":"Erratum"
     },
     "clickToView":"Click to view",
     "Reset":"重置",
