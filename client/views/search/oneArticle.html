@@ -1,6 +1,6 @@
 <template name="oneArticle">
 
-    <ul class="dotted list-unstyled">
+    <ul class="dotted list-unstyled article-info">
         <li>
 	        <!--{{#if can "delete-article" "resource"}}-->
 	        <!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
@@ -17,9 +17,11 @@
                     <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
                     <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
                 </li>
-                {{> abstractDetails}}
                 <li>
                     {{contentType}}
+                </li>
+                <li>
+                    {{> abstractDetails}}
                 </li>
             </ul>
         </li>
