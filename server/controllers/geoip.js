@@ -39,6 +39,9 @@ getLocationByIP = function (ip) {
         //pretend to be baidu in dev mode because of internal office ip not resolving correctly
         ip = "180.149.132.47"; //180.149.132.47 = baidu.com
     }
+    if(_.isString(ip) && ip.startWith("192.168")){//内网ip推定为国内
+        return {country_code:"CN"};
+    }
     var result = getLocationFromGeoIPServer(ip);
     if (!result)
         result = getLocationFromLocalDatabase(ip);

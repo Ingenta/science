@@ -16,7 +16,7 @@ ArticleSubs = new SubsManager();
 HomePageSubs.subscribe("current_user_data");
 HomePageSubs.subscribe('pages');
 HomePageSubs.subscribe('images');
-HomePageSubs.subscribe('advertisement');
+Meteor.subscribe('advertisement');
 HomePageSubs.subscribe('institutions');
 HomePageSubs.subscribe('searchHistory');
 HomePageSubs.subscribe('emailConfig');
