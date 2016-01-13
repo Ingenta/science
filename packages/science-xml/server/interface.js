@@ -40,7 +40,7 @@ Router.route('/api', function () {
 			result.message=err.message;
 		}else{
 			result.result="success";
-			Tasks.startJob(targetPath,filename,"application/zip");
+			Tasks.startJob(targetPath,filename,"application/zip",{creator:"api"});
 		}
 		res.write(JSON.stringify(result));
 
