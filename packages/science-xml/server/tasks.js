@@ -150,7 +150,7 @@ Tasks.parse = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        if(!Tasks.checkPermission(result.journalId, log.creator)){
+        if(log.creator!='api' && !Tasks.checkPermission(result.journalId, log.creator)){
             log.errors.push("Upload article permission denied");
             Tasks.fail(taskId,logId,log.errors);
             return;
