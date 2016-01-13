@@ -2,7 +2,7 @@ Meteor.startup(function () {
 
     //Topics.remove({})
     if (Topics.find().count() === 0) {
-        logger.info("importing PACS data from /assets/app/topics.json");
+        logger.info("importing Topic data from /assets/app/topics.json");
         var topicsFile = process.cwd() + "/assets/app/topics.json";
         if (!Science.FSE.existsSync(topicsFile))
             return;
