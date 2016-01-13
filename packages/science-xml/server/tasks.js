@@ -5,7 +5,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
     //文章的出版状态(默认是正式出版)
     var pubstatus = formFields ? formFields.pubStatus : "normal";
-
+    formFields = _.isEmpty(formFields) || {};
     var logId = UploadLog.insert({
         name: fileName,
         pubStatus: pubstatus,
@@ -140,13 +140,17 @@ Tasks.parse = function (logId, pathToXml) {
         logId: logId
     });
     try {
-        var result = ScienceXML.parseXml(pathToXml,log.pubStatus);
+        var result;
+        if(log.pubStatus == "accepted")
+            result = Science.parserAcceped(pathToXml)
+        else
+            result = ScienceXML.parseXml(pathToXml,log.pubStatus);
         log.errors = result.errors;
         if (!_.isEmpty(log.errors)) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        if(!Tasks.checkPermission(result.journalId, log.creator)){
+        if(log.creator!='api' && !Tasks.checkPermission(result.journalId, log.creator)){
             log.errors.push("Upload article permission denied");
             Tasks.fail(taskId,logId,log.errors);
             return;
