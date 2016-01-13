@@ -41,7 +41,6 @@ Tasks.fail = function (taskId, logId, errors) {
     UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: errors}});
 
     var log = UploadLog.findOne({_id: logId});
-    ScienceXML.RemoveFile(log.filePath);
     if (log.extractTo)
         ScienceXML.RemoveFile(log.extractTo);
 }
@@ -308,8 +307,7 @@ Tasks.insertArticleTask = function (logId, result) {
     if (!hadError) {
         var url = Science.URL.articleDetail(articleId);
         logger.info("Import complete: " + log.name + " available at " + url);
-        //cleanup and set log and tasks to done
-        ScienceXML.RemoveFile(log.filePath);
+
         UploadTasks.update(
             {_id: taskId},
             {$set: {status: "Success"}});
