@@ -19,8 +19,11 @@ copy *.tar.gz to ~/app folder on server
 --------------------------
 3. cd to respective folder and build docker images
 
+docker pull index.alauda.cn/jackkav/docker-meteor
+docker pull index.alauda.cn/library/mongo
 docker build -t jackjk/mongo https://github.com/Ingenta/docker-mongo.git
 docker build -t jackjk/solr https://github.com/Ingenta/docker-solr.git
+(if this doesn't work download the zip extract it and replace the last part with path to dockerfile)
 docker build -t jackjk/conn https://raw.githubusercontent.com/Ingenta/docker-solr-mongo-connector/master/Dockerfile
 
 --------------------------
