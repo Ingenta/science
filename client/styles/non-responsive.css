@@ -229,3 +229,7 @@ body,
 .left-filter-menu {
     padding-left: 0px;
 }
+
+.recommed-topics > div{
+    margin-bottom:4px;
+}
