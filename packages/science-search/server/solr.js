@@ -38,7 +38,8 @@ SolrUtils = {
         "issue": ["issue"],
         "page": ["startPage", 'elocationId'],
         "publishDate": ["published"],
-        "not_id": ["NOT _id"]
+        "not_id": ["NOT _id"],
+        "contentType":["contentType"]
     },
     getQueryStr: function (queryArr) {
         var qstring;
