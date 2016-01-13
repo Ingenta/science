@@ -5,7 +5,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
     //文章的出版状态(默认是正式出版)
     var pubstatus = formFields ? formFields.pubStatus : "normal";
-
+    formFields = _.isEmpty(formFields) || {};
     var logId = UploadLog.insert({
         name: fileName,
         pubStatus: pubstatus,
