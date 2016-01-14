@@ -1,6 +1,7 @@
-var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10"
+var localDevServer = process.env.DOCKER_URL ? process.env.DOCKER_URL : "http://192.168.1.10";
+var productionSolrServer = process.env.SOLR_URL ? process.env.SOLR_URL : "http://solr";
 var isDev = process.env.ROOT_URL.indexOf('localhost') != -1;
-var host = isDev ? localDevServer : "http://solr";
+var host = isDev ? localDevServer : productionSolrServer;
 SolrClient = Solr.createClient({
     host: host,
     port: "8983",
