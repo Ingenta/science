@@ -7,14 +7,13 @@ this.Publications.allow({
     update: function (userId, doc) {
         return Permissions.userCan("modify-journal", "resource", userId);
     },
-    remove: function(userId,doc){
-        return Permissions.userCan("delete-journal","resource",userId);
+    remove: function (userId, doc) {
+        return Permissions.userCan("delete-journal", "resource", userId);
     }
 });
 
 
-
-var getTags = function(){
+var getTags = function () {
     var tags = Tags.find({}).fetch();
     var result = [];
     _.each(tags, function (item) {
@@ -23,13 +22,24 @@ var getTags = function(){
     return result;
 }
 
-var getTopics= function () {
+var getTopics = function () {
     var iscn = TAPi18n.getLanguage() === 'zh-CN';
     var topics = Topics.find({}, {name: 1, englishName: 1}).fetch();
     var result = [];
     _.each(topics, function (item) {
         var name = iscn ? item.name : item.englishName;
         result.push({label: name, value: item._id});
+    });
+    return result;
+}
+
+var getJournals = function () {
+    var iscn = TAPi18n.getLanguage() === 'zh-CN';
+    var pubs = Publications.find({}, {title: 1, titleCn: 1}).fetch();
+    var result = [];
+    _.each(pubs, function (item) {
+        var title = iscn ? item.titleCn : item.title;
+        result.push({label: title, value: item._id});
     });
     return result;
 }
@@ -88,7 +98,7 @@ PublicationsSchema = new SimpleSchema({
     included: {
         type: [String],
         optional: true,
-        autoform:{
+        autoform: {
             type: "universe-select",
             afFieldInput: {
                 multiple: true,
@@ -103,7 +113,7 @@ PublicationsSchema = new SimpleSchema({
     topicId: {
         type: [String],
         optional: true,
-        autoform:{
+        autoform: {
             type: "universe-select",
             afFieldInput: {
                 multiple: true,
@@ -166,7 +176,7 @@ PublicationsSchema = new SimpleSchema({
         type: String
     },
     description: {
-        optional:true,
+        optional: true,
         type: Science.schemas.MultipleAreaSchema
     },
     publisher: {
@@ -180,7 +190,7 @@ PublicationsSchema = new SimpleSchema({
                 type: 'fileUpload',
                 collection: 'Images',
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png',
-                label: function(){
+                label: function () {
                     return TAPi18n.__("Choose file")
                 }
             }
@@ -194,33 +204,33 @@ PublicationsSchema = new SimpleSchema({
                 type: 'fileUpload',
                 collection: 'Images',
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png',
-                label: function(){
-                   return TAPi18n.__("Choose file")
+                label: function () {
+                    return TAPi18n.__("Choose file")
                 }
             }
         }
     },
     adBanner: {
-    type: String,
+        type: String,
         optional: true,
         autoform: {
-        afFieldInput: {
-            type: 'fileUpload',
+            afFieldInput: {
+                type: 'fileUpload',
                 collection: 'Images',
                 accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png',
-                label: function(){
+                label: function () {
                     return TAPi18n.__("Choose file")
                 }
+            }
         }
-    }
-},
-    scholarOneCode:{
-        type: String,
-        optional:true
     },
-    magtechCode:{
+    scholarOneCode: {
         type: String,
-        optional:true
+        optional: true
+    },
+    magtechCode: {
+        type: String,
+        optional: true
     },
     tabSelections: {
         type: [String],
@@ -229,26 +239,17 @@ PublicationsSchema = new SimpleSchema({
             type: "select-checkbox-inline"
         }
     },
-    historicalJournal: {
-        type: [Object],
-        optional: true
-    },
-    "historicalJournal.$.title": {
-        type: Science.schemas.MultipleTextOptionalSchema,
-        optional: true
-    },
-    "historicalJournal.$.dateRange": {
-        type: String,
-        optional: true
-    },
-    "historicalJournal.$.issn": {
-        type: String,
-        max: 9,
-        optional: true
-    },
-    "historicalJournal.$.essn": {
-        type: String,
-        optional: true
+    historicalJournals: {
+        type: [String],
+        optional: true,
+        autoform: {
+            type: "universe-select",
+            afFieldInput: {
+                multiple: true,
+                create: false,
+                options: getJournals
+            }
+        }
     }
 });
 Meteor.startup(function () {

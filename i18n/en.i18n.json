@@ -326,30 +326,8 @@
                     "Author Center": "Author Center"
                 }
             },
-            "historicalJournal": {
-                "label": "Historical Journal",
-                "$": {
-                    "title": {
-                        "label": "Previous Title",
-                        "cn": {
-                            "label": "Chinese"
-                        },
-                        "en": {
-                            "label": "English"
-                        }
-                    },
-                    "dateRange": {
-                        "label": "Effective Date",
-                        "placeholder": "e.g. 1950-2001"
-                    },
-                    "issn": {
-                        "label": "ISSN",
-                        "placeholder": "1234-5678"
-                    },
-                    "essn": {
-                        "label": "EISSN"
-                    }
-                }
+            "historicalJournals": {
+                "label": "Historical Journal"
             }
         },
         "publishers": {
