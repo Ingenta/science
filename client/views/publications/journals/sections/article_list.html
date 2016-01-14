@@ -58,23 +58,18 @@
 </template>
 
 <template name="HistoricalJournalTable">
-    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
-        {{#unless historicalJournal}}
-            <div class="pull-left">
-                {{_ "No historical journal found!"}}
-            </div>
-        {{/unless}}
-        <div class="pull-right">
-            {{> updateHistoricalJournalModalForm}}
+    {{#unless historicalJournals}}
+        <div class="pull-left">
+            {{_ "No historical journal found!"}}
         </div>
-    {{/if}}
+    {{/unless}}
 
-    {{#if historicalJournal}}
+    {{#if historicalJournals}}
         <h4>{{_ "Historical Journal"}}</h4>
         <table id="dataview-table" class="table table-striped table-hover">
             <thead id="dataview-table-header">
             <tr id="dataview-table-header-row">
-                <th class="th-sortable" data-sort="username">
+                <th class="th-sortable">
                     {{_ "Previous Title"}}
                 </th>
                 <th class="th-sortable">
@@ -86,13 +81,10 @@
                 <th class="th-sortable">
                     "EISSN"
                 </th>
-                <!--<th>-->
-                <!--&nbsp;-->
-                <!--</th>-->
             </tr>
             </thead>
             <tbody id="dataview-table-items">
-            {{#each historicalJournal}}
+            {{#each historicalJournals}}
                 {{> HistoricalJournalItem}}
             {{/each}}
             </tbody>
@@ -101,28 +93,20 @@
 </template>
 
 <template name="HistoricalJournalItem">
+    {{#with journalItemData this}}
     <tr id="dataview-table-items-row">
         <td>
-            {{{translateThis title.cn title.en}}}
+            {{{translateThis titleCn title}}}
         </td>
         <td>
-            {{dateRange}}
+            {{moFormat createDate 'll'}}
         </td>
         <td>
             {{formatissn issn}}
         </td>
         <td>
-            {{essn}}
+            {{EISSN}}
         </td>
-        <!--<td class="td-icon">-->
-            <!--{{#if can "user-modify" "user"}}-->
-        <!--<span id="edit-button" class="fa fa-pencil " title="Edit"></span>-->
-            <!--{{/if}}-->
-        <!--</td>-->
     </tr>
-</template>
-
-<template name="updateHistoricalJournalModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="Publications" doc=_id operation="update" fields="historicalJournal" buttonContent=getUpdateButtonContent}}
-    {{/afModal}}
+    {{/with}}
 </template>
