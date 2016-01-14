@@ -19,8 +19,11 @@ copy *.tar.gz to ~/app folder on server
 --------------------------
 3. cd to respective folder and build docker images
 
+docker pull index.alauda.cn/jackkav/docker-meteor
+docker pull index.alauda.cn/library/mongo
 docker build -t jackjk/mongo https://github.com/Ingenta/docker-mongo.git
 docker build -t jackjk/solr https://github.com/Ingenta/docker-solr.git
+(if this doesn't work download the zip extract it and replace the last part with path to dockerfile)
 docker build -t jackjk/conn https://raw.githubusercontent.com/Ingenta/docker-solr-mongo-connector/master/Dockerfile
 
 --------------------------
@@ -38,6 +41,6 @@ docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo j
 docker run -d --name freegeoip -p 8080:8080 --restart=always fiorix/freegeoip
 
 docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr --link freegeoip:freegeoip -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
-
+docker run -d --name meteor --restart=always --link freegeoip:freegeoip -e ROOT_URL=http://219.238.6.215 -e MONGO_URL=mongodb://192.168.0.24:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
 
 --------------------------

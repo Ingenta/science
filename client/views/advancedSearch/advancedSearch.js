@@ -1,20 +1,10 @@
 Template.AdvancedSearch.onRendered(function() {
     this.$('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD'});
-    $(".js-multiple1").select2({
-        placeholder: TAPi18n.__( "Publisher name")
-    });
-    $(".js-multiple2").select2({
-        placeholder: TAPi18n.__( "Journal name")
-    });
-    $(".js-multiple3").select2({
-        placeholder: TAPi18n.__( "The topic name")
-    });
-    $(".js-multiple4").select2({
-        placeholder: TAPi18n.__( "Article Content Type")
-    });
-    $(".js-multiple5").select2({
-        placeholder: TAPi18n.__( "Journal label")
-    });
+    $(".js-multiple1").select2();
+    $(".js-multiple2").select2();
+    $(".js-multiple3").select2();
+    $(".js-multiple4").select2();
+    $(".js-multiple5").select2();
 });
 
 Template.AdvancedSearch.helpers({

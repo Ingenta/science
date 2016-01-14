@@ -5,7 +5,7 @@ Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
     //文章的出版状态(默认是正式出版)
     var pubstatus = formFields ? formFields.pubStatus : "normal";
-
+    formFields = _.isEmpty(formFields) ? {} : formFields;
     var logId = UploadLog.insert({
         name: fileName,
         pubStatus: pubstatus,
@@ -41,7 +41,6 @@ Tasks.fail = function (taskId, logId, errors) {
     UploadLog.update({_id: logId}, {$set: {status: "Failed", errors: errors}});
 
     var log = UploadLog.findOne({_id: logId});
-    ScienceXML.RemoveFile(log.filePath);
     if (log.extractTo)
         ScienceXML.RemoveFile(log.extractTo);
 }
@@ -150,7 +149,7 @@ Tasks.parse = function (logId, pathToXml) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        if(!Tasks.checkPermission(result.journalId, log.creator)){
+        if(log.creator!='api' && !Tasks.checkPermission(result.journalId, log.creator)){
             log.errors.push("Upload article permission denied");
             Tasks.fail(taskId,logId,log.errors);
             return;
@@ -308,8 +307,7 @@ Tasks.insertArticleTask = function (logId, result) {
     if (!hadError) {
         var url = Science.URL.articleDetail(articleId);
         logger.info("Import complete: " + log.name + " available at " + url);
-        //cleanup and set log and tasks to done
-        ScienceXML.RemoveFile(log.filePath);
+
         UploadTasks.update(
             {_id: taskId},
             {$set: {status: "Success"}});
