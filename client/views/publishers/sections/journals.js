@@ -15,6 +15,8 @@ Template.PublicationList.helpers({
             numPerPage = 10;
         }
         var q = {};
+        if(!Permissions.userCan("modify-journal", "resource",this.userId))
+            q.visible="1";
         pubId && (q.publisher = pubId);
         var reg;
         if (first && first == "other") {
