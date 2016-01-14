@@ -41,6 +41,6 @@ docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo j
 docker run -d --name freegeoip -p 8080:8080 --restart=always fiorix/freegeoip
 
 docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr --link freegeoip:freegeoip -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
-
+docker run -d --name meteor --restart=always --link freegeoip:freegeoip -e ROOT_URL=http://219.238.6.215 -e MONGO_URL=mongodb://192.168.0.24:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
 
 --------------------------
