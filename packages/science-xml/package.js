@@ -29,7 +29,8 @@ Package.onUse(function (api) {
         'server/parse.js',
         'server/tasks.js',
         'server/interface.js',
-        'server/ftpScan.js'
+        'server/ftpScan.js',
+        'server/acceptedParse.js'
     ], 'server');
 
     api.addFiles('client/views/upload.html', 'client');
