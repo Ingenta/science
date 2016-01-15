@@ -191,7 +191,9 @@ SolrUtils = {
         userParams = Science.JSON.MergeObject(userParams, options);
         SolrClient.query(userParams, function (err, response) {
             if (!err) {
-                return myFuture.return(JSON.parse(response.content));
+                var result = JSON.parse(response.content);
+                SolrClient.triggerAfterSearch(result);
+                return myFuture.return(result);
             }
             else {
                 logger.error("connection to solr failed at: " + SolrClient.options.host + ":" + SolrClient.options.port);
