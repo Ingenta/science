@@ -70,6 +70,16 @@ SolrUtils = {
             _.each(queryObj, function (val, key) {
                 isFirstOne = false;
                 var solrFields = SolrUtils.facetFieldMap[key];
+                if(key == 'journalId') {
+                    var journalIdForSolr = val;
+                    _.each(val, function (jId) {
+                        var journal = Publications.findOne({_id: jId}, {fields: {historicalJournals: 1}})
+                        if (journal && !_.isEmpty(journal.historicalJournals)) {
+                            journalIdForSolr = _.union(journalIdForSolr, journal.historicalJournals);
+                        }
+                    })
+                    val = journalIdForSolr;
+                }
                 if (key == 'publishDate') {
                     if (val && (val.start || val.end)) {
                         var subQueues = _.map(solrFields, function (sField) {
@@ -79,6 +89,7 @@ SolrUtils = {
                         });
                         fqStrArr.push(subQueues.join(" OR "));
                     }
+
                 } else {
                     var subQueues = _.map(solrFields, function (field) {
                         if (typeof val === 'string' || typeof val === 'number') {
