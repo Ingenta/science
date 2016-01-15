@@ -44,10 +44,11 @@ Meteor.startup(function(){
 			var journals = Publications.find({_id:{$in:journalIdArr}},{fields: {historicalJournals: 1,visible:1}}).fetch();
 
 			_.each(journalFacetObj,function(count,id){
-				var journal = _.find(journals,function(j){return j._id=id});
-				if(!journal.visible){
-					var newestJournal=_.find(journals,function(j){return _.contains(j.historicalJournals,id) && j.visible});
-					journalFacetObj[newestJournal._id] = (journalFacetObj[newestJournal._id] || 0 ) + count;
+				var journal = _.find(journals,function(j){return j._id===id});
+				if(journal.visible=="0"){
+					var newestJournal=_.find(journals,function(hj){return _.contains(hj.historicalJournals,id) && hj.visible=="1"});
+					if(newestJournal)
+						journalFacetObj[newestJournal._id] = (journalFacetObj[newestJournal._id] || 0 ) + count;
 					delete journalFacetObj[id];
 				}
 			})
