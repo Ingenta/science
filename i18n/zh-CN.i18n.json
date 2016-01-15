@@ -469,30 +469,8 @@
           "Author Center": "作者中心"
         }
       },
-      "historicalJournal": {
-        "label": "历史期刊",
-        "$": {
-          "title": {
-            "label": "过刊名称",
-            "cn": {
-              "label": "中文"
-            },
-            "en": {
-              "label": "英文"
-            }
-          },
-          "dateRange": {
-            "label": "有效日期",
-            "placeholder": "例如 1950-2001"
-          },
-          "issn": {
-            "label": "ISSN",
-            "placeholder": "1234-5678"
-          },
-          "essn": {
-            "label": "EISSN"
-          }
-        }
+      "historicalJournals": {
+        "label": "历史期刊"
       }
     },
     "publishers": {

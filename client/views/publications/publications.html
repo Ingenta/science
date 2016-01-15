@@ -88,7 +88,7 @@
             {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                 {{> displayPublication}}
                 {{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"
-                fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,scholarOneCode,magtechCode,tabSelections,historicalJournal" buttonContent=getUpdateButtonContent}}
+                fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,scholarOneCode,magtechCode,tabSelections,historicalJournals" buttonContent=getUpdateButtonContent}}
                 {{/afModal}}
             {{/if}}
             {{#if permissionCheckWithScope "delete-journal" "resource"  "publisher" publisher}}

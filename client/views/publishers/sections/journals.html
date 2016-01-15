@@ -59,7 +59,7 @@
                     {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                         {{> displayPublication}}
                         {{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"
-                        fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,scholarOneCode,magtechCode,tabSelections,historicalJournal" buttonContent=getUpdateButtonContent}}
+                        fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,scholarOneCode,magtechCode,tabSelections,historicalJournals" buttonContent=getUpdateButtonContent}}
                         {{/afModal}}
                     {{/if}}
                     {{#if permissionCheckWithScope "delete-journal" "resource" "publisher" publisher}}
@@ -141,7 +141,7 @@
 	                    {{> afQuickField name="scholarOneCode"}}
 	                    {{> afQuickField name="magtechCode"}}
                         {{> afFieldInput name="tabSelections"}}
-                        {{> afQuickField name="historicalJournal"}}
+                        {{> afQuickField name="historicalJournals"}}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>

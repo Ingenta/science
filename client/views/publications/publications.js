@@ -74,6 +74,8 @@ Template.FilterList.helpers({
             numPerPage = 10;
         }
         var q = {};
+        if(!Permissions.userCan("modify-journal", "resource",this.userId))
+            q.visible="1";
         pubId && (q.publisher = pubId);
         var reg;
         if (first && first == "other") {
@@ -112,6 +114,8 @@ Template.FilterList.helpers({
         var topicId = Session.get('filterTopics');
         topicId = _.isArray(topicId)?topicId:[topicId];
         var q = {};
+        if(!Permissions.userCan("modify-journal", "resource",this.userId))
+            q.visible="1";
         pubId && (q.publisher = pubId);
         var reg;
         if (first && first == "other") {

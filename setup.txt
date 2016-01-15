@@ -43,4 +43,6 @@ docker run -d --name freegeoip -p 8080:8080 --restart=always fiorix/freegeoip
 docker run -d --name meteor --restart=always --link mongo:mongo --link solr:solr --link freegeoip:freegeoip -e ROOT_URL=http://219.238.6.206 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
 docker run -d --name meteor --restart=always --link freegeoip:freegeoip -e ROOT_URL=http://219.238.6.215 -e MONGO_URL=mongodb://192.168.0.24:27017/meteor -v ~/app:/bundle -p 80:80 jackkav/docker-meteor
 
+docker run -d --name jenkinsci  --restart=always -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai -p 8081:8080 -v /var/jenkins_home jenkins
+
 --------------------------

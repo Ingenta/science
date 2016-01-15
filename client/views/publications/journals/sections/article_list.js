@@ -2,30 +2,34 @@ Template.journalNavigationPanel.helpers({
     volumeInJournal: function (journalId) {
         if (journalId) {
             var v = Volumes.find({'journalId': journalId}).fetch();
-            return _.sortBy(v, function(oneVolume){ return parseInt(oneVolume.volume,10); }).reverse();
+            return _.sortBy(v, function (oneVolume) {
+                return parseInt(oneVolume.volume, 10);
+            }).reverse();
         }
     },
     issueInVolume: function (journalId, volume) {
         if (journalId && volume) {
             var issues = Issues.find({'journalId': journalId, 'volume': volume}).fetch();
-            return _.sortBy(issues, function(oneIssue){ return parseInt(oneIssue.issue,10); }).reverse();
+            return _.sortBy(issues, function (oneIssue) {
+                return parseInt(oneIssue.issue, 10);
+            }).reverse();
         }
     },
-    formatMonth:function(){
-        return this.month?(", "+this.month):"";
+    formatMonth: function () {
+        return this.month ? (", " + this.month) : "";
     },
-    unionYear:function(){
-        var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume},{$fields:{year:1}}).fetch();
-        var years = _.pluck(issues,'year');
+    unionYear: function () {
+        var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume}, {$fields: {year: 1}}).fetch();
+        var years = _.pluck(issues, 'year');
         years = _.uniq(years.join(", ").split(/, ?/)).sort();
-        if(!_.isEmpty(years))
-            return "("+years.join(", ") +")"
+        if (!_.isEmpty(years))
+            return "(" + years.join(", ") + ")"
     },
-    class:function(){
-        return this._id===Session.get("currentVolumeId")?"fa-minus":"fa-plus";
+    class: function () {
+        return this._id === Session.get("currentVolumeId") ? "fa-minus" : "fa-plus";
     },
-    issueDisplay:function(){
-        return this._id===Session.get("currentVolumeId")?"block":"none";
+    issueDisplay: function () {
+        return this._id === Session.get("currentVolumeId") ? "block" : "none";
     }
 });
 
@@ -42,30 +46,34 @@ Template.journalNavigationPanel.events({
         var issue = $(event.target).data().issue;
         issueId && Session.set("currentIssueId", issueId);
         //if url contains issue, router.go
-            Router.current().params.volume = volume;
-            Router.current().params.issue = issue;
-            Router.go("journal.name.toc", Router.current().params)
+        Router.current().params.volume = volume;
+        Router.current().params.issue = issue;
+        Router.go("journal.name.toc", Router.current().params)
     }
 });
 
-var getLastIssue = function(){
+var getLastIssue = function () {
     //Get the newest issue to display by default
     var journalId = Session.get('currentJournalId');
     var issues = Issues.find({'journalId': journalId}).fetch();
-    var highestVolume = _.max(issues, function(i){ return parseInt(i.volume,10); }).volume;
+    var highestVolume = _.max(issues, function (i) {
+        return parseInt(i.volume, 10);
+    }).volume;
     var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
-    return  _.max(issuesInThisVolume, function(i){ return parseInt(i.issue,10); });
+    return _.max(issuesInThisVolume, function (i) {
+        return parseInt(i.issue, 10);
+    });
 }
-Template.journalNavigationPanel.onRendered(function(){
+Template.journalNavigationPanel.onRendered(function () {
     var lastIssue;
-    if(Session.get("currentIssueId"))
-        lastIssue = Issues.findOne({'_id':Session.get("currentIssueId")});
+    if (Session.get("currentIssueId"))
+        lastIssue = Issues.findOne({'_id': Session.get("currentIssueId")});
     else
         lastIssue = getLastIssue();
-    if(!lastIssue) return;
-    var currVolume = Volumes.findOne({journalId:lastIssue.journalId,volume:lastIssue.volume});
-    if(!currVolume) return;
-    Session.set("currentVolumeId",currVolume._id)
+    if (!lastIssue) return;
+    var currVolume = Volumes.findOne({journalId: lastIssue.journalId, volume: lastIssue.volume});
+    if (!currVolume) return;
+    Session.set("currentVolumeId", currVolume._id)
 })
 
 
@@ -80,9 +88,9 @@ Template.articleListRight.helpers({
         var pubStatus = Template.currentData().pubStatus;
         var curIssue = Session.get("currentIssueId");
         if (curIssue) {
-            return Articles.find({issueId: curIssue, pubStatus: pubStatus},{sort: {elocationId: -1}});
+            return Articles.find({issueId: curIssue, pubStatus: pubStatus}, {sort: {elocationId: -1}});
         } else {
-            var lastIssue =  getLastIssue();
+            var lastIssue = getLastIssue();
             if (lastIssue) Session.set("currentIssueId", lastIssue._id);
         }
     },
@@ -92,15 +100,15 @@ Template.articleListRight.helpers({
         var i = Issues.findOne({_id: curIssue});
         if (!i)return;
         var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", ";
-        if(i.month){
-            var months = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
-            if(TAPi18n.getLanguage() === "en"){
-                title+=months[i.month] + " " + i.year;
-            }else{
-                title+=i.year + "年" + i.month + "月";
+        if (i.month) {
+            var months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            if (TAPi18n.getLanguage() === "en") {
+                title += months[i.month] + " " + i.year;
+            } else {
+                title += i.year + "年" + i.month + "月";
             }
-        }else{
-            title+=i.year;
+        } else {
+            title += i.year;
         }
         return title;
 
@@ -114,5 +122,10 @@ Template.articleListRight.helpers({
     },
     normal: function () {
         return Template.currentData().pubStatus == "normal"
+    }
+});
+Template.HistoricalJournalItem.helpers({
+    journalItemData: function (id) {
+        return Publications.findOne({_id: id});
     }
 });
