@@ -40,7 +40,8 @@ SolrUtils = {
         "page": ["startPage", 'elocationId'],
         "publishDate": ["published"],
         "not_id": ["NOT _id"],
-        "contentType":["contentType"]
+        "contentType":["contentType"],
+        "pacsCodes":["pacsCodes"]
     },
     getQueryStr: function (queryArr) {
         var qstring;
@@ -78,7 +79,7 @@ SolrUtils = {
                             journalIdForSolr = _.union(journalIdForSolr, journal.historicalJournals);
                         }
                     })
-                    val = journalIdForSolr;
+                    val = journalIdForSolr.join(" OR ");
                 }
                 if (key == 'publishDate') {
                     if (val && (val.start || val.end)) {
