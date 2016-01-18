@@ -94,7 +94,7 @@ AutoForm.addHooks(['addTopicModalForm'], {
 
 Template.Topics.events({
     'keyup #topic-search': function (e) {
-        if (e.keyCode === 32 || e.keyCode === 13) {
+        if (e.keyCode === 13) {
             var pattern = $('#topic-search').val();
             var options = {
                 ignoreCase: true,
@@ -103,6 +103,6 @@ Template.Topics.events({
             };
             $('#tree').treeview('search', [pattern, options]);
         }
-
+        if(e.keyCode === 8) $('#tree').treeview('collapseAll');
     }
 })
