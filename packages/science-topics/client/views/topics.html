@@ -1,11 +1,10 @@
 <template name="Topics">
     <div class="container-fluid">
         {{> pageElement key="topic"}}
-        <input class="refineSearch form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
+        <input id="topic-search" class="form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
         {{#if selectedTopic}}
             <div class="container-fluid">
                 <div class="pull-right">
-                    {{selectedTopic}}
                     {{#if can "add-topic" "topic" }}
                         {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
                     {{/if}}

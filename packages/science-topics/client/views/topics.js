@@ -5,7 +5,6 @@ Template.Topics.onRendered(function () {
         levels: 1,
         showBorder: false,
         data: flatTopicsToTreeNodes(isLangCn),
-        showTags: true,
         enableLinks: true,
         onNodeSelected: function (event, node) {
             Session.set("selectedTopic", node.tags[0]);
@@ -80,6 +79,26 @@ AutoForm.addHooks(['addTopicModalForm'], {
         }
     }
 }, true);
+
+Template.Topics.events({
+    'keyup #topic-search': function (e) {
+        console.log(e.keyCode)
+        if(e.keyCode===32||e.keyCode === 13) {
+            var pattern = $('#topic-search').val();
+            var options = {
+                ignoreCase: true,
+                exactMatch: false,
+                revealResults: true
+            };
+            var results = $('#tree').treeview('search', [pattern, options]);
+        }
+        //var output = '<p>' + results.length + ' matches found</p>';
+        //$.each(results, function (index, result) {
+        //    output += '<p>- ' + result.text + '</p>';
+        //});
+        //$('#search-output').html(output);
+    }
+})
 
 //var reactDic = new ReactiveDict();
 //
