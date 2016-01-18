@@ -40,7 +40,8 @@ SolrUtils = {
         "page": ["startPage", 'elocationId'],
         "publishDate": ["published"],
         "not_id": ["NOT _id"],
-        "contentType":["contentType"]
+        "contentType":["contentType"],
+        "pacsCodes":["pacsCodes"]
     },
     getQueryStr: function (queryArr) {
         var qstring;
@@ -70,6 +71,16 @@ SolrUtils = {
             _.each(queryObj, function (val, key) {
                 isFirstOne = false;
                 var solrFields = SolrUtils.facetFieldMap[key];
+                if(key == 'journalId') {
+                    var journalIdForSolr = val;
+                    _.each(val, function (jId) {
+                        var journal = Publications.findOne({_id: jId}, {fields: {historicalJournals: 1}})
+                        if (journal && !_.isEmpty(journal.historicalJournals)) {
+                            journalIdForSolr = _.union(journalIdForSolr, journal.historicalJournals);
+                        }
+                    })
+                    val = journalIdForSolr.join(" OR ");
+                }
                 if (key == 'publishDate') {
                     if (val && (val.start || val.end)) {
                         var subQueues = _.map(solrFields, function (sField) {
@@ -79,6 +90,7 @@ SolrUtils = {
                         });
                         fqStrArr.push(subQueues.join(" OR "));
                     }
+
                 } else {
                     var subQueues = _.map(solrFields, function (field) {
                         if (typeof val === 'string' || typeof val === 'number') {
@@ -179,7 +191,9 @@ SolrUtils = {
         userParams = Science.JSON.MergeObject(userParams, options);
         SolrClient.query(userParams, function (err, response) {
             if (!err) {
-                return myFuture.return(JSON.parse(response.content));
+                var result = JSON.parse(response.content);
+                SolrClient.triggerAfterSearch(result);
+                return myFuture.return(result);
             }
             else {
                 logger.error("connection to solr failed at: " + SolrClient.options.host + ":" + SolrClient.options.port);
