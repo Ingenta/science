@@ -13,3 +13,19 @@ ul.article-list > ul {
 a.select-filter {
     border-bottom: 2px #000000 solid;
 }
+
+.historical-journal > h5{
+    margin:4px
+}
+.journal-summary > dt {
+     width:50px !important;
+ }
+.journal-summary > dd {
+    margin-left:55px !important;
+}
+li.issue.list-group-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top-right-radius: initial;
+    border-top-left-radius: initial;
+}

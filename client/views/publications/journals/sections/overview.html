@@ -28,12 +28,14 @@
         {{/if}}
     </div>
     <p><img src="{{getImageHelper picture}}" width="137"/></p>
-
-    <p>ISSN: {{formatissn issn}}</p>
-
-    <p>E-ISSN: {{EISSN}}</p>
-
-    <p>CN: {{CN}}</p>
+    <dl class="dl-horizontal journal-summary">
+        <dt>ISSN</dt>
+        <dd>{{formatissn issn}}</dd>
+        <dt>E-ISSN</dt>
+        <dd>{{EISSN}}</dd>
+        <dt>CN</dt>
+        <dd>{{CN}}</dd>
+    </dl>
 </template>
 <template name="journalSummary">
     <div class="row">
