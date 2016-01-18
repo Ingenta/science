@@ -141,7 +141,7 @@ Tasks.parse = function (logId, pathToXml) {
     try {
         var result;
         if(log.pubStatus == "accepted")
-            result = Science.parserAcceped(pathToXml)
+            result = Science.parserAccepted(pathToXml)
         else
             result = ScienceXML.parseXml(pathToXml,log.pubStatus);
         log.errors = result.errors;
