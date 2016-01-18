@@ -14,13 +14,13 @@ Template.Topics.onRendered(function () {
         }
     });
 })
-var getSearchUrl = function(id){
+var getSearchUrl = function (id) {
     return SolrQuery.makeUrl(
         {
-            filterQuery:{
-                topic:[id]
+            filterQuery: {
+                topic: [id]
             },
-            setting:{from:'topic'}
+            setting: {from: 'topic'}
         }
     );
 }
@@ -28,13 +28,25 @@ var getSearchUrl = function(id){
 flatTopicsToTreeNodes = function (isLangCn) {
     var topicTree = [];
     _.each(Topics.find({parentId: null}).fetch(), function (topic) {
-        var thisTopic = {text: isLangCn ? topic.name : topic.englishName, tags: [topic._id], href: getSearchUrl(topic._id)};
+        var thisTopic = {
+            text: isLangCn ? topic.name : topic.englishName,
+            tags: [topic._id],
+            href: getSearchUrl(topic._id)
+        };
         var childTopics = [];
         _.each(Topics.find({parentId: topic._id}).fetch(), function (child) {
-            var oneChild = {text: isLangCn ? child.name : child.englishName, tags: [child._id], href: getSearchUrl(child._id)};
+            var oneChild = {
+                text: isLangCn ? child.name : child.englishName,
+                tags: [child._id],
+                href: getSearchUrl(child._id)
+            };
             var grandchildTopics = [];
             _.each(Topics.find({parentId: child._id}).fetch(), function (grandchild) {
-                var oneGrandchild = {text: isLangCn ? grandchild.name : grandchild.englishName, tags: [grandchild._id], href: getSearchUrl(grandchild._id)};
+                var oneGrandchild = {
+                    text: isLangCn ? grandchild.name : grandchild.englishName,
+                    tags: [grandchild._id],
+                    href: getSearchUrl(grandchild._id)
+                };
                 grandchildTopics.push(oneGrandchild)
             })
             if (!_.isEmpty(grandchildTopics))
@@ -56,14 +68,14 @@ Template.Topics.helpers({
     },
     hasNoChildTopics: function () {
         var topicId = Session.get("selectedTopic");
-        if(!topicId)return true;
+        if (!topicId)return true;
         if (Topics.findOne({parentId: topicId}))
             return false;
         return true;
     },
     getDoc: function () {
         var topicId = Session.get("selectedTopic");
-        if(!topicId)return;
+        if (!topicId)return;
         return Topics.findOne({_id: topicId});
     }
 });
@@ -82,8 +94,7 @@ AutoForm.addHooks(['addTopicModalForm'], {
 
 Template.Topics.events({
     'keyup #topic-search': function (e) {
-        console.log(e.keyCode)
-        if(e.keyCode===32||e.keyCode === 13) {
+        if (e.keyCode === 32 || e.keyCode === 13) {
             var pattern = $('#topic-search').val();
             var options = {
                 ignoreCase: true,
