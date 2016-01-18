@@ -19,7 +19,7 @@ Template.journalNavigationPanel.helpers({
         return this.month ? (", " + this.month) : "";
     },
     unionYear: function () {
-        var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume}, {$fields: {year: 1}}).fetch();
+        var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume}, {fields: {year: 1}}).fetch();
         var years = _.pluck(issues, 'year');
         years = _.uniq(years.join(", ").split(/, ?/)).sort();
         if (!_.isEmpty(years))
@@ -38,9 +38,10 @@ Template.journalNavigationPanel.events({
         var toggleOption = ["fa-plus", "fa-minus"];
         var remove = $(event.currentTarget).find("i.fa-plus").length ? 0 : 1;
         $(event.currentTarget).find("i").removeClass(toggleOption[remove]).addClass(toggleOption[1 - remove]);
-        $(event.currentTarget).next("div").toggle(200);
+        $(event.currentTarget).next(".issues").slideToggle(200);
     },
     "click .issue": function (event) {
+        console.log(this)
         var issueId = $(event.target).data().value;
         var volume = $(event.target).data().volume;
         var issue = $(event.target).data().issue;
@@ -48,6 +49,9 @@ Template.journalNavigationPanel.events({
         //if url contains issue, router.go
         Router.current().params.volume = volume;
         Router.current().params.issue = issue;
+        if(this.journalId!=Session.get("currentJournalId")){
+            Router.current().params.journalShortTitle=Publications.findOne({_id:this.journalId}).shortTitle;
+        }
         Router.go("journal.name.toc", Router.current().params)
     }
 });
@@ -129,3 +133,13 @@ Template.HistoricalJournalItem.helpers({
         return Publications.findOne({_id: id});
     }
 });
+
+Template.historicalJournalNavigationPanel.helpers({
+    hasHisJournal:function(){
+        return !_.isEmpty(this.historicalJournals)
+    },
+    sortedHisJournal:function(){
+        var hisJournals= Publications.find({_id:{$in:this.historicalJournals}},{sort:{publicationDate:-1}});
+        return hisJournals;
+    }
+})

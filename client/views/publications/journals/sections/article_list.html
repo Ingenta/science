@@ -3,6 +3,7 @@
         <div class="col-xs-3">
             {{> journalCoverSummary}}
             {{> journalNavigationPanel}}
+            {{> historicalJournalNavigationPanel}}
         </div>
         <div class="col-xs-9">
             {{> articleListRight pubStatus="normal"}}
@@ -12,18 +13,18 @@
 </template>
 
 <template name="journalNavigationPanel">
-    <ul class="list-unstyled">
+    <ul class="list-group">
         {{#each volumeInJournal _id}}
-            <li class="volume">
+            <li class="volume list-group-item">
                 <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }}{{unionYear}}</span>
             </li>
-            <div id="vol_{{_id}}" class="issues" style="display:{{issueDisplay}}">
+            <ul id="vol_{{_id}}" class="issues list-group" style="display:{{issueDisplay}}">
                 {{#each issueInVolume journalId volume}}
-                    <div class="issue" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
+                    <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
                         {{_ "issueItem" issue }} {{formatMonth}}
-                    </div>
+                    </li>
                 {{/each}}
-            </div>
+            </ul>
         {{/each}}
     </ul>
 </template>
@@ -109,4 +110,20 @@
         </td>
     </tr>
     {{/with}}
+</template>
+
+<template name="historicalJournalNavigationPanel">
+    {{#if hasHisJournal}}
+        <div class="historical-journal">
+        <h5>历史期刊</h5>
+
+        {{#each sortedHisJournal}}
+
+            <h6>{{{translateThis titleCn title}}}</h6>
+
+            {{> journalNavigationPanel}}
+        {{/each}}
+
+        </div>
+    {{/if}}
 </template>

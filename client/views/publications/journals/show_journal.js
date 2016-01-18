@@ -1,7 +1,7 @@
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug) {
-        Session.set("activeTab", "")
+        //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (slug !== "Browse" && Router.current().route.getName() === "journal.name.toc") {
             Router.current().params.volume = undefined;
