@@ -23,3 +23,9 @@ a.select-filter {
 .journal-summary > dd {
     margin-left:55px !important;
 }
+li.issue.list-group-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top-right-radius: initial;
+    border-top-left-radius: initial;
+}

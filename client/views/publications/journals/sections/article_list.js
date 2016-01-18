@@ -38,7 +38,7 @@ Template.journalNavigationPanel.events({
         var toggleOption = ["fa-plus", "fa-minus"];
         var remove = $(event.currentTarget).find("i.fa-plus").length ? 0 : 1;
         $(event.currentTarget).find("i").removeClass(toggleOption[remove]).addClass(toggleOption[1 - remove]);
-        $(event.currentTarget).next(".issues").toggle(200);
+        $(event.currentTarget).next(".issues").slideToggle(200);
     },
     "click .issue": function (event) {
         console.log(this)
