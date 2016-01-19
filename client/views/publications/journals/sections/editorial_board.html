@@ -62,31 +62,30 @@
                 {{#if can "delete-editorial-member" "resource" }}<a href="#" class="fa fa-trash"></a>{{/if}}
             </div>
 
-            <div class="row">
+            <div class="row editorial-desc">
                 <div class="col-xs-4">
                     <img src="{{getHeadImageHelper picture}}" width="133" height="180" />
 
-                    <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
+                    <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{translateThis position.cn position.en}}</div>
                 </div>
                 <div class="col-xs-8">
                     {{#if workUnits}}
-                        {{_ "Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
+                        {{_ "Company name"}}:&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
                     {{/if}}
                     {{#if phone}}
-                        {{_ "Phone"}}：&nbsp;{{phone}}<br>
+                        {{_ "Phone"}}:&nbsp;{{phone}}<br>
                     {{/if}}
                     {{#if fax}}
-                        {{_ "Fax"}}：&nbsp;{{fax}}<br>
+                        {{_ "Fax"}}:&nbsp;{{fax}}<br>
                     {{/if}}
                     {{#if email}}
-                        {{_ "E-mail"}}：&nbsp;{{email}}<br>
+                        {{_ "E-mail"}}:&nbsp;{{email}}<br>
                     {{/if}}
                     {{#if researchArea}}
-                        {{_ "Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
+                        {{_ "Research Area"}}:&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
                     {{/if}}
                     {{#if abstract}}
-                        {{_ "Introduction"}}
-                        ：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}
+                        {{_ "Introduction"}}:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}
                         <br>
                     {{/if}}
                 </div>
