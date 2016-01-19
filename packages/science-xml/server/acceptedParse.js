@@ -1,4 +1,4 @@
-Science.parserAcceped = function(filepath){
+Science.parserAccepted = function(filepath){
     var parserHelper = Science.XPath.ParseHelper;
     var fs = Science.FSE;
     var dom;
@@ -35,35 +35,17 @@ Science.parserAcceped = function(filepath){
             article.accepted = article.accepted.split("T")[0];
         article.topic = parserHelper.getFirstAttribute("//content/attr_type[@name='Speciality']/attribute/attribute::name", dom);
         var keywords = parserHelper.getAttributes("//content/attr_type[@name='Keywords']/attribute/attribute::name", dom);
-        article.keywords = {en: keywords,cn: keywords}
+        article.keywords = {en: keywords,cn: keywords};
+        if(article.issn){
+            article.issn = article.issn.replace("-","");
+            var publication = Publications.findOne({issn:article.issn});
+            if(publication){
+                article.publisher= publication.publisher;
+                article.journalId =publication._id;
+            }
+        }
         return article;
     }
-    /**
-     * 异步方法
-     * 读取xml文件
-     */
-    var readXml = function () {
-        fs.readFile(filepath, 'utf-8', function (err, data) {
-            if (err) {
-                callback(err);
-                return;
-            }
-            parse(data);
-        })
-    };
-    /**
-     * 异步方法
-     * 判断文件是否存在
-     */
-    var start = function () {
-        fs.exists(filepath, function (info) {
-            if (info !== true) {
-                callback(info);
-                return;
-            }
-            readXml();
-        });
-    };
-    //开始
-    start();
+    if(Science.FSE.existsSync(filepath))
+        return parse(Science.FSE.readFileSync(filepath, 'utf-8'));
 }

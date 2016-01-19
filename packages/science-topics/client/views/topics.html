@@ -1,74 +1,30 @@
 <template name="Topics">
     <div class="container-fluid">
         {{> pageElement key="topic"}}
-        {{#if can "add-topic" "topic"}}
-            <div class="row">
-                {{#jkafModal class="btn btn-success" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
-                    {{_ "Add new"}} <i class="fa fa-plus"></i>
-                {{/jkafModal}}
+        <input id="topic-search" class="form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
+        {{#if selectedTopic}}
+            <div class="container-fluid">
+                <div class="pull-right">
+                    {{#if can "add-topic" "topic" }}
+                        {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
+                    {{/if}}
+                    {{#if can "modify-topic" "topic" }}
+                        {{>jkafModal class="fa fa-pencil" doc=getDoc template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
+                    {{/if}}
+                    {{#if can "delete-topic" "topic" }}
+                        {{#if hasNoChildTopics}}
+                            {{> deleteTopicModalForm}}
+                        {{/if}}
+                    {{/if}}
+                    {{#if can "add-article-to-topic" "topic" }}
+                        <a class="fa fa-long-arrow-right"
+                           href="{{pathFor 'topics.selectArticles' topicsId=selectedTopic}}"></a>
+                    {{/if}}
+                </div>
             </div>
         {{/if}}
-        <hr>
-        <div class="row topics parentTopicList">
-            <input class="refineSearch form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
-            {{> TopicList}}
-        </div>
+        <div id="tree"></div>
     </div>
-</template>
-
-<template name="TopicList">
-    {{#if isTop}}
-        <ul class="list-unstyled">
-            {{#each topics}}
-                <li id="{{_id}}" class="topic-li">
-                    {{#if subTopicCount}}
-                        {{#if isExpand}}
-                            <i class="fa fa-minus" type="button"></i>
-                        {{else}}
-                            <i class="fa fa-plus" type="button"></i>
-                        {{/if}}
-                    {{/if}}
-                    <a href="{{searchUrl}}">
-                        {{translateThis name englishName}}
-                    </a>
-
-                    <div class="control-panel pull-right">{{#if hasAnyPermission}}<img src="loading.gif">{{/if}}</div>
-                    <hr>
-                    {{#if subTopicCount}}
-                        {{> TopicList parent=_id}}
-                    {{/if}}
-                </li>
-            {{else}}
-                {{_ "No topics found!"}}
-            {{/each}}
-        </ul>
-    {{else}}
-        <ul style="display:none">
-            {{#each topics}}
-                <li id="{{_id}}" class="topic-li">
-
-                    {{#if subTopicCount}}
-                        {{#if isExpand}}
-                            <i class="fa fa-minus" type="button"></i>
-                        {{else}}
-                            <i class="fa fa-plus" type="button"></i>
-                        {{/if}}
-                    {{/if}}
-                    <a href="{{searchUrl}}">
-                        {{translateThis name englishName}}
-                    </a>
-
-                    <div class="control-panel pull-right">{{#if hasAnyPermission}}<img src="loading.gif">{{/if}}</div>
-                    <hr>
-                    {{#if subTopicCount}}
-                        {{> TopicList parent=_id}}
-                    {{/if}}
-                </li>
-            {{else}}
-                {{_ "No topics found!"}}
-            {{/each}}
-        </ul>
-    {{/if}}
 </template>
 
 <template name="updateTopicModalForm">
@@ -81,7 +37,7 @@
 </template>
 
 <template name="deleteTopicModalForm">
-    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=_id prompt=getPrompt buttonContent=getDeleteButtonContent title=getDeleteButtonContent}}
+    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=selectedTopic prompt=getPrompt buttonContent=getDeleteButtonContent title=getDeleteButtonContent}}
     {{/afModal}}
 </template>
 
@@ -92,19 +48,4 @@
         {{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
     {{/autoForm}}
-</template>
-
-<template name="controlPanel">
-    {{#if canAdd}}
-        {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
-    {{/if}}
-    {{#if canModify}}
-        {{>jkafModal class="fa fa-pencil" doc=this template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
-    {{/if}}
-    {{#if canDel}}
-        {{> deleteTopicModalForm}}
-    {{/if}}
-    {{#if canAddArticle}}
-        <a class="fa fa-long-arrow-right" href="{{pathFor 'topics.selectArticles' topicsId=_id}}"></a>
-    {{/if}}
 </template>
