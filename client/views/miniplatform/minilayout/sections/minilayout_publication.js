@@ -1,7 +1,7 @@
 Template.layoutPublications.helpers({
     hasJournal: function(){
         var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
-        if(publisher)return Publications.find({publisher:publisher._id});
+        if(publisher)return Publications.find({publisher:publisher._id,visible:"1"});
     },
     publisherUrl: function(){
         var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
