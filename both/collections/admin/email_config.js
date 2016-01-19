@@ -69,6 +69,25 @@ EmailsSchema  = new SimpleSchema({
     }
 });
 
+BroadcastEmailsSchema = new SimpleSchema({
+    recipient:{
+        type:String,
+        regEx: SimpleSchema.RegEx.Email
+    },
+    subject:{
+        type:String
+    },
+    content: {
+        type: String,
+        autoform: {
+            afFieldInput: {
+                type: 'summernote'
+            }
+        }
+    }
+});
+
 Meteor.startup(function(){
     EmailsSchema.i18n("schemas.emails");
-})
+    BroadcastEmailsSchema.i18n("schemas.broadcastEmails");
+});

@@ -23,7 +23,12 @@
         {{/each}}
         </tbody>
     </table>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#broadcastEmailModal">
+        {{_ "Broadcast"}}
+    </button>
+    {{> broadcastEmailModalForm}}
 </template>
+
 <template name="updateEmailConfig">
     {{#autoForm id="test123" collection="EmailConfig"  doc=this type="update" buttonContent=getUpdateButtonContent}}
         {{#if isAlert}}
@@ -32,5 +37,34 @@
         {{> afQuickField name="subject" }}
         {{> afQuickField name="body" }}
         <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
+</template>
+
+<template name="broadcastEmailModalForm">
+    <div class="modal fade" id="broadcastEmailModal" role="dialog" aria-labelledby="broadcastEmailModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="broadcastEmailModalLabel">{{_ "Broadcast"}}</h4>
+                </div>
+                {{> broadcastEmails}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="broadcastEmails">
+    {{#autoForm schema="BroadcastEmailsSchema" id="broadcastEmailsModalForm" type="method" meteormethod="broadcastEmail"}}
+        <div class="modal-body">
+            {{> afQuickField name="recipient"}}
+            {{> afQuickField name="subject"}}
+            {{> afQuickField name='content'}}
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{{_ "Send"}}</button>
+        </div>
     {{/autoForm}}
 </template>

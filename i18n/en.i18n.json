@@ -780,6 +780,17 @@
                 "label": "Reasons"
             }
         },
+        "broadcastEmails": {
+            "recipient": {
+                "label": "Recipient"
+            },
+            "subject": {
+                "label": "Subject"
+            },
+            "content": {
+                "label": "Content"
+            }
+        },
         "authorCenter": {
             "title": {
                 "label": "Title",
