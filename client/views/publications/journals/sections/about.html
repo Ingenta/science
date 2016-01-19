@@ -101,7 +101,7 @@
     {{#each members}}
         <div class="part">
             <p>
-                <img src="{{getImageHelper picture}}" width="89" height="89"/>{{{translateThis abstract.cn abstract.en}}}
+                <img src="{{getHeadImageHelper picture}}" width="89" height="89"/>{{{translateThis abstract.cn abstract.en}}}
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                     <div class="pull-right">
                         {{> updateEditorialMemberModalForm}}&nbsp;&nbsp;<a href="#" class="fa fa-trash"></a>
