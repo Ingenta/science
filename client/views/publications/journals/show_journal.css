@@ -18,10 +18,20 @@ a.select-filter {
     margin:4px
 }
 .journal-summary > dt {
+    font-size: 12px;
      width:50px !important;
  }
 .journal-summary > dd {
+    font-size: 12px;
     margin-left:55px !important;
+}
+.journal-summary-small > dt {
+    font-size: 12px;
+    width:35px !important;
+}
+.journal-summary-small > dd {
+    font-size: 12px;
+    margin-left:40px !important;
 }
 li.issue.list-group-item {
     padding-top: 5px;
