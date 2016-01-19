@@ -917,6 +917,17 @@
         "label": "推荐理由"
       }
     },
+    "broadcastEmails": {
+      "recipient": {
+        "label": "收件人的邮件地址"
+      },
+      "subject": {
+        "label": "标题"
+      },
+      "content": {
+        "label": "内容"
+      }
+    },
     "authorCenter": {
       "title": {
         "label": "标题",
@@ -1315,5 +1326,6 @@
   "email_not_verified":"您的邮箱尚未注册",
   "Topic Watch Is Empty":"学科关注为空",
   "Journal Watch Is Empty":"期刊关注为空",
-  "Article Watch Is Empty":"文章关注为空"
+  "Article Watch Is Empty":"文章关注为空",
+  "Broadcast": "广播"
 }
