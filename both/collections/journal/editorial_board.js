@@ -14,7 +14,7 @@ this.EditorialBoard.allow({
 
 EditorialBoardSchema = new SimpleSchema({
     name: {
-        type: Science.schemas.MultipleTextOptionalSchema
+        type: Science.schemas.MultipleTextRequiredSchema
     },
     position: {
         type: String,
