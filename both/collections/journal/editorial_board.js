@@ -17,7 +17,7 @@ EditorialBoardSchema = new SimpleSchema({
         type: Science.schemas.MultipleTextRequiredSchema
     },
     position: {
-        type: String,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     workUnits: {

@@ -304,7 +304,7 @@
                 "label": "Choose Image for Banner inside PDF"
             },
             "scholarOneCode":{
-                "label":"Scholar One Code"
+                "label":"ScholarOne Code"
             },
             "magtechCode":{
                 "label":"Magtech Code"
@@ -634,7 +634,13 @@
                 }
             },
             "position": {
-                "label": "Job Title"
+                "label": "Job Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "workUnits": {
                 "label": "The Company name",
@@ -772,6 +778,17 @@
             },
             "reasons": {
                 "label": "Reasons"
+            }
+        },
+        "broadcastEmails": {
+            "recipient": {
+                "label": "Recipient"
+            },
+            "subject": {
+                "label": "Subject"
+            },
+            "content": {
+                "label": "Content"
             }
         },
         "authorCenter": {

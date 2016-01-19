@@ -17,3 +17,10 @@ AutoForm.addHooks(['test123'], {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
 });
+
+AutoForm.addHooks(['broadcastEmailsModalForm'], {
+    onSuccess: function () {
+        $("#jkafModal").modal('hide');
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+    }
+});

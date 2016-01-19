@@ -77,6 +77,12 @@ Template.registerHelper('getImageHelper', function (pictureId) {
     return (imgObj && imgObj.url()) || noPicture;
 });
 
+Template.registerHelper('getHeadImageHelper', function (pictureId) {
+    var noPicture = "/defeat_head.jpg";
+    var imgObj = Images && pictureId && Images.findOne({_id: pictureId});
+    return (imgObj && imgObj.url()) || noPicture;
+});
+
 Template.registerHelper('isChinese', function (language) {
     if (!language) language = TAPi18n.getLanguage();
     return language === "zh-CN" ? true : false;
