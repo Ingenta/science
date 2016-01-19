@@ -320,13 +320,17 @@ PastDataImport = function (path, pdfFolder) {
                     })
                 }
             }
+            Science.FSE.remove(data.filepath,function(e){
+                if(e) console.log(e);
+                else logger.info('xml file removed');
+            })
             next();
         }));
     };
 
     Science.FSE.readdir(folder, Meteor.bindEnvironment(function (err, fileList) {
         if (err)
-            throw err;
+            logger.error(err);
         _.each(fileList, function (file) {
             if (file && file.toLowerCase().endWith(".xml")) {
                 importQueue.add({filepath: folder + file});
