@@ -14,7 +14,7 @@ this.AboutArticles.allow({
 
 AboutArticlesSchema = new SimpleSchema({
     title: {
-        type: Science.schemas.MultiLangSchema
+        type: Science.schemas.MultipleTextRequiredSchema
     },
     description: {
         type: Science.schemas.MultipleTextAreaSchema

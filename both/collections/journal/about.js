@@ -14,7 +14,7 @@ this.About.allow({
 
 AboutSchema = new SimpleSchema({
     title: {
-        type: Science.schemas.MultiLangSchema
+        type: Science.schemas.MultipleTextRequiredSchema
     },
     agree: {
         type: Boolean,
