@@ -1,8 +1,9 @@
-PastDataImport = function (path,pdfFolder) {
+PastDataImport = function (path, pdfFolder) {
 
     var issueCreator = new ScienceXML.IssueCreator();
     var folder = path || "/Users/jack/ImportPastData/";
     logger.info("working folder is: " + folder);
+    pdfFolder && logger.info("pdf folder is: " + pdfFolder);
 
     var getDoiSecondPart = function (doi) {
         if (doi) {
@@ -97,53 +98,92 @@ PastDataImport = function (path,pdfFolder) {
     var getFolder = function (issn) {
         var map = {
             "16747216": "sciA",
+            "10069232": "sciA",
+            "10003126": "sciA",
+            "10000001": "sciA",
+
             "16747283": "sciAe",
+            "10000002": "sciAe",
+            "02535831": "sciAe",
+            "10069283": "sciAe",
+
+            "10000003": "sciB",
+            "10003134": "sciB",
+            "10069240": "sciB",
             "16747224": "sciB",
+
+            "02535823": "sciBe",
+            "1001652X": "sciBe",
+            "10069291": "sciBe",
             "16747291": "sciBe",
+
+            "10069259": "sciC",
             "16747232": "sciC",
+
+            "10069305": "sciCe",
             "16747305": "sciCe",
+
+            "10069267": "sciD",
             "16747240": "sciD",
+
+            "10069313": "sciDe",
             "16747313": "sciDe",
+
+            "10069275": "sciE",
             "16747259": "sciE",
+
+            "10069321": "sciEe",
             "16747321": "sciEe",
+
+            "16745973": "sciF",
             "16747267": "sciF",
+
+            "10092757": "sciFe",
             "1674733X": "sciFe",
+
+            "16721780": "sciG",
             "16747275": "sciG",
+
+            "16721799": "sciGe",
             "16747348": "sciGe",
-            "20958226": "sciH",
-            "0023074X": "kxtb",
+
+            "20958226": "sciH", //材料科学没有变更记录
+
+            "0023074X": "kxtb", //科学通报中文 无变更记录
+
+            "10016538": "kxtbe",
             "20959273": "kxtbe"
         }
         return map[issn.replace('-', '')];
     }
 
     var importPdf = function (issn, pdfName, callback) {
-        if(!pdfName){
+        if (!pdfName) {
             logger.info("pdf name is empty.");
             callback && callback();
             return;
         }
-        var folder = getFolder(issn);
+        var journalPdfFolder = getFolder(issn);
         if (!folder) {
-            logger.warning("can't find pdf folder of " + issn);
+            logger.warn("can't find pdf folder of " + issn);
             callback && callback();
             return;
         }
-        if(!pdfFolder){
+        if (!pdfFolder) {
             callback && callback();
             return;
         }
-        var origPath = pdfFolder + folder + "/" + pdfName;
-        Science.FSE.exists(origPath,Meteor.bindEnvironment( function (exists) {
-            if(!exists){
+        var origPath = pdfFolder + journalPdfFolder + "/" + pdfName;
+        Science.FSE.exists(origPath, Meteor.bindEnvironment(function (exists) {
+            if (!exists) {
                 logger.error("can't find pdf folder of " + issn);
                 callback && callback();
-            }else{
+            } else {
                 PdfStore.insert(origPath, function (err, fileObj) {
                     if (err) {
                         logger.error(err);
                         callback && callback();
-                    }else{
+                    } else {
                         logger.info("pdf imported");
                         callback && callback(fileObj._id)
                     }
@@ -152,7 +192,7 @@ PastDataImport = function (path,pdfFolder) {
         }))
     }
 
-    var saveArticle = function(obj){
+    var saveArticle = function (obj) {
         var existArticle = Articles.findOne({doi: obj.doi});
 
         if (existArticle) {
@@ -216,7 +256,7 @@ PastDataImport = function (path,pdfFolder) {
                         EISSN: 1,
                         CN: 1,
                         publisher: 1,
-                        accessKey:1
+                        accessKey: 1
                     }
                 });
 
@@ -267,14 +307,14 @@ PastDataImport = function (path,pdfFolder) {
                             newOne.references = refs;
                         }
 
-                        if(article.pdf){
-                            var obj={};
-                            importPdf(journal.issn,article.pdf,Meteor.bindEnvironment(function(result){
-                                if(result)
-                                    newOne.pdfId=result;
+                        if (article.pdf) {
+                            var obj = {};
+                            importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
+                                if (result)
+                                    newOne.pdfId = result;
                                 saveArticle(newOne);
                             }))
-                        }else{
+                        } else {
                             saveArticle(newOne)
                         }
                     })
@@ -297,9 +337,9 @@ PastDataImport = function (path,pdfFolder) {
 
 
 Meteor.methods({
-    PastDataImportMethod: function (path,pdfFolder) {
+    PastDataImportMethod: function (path, pdfFolder) {
         logger.info("Client request for historical data import");
-        PastDataImport(path,pdfFolder);
+        PastDataImport(path, pdfFolder);
     }
 })
 
