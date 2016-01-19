@@ -25,3 +25,9 @@
 .aboutEditButtons {
     padding-right: 15px;
 }
+
+.editorial-desc{
+    line-height: 1.5;
+    font-size: 12px;
+    font-family:"黑体";
+}
