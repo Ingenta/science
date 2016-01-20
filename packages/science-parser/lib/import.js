@@ -159,7 +159,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
             "16721799": "sciGe",
             "16747348": "sciGe",
 
-            "20958226": "sciH", //材料科学没有变更记录
+            "20958226": "sciHe", //材料科学没有变更记录
 
             "0023074X": "kxtb", //科学通报中文 无变更记录
 
@@ -342,12 +342,14 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                             }
                             if (options.importPdf && article.pdf) {
                                 var a = Articles.findOne({doi:article.doi},{fields:{pdfId:1}});
-                                if(!a.pdfId){//已经成功上传过pdf不再处理
+                                if(!a || !a.pdfId){//已经成功上传过pdf不再处理
                                     importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
                                         if (result)
                                             newOne.pdfId = result;
                                         saveArticle(newOne);
                                     }))
+                                }else{
+                                    logger.info("import " + article.doi + " skipped");
                                 }
                             } else if (options.importArticle) {
                                 saveArticle(newOne)
