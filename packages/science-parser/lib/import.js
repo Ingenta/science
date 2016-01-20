@@ -257,7 +257,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
         Parser(data.filepath, options, Meteor.bindEnvironment(function (err, issue) {
             if (err)
                 logger.error(err)
-            if (!(issue && !_.isEmpty(issue.articles))) {
+            if (!(issue && !_.isEmpty(issue.articles)) && (options.importArticle || options.importPdf)) {
                 logger.warn("articles not found in historical issue xml")
             } else {
                 var journal = Publications.findOne({issn: issue.issn.replace('-', '')}, {
@@ -284,6 +284,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                             year: issue.year,
                             month: issue.month
                         });
+                        console.log("created volume: "+ issue.volume + ", issue: " + issue.issue);
                     } else {
                         var volumeObj = Volumes.findOne({journalId: journal._id, volume: issue.volume})._id;
                         var issueObj = Issues.findOne({
