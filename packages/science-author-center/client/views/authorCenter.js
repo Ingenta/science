@@ -12,3 +12,17 @@ Template.SinglePublisherForAuthorCenter.helpers({
         return Publications.find({"publisher": id});
     }
 });
+
+Template.SingleJournal.helpers({
+    urlToJournalAuthorCenter: function (id) {
+        if(id){
+            var journal = Publications.findOne({_id: id});
+
+            if(journal){
+                var publisher = Publishers.findOne({_id: journal.publisher});
+                Session.set("activeTab", "Author Center");
+                return "/publisher/"+publisher.shortname+"/journal/"+journal.shortTitle;
+            }
+        }
+    }
+});
