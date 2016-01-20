@@ -45,10 +45,12 @@ Template.newsCenterList.helpers({
         return News.find({about: aboutId,publications:publicationId,types:"2"});
     },
     whichUrl: function() {
+        var journalId = Session.get('currentJournalId');
+        var publication = Publications.findOne({_id:journalId});
         if(this.url){
             return this.url;
         }
-        return "/news/"+this._id;
+        return publication.shortTitle+"/news/journalNews/"+this._id;
     }
 });
 

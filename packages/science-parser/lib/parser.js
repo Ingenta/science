@@ -65,6 +65,11 @@ Parser = function (filepath, options, callback) {
         issue.year = parseHelper.getSimpleVal("//issue/year", dom);
         issue.volume = parseHelper.getSimpleVal("//issue/volume", dom);
         issue.issue = parseHelper.getSimpleVal("//issue/number", dom);
+        if(!options.importArticle && !options.importPdf){
+            callback(undefined,issue);
+            return;
+        }
+
         issue.articles = [];
         var sections = parseHelper.getNodes("//issue/section", dom);
         _.each(sections, function (sec) {

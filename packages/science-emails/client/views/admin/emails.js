@@ -20,7 +20,7 @@ AutoForm.addHooks(['test123'], {
 
 AutoForm.addHooks(['broadcastEmailsModalForm'], {
     onSuccess: function () {
-        $("#jkafModal").modal('hide');
+        $("#broadcastEmailModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
 });
