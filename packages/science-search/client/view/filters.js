@@ -24,7 +24,7 @@ Template.solrFilterItem.helpers({
 		if(_.isEmpty(this.filterOptions))
 			return;
 		var scount = pageSetting.get(this.name) || itemLimit;
-		return _.first(this.filterOptions,scount);
+		return scount<0?this.filterOptions:_.first(this.filterOptions,scount);
 	},
 	isTooMany:function(){
 		return pageSetting.get(this.name)!=-1 && this.filterOptions.length> itemLimit;
