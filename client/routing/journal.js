@@ -121,3 +121,27 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscr
     }
 
 });
+
+Router.route('/publisher/:publisherName/journal/:journalShortTitle/news/journalNews/:newsId', {
+    data: function () {
+        var pub = Publishers.findOne({shortname: this.params.publisherName});
+        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        if (journal) {
+            Session.set('currentJournalId', journal._id);
+            Session.set('currentPublisherId', pub._id);
+            return journal;
+        }
+    },
+    template: "showNewsArticle",
+    title: function () {
+        return TAPi18n.__("News");
+    },
+    parent: "journal.name",
+    name: "journalNews.show",
+    waitOn: function () {
+        return [
+            JournalSubs.subscribe('files'),
+            HomePageSubs.subscribe('news')
+        ]
+    }
+});
