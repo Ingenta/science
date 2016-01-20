@@ -53,8 +53,8 @@
             </div>
             {{#each instructions}}
                 <ul>
-                    <li>
-                        <a href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
+                    <li style="margin-left: -25px;">
+                        <a style="font-size: 12px" href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateAuthorCenterModalForm}}
                         {{/if}}
@@ -78,7 +78,7 @@
                 {{/if}}
             </div>
             {{#each manuscript}}
-                <p> >> {{{translateThis title.cn title.en}}}111
+                <p style="font-size: 12px"><strong> >> {{{translateThis title.cn title.en}}}</strong>
                     {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                         {{> updateSubmitManuscriptModalForm}}
                     {{/if}}
@@ -88,7 +88,7 @@
                 </p>
                 {{#each childList}}
                     <ul>
-                        <li><a href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
+                        <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
                             {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
                             {{/if}}
@@ -116,7 +116,7 @@
             </div>
             {{#each submitManuscript}}
                 <ul>
-                    <li><a href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
+                    <li style="margin-left: -25px;"><a style="font-size: 12px" href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateSubmitManuscriptModalForm}}
                         {{/if}}
