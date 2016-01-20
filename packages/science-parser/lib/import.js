@@ -188,7 +188,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
         var origPath = pdfFolder + journalPdfFolder + "/" + pdfName;
         Science.FSE.exists(origPath, Meteor.bindEnvironment(function (exists) {
             if (!exists) {
-                logger.error("can't find pdf folder of " + issn);
+                logger.error("can't find pdf of " + origPath);
                 callback && callback();
             } else {
                 PdfStore.insert(origPath, function (err, fileObj) {
@@ -284,7 +284,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                             year: issue.year,
                             month: issue.month
                         });
-                        console.log("created volume: " + issue.volume + ", issue: " + issue.issue);
+                        logger.info("created volume: " + issue.volume + ", issue: " + issue.issue);
                     } else {
                         var volumeObj = Volumes.findOne({journalId: journal._id, volume: issue.volume})._id;
                         var issueObj = Issues.findOne({
