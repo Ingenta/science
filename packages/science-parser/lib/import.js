@@ -284,7 +284,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                             year: issue.year,
                             month: issue.month
                         });
-                        console.log("created volume: "+ issue.volume + ", issue: " + issue.issue);
+                        console.log("created volume: " + issue.volume + ", issue: " + issue.issue);
                     } else {
                         var volumeObj = Volumes.findOne({journalId: journal._id, volume: issue.volume})._id;
                         var issueObj = Issues.findOne({
@@ -299,7 +299,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                             }
                         }
                     }
-                    if(!vi){
+                    if (!vi) {
                         logger.error("can't find volume&issue from: " + data.filepath);
                     }
                     if (vi && (options.importArticle || options.importPdf)) {
@@ -341,12 +341,15 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 }
                             }
                             if (options.importPdf && article.pdf) {
-                                importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
-                                    if (result)
-                                        newOne.pdfId = result;
-                                    saveArticle(newOne);
-                                }))
-                            } else if(options.importArticle) {
+                                var a = Articles.findOne({doi:article.doi},{fields:{pdfId:1}});
+                                if(!a.pdfId){//已经成功上传过pdf不再处理
+                                    importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
+                                        if (result)
+                                            newOne.pdfId = result;
+                                        saveArticle(newOne);
+                                    }))
+                                }
+                            } else if (options.importArticle) {
                                 saveArticle(newOne)
                             }
                         })
@@ -380,13 +383,13 @@ Meteor.methods({
     }
 })
 
-//-----------------------------------------------------------------
-//由于旧数据导入运行一段时间(约半小时)后,出现一个未知错误会导致服务崩溃重启,
-//为了不影响数据导入的时间,加入这段代码,重启后继续执行旧数据导入程序.
-//待旧数据导入工作完成后，删除这段代码
-if (Meteor.isServer && process.env.RUN_TASKS) {
-    Meteor.startup(function () {
-        PastDataImport("/bundle/import/", "/bundle/allpdf/");
-    })
-}
-//-----------------------------------------------------------------
+////-----------------------------------------------------------------
+////由于旧数据导入运行一段时间(约半小时)后,出现一个未知错误会导致服务崩溃重启,
+////为了不影响数据导入的时间,加入这段代码,重启后继续执行旧数据导入程序.
+////待旧数据导入工作完成后，删除这段代码
+//if (Meteor.isServer && process.env.RUN_TASKS) {
+//    Meteor.startup(function () {
+//        PastDataImport("/bundle/import/", "/bundle/allpdf/");
+//    })
+//}
+////-----------------------------------------------------------------
