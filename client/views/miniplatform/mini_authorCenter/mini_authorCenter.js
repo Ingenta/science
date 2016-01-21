@@ -1,7 +1,7 @@
 Template.authorCentered.helpers({
     journalsInPublisher: function () {
         var publisher = Publishers.findOne({agree: true});
-        if (publisher)return Publications.find({publisher: publisher._id});
+        if (publisher)return Publications.find({publisher: publisher._id, visible:"1"});
     },
     urlToJournalAuthorCenter: function (id) {
         if(id){
