@@ -5,7 +5,13 @@
                 <ul class="list-unstyled">
                     <h6 class="bg-eee" align="center">{{LeftTitle}}</h6>
                     {{#each authorTitle}}
-                        <li style="margin-left: 10px;cursor: pointer"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
+                        <li style="cursor: pointer"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
+                        <ul class="list-unstyled">
+                            {{#each childTitle}}
+                                <li style="margin-left: 13px;cursor: pointer"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
+                            {{else}}
+                            {{/each}}
+                        </ul>
                     {{else}}
                         {{_ "No results found!"}}
                     {{/each}}
@@ -16,7 +22,7 @@
                     <div class="row" style="margin-top: 20px;">
                         {{#each authorCenters}}
                             <div align="center">
-                                <span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
+                                <span style="font-size:14px"><strong>{{translateThis title.cn title.en}}</strong></span>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
                             </div><br>

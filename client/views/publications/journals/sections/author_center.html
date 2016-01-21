@@ -45,7 +45,7 @@
 <template name="guideArticles">
     <div class="col-xs-4">
         <div class="part h220">
-            <div class="dotted mb15">
+            <div class="dotted mb15 text-center" >
                 <strong style="margin-left: 8px">{{_ "Submission Guidelines"}}</strong>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;" data-toggle="modal" data-target="#addInstructionsModal"></span>
@@ -71,7 +71,7 @@
     </div>
     <div class="col-xs-4">
         <div class="part h220">
-            <div class="dotted mb15">
+            <div class="dotted mb15 text-center">
                 <strong style="margin-left: 8px">{{_ "Prepare Manuscript"}}</strong>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addManuscriptModal"></span>
@@ -108,7 +108,7 @@
     </div>
     <div class="col-xs-4">
         <div class="part h220">
-            <div class="dotted mb15">
+            <div class="dotted mb15 text-center">
                 <strong style="margin-left: 8px">{{_ "Submit  Manuscript"}}</strong>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>
@@ -157,8 +157,7 @@
 
 
 <template name="addInstructionsModalForm">
-    <div class="modal fade" id="addInstructionsModal" role="dialog" aria-labelledby="addInstructionsModalLabel"
-         aria-hidden="true">
+    <div class="modal fade text-left" id="addInstructionsModal" role="dialog" aria-labelledby="addInstructionsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -182,8 +181,7 @@
 </template>
 
 <template name="addManuscriptModalForm">
-    <div class="modal fade" id="addManuscriptModal" role="dialog" aria-labelledby="addManuscriptModalLabel"
-         aria-hidden="true">
+    <div class="modal fade text-left" id="addManuscriptModal" role="dialog" aria-labelledby="addManuscriptModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -208,8 +206,7 @@
 </template>
 
 <template name="addSubmitManuscriptModalForm">
-    <div class="modal fade" id="addSubmitManuscriptModal" role="dialog" aria-labelledby="addSubmitManuscriptModalLabel"
-         aria-hidden="true">
+    <div class="modal fade text-left" id="addSubmitManuscriptModal" role="dialog" aria-labelledby="addSubmitManuscriptModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
