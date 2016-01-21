@@ -41,7 +41,6 @@ Template.journalNavigationPanel.events({
         $(event.currentTarget).next(".issues").slideToggle(200);
     },
     "click .issue": function (event) {
-        console.log(this)
         var issueId = $(event.target).data().value;
         var volume = $(event.target).data().volume;
         var issue = $(event.target).data().issue;

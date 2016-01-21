@@ -1,10 +1,22 @@
-PastDataImport = function (path, pdfFolder) {
+PastDataImport = function (path, pdfFolder, userOptions) {
 
     var issueCreator = new ScienceXML.IssueCreator();
     var folder = path || "/Users/jack/ImportPastData/";
     logger.info("working folder is: " + folder);
     pdfFolder && logger.info("pdf folder is: " + pdfFolder);
 
+    var options = {
+        maxProc: 1,
+        createVI: true,
+        importArticle: true,
+        importPdf: true
+    }
+    if (!_.isEmpty(userOptions)) {
+        options.maxProc = _.isNumber(userOptions.maxProc) ? userOptions.maxProc : options.maxProc;
+        options.createVI = _.isBoolean(userOptions.createVI) ? userOptions.createVI : options.createVI;
+        options.importArticle = _.isBoolean(userOptions.importArticle) ? userOptions.importArticle : options.importArticle;
+        options.importPdf = _.isBoolean(userOptions.importPdf) ? userOptions.importPdf : options.importPdf;
+    }
     var getDoiSecondPart = function (doi) {
         if (doi) {
             var i = doi.indexOf("/");
@@ -147,7 +159,7 @@ PastDataImport = function (path, pdfFolder) {
             "16721799": "sciGe",
             "16747348": "sciGe",
 
-            "20958226": "sciH", //材料科学没有变更记录
+            "20958226": "sciHe", //材料科学没有变更记录
 
             "0023074X": "kxtb", //科学通报中文 无变更记录
 
@@ -176,7 +188,7 @@ PastDataImport = function (path, pdfFolder) {
         var origPath = pdfFolder + journalPdfFolder + "/" + pdfName;
         Science.FSE.exists(origPath, Meteor.bindEnvironment(function (exists) {
             if (!exists) {
-                logger.error("can't find pdf folder of " + issn);
+                logger.error("can't find pdf of " + origPath);
                 callback && callback();
             } else {
                 PdfStore.insert(origPath, function (err, fileObj) {
@@ -233,7 +245,7 @@ PastDataImport = function (path, pdfFolder) {
     }
 
     var importQueue = new PowerQueue({
-        maxProcessing: 1,//1并发
+        maxProcessing: options.maxProc,//并发
         maxFailures: 1 //不重试
     })
 
@@ -242,10 +254,10 @@ PastDataImport = function (path, pdfFolder) {
     };
 
     importQueue.taskHandler = function (data, next) {
-        Parser(data.filepath, {}, Meteor.bindEnvironment(function (err, issue) {
+        Parser(data.filepath, options, Meteor.bindEnvironment(function (err, issue) {
             if (err)
                 logger.error(err)
-            if (!(issue && !_.isEmpty(issue.articles))) {
+            if (!(issue && !_.isEmpty(issue.articles)) && (options.importArticle || options.importPdf)) {
                 logger.warn("articles not found in historical issue xml")
             } else {
                 var journal = Publications.findOne({issn: issue.issn.replace('-', '')}, {
@@ -263,65 +275,91 @@ PastDataImport = function (path, pdfFolder) {
                 if (!journal) {
                     logger.warn("journal does not exist with issn: " + issue.issn);
                 } else {
-                    var vi = issueCreator.createIssue({
-                        journalId: journal._id,
-                        volume: issue.volume,
-                        issue: issue.issue,
-                        year: issue.year,
-                        month: issue.month
-                    });
-
-                    _.each(issue.articles, function (article) {
-                        logger.info("import " + article.doi + " started");
-                        var newOne = {};
-                        newOne.journalId = journal._id;
-                        newOne.journal = journal;
-                        newOne.volume = issue.volume;
-                        newOne.issue = issue.issue;
-                        newOne.year = issue.year;
-
-                        newOne.volumeId = vi.volumeId;
-                        newOne.issueId = vi.issueId;
-                        newOne.doi = article.doi;
-                        newOne.articledoi = getDoiSecondPart(article.doi);
-                        newOne.title = article.title;
-                        newOne.publisher = journal.publisher;
-                        newOne.startPage = article.startPage;
-                        newOne.elocationId = article.startPage;
-                        newOne.accepted = Science.String.toDate(article.acceptDate);
-                        newOne.published = Science.String.toDate(article.publishDate);
-                        newOne.topic = getTopic(article.subspecialty);
-                        newOne.contentType = article.contentType;
-                        newOne.abstract = article.abstract;
-                        var authors = getAuthors(article.authors);
-                        if (!_.isEmpty(authors)) {
-                            _.extend(newOne, authors);
+                    var vi;
+                    if (options.createVI) {
+                        vi = issueCreator.createIssue({
+                            journalId: journal._id,
+                            volume: issue.volume,
+                            issue: issue.issue,
+                            year: issue.year,
+                            month: issue.month
+                        });
+                        logger.info("created volume: " + issue.volume + ", issue: " + issue.issue);
+                    } else {
+                        var volumeObj = Volumes.findOne({journalId: journal._id, volume: issue.volume})._id;
+                        var issueObj = Issues.findOne({
+                            journalId: journal._id,
+                            volume: issue.volume,
+                            issue: issue.issue
+                        });
+                        if (volumeObj && issueObj) {
+                            vi = {
+                                volumeId: volumeObj._id,
+                                issueId: issueObj._id
+                            }
                         }
-                        newOne.keywords = article.indexing;
-                        insertKeywords(newOne.keywords);
-                        newOne.pubStatus = "normal";
-                        newOne.accessKey = journal.accessKey;
-                        newOne.language = article.language == 'zh_CN' ? 2 : 1;
-                        var refs = getReference(article.citations);
-                        if (!_.isEmpty(refs)) {
-                            newOne.references = refs;
-                        }
+                    }
+                    if (!vi) {
+                        logger.error("can't find volume&issue from: " + data.filepath);
+                    }
+                    if (vi && (options.importArticle || options.importPdf)) {
+                        _.each(issue.articles, function (article) {
+                            logger.info("import " + article.doi + " started");
+                            var newOne = {};
+                            if (options.importArticle) {
+                                newOne.journalId = journal._id;
+                                newOne.journal = journal;
+                                newOne.volume = issue.volume;
+                                newOne.issue = issue.issue;
+                                newOne.year = issue.year;
 
-                        if (article.pdf) {
-                            var obj = {};
-                            importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
-                                if (result)
-                                    newOne.pdfId = result;
-                                saveArticle(newOne);
-                            }))
-                        } else {
-                            saveArticle(newOne)
-                        }
-                    })
+                                newOne.volumeId = vi.volumeId;
+                                newOne.issueId = vi.issueId;
+                                newOne.doi = article.doi;
+                                newOne.articledoi = getDoiSecondPart(article.doi);
+                                newOne.title = article.title;
+                                newOne.publisher = journal.publisher;
+                                newOne.startPage = article.startPage;
+                                newOne.elocationId = article.startPage;
+                                newOne.accepted = Science.String.toDate(article.acceptDate);
+                                newOne.published = Science.String.toDate(article.publishDate);
+                                newOne.topic = getTopic(article.subspecialty);
+                                newOne.contentType = article.contentType;
+                                newOne.abstract = article.abstract;
+                                var authors = getAuthors(article.authors);
+                                if (!_.isEmpty(authors)) {
+                                    _.extend(newOne, authors);
+                                }
+                                newOne.keywords = article.indexing;
+                                insertKeywords(newOne.keywords);
+                                newOne.pubStatus = "normal";
+                                newOne.accessKey = journal.accessKey;
+                                newOne.language = article.language == 'zh_CN' ? 2 : 1;
+                                var refs = getReference(article.citations);
+                                if (!_.isEmpty(refs)) {
+                                    newOne.references = refs;
+                                }
+                            }
+                            if (options.importPdf && article.pdf) {
+                                var a = Articles.findOne({doi:article.doi},{fields:{pdfId:1}});
+                                if(!a || !a.pdfId){//已经成功上传过pdf不再处理
+                                    importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
+                                        if (result)
+                                            newOne.pdfId = result;
+                                        saveArticle(newOne);
+                                    }))
+                                }else{
+                                    logger.info("import " + article.doi + " skipped");
+                                }
+                            } else if (options.importArticle) {
+                                saveArticle(newOne)
+                            }
+                        })
+                    }
                 }
             }
-            Science.FSE.remove(data.filepath,function(e){
-                if(e) console.log(e);
+            Science.FSE.remove(data.filepath, function (e) {
+                if (e) console.log(e);
                 else logger.info('xml file removed');
             })
             next();
@@ -341,19 +379,19 @@ PastDataImport = function (path, pdfFolder) {
 
 
 Meteor.methods({
-    PastDataImportMethod: function (path, pdfFolder) {
+    PastDataImportMethod: function (path, pdfFolder, options) {
         logger.info("Client request for historical data import");
-        PastDataImport(path, pdfFolder);
+        PastDataImport(path, pdfFolder, options);
     }
 })
 
-//-----------------------------------------------------------------
-//由于旧数据导入运行一段时间(约半小时)后,出现一个未知错误会导致服务崩溃重启,
-//为了不影响数据导入的时间,加入这段代码,重启后继续执行旧数据导入程序.
-//待旧数据导入工作完成后，删除这段代码
-if(Meteor.isServer && process.env.RUN_TASKS){
-    Meteor.startup(function(){
-        PastDataImport("/bundle/import/", "/bundle/allpdf/");
-    })
-}
-//-----------------------------------------------------------------
+////-----------------------------------------------------------------
+////由于旧数据导入运行一段时间(约半小时)后,出现一个未知错误会导致服务崩溃重启,
+////为了不影响数据导入的时间,加入这段代码,重启后继续执行旧数据导入程序.
+////待旧数据导入工作完成后，删除这段代码
+//if (Meteor.isServer && process.env.RUN_TASKS) {
+//    Meteor.startup(function () {
+//        PastDataImport("/bundle/import/", "/bundle/allpdf/");
+//    })
+//}
+////-----------------------------------------------------------------

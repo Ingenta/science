@@ -64,6 +64,20 @@ SolrUtils = {
         }
         return qstring || "";
     },
+    getRelatedJournals:function(journals){
+        var result=[];
+        if(_.isString(journals))
+            journals=[journals];
+        _.each(journals, function (jId) {
+            var journal = Publications.findOne({_id: jId}, {fields: {historicalJournals: 1}})
+            if (journal && !_.isEmpty(journal.historicalJournals)) {
+                result = _.union(result,jId, journal.historicalJournals);
+            }else{
+                result = _.union(result,jId);
+            }
+        })
+        return result;
+    },
     getFilterQueryStrArr: function (queryObj) {
         var fqStrArr = [];
         if (queryObj) {
@@ -72,13 +86,7 @@ SolrUtils = {
                 isFirstOne = false;
                 var solrFields = SolrUtils.facetFieldMap[key];
                 if(key == 'journalId') {
-                    var journalIdForSolr = val;
-                    _.each(val, function (jId) {
-                        var journal = Publications.findOne({_id: jId}, {fields: {historicalJournals: 1}})
-                        if (journal && !_.isEmpty(journal.historicalJournals)) {
-                            journalIdForSolr = _.union(journalIdForSolr, journal.historicalJournals);
-                        }
-                    })
+                    var journalIdForSolr = SolrUtils.getRelatedJournals(val);
                     val = journalIdForSolr.join(" OR ");
                 }
                 if (key == 'publishDate') {
