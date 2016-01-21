@@ -73,7 +73,7 @@ Meteor.methods({
                 from: Config.mailServer.address,
                 subject: values.subject,
                 html: JET.render('broadcastEmail', {
-                    "subject": values.subject,
+                    //"subject": values.subject,
                     "content": values.content,
                     "scpLogoUrl": Config.rootUrl + "email/logo.png",
                     "rootUrl": Config.rootUrl
