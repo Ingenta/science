@@ -92,7 +92,13 @@ Template.FilterList.helpers({
         }
         console.log('aa')
         Session.set("totalPublicationResults", Publications.find(q).count());
-        var pubs = myPubPagination.find(q, {itemsPerPage: numPerPage});
+        var pubs;
+        if(TAPi18n.getLanguage() === "en"){
+            pubs = myPubPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
+        }
+        if(TAPi18n.getLanguage() === "zh-CN"){
+            pubs = myPubPagination.find(q, {itemsPerPage: numPerPage, sort: {titleCn: 1}});
+        }
         return pubs;
     },
     selectedPublisher: function () {

@@ -9,7 +9,7 @@ Template.SinglePublisherForAuthorCenter.helpers({
         return Publications.find({"publisher": id}).count() !== 0;
     },
     hasJournal: function(id){
-        return Publications.find({"publisher": id});
+        return Publications.find({"publisher": id,visible:"1"});
     }
 });
 
