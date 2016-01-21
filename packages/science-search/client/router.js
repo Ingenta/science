@@ -7,7 +7,6 @@ Router.route('/search', {
 	},
 	waitOn: function () {
 		return [
-			ArticleSubs.subscribe('keywords'),
 			HomePageSubs.subscribe('topics')
 		]
 	},
