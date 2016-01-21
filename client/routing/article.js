@@ -49,9 +49,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Session.set("hideAffLabel", false);
         }
 
-        if(!Science.Cookies.get('mjx.menu')){
-            Science.Cookies.set('mjx.menu',"renderer:PreviewHTML")
-        }
+        //if(!Science.Cookies.get('mjx.menu')){
+        //    Science.Cookies.set('mjx.menu',"renderer:PreviewHTML")
+        //}
         this.next();
     },
     onStop: function () {

@@ -65,3 +65,6 @@
      color: #fff;
      background-color: #333;
  }
+ .note-editable {
+     min-height: 50px;
+ }
