@@ -16,9 +16,12 @@ Template.onePublication.helpers({
 Template.onePublisherInFilterList.helpers({
     count: function (id) {
         var first = Session.get('firstLetter');
-        if (first === undefined)
-            return Publications.find({publisher: id}).count();
-        return Publications.find({publisher: id, shortTitle: {$regex: "^" + first, $options: "i"}}).count();
+        var q={publisher:id};
+        if(!Permissions.userCan("modify-journal", "resource",this.userId))
+            q.visible="1";
+        if (first !== undefined)
+            q.shortTitle={$regex: "^" + first, $options: "i"};
+        return Publications.find(q).count();
     }
 });
 Template.PublicationsAlphabetBar.helpers({
@@ -87,6 +90,7 @@ Template.FilterList.helpers({
         if(!_.isEmpty(_.compact(topicId))){
             q.topicId={$in:topicId}
         }
+        console.log('aa')
         Session.set("totalPublicationResults", Publications.find(q).count());
         var pubs = myPubPagination.find(q, {itemsPerPage: numPerPage});
         return pubs;
