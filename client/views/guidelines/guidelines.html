@@ -22,7 +22,7 @@
                     <div class="row" style="margin-top: 20px;">
                         {{#each authorCenters}}
                             <div align="center">
-                                <span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
+                                <span style="font-size:14px"><strong>{{translateThis title.cn title.en}}</strong></span>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
                             </div><br>
