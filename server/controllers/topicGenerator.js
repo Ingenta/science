@@ -1,5 +1,5 @@
 Meteor.methods({
-    'flatTopicsToTreeNodes': function (isLangCn) {
+    'flatTopicsToTreeNodes': function (isLangCn) { //TODO: don't regenerate this each time a user visits the page only when the data is changed.
         var topicTree = [];
         _.each(Topics.find({parentId: null}).fetch(), function (topic) {
             var thisTopic = {
