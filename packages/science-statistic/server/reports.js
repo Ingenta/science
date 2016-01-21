@@ -301,25 +301,48 @@ Science.Reports.getArticleReportDataNew = function (query) {
 };
 
 Science.Reports.getJournalCitedReportData = function (query) {
-    var citations = Articles.aggregate([{
-        $match: {
-            $and: [query]
-        }
-    }, {
-        $group: {_id: "$journalId",total: {$sum: "$citationCount"}}
-    },{
-        $sort: {total: -1}
-    }]);
-    _.each(citations, function (x) {
-        var journal = Publications.findOne({_id: x._id});
-        if(journal){
-            x.publisher = Publishers.findOne({_id: journal.publisher}).name;
-            x.title = journal.title;
-            x.issn = journal.issn;
-            x.EISSN = journal.EISSN;
-        }
-    })
-    return citations;
 
+    var myFuture = new Future();
+    var allJournals = Publications.find().fetch();
+    var allPublisher = Publishers.find().fetch();
+    Articles.rawCollection().group(
+        {journalId: true},
+        query,
+        {total:0,years:{},min:"2016"},
+        function (doc, result) {
+            result.total+=doc.citations.length;
+            doc.citations.forEach(function(d){
+                if (d.year){
+                    if(d.year<result.min)
+                        result.min= d.year;
+                    var k="year"+ d.year;
+                    if(!result.years[k])
+                        result.years[k] = 0;
+                    result.years[k]++;
+                }
+            })
+        },
+        function (err, result) {
+            var currYear=new Date().getFullYear();
+            var yearRange={max:currYear,min:currYear-10};
+            var min = parseInt(_.min(_.pluck(result,"min")));
+            if(min<yearRange.min)
+                yearRange.min=min;
+            result.range=yearRange;
+            result.forEach(function (item) {
+                var journal = _.findWhere(allJournals, {_id: item.journalId});
+                if(journal){
+                    var x = {};
+                    x.publisher = _.findWhere(allPublisher, {_id: journal.publisher}).chinesename;
+                    x.title = journal.titleCn;
+                    x.issn = journal.issn;
+                    x.EISSN = journal.EISSN;
+                    _.extend(item, x);
+                }
+            })
+            return myFuture.return(result);
+        }
+    );
+    return myFuture.wait();
 };
 //-----------------------------数据范围------------------------------
