@@ -12,7 +12,7 @@ Template.MetricsTemplate.rendered = function () {
         buildHitCounterGraph(response);
     });
 
-    Meteor.call("getLocationReport", "fulltext", article._id, function (err, arr) {
+    Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
         var index = 0;
         _.each(arr, function (obj) {

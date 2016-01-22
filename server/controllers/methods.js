@@ -15,30 +15,6 @@ Meteor.methods({
         var ip = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
         return getLocationByIP(ip);
     },
-    'getArticlePageViewsPieChartData': function (articleId) {
-        var data = new Array();
-        data.push({
-            name: TAPi18n.__('Abstract Views'),
-            y: PageViews.find({action: "abstract", articleId: articleId}).count()
-        });
-
-        data.push({
-            name: TAPi18n.__('Full text Views'),
-            y: PageViews.find({action: "fulltext", articleId: articleId}).count()
-        });
-
-        data.push({
-            name: TAPi18n.__('PDF Downloads'),
-            y: PageViews.find({action: "pdfDownload", articleId: articleId}).count()
-        });
-        return data;
-    },
-    'getArticlePageViewsGraphData': function (articleId) {
-        return getArticlePageViewsGraphData(articleId);
-    },
-    'getLocationReport': function (action, articleId) {
-        return getArticlePageLocationReport(action, articleId);
-    },
     'updateKeywordScore': function (keywords, score) {
         if (_.isEmpty(keywords))
             return;
