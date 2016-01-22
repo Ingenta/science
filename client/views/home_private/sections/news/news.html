@@ -59,7 +59,7 @@
 </template>
 
 <template name="updateNewsModalForm">
-    {{#autoForm id="updateNewsModalForm" collection="News"  doc=this type="update" buttonContent=getUpdateButtonContent omitFields="pageView,createDate,types,about,publications"}}
+    {{#autoForm id="updateNewsModalForm" collection="News"  doc=this type="update" buttonContent=getUpdateButtonContent}}
         {{> afQuickField name="title"}}
         {{> afQuickField name="author" }}
         {{> afQuickField name="abstract" }}
