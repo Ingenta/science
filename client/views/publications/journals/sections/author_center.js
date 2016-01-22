@@ -1,76 +1,75 @@
 Template.publicationPdfContent.helpers({
     authorResources: function () {
         var journalId = Session.get('currentJournalId');
-        return Publications.find({_id:journalId});
+        return Publications.find({_id: journalId});
     },
-    pdfValue:function(){
-        if(this.fileId===undefined){
-            return null;
-        }
-        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        return file.url()+"&download=true";
+    pdfValue: function () {
+        if (!this.fileId)return;
+        var file = Collections.JournalMediaFileStore.findOne({_id: this.fileId});
+        if (!file)return;
+        return file.url() + "&download=true";
     }
 });
 
 Template.guideArticles.helpers({
     instructions: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type:"1",publications:journalId});
+        return AuthorCenter.find({type: "1", publications: journalId});
     },
     manuscript: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type:"2",publications:journalId,parentId:null});
+        return AuthorCenter.find({type: "2", publications: journalId, parentId: null});
     },
     childList: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type:"2",publications:journalId,parentId:this._id});
+        return AuthorCenter.find({type: "2", publications: journalId, parentId: this._id});
     },
     submitManuscript: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type:"3",publications:journalId});
+        return AuthorCenter.find({type: "3", publications: journalId});
     },
-    whichUrl: function() {
-        if(this.url){
+    whichUrl: function () {
+        if (this.url) {
             return this.url;
         }
         var journalId = Session.get('currentJournalId');
-        var publication = Publications.findOne({_id:journalId});
-        return publication.shortTitle+"/guide/Manuscript/"+this._id;
+        var publication = Publications.findOne({_id: journalId});
+        return publication.shortTitle + "/guide/Manuscript/" + this._id;
     }
 });
 
 Template.guideArticles.events({
     'click .fa-trash': function (e) {
         var id = this._id;
-        confirmDelete(e,function(){
-            AuthorCenter.remove({_id:id});
+        confirmDelete(e, function () {
+            AuthorCenter.remove({_id: id});
         })
     }
 });
 
 Template.addManuscriptModalForm.helpers({
-    getManuscript:function(){
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
+    getManuscript: function () {
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var journalId = Session.get('currentJournalId');
-        var articles = AuthorCenter.find({type:"2",publications:journalId,parentId:null}).fetch();
+        var articles = AuthorCenter.find({type: "2", publications: journalId, parentId: null}).fetch();
         var result = [];
-        _.each(articles,function(item){
-            var name = iscn?item.title.cn:item.title.en;
-            result.push({label:name,value:item._id});
+        _.each(articles, function (item) {
+            var name = iscn ? item.title.cn : item.title.en;
+            result.push({label: name, value: item._id});
         });
         return result;
     }
 });
 
 Template.updateManuscriptModalForm.helpers({
-    getManuscript:function(){
-        var iscn=TAPi18n.getLanguage()==='zh-CN';
+    getManuscript: function () {
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var journalId = Session.get('currentJournalId');
-        var articles = AuthorCenter.find({type:"2",publications:journalId,parentId:null}).fetch();
+        var articles = AuthorCenter.find({type: "2", publications: journalId, parentId: null}).fetch();
         var result = [];
-        _.each(articles,function(item){
-            var name = iscn?item.title.cn:item.title.en;
-            result.push({label:name,value:item._id});
+        _.each(articles, function (item) {
+            var name = iscn ? item.title.cn : item.title.en;
+            result.push({label: name, value: item._id});
         });
         return result;
     }
@@ -81,20 +80,20 @@ Template.authorArticlesHistory.events({
         var name = $('#authorName').val();
         var company = $('#affiliation').val();
         var query = [];
-        var flag=false;
-        if(name){
-            query.push({key:"author",val:name});
-            flag=true;
+        var flag = false;
+        if (name) {
+            query.push({key: "author", val: name});
+            flag = true;
         }
-        if(company){
-            var p = {key:"affiliation",val:company};
-            if(flag){
-                p.logicRelation="AND";
+        if (company) {
+            var p = {key: "affiliation", val: company};
+            if (flag) {
+                p.logicRelation = "AND";
             }
             query.push(p);
-            flag=true;
+            flag = true;
         }
-        SolrQuery.search({query:query});
+        SolrQuery.search({query: query});
     }
 });
 
