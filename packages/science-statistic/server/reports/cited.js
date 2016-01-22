@@ -4,10 +4,8 @@ Science.Reports.getCitedJournalReportFile = function (query, fileName) {
     delete query.institutionId;
     delete query.action;
     query.citations = {$exists: true};
-    console.dir(query);
     var data = Science.Reports.getJournalCitedReportData(query);
-    var fields = Science.Reports.getCitedJournalReportFields();
-    console.dir(data);
+    var fields = Science.Reports.getCitedJournalReportFields(data.range);
     return Excel.export(fileName, fields, data);
 };
 //CitedArticle
@@ -23,7 +21,7 @@ Science.Reports.getCitedArticleReportFile = function (query, fileName) {
     return Excel.export(fileName, fields, data);
 };
 
-Science.Reports.getCitedJournalReportFields = function () {
+Science.Reports.getCitedJournalReportFields = function (range) {
     var fields = [
         {
             key: 'title',
@@ -51,6 +49,23 @@ Science.Reports.getCitedJournalReportFields = function () {
             type: 'number'
         }
     ];
+    var yearArr=[];
+    for(var i=range.max;i>=range.min;i--) {
+        yearArr.push(String(i));
+    }
+    _.each(yearArr,function(year){
+        fields.push({
+            key: 'years',
+            title: year,
+            width: 8,
+            type: 'number',
+            transform: function (val, doc) {
+                if(!val)return 0;
+                if(!val["year"+year])return 0;
+                return val["year"+year];
+            }
+        })
+    })
     return fields;
 };
 

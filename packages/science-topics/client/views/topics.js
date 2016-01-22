@@ -1,64 +1,24 @@
 Template.Topics.onRendered(function () {
     Session.set("selectedTopic", null);
     var isLangCn = TAPi18n.getLanguage() === "zh-CN";
-    //$('#tree').treeview({
-    //    levels: 1,
-    //    showBorder: false,
-    //    data: flatTopicsToTreeNodes(isLangCn),
-    //    enableLinks: true,
-    //    onNodeSelected: function (event, node) {
-    //        Session.set("selectedTopic", node.tags[0]);
-    //    },
-    //    onNodeUnselected: function (event, node) {
-    //        Session.set("selectedTopic", null);
-    //    }
-    //});
-})
-var getSearchUrl = function (id) {
-    return SolrQuery.makeUrl(
-        {
-            filterQuery: {
-                topic: [id]
+    Meteor.call("flatTopicsToTreeNodes", isLangCn, function (err, result) {
+        if (err)console.log(err)
+        $('#tree').treeview({
+            levels: 1,
+            showBorder: false,
+            data: result,
+            enableLinks: true,
+            onNodeSelected: function (event, node) {
+                Session.set("selectedTopic", node.tags[0]);
             },
-            setting: {from: 'topic'}
-        }
-    );
-}
+            onNodeUnselected: function (event, node) {
+                Session.set("selectedTopic", null);
+            }
+        });
+    });
+})
 
-//flatTopicsToTreeNodes = function (isLangCn) {
-//    var topicTree = [];
-//    _.each(Topics.find({parentId: null}).fetch(), function (topic) {
-//        var thisTopic = {
-//            text: isLangCn ? topic.name : topic.englishName,
-//            tags: [topic._id],
-//            href: getSearchUrl(topic._id)
-//        };
-//        var childTopics = [];
-//        _.each(Topics.find({parentId: topic._id}).fetch(), function (child) {
-//            var oneChild = {
-//                text: isLangCn ? child.name : child.englishName,
-//                tags: [child._id],
-//                href: getSearchUrl(child._id)
-//            };
-//            var grandchildTopics = [];
-//            _.each(Topics.find({parentId: child._id}).fetch(), function (grandchild) {
-//                var oneGrandchild = {
-//                    text: isLangCn ? grandchild.name : grandchild.englishName,
-//                    tags: [grandchild._id],
-//                    href: getSearchUrl(grandchild._id)
-//                };
-//                grandchildTopics.push(oneGrandchild)
-//            })
-//            if (!_.isEmpty(grandchildTopics))
-//                oneChild.nodes = grandchildTopics;
-//            childTopics.push(oneChild)
-//        })
-//        if (!_.isEmpty(childTopics))
-//            thisTopic.nodes = childTopics;
-//        topicTree.push(thisTopic)
-//    })
-//    return topicTree;
-//}
+
 Template.Topics.helpers({
     selectedTopic: function () {
         return Session.get("selectedTopic");
@@ -103,6 +63,6 @@ Template.Topics.events({
             };
             $('#tree').treeview('search', [pattern, options]);
         }
-        if(e.keyCode === 8) $('#tree').treeview('collapseAll');
+        if (e.keyCode === 8) $('#tree').treeview('collapseAll');
     }
 })
