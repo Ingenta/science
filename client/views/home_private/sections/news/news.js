@@ -85,8 +85,15 @@ Template.addNewsButton.helpers({
     }
 });
 
-Template.updateNewsModalForm.helpers({
-    getTitle: function () {
-        return TAPi18n.__("Update");
+AutoForm.addHooks(['updateNewsModalForm'], {
+    onSuccess: function () {
+        $("#jkafModal").modal('hide');
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
 });
+
+//Template.updateNewsModalForm.helpers({
+//    getTitle: function () {
+//        return TAPi18n.__("Update");
+//    }
+//});
