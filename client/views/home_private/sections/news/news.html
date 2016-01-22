@@ -38,7 +38,7 @@
     <div class="row index index-num">
         <div class="pull-right">
             {{#if can "edit-homepage-news" "news" }}
-                {{> updateNewsModalForm}}
+                {{>jkafModal template="updateNewsModalForm" doc=this}}
             {{/if}}
             {{#if can "delete-homepage-news" "news" }}
                 {{#if hasMoreThanOneNews}}
@@ -59,8 +59,16 @@
 </template>
 
 <template name="updateNewsModalForm">
-    {{#afModal class="fa fa-pencil" title=getTitle collection="News" doc=_id operation="update" buttonContent=getUpdateButtonContent omitFields="pageView,createDate,types,about,publications"}}
-    {{/afModal}}
+    {{#autoForm id="updateNewsModalForm" collection="News"  doc=this type="update" buttonContent=getUpdateButtonContent omitFields="pageView,createDate,types,about,publications"}}
+        {{> afQuickField name="title"}}
+        {{> afQuickField name="author" }}
+        {{> afQuickField name="abstract" }}
+        {{> afQuickField name="content" }}
+        {{> afQuickField name="url" }}
+        {{> afQuickField name="picture" }}
+        {{> afQuickField name="fileId" }}
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
 
 <template name="addNewsForm">
