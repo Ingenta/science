@@ -37,3 +37,10 @@ Science.URL.articleDetail = function (articleId) {
         return journalPart + issuePart + "/" + article.doi;
     }
 }
+
+Science.URL.articleDetailDoi = function (articleId) {
+    var article = Articles.findOne({_id: articleId}, {fields: {doi: 1}});
+    if (article) {
+        return  "/doi/" + article.doi;
+    }
+}

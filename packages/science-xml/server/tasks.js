@@ -305,7 +305,7 @@ Tasks.insertArticleTask = function (logId, result) {
         hadError = true;
     }
     if (!hadError) {
-        var url = Science.URL.articleDetail(articleId);
+        var url = Science.URL.articleDetailDoi(articleId);
         logger.info("Import complete: " + log.name + " available at " + url);
 
         UploadTasks.update(
