@@ -24,21 +24,6 @@ Science.URL.issueDetail = function (issueId) {
 };
 
 Science.URL.articleDetail = function (articleId) {
-    var article = Articles.findOne({_id: articleId}, {fields: {publisher: 1, journalId: 1, issueId: 1, doi: 1}});
-    if (article) {
-        var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
-        if (!pub)return;
-        var journal = Publications.findOne({_id: article.journalId}, {fields: {publisher: 1, shortTitle: 1}});
-        if (!journal)return;
-        var issue = Issues.findOne({_id: article.issueId});
-        if (!issue)return;
-        var journalPart = "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
-        var issuePart = "/" + issue.volume + "/" + issue.issue;
-        return journalPart + issuePart + "/" + article.doi;
-    }
-}
-
-Science.URL.articleDetailDoi = function (articleId) {
     var article = Articles.findOne({_id: articleId}, {fields: {doi: 1}});
     if (article) {
         return  "/doi/" + article.doi;

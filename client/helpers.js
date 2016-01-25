@@ -49,14 +49,9 @@ Template.registerHelper('publisherNameById', function (id) {
     return publisherIdToName(id);
 });
 
-
-Template.registerHelper('urlToArticle', function (title) {
-    var article = Articles.findOne({'title.en': title});
-    return urlToArticleByArticleObject(article);
-});
-
 Template.registerHelper('urlToArticleById', function (id) {
-    return urlToArticleByArticleById(id);
+    if (!id)return;
+    return Science.URL.articleDetail(id);
 });
 
 Template.registerHelper('urlToJournal', function (title) {
