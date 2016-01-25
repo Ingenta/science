@@ -9,7 +9,8 @@ ReactiveTabs.createInterface({
 Template.showInstitution.helpers({
     "getInstitutionNameById": function () {
         if(Router.current().params.insId)
-            return Institutions.findOne({_id: Router.current().params.insId}).name;
+            var i = Institutions.findOne({_id: Router.current().params.insId});
+        if(i)return i.name;
     },
     displayOption: function () {
         return Router.current().route.getName() === "admin.institutions.detail";

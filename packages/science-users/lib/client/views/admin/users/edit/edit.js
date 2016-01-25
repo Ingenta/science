@@ -146,10 +146,12 @@ Template.AdminUsersEditEditForm.helpers({
 		return Router.current().data().currUser.disable ? "checked" : "";
 	},
 	"emailAddress"          : function () {
-		return Router.current().data().currUser.emails[0].address;
+		var e = Router.current().data().currUser.emails[0];
+		if(e)return e.address;
 	},
 	"getInstitutionNameById": function () {
-		return Institutions.findOne({_id: Router.current().data().currUser.institutionId}).name;
+		var i = Institutions.findOne({_id: Router.current().data().currUser.institutionId});
+		if(i)return i.name;
 	},
 	"getPublisherNameById"  : function () {
 		return Publishers.findOne({_id: Router.current().data().currUser.publisherId}, {
