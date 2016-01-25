@@ -17,6 +17,7 @@ Template.showInstitution.helpers({
     },
     info: function () {
         var obj = Institutions.findOne({_id: Router.current().params.insId});
+        if(!obj)return;
         obj.scope =  this.scope;
         return obj;
     }
