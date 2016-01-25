@@ -40,7 +40,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             HomePageSubs.subscribe("news"),
             HomePageSubs.subscribe('mostCited',Session.get('currentJournalId')),
             Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId')),
-            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5)
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
+            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"online_first"),
+            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"accepted")
         ]
     },
     onStop:function(){

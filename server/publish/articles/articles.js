@@ -80,5 +80,11 @@ Meteor.publish('articlesInSpecTopic', function (stid) {
     if (stopic && !_.isEmpty(stopic.articles)) {
         return Articles.find({_id: {$in: stopic.articles}}, {fields: articleWithMetadata});
     }
-    return Articles.find({_id: "null"});//return null 会导致客户端一直等待.
+
+    return Articles.find({_id:"null"});//return null 会导致客户端一直等待.
+})
+
+Meteor.publish('specialPubStatus',function(journalId,pubStatus){
+    var query={journalId:journalId,pubStatus:pubStatus};
+    return Articles.find(query);
 })

@@ -175,7 +175,7 @@ Tasks.checkPermission = function(journalId, userId){
 };
 
 Tasks.checkPubStatus = function(doi, currStatus){
-    var statusOrder = {"normal":0,"online_frist":1,"accepted":2};
+    var statusOrder = {"normal":0,"online_first":1,"accepted":2};
 
     if(statusOrder[currStatus]===undefined)
         return false;

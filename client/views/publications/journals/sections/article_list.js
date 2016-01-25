@@ -89,13 +89,21 @@ Template.articleListRight.helpers({
     },
     articles: function () {
         var pubStatus = Template.currentData().pubStatus;
-        var curIssue = Session.get("currentIssueId");
-        if (curIssue) {
-            return Articles.find({issueId: curIssue, pubStatus: pubStatus}, {sort: {elocationId: -1}});
-        } else {
-            var lastIssue = getLastIssue();
-            if (lastIssue) Session.set("currentIssueId", lastIssue._id);
+        var query = {pubStatus:pubStatus};
+        if(pubStatus=='normal'){
+            var curIssue = Session.get("currentIssueId");
+            if (!curIssue){
+                var lastIssue = getLastIssue();
+                if (lastIssue) {
+                    Session.set("currentIssueId", lastIssue._id);
+                    curIssue=Session.get("currentIssueId");
+                }
+            }
+            query.issueId=curIssue;
         }
+        console.log('aaaa')
+        return Articles.find(query, {sort: {elocationId: -1}});
+
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");
