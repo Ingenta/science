@@ -72,15 +72,20 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
     if (article) {
         var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
         var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
+        this.redirect('article.show', {
+            publisherName: pub.shortname,
+            journalShortTitle: journal.shortTitle,
+            volume: article.volume,
+            issue: article.issue,
+            publisherDoi: this.params.publisherDoi,
+            articleDoi: this.params.articleDoi
+        });
     }
-    this.redirect('article.show', {
-        publisherName: pub.shortname,
-        journalShortTitle: journal.shortTitle,
-        volume: article.volume,
-        issue: article.issue,
-        publisherDoi: this.params.publisherDoi,
-        articleDoi: this.params.articleDoi
-    });
+    else{
+        console.log(this.params.publisherDoi + "/" + this.params.articleDoi+' doi not found, redirecting to homepage')
+        this.redirect('home')
+    }
+
 }, {
     waitOn: function () {
         return [

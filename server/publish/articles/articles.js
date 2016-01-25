@@ -6,7 +6,7 @@ minimumArticle = {
     issueId: 1,
     volume: 1,
     published: 1,
-    publisher:1
+    publisher: 1
 };
 articleWithMetadata = {
     title: 1,
@@ -22,8 +22,8 @@ articleWithMetadata = {
     accessKey: 1,
     published: 1,//needed for most cited
     citationCount: 1,//needed for most cited
-    topic:1,
-    publisher:1
+    topic: 1,
+    publisher: 1
 };
 
 Meteor.publish('articleSearchResults', function () {
@@ -40,43 +40,45 @@ Meteor.publish('oneArticle', function (id) {
 });
 
 Meteor.publish('oneArticleByDoi', function (doi) {
-    return Articles.find({doi: doi});
+    var a = Articles.find({doi: doi});
+    if (a)return a;
+    this.ready();
 });
 Meteor.publish('recommendedMiniPlatformArticles', function () {
-    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}},{limit:6}).fetch();
+    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}}, {limit: 6}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: articleWithMetadata
     });
 });
 Meteor.publish('recommendedJournalArticles', function (val) {
-    var recommended = EditorsRecommend.find({publications:val}, {fields: {ArticlesId: 1}},{limit:5}).fetch();
+    var recommended = EditorsRecommend.find({publications: val}, {fields: {ArticlesId: 1}}, {limit: 5}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: minimumArticle
     });
 });
-Meteor.publish('articlesInCollection',function(collId){
-    var coll = ArticleCollections.findOne({_id:collId})
-    if(coll && !_.isEmpty(coll.articles)){
-        return Articles.find({_id:{$in:coll.articles}},{fields:articleWithMetadata});
+Meteor.publish('articlesInCollection', function (collId) {
+    var coll = ArticleCollections.findOne({_id: collId})
+    if (coll && !_.isEmpty(coll.articles)) {
+        return Articles.find({_id: {$in: coll.articles}}, {fields: articleWithMetadata});
     }
-    return Articles.find({_id:"null"});//return null 会导致客户端一直等待.
+    return Articles.find({_id: "null"});//return null 会导致客户端一直等待.
 })
 
 Meteor.publish('oneArticleMeta', function (id) {
-    return Articles.find({_id: id},{fields:articleWithMetadata});
+    return Articles.find({_id: id}, {fields: articleWithMetadata});
 });
 
-Meteor.publish('articlesInTopic',function(topicsId){
-    return Articles.find({topic: topicsId},{fields:articleWithMetadata});
+Meteor.publish('articlesInTopic', function (topicsId) {
+    return Articles.find({topic: topicsId}, {fields: articleWithMetadata});
 })
 
 
-Meteor.publish('articlesInSpecTopic',function(stid){
-    var stopic = SpecialTopics.findOne({_id:stid})
-    if(stopic && !_.isEmpty(stopic.articles)){
-        return Articles.find({_id:{$in:stopic.articles}},{fields:articleWithMetadata});
+Meteor.publish('articlesInSpecTopic', function (stid) {
+    var stopic = SpecialTopics.findOne({_id: stid})
+    if (stopic && !_.isEmpty(stopic.articles)) {
+        return Articles.find({_id: {$in: stopic.articles}}, {fields: articleWithMetadata});
     }
-    return Articles.find({_id:"null"});//return null 会导致客户端一直等待.
+    return Articles.find({_id: "null"});//return null 会导致客户端一直等待.
 })
