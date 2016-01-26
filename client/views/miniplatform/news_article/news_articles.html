@@ -12,7 +12,7 @@
                                 <div align="center"><span style="font-size:21px;">{{{title}}}</span>
                                     {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                 </div><br>
-                                <p class="text-center">发布时间：{{formatDate createDate "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;作者：{{author}}</p><br>
+                                <p class="text-center">发布时间：{{formatDate releaseTime "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;作者：{{author}}</p><br>
                                 <p>{{{content}}}</p>
                                 {{#if fields}}
                                     <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">下载附件</a></p>
@@ -27,7 +27,7 @@
                     <h6 class="text-uppercase bg-eee" align="center" style="font-size: 15px"><strong>最新资讯</strong></h6>
                     {{#each latestNews}}
                         <ul class="list-unstyled">
-                            <li><p><a href="{{whichUrl}}" target="_self">{{title}}&nbsp;({{formatDate createDate "YYYY-MM-DD"}})</a></p></li>
+                            <li><p><a href="{{whichUrl}}" target="_self">{{title}}&nbsp;({{formatDate releaseTime "YYYY-MM-DD"}})</a></p></li>
                         </ul>
                     {{else}}
                         {{_ "No results found!"}}
