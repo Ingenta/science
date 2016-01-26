@@ -212,8 +212,13 @@ Router.map(function () {
                     pdfId: 1
                 }
             });
-            if (!article) {
-                logger.warning("pdf not found for this article: " + articleId);
+            if (!article || !ScienceXML.FileExists(article.pdfId)) {
+                logger.warn("pdf not found for this article: " + this.params.articleId);
+                this.response.writeHead(302, {
+                    'Location': "/"
+                });
+
+                this.response.end();
                 return;
             }
             //create path to expected first page of pdf
@@ -234,10 +239,10 @@ Router.map(function () {
             var data = {};
             //create path to journal banner and advert banner
             var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
-            if (journalInfo.banner) {
+            if (journalInfo.banner && Images.findOne({_id: journalInfo.banner})) {
                 data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
             }
-            if (journalInfo.adBanner) {
+            if (journalInfo.adBanner && Images.findOne({_id: journalInfo.adBanner})) {
                 data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
             }
 

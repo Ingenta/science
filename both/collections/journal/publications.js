@@ -224,11 +224,15 @@ PublicationsSchema = new SimpleSchema({
             }
         }
     },
-    scholarOneCode: {
-        type: String,
-        optional: true
-    },
-    magtechCode: {
+    //scholarOneCode: {
+    //    type: String,
+    //    optional: true
+    //},
+    //magtechCode: {
+    //    type: String,
+    //    optional: true
+    //},
+    submissionReview: {
         type: String,
         optional: true
     },

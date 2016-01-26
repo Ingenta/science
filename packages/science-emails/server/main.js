@@ -110,8 +110,7 @@ Science.Email.tableOfContentEmail = function (date) {
                 titleCn: 1,
                 description: 1,
                 banner: 1,
-                scholarOneCode: 1,
-                magtechCode: 1
+                submissionReview: 1
             }
         });
         if(!journal) return;
