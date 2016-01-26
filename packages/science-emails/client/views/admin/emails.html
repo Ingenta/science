@@ -32,10 +32,12 @@
 <template name="updateEmailConfig">
     {{#autoForm id="test123" collection="EmailConfig"  doc=this type="update" buttonContent=getUpdateButtonContent}}
         {{#if isAlert}}
-        {{> afQuickField name="frequency"}}
+            {{> afQuickField name="frequency"}}
         {{/if}}
         {{> afQuickField name="subject" }}
-        {{> afQuickField name="body" }}
+        {{#unless isAlert}}
+            {{> afQuickField name="body" }}
+        {{/unless}}
         <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
     {{/autoForm}}
 </template>
