@@ -191,15 +191,11 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                 logger.error("can't find pdf of " + origPath);
                 callback && callback();
             } else {
-                PdfStore.insert(origPath, function (err, fileObj) {
-                    if (err) {
-                        logger.error(err);
-                        callback && callback();
-                    } else {
-                        logger.info("pdf imported");
-                        callback && callback(fileObj._id)
-                    }
-                });
+                var newPdfFolder = Config.staticFiles.uploadPdfDir + "/" + issn;
+                var newPdfPath = newPdfFolder + "/" + pdfName;
+                ScienceXML.FolderExists(newPdfFolder);
+                ScienceXML.CopyFile(origPath, newPdfPath);
+                callback && callback(newPdfPath);
             }
         }))
     }
@@ -344,8 +340,10 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 var a = Articles.findOne({doi:article.doi},{fields:{pdfId:1}});
                                 if(!a || !a.pdfId){//已经成功上传过pdf不再处理
                                     importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
-                                        if (result)
+                                        if (result) {
                                             newOne.pdfId = result;
+                                            logger.info("pdf imported for: " + article.doi);
+                                        }
                                         saveArticle(newOne);
                                     }))
                                 }else{
