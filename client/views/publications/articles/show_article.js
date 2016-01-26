@@ -127,9 +127,6 @@ Template.showArticle.onRendered(function () {
 });
 
 Template.showArticle.helpers({
-    getPdfById: function (id) {
-        return PdfStore.findOne({_id: id}).url() + "&download=true";
-    },
     refs: function () {
         var affObjs = Router.current().data().affiliations;
         var allrefs = [];
