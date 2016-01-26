@@ -69,6 +69,14 @@ NewsCenterSchema = new SimpleSchema({
             collection: "files"
         }
     },
+    releaseTime: {
+        type: Date,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
     createDate: {
         type: Date,
         optional: true
