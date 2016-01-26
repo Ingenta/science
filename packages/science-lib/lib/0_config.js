@@ -31,6 +31,7 @@ Config = {
             journal: [
                 'journal.name.toc',
                 'article.show',
+                'article.show.strange',
                 'journal.name'
             ],
             global: [
@@ -56,12 +57,14 @@ Config = {
             'publications',
             'journal.name',
             'article.show',
+            'article.show.strange',
             'solrsearch'
         ],
         displayJournalLogin: {
             journal: [
                 'journal.name.toc',
                 'article.show',
+                'article.show.strange',
                 'journal.name'
             ]
         }

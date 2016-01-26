@@ -43,7 +43,7 @@ Template.LayoutSideBar.helpers({
     },
     isArticlePage: function () {
         if (Router.current() && Router.current().route)
-            return Router.current().route.getName() == "article.show";
+            return Router.current().route.getName() == "article.show" || Router.current().route.getName() == "article.show.strange";
     },
     isJournalPage: function () {
         if (Router.current() && Router.current().route)
