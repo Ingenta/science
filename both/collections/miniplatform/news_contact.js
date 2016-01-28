@@ -43,6 +43,15 @@ NewsContactSchema = new SimpleSchema({
             collection: "files"
         }
     },
+    releaseTime: {
+        type: Date,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
     types: {
         type: String,
         optional: true

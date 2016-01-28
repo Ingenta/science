@@ -907,6 +907,9 @@
                 "label": "Exterior Chain",
                 "placeholder": "http://"
             },
+            "releaseTime": {
+                "label": "Release Time"
+            },
             "fileName": {
                 "label": "AttachmentName"
             },
