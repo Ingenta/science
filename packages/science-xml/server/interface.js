@@ -21,7 +21,8 @@ Router.route('/api', function () {
 			user      : NonEmptyString,
 			password  : NonEmptyString,
 			host      : NonEmptyString,
-			sourcePath: NonEmptyString
+			sourcePath: NonEmptyString,
+			type	  : NonEmptyString
 		});
 	}catch(e){
 		result.result="failed";
