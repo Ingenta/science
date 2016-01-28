@@ -1,9 +1,9 @@
 Template.enterpriseCulture.helpers({
     enterpriseNews: function () {
-        return NewsContact.find({types:"6"},{sort: {createDate: -1}});
+        return NewsContact.find({types:"6"},{sort: {releaseTime: -1}});
     },
     editFields: function () {
-        return NewsContact.find({types:"7"},{sort: {createDate: -1}});
+        return NewsContact.find({types:"7"},{sort: {releaseTime: -1}});
     },
     whichUrl: function () {
         if (this.link) {

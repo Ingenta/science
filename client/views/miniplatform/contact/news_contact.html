@@ -29,7 +29,7 @@
 </template>
 
 <template name="updateNewsContactModalForm">
-    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="createDate,link,fileName,fileId,types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="releaseTime,createDate,link,fileName,fileId,types"}}{{/afModal}}
 </template>
 
 <template name="addNewsContactModalForm">

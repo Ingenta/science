@@ -1052,6 +1052,9 @@
         "label": "外链地址",
         "placeholder": "http://"
       },
+      "releaseTime": {
+        "label": "发布时间"
+      },
       "fileName": {
         "label": "附件名称"
       },

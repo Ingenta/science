@@ -248,9 +248,11 @@ Router.map(function () {
 
             //parse article metadata
             data.title = getdata(article.title, lang);
-            data.authors = _.map(article.authors.fullname, function (fname) {
-                return getdata(fname, lang);
-            });
+            if(article.authors) {
+                data.authors = _.map(article.authors.fullname, function (fname) {
+                    return getdata(fname, lang);
+                });
+            }
             data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
             data.volume = article.volume;
             data.page = article.elocationId || article.firstPage;
