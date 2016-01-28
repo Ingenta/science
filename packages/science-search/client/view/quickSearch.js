@@ -5,7 +5,7 @@ Template.quickSearchTemplate.helpers({
     isJournalPage: function () {
         if (!Router.current().route)return false;
         var currRoute = Router.current().route.getName();
-        return _.contains(['journal.name', 'journal.name.toc', 'article.show', 'guidelines.show'], currRoute);
+        return _.contains(['journal.name', 'journal.name.toc', 'article.show','article.show.strange', 'guidelines.show'], currRoute);
     },
     journal: function () {
         var jourId = Session.get('currentJournalId');

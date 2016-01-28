@@ -41,7 +41,7 @@ Template.otherPlatformloginButtons.helpers({
 		if (Router.current() && Router.current().route.getName()) {
 			if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
 				journalId = Router.current().data()._id;
-			if (Router.current().route.getName() === "article.show")
+			if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
 				journalId = Router.current().data().journalId;
 		}
 		var journal = Publications.findOne({_id:journalId});
@@ -52,7 +52,7 @@ Template.otherPlatformloginButtons.helpers({
 		if (Router.current() && Router.current().route.getName()) {
 			if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
 				journalId = Router.current().data()._id;
-			if (Router.current().route.getName() === "article.show")
+			if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
 				journalId = Router.current().data().journalId;
 		}
 		if(journalId===undefined)return true;
