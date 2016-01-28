@@ -10,7 +10,7 @@ var delayRender = function () {
         var figs = Router.current().data().figures;
         _.each(figs, function (fig) {
             var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
-            if(_.isEmpty(refs)){
+            if (_.isEmpty(refs)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
             }
             if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
@@ -18,7 +18,7 @@ var delayRender = function () {
             }
             if (refs && refs.length) {
                 var closestP = $(refs[0]).closest("p");
-                if(closestP.length){
+                if (closestP.length) {
                     Blaze.renderWithData(Template.figure, fig, closestP[0]);
                     closestP.show();
                     //$(refs[0]).remove();
@@ -127,20 +127,17 @@ Template.showArticle.onRendered(function () {
 });
 
 Template.showArticle.helpers({
-    getPdfById: function (id) {
-        return PdfStore.findOne({_id: id}).url() + "&download=true";
-    },
     refs: function () {
-        var affObjs=Router.current().data().affiliations;
+        var affObjs = Router.current().data().affiliations;
         var allrefs = [];
         if (!_.isEmpty(this.affs)) {
             _.each(this.affs, function (aff) {
                 var match = /\d/.exec(aff);
                 var labelInId = !_.isEmpty(match) && match[0];
-                var currAffObj = _.find(affObjs,function(ao){
-                    return ao.id==aff;
+                var currAffObj = _.find(affObjs, function (ao) {
+                    return ao.id == aff;
                 })
-                var labelInData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage()=="zh-CN"?"cn":"en"]
+                var labelInData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage() == "zh-CN" ? "cn" : "en"]
                 allrefs.push(labelInData || labelInId)
             })
             if (!_.isEmpty(allrefs)) {
@@ -223,6 +220,10 @@ Template.articlePageNavigation.helpers({
         if (!this.elocationId)return false;
         var curIssue = this.issueId;
         return getNextPage(curIssue, this.elocationId, true);
+    },
+    hasIssue: function () {
+        if (this.pubStatus && this.pubStatus === "normal")return true;
+        return false;
     }
 });
 

@@ -188,166 +188,177 @@ Router.map(function () {
     });
     this.route('downloadPdf', {
         where: 'server',
-        path: '/downloadPdf/:pdfId',
+        path: '/downloadPdf/:articleId',
         action: function () {
-            var pdf = PdfStore.findOne({_id: this.params.pdfId});
-            if (pdf) {
-                var response = this.response;
-                var request = this.request;
-                var outputFileName = Guid.create() + ".pdf"
-                var outputPath = Config.staticFiles.uploadPdfDir + "/handle/" + outputFileName;
-                console.log(outputPath)
-                //get this article by pdf id
-                var article = Articles.findOne({pdfId: this.params.pdfId}, {
-                    fields: {
-                        doi: 1,
-                        title: 1,
-                        journal: 1,
-                        publisher: 1,
-                        authors: 1,
-                        volume: 1,
-                        elocationId: 1,
-                        firstPage: 1,
-                        year: 1,
-                        topic: 1
-                    }
+            var response = this.response;
+            var request = this.request;
+            var outputFileName = Guid.create() + ".pdf"
+            var outputPath = Config.staticFiles.uploadPdfDir + "/handle/" + outputFileName;
+            console.log(outputPath)
+            //get this article by pdf id
+            var article = Articles.findOne({_id: this.params.articleId}, {
+                fields: {
+                    doi: 1,
+                    articledoi: 1,
+                    title: 1,
+                    journal: 1,
+                    publisher: 1,
+                    authors: 1,
+                    volume: 1,
+                    elocationId: 1,
+                    firstPage: 1,
+                    year: 1,
+                    topic: 1,
+                    pdfId: 1
+                }
+            });
+            if (!article || !ScienceXML.FileExists(article.pdfId)) {
+                logger.warn("pdf not found for this article: " + this.params.articleId);
+                this.response.writeHead(302, {
+                    'Location': "/"
                 });
-                //create path to expected first page of pdf
-                var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.pdfId + (new Date()).getTime() + ".pdf";
-                //准备需要添加到pdf中的数据
-                var lang = this.params.query.lang || "en";
 
-                var journalInfo = Publications.findOne({_id: article.journal._id});
-                var publisherInfo = Publishers.findOne({_id: article.publisher});
-                var langArr = ["en", "cn"];
-                var getdata = function (data, lang, specialArr) {
-                    var index = lang === 'en' ? 0 : 1;
-                    if (specialArr) {
-                        return data[specialArr[index]] || data[specialArr[1 - index]];
-                    }
-                    return data[langArr[index]] || data[langArr[1 - index]];
-                };
-                var data = {};
-                //create path to journal banner and advert banner
-                var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
-                if (journalInfo.banner) {
-                    data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
-                }
-                if (journalInfo.adBanner) {
-                    data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
-                }
+                this.response.end();
+                return;
+            }
+            //create path to expected first page of pdf
+            var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.pdfId + (new Date()).getTime() + ".pdf";
+            //准备需要添加到pdf中的数据
+            var lang = this.params.query.lang || "en";
 
-                //parse article metadata
-                data.title = getdata(article.title, lang);
+            var journalInfo = Publications.findOne({_id: article.journal._id});
+            var publisherInfo = Publishers.findOne({_id: article.publisher});
+            var langArr = ["en", "cn"];
+            var getdata = function (data, lang, specialArr) {
+                var index = lang === 'en' ? 0 : 1;
+                if (specialArr) {
+                    return data[specialArr[index]] || data[specialArr[1 - index]];
+                }
+                return data[langArr[index]] || data[langArr[1 - index]];
+            };
+            var data = {};
+            //create path to journal banner and advert banner
+            var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
+            if (journalInfo.banner && Images.findOne({_id: journalInfo.banner})) {
+                data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
+            }
+            if (journalInfo.adBanner && Images.findOne({_id: journalInfo.adBanner})) {
+                data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
+            }
+
+            //parse article metadata
+            data.title = getdata(article.title, lang);
+            if(article.authors) {
                 data.authors = _.map(article.authors.fullname, function (fname) {
                     return getdata(fname, lang);
                 });
-                data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
-                data.volume = article.volume;
-                data.page = article.elocationId || article.firstPage;
-                data.year = article.year;
-                data.doi = article.doi;
-                data.fulltextUrl = "http://dx.doi.org/" + article.doi;
-                data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
+            }
+            data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
+            data.volume = article.volume;
+            data.page = article.elocationId || article.firstPage;
+            data.year = article.year;
+            data.doi = article.doi;
+            data.fulltextUrl = "http://dx.doi.org/" + article.doi;
+            data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
 
-                //create related article query
-                var query = {q: data.title, wt: "json"};
-                var topicArr = _.compact(article.topic);
-                if (!_.isEmpty(topicArr)) {
-                    query.fq = {
-                        all_topics: topicArr.join(" OR ")
+            //create related article query
+            var query = {q: data.title, wt: "json"};
+            var topicArr = _.compact(article.topic);
+            if (!_.isEmpty(topicArr)) {
+                query.fq = {
+                    all_topics: topicArr.join(" OR ")
+                }
+            }
+            query.rows = 5;
+
+            //get related articles
+            SolrClient.query(query, function (err, result) {
+
+                if (!err) {
+                    var jsonResult = JSON.parse(result.content);
+                    if (jsonResult.response && jsonResult.response.numFound) {
+                        var similars = _.map(jsonResult.response.docs, function (atc) {
+                            var atcObj = {};
+                            atcObj.title = getdata(atc, lang, ["title.en", "title.cn"]);
+                            atcObj.journal = getdata(atc, lang, ["journal.title", "journal.titleCn"]);
+                            atcObj.volume = atc.volume;
+                            atcObj.page = atc.elocationId || atc.firstPage;
+                            atcObj.year = atc.year;
+                            atcObj.doi = atc.doi;
+                            atcObj.fulltextUrl = "http://dx.doi.org/" + atc.doi;
+                            return atcObj;
+                        })
+                        data.similar = similars;
                     }
                 }
-                query.rows = 5;
 
-                //get related articles
-                SolrClient.query(query, function (err, result) {
 
-                    if (!err) {
-                        var jsonResult = JSON.parse(result.content);
-                        if (jsonResult.response && jsonResult.response.numFound) {
-                            var similars = _.map(jsonResult.response.docs, function (atc) {
-                                var atcObj = {};
-                                atcObj.title = getdata(atc, lang, ["title.en", "title.cn"]);
-                                atcObj.journal = getdata(atc, lang, ["journal.title", "journal.titleCn"]);
-                                atcObj.volume = atc.volume;
-                                atcObj.page = atc.elocationId || atc.firstPage;
-                                atcObj.year = atc.year;
-                                atcObj.doi = atc.doi;
-                                atcObj.fulltextUrl = "http://dx.doi.org/" + atc.doi;
-                                return atcObj;
-                            })
-                            data.similar = similars;
-                        }
+                var html = JET.render('pdf', data);
+
+                wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>', Meteor.bindEnvironment(function (code, signal) {
+                    if (code) {
+                        //logger.error(code);
+                        console.dir(code);
+                        console.dir(signal);
                     }
-
-
-                    var html = JET.render('pdf', data);
-
-                    wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>', Meteor.bindEnvironment(function (code, signal) {
-                        if(code){
-                            //logger.error(code);
-                            console.dir(code);
-                            console.dir(signal);
-                        }
-                        var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
-                        var footmark = Config.pdf.footmark.replace("{ip}", ip || "unknown")
-                            .replace("{time}", new Date().format("yyyy-MM-dd hh:mm:ss"))
-                            .replace("{url}", Config.rootUrl + Science.URL.articleDetail(article._id).substring(1) || "");
-                        var params = [
-                            "-i", Config.staticFiles.uploadPdfDir + "/" + pdf.copies.pdfs.key,   //待处理的pdf文件位置
-                            "-o", outputPath, //处理完成后保存的文件位置
-                            "-s", adPdf,       //广告页位置
-                            "-f", footmark
-                        ];
-                        //预出版的文章pdf上需要加上“Accepted”字样的水印
-                        if (article.pubStatus === 'accepted') {
-                            params = _.union(params, ["-w", Config.pdf.watermark]);
-                        }
-                        Science.Pdf(params, function (error, stdout, stderr) {
-                                Science.FSE.remove(adPdf);
-                                if (stdout) {
-                                    console.log('------STDOUT--------');
-                                    console.dir(stdout);
-                                    console.log('------STDOUT--------');
-                                }
-                                if (stderr) {
-                                    console.log('------STDERR--------');
-                                    console.dir(stderr);
-                                    console.log('------STDERR--------');
-                                }
-                                if (!error) {
-                                    Science.FSE.exists(outputPath, function (result) {
-                                        if (result) {
-                                            var stat = null;
-                                            try {
-                                                stat = Science.FSE.statSync(outputPath);
-                                            } catch (_error) {
-                                                logger.error(_error);
-                                                response.statusCode = 404;
-                                                response.end();
-                                                return;
-                                            }
-                                            var headers = {
-                                                'Content-Type': pdf.copies.pdfs.type,
-                                                'Content-Disposition': "attachment; filename=" + pdf.copies.pdfs.name,
-                                                'Content-Length': stat.size
-                                            };
-
-                                            response.writeHead(200, headers);
-
-                                            Science.FSE.createReadStream(outputPath).pipe(response);
-                                        }
-                                    });
-                                } else {
-                                    throw error;
-                                }
+                    var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
+                    var footmark = Config.pdf.footmark.replace("{ip}", ip || "unknown")
+                        .replace("{time}", new Date().format("yyyy-MM-dd hh:mm:ss"))
+                        .replace("{url}", Config.rootUrl + Science.URL.articleDetail(article._id).substring(1) || "");
+                    var params = [
+                        "-i", article.pdfId,   //待处理的pdf文件位置
+                        "-o", outputPath, //处理完成后保存的文件位置
+                        "-s", adPdf,       //广告页位置
+                        "-f", footmark
+                    ];
+                    //预出版的文章pdf上需要加上“Accepted”字样的水印
+                    if (article.pubStatus === 'accepted') {
+                        params = _.union(params, ["-w", Config.pdf.watermark]);
+                    }
+                    Science.Pdf(params, function (error, stdout, stderr) {
+                            Science.FSE.remove(adPdf);
+                            if (stdout) {
+                                console.log('------STDOUT--------');
+                                console.dir(stdout);
+                                console.log('------STDOUT--------');
                             }
-                        );
-                    })).pipe(Science.FSE.createWriteStream(adPdf));
+                            if (stderr) {
+                                console.log('------STDERR--------');
+                                console.dir(stderr);
+                                console.log('------STDERR--------');
+                            }
+                            if (!error) {
+                                Science.FSE.exists(outputPath, function (result) {
+                                    if (result) {
+                                        var stat = null;
+                                        try {
+                                            stat = Science.FSE.statSync(outputPath);
+                                        } catch (_error) {
+                                            logger.error(_error);
+                                            response.statusCode = 404;
+                                            response.end();
+                                            return;
+                                        }
+                                        var headers = {
+                                            'Content-Type': "application/pdf",
+                                            'Content-Disposition': "attachment; filename=" + article.articledoi + ".pdf",
+                                            'Content-Length': stat.size
+                                        };
 
-                });
-            }
+                                        response.writeHead(200, headers);
+
+                                        Science.FSE.createReadStream(outputPath).pipe(response);
+                                    }
+                                });
+                            } else {
+                                throw error;
+                            }
+                        }
+                    );
+                })).pipe(Science.FSE.createWriteStream(adPdf));
+
+            });
+
         }
     });
 

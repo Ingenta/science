@@ -14,7 +14,7 @@ JournalSubs = new SubsManager();
 ArticleSubs = new SubsManager();
 
 HomePageSubs.subscribe("current_user_data");
-HomePageSubs.subscribe('pages');
+Meteor.subscribe('pages');
 HomePageSubs.subscribe('images');
 Meteor.subscribe('advertisement');
 HomePageSubs.subscribe('institutions');

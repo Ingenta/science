@@ -13,8 +13,11 @@
                    autofocus>
             <input id="register_email" type="text" class="form-control" placeholder="{{_ 'Email address'}}" required>
             <input id="register_password" type="password" class="form-control" placeholder="{{_ 'Password'}}" required>
-            <input id="register_accept" type="checkbox"> {{_ "I accept"}} <a data-toggle="modal" data-target="#myModal"><em>{{_ "SCP User Agreement"}}</em></a>
-            {{> Agreement}}
+            <p>
+                <input id="register_accept" type="checkbox"> {{_ "I accept"}}
+                <a data-toggle="modal" data-target="#myModal" href="#"><em>{{_ "SCP User Agreement"}}</em></a>
+                {{> Agreement}}
+            </p>
             <button id="register_submit" class="btn btn-lg btn-primary btn-block" disabled type="submit"
                     data-loading-text="{{_ 'PleaseWait'}}">
                 {{_ "Sign up"}}

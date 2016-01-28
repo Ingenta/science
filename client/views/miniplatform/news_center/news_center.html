@@ -28,7 +28,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -53,7 +53,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -78,7 +78,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span>
+                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -122,6 +122,7 @@
                         {{> afQuickField name="abstract"}}
                         {{> afQuickField name="content"}}
                         {{> afQuickField name="link"}}
+                        {{> afQuickField name="releaseTime"}}
                         {{> afQuickField name="fileId"}}
                     </div>
                     <div class="modal-footer">
@@ -151,6 +152,7 @@
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="recommend"}}
                     {{> afQuickField name="link"}}
+                    {{> afQuickField name="releaseTime"}}
                     {{> afQuickField name="picture"}}
                     {{> afQuickField name="fileId"}}
                 </div>
@@ -181,6 +183,7 @@
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="recommend"}}
                     {{> afQuickField name="link"}}
+                    {{> afQuickField name="releaseTime"}}
                     {{> afQuickField name="picture"}}
                     {{> afQuickField name="fileId"}}
                 </div>
@@ -211,6 +214,7 @@
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="recommend"}}
                     {{> afQuickField name="link"}}
+                    {{> afQuickField name="releaseTime"}}
                     {{> afQuickField name="picture"}}
                     {{> afQuickField name="fileId"}}
                 </div>

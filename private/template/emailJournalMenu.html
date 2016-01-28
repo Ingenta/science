@@ -1,10 +1,6 @@
 <div class="logo">
-    {{#if journal.magtechCode}}
-        <a href="http://ees.scichina.com/user/login.action?pageCode={{journal.magtechCode}}">Submit Your Manuscript</a>|
-    {{else}}
-        {{#if journal.scholarOneCode}}
-            <a href="https://mc03.manuscriptcentral.com/{{journal.scholarOneCode}}">Submit Your Manuscript</a>|
-        {{/if}}
+    {{#if journal.submissionReview}}
+        <a href="{{journal.submissionReview}}">Submit Your Manuscript</a>|
     {{/if}}
     <a href="{{journal.url}}?activeTab=Author Center">Author Guidelines</a>|
     <a href="{{issue.url}}">Current Issue</a>|

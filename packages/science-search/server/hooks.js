@@ -45,7 +45,7 @@ Meteor.startup(function(){
 
 			_.each(journalFacetObj,function(count,id){
 				var journal = _.find(journals,function(j){return j._id===id});
-				if(journal.visible=="0"){
+				if(journal&&journal.visible=="0"){
 					var newestJournal=_.find(journals,function(hj){return _.contains(hj.historicalJournals,id) && hj.visible=="1"});
 					if(newestJournal)
 						journalFacetObj[newestJournal._id] = (journalFacetObj[newestJournal._id] || 0 ) + count;

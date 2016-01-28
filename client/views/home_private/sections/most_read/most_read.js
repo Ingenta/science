@@ -4,7 +4,7 @@ Template.mostReadArticleList.helpers({
         if (Router.current() && Router.current().route.getName()) {
             if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
                 journalId = Router.current().data()._id;
-            if (Router.current().route.getName() === "article.show")
+            if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
                 journalId = Router.current().data().journalId;
         }
         Meteor.call("getMostRead", journalId, 5, function (err, result) {

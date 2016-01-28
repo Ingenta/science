@@ -39,7 +39,14 @@ if (Meteor.isServer) {
         json: true
     };
     if (isDev){
-        logger = new (winston.Logger)();
+        logger = new (winston.Logger)({
+            transports: [
+                new (winston.transports.Console)(),
+            ],
+            exceptionHandlers: [
+                new (winston.transports.Console)()
+            ]
+        });
     }
     else {
         logger = new (winston.Logger)({

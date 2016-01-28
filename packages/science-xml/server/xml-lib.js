@@ -18,9 +18,21 @@ ScienceXML.FolderExists = function (path) {
 ScienceXML.RemoveFile = function (path) {
     if (path) {
         Science.FSE.remove(path, function (err) {
-            if (err) return console.error(err)
+            if (err) return logger.error(err)
         });
     }
+}
+ScienceXML.CopyFile = function (srcPath, destPath) {
+    if (srcPath && destPath) {
+        try {
+            Science.FSE.copySync(srcPath, destPath);
+            return true;
+        } catch (err) {
+            logger.error('Error copying file: ' + srcPath + " to " + destPath, err.message);
+            return false;
+        }
+    }
+    return false;
 }
 ScienceXML.getLocationAsync = function (path, cb) {
     cb && cb(null, HTTP.get(path).content);
@@ -96,11 +108,11 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.errors.push("No noteLabel found");
         } else {
             var entry = {id: id, label: noteLabel};
-            if(email)  entry.email = email;
+            if (email)  entry.email = email;
             if (!_.isEmpty(multiLangNote)) {
                 entry.note = {};
                 _.each(multiLangNote, function (noteContent, key) {
-                    if(entry.email){
+                    if (entry.email) {
                         var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, email);
                         noteContent = noteContent.toString().replace(/<ext-link[^<]+<\/ext-link>/, mailTag);
                     }
@@ -162,12 +174,12 @@ ScienceXML.getSubSection = function (subSectionNodes) {
                         delete subSecs[i].body.figures;
                     }
                     if (!_.isEmpty(subSecs[i].body.tables)) {
-                        tables = _.union(tables,subSecs[i].body.tables);
+                        tables = _.union(tables, subSecs[i].body.tables);
                         delete subSecs[i].body.tables;
                     }
                 }
-                thisSection.body.figures = _.compact(_.union(thisSection.body.figures,figures));
-                thisSection.body.tables = _.compact(_.union(thisSection.body.tables,tables));
+                thisSection.body.figures = _.compact(_.union(thisSection.body.figures, figures));
+                thisSection.body.tables = _.compact(_.union(thisSection.body.tables, tables));
             }
             thisSubSection.push({
                 label: thisSection.label,
@@ -181,7 +193,7 @@ ScienceXML.getSubSection = function (subSectionNodes) {
 }
 
 var getParagraphs = function (paragraphNodes) {
-    var paragraphs = {html: "", tex: [], figures: [], tables:[]};
+    var paragraphs = {html: "", tex: [], figures: [], tables: []};
     paragraphNodes.forEach(function (paragraph) {
         if (paragraph.tagName === 'fig') {
             //兼容中国科学插图数据处理
@@ -191,9 +203,9 @@ var getParagraphs = function (paragraphNodes) {
                 var ref = '<p><xref original="true" ref-type="fig" rid="' + fig.id + '">' + fig.label + '</xref></p>';
                 paragraphs.html += ref;
             }
-        } else if(paragraph.tagName === 'table-wrap'){
+        } else if (paragraph.tagName === 'table-wrap') {
             var table = getTable(paragraph);
-            if(table){
+            if (table) {
                 paragraphs.tables.push(table);
                 var ref = '<p><xref original="true" ref-type="table" rid="' + table.id + '">' + table.label + '</xref></p>';
                 paragraphs.html += ref;
@@ -268,13 +280,13 @@ ScienceXML.getFullText = function (results, doc) {
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstract = parserHelper.getXmlString("//abstract",doc,true);
+    var abstract = parserHelper.getXmlString("//abstract", doc, true);
     if (!abstract)
         results.errors.push("No abstract found");
     else {
         abstract = abstract.trim()
-        if(abstract.startWith("<p>") && abstract.endWith("</p>"))
-            abstract = abstract.slice(3,-4)
+        if (abstract.startWith("<p>") && abstract.endWith("</p>"))
+            abstract = abstract.slice(3, -4)
         results.abstract = abstract;
     }
     return results;
@@ -444,11 +456,11 @@ ScienceXML.getFigures = function (doc) {
 
 var getTable = function (tableWrapNode) {
     var table = {};
-    table.id = parserHelper.getFirstAttribute("./@id",tableWrapNode);
+    table.id = parserHelper.getFirstAttribute("./@id", tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
-    table.label=parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label",tableWrapNode);
-    table.caption = parserHelper.getSimpleVal("child::caption/p",tableWrapNode);
-    table.table = parserHelper.getXmlString("child::table",tableWrapNode).replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+    table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
+    table.caption = parserHelper.getSimpleVal("child::caption/p", tableWrapNode);
+    table.table = parserHelper.getXmlString("child::table", tableWrapNode).replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
 };
 

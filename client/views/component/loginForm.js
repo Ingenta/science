@@ -1,39 +1,60 @@
 Template.loginForm.rendered = function () {
 	$(".js-example-basic-single").select2();
+	$("#login-form-journal").on("select2:select", function (e) {
+		var id = e.params.data.id;
+		var journal = Publications.findOne({_id:id});
+		if(journal){
+			Session.set("pubValue", journal.submissionReview);
+		}
+	});
 };
-
-Template.loginForm.events({
-	'mousedown .btn':function (e,t){
-		var code = t.find("#login-form-journal").value;
-		Session.set("pubValue", code);
-	}
-});
 
 Template.loginForm.helpers({
 	publicationsList:function(){
-		return Publications.find();
+		return Publications.find({visible:"1",submissionReview: {$exists: true}});
 	},
 	loginUrl: function(){
-		var pageCode = Session.get("pubValue");
-		if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone+pageCode;
-		return Config.otherPlatformLoginUrl.editors+pageCode;
-	},
-	registerUrl: function(){
-		var pageCode = Session.get("pubValue");
-		if (TAPi18n.getLanguage() === "en")return Config.otherPlatformLoginUrl.scholarone+pageCode;
-		return Config.otherPlatformRegisterUrl.editors;
-	},
-	isDisplayLogin: function(){
-		if (TAPi18n.getLanguage() === "zh-CN") return true;
-	},
-	codeValue:function(){
-		if (TAPi18n.getLanguage() === "en")return this.scholarOneCode || " ";
-		return this.magtechCode || " ";
+		var code = Session.get("pubValue");
+		if(code)return code;
 	}
+	//loginUrl: function(){
+	//	var pageCode = Session.get("pubValue");
+	//	var lang = Session.get("Language");
+	//	if (lang == "1") return Config.otherPlatformLoginUrl.scholarone+pageCode;
+	//	return Config.otherPlatformLoginUrl.editors+pageCode;
+	//},
+	//registerUrl: function(){
+	//	var pageCode = Session.get("pubValue");
+	//	var lang = Session.get("Language");
+	//	if (lang == "1")return Config.otherPlatformLoginUrl.scholarone+pageCode;
+	//	return Config.otherPlatformRegisterUrl.editors;
+	//},
+	//isDisplayLogin: function(){
+	//	var lang = Session.get("Language");
+	//	if (lang == "2") return true;
+	//}
 });
 
 Template.otherPlatformloginButtons.helpers({
-	displayIl8n: function(){
-		if (TAPi18n.getLanguage() === "en") return true;
+	urlSubmission: function(){
+		var journalId;
+		if (Router.current() && Router.current().route.getName()) {
+			if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
+				journalId = Router.current().data()._id;
+			if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
+				journalId = Router.current().data().journalId;
+		}
+		var journal = Publications.findOne({_id:journalId});
+		if(journal)return journal.submissionReview;
+	},
+	hideUrl: function(){
+		var journalId;
+		if (Router.current() && Router.current().route.getName()) {
+			if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
+				journalId = Router.current().data()._id;
+			if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
+				journalId = Router.current().data().journalId;
+		}
+		if(journalId===undefined)return true;
 	}
 });

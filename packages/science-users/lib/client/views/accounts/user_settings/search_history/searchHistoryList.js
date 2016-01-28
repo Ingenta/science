@@ -1,13 +1,12 @@
 Template.searchHistoryList.helpers({
     searchHistory:function(){
-        var user = Meteor.user();
-        return user.history.unsave;
+        return Meteor.user().history && Meteor.user().history.unsave
     },
     time : function(){
         return this.createOn.format("yyyy-MM-dd");
     },
     folder : function(){
-        return Meteor.user().history.saved;
+        return Meteor.user().history && Meteor.user().history.saved
     },
     form : function(){
         var form = (_.contains(["bar","history"],this.from))?TAPi18n.__("Common Search"):"";

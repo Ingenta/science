@@ -76,7 +76,7 @@
                 <div class="row">
                     {{#if pdfId}}
                         <li class="pdf">
-                            <a target="_blank" class="pdfDownload" href="/downloadPdf/{{pdfId}}">
+                            <a target="_blank" class="pdfDownload" href="/downloadPdf/{{_id}}">
                                 <img style="height:50px" src="/pdf.png"/>
 
                                 <p>{{_ "Download"}} PDF</p>
@@ -120,7 +120,13 @@
                   {{else}}
                       <b>{{_ "Previous Article"}}</b>
                   {{/if}}
-                  | <a href="../"><b>{{_ "Table of Contents"}}</b></a> |
+                  |
+                  {{#if hasIssue}}
+                      <a href="../"><b>{{_ "Table of Contents"}}</b></a>
+                  {{else}}
+                      <b>{{_ "Table of Contents"}}</b>
+                  {{/if}}
+                  |
                   {{#if nextArticle}}
                       <a href="{{nextArticle}}">
                           <b>{{_ "Next Article"}}</b>
@@ -137,19 +143,19 @@
 
 <template name="shareTemplate">
     <!--<div class="bdsharebuttonbox pull-right">-->
-        <!--<a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>-->
-        <!--<a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>-->
-        <!--<a title="分享到fb" class="bds_fbook" href="#" data-cmd="fbook"></a>-->
-        <!--<a title="分享到twi" class="bds_twi" href="#" data-cmd="twi"></a></div>-->
+    <!--<a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>-->
+    <!--<a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>-->
+    <!--<a title="分享到fb" class="bds_fbook" href="#" data-cmd="fbook"></a>-->
+    <!--<a title="分享到twi" class="bds_twi" href="#" data-cmd="twi"></a></div>-->
     <!--<script>window._bd_share_config = {-->
-        <!--"common": {-->
-            <!--"bdSnsKey": {},-->
-            <!--"bdText": "",-->
-            <!--"bdMini": "2",-->
-            <!--"bdPic": "",-->
-            <!--"bdStyle": "0",-->
-            <!--"bdSize": "16"-->
-        <!--}, "share": {}-->
+    <!--"common": {-->
+    <!--"bdSnsKey": {},-->
+    <!--"bdText": "",-->
+    <!--"bdMini": "2",-->
+    <!--"bdPic": "",-->
+    <!--"bdStyle": "0",-->
+    <!--"bdSize": "16"-->
+    <!--}, "share": {}-->
     <!--};-->
     <!--with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];-->
     <!--</script>-->
@@ -236,7 +242,8 @@
         {{#each tables}}
             {{> atttable}}
         {{/each}}
-    </div><hr>
+    </div>
+    <hr>
     {{> articleMedia}}
 </template>
 

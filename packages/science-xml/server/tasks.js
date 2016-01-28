@@ -140,23 +140,23 @@ Tasks.parse = function (logId, pathToXml) {
     });
     try {
         var result;
-        if(log.pubStatus == "accepted")
+        if (log.pubStatus == "accepted")
             result = Science.parserAccepted(pathToXml)
         else
-            result = ScienceXML.parseXml(pathToXml,log.pubStatus);
+            result = ScienceXML.parseXml(pathToXml, log.pubStatus);
         log.errors = result.errors;
         if (!_.isEmpty(log.errors)) {
             Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        if(log.creator!='api' && !Tasks.checkPermission(result.journalId, log.creator)){
+        if (log.creator != 'api' && !Tasks.checkPermission(result.journalId, log.creator)) {
             log.errors.push("Upload article permission denied");
-            Tasks.fail(taskId,logId,log.errors);
+            Tasks.fail(taskId, logId, log.errors);
             return;
         }
-        if(!Tasks.checkPubStatus(result.doi, log.pubStatus)){
+        if (!Tasks.checkPubStatus(result.doi, log.pubStatus)) {
             log.errors.push("Already exist more close to the final version of the data, can not override");
-            Tasks.fail(taskId,logId,log.errors);
+            Tasks.fail(taskId, logId, log.errors);
             return;
         }
         //set parse task to success and start next task
@@ -170,18 +170,18 @@ Tasks.parse = function (logId, pathToXml) {
     }
 };
 
-Tasks.checkPermission = function(journalId, userId){
+Tasks.checkPermission = function (journalId, userId) {
     return Permissions.userCan('add-article', 'resource', userId, {journal: journalId});
 };
 
-Tasks.checkPubStatus = function(doi, currStatus){
-    var statusOrder = {"normal":0,"online_first":1,"accepted":2};
+Tasks.checkPubStatus = function (doi, currStatus) {
+    var statusOrder = {"normal": 0, "online_first": 1, "accepted": 2};
 
-    if(statusOrder[currStatus]===undefined)
+    if (statusOrder[currStatus] === undefined)
         return false;
 
-    var articleObj = Articles.findOne({doi:doi},{fields:{pubStatus:1}});
-    if(!articleObj || !articleObj.pubStatus)
+    var articleObj = Articles.findOne({doi: doi}, {fields: {pubStatus: 1}});
+    if (!articleObj || !articleObj.pubStatus)
         return true;
 
     return statusOrder[currStatus] <= statusOrder[articleObj.pubStatus]
@@ -201,17 +201,25 @@ Tasks.insertArticlePdf = function (logId, result) {
         status: "Started",
         logId: logId
     });
-    PdfStore.insert(log.pdf, function (err, fileObj) {
-        if(err){
-            logger.error(err);
-            log.errors.push(err);
-        }
-        logger.info("pdf imported")
-        result.pdfId = fileObj._id;
-        UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
-        UploadLog.update({_id: logId}, {$set: {pdfId: fileObj._id}});
-        Tasks.insertArticleImages(logId, result);
-    });
+    //TODO: instead of inserting to collectionfs copy to original pdf folder in app
+
+    //TODO: check destination path exists
+    //TODO: copy file and get new path
+    var newPdfFolder = Config.staticFiles.uploadPdfDir + "/" + result.issn;
+    var newPdfPath = newPdfFolder + "/" + log.filename + "-" + logId + ".pdf";
+    ScienceXML.FolderExists(newPdfFolder);
+    if (!ScienceXML.CopyFile(log.pdf, newPdfPath)) {
+        logger.error("pdf failed to copy to: " + newPdfPath, err.message);
+        Tasks.fail(taskId, logId, log.errors);
+        return;
+    }
+    //TODO: write new path to article object
+    result.pdfId = newPdfPath;
+    //TODO: call insert
+    UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
+    UploadLog.update({_id: logId}, {$set: {pdfId: result.pdfId}});
+    Tasks.insertArticleImages(logId, result);
+
     if (!_.isEmpty(log.errors)) {
         Tasks.fail(taskId, logId, log.errors);
         return;
@@ -353,7 +361,7 @@ var insertArticle = function (a) {
     a.accessKey = journal.accessKey;
     a.language = journal.language;
 
-    if(a.pubStatus=='normal'){
+    if (a.pubStatus == 'normal') {
         var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
         if (!volume) {
             volume = Volumes.insert({

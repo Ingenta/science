@@ -27,7 +27,7 @@ Template.LayoutSideBar.helpers({
             });
         }
         if (institutuion) {
-            logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo}).url();
+            logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo})&& Images.findOne({_id: institutuion.logo}).url();
         }
         if (logo) return '<img src="' + logo + '" width="100%" height="auto"/>';
         else return;
@@ -43,7 +43,7 @@ Template.LayoutSideBar.helpers({
     },
     isArticlePage: function () {
         if (Router.current() && Router.current().route)
-            return Router.current().route.getName() == "article.show";
+            return Router.current().route.getName() == "article.show" || Router.current().route.getName() == "article.show.strange";
     },
     isJournalPage: function () {
         if (Router.current() && Router.current().route)

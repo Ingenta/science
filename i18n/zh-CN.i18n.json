@@ -1,4 +1,5 @@
 {
+  "Password reset": "修改密码成功",
   "Connection to Server Lost!": "连接到服务器丢失！",
   "Click to try reconnecting now": "现在点击重新尝试",
   "Automatically attempting to reconnect in": "自动尝试重新连接",
@@ -240,8 +241,7 @@
   "Edit user": "修改用户信息",
   "Blocked": "锁定",
   "Admin": "管理员",
-  "Submission and review Login": "ScholarOne登录",
-  "Editors Login": "投审稿登录",
+  "Submission and Review": "投审稿",
   "Create": "新建",
   "Update": "修改",
   "Delete": "删除",
@@ -448,11 +448,8 @@
       "adBanner": {
         "label": "选择PDF广告横幅图片"
       },
-      "scholarOneCode":{
-        "label":"英文投稿平台代号"
-      },
-      "magtechCode":{
-        "label":"中文投稿平台代号"
+      "submissionReview":{
+        "label":"投审稿地址"
       },
       "tabSelections": {
         "label": "选择标签页",
@@ -1055,6 +1052,9 @@
         "label": "外链地址",
         "placeholder": "http://"
       },
+      "releaseTime": {
+        "label": "发布时间"
+      },
       "fileName": {
         "label": "附件名称"
       },
@@ -1085,6 +1085,9 @@
       "link": {
         "label": "外链地址",
         "placeholder": "http://"
+      },
+      "releaseTime": {
+        "label": "发布时间"
       },
       "picture": {
         "label": "新闻配图"

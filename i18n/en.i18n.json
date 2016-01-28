@@ -303,11 +303,8 @@
             "adBanner": {
                 "label": "Choose Image for Banner inside PDF"
             },
-            "scholarOneCode":{
-                "label":"ScholarOne Code"
-            },
-            "magtechCode":{
-                "label":"Magtech Code"
+            "submissionReview":{
+                "label":"Submission and Review"
             },
             "tabSelections": {
                 "label": "Choose tabs",
@@ -910,6 +907,9 @@
                 "label": "Exterior Chain",
                 "placeholder": "http://"
             },
+            "releaseTime": {
+                "label": "Release Time"
+            },
             "fileName": {
                 "label": "AttachmentName"
             },
@@ -940,6 +940,9 @@
             "link": {
                 "label": "Exterior Chain",
                 "placeholder": "http://"
+            },
+            "releaseTime": {
+                "label": "Release Time"
             },
             "picture": {
                 "label": "Choose file"
