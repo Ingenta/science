@@ -21,7 +21,8 @@ Router.route('/api', function () {
 			user      : NonEmptyString,
 			password  : NonEmptyString,
 			host      : NonEmptyString,
-			sourcePath: NonEmptyString
+			sourcePath: NonEmptyString,
+			type	  : NonEmptyString
 		});
 	}catch(e){
 		result.result="failed";
@@ -41,7 +42,7 @@ Router.route('/api', function () {
 			result.message=err.message;
 		}else{
 			result.result="success";
-			Tasks.startJob(targetPath,filename,"application/zip",{creator:"api"});
+			Tasks.startJob(targetPath,filename,"application/zip",{creator:"api",pubStatus:req.body.type});
 		}
 		res.write(JSON.stringify(result));
 
