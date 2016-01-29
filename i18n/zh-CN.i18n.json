@@ -1119,6 +1119,9 @@
       "abstract": {
         "label": "专栏简介"
       },
+      "releaseTime": {
+        "label": "发布时间"
+      },
       "content": {
         "label": "专栏内容"
       }

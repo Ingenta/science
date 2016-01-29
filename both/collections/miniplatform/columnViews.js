@@ -34,6 +34,15 @@ ColumnViewsSchema = new SimpleSchema({
             }
         }
     },
+    releaseTime: {
+        type: Date,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
     columnId: {
         type: String
     },
