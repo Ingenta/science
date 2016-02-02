@@ -7,7 +7,7 @@ Template.columnViewsDetails.helpers({
     },
     columnList: function () {
         var columnId = Router.current().params.columnId;
-        return ColumnViews.find({columnId: columnId});
+        return ColumnViews.find({columnId: columnId},{sort: {releaseTime: -1}});
     },
     isActive: function (id) {
         var viewsId =  Session.get('tabColumn');

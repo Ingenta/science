@@ -974,6 +974,9 @@
             "abstract": {
                 "label": "Column profile"
             },
+            "releaseTime": {
+                "label": "Release Time"
+            },
             "content": {
                 "label": "Column content"
             }
