@@ -165,7 +165,7 @@ Tasks.parse = function (logId, pathToXml) {
         //start import tasks
         Tasks.insertArticlePdf(logId, result);
     } catch (e) {
-        log.errors.push(e.toString());
+        log.errors.push(e&&e.toString());
         Tasks.fail(taskId, logId, log.errors);
     }
 };
