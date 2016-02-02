@@ -90,7 +90,9 @@ Template.figure.helpers({
 });
 
 Template.figure.events({
-    "click .figure-image": function () {
+    "click .figure-image": function (e) {
+        e.stopPropagation();
+        e.preventDefault();
         Session.set("fig", this);
         $(".figure-modal").modal('show');
     }
