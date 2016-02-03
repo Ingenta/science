@@ -2,13 +2,13 @@ this.EditorialMember = new Meteor.Collection("editorial_member");
 
 this.EditorialMember.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-editorial-member", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId);
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-editorial-member", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId);
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-editorial-member", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId);
     }
 });
 
