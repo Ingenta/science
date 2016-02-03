@@ -31,3 +31,12 @@
     font-size: 14px;
     font-family:"黑体";
 }
+
+.editorial-board-list{
+    padding-left:0px !important;
+    padding-right:0px !important;
+}
+
+.editorial-name-list .col-md-4{
+   padding:5px;
+}

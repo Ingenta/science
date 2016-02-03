@@ -27,7 +27,7 @@
                 </div>
             </ul>
         </div>
-        <div class="tab-content col-xs-8">
+        <div class="tab-content col-xs-8 editorial-board-list">
             <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
         </div>
     </div>
@@ -43,7 +43,7 @@
         </div>
         <hr>
         {{#if agree}}
-            <div class="part" style="padding: 0px;">
+            <div class="part editorial-name-list">
                 <p>
                     {{#each editorialBoards}}
                         <div class="col-md-4"><a href="#{{_id}}">{{translateThis name.cn name.en}}</a></div>

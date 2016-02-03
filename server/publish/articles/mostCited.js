@@ -1,6 +1,6 @@
 Meteor.publish('mostCited', function (journalId) {
     var query = journalId && {journalId: journalId} || {};
-    var mostCited = MostCited.find(query,{limit:20});
+    var mostCited = MostCited.find(query,{limit:20,sort: {count: -1}});
     var ids = _.pluck(mostCited.fetch(), 'articleId');
     return [
         Articles.find({_id: {$in: ids}}, {
