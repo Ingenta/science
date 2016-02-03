@@ -37,7 +37,8 @@ getMostReadSuggestion = function (currentJournalId) {
     if (!currentJournalId) return article;
     if (article.journalId !== currentJournalId) return;
     return article;
-}
+};
+
 createMostReadList = function (journalId, limit) {
     var allIds = [];
     //get the most read object by grouping articleviews
@@ -53,7 +54,7 @@ createMostReadList = function (journalId, limit) {
         allIds.push(item._id);
     });
     return _.uniq(allIds); //This removes any duplicates after initial
-}
+};
 
 updateMostCited = function(){
     MostCited.remove({});
@@ -71,5 +72,40 @@ updateMostCited = function(){
                 });
             });
         }
+    });
+};
+
+updateMostRead = function(){
+    MostRead.remove({});
+    Publications.find({visible: "1"}).forEach(function (journal) {
+        PageViews.aggregate([{
+            $match: {
+                journalId: journal._id,
+                articleId: {$ne: null}
+            }
+        }, {
+            $group: {
+                _id: '$articleId',
+                count: {$sum: 1}
+
+            }
+        }, {$sort: {count: -1}}
+            , {$limit: 20}]).forEach(function (obj) {
+            obj.journalId = journal._id;
+            MostRead.insert(obj);
+        });
+    });
+    PageViews.aggregate([{
+        $match: {
+                    articleId: {$ne: null}
+                }
+            }, {
+        $group: {
+            _id: '$articleId',
+            count: {$sum: 1}
+        }
+    }, {$sort: {count: -1}}
+        , {$limit: 20}]).forEach(function (obj) {
+        MostRead.insert(obj);
     });
 };
