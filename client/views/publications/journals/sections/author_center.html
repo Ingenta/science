@@ -170,6 +170,8 @@
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="fileName"}}
+                    {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -194,6 +196,8 @@
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="fileName"}}
+                    {{> afQuickField name="fileId"}}
                     {{> afQuickField name="parentId" options=getManuscript }}
                 </div>
                 <div class="modal-footer">
@@ -218,6 +222,8 @@
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="fileName"}}
+                    {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -234,6 +240,8 @@
         {{> afQuickField name="title"}}
         {{> afQuickField name="content"}}
         {{> afQuickField name="url"}}
+        {{> afQuickField name="fileName"}}
+        {{> afQuickField name="fileId"}}
         {{> afQuickField name="parentId" options=getManuscript }}
     </fieldset>
     <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
@@ -241,9 +249,9 @@
 </template>
 
 <template name="updateAuthorCenterModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AuthorCenter" doc=_id operation="update" fields="title,content,url" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AuthorCenter" doc=_id operation="update" fields="title,content,url,fileName,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
 <template name="updateSubmitManuscriptModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AuthorCenter" doc=_id operation="update" fields="title,url" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AuthorCenter" doc=_id operation="update" fields="title,url,fileName,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
