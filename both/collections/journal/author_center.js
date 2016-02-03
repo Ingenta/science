@@ -36,8 +36,21 @@ AuthorCenterSchema = new SimpleSchema({
             type: 'universe-select'
         }
     },
+    fileName: {
+        type: Science.schemas.MultipleTextOptionalSchema,
+        optional: true
+    },
+    fileId: {
+        type: String,
+        optional: true,
+        autoform: {
+            type: "cfs-file",
+            collection: "files"
+        }
+    },
     publications: {
-        type: String
+        type: String,
+        optional: true
     }
 });
 Meteor.startup(function () {

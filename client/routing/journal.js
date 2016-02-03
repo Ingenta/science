@@ -118,7 +118,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscr
     name: "guidelines.show",
     waitOn: function () {
         return [
-            JournalSubs.subscribe("author_center")
+            JournalSubs.subscribe("author_center"),
+            JournalSubs.subscribe('files'),
         ]
     }
 

@@ -31,6 +31,13 @@ Template.ShowGuidelines.helpers({
             return name;
         }
         return null;
+    },
+    wordValue:function(){
+        if(this.fileId===undefined){
+            return null;
+        }
+        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
+        return file.url()+"&download=true";
     }
 });
 
