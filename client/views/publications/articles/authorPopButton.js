@@ -24,7 +24,8 @@ Template.authorPopButton.helpers({
     name: function () {
         if(Template.currentData().name)
             return Template.currentData().name;
-        return TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en ;
+        if(this.fullname)
+            return TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en ;
     }
 })
 

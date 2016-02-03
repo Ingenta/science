@@ -27,6 +27,7 @@
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
                             </div><br>
                             <p>{{{translateThis content.cn content.en}}}</p>
+                            <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{{translateThis fileName.cn fileName.en}}}</a></p>
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}

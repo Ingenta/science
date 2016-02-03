@@ -811,6 +811,18 @@
                 "label": "A Link",
                 "placeholder": "http://"
             },
+            "fileName": {
+                "label": "AttachmentName",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            },
+            "fileId": {
+                "label": "Choose file"
+            },
             "parentId": {
                 "label": "Choose Father and son set"
             }
