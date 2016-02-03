@@ -8,7 +8,7 @@ ReactiveTabs.createInterface({
             Router.current().params.issue = undefined;
             Router.go("journal.name", Router.current().params)
         }
-        if(Router.current().params.journalShortTitle){
+        if (Router.current().params.journalShortTitle) {
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
                 Meteor.call("insertAudit", Meteor.userId(), "journalOverview", journal.publisher, journal._id, function (err, response) {
@@ -29,7 +29,9 @@ Template.journalBanner.helpers({
         var journal = Publications.findOne({_id: journalId});
         if (!journal) return;
         if (!journal.banner) return;
-        return Images.findOne({_id: journal.banner}).url();
+        var banner = Images.findOne({_id: journal.banner});
+        if (!banner) return;
+        return banner.url();
     },
     hasJournalBanner: function (journalId) {
         if (!journalId)return;
