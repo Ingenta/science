@@ -165,7 +165,8 @@ Tasks.parse = function (logId, pathToXml) {
         //start import tasks
         Tasks.insertArticlePdf(logId, result);
     } catch (e) {
-        log.errors.push(e.toString());
+        if(!e)log.errors.push("unknown error occurred during import");
+        else log.errors.push(e.toString());
         Tasks.fail(taskId, logId, log.errors);
     }
 };

@@ -101,7 +101,6 @@ Template.articleListRight.helpers({
             }
             query.issueId=curIssue;
         }
-        console.log('aaaa')
         return Articles.find(query, {sort: {elocationId: -1}});
 
     },

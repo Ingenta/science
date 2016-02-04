@@ -308,7 +308,7 @@ Router.map(function () {
                     var params = [
                         "-i", article.pdfId,   //待处理的pdf文件位置
                         "-o", outputPath, //处理完成后保存的文件位置
-                        "-s", adPdf,       //广告页位置
+                        "-c", adPdf,       //广告页位置
                         "-f", footmark
                     ];
                     //预出版的文章pdf上需要加上“Accepted”字样的水印

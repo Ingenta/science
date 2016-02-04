@@ -173,7 +173,7 @@
   "Profile": "个人资料",
   "Update information": "更新注册资料",
   "Please update your registered information (optional)": "更新注册资料",
-  "Please select more journal name": "请选择期刊名称",
+  "Please select a journal": "请选择期刊名称",
   "Publisher name": "出版商名称",
   "Journal name": "期刊名称",
   "Volume name": "卷号",
@@ -955,6 +955,18 @@
       "url": {
         "label": "相关链接",
         "placeholder": "http://"
+      },
+      "fileName": {
+        "label": "附件名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "fileId": {
+        "label": "附件"
       },
       "parentId": {
         "label": "是否选择一个父集合"
