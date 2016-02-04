@@ -5,7 +5,7 @@ getMostReadByJournal = function (journalId, limit) {
         mostRead = MostRead.find({journalId: journalId}, {sort: {count: -1}, limit: limit}).fetch();
     }
     else {
-        mostRead = MostRead.find({journalId: {$exists: true}}, {sort: {count: -1}, limit: limit}).fetch();
+        mostRead = MostRead.find({}, {sort: {count: -1}, limit: limit}).fetch();
     }
     if (!mostRead)return;
     return _.filter(mostRead, function (notNull) {
@@ -78,18 +78,5 @@ updateMostRead = function(){
             obj.journalId = journal._id;
             MostRead.insert(obj);
         });
-    });
-    PageViews.aggregate([{
-        $match: {
-                    articleId: {$ne: null}
-                }
-            }, {
-        $group: {
-            _id: '$articleId',
-            count: {$sum: 1}
-        }
-    }, {$sort: {count: -1}}
-        , {$limit: 20}]).forEach(function (obj) {
-        MostRead.insert(obj);
     });
 };
