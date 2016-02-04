@@ -2,32 +2,16 @@ getMostReadByJournal = function (journalId, limit) {
     if (!limit)limit = 20;//TODO: fix this so it filters out null article ids in the aggregate query
     var mostRead;
     if (journalId) {
-        mostRead = PageViews.aggregate([{
-            $match: {
-                journalId: journalId
-            }
-        }, {
-            $group: {
-                _id: '$articleId',
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            , {$limit: limit}]);
+        mostRead = MostRead.find({journalId: journalId}, {sort: {count: -1}, limit: limit}).fetch();
     }
     else {
-        mostRead = PageViews.aggregate([{
-            $group: {
-                _id: '$articleId',
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            , {$limit: limit}]);
+        mostRead = MostRead.find({journalId: {$exists: true}}, {sort: {count: -1}, limit: limit}).fetch();
     }
     if (!mostRead)return;
     return _.filter(mostRead, function (notNull) {
         return notNull._id;
     });
-}
+};
 getMostReadSuggestion = function (currentJournalId) {
     //add suggestion if journalId not set or its journalId equals current
     var suggestedArticle = SuggestedArticles.findOne();
