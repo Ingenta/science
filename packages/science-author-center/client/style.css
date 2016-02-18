@@ -1,0 +1,8 @@
+.jour-name-list>div>hr {
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
+
+.jour-name-list>div {
+    height: 35px;
+}
