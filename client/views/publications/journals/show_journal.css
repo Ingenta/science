@@ -39,3 +39,7 @@ li.issue.list-group-item {
     border-top-right-radius: initial;
     border-top-left-radius: initial;
 }
+
+.his-jour-title-th {
+    width:280px;
+}
