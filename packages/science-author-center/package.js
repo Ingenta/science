@@ -27,6 +27,7 @@ Package.onUse(function (api) {
     api.addFiles('client/router.js','client');
     api.addFiles('client/views/authorCenter.html','client');
     api.addFiles('client/views/authorCenter.js','client');
+    api.addFiles('client/style.css','client')
 
 });
 

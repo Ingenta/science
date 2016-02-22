@@ -7,7 +7,7 @@ Template.dynamicShow.events({
 Template.dynamicShow.helpers({
     mostMagazines: function () {
         var sort = {};
-        if(Session.get("sort"))sort={"createDate":Session.get("sort")};
+        if(Session.get("sort"))sort={"releaseTime":Session.get("sort")};
         return NewsCenter.find({recommend:"1",types:"2"},{sort: sort, limit: 20});
     },
     whichUrl: function () {
