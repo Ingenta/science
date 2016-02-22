@@ -49,4 +49,6 @@ docker run -d --name meteorTasks --restart=always -e RUN_TASKS=1 -e ROOT_URL=htt
 
 docker run -d --name jenkinsci  --restart=always -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai -p 8081:8080 -v /var/jenkins_home jenkins
 
+[nginx server requires a folder on the server with config found here]
+docker run -d --name nginx -p 80:80 -v ~/nginx/nginx.conf:/etc/nginx/nginx.conf:ro nginx
 --------------------------
