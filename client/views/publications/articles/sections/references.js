@@ -77,7 +77,7 @@ Template.singleReferenceTemplate.helpers({
 			content+="("+this.issue.trim()+")";
 		}
 		content && sourceArr.push(content);
-		return _.isEmpty(sourceArr) || sourceArr.join(", ");
+		return _.isEmpty(sourceArr) ? "": sourceArr.join(", ");
 	},
 	formatRange:function(){
 		var content= "";
