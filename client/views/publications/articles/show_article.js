@@ -1,7 +1,5 @@
-var drId;
 var delayRender = function () {
-    if (drId) return;
-    drId = Meteor.setTimeout(function () {
+    Meteor.setTimeout(function () {
         console.log('dr..');
 
         if (!Router.current().data || !Router.current().data() || !Router.current().data().figures) {
@@ -33,7 +31,6 @@ var delayRender = function () {
                 Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
             }
         });
-        drId = undefined;
     }, 1000)
 }
 
@@ -74,6 +71,7 @@ var removeArticleFromArray = function (array, articleId) {
 };
 
 Template.showArticle.onRendered(function () {
+    console.log('showArticle rendered..');
     delayRender();
     TAPi18n.addChangeHook('dynamicRender', delayRender);
     var rva = Session.get("recentViewedArticles");
