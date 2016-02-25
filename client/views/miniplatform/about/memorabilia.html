@@ -20,6 +20,27 @@
                 {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{content}}}</p>
+            {{#if accordionExists}}
+                <h4>{{accordion.title}}</h4>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                {{#each accordion.items}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading{{@index}}">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
+                                    {{title}}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{@index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{@index}}">
+                            <div class="panel-body">
+                                {{content}}
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                </div>
+            {{/if}}
         </div>
     {{else}}
         {{_ "No results found!"}}
@@ -44,6 +65,7 @@
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
+                    {{> afQuickField name="accordion"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>

@@ -48,6 +48,7 @@ Package.onUse(function (api) {
         'lib/jsonUtils.js',
         'lib/dateUtils.js',
         'both/schema/multiLang.js',
+        'both/schema/accordion.js',
         'both/url.js'
     ], ['server', 'client']);
 

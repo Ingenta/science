@@ -915,6 +915,23 @@
             "content": {
                 "label": "Content"
             },
+            "accordion":{
+                "label": "Accordion",
+                "title":{
+                    "label":"Title"
+                },
+                "items":{
+                    "label":"Items",
+                    "$":{
+                        "title":{
+                            "label":"Title"
+                        },
+                        "content":{
+                            "label":"Content"
+                        }
+                    }
+                }
+            },
             "link": {
                 "label": "Exterior Chain",
                 "placeholder": "http://"

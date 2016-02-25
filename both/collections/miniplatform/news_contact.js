@@ -27,6 +27,10 @@ NewsContactSchema = new SimpleSchema({
             }
         }
     },
+    accordion:{
+        type: Science.schemas.AccordionSchema,
+        optional:true
+    },
     link: {
         type: String,
         optional: true

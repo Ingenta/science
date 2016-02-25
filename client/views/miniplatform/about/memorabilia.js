@@ -7,6 +7,9 @@ Template.memorabilia.helpers({
 Template.memorabiliaList.helpers({
     memorabilias: function () {
         return NewsContact.find({types:"4"});
+    },
+    accordionExists:function(){
+        return this.accordion && !_.isEmpty(this.accordion.items);
     }
 });
 

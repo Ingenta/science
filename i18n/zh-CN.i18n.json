@@ -1060,6 +1060,23 @@
       "content": {
         "label": "内容"
       },
+      "accordion":{
+        "label": "折叠列表",
+        "title":{
+          "label":"标题"
+        },
+        "items":{
+          "label":"项目",
+          "$":{
+            "title":{
+              "label":"标题"
+            },
+            "content":{
+              "label":"内容"
+            }
+          }
+        }
+      },
       "link": {
         "label": "外链地址",
         "placeholder": "http://"
