@@ -14,8 +14,7 @@ this.NewsContact.allow({
 
 NewsContactSchema = new SimpleSchema({
     title: {
-        type: String,
-        unique: true
+        type: String
     },
     content: {
         type: String,
