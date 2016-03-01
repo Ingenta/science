@@ -8,11 +8,11 @@ Science.Email.authorCitationAlertEmail = function (date) {
         }
     }, {
         $group: {
-            _id: "$articleId",
+            _id: "$doi",
             citations: {$push: "$citation"}
         }
     }]).forEach(function (item) {
-        var article = Articles.findOne({_id: item._id}, {
+        var article = Articles.findOne({doi: item._id}, {
             fields: {
                 title: 1,
                 authors: 1,
@@ -31,7 +31,7 @@ Science.Email.authorCitationAlertEmail = function (date) {
         if(article.journalId) article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1))
         article.authorNotes.forEach(function (address) {
             var authorName = _.find(article.authors, function (obj) {
-                return obj.email === address.id;
+                return obj.email == address.id;
             });
             Email.send({
                 to: address.email,
