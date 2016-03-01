@@ -1,6 +1,6 @@
 <template name="mostReadArticleList">
     <div>
-        <span style="font-size:17px;">{{_ "Most read articles"}}  </span>
+        <h4>{{_ "Most read articles"}}  </h4>
         {{#if can "manage-top-most-read" "platform" }}
             {{> suggestedMostReadButtons}}
         {{/if}}

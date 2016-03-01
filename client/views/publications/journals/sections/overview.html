@@ -90,7 +90,7 @@
 
 <template name="editorRecommendedArticles">
     <div>
-        <span style="font-size:17px;">{{_ "Editors Recommend"}}</span>&nbsp;&nbsp;
+        <h4>{{_ "Editors Recommend"}}</h4>&nbsp;&nbsp;
         {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
             <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecommendModal"></span>
             {{> addRecommendModalForm}}
