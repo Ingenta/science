@@ -176,6 +176,8 @@ Template.SolrSearchResults.helpers({
                 }
             }
             return results;
+        }else{
+            console.log('no facet');
         }
     },
     'highlightFields': function(){
