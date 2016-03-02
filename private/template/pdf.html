@@ -21,7 +21,7 @@
 			{{#each similar}}
 				<li style="list-style: none">
 					<div style="font-size:14px"><a href="{{fulltextUrl}}">{{title}}</a></div>
-					<div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); {{doi}}</div>
+					<div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}}; {{doi}}</div>
 				</li>
 			{{/each}}
 		</ul>

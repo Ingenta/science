@@ -13,7 +13,7 @@
         </li>
         <li>
             <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
-            <b>{{volume}}</b>, {{elocationId}} ({{year}})
+            <b>{{volume}}</b>, {{elocationId}} {{#if year}}({{year}}){{/if}}
             <a href="http://dx.doi.org/{{doi}}">{{{showdoi}}} <i class="fa fa-external-link"></i></a>
         </li>
     </ul>
