@@ -3,7 +3,7 @@
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="contact" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
-                <h4>《中国科学》杂志社所属各期刊部门通讯信息：
+                <h4>{{_ "Communication Information"}}：
                     {{#if miniPlatformPermission}}
                         <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsContactModal"></span>{{> addNewsContactModalForm}}
                     {{/if}}
