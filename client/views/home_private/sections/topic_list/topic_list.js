@@ -16,7 +16,7 @@ Template.homePageTopicList.helpers({
             {name: "材料科学与工程", englishName: "Materials Science and Engineering"},
             {name: "机械工程", englishName: "Mechanical Engineering"},
             {name: "航空航天科学", englishName: "Aviation & Aerospace"},
-            {name: "信息和通信工程", englishName: "Information & Communication Engineering"},
+            {name: "智能控制", englishName: "Intelligent Control"},
             {name: "计算机科学与技术", englishName: "Computer Science & Technology"},
             {name: "计算机图形与图像", englishName: "Computer Graphics"},
             {name: "量子物理", englishName: "Quantum Physics"},
