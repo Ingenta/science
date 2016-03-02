@@ -9,7 +9,7 @@
 				<span>{{this}}</span>,
 			{{/each}}
 		</div>
-		<div style="font-size:13px">Citation: {{journal}} <b>{{volume}}</b>, {{page}} ({{year}}); doi: {{doi}}</div>
+		<div style="font-size:13px">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}}{{#if doi}}; doi: {{doi}}{{/if}}</div>
 		<div style="font-size:13px">View online: <a href="{{fulltexturl}}">{{fulltextUrl}}</a></div>
 		<div style="font-size:13px">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
 		<div style="font-size:13px">Published by the {{publisher}}</div>
