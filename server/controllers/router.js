@@ -209,7 +209,8 @@ Router.map(function () {
                     firstPage: 1,
                     year: 1,
                     topic: 1,
-                    pdfId: 1
+                    pdfId: 1,
+                    pubStatus:1
                 }
             });
             if (!article || !ScienceXML.FileExists(article.pdfId)) {
