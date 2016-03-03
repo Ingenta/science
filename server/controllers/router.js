@@ -223,7 +223,7 @@ Router.map(function () {
                 return;
             }
             //create path to expected first page of pdf
-            var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.pdfId + (new Date()).getTime() + ".pdf";
+            var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.articleId + (new Date()).getTime() + ".pdf";
             //准备需要添加到pdf中的数据
             var lang = this.params.query.lang || "en";
 
