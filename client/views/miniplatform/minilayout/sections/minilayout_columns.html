@@ -2,7 +2,7 @@
     <div class="classify">
         <div class="part part1">
             {{#each firstColumn}}
-                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{title}}</a>
+                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{translateThis title.cn title.en}}</a>
                 <p class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="meetingDel" class="fa fa-trash"></a>{{/if}}

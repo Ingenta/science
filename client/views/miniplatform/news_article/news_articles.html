@@ -2,7 +2,7 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             <div class="row">
-                <h3>新闻详情</h3>
+                <h3>{{_ "News Details"}}</h3>
             </div>
             <div class="row">
                 <div id="subcontent" class="col-xs-8">
@@ -12,10 +12,10 @@
                                 <div align="center"><span style="font-size:21px;">{{{title}}}</span>
                                     {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                 </div><br>
-                                <p class="text-center">发布时间：{{formatDate releaseTime "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;作者：{{author}}</p><br>
+                                <p class="text-center">{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{author}}</p><br>
                                 <p>{{{content}}}</p>
                                 {{#if fields}}
-                                    <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">下载附件</a></p>
+                                    <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{_ "Download The Attachment"}}</a></p>
                                 {{/if}}
                             {{else}}
                                 {{_ "No results found!"}}
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div id="menu" class="col-xs-4" style="border:1px solid #d7d7d7;">
-                    <h6 class="text-uppercase bg-eee" align="center" style="font-size: 15px"><strong>最新资讯</strong></h6>
+                    <h6 class="text-uppercase bg-eee" align="center" style="font-size: 15px"><strong>{{_ "Latest News"}}</strong></h6>
                     {{#each latestNews}}
                         <ul class="list-unstyled">
                             <li><p><a href="{{whichUrl}}" target="_self">{{title}}&nbsp;({{formatDate releaseTime "YYYY-MM-DD"}})</a></p></li>
