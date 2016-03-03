@@ -13,11 +13,8 @@ this.Column.allow({
 });
 
 ColumnSchema = new SimpleSchema({
-    title: {
-        type: String,
-        unique: true
-        //title:{
-        //type:Science.schemas.MultiLangSchema
+    title:{
+        type:Science.schemas.MultiLangSchema
     },
     picture: {
         type: String,
