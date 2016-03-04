@@ -1,5 +1,5 @@
 <template name="ReferencesTemplate">
-    <div>
+    <div style="margin-top:10px">
 	    <ul class="list-unstyled">
 		    {{#each references}}
 			    {{> singleReferenceTemplate}}
@@ -9,7 +9,7 @@
 </template>
 
 <template name="singleReferenceTemplate">
-	<li style="overflow:hidden">
+	<li style="overflow:hidden; margin-bottom: 5px;">
 		<span style="float:left;margin-right:10px;">[{{index}}]</span>
 		<span style="float:left; width:92%;">
 			{{#if fullContent}}
