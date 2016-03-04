@@ -17,11 +17,11 @@
 <template name="contactList">
     {{#each contactUs}}
         <div class="col-xs-6">
-            <div><strong>{{title}}</strong>
+            <div><strong>{{translateThis title.cn title.en}}</strong>
             {{#if miniPlatformPermission}}{{> updateNewsContactModalForm}}{{/if}}
             {{#if miniPlatformPermission}}<a href="#" id="contactDel" class="fa fa-trash"></a>{{/if}}
             </div>
-            <div><p>{{{content}}}</p></div>
+            <div><p>{{{translateThis content.cn content.en}}}</p></div>
         </div>
     {{else}}
         {{_ "No results found!"}}
