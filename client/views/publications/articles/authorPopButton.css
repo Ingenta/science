@@ -6,3 +6,7 @@
 .author-display {
     display:inline-block;
 }
+
+.author-name {
+    font-size:12px;
+}

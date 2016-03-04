@@ -2,13 +2,13 @@
 
 	<ul class="dotted list-unstyled" style="font-size: 12px">
 		<li>
-			<h4>
+			<b>
 				<div class="resultsList">{{> accessKeyImage}}
-					<a class="{{class}}" style="font-size: 15px" href="{{articleUrl _id}}">{{{showTitle}}}</a>
+					<a class="{{class}}" style="font-size: 12px" href="{{articleUrl _id}}">{{{showTitle}}}</a>
 				</div>
-			</h4>
+			</b>
 
-			<ul class="list-unstyled">
+			<ul class="list-unstyled article-desc-ul">
 				<li>
 					{{#each getAuthors}}
 					<span class="separate-comma author-display"> {{> authorPopButton name=this}} </span>
