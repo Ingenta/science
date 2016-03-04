@@ -43,7 +43,8 @@ var generationXML = function(options,callback){
 			{"stamps.rdoi":{$lte:condition}} //较早前进行过注册的
 		]};
 	}
-	articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1}});
+	query.pubStatus="normal";
+	articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1},limit:100});
 
 	if(articles.count()==0){
 		AutoTasks.update({_id:options.taskId},{$set:{status:"aborted",total:0}});

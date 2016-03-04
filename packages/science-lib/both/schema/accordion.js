@@ -4,7 +4,7 @@
 Science.schemas.CollapsItemSchema = new SimpleSchema({
     title:{
         type: String,
-        unique: true
+        unique: false
     },
     content:{
         type: String,
@@ -23,6 +23,7 @@ Science.schemas.AccordionSchema = new SimpleSchema({
         type:String
     },
     items:{
+        unique:false,
         type:[Science.schemas.CollapsItemSchema]
     }
 });

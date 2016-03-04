@@ -20,6 +20,10 @@ NewsContactSchema = new SimpleSchema({
         type:Science.schemas.MultipleTextAreaSchema,
         optional: true
     },
+    accordion:{
+        type: Science.schemas.AccordionSchema,
+        optional:true
+    },
     link: {
         type: String,
         optional: true
