@@ -16,10 +16,10 @@
 <template name="councilList">
     {{#each councils}}
         <div class="partContent">
-            <div align="center"><span style="font-size:24px;">{{title}}</span>
+            <div align="center"><span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
                 {{#if miniPlatformPermission}}{{> updateCouncilModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="couDel" class="fa fa-trash"></a>{{/if}}</div><br>
-            <p>{{{content}}}</p>
+            <p>{{{translateThis content.cn content.en}}}</p>
         </div>
     {{else}}
         {{_ "No results found!"}}

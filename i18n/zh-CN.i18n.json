@@ -1057,10 +1057,22 @@
     },
     "newsContact": {
       "title": {
-        "label": "标题"
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "content": {
-        "label": "内容"
+        "label": "内容",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "accordion":{
         "label": "折叠列表",
@@ -1095,16 +1107,40 @@
     },
     "newsCenter": {
       "title": {
-        "label": "标题"
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "author": {
-        "label": "作者"
+        "label": "作者",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "abstract": {
-        "label": "简介"
+        "label": "简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "content": {
-        "label": "全文"
+        "label": "全文",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "recommend": {
         "label": "新闻推荐",
@@ -1129,7 +1165,13 @@
     },
     "newsRecommend": {
       "ArticlesId": {
-          "label": "标题"
+          "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "picture": {
           "label": "选择代表图片"
@@ -1137,7 +1179,13 @@
     },
     "column": {
       "title": {
-        "label": "专栏名称"
+        "label": "专栏名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "picture": {
         "label": "选择代表图片"
@@ -1145,16 +1193,34 @@
     },
     "columnViews": {
       "title": {
-        "label": "专栏名称"
+        "label": "专栏名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "abstract": {
-        "label": "专栏简介"
+        "label": "专栏简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "releaseTime": {
         "label": "发布时间"
       },
       "content": {
-        "label": "专栏内容"
+        "label": "专栏内容",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       }
     },
     "journalAC": {

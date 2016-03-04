@@ -912,10 +912,22 @@
         },
         "newsContact": {
             "title": {
-                "label": "Title"
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "content": {
-                "label": "Content"
+                "label": "Content",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "accordion":{
                 "label": "Accordion",
@@ -950,16 +962,40 @@
         },
         "newsCenter": {
             "title": {
-                "label": "Title"
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "author": {
-                "label": "Author"
+                "label": "Author",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "abstract": {
-                "label": "Abstract"
+                "label": "Abstract",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "content": {
-                "label": "Full Text"
+                "label": "Full Text",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "recommend": {
                 "label": "News recommend",
@@ -992,7 +1028,13 @@
         },
         "column": {
             "title": {
-                "label": "Column name"
+                "label": "Column name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "picture": {
                 "label": "Choose file"
@@ -1000,16 +1042,34 @@
         },
         "columnViews": {
             "title": {
-                "label": "Column name"
+                "label": "Column name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "abstract": {
-                "label": "Column profile"
+                "label": "Column profile",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "releaseTime": {
                 "label": "Release Time"
             },
             "content": {
-                "label": "Column content"
+                "label": "Column content",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             }
         },
         "journalAC": {

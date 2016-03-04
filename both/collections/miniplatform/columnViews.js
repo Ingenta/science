@@ -14,25 +14,15 @@ this.ColumnViews.allow({
 
 ColumnViewsSchema = new SimpleSchema({
     title: {
-        type: String,
-        unique: true
+        type: Science.schemas.MultiLangSchema
     },
     abstract: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 4
-        }
+        type: Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     content: {
-        type: String,
-        optional: true,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
+        type:Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     releaseTime: {
         type: Date,
