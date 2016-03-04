@@ -23,6 +23,7 @@ Science.schemas.AccordionSchema = new SimpleSchema({
         type:String
     },
     items:{
+        unique:false,
         type:[Science.schemas.CollapsItemSchema]
     }
 });
