@@ -4,16 +4,16 @@
             <div><img style="width:100%;max-height:120px" src="{{banner}}"></div>
         {{/if}}
         <div>
-            <h4>{{title}}</h4>
-            <div>
+            <h4 style="margin-bottom: 4px;">{{title}}</h4>
+            <div style="margin:8px 0px;">
                 {{#each authors}}
-                    <span>{{this}}</span>,
+                    <span style="font-size:13px">{{this}}</span>,
                 {{/each}}
             </div>
-            <div style="font-size:13px">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
+            <div style="font-size:13px;margin-bottom: 10px;">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
                 ){{/if}}{{#if doi}}; doi: {{doi}}{{/if}}</div>
-            <div style="font-size:13px">View online: <a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
-            <div style="font-size:13px">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
+            <div style="font-size:13px;margin-bottom: 10px;">View online: <a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
+            <div style="font-size:13px;margin-bottom: 10px;">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
             <div style="font-size:13px">Published by the {{publisher}}</div>
         </div>
         <hr>
@@ -21,7 +21,7 @@
             <h5>Articles you may be interested in</h5>
             <ul style="padding: 0px">
                 {{#each similar}}
-                    <li style="list-style: none;margin-top:18px">
+                    <li style="list-style: none;padding-bottom:18px">
                         <div style="font-size:14px"><b>{{title}}</b></div>
                         <div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
                             ){{/if}};
