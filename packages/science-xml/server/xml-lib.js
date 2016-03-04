@@ -57,7 +57,8 @@ ScienceXML.getFileContentsFromRemotePath = function (path) {
     return getLocationSync(fullPath);
 }
 ScienceXML.getFileContentsFromLocalPath = function (path) {
-    return Science.FSE.readFileSync(path, "utf8");
+    var text = Science.FSE.readFileSync(path, "utf8");
+    return text.replace(/\sxml:base=/g,' ref-type=');
 }
 
 ScienceXML.getAuthorInfo = function (results, doc) {
