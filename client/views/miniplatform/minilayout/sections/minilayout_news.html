@@ -9,8 +9,8 @@
                 <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p><a href="{{whichUrl}}" target="_blank">{{title}}</a></p>
-                        <p class="col777">{{author}}({{formatDate createDate "YYYY-MM-DD"}})</p>
+                        <p><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></p>
+                        <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
                     <p class="tr">
                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
@@ -32,8 +32,8 @@
                 <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p><a href="{{whichUrl}}" target="_blank">{{title}}</a></p>
-                        <p class="col777">{{author}}({{formatDate createDate "YYYY-MM-DD"}})</p>
+                        <p><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></p>
+                        <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
                     <p class="tr">
                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}

@@ -14,29 +14,19 @@ this.NewsCenter.allow({
 
 NewsCenterSchema = new SimpleSchema({
     title: {
-        type: String,
-        unique: true
+        type: Science.schemas.MultiLangSchema
     },
     author: {
-        type: String,
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
     abstract: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 4
-        }
+        type: Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     content: {
-        type: String,
-        optional: true,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
+        type:Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     recommend: {
         type: String,

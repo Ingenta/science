@@ -9,11 +9,11 @@
                     <div class="container-fluid">
                         <div class="row" style="margin-top: 20px;">
                             {{#each newsDetails}}
-                                <div align="center"><span style="font-size:21px;">{{{title}}}</span>
+                                <div align="center"><span style="font-size:21px;">{{{translateThis title.cn title.en}}}</span>
                                     {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                 </div><br>
-                                <p class="text-center">{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{author}}</p><br>
-                                <p>{{{content}}}</p>
+                                <p class="text-center">{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD HH:mm:ss"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{translateThis author.cn author.en}}</p><br>
+                                <p>{{{translateThis content.cn content.en}}}</p>
                                 {{#if fields}}
                                     <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{_ "Download The Attachment"}}</a></p>
                                 {{/if}}
@@ -27,7 +27,7 @@
                     <h6 class="text-uppercase bg-eee" align="center" style="font-size: 15px"><strong>{{_ "Latest News"}}</strong></h6>
                     {{#each latestNews}}
                         <ul class="list-unstyled">
-                            <li><p><a href="{{whichUrl}}" target="_self">{{title}}&nbsp;({{formatDate releaseTime "YYYY-MM-DD"}})</a></p></li>
+                            <li><p><a href="{{whichUrl}}" target="_self">{{translateThis title.cn title.en}}&nbsp;({{formatDate releaseTime "YYYY-MM-DD"}})</a></p></li>
                         </ul>
                     {{else}}
                         {{_ "No results found!"}}
