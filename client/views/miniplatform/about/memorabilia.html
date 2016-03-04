@@ -16,10 +16,10 @@
 <template name="memorabiliaList">
     {{#each memorabilias}}
         <div class="partContent">
-            <div align="center"><span style="font-size:24px;">{{title}}</span>
+            <div align="center"><span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
                 {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}</div><br>
-            <p>{{{content}}}</p>
+            <p>{{{translateThis content.cn content.en}}}</p>
             {{#if accordionExists}}
                 <h4>{{accordion.title}}</h4>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
