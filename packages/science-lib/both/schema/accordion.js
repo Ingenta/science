@@ -4,7 +4,7 @@
 Science.schemas.CollapsItemSchema = new SimpleSchema({
     title:{
         type: String,
-        unique: true
+        unique: false
     },
     content:{
         type: String,
