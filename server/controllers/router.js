@@ -250,8 +250,8 @@ Router.map(function () {
             //parse article metadata
             data.title = getdata(article.title, lang);
             if(article.authors) {
-                data.authors = _.map(article.authors.fullname, function (fname) {
-                    return getdata(fname, lang);
+                data.authors = _.map(article.authors, function (author) {
+                    return getdata(author.fullname, lang);
                 });
             }
             data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
