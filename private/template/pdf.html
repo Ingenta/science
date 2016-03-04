@@ -1,34 +1,38 @@
-<div style="height:100%">
-	{{#if banner}}
-	<div style="height:auto"><img style="width:100%" src="{{banner}}"></div>
-	{{/if}}
-	<div style="height:20%">
-		<h4>{{title}}</h4>
-		<div>
-			{{#each authors}}
-				<span>{{this}}</span>,
-			{{/each}}
-		</div>
-		<div style="font-size:13px">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}}{{#if doi}}; doi: {{doi}}{{/if}}</div>
-		<div style="font-size:13px">View online: <a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
-		<div style="font-size:13px">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
-		<div style="font-size:13px">Published by the {{publisher}}</div>
-	</div>
-	<hr>
-	<div style="height:50%">
-		<h5>Articles you may be interested in</h5>
-		<ul style="padding: 0px">
-			{{#each similar}}
-				<li style="list-style: none">
-					<div style="font-size:14px"><b>{{title}}</b></div>
-					<div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}};
-                        {{#if doi}} <a href="{{fulltextUrl}}">{{fulltextUrl}}</a>{{/if}}</div>
-				</li>
-			{{/each}}
-		</ul>
-	</div>
-	<hr>
-	{{#if ad}}
-		<div style="height:auto"><img style="width:100%" src="{{ad}}"></div>
-	{{/if}}
+<div style="height:100%;position: relative;">
+    <div>
+        {{#if banner}}
+            <div><img style="width:100%;max-height:120px" src="{{banner}}"></div>
+        {{/if}}
+        <div>
+            <h4>{{title}}</h4>
+            <div>
+                {{#each authors}}
+                    <span>{{this}}</span>,
+                {{/each}}
+            </div>
+            <div style="font-size:13px">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
+                ){{/if}}{{#if doi}}; doi: {{doi}}{{/if}}</div>
+            <div style="font-size:13px">View online: <a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
+            <div style="font-size:13px">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
+            <div style="font-size:13px">Published by the {{publisher}}</div>
+        </div>
+        <hr>
+        <div>
+            <h5>Articles you may be interested in</h5>
+            <ul style="padding: 0px">
+                {{#each similar}}
+                    <li style="list-style: none;margin-top:18px">
+                        <div style="font-size:14px"><b>{{title}}</b></div>
+                        <div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
+                            ){{/if}};
+                            {{#if doi}} <a href="{{fulltextUrl}}">{{fulltextUrl}}</a>{{/if}}</div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        <hr>
+    </div>
+    {{#if ad}}
+        <div style="position: absolute;bottom: 0"><img style="width:100%" src="{{ad}}"></div>
+    {{/if}}
 </div>
