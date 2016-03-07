@@ -1,11 +1,11 @@
-Template.newsShow.events({
+Template.publishingShow.events({
     'click .datesort': function (event) {
         Session.set("sort",event.target.value);
     }
 });
 
-Template.newsShow.helpers({
-    mostNews: function () {
+Template.publishingShow.helpers({
+    mostMagazines: function () {
         var sort = {};
         if(Session.get("sort"))sort={"releaseTime":Session.get("sort")};
         return NewsCenter.find({recommend:"1",types:"3"},{sort: sort, limit: 20});

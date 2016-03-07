@@ -157,6 +157,18 @@ Router.map(function () {
         }
     });
 
+    //更多出版动态
+    this.route("publishingShow", {
+        path: "/miniplatform/publishingShow",
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                MiniPlatformSubs.subscribe('news_center'),
+                MiniPlatformSubs.subscribe('news_link')
+            ]
+        }
+    });
+
     //更多最新文章
     this.route("dynamicArticleShow", {
         path: "/miniplatform/dynamicArticleShow",
