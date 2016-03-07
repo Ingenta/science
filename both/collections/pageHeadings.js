@@ -10,7 +10,7 @@ PagesSchema = new SimpleSchema({
         optional: true
     },
     description: {
-        type: Science.schemas.MultipleAreaSchema,
+        type: Science.schemas.MultipleTextAreaSchema,
         optional: true
     }
 });
