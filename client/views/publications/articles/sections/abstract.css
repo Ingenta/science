@@ -135,4 +135,10 @@ xref[ref-type='table'] {
 
 #fulltext-viewer p, .interesting-content p {
     -webkit-text-size-adjust:none;
+    font-size:13px;
+    font-family:Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#fulltext-viewer h3, #fulltext-viewer h4, #fulltext-viewer h5{
+    font-weight:500;
 }
