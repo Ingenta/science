@@ -1076,17 +1076,23 @@
       },
       "accordion":{
         "label": "折叠列表",
-        "title":{
-          "label":"标题"
-        },
-        "items":{
-          "label":"项目",
-          "$":{
-            "title":{
-              "label":"标题"
+        "$":{
+          "title":{
+            "label":"标题",
+            "cn": {
+              "label": "中文"
             },
-            "content":{
-              "label":"内容"
+            "en": {
+              "label": "英文"
+            }
+          },
+          "content":{
+            "label":"内容",
+            "cn": {
+              "label": "中文"
+            },
+            "en": {
+              "label": "英文"
             }
           }
         }

@@ -8,7 +8,7 @@ Template.newsShow.helpers({
     mostNews: function () {
         var sort = {};
         if(Session.get("sort"))sort={"releaseTime":Session.get("sort")};
-        return NewsCenter.find({recommend:"1",types:"1"},{sort: sort, limit: 20});
+        return NewsCenter.find({recommend:"1",types:"3"},{sort: sort, limit: 20});
     },
     whichUrl: function () {
         if (this.link) {

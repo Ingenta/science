@@ -266,7 +266,7 @@ Router.map(function () {
             data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
 
             //create related article query
-            var query = {q: data.title, wt: "json"};
+            var query = {q: "_text_:("+data.title+") AND NOT _id:"+article._id, wt: "json"};
             var topicArr = _.compact(article.topic);
             if (!_.isEmpty(topicArr)) {
                 query.fq = {

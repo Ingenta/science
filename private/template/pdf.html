@@ -1,13 +1,21 @@
+<style>
+    .separate-comma:not(:last-child):after{
+        content:", ";
+    }
+    .separate-and:nth-last-child(2):after{
+        content:" and ";
+    }
+</style>
 <div style="height:100%;position: relative;">
     <div>
         {{#if banner}}
             <div><img style="width:100%;max-height:120px" src="{{banner}}"></div>
         {{/if}}
         <div style="padding-bottom:10px;">
-            <h4 style="margin-bottom: 4px;">{{title}}</h4>
+            <h4 style="margin-bottom: 4px;">{{{title}}}</h4>
             <div style="margin:8px 0px;">
                 {{#each authors}}
-                    <span style="font-size:13px">{{this}}</span>,
+                    <span class="separate-and separate-comma" style="font-size:13px">{{this}}</span>
                 {{/each}}
             </div>
             <div style="font-size:13px;margin-bottom: 10px;">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
@@ -24,10 +32,9 @@
             <ul style="padding: 0px">
                 {{#each similar}}
                     <li style="list-style: none;padding-bottom:18px">
-                        <div style="font-size:14px"><b>{{title}}</b></div>
-                        <div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
-                            ){{/if}};
-                            {{#if doi}} <a href="{{fulltextUrl}}">{{fulltextUrl}}</a>{{/if}}</div>
+                        <div style="font-size:14px"><b>{{{title}}}</b></div>
+                        <div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}};</div>
+                        {{#if doi}} <div style="font-size:13px"><a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>{{/if}}
                     </li>
                 {{/each}}
             </ul>
