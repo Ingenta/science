@@ -1,0 +1,25 @@
+<template name="publishingShow">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <h3 class="dotted"><b>{{_ "Dynamic Publishing"}}&nbsp;:</b></h3>
+            <div class="dotted">
+                <label>{{_ "Sort Results By"}}：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> {{_ "First release"}}</label>
+            </div>
+            <div class="dotted">
+                <h4><b>{{_ "Dynamic Publishing"}}：</b></h4>
+            </div>
+            <div class="dotted">
+                {{#each mostMagazines}}
+                    <ul class="dotted list-unstyled">
+                        <li><p><a href="{{whichUrl}}">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span></p></li>
+                    </ul>
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>
