@@ -11,15 +11,3 @@ Science.schemas.CollapsItemSchema = new SimpleSchema({
         optional: true
     }
 });
-
-Science.schemas.AccordionSchema = new SimpleSchema({
-    title:{
-        type:String,
-        optional:true
-    },
-    items:{
-        unique:false,
-        optional:true,
-        type:[Science.schemas.CollapsItemSchema]
-    }
-});
