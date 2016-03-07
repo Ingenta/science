@@ -21,7 +21,7 @@ NewsContactSchema = new SimpleSchema({
         optional: true
     },
     accordion:{
-        type: Science.schemas.AccordionSchema,
+        type: [Science.schemas.CollapsItemSchema],
         optional:true
     },
     link: {

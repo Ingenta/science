@@ -930,18 +930,24 @@
                 }
             },
             "accordion":{
-                "label": "Accordion",
-                "title":{
-                    "label":"Title"
-                },
-                "items":{
-                    "label":"Items",
-                    "$":{
-                        "title":{
-                            "label":"Title"
+                "label":"Items of Accordion",
+                "$":{
+                    "title":{
+                        "label":"Title",
+                        "cn": {
+                            "label": "Chinese"
                         },
-                        "content":{
-                            "label":"Content"
+                        "en": {
+                            "label": "English"
+                        }
+                    },
+                    "content":{
+                        "label":"Content",
+                        "cn": {
+                            "label": "Chinese"
+                        },
+                        "en": {
+                            "label": "English"
                         }
                     }
                 }
