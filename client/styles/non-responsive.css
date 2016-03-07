@@ -241,3 +241,12 @@ body,
 ul > li {
     maring-bottom:4px;
 }
+
+.pub-title {
+    font-size:17px;
+    font-family: Arial,"黑体", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+li.tab-item.active {
+    font-weight: bold;
+}
