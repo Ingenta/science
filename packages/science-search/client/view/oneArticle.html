@@ -11,7 +11,7 @@
 			<ul class="list-unstyled article-desc-ul">
 				<li>
 					{{#each getAuthors}}
-					<span class="separate-comma author-display"> {{> authorPopButton name=this}} </span>
+					<span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display"> {{> authorPopButton name=this}} </span>
 					{{/each}}
 				</li>
 				<li>
@@ -19,7 +19,6 @@
 					<b>{{volume}}</b>, {{elocationId}} {{#if year}}({{year}}){{/if}}
 					<a href="http://dx.doi.org/{{doi}}">{{{showdoi}}} <i class="fa fa-external-link"></i></a>
 				</li>
-				<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
 				{{> toggleFieldBrowse field=showAbstract _id=_id doi=doi}}
 			</ul>
 		</li>

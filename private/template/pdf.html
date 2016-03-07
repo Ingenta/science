@@ -3,7 +3,7 @@
         {{#if banner}}
             <div><img style="width:100%;max-height:120px" src="{{banner}}"></div>
         {{/if}}
-        <div>
+        <div style="padding-bottom:10px;">
             <h4 style="margin-bottom: 4px;">{{title}}</h4>
             <div style="margin:8px 0px;">
                 {{#each authors}}
@@ -13,8 +13,10 @@
             <div style="font-size:13px;margin-bottom: 10px;">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
                 ){{/if}}{{#if doi}}; doi: {{doi}}{{/if}}</div>
             <div style="font-size:13px;margin-bottom: 10px;">View online: <a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
-            <div style="font-size:13px;margin-bottom: 10px;">View Table of Contents:<a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
-            <div style="font-size:13px">Published by the {{publisher}}</div>
+            {{#if volume}}
+            <div style="font-size:13px;margin-bottom: 10px;">View Table of Contents:<a href="{{tocUrl}}">{{tocUrl}}</a></div>
+            {{/if}}
+            <div style="font-size:13px">Published by the <b>{{publisher}}</b></div>
         </div>
         <hr>
         <div>

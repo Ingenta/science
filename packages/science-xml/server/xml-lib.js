@@ -57,7 +57,8 @@ ScienceXML.getFileContentsFromRemotePath = function (path) {
     return getLocationSync(fullPath);
 }
 ScienceXML.getFileContentsFromLocalPath = function (path) {
-    return Science.FSE.readFileSync(path, "utf8");
+    var text = Science.FSE.readFileSync(path, "utf8");
+    return text.replace(/\sxml:base=/g,' ref-type=');
 }
 
 ScienceXML.getAuthorInfo = function (results, doc) {
@@ -213,6 +214,12 @@ var getParagraphs = function (paragraphNodes) {
         } else {
             var parseResult = ScienceXML.handlePara(paragraph);
             var sectionText = new serializer().serializeToString(parseResult.paraNode);
+            if(!_.isEmpty(parseResult.figures)){
+                paragraphs.figures= _.union(paragraphs.figures,parseResult.figures);
+            }
+            if(!_.isEmpty(parseResult.tables)){
+                paragraphs.tables= _.union(paragraphs.tables,parseResult.tables);
+            }
             paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(sectionText));
 
             if (parseResult.formulas && parseResult.formulas.length) {
@@ -459,6 +466,11 @@ var getTable = function (tableWrapNode) {
     table.id = parserHelper.getFirstAttribute("./@id", tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
     table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
+    if(_.isEmpty(table.label)){
+        var xref=xpath.useNamespaces({"base":""})("child::caption/p/bold/xref",tableWrapNode);
+        if(xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+            table.label=xref[0].childNodes[0].data;
+    }
     table.caption = parserHelper.getSimpleVal("child::caption/p", tableWrapNode);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode).replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
@@ -478,7 +490,28 @@ ScienceXML.getTables = function (doc) {
 
 ScienceXML.handlePara = function (paragraph) {
     var handled = {paraNode: paragraph};
-
+    var figAndTbl=xpath.select("descendant::fig[@id] | descendant::table-wrap[@id]",paragraph);
+    if(!_.isEmpty(figAndTbl)){
+        figAndTbl.forEach(function(ftNode){
+            if(ftNode.tagName=='fig'){
+                handled.figures=handled.figures || [];
+                var figure = getFigure(ftNode);
+                figure && handled.figures.push(figure);
+                while (ftNode.firstChild)
+                    ftNode.removeChild(ftNode.firstChild);
+                var nd = ScienceXML.xmlStringToXmlDoc('<p><xref original="true" ref-type="fig" rid="' + figure.id + '">' + figure.label + '</xref></p>');
+                ftNode.appendChild(nd.documentElement);
+            }else if(ftNode.tagName=='table-wrap'){
+                handled.tables=handled.tables || [];
+                var table = getTable(ftNode);
+                table && handled.tables.push(table);
+                while (ftNode.firstChild)
+                    ftNode.removeChild(ftNode.firstChild);
+                var nd = ScienceXML.xmlStringToXmlDoc('<p><xref original="true" ref-type="table" rid="' + table.id + '">' + table.label + '</xref></p>');
+                ftNode.appendChild(nd.documentElement);
+            }
+        })
+    }
     var formulaNodes = xpath.select("descendant::disp-formula | descendant::inline-formula", paragraph);
     if (formulaNodes && formulaNodes.length) {
         handled.formulas = [];
