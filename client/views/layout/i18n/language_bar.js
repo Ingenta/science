@@ -5,6 +5,15 @@ Template.i18n_switch.events({
         return TAPi18n.setLanguageAmplify(id);
     }
 });
+
+//Template.i18n_switch.helpers({
+//    miniPlatform : function(){
+//        var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
+//        if(publisher)
+//        return true;
+//    }
+//});
+
 TAPi18n._afterUILanguageChange = function () {
 //triggers on language switch
     mo.setLocale(TAPi18n.getLanguage());

@@ -9,6 +9,13 @@
 </template>
 <template name="i18n_switch">
     <span class="tap-i18n-buttons">
+        <!--{{#if miniPlatform}}-->
+            {{#if currentUser}}
+                <a href="{{pathFor 'logout'}}"><i class="fa fa-sign-out"></i> {{_ "Log Out"}}</a>
+                 {{else}}
+                <a href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Login"}}</a>
+            {{/if}}
+        <!--{{/if}}-->
         {{#if i18n_enabled}}
         <a id="zh-CN">中文</a>
         |
