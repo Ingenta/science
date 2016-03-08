@@ -247,6 +247,6 @@ ul > li {
     font-family: Arial,"黑体", "Helvetica Neue", Helvetica, sans-serif;
 }
 
-li.tab-item.active {
+li.active {
     font-weight: bold;
 }
