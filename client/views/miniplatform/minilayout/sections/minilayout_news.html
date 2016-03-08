@@ -49,7 +49,6 @@
             <p class="fl w300 mt12"><span class="mr20">{{_ "Publishing Dynamic"}}</span></p>
             <p class="fr mt8"><a href="{{pathFor 'publishingShow'}}"><img src="/goAll.png"/></a></p>
         </div>
-    </div>
     {{#each layoutPublishingMagazines}}
         <div class="contPart">
             <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
@@ -66,4 +65,5 @@
     {{else}}
         {{_ "No results found!"}}
     {{/each}}
+    </div>
 </template>
