@@ -14,7 +14,7 @@
             </div>
             <ul class="nav nav-tabs" role="tablist">
                 <!--<li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">{{_ "News"}}>></a></li>-->
-                 <li role="presentation"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">{{_ "Magazine dynamic"}}>></a></li>
+                 <li role="presentation" class="active"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">{{_ "Magazine dynamic"}}>></a></li>
                  <li role="presentation"><a href="#publishingBtn" aria-controls="messages" role="tab" data-toggle="tab">{{_ "Publishing Dynamic"}}>></a></li>
             </ul>
             <div class="tab-content">
@@ -43,7 +43,7 @@
                         <!--{{/if}}-->
                     <!--</div><hr>-->
                 <!--</div>-->
-                <div role="tabpanel" class="tab-pane" id="magazineBtn" style="margin-left: 20px">
+                <div role="tabpanel" class="tab-pane active" id="magazineBtn" style="margin-left: 20px">
                     <!--<strong style="font-size: 18px">杂志社动态</strong>-->
                     <div class="pull-right">
                         {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
