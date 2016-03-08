@@ -28,9 +28,7 @@
             </div>
             <ul class="list-unstyled">
                 <li>
-                    <h4>
-                        <a href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
-                    </h4>
+                    <a class="pub-title" href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
                 </li>
                 <li>{{_ "Publisher"}} <a href="{{urlToPublisherById publisherId}}">{{publisherNameById publisherId}}</a></li>
                 {{#if journalId}}

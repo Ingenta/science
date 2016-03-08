@@ -9,7 +9,7 @@
         </div>
         <div class="tab-content col-xs-9">
             <div class="tab-pane active" id="a">
-                <div class="part"><strong>{{_ "Editorial Policies"}}</strong>
+                <div class="part"><h4>{{_ "Editorial Policies"}}</h4>
                     <div class="pull-right">
                         {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                             {{> addAboutArticlesModalForm}}
@@ -20,7 +20,7 @@
                 {{> aboutArticlesList}}
             </div>
             <div class="tab-pane" id="b">
-                <div class="part"><strong>{{_ "Notice To Readers"}}</strong>
+                <div class="part"><h4>{{_ "Notice To Readers"}}</h4>
                     <div class="pull-right">
                         {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
                             {{> addAboutArticlesModalForm}}
@@ -31,7 +31,7 @@
                 {{> aboutArticlesList}}
             </div>
             <div class="tab-pane" id="c">
-                <div class="part"><strong>{{_ "Contact Us"}}</strong></div>
+                <div class="part"><h4>{{_ "Contact Us"}}</h4></div>
                 <hr>
                 {{> editorialMemberList}}
             </div>

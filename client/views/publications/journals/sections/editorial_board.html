@@ -35,7 +35,7 @@
 
 <template name="EditorialBoardMembersList">
     {{#with about}}
-        <div class="part"><strong>{{_ "Editorial Board"}}——{{translateThis title.cn title.en}}</strong>
+        <div class="part"><h4>{{_ "Editorial Board"}}——{{translateThis title.cn title.en}}</h4>
 
             <div class="pull-right">
                 {{#if can "add-editorial-member" "resource" }}{{> addEditorialBoardModalForm}}{{/if}}
@@ -62,7 +62,7 @@
                 {{#if can "delete-editorial-member" "resource" }}<a href="#" class="fa fa-trash"></a>{{/if}}
             </div>
 
-            <div class="row editorial-desc">
+            <div class="row">
                 <div class="col-xs-4">
                     <div style="width:133px;height: 180px;"><img src="{{getHeadImageHelper picture}}" style="width: 100%;height: 100%"/></div>
                     <div align="center" style="margin-top: 8px;">{{translateThis name.cn name.en}}</div>

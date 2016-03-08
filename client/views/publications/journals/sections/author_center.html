@@ -1,8 +1,8 @@
 <template name="authorCenterList">
     {{> publicationPdfContent}}
-    <div class="part"><strong> >> {{_ "Guide for Authors"}}</strong> </div>
+    <div class="part"><h4> >> {{_ "Guide for Authors"}}</h4> </div>
     {{> guideArticles}}
-    <div class="part"><strong> >> {{_ "The author article history"}}</strong> </div>
+    <div class="part"><h4> >> {{_ "The author article history"}}</h4> </div>
     {{> authorArticlesHistory}}
 </template>
 
@@ -46,7 +46,7 @@
     <div class="col-xs-4">
         <div class="part h220">
             <div class="dotted mb15 text-center" >
-                <strong style="margin-left: 8px">{{_ "Submission Guidelines"}}</strong>
+                <h4 style="margin-left: 8px">{{_ "Submission Guidelines"}}</h4>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;" data-toggle="modal" data-target="#addInstructionsModal"></span>
                     {{> addInstructionsModalForm}}
@@ -72,7 +72,7 @@
     <div class="col-xs-4">
         <div class="part h220">
             <div class="dotted mb15 text-center">
-                <strong style="margin-left: 8px">{{_ "Prepare Manuscript"}}</strong>
+                <h4 style="margin-left: 8px">{{_ "Prepare Manuscript"}}</h4>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addManuscriptModal"></span>
                     {{> addManuscriptModalForm}}
@@ -109,7 +109,7 @@
     <div class="col-xs-4">
         <div class="part h220">
             <div class="dotted mb15 text-center">
-                <strong style="margin-left: 8px">{{_ "Submit  Manuscript"}}</strong>
+                <h4 style="margin-left: 8px">{{_ "Submit  Manuscript"}}</h4>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>
                     {{> addSubmitManuscriptModalForm}}

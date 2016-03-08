@@ -1,7 +1,7 @@
 <template name="AbstractContentAndKeywords">
     <div class="row">
         <div class="col-xs-9">
-            <h3 class="sectionDivider title">{{_ "Abstract"}}</h3>
+            <h3 class="sectionDivider-title sectionDivider">{{_ "Abstract"}}</h3>
             {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
                 <div class="pull-right">
                     {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}

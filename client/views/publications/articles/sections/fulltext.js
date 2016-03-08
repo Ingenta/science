@@ -54,7 +54,8 @@ Template.FullTextTemplate.events({
             //----引用文献
             if(rid.startWith('REF')){
                 var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
-                if(/^\d{1,3}(\s*?[~-－––,，]\s*?\d{1,3})*$/.test(indexStr)){
+                console.log('aa')
+                if(/^\d{1,3}(\s*?[~-－-––,，]\s*?\d{1,3})*$/.test(indexStr)){
                     var refIndexs = Science.String.parseToNumbers(indexStr);
                     if(!_.isEmpty(refIndexs)){
                         Session.set("refs",refIndexs);
