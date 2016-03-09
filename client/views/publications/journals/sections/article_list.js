@@ -147,5 +147,8 @@ Template.historicalJournalNavigationPanel.helpers({
     sortedHisJournal:function(){
         var hisJournals= Publications.find({_id:{$in:this.historicalJournals}},{sort:{publicationDate:-1}});
         return hisJournals;
+    },
+    whichUrl:function(){
+        return getJournalComponentByJournalId(this._id);
     }
 })
