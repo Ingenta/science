@@ -26,9 +26,9 @@
                     <a href="#" class="fa fa-trash" collId="{{_id}}"></a>
                 {{/if}}
             </div>
-            <ul class="list-unstyled article-desc-ul">
+            <ul class="list-unstyled">
                 <li>
-                    <a class="pub-title" href="{{pathFor 'collections.detail' collId=_id}}">{{translateThis title.cn title.en}}</a>
+                    <a href="{{pathFor 'collections.detail' collId=_id}}"><b>{{translateThis title.cn title.en}}</b></a>
                 </li>
                 {{#unless underPublisherPage}}
                 <li>{{_ "Publisher"}} <a href="{{urlToPublisherById publisherId}}">{{publisherNameById publisherId}}</a></li>
