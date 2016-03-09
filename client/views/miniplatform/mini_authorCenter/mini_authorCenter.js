@@ -1,6 +1,6 @@
 Template.authorCentered.helpers({
     journalsInPublisher: function () {
-        var publisher = Publishers.findOne({agree: true});
+        var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
         if (publisher)return Publications.find({publisher: publisher._id, visible:"1"},{sort: {title: 1}});
     },
     urlToJournalAuthorCenter: function (id) {
