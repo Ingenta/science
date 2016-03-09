@@ -6,13 +6,11 @@ Template.i18n_switch.events({
     }
 });
 
-//Template.i18n_switch.helpers({
-//    miniPlatform : function(){
-//        var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
-//        if(publisher)
-//        return true;
-//    }
-//});
+Template.i18n_switch.helpers({
+    miniPlatform : function(){
+        return Router.current().url.indexOf("miniplatform")>-1
+    }
+});
 
 TAPi18n._afterUILanguageChange = function () {
 //triggers on language switch
