@@ -3,7 +3,7 @@
  */
 Science.schemas.CollapsItemSchema = new SimpleSchema({
     title:{
-        type: Science.schemas.MultipleTextAreaSchema,
+        type: Science.schemas.MultipleTextOptionalSchema,
         unique: false
     },
     content:{

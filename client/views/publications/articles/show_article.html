@@ -29,7 +29,7 @@
                 <li>
                     <p>
                         {{#each authors}}
-                            <span class="separate-comma author-display">{{> authorPopButton}}
+                            <span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display">{{> authorPopButton}}
                                 {{#if refs}}
                                     <sup>{{refs}}</sup>
                                 {{/if}}
@@ -55,8 +55,11 @@
                 {{/if}}
                 <li>
                     <p>
-                        {{journalName journalId}} <b>{{volume}}</b>, {{elocationId}} {{#if year}}({{year}}){{/if}};
-                        <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
+                        {{journalName journalId}}
+                        {{#if volume}}<b>{{volume}}</b>{{#if issue}}({{issue}}){{/if}},{{/if}}
+                        {{#if elocationId}}{{elocationId}}{{/if}}
+                        {{#if year}}({{year}}){{/if}};
+                        <a style="margin-left:0.5em;" href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i
                                 class="fa fa-external-link"></i></a>
                     </p>
                 </li>

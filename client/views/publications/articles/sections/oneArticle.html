@@ -2,24 +2,22 @@
 
 	<ul class="dotted list-unstyled">
 		<li>
-			<h4>
-				<div class="resultsList"><img src="/icon_access_oa.gif">
-					<a class="{{class}}" href="{{articleUrl _id}}">{{{showTitle}}}</a>
-				</div>
-			</h4>
-
-			<ul class="list-unstyled">
+            <div class="resultsList"><img src="/icon_access_oa.gif">
+                <a class="pub-title {{class}}" style="font-size:12px" href="{{articleUrl _id}}">{{{showTitle}}}</a>
+            </div>
+			<ul class="list-unstyled article-desc-ul">
 				<li>
 					{{#each getAuthors}}
-						<span class="separate-comma author-display"> {{> authorPopButton name=this}} </span>
+						<span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display"> {{> authorPopButton name=this}} </span>
 					{{/each}}
 				</li>
 				<li>
 					<a class="journalTitle" href="{{urlToJournalById journalId}}">{{journalName journalId}}</a>
-					<b>{{volume}}</b>, {{elocationId}} {{#if year}}({{year}}){{/if}} 
+					{{#if volume}}<b>{{volume}}</b>, {{/if}}
+                    {{#if elocationId}}{{elocationId}}{{/if}}
+                    {{#if year}}({{year}}){{/if}}
 					<a href="http://dx.doi.org/{{doi}}">{{{showdoi}}} <i class="fa fa-external-link"></i></a>
 				</li>
-				<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
 				{{> abstractDetails}}
 			</ul>
 		</li>

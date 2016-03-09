@@ -6,21 +6,21 @@
             {{#mathjax}}
                 {{#each sections}}
                     <div>
-                        <h3 id="sec-{{clearStr title}}" class="sectionDivider title">{{label}} {{{handledTitle}}}</h3>
+                        <h3 id="sec-{{clearStr title}}" class="sectionDivider-title sectionDivider">{{label}} {{{handledTitle}}}</h3>
                     </div>
                     <p>
                         {{{body.html}}}
                     </p>
                     {{#each sections}}
                         <div>
-                            <h4 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+                            <h4 class="sectionDivider-title" id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
                         </div>
                         <p>
                             {{{body.html}}}
                         </p>
                         {{#each sections}}
                             <div>
-                                <h5 id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+                                <h5 class="sectionDivider-title" id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
                             </div>
                             <p>
                                 {{{body.html}}}
