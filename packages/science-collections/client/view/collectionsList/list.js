@@ -55,3 +55,9 @@ Template.oneCollection.events({
         })
     }
 })
+
+Template.oneCollection.helpers({
+    "underPublisherPage":function(){
+        return Router.current().route.getName() == "publisher.name";
+    }
+})

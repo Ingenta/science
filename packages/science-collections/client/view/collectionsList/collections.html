@@ -3,7 +3,9 @@
         {{#if isCollection}}
             {{> pageElement key="collections"}}
         {{/if}}
-        {{> collAlphabetBar}}
+        {{#if isCollection}}
+            {{> collAlphabetBar}}
+        {{/if}}
         <div class="row">
             <div class="col-xs-12">
                 {{#if collectionPermissionCheck "add-publisher-collection,add-journal-collection" publisherId journalId}}
