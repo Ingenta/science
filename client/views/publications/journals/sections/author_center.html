@@ -44,7 +44,7 @@
 
 <template name="guideArticles">
     <div class="col-xs-4">
-        <div class="part h220">
+        <div class="part h220" data-spy="scroll">
             <div class="dotted mb15 text-center" >
                 <strong style="margin-left: 8px">{{_ "Submission Guidelines"}}</strong>
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}

@@ -101,7 +101,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 HomePageSubs.subscribe('images'),
-                HomePageSubs.subscribe('publishers')
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('tag')
             ]
         }
     });
@@ -116,7 +117,8 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('topics')
+                HomePageSubs.subscribe('topics'),
+                HomePageSubs.subscribe('tag')
             ]
         }
     });
