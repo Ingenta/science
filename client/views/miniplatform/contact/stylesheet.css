@@ -1,0 +1,11 @@
+div#accordion .panel-heading a {
+    color: #03619E;
+}
+div#accordion .panel-heading a.collapsed:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f067";
+}
+div#accordion .panel-heading a:not(.collapsed):before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f068";
+}
