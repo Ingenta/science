@@ -53,11 +53,17 @@ Science.schemas.MultipleAreaSchema = new SimpleSchema({
 Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 	en:{
 		type: String,
-		optional: true,
+		optional:true,
 		autoform: {
+			type: "jkfroala",
 			afFieldInput: {
-				type: 'summernote',
-				class: 'editor'
+				froalaOptions: {
+					language:'zh_cn',
+					theme: 'red',
+					inlineMode: false,
+					buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'selectAll', 'insertLink', 'insertImage', 'insertVideo', 'table', 'undo', 'redo', 'html', 'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+					height: '400'
+				}
 			}
 		}
 	},
@@ -65,9 +71,15 @@ Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 		type: String,
 		optional: true,
 		autoform: {
+			type: "jkfroala",
 			afFieldInput: {
-				type: 'summernote',
-				class: 'editor'
+				froalaOptions: {
+					language:'zh_cn',
+					theme: 'red',
+					inlineMode: false,
+					buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'selectAll', 'insertLink', 'insertImage', 'insertVideo', 'table', 'undo', 'redo', 'html', 'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+					height: '400'
+				}
 			}
 		}
 	}
