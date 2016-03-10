@@ -83,7 +83,7 @@
         </p>
         <p>
             {{#if StartDate}}
-                {{_ "Meeting Time"}}：&nbsp;{{startDate}}&nbsp;&nbsp;
+                {{_ "Meeting Time"}}：&nbsp;{{formatDate startDate "YYYY-MM-DD"}}&nbsp;&nbsp;
             {{/if}}
             {{#if Phone}}
                 {{_ "Contact Way"}}：&nbsp;{{phone}}<br>
