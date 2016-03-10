@@ -25,7 +25,7 @@ Package.onUse(function(api) {
     'iron:router'
   ],['client', 'server']);
 
-  api.addFiles(['afFroalaEditor.html','afFroalaEditor.js'],'client');
+  api.addFiles(['afFroalaEditor.html','afFroalaEditor.js','stylesheet.css'],'client');
   api.addFiles(['upload.js'],'server'); // there is a bug with Router.onBeforeAction
 });
 
