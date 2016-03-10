@@ -28,15 +28,15 @@
         </div>
         {{#each layoutRecommendMagazines}}
             <div class="contPart">
-                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
+                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></p>
+                        <p>
+                            <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a>
+                            {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                        </p>
                         <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
-                    <p class="tr">
-                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                    </p>
                 </div>
             </div>
         {{else}}
@@ -51,15 +51,15 @@
         </div>
     {{#each layoutPublishingMagazines}}
         <div class="contPart">
-            <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
+            <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
             <div class="fl w350">
                 <div class="h50">
-                    <p><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></p>
+                    <p>
+                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a>
+                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                    </p>
                     <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                 </div>
-                <p class="tr">
-                    {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                </p>
             </div>
         </div>
     {{else}}
