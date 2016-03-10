@@ -1,4 +1,4 @@
-var Busboy = Npm.require("Busboy");
+var Busboy = Npm.require("busboy");
 
 Router.onBeforeAction(function (req, res, next) {
     var files = []; // Store filenames and then pass them to request.

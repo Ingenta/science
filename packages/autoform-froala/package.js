@@ -12,7 +12,7 @@ Package.describe({
 
 Npm.depends({
   "busboy":"0.2.9"
-})
+});
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
