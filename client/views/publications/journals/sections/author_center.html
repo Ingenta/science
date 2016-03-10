@@ -46,11 +46,11 @@
     <div class="col-xs-4">
         <div class="part h220">
             <div class="dotted mb15 text-center" >
-                <h4 style="margin-left: 8px">{{_ "Submission Guidelines"}}</h4>
+                <h5 style="margin-left: 5px">{{_ "Submission Guidelines"}}
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;" data-toggle="modal" data-target="#addInstructionsModal"></span>
+                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addInstructionsModal"></span>
                     {{> addInstructionsModalForm}}
-                {{/if}}
+                {{/if}}</h5>
             </div>
             {{#each instructions}}
                 <ul>
@@ -72,11 +72,11 @@
     <div class="col-xs-4">
         <div class="part h220">
             <div class="dotted mb15 text-center">
-                <h4 style="margin-left: 8px">{{_ "Prepare Manuscript"}}</h4>
+                <h5 style="margin-left: 5px">{{_ "Prepare Manuscript"}}
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addManuscriptModal"></span>
+                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addManuscriptModal"></span>
                     {{> addManuscriptModalForm}}
-                {{/if}}
+                {{/if}}</h5>
             </div>
             {{#each manuscript}}
                 <p style="font-size: 12px"><strong> >> {{{translateThis title.cn title.en}}}</strong>
@@ -109,11 +109,11 @@
     <div class="col-xs-4">
         <div class="part h220">
             <div class="dotted mb15 text-center">
-                <h4 style="margin-left: 8px">{{_ "Submit  Manuscript"}}</h4>
+                <h5 style="margin-left: 5px">{{_ "Submit  Manuscript"}}
                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>
+                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>
                     {{> addSubmitManuscriptModalForm}}
-                {{/if}}
+                {{/if}}</h5>
             </div>
             {{#each submitManuscript}}
                 <ul>

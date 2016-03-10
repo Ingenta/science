@@ -44,10 +44,8 @@
                     <!--</div><hr>-->
                 <!--</div>-->
                 <div role="tabpanel" class="tab-pane active" id="magazineBtn" style="margin-left: 20px">
-                    <!--<strong style="font-size: 18px">杂志社动态</strong>-->
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each miniMagazines}}
                             <ul class="dotted list-unstyled">
@@ -70,10 +68,8 @@
                     </div><hr>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="publishingBtn" style="margin-left: 20px">
-                    <!--<strong style="font-size: 18px">出版动态</strong>-->
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each miniPublishing}}
                             <ul class="dotted list-unstyled">

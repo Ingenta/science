@@ -14,8 +14,7 @@ this.AuthorCenter.allow({
 
 AuthorCenterSchema = new SimpleSchema({
     title: {
-        type: Science.schemas.MultipleTextOptionalSchema,
-        optional: true
+        type: Science.schemas.MultipleTextOptionalSchema
     },
     content: {
         type:Science.schemas.MultipleTextAreaSchema,

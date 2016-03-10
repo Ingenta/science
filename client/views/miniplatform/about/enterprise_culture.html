@@ -8,10 +8,8 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="enterBtn" style="margin-left: 20px">
-                    <strong style="font-size: 18px">{{_ "Corporate News"}}</strong>
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each enterpriseNews}}
                             <ul class="dotted list-unstyled">
@@ -29,10 +27,8 @@
                     </div><hr>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="editBtn" style="margin-left: 20px">
-                    <strong style="font-size: 18px">{{_ "Edit Corner"}}</strong>
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each editFields}}
                             <ul class="dotted list-unstyled">
