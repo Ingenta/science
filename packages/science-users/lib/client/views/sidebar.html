@@ -29,12 +29,12 @@
             {{#if isArticlePage}}
                 {{>exportCitationSidebar}}
                 <li><a class="favorite" href=""><i class="fa fa-star"></i> {{favoriteName}}</a></li>
-                <li><a class="watchArticle" href=""><i class="fa fa-eye"></i> {{articleWatchState}}</a></li>
+                <li><a class="watchArticle" href=""><i class="glyphicon glyphicon-heart"></i> {{articleWatchState}}</a></li>
                 <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i
                         class="fa fa-envelope"></i> {{_ "Email This"}}</a></li>
             {{/if}}
             {{#if isJournalPage}}
-                <li><a class="watchJournal" href=""><i class="fa fa-eye"></i> {{journalWatchState}}</a></li>
+                <li><a class="watchJournal" href=""><i class="glyphicon glyphicon-heart"></i> {{journalWatchState}}</a></li>
             {{/if}}
         {{else}}
             <li>
