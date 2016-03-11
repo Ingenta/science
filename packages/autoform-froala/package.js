@@ -10,20 +10,23 @@ Package.describe({
   documentation: 'README.md'
 });
 
-Npm.depends({ "busboy": "0.2.9" });
+Npm.depends({
+  "busboy":"0.2.9"
+});
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use('ecmascript');
   api.use([
-    'froala:editor@2.2.1',
+    'reactive-var',
+    'froala:editor@2.0.1_1',
     'templating',
     'aldeed:autoform',
-    'iron:router@1.0.12'
+    'iron:router'
   ],['client', 'server']);
 
-  api.addFiles(['afFroalaEditor.html','afFroalaEditor.js'],'client');
-  //api.addFiles(['imageUpload.js'],'server'); // there is a bug with Router.onBeforeAction
+  api.addFiles(['afFroalaEditor.html','afFroalaEditor.js','stylesheet.css'],'client');
+  api.addFiles(['upload.js'],'server'); // there is a bug with Router.onBeforeAction
 });
 
 Package.onTest(function(api) {
