@@ -5,6 +5,11 @@ Meteor.startup(function () {
             if (err)
                 throw new Meteor.Error(err);
         });
+        //确保上传附件的文件夹存在
+        Science.FSE.ensureDir(Config.staticFiles.uploadFileDir, function (err) {
+            if (err)
+                throw new Meteor.Error(err);
+        });
     }
 })
 

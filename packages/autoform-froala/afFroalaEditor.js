@@ -130,6 +130,10 @@ function initEditor(self, data, lastData, $input, froalaMethod, dropdownOptions)
         data.imageUploadURL = dropdownOptions.imageUploadURL;
     }
 
+    if(dropdownOptions.fileUploadURL) {
+        data.fileUploadURL = dropdownOptions.fileUploadURL;
+    }
+
     if(!_.isEmpty(dropdownOptions.customDropdowns)){
         // Make sure all dropdowns are added to buttons
         $.each(dropdownOptions.customDropdowns, function(key, val){
