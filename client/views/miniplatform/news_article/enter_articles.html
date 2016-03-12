@@ -7,7 +7,7 @@
             <hr>
             {{#each cultureDetails}}
                 <div class="partContent">
-                    <div align="center"><span style="font-size:21px;">{{translateThis title.cn title.en}}</span>
+                    <div align="center"><span class="title-font">{{translateThis title.cn title.en}}</span>
                         {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}</div><br>
                     <p>{{{translateThis content.cn content.en}}}</p>
                 </div>
