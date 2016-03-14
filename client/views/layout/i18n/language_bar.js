@@ -5,6 +5,13 @@ Template.i18n_switch.events({
         return TAPi18n.setLanguageAmplify(id);
     }
 });
+
+Template.i18n_switch.helpers({
+    miniPlatform : function(){
+        return Router.current().url.indexOf("miniplatform")>-1
+    }
+});
+
 TAPi18n._afterUILanguageChange = function () {
 //triggers on language switch
     mo.setLocale(TAPi18n.getLanguage());

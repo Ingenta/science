@@ -19,14 +19,15 @@
 			<ul class="list-unstyled">
 				<li>
 					{{#each getAuthors}}
-						<span class="separate-comma author-display"> {{> authorPopButton name=this}} </span>
+						<span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display"> {{> authorPopButton name=this}} </span>
 					{{/each}}
 				</li>
 				<li>
 					{{journalName journalId}}
-					<b>{{volume}}</b>, {{elocationId}} ({{year}}) , {{doi}}
+					{{#if volume}}<b>{{volume}}</b>{{#if issue}}({{issue}}){{/if}},{{/if}}
+                    {{#if elocationId}}{{elocationId}}{{/if}}
+                    {{#if year}}({{year}}){{/if}} , <span style="margin-left:0.5em;">{{doi}}</span>
 				</li>
-				<li>{{_ "Language"}} : {{_ "Chinese"}}</li>
 			</ul>
 		</li>
 	</ul>

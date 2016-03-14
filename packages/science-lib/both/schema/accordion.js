@@ -3,26 +3,11 @@
  */
 Science.schemas.CollapsItemSchema = new SimpleSchema({
     title:{
-        type: String,
-        unique: true
+        type: Science.schemas.MultipleTextOptionalSchema,
+        unique: false
     },
     content:{
-        type: String,
-        optional: true,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
-    }
-});
-
-Science.schemas.AccordionSchema = new SimpleSchema({
-    title:{
-        type:String
-    },
-    items:{
-        type:[Science.schemas.CollapsItemSchema]
+        type: Science.schemas.MultipleTextAreaSchema,
+        optional: true
     }
 });

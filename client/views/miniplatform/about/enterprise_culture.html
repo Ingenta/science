@@ -3,21 +3,19 @@
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="enterpriseCulture" isMiniPlatform=true}}
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#enterBtn" aria-controls="home" role="tab" data-toggle="tab">企业新闻>></a></li>
-                <li role="presentation"><a href="#editBtn" aria-controls="profile" role="tab" data-toggle="tab">编辑园地>></a></li>
+                <li role="presentation" class="active"><a href="#enterBtn" aria-controls="home" role="tab" data-toggle="tab">{{_ "Corporate News"}}>></a></li>
+                <li role="presentation"><a href="#editBtn" aria-controls="profile" role="tab" data-toggle="tab">{{_ "Edit Corner"}}>></a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="enterBtn" style="margin-left: 20px">
-                    <strong style="font-size: 18px">企业新闻</strong>
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each enterpriseNews}}
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="entersDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -29,16 +27,14 @@
                     </div><hr>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="editBtn" style="margin-left: 20px">
-                    <strong style="font-size: 18px">编辑园地</strong>
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each editFields}}
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="editsDel" class="fa fa-trash"></a>{{/if}}
                                     </p>

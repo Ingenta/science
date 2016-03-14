@@ -16,25 +16,24 @@
 <template name="memorabiliaList">
     {{#each memorabilias}}
         <div class="partContent">
-            <div align="center"><span style="font-size:24px;">{{title}}</span>
+            <div align="center"><span class="title-font"><b>{{translateThis title.cn title.en}}</b></span>
                 {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}</div><br>
-            <p>{{{content}}}</p>
+            <p>{{{translateThis content.cn content.en}}}</p>
             {{#if accordionExists}}
-                <h4>{{accordion.title}}</h4>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                {{#each accordion.items}}
+                {{#each accordion}}
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading{{@index}}">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
-                                    {{title}}
+                            <h4 class="panel-title" style="font-size:14px">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
+                                    {{translateThis title.cn title.en}}
                                 </a>
                             </h4>
                         </div>
                         <div id="collapse{{@index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{@index}}">
                             <div class="panel-body">
-                                {{content}}
+                                {{{translateThis content.cn content.en}}}
                             </div>
                         </div>
                     </div>

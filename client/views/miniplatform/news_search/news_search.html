@@ -1,27 +1,27 @@
 <template name="newsSearchShowPage">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            <h3 class="dotted"><b>检索结果查看>></b></h3>
+            <h3 class="dotted"><b>{{_ "View Search Results"}}>></b></h3>
             <div class="dotted">
-                <label>结果排序：</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> 默认</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> 最新发布</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> 最早发布</label>
+                <label>{{_ "Sort Results By"}}：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1">{{_ "First release"}}</label>
             </div>
             <div class="dotted">
                 <table class="table table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <td>信息标题</td>
-                        <td>发布时间</td>
-                        <td>浏览量/次</td>
+                        <td>{{_ "Information Title"}}</td>
+                        <td>{{_ "Published online"}}</td>
+                        <td>{{_ "Each Pageviews"}}</td>
                     </tr>
                     </thead>
                     <tbody>
                         {{#each results}}
                             <tr>
-                                <td><a href="{{whichUrl}}" target="_blank">{{title}}</a></td>
-                                <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
+                                <td><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></td>
+                                <td>{{formatDate releaseTime "YYYY-MM-DD"}}</td>
                                 <td>{{pageView}}</td>
                             </tr>
                         {{else}}

@@ -1,11 +1,11 @@
 Template.newsCenter.helpers({
-    miniNews: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
-        return myNewsCenterPagination.find({types:"1"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
-    },
+    //miniNews: function () {
+    //    var numPerPage = Session.get('PerPage');
+    //    if (numPerPage === undefined) {
+    //        numPerPage = 10;
+    //    }
+    //    return myNewsCenterPagination.find({types:"1"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+    //},
     miniMagazines: function () {
         var numPerPage = Session.get('PerPage');
         if (numPerPage === undefined) {
@@ -26,9 +26,9 @@ Template.newsCenter.helpers({
     hide: function () {
         return NewsCenter.find({types:"4"}).count()<1 ? "": "hide";
     },
-    newsCount: function () {
-        return NewsCenter.find({types:"1"}).count()>10;
-    },
+    //newsCount: function () {
+    //    return NewsCenter.find({types:"1"}).count()>10;
+    //},
     magazinesCount: function () {
         return NewsCenter.find({types:"2"}).count()>10;
     },
@@ -69,6 +69,7 @@ Template.newsCenter.events({
         })
     },
     'click .perPage': function (event) {
+        Session.set('PerPage', undefined);
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
     }

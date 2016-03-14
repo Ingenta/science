@@ -15,7 +15,7 @@ Npm.depends({
     "request": "2.61.0",
     "readline": "1.0.0",
     "xml2js": "0.4.11",
-    "xss": "0.2.7",
+    "xss": "0.2.7"
 });
 
 Package.onUse(function (api) {

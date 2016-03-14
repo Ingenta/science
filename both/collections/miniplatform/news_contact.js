@@ -14,20 +14,14 @@ this.NewsContact.allow({
 
 NewsContactSchema = new SimpleSchema({
     title: {
-        type: String
+        type: Science.schemas.MultiLangSchema
     },
     content: {
-        type: String,
-        optional: true,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor'
-            }
-        }
+        type:Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     accordion:{
-        type: Science.schemas.AccordionSchema,
+        type: [Science.schemas.CollapsItemSchema],
         optional:true
     },
     link: {

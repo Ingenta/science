@@ -117,19 +117,19 @@
     "PACS_plural":"PACS numbers:",
     "funding":"Funded by",
     "contentType":{
-        "article":"Articles",
-        "reviews":"Reviews",
-        "letters":"Letters",
-        "editorials":"Editorials",
-        "highlights":"Highlights",
-        "forums":"Forums",
+        "article":"Article",
+        "reviews":"Review",
+        "letters":"Letter",
+        "editorials":"Editorial",
+        "highlights":"Highlight",
+        "forums":"Forum",
         "progress":"Progress",
-        "communications":"Communications",
-        "perspectives":"Perspectives",
+        "communications":"Communication",
+        "perspectives":"Perspective",
         "correspondance":"Correspondance",
         "interview":"Interview",
-        "comments":"Comments",
-        "newsAndViews":"News & Views",
+        "comments":"Comment",
+        "newsAndViews":"News & View",
         "briefReport":"Brief report",
         "scienceNews":"Science News",
         "bookReview":"Book review",
@@ -201,8 +201,10 @@
                 "options": {
                     "1": "Quarterly Publication",
                     "2": "Monthly Publication",
-                    "3": "Bi-monthly Publication",
-                    "4": "Ten-day Publication"
+                    "3": "Semimonthly Publication",
+                    "4": "Ten-day Publication",
+                    "5": "Weekly Publication",
+                    "6": "Bi-monthly Publication"
                 }
             },
             "included": {
@@ -910,24 +912,42 @@
         },
         "newsContact": {
             "title": {
-                "label": "Title"
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "content": {
-                "label": "Content"
+                "label": "Content",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "accordion":{
-                "label": "Accordion",
-                "title":{
-                    "label":"Title"
-                },
-                "items":{
-                    "label":"Items",
-                    "$":{
-                        "title":{
-                            "label":"Title"
+                "label":"Items of Accordion",
+                "$":{
+                    "title":{
+                        "label":"Title",
+                        "cn": {
+                            "label": "Chinese"
                         },
-                        "content":{
-                            "label":"Content"
+                        "en": {
+                            "label": "English"
+                        }
+                    },
+                    "content":{
+                        "label":"Content",
+                        "cn": {
+                            "label": "Chinese"
+                        },
+                        "en": {
+                            "label": "English"
                         }
                     }
                 }
@@ -948,16 +968,40 @@
         },
         "newsCenter": {
             "title": {
-                "label": "Title"
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "author": {
-                "label": "Author"
+                "label": "Author",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "abstract": {
-                "label": "Abstract"
+                "label": "Abstract",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "content": {
-                "label": "Full Text"
+                "label": "Full Text",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "recommend": {
                 "label": "News recommend",
@@ -990,7 +1034,13 @@
         },
         "column": {
             "title": {
-                "label": "Column name"
+                "label": "Column name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "picture": {
                 "label": "Choose file"
@@ -998,16 +1048,34 @@
         },
         "columnViews": {
             "title": {
-                "label": "Column name"
+                "label": "Column name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "abstract": {
-                "label": "Column profile"
+                "label": "Column profile",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "releaseTime": {
                 "label": "Release Time"
             },
             "content": {
-                "label": "Column content"
+                "label": "Column content",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             }
         },
         "journalAC": {
@@ -1042,5 +1110,40 @@
     "ConfirmNewPas":"Please confirm your new password.",
     "NewPasSet":"Your new password is set.",
     "Incorrect password":"Incorrect password",
-    "Choose file":"Choose file"
+    "Choose file":"Choose file",
+    "Magazine Profile":"Introduction",
+    "Council":"Council",
+    "Two TV Memorabilia":"History",
+    "Company Culture":"Culture",
+    "Publishing Cooperation":"Cooperation",
+    "Links":"Links",
+    "Corporate News":"News",
+    "Edit Corner":"Editors View",
+    "Communication Information":"Contact information for each department",
+    "Strategic Cooperation":"Our partner institutions",
+    "Magazine Belongs":"Here are all of the Science China Press journals",
+    "Magazine dynamic view":"Magazine dynamic view",
+    "Latest release":"Latest release",
+    "First release":"First release",
+    "Magazine dynamic view":"Up in this internet magazine dynamic view",
+    "Latest published Articles View":"Latest published Articles View",
+    "Most recent":"The most recent published article in this internet View",
+    "See Science News":"See Science News",
+    "Science news":"Science news in this platform up to view",
+    "Cultural details":"Enterprise Culture",
+    "News Details":"News Center",
+    "Latest News":"Latest News",
+    "Magazine dynamic":"SCP News",
+    "View Search Results":"View Search Results",
+    "Information Title":"Information Title",
+    "Each Pageviews":"Pageviews / time",
+    "Latest articles published":"Most recent articles",
+    "Article Resources":"Article Resources",
+    "Information Portal":"News Resources",
+    "Webmaster":"Webmaster",
+    "Click into":"Click into the SciEngine Platform",
+    "Science News To":"Science News",
+    "Publishing Dynamic":"Publication Trends",
+    "EIC":"EIC",
+    "Dynamic Publishing":"The dynamic publishing platform View"
 }

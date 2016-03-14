@@ -4,7 +4,7 @@
             {{> pageElement key="newsCenter" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
                 {{#each recruitInfo}}
-                    <strong><a style="font-size: 16px;color: red" href="{{whichUrl}}" target="_blank">{{title}}</a></strong>
+                    <strong><a style="font-size: 14px;color: red" href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></strong>
                     {{#if miniPlatformPermission}}{{> updateRecruitmentModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="recruitDel" class="fa fa-trash"></a>{{/if}}
                 {{/each}}
@@ -13,47 +13,45 @@
                 {{/if}}<hr>
             </div>
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">新闻>></a></li>
-                <li role="presentation"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">杂志社动态>></a></li>
-                <li role="presentation"><a href="#publishingBtn" aria-controls="messages" role="tab" data-toggle="tab">出版动态>></a></li>
+                <!--<li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">{{_ "News"}}>></a></li>-->
+                 <li role="presentation" class="active"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">{{_ "Magazine dynamic"}}>></a></li>
+                 <li role="presentation"><a href="#publishingBtn" aria-controls="messages" role="tab" data-toggle="tab">{{_ "Publishing Dynamic"}}>></a></li>
             </ul>
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="newsBtn" style="margin-left: 20px">
-                    <!--<strong style="font-size: 18px">新闻</strong>-->
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}
-                    </div><hr>
-                    <div>
-                        {{#each miniNews}}
-                            <ul class="dotted list-unstyled">
-                                <li>
-                                    <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
-                                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                                        {{#if miniPlatformPermission}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}
-                                    </p>
-                                </li>
-                            </ul>
-                        {{else}}
-                            {{_ "No results found!"}}
-                        {{/each}}
-                        {{> Paginator_UI miniNews}}
-                        {{#if newsCount}}
-                            {{> displayPerPage}}
-                        {{/if}}
-                    </div><hr>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="magazineBtn" style="margin-left: 20px">
-                    <!--<strong style="font-size: 18px">杂志社动态</strong>-->
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
-                    </div><hr>
+                <!--<div role="tabpanel" class="tab-pane active" id="newsBtn" style="margin-left: 20px">-->
+                    <!--&lt;!&ndash;<strong style="font-size: 18px">新闻</strong>&ndash;&gt;-->
+                    <!--<div class="pull-right">-->
+                        <!--{{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}-->
+                    <!--</div><hr>-->
+                    <!--<div>-->
+                        <!--{{#each miniNews}}-->
+                            <!--<ul class="dotted list-unstyled">-->
+                                <!--<li>-->
+                                    <!--<p>-->
+                                        <!--<a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>-->
+                                        <!--{{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}-->
+                                        <!--{{#if miniPlatformPermission}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}-->
+                                    <!--</p>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--{{else}}-->
+                            <!--{{_ "No results found!"}}-->
+                        <!--{{/each}}-->
+                        <!--{{> Paginator_UI miniNews}}-->
+                        <!--{{#if newsCount}}-->
+                            <!--{{> displayPerPage}}-->
+                        <!--{{/if}}-->
+                    <!--</div><hr>-->
+                <!--</div>-->
+                <div role="tabpanel" class="tab-pane active" id="magazineBtn" style="margin-left: 20px">
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each miniMagazines}}
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -62,6 +60,7 @@
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}
+                        <br>
                         {{> Paginator_UI miniMagazines}}
                         {{#if magazinesCount}}
                             {{> displayPerPage}}
@@ -69,16 +68,14 @@
                     </div><hr>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="publishingBtn" style="margin-left: 20px">
-                    <!--<strong style="font-size: 18px">出版动态</strong>-->
-                    <div class="pull-right">
-                        {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
-                    </div><hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
+                    <hr>
                     <div>
                         {{#each miniPublishing}}
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{title}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -87,6 +84,7 @@
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}
+                        <br>
                         {{> Paginator_UI miniPublishing}}
                         {{#if publishingCount}}
                             {{> displayPerPage}}

@@ -1,30 +1,33 @@
 <template name="dynamicArticleShow">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            <h3 class="dotted"><b>最新出版文章查看&nbsp;:</b></h3>
+            <h3 class="dotted"><b>{{_ "Latest published Articles View"}}&nbsp;:</b></h3>
             <div class="dotted">
-                <label>结果排序：</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> 默认</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> 最新发布</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> 最早发布</label>
+                <label>{{_ "Sort Results By"}}：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> {{_ "First release"}}</label>
             </div>
             <div class="dotted">
-                <h4><b>本平台内最多最新出版文章查看：</b></h4>
+                <h4><b>{{_ "Most recent"}}：</b></h4>
             </div>
             <div class="dotted">
                 {{#each mostPublishingArticles}}
                     <ul class="dotted list-unstyled">
                         <li>
-                            <h4><div class="resultsList">{{> accessKeyImage}}<a href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div></h4>
+                            <div class="resultsList pub-title">{{> accessKeyImage}}<a style="font-size:12px" href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div>
 
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled article-desc-ul">
                                 <li>
                                     {{#each authors}}
-                                    {{> authorPopButton}}
+                                        <span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display"> {{> authorPopButton}} </span>
                                     {{/each}}
                                 </li>
                                 <li>
-                                    <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                                    <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
+                                    {{#if volume}}<b>{{volume}}</b>, {{/if}}
+                                    {{#if elocationId}}{{elocationId}}{{/if}}
+                                    {{#if year}}({{year}}){{/if}}
                                     <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
                                 </li>
                                 {{> abstractDetails}}

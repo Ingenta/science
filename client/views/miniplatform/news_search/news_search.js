@@ -11,9 +11,12 @@ Template.newsSearchShowPage.helpers({
             var sort = {};
             if(Session.get("sort"))sort={"createDate":Session.get("sort")};
             var mongoDbArr = [];
-            mongoDbArr.push({'title': {$regex: q, $options: "i"}});
-            mongoDbArr.push({author: {$regex: q, $options: "i"}});
-            mongoDbArr.push({abstract: {$regex: q, $options: "i"}});
+            mongoDbArr.push({'title.en': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'title.cn': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'author.en': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'author.cn': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'abstract.en': {$regex: q, $options: "i"}});
+            mongoDbArr.push({'abstract.cn': {$regex: q, $options: "i"}});
             return NewsCenter.find({$or: mongoDbArr},{sort: sort});
         }
     },

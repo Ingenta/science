@@ -104,10 +104,13 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 return;
                             }
                             var xmlFileName = "";
+                            var pdfFileName = "";
                             file.forEach(function (f) {
                                 if (f.endWith('.xml') && f !== "readme.xml") {
                                     xmlFileName = f.substr(0, f.lastIndexOf(".xml"));
                                     //TODO: should break here, or better yet find a better means of finding the xml
+                                }else if(f.endWith('.pdf')){
+                                    pdfFileName = f.substr(0, f.lastIndexOf(".pdf"));
                                 }
                             });
                             if (!xmlFileName) {
@@ -116,7 +119,7 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                             }
 
                             var targetXml = targetPath + "/" + xmlFileName + ".xml";
-                            var targetPdf = targetPath + "/" + xmlFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
+                            var targetPdf = targetPath + "/" + pdfFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
                             UploadLog.update({_id: logId}, {
                                 $set: {
                                     xml: targetXml,

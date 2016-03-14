@@ -116,14 +116,12 @@
     {{#if hasHisJournal}}
         <div class="historical-journal">
         <h5>{{_ "Historical Journal"}}</h5>
-
         {{#each sortedHisJournal}}
-
-            <h6>{{{translateThis titleCn title}}}</h6>
-
+            <a href="{{whichUrl}}">
+                <h6>{{{translateThis titleCn title}}}</h6>
+            </a>
             {{> journalNavigationPanel}}
         {{/each}}
-
         </div>
     {{/if}}
 </template>

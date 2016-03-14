@@ -205,11 +205,13 @@ Router.map(function () {
                     publisher: 1,
                     authors: 1,
                     volume: 1,
+                    issue: 1,
                     elocationId: 1,
                     firstPage: 1,
                     year: 1,
                     topic: 1,
-                    pdfId: 1
+                    pdfId: 1,
+                    pubStatus:1
                 }
             });
             if (!article || !ScienceXML.FileExists(article.pdfId)) {
@@ -222,7 +224,7 @@ Router.map(function () {
                 return;
             }
             //create path to expected first page of pdf
-            var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.pdfId + (new Date()).getTime() + ".pdf";
+            var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.articleId + (new Date()).getTime() + ".pdf";
             //准备需要添加到pdf中的数据
             var lang = this.params.query.lang || "en";
 
@@ -249,20 +251,22 @@ Router.map(function () {
             //parse article metadata
             data.title = getdata(article.title, lang);
             if(article.authors) {
-                data.authors = _.map(article.authors.fullname, function (fname) {
-                    return getdata(fname, lang);
+                data.authors = _.map(article.authors, function (author) {
+                    return getdata(author.fullname, lang);
                 });
             }
             data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
             data.volume = article.volume;
+            data.issue = article.issue;
             data.page = article.elocationId || article.firstPage;
             data.year = article.year;
             data.doi = article.doi;
-            data.fulltextUrl = "http://dx.doi.org/" + article.doi;
+            data.fulltextUrl = "http://219.238.6.215/doi/" + article.doi;
+            data.tocUrl="http://219.238.6.215/publisher/"+publisherInfo.shortname+"/journal/"+ journalInfo.shortTitle + "/"+article.volume + "/" + article.issue;
             data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
 
             //create related article query
-            var query = {q: data.title, wt: "json"};
+            var query = {q: "_text_:("+data.title+") AND NOT _id:"+article._id, wt: "json"};
             var topicArr = _.compact(article.topic);
             if (!_.isEmpty(topicArr)) {
                 query.fq = {
@@ -285,7 +289,7 @@ Router.map(function () {
                             atcObj.page = atc.elocationId || atc.firstPage;
                             atcObj.year = atc.year;
                             atcObj.doi = atc.doi;
-                            atcObj.fulltextUrl = "http://dx.doi.org/" + atc.doi;
+                            atcObj.fulltextUrl = "http://219.238.6.215/doi/" + atc.doi;
                             return atcObj;
                         })
                         data.similar = similars;

@@ -1,7 +1,8 @@
 <template name="miniLayout">
     <div class="miniPlatform">
     <!-- head 开始 -->
-    <div class="head">
+    <div class="head" style="height: 110px">
+        {{> languageBar}}
         <div class="top">
             <div class="logo">
                 <div class="copLogo"><a href="{{pathFor 'newsPlatform'}}"><img src="/logo.png" /></a></div>
@@ -9,7 +10,7 @@
             <div class="serach">
                 <div class="navbar-form pull-right" role="search">
                     <div class="input-group">
-                        <select id="searchSelect" style="float:left;height:32px;"><option value ="resource">文章资源</option><option value ="local">门户信息</option></select><input id="searchInput" style="float:right;width:300px;" type="text" class="form-control" placeholder="搜索">
+                        <select id="searchSelect" style="float:left;height:32px;"><option value ="resource">{{_ "Article Resources"}}</option><option value ="local">{{_ "Information Portal"}}</option></select><input id="searchInput" style="float:right;width:285px;" type="text" class="form-control" placeholder="{{_ "Search"}}">
             <span class="input-group-btn">
                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
             </span>
@@ -23,40 +24,40 @@
     <div class="navMini">
         <ul>
             <li id="nav-item-dropdown" class="dropdown {{menuClass 'magazineProfile'}}{{menuClass 'council'}}{{menuClass 'memorabilia'}}{{menuClass 'enterpriseCulture'}}" style="border-left:1px solid #dedede;">
-                <a data-toggle="dropdown">关于我们<b class="caret"></b></a>
+                <a data-toggle="dropdown">{{_ "About"}}<b class="caret"></b></a>
                 <ul id="dropdown-nav-items" class="dropdown-menu" style="min-width: 132px;margin-left:-2px;">
                     <li class="{{menuClass 'magazineProfile'}}">
-                        <a href="{{pathFor 'magazineProfile'}}" >杂志社简介</a>
+                        <a href="{{pathFor 'magazineProfile'}}" >{{_ "Magazine Profile"}}</a>
                     </li>
                     <li class="{{menuClass 'council'}}">
-                        <a href="{{pathFor 'council'}}" >理事会</a>
+                        <a href="{{pathFor 'council'}}" >{{_ "Council"}}</a>
                     </li>
                     <li class="{{menuClass 'memorabilia'}}">
-                        <a href="{{pathFor 'memorabilia'}}" >两刊大事记</a>
+                        <a href="{{pathFor 'memorabilia'}}" >{{_ "Two TV Memorabilia"}}</a>
                     </li>
                     <li class="{{menuClass 'enterpriseCulture'}}">
-                        <a href="{{pathFor 'enterpriseCulture'}}" >企业文化</a>
+                        <a href="{{pathFor 'enterpriseCulture'}}" >{{_ "Company Culture"}}</a>
                     </li>
                 </ul>
             </li>
             <li class="{{menuClass 'authorCentered'}}">
-               <a href="{{pathFor 'authorCentered'}}">作者中心</a>
+               <a href="{{pathFor 'authorCentered'}}">{{_ "Author Center"}}</a>
             </li>
             <li>
-                <a href="{{collectionsLink}}">文章集</a>
+                <a href="{{collectionsLink}}">{{_ "Collections"}}</a>
             </li>
             <li class="{{menuClass 'cooperation'}}">
-               <a href="{{pathFor 'cooperation'}}">出版合作</a>
+               <a href="{{pathFor 'cooperation'}}">{{_ "Publishing Cooperation"}}</a>
             </li>
             <li>
-                <a href="{{pathFor 'cooperationCenter' 'curLi'}}">广告合作</a>
+                <a href="{{pathFor 'cooperationCenter' 'curLi'}}">{{_ "AD Cooperation"}}</a>
             </li>
             <li class="{{menuClass 'newsCenter'}}">
-                <a href="{{pathFor 'newsCenter'}}">新闻中心</a>
+                <a href="{{pathFor 'newsCenter'}}">{{_ "News Center"}}</a>
             </li>
             <li class="{{menuClass 'contact'}}" style="width:146px;">
                 <!--<a href="/" class="fa fa-pencil" collection="PageHeadings" operation="update"></a>-->
-                <a href="{{pathFor 'contact'}}">联系我们</a>
+                <a href="{{pathFor 'contact'}}">{{_ "Contact Us"}}</a>
             </li>
         </ul>
     </div>
@@ -73,7 +74,7 @@
     <div class="footer">
         <div class="foot">
             <p class="oh">
-                <span class="colBlue">友情链接：</span>
+                <span class="colBlue">{{_ "Links"}}：</span>
                 {{#each myLinks}}
                     <a href="{{link}}" target="_blank" title="{{remark}}"><img src="{{getImageHelper picture}}" height="30" width="100"/></a>
                     {{#if miniPlatformPermission}}{{> updateIndexNewsLinkModalForm}}{{/if}}
@@ -87,7 +88,7 @@
                 {{/if}}
                 </div>
             </p>
-            <p>网站主管：010  64034113   sys@scichina.org </p>
+            <p>{{_ "Webmaster"}}：010  64034113   sys@scichina.org </p>
             <p>中Copyright  2011  Science China  PressCo.,Ltd.《中国科学社》杂志社有限公司 </p>
             <p>版权所有　京ICP备13008135号 </p>
         </div>
@@ -128,7 +129,10 @@
     <div class="publishAll">
         <div class="pubAllCont">
             <img src="/biao.png" class="vm"/>
-            <span class="ml200"><a href="/">点击进入SCP Publication平台 <img src="/goAll2.png" class="vm"/></a></span> <span class="ml10"></span>
+            <span class="ml200" style="margin-left:100px">
+                <a href="/">{{_ "Click into"}} <i class="fa fa-hand-o-right"></i></a>
+            </span>
+            <span class="ml10"></span>
         </div>
     </div>
     <!-- publishAll 结束 -->

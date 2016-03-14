@@ -2,37 +2,37 @@
     <div class="classify">
         <div class="part part1">
             {{#each firstColumn}}
-                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{title}}</a>
+                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{translateThis title.cn title.en}}</a>
                 <p class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="meetingDel" class="fa fa-trash"></a>{{/if}}
                 </p>
             {{else}}
-                {{_ "No results found!"}}
+                <a style="font-size: 12px;color: black;">{{_ "No results found!"}}</a>
             {{/each}}
             {{#if miniPlatformPermission}}<span class="fa fa-plus {{firstHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addXianMeetingModal"></span>{{> addXianMeetingModalForm}}{{/if}}
         </div>
         <div class="part part2">
             {{#each secondColumn}}
-                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{title}}</a>
+                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{translateThis title.cn title.en}}</a>
                 <p class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="fundDel" class="fa fa-trash"></a>{{/if}}
                 </p>
             {{else}}
-                {{_ "No results found!"}}
+                <a style="font-size: 12px;color: black;">{{_ "No results found!"}}</a>
             {{/each}}
             {{#if miniPlatformPermission}}<span class="fa fa-plus {{secondHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addFundsModal"></span>{{> addFundsModalForm}}{{/if}}
         </div>
         <div class="part part3">
             {{#each thirdColumn}}
-                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{title}}</a>
+                <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{translateThis title.cn title.en}}</a>
                 <p class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="forumDel" class="fa fa-trash"></a>{{/if}}
                 </p>
             {{else}}
-                {{_ "No results found!"}}
+                <a style="font-size: 12px;color: black;">{{_ "No results found!"}}</a>
             {{/each}}
             {{#if miniPlatformPermission}}<span class="fa fa-plus {{thirdHide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addForumColumnModal"></span>{{> addForumColumnModalForm}}{{/if}}
         </div>

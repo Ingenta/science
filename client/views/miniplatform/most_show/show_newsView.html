@@ -1,20 +1,20 @@
 <template name="newsShow">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            <h3 class="dotted"><b>科学新闻查看&nbsp;:</b></h3>
+            <h3 class="dotted"><b>{{_ "See Science News"}}&nbsp;:</b></h3>
             <div class="dotted">
-                <label>结果排序：</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> 默认</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> 最新发布</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> 最早发布</label>
+                <label>{{_ "Sort Results By"}}：</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
+                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> {{_ "First release"}}</label>
             </div>
             <div class="dotted">
-                <h4><b>本平台内最多科学新闻查看：</b></h4>
+                <h4><b>{{_ "Science news"}}：</b></h4>
             </div>
             <div class="dotted">
                 {{#each mostNews}}
                     <ul class="dotted list-unstyled">
-                        <li><p><a href="{{whichUrl}}">{{title}}</a><span class="pull-right">({{formatDate createDate "YYYY-MM-DD"}})</span></p></li>
+                        <li><p><a href="{{whichUrl}}">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span></p></li>
                     </ul>
                 {{else}}
                     {{_ "No results found!"}}

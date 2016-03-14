@@ -217,7 +217,7 @@ body,
     border-top: 0;
 }
 .simple-list>li{
-    margin: 0;
+    padding: 5px 0;
     list-style-type: none;
     border-top: 1px solid #eee;
 }
@@ -236,4 +236,17 @@ body,
 
 .logo {
     padding-left:30px;
+}
+
+ul > li {
+    maring-bottom:4px;
+}
+
+.pub-title {
+    font-size:17px;
+    font-family: Arial,"黑体", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+li.active {
+    font-weight: bold;
 }

@@ -101,7 +101,7 @@ Template.articleListRight.helpers({
             }
             query.issueId=curIssue;
         }
-        return Articles.find(query, {sort: {elocationId: -1}});
+        return Articles.find(query, {sort: {elocationId: 1}});
 
     },
     getIssueTitle: function () {
@@ -147,5 +147,8 @@ Template.historicalJournalNavigationPanel.helpers({
     sortedHisJournal:function(){
         var hisJournals= Publications.find({_id:{$in:this.historicalJournals}},{sort:{publicationDate:-1}});
         return hisJournals;
+    },
+    whichUrl:function(){
+        return getJournalComponentByJournalId(this._id);
     }
 })

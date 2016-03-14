@@ -2,7 +2,7 @@
     <div class="mainPart">
         <div class="mainTitle">
             <p class="fl w300 mt12">
-                <span class="mr20">最新出版文章</span>
+                <span class="mr20">{{_ "Latest articles published"}}</span>
                 {{#if miniPlatformPermission}}
                     <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addLatestArticlesModal"></span>{{> addLatestArticlesModalForm}}
                 {{/if}}
@@ -12,16 +12,16 @@
         <!-- 推荐文章部分开始 -->
         {{#each recommendArticles}}
             <div class="contPart">
-                <div class="fl w80"><a href="{{urlToArticleById ArticlesId}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
+                <div class="fl w80"><a href="{{urlToArticleById ArticlesId}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p><a href="{{urlToArticleById ArticlesId}}" target="_blank">{{titles ArticlesId}}</a></p>
+                        <p>
+                            <a href="{{urlToArticleById ArticlesId}}" target="_blank">{{titles ArticlesId}}</a>
+                            {{#if miniPlatformPermission}}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
+                            {{#if miniPlatformPermission}}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
+                        </p>
                         <p class="col777">{{publishDate ArticlesId}}</p>
                     </div>
-                    <p class="tr">
-                        {{#if miniPlatformPermission}}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
-                        {{#if miniPlatformPermission}}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
-                    </p>
                 </div>
             </div>
         {{else}}
@@ -29,16 +29,16 @@
         <!-- 推荐文章部分结束 -->
 
         <!-- 最新文章部分开始 -->
-        {{#each lastArticle}}
-            <div class="contPart">
-                <div class="fl w350">
-                    <div class="h50">
-                        <p><a href="{{urlToArticleById _id}}" target="_blank">{{{translateThis title.cn title.en}}}</a></p>
-                    </div>
-                </div>
-            </div>
-        {{else}}
-        {{/each}}
+        <!--{{#each lastArticle}}-->
+            <!--<div class="contPart">-->
+                <!--<div class="fl w350">-->
+                    <!--<div class="h50">-->
+                        <!--<p><a href="{{urlToArticleById _id}}" target="_blank">{{{translateThis title.cn title.en}}}</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--{{else}}-->
+        <!--{{/each}}-->
         <!-- 最新文章部分结束 -->
     </div>
 </template>

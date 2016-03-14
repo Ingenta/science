@@ -3,7 +3,7 @@
         <div class="container-fluid" style="margin-left: 41px">
             {{> pageElement key="contact" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
-                <h4>《中国科学》杂志社所属各期刊部门通讯信息：
+                <h4>{{_ "Communication Information"}}：
                     {{#if miniPlatformPermission}}
                         <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addNewsContactModal"></span>{{> addNewsContactModalForm}}
                     {{/if}}
@@ -17,11 +17,11 @@
 <template name="contactList">
     {{#each contactUs}}
         <div class="col-xs-6">
-            <div><strong>{{title}}</strong>
+            <div><strong>{{translateThis title.cn title.en}}</strong>
             {{#if miniPlatformPermission}}{{> updateNewsContactModalForm}}{{/if}}
             {{#if miniPlatformPermission}}<a href="#" id="contactDel" class="fa fa-trash"></a>{{/if}}
             </div>
-            <div><p>{{{content}}}</p></div>
+            <div><p>{{{translateThis content.cn content.en}}}</p></div>
         </div>
     {{else}}
         {{_ "No results found!"}}
@@ -29,7 +29,7 @@
 </template>
 
 <template name="updateNewsContactModalForm">
-    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="releaseTime,createDate,link,fileName,fileId,types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="releaseTime,createDate,link,fileName,fileId,types,accordion"}}{{/afModal}}
 </template>
 
 <template name="addNewsContactModalForm">

@@ -1,20 +1,42 @@
 <template name="layoutRightNews">
+    <!--<div class="mainPart">-->
+        <!--<div class="mainTitle">-->
+        <!--<p class="fl w300 mt12"><span class="mr20">{{_ "Science News To"}}</span></p>-->
+        <!--<p class="fr mt8"><a href="{{pathFor 'newsShow'}}"><img src="/goAll.png"/></a></p>-->
+        <!--</div>-->
+            <!--{{#each layoutRecommendNews}}-->
+            <!--<div class="contPart">-->
+            <!--<div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>-->
+            <!--<div class="fl w350">-->
+            <!--<div class="h50">-->
+            <!--<p><a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></p>-->
+            <!--<p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>-->
+            <!--</div>-->
+            <!--<p class="tr">-->
+            <!--{{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--</div>-->
+                <!--{{else}}-->
+            <!--{{_ "No results found!"}}-->
+                <!--{{/each}}-->
+        <!--</div>-->
     <div class="mainPart">
         <div class="mainTitle">
-            <p class="fl w300 mt12"><span class="mr20">科学新闻</span></p>
-            <p class="fr mt8"><a href="{{pathFor 'newsShow'}}"><img src="/goAll.png"/></a></p>
+            <p class="fl w300 mt12"><span class="mr20">{{_ "Magazine dynamic"}}</span></p>
+            <p class="fr mt8"><a href="{{pathFor 'dynamicShow'}}"><img src="/goAll.png"/></a></p>
         </div>
-        {{#each layoutRecommendNews}}
+        {{#each layoutRecommendMagazines}}
             <div class="contPart">
-                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
+                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
-                        <p><a href="{{whichUrl}}" target="_blank">{{title}}</a></p>
-                        <p class="col777">{{author}}({{formatDate createDate "YYYY-MM-DD"}})</p>
+                        <p>
+                            <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a>
+                            {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                        </p>
+                        <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
-                    <p class="tr">
-                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                    </p>
                 </div>
             </div>
         {{else}}
@@ -24,24 +46,24 @@
 
     <div class="mainPart mt20">
         <div class="mainTitle">
-            <p class="fl w300 mt12"><span class="mr20">杂志社动态</span></p>
-            <p class="fr mt8"><a href="{{pathFor 'dynamicShow'}}"><img src="/goAll.png"/></a></p>
+            <p class="fl w300 mt12"><span class="mr20">{{_ "Publishing Dynamic"}}</span></p>
+            <p class="fr mt8"><a href="{{pathFor 'publishingShow'}}"><img src="/goAll.png"/></a></p>
         </div>
-        {{#each layoutRecommendMagazines}}
-            <div class="contPart">
-                <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="72" width="65"/></a></div>
-                <div class="fl w350">
-                    <div class="h50">
-                        <p><a href="{{whichUrl}}" target="_blank">{{title}}</a></p>
-                        <p class="col777">{{author}}({{formatDate createDate "YYYY-MM-DD"}})</p>
-                    </div>
-                    <p class="tr">
+    {{#each layoutPublishingMagazines}}
+        <div class="contPart">
+            <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
+            <div class="fl w350">
+                <div class="h50">
+                    <p>
+                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a>
                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                     </p>
+                    <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                 </div>
             </div>
-        {{else}}
-            {{_ "No results found!"}}
-        {{/each}}
+        </div>
+    {{else}}
+        {{_ "No results found!"}}
+    {{/each}}
     </div>
 </template>

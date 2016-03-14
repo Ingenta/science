@@ -25,16 +25,21 @@
         {{#each mostReadArticles}}
             <ul class="dotted list-unstyled">
                 <li>
-                    <h4><div class="resultsList">{{> accessKeyImage}}<a href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div></h4>
+                    <div class="resultsList article-title">{{> accessKeyImage}}
+                        <a style="font-size:12px" href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a>
+                    </div>
 
                     <ul class="list-unstyled">
                         <li>
                             {{#each authors}}
-                            {{> authorPopButton}}
+                                <span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display"> {{> authorPopButton}} </span>
                             {{/each}}
                         </li>
                         <li>
-                            <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a> <b>{{volume}}</b>, {{elocationId}} ({{year}})
+                            <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
+                            {{#if volume}}<b>{{volume}}</b>, {{/if}}
+                            {{#if elocationId}}{{elocationId}}{{/if}}
+                            {{#if year}}({{year}}){{/if}}
                             <a href="http://dx.doi.org/{{doi}}">http://dx.doi.org/{{doi}} <i class="fa fa-external-link"></i></a>
                         </li>
                         {{> abstractDetails}}

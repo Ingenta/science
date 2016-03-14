@@ -15,7 +15,7 @@
   "Page View":"浏览次数",
   "Batch Add": "批量添加",
   "Ad Center": "广告中心",
-  "Advertisement": "广告合作",
+  "AD Cooperation": "广告合作",
   "Most read articles to date": "热读文章查看",
   "Most cited to view": "最多引用查看",
   "Editors recommend to view": "编辑推荐查看",
@@ -347,7 +347,9 @@
           "1": "季刊",
           "2": "月刊",
           "3": "半月刊",
-          "4": "旬刊"
+          "4": "旬刊",
+          "5": "周刊",
+          "6": "双月刊"
         }
       },
       "included": {
@@ -1055,24 +1057,42 @@
     },
     "newsContact": {
       "title": {
-        "label": "标题"
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "content": {
-        "label": "内容"
+        "label": "内容",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "accordion":{
         "label": "折叠列表",
-        "title":{
-          "label":"标题"
-        },
-        "items":{
-          "label":"项目",
-          "$":{
-            "title":{
-              "label":"标题"
+        "$":{
+          "title":{
+            "label":"标题",
+            "cn": {
+              "label": "中文"
             },
-            "content":{
-              "label":"内容"
+            "en": {
+              "label": "英文"
+            }
+          },
+          "content":{
+            "label":"内容",
+            "cn": {
+              "label": "中文"
+            },
+            "en": {
+              "label": "英文"
             }
           }
         }
@@ -1093,16 +1113,40 @@
     },
     "newsCenter": {
       "title": {
-        "label": "标题"
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "author": {
-        "label": "作者"
+        "label": "作者",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "abstract": {
-        "label": "简介"
+        "label": "简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "content": {
-        "label": "全文"
+        "label": "全文",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "recommend": {
         "label": "新闻推荐",
@@ -1127,7 +1171,13 @@
     },
     "newsRecommend": {
       "ArticlesId": {
-          "label": "标题"
+          "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "picture": {
           "label": "选择代表图片"
@@ -1135,7 +1185,13 @@
     },
     "column": {
       "title": {
-        "label": "专栏名称"
+        "label": "专栏名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "picture": {
         "label": "选择代表图片"
@@ -1143,16 +1199,34 @@
     },
     "columnViews": {
       "title": {
-        "label": "专栏名称"
+        "label": "专栏名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "abstract": {
-        "label": "专栏简介"
+        "label": "专栏简介",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "releaseTime": {
         "label": "发布时间"
       },
       "content": {
-        "label": "专栏内容"
+        "label": "专栏内容",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       }
     },
     "journalAC": {
@@ -1312,10 +1386,10 @@
   "Dropdown":"下拉",
   "funding":"基金资助",
   "contentType":{
-    "article":"文章",
+    "article":"论文",
     "reviews":"评述",
-    "letters":"快讯",
-    "editorials":"社论",
+    "letters":"快报",
+    "editorials":"编者按",
     "highlights":"亮点",
     "forums":"论坛",
     "progress":"进展",
@@ -1323,8 +1397,8 @@
     "perspectives":"观点",
     "correspondance":"争鸣",
     "interview":"科学访谈",
-    "comments":"评论",
-    "newsAndViews":"点评",
+    "comments":"点评",
+    "newsAndViews":"新闻",
     "briefReport":"简报",
     "scienceNews":"科学新闻",
     "bookReview":"书评",
@@ -1370,5 +1444,39 @@
   "Topic Watch Is Empty":"学科关注为空",
   "Journal Watch Is Empty":"期刊关注为空",
   "Article Watch Is Empty":"文章关注为空",
-  "Broadcast": "广播"
+  "Broadcast": "广播",
+  "Magazine Profile":"杂志社简介",
+  "Council":"理事会",
+  "Two TV Memorabilia":"两刊大事记",
+  "Company Culture":"企业文化",
+  "Publishing Cooperation":"出版合作",
+  "Links":"友情链接",
+  "Corporate News":"企业新闻",
+  "Edit Corner":"编辑园地",
+  "Communication Information":"《中国科学》杂志社所属各期刊部门通讯信息",
+  "Strategic Cooperation":"《中国科学》杂志社和以下机构达成了战略合作",
+  "Magazine Belongs":"《中国科学》杂志社下所属期刊",
+  "Magazine dynamic view":"杂志社动态查看",
+  "Latest release":"最新发布",
+  "First release":"最早发布",
+  "Magazine dynamic view":"本平台内最多杂志社动态查看",
+  "Latest published Articles View":"最新出版文章查看",
+  "Most recent":"本平台内最多最新出版文章查看",
+  "See Science News":"科学新闻查看",
+  "Science news":"本平台内最多科学新闻查看",
+  "Cultural details":"企业文化",
+  "News Details":"新闻详情",
+  "Latest News":"最新资讯",
+  "Magazine dynamic":"杂志社动态",
+  "View Search Results":"检索结果查看",
+  "Information Title":"信息标题",
+  "Each Pageviews":"浏览量/次",
+  "Latest articles published":"最新出版文章",
+  "Article Resources":"文章资源",
+  "Information Portal":"门户信息",
+  "Webmaster":"网站主管",
+  "Click into":"点击进入SciEngine平台",
+  "Science News To":"科学新闻",
+  "EIC":"主编",
+  "Dynamic Publishing":"本平台出版动态查看"
 }

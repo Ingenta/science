@@ -25,7 +25,7 @@ NewsSchema = new SimpleSchema({
         optional: true
     },
     abstract: {
-        type: Science.schemas.MultipleTextAreaSchema,
+        type: Science.schemas.MultipleAreaSchema,
         optional: true
     },
     content: {

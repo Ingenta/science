@@ -2,7 +2,7 @@ Template.columnViewsDetails.helpers({
     columnTitle: function () {
         var columnId = Router.current().params.columnId;
         var columns = Column.findOne({_id: columnId});
-        if(columns===undefined)return "新闻专栏" ;
+        if(columns===undefined)return "专栏" ;
         return columns.title;
     },
     columnList: function () {

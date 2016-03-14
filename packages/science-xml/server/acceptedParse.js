@@ -10,67 +10,39 @@ Science.parserAccepted = function(filepath){
         if(article.doi)
             article.articledoi = article.doi.split("/")[1];
         article.title = parserHelper.getMultiVal("//article/article_title", dom);
-        var authorNodes = parserHelper.getNodes("//author_list", dom);
-        article.authors = [];
-        //_.each(authorNodes , function(authorNode){
-        //    var author = {};
-        //    var fullName = {};
-        //    author.surname = parserHelper.getMultiVal("//author/child::first_name", authorNode);
-        //    author.given = parserHelper.getMultiVal("//author/child::last_name", authorNode);
-        //    fullName.en = author.surname.en + " " + author.given.en;
-        //    fullName.cn = author.surname.cn + " " + author.given.cn;
-        //    author.isPrimary = parserHelper.getFirstAttribute("//author/attribute::corr", authorNode);
-        //    author.address = parserHelper.getSimpleVal("//affiliation/child::addr1", authorNode);
-        //    author.city = parserHelper.getSimpleVal("//affiliation/child::city", authorNode);
-        //    author.state = parserHelper.getSimpleVal("//affiliation/child::state", authorNode);
-        //    author.country = parserHelper.getSimpleVal("//affiliation/child::country", authorNode);
-        //    if(author.address||author.city||author.state||author.country){
-        //        author.affiliation = author.address+" "+author.city+" "+author.state+" "+author.country;
-        //    }
-        //    author.postCode = parserHelper.getSimpleVal("//affiliation/child::post_code", authorNode);
-        //    article.authors.push(author);
-        //});
+        var authorNodes = parserHelper.getNodes("//author_list/author", dom);
         var isSameAffiliation = function (a, b) {
-            return a.affText.cn === b.affText.cn;
+            return a.affText.cn.replace(/[\.,;，。；\s]/g,'') === b.affText.cn.replace(/[\.,;，。；\s]/g,'');
         };
         var affiliations = new Science.JSON.UniqueArray("id", isSameAffiliation, 1);
-        //var authorNotes = new Science.JSON.UniqueArray("id", undefined, 1);
+        var authorNotes = new Science.JSON.UniqueArray("id", undefined, 1);
         var authors = [];
         _.each(authorNodes, function (authorNode) {
             var author = {affs: []};
             var fullName = {};
-            var affiliation = {};
-            author.surname = parserHelper.getMultiVal("//author/child::first_name", authorNode);
-            author.given = parserHelper.getMultiVal("//author/child::last_name", authorNode);
-            author.email = parserHelper.getMultiVal("//author/child::email", authorNode);
+            author.surname = parserHelper.getMultiVal("child::first_name", authorNode);
+            author.given = parserHelper.getMultiVal("child::last_name", authorNode);
             fullName.en = author.surname.en + " " + author.given.en;
             fullName.cn = author.surname.cn + " " + author.given.cn;
-            author.isPrimary = parserHelper.getFirstAttribute("//author/attribute::corr", authorNode);
-            author.address = parserHelper.getSimpleVal("//affiliation/child::addr1", authorNode);
-            author.city = parserHelper.getSimpleVal("//affiliation/child::city", authorNode);
-            author.state = parserHelper.getSimpleVal("//affiliation/child::state", authorNode);
-            author.country = parserHelper.getSimpleVal("//affiliation/child::country", authorNode);
-            if(author.address||author.city||author.state||author.country){
-                author.affiliation = author.address+" "+author.city+" "+author.state+" "+author.country;
-            }
-            author.postCode = parserHelper.getSimpleVal("//affiliation/child::post_code", authorNode);
-            if (author.affiliation) {
-                var affCnArr = author.affiliation;
-                var affEnArr = author.affiliation;
-                if (_.isEmpty(affCnArr))
-                    affCnArr = affEnArr;
-                 for (var i = 0; i < affCnArr.length; i++) {
-                    var index = affiliations.push({affText: {cn: affCnArr[i], en: affEnArr[i]}});
-                    author.affs.push(index);
-                };
-                author.affs = _.uniq(author.affs);
+            author.fullname=fullName;
+
+            var address = parserHelper.getSimpleVal("child::affiliation/addr1", authorNode) || "";
+            var city = parserHelper.getSimpleVal("child::affiliation/city", authorNode) || "";
+            var state = parserHelper.getSimpleVal("child::affiliation/state", authorNode) || "";
+            var country = parserHelper.getSimpleVal("child::affiliation/country", authorNode) || "";
+            var postCode = parserHelper.getSimpleVal("child::affiliation/post_code", authorNode) || "";
+            if(address|| city|| state|| country){
+                var affiliation = address +" "+city +" "+state +" "+country + " " + postCode;
+                author.affs.push(affiliations.push({affText: {cn: affiliation, en: affiliation}}));
             }
 
-            if (authorNode.isPrimary === 'true' && authorNode.email) {
-                var index = authorNotes.push({email: authorNode.email});
+            var isPrimary = parserHelper.getFirstAttribute("attribute::corr", authorNode);
+            var email = parserHelper.getSimpleVal("child::email", authorNode);
+            if (isPrimary === 'true' && email) {
+                var index = authorNotes.push({email: email});
                 author.email = index;
             }
-            article.authors.push(author);
+            authors.push(author);
         });
         //为了与新数据格式保持一致,当只有一个地址(工作单位?)时,不显示地址上标
         //以下内容为此功能的实现.
@@ -80,6 +52,10 @@ Science.parserAccepted = function(filepath){
                 return author;
             })
         }
+        article.authors=authors;
+        article.authorNotes=authorNotes.getArray();
+        article.affiliations=affiliations.getArray();
+
         article.abstract = parserHelper.getMultiVal("//article/abstract", dom);
         article.fundings = parserHelper.getFirstAttribute("//configurable_data_fields/custom_fields[@cd_code='Funding source']/attribute::cd_value", dom);
         article.contentType = parserHelper.getSimpleVal("//article/publication_type", dom);

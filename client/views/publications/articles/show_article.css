@@ -67,8 +67,14 @@ ol.affiliationList li {
     margin:0px 3px 0px -3px;
     display: inline-table;
 }
-.sectionDivider.title {
+.separate-and:nth-last-child(2):after{
+    content:"and";
+    margin:0px 3px;
+}
+
+.sectionDivider-title {
     color: #39392A;
+    font-weight:500;
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 1.3em;
     padding: 5px 0 5px 0px;
@@ -81,7 +87,6 @@ ol.affiliationList li {
 }
 .sectionDivider {
     background-color: #EEEEEE;
-    padding: 0px;
     border: 1px solid #cccccc;
 }
 .separate-comma sup {

@@ -9,7 +9,7 @@ Template.memorabiliaList.helpers({
         return NewsContact.find({types:"4"});
     },
     accordionExists:function(){
-        return this.accordion && !_.isEmpty(this.accordion.items);
+        return !_.isEmpty(this.accordion);
     }
 });
 

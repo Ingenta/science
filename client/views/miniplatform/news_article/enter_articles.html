@@ -2,14 +2,14 @@
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             <div class="row">
-                <h3>文化详情</h3>
+                <h3>{{_ "Cultural details"}}</h3>
             </div>
             <hr>
             {{#each cultureDetails}}
                 <div class="partContent">
-                    <div align="center"><span style="font-size:21px;">{{title}}</span>
+                    <div align="center"><span class="title-font">{{translateThis title.cn title.en}}</span>
                         {{#if miniPlatformPermission}}{{> updateEnterpriseCultureModalForm}}{{/if}}</div><br>
-                    <p>{{{content}}}</p>
+                    <p>{{{translateThis content.cn content.en}}}</p>
                 </div>
             {{else}}
                 {{_ "No results found!"}}
