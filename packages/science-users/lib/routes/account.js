@@ -54,7 +54,7 @@ Meteor.startup(function () {
         action: function () {
             Accounts.verifyEmail(this.params.token, function () {
                 sweetAlert(TAPi18n.__("Email verified successfully"));
-                Router.go('/');
+                Router.go('/user_settings/update_information');
             });
         }
     });

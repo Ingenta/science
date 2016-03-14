@@ -6,9 +6,13 @@ Router.onBeforeAction(function (req, res, next) {
     if (req.method === "POST") {
         var busboy = new Busboy({ headers: req.headers });
         busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
+            var folder = Config.staticFiles.uploadFileDir;
+            if (req.url=='/upload_froala'){
+                folder=Config.staticFiles.uploadPicDir;
+            }
             var ext = Science.String.getExt(filename);
             var newname=Date.now()+"."+ext;
-            var saveTo = Config.staticFiles.uploadPicDir+newname;
+            var saveTo = folder+newname;
             file.pipe(Science.FSE.createWriteStream(saveTo));
             files.push({path:saveTo,name:newname,ext:ext,mimetype:mimetype});
         });
@@ -42,8 +46,21 @@ Router.route("/upload_froala", {
     }
 });
 
+Router.route("/upload_froala_file", {
+    name: "upload.froala.file",
+    where: 'server',
+    action: function() {
+        var file = this.request.files[0];
+        var resp=this.response;
+        if(file){
+            resp.end(JSON.stringify({link:"/uploadfiles/editorfiles/"+file.name}));
+        }
+        resp.end();
+    }
+});
+
 Router.route("/uploadfiles/editor/:filename",{
-    name:"upload.file.get",
+    name:"upload.image.get",
     where:'server',
     action:function(){
         var filename=this.params.filename;
@@ -69,6 +86,38 @@ Router.route("/uploadfiles/editor/:filename",{
                 response.writeHead(200, headers);
 
                 Science.FSE.createReadStream(Config.staticFiles.uploadPicDir+ filename).pipe(response);
+            }
+        });
+    }
+})
+
+Router.route("/uploadfiles/editorfiles/:filename",{
+    name:"upload.file.get",
+    where:'server',
+    action:function(){
+        var filename=this.params.filename;
+        var response=this.response;
+        Science.FSE.exists(Config.staticFiles.uploadFileDir+ filename, function (result) {
+            if (result) {
+                var stat = null;
+                try {
+                    stat = Science.FSE.statSync(Config.staticFiles.uploadFileDir+ filename);
+                } catch (_error) {
+                    logger.error(_error);
+                    response.statusCode = 404;
+                    response.end();
+                    return;
+                }
+
+                var headers = {
+                    'Content-Type': "application/file",
+                    'Content-Disposition': "attachment; filename=" + filename,
+                    'Content-Length': stat.size
+                };
+
+                response.writeHead(200, headers);
+
+                Science.FSE.createReadStream(Config.staticFiles.uploadFileDir+ filename).pipe(response);
             }
         });
     }
