@@ -16,7 +16,7 @@ Template.loginForm.helpers({
 	loginUrl: function(){
 		var code = Session.get("pubValue");
 		if(code)return code;
-		window.close();
+		//window.close();
 	}
 	//loginUrl: function(){
 	//	var pageCode = Session.get("pubValue");
