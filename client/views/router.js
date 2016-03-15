@@ -153,14 +153,6 @@ Router.map(function () {
         }
     });
 
-
-    this.route("author", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Author");
-        }
-    });
-
     this.route('cooperationCenter', {
         template: "cooperationCenter",
         parent: "home",
