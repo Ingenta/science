@@ -23,26 +23,26 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     name: "journal.name",
     waitOn: function () {
         return [
+            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"online_first"),
+            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"accepted"),
             Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
             Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId')),
+            Meteor.subscribe('editorRecommends',Session.get('currentJournalId')),
+            Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId')),
+            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
             JournalSubs.subscribe('about'),
             JournalSubs.subscribe('about_articles'),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('specialTopics'),
-            Meteor.subscribe('editorRecommends',Session.get('currentJournalId')),
             JournalSubs.subscribe("editorial_member"),
             JournalSubs.subscribe("editorial_board"),
             JournalSubs.subscribe("author_center"),
             JournalSubs.subscribe("meeting_info"),
             HomePageSubs.subscribe("news"),
             HomePageSubs.subscribe('mostCited',Session.get('currentJournalId')),
-            Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId')),
-            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
-            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"online_first"),
-            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"accepted")
         ]
     },
     onStop:function(){
