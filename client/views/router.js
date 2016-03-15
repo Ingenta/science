@@ -23,7 +23,6 @@ HomePageSubs.subscribe('emailConfig');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
-//HomePageSubs.subscribe('topics');
 HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
@@ -117,7 +116,6 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('topics'),
                 HomePageSubs.subscribe('tag')
             ]
         }
@@ -147,8 +145,7 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                CollectionSubs.subscribe('allCollections'),
-                HomePageSubs.subscribe('topics')
+                CollectionSubs.subscribe('allCollections')
             ]
         }
     });
@@ -251,7 +248,7 @@ Router.map(function () {
             return [
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('topics')
+                Meteor.subscribe('topics')
             ]
         }
     });
