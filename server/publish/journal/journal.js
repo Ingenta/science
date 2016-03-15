@@ -7,6 +7,7 @@ Meteor.publish('oneJournalArticles', function (id,issueId) {
 });
 
 Meteor.publish('oneIssueArticlesByArticleId', function (id) {
+    if(!id)return this.ready();
     var art = Articles.findOne({_id: id});
     if(!art)return this.ready();
     return Articles.find({issueId: art.issueId}, {

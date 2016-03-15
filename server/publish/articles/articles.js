@@ -59,29 +59,32 @@ Meteor.publish('recommendedJournalArticles', function (val) {
     });
 });
 Meteor.publish('articlesInCollection', function (collId) {
+    if(!collId)return this.ready();
     var coll = ArticleCollections.findOne({_id: collId})
     if (coll && !_.isEmpty(coll.articles)) {
         return Articles.find({_id: {$in: coll.articles}}, {fields: articleWithMetadata});
     }
-    return Articles.find({_id: "null"});//return null 会导致客户端一直等待.
+    return this.ready();
 })
 
 Meteor.publish('oneArticleMeta', function (id) {
+    if(!id)return this.ready();
     return Articles.find({_id: id}, {fields: articleWithMetadata});
 });
 
 Meteor.publish('articlesInTopic', function (topicsId) {
+    if(!topicsId)return this.ready();
     return Articles.find({topic: topicsId}, {fields: articleWithMetadata});
 })
 
 
 Meteor.publish('articlesInSpecTopic', function (stid) {
+    if(!stid)return this.ready();
     var stopic = SpecialTopics.findOne({_id: stid})
     if (stopic && !_.isEmpty(stopic.articles)) {
         return Articles.find({_id: {$in: stopic.articles}}, {fields: articleWithMetadata});
     }
-
-    return Articles.find({_id:"null"});//return null 会导致客户端一直等待.
+    if(!journalId)return this.ready();
 })
 
 Meteor.publish('specialPubStatus',function(journalId,pubStatus){
