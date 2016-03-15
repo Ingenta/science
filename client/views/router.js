@@ -133,8 +133,7 @@ Router.map(function () {
         template: "ShowPublisher",
         parent: "publishers",
         title: function () {
-            var id = Session.get('currentPublisherId');
-            var p = Publishers.findOne({_id: id});
+            var p = Publishers.findOne({shortname: this.params.publisherName})
             if(!p)return this.params.publisherName;
             if (TAPi18n.getLanguage() === "en")return p.name || p.chinesename;
             return p.chinesename || p.name;

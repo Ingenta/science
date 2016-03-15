@@ -23,14 +23,14 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     name: "journal.name",
     waitOn: function () {
         return [
-            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"online_first"),
-            Meteor.subscribe("specialPubStatus",Session.get('currentJournalId'),"accepted"),
-            Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId')),
-            Meteor.subscribe('editorRecommends',Session.get('currentJournalId')),
-            Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId')),
-            Meteor.subscribe('mostRead', Session.get('currentJournalId'), 5),
+            Meteor.subscribe("journalOverviewTab",this.params.journalShortTitle),
+            Meteor.subscribe("journalOnlineFirstTab",this.params.journalShortTitle),
+            Meteor.subscribe("journalAcceptedTab",this.params.journalShortTitle),
+            Meteor.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
+
+            Meteor.subscribe('journalBrowseTabArticleList', this.params.journalShortTitle, Session.get('currentIssueId')),
+
+
             JournalSubs.subscribe('about'),
             JournalSubs.subscribe('about_articles'),
             CollectionSubs.subscribe('allCollections'),
@@ -42,7 +42,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe("author_center"),
             JournalSubs.subscribe("meeting_info"),
             HomePageSubs.subscribe("news"),
-            HomePageSubs.subscribe('mostCited',Session.get('currentJournalId')),
         ]
     },
     onStop:function(){
@@ -91,9 +90,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalVolumes', Session.get('currentJournalId')),
-            Meteor.subscribe('oneJournalArticles', Session.get('currentJournalId'), Session.get('currentIssueId'))
+            Meteor.subscribe('journalBrowseTab', this.params.journalShortTitle, this.params.issue)
         ]
     }
 });
