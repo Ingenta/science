@@ -86,8 +86,3 @@ Meteor.publish('articlesInSpecTopic', function (stid) {
     }
     if(!journalId)return this.ready();
 })
-
-Meteor.publish('specialPubStatus',function(journalId,pubStatus){
-    var query={journalId:journalId,pubStatus:pubStatus};
-    return Articles.find(query);
-})
