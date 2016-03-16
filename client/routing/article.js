@@ -16,7 +16,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     },
     parent: "journal.name.toc",
     name: "article.show",
-    waitOn: function () {
+    subscriptions: function () {
         var artData = this.data();
         var artId;
         if (artData)artId = artData._id;
@@ -70,7 +70,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
     },
     parent: "journal.name",
     name: "article.show.strange",
-    waitOn: function () {
+    subscriptions: function () {
         return [
             Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
             Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
