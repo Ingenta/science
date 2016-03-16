@@ -55,11 +55,12 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
         Issues.find({journalId:{$in:idArr}})
     ]
 });
-Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issueId) {
+Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
+    var issueId = getMostRecentIssue(journalId)._id;
     if(!issueId)return this.ready();
     return [
         Articles.find({journalId: journalId, issueId: issueId}, {
@@ -68,7 +69,16 @@ Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issue
     ]
 });
 
-
+var getMostRecentIssue = function(journalId){
+    var issues = Issues.find({'journalId': journalId}).fetch();
+    var highestVolume = _.max(issues, function (i) {
+        return parseInt(i.volume, 10);
+    }).volume;
+    var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
+    return _.max(issuesInThisVolume, function (i) {
+        return parseInt(i.issue, 10);
+    });
+}
 
 Meteor.publish('journalOverviewTab', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();

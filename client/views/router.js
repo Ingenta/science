@@ -62,7 +62,7 @@ Router.route("/topics/", {
     title: function () {
         return TAPi18n.__("Topics");
     },
-    waitOn: function () {
+    subscriptions: function () {
         return [
             Meteor.subscribe('topics')
         ]

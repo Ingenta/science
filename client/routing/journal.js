@@ -21,14 +21,18 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     },
     parent: "publisher.name",
     name: "journal.name",
-    subscriptions: function () {
+    //waitOn: function () {
+    //    return [
+    //
+    //    ]
+    //},
+    waitOn: function () {
         return [
-            Meteor.subscribe("journalOverviewTab",this.params.journalShortTitle),
             Meteor.subscribe("journalOnlineFirstTab",this.params.journalShortTitle),
             Meteor.subscribe("journalAcceptedTab",this.params.journalShortTitle),
             Meteor.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
-
-            Meteor.subscribe('journalBrowseTabArticleList', this.params.journalShortTitle, Session.get('currentIssueId')),
+            Meteor.subscribe("journalOverviewTab",this.params.journalShortTitle),
+            Meteor.subscribe('journalBrowseTabArticleList', this.params.journalShortTitle),
 
 
             JournalSubs.subscribe('about'),
@@ -88,7 +92,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     title: function () {
         return TAPi18n.__("volumeItem", Router.current().params.volume) + ", " + TAPi18n.__("issueItem", Router.current().params.issue)
     },
-    subscriptions: function () {
+    waitOn: function () {
         return [
             Meteor.subscribe('journalBrowseTab', this.params.journalShortTitle, this.params.issue)
         ]
