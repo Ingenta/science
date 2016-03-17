@@ -84,9 +84,9 @@ SolrQuery = {
 		}
 		else{
 			//the following regex will replace anything which is not a number or letter with a space
-			queryStr = JSON.stringify(option.query&&option.query.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g," "));
+			queryStr = JSON.stringify(option.query&&option.query.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," "));
 			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option.filterQuery));
-			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g," "));
+			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," "));
 			setting  = option.setting || {};
 		}
 		if (!setting.start)
@@ -134,7 +134,7 @@ SolrQuery = {
 			var trimContent = content.trim();
 			if (trimContent.length > 2 && trimContent.length < 100) {
 				//remove all special characters
-				trimContent = trimContent.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g," ");
+				trimContent = trimContent.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," ");
 				var journalId = Session.get('currentJournalId');
 				var articleId = Router.current().data() && Router.current().data()._id;
 				var fq        = {};
