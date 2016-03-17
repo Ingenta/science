@@ -83,9 +83,10 @@ SolrQuery = {
 			setting  = SolrQuery.params("st") || {};
 		}
 		else{
-			queryStr = JSON.stringify(option.query&&option.query.replace(/[\\$()-='"]/g,""));
+			//the following regex will replace anything which is not a number or letter with a space
+			queryStr = JSON.stringify(option.query&&option.query.replace(/[^a-zA-Z0-9]/g," "));
 			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option.filterQuery));
-			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[\\$()-='"]/g,""));
+			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[^a-zA-Z0-9]/g," "));
 			setting  = option.setting || {};
 		}
 		if (!setting.start)
