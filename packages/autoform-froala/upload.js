@@ -6,6 +6,7 @@ Router.onBeforeAction(function (req, res, next) {
     if (req.method === "POST") {
         var busboy = new Busboy({ headers: req.headers });
         busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
+            console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
             var folder = Config.staticFiles.uploadFileDir;
             if (req.url=='/upload_froala'){
                 folder=Config.staticFiles.uploadPicDir;
@@ -17,7 +18,13 @@ Router.onBeforeAction(function (req, res, next) {
             files.push({path:saveTo,name:newname,ext:ext,mimetype:mimetype});
         });
         busboy.on("field", function(fieldname, value) {
+            console.log('Field [' + fieldname + ']: value: ');
+            if(_.isEmpty(req)||_.isEmpty(req.body))return;
+            console.dir(req.body[fieldname]);
             req.body[fieldname] = value;
+        });
+        busboy.on('error', function (error) {
+            console.log("Error in uploading file with chunks: "  + error);
         });
         busboy.on("finish", function () {
             // Pass files to request

@@ -84,5 +84,5 @@ Meteor.publish('articlesInSpecTopic', function (stid) {
     if (stopic && !_.isEmpty(stopic.articles)) {
         return Articles.find({_id: {$in: stopic.articles}}, {fields: articleWithMetadata});
     }
-    if(!journalId)return this.ready();
+    return this.ready();
 })

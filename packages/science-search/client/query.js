@@ -74,10 +74,21 @@ SolrQuery = {
 		SolrQuery.params("sq", sq);
 	},
 	makeUrl               : function (option) {
-		var queryStr = JSON.stringify(option ? option.query : SolrQuery.params("q"));
-		var fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
-		var sqStr    = JSON.stringify(option ? option.secondQuery : SolrQuery.params("sq"));
-		var setting  = (option ? option.setting : SolrQuery.params("st")) || {};
+		var queryStr,fqStr,sqStr,setting;
+		if(!option)
+		{
+			queryStr = JSON.stringify(SolrQuery.params("q"));
+			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(SolrQuery.params("fq")));
+			sqStr    = JSON.stringify(SolrQuery.params("sq"));
+			setting  = SolrQuery.params("st") || {};
+		}
+		else{
+			//the following regex will replace anything which is not a number or letter with a space
+			queryStr = JSON.stringify(option.query&&option.query.replace(/[^a-zA-Z0-9]/g," "));
+			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option.filterQuery));
+			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[^a-zA-Z0-9]/g," "));
+			setting  = option.setting || {};
+		}
 		if (!setting.start)
 			setting.start = 0;
 		if (!setting.rows)
@@ -122,6 +133,8 @@ SolrQuery = {
 		if (content) {
 			var trimContent = content.trim();
 			if (trimContent.length > 2 && trimContent.length < 100) {
+				//remove all special characters
+				trimContent = trimContent.replace(/[^a-zA-Z0-9]/g," ");
 				var journalId = Session.get('currentJournalId');
 				var articleId = Router.current().data() && Router.current().data()._id;
 				var fq        = {};
