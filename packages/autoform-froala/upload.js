@@ -19,7 +19,8 @@ Router.onBeforeAction(function (req, res, next) {
         });
         busboy.on("field", function(fieldname, value) {
             console.log('Field [' + fieldname + ']: value: ');
-            console.dir(value);
+            console.dir(req.body[fieldname]);
+            if(_.isEmpty(req)||_.isEmpty(req.body))return;
             req.body[fieldname] = value;
         });
         busboy.on('error', function (error) {
