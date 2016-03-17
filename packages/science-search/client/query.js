@@ -74,9 +74,9 @@ SolrQuery = {
 		SolrQuery.params("sq", sq);
 	},
 	makeUrl               : function (option) {
-		var queryStr = JSON.stringify(option ? option.query : SolrQuery.params("q"));
+		var queryStr = JSON.stringify(option ? option.query.replace(/[\\$()-='"]/g,"") : SolrQuery.params("q"));
 		var fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
-		var sqStr    = JSON.stringify(option ? option.secondQuery : SolrQuery.params("sq"));
+		var sqStr    = JSON.stringify(option ? option.secondQuery.replace(/[\\$()-='"]/g,"") : SolrQuery.params("sq"));
 		var setting  = (option ? option.setting : SolrQuery.params("st")) || {};
 		if (!setting.start)
 			setting.start = 0;
