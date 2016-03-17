@@ -74,10 +74,20 @@ SolrQuery = {
 		SolrQuery.params("sq", sq);
 	},
 	makeUrl               : function (option) {
-		var queryStr = JSON.stringify(option ? option.query.replace(/[\\$()-='"]/g,"") : SolrQuery.params("q"));
-		var fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option ? option.filterQuery : SolrQuery.params("fq")));
-		var sqStr    = JSON.stringify(option ? option.secondQuery.replace(/[\\$()-='"]/g,"") : SolrQuery.params("sq"));
-		var setting  = (option ? option.setting : SolrQuery.params("st")) || {};
+		var queryStr,fqStr,sqStr,setting;
+		if(!option)
+		{
+			queryStr = JSON.stringify(SolrQuery.params("q"));
+			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(SolrQuery.params("fq")));
+			sqStr    = JSON.stringify(SolrQuery.params("sq"));
+			setting  = SolrQuery.params("st") || {};
+		}
+		else{
+			queryStr = JSON.stringify(option.query&&option.query.replace(/[\\$()-='"]/g,""));
+			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option.filterQuery));
+			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[\\$()-='"]/g,""));
+			setting  = option.setting || {};
+		}
 		if (!setting.start)
 			setting.start = 0;
 		if (!setting.rows)
