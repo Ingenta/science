@@ -133,6 +133,8 @@ SolrQuery = {
 		if (content) {
 			var trimContent = content.trim();
 			if (trimContent.length > 2 && trimContent.length < 100) {
+				//remove all special characters
+				trimContent = trimContent.replace(/[^a-zA-Z0-9]/g," ");
 				var journalId = Session.get('currentJournalId');
 				var articleId = Router.current().data() && Router.current().data()._id;
 				var fq        = {};
