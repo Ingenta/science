@@ -18,7 +18,8 @@ Router.onBeforeAction(function (req, res, next) {
             files.push({path:saveTo,name:newname,ext:ext,mimetype:mimetype});
         });
         busboy.on("field", function(fieldname, value) {
-            console.log('Field [' + fieldname + ']: value: ' + inspect(value));
+            console.log('Field [' + fieldname + ']: value: ');
+            console.dir(value);
             req.body[fieldname] = value;
         });
         busboy.on('error', function (error) {
