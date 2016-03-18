@@ -73,7 +73,7 @@ Template.registerHelper('getImageHelper', function (pictureId) {
 });
 
 Template.registerHelper('getHeadImageHelper', function (pictureId) {
-    var noPicture = "/defeat_head.jpg";
+    var noPicture = "";
     var imgObj = Images && pictureId && Images.findOne({_id: pictureId});
     return (imgObj && imgObj.url()) || noPicture;
 });
