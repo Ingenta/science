@@ -23,7 +23,7 @@ Template.journalNavigationPanel.helpers({
         var years = _.pluck(issues, 'year');
         years = _.uniq(years.join(", ").split(/, ?/)).sort();
         if (!_.isEmpty(years))
-            return "(" + years.join(", ") + ")"
+            return " (" + years.join(", ") + ")"
     },
     class: function () {
         return this._id === Session.get("currentVolumeId") ? "fa-minus" : "fa-plus";
