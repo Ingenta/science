@@ -17,12 +17,12 @@ Router.onBeforeAction(function (req, res, next) {
             file.pipe(Science.FSE.createWriteStream(saveTo));
             files.push({path:saveTo,name:newname,ext:ext,mimetype:mimetype});
         });
-        busboy.on("field", function(fieldname, value) {
-            console.log('Field [' + fieldname + ']: value: ');
-            if(_.isEmpty(req)||_.isEmpty(req.body))return;
-            console.dir(req.body[fieldname]);
-            req.body[fieldname] = value;
-        });
+        //busboy.on("field", function(fieldname, value) {
+        //    console.log('Field [' + fieldname + ']: value: ');
+        //    if(_.isEmpty(req)||_.isEmpty(req.body))return;
+        //    console.dir(req.body[fieldname]);
+        //    req.body[fieldname] = value;
+        //});
         busboy.on('error', function (error) {
             console.log("Error in uploading file with chunks: "  + error);
         });
