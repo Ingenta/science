@@ -16,7 +16,7 @@
     <ul class="list-group">
         {{#each volumeInJournal _id}}
             <li class="volume list-group-item">
-                <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }}{{unionYear}}</span>
+                <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }} {{unionYear}}</span>
             </li>
             <ul id="vol_{{_id}}" class="issues list-group" style="display:{{issueDisplay}}">
                 {{#each issueInVolume journalId volume}}
