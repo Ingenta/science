@@ -43,7 +43,7 @@ SolrUtils = {
         "contentType":["contentType"],
         "pacsCodes":["pacsCodes"]
     },
-    getQueryStr: function (queryArr) {
+    getQueryStr: function (queryArr) { //TODO: move special character replace regex to avoid duplicates
         var qstring;
         if (queryArr) {
             if (typeof queryArr === 'string')
