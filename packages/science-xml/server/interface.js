@@ -2,6 +2,10 @@ Router.route('/api', function () {
 	var req            = this.request;
 	var res            = this.response;
 	var result = {};
+	Meteor.call("getClientIP", function (err, ip) {
+		console.log("api called by: "+ip);
+	});
+
 	res.writeHead(200,{
 		'Content-Type': 'application/json; charset=utf-8'
 	});
