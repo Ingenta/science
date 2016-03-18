@@ -84,9 +84,9 @@ SolrQuery = {
 		}
 		else{
 			//the following regex will replace anything which is not a number or letter with a space
-			queryStr = JSON.stringify(option.query&&option.query.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," "));
+			queryStr = JSON.stringify(option.query);
 			fqStr    = JSON.stringify(QueryUtils.getFilterQuery(option.filterQuery));
-			sqStr    = JSON.stringify(option.secondQuery&&option.secondQuery.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," "));
+			sqStr    = JSON.stringify(option.secondQuery);
 			setting  = option.setting || {};
 		}
 		if (!setting.start)
@@ -96,12 +96,14 @@ SolrQuery = {
 		var settingStr = JSON.stringify(setting);
 		var qString    = "";
 		if (queryStr) {
+			queryStr=queryStr.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," ");
 			qString += "&q=" + queryStr;
 		}
 		if (fqStr) {
 			qString += "&fq=" + fqStr;
 		}
 		if (sqStr) {
+			sqStr=sqStr.replace(/[&\/\\#,+()$~%.'":*?<>^{}]/g," ");
 			qString += "&sq=" + sqStr;
 		}
 		if (settingStr) {
