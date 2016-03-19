@@ -112,4 +112,11 @@ Meteor.publish('journalAcceptedTab',function (journalShortTitle) {
     var journalId=journal._id;
     return Articles.find({journalId:journalId,pubStatus:"accepted"});
 })
+Meteor.publish('journalEditorialBoard',function (journalShortTitle) {
+    if(!journalShortTitle)return this.ready();
+    var journal = Publications.findOne({shortTitle: journalShortTitle});
+    if(!journal)return this.ready();
+    var journalId=journal._id;
+    return EditorialBoard.find({publications:journalId});
+})
 

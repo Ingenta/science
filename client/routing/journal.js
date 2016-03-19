@@ -27,9 +27,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Meteor.subscribe("journalOnlineFirstTab",this.params.journalShortTitle),
             Meteor.subscribe("journalAcceptedTab",this.params.journalShortTitle),
             Meteor.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
-
             Meteor.subscribe('journalBrowseTabArticleList', this.params.journalShortTitle, Session.get('currentIssueId')),
 
+            Meteor.subscribe("journalEditorialBoard",this.params.journalShortTitle),
 
             JournalSubs.subscribe('about'),
             JournalSubs.subscribe('about_articles'),
@@ -38,7 +38,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('specialTopics'),
             JournalSubs.subscribe("editorial_member"),
-            JournalSubs.subscribe("editorial_board"),
             JournalSubs.subscribe("author_center"),
             JournalSubs.subscribe("meeting_info"),
             HomePageSubs.subscribe("news"),
