@@ -21,7 +21,7 @@
             <ul id="vol_{{_id}}" class="issues list-group" style="display:{{issueDisplay}}">
                 {{#each issueInVolume journalId volume}}
                     <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
-                        {{_ "issueItem" issue }} {{formatMonth}}
+                        {{_ "issueItem" issue }}
                     </li>
                 {{/each}}
             </ul>

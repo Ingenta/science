@@ -64,7 +64,7 @@
 
             <div class="row">
                 <div class="col-xs-4">
-                    <div style="width:133px;height: 180px;"><img src="{{getHeadImageHelper picture}}" style="width: 100%;height: 100%"/></div>
+                    <div style="width:133px;height: 180px;"><img src="{{getImageHelper picture}}" style="width: 100%;height: 100%"/></div>
                     <div align="center" style="margin-top: 8px;">{{translateThis name.cn name.en}}</div>
                     <div align="center">{{translateThis position.cn position.en}}</div>
                 </div>
@@ -93,59 +93,6 @@
         </div>
     {{else}}
     {{/each}}
-</template>
-
-<template name="EditorialBoardList">{{!--
-    {{#each about}}
-        <div class="part"><strong>编委会——{{translateThis title.cn title.en}}</strong>
-
-            <div class="pull-right">
-                {{#if can "add-editorial-member" "resource" }}{{> addEditorialBoardModalForm}}{{/if}}
-            </div>
-        </div>
-        <hr>
-    {{else}}
-        {{_ "No About found!"}}
-    {{/each}}
-    {{#each editorialBoards}}
-        <div class="part">
-            <div class="pull-right">
-                {{#if can "modify-editorial-member" "resource" }}{{> updateEditorialBoardModalForm}}{{/if}}
-                {{#if can "delete-editorial-member" "resource" }}<a href="#" class="fa fa-trash"></a>{{/if}}
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <img src="{{getImageHelper picture}}" width="133" height="180"/>
-
-                    <div align="center">{{translateThis name.cn name.en}}&nbsp;&nbsp;{{position}}</div>
-                </div>
-                <div class="col-xs-9">
-                    {{#if workUnits}}
-                        {{_ "Company name"}}：&nbsp;{{translateThis workUnits.cn workUnits.en}}<br>
-                    {{/if}}
-                    {{#if phone}}
-                        {{_ "Phone"}}：&nbsp;{{phone}}<br>
-                    {{/if}}
-                    {{#if fax}}
-                        {{_ "Fax"}}：&nbsp;{{fax}}<br>
-                    {{/if}}
-                    {{#if email}}
-                        {{_ "E-mail"}}：&nbsp;{{email}}<br>
-                    {{/if}}
-                    {{#if researchArea}}
-                        {{_ "Research Area"}}：&nbsp;{{translateThis researchArea.cn researchArea.en}}<br>
-                    {{/if}}
-                    {{#if abstract}}
-                        {{_ "Introduction"}}
-                        ：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{translateThis abstract.cn abstract.en}}
-                        <br>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-    {{else}}
-        {{_ "No results found!"}}
-    {{/each}}--}}
 </template>
 
 <template name="addAboutTitleModalForm">
