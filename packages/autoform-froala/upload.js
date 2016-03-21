@@ -4,6 +4,7 @@ Router.onBeforeAction(function (req, res, next) {
     var files = []; // Store filenames and then pass them to request.
 
     if (req.method === "POST") {
+        console.log("Busboy POST was trigger by the following URL"+req.url);
         var busboy = new Busboy({ headers: req.headers });
         busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
             console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
