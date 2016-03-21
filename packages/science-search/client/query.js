@@ -96,14 +96,12 @@ SolrQuery = {
 		var settingStr = JSON.stringify(setting);
 		var qString    = "";
 		if (queryStr) {
-			queryStr=queryStr.replace(/[&\/\\#,+()$~%.'":*?!<>^{}]/g," ");
 			qString += "&q=" + queryStr;
 		}
 		if (fqStr) {
 			qString += "&fq=" + fqStr;
 		}
 		if (sqStr) {
-			sqStr=sqStr.replace(/[&\/\\#,+()$~%.'":*?!<>^{}]/g," ");
 			qString += "&sq=" + sqStr;
 		}
 		if (settingStr) {
@@ -135,8 +133,6 @@ SolrQuery = {
 		if (content) {
 			var trimContent = content.trim();
 			if (trimContent.length > 2 && trimContent.length < 100) {
-				//remove all special characters
-				trimContent = trimContent.replace(/[&\/\\#,+()$~%.'":*?!<>^{}]/g," ");
 				var journalId = Session.get('currentJournalId');
 				var articleId = Router.current().data() && Router.current().data()._id;
 				var fq        = {};
