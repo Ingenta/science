@@ -119,6 +119,7 @@
                     {{> afQuickField name="abstract"}}
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="releaseTime"}}
                     {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
@@ -144,6 +145,7 @@
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="releaseTime"}}
                     {{> afQuickField name="abstract"}}
                     {{> afQuickField name="picture"}}
                     {{> afQuickField name="fileId"}}
@@ -158,7 +160,7 @@
 </template>
 
 <template name="updatePublishingDynamicModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,abstract,picture,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,releaseTime,abstract,picture,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
 

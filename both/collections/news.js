@@ -59,6 +59,15 @@ NewsSchema = new SimpleSchema({
             collection: "files"
         }
     },
+    releaseTime: {
+        type: Date,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
     about: {
         type: String,
         optional: true
