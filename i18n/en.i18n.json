@@ -473,6 +473,9 @@
                 "label": "Link",
                 "placeholder": "http://"
             },
+            "releaseTime": {
+                "label": "Release Time"
+            },
             "picture": {
                 "label": "Choose file"
             },

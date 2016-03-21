@@ -42,7 +42,7 @@ Template.newsCenterList.helpers({
     newsContent: function () {
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return News.find({about: aboutId,publications:publicationId,types:"2"});
+        return News.find({about: aboutId,publications:publicationId,types:"2"},{sort: {releaseTime: -1}});
     },
     whichUrl: function() {
         var journalId = Session.get('currentJournalId');
@@ -58,7 +58,7 @@ Template.pubDynamicList.helpers({
     pubDynamic: function () {
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return News.find({about: aboutId,publications:publicationId,types:"2"});
+        return News.find({about: aboutId,publications:publicationId,types:"2"},{sort: {releaseTime: -1}});
     }
 });
 
@@ -66,7 +66,7 @@ Template.meetingInfoList.helpers({
     meetingContent: function () {
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return Meeting.find({about: aboutId,publications:publicationId});
+        return Meeting.find({about: aboutId,publications:publicationId},{sort: {startDate: -1}});
     },
     StartDate: function () {
         if(this.startDate){

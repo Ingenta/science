@@ -617,6 +617,9 @@
         "label": "链接",
         "placeholder": "http://"
       },
+      "releaseTime": {
+        "label": "发布时间"
+      },
       "picture": {
         "label": "选择图片"
       },

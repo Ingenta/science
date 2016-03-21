@@ -9,7 +9,7 @@ Template.NewsList.events({
 });
 Template.NewsList.helpers({
     news: function () {
-        return News.find({types: "1"}, {limit: 3});
+        return News.find({types: "1"}, {sort: {releaseTime: -1,limit: 3}});
     },
     getOptions:function(){
         return {
