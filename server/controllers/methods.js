@@ -99,6 +99,25 @@ Meteor.methods({
             return parseInt(oneIssue.issue, 10);
         }).reverse();
         return sortedIssues[0];
+    },
+    getJournalVolumesList:function(journalShortTitle){
+        var journal = Publications.findOne({shortTitle: journalShortTitle});
+        if(!journal)return;
+        var issues = Issues.find({'journalId': journal._id},{fields:{journalId:0,createDate:0}}).fetch();
+        if(!issues)return;
+        var sortedIssues = _.sortBy(issues, function (oneIssue) {
+            return pad("000",oneIssue.volume,true)+pad("000",oneIssue.issue,true);
+        }).reverse();
+        return sortedIssues;
+
     }
 });
-
+function pad(pad, str, padLeft) {
+    if (typeof str === 'undefined')
+        return pad;
+    if (padLeft) {
+        return (pad + str).slice(-pad.length);
+    } else {
+        return (str + pad).substring(0, pad.length);
+    }
+}
