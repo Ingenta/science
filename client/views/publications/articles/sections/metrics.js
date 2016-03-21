@@ -8,9 +8,9 @@ Template.MetricsTemplate.rendered = function () {
         buildHitCounterChart(response);
     });
 
-    Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
-        buildHitCounterGraph(response);
-    });
+    //Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
+    //    buildHitCounterGraph(response);
+    //});
 
     Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
