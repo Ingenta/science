@@ -49,6 +49,56 @@ Meteor.methods({
     updateMostCited: function () {
         updateMostCited && updateMostCited();
         return true;
+    },
+    getNextArticleDoi: function(doi,volume,issue){
+        if(!doi)return;
+        var a = Articles.findOne({doi: doi});
+        if(!a)return;
+        var elocationId = a.elocationId;
+        var articlesInThisIssue = Articles.find({journalId:a.journalId,volume:volume,issue:issue},{fields: {elocationId: 1, doi: 1}}).fetch()
+        var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
+            return parseInt(a.elocationId, 10);
+        });
+        //get all article elocations in this volume and sort
+        var pageNumbers = _.pluck(articlesOrderedByPage,"elocationId");
+        var positionInList = _.indexOf(pageNumbers, elocationId, true);
+        var nextPageIndex = positionInList + 1;
+        if (!articlesOrderedByPage[nextPageIndex]) return;
+        var nextDoi = articlesOrderedByPage[nextPageIndex].doi;
+        return nextDoi.substring(nextDoi.lastIndexOf("/") + 1);
+    },
+    getPrevArticleDoi: function(doi,volume,issue){
+        if(!doi)return;
+        var a = Articles.findOne({doi: doi});
+        if(!a)return;
+        var elocationId = a.elocationId;
+        var articlesInThisIssue = Articles.find({journalId:a.journalId,volume:volume,issue:issue},{fields: {elocationId: 1, doi: 1}}).fetch()
+        var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
+            return parseInt(a.elocationId, 10);
+        });
+        //get all article elocations in this volume and sort
+        var pageNumbers = _.pluck(articlesOrderedByPage,"elocationId");
+        var positionInList = _.indexOf(pageNumbers, elocationId, true);
+        var nextPageIndex = positionInList - 1;
+        if (!articlesOrderedByPage[nextPageIndex]) return;
+        var nextDoi = articlesOrderedByPage[nextPageIndex].doi;
+        return nextDoi.substring(nextDoi.lastIndexOf("/") + 1);
+    },
+    getLatestIssue: function(journalShortTitle){
+        var journal = Publications.findOne({shortTitle: journalShortTitle});
+        if(!journal)return;
+        var volumes = Volumes.find({journalId:journal._id}).fetch();
+        if(!volumes)return;
+        var sortedVolumes = _.sortBy(volumes, function (oneVolume) {
+            return parseInt(oneVolume.volume, 10);
+        }).reverse();
+        var latestVolume = sortedVolumes[0];
+        var issues = Issues.find({'journalId': journal._id, 'volume': latestVolume.volume}).fetch();
+        if(!issues)return;
+        var sortedIssues = _.sortBy(issues, function (oneIssue) {
+            return parseInt(oneIssue.issue, 10);
+        }).reverse();
+        return sortedIssues[0];
     }
 });
 
