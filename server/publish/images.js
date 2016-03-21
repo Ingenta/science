@@ -5,10 +5,9 @@ Meteor.publish('articleXml', function () {
     return FiguresStore.find({}, {sort: {'uploadedAt': -1}});
 });
 Meteor.publish('oneArticleFigures', function (articleDoi) {
+    if(!articleDoi)return this.ready();
     var a = Articles.findOne({doi: articleDoi});
-    if (!a)return;
-    var thisArticleImageIds = [];
-    var ids = _.pluck(a.figures, "imageId");
-    if (ids)thisArticleImageIds = ids;
+    if (!a)return this.ready();
+    var thisArticleImageIds = _.pluck(a.figures, "imageId");
     return FiguresStore.find({_id: {$in: thisArticleImageIds}}, {sort: {'uploadedAt': -1}});
 });

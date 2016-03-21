@@ -17,7 +17,7 @@ ColumnViewsSchema = new SimpleSchema({
         type: Science.schemas.MultiLangSchema
     },
     abstract: {
-        type: Science.schemas.MultipleTextAreaSchema,
+        type: Science.schemas.MultipleAreaSchema,
         optional: true
     },
     content: {

@@ -33,15 +33,15 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         ]
     },
     onBeforeAction: function () {
-        if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
-            Meteor.call("getLocationByCurrentIP", function (err, result) {
-                if (!result)console.log("ip not found.");
-                else {
-                    console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-                    Session.set("ipInChina", result.country_code === "CN");
-                }
-            })
-        }
+        //if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
+        //    Meteor.call("getLocationByCurrentIP", function (err, result) {
+        //        if (!result)console.log("ip not found.");
+        //        else {
+        //            console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+        //            Session.set("ipInChina", result.country_code === "CN");
+        //        }
+        //    })
+        //}
         if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
 
@@ -82,15 +82,15 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
         ]
     },
     onBeforeAction: function () {
-        if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
-            Meteor.call("getLocationByCurrentIP", function (err, result) {
-                if (!result)console.log("ip not found.");
-                else {
-                    console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-                    Session.set("ipInChina", result.country_code === "CN");
-                }
-            })
-        }
+        //if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
+        //    Meteor.call("getLocationByCurrentIP", function (err, result) {
+        //        if (!result)console.log("ip not found.");
+        //        else {
+        //            console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+        //            Session.set("ipInChina", result.country_code === "CN");
+        //        }
+        //    })
+        //}
         if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
 

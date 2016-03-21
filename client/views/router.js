@@ -23,7 +23,6 @@ HomePageSubs.subscribe('emailConfig');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
-//HomePageSubs.subscribe('topics');
 HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
@@ -117,7 +116,6 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('topics'),
                 HomePageSubs.subscribe('tag')
             ]
         }
@@ -135,8 +133,7 @@ Router.map(function () {
         template: "ShowPublisher",
         parent: "publishers",
         title: function () {
-            var id = Session.get('currentPublisherId');
-            var p = Publishers.findOne({_id: id});
+            var p = Publishers.findOne({shortname: this.params.publisherName})
             if(!p)return this.params.publisherName;
             if (TAPi18n.getLanguage() === "en")return p.name || p.chinesename;
             return p.chinesename || p.name;
@@ -147,17 +144,8 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                CollectionSubs.subscribe('allCollections'),
-                HomePageSubs.subscribe('topics')
+                CollectionSubs.subscribe('allCollections')
             ]
-        }
-    });
-
-
-    this.route("author", {
-        parent: "home",
-        title: function () {
-            return TAPi18n.__("Author");
         }
     });
 
@@ -259,7 +247,7 @@ Router.map(function () {
             return [
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('topics')
+                Meteor.subscribe('topics')
             ]
         }
     });

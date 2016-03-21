@@ -7,7 +7,8 @@ Router.route("/authorCenter/", {
     },
     waitOn: function () {
         return [
-//            Meteor.subscribe('emails')
+            HomePageSubs.subscribe('publishers'),
+            HomePageSubs.subscribe('publications')
         ]
     }
 });

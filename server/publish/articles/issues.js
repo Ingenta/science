@@ -2,6 +2,7 @@ Meteor.publish('issues', function() {
     return Issues.find();
 });
 Meteor.publish('oneJournalIssues', function(journalId) {
+    if(!journalId)return this.ready();
     var idArr = [journalId];
     var journal=Publications.findOne({_id:journalId},{fields:{historicalJournals:1}});
     if(journal && !_.isEmpty(journal.historicalJournals)){
