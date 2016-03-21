@@ -24,8 +24,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     waitOn: function () {
         return [
             Meteor.subscribe("journalOverviewTab",this.params.journalShortTitle),
-            Meteor.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
-            Meteor.subscribe('journalBrowseTabArticleList', this.params.journalShortTitle, Session.get('currentIssueId')),
 
             JournalSubs.subscribe('about'),
             JournalSubs.subscribe('about_articles'),

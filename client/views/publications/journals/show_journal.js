@@ -15,6 +15,8 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
+                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
+                Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currentIssueId'));
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
