@@ -15,10 +15,19 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
+                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
+                Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currentIssueId'));
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
+            } else if(slug === 'Editorial Board'){
+                Meteor.subscribe("journalEditorialBoard",Router.current().params.journalShortTitle);
+            } else if(slug === 'Accepted'){
+                Meteor.subscribe("journalAcceptedTab",Router.current().params.journalShortTitle);
+            } else if(slug === 'Online First'){
+                Meteor.subscribe("journalOnlineFirstTab",Router.current().params.journalShortTitle);
             }
+
         }
     }
 });
