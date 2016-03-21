@@ -7,7 +7,7 @@
 	        <!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
 	        <!--{{/if}}-->
             <div class="resultsList">{{> accessKeyImage}}
-                <a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a>
+                <a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{#mathjax}}{{{translateThis title.cn title.en}}}{{/mathjax}}</b></a>
             </div>
 
 	        <ul class="list-unstyled article-desc-ul">

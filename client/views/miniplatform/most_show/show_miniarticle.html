@@ -12,6 +12,7 @@
                 <h4><b>{{_ "Most recent"}}：</b></h4>
             </div>
             <div class="dotted">
+                {{#mathjax}}
                 {{#each mostPublishingArticles}}
                     <ul class="dotted list-unstyled">
                         <li>
@@ -37,6 +38,7 @@
                 {{else}}
                     {{_ "No articles found!"}}
                 {{/each}}
+                {{/mathjax}}
             </div>
         </div>
     </div>

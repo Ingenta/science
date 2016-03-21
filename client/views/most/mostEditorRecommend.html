@@ -5,6 +5,7 @@
         {{>sortByDateControl}}
     </div>
     <div class="dotted">
+        {{#mathjax}}
         {{#each mostRecommendArticles}}
             <ul class="dotted list-unstyled">
                 <li>
@@ -32,5 +33,6 @@
         {{else}}
             {{_ "No articles found!"}}
         {{/each}}
+        {{/mathjax}}
     </div>
 </template>
