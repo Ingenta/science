@@ -45,9 +45,10 @@ SolrUtils = {
     },
     getQueryStr: function (queryArr) {
         var qstring;
+        var clearReg=/[&\/\\#,+()$~%.'":*?!<>^{}\[\]]/g;
         if (queryArr) {
             if (typeof queryArr === 'string')
-                return queryArr;
+                return queryArr.replace(clearReg," ").trim();
             qstring = "";
             var isFirstOne = true;
             _.each(queryArr, function (sQuery) {
@@ -57,7 +58,7 @@ SolrUtils = {
                 isFirstOne = false;
                 var solrFields = SolrUtils.fieldMap[sQuery.key];
                 var subQueues = _.map(solrFields, function (sField) {
-                    return sField + ":" + sQuery.val;
+                    return sField + ":(" + sQuery.val.replace(clearReg," ").trim() + ")";
                 });
                 qstring += "(" + subQueues.join(" OR ") + ")";
             })
