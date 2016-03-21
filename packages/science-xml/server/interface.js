@@ -33,6 +33,7 @@ Router.route('/api', function () {
 		result.message="miss params";
 		res.write(JSON.stringify(result));
 		res.end();
+		return;
 	}
 
 	var slashLoc       = req.body.sourcePath.lastIndexOf("/")+1;
