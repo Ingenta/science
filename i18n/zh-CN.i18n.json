@@ -523,7 +523,13 @@
         }
       },
       "abstract": {
-        "label": "摘要"
+        "label": "摘要",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "accessKey": {
         "label": "请选择一个资源标签",
@@ -1406,7 +1412,8 @@
     "scienceNews":"科学新闻",
     "bookReview":"书评",
     "mooPaper":"MOO论文",
-    "erratum":"勘误"
+    "erratum":"勘误",
+    "invitedReview":"特邀评述"
   },
   "clickToView":"点击查看",
   "Rating": "评分",

@@ -18,7 +18,7 @@ Template.registerHelper('mathjax', function () {
 	}
 
 	var mathjax = new Template('mathjax', function () { // render func
-		var view = this, conent = '';
+		var view = this, content = '';
 		if (view.templateContentBlock) {
 			// this will trigger rerender every time the content is changed
 			content = Blaze._toText(view.templateContentBlock, HTML.TEXTMODE.STRING);
@@ -55,7 +55,7 @@ function onMathJaxReady(callback) {
 					MathJax.Hub.Config({
 						skipStartupTypeset: true,
 						showProcessingMessages: false,
-						tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+						tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] ,processEscapes: true},
 						menuSettings: {
 							zoom: "None",        //  when to do MathZoom
 							CTRL: false,         //    require CTRL for MathZoom?

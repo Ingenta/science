@@ -30,8 +30,17 @@ EmailConfigSchema = new SimpleSchema({
     body: {
         type: String,
         autoform: {
+            type: "jkfroala",
             afFieldInput: {
-                type: 'summernote'
+                froalaOptions: {
+                    language: 'zh_cn',
+                    theme: 'red',
+                    inlineMode: false,
+                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'selectAll', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'table', 'undo', 'redo', 'html', 'insertHorizontalRule', 'removeFormat', 'fullscreen'],
+                    height: '400',
+                    imageUploadURL: "/upload_froala",
+                    fileUploadURL: "/upload_froala_file"
+                }
             }
         }
     },
@@ -80,8 +89,17 @@ BroadcastEmailsSchema = new SimpleSchema({
     content: {
         type: String,
         autoform: {
+            type: "jkfroala",
             afFieldInput: {
-                type: 'summernote'
+                froalaOptions: {
+                    language: 'zh_cn',
+                    theme: 'red',
+                    inlineMode: false,
+                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'selectAll', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'table', 'undo', 'redo', 'html', 'insertHorizontalRule', 'removeFormat', 'fullscreen'],
+                    height: '400',
+                    imageUploadURL: "/upload_froala",
+                    fileUploadURL: "/upload_froala_file"
+                }
             }
         }
     }

@@ -135,7 +135,8 @@ Config = {
             scienceNews:["科学新闻","science news"],
             bookReview:["书评","book review"],
             mooPaper:["MOO论文","moo paper"],
-            erratum:["勘误","retraction note","更正"]
+            erratum:["勘误","retraction note","更正"],
+            invitedReview:["invited review","特邀评述"]
         }
     },
     otherPlatformLoginUrl: {

@@ -133,9 +133,10 @@
         "newsAndViews":"News & View",
         "briefReport":"Brief report",
         "scienceNews":"Science News",
-        "bookReview":"Book review",
-        "mooPaper":"MOO paper",
-        "erratum":"Erratum"
+        "bookReview":"Book Review",
+        "mooPaper":"MOO Paper",
+        "erratum":"Erratum",
+        "invitedReview":"Invited Review"
     },
     "clickToView":"Click to view",
     "Reset":"重置",
@@ -379,7 +380,13 @@
                 }
             },
             "abstract": {
-                "label": "abstract"
+                "label": "abstract",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "accessKey": {
                 "label": "Choose an Access Key",

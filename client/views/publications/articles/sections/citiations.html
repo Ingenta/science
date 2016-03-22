@@ -1,16 +1,19 @@
 <template name="CitedByTemplate">
     <div>
         <ol>
-            {{#each citations}}
-                <li>
-                    {{getAuthorString}}{{{formatTitle}}}{{{formatJournalTitle}}}{{formatYear}}{{volume}}{{formatIssue}}{{firstPage}}<br>
-                    {{#if this.doi}}
-                        <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}} <i class="fa fa-external-link"></i></a>
-                    {{/if}}
-                </li>
-            {{else}}
-                {{_ "No articles found!"}}
-            {{/each}}
+            {{#mathjax}}
+                {{#each citations}}
+                    <li>
+                        <div>{{getAuthorString}}{{{formatTitle}}}{{{formatJournalTitle}}}{{formatYear}}{{volume}}{{formatIssue}}{{firstPage}}<br>
+                        {{#if this.doi}}
+                            <a href="http://dx.doi.org/{{this.doi}}">http://dx.doi.org/{{this.doi}} <i class="fa fa-external-link"></i></a>
+                        {{/if}}
+                        </div>
+                    </li>
+                {{else}}
+                    {{_ "No articles found!"}}
+                {{/each}}
+            {{/mathjax}}
         </ol>
     </div>
 </template>
