@@ -19,6 +19,7 @@
 
     <ul class="dotted list-unstyled">
         <li>
+        {{#mathjax}}
             <div class="pull-right"><a href="#" class="fa fa-trash "></a></div>
             <div class="resultsList pub-title">{{> accessKeyImage}}
                 <a style="font-size:12px" href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a>
@@ -40,6 +41,7 @@
                 </li>
                 {{> abstractDetails}}
             </ul>
+        {{/mathjax}}
         </li>
         <div class="bdsharebuttonbox pull-right">
             <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>

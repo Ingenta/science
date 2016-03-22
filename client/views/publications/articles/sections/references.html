@@ -12,13 +12,17 @@
 	<li style="overflow:hidden; margin-bottom: 5px;">
 		<span style="float:left;margin-right:10px;">[{{index}}]</span>
 		<span style="float:left; width:92%;">
-			{{#if fullContent}}
-				{{{fullContent}}}
-			{{else}}
-				{{formatAuthors}}{{{formatTitle}}}{{formatSource}}{{formatRange}}
-				{{{link}}}
-				{{{googleScholar}}}
-			{{/if}}
+            {{#mathjax}}
+                <div>
+                {{#if fullContent}}
+                    {{{fullContent}}}
+                {{else}}
+                    {{formatAuthors}}{{formatCollab}}{{{formatTitle}}}{{formatSource}}{{formatRange}}
+                    {{{link}}}
+                    {{{googleScholar}}}
+                {{/if}}
+                </div>
+            {{/mathjax}}
 		</span>
 	</li>
 </template>

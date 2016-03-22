@@ -6,13 +6,15 @@
         {{/if}}
     </div>
     <ul class="list-unstyled simple-list">
+        {{#mathjax}}
         {{#each mostReadArticlesTopFive}}
             <li>
-                <a href={{urlToArticleById _id}}>{{{translateThis title.cn title.en}}}</a>
+                <div><a href={{urlToArticleById _id}}>{{{translateThis title.cn title.en}}}</a></div>
             </li>
         {{else}}
             {{_ "No articles found!"}}
         {{/each}}
+        {{/mathjax}}
     </ul>
     {{#if hasFiveOrMoreMostReadArticles}}
         <div align="right"><a href="/mostReadArticles/{{this.journalId}}">

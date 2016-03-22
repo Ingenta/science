@@ -20,12 +20,7 @@ ArticleTitleSchema = new SimpleSchema({
 });
 ArticleAbstractSchema = new SimpleSchema({
     abstract: {
-        type: String,
-        autoform: {
-            afFieldInput: {
-                type: 'summernote'
-            }
-        }
+        type: Science.schemas.MultipleTextAreaSchema
     }
 
 });

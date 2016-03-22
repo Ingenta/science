@@ -36,6 +36,10 @@ SpecialTopicsSchema  = new SimpleSchema({
     articles:{
         type:[String],
         optional: true
+    },
+    createDate: {
+        type: Date,
+        optional: true
     }
 });
 

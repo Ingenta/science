@@ -30,6 +30,11 @@ Template.singleReferenceTemplate.helpers({
 		}
 		return ". "
 	},
+	formatCollab: function(){
+		if(this.collab){
+			return this.collab && ("(" + this.collab + "). ");
+		}
+	},
 	link:function(){
 		if(this.href){
 			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:"CrossRef"});
