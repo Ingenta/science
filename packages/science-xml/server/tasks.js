@@ -383,6 +383,7 @@ var insertArticle = function (a) {
                 issue: a.issue,
                 year: a.year,
                 month: a.month,
+                order: a.year+Science.String.PadLeft(a.volume,"0",4)+Science.String.PadLeft(a.issue,"0",4),
                 createDate: new Date()
             });
         }
