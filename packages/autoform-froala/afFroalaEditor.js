@@ -118,6 +118,7 @@ function initEditor(self, data, lastData, $input, froalaMethod, dropdownOptions)
     data.inlineMode = false;
     data.buttons = [];
     data.customDropdowns = {};
+    data.linkAlwaysBlank=true;
 
     data.theme=dropdownOptions.theme;
     data.height = dropdownOptions.height;

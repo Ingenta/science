@@ -1,4 +1,10 @@
 <style>
+    * {
+        font-family: Arial,"宋体", "Helvetica Neue", Helvetica, sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .title{
+        font-family: Arial,"黑体", "Helvetica Neue", Helvetica, sans-serif;
+    }
     .separate-comma:not(:last-child):after{
         content:", ";
     }
@@ -6,6 +12,7 @@
         content:" and ";
     }
 </style>
+
 <div style="height:100%;position: relative;">
     <div>
         {{#if banner}}
@@ -32,7 +39,7 @@
             <ul style="padding: 0px">
                 {{#each similar}}
                     <li style="list-style: none;padding-bottom:18px">
-                        <div style="font-size:14px"><b>{{{title}}}</b></div>
+                        <div class="title" style="font-size:14px"><b>{{{title}}}</b></div>
                         <div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}};</div>
                         {{#if doi}} <div style="font-size:13px"><a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>{{/if}}
                     </li>
