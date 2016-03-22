@@ -15,10 +15,14 @@
             </div>
 
             <div class="articleTitle">
-                <span style="font-size:16px;">
+                {{#mathjax}}
+                <div>
+                    <span style="font-size:16px;">
                     {{{translateThis title.cn title.en}}}
-                </span>
-                {{> crossmark doi=doi}}
+                    </span>
+                    {{> crossmark doi=doi}}
+                </div>
+                {{/mathjax}}
             </div>
         </div>
     </div>

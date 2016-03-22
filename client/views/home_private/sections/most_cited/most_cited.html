@@ -4,7 +4,7 @@
         {{#mathjax}}
         {{#each mostCitedArticles}}
             <li>
-                <a href={{urlToArticleById articleId}}>{{{translateThis title.cn title.en}}}</a>
+                <div><a href={{urlToArticleById articleId}}>{{{translateThis title.cn title.en}}}</a></div>
             </li>
         {{else}}
             {{_ "No articles found!"}}

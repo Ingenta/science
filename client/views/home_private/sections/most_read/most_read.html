@@ -9,7 +9,7 @@
         {{#mathjax}}
         {{#each mostReadArticlesTopFive}}
             <li>
-                <a href={{urlToArticleById _id}}>{{{translateThis title.cn title.en}}}</a>
+                <div><a href={{urlToArticleById _id}}>{{{translateThis title.cn title.en}}}</a></div>
             </li>
         {{else}}
             {{_ "No articles found!"}}

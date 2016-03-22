@@ -13,9 +13,11 @@
 <template name="solrArticleMarkup">
 	<ul class="dotted list-unstyled">
 		<li>
+            {{#mathjax}}
 			<div>{{> accessKeyImage}}
-				<h7>{{#mathjax}}{{{showTitle}}}{{/mathjax}}</h7>
+				<h7>{{{showTitle}}}</h7>
 			</div>
+            {{/mathjax}}
 			<ul class="list-unstyled">
 				<li>
 					{{#each getAuthors}}

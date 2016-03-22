@@ -1,5 +1,4 @@
 <template name="showNewsArticle">
-    {{#mathjax}}
     {{#each newsArticles}}
         <div class="part">
             <div align="center"><span style="font-size:24px;">{{{translateThis title.cn title.en}}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}</div><br>
@@ -12,5 +11,4 @@
     {{else}}
         {{_ "No content found!"}}
     {{/each}}
-    {{/mathjax}}
 </template>

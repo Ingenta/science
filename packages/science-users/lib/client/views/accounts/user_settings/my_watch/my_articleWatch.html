@@ -12,9 +12,9 @@
             {{#with articleWatch}}
                 <tr>
                     <td>
-                        <a href="{{urlToArticleById _id}}">
-                            <a>{{{translateThis title.cn title.en}}}</a>
-                        </a>
+                        <div>
+                            <a href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a>
+                        </div>
                     </td>
                     <td>
                         {{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}

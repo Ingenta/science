@@ -1,9 +1,9 @@
 <template name="standardArticleListing">
-    <h4>
-        <div class="resultsList">{{> accessKeyImage}}
-            <a href="{{urlToArticleById _id}}">{{#mathjax}}{{{translateThis title.cn title.en}}}{{/mathjax}}</a>
-        </div>
-    </h4>
+    {{#mathjax}}
+    <div class="resultsList">{{> accessKeyImage}}
+        <a href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a>
+    </div>
+    {{/mathjax}}
 
     <ul class="list-unstyled">
         <li>

@@ -7,9 +7,11 @@
                     {{>jkafModal template="updateArticleAbstractModalForm" doc=this id="updateArticleAbstractForm"}}
                 </div>
             {{/if}}
+            {{#mathjax}}
             <div class="interesting-content">
-                <p>{{#mathjax}}{{{getAbstract}}}{{/mathjax}}</p>
+                {{{getAbstract}}}
             </div>
+            {{/mathjax}}
         </div>
         <div class="col-xs-3">
             {{#each getKeywords}}
