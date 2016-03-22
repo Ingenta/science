@@ -3,13 +3,13 @@ var Busboy = Npm.require("busboy");
 Router.onBeforeAction(function (req, res, next) {
     var files = []; // Store filenames and then pass them to request.
 
-    if (req.method === "POST") {
+    if (req.method === "POST" && (req.url==='/upload_froala'||req.url==='/upload_froala_file')) {
         console.log("Busboy POST was trigger by the following URL"+req.url);
         var busboy = new Busboy({ headers: req.headers });
         busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
             console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
             var folder = Config.staticFiles.uploadFileDir;
-            if (req.url=='/upload_froala'){
+            if (req.url==='/upload_froala'){
                 folder=Config.staticFiles.uploadPicDir;
             }
             var ext = Science.String.getExt(filename);
