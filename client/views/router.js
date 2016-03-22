@@ -96,13 +96,6 @@ Router.map(function () {
         parent: "home",
         title: function () {
             return TAPi18n.__("Publishers");
-        },
-        waitOn: function () {
-            return [
-                HomePageSubs.subscribe('images'),
-                HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('tag')
-            ]
         }
     });
 
@@ -110,14 +103,6 @@ Router.map(function () {
         parent: "home",
         title: function () {
             return TAPi18n.__("Publications");
-        },
-        waitOn: function () {
-            return [
-                HomePageSubs.subscribe('images'),
-                HomePageSubs.subscribe('publications'),
-                HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('tag')
-            ]
         }
     });
 
@@ -141,10 +126,9 @@ Router.map(function () {
         name: "publisher.name",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('images'),
-                HomePageSubs.subscribe('publications'),
-                HomePageSubs.subscribe('publishers'),
-                CollectionSubs.subscribe('allCollections')
+                CollectionSubs.subscribe('allCollections'),
+                HomePageSubs.subscribe('topics'),
+                HomePageSubs.subscribe('tag')
             ]
         }
     });
