@@ -25,7 +25,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         return [
             Meteor.subscribe("journalOverviewTab",this.params.journalShortTitle),
 
-            JournalSubs.subscribe('issues'),
             JournalSubs.subscribe('about'),
             JournalSubs.subscribe('about_articles'),
             CollectionSubs.subscribe('allCollections'),

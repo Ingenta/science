@@ -33,7 +33,7 @@ Template.SpecialTopics.events({
 
 Template.SpecialTopics.helpers({
     specialTopics: function () {
-        return SpecialTopics.find({journalId:this._id});
+        return SpecialTopics.find({journalId:this._id},{sort:{createDate:-1}});
     },
     year: function () {
         var issue = Issues.findOne({_id: this.IssueId});
@@ -78,6 +78,7 @@ AutoForm.addHooks(['addSpecialTopicsModalForm'], {
     before: {
         insert: function (doc) {
             doc.journalId = Router.current().data()._id;
+            doc.createDate = new Date();
             return doc;
         }
     },
