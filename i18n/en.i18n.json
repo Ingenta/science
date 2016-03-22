@@ -380,7 +380,13 @@
                 }
             },
             "abstract": {
-                "label": "abstract"
+                "label": "abstract",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "accessKey": {
                 "label": "Choose an Access Key",

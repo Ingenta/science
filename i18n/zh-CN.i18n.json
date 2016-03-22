@@ -523,7 +523,13 @@
         }
       },
       "abstract": {
-        "label": "摘要"
+        "label": "摘要",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "accessKey": {
         "label": "请选择一个资源标签",
