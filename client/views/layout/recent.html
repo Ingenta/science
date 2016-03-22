@@ -1,5 +1,6 @@
 <template name="recentReadAndSearchContainer">
     {{#if anyRecentUse}}
+        {{#mathjax}}
         <div class="row">
             <hr>
             <div class="col-xs-6">
@@ -8,7 +9,7 @@
                     <ul class="list-unstyled simple-list">
                         {{#each recentlyRead}}
                             <li>
-                                <a href="{{url}}">{{{translateThis title.cn title.en}}}</a>
+                                <div><a href="{{url}}">{{{translateThis title.cn title.en}}}</a></div>
                             </li>
                         {{/each}}
                     </ul>
@@ -27,5 +28,6 @@
                 {{/if}}
             </div>
         </div>
+        {{/mathjax}}
     {{/if}}
 </template>
