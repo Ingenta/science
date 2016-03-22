@@ -84,17 +84,17 @@
 
 <template name="onePublication">
     <div class="row dotted-publication-item">
-        <div class="pull-right">
-            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
-                {{> displayPublication}}
-                {{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"
-                fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,submissionReview,tabSelections,historicalJournals" buttonContent=getUpdateButtonContent}}
-                {{/afModal}}
-            {{/if}}
-            {{#if permissionCheckWithScope "delete-journal" "resource"  "publisher" publisher}}
-                <a href="#" class="fa fa-trash"></a>
-            {{/if}}
-        </div>
+        <!--<div class="pull-right">-->
+            <!--{{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}-->
+                <!--{{> displayPublication}}-->
+                <!--{{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"-->
+                <!--fields="title,titleCn,shortTitle,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,banner,adBanner,submissionReview,tabSelections,historicalJournals" buttonContent=getUpdateButtonContent}}-->
+                <!--{{/afModal}}-->
+            <!--{{/if}}-->
+            <!--{{#if permissionCheckWithScope "delete-journal" "resource"  "publisher" publisher}}-->
+                <!--<a href="#" class="fa fa-trash"></a>-->
+            <!--{{/if}}-->
+        <!--</div>-->
         <div class="col-xs-3">
             <a href="{{urlToJournalById _id}}"><img src="{{getImageHelper picture}}" width="105"/></a>
         </div>

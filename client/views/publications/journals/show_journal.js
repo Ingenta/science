@@ -20,12 +20,15 @@ ReactiveTabs.createInterface({
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
+                //Session.set("activeTab",""); NOTE: possibly need this to prevent page sticking to browse or could disable tabs
             } else if(slug === 'Editorial Board'){
                 Meteor.subscribe("journalEditorialBoard",Router.current().params.journalShortTitle);
             } else if(slug === 'Accepted'){
                 Meteor.subscribe("journalAcceptedTab",Router.current().params.journalShortTitle);
             } else if(slug === 'Online First'){
                 Meteor.subscribe("journalOnlineFirstTab",Router.current().params.journalShortTitle);
+            }else if(slug === 'Author Center'){
+                Meteor.subscribe("journalAuthorCenterTab",Router.current().params.journalShortTitle);
             }
 
         }
