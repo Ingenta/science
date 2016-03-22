@@ -72,7 +72,7 @@
 
 <template name="updateArticleAbstractModalForm">
     {{#autoForm schema="ArticleAbstractSchema" collection="Articles" id="updateArticleAbstractForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
-        {{> afFieldInput name="abstract"}}
+        {{> afQuickField name="abstract"}}
         <button type="submit" class="btn btn-primary">update</button>
     {{/autoForm}}
 </template>
