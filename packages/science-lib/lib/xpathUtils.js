@@ -92,7 +92,7 @@ Science.XPath.ParseHelper = {
 			return !_.isEmpty(attrs)? attrs[0].value:undefined;
 		}
 		var attrs = this.getAttributes(xp,ele);
-		return attrs && attrs[0];
+		return attrs && attrs[0] || "";
 	},
 	/**
 	 * 同步方法
