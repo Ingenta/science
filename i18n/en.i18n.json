@@ -136,7 +136,8 @@
         "bookReview":"Book Review",
         "mooPaper":"MOO Paper",
         "erratum":"Erratum",
-        "invitedReview":"Invited Review"
+        "invitedReview":"Invited Review",
+        "retraction":"retraction note"
     },
     "clickToView":"Click to view",
     "Reset":"重置",
