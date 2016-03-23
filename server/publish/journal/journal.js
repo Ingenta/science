@@ -34,7 +34,7 @@ Meteor.publish('journalBrowseTab', function (journalShortTitle,issue) {
             fields: {sections: 0, figures: 0, references: 0, authorNotes:0, affiliations:0, tables:0, pacs:0, fundings:0}
         }),
         Volumes.find({journalId:{$in:idArr}}),
-        Issues.find({journalId:{$in:idArr}})
+        Issues.find({journalId:{$in:idArr}},{fields:{createDate:0}})
       ]
 });
 Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
@@ -52,7 +52,7 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     }
     return [
         Volumes.find({journalId:{$in:idArr}}),
-        Issues.find({journalId:{$in:idArr}})
+        Issues.find({journalId:{$in:idArr}},{fields:{createDate:0}})
     ]
 });
 Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issueId) {
