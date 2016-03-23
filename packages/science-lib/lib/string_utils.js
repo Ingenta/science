@@ -163,6 +163,13 @@ Science.String.toDate=function(str){
     return new Date(p);
 }
 
+Science.String.PadLeft=function(str,pchar,len){
+    var curLen = ('' + str).length;
+    return (Array(
+        len > curLen ? len - curLen + 1 || 0 : 0
+    ).join(pchar) + str);
+}
+
 Science.escapeRegEx = Science.String.escapeRegEx;
 Science.replaceSubstrings = Science.String.replaceSubstrings;
 Science.clearTags =Science.String.clearTags ;
