@@ -96,6 +96,12 @@ Router.map(function () {
         parent: "home",
         title: function () {
             return TAPi18n.__("Publishers");
+        },
+        waitOn: function () {
+            return [
+                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publishers')
+            ]
         }
     });
 
@@ -103,6 +109,13 @@ Router.map(function () {
         parent: "home",
         title: function () {
             return TAPi18n.__("Publications");
+        },
+        waitOn: function () {
+            return [
+                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('publications')
+            ]
         }
     });
 
@@ -126,6 +139,9 @@ Router.map(function () {
         name: "publisher.name",
         waitOn: function () {
             return [
+                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publishers'),
+                HomePageSubs.subscribe('publications'),
                 CollectionSubs.subscribe('allCollections'),
                 HomePageSubs.subscribe('topics'),
                 HomePageSubs.subscribe('tag')
