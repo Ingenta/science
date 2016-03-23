@@ -3,20 +3,21 @@ Router.route('/api', function () {
 	var res            = this.response;
 	var result = {};
 
-	console.log("api requesting: "+JSON.stringify(req));
-	console.log("api called by: "+JSON.stringify(this.connection));
+
 
 
 	res.writeHead(200,{
 		'Content-Type': 'application/json; charset=utf-8'
 	});
-	if(req.method !=='POST'){
+	if(req.method !=='POST' && req.headers.content-type!=='application/x-www-form-urlencoded'){
 		result.result="failed";
 		result.message="wrong method, please use POST method with 'x-www-form-urlencoded'";
 		res.write(JSON.stringify(result));
 		res.end();
 		return;
 	}
+	console.log("api requesting: "+JSON.stringify(req.body));
+	console.log("api called by: "+JSON.stringify(req.headers));
 	var NonEmptyString = Match.Where(function (x) {
 		check(x, String);
 		return x.length > 0;
