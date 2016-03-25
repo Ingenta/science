@@ -73,7 +73,7 @@ Science.parserAccepted = function(filepath){
         }
         var acceptedDateStr = parserHelper.getFirstAttribute("//task[@name='EM Final Decision']/status/attribute::event_date | //task[@name='AE Make Decision']/status/attribute::event_date", dom);
         if(acceptedDateStr){
-            article.accepted = new Date(Date.parse(article.accepted.split("T")[0]));
+            article.accepted = new Date(Date.parse(acceptedDateStr.split("T")[0]));
         }else{
             acceptedDateStr = parserHelper.getSimpleVal("//publish_date",dom)
             article.accepted = new Date(Date.parse(acceptedDateStr));
