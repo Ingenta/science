@@ -101,7 +101,8 @@ Template.articleListRight.helpers({
             }
             query.issueId=curIssue;
         }
-        return Articles.find(query, {sort: {elocationId: 1}});
+        //return Articles.find(query, {sort: {elocationId: 1}});
+        return Articles.find(query, {sort: {accepted:-1}});
 
     },
     getIssueTitle: function () {

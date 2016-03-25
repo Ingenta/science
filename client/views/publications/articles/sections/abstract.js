@@ -7,6 +7,10 @@ Template.AbstractTemplate.helpers({
 	getJournalIdFromSession: function () {
 		var journalId = Session.get('currentJournalId');
 		return journalId ? journalId : "";
+	},
+	isAccepted: function (){
+		var pubStatus = Template.currentData().pubStatus;
+		if(pubStatus=='accepted')return true;
 	}
 });
 Template.AbstractContentAndKeywords.helpers({
