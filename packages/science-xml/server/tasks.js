@@ -169,7 +169,7 @@ Tasks.parse = function (logId, pathToXml) {
         Tasks.insertArticlePdf(logId, result);
     } catch (e) {
         if(!e)log.errors.push("unknown error occurred during import");
-        else log.errors.push(e.toString());
+        else log.errors.push("Unexpected input was found during xml parsing: "+e.stack.toString());
         Tasks.fail(taskId, logId, log.errors);
     }
 };
