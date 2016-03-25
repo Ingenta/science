@@ -472,7 +472,8 @@ var getTable = function (tableWrapNode) {
             table.label=xref[0].childNodes[0].data;
     }
     table.caption = parserHelper.getSimpleVal("child::caption/p", tableWrapNode);
-    table.table = parserHelper.getXmlString("child::table", tableWrapNode).replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+    table.table = parserHelper.getXmlString("child::table", tableWrapNode);
+    if(!_.isEmpty(table.table))table.table = table.table.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
 };
 
