@@ -1,5 +1,7 @@
 <template name="FullTextTemplate">
+    {{#if hasAbstractOrKeyword}}
     {{>AbstractContentAndKeywords}}
+    {{/if}}
     {{> sectionSelector sections=sections}}
     <div class="row">
         <div id="fulltext-viewer" class="col-xs-12">
