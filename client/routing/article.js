@@ -29,7 +29,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             Meteor.subscribe('journalMostReadBrief', Session.get('currentJournalId')),
-            Meteor.subscribe('mostCited', Session.get('currentJournalId'), 5)
+            Meteor.subscribe('journalMostCitedBrief', Session.get('currentJournalId'))
         ]
     },
     onBeforeAction: function () {
@@ -77,8 +77,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
-            Meteor.subscribe('journalMostRead', Session.get('currentJournalId'), 5),
-            Meteor.subscribe('mostCited', Session.get('currentJournalId'), 5)
+            Meteor.subscribe('journalMostRead', Session.get('currentJournalId')),
+            Meteor.subscribe('journalMostCited', Session.get('currentJournalId'))
         ]
     },
     onBeforeAction: function () {
