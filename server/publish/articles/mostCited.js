@@ -1,4 +1,6 @@
 Meteor.publish('mostCited', function (journalId, limit) {
+    check(journalId, String);
+    check(limit, Number);
     if(!limit)limit=20;
     var query = journalId && {journalId: journalId} || {};
     var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});

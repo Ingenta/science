@@ -1,4 +1,6 @@
 Meteor.publish('homepageMostRecentArticles', function (publisherId,count) {
+    check(publisherId, String);
+    check(count, Number);
     var c=count || 10;
     var query = {};
     if(publisherId)

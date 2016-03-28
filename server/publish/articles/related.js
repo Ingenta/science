@@ -1,5 +1,6 @@
 Meteor.publish('relatedArticles', function (relatedArticles) {
     if(!relatedArticles)return this.ready();
+    check(relatedArticles, String);
     var relatedIds = _.pluck(relatedArticles,"_id");
     return [
         Articles.find({_id: {$in: relatedIds}}, {
