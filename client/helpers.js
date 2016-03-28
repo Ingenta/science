@@ -163,3 +163,17 @@ Template.registerHelper('formatissn', function (issn) {
     if (issn.length == 8)
         return issn.slice(0, 4) + "-" + issn.slice(4);
 })
+
+topicCache=new ReactiveDict();
+
+Template.registerHelper('showTopicName',function(topics){
+    if(!_.isArray(topics)) return;
+    if(_.isEmpty(topics)) return;
+    var topicId=topics[0], key='topic_'+topicId;
+    Meteor.call("getOneTopic",topicId,function(err,result){
+        console.log(result);
+        if(!err)
+            topicCache.set(key,result);
+    })
+    return topicCache.get(key) && ( TAPi18n.getLanguage()=='zh-CN'?topicCache.get(key).name:topicCache.get(key).englishName);
+})

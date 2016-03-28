@@ -29,6 +29,9 @@ Package.onUse(function (api) {
         both);
 
     api.addFiles('topics.js', both);
+
+    api.addFiles('server/methods.js','server');
+
     api.addFiles('client/router.js','client');
     api.addFiles('client/views/addArticlesForTopics.html', 'client');
     api.addFiles('client/views/topicsDetail/detail.html', 'client');
