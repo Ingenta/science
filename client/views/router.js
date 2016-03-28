@@ -47,7 +47,7 @@ Router.route("home", {
             HomePageSubs.subscribe('news'),
             HomePageSubs.subscribe('homepageMostRecentArticles'),
             HomePageSubs.subscribe('mostCited'),
-            Meteor.subscribe('mostRead', undefined, 5)
+            Meteor.subscribe('homepageMostReadBrief')
         ]
     },
     onStop:function(){
@@ -177,7 +177,7 @@ Router.map(function () {
         name: "mostRead.show",
         waitOn: function () {
             return [
-                Meteor.subscribe('mostRead')
+                Meteor.subscribe('homepageMostRead')
             ]
         }
     });
@@ -191,7 +191,7 @@ Router.map(function () {
         name: "mostRead.showWithJournalId",
         waitOn: function () {
             return [
-                Meteor.subscribe('mostRead',this.params.journalId)
+                Meteor.subscribe('journalMostRead',this.params.journalId)
             ]
         }
     });
