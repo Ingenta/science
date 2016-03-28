@@ -23,6 +23,9 @@ Template.FullTextTemplate.helpers({
     },
     anyReference:function(){
         return !_.isEmpty(Template.currentData().references);
+    },
+    hasAbstractOrKeyword:function(){
+        return this.abstract || !_.isEmpty(this.keywords);
     }
 })
 

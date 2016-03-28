@@ -1,6 +1,6 @@
 Template.searchResultForAddToSpecialTopics.helpers({
 	articles: function () {
-		return Articles.find();
+		return Articles.find({}, {sort: {elocationId: 1}});
 	}
 });
 

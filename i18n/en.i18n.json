@@ -1159,5 +1159,6 @@
     "Publishing Dynamic":"Publication Trends",
     "EIC":"EIC",
     "Dynamic Publishing":"The dynamic publishing platform View",
-    "Article Metrics":"Article Metrics"
+    "Article Metrics":"Article Metrics",
+    "noAbstract":"There is no abstract available for this article."
 }

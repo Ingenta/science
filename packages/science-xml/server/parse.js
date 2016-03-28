@@ -130,7 +130,8 @@ ScienceXML.parseXml = function (path, pubStatus) {
     if (_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)) {
         keywordsEn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
         if (_.isEmpty(keywordsEn)) {
-            results.errors.push("No keywords found");
+            results.keywords={};
+            //results.errors.push("No keywords found");//允许没有关键词信息
         } else {
             results.keywords = {en: keywordsEn};
         }

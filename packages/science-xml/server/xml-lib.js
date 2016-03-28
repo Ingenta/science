@@ -288,9 +288,9 @@ ScienceXML.getFullText = function (results, doc) {
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
     var abstract = parserHelper.getXmlString("//abstract", doc, true);
-    if (!abstract)
-        results.errors.push("No abstract found");
-    else {
+    if (!abstract){
+        //results.errors.push("No abstract found");//允许文章没有摘要信息
+    }else {
         abstract = abstract.trim()
         if (abstract.startWith("<p>") && abstract.endWith("</p>"))
             abstract = abstract.slice(3, -4)

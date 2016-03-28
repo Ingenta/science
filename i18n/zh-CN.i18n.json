@@ -139,8 +139,8 @@
   "Prepare Manuscript": "准备手稿",
   "Submit  Manuscript": "提交稿件",
   "Collections": "文章集",
-  "Received": "接收时间",
-  "Accepted Date": "收录时间",
+  "Received": "收稿时间",
+  "Accepted Date": "接收时间",
   "Published online": "发布时间",
   "Accepted": "预出版",
   "Online First": "优先出版",
@@ -1490,5 +1490,6 @@
   "Science News To":"科学新闻",
   "EIC":"主编",
   "Dynamic Publishing":"本平台出版动态查看",
-  "Article Metrics": "社交媒体分享"
+  "Article Metrics": "社交媒体分享",
+  "noAbstract":"该文章没有摘要信息"
 }

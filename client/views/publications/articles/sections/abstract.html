@@ -48,10 +48,16 @@
             {{/if}}
         </div>
         <div class="col-xs-3">
-            {{#if published}}
+            {{#if isAccepted}}
                 <small><strong>{{_ "Published online"}} </strong>
-                    {{moFormat published 'll'}}
+                    {{moFormat createdAt 'll'}}
                 </small>
+            {{else}}
+                {{#if published}}
+                    <small><strong>{{_ "Published online"}} </strong>
+                        {{moFormat published 'll'}}
+                    </small>
+                {{/if}}
             {{/if}}
         </div>
     </div>

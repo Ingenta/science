@@ -36,11 +36,9 @@ Template.singleReferenceTemplate.helpers({
 		}
 	},
 	link:function(){
-		if(this.href){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:this.href,name:"CrossRef"});
-		}//else if(this.doi){
-		//	return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:"CrossRef"});
-		//}
+		if(this.doi){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:"CrossRef"});
+		}
 	},
 	googleScholar:function(){
 		var href="http://scholar.google.com/scholar_lookup?";
@@ -55,7 +53,16 @@ Template.singleReferenceTemplate.helpers({
 		this.source && paramsStrArr.push("journal="+this.source);
 		this.volume && paramsStrArr.push("volume="+this.volume);
 		this.issue && paramsStrArr.push("issue="+this.issue);
-		this.firstPage && this.lastPage && paramsStrArr.push("pages="+this.firstPage+"-"+this.lastPage);
+		var pagestr="";
+		if(this.firstPage){
+			pagestr=this.firstPage;
+		}
+		if(this.lastPage){
+			pagestr+="-"+this.lastPage;
+		}
+		if(pagestr){
+			paramsStrArr.push("pages="+pagestr);
+		}
 		if(_.isEmpty(paramsStrArr))
 			return;
 
