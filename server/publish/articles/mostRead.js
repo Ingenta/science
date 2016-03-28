@@ -1,4 +1,6 @@
 Meteor.publish('mostRead', function (journalId, limit) {
+    check(journalId, String);
+    check(limit, Number);
     var result = createMostReadList(journalId, limit);
     return [
         Articles.find({_id: {$in: result}}, {
