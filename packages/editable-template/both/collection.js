@@ -14,6 +14,7 @@ JET.store.allow({
 
 if(Meteor.isServer){
 	Meteor.publish('oneEditableTemplate', function(name) {
+		check(name, String);
 		return JET.store.find({name:name});
 	});
 
