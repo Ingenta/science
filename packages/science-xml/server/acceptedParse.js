@@ -59,6 +59,7 @@ Science.parserAccepted = function(filepath){
         article.abstract = parserHelper.getMultiVal("//article/abstract", dom);
         article.fundings = parserHelper.getFirstAttribute("//configurable_data_fields/custom_fields[@cd_code='Funding source']/attribute::cd_value", dom);
         article.contentType = parserHelper.getSimpleVal("//article/publication_type | //article/manuscript_type", dom);
+        article.contentType = Science.data.tranContentType(article.contentType);
 
         var recDateStr = parserHelper.getSimpleVal("//received_date",dom);
         if(recDateStr){
