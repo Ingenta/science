@@ -14,7 +14,7 @@ this.News.allow({
 
 NewsSchema = new SimpleSchema({
     title: {
-        type: Science.schemas.MultiLangSchema
+        type: Science.schemas.MultipleTextOptionalSchema
     },
     createDate: {
         type: Date,
