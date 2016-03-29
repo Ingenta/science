@@ -36,10 +36,12 @@ Meteor.publish('articleSearchResults', function () {
 });
 
 Meteor.publish('oneArticle', function (id) {
+    check(id, String);
     return Articles.find({_id: id});
 });
 
 Meteor.publish('oneArticleByDoi', function (doi) {
+    check(doi, String);
     var a = Articles.find({doi: doi});
     if (a)return a;
     this.ready();
@@ -51,8 +53,9 @@ Meteor.publish('recommendedMiniPlatformArticles', function () {
         fields: articleWithMetadata
     });
 });
-Meteor.publish('recommendedJournalArticles', function (val) {
-    var recommended = EditorsRecommend.find({publications: val}, {fields: {ArticlesId: 1}}, {limit: 5}).fetch();
+Meteor.publish('recommendedJournalArticles', function (journalId) {
+    check(journalId, String);
+    var recommended = EditorsRecommend.find({publications: journalId}, {fields: {ArticlesId: 1}}, {limit: 5}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: minimumArticle
@@ -60,6 +63,7 @@ Meteor.publish('recommendedJournalArticles', function (val) {
 });
 Meteor.publish('articlesInCollection', function (collId) {
     if(!collId)return this.ready();
+    check(collId, String);
     var coll = ArticleCollections.findOne({_id: collId})
     if (coll && !_.isEmpty(coll.articles)) {
         return Articles.find({_id: {$in: coll.articles}}, {fields: articleWithMetadata});
@@ -69,17 +73,20 @@ Meteor.publish('articlesInCollection', function (collId) {
 
 Meteor.publish('oneArticleMeta', function (id) {
     if(!id)return this.ready();
+    check(id, String);
     return Articles.find({_id: id}, {fields: articleWithMetadata});
 });
 
 Meteor.publish('articlesInTopic', function (topicsId) {
     if(!topicsId)return this.ready();
+    check(topicsId, String);
     return Articles.find({topic: topicsId}, {fields: articleWithMetadata});
 })
 
 
 Meteor.publish('articlesInSpecTopic', function (stid) {
     if(!stid)return this.ready();
+    check(stid, String);
     var stopic = SpecialTopics.findOne({_id: stid})
     if (stopic && !_.isEmpty(stopic.articles)) {
         return Articles.find({_id: {$in: stopic.articles}}, {fields: articleWithMetadata});

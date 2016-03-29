@@ -1,13 +1,7 @@
-Meteor.publish('oneJournalArticles', function (id,issueId) {
-    if(!id)return this.ready();
-    if(!issueId)return this.ready();
-    return Articles.find({journalId: id, issueId: issueId}, {
-        fields: {sections: 0, figures: 0, references: 0}
-    });
-});
 
 Meteor.publish('oneIssueArticlesByArticleId', function (id) {
     if(!id)return this.ready();
+    check(id, String);
     var art = Articles.findOne({_id: id});
     if(!art)return this.ready();
     return Articles.find({issueId: art.issueId}, {
@@ -17,10 +11,12 @@ Meteor.publish('oneIssueArticlesByArticleId', function (id) {
 
 Meteor.publish('journalBrowseTab', function (journalShortTitle,issue) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
     if(!issue)return this.ready();
+    check(issue, String);
 
     //combine all historical journals
     var idArr = [journalId];
@@ -39,6 +35,7 @@ Meteor.publish('journalBrowseTab', function (journalShortTitle,issue) {
 });
 Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
@@ -57,10 +54,12 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
 });
 Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issueId) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
     if(!issueId)return this.ready();
+    check(issueId, String);
     return [
         Articles.find({journalId: journalId, issueId: issueId}, {
             fields: {sections: 0, figures: 0, references: 0, authorNotes:0, affiliations:0, tables:0, pacs:0, fundings:0}
@@ -72,6 +71,7 @@ Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issue
 
 Meteor.publish('journalOverviewTab', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
@@ -101,6 +101,7 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
 
 Meteor.publish('journalOnlineFirstTab',function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
@@ -108,6 +109,7 @@ Meteor.publish('journalOnlineFirstTab',function (journalShortTitle) {
 })
 Meteor.publish('journalAcceptedTab',function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
@@ -115,6 +117,7 @@ Meteor.publish('journalAcceptedTab',function (journalShortTitle) {
 })
 Meteor.publish('journalEditorialBoard',function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
@@ -122,6 +125,7 @@ Meteor.publish('journalEditorialBoard',function (journalShortTitle) {
 })
 Meteor.publish('journalAuthorCenterTab',function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;

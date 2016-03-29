@@ -1,9 +1,7 @@
 Meteor.publish('images', function () {
     return Images.find();
 });
-Meteor.publish('articleXml', function () {
-    return FiguresStore.find({}, {sort: {'uploadedAt': -1}});
-});
+
 Meteor.publish('oneArticleFigures', function (articleDoi) {
     if(!articleDoi)return this.ready();
     var a = Articles.findOne({doi: articleDoi});

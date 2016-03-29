@@ -12,6 +12,7 @@ Template.pageElement.helpers({
             return
         }
         Session.set("thisPageElement", element.key);
+        if (!element.title)return;
         if (TAPi18n.getLanguage() === "zh-CN")
             return element.title.cn;
         return element.title.en;

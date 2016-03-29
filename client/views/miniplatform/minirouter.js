@@ -19,7 +19,7 @@ Router.map(function () {
                 HomePageSubs.subscribe('publications'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles'),
                 MiniPlatformSubs.subscribe('news_link'),
-                MiniPlatformSubs.subscribe('homepageMostRecentArticles',Session.get("publisherId"),6)
+                MiniPlatformSubs.subscribe('miniplatformMostRecentArticles',Session.get("publisherId"),6)
             ]
         }
     });

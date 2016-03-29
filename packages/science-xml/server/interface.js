@@ -28,11 +28,11 @@ Router.route('/api', function () {
 			password  : NonEmptyString,
 			host      : NonEmptyString,
 			sourcePath: NonEmptyString,
-			type	  : NonEmptyString
+			type	  : Match.OneOf("normal","accepted","online_first")
 		});
 	}catch(e){
 		result.result="failed";
-		result.message="miss params";
+		result.message=e.message;
 		res.write(JSON.stringify(result));
 		res.end();
 		return;
@@ -41,7 +41,6 @@ Router.route('/api', function () {
 	var slashLoc       = req.body.sourcePath.lastIndexOf("/")+1;
 	var filename       = slashLoc == 0 ? req.body.sourcePath : req.body.sourcePath.substr(slashLoc);
 	var targetPath     = Config.ftp.downloadDir + "/" + filename;
-	//TODO: fix this if its false it doesn't do anything!
 	ScienceXML.FolderExists(Config.ftp.downloadDir);
 	var downloadCallback = function(err){
 		if(err){
