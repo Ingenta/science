@@ -109,3 +109,7 @@ ol.affiliationList li {
 #crossmark-icon {
     height:20px
 }
+
+div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all {
+    left: 0px !important;
+}
