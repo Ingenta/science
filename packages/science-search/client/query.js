@@ -184,12 +184,14 @@ SolrQuery = {
 		SolrQuery.reset();
 		var params = QueryUtils.parseUrl();
 		if (!_.isEmpty(params.q) && _.isString(params.q)) {
+			//更新用户的最近搜索(cookies)
 			Users.recent.search(params.q);
 			var setting = params.st || {};
 			var q       = (_.contains(["bar", "history"], setting.from)) ? params.q : "";
 			$("#searchInput").val(q);
-			if (Meteor.userId()) {
-				var his = !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave: []}
+			if (Meteor.user()) {
+				//若用户从未搜索过改词,则将该词存入用户的搜索历史中(数据库)
+				var his =  !_.isEmpty(Meteor.user().history) && Meteor.user().history || {unsave: []}
 				var obj = _.find(his, function (arr, key) {
 					return _.find(arr, function (item) {
 						return item.word === q;
