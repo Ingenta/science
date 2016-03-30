@@ -61,7 +61,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             journal && Session.set('currentJournalId', journal._id);
             pub && Session.set('currentPublisherId', pub._id);
             Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi);
-            return Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var article = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            if(article && _.contains(journal.tabSelections,"MOOP")){
+                article.hasMoop=true;
+            }
+            return article;
         }
     },
     template: "showArticle",
