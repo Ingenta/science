@@ -136,9 +136,12 @@ Template.articleListRight.helpers({
         return Template.currentData().pubStatus == "normal"
     }
 });
-Template.HistoricalJournalItem.helpers({
-    journalItemData: function (id) {
-        return Publications.findOne({_id: id});
+Template.HistoricalJournalTable.helpers({
+    //journalItemData: function (id) {
+    //    return Publications.findOne({_id: id});
+    //},
+    historicalJournals: function(){
+        return Publications.find({_id:{$in:this.historicalJournals}},{sort:{publicationDate:-1}});
     }
 });
 
