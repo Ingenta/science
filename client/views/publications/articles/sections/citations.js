@@ -20,7 +20,7 @@ Template.CitedByTemplate.helpers({
         return this.issue && ('('+this.issue+')' + " : ")
     },
     pages: function (){
-        return this.fpage && this.lpage && (this.fpage + "-" + this.lpage);
+        return this.startPage && this.endPage && (this.startPage + "-" + this.endPage);
     },
 
 })

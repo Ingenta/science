@@ -428,8 +428,8 @@ var insertArticle = function (a) {
         journal: a.journalInfo,//journal是后加的
         publisher: a.publisher,
         elocationId: a.elocationId,
-        fpage: a.fpage,
-        lpage: a.lpage,
+        startPage: a.startPage,
+        endPage: a.endPage,
         year: a.year,
         month: a.month,
         issue: a.issue,

@@ -147,12 +147,12 @@ ScienceXML.parseXml = function (path, pubStatus) {
     if (elocationId !== undefined)
         results.elocationId = elocationId;
     else{
-        var fpage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
-        var lpage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
-        if(fpage !== undefined) results.fpage = fpage;
-            logger.info('parsed fpage');
-        if(lpage !== undefined) results.lpage = lpage;
-            logger.info('parsed lpage');
+        var startPage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
+        var endPage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
+        if(startPage !== undefined) results.startPage = startPage;
+            logger.info('parsed startPage');
+        if(endPage !== undefined) results.endPage = endPage;
+            logger.info('parsed endPage');
     }
     logger.info('parsed elocationId');
 

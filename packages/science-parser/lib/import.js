@@ -316,6 +316,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 newOne.title = article.title;
                                 newOne.publisher = journal.publisher;
                                 newOne.startPage = article.startPage;
+                                newOne.endPage = article.endPage;
                                 newOne.elocationId = article.startPage;
                                 newOne.accepted = Science.String.toDate(article.acceptDate);
                                 newOne.published = Science.String.toDate(article.publishDate);
