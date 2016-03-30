@@ -418,7 +418,7 @@ var insertArticle = function (a) {
     a.journalInfo = journalInfo;
 
 
-    //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsWhichFromXml
+    //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsFromXmlToUpdate
     var id = Articles.insert({
         doi: a.doi,
         articledoi: a.articledoi,
@@ -428,6 +428,8 @@ var insertArticle = function (a) {
         journal: a.journalInfo,//journal是后加的
         publisher: a.publisher,
         elocationId: a.elocationId,
+        fpage: a.fpage,
+        lpage: a.lpage,
         year: a.year,
         month: a.month,
         issue: a.issue,
