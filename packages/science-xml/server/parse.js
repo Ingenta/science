@@ -133,9 +133,14 @@ ScienceXML.parseXml = function (path, pubStatus) {
             results.keywords={};
             //results.errors.push("No keywords found");//允许没有关键词信息
         } else {
-            results.keywords = {en: keywordsEn};
+            results.keywords = {en: keywordsEn,cn:keywordsEn};
         }
-    } else {
+    }else {
+        if(_.isEmpty(keywordsCn)){
+            keywordsCn=keywordsEn;
+        }else if(_.isEmpty(keywordsEn)){
+            keywordsEn=keywordsCn;
+        }
         results.keywords = {
             cn: keywordsCn,
             en: keywordsEn

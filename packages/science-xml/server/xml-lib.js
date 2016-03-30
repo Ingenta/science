@@ -287,14 +287,22 @@ ScienceXML.getFullText = function (results, doc) {
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstract = parserHelper.getXmlString("//abstract", doc, true);
-    if (!abstract){
+    var abstractCn = parserHelper.getXmlString("//abstract", doc, true);
+    if (!abstractCn){
         //results.errors.push("No abstract found");//允许文章没有摘要信息
     }else {
-        abstract = abstract.trim()
-        if (abstract.startWith("<p>") && abstract.endWith("</p>"))
-            abstract = abstract.slice(3, -4)
-        results.abstract = abstract;
+        abstractCn = abstractCn.trim()
+        if (abstractCn.startWith("<p>") && abstractCn.endWith("</p>"))
+            abstractCn = abstractCn.slice(3, -4)
+        results.abstract={cn:abstractCn};
+
+        var abstractEn = parserHelper.getXmlString("//trans-abstract", doc, true);
+        if (abstractEn && abstractEn.startWith("<p>") && abstractEn.endWith("</p>"))
+            abstractEn = abstractEn.slice(3, -4)
+
+        if(abstractEn){
+            results.abstract.en=abstractEn;
+        }
     }
     return results;
 };
