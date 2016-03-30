@@ -57,16 +57,7 @@ Template.journalNavigationPanelOnlyMoop.events({
     },
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
-        var volume = $(event.target).data().volume;
-        var issue = $(event.target).data().issue;
-        issueId && Session.set("currentIssueId", issueId);
-        //if url contains issue, router.go
-        Router.current().params.volume = volume;
-        Router.current().params.issue = issue;
-        if(this.journalId!=Session.get("currentJournalId")){
-            Router.current().params.journalShortTitle=Publications.findOne({_id:this.journalId}).shortTitle;
-        }
-        Router.go("journal.name.toc", Router.current().params)
+        issueId && Session.set("currMoopIssue_" + this.journalId, issueId);
     }
 });
 
