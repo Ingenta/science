@@ -26,10 +26,8 @@ Template.addArticleMediaForm.events({
 
 Template.articleMedia.helpers({
     medias:function(){
-        var doi = Session.get('currentDoi');
-        var journalId = Session.get('currentJournalId');
-        if(doi)
-            return Collections.Medias.find({"doi":doi,"journalId":journalId});
+        if(this.doi)
+            return Collections.Medias.find({"doi":this.doi,"journalId":this.journalId});
     },
     dynamicTemp:function(){
         var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});

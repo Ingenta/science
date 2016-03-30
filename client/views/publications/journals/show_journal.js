@@ -31,8 +31,10 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe("journalAuthorCenterTab",Router.current().params.journalShortTitle);
             }else if(slug === 'Special Topics'){
                 Meteor.subscribe("journalIssues",Router.current().params.journalShortTitle);
+            }else if(slug == 'MOOP'){
+                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
+                Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currMoopIssue_'+journal._id));
             }
-
         }
     }
 });
