@@ -16,6 +16,8 @@ articleWithMetadata = {
     issueId: 1,
     volume: 1,
     elocationId: 1,
+    fpage: 1,
+    lpage: 1,
     year: 1,
     abstract: 1,
     authors: 1,

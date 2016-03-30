@@ -81,6 +81,8 @@ Config = {
         "journalId",
         "publisher",
         "elocationId",
+        "fpage",
+        "lpage",
         "year",
         "month",
         "issue",

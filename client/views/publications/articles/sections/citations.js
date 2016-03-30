@@ -18,5 +18,9 @@ Template.CitedByTemplate.helpers({
     },
     formatIssue:function(){
         return this.issue && ('('+this.issue+')' + " : ")
-    }
+    },
+    pages: function (){
+        return this.fpage && this.lpage && (this.fpage + "-" + this.lpage);
+    },
+
 })

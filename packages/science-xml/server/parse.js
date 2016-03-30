@@ -144,7 +144,16 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed keyword');
 
     var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
-    if (elocationId !== undefined) results.elocationId = elocationId;
+    if (elocationId !== undefined)
+        results.elocationId = elocationId;
+    else{
+        var fpage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
+        var lpage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
+        if(fpage !== undefined) results.fpage = fpage;
+            logger.info('parsed fpage');
+        if(lpage !== undefined) results.lpage = lpage;
+            logger.info('parsed lpage');
+    }
     logger.info('parsed elocationId');
 
     var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
