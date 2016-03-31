@@ -33,15 +33,9 @@ Meteor.publish('journalMostCitedBrief', function (journalShortTitle) {
     var ids = _.pluck(mostCited.fetch(), 'articleId');
     return [
         Articles.find({_id: {$in: ids}}, {
-            fields: articleWithMetadata
+            fields: {doi: 1, title: 1}
         }),
-        MostCited.find(),
-        Publishers.find({}, {
-            fields: {shortname: 1}
-        }),
-        Publications.find({}, {
-            fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
-        })
+        MostCited.find()
     ]
 });
 
@@ -70,7 +64,7 @@ Meteor.publish('homepageMostCitedBrief', function () {
     var ids = _.pluck(mostCited.fetch(), 'articleId');
     return [
         Articles.find({_id: {$in: ids}}, {
-            fields: articleWithMetadata
+            fields: {doi: 1, title: 1}
         }),
         MostCited.find(),
         Publishers.find({}, {
