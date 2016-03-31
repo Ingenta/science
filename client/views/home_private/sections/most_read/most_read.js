@@ -8,8 +8,8 @@ Template.mostReadArticleList.onCreated(function(){
         }
 
     }
-    else if(this.journalId){
-        var journalId = this.journalId;
+    else if(this.data && this.data.journalId){
+        var journalId = this.data.journalId;
         if(!Session.get("mostReadIds"+journalId)) {
             Meteor.call("getMostRead", journalId, 6, function (err, result) {
                 Session.set("mostReadIds" + journalId, result);
