@@ -37,6 +37,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         ]
     },
     onBeforeAction: function () {
+        Session.set('moopFile',null);
         //if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
         //    Meteor.call("getLocationByCurrentIP", function (err, result) {
         //        if (!result)console.log("ip not found.");

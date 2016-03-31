@@ -1491,5 +1491,10 @@
   "EIC":"主编",
   "Dynamic Publishing":"本平台出版动态查看",
   "Article Metrics": "社交媒体分享",
-  "noAbstract":"该文章没有摘要信息"
+  "noAbstract":"该文章没有摘要信息",
+  "title":"标题",
+  "type":"类型",
+  "operation":"操作",
+  "play":"播放",
+  "download":"下载"
 }

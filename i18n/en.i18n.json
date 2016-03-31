@@ -1160,5 +1160,10 @@
     "EIC":"EIC",
     "Dynamic Publishing":"The dynamic publishing platform View",
     "Article Metrics":"Article Metrics",
-    "noAbstract":"There is no abstract available for this article."
+    "noAbstract":"There is no abstract available for this article.",
+    "title":"Title",
+    "type":"Type",
+    "operation":"Operation",
+    "play":"Play",
+    "download":"Download"
 }

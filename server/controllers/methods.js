@@ -57,6 +57,7 @@ Meteor.methods({
             var datas = _.map(medias.fetch(),function(item){
                 var obj={};
                 obj.title=item.title;
+                obj.description = item.description;
                 if(item.fileId){
                     var file = Collections.JournalMediaFileStore.findOne({_id:item.fileId});
                     if(file){
