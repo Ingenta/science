@@ -62,6 +62,27 @@ Science.XPath.ParseHelper = {
 	},
 	/**
 	 * 同步方法
+	 * 使用xpath从dom元素中获取所有满足条件的值
+	 * @param xp
+	 * @param ele
+	 * @returns {void|*|array}
+	 */
+	getAllMatchedVal:function(xp,ele,planb){
+		var val = xpath.select(xp,ele);
+		if(_.isEmpty(val)){
+			if(planb){
+				return this.getAllMatchedVal(planb,ele);
+			}else{
+				return;
+			}
+		}
+		var datas = _.map(val,function(v){
+			return _.pluck(v.childNodes,"data").join("").replace(/\r\n/g," ").trim();;
+		});
+		return datas;
+	},
+	/**
+	 * 同步方法
 	 * 使用xpath取得dom元素的内容
 	 * @param xp
 	 * @param ele
