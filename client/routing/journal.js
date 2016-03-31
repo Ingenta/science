@@ -12,8 +12,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     },
     template: "ShowJournal",
     title: function () {
-        var id = Session.get('currentJournalId');
-        var p = Publications.findOne({_id: id});
+        var p = Publications.findOne({shortTitle: this.params.journalShortTitle});
         if (!p)return ":journalShortTitle";
         if (TAPi18n.getLanguage() === "en")return p.title || p.titleCn;
         return p.titleCn || p.title;
@@ -54,7 +53,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
         return [
             Meteor.subscribe('articlesInSpecTopic', this.params.specialTopicsId),
             JournalSubs.subscribe('specialTopics'),
-            Meteor.subscribe('oneJournalIssues',Session.get("currentJournalId"))
+            Meteor.subscribe('journalIssues',this.params.journalShortTitle)
         ]
     }
 });

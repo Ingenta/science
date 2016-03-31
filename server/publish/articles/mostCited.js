@@ -1,5 +1,9 @@
-Meteor.publish('journalMostCited', function (journalId) {
-    check(journalId, String);
+Meteor.publish('journalMostCited', function (journalShortTitle) {
+    if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
+    var journal = Publications.findOne({shortTitle: journalShortTitle});
+    if(!journal)return this.ready();
+    var journalId=journal._id;
     var limit=20;
     var query = journalId && {journalId: journalId} || {};
     var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});
@@ -17,8 +21,12 @@ Meteor.publish('journalMostCited', function (journalId) {
         })
     ]
 });
-Meteor.publish('journalMostCitedBrief', function (journalId) {
-    check(journalId, String);
+Meteor.publish('journalMostCitedBrief', function (journalShortTitle) {
+    if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
+    var journal = Publications.findOne({shortTitle: journalShortTitle});
+    if(!journal)return this.ready();
+    var journalId=journal._id;
     var limit=5;
     var query = journalId && {journalId: journalId} || {};
     var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});

@@ -49,8 +49,12 @@ Meteor.publish('journalMostRead', function (journalId) {
 
 });
 
-Meteor.publish('journalMostReadBrief', function (journalId) {
-    check(journalId, String);
+Meteor.publish('journalMostReadBrief', function (journalShortTitle) {
+    if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
+    var journal = Publications.findOne({shortTitle: journalShortTitle});
+    if(!journal)return this.ready();
+    var journalId=journal._id;
     var result = createMostReadList(journalId, 5);
     return [
         Articles.find({_id: {$in: result}}, {
