@@ -120,11 +120,11 @@ classcraft:meteor-wkhtmltopdf
 timbrandin:slick
 
 # debug
-meteortoys:toykit
-msavin:mongol
+#meteortoys:toykit
+#msavin:mongol
 meteorhacks:kadira
 natestrauser:connection-banner
-
+kadira:debug
 
 
 kaso:bootstrap-treeview
