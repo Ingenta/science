@@ -49,6 +49,25 @@ Meteor.methods({
     updateMostCited: function () {
         updateMostCited && updateMostCited();
         return true;
+    },
+    getMoopForArticle:function(doi){
+        if(!doi) return;
+        var medias = Collections.Medias.find({doi:doi});
+        if(medias.count()){
+            var datas = _.map(medias.fetch(),function(item){
+                var obj={};
+                obj.title=item.title;
+                if(item.fileId){
+                    var file = Collections.JournalMediaFileStore.findOne({_id:item.fileId});
+                    if(file){
+                        obj.url=file.url();
+                        obj.ext=Science.String.getLastPart(file.original.type,"/");
+                    }
+                }
+                return obj;
+            })
+            return datas;
+        }
     }
 });
 

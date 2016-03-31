@@ -171,7 +171,6 @@ Template.registerHelper('showTopicName',function(topics){
     if(_.isEmpty(topics)) return;
     var topicId=topics[0], key='topic_'+topicId;
     Meteor.call("getOneTopic",topicId,function(err,result){
-        console.log(result);
         if(!err)
             topicCache.set(key,result);
     })
