@@ -1,8 +1,8 @@
 
-Meteor.publish('oneIssueArticlesByArticleId', function (id) {
-    if(!id)return this.ready();
-    check(id, String);
-    var art = Articles.findOne({_id: id});
+Meteor.publish('getAllIssuesMatchingThisOneForNextAndPrevious', function (doi) {
+    if(!doi)return this.ready();
+    check(doi, String);
+    var art = Articles.findOne({doi: doi},{fields:{issueId:1}});
     if(!art)return this.ready();
     return Articles.find({issueId: art.issueId}, {
         fields: {doi: 1, elocationId: 1, issueId: 1}

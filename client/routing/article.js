@@ -17,11 +17,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     parent: "journal.name.toc",
     name: "article.show",
     waitOn: function () {
-        var artData = this.data();
-        var artId;
-        if (artData)artId = artData._id;
         return [
-            Meteor.subscribe('oneIssueArticlesByArticleId', artId),
+            Meteor.subscribe('getAllIssuesMatchingThisOneForNextAndPrevious', this.params.publisherDoi + "/" + this.params.articleDoi),
             Meteor.subscribe('journalIssues', this.params.journalShortTitle),
             Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
             Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi),
