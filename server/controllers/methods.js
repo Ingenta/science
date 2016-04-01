@@ -28,7 +28,7 @@ Meteor.methods({
     'insertAudit': function (userId, action, publisherId, journalId, articleId, keywords) {
         var datetime = new Date();
         var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
-        var user = Users.findOne({_id: userId});
+        var user = Users.findOne({_id: userId},{fields:{institutionId:1}});
         PageViews.insert({
             articleId: articleId,
             userId: userId,
