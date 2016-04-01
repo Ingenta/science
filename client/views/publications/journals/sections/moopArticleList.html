@@ -1,0 +1,40 @@
+<template name="moopArticleList">
+    <div class="row">
+        <div class="col-xs-3">
+            {{> journalCoverSummary}}
+            {{> journalNavigationPanelOnlyMoop}}
+            <!--{{> historicalJournalNavigationPanel}}-->
+        </div>
+        <div class="col-xs-9">
+            {{> articleListRightOnlyMoop}}
+            <!--{{> HistoricalJournalTable}}-->
+        </div>
+    </div>
+</template>
+
+<template name="journalNavigationPanelOnlyMoop">
+    <ul class="list-group">
+        {{#each volumeInJournal _id}}
+            <li class="volume list-group-item">
+                <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }}</span>
+            </li>
+            <ul id="vol_{{_id}}" class="issues list-group" style="display:{{issueDisplay}}">
+                {{#each issueInVolume journalId _id}}
+                    <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
+                        {{_ "issueItem" issue }}
+                    </li>
+                {{/each}}
+            </ul>
+        {{/each}}
+    </ul>
+</template>
+
+<template name="articleListRightOnlyMoop">
+    <ul class="article-list list-unstyled">
+        {{#each articles}}
+            {{> oneArticle}}
+        {{else}}
+            {{_ "No articles found!"}}
+        {{/each}}
+    </ul>
+</template>
