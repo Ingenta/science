@@ -3,20 +3,14 @@ Meteor.publish('homepageMostRecentArticles', function () {
         Articles.find({}, {
             sort: {createdAt: -1},
             limit: 10,
-            fields: minimumArticle
+            fields: {title: 1, doi: 1}
         }),
-        Publishers.find({}, {
-            fields: {shortname: 1}
-        }),
-        Publications.find({}, {
-            fields: {publisher: 1, shortTitle: 1}
-        })
     ]
 });
 Meteor.publish('miniplatformMostRecentArticles', function () {
-    var limit=6;
+    var limit = 6;
     var query = {};
-        query.publisher=Publishers.findOne({shortname : Config.defaultPublisherShortName})._id;
+    query.publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName})._id;
     return [
         Articles.find(query, {
             sort: {createdAt: -1},

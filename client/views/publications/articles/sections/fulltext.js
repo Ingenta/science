@@ -25,7 +25,7 @@ Template.FullTextTemplate.helpers({
         return !_.isEmpty(Template.currentData().references);
     },
     hasAbstractOrKeyword:function(){
-        return this.abstract || !_.isEmpty(this.keywords);
+        return (this.abstract && (this.abstract.cn || this.abstract.en)) || !_.isEmpty(this.keywords);
     }
 })
 

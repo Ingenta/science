@@ -15,7 +15,8 @@ Template.AbstractTemplate.helpers({
 });
 Template.AbstractContentAndKeywords.helpers({
 	getAbstract:function(){
-		if(!this.abstract)return TAPi18n.__("noAbstract");
+		if(!this.abstract || (!this.abstract.en && !this.abstract.cn))
+			return TAPi18n.__("noAbstract");
 		if(_.isString(this.abstract))
 			return this.abstract;
 		else if(_.isObject(this.abstract)){
