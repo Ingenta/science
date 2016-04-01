@@ -1,10 +1,10 @@
-Template.mostCiteArticle.events({
+Template.mostCitedArticleFullList.events({
     'change input.datesort': function (event) {
         Session.set("sort", parseInt(event.target.value));
     }
 });
 
-Template.mostCiteArticle.helpers({
+Template.mostCitedArticleFullList.helpers({
     mostCitedArticles: function () {
         var citedAr = undefined;
         var journalId = Router.current().params.journalId;

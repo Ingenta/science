@@ -31,6 +31,8 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe("journalAuthorCenterTab",Router.current().params.journalShortTitle);
             }else if(slug === 'Special Topics'){
                 Meteor.subscribe("journalIssues",Router.current().params.journalShortTitle);
+            }else if(slug === 'About'){
+                Meteor.subscribe("editorial_member",Router.current().params.journalShortTitle)
             }
 
         }
