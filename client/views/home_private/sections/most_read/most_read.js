@@ -1,8 +1,8 @@
 Template.mostReadArticleList.onCreated(function(){
     if(Router.current().route.getName() === "home")
     {
-        if(!Session.get("homePageMostReadArticleIds")) {
-            Meteor.call("getMostRead", undefined, 6, function (err, result) {
+        if(_.isEmpty(Session.get("homePageMostReadArticleIds"))) {
+            Meteor.call("getMostRead", undefined, 5, function (err, result) {
                 Session.set("homePageMostReadArticleIds", result);
             });
         }
@@ -10,8 +10,8 @@ Template.mostReadArticleList.onCreated(function(){
     }
     else if(this.data && this.data.journalId){
         var journalId = this.data.journalId;
-        if(!Session.get("mostReadIds"+journalId)) {
-            Meteor.call("getMostRead", journalId, 6, function (err, result) {
+        if(_.isEmpty(Session.get("mostReadIds"+journalId))) {
+            Meteor.call("getMostRead", journalId, 5, function (err, result) {
                 Session.set("mostReadIds" + journalId, result);
             });
         }
@@ -23,14 +23,14 @@ Template.mostReadArticleList.helpers({
         //homepage
         if(Router.current().route.getName() === "home")
         {
-            if(!Session.get("homePageMostReadArticleIds")) return;
+            if(_.isEmpty(Session.get("homePageMostReadArticleIds"))) return;
             return _.map(Session.get("homePageMostReadArticleIds"), function (id) {
                 return Articles.findOne({_id: id})
             });
         }
         else if(this.journalId){
             var journalId = this.journalId;
-            if(!Session.get("mostReadIds"+journalId)) return;
+            if(_.isEmpty(Session.get("mostReadIds"+journalId))) return;
             return _.map(Session.get("mostReadIds"+journalId), function (id) {
                 return Articles.findOne({_id: id})
             });
