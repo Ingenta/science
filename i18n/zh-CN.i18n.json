@@ -1239,15 +1239,35 @@
       }
     },
     "journalAC": {
-      "journalId": {
-        "label": "期刊名称"
+      "title": {
+        "label": "标题",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
-      "link": {
-        "label": "链接",
-        "placeholder": "http://"
+      "author": {
+        "label": "作者",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
-      "fileId": {
-        "label": "选择文件"
+      "content": {
+        "label": "全文",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "releaseTime": {
+        "label": "发布时间"
       }
     }
   },
@@ -1479,6 +1499,7 @@
   "Cultural details":"企业文化",
   "News Details":"新闻详情",
   "Latest News":"最新资讯",
+  "Latest Advertisement":"最新广告合作",
   "Magazine dynamic":"杂志社动态",
   "View Search Results":"检索结果查看",
   "Information Title":"信息标题",

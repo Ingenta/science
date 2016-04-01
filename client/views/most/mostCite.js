@@ -1,6 +1,9 @@
+Template.mostCitedArticleFullList.onCreated(function(){
+    this.sortOrder = new ReactiveVar(0);
+})
 Template.mostCitedArticleFullList.events({
-    'change input.datesort': function (event) {
-        Session.set("sort", parseInt(event.target.value));
+    'change input.datesort': function (event, template) {
+        template.sortOrder.set(parseInt(event.target.value));
     }
 });
 
@@ -14,8 +17,8 @@ Template.mostCitedArticleFullList.helpers({
         var allId = _.pluck(citedAr, 'articleId');
         // 返回article信息，并排序
         var sort = {};
-        if (Session.get("sort"))
-            sort = {published: Session.get("sort")};
+        if (Template.instance().sortOrder.get())
+            sort = {published: Template.instance().sortOrder.get()};
         else
             sort = {citationCount: -1};
         return Articles.find({_id: {$in: allId}}, {sort: sort});

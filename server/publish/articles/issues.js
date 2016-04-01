@@ -1,4 +1,4 @@
-Meteor.publish('journalIssues', function(journalShortTitle) {
+Meteor.publish('journalIssuesIncludingHistorical', function(journalShortTitle) {
     if(!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
