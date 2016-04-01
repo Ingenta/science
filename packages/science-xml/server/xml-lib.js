@@ -98,7 +98,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     var authorNotesNodes = parserHelper.getNodes("//author-notes/fn[@id]", doc);
     authorNotesNodes.forEach(function (note) {
         var noteLabel = parserHelper.getSimpleVal("child::label", note);
-        var email = parserHelper.getSimpleVal("descendant::ext-link", note);
+        var email = parserHelper.getAllMatchedVal("descendant::ext-link", note);
         var multiLangNote = parserHelper.getMultiVal("child::p[@lang='{lang}']", note, {
             planb: "child::p",
             handler: parserHelper.handler.xml
@@ -109,13 +109,17 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             results.errors.push("No noteLabel found");
         } else {
             var entry = {id: id, label: noteLabel};
-            if (email)  entry.email = email;
+            if (!_.isEmpty(email))  entry.email = email;
             if (!_.isEmpty(multiLangNote)) {
                 entry.note = {};
                 _.each(multiLangNote, function (noteContent, key) {
-                    if (entry.email) {
-                        var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, email);
-                        noteContent = noteContent.toString().replace(/<ext-link[^<]+<\/ext-link>/, mailTag);
+                    if (!_.isEmpty(entry.email)) {
+                        noteContent = noteContent.toString();
+                        _.each(entry.email,function(em){
+                            var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, em);
+                            noteContent = noteContent.replace(new RegExp("<ext-link[^<]+"+em+"<\/ext-link>"), mailTag);
+                        })
+
                     }
                     entry.note[key] = noteContent.trim().replace(/<\/?p[^>]*>/g, "");
                 })
@@ -287,14 +291,22 @@ ScienceXML.getFullText = function (results, doc) {
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstract = parserHelper.getXmlString("//abstract", doc, true);
-    if (!abstract){
+    var abstractCn = parserHelper.getXmlString("//abstract", doc, true);
+    if (!abstractCn){
         //results.errors.push("No abstract found");//允许文章没有摘要信息
     }else {
-        abstract = abstract.trim()
-        if (abstract.startWith("<p>") && abstract.endWith("</p>"))
-            abstract = abstract.slice(3, -4)
-        results.abstract = abstract;
+        abstractCn = abstractCn.trim()
+        if (abstractCn.startWith("<p>") && abstractCn.endWith("</p>"))
+            abstractCn = abstractCn.slice(3, -4)
+        results.abstract={cn:abstractCn};
+
+        var abstractEn = parserHelper.getXmlString("//trans-abstract", doc, true);
+        if (abstractEn && abstractEn.startWith("<p>") && abstractEn.endWith("</p>"))
+            abstractEn = abstractEn.slice(3, -4)
+
+        if(abstractEn){
+            results.abstract.en=abstractEn;
+        }
     }
     return results;
 };

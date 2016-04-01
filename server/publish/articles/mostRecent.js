@@ -13,17 +13,14 @@ Meteor.publish('homepageMostRecentArticles', function () {
         })
     ]
 });
-Meteor.publish('miniplatformMostRecentArticles', function (publisherId,count) {
-    check(publisherId, String);
-    check(count, Number);
-    var c=count || 10;
+Meteor.publish('miniplatformMostRecentArticles', function () {
+    var limit=6;
     var query = {};
-    if(publisherId)
-        query.publisher=publisherId;
+        query.publisher=Publishers.findOne({shortname : Config.defaultPublisherShortName})._id;
     return [
         Articles.find(query, {
             sort: {createdAt: -1},
-            limit: c,
+            limit: limit,
             fields: minimumArticle
         }),
         Publishers.find({}, {

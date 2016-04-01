@@ -54,6 +54,11 @@ Template.registerHelper('urlToArticleById', function (id) {
     return Science.URL.articleDetail(id);
 });
 
+Template.registerHelper('urlToArticleByDoi', function (doi) {
+    if (!doi)return;
+    return "/doi/"+doi;
+});
+
 Template.registerHelper('urlToJournal', function (title) {
     var article = Articles.findOne({'title.en': title});
     return getJournalComponentByArticle(article);
@@ -170,10 +175,11 @@ Template.registerHelper('showTopicName',function(topics){
     if(!_.isArray(topics)) return;
     if(_.isEmpty(topics)) return;
     var topicId=topics[0], key='topic_'+topicId;
-    Meteor.call("getOneTopic",topicId,function(err,result){
-        console.log(result);
-        if(!err)
-            topicCache.set(key,result);
-    })
+    //NOTE: disabled until a more efficient method is found
+    // Meteor.call("getOneTopic",topicId,function(err,result){
+    //     console.log(result);
+    //     if(!err)
+    //         topicCache.set(key,result);
+    // })
     return topicCache.get(key) && ( TAPi18n.getLanguage()=='zh-CN'?topicCache.get(key).name:topicCache.get(key).englishName);
 })

@@ -17,19 +17,15 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     parent: "journal.name.toc",
     name: "article.show",
     waitOn: function () {
-        var artData = this.data();
-        var artId;
-        if (artData)artId = artData._id;
         return [
-            Meteor.subscribe('oneIssueArticlesByArticleId', artId),
-            Meteor.subscribe('oneJournalIssues', Session.get('currentJournalId')),
-            Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
-            Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
-            Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
+            Meteor.subscribe('getAllIssuesMatchingThisOneForNextAndPrevious', this.params.publisherDoi + "/" + this.params.articleDoi),
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
+            Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi),
+            Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
-            Meteor.subscribe('journalMostReadBrief', Session.get('currentJournalId')),
-            Meteor.subscribe('journalMostCitedBrief', Session.get('currentJournalId'))
+            Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
+            Meteor.subscribe('journalMostCitedBrief', this.params.journalShortTitle)
         ]
     },
     onBeforeAction: function () {
@@ -72,13 +68,13 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
     name: "article.show.strange",
     waitOn: function () {
         return [
-            Meteor.subscribe('oneArticleByDoi', Session.get('currentDoi')),
-            Meteor.subscribe('oneArticleKeywords', Session.get('currentDoi')),
-            Meteor.subscribe('oneArticleFigures', Session.get('currentDoi')),
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
+            Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi),
+            Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
-            Meteor.subscribe('journalMostRead', Session.get('currentJournalId')),
-            Meteor.subscribe('journalMostCited', Session.get('currentJournalId'))
+            Meteor.subscribe('journalMostRead', this.params.journalShortTitle),
+            Meteor.subscribe('journalMostCited', this.params.journalShortTitle)
         ]
     },
     onBeforeAction: function () {
