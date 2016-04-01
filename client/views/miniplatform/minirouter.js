@@ -84,9 +84,21 @@ Router.map(function () {
         }
     });
 
-    //关于我们-理事会
+    //关于我们-两刊理事会
     this.route("council", {
         path: "/miniplatform/council",
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                MiniPlatformSubs.subscribe('news_contact'),
+                MiniPlatformSubs.subscribe('news_link')
+            ]
+        }
+    });
+
+    //关于我们-两刊总主编
+    this.route("chiefEditor", {
+        path: "/miniplatform/chiefEditor",
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
