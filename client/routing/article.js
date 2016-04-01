@@ -117,24 +117,24 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
     else if (article.pubStatus === "normal") {
         var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
         var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
-        this.redirect('article.show', {
+        Router.go('article.show', {
             publisherName: pub.shortname,
             journalShortTitle: journal.shortTitle,
             volume: article.volume,
             issue: article.issue,
             publisherDoi: this.params.publisherDoi,
             articleDoi: this.params.articleDoi
-        });
+        },{ replaceState: true });
     }
     else {
         var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
         var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
-        this.redirect('article.show.strange', {
+        Router.go('article.show.strange', {
             publisherName: pub.shortname,
             journalShortTitle: journal.shortTitle,
             publisherDoi: this.params.publisherDoi,
             articleDoi: this.params.articleDoi
-        });
+        },{ replaceState: true });
     }
 
 
