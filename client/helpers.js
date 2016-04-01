@@ -54,6 +54,11 @@ Template.registerHelper('urlToArticleById', function (id) {
     return Science.URL.articleDetail(id);
 });
 
+Template.registerHelper('urlToArticleByDoi', function (doi) {
+    if (!doi)return;
+    return "/doi/"+doi;
+});
+
 Template.registerHelper('urlToJournal', function (title) {
     var article = Articles.findOne({'title.en': title});
     return getJournalComponentByArticle(article);

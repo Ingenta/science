@@ -212,14 +212,12 @@ var getNextPage = function (issue, page, ascending) {
 }
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        if (!this.elocationId)return false;
-        var curIssue = this.issueId;
-        return getNextPage(curIssue, this.elocationId, false);
+        if (this.elocationId && this.issueId)
+            return getNextPage(this.issueId, this.elocationId, false);
     },
     nextArticle: function () {
-        if (!this.elocationId)return false;
-        var curIssue = this.issueId;
-        return getNextPage(curIssue, this.elocationId, true);
+        if (this.elocationId && this.issueId)
+            return getNextPage(this.issueId, this.elocationId, true);
     },
     hasIssue: function () {
         if (this.pubStatus && this.pubStatus === "normal")return true;

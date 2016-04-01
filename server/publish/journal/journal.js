@@ -1,8 +1,8 @@
 
-Meteor.publish('oneIssueArticlesByArticleId', function (id) {
-    if(!id)return this.ready();
-    check(id, String);
-    var art = Articles.findOne({_id: id});
+Meteor.publish('getAllIssuesMatchingThisOneForNextAndPrevious', function (doi) {
+    if(!doi)return this.ready();
+    check(doi, String);
+    var art = Articles.findOne({doi: doi},{fields:{issueId:1}});
     if(!art)return this.ready();
     return Articles.find({issueId: art.issueId}, {
         fields: {doi: 1, elocationId: 1, issueId: 1}
@@ -80,10 +80,21 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
     var mostRead = createMostReadList(journalId, 5);
     var mostCitedList = MostCited.find({journalId:journalId},{limit:6,sort: {count: -1}});
     var mostCited = _.pluck(mostCitedList.fetch(), 'articleId');
-    var homepageArticles = _.union(recommendedArticleIds,mostRead,mostCited);
+    var recentlyUploadedList = Articles.find({journalId:journalId}, {
+        sort: {createdAt: -1},
+        limit: 10,
+        fields: {_id: 1}
+    })
+    var recentlyUploaded = _.pluck(recentlyUploadedList.fetch(), '_id');
+    var homepageArticles = _.union(recommendedArticleIds,mostRead,mostCited,recentlyUploaded);
+
     return [
         Articles.find({_id: {$in: homepageArticles}}, {
-            fields: articleWithMetadata
+            fields: {
+                title: 1,
+                journalId: 1,
+                doi: 1
+            }
         }),
         Publishers.find({}, {
             fields: {shortname: 1}
