@@ -30,7 +30,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('specialTopics'),
-            JournalSubs.subscribe("editorial_member"),
             JournalSubs.subscribe("meeting_info"),
             HomePageSubs.subscribe("news"),
         ]
