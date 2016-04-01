@@ -47,7 +47,11 @@
             {{/if}}
         </div>
         <div class="row">
-            <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a>
+            {{#if url}}
+                <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a>
+            {{else}}
+                <a href="{{whichUrl}}">{{translateThis title.cn title.en}}</a>
+            {{/if}}
         </div>
         <div class="over-height">
             <small>
