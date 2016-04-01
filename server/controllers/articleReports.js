@@ -1,3 +1,5 @@
+var Future = Npm.require('fibers/future');
+
 Meteor.methods({
     'getArticlePageViewsPieChartData': function (articleId) {
         var data = new Array();
@@ -18,39 +20,42 @@ Meteor.methods({
         return data;
     },
     'getArticlePageLocationReport': function (action, articleId) {
-        var countryViews = {};
-        var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
-        PageViews.aggregate([{
-            $group: {
-                _id: {articleId: articleId, action: action, ip: '$ip'},
-                count: {$sum: 1}
-            }
-        }]).forEach(function (item) {
-            if (!item._id.ip) {
-                other.locationCount += item.count;
-            } else {
-                var currentUserIPNumber = Science.ipToNumber(item._id.ip)
-                var country = IP2Country.findOne({
-                        startIpLong: {$lte: currentUserIPNumber},
-                        endIpLong: {$gte: currentUserIPNumber}
-                    },
-                    {fields: {country: 1, countryCode2: 1}}
-                );
-                if (country) {
-                    if (countryViews[country.countryCode2]) {
-                        countryViews[country.countryCode2].locationCount += item.count;
-                    } else {
-                        countryViews[country.countryCode2] = {name: country.country, locationCount: item.count}
+        var myFuture = new Future();
+        console.time('aaab')
+
+        PageViews.rawCollection().group(
+            {ip:true},
+            {articleId: articleId, action: action},
+            {count:0},
+            function (doc, result) {
+                result.count++;
+            },
+            Meteor.bindEnvironment(function (err, result) {
+                var countryViews = {};
+                var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
+                _.each(result, function(item){
+                    var currentUserIPNumber = Science.ipToNumber(item.ip);
+                    var country = IP2Country.findOne({
+                            startIpLong: {$lte: currentUserIPNumber},
+                            endIpLong: {$gte: currentUserIPNumber}
+                        }, {fields: {country: 1, countryCode2: 1}});
+                    if(country){
+                        if (countryViews[country.countryCode2]) {
+                            countryViews[country.countryCode2].locationCount += item.count;
+                        } else {
+                            countryViews[country.countryCode2] = {name: country.country, locationCount: item.count}
+                        }
+                    }else{
+                        other.locationCount += item.count;
                     }
-                } else {
-                    other.locationCount += item.count;
-                }
-            }
-        });
-        countryViews = _.values(countryViews);
-        if (other.locationCount > 0)
-            countryViews.push(other);
-        return countryViews;
+                })
+                countryViews = _.values(countryViews);
+                if (other.locationCount > 0)
+                    countryViews.push(other);
+                return myFuture.return(countryViews);
+            })
+        )
+        return myFuture.wait()
     },
     'getArticlePageViewsGraphData': function (articleId) {
         var currentDate = new Date;

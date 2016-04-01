@@ -1,4 +1,6 @@
 Meteor.publish('news', function() {
     return News.find();
 });
-//TODO: make a homepage and journal subscription
+Meteor.publish('homepageNews', function() {
+    return News.find({publications: {$exists: false}});
+});
