@@ -25,13 +25,30 @@ Meteor.publish('journalBrowseTab', function (journalShortTitle,issue) {
     if(journal && !_.isEmpty(journal.historicalJournals)){
         idArr = _.union(idArr,journal.historicalJournals)
     }
-    return [
+
+    //get all topic id
+    var topics = Articles.find({journalId: journalId, issue: issue},{fields:{topic:1}}).fetch();
+    var topicsArr = _.reduce(topics,function(memo,item){
+        if(item.topic){
+            return _.union(memo,item.topic);
+        }
+        return memo;
+    },[]);
+    topicsArr = _.compact(topicsArr);
+
+    var publishList = [
         Articles.find({journalId: journalId, issue: issue}, {
             fields: {sections: 0, figures: 0, references: 0, authorNotes:0, affiliations:0, tables:0, pacs:0, fundings:0}
-        }),
-        Volumes.find({journalId:{$in:idArr}}),
-        Issues.find({journalId:{$in:idArr}},{fields:{createDate:0}})
-      ]
+        })
+    ];
+    if(!_.isEmpty(idArr)){
+        publishList.push(Volumes.find({journalId:{$in:idArr}}));
+        publishList.push(Issues.find({journalId:{$in:idArr}},{fields:{createDate:0}}))
+    }
+    if(!_.isEmpty(topicsArr)){
+        publishList.push(Topics.find({_id:{$in:topicsArr}}))
+    }
+    return publishList;
 });
 Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
@@ -60,11 +77,28 @@ Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issue
     var journalId=journal._id;
     if(!issueId)return this.ready();
     check(issueId, String);
-    return [
+
+    //get all topic id
+    var topics = Articles.find({journalId: journalId, issueId: issueId},{fields:{topic:1}}).fetch();
+    var topicsArr = _.reduce(topics,function(memo,item){
+        if(item.topic){
+            return _.union(memo,item.topic);
+        }
+        return memo;
+    },[]);
+    topicsArr = _.compact(topicsArr);
+
+    var publishList = [
         Articles.find({journalId: journalId, issueId: issueId}, {
             fields: {sections: 0, figures: 0, references: 0, authorNotes:0, affiliations:0, tables:0, pacs:0, fundings:0}
         })
-    ]
+    ];
+
+    if(!_.isEmpty(topicsArr)){
+        publishList.push(Topics.find({_id:{$in:topicsArr}}))
+    }
+    return publishList;
+
 });
 
 
