@@ -29,15 +29,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         ]
     },
     onBeforeAction: function () {
-        //if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
-        //    Meteor.call("getLocationByCurrentIP", function (err, result) {
-        //        if (!result)console.log("ip not found.");
-        //        else {
-        //            console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-        //            Session.set("ipInChina", result.country_code === "CN");
-        //        }
-        //    })
-        //}
         if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
 
@@ -78,15 +69,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
         ]
     },
     onBeforeAction: function () {
-        //if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
-        //    Meteor.call("getLocationByCurrentIP", function (err, result) {
-        //        if (!result)console.log("ip not found.");
-        //        else {
-        //            console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-        //            Session.set("ipInChina", result.country_code === "CN");
-        //        }
-        //    })
-        //}
         if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
 
@@ -112,38 +94,34 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
     );
     if (!article) {
         console.log(this.params.publisherDoi + "/" + this.params.articleDoi + ' doi not found, redirecting to homepage')
-        this.redirect('home')
+        return Router.go('home')
     }
-    else if (article.pubStatus === "normal") {
-        var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
-        var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
-        this.redirect('article.show', {
+    var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
+    var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
+    if (article.pubStatus === "normal") {
+        Router.go('article.show', {
             publisherName: pub.shortname,
             journalShortTitle: journal.shortTitle,
             volume: article.volume,
             issue: article.issue,
             publisherDoi: this.params.publisherDoi,
             articleDoi: this.params.articleDoi
-        });
+        }, {replaceState: true});
     }
     else {
-        var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
-        var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
-        this.redirect('article.show.strange', {
+        Router.go('article.show.strange', {
             publisherName: pub.shortname,
             journalShortTitle: journal.shortTitle,
             publisherDoi: this.params.publisherDoi,
             articleDoi: this.params.articleDoi
-        });
+        }, {replaceState: true});
     }
 
 
 }, {
     waitOn: function () {
         return [
-            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
-            JournalSubs.subscribe('medias'),
-            JournalSubs.subscribe('files')
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi)
         ]
     }
 });

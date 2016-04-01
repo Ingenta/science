@@ -9,14 +9,14 @@
                     <div class="row">
                         <h3>{{translateThis chinesename name}}</h3>
                     </div>
-                    {{#each publicationAds _id}}
+                    {{#each journalAC _id}}
                         <div class="col-xs-6">
-                            <a href="{{pdfValue}}" target="_blank">{{titleValue journalId}}&nbsp;{{_ "Advertisement"}}</a>
-                            {{#if can "modify-journalAC" "resource"}}{{>jkafModal template="updateAdCenterModalForm" doc=this id="updateAdCenterModal"}}{{/if}}
-                            {{#if can "delete-journalAC" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                            <a href="{{adUrl}}">{{translateThis title.cn title.en}}</a>
+                            {{#if miniPlatformPermission}}{{> updateAdCenterModalForm}}{{/if}}
+                            {{#if miniPlatformPermission}}<a href="#" class="fa fa-trash"></a>{{/if}}
                         </div>
                     {{else}}
-                        {{_ "No publications found!"}}
+                        {{_ "No content found!"}}
                     {{/each}}
                     {{#if can "add-journalAC" "resource" }}
                         <span class="fa fa-plus" id="adAdd" data-pubsid="{{_id}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addAdCenterModal"></span>{{> addAdCenterModalForm}}
@@ -30,13 +30,7 @@
 </template>
 
 <template name="updateAdCenterModalForm">
-    {{#autoForm doc=this collection="JournalAC" id="updateAdCenterModal" type="update" buttonContent=getUpdateButtonContent}}
-    <fieldset>
-        {{> afQuickField name="journalId" options=getJournals}}
-        {{> afQuickField name="fileId"}}
-    </fieldset>
-    <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
-    {{/autoForm}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="JournalAC" doc=_id operation="update" omitFields="publisher,pageView,types"}}{{/afModal}}
 </template>
 
 <template name="addAdCenterModalForm">
@@ -45,18 +39,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="addAdCenterModalLabel">{{_ "Add new"}}</h4>
                 </div>
                 {{#autoForm id="addAdCenterModalForm" collection="JournalAC" type="insert"}}
-                <div class="modal-body">
-                    {{> afQuickField name="journalId" options=getJournals}}
-                    {{> afQuickField name="fileId"}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-                </div>
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="author"}}
+                        {{> afQuickField name="content"}}
+                        {{> afQuickField name="releaseTime"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
                 {{/autoForm}}
             </div>
         </div>
