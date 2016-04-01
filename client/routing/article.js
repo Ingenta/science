@@ -94,11 +94,11 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
     );
     if (!article) {
         console.log(this.params.publisherDoi + "/" + this.params.articleDoi + ' doi not found, redirecting to homepage')
-        this.redirect('home')
+        return Router.go('home')
     }
-    else if (article.pubStatus === "normal") {
-        var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
-        var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
+    var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
+    var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
+    if (article.pubStatus === "normal") {
         Router.go('article.show', {
             publisherName: pub.shortname,
             journalShortTitle: journal.shortTitle,
@@ -106,26 +106,22 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
             issue: article.issue,
             publisherDoi: this.params.publisherDoi,
             articleDoi: this.params.articleDoi
-        },{ replaceState: true });
+        }, {replaceState: true});
     }
     else {
-        var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
-        var pub = Publishers.findOne({_id: article.publisher}, {fields: {shortname: 1}});
         Router.go('article.show.strange', {
             publisherName: pub.shortname,
             journalShortTitle: journal.shortTitle,
             publisherDoi: this.params.publisherDoi,
             articleDoi: this.params.articleDoi
-        },{ replaceState: true });
+        }, {replaceState: true});
     }
 
 
 }, {
     waitOn: function () {
         return [
-            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
-            JournalSubs.subscribe('medias'),
-            JournalSubs.subscribe('files')
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi)
         ]
     }
 });
