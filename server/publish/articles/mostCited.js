@@ -12,7 +12,7 @@ Meteor.publish('journalMostCited', function (journalShortTitle) {
         Articles.find({_id: {$in: ids}}, {
             fields: articleWithMetadata
         }),
-        MostCited.find(),
+        mostCited,
         Publishers.find({}, {
             fields: {shortname: 1}
         }),
@@ -27,7 +27,7 @@ Meteor.publish('journalMostCitedBrief', function (journalShortTitle) {
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
-    var limit=5;
+    var limit=6;
     var query = journalId && {journalId: journalId} || {};
     var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});
     var ids = _.pluck(mostCited.fetch(), 'articleId');
@@ -35,7 +35,7 @@ Meteor.publish('journalMostCitedBrief', function (journalShortTitle) {
         Articles.find({_id: {$in: ids}}, {
             fields: {doi: 1, title: 1}
         }),
-        MostCited.find()
+        mostCited
     ]
 });
 
@@ -58,7 +58,7 @@ Meteor.publish('homepageMostCited', function () {
     ]
 });
 Meteor.publish('homepageMostCitedBrief', function () {
-    var limit=5;
+    var limit=6;
     var query = {};
     var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});
     var ids = _.pluck(mostCited.fetch(), 'articleId');
@@ -66,7 +66,7 @@ Meteor.publish('homepageMostCitedBrief', function () {
         Articles.find({_id: {$in: ids}}, {
             fields: {doi: 1, title: 1}
         }),
-        MostCited.find(),
+        mostCited,
         Publishers.find({}, {
             fields: {shortname: 1}
         }),

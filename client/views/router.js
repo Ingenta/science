@@ -19,7 +19,7 @@ HomePageSubs.subscribe('images');
 Meteor.subscribe('advertisement');
 HomePageSubs.subscribe('institutions');
 HomePageSubs.subscribe('searchHistory');
-HomePageSubs.subscribe('emailConfig');
+// HomePageSubs.subscribe('emailConfig');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
@@ -197,7 +197,7 @@ Router.map(function () {
     });
 
     this.route('/mostCitedArticles', {
-        template: "mostCiteArticle",
+        template: "mostCitedArticleFullList",
         title: function () {
             return TAPi18n.__("Most cited");
         },
@@ -211,7 +211,7 @@ Router.map(function () {
     });
 
     this.route('/mostCitedArticles/:journalId', {
-        template: "mostCiteArticle",
+        template: "mostCitedArticleFullList",
         title: function () {
             return TAPi18n.__("Most cited");
         },
