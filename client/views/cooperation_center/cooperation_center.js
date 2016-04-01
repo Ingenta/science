@@ -1,18 +1,12 @@
 Template.cooperationCenter.helpers({
     publishers: function(){
-        return Publishers.find();
+        return Publishers.find({shortname : Config.defaultPublisherShortName});
     },
-    publicationAds: function(pId){
+    journalAC: function(pId){
         return JournalAC.find({types: "1",publisher: pId});
     },
-    titleValue: function (id) {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var publication = Publications.findOne({_id: id});
-        if(publication)return iscn ? publication.titleCn : publication.title;
-    },
-    pdfValue:function(){
-        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        if(file)return file.url();
+    adUrl: function () {
+        return "/cooperationCenter/" + this._id;
     }
 });
 
@@ -26,40 +20,6 @@ Template.cooperationCenter.events({
         confirmDelete(e,function(){
             JournalAC.remove({_id:id});
         })
-    }
-});
-
-Template.updateAdCenterModalForm.helpers({
-    getJournals: function () {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var adv = JournalAC.find({types: "1",publisher: this.publisher,_id:{$ne:this._id}}).fetch();
-        var adId = _.pluck(adv,"journalId");
-        var publications = Publications.find({publisher: this.publisher,_id:{$nin:adId}}).fetch();
-        if(publications)
-        var result = [];
-        _.each(publications, function (item) {
-            var name = iscn ? item.titleCn : item.title;
-            result.push({label: name, value: item._id});
-        });
-        return result;
-    }
-});
-
-Template.addAdCenterModalForm.helpers({
-    getJournals: function () {
-        var viewsId =  Session.get('PublisherId');
-        if(viewsId)
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        var adv = JournalAC.find({types: "1",publisher: viewsId}).fetch();
-        var adId = _.pluck(adv,"journalId");
-        var publications = Publications.find({publisher: viewsId,_id:{$nin:adId}}).fetch();
-        if(publications)
-        var result = [];
-        _.each(publications, function (item) {
-            var name = iscn ? item.titleCn : item.title;
-            result.push({label: name, value: item._id});
-        });
-        return result;
     }
 });
 

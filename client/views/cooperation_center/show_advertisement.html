@@ -1,0 +1,36 @@
+<template name="cooperationCenterDetails">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            <div class="row">
+                <h3>{{_ "Ad Center"}}</h3>
+            </div>
+            <div class="row">
+                <div id="subcontent" class="col-xs-8">
+                    <div class="container-fluid">
+                        <div class="row" style="margin-top: 20px;">
+                            {{#each adDetails}}
+                                <div align="center"><span class="title-font">{{{translateThis title.cn title.en}}}</span>
+                                    {{#if miniPlatformPermission}}{{> updateAdCenterModalForm}}{{/if}}
+                                </div><br>
+                                <p class="text-center">{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{translateThis author.cn author.en}}</p><br>
+                                <p>{{{translateThis content.cn content.en}}}</p>
+                            {{else}}
+                                {{_ "No content found!"}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div id="menu" class="col-xs-4" style="border:1px solid #d7d7d7;">
+                    <h6 class="bg-eee" align="center" style="font-size: 12px"><strong>{{_ "Latest Advertisement"}}</strong></h6>
+                    {{#each latestAd}}
+                        <ul class="list-unstyled">
+                            <li><p><a href="{{adUrl}}">{{translateThis title.cn title.en}}</a></p></li>
+                        </ul>
+                    {{else}}
+                        {{_ "No results found!"}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

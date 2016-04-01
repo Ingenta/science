@@ -13,23 +13,23 @@ this.JournalAC.allow({
 });
 
 JournalACSchema = new SimpleSchema({
-    journalId: {
-        type: String,
-        unique: true,
-        autoform: {
-            type: 'universe-select'
-        }
+    title: {
+        type: Science.schemas.MultipleTextOptionalSchema
     },
-    link: {
-        type: String,
+    author: {
+        type: Science.schemas.MultipleTextOptionalSchema,
         optional: true
     },
-    fileId: {
-        type: String,
-        optional: true,
+    content: {
+        type:Science.schemas.MultipleTextAreaSchema,
+        optional: true
+    },
+    releaseTime: {
+        type: Date,
         autoform: {
-            type: "cfs-file",
-            collection: "files"
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
         }
     },
     publisher: {
@@ -38,6 +38,11 @@ JournalACSchema = new SimpleSchema({
     },
     types: {
         type: String,
+        optional: true
+    },
+    pageView: {
+        type:Number,
+        defaultValue: 0,
         optional: true
     }
 });

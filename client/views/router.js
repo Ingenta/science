@@ -158,10 +158,22 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('images'),
-                JournalSubs.subscribe('files'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('publications'),
+                JournalSubs.subscribe("journal_ad")
+            ]
+        }
+    });
+
+    this.route('cooperationCenter/:adId', {
+        template: "cooperationCenterDetails",
+        parent: "home",
+        name: "cooperationCenterDetails",
+        title: function () {
+            return TAPi18n.__("Ad Center");
+        },
+        waitOn: function () {
+            return [
+                HomePageSubs.subscribe('publishers'),
                 JournalSubs.subscribe("journal_ad")
             ]
         }
