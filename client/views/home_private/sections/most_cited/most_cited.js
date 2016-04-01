@@ -1,4 +1,4 @@
-Template.mostCitedArticleList.helpers({
+Template.mostCitedArticleShortList.helpers({
     mostCitedArticles: function () {
         if (this.journalId) return MostCited.find({journalId: this.journalId}, {sort: {count: -1}, limit: 5});
         return MostCited.find({}, {sort: {count: -1}, limit: 5});

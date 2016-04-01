@@ -1,18 +1,40 @@
 //TODO: distinct chart data on userid
 //TODO: consider only calling if location report data is older than a day?
-Template.MetricsTemplate.rendered = function () {
+// Template.MetricsTemplate.rendered = function () {
+//     var article = Articles.findOne({articledoi: Router.current().params.articleDoi}, {fields: {_id: 1}});
+//     if (!article || !article._id)return;
+//
+//     Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
+//         buildHitCounterChart(response);
+//     });
+//
+//     //Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
+//     //    buildHitCounterGraph(response);
+//     //});
+//
+//     Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
+//         var data = new Array();
+//         var index = 0;
+//         _.each(arr, function (obj) {
+//             index++;
+//             if (obj.name) {
+//                 data.push({
+//                     name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
+//                     y: obj.locationCount
+//                 });
+//             }
+//         });
+//         buildLocationChart(data);
+//     });
+// }
+prepareMetricsForThisArticle = function(){
     var article = Articles.findOne({articledoi: Router.current().params.articleDoi}, {fields: {_id: 1}});
     if (!article || !article._id)return;
 
     Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
         buildHitCounterChart(response);
     });
-
-    //Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
-    //    buildHitCounterGraph(response);
-    //});
-
-    Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
+        Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
         var index = 0;
         _.each(arr, function (obj) {
@@ -27,7 +49,6 @@ Template.MetricsTemplate.rendered = function () {
         buildLocationChart(data);
     });
 }
-
 
 var buildHitCounterChart = function (data) {
 

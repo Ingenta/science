@@ -19,7 +19,7 @@ HomePageSubs.subscribe('images');
 Meteor.subscribe('advertisement');
 HomePageSubs.subscribe('institutions');
 HomePageSubs.subscribe('searchHistory');
-HomePageSubs.subscribe('emailConfig');
+// HomePageSubs.subscribe('emailConfig');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
@@ -42,12 +42,10 @@ Router.route("home", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe('publishers'),
-            HomePageSubs.subscribe('images'),
-            HomePageSubs.subscribe('news'),
+            HomePageSubs.subscribe('homepageNews'),
             HomePageSubs.subscribe('homepageMostRecentArticles'),
             HomePageSubs.subscribe('homepageMostCitedBrief'),
-            Meteor.subscribe('homepageMostReadBrief')
+            HomePageSubs.subscribe('homepageMostReadBrief')
         ]
     },
     onStop:function(){
@@ -197,7 +195,7 @@ Router.map(function () {
     });
 
     this.route('/mostCitedArticles', {
-        template: "mostCiteArticle",
+        template: "mostCitedArticleFullList",
         title: function () {
             return TAPi18n.__("Most cited");
         },
@@ -205,13 +203,13 @@ Router.map(function () {
         name: "mostCite.show",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('homepageMostCited')
+                Meteor.subscribe('homepageMostCited')
             ]
         }
     });
 
     this.route('/mostCitedArticles/:journalId', {
-        template: "mostCiteArticle",
+        template: "mostCitedArticleFullList",
         title: function () {
             return TAPi18n.__("Most cited");
         },
