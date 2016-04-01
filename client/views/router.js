@@ -205,7 +205,7 @@ Router.map(function () {
         name: "mostCite.show",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('homepageMostCited')
+                Meteor.subscribe('homepageMostCited')
             ]
         }
     });

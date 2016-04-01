@@ -1,9 +1,6 @@
-Meteor.publish('journalMostCited', function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
+Meteor.publish('journalMostCited', function (journalId) {
+    if(!journalId)return this.ready();
+    check(journalId, String);
     var limit=20;
     var query = journalId && {journalId: journalId} || {};
     var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});
