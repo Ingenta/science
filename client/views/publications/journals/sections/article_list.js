@@ -48,8 +48,8 @@ Template.journalNavigationPanel.events({
         //if url contains issue, router.go
         Router.current().params.volume = volume;
         Router.current().params.issue = issue;
-        if(this.journalId!=Session.get("currentJournalId")){
-            Router.current().params.journalShortTitle=Publications.findOne({_id:this.journalId}).shortTitle;
+        if (this.journalId != Session.get("currentJournalId")) {
+            Router.current().params.journalShortTitle = Publications.findOne({_id: this.journalId}).shortTitle;
         }
         Router.go("journal.name.toc", Router.current().params)
     }
@@ -89,20 +89,20 @@ Template.articleListRight.helpers({
     },
     articles: function () {
         var pubStatus = Template.currentData().pubStatus;
-        var query = {pubStatus:pubStatus};
-        if(pubStatus=='normal'){
+        var query = {pubStatus: pubStatus};
+        if (pubStatus == 'normal') {
             var curIssue = Session.get("currentIssueId");
-            if (!curIssue){
+            if (!curIssue) {
                 var lastIssue = getLastIssue();
                 if (lastIssue) {
                     Session.set("currentIssueId", lastIssue._id);
-                    curIssue=Session.get("currentIssueId");
+                    curIssue = Session.get("currentIssueId");
                 }
             }
-            query.issueId=curIssue;
+            query.issueId = curIssue;
         }
-        if(pubStatus=='accepted'){
-            return Articles.find(query, {sort: {accepted:-1}});
+        if (pubStatus == 'accepted') {
+            return Articles.find(query, {sort: {accepted: -1}});
         }
         return Articles.find(query, {sort: {elocationId: 1}});
     },
@@ -137,23 +137,22 @@ Template.articleListRight.helpers({
     }
 });
 Template.HistoricalJournalTable.helpers({
-    //journalItemData: function (id) {
-    //    return Publications.findOne({_id: id});
-    //},
-    historicalJournals: function(){
-        return Publications.find({_id:{$in:this.historicalJournals}},{sort:{publicationDate:-1}});
+    historicalJournals: function () {
+        if (this.historicalJournals)
+            return Publications.find({_id: {$in: this.historicalJournals}}, {sort: {publicationDate: -1}});
     }
 });
 
 Template.historicalJournalNavigationPanel.helpers({
-    hasHisJournal:function(){
+    hasHisJournal: function () {
         return !_.isEmpty(this.historicalJournals)
     },
-    sortedHisJournal:function(){
-        var hisJournals= Publications.find({_id:{$in:this.historicalJournals}},{sort:{publicationDate:-1}});
-        return hisJournals;
+    sortedHisJournal: function () {
+        if (this.historicalJournals)
+            return Publications.find({_id: {$in: this.historicalJournals}}, {sort: {publicationDate: -1}});
     },
-    whichUrl:function(){
-        return getJournalComponentByJournalId(this._id);
+    whichUrl: function () {
+        if (this._id)
+            return getJournalComponentByJournalId(this._id);
     }
 })
