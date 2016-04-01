@@ -42,12 +42,9 @@ Router.route("home", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe('publishers'),
-            HomePageSubs.subscribe('images'),
-            HomePageSubs.subscribe('news'),
             HomePageSubs.subscribe('homepageMostRecentArticles'),
             HomePageSubs.subscribe('homepageMostCitedBrief'),
-            Meteor.subscribe('homepageMostReadBrief')
+            HomePageSubs.subscribe('homepageMostReadBrief')
         ]
     },
     onStop:function(){
