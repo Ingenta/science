@@ -47,16 +47,17 @@ Template.updateLatestArticlesModalForm.helpers({
     getArticles: function () {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
-        if(publisher)
-        var rec = NewsRecommend.find({_id:{$ne:this._id}}).fetch();
-        var recId = _.pluck(rec,"ArticlesId");
-        var articles = Articles.find({publisher:publisher._id,_id:{$nin:recId}}).fetch();
-        var result = [];
-        _.each(articles, function (item) {
-            var name = iscn ? item.title.cn : item.title.en;
-            result.push({label: name, value: item._id});
-        });
-        return result;
+        if(publisher){
+            var rec = NewsRecommend.find({_id:{$ne:this._id}}).fetch();
+            var recId = _.pluck(rec,"ArticlesId");
+            var articles = Articles.find({publisher:publisher._id,_id:{$nin:recId}}).fetch();
+            var result = [];
+            _.each(articles, function (item) {
+                var name = iscn ? item.title.cn : item.title.en;
+                result.push({label: name, value: item._id});
+            });
+            return result;
+        }
     }
 });
 
