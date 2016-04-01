@@ -56,6 +56,9 @@ ReactiveTabs.createInterface({
             }
             Users.recent.read(article);
         }
+        else if (slug === 'metrics') {
+            prepareMetricsForThisArticle();
+        }
     }
 });
 
