@@ -63,7 +63,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                     var index = authorNotes.push({email: obj.email});
                     author.email = index;
                 }
-
+                //TODO: correct this logic
                 author.surname = {en: obj.firstname, cn: obj.firstname};
                 author.given = {
                     en: (obj.middlename || "" + " " + obj.lastname || ""),

@@ -574,7 +574,9 @@ ScienceXML.getKeywords = function (xp, dom) {
     var allkeywords = [];
     if (keywords && keywords.length) {
         _.each(keywords, function (kw) {
-            var skw = kw.toString().split(/\s*[,，]\s*/);
+            var skw = kw.toString().split(/\s*[,，]\s*/).map(function (k) {
+                return k.trim();
+            });
             allkeywords = _.union(allkeywords, skw);
 
         })
