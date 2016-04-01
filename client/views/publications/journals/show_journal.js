@@ -34,6 +34,7 @@ ReactiveTabs.createInterface({
             }else if(slug === 'About'){
                 Meteor.subscribe("editorial_member",Router.current().params.journalShortTitle);
             }else if(slug == 'MOOP'){
+                Meteor.subscribe("journalMoopTab",Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currMoopIssue_'+journal._id));
             }

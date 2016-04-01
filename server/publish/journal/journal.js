@@ -177,4 +177,11 @@ Meteor.publish('journalAuthorCenterTab',function (journalShortTitle) {
     return AuthorCenter.find({publications:journalId});
 })
 
-
+Meteor.publish('journalMoopTab',function(journalShortTitle){
+    if(!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
+    var journal = Publications.findOne({shortTitle: journalShortTitle});
+    if(!journal)return this.ready();
+    var journalId=journal._id;
+    return Collections.Medias.find({journalId:journalId});
+})
