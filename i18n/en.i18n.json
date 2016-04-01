@@ -1091,15 +1091,35 @@
             }
         },
         "journalAC": {
-            "journalId": {
-                "label": "Journal title"
+            "title": {
+                "label": "Title",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
-            "link": {
-                "label": "Link",
-                "placeholder": "http://"
+            "author": {
+                "label": "Author",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
-            "fileId": {
-                "label": "Choose file"
+            "content": {
+                "label": "Full Text",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            },
+            "releaseTime": {
+                "label": "Release Time"
             }
         }
     },
@@ -1146,6 +1166,7 @@
     "Cultural details":"Enterprise Culture",
     "News Details":"News Center",
     "Latest News":"Latest News",
+    "Latest Advertisement":"Latest Advertisement",
     "Magazine dynamic":"SCP News",
     "View Search Results":"View Search Results",
     "Information Title":"Information Title",
