@@ -89,7 +89,7 @@ Template.figure.helpers({
         if (!id)return;
         var fig = FiguresStore.findOne({_id: id});
         if (!fig)return;
-        return fig.url();
+        return fig.url({auth:false});
     }
 });
 
@@ -107,7 +107,7 @@ Template.figModal.helpers({
         if (!fig || !fig.imageId)return;
         var a = FiguresStore.findOne({_id: fig.imageId});
         if (!a)return;
-        return a.url();
+        return a.url({auth:false});
     }
 });
 Template.tableModal.helpers({

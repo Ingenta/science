@@ -242,10 +242,10 @@ Router.map(function () {
             //create path to journal banner and advert banner
             var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
             if (journalInfo.banner && Images.findOne({_id: journalInfo.banner})) {
-                data.banner = host + Images.findOne({_id: journalInfo.banner}).url();
+                data.banner = host + Images.findOne({_id: journalInfo.banner}).url({auth:false});
             }
             if (journalInfo.adBanner && Images.findOne({_id: journalInfo.adBanner})) {
-                data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url();
+                data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url({auth:false});
             }
 
             //parse article metadata

@@ -61,7 +61,7 @@ Meteor.methods({
                 if(item.fileId){
                     var file = Collections.JournalMediaFileStore.findOne({_id:item.fileId});
                     if(file){
-                        obj.url=file.url();
+                        obj.url=file.url({auth:false});
                         obj.ext=Science.String.getLastPart(file.original.type,"/");
                     }
                 }

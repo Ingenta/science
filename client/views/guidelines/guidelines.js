@@ -37,7 +37,7 @@ Template.ShowGuidelines.helpers({
             return null;
         }
         var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        return file.url()+"&download=true";
+        return file.url({auth:false})+"&download=true";
     }
 });
 
