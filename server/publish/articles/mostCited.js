@@ -38,8 +38,7 @@ Meteor.publish('journalMostCitedBrief', function (journalShortTitle) {
 
 Meteor.publish('homepageMostCited', function () {
     var limit=20;
-    var query = {};
-    var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});
+    var mostCited = MostCited.find({},{limit:limit,sort: {count: -1}});
     var ids = _.pluck(mostCited.fetch(), 'articleId');
     return [
         Articles.find({_id: {$in: ids}}, {
@@ -56,8 +55,7 @@ Meteor.publish('homepageMostCited', function () {
 });
 Meteor.publish('homepageMostCitedBrief', function () {
     var limit=6;
-    var query = {};
-    var mostCited = MostCited.find(query,{limit:limit,sort: {count: -1}});
+    var mostCited = MostCited.find({},{limit:limit,sort: {count: -1}});
     var ids = _.pluck(mostCited.fetch(), 'articleId');
     return [
         Articles.find({_id: {$in: ids}}, {
@@ -77,3 +75,6 @@ Meteor.publish('suggestedMostRead', function () {
     return SuggestedArticles.find();
 });
 
+Meteor.startup(function () {
+    MostCited._ensureIndex({journalId: 1});
+});

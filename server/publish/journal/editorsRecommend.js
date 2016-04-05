@@ -10,3 +10,6 @@ Meteor.publish('editorRecommends', function (journalId) {
 		EditorsRecommend.find({publications: journalId})
 	];
 });
+Meteor.startup(function () {
+	EditorsRecommend._ensureIndex({publications: 1});
+});

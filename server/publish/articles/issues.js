@@ -12,3 +12,6 @@ Meteor.publish('journalIssuesIncludingHistorical', function(journalShortTitle) {
     }
     return Issues.find({journalId:{$in:idArr}});
 });
+Meteor.startup(function () {
+    Issues._ensureIndex({journalId: 1});
+});
