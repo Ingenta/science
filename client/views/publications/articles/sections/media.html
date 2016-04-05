@@ -2,7 +2,7 @@
     <div class="row">
         <div style="margin-left: 4%">
             <div>
-                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
+                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
                     {{#jkafModal template="addArticleMediaForm" id="addArticleMediaForm" class="btn btn-success" title="Add new"}}
                         {{_ "Add new"}} <i class="fa fa-plus"></i>
                     {{/jkafModal}}

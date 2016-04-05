@@ -166,7 +166,7 @@ Template.articleOptions.helpers({
         return Articles.findOne({doi: currentDoi});
     },
     tabs: function () {
-        return [
+        var tabArr = [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
             {name: TAPi18n.__("Full Text"), slug: 'full text'},
             {
@@ -178,6 +178,10 @@ Template.articleOptions.helpers({
             {name: TAPi18n.__("Metrics"), slug: 'metrics'},
             {name: TAPi18n.__("Related"), slug: 'related'}
         ];
+        if(this.hasMoop){
+            tabArr.push({name: TAPi18n.__("MOOP"),slug:'moop'})
+        }
+        return tabArr;
     },
     activeTab: function () {
         return Session.get('activeTab');

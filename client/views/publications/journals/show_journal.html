@@ -17,6 +17,7 @@
     {{/if}}
     <br>
     {{> journalOptions}}
+    {{> moopPlayModal}}
 </template>
 
 <template name="journalBanner">
@@ -72,7 +73,7 @@
             {{/tabContent}}
 
             {{#tabContent slug="MOOP"}}
-                {{> mediaList}}
+                {{> moopArticleList}}
             {{/tabContent}}
 
             {{#tabContent slug="Author Center"}}

@@ -1,0 +1,77 @@
+<template name="MoopTemplate">
+    {{> articleMedia journalId=journalId doi=doi}}
+</template>
+
+
+<template name="moopDetails">
+    {{#if hasMoops}}
+        <p>
+            <i class="fa fa-plus" data-toggle="collapse" data-target="section.tabs-content:visible .mooptoggle{{_id}}"></i>
+            <a href="#" type="button" data-toggle="collapse" data-target="section.tabs-content:visible .mooptoggle{{_id}}"
+               aria-expanded="false" aria-controls="section.tabs-content:visible .mooptoggle{{_id}}"> {{_ "MOOP"}}</a>
+        </p>
+        <div class="collapse mooptoggle{{_id}}">
+            <ul class="list-unstyled">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="width:40px">{{_ "type"}}</th>
+                        <th>{{_ "title"}}</th>
+                        <th style="width:50px">{{_ "operation"}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each moopDatas}}
+                        <tr>
+                            <td>{{ext}}</td>
+                            <td>{{translateThis title.cn title.en}}</td>
+                            <td>{{>moopButtons}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </ul>
+        </div>
+    {{/if}}
+</template>
+
+<template name="moopButtons">
+    {{#if isCanPlay}}
+        <a title="{{_ 'play'}}" class="play-button fa fa-play-circle" href="#"></a>
+    {{/if}}
+    <a title="{{_ 'download'}}" target="_blank" class="fa fa-download" href="{{url}}?download=true"></a>
+</template>
+
+<template name="moopPlayModal">
+    <div class="modal fade" id="moopModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {{#with moopEntity}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{translateThis title.cn title.en}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{#if isVideo}}
+                            <video class="moopPlayer" autoplay width="100%" controls="controls">
+                                <source src="{{url}}?play=true" type='video/mp4' />
+                            </video>
+                        {{/if}}
+                        {{#if isAudio}}
+                            <audio class="moopPlayer" autoplay width="100%" controls="controls">
+                                <source src="{{url}}?play=true" type='audio/mp3' />
+                            </audio>
+                        {{/if}}
+                    </p>
+                    {{#if description}}
+                        <p>
+                            {{translateThis description.cn description.en}}
+                        </p>
+                    {{/if}}
+                </div>
+                {{/with}}
+            </div>
+        </div>
+    </div>
+</template>
