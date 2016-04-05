@@ -4,7 +4,7 @@
         <li>
             <div style="margin-bottom: 10px;">
                 <span class="label label-primary">{{contentType}}</span>
-                <!--{{showTopicName topic}}-->
+                {{showTopicName topic}}
             </div>
 	        <!--{{#if can "delete-article" "resource"}}-->
 	        <!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
@@ -33,6 +33,7 @@
                 <li>
                     {{> abstractDetails}}
                 </li>
+                {{> moopDetails}}
             </ul>
         </li>
     </ul>

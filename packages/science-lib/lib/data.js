@@ -9,3 +9,22 @@ Science.data.tranContentType = function(origType){
     })
     return trans;
 }
+
+Science.data.isValidDoi = function (doi) {
+    if (!_.isString(doi)) return false;
+    var index = doi.indexOf('/');
+    if (index<=0 || index>=doi.length-1) return false;
+    if(_.isEmpty(doi.slice(0,index).trim())) return false;
+    if(_.isEmpty(doi.slice(index+1).trim())) return false;
+    return true;
+}
+
+Science.data.getArticleDoiFromFullDOI = function (fullDOI) {
+    if (!fullDOI) return "";
+    if (fullDOI.indexOf("/") === -1) return fullDOI;
+    var index = doi.indexOf('/');
+    if (index<=0 || index>=doi.length-1) return fullDOI;
+    var articleDOI = doi.slice(index+1).trim();
+    if(_.isEmpty(articleDOI)) return fullDOI;
+    return articleDOI;
+}
