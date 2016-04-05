@@ -145,5 +145,3 @@ Meteor.publish('journalAuthorCenterTab',function (journalShortTitle) {
     var journalId=journal._id;
     return AuthorCenter.find({publications:journalId});
 })
-
-

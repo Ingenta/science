@@ -9,3 +9,9 @@ Meteor.publish('journalAboutTab', function (journalShortTitle) {
         AboutArticles.find({publications: journalId})
     ]
 });
+Meteor.startup(function () {
+    EditorialMember._ensureIndex({publications: 1});
+});
+Meteor.startup(function () {
+    AboutArticles._ensureIndex({publications: 1});
+});

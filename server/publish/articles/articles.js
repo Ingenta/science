@@ -95,3 +95,6 @@ Meteor.publish('articlesInSpecTopic', function (stid) {
     }
     return this.ready();
 })
+Meteor.startup(function () {
+    Articles._ensureIndex({doi: 1});
+});
