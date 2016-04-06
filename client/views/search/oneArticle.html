@@ -4,7 +4,7 @@
         <li>
             <div style="margin-bottom: 10px;">
                 <span class="label label-primary">{{contentType}}</span>
-                {{showTopicName topic}}
+                {{> topicNameTemplate}}
             </div>
 	        <!--{{#if can "delete-article" "resource"}}-->
 	        <!--<a href="#" class="fa fa-trash btn-delete-article " style="float:right"></a>-->
@@ -43,4 +43,10 @@
     {{#mathjax}}
             {{> toggleFieldBrowse field=abstract _id=_id doi=doi}}
     {{/mathjax}}
+</template>
+
+<template name="topicNameTemplate">
+    {{#if topic}}
+        <span class="label label-primary">{{showTopicName topic}}</span>
+    {{/if}}
 </template>
