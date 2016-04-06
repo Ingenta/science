@@ -143,7 +143,10 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
 
 });
 
-
+Meteor.publish('publishersJournalsTab',function (journalId) {
+    if(!journalId)return this.ready();
+    return Articles.find({journalId:journalId});
+})
 Meteor.publish('journalOnlineFirstTab',function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
     check(journalShortTitle, String);

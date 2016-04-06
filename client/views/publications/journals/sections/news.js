@@ -59,7 +59,15 @@ Template.pubDynamicList.helpers({
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
         return News.find({about: aboutId,publications:publicationId,types:"2"},{sort: {releaseTime: -1}});
+    },
+    whichUrl: function() {
+    var journalId = Session.get('currentJournalId');
+    var publication = Publications.findOne({_id:journalId});
+    if(this.url){
+        return this.url;
     }
+    return publication.shortTitle+"/news/journalNews/"+this._id;
+}
 });
 
 Template.meetingInfoList.helpers({

@@ -12,7 +12,7 @@
                                 <div align="center"><span class="title-font">{{{translateThis title.cn title.en}}}</span>
                                     {{#if miniPlatformPermission}}{{> updateAdCenterModalForm}}{{/if}}
                                 </div><br>
-                                <p class="text-center">{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD"}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{_ "Author"}}：{{translateThis author.cn author.en}}</p><br>
+                                <p class="text-center">{{#if releaseTime}}{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD"}}&nbsp;&nbsp;&nbsp;&nbsp;{{/if}}{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if author}}{{_ "Author"}}：{{translateThis author.cn author.en}}{{/if}}</p><br>
                                 <p>{{{translateThis content.cn content.en}}}</p>
                             {{else}}
                                 {{_ "No content found!"}}

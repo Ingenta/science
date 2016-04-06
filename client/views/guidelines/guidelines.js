@@ -32,6 +32,10 @@ Template.ShowGuidelines.helpers({
         }
         return null;
     },
+    fields:function(){
+        if(this.fileId)return true;
+        return false;
+    },
     wordValue:function(){
         if(this.fileId===undefined){
             return null;
