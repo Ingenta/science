@@ -109,7 +109,7 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if(!journal)return this.ready();
     var journalId=journal._id;
-    var recommended = EditorsRecommend.find({publications: journalId}, {fields: {ArticlesId: 1, publications: 1, createDate: 1}}, {limit: 5});
+    var recommended = EditorsRecommend.find({publications: journalId}, {limit: 5});
     var recommendedArticleIds = _.pluck(recommended.fetch(), "ArticlesId");
     var mostRead = createMostReadList(journalId, 5);
     var mostCitedList = MostCited.find({journalId:journalId},{limit:6,sort: {count: -1}});
