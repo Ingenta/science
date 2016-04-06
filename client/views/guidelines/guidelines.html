@@ -5,7 +5,7 @@
                 <ul class="list-unstyled">
                     <h6 class="bg-eee" align="center">{{LeftTitle}}</h6>
                     {{#each authorTitle}}
-                        <li style="cursor: pointer"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
+                        <li style="cursor: pointer;margin-left: 5px;border-bottom: 1px #ccc solid;overflow:hidden;padding-top: 6px;padding-bottom: 6px;"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
                         <ul class="list-unstyled">
                             {{#each childTitle}}
                                 <li style="margin-left: 13px;cursor: pointer"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
@@ -22,12 +22,14 @@
                     <div class="row" style="margin-top: 20px;">
                         {{#each authorCenters}}
                             <div align="center">
-                                <span style="font-size:14px"><strong>{{translateThis title.cn title.en}}</strong></span>
+                                <span class="title-font"><strong>{{translateThis title.cn title.en}}</strong></span>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{>jkafModal template="updateContributeModalForm" doc=this id="updateContributeModal"}}{{/if}}
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
                             </div><br>
                             <p>{{{translateThis content.cn content.en}}}</p>
-                            <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{{translateThis fileName.cn fileName.en}}}</a></p>
+                            {{#if fields}}
+                                <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{{translateThis fileName.cn fileName.en}}}</a></p>
+                            {{/if}}
                         {{else}}
                             {{_ "No results found!"}}
                         {{/each}}

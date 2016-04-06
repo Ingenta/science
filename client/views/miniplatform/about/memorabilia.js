@@ -10,6 +10,13 @@ Template.memorabiliaList.helpers({
     },
     accordionExists:function(){
         return !_.isEmpty(this.accordion);
+    },
+    historyNewsExists: function () {
+        var history = NewsContact.find({types:"8"});
+        if(history.count()>0)return true;
+    },
+    historyList: function () {
+        return NewsContact.find({types:"8"},{sort: {title: 1}});
     }
 });
 
@@ -30,6 +37,20 @@ AutoForm.addHooks(['addMemorabiliaModalForm'], {
     before: {
         insert: function (doc) {
             doc.types = "4";
+            doc.createDate = new Date();
+            return doc;
+        }
+    }
+}, true);
+
+AutoForm.addHooks(['addHistoryNewsModalForm'], {
+    onSuccess: function () {
+        $("#addHistoryNewsModal").modal('hide');
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+    },
+    before: {
+        insert: function (doc) {
+            doc.types = "8";
             doc.createDate = new Date();
             return doc;
         }

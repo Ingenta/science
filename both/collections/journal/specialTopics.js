@@ -37,10 +37,15 @@ SpecialTopicsSchema  = new SimpleSchema({
         type:[String],
         optional: true
     },
+    order:{
+        type: String,
+        optional: true
+    },
     createDate: {
         type: Date,
         optional: true
-    }
+    },
+
 });
 
 Meteor.startup(function(){

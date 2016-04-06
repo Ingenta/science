@@ -61,35 +61,26 @@
 <template name="HistoricalJournalTable">
     {{#unless historicalJournals}}
         <div class="pull-left">
-            {{_ "No historical journal found!"}}
+            <!--{{_ "No historical journal found!"}}-->
         </div>
     {{/unless}}
 
     {{#if historicalJournals}}
         <h4>{{_ "Historical Journal"}}</h4>
-        <table id="dataview-table" class="table table-striped table-hover">
-            <thead id="dataview-table-header">
-            <tr id="dataview-table-header-row">
-                <th class="th-sortable his-jour-title-th">
-                    {{_ "Previous Title"}}
-                </th>
-                <th class="th-sortable">
-                    {{_ "createAt"}}
-                </th>
-                <th class="th-sortable">
-                    ISSN
-                </th>
-                <th class="th-sortable">
-                    EISSN
-                </th>
-            </tr>
-            </thead>
-            <tbody id="dataview-table-items">
-            {{#each historicalJournals}}
-                {{> HistoricalJournalItem}}
-            {{/each}}
-            </tbody>
-        </table>
+        <ul class="article-list list-unstyled">
+        {{#each historicalJournals}}
+            <ul class="dotted list-unstyled article-info" style="font-size: 12px">
+                <li style="margin-left: 25px;margin-bottom: 10px">
+                    <div>
+                        <strong>{{translateThis titleCn title}}</strong>
+                    </div>
+                    <div>
+                        ISSN:{{issn}},EISSN:{{EISSN}},({{moFormat publicationDate 'll'}})
+                    </div>
+                </li>
+            </ul>
+        {{/each}}
+         </ul>
     {{/if}}
 </template>
 

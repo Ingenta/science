@@ -7,7 +7,7 @@ Template.publicationPdfContent.helpers({
         if (!this.fileId)return;
         var file = Collections.JournalMediaFileStore.findOne({_id: this.fileId});
         if (!file)return;
-        return file.url() + "&download=true";
+        return file.url({auth:false}) + "&download=true";
     }
 });
 

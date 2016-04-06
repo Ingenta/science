@@ -117,7 +117,7 @@ Science.Email.tableOfContentEmail = function (date) {
 
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
         journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
-        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url().substring(1));
+        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url({auth:false}).substring(1));
         generateArticleLinks(articleList, journal.url);
 
         oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
@@ -175,7 +175,7 @@ Science.Email.availableOnline = function (date) {
         var journal = {};
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
         journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
-        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url().substring(1));
+        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url({auth:false}).substring(1));
         generateArticleLinks(obj.articleList, journal.url);
 
         var content = JET.render('availableOnline', {
@@ -273,7 +273,7 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
         if (article.journalId) {
             article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
             article.journal.banner = Publications.findOne({_id: article.journalId},{fields: {banner: 1}}).banner;
-            if (article.journal.banner) article.journal.banner = Meteor.absoluteUrl(Images.findOne({_id: article.journal.banner}).url().substring(1));
+            if (article.journal.banner) article.journal.banner = Meteor.absoluteUrl(Images.findOne({_id: article.journal.banner}).url({auth:false}).substring(1));
         }
         var content = JET.render('citationAlertEmail', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",

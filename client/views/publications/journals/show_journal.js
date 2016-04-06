@@ -51,7 +51,7 @@ Template.journalBanner.helpers({
         if (!journal.banner) return;
         var banner = Images.findOne({_id: journal.banner});
         if (!banner) return;
-        return banner.url();
+        return banner.url({auth:false});
     },
     hasJournalBanner: function (journalId) {
         if (!journalId)return;

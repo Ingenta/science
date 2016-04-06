@@ -27,7 +27,7 @@ Template.LayoutSideBar.helpers({
             });
         }
         if (institutuion) {
-            logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo})&& Images.findOne({_id: institutuion.logo}).url();
+            logo = Images && institutuion.logo && Images.findOne({_id: institutuion.logo})&& Images.findOne({_id: institutuion.logo}).url({auth:false});
         }
         if (logo) return '<img src="' + logo + '" width="100%" height="auto"/>';
         else return;

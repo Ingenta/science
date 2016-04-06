@@ -1,5 +1,6 @@
 Meteor.publish('images', function () {
-    return Images.find();
+    // return Images.find({},{fields:{uploadedAt:0,original:0,owner:0,"copies.images.createdAt":0,"copies.images.updatedAt":0,"copies.images.key":0}});
+    return Images.find({},{fields:{"copies.images.key":1}});
 });
 
 Meteor.publish('oneArticleFigures', function (articleDoi) {

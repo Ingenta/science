@@ -69,7 +69,11 @@ Template.SinglePublication.events({
 Template.SinglePublication.helpers({
     getModalTitle:function(){
         return TAPi18n.__("Update");
-    }
+    },
+    //hide: function(){
+    //    Meteor.subscribe('publishersJournalsTab', this._id);
+    //    return Articles.find({journalId:this._id}).count()<1 ? "": "hide";
+    //}
 });
 
 Template.PublicationList.events({

@@ -39,6 +39,7 @@
         <a href="{{whichUrl}}" target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
 
         <div class="pull-right">
+            ({{formatDate releaseTime "YYYY-MM-DD"}})
             {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
             {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
@@ -55,7 +56,7 @@
 <template name="pubDynamicList">
     {{#each pubDynamic}}
     <div class="part"><p>
-        <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
+        <a href={{whichUrl}} target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
 
         <div class="pull-right">
             {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
