@@ -155,6 +155,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
         var startPage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
         var endPage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
         if(startPage !== undefined) results.startPage = startPage;
+            results.elocationId = startPage;
             logger.info('parsed startPage');
         if(endPage !== undefined) results.endPage = endPage;
             logger.info('parsed endPage');
