@@ -86,3 +86,7 @@ Meteor.startup(function () {
     NewsSchema.i18n("schemas.news");
     News.attachSchema(NewsSchema);
 });
+
+if (Meteor.isClient) {
+    myNewsPagination = new Paginator(News);
+}

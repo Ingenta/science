@@ -664,3 +664,30 @@ ScienceXML.getFunding = function (doc) {
     })
     return fundingObjects;
 }
+
+ScienceXML.getTitle=function(doc){
+    var primaryTitle = parserHelper.getSimpleVal("//article-title", doc);
+    if (primaryTitle === undefined)
+        return;
+    else {
+        var title = {
+            en:primaryTitle,
+            cn:primaryTitle
+        };
+        var primaryLang = parserHelper.getFirstAttribute("//article-title/attribute::lang", doc);
+        if (primaryLang) {
+            var secondaryTitle = ScienceXML.getSimpleValueByXPath("//trans-title-group/trans-title", doc);
+            if (primaryLang === 'en') {
+                title.en = primaryTitle;
+                if (secondaryTitle === undefined) title.cn = primaryTitle;
+                else title.cn = secondaryTitle;
+            }
+            else if (primaryLang === 'zh-Hans') {
+                title.cn = primaryTitle;
+                if (secondaryTitle === undefined) title.en = primaryTitle;
+                else title.en = secondaryTitle;
+            }
+        }
+        return title;
+    }
+}

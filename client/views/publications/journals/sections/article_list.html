@@ -6,8 +6,17 @@
             {{> historicalJournalNavigationPanel}}
         </div>
         <div class="col-xs-9">
-            {{> articleListRight pubStatus="normal"}}
-            {{> HistoricalJournalTable}}
+            {{#unless IsArticleListReady}}
+                {{> articleListRight pubStatus="normal"}}
+                {{> HistoricalJournalTable}}
+            {{else}}
+                <br>
+                <br>
+                <br>
+                <div class="loading">
+                    <i class="loading fa fa-circle-o-notch fa-3x fa-spin"></i>
+                </div>
+            {{/unless}}
         </div>
     </div>
 </template>
@@ -20,7 +29,8 @@
             </li>
             <ul id="vol_{{_id}}" class="issues list-group" style="display:{{issueDisplay}}">
                 {{#each issueInVolume journalId volume}}
-                    <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}" data-issue="{{issue}}">
+                    <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}"
+                        data-issue="{{issue}}">
                         {{_ "issueItem" issue }}
                     </li>
                 {{/each}}
@@ -30,6 +40,7 @@
 </template>
 
 <template name="articleListRight">
+
     {{#if normal}}
         <h4>{{getIssueTitle}}</h4>
         {{#with issueContext}}
@@ -49,6 +60,7 @@
         <hr>
         {{resetArticlesFilter}}
     {{/if}}
+
     <ul class="article-list list-unstyled">
         {{#each articles}}
             {{> oneArticle}}
@@ -70,12 +82,10 @@
         <ul class="article-list list-unstyled">
         {{#each historicalJournals}}
             <ul class="dotted list-unstyled article-info" style="font-size: 12px">
-                <li style="margin-left: 25px;margin-bottom: 10px">
+                <li style="margin-left: 20px;margin-bottom: 8px;margin-top: 8px">
+                    <div style="margin-bottom: 5px;"><a href="{{urlToJournalById _id}}"><b>{{translateThis titleCn title}}</b></a></div>
                     <div>
-                        <strong>{{translateThis titleCn title}}</strong>
-                    </div>
-                    <div>
-                        ISSN:{{issn}},EISSN:{{EISSN}},({{moFormat publicationDate 'll'}})
+                        {{shortTitle}},&nbsp;ISSN:&nbsp;{{issn}},&nbsp;{{#if EISSN}}EISSN:&nbsp;{{EISSN}},&nbsp;{{/if}}{{#if publicationDate}}({{moFormat publicationDate 'll'}}){{/if}}
                     </div>
                 </li>
             </ul>
@@ -85,7 +95,7 @@
 </template>
 
 <template name="HistoricalJournalItem">
-    <!--{{#with journalItemData this}}-->
+<!--{{#with journalItemData this}}-->
     <tr id="dataview-table-items-row">
         <td>
             {{{translateThis titleCn title}}}
@@ -100,19 +110,19 @@
             {{EISSN}}
         </td>
     </tr>
-    <!--{{/with}}-->
+        <!--{{/with}}-->
 </template>
 
 <template name="historicalJournalNavigationPanel">
     {{#if hasHisJournal}}
         <div class="historical-journal">
-        <h5>{{_ "Historical Journal"}}</h5>
-        {{#each sortedHisJournal}}
-            <a href="{{whichUrl}}">
-                <h6>{{{translateThis titleCn title}}}</h6>
-            </a>
-            {{> journalNavigationPanel}}
-        {{/each}}
+            <h5>{{_ "Historical Journal"}}</h5>
+            {{#each sortedHisJournal}}
+                <a href="{{whichUrl}}">
+                    <h6>{{{translateThis titleCn title}}}</h6>
+                </a>
+                {{> journalNavigationPanel}}
+            {{/each}}
         </div>
     {{/if}}
 </template>
