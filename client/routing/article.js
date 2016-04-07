@@ -18,7 +18,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     title: function () {
         return TAPi18n.__("Article");
     },
-    parent: "journal.name.toc",
+    parent: "journal.name",
     name: "article.show",
     waitOn: function () {
         return [

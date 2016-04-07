@@ -40,7 +40,7 @@ Template.otherPlatformloginButtons.helpers({
 	urlSubmission: function(){
 		var journalId;
 		if (Router.current() && Router.current().route.getName()) {
-			if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
+			if (Router.current().route.getName() === "journal.name")
 				journalId = Router.current().data()._id;
 			if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
 				journalId = Router.current().data().journalId;
@@ -51,7 +51,7 @@ Template.otherPlatformloginButtons.helpers({
 	hideUrl: function(){
 		var journalId;
 		if (Router.current() && Router.current().route.getName() && Router.current().data && Router.current().data()) {
-			if (Router.current().route.getName() === "journal.name" || Router.current().route.getName() === "journal.name.toc")
+			if (Router.current().route.getName() === "journal.name")
 				journalId = Router.current().data()._id;
 			if (Router.current().route.getName() === "article.show" || Router.current().route.getName() === "article.show.strange")
 				journalId = Router.current().data().journalId;

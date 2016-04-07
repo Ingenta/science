@@ -7,13 +7,18 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
+            if(this.params.hash)
+            {
+                Session.set('currentIssueId', this.params.hash);
+                Session.set("activeTab", "Browse")
+            }
             return journal;
         }
     },
     template: "ShowJournal",
     title: function () {
         var p = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        if (!p)return "";
+        if (!p)return ":journalShortTitle";
         if (TAPi18n.getLanguage() === "en")return p.title || p.titleCn;
         return p.titleCn || p.title;
 
@@ -54,33 +59,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
     }
 });
 
-Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue', {
-    data: function () {
-        var pub = Publishers.findOne({shortname: this.params.publisherName});
-        var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        Session.set("activeTab", "Browse");
-        if (journal) {
-            var i = Issues.findOne({journalId: journal._id, volume: this.params.volume, issue: this.params.issue});
-            if (i !== undefined) {
-                Session.set("currentIssueId", i._id);
-            }
-            Session.set('currentJournalId', journal._id);
-            Session.set('currentPublisherId', pub._id);
-            return journal;
-        }
-    },
-    template: "ShowJournal",
-    name: "journal.name.toc",
-    parent: "journal.name",
-    title: function () {
-        return TAPi18n.__("volumeItem", Router.current().params.volume) + ", " + TAPi18n.__("issueItem", Router.current().params.issue)
-    },
-    waitOn: function () {
-        return [
-            Meteor.subscribe('journalBrowseTab', this.params.journalShortTitle, this.params.issue)
-        ]
-    }
-});
 
 
 
