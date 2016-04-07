@@ -13,7 +13,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     template: "ShowJournal",
     title: function () {
         var p = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        if (!p)return ":journalShortTitle";
+        if (!p)return "";
         if (TAPi18n.getLanguage() === "en")return p.title || p.titleCn;
         return p.titleCn || p.title;
 

@@ -78,7 +78,11 @@ Template.journalNavigationPanel.onRendered(function () {
     if (!currVolume) return;
     Session.set("currentVolumeId", currVolume._id)
 })
-
+Template.articleList.helpers({
+    IsArticleListReady: function () {
+        return Session.get("WaitingForArticles");
+    }
+})
 
 Template.articleListRight.helpers({
     resetArticlesFilter: function () {
