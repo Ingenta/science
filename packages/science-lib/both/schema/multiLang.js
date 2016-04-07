@@ -20,7 +20,6 @@ Science.schemas.MultipleTextOptionalSchema = new SimpleSchema({
 		optional: true
 	}
 });
-
 //
 Science.schemas.MultipleTextRequiredSchema = new SimpleSchema({
 	en:{
@@ -30,7 +29,6 @@ Science.schemas.MultipleTextRequiredSchema = new SimpleSchema({
 		type: String
 	}
 });
-
 // 普通文本
 Science.schemas.MultipleAreaSchema = new SimpleSchema({
 	en:{
@@ -48,7 +46,6 @@ Science.schemas.MultipleAreaSchema = new SimpleSchema({
 		}
 	}
 });
-
 // 富文本格式
 Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 	en:{
@@ -87,4 +84,39 @@ Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 			}
 		}
 	}
-})
+});
+// 出版商专用富文本格式
+Science.schemas.PublisherMultipleTextAreaSchema = new SimpleSchema({
+	en:{
+		type: String,
+		optional:true,
+		autoform: {
+			type: "jkfroala",
+			afFieldInput: {
+				froalaOptions: {
+					language:'zh_cn',
+					theme: 'red',
+					inlineMode: false,
+					buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','table', 'undo', 'redo'],
+					height: '400'
+				}
+			}
+		}
+	},
+	cn:{
+		type: String,
+		optional: true,
+		autoform: {
+			type: "jkfroala",
+			afFieldInput: {
+				froalaOptions: {
+					language:'zh_cn',
+					theme: 'red',
+					inlineMode: false,
+					buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','table', 'undo', 'redo'],
+					height: '400'
+				}
+			}
+		}
+	}
+});

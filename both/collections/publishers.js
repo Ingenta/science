@@ -18,8 +18,8 @@ PublishersSchema = new SimpleSchema({
         optional: true,
         regEx: SimpleSchema.RegEx.Url
     },
-    description:{
-        type:Science.schemas.MultipleTextAreaSchema,
+    descriptions:{
+        type:Science.schemas.PublisherMultipleTextAreaSchema,
         optional: true
     },
     picture: {
