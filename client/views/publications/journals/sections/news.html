@@ -51,6 +51,10 @@
     {{else}}
     {{_ "No content found!"}}
     {{/each}}
+    {{> Paginator_UI newsContent}}
+    {{#if newsContentCount}}
+        {{> displayPerPage}}
+    {{/if}}
 </template>
 
 <template name="pubDynamicList">
@@ -70,6 +74,10 @@
     {{else}}
     {{_ "No content found!"}}
     {{/each}}
+    {{> Paginator_UI pubDynamic}}
+    {{#if pubDynamicCount}}
+        {{> displayPerPage}}
+    {{/if}}
 </template>
 
 <template name="meetingInfoList">

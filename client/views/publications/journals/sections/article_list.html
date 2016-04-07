@@ -70,12 +70,10 @@
         <ul class="article-list list-unstyled">
         {{#each historicalJournals}}
             <ul class="dotted list-unstyled article-info" style="font-size: 12px">
-                <li style="margin-left: 25px;margin-bottom: 10px">
+                <li style="margin-left: 20px;margin-bottom: 8px;margin-top: 8px">
+                    <div style="margin-bottom: 5px;"><a href="{{urlToJournalById _id}}"><b>{{translateThis titleCn title}}</b></a></div>
                     <div>
-                        <strong>{{translateThis titleCn title}}</strong>
-                    </div>
-                    <div>
-                        ISSN:{{issn}},EISSN:{{EISSN}},({{moFormat publicationDate 'll'}})
+                        {{shortTitle}},&nbsp;ISSN:&nbsp;{{issn}},&nbsp;{{#if EISSN}}EISSN:&nbsp;{{EISSN}},&nbsp;{{/if}}{{#if publicationDate}}({{moFormat publicationDate 'll'}}){{/if}}
                     </div>
                 </li>
             </ul>
