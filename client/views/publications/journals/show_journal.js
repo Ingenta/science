@@ -1,6 +1,8 @@
+
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug) {
+        Session.set("WaitingForArticles",true);
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (slug !== "Browse" && Router.current().route.getName() === "journal.name.toc") {
@@ -16,11 +18,12 @@ ReactiveTabs.createInterface({
                 });
             } else if (slug === 'Browse') {
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currentIssueId'));
+                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currentIssueId'));
+                Session.set("WaitingForArticles",!articlesSub.ready())
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
-                //Session.set("activeTab",""); NOTE: possibly need this to prevent page sticking to browse or could disable tabs
+                Session.set("activeTab",""); //NOTE: possibly need this to prevent page sticking to browse or could disable tabs
             } else if(slug === 'Editorial Board'){
                 Meteor.subscribe("journalEditorialBoard",Router.current().params.journalShortTitle);
             } else if(slug === 'Accepted'){
