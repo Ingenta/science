@@ -365,7 +365,7 @@ var insertArticle = function (a) {
     a.accessKey = journal.accessKey;
     a.language = journal.language;
 
-    if (a.pubStatus == 'normal') {
+    if (a.pubStatus == 'normal' || a.pubStatus == 'online_first') {
         var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
         if (!volume) {
             volume = Volumes.insert({

@@ -80,6 +80,7 @@ Template.articleListRight.helpers({
         var pubStatus = Template.currentData().pubStatus;
         var query = {pubStatus: pubStatus};
         if (pubStatus == 'normal') {
+            query = {pubStatus: {$ne:'accepted'}}
             var curIssue = Session.get("currentIssueId");
             if (!curIssue) {
                 var lastIssue = getLastIssue();
