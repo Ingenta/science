@@ -5,7 +5,13 @@ Template.aboutTitle.helpers({
     },
     isActive: function (id) {
         var aboutId = Session.get('tabBoard');
-        if (aboutId === id)return "active";
+        var publicationsId = Session.get('currentJournalId');
+        var about = About.findOne({publications: publicationsId});
+        if(aboutId){
+            if (aboutId === id)return "active";
+        }else{
+            Session.set('tabBoard', about._id);
+        }
     }
 });
 

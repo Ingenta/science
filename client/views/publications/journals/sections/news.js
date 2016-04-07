@@ -1,5 +1,6 @@
 Template.newContent.events({
     'click .activeButton': function (event) {
+        Session.set('PerPage', undefined);
         var idValue = $(event.target).data().topicstid;
         Session.set('tabNews', idValue);
     }
@@ -7,6 +8,7 @@ Template.newContent.events({
 
 Template.newsCenterList.onRendered(function () {
     if (Session.get('tabNews')===undefined) {
+        Session.set('PerPage', undefined);
         Session.set('tabNews', "a1");
     }
 });
@@ -17,6 +19,10 @@ Template.newsCenterList.events({
         confirmDelete(e,function(){
             News.remove({_id:id});
         })
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 
@@ -26,6 +32,10 @@ Template.pubDynamicList.events({
         confirmDelete(e,function(){
             News.remove({_id:id});
         })
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 
@@ -40,9 +50,13 @@ Template.meetingInfoList.events({
 
 Template.newsCenterList.helpers({
     newsContent: function () {
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return News.find({about: aboutId,publications:publicationId,types:"2"},{sort: {releaseTime: -1}});
+        return myNewsPagination.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     whichUrl: function() {
         var journalId = Session.get('currentJournalId');
@@ -51,14 +65,36 @@ Template.newsCenterList.helpers({
             return this.url;
         }
         return publication.shortTitle+"/news/journalNews/"+this._id;
+    },
+    newsContentCount: function(){
+        var aboutId = Session.get('tabNews');
+        var publicationId = Session.get('currentJournalId');
+        return News.find({about: aboutId,publications:publicationId,types:"2"}).count()>10;
     }
 });
 
 Template.pubDynamicList.helpers({
     pubDynamic: function () {
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return News.find({about: aboutId,publications:publicationId,types:"2"},{sort: {releaseTime: -1}});
+        return myNewsPagination.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+    },
+    whichUrl: function() {
+        var journalId = Session.get('currentJournalId');
+        var publication = Publications.findOne({_id:journalId});
+        if(this.url){
+            return this.url;
+        }
+        return publication.shortTitle+"/news/journalNews/"+this._id;
+    },
+    pubDynamicCount: function(){
+        var aboutId = Session.get('tabNews');
+        var publicationId = Session.get('currentJournalId');
+        return News.find({about: aboutId,publications:publicationId,types:"2"}).count()>10;
     }
 });
 

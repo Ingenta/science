@@ -44,30 +44,11 @@ ScienceXML.parseXml = function (path, pubStatus) {
     //var existingArticle = Articles.findOne({doi: results.doi});
     //if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
 
-    var primaryTitle = ScienceXML.getSimpleValueByXPath("//article-title", doc);
-    if (primaryTitle === undefined) results.errors.push("No title found");
-    else {
-        results.title = {};
-        var primaryLang = xpath.select("//article-title/attribute::lang", doc);
-        if (primaryLang[0] === undefined) {
-            results.title.en = primaryTitle;
-            results.title.cn = primaryTitle;
-        }
-        else {
-            primaryLang = primaryLang[0].value;
-            var secondaryTitle = ScienceXML.getSimpleValueByXPath("//trans-title-group/trans-title", doc);
-            if (primaryLang === 'en') {
-                results.title.en = primaryTitle;
-                if (secondaryTitle === undefined) results.title.cn = primaryTitle;
-                else results.title.cn = secondaryTitle;
-            }
-            else if (primaryLang === 'zh-Hans') {
-                results.title.cn = primaryTitle;
-                if (secondaryTitle === undefined) results.title.en = primaryTitle;
-                else results.title.en = secondaryTitle;
-            }
-        }
-    }
+    var title=ScienceXML.getTitle(doc);
+    if(title)
+        results.title=title;
+    else
+        results.errors.push("No title found");
     logger.info('parsed title');
 
     ScienceXML.getContentType(results, doc);
@@ -155,6 +136,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
         var startPage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
         var endPage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
         if(startPage !== undefined) results.startPage = startPage;
+            results.elocationId = startPage;
             logger.info('parsed startPage');
         if(endPage !== undefined) results.endPage = endPage;
             logger.info('parsed endPage');

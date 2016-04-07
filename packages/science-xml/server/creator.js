@@ -26,7 +26,7 @@ ScienceXML.IssueCreator = function () {
                         issue: obj.issue,
                         year: obj.year,
                         month: obj.month,
-                        order: obj.year+Science.String.PadLeft(obj.volume,"0",4)+Science.String.PadLeft(obj.issue,"0",4),
+                        order: obj.year+Science.String.PadLeft(obj.volume,"0",8)+Science.String.PadLeft(obj.issue,"0",8),
                         createDate: new Date()
                     })
                 }

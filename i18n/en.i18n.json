@@ -334,10 +334,13 @@
         },
         "publishers": {
             "description": {
-                "label": "Description"
-            },
-            "chinesedescription": {
-                "label": "Chinese Description"
+                "label": "Description",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
             },
             "name": {
                 "label": "Publisher Name",
