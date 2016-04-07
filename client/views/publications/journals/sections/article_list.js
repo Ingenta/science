@@ -42,16 +42,7 @@ Template.journalNavigationPanel.events({
     },
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
-        var volume = $(event.target).data().volume;
-        var issue = $(event.target).data().issue;
         issueId && Session.set("currentIssueId", issueId);
-        //if url contains issue, router.go
-        Router.current().params.volume = volume;
-        Router.current().params.issue = issue;
-        if (this.journalId != Session.get("currentJournalId")) {
-            Router.current().params.journalShortTitle = Publications.findOne({_id: this.journalId}).shortTitle;
-        }
-        Router.go("journal.name.toc", Router.current().params)
     }
 });
 
@@ -85,12 +76,6 @@ Template.articleList.helpers({
 })
 
 Template.articleListRight.helpers({
-    resetArticlesFilter: function () {
-        //Only reset session if volume and issue aren't set
-        if (!Router.current().params.volume)
-            if (!Router.current().params.issue)
-                Session.set("currentIssueId", undefined);
-    },
     articles: function () {
         var pubStatus = Template.currentData().pubStatus;
         var query = {pubStatus: pubStatus};

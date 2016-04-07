@@ -47,7 +47,7 @@ Template.LayoutSideBar.helpers({
     },
     isJournalPage: function () {
         if (Router.current() && Router.current().route)
-            if (Router.current().route.getName() == "journal.name" || Router.current().route.getName() == "journal.name.toc")
+            if (Router.current().route.getName() == "journal.name")
                 return true;
     },
     favoriteName: function () {
