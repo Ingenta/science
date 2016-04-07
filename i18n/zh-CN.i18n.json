@@ -475,7 +475,7 @@
       }
     },
     "publishers": {
-      "description": {
+      "descriptions": {
         "label": "描述",
         "cn": {
           "label": "中文"

@@ -84,7 +84,7 @@
                 <li style="margin-left: 20px;margin-bottom: 8px;margin-top: 8px">
                     <div style="margin-bottom: 5px;"><a href="{{urlToJournalById _id}}"><b>{{translateThis titleCn title}}</b></a></div>
                     <div>
-                        {{shortTitle}},&nbsp;ISSN:&nbsp;{{issn}},&nbsp;{{#if EISSN}}EISSN:&nbsp;{{EISSN}},&nbsp;{{/if}}{{#if publicationDate}}({{moFormat publicationDate 'll'}}){{/if}}
+                        <b>ISSN:</b>&nbsp;{{formatissn issn}},&nbsp;&nbsp;{{#if EISSN}}<b>EISSN:</b>&nbsp;{{EISSN}},&nbsp;&nbsp;{{/if}}{{#if publicationDate}}<b>{{_ "Release Date"}}:</b>&nbsp;{{moFormat publicationDate 'll'}}{{/if}}
                     </div>
                 </li>
             </ul>

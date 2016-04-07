@@ -333,7 +333,7 @@
             }
         },
         "publishers": {
-            "description": {
+            "descriptions": {
                 "label": "Description",
                 "cn": {
                     "label": "Chinese"
