@@ -9,11 +9,7 @@
                     {{translateThis chinesename name}}
                 </h2>
                 <p>
-                    {{#if i18n_isCurrentLanguage 'en'}}
-                        {{description}}
-                    {{else}}
-                        {{chinesedescription}}
-                    {{/if}}
+                    {{translateThis description.cn description.en}}
                 </p>
                 <p>{{> PublisherWebsite}}</p>
             </div>

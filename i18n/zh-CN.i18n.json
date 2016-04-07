@@ -476,10 +476,13 @@
     },
     "publishers": {
       "description": {
-        "label": "英文描述"
-      },
-      "chinesedescription": {
-        "label": "中文描述"
+        "label": "描述",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
       },
       "name": {
         "label": "出版商英文名字",

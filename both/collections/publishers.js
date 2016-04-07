@@ -18,19 +18,9 @@ PublishersSchema = new SimpleSchema({
         optional: true,
         regEx: SimpleSchema.RegEx.Url
     },
-    description: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 2
-        }
-    },
-    chinesedescription: {
-        type: String,
-        optional: true,
-        autoform: {
-            rows: 2
-        }
+    description:{
+        type:Science.schemas.MultipleTextAreaSchema,
+        optional: true
     },
     picture: {
         type: String,
