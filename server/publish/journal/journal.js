@@ -9,47 +9,6 @@ Meteor.publish('getAllIssuesMatchingThisOneForNextAndPrevious', function (doi) {
     });
 });
 
-Meteor.publish('journalBrowseTab', function (journalShortTitle,issue) {
-    if(!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
-    if(!issue)return this.ready();
-    check(issue, String);
-
-    //combine all historical journals
-    var idArr = [journalId];
-    var journal=Publications.findOne({_id:journalId},{fields:{historicalJournals:1}});
-
-    if(journal && !_.isEmpty(journal.historicalJournals)){
-        idArr = _.union(idArr,journal.historicalJournals)
-    }
-
-    //get all topic id
-    var topics = Articles.find({journalId: journalId, issue: issue},{fields:{topic:1}}).fetch();
-    var topicsArr = _.reduce(topics,function(memo,item){
-        if(item.topic){
-            return _.union(memo,item.topic);
-        }
-        return memo;
-    },[]);
-    topicsArr = _.compact(topicsArr);
-
-    var publishList = [
-        Articles.find({journalId: journalId, issue: issue}, {
-            fields: {sections: 0, figures: 0, references: 0, authorNotes:0, affiliations:0, tables:0, pacs:0, fundings:0}
-        })
-    ];
-    if(!_.isEmpty(idArr)){
-        publishList.push(Volumes.find({journalId:{$in:idArr}}));
-        publishList.push(Issues.find({journalId:{$in:idArr}},{fields:{createDate:0}}))
-    }
-    if(!_.isEmpty(topicsArr)){
-        publishList.push(Topics.find({_id:{$in:topicsArr}}))
-    }
-    return publishList;
-});
 Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
     check(journalShortTitle, String);

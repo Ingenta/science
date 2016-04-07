@@ -31,7 +31,6 @@ Config = {
     Routes: {
         ADPages: {
             journal: [
-                'journal.name.toc',
                 'article.show',
                 'article.show.strange',
                 'journal.name'
@@ -47,7 +46,6 @@ Config = {
         },
         NewsPage: {
             journal: [
-                'journal.name.toc',
                 'journal.name'
             ],
             global: [
@@ -64,7 +62,6 @@ Config = {
         ],
         displayJournalLogin: {
             journal: [
-                'journal.name.toc',
                 'article.show',
                 'article.show.strange',
                 'journal.name'
