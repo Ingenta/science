@@ -47,14 +47,12 @@ ScienceXML.parseXml = function (path, pubStatus) {
     var primaryTitle = ScienceXML.getSimpleValueByXPath("//article-title", doc);
     if (primaryTitle === undefined) results.errors.push("No title found");
     else {
-        results.title = {};
-        var primaryLang = xpath.select("//article-title/attribute::lang", doc);
-        if (primaryLang[0] === undefined) {
-            results.title.en = primaryTitle;
-            results.title.cn = primaryTitle;
-        }
-        else {
-            primaryLang = primaryLang[0].value;
+        results.title = {
+            en:primaryTitle,
+            cn:primaryTitle
+        };
+        var primaryLang = Science.XPath.getFirstAttribute("//article-title/attribute::lang", doc);
+        if (primaryLang) {
             var secondaryTitle = ScienceXML.getSimpleValueByXPath("//trans-title-group/trans-title", doc);
             if (primaryLang === 'en') {
                 results.title.en = primaryTitle;

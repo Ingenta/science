@@ -23,7 +23,7 @@ Science.parserAccepted = function(filepath){
             author.surname = parserHelper.getMultiVal("child::last_name", authorNode);
             author.given = parserHelper.getMultiVal("child::first_name", authorNode);
             fullName.en = author.surname.en + " " + author.given.en;
-            fullName.cn = author.surname.cn + " " + author.given.cn;
+            fullName.cn = author.surname.cn + author.given.cn;
             author.fullname=fullName;
 
             var address = parserHelper.getSimpleVal("child::affiliation/addr1", authorNode) || "";
