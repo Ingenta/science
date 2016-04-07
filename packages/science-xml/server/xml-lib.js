@@ -106,7 +106,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
         var id = parserHelper.getFirstAttribute("attribute::id", note);
         if (noteLabel === undefined) {
-            results.errors.push("No noteLabel found");
+            //results.errors.push("No noteLabel found"); 2016年4月7日,侯老师要求去除该检查10.1007/s40843-016-0129-7
         } else {
             var entry = {id: id, label: noteLabel};
             if (!_.isEmpty(email))  entry.email = email;
