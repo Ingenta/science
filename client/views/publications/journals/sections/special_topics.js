@@ -28,17 +28,28 @@ Template.SpecialTopics.events({
         confirmDelete(e, function () {
             SpecialTopics.remove({_id: id});
         })
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 
 Template.SpecialTopics.helpers({
     specialTopics: function () {
-        return SpecialTopics.find({journalId:this._id},{sort:{order:-1}});
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
+        return mySpecialTopicsPagination.find({journalId:this._id},{itemsPerPage: numPerPage, sort: {order: -1}});
+    },
+    specialTopicsCount: function(){
+        return SpecialTopics.find({journalId:this._id}).count()>10;
     },
     year: function () {
         var issue = Issues.findOne({_id: this.IssueId});
         if (issue)
-            return issue.year+" "+issue.volume+"("+issue.issue+")";
+            return issue.volume+"("+issue.issue+")"+",  "+issue.year;
     },
     name: function () {
         var id = Session.get("specialTopicsId");

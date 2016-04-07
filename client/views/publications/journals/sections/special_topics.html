@@ -9,37 +9,33 @@
                     </button>
                 </div>
             </div>
+            <hr>
         {{/if}}
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <td>{{_ "Year of publication(volume)(issue)"}}</td>
-                        <td>{{_ "Topic name"}}</td>
-                        <td>{{_ "Guest Editor"}}</td>
-                        <td>{{_ "Action"}}</td>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <ul class="article-list list-unstyled">
                     {{#each specialTopics}}
-                        <tr>
-                            <td>{{year}}</td>
-                            <td>
-                                <a href="{{pathFor 'specialTopics.selectArticles' data=getData}}">{{translateThis title.cn title.en}}</a>
-                            </td>
-                            <td>{{translateThis guest_editor.cn guest_editor.en}}</td>
-                            <td>
-                                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
-                                    {{> updateSpecialTopicsModalForm}}
-                                    &nbsp;&nbsp;
-                                    <a href="#" class="fa fa-trash"></a>
-                                {{/if}}
-                            </td>
-                        </tr>
+                        <ul class="dotted list-unstyled article-info" style="font-size: 12px">
+                            <li style="margin-left: 10px;margin-bottom: 5px;margin-top: 5px">
+                                <div style="margin-bottom: 5px;"><b><a href="{{pathFor 'specialTopics.selectArticles' data=getData}}">{{translateThis title.cn title.en}}</a></b></div>
+                                <div class="pull-right">
+                                    {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                                        {{> updateSpecialTopicsModalForm}}
+                                        &nbsp;&nbsp;
+                                        <a href="#" class="fa fa-trash"></a>
+                                    {{/if}}
+                                </div>
+                                <div>
+                                    {{#if guest_editor}}{{translateThis guest_editor.cn guest_editor.en}}&nbsp;&nbsp;{{/if}}{{#if IssueId}}{{year}}{{/if}}
+                                </div>
+                            </li>
+                        </ul>
                     {{/each}}
-                    </tbody>
-                </table>
+                </ul>
+                {{> Paginator_UI specialTopics}}
+                {{#if specialTopicsCount}}
+                    {{> displayPerPage}}
+                {{/if}}
             </div>
         </div>
     </div>

@@ -48,6 +48,9 @@
     </ul>
     {{> otherPlatformloginButtons}}
     <hr>
+    {{#if isArticlePage}}
+        {{> altmetric doi=doi}}
+    {{/if}}
     <ul class="list-unstyled">
         {{> sidebarAd}}
         {{#if showAccessKey}}
