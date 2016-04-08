@@ -36,7 +36,7 @@
 <template name="newsCenterList">
     {{#each newsContent}}
     <div class="part"><p>
-        <a href="{{whichUrl}}" target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
+        <a href="{{whichUrl}}"><strong>{{translateThis title.cn title.en}}</strong></a>
 
         <div class="pull-right">
             {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}

@@ -32,8 +32,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('specialTopics'),
-            JournalSubs.subscribe("meeting_info"),
-            HomePageSubs.subscribe("news"),
+            JournalSubs.subscribe("meeting_info")
         ]
     },
     onStop:function(){
@@ -106,7 +105,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/news/journalN
     waitOn: function () {
         return [
             JournalSubs.subscribe('files'),
-            HomePageSubs.subscribe('news')
+            Meteor.subscribe('fullNewsPage', this.params.newsId)
         ]
     }
 });
