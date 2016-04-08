@@ -3,6 +3,7 @@
         {{#if getKeywords}}
             <h4>{{_ "Keywords"}}</h4>
         {{/if}}
+        {{#mathjax}}
         {{#each getKeywords}}
             <p class="title_style">
                 <span class="name_style">
@@ -13,5 +14,6 @@
             <p class="data" style="width:{{ percent }}%">
             </p>
         {{/each}}
+        {{/mathjax}}
     </div>
 </template>
