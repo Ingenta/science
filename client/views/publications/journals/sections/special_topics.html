@@ -26,7 +26,7 @@
                                     {{/if}}
                                 </div>
                                 <div>
-                                    {{#if guest_editor}}{{translateThis guest_editor.cn guest_editor.en}}&nbsp;&nbsp;{{/if}}{{#if IssueId}}{{year}}{{/if}}
+                                    {{#if guest_editor}}{{_ "Guest Editor"}}:&nbsp;{{translateThis guest_editor.cn guest_editor.en}},&nbsp;{{/if}}{{#if IssueId}}{{year}}{{/if}}
                                 </div>
                             </li>
                         </ul>
