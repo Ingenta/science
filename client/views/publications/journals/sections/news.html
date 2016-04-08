@@ -39,7 +39,7 @@
         <a href="{{whichUrl}}"><strong>{{translateThis title.cn title.en}}</strong></a>
 
         <div class="pull-right">
-            ({{formatDate releaseTime "YYYY-MM-DD"}})
+            {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
             {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
             {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
