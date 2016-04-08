@@ -117,26 +117,26 @@ Config = {
     sysAdmin: "admin",
     parser: {
         contentTypeDic: {
-            article: ["article","articles", "论文", "research paper","research papers","feature article","feature articles","invited article","invited articles"],
-            reviews:[ "评述","review","reviews","专题论述","综述","mini review","mini reviews","研究述评"],
-            letters:["快讯","letter","letters"],
-            editorials:["社论","editorials","editorial"],
-            highlights:["亮点","highlights","highlight"],
-            forums:["论坛","forums","forum"],
-            progress:["进展","progress"],
+            article: ["article","articles", "论文", "research paper","research papers","feature article","feature articles","invited article","invited articles", "论 文", "特邀论文"],
+            reviews:[ "评述","review","reviews","专题论述","综述","mini review","mini reviews","研究述评", "评 述","综 述"],
+            letters:["快讯","letter","letters","快 讯","快报","快 报"],
+            editorials:["社论","editorials","editorial","Preface","Prefaces","社 论","编者按"],
+            highlights:["亮点","highlights","highlight","亮 点","research highlight","research highlights"],
+            forums:["论坛","forums","forum","论 坛"],
+            progress:["进展","progress","动态","Trends","Trend","动 态","进 展"],
             communications:["信息交流","communications","communication"],
-            perspectives:["观点","perspectives","perspective"],
-            correspondance:["争鸣","correspondance","correspondances"],
+            perspectives:["观点","perspectives","perspective","展望","展 望"],
+            correspondance:["争鸣","correspondance","correspondances","争 鸣"],
             interview:["科学访谈","interview","interviews"],
             comments:["评论","comments","comment"],
             newsAndViews:["点评","news & views","news & view"],
-            briefReport:["简报","brief report","brief reports"],
+            briefReport:["简报","brief report","brief reports","简 报"],
             scienceNews:["科学新闻","science news"],
-            bookReview:["书评","book review","book reviews"],
+            bookReview:["书评","book review","book reviews","书 评"],
             mooPaper:["MOO论文","moo paper","moo papers"],
-            erratum:["勘误","erratum","erratums","更正"],
+            erratum:["勘误","erratum","erratums","更正","勘 误","更 正"],
             invitedReview:["invited review","invited reviews","特邀评述"],
-            retraction:["撤稿","retraction note","retraction notes","retraction","retractions"]
+            retraction:["撤稿","retraction note","retraction notes","retraction","retractions","撤 稿"]
         }
     },
     otherPlatformLoginUrl: {
@@ -168,9 +168,9 @@ if (Meteor.isServer) {
     Config.AutoTasks = {
         start: process.env.RUN_TASKS,
             DOI_Register: {
-            savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
+                savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
                 recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
-                rootUrl: "http://phys.scichina.com:8083/sciG/CN/",//必须以/结束 ，必须
+                rootUrl: "http://engine.scichina.com/",//必须以/结束 ，必须
                 rate: "at 1:00 am",//提交注册请求的频率，默认每晚1点
                 condition: 1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
         },

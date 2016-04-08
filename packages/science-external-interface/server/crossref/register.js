@@ -24,6 +24,7 @@ var generationXML = function(options,callback){
 	if(!Articles || !Publications){
 		throw new Error('Articles and Publication are required');
 	}
+	var limit  = options.limit || 0;
 	var journals = {};
 	var articles;
 	var query;
@@ -43,72 +44,81 @@ var generationXML = function(options,callback){
 			{"stamps.rdoi":{$lte:condition}} //较早前进行过注册的
 		]};
 	}
-	query.pubStatus="normal";
-	articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1},limit:100});
 
-	if(articles.count()==0){
-		AutoTasks.update({_id:options.taskId},{$set:{status:"aborted",total:0}});
-		logger.verbose("Not found any article for DOI register");
+	var volumes = Volumes.find({},{fields:{_id:1}}).fetch();
+	if(!volumes.length)
 		return;
+
+	query.pubStatus="normal";
+	for(var i=0;i<volumes.length;i++){
+		query.volumeId = volumes[i]._id;
+		articles = Articles.find(query,{fields:{journalId:1,doi:1,title:1,year:1}});
+		var count=articles.count();
+		if(count==0){
+			continue;
+		}
+		options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"splicing"},$inc:{total:count}});
+		journals={};
+		articles.forEach(function(articleInfo){
+			//计数器
+			journals.articleCount = (journals.articleCount || 0)+1;
+
+			inQuery && articleInfo.doi && dois.push(articleInfo.doi);
+			//单条article的xml内容
+			var title=articleInfo.title.en || articleInfo.title.cn;
+			if(title)
+				title=title.replace(/</g,'&#60;').replace(/>/g,'&#62;').replace(/&/g,'&#38;').replace(/"/g,'&#34;').replace(/'/g,"&#39;");
+			articleInfo.xmlContent = JEC.name2Char(articleStr.replace("{title}",title)
+				.replace("{year}",articleInfo.year)
+				.replace("{doi}",articleInfo.doi)
+				.replace("{url}",options.rootUrl + articleInfo.doi));
+			//结果集中若没有当前这篇文章所属的期刊，先将这个刊加入结果集。
+			if(!journals.hasOwnProperty(articleInfo.journalId)){
+				//查询得到刊的信息
+				var journalInfo = Publications.findOne({_id:articleInfo.journalId},{fields:{title:1,shortTitle:1,issn:1}});
+				journalInfo.xmlContent = JEC.name2Char(
+					journalStr.replace("{journalTitle}",journalInfo.title.replace(/</g,'&#60;').replace(/>/g,'&#62;').replace(/&/g,'&#38;').replace(/"/g,'&#34;').replace(/'/g,"&#39;"))
+						.replace("{abbrTitle}",journalInfo.shortTitle)
+						.replace("{issn}",journalInfo.issn));
+				//加入结果集
+				journalInfo.articles=[];
+				journalInfo.allArticleXmlContent="";
+				journals[articleInfo.journalId]=journalInfo;
+			}
+
+			journals[articleInfo.journalId].articles.push(articleInfo);
+			journals[articleInfo.journalId].allArticleXmlContent+=articleInfo.xmlContent;
+
+			if(journals.articleCount>= count){//最后一个article处理完以后拼装出完整的xml内容
+				//保存本次任务提交的doi集合
+				options.taskId && AutoTasks.update({_id:options.taskId},{$set:{dois:options.dois || dois}});
+				delete journals.articleCount;
+				var allJournalXmlContent="";
+				_.each(journals,function(journalInfo){
+					allJournalXmlContent+= journalInfo.xmlContent.replace("{articles}",journalInfo.allArticleXmlContent);
+				});
+				//以当前时间命名准备提交个crossRef的xml文件
+				var timestamp = new Date().format("yyyyMMddhhmmss");
+				var headContent = headStr.replace("{batchId}",timestamp.substr(0,8))
+					.replace("{timestamp}",timestamp)
+					.replace("{recvEmail}",options.recvEmail);
+				var finallyXmlContent = xmlStr+
+					doiBatchStr.replace("{content}",headContent + bodyStr.replace("{journals}",allJournalXmlContent));
+				//保存文件到预定位置，在回调函数中提交给crossRef
+				var filePath = Config.AutoTasks.DOI_Register.savePath+timestamp +".xml";
+				options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"saving"}});
+				Science.FSE.outputFile(filePath,finallyXmlContent,Meteor.bindEnvironment(function(err){
+						if(!err && callback){
+							options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"saved"}});
+							callback(options.taskId,filePath);
+						}else{
+							options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"error",error:err}});
+						}
+					})
+				);
+			}
+		});
 	}
-	options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"splicing",total:articles.count()}});
-
-	articles.forEach(function(articleInfo){
-		//计数器
-		journals.articleCount = (journals.articleCount || 0)+1;
-
-		inQuery && articleInfo.doi && dois.push(articleInfo.doi);
-		//单条article的xml内容
-		articleInfo.xmlContent = articleStr.replace("{title}",articleInfo.title.en || articleInfo.title.cn)
-			.replace("{year}",articleInfo.year)
-			.replace("{doi}",articleInfo.doi)
-			.replace("{url}",options.rootUrl + articleInfo.doi);//TODO  最终的url待确认
-		//结果集中若没有当前这篇文章所属的期刊，先将这个刊加入结果集。
-		if(!journals.hasOwnProperty(articleInfo.journalId)){
-			//查询得到刊的信息
-			var journalInfo = Publications.findOne({_id:articleInfo.journalId},{fields:{title:1,shortTitle:1,issn:1}});
-			journalInfo.xmlContent = journalStr.replace("{journalTitle}",journalInfo.title)
-				.replace("{abbrTitle}",journalInfo.shortTitle)
-				.replace("{issn}",journalInfo.issn);
-			//加入结果集
-			journalInfo.articles=[];
-			journalInfo.allArticleXmlContent="";
-			journals[articleInfo.journalId]=journalInfo;
-		}
-
-		journals[articleInfo.journalId].articles.push(articleInfo);
-		journals[articleInfo.journalId].allArticleXmlContent+=articleInfo.xmlContent;
-
-		if(journals.articleCount>= articles.count()){//最后一个article处理完以后拼装出完整的xml内容
-			//保存本次任务提交的doi集合
-			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{dois:options.dois || dois}});
-			delete journals.articleCount;
-			var allJournalXmlContent="";
-			_.each(journals,function(journalInfo){
-				allJournalXmlContent+= journalInfo.xmlContent.replace("{articles}",journalInfo.allArticleXmlContent);
-			});
-			//以当前时间命名准备提交个crossRef的xml文件
-			var timestamp = new Date().format("yyyyMMddhhmmss");
-			var headContent = headStr.replace("{batchId}",timestamp.substr(0,8))
-				.replace("{timestamp}",timestamp)
-				.replace("{recvEmail}",options.recvEmail);
-			var finallyXmlContent = xmlStr+
-				doiBatchStr.replace("{content}",headContent + bodyStr.replace("{journals}",allJournalXmlContent));
-			//保存文件到预定位置，在回调函数中提交给crossRef
-			var filePath = Config.AutoTasks.DOI_Register.savePath+timestamp +".xml";
-			options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"saving"}});
-			Science.FSE.outputFile(filePath,finallyXmlContent,Meteor.bindEnvironment(function(err){
-					if(!err && callback){
-						options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"saved"}});
-						callback(options.taskId,filePath);
-					}else{
-						options.taskId && AutoTasks.update({_id:options.taskId},{$set:{status:"error",error:err}});
-					}
-				})
-			);
-		}
-	});
-
 };
 
 var post2CrossRef =function(taskId,filepath){
