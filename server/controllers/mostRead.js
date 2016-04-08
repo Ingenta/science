@@ -1,11 +1,12 @@
 getMostReadByJournal = function (journalId, limit) {
-    if (!limit)limit = 20;//TODO: fix this so it filters out null article ids in the aggregate query
+    if (!limit)limit = 20;
     var mostRead;
     if (journalId) {
         mostRead = PageViews.aggregate([{
             $match: {
                 journalId: journalId,
-                action: "fulltext"
+                action: "fulltext",
+                articleId: {$exists:true, $ne: null}
             }
         }, {
             $group: {
@@ -18,7 +19,8 @@ getMostReadByJournal = function (journalId, limit) {
     else {
         mostRead = PageViews.aggregate([{
             $match: {
-                action: "fulltext"
+                action: "fulltext",
+                articleId: {$exists:true, $ne: null}
             }
         },{
             $group: {

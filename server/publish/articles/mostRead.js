@@ -1,5 +1,5 @@
 Meteor.publish('homepageMostRead', function () {
-    var result = createMostReadList();
+    var result = createMostReadList(undefined,20);
     if(_.isEmpty(result))return this.ready();
     return [
         Articles.find({_id: {$in: result}}, {
