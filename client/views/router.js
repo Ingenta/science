@@ -23,7 +23,7 @@ HomePageSubs.subscribe('searchHistory');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
-HomePageSubs.subscribe('news');
+// HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -274,7 +274,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 JournalSubs.subscribe('files'),
-                HomePageSubs.subscribe('news')
+                Meteor.subscribe('fullNewsPage', this.params.newsId)
             ]
         }
     });

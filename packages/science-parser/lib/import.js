@@ -63,12 +63,10 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                     var index = authorNotes.push({email: obj.email});
                     author.email = index;
                 }
-                //TODO: correct this logic
-                author.surname = {en: obj.firstname, cn: obj.firstname};
-                author.given = {
-                    en: (obj.middlename || "" + " " + obj.lastname || ""),
-                    cn: (obj.middlename || "" + " " + obj.lastname || "")
-                };
+
+                author.surname = {en: obj.lastname, cn: obj.lastname};
+                author.given = {en: obj.firstname, cn: obj.firstname};
+                author.middle = {en: obj.middlename, cn: obj.middlename};
                 author.fullname = obj.authorname;
                 if (author.fullname && author.fullname.cn) {
                     author.fullname.en = author.fullname.en || author.fullname.cn;
@@ -338,8 +336,8 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 }
                             }
                             if (options.importPdf && article.pdf) {
-                                var a = Articles.findOne({doi:article.doi},{fields:{pdfId:1}});
-                                if(!a || !a.pdfId){//已经成功上传过pdf不再处理
+                                var a = Articles.findOne({doi: article.doi}, {fields: {pdfId: 1}});
+                                if (!a || !a.pdfId) {//已经成功上传过pdf不再处理
                                     importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
                                         if (result) {
                                             newOne.pdfId = result;
@@ -347,7 +345,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                         }
                                         saveArticle(newOne);
                                     }))
-                                }else{
+                                } else {
                                     logger.info("import " + article.doi + " skipped");
                                 }
                             } else if (options.importArticle) {

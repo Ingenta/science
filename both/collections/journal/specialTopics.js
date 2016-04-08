@@ -51,4 +51,8 @@ SpecialTopicsSchema  = new SimpleSchema({
 Meteor.startup(function(){
     SpecialTopicsSchema.i18n("schemas.specialTopics");
     SpecialTopics.attachSchema(SpecialTopicsSchema);
-})
+});
+
+if (Meteor.isClient) {
+    mySpecialTopicsPagination = new Paginator(SpecialTopics);
+}

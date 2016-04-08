@@ -5,11 +5,6 @@ ReactiveTabs.createInterface({
         Session.set("WaitingForArticles",true);
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
-        if (slug !== "Browse" && Router.current().route.getName() === "journal.name.toc") {
-            Router.current().params.volume = undefined;
-            Router.current().params.issue = undefined;
-            Router.go("journal.name", Router.current().params)
-        }
         if (Router.current().params.journalShortTitle) {
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
@@ -37,10 +32,12 @@ ReactiveTabs.createInterface({
             }else if(slug === 'About'){
                 Meteor.subscribe("journalAboutTab",Router.current().params.journalShortTitle);
                 Meteor.subscribe("editorial_member",Router.current().params.journalShortTitle);
-            }else if(slug == 'MOOP'){
+            }else if(slug === 'MOOP'){
                 Meteor.subscribe("journalMoopTab",Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currMoopIssue_'+journal._id));
+            }else if (slug === 'News'){
+                Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }
         }
     }

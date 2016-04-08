@@ -90,7 +90,6 @@
                             </a>
                         </li>
                     {{/if}}
-                    {{> altmetric doi=doi}}
                 </div>
             </div>
             <br>
@@ -129,7 +128,7 @@
                   {{/if}}
                   |
                   {{#if hasIssue}}
-                      <a href="../"><b>{{_ "Table of Contents"}}</b></a>
+                      <a href="{{urlToJournalById journalId}}#{{issueId}}"><b>{{_ "Table of Contents"}}</b></a>
                   {{else}}
                       <b>{{_ "Table of Contents"}}</b>
                   {{/if}}
