@@ -34,7 +34,6 @@ EmailConfigSchema = new SimpleSchema({
             afFieldInput: {
                 froalaOptions: {
                     language: 'zh_cn',
-                    theme: 'red',
                     inlineMode: false,
                     buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'selectAll', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'table', 'undo', 'redo', 'html', 'insertHorizontalRule', 'removeFormat', 'fullscreen'],
                     height: '400',
@@ -93,7 +92,6 @@ BroadcastEmailsSchema = new SimpleSchema({
             afFieldInput: {
                 froalaOptions: {
                     language: 'zh_cn',
-                    theme: 'red',
                     inlineMode: false,
                     buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'selectAll', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'table', 'undo', 'redo', 'html', 'insertHorizontalRule', 'removeFormat', 'fullscreen'],
                     height: '400',
