@@ -4,6 +4,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
         //if (!Session.get("activeTab"))
         //    Session.set("activeTab", this.params.query.activeTab || "Browse");
+        Session.set("currentIssueId", undefined);
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);

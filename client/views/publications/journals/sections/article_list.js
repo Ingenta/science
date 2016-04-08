@@ -98,8 +98,13 @@ Template.articleListRight.helpers({
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");
-        if (!curIssue) return;
-        var i = Issues.findOne({_id: curIssue});
+        if(curIssue){
+            var i = Issues.findOne({_id: curIssue});
+        }else{
+            var v = Volumes.findOne({'journalId': this._id},{sort: {volume: -1}});
+            if (!v)return;
+            var i = Issues.findOne({'journalId': this._id, 'volume': v.volume},{sort: {order: -1}});
+        }
         if (!i)return;
         var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", ";
         if (i.month) {
@@ -113,8 +118,6 @@ Template.articleListRight.helpers({
             title += i.year;
         }
         return title;
-
-
     },
     issueContext: function () {
         var curIssue = Session.get("currentIssueId");
