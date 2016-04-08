@@ -457,6 +457,10 @@ var getFigure = function (fig) {
             figure.graphics.push(g);
         })
     }
+    if(_.isEmpty(figure.graphics)){
+        throw (new Error("No graphic node found inside of fig " + id || ""));
+        return result;
+    }
     return figure;
 };
 
