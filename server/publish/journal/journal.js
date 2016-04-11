@@ -1,77 +1,83 @@
-
-
 //TODO this is inefficient and fetches too many documents, consider dynamic loading or meteor.call
 Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
+    if (!journal)return this.ready();
+    var journalId = journal._id;
 
     //combine all historical journals
     var idArr = [journalId];
-    var journal=Publications.findOne({_id:journalId},{fields:{historicalJournals:1}});
+    var journal = Publications.findOne({_id: journalId}, {fields: {historicalJournals: 1}});
 
-    if(journal && !_.isEmpty(journal.historicalJournals)){
-        idArr = _.union(idArr,journal.historicalJournals)
+    if (journal && !_.isEmpty(journal.historicalJournals)) {
+        idArr = _.union(idArr, journal.historicalJournals)
     }
     return [
-        Volumes.find({journalId:{$in:idArr}}),
-        Issues.find({journalId:{$in:idArr}},{fields:{createDate:0},sort: {order: -1}})
+        Volumes.find({journalId: {$in: idArr}}),
+        Issues.find({journalId: {$in: idArr}}, {fields: {createDate: 0}, sort: {order: -1}})
     ]
 });
 Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issueId) {
-    if(!journalShortTitle)return this.ready();
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
-    if(!issueId)return this.ready();
+    if (!journal)return this.ready();
+    var journalId = journal._id;
+    if (!issueId)return this.ready();
     check(issueId, String);
 
     //get all topic id
-    var topics = Articles.find({journalId: journalId, issueId: issueId},{fields:{topic:1}}).fetch();
-    var topicsArr = _.reduce(topics,function(memo,item){
-        if(item.topic){
-            return _.union(memo,item.topic);
+    var topics = Articles.find({journalId: journalId, issueId: issueId}, {fields: {topic: 1}}).fetch();
+    var topicsArr = _.reduce(topics, function (memo, item) {
+        if (item.topic) {
+            return _.union(memo, item.topic);
         }
         return memo;
-    },[]);
+    }, []);
     topicsArr = _.compact(topicsArr);
 
     var publishList = [
         Articles.find({journalId: journalId, issueId: issueId}, {
-            fields: {sections: 0, figures: 0, references: 0, authorNotes:0, affiliations:0, tables:0, pacs:0, fundings:0}
+            fields: {
+                sections: 0,
+                figures: 0,
+                references: 0,
+                authorNotes: 0,
+                affiliations: 0,
+                tables: 0,
+                pacs: 0,
+                fundings: 0
+            }
         })
     ];
 
-    if(!_.isEmpty(topicsArr)){
-        publishList.push(Topics.find({_id:{$in:topicsArr}}))
+    if (!_.isEmpty(topicsArr)) {
+        publishList.push(Topics.find({_id: {$in: topicsArr}}))
     }
     return publishList;
 
 });
 
 
-
 Meteor.publish('journalOverviewTab', function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
+    if (!journal)return this.ready();
+    var journalId = journal._id;
     var recommended = EditorsRecommend.find({publications: journalId}, {limit: 5});
     var recommendedArticleIds = _.pluck(recommended.fetch(), "ArticlesId");
     var mostRead = createMostReadList(journalId, 5);
-    var mostCitedList = MostCited.find({journalId:journalId},{limit:6,sort: {count: -1}});
+    var mostCitedList = MostCited.find({journalId: journalId}, {limit: 6, sort: {count: -1}});
     var mostCited = _.pluck(mostCitedList.fetch(), 'articleId');
-    var recentlyUploadedList = Articles.find({journalId:journalId}, {
+    var recentlyUploadedList = Articles.find({journalId: journalId}, {
         sort: {createdAt: -1},
         limit: 10,
         fields: {_id: 1}
     })
     var recentlyUploaded = _.pluck(recentlyUploadedList.fetch(), '_id');
-    var homepageArticles = _.union(recommendedArticleIds,mostRead,mostCited,recentlyUploaded);
+    var homepageArticles = _.union(recommendedArticleIds, mostRead, mostCited, recentlyUploaded);
 
     return [
         Articles.find({_id: {$in: homepageArticles}}, {
@@ -94,50 +100,50 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
 
 });
 
-Meteor.publish('publishersJournalsTab',function (journalId) {
-    if(!journalId)return this.ready();
-    return Articles.find({journalId:journalId});
+Meteor.publish('publishersJournalsTab', function (journalId) {
+    if (!journalId)return this.ready();
+    return Articles.find({journalId: journalId});
 })
-Meteor.publish('journalOnlineFirstTab',function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
+Meteor.publish('journalOnlineFirstTab', function (journalShortTitle) {
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
-    return Articles.find({journalId:journalId,pubStatus:"online_first"});
+    if (!journal)return this.ready();
+    var journalId = journal._id;
+    return Articles.find({journalId: journalId, pubStatus: "online_first"});
 })
-Meteor.publish('journalAcceptedTab',function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
+Meteor.publish('journalAcceptedTab', function (journalShortTitle) {
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
-    return Articles.find({journalId:journalId,pubStatus:"accepted"});
+    if (!journal)return this.ready();
+    var journalId = journal._id;
+    return Articles.find({journalId: journalId, pubStatus: "accepted"});
 })
-Meteor.publish('journalEditorialBoard',function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
+Meteor.publish('journalEditorialBoard', function (journalShortTitle) {
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
+    if (!journal)return this.ready();
+    var journalId = journal._id;
     return [
-        EditorialBoard.find({publications:journalId}),
-        About.find({publications:journalId})
+        EditorialBoard.find({publications: journalId}),
+        About.find({publications: journalId})
     ]
 })
-Meteor.publish('journalAuthorCenterTab',function (journalShortTitle) {
-    if(!journalShortTitle)return this.ready();
+Meteor.publish('journalAuthorCenterTab', function (journalShortTitle) {
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
-    return AuthorCenter.find({publications:journalId});
+    if (!journal)return this.ready();
+    var journalId = journal._id;
+    return AuthorCenter.find({publications: journalId});
 })
-Meteor.publish('journalMoopTab',function(journalShortTitle){
-    if(!journalShortTitle)return this.ready();
+Meteor.publish('journalMoopTab', function (journalShortTitle) {
+    if (!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
     var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if(!journal)return this.ready();
-    var journalId=journal._id;
-    return Collections.Medias.find({journalId:journalId});
+    if (!journal)return this.ready();
+    var journalId = journal._id;
+    return Collections.Medias.find({journalId: journalId});
 })
