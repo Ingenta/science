@@ -34,30 +34,39 @@ Template.FullTextTemplate.events({
         e.stopPropagation();
         e.preventDefault();
         var xr = $(e.target);
+        var rtype = xr.attr("ref-type") || xr.attr("xml:base");
+        if(rtype)
+            rtype=rtype.toLowerCase();
         var rid = xr.attr("rid");
-        if (rid) {
+        if (rtype || rid) {
             //----插图
             var fig = _.find(Template.currentData().figures, function (fig) {
                 return fig.id == rid || _.contains(fig.links, rid);
             });
-            if (fig) {
-                Session.set("fig", fig);
-                $(".figure-modal").modal('show');
-                return;
+            if(rtype=="fig" || fig){
+
+                if (fig) {
+                    Session.set("fig", fig);
+                    $(".figure-modal").modal('show');
+                    return;
+                }
             }
+
             //----表格
             var table = _.find(Template.currentData().tables, function (table) {
                 return table.id == rid;
             });
-            if (table) {
-                Session.set("table", table);
-                $(".table-modal").modal('show');
-                return;
+            if(rtype=="tab" || table){
+                if (table) {
+                    Session.set("table", table);
+                    $(".table-modal").modal('show');
+                    return;
+                }
             }
+
             //----引用文献
-            if(rid.startWith('REF')){
+            if(rtype=="bibr"){
                 var indexStr = xr[0].innerText.replace("[","").replace("]","").trim();
-                console.log('aa')
                 if(/^\d{1,3}(\s*?[~-－-––,，]\s*?\d{1,3})*$/.test(indexStr)){
                     var refIndexs = Science.String.parseToNumbers(indexStr);
                     if(!_.isEmpty(refIndexs)){
@@ -73,7 +82,11 @@ Template.FullTextTemplate.events({
                 $(".reference-modal").modal('show');
                 return;
             }
-            Science.dom.scollToElement("#"+rid);
+
+            //----公式
+            if(rtype=="disp-formula"){
+                Science.dom.scollToElement("#"+rid);
+            }
         }
     },
     "click #resetFulltext": function () {
