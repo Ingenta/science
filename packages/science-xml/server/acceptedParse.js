@@ -107,5 +107,5 @@ Science.parserAccepted = function(filepath){
         return article;
     }
     if(Science.FSE.existsSync(filepath))
-        return parse(Science.FSE.readFileSync(filepath, 'utf-8'));
+        return parse(ScienceXML.getFileContentsFromLocalPath(filepath, 'utf-8'));
 }
