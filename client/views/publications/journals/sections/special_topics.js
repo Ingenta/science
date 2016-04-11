@@ -49,7 +49,7 @@ Template.SpecialTopics.helpers({
     year: function () {
         var issue = Issues.findOne({_id: this.IssueId});
         if (issue)
-            return issue.volume+"("+issue.issue+")"+",  "+issue.year;
+            return issue.volume+"("+issue.issue+")"+", "+TAPi18n.__("Published")+":"+issue.year;
     },
     name: function () {
         var id = Session.get("specialTopicsId");

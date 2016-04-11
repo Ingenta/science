@@ -64,6 +64,9 @@ gwendall:autoform-i18n
 gwendall:simple-schema-i18n
 tap:i18n
 tap:i18n-ui
+kaso:bootstrap-treeview
+jackjiang:autoform-froala
+
 
 # libs
 science-lib
@@ -124,9 +127,7 @@ meteortoys:toykit
 msavin:mongol
 meteorhacks:kadira
 natestrauser:connection-banner
-
-
-
-kaso:bootstrap-treeview
-jackjiang:autoform-froala
 kadira:debug
+
+# doi
+jackjiang:entity-converter

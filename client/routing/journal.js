@@ -4,6 +4,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
         //if (!Session.get("activeTab"))
         //    Session.set("activeTab", this.params.query.activeTab || "Browse");
+        Session.set("currentIssueId", undefined);
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
@@ -32,7 +33,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('specialTopics'),
-            JournalSubs.subscribe("meeting_info")
+            JournalSubs.subscribe("meeting_info"),
+            JournalSubs.subscribe('tag')
         ]
     },
     onStop:function(){

@@ -45,6 +45,12 @@ Template.LayoutSideBar.helpers({
         if (Router.current() && Router.current().route)
             return Router.current().route.getName() == "article.show" || Router.current().route.getName() == "article.show.strange";
     },
+    getdoi:function(){
+        if (Router.current() && Router.current().route
+            && Router.current().route.getName() == "article.show" || Router.current().route.getName() == "article.show.strange"){
+            return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        }
+    },
     isJournalPage: function () {
         if (Router.current() && Router.current().route)
             if (Router.current().route.getName() == "journal.name")

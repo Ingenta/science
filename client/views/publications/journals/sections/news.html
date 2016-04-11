@@ -60,7 +60,7 @@
 <template name="pubDynamicList">
     {{#each pubDynamic}}
     <div class="part"><p>
-        <a href={{whichUrl}} target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
+        <a href={{whichUrl}}><strong>{{translateThis title.cn title.en}}</strong></a>
 
         <div class="pull-right">
             {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}

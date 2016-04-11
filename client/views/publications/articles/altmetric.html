@@ -1,6 +1,13 @@
 <template name="altmetric">
 	{{#if getData}}
-		<a target="_blank" href="{{url}}"><img style="height:50px" src="{{imageLink}}"/></a>
+        <div style="margin-top: 10px;">
+            <p><a href="{{url}}">Article Metrics</a></p>
+            <p>
+                <a target="_blank" href="{{url}}">
+                    <img src="{{imageLink}}">
+                </a>
+            </p>
+        </div>
         <hr>
 	{{/if}}
 </template>
