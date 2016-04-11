@@ -25,7 +25,7 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     }
     return [
         Volumes.find({journalId:{$in:idArr}}),
-        Issues.find({journalId:{$in:idArr}},{fields:{createDate:0}})
+        Issues.find({journalId:{$in:idArr}},{fields:{createDate:0},sort: {order: -1}})
     ]
 });
 Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issueId) {
