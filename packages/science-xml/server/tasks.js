@@ -2,7 +2,8 @@ Tasks = {};
 
 Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     if (!pathToFile || !fileName || !fileType)return;
-    var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf("."));
+    //TODO: fix this for shared paths to take after the last / or \
+    var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf(".")); //fileName.replace(/.*[\/\\]([^\/\\]+)\..*/i,"$1");
     //文章的出版状态(默认是正式出版)
     var pubstatus = formFields ? formFields.pubStatus : "normal";
     formFields = _.isEmpty(formFields) ? {} : formFields;
@@ -118,8 +119,8 @@ Tasks.extract = function (logId, pathToFile, targetPath) {
                                 return;
                             }
 
-                            var targetXml = targetPath + "/" + xmlFileName + ".xml";
-                            var targetPdf = targetPath + "/" + pdfFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
+                            var targetXml = xmlFileName && targetPath + "/" + xmlFileName + ".xml";
+                            var targetPdf = pdfFileName && targetPath + "/" + pdfFileName + ".pdf";//pdf默认位置，若xml内容中有指定pdf则以xml中的位置优先
                             UploadLog.update({_id: logId}, {
                                 $set: {
                                     xml: targetXml,
@@ -232,10 +233,10 @@ Tasks.insertArticlePdf = function (logId, result) {
 var readyToStartArticleImport = function (log, logId, taskId, result) {
     UploadTasks.update({_id: taskId}, {$set: {status: "Success"}});
     Tasks.insertArticleTask(logId, result);
-    if (log.extractTo)
-        Meteor.setTimeout(function () {
-            ScienceXML.RemoveFile(log.extractTo);
-        }, 20000)
+    // if (log.extractTo)
+    //     Meteor.setTimeout(function () {
+    //         ScienceXML.RemoveFile(log.extractTo);
+    //     }, 20000)
 }
 Tasks.insertArticleImages = function (logId, result) {
     var taskId = UploadTasks.insert({
