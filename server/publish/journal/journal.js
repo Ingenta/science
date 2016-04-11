@@ -39,16 +39,7 @@ Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issue
 
     var publishList = [
         Articles.find({journalId: journalId, issueId: issueId}, {
-            fields: {
-                sections: 0,
-                figures: 0,
-                references: 0,
-                authorNotes: 0,
-                affiliations: 0,
-                tables: 0,
-                pacs: 0,
-                fundings: 0
-            }
+            fields: articleWithMetadata
         })
     ];
 

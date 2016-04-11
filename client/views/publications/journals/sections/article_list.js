@@ -47,10 +47,6 @@ Template.journalNavigationPanel.events({
     }
 });
 
-
-Template.journalNavigationPanel.onRendered(function () {
-    Session.set('currentIssueId', undefined);
-})
 Template.articleList.helpers({
     IsArticleListReady: function () {
         return Session.get("WaitingForArticles");

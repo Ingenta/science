@@ -2,16 +2,13 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     data: function () {
         var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        //if (!Session.get("activeTab"))
-        //    Session.set("activeTab", this.params.query.activeTab || "Browse");
-        Session.set("currentIssueId", undefined);
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
             if(this.params.hash)
             {
                 Session.set('currentIssueId', this.params.hash);
-                Session.set("activeTab", "Browse")
+                Session.set("activeTab", "Browse");
             }
             return journal;
         }
