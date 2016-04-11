@@ -33,7 +33,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('specialTopics'),
-            JournalSubs.subscribe("meeting_info")
+            JournalSubs.subscribe("meeting_info"),
+            JournalSubs.subscribe('tag')
         ]
     },
     onStop:function(){
