@@ -1,7 +1,7 @@
 <template name="showNewsArticle">
     {{#each newsArticles}}
         <div class="part">
-            <div align="center"><span class="title-font">{{{translateThis title.cn title.en}}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}</div><br>
+            <div align="center"><span class="title-font">{{{translateThis title.cn title.en}}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{#if can "edit-homepage-news" "news" }}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}</div><br>
             <p class="text-center">{{#if releaseTime}}{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD"}}&nbsp;&nbsp;&nbsp;&nbsp;{{/if}}{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if author}}{{_ "Author"}}：{{translateThis author.cn author.en}}{{/if}}</p><br>
             <p align="text-center" style="margin-left: 1.5%">{{{translateThis content.cn content.en}}}</p>
             {{#if fields}}
