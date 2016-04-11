@@ -18,17 +18,12 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
         Issues.find({journalId: {$in: idArr}}, {fields: {createDate: 0}, sort: {order: -1}})
     ]
 });
-Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issueId) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalBrowseTabArticleList', function (issueId) {
     if (!issueId)return this.ready();
     check(issueId, String);
 
     //get all topic id
-    var topics = Articles.find({journalId: journalId, issueId: issueId}, {fields: {topic: 1}}).fetch();
+    var topics = Articles.find({issueId: issueId}, {fields: {topic: 1}}).fetch();
     var topicsArr = _.reduce(topics, function (memo, item) {
         if (item.topic) {
             return _.union(memo, item.topic);
@@ -38,7 +33,7 @@ Meteor.publish('journalBrowseTabArticleList', function (journalShortTitle, issue
     topicsArr = _.compact(topicsArr);
 
     var publishList = [
-        Articles.find({journalId: journalId, issueId: issueId}, {
+        Articles.find({issueId: issueId}, {
             fields: articleWithMetadata
         })
     ];

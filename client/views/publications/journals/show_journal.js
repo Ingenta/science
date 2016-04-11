@@ -13,7 +13,7 @@ ReactiveTabs.createInterface({
                 });
             } else if (slug === 'Browse') {
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get("currentIssueId"));
+                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 Session.set("WaitingForArticles",!articlesSub.ready())
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
@@ -35,7 +35,7 @@ ReactiveTabs.createInterface({
             }else if(slug === 'MOOP'){
                 Meteor.subscribe("journalMoopTab",Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currMoopIssue_'+journal._id));
+                Meteor.subscribe('journalBrowseTabArticleList', Session.get('currMoopIssue_'+journal._id));
             }else if (slug === 'News'){
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }
