@@ -22,7 +22,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     name: "article.show",
     waitOn: function () {
         return [
-            Meteor.subscribe('getAllIssuesMatchingThisOneForNextAndPrevious', this.params.publisherDoi + "/" + this.params.articleDoi),
             Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi),
             Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi),
             Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi),

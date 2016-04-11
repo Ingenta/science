@@ -1,14 +1,6 @@
 
-Meteor.publish('getAllIssuesMatchingThisOneForNextAndPrevious', function (doi) {
-    if(!doi)return this.ready();
-    check(doi, String);
-    var art = Articles.findOne({doi: doi},{fields:{issueId:1}});
-    if(!art)return this.ready();
-    return Articles.find({issueId: art.issueId}, {
-        fields: {doi: 1, elocationId: 1, issueId: 1}
-    });
-});
 
+//TODO this is inefficient and fetches too many documents, consider dynamic loading or meteor.call
 Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
     check(journalShortTitle, String);
