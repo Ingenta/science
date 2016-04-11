@@ -178,8 +178,8 @@ Template.articleOptions.helpers({
             {name: TAPi18n.__("Metrics"), slug: 'metrics'},
             {name: TAPi18n.__("Related"), slug: 'related'}
         ];
-        if(this.hasMoop){
-            tabArr.push({name: TAPi18n.__("MOOP"),slug:'moop'})
+        if (this.hasMoop) {
+            tabArr.push({name: TAPi18n.__("MOOP"), slug: 'moop'})
         }
         return tabArr;
     },
@@ -204,27 +204,29 @@ Template.showArticle.events({
         });
     }
 });
+Template.articlePageNavigation.onCreated(function () {
+    this.nextDoi = new ReactiveVar(0);
+    this.prevDoi = new ReactiveVar(0);
+    if (this.data.elocationId && this.data.issueId) {
+        var pDoi = this.prevDoi;
+        Meteor.call("previousDoi", this.data.elocationId, this.data.issueId, function (err, response) {
+            if (err) console.log(err);
+            pDoi.set(response);
+        })
+        var nDoi = this.nextDoi;
+        Meteor.call("nextDoi", this.data.elocationId, this.data.issueId, function (err, response) {
+            if (err) console.log(err);
+            nDoi.set(response);
+        })
+    }
+})
 
-var getNextPage = function (issue, page, ascending) {
-    var articlesInThisIssue = Articles.find({issueId: issue}, {fields: {elocationId: 1, doi: 1}}).fetch();
-    var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
-        return parseInt(a.elocationId, 10);
-    });
-    var dois = _.pluck(articlesOrderedByPage, "elocationId");
-    var positionInList = _.indexOf(dois, page, true);
-    var nextPageIndex = ascending ? positionInList + 1 : positionInList - 1;
-    if (!articlesOrderedByPage[nextPageIndex]) return false;
-    var nextDoi = articlesOrderedByPage[nextPageIndex].doi;
-    return nextDoi.substring(nextDoi.lastIndexOf("/") + 1);
-}
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        if (this.elocationId && this.issueId)
-            return getNextPage(this.issueId, this.elocationId, false);
+        return Template.instance().prevDoi.get();
     },
     nextArticle: function () {
-        if (this.elocationId && this.issueId)
-            return getNextPage(this.issueId, this.elocationId, true);
+        return Template.instance().nextDoi.get();
     },
     hasIssue: function () {
         if (this.pubStatus && this.pubStatus === "normal")return true;

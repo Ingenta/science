@@ -25,7 +25,8 @@ articleWithMetadata = {
     published: 1,//needed for most cited
     citationCount: 1,//needed for most cited
     topic: 1,
-    publisher: 1
+    publisher: 1,
+    contentType: 1
 };
 
 Meteor.publish('articleSearchResults', function () {
