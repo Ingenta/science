@@ -69,6 +69,24 @@ Meteor.methods({
             })
             return datas;
         }
+    },
+    getLatestIssueId:function(journalId){
+        if(!journalId)return;
+        var issues = Issues.find({'journalId': journalId},{fields:{volume:1}}).fetch();
+        if(!issues.length)return;
+        var highestVolume = _.max(issues, function (i) {
+            return parseInt(i.volume, 10);
+        }).volume;
+        // var highestVolume = "59";
+        // console.log("journalId: " + journalId);
+        // console.log("issues: "+issues.length);
+        // console.log("latest volume: " + highestVolume);
+        var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
+        var latestIssue = _.max(issuesInThisVolume, function (i) {
+            return parseInt(i.issue, 10);
+        });
+        // console.log("latest issue: " + latestIssue.issue);
+        return latestIssue._id;
     }
 });
 

@@ -43,58 +43,31 @@ Template.journalNavigationPanel.events({
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
         issueId && Session.set("currentIssueId", issueId);
+        window.location.hash = issueId;
     }
 });
 
-var getLastIssue = function () {
-    //Get the newest issue to display by default
-    var journalId = Session.get('currentJournalId');
-    var issues = Issues.find({'journalId': journalId}).fetch();
-    var highestVolume = _.max(issues, function (i) {
-        return parseInt(i.volume, 10);
-    }).volume;
-    var issuesInThisVolume = Issues.find({'journalId': journalId, 'volume': highestVolume}).fetch();
-    return _.max(issuesInThisVolume, function (i) {
-        return parseInt(i.issue, 10);
-    });
-}
+
 Template.journalNavigationPanel.onRendered(function () {
-    var lastIssue;
-    if (Session.get("currentIssueId"))
-        lastIssue = Issues.findOne({'_id': Session.get("currentIssueId")});
-    else
-        lastIssue = getLastIssue();
-    if (!lastIssue) return;
-    var currVolume = Volumes.findOne({journalId: lastIssue.journalId, volume: lastIssue.volume});
-    if (!currVolume) return;
-    Session.set("currentVolumeId", currVolume._id)
+    Session.set('currentIssueId', undefined);
 })
 Template.articleList.helpers({
     IsArticleListReady: function () {
         return Session.get("WaitingForArticles");
     }
 })
-
 Template.articleListRight.helpers({
     articles: function () {
-        var pubStatus = Template.currentData().pubStatus;
-        var query = {pubStatus: pubStatus};
-        if (pubStatus == 'normal') {
-            query = {pubStatus: {$ne:'accepted'}}
-            var curIssue = Session.get("currentIssueId");
-            if (!curIssue) {
-                var lastIssue = getLastIssue();
-                if (lastIssue) {
-                    Session.set("currentIssueId", lastIssue._id);
-                    curIssue = Session.get("currentIssueId");
-                }
-            }
-            query.issueId = curIssue;
+        if (Template.currentData().pubStatus === 'accepted') {
+            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {accepted: -1}});
         }
-        if (pubStatus == 'accepted') {
-            return Articles.find(query, {sort: {accepted: -1}});
+        if (Template.currentData().pubStatus === 'online_first') {
+            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {elocationId: 1}});
         }
-        return Articles.find(query, {sort: {elocationId: 1}});
+        if (Template.currentData().pubStatus === 'normal') {
+            query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
+            return Articles.find(query, {sort: {elocationId: 1}});
+        }
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");

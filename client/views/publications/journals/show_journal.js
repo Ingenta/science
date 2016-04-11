@@ -13,7 +13,7 @@ ReactiveTabs.createInterface({
                 });
             } else if (slug === 'Browse') {
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get('currentIssueId'));
+                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Router.current().params.journalShortTitle, Session.get("currentIssueId"));
                 Session.set("WaitingForArticles",!articlesSub.ready())
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
@@ -66,6 +66,16 @@ Template.ShowJournal.helpers({
     initPage: function (id, publisher) {
         Session.set('currentJournalId', id);
         Session.set('currentPublisherId', publisher);
+        if (Router.current().params.journalShortTitle) {
+            var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
+            if (!Router.current().params.hash) {
+                Meteor.call("getLatestIssueId", journal._id, function (err, response) {
+                    if (err) console.log(err);
+                    response && Session.set("currentIssueId", response);
+                    window.location.hash = response;
+                });
+            }
+        }
     }
 });
 
