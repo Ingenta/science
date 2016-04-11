@@ -97,7 +97,16 @@ Meteor.methods({
         check(elocationId, String);
         check(issueId, String);
         return getNextPage(issueId,elocationId,true);
+    },
+    volumesAtJournal: function (journalId) {
+        if (!journalId)return;
+        check(journalId, String);
+        var v = Volumes.find({'journalId': journalId}).fetch();
+        return _.sortBy(v, function (oneVolume) {
+            return parseInt(oneVolume.volume, 10);
+        }).reverse();
     }
+
 });
 
 var getNextPage = function (issue, page, ascending) {

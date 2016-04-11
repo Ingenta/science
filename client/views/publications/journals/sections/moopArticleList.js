@@ -37,9 +37,6 @@ Template.journalNavigationPanelOnlyMoop.helpers({
             return iss;
         }
     },
-    formatMonth: function () {
-        return this.month ? (", " + this.month) : "";
-    },
     class: function () {
         return this._id === Session.get("currentVolumeId") ? "fa-minus" : "fa-plus";
     },
