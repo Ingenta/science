@@ -1438,7 +1438,8 @@
     "mooPaper":"MOO论文",
     "erratum":"勘误",
     "invitedReview":"特邀评述",
-    "retraction":"撤稿"
+    "retraction":"撤稿",
+    "other":"其他"
   },
   "clickToView":"点击查看",
   "Rating": "评分",
