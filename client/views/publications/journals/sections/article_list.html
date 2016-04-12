@@ -23,7 +23,7 @@
 
 <template name="journalNavigationPanel">
     <ul class="list-group">
-        {{#each volumeInJournal _id}}
+        {{#each volumeInJournal}}
             <li class="volume list-group-item">
                 <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }} {{unionYear}}</span>
             </li>

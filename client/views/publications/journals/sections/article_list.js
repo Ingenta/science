@@ -1,11 +1,15 @@
+Template.journalNavigationPanel.onCreated(function () {
+    this.volumes = new ReactiveVar(0);
+    var x = this.volumes;
+    Meteor.call("volumesAtJournal", this.data._id, function (err, response) {
+        if (err) console.log(err);
+        x.set(response);
+    })
+})
+
 Template.journalNavigationPanel.helpers({
-    volumeInJournal: function (journalId) {
-        if (journalId) {
-            var v = Volumes.find({'journalId': journalId}).fetch();
-            return _.sortBy(v, function (oneVolume) {
-                return parseInt(oneVolume.volume, 10);
-            }).reverse();
-        }
+    volumeInJournal: function () {
+        return Template.instance().volumes.get()
     },
     issueInVolume: function (journalId, volume) {
         if (journalId && volume) {
@@ -15,10 +19,7 @@ Template.journalNavigationPanel.helpers({
             }).reverse();
         }
     },
-    formatMonth: function () {
-        return this.month ? (", " + this.month) : "";
-    },
-    unionYear: function () {
+    unionYear: function () { //TODO: this is inefficient consider moving year to volumes collection
         var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume}, {fields: {year: 1}}).fetch();
         var years = _.pluck(issues, 'year');
         years = _.uniq(years.join(", ").split(/, ?/)).sort();
@@ -67,12 +68,12 @@ Template.articleListRight.helpers({
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");
-        if(curIssue){
+        if (curIssue) {
             var i = Issues.findOne({_id: curIssue});
-        }else{
-            var v = Volumes.findOne({'journalId': this._id},{sort: {volume: -1}});
+        } else {
+            var v = Volumes.findOne({'journalId': this._id}, {sort: {volume: -1}});
             if (!v)return;
-            var i = Issues.findOne({'journalId': this._id, 'volume': v.volume},{sort: {order: -1}});
+            var i = Issues.findOne({'journalId': this._id, 'volume': v.volume}, {sort: {order: -1}});
         }
         if (!i)return;
         var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", ";

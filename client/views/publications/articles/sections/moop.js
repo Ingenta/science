@@ -4,8 +4,9 @@ Template.moopDetails.helpers({
     hasMoops: function () {
         check(this.doi, String);
         check(this._id, String);
+        var totalMediaForThisArticle = Collections.Medias.find({doi: this.doi}).count();
+        if(!totalMediaForThisArticle)return;
         var key = "moop_" + this._id;
-        //TODO this is called on every visit to journal page unnecessarily
         Meteor.call("getMoopForArticle", this.doi, function (err, result) {
             if (!err)
                 moopCache.set(key, result);
