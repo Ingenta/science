@@ -141,6 +141,10 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
+            ]
+        },
+        subscriptions: function(){
+            return [
                 CollectionSubs.subscribe('allCollections'),
                 HomePageSubs.subscribe('topics'),
                 HomePageSubs.subscribe('tag')
