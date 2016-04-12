@@ -27,7 +27,23 @@ Template.AbstractContentAndKeywords.helpers({
 
 
 Template.fundingInfo.helpers({
-	"fundings3":function(){
-		return _.first(this.fundings,3);
+	"fundingsGroup":function(){
+		if(_.isArray(this.fundings)){
+			var aftReduce = _.reduce(this.fundings,function(result, item){
+				if(result[item.source])
+					result[item.source].code+=", "+ item.contract;
+				else if(item.contract){
+					result[item.source]={
+						name:item.source,
+						code:item.contract
+					}
+				}
+				console.log(result);
+				return result;
+			},{});
+			return _.first(_.values(aftReduce), 3);
+		}else if(_.isString(this.fundings)){
+			return [{name:this.fundings}];
+		}
 	}
 })
