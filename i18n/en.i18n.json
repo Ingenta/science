@@ -137,7 +137,8 @@
         "mooPaper":"MOO Paper",
         "erratum":"Erratum",
         "invitedReview":"Invited Review",
-        "retraction":"retraction note"
+        "retraction":"retraction note",
+        "other":"other"
     },
     "clickToView":"Click to view",
     "Reset":"重置",
