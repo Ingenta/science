@@ -31,7 +31,7 @@ Router.route("user_settings.update_information", {
     parent: "user_settings",
     waitOn: function () {
         return [
-            Meteor.subscribe('topics'),
+            HomePageSubs.subscribe('topics'),
             HomePageSubs.subscribe('publications')
         ]
     }
@@ -62,7 +62,7 @@ Router.route("user_settings.my_watch", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('publications'),
-            Meteor.subscribe('topics'),
+            HomePageSubs.subscribe('topics'),
             Meteor.subscribe('myWatchedArticles')
         ]
     }

@@ -35,7 +35,7 @@
 </template>
 
 <template name="SingleNews">
-    <div class="row index index-num">
+    <div class="row index index-num" style="margin-bottom: 5px;">
         <div class="pull-right">
             {{#if can "edit-homepage-news" "news" }}
                 {{>jkafModal template="updateNewsModalForm" doc=this}}
