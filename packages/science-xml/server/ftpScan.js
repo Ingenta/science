@@ -27,7 +27,6 @@ Tasks.scanFTP = function(){
                     fileName:file.name,
                     fileType:"application/zip"
                 })
-                //Tasks.startJob(Config.ftp.downloadDir + "/"+ file.name,file.name,"application/zip")
             }))
         })
     }));

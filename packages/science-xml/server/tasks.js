@@ -367,27 +367,6 @@ var insertArticle = function (a) {
     a.language = journal.language;
 
     if (a.pubStatus == 'normal' || a.pubStatus == 'online_first') {
-        //var volume = Volumes.findOne({journalId: a.journalId, volume: a.volume});
-        //if (!volume) {
-        //    volume = Volumes.insert({
-        //        journalId: a.journalId,
-        //        volume: a.volume
-        //    });
-        //}
-        //a.volumeId = volume._id || volume;
-        //
-        //var issue = Issues.findOne({journalId: a.journalId, volume: a.volume, issue: a.issue});
-        //if (!issue) {
-        //    issue = Issues.insert({
-        //        journalId: a.journalId,
-        //        volume: a.volume,
-        //        issue: a.issue,
-        //        year: a.year,
-        //        month: a.month,
-        //        order: a.year+Science.String.PadLeft(a.volume,"0",8)+Science.String.PadLeft(a.issue,"0",8),
-        //        createDate: new Date()
-        //    });
-        //}
         //确保article有一个关联的issue
         var vi = ScienceXML.IssueCreatorInstance.createIssue({
             journalId: a.journalId,
