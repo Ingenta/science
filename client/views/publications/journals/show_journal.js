@@ -1,8 +1,9 @@
-
+Template.journalTabs.onCreated(function(){
+    this.waiting = ReactiveVar(0);
+})
 ReactiveTabs.createInterface({
     template: 'journalTabs',
-    onChange: function (slug) {
-        Session.set("WaitingForArticles",true);
+    onChange: function (slug, template) {
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (Router.current().params.journalShortTitle) {
@@ -14,7 +15,7 @@ ReactiveTabs.createInterface({
             } else if (slug === 'Browse') {
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
-                Session.set("WaitingForArticles",!articlesSub.ready())
+                template.waiting.set(!articlesSub.ready());
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });

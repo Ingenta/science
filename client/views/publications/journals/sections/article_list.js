@@ -50,7 +50,8 @@ Template.journalNavigationPanel.events({
 
 Template.articleList.helpers({
     IsArticleListReady: function () {
-        return Session.get("WaitingForArticles");
+        //will get journal tabs template where instance variable is set
+        return Template.instance().parent(2,true).waiting.get()
     }
 })
 Template.articleListRight.helpers({
