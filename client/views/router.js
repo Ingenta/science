@@ -23,6 +23,8 @@ HomePageSubs.subscribe('searchHistory');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
+HomePageSubs.subscribe('topics');
+
 // HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
@@ -63,7 +65,7 @@ Router.route("/topics/", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('topics')
+            HomePageSubs.subscribe('topics')
         ]
     },
     onBeforeAction: function () {
@@ -82,7 +84,7 @@ Router.route("topics/:topicsId/", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe('topics'),
+            HomePageSubs.subscribe('topics'),
             Meteor.subscribe('articlesInTopic',this.params.topicsId)
         ]
     }
@@ -141,12 +143,7 @@ Router.map(function () {
                 HomePageSubs.subscribe('images'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
-            ]
-        },
-        subscriptions: function(){
-            return [
                 CollectionSubs.subscribe('allCollections'),
-                HomePageSubs.subscribe('topics'),
                 HomePageSubs.subscribe('tag')
             ]
         }
@@ -262,7 +259,7 @@ Router.map(function () {
             return [
                 HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                Meteor.subscribe('topics')
+                HomePageSubs.subscribe('topics')
             ]
         }
     });
