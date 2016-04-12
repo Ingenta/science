@@ -46,7 +46,13 @@ Router.route('/api', function () {
             result.message = err.message;
         } else {
             result.result = "success";
-            Tasks.startJob(targetPath, filename, "application/zip", {creator: "api", pubStatus: req.body.type});
+            importQueue.add({
+                pathToFile:targetPath,
+                fileName:filename,
+                fileType:"application/zip",
+                formFields:{creator: "api", pubStatus: req.body.type}
+            })
+            //Tasks.startJob(targetPath, filename, "application/zip", {creator: "api", pubStatus: req.body.type});
         }
         res.write(JSON.stringify(result));
 

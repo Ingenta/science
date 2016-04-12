@@ -22,7 +22,12 @@ Tasks.scanFTP = function(){
                         logger.error("Move fail:" + err.toString())
                     }
                 })
-                Tasks.startJob(Config.ftp.downloadDir + "/"+ file.name,file.name,"application/zip")
+                importQueue.add({
+                    pathToFile:Config.ftp.downloadDir + "/"+ file.name,
+                    fileName:file.name,
+                    fileType:"application/zip"
+                })
+                //Tasks.startJob(Config.ftp.downloadDir + "/"+ file.name,file.name,"application/zip")
             }))
         })
     }));
