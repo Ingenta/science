@@ -1,10 +1,15 @@
 ScienceXML.IssueCreator = function () {
+    var lastTimeUseAt = new Date();
     var gen = function (obj) {
         return "j:" + obj.journalId + ",v:" + obj.volume + ",i:" + obj.issue;
     };
     var tasks = new Science.JSON.UniqueList(gen);
 
     this.createIssue = function (obj) {
+        if(new Date()-lastTimeUseAt>120000){
+            tasks=new Science.JSON.UniqueList(gen);
+        }
+        lastTimeUseAt = new Date();
         if (obj.journalId && obj.volume && obj.issue) {
             if (!tasks.exists(obj)) {
                 tasks.push(obj);
@@ -13,6 +18,7 @@ ScienceXML.IssueCreator = function () {
                     volume: obj.volume
                 });
                 var volume = Volumes.findOne({journalId: obj.journalId, volume: obj.volume})._id;
+              
                 var issue = Issues.findOne({journalId: obj.journalId, volume: obj.volume, issue: obj.issue});
                 if (issue && issue._id) {
                     if(issue.year && issue.year.indexOf(obj.year)==-1){
@@ -46,8 +52,8 @@ ScienceXML.IssueCreator = function () {
                 }
                 return {
                     journalId: obj.journalId,
-                    volumeId: volume,
-                    issueId: issue,
+                    volumeId: volume._id,
+                    issueId: issue._id,
                     volume: obj.volume,
                     issue: obj.issue
                 };
@@ -55,6 +61,8 @@ ScienceXML.IssueCreator = function () {
         }
     }
 }
+
+ScienceXML.IssueCreatorInstance = new ScienceXML.IssueCreator();
 
 ScienceXML.testIssueCreator = function (countOfIssue) {
     var issueCreator = new ScienceXML.IssueCreator();

@@ -16,7 +16,8 @@ Package.onUse(function (api) {
             'jackkav:xpath',
             'science-lib',
             'science-topics',
-            'didstopia:admzip'
+            'didstopia:admzip',
+            'cfs:power-queue'
         ],
         both);
     api.addFiles('both/routes.js', both);
@@ -30,7 +31,8 @@ Package.onUse(function (api) {
         'server/tasks.js',
         'server/interface.js',
         'server/ftpScan.js',
-        'server/acceptedParse.js'
+        'server/acceptedParse.js',
+        'server/queue.js'
     ], 'server');
 
     api.addFiles('client/views/upload.html', 'client');
