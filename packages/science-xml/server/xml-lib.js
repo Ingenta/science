@@ -67,29 +67,52 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.affiliations = [];
     var authorNodes = parserHelper.getNodes("//contrib[@contrib-type='author']", doc);
     _.each(authorNodes, function (author) {
-        var fullnamePart = {};
+        var nameNodes = parserHelper.getNodes("descendant::name",author);
+        if(!_.isEmpty(nameNodes)){
+            var fullnamePart = {};
+            var surnamePart={};
+            var givenPart={};
+            var useSameVal=nameNodes.length==1;
+            _.each(nameNodes,function(nNode){
+                var lang=parserHelper.getFirstAttribute("attribute::lang",nNode) || "en";
+                var style=parserHelper.getFirstAttribute("attribute::name-style",nNode) || "western";
+                var space=style=="western"?" ":"";
+                var surName=parserHelper.getSimpleVal("child::surname",nNode);
+                var givenName=parserHelper.getSimpleVal("child::given-names",nNode);
+                _.each(parserHelper.langNames,function(val,key){
+                    if(val==lang){
+                        lang=key;
+                        return;
+                    }
+                })
+                surnamePart[lang]=surName;
+                givenName[lang]=givenName;
+                fullnamePart[lang]=surName+space+givenName;
+                if(useSameVal){
+                    var anthorLang = lang == 'en'?"cn":"en";
+                    surnamePart[anthorLang]=surName;
+                    givenName[anthorLang]=givenName;
+                    fullnamePart[anthorLang]=surName+space+givenName;
+                }
+            })
+            var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
 
-        var surnamePart = parserHelper.getMultiVal("descendant::name[@lang='{lang}']/surname", author, {planb: "descendant::name/surname"});
-        var givenPart = parserHelper.getMultiVal("descendant::name[@lang='{lang}']/given-names", author, {planb: "descendant::name/given-names"});
-        fullnamePart.en = surnamePart.en + " " + givenPart.en;
-        fullnamePart.cn = surnamePart.cn + " " + givenPart.cn;
+            //通讯作者信息
+            var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
+            if (noteAttr) {
+                authorObj.email = noteAttr;
+                logger.info('parse email done')
+            }
 
-        var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
+            //工作单位信息
+            var affAttrs = parserHelper.getAttributes("child::xref[@ref-type='aff']/attribute::rid", author);
+            if (!_.isEmpty(affAttrs)) {
+                authorObj.affs = _.uniq(affAttrs);
+            }
 
-        //通讯作者信息
-        var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
-        if (noteAttr) {
-            authorObj.email = noteAttr;
-            logger.info('parse email done')
+            results.authors.push(authorObj);
         }
 
-        //工作单位信息
-        var affAttrs = parserHelper.getAttributes("child::xref[@ref-type='aff']/attribute::rid", author);
-        if (!_.isEmpty(affAttrs)) {
-            authorObj.affs = _.uniq(affAttrs);
-        }
-
-        results.authors.push(authorObj);
     });
     if (_.isEmpty(results.authors)) {
         results.errors.push("No author found");
