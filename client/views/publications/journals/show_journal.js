@@ -64,13 +64,12 @@ Template.journalBanner.helpers({
 });
 
 Template.ShowJournal.helpers({
-    initPage: function (id, publisher) {
-        Session.set('currentJournalId', id);
+    initPage: function (journalId, publisher) {
+        Session.set('currentJournalId', journalId);
         Session.set('currentPublisherId', publisher);
         if (Router.current().params.journalShortTitle) {
-            var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (!Router.current().params.hash) {
-                Meteor.call("getLatestIssueId", journal._id, function (err, response) {
+                Meteor.call("getLatestIssueId", journalId, function (err, response) {
                     if (err) console.log(err);
                     response && Session.set("currentIssueId", response);
                     window.location.hash = response;
