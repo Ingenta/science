@@ -19,7 +19,7 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use([
     'reactive-var',
-    'froala:editor@2.0.1_1',
+    'froala:editor@2.2.3',
     'templating',
     'aldeed:autoform',
     'iron:router'

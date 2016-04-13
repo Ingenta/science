@@ -3,13 +3,26 @@ Science.parserAccepted = function(filepath){
     var fs = Science.FSE;
     var dom;
     var parse = function (data) {
-        var article = {};
+        var article = {errors:[]};
         dom = new Science.Dom().parseFromString(data);
         article.issn = parserHelper.getSimpleVal("//journal/issn[@issn_type='print'] | //article/journal_issn", dom);
         article.doi = parserHelper.getSimpleVal("//journal/doi | //article/doi", dom);
-        if(article.doi)
-            article.articledoi = article.doi.split("/")[1];
-        article.title = parserHelper.getMultiVal("//article/article_title", dom);
+        if(article.doi){
+            doi = doi.trim();
+            if (!ScienceXML.isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
+            else {
+                results.doi = doi;
+                results.articledoi = ScienceXML.getArticleDoiFromFullDOI(doi);
+            }
+        }else{
+            article.errors.push("No doi found");
+        }
+        var title = parserHelper.getMultiVal("//article/article_title", dom);
+        if(title)
+            article.title=title;
+        else
+            article.errors.push("No title found");
+
         var authorNodes = parserHelper.getNodes("//author_list/author", dom);
         var isSameAffiliation = function (a, b) {
             return a.affText.cn.replace(/[\.,;，。；\s]/g,'') === b.affText.cn.replace(/[\.,;，。；\s]/g,'');
@@ -102,7 +115,11 @@ Science.parserAccepted = function(filepath){
             if(publication){
                 article.publisher= publication.publisher;
                 article.journalId =publication._id;
+            }else{
+                article.errors.push("No such issn found in journal collection: " + issn);
             }
+        }else{
+            article.errors.push("No issn found in xml")
         }
         return article;
     }
