@@ -29,3 +29,13 @@ SyncedCron.add({
         //SyncedCron.stop();
     }
 });
+
+Meteor.methods({
+    fetchCitations:function(journalId){
+        check(journalId, String);
+        var articles = Articles.find({journalId:journalId}, {fields: {doi: 1}});
+        articles.forEach(function (item) {
+            Science.Queue.Citation.add({doi: item.doi, articleId: item._id});
+        });
+    }
+})
