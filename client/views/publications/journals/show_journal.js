@@ -73,8 +73,9 @@ Template.ShowJournal.helpers({
                 Meteor.call("getLatestIssueId", journalId, function (err, response) {
                     if (err) return console.log(err);
                     response && Session.set("currentIssueId", response);
-                    window.location.hash = response;
+                    // window.location.hash = response;
                 });
+                console.log("getting latest issue")
             }
         }
     }

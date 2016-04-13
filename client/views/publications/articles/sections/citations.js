@@ -19,8 +19,10 @@ Template.CitedByTemplate.helpers({
     formatIssue:function(){
         return this.issue && ('('+this.issue+')' + " : ")
     },
-    pages: function (){
-        return this.startPage && this.endPage && (this.startPage + "-" + this.endPage);
+    startPage: function (){
+        return this.startPage && (this.startPage);
     },
-
+    endPage: function (){
+        return this.endPage && ('-'+this.endPage);
+    },
 })

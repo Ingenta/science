@@ -44,7 +44,7 @@ Template.journalNavigationPanel.events({
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
         issueId && Session.set("currentIssueId", issueId);
-        window.location.hash = issueId;
+        // window.location.hash = issueId;
     }
 });
 
