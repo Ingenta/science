@@ -1,4 +1,4 @@
-Template.journalTabs.onCreated(function(){
+Template.journalTabs.onCreated(function () {
     this.waiting = ReactiveVar(0);
 })
 ReactiveTabs.createInterface({
@@ -19,25 +19,25 @@ ReactiveTabs.createInterface({
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
-                Session.set("activeTab",""); //NOTE: possibly need this to prevent page sticking to browse or could disable tabs
-            } else if(slug === 'Editorial Board'){
-                Meteor.subscribe("journalEditorialBoard",Router.current().params.journalShortTitle);
-            } else if(slug === 'Accepted'){
-                Meteor.subscribe("journalAcceptedTab",Router.current().params.journalShortTitle);
-            } else if(slug === 'Online First'){
-                Meteor.subscribe("journalOnlineFirstTab",Router.current().params.journalShortTitle);
-            }else if(slug === 'Author Center'){
-                Meteor.subscribe("journalAuthorCenterTab",Router.current().params.journalShortTitle);
-            }else if(slug === 'Special Topics'){
-                Meteor.subscribe("journalIssuesIncludingHistorical",Router.current().params.journalShortTitle);
-            }else if(slug === 'About'){
-                Meteor.subscribe("journalAboutTab",Router.current().params.journalShortTitle);
-                Meteor.subscribe("editorial_member",Router.current().params.journalShortTitle);
-            }else if(slug === 'MOOP'){
-                Meteor.subscribe("journalMoopTab",Router.current().params.journalShortTitle);
+                Session.set("activeTab", ""); //NOTE: possibly need this to prevent page sticking to browse or could disable tabs
+            } else if (slug === 'Editorial Board') {
+                Meteor.subscribe("journalEditorialBoard", Router.current().params.journalShortTitle);
+            } else if (slug === 'Accepted') {
+                Meteor.subscribe("journalAcceptedTab", Router.current().params.journalShortTitle);
+            } else if (slug === 'Online First') {
+                Meteor.subscribe("journalOnlineFirstTab", Router.current().params.journalShortTitle);
+            } else if (slug === 'Author Center') {
+                Meteor.subscribe("journalAuthorCenterTab", Router.current().params.journalShortTitle);
+            } else if (slug === 'Special Topics') {
+                Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
+            } else if (slug === 'About') {
+                Meteor.subscribe("journalAboutTab", Router.current().params.journalShortTitle);
+                Meteor.subscribe("editorial_member", Router.current().params.journalShortTitle);
+            } else if (slug === 'MOOP') {
+                Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                Meteor.subscribe('journalBrowseTabArticleList', Session.get('currMoopIssue_'+journal._id));
-            }else if (slug === 'News'){
+                Meteor.subscribe('journalBrowseTabArticleList', Session.get('currMoopIssue_' + journal._id));
+            } else if (slug === 'News') {
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }
         }
@@ -52,7 +52,7 @@ Template.journalBanner.helpers({
         if (!journal.banner) return;
         var banner = Images.findOne({_id: journal.banner});
         if (!banner) return;
-        return banner.url({auth:false});
+        return banner.url({auth: false});
     },
     hasJournalBanner: function (journalId) {
         if (!journalId)return;
@@ -64,14 +64,14 @@ Template.journalBanner.helpers({
 });
 
 Template.ShowJournal.helpers({
-    initPage: function (id, publisher) {
-        Session.set('currentJournalId', id);
+    initPage: function (journalId, publisher) {
+        if (!journalId || !publisher) return;
+        Session.set('currentJournalId', journalId);
         Session.set('currentPublisherId', publisher);
         if (Router.current().params.journalShortTitle) {
-            var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (!Router.current().params.hash) {
-                Meteor.call("getLatestIssueId", journal._id, function (err, response) {
-                    if (err) console.log(err);
+                Meteor.call("getLatestIssueId", journalId, function (err, response) {
+                    if (err) return console.log(err);
                     response && Session.set("currentIssueId", response);
                     window.location.hash = response;
                 });
