@@ -1,11 +1,11 @@
-var getArticleDoiFromFullDOI = function (fullDOI) {
+ScienceXML.getArticleDoiFromFullDOI = function (fullDOI) {
     if (!fullDOI) return "";
     if (fullDOI.indexOf("/") === -1) return fullDOI;
     var articleDOI = fullDOI.split("/")[1];
     if (!articleDOI) return fullDOI;
     return articleDOI;
 }
-var isValidDoi = function (doi) {
+ScienceXML.isValidDoi = function (doi) {
     if (!doi) return false;
     if (doi.split('/').length !== 2) return false;
     if (_.isEmpty(doi.split('/')[0].trim())) return false;
@@ -32,10 +32,10 @@ ScienceXML.parseXml = function (path, pubStatus) {
     if (doi === undefined) results.errors.push("No doi found");
     else {
         doi = doi.trim();
-        if (!isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
+        if (!ScienceXML.isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
         else {
             results.doi = doi;
-            results.articledoi = getArticleDoiFromFullDOI(doi);
+            results.articledoi = ScienceXML.getArticleDoiFromFullDOI(doi);
         }
     }
     logger.info('doi: ' + results.doi)
