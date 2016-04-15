@@ -55,7 +55,7 @@
             {{#each instructions}}
                 <ul>
                     <li style="margin-left: -25px;">
-                        <a style="font-size: 12px" href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
+                        <a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateAuthorCenterModalForm}}
                         {{/if}}
@@ -89,7 +89,7 @@
                 </p>
                 {{#each childList}}
                     <ul>
-                        <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
+                        <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                             {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
                             {{/if}}
@@ -116,7 +116,7 @@
             </div>
             {{#each submitManuscript}}
                 <ul>
-                    <li style="margin-left: -25px;"><a style="font-size: 12px" href={{whichUrl}} target="_blank">{{{translateThis title.cn title.en}}}</a>
+                    <li style="margin-left: -25px;"><a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateSubmitManuscriptModalForm}}
                         {{/if}}

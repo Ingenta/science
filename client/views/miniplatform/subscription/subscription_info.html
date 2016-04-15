@@ -20,7 +20,7 @@
                 {{#if miniPlatformPermission}}{{> updateSubscriptionModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="subDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{content}}}</p>
-            <p><img src="/load_word.png">&nbsp;&nbsp;<a style="color: red" href="{{wordValue}}" target="_blank">{{fileName}}</a></p>
+            <p><a style="color: red" href="{{wordValue}}" target="_blank"><img src="/load_word.png">&nbsp;&nbsp;{{fileName}}</a></p>
         </div>
     {{else}}
         {{_ "No results found!"}}
