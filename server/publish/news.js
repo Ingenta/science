@@ -8,7 +8,11 @@ Meteor.publish('journalNews', function (journalShortTitle) {
     var journal = Publications.findOne({shortTitle: journalShortTitle});
     if (!journal)return this.ready();
     var journalId = journal._id;
-    return News.find({publications: journalId}, {fields: {content: 0}});
+
+    return [
+        News.find({publications: journalId}, {fields: {content: 0}}),
+        Meeting.find({publications: journalId})
+    ]
 });
 
 Meteor.publish('fullNewsPage', function (newsId) {

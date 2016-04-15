@@ -29,7 +29,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
-            JournalSubs.subscribe("meeting_info"),
             JournalSubs.subscribe('tag')
         ]
     },

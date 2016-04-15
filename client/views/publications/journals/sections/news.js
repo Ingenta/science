@@ -117,13 +117,13 @@ Template.meetingInfoList.helpers({
         return false;
     },
     Address: function () {
-        if(this.address.en||this.address.cn){
+        if(this.address && (this.address.en||this.address.cn)){
             return true;
         }
         return false;
     },
     Theme: function () {
-        if(this.theme.en||this.theme.cn){
+        if(this.theme && (this.theme.en||this.theme.cn)){
             return true;
         }
         return false;
