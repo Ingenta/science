@@ -1,0 +1,53 @@
+<template name="chiefEditor">
+    <div class="banner">
+        <div class="container-fluid" style="margin-left: 41px">
+            {{> pageElement key="council" isMiniPlatform=true}}
+            <div class="row">
+                {{#if miniPlatformPermission}}
+                    <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addChiefEditorModal"></span>{{> addChiefEditorModalForm}}
+                {{/if}}
+            </div>
+            <hr>
+            {{> chiefEditorList}}
+        </div>
+    </div>
+</template>
+
+<template name="chiefEditorList">
+    {{#each chiefEditor}}
+        <div class="partContent">
+            <div align="center"><span class="title-font">{{translateThis title.cn title.en}}</span>
+                {{#if miniPlatformPermission}}{{> updateChiefEditorModalForm}}{{/if}}
+                {{#if miniPlatformPermission}}<a href="#" id="chiefEdi" class="fa fa-trash"></a>{{/if}}</div><br>
+            <p>{{{translateThis content.cn content.en}}}</p>
+        </div>
+    {{else}}
+        {{_ "No results found!"}}
+    {{/each}}
+</template>
+
+<template name="updateChiefEditorModalForm">
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="accordion,releaseTime,createDate,link,fileName,fileId,types"}}{{/afModal}}
+</template>
+
+<template name="addChiefEditorModalForm">
+    <div class="modal fade" id="addChiefEditorModal" role="dialog" aria-labelledby="addChiefEditorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addChiefEditorModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addChiefEditorModalForm" collection="NewsContact" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="title"}}
+                        {{> afQuickField name="content"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>

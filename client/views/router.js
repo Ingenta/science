@@ -36,30 +36,64 @@ Router.onBeforeAction(function () {
         this.next();
     }
 });
-Router.route("home", {
-    path: "/",
-    controller: "HomePrivateController",
-    title: function () {
-        return TAPi18n.__("Home");
-    },
-    waitOn: function () {
-        return [
-            HomePageSubs.subscribe('homepageNews'),
-            HomePageSubs.subscribe('images'),
-            HomePageSubs.subscribe('homepageMostRecentArticles'),
-            HomePageSubs.subscribe('homepageMostCitedBrief'),
-            HomePageSubs.subscribe('homepageMostReadBrief')
-        ]
-    },
-    onStop:function(){
-        Science.dom.clearSelect2Record();
+Meteor.startup(function () {
+    if (Meteor.isClient) {
+        //This code is needed to detect if there is a subdomain. So the system wants to know the routes of the subdomain
+        var hostnameArray = document.location.hostname.split(".");
+        if (hostnameArray[0] === "www"||hostnameArray[0] === "127") {
+            Router.route("home", {
+                data: function () {
+                    var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
+                    if (publisher) {
+                        Session.set('publisherId', publisher._id);
+                    }
+                },
+                path: "/",
+                template: "newsPlatform",
+                layoutTemplate: "miniLayout",
+                waitOn: function () {
+                    return [
+                        MiniPlatformSubs.subscribe('news_recommend'),
+                        MiniPlatformSubs.subscribe('column'),
+                        MiniPlatformSubs.subscribe('news_center'),
+                        HomePageSubs.subscribe('publishers'),
+                        HomePageSubs.subscribe('publications'),
+                        MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles'),
+                        MiniPlatformSubs.subscribe('news_link'),
+                        MiniPlatformSubs.subscribe('miniplatformMostRecentArticles')
+                    ]
+                }
+            });
+        }
+        else {
+            Router.route("home", {
+                path: "/",
+                controller: "HomePrivateController",
+                title: function () {
+                    return TAPi18n.__("Home");
+                },
+                waitOn: function () {
+                    return [
+                        HomePageSubs.subscribe('homepageNews'),
+                        HomePageSubs.subscribe('images'),
+                        HomePageSubs.subscribe('homepageMostRecentArticles'),
+                        HomePageSubs.subscribe('homepageMostCitedBrief'),
+                        HomePageSubs.subscribe('homepageMostReadBrief')
+                    ]
+                },
+                onStop: function () {
+                    Science.dom.clearSelect2Record();
+                }
+            });
+        }
     }
 });
+
 
 Router.route("/topics/", {
     parent: "home",
     name: "topics",
-    template:"Topics",
+    template: "Topics",
     title: function () {
         return TAPi18n.__("Topics");
     },
@@ -76,16 +110,16 @@ Router.route("/topics/", {
 });
 
 Router.route("topics/:topicsId/", {
-    template      : "topicsDetail",
-    name          : "topics.selectArticles",
-    parent        : "topics",
+    template: "topicsDetail",
+    name: "topics.selectArticles",
+    parent: "topics",
     title: function () {
         return TAPi18n.__("addArticleToCollection");
     },
     waitOn: function () {
         return [
             HomePageSubs.subscribe('topics'),
-            Meteor.subscribe('articlesInTopic',this.params.topicsId)
+            Meteor.subscribe('articlesInTopic', this.params.topicsId)
         ]
     }
 });
@@ -133,7 +167,7 @@ Router.map(function () {
         parent: "publishers",
         title: function () {
             var p = Publishers.findOne({shortname: this.params.publisherName})
-            if(!p)return this.params.publisherName;
+            if (!p)return this.params.publisherName;
             if (TAPi18n.getLanguage() === "en")return p.name || p.chinesename;
             return p.chinesename || p.name;
         },
@@ -203,7 +237,7 @@ Router.map(function () {
         name: "mostRead.showWithJournalId",
         waitOn: function () {
             return [
-                Meteor.subscribe('journalMostRead',this.params.journalId)
+                Meteor.subscribe('journalMostRead', this.params.journalId)
             ]
         }
     });
@@ -231,7 +265,7 @@ Router.map(function () {
         name: "mostCite.showWithJournalId",
         waitOn: function () {
             return [
-                Meteor.subscribe('journalMostCited',this.params.journalId)
+                Meteor.subscribe('journalMostCited', this.params.journalId)
             ]
         }
     });
@@ -297,7 +331,7 @@ Router.map(function () {
             ]
         },
         onBeforeAction: function () {
-            Permissions.check("use-publisher-panel", "platform",{publisher:this.params.pubId});
+            Permissions.check("use-publisher-panel", "platform", {publisher: this.params.pubId});
             /*BEFORE_FUNCTION*/
             this.next();
         },
@@ -326,7 +360,7 @@ Router.map(function () {
         },
 
         onBeforeAction: function () {
-            Permissions.check("add-user", "user",{publisher:this.params.pubId});
+            Permissions.check("add-user", "user", {publisher: this.params.pubId});
             this.next();
         }
     });
@@ -347,27 +381,27 @@ Router.map(function () {
                 HomePageSubs.subscribe('publishers')
             ]
         },
-        onBeforeAction: function() {
+        onBeforeAction: function () {
             var scope = {};
-            var user = Users.findOne({_id:this.params.userId},{fields:{publisherId:1,institutionId:1}});
-            if(user.publisherId)
-                scope.publisher=user.publisherId;
-            if(user.institutionId)
-                scope.institution=user.institutionId;
-            if (!Permissions.userCan("modify-user","user",Meteor.userId(),scope))
+            var user = Users.findOne({_id: this.params.userId}, {fields: {publisherId: 1, institutionId: 1}});
+            if (user.publisherId)
+                scope.publisher = user.publisherId;
+            if (user.institutionId)
+                scope.institution = user.institutionId;
+            if (!Permissions.userCan("modify-user", "user", Meteor.userId(), scope))
                 Router.go('home');
             this.next();
         },
-        data: function() {
-            var result =  {
+        data: function () {
+            var result = {
                 params: this.params || {},
-                currUser: Users.findOne({_id:this.params.userId}, {})
+                currUser: Users.findOne({_id: this.params.userId}, {})
             };
             var urs = Permissions.getUserRoles();
-            var publisherManagerOne = _.find(urs,function(ur){
+            var publisherManagerOne = _.find(urs, function (ur) {
                 return ur.role == 'publisher:publisher-manager-from-user';
             });
-            if(publisherManagerOne && publisherManagerOne.scope){
+            if (publisherManagerOne && publisherManagerOne.scope) {
                 result.publisherScope = publisherManagerOne.scope.publisher;
             }
             return result;
@@ -375,7 +409,7 @@ Router.map(function () {
     });
 
     this.route("/publisherPanel/:pubId", {
-        name:"publisherPanel",
+        name: "publisherPanel",
         controller: "publisherPanelController",
         parent: "home",
         title: function () {
