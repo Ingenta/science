@@ -78,7 +78,15 @@ ol.affiliationList li {
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 1.3em;
     padding: 5px 0 5px 0px;
-    text-transform: uppercase;
+}
+
+h4.sectionDivider-title{
+    font-size:1.2em;
+}
+
+h5.sectionDivider-title {
+    font-size:1.2em;
+    font-style:italic;
 }
 .subtitle {
     color: #39392A;
@@ -113,3 +121,4 @@ ol.affiliationList li {
 div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all {
     left: 0px !important;
 }
+
