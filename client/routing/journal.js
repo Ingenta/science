@@ -29,7 +29,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
-            JournalSubs.subscribe('specialTopics'),
             JournalSubs.subscribe("meeting_info"),
             JournalSubs.subscribe('tag')
         ]
@@ -51,7 +50,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
     waitOn: function () {
         return [
             Meteor.subscribe('articlesInSpecTopic', this.params.specialTopicsId),
-            JournalSubs.subscribe('specialTopics'),
+            Meteor.subscribe('journalSpecialTopics',this.params.journalShortTitle),
             Meteor.subscribe('journalIssuesIncludingHistorical',this.params.journalShortTitle)
         ]
     }
