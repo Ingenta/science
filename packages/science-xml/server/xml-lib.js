@@ -86,12 +86,12 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                     }
                 })
                 surnamePart[lang]=surName;
-                givenName[lang]=givenName;
+                givenPart[lang]=givenName;
                 fullnamePart[lang]=surName+space+givenName;
                 if(useSameVal){
                     var anthorLang = lang == 'en'?"cn":"en";
                     surnamePart[anthorLang]=surName;
-                    givenName[anthorLang]=givenName;
+                    givenPart[anthorLang]=givenName;
                     fullnamePart[anthorLang]=surName+space+givenName;
                 }
             })
