@@ -15,6 +15,7 @@ Template.i18n_switch.helpers({
 TAPi18n._afterUILanguageChange = function () {
 //triggers on language switch
     mo.setLocale(TAPi18n.getLanguage());
+    document.title = TAPi18n.__("Science China Press");
     if(TAPi18n.afterChangeHook){
         _.map(TAPi18n.afterChangeHook,function(hook,key){
             hook && hook();

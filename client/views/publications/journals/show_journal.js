@@ -87,7 +87,9 @@ Template.journalOptions.helpers({
         var tabList = [];
         var currentTitle = Router.current().params.journalShortTitle;
         if (!currentTitle)return;
-        var journalTabSelections = Publications.findOne({shortTitle: currentTitle}).tabSelections;
+        var journal = Publications.findOne({shortTitle: currentTitle});
+        if (!journal)return;
+        var journalTabSelections = journal.tabSelections;
         _.each(journalTabSelections, function (t) {
             tabList.push({name: TAPi18n.__(t), slug: t});
         });
