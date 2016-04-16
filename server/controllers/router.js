@@ -322,7 +322,7 @@ Router.map(function () {
                     Science.Pdf(params, function (error, stdout, stderr) {
                             Science.FSE.remove(adPdf);
                             if (stdout) {
-                                logger.info(stdout);
+                                // logger.debug(stdout);
                             }
                             if (stderr) {
                                 console.log('------STDERR--------');
