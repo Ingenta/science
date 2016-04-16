@@ -194,7 +194,7 @@ Router.map(function () {
             var request = this.request;
             var outputFileName = Guid.create() + ".pdf"
             var outputPath = Config.staticFiles.uploadPdfDir + "/handle/" + outputFileName;
-            logger.info(outputPath)
+            //logger.info(outputPath)
             //get this article by pdf id
             var article = Articles.findOne({_id: this.params.articleId}, {
                 fields: {
@@ -211,11 +211,17 @@ Router.map(function () {
                     year: 1,
                     topic: 1,
                     pdfId: 1,
-                    pubStatus:1
+                    pubStatus: 1
                 }
             });
             if (!article || !ScienceXML.FileExists(article.pdfId)) {
-                logger.warn("pdf not found for this article: " + this.params.articleId);
+
+                if (article) {
+                    logger.warn("pdf not found for this article: " + article.doi + " with this pdfId: " + article.pdfId);
+                } else {
+                    logger.warn("article not found at this id: " + this.params.articleId);
+                }
+
                 this.response.writeHead(302, {
                     'Location': "/"
                 });
@@ -242,15 +248,15 @@ Router.map(function () {
             //create path to journal banner and advert banner
             var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
             if (journalInfo.banner && Images.findOne({_id: journalInfo.banner})) {
-                data.banner = host + Images.findOne({_id: journalInfo.banner}).url({auth:false});
+                data.banner = host + Images.findOne({_id: journalInfo.banner}).url({auth: false});
             }
             if (journalInfo.adBanner && Images.findOne({_id: journalInfo.adBanner})) {
-                data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url({auth:false});
+                data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url({auth: false});
             }
 
             //parse article metadata
             data.title = getdata(article.title, lang);
-            if(article.authors) {
+            if (article.authors) {
                 data.authors = _.map(article.authors, function (author) {
                     return getdata(author.fullname, lang);
                 });
@@ -262,11 +268,11 @@ Router.map(function () {
             data.year = article.year;
             data.doi = article.doi;
             data.fulltextUrl = "http://219.238.6.215/doi/" + article.doi;
-            data.tocUrl="http://219.238.6.215/publisher/"+publisherInfo.shortname+"/journal/"+ journalInfo.shortTitle + "/"+article.volume + "/" + article.issue;
+            data.tocUrl = "http://219.238.6.215/publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "/" + article.volume + "/" + article.issue;
             data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
 
             //create related article query
-            var query = {q: "_text_:("+data.title+") AND NOT _id:"+article._id, wt: "json"};
+            var query = {q: "_text_:(" + data.title + ") AND NOT _id:" + article._id, wt: "json"};
             var topicArr = _.compact(article.topic);
             if (!_.isEmpty(topicArr)) {
                 query.fq = {
