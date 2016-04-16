@@ -194,7 +194,7 @@ Router.map(function () {
             var request = this.request;
             var outputFileName = Guid.create() + ".pdf"
             var outputPath = Config.staticFiles.uploadPdfDir + "/handle/" + outputFileName;
-            console.log(outputPath)
+            logger.info(outputPath)
             //get this article by pdf id
             var article = Articles.findOne({_id: this.params.articleId}, {
                 fields: {
@@ -322,9 +322,7 @@ Router.map(function () {
                     Science.Pdf(params, function (error, stdout, stderr) {
                             Science.FSE.remove(adPdf);
                             if (stdout) {
-                                console.log('------STDOUT--------');
-                                console.dir(stdout);
-                                console.log('------STDOUT--------');
+                                logger.info(stdout);
                             }
                             if (stderr) {
                                 console.log('------STDERR--------');
