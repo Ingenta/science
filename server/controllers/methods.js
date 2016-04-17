@@ -3,6 +3,10 @@ Meteor.methods({
         return this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
     },
     'getMostRead': function (journalId, limit) {
+        if(journalId)
+            check(journalId, String);
+        if(limit)
+            check(limit, Number);
         return createMostReadList(journalId, limit);
     },
     'totalConnections': function () {
@@ -16,6 +20,8 @@ Meteor.methods({
         return getLocationByIP(ip);
     },
     'updateKeywordScore': function (keywords, score) {
+        //TODO: add a check for type here but input could be object so need to be careful
+        check(score, Number);
         if (_.isEmpty(keywords))
             return;
         var arr = (typeof keywords === 'string') ? [keywords] : keywords;
@@ -26,6 +32,12 @@ Meteor.methods({
         return true;
     },
     'insertAudit': function (userId, action, publisherId, journalId, articleId, keywords) {
+        if(userId)check(userId, String);
+        check(action, String);
+        if(publisherId)check(publisherId, String);
+        if(journalId)check(journalId, String);
+        if(articleId)check(articleId, String);
+        if(keywords)check(keywords, String);
         var datetime = new Date();
         var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
         var user = Users.findOne({_id: userId}, {fields: {institutionId: 1}});
@@ -52,6 +64,7 @@ Meteor.methods({
     },
     getMoopForArticle: function (doi) {
         if (!doi) return;
+        check(doi, String);
         var medias = Collections.Medias.find({doi: doi});
         if (medias.count()) {
             var datas = _.map(medias.fetch(), function (item) {
