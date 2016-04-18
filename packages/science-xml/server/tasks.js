@@ -211,7 +211,7 @@ Tasks.insertArticlePdf = function (logId, result) {
     //TODO: check destination path exists
     //TODO: copy file and get new path
     var newPdfFolder = Config.staticFiles.uploadPdfDir + "/" + result.issn;
-    var newPdfPath = newPdfFolder + "/" + log.filename + "-" + logId + ".pdf";
+    var newPdfPath = newPdfFolder + "/" + logId + ".pdf";
     ScienceXML.FolderExists(newPdfFolder);
     if (!ScienceXML.CopyFile(log.pdf, newPdfPath)) {
         logger.error("pdf failed to copy to: " + newPdfPath, err.message);
