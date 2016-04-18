@@ -238,6 +238,7 @@ Router.map(function () {
             var publisherInfo = Publishers.findOne({_id: article.publisher});
             var langArr = ["en", "cn"];
             var getdata = function (data, lang, specialArr) {
+                if(_.isEmpty(data))return "";
                 var index = lang === 'en' ? 0 : 1;
                 if (specialArr) {
                     return data[specialArr[index]] || data[specialArr[1 - index]];
