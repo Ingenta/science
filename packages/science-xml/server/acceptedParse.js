@@ -8,11 +8,10 @@ Science.parserAccepted = function(filepath){
         article.issn = parserHelper.getSimpleVal("//journal/issn[@issn_type='print'] | //article/journal_issn", dom);
         article.doi = parserHelper.getSimpleVal("//journal/doi | //article/doi", dom);
         if(article.doi){
-            doi = doi.trim();
-            if (!ScienceXML.isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
+            if (!ScienceXML.isValidDoi(article.doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
             else {
-                results.doi = doi;
-                results.articledoi = ScienceXML.getArticleDoiFromFullDOI(doi);
+                results.doi = article.doi.trim();
+                results.articledoi = ScienceXML.getArticleDoiFromFullDOI(article.doi);
             }
         }else{
             article.errors.push("No doi found");
