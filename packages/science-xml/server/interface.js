@@ -36,8 +36,7 @@ Router.route('/api', function () {
         return;
     }
 
-    var slashLoc = req.body.sourcePath.lastIndexOf("/") + 1;
-    var filename = slashLoc == 0 ? req.body.sourcePath : req.body.sourcePath.substr(slashLoc);
+    var filename = Science.String.getFileName(req.body.sourcePath);
     var targetPath = Config.ftp.downloadDir + "/" + filename;
     ScienceXML.FolderExists(Config.ftp.downloadDir);
     var downloadCallback = function (err) {
@@ -45,12 +44,12 @@ Router.route('/api', function () {
             result.result = "failed";
             result.message = err.message;
         } else {
-            result.result = "success";
+            result.result = "job started";
             importQueue.add({
-                pathToFile:targetPath,
-                fileName:filename,
-                fileType:"application/zip",
-                formFields:{creator: "api", pubStatus: req.body.type}
+                pathToFile: targetPath,
+                fileName: filename,
+                fileType: "application/zip",
+                formFields: {creator: "api", pubStatus: req.body.type}
             })
         }
         res.write(JSON.stringify(result));
@@ -65,14 +64,14 @@ Router.route('downloadXml', {
     where: 'server',
     path: '/xml/:doiPartOne/:doiPartTwo',
     action: function () {
-        var fullDoi = this.params.doiPartOne+"/"+this.params.doiPartTwo;
-        var art = Articles.findOne({doi:fullDoi},{fields:{_id:1}});
-        if(!art){
+        var fullDoi = this.params.doiPartOne + "/" + this.params.doiPartTwo;
+        var art = Articles.findOne({doi: fullDoi}, {fields: {_id: 1}});
+        if (!art) {
             this.response.writeHead(400);
             return this.response.end("Not Found");
         }
-        var log = UploadLog.findOne({articleId:art._id},{sort:{uploadedAt:-1}},{fields:{xml:1}});
-        if(!log.xml || !Science.FSE.existsSync(log.xml)){
+        var log = UploadLog.findOne({articleId: art._id}, {sort: {uploadedAt: -1}}, {fields: {xml: 1}});
+        if (!log.xml || !Science.FSE.existsSync(log.xml)) {
             this.response.writeHead(400);
             return this.response.end("File Not Found");
         }
