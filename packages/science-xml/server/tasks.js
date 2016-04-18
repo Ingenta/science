@@ -374,8 +374,12 @@ var insertArticle = function (a) {
             issue:a.issue,
             year:a.year
         })
-        a.volumeId=vi.volumeId;
-        a.issueId=vi.issueId;
+
+        if(!vi && a.pubStatus == 'normal'){
+            throw new Error("already published data must have volume and issue")
+        }
+        a.volumeId=vi?vi.volumeId:null;
+        a.issueId=vi?vi.issueId:null;
     }
 
 
