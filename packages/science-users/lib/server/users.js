@@ -226,5 +226,12 @@ Meteor.methods({
                 );
             }
         }, 2000)
+    },
+    changeUsersPass:function(userId,newPass){
+        if(!Permissions.userCan("modify-user","user",Meteor.userId()))
+            return "permission deny";
+        check(userId, String);
+        check(newPass, String);
+        return Accounts.setPassword(userId,newPass);
     }
 });
