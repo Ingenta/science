@@ -147,7 +147,8 @@ Science.String.getExt = function(str){
 };
 
 Science.String.getFileName = function(str){
-    return Science.String.getLastPart(str,"/") || Science.String.getLastPart(str,"\\") || str;
+    var afterReplace = str.replace(/\\/g,"/");
+    return Science.String.getLastPart(afterReplace,"/") || str;
 };
 
 Science.String.getFileNameWithOutExt = function(str){
