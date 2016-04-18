@@ -95,6 +95,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
     var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
     logger.info(topic);
     if (topic) {
+        topic=topic.trim();
         var topicEneity = Topics.findOne({$or:[{name:topic},{englishName:topic}]});
         if (topicEneity)
             results.topic = [topicEneity._id];
