@@ -10,8 +10,8 @@ Science.parserAccepted = function(filepath){
         if(article.doi){
             if (!ScienceXML.isValidDoi(article.doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
             else {
-                results.doi = article.doi.trim();
-                results.articledoi = ScienceXML.getArticleDoiFromFullDOI(article.doi);
+                article.doi = article.doi.trim();
+                article.articledoi = ScienceXML.getArticleDoiFromFullDOI(article.doi);
             }
         }else{
             article.errors.push("No doi found");
