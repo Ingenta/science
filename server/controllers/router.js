@@ -240,8 +240,8 @@ Router.map(function () {
             var journalInfo = Publications.findOne({_id: article.journal._id});
             var publisherInfo = Publishers.findOne({_id: article.publisher});
             var langArr = ["en", "cn"];
-            var getdata = function (data, lang, specialArr) {
-                if(_.isEmpty(data))return "";
+            var getContentByLanguage = function (data, lang, specialArr) {
+                if (_.isEmpty(data))return "";
                 var index = lang === 'en' ? 0 : 1;
                 if (specialArr) {
                     return data[specialArr[index]] || data[specialArr[1 - index]];
@@ -259,21 +259,21 @@ Router.map(function () {
             }
 
             //parse article metadata
-            data.title = getdata(article.title, lang);
+            data.title = getContentByLanguage(article.title, lang);
             if (article.authors) {
                 data.authors = _.map(article.authors, function (author) {
-                    return getdata(author.fullname, lang);
+                    return getContentByLanguage(author.fullname, lang);
                 });
             }
-            data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
+            data.journal = getContentByLanguage(journalInfo, lang, ["title", "titleCn"]);
             data.volume = article.volume;
             data.issue = article.issue;
             data.page = article.elocationId || article.firstPage;
             data.year = article.year;
             data.doi = article.doi;
-            data.fulltextUrl = "http://219.238.6.215/doi/" + article.doi;
-            data.tocUrl = "http://219.238.6.215/publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "/" + article.volume + "/" + article.issue;
-            data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
+            data.fulltextUrl = "http://engine.scichina.com/doi/" + article.doi;
+            data.tocUrl = "http://engine.scichina.com/publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "/" + article.volume + "/" + article.issue;
+            data.publisher = getContentByLanguage(publisherInfo, lang, ["name", "chinesename"]);
 
             //create related article query
             var query = {q: "_text_:(" + data.title + ") AND NOT _id:" + article._id, wt: "json"};
@@ -293,8 +293,8 @@ Router.map(function () {
                     if (jsonResult.response && jsonResult.response.numFound) {
                         var similars = _.map(jsonResult.response.docs, function (atc) {
                             var atcObj = {};
-                            atcObj.title = getdata(atc, lang, ["title.en", "title.cn"]);
-                            atcObj.journal = getdata(atc, lang, ["journal.title", "journal.titleCn"]);
+                            atcObj.title = getContentByLanguage(atc, lang, ["title.en", "title.cn"]);
+                            atcObj.journal = getContentByLanguage(atc, lang, ["journal.title", "journal.titleCn"]);
                             atcObj.volume = atc.volume;
                             atcObj.page = atc.elocationId || atc.firstPage;
                             atcObj.year = atc.year;
