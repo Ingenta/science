@@ -1,3 +1,7 @@
+var pageSession = new ReactiveDict();
+
+pageSession.set("errorMessage", "");
+
 var getSearchStrKey = function(){
 	var obj=Science.JSON.MergeObject({},{level:this.level},this.scope);
 	var searchStrKey = _.reduce(obj,function(mem,val,key){
@@ -72,6 +76,19 @@ Template.AdminUsersViewTableItems.events({
 		}
 		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
+	},
+	"click #undo-button": function() {
+		var default_password = "123456";
+		Meteor.call("changeUsersPass", this._id, default_password, function (err) {
+			if (err) {
+				pageSession.set("errorMessage", err.reason);
+			}
+			else {
+				pageSession.set("errorMessage", "");
+				sweetAlert(TAPi18n.__("Password reset"));
+			}
+		});
+		return false;
 	}
 });
 
@@ -84,6 +101,13 @@ Template.AdminUsersViewTableItems.helpers({
 	},
 	"canModify":function(){
 		return Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope) && (this._id !== Meteor.userId()); //用户不可以在用户管理页中修改自己的信息
+	},
+	errorMessage: function () {
+		return pageSession.get("errorMessage");
+	},
+	isEnrollAccount: function () {
+		if (window.location.href.indexOf("enroll-account")!==-1)return true;
+		return false;
 	}
 });
 
