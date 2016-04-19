@@ -24,11 +24,19 @@ Template.journalSummary.helpers({
             return title;
         }
         if (num == "3") {
-            var title = iscn ? "半月刊" : "Bi-monthly Publication";
+            var title = iscn ? "半月刊" : "Semimonthly Publication";
             return title;
         }
         if (num == "4") {
             var title = iscn ? "旬刊" : "Ten-day Publication";
+            return title;
+        }
+        if (num == "5") {
+            var title = iscn ? "周刊" : "Weekly Publication";
+            return title;
+        }
+        if (num == "6") {
+            var title = iscn ? "双月刊" : "Bi-monthly Publication";
             return title;
         }
     },
