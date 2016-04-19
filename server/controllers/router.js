@@ -92,10 +92,11 @@ Router.map(function () {
                 text += "%T " + (obj.title.cn || obj.title.en) + "\n%D " + obj.year + "\n%J " + (obj.journal.titleCn || obj.journal.title);
             }
             text += "\n%V " + obj.volume + "\n%N " + obj.issue + "\n%P " + (obj.elocationId || "") + "\n%R doi:http://dx.doi.org/" + obj.doi + "\n";
-
-            obj.keywords.forEach(function (keyword) {
-                text += "%K " + keyword + "\n";
-            });
+            if (obj.keywords) {
+                obj.keywords.forEach(function (keyword) {
+                    text += "%K " + keyword + "\n";
+                });
+            }
             text += "%U " + Config.rootUrl + name1 + "\n";
 
             var filename = this.params.articleDoi + '.enw';
@@ -158,9 +159,11 @@ Router.map(function () {
                 text += (obj.title.cn || obj.title.en) + "\n%U http://dx.doi.org/" + obj.doi + "\n%I " + publisher.chinesename;
             }
             text += "\n%8 " + (obj.published ? obj.published.format("yyyy-MM-dd") : "") + "\n";
-            obj.keywords.forEach(function (keyword) {
-                text += "%K " + keyword + "\n";
-            });
+            if (obj.keywords) {
+                obj.keywords.forEach(function (keyword) {
+                    text += "%K " + keyword + "\n";
+                });
+            }
             if (obj.language == 1) {
                 obj.authors.forEach(function (author) {
                     text += "%A " + (author.given.en || author.given.cn) + ", " + (author.surname.en || author.surname.cn) + "\n";
@@ -215,11 +218,11 @@ Router.map(function () {
                 }
             });
             if (!article || !ScienceXML.FileExists(article.pdfId)) {
-
                 if (article) {
                     logger.warn("pdf not found for this article: " + article.doi + " with this pdfId: " + article.pdfId);
                 } else {
-                    logger.warn("article not found at this id: " + this.params.articleId);
+                    var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
+                    logger.warn("article not found at this id: " + this.params.articleId + "request came from "+ ip);
                 }
 
                 this.response.writeHead(302, {
@@ -237,8 +240,8 @@ Router.map(function () {
             var journalInfo = Publications.findOne({_id: article.journal._id});
             var publisherInfo = Publishers.findOne({_id: article.publisher});
             var langArr = ["en", "cn"];
-            var getdata = function (data, lang, specialArr) {
-                if(_.isEmpty(data))return "";
+            var getContentByLanguage = function (data, lang, specialArr) {
+                if (_.isEmpty(data))return "";
                 var index = lang === 'en' ? 0 : 1;
                 if (specialArr) {
                     return data[specialArr[index]] || data[specialArr[1 - index]];
@@ -256,21 +259,21 @@ Router.map(function () {
             }
 
             //parse article metadata
-            data.title = getdata(article.title, lang);
+            data.title = getContentByLanguage(article.title, lang);
             if (article.authors) {
                 data.authors = _.map(article.authors, function (author) {
-                    return getdata(author.fullname, lang);
+                    return getContentByLanguage(author.fullname, lang);
                 });
             }
-            data.journal = getdata(journalInfo, lang, ["title", "titleCn"]);
+            data.journal = getContentByLanguage(journalInfo, lang, ["title", "titleCn"]);
             data.volume = article.volume;
             data.issue = article.issue;
             data.page = article.elocationId || article.firstPage;
             data.year = article.year;
             data.doi = article.doi;
-            data.fulltextUrl = "http://219.238.6.215/doi/" + article.doi;
-            data.tocUrl = "http://219.238.6.215/publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "/" + article.volume + "/" + article.issue;
-            data.publisher = getdata(publisherInfo, lang, ["name", "chinesename"]);
+            data.fulltextUrl = Config.rootUrl + "doi/" + article.doi;
+            data.tocUrl = Config.rootUrl + "publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "#" +article.issueId;
+            data.publisher = getContentByLanguage(publisherInfo, lang, ["name", "chinesename"]);
 
             //create related article query
             var query = {q: "_text_:(" + data.title + ") AND NOT _id:" + article._id, wt: "json"};
@@ -290,13 +293,13 @@ Router.map(function () {
                     if (jsonResult.response && jsonResult.response.numFound) {
                         var similars = _.map(jsonResult.response.docs, function (atc) {
                             var atcObj = {};
-                            atcObj.title = getdata(atc, lang, ["title.en", "title.cn"]);
-                            atcObj.journal = getdata(atc, lang, ["journal.title", "journal.titleCn"]);
+                            atcObj.title = getContentByLanguage(atc, lang, ["title.en", "title.cn"]);
+                            atcObj.journal = getContentByLanguage(atc, lang, ["journal.title", "journal.titleCn"]);
                             atcObj.volume = atc.volume;
                             atcObj.page = atc.elocationId || atc.firstPage;
                             atcObj.year = atc.year;
                             atcObj.doi = atc.doi;
-                            atcObj.fulltextUrl = "http://219.238.6.215/doi/" + atc.doi;
+                            atcObj.fulltextUrl = Config.rootUrl + "doi/" + atc.doi;
                             return atcObj;
                         })
                         data.similar = similars;
