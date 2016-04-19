@@ -271,8 +271,8 @@ Router.map(function () {
             data.page = article.elocationId || article.firstPage;
             data.year = article.year;
             data.doi = article.doi;
-            data.fulltextUrl = "http://engine.scichina.com/doi/" + article.doi;
-            data.tocUrl = "http://engine.scichina.com/publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "/" + article.volume + "/" + article.issue;
+            data.fulltextUrl = Config.rootUrl + "doi/" + article.doi;
+            data.tocUrl = Config.rootUrl + "publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "#" +article.issueId;
             data.publisher = getContentByLanguage(publisherInfo, lang, ["name", "chinesename"]);
 
             //create related article query
@@ -299,7 +299,7 @@ Router.map(function () {
                             atcObj.page = atc.elocationId || atc.firstPage;
                             atcObj.year = atc.year;
                             atcObj.doi = atc.doi;
-                            atcObj.fulltextUrl = "http://219.238.6.215/doi/" + atc.doi;
+                            atcObj.fulltextUrl = Config.rootUrl + "doi/" + atc.doi;
                             return atcObj;
                         })
                         data.similar = similars;
