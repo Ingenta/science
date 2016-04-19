@@ -13,7 +13,17 @@
         </div>
     {{/if}}
 </template>
-
+<template name="scibreadcrumb">
+    <ol class="breadcrumb">
+        {{#each Breadcrumb}}
+            <li class="{{cssClasses}}">
+                {{#if showLink}}
+                    <a href="{{url}}">{{title}}</a>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ol>
+</template>
 <template name="toggleFieldBrowse">
     {{#if notEmptyField}}
         <p>

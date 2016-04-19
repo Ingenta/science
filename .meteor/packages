@@ -39,6 +39,7 @@ eluck:accounts-lockout
 # router
 iron:router
 monbro:iron-router-breadcrumb
+ostrio:iron-router-title
 multiply:iron-router-progress
 meteorhacks:subs-manager
 

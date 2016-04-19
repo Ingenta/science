@@ -5,7 +5,8 @@ Router.configure({
     notFoundTemplate: "notFound",
     loadingTemplate: "loading",
     progressDelay: 100,
-    progressSpinner: false
+    progressSpinner: false,
+    defaultBreadcrumbLastLink: false
 });
 HomePageSubs = new SubsManager();
 CollectionSubs = new SubsManager();
