@@ -221,7 +221,8 @@ Router.map(function () {
                 if (article) {
                     logger.warn("pdf not found for this article: " + article.doi + " with this pdfId: " + article.pdfId);
                 } else {
-                    logger.warn("article not found at this id: " + this.params.articleId);
+                    var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
+                    logger.warn("article not found at this id: " + this.params.articleId + "request came from "+ ip);
                 }
 
                 this.response.writeHead(302, {
