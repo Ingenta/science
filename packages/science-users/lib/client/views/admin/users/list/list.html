@@ -1,5 +1,10 @@
 <template name="AdminUsersView">
 	<div id="data_view" class="container-fluid">
+        {{#if errorMessage}}
+            <div class="alert alert-warning">
+                {{errorMessage}}
+            </div>
+        {{/if}}
 		{{> userButtons}}
 		{{#if isNotEmpty}}
 			<div id="dataview-data">
@@ -10,7 +15,7 @@
 						<th class="th-sortable">{{_ "E-mail"}}</th>
 						<th class="th-sortable">{{_ "Role"}}</th>
 						<th class="th-sortable">{{_ "Status"}}</th>
-						<th>&nbsp;</th>
+						<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 					</tr>
 					</thead>
 					<tbody id="dataview-table-items">
@@ -47,7 +52,8 @@
 		<td class="td-icon">
 			{{#if canModify}}
 				<span id="edit-button" class="fa fa-pencil " title="Edit"></span>
-			{{/if}}
+                <span id="undo-button" class="fa fa-undo " title="Reset Password"></span>
+            {{/if}}
 		</td>
 	</tr>
 </template>

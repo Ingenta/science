@@ -85,6 +85,7 @@ Science.Email.tableOfContentEmail = function (date) {
     Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
         var userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
         if(!userList.count()) return;
+        logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
         var articleList = Articles.find({
             journalId: oneIssue.journalId,
             volume: oneIssue.volume,
@@ -104,6 +105,7 @@ Science.Email.tableOfContentEmail = function (date) {
         }).fetch();
         if (!articleList || !articleList.length) return;
 
+        logger.info("finded " + articleList.length+" articles in the newest issue which has the id: " + oneIssue._id);
         var journal = Publications.findOne({_id: oneIssue.journalId}, {
             fields: {
                 title: 1,
@@ -117,7 +119,12 @@ Science.Email.tableOfContentEmail = function (date) {
 
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
         journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
-        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url({auth:false}).substring(1));
+        if (journal.banner) {
+            var banner = Images.findOne({_id: journal.banner});
+            if(banner){
+                journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
+            }
+        }
         generateArticleLinks(articleList, journal.url);
 
         oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
@@ -134,6 +141,7 @@ Science.Email.tableOfContentEmail = function (date) {
         });
 
         userList.forEach(function (oneUser) {
+            logger.info("sent watchJournal email to "+oneUser.emails[0].address);
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
