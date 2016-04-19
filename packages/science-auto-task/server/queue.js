@@ -6,6 +6,7 @@ Science.Queue = {
 };
 
 Science.Queue.Citation.errorHandler = function(data){
+	logger.info("got error from updateCitation Queue");
 	SubTasks.update({_id:data.id},{$set:{status:"error"}});
 	AutoTasks.update({_id:data.taskId},{$set:{
 		failed:Science.Queue.Citation.failures()+Science.Queue.Citation.errors(),
@@ -14,6 +15,7 @@ Science.Queue.Citation.errorHandler = function(data){
 };
 
 Science.Queue.Citation.taskHandler = function(data,next){
+	logger.info("updating citation of doi:"+data.doi);
 	AutoTasks.update({_id:data.taskId},{$set:{processing:Science.Queue.Citation.processing(),status:"processing"}});
 	SubTasks.update({_id:data.id},{$set:{ status : "processing"}});
 	Science.Interface.CrossRef.getCitedBy(data.doi,Meteor.bindEnvironment(function(crErr,crResult){
@@ -34,7 +36,7 @@ Science.Queue.Citation.taskHandler = function(data,next){
 					Articles.update({doi:data.doi},{$set:{citations:spResult, citationCount:spResult.length}});
 					SubTasks.update({_id:data.id},{$set:{status:"success",from:"springer"}});
 					AutoTasks.update({_id:data.taskId},{$inc:{success:1},$set:{processing:Science.Queue.Citation.processing()}});
-
+					logger.info("got ["+ spResult.length+"] citations from Springer for doi:"+ data.doi);
 					spResult.forEach(function (item) {
 						if (!Citations.find({doi: data.doi, 'citation.doi': item.doi}).count())
 							Citations.insert({doi: data.doi, articleId:data.articleId, citation: item, source: 'springer', createdAt: new Date()});
@@ -45,7 +47,7 @@ Science.Queue.Citation.taskHandler = function(data,next){
 			Articles.update({doi:data.doi},{$set:{citations:crResult, citationCount:crResult.length}});
 			SubTasks.update({_id:data.id},{$set:{status:"success",from:"crossref"}});
 			AutoTasks.update({_id:data.taskId},{$inc:{success:1}});
-
+			logger.info("got ["+ crResult.length+"] citations from CrossRef for doi:"+ data.doi);
 			crResult.forEach(function (item) {
 				if (!Citations.find({doi: data.doi, 'citation.doi': item.doi}).count())
 					Citations.insert({doi: data.doi, articleId:data.articleId, citation: item, source: 'crossref', createdAt: new Date()});
