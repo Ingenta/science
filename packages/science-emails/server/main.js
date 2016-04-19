@@ -85,6 +85,7 @@ Science.Email.tableOfContentEmail = function (date) {
     Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
         var userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
         if(!userList.count()) return;
+        logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
         var articleList = Articles.find({
             journalId: oneIssue.journalId,
             volume: oneIssue.volume,
@@ -104,6 +105,7 @@ Science.Email.tableOfContentEmail = function (date) {
         }).fetch();
         if (!articleList || !articleList.length) return;
 
+        logger.info("finded " + articleList.length+" articles in the newest issue which has the id: " + oneIssue._id);
         var journal = Publications.findOne({_id: oneIssue.journalId}, {
             fields: {
                 title: 1,
@@ -139,6 +141,7 @@ Science.Email.tableOfContentEmail = function (date) {
         });
 
         userList.forEach(function (oneUser) {
+            logger.info("sent watchJournal email to "+oneUser.emails[0].address);
             Email.send({
                 to: oneUser.emails[0].address,
                 from: Config.mailServer.address,
