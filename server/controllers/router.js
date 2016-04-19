@@ -221,8 +221,7 @@ Router.map(function () {
                 if (article) {
                     logger.warn("pdf not found for this article: " + article.doi + " with this pdfId: " + article.pdfId);
                 } else {
-                    if (Meteor.user())logger.warn(Meteor.user().username + " is trying to access a pdf at this missing articleId: " + this.params.articleId)
-                    else logger.warn("article not found at this id: " + this.params.articleId);
+                    logger.warn("article not found at this id: " + this.params.articleId);
                 }
 
                 this.response.writeHead(302, {
