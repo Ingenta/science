@@ -704,7 +704,7 @@ ScienceXML.getFunding = function (doc) {
 }
 
 ScienceXML.getTitle=function(doc){
-    var primaryTitle = parserHelper.getSimpleVal("//article-title", doc);
+    var primaryTitle = parserHelper.getXmlString("//article-meta/title-group/article-title", doc,true);
     if (primaryTitle === undefined)
         return;
     else {
@@ -712,9 +712,9 @@ ScienceXML.getTitle=function(doc){
             en:primaryTitle,
             cn:primaryTitle
         };
-        var primaryLang = parserHelper.getFirstAttribute("//article-title/attribute::lang", doc);
+        var primaryLang = parserHelper.getFirstAttribute("//article-meta/title-group/article-title/attribute::lang", doc);
         if (primaryLang) {
-            var secondaryTitle = ScienceXML.getSimpleValueByXPath("//trans-title-group/trans-title", doc);
+            var secondaryTitle = parserHelper.getXmlString("//article-meta/title-group/trans-title-group/trans-title", doc,true);
             if (primaryLang === 'en') {
                 title.en = primaryTitle;
                 if (secondaryTitle === undefined) title.cn = primaryTitle;

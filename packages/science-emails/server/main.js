@@ -117,7 +117,12 @@ Science.Email.tableOfContentEmail = function (date) {
 
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
         journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
-        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url({auth:false}).substring(1));
+        if (journal.banner) {
+            var banner = Images.findOne({_id: journal.banner});
+            if(banner){
+                journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
+            }
+        }
         generateArticleLinks(articleList, journal.url);
 
         oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
