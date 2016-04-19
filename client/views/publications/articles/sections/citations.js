@@ -20,9 +20,9 @@ Template.CitedByTemplate.helpers({
         return this.issue && ('('+this.issue+')' + " : ")
     },
     startPage: function (){
-        return this.startPage && (this.startPage);
+        return this.firstPage && (this.firstPage);
     },
     endPage: function (){
-        return this.endPage && ('-'+this.endPage);
+        return this.lastPage && ('-'+this.lastPage);
     },
 })
