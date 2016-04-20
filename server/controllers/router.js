@@ -92,8 +92,8 @@ Router.map(function () {
                 text += "%T " + (obj.title.cn || obj.title.en) + "\n%D " + obj.year + "\n%J " + (obj.journal.titleCn || obj.journal.title);
             }
             text += "\n%V " + obj.volume + "\n%N " + obj.issue + "\n%P " + (obj.elocationId || "") + "\n%R doi:http://dx.doi.org/" + obj.doi + "\n";
-            if (obj.keywords) {
-                obj.keywords.forEach(function (keyword) {
+            if (obj.keywords && obj.keywords.cn) {
+                obj.keywords.cn.forEach(function (keyword) {
                     text += "%K " + keyword + "\n";
                 });
             }
@@ -159,8 +159,8 @@ Router.map(function () {
                 text += (obj.title.cn || obj.title.en) + "\n%U http://dx.doi.org/" + obj.doi + "\n%I " + publisher.chinesename;
             }
             text += "\n%8 " + (obj.published ? obj.published.format("yyyy-MM-dd") : "") + "\n";
-            if (obj.keywords) {
-                obj.keywords.forEach(function (keyword) {
+            if (obj.keywords && obj.keywords.cn) {
+                obj.keywords.cn.forEach(function (keyword) {
                     text += "%K " + keyword + "\n";
                 });
             }
