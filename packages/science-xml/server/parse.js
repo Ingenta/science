@@ -149,7 +149,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed eissn');
 
     //    GET JOURNAL AND PUBLISHER BY NAME (consider changing journal to find my doi)
-    var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-meta/journal-title", doc);
+    var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-meta/journal-title-group/journal-title", doc);
     if (journalTitle === undefined) results.errors.push("No journal title found");
     else results.journalTitle = journalTitle;
     logger.info('parsed journal\'s title');
