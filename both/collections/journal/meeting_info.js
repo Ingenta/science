@@ -26,7 +26,8 @@ MeetingSchema = new SimpleSchema({
     },
     phone: {
         type: String,
-        optional: true
+        optional: true,
+        max: 18
     },
     address: {
         type: Science.schemas.MultipleTextOptionalSchema,

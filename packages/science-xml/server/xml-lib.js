@@ -65,7 +65,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.authors = [];
     results.authorNotes = [];
     results.affiliations = [];
-    var authorNodes = parserHelper.getNodes("//contrib[@contrib-type='author']", doc);
+    var authorNodes = parserHelper.getNodes("//article-meta/contrib-group/contrib[@contrib-type='author']", doc);
     _.each(authorNodes, function (author) {
         var nameNodes = parserHelper.getNodes("descendant::name",author);
         if(!_.isEmpty(nameNodes)){
@@ -118,7 +118,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         results.errors.push("No author found");
     }
 
-    var authorNotesNodes = parserHelper.getNodes("//author-notes/fn[@id]", doc);
+    var authorNotesNodes = parserHelper.getNodes("//article-meta/author-notes/fn[@id]", doc);
     authorNotesNodes.forEach(function (note) {
         var noteLabel = parserHelper.getSimpleVal("child::label", note);
         var email = parserHelper.getAllMatchedVal("descendant::ext-link", note);
@@ -151,9 +151,9 @@ ScienceXML.getAuthorInfo = function (results, doc) {
         }
     });
 
-    var affNodes = parserHelper.getNodes("//contrib-group/aff-alternatives", doc);
+    var affNodes = parserHelper.getNodes("//article-meta/contrib-group/aff-alternatives", doc);
     if (_.isEmpty(affNodes)) {
-        affNodes = parserHelper.getNodes("//contrib-group/aff", doc);
+        affNodes = parserHelper.getNodes("//article-meta/contrib-group/aff", doc);
         _.each(affNodes, function (affNode) {
             var affiliation = {id: undefined, affText: {}};
             affiliation.id = parserHelper.getFirstAttribute("attribute::id", affNode);

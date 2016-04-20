@@ -28,7 +28,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
 
     // GET DOI, TITLE, VOLUME, ISSUE, MONTH, YEAR, ISSN, ESSN, TOPIC
 
-    var doi = ScienceXML.getSimpleValueByXPath("//article-id[@pub-id-type='doi']", doc);
+    var doi = ScienceXML.getSimpleValueByXPath("//article-meta/article-id[@pub-id-type='doi']", doc);
     if (doi === undefined) results.errors.push("No doi found");
     else {
         doi = doi.trim();
@@ -58,22 +58,22 @@ ScienceXML.parseXml = function (path, pubStatus) {
     if (ack !== undefined) results.acknowledgements = ack;
     logger.info('parsed acknowledgements');
 
-    var volume = ScienceXML.getSimpleValueByXPath("//volume", doc);
+    var volume = ScienceXML.getSimpleValueByXPath("//article-meta/volume", doc);
     if (volume === undefined && pubStatus==='normal') results.errors.push("No volume found");
     else results.volume = volume;
     logger.info('parsed volume');
 
-    var issue = ScienceXML.getSimpleValueByXPath("//issue", doc);
+    var issue = ScienceXML.getSimpleValueByXPath("//article-meta/issue", doc);
     if (issue === undefined && pubStatus==='normal') results.errors.push("No issue found");
     else results.issue = issue;
     logger.info('parsed issue');
 
-    var month = ScienceXML.getSimpleValueByXPath("//pub-date/month", doc);
+    var month = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/month", doc);
     if (month === undefined && pubStatus==='normal') results.errors.push("No month found");
     else results.month = month;
     logger.info('parsed month');
 
-    var year = ScienceXML.getSimpleValueByXPath("//pub-date/year", doc);
+    var year = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/year", doc);
     if (year === undefined && pubStatus==='normal') results.errors.push("No year found");
     else results.year = year;
     logger.info('parsed year');
@@ -107,10 +107,10 @@ ScienceXML.parseXml = function (path, pubStatus) {
     //if (keywords === undefined) results.errors.push("No keywords found");
     //else results.keywords = keywords;
 
-    var keywordsCn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()", doc);
-    var keywordsEn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()", doc);
+    var keywordsCn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()", doc);
+    var keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()", doc);
     if (_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)) {
-        keywordsEn = ScienceXML.getKeywords("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
+        keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
         if (_.isEmpty(keywordsEn)) {
             results.keywords={};
             //results.errors.push("No keywords found");//允许没有关键词信息
@@ -131,30 +131,34 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed keyword');
 
     var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
-    if (elocationId !== undefined)
+    if (elocationId !== undefined){
         results.elocationId = elocationId;
-    else{
+        results.padPage=Science.String.PadLeft(elocationId,"0",10);
+    }else{
         var startPage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
         var endPage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
-        if(startPage !== undefined) results.startPage = startPage;
-            results.elocationId = startPage;
-            logger.info('parsed startPage');
+        if(startPage !== undefined) {
+            results.startPage = startPage;
+            results.padPage=Science.String.PadLeft(startPage,"0",10);
+        }
+        results.elocationId = startPage;
+        logger.info('parsed startPage');
         if(endPage !== undefined) results.endPage = endPage;
             logger.info('parsed endPage');
     }
     logger.info('parsed elocationId');
 
-    var essn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='epub']", doc);
+    var essn = ScienceXML.getSimpleValueByXPath("//journal-meta/issn[@pub-type='epub']", doc);
     if (essn !== undefined) results.essn = essn;
     logger.info('parsed eissn');
 
     //    GET JOURNAL AND PUBLISHER BY NAME (consider changing journal to find my doi)
-    var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-title", doc);
+    var journalTitle = ScienceXML.getSimpleValueByXPath("//journal-meta/journal-title-group/journal-title", doc);
     if (journalTitle === undefined) results.errors.push("No journal title found");
     else results.journalTitle = journalTitle;
     logger.info('parsed journal\'s title');
 
-    var issn = ScienceXML.getSimpleValueByXPath("//issn[@pub-type='ppub']", doc);
+    var issn = ScienceXML.getSimpleValueByXPath("//journal-meta/issn[@pub-type='ppub']", doc);
     if (issn === undefined) {
         results.errors.push("No issn found in xml");
     } else {
@@ -169,7 +173,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed issn');
 
 
-    var publisherName = ScienceXML.getSimpleValueByXPath("//publisher-name", doc);
+    var publisherName = ScienceXML.getSimpleValueByXPath("//journal-meta/publisher/publisher-name", doc);
     if (publisherName === undefined) results.errors.push("No publisher name found");
     else {
         results.publisherName = publisherName;

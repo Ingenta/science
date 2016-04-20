@@ -334,6 +334,11 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 if (!_.isEmpty(refs)) {
                                     newOne.references = refs;
                                 }
+
+                                var padPage = article.elocationId || article.startPage;
+                                if(padPage){
+                                    newOne.padPage = Science.String.PadLeft(padPage,"0",10);
+                                }
                             }
                             if (options.importPdf && article.pdf) {
                                 var a = Articles.findOne({doi: article.doi}, {fields: {pdfId: 1}});

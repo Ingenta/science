@@ -60,11 +60,11 @@ Template.articleListRight.helpers({
             return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {accepted: -1}});
         }
         if (Template.currentData().pubStatus === 'online_first') {
-            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {elocationId: 1}});
+            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {padPage: 1}});
         }
         if (Template.currentData().pubStatus === 'normal') {
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
-            return Articles.find(query, {sort: {elocationId: 1}});
+            return Articles.find(query, {sort: {padPage: 1}});
         }
     },
     getIssueTitle: function () {
