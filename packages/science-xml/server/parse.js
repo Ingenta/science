@@ -131,14 +131,18 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed keyword');
 
     var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
-    if (elocationId !== undefined)
+    if (elocationId !== undefined){
         results.elocationId = elocationId;
-    else{
+        results.padPage=Science.String.PadLeft(elocationId,"0",10);
+    }else{
         var startPage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
         var endPage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
-        if(startPage !== undefined) results.startPage = startPage;
-            results.elocationId = startPage;
-            logger.info('parsed startPage');
+        if(startPage !== undefined) {
+            results.startPage = startPage;
+            results.padPage=Science.String.PadLeft(startPage,"0",10);
+        }
+        results.elocationId = startPage;
+        logger.info('parsed startPage');
         if(endPage !== undefined) results.endPage = endPage;
             logger.info('parsed endPage');
     }
