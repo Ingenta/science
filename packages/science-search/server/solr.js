@@ -205,7 +205,7 @@ SolrUtils = {
                 return myFuture.return(result);
             }
             else {
-                logger.error("connection to solr failed at: " + SolrClient.options.host + ":" + SolrClient.options.port);
+                logger.warn("solr server encountered an error at: " + SolrClient.options.host + ":" + SolrClient.options.port, " attempting to process the following query: "+userParams.q);
                 myFuture.throw(err);
                 //logger.error(SolrClient.options);
             }
