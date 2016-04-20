@@ -421,6 +421,7 @@ var insertArticle = function (a) {
         elocationId: a.elocationId,
         startPage: a.startPage,
         endPage: a.endPage,
+        padPage: a.padPage,
         year: a.year,
         month: a.month,
         issue: a.issue,

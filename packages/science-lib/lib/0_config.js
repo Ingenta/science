@@ -80,6 +80,7 @@ Config = {
         "elocationId",
         "startPage",
         "endPage",
+        "padPage",
         "year",
         "month",
         "issue",
@@ -170,7 +171,7 @@ if (Meteor.isServer) {
         DOI_Register: {
             savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
             recvEmail: "kai.jiang@digitalpublishing.cn",//接受注册结果反馈的邮箱地址，必须
-            rootUrl: "http://engine.scichina.com/",//必须以/结束 ，必须
+            rootUrl: "http://engine.scichina.com/doi/",//必须以/结束 ，必须
             rate: "at 1:00 am",//提交注册请求的频率，默认每晚1点
             condition: 1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
         },
