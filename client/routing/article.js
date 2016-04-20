@@ -11,12 +11,15 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             if(article && _.contains(journal.tabSelections,"MOOP")){
                 article.hasMoop=true;
             }
+            if(article){
+                Session.set("articleTitle",TAPi18n.getLanguage() === "en" ? article.title.en:article.title.cn)
+            }
             return article;
         }
     },
     template: "showArticle",
     title: function () {
-        return TAPi18n.__("Article");
+        return Session.get("articleTitle");
     },
     parent: "journal.name",
     name: "article.show",
