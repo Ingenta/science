@@ -5,6 +5,11 @@ Package.describe({
     git: '',
     documentation: 'README.md'
 });
+Npm.depends({
+    "doi-regex": "0.1.4"
+});
+
+
 both = ['client', 'server'];
 Package.onUse(function (api) {
     api.versionsFrom('1.2.1');

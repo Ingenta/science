@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "doi-regex": {
+      "version": "0.1.4"
+    }
+  }
+}
