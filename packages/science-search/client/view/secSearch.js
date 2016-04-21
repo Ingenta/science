@@ -3,6 +3,8 @@ Template.secSearch.events({
 		var ele =  Template.instance().$("#secSearchInput");
 		var searchval =ele.val();
 		ele.val("");
+		//NOTE: if refine search value is empty don't perform the search
+		if(!searchval)return;
 		SolrQuery.addSecondQuery(searchval);
 		Router.go(SolrQuery.makeUrl());
 	},

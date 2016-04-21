@@ -186,7 +186,7 @@ SolrUtils = {
         }
         if (userParams.sq) {
             _.each(userParams.sq, function (sq) {
-                userParams.q += " AND " + sq;
+                if(sq)userParams.q += " AND " + sq;
             });
         }
         if (userParams.fq) {
