@@ -27,10 +27,7 @@ Template.journalNavigationPanelOnlyMoop.helpers({
             var iArr = _.uniq(_.pluck(_.filter(allmoops.get(),function(item){
                 return item.volumeId = volumeId;
             }),"issueId"));
-            var issues = Issues.find({'journalId': journalId, '_id':{$in:iArr}}).fetch();
-            var iss = _.sortBy(issues, function (oneIssue) {
-                return parseInt(oneIssue.issue, 10);
-            }).reverse();
+            var iss = Issues.find({'journalId': journalId, '_id':{$in:iArr}},{fields: {createDate: 0}, sort: {order: -1}}).fetch();
             if(!_.isEmpty(iss) && iss[0].volume==Session.get("currMoopVol_"+journalId)){
                 Session.set("currMoopIssue_"+journalId,iss[0]._id);
             }

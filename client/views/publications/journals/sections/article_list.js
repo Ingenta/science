@@ -13,10 +13,7 @@ Template.journalNavigationPanel.helpers({
     },
     issueInVolume: function (journalId, volume) {
         if (journalId && volume) {
-            var issues = Issues.find({'journalId': journalId, 'volume': volume}).fetch();
-            return _.sortBy(issues, function (oneIssue) {
-                return parseInt(oneIssue.issue, 10);
-            }).reverse();
+            return Issues.find({'journalId': journalId, 'volume': volume},{fields: {createDate: 0}, sort: {order: -1}});
         }
     },
     unionYear: function () { //TODO: this is inefficient consider moving year to volumes collection
