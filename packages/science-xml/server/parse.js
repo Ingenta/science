@@ -1,3 +1,7 @@
+Science.DOIValidator = {};
+
+Science.DOIValidator = Npm.require('doi-regex');
+
 ScienceXML.getArticleDoiFromFullDOI = function (fullDOI) {
     if (!fullDOI) return "";
     if (fullDOI.indexOf("/") === -1) return fullDOI;
@@ -7,10 +11,9 @@ ScienceXML.getArticleDoiFromFullDOI = function (fullDOI) {
 }
 ScienceXML.isValidDoi = function (doi) {
     if (!doi) return false;
+    //NOTE: only has one slash, for now not allowing oxford press data
     if (doi.split('/').length !== 2) return false;
-    if (_.isEmpty(doi.split('/')[0].trim())) return false;
-    if (_.isEmpty(doi.split('/')[1].trim())) return false;
-    return true;
+    return Science.DOIValidator({exact: true}).test(doi);
 }
 
 ScienceXML.parseXml = function (path, pubStatus) {
@@ -44,9 +47,9 @@ ScienceXML.parseXml = function (path, pubStatus) {
     //var existingArticle = Articles.findOne({doi: results.doi});
     //if (existingArticle !== undefined)results.errors.push("Article found matching this DOI: " + results.doi);
 
-    var title=ScienceXML.getTitle(doc);
-    if(title)
-        results.title=title;
+    var title = ScienceXML.getTitle(doc);
+    if (title)
+        results.title = title;
     else
         results.errors.push("No title found");
     logger.info('parsed title');
@@ -59,22 +62,22 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed acknowledgements');
 
     var volume = ScienceXML.getSimpleValueByXPath("//article-meta/volume", doc);
-    if (volume === undefined && pubStatus==='normal') results.errors.push("No volume found");
+    if (volume === undefined && pubStatus === 'normal') results.errors.push("No volume found");
     else results.volume = volume;
     logger.info('parsed volume');
 
     var issue = ScienceXML.getSimpleValueByXPath("//article-meta/issue", doc);
-    if (issue === undefined && pubStatus==='normal') results.errors.push("No issue found");
+    if (issue === undefined && pubStatus === 'normal') results.errors.push("No issue found");
     else results.issue = issue;
     logger.info('parsed issue');
 
     var month = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/month", doc);
-    if (month === undefined && pubStatus==='normal') results.errors.push("No month found");
+    if (month === undefined && pubStatus === 'normal') results.errors.push("No month found");
     else results.month = month;
     logger.info('parsed month');
 
     var year = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/year", doc);
-    if (year === undefined && pubStatus==='normal') results.errors.push("No year found");
+    if (year === undefined && pubStatus === 'normal') results.errors.push("No year found");
     else results.year = year;
     logger.info('parsed year');
 
@@ -95,8 +98,8 @@ ScienceXML.parseXml = function (path, pubStatus) {
     var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
     logger.info(topic);
     if (topic) {
-        topic=topic.trim();
-        var topicEneity = Topics.findOne({$or:[{name:topic},{englishName:topic}]});
+        topic = topic.trim();
+        var topicEneity = Topics.findOne({$or: [{name: topic}, {englishName: topic}]});
         if (topicEneity)
             results.topic = [topicEneity._id];
     }
@@ -112,16 +115,16 @@ ScienceXML.parseXml = function (path, pubStatus) {
     if (_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)) {
         keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
         if (_.isEmpty(keywordsEn)) {
-            results.keywords={};
+            results.keywords = {};
             //results.errors.push("No keywords found");//允许没有关键词信息
         } else {
-            results.keywords = {en: keywordsEn,cn:keywordsEn};
+            results.keywords = {en: keywordsEn, cn: keywordsEn};
         }
-    }else {
-        if(_.isEmpty(keywordsCn)){
-            keywordsCn=keywordsEn;
-        }else if(_.isEmpty(keywordsEn)){
-            keywordsEn=keywordsCn;
+    } else {
+        if (_.isEmpty(keywordsCn)) {
+            keywordsCn = keywordsEn;
+        } else if (_.isEmpty(keywordsEn)) {
+            keywordsEn = keywordsCn;
         }
         results.keywords = {
             cn: keywordsCn,
@@ -131,20 +134,20 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed keyword');
 
     var elocationId = ScienceXML.getSimpleValueByXPath("//article-meta/elocation-id", doc);
-    if (elocationId !== undefined){
+    if (elocationId !== undefined) {
         results.elocationId = elocationId;
-        results.padPage=Science.String.PadLeft(elocationId,"0",10);
-    }else{
+        results.padPage = Science.String.PadLeft(elocationId, "0", 10);
+    } else {
         var startPage = ScienceXML.getSimpleValueByXPath("//article-meta/fpage", doc);
         var endPage = ScienceXML.getSimpleValueByXPath("//article-meta/lpage", doc);
-        if(startPage !== undefined) {
+        if (startPage !== undefined) {
             results.startPage = startPage;
-            results.padPage=Science.String.PadLeft(startPage,"0",10);
+            results.padPage = Science.String.PadLeft(startPage, "0", 10);
         }
         results.elocationId = startPage;
         logger.info('parsed startPage');
-        if(endPage !== undefined) results.endPage = endPage;
-            logger.info('parsed endPage');
+        if (endPage !== undefined) results.endPage = endPage;
+        logger.info('parsed endPage');
     }
     logger.info('parsed elocationId');
 
