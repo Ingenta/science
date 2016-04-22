@@ -185,5 +185,6 @@ if (Meteor.isServer) {
             rate: "every 30 minutes"
         }
     }
+    Meteor.isLive = process.env.ROOT_URL == "http://engine.scichina.com";
 }
 

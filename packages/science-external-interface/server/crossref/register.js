@@ -170,16 +170,16 @@ var post2CrossRef = function (taskId, filepath) {
 };
 
 var generationXMLForSingleArticle = function (doi, callback) {
-    if (!Articles || !Publications) {
-        throw new Error('Articles and Publication are required');
-    }
     check(doi, String);
-    if (!doi.startWith("10.1360/"))
-        throw new Error("doi must start with 10.1360/");//由于中国科学在CrossRef上机构代号为10.1360所以只有为10.1360开头的doi注册的权限.
+    if (!doi.startWith("10.1360/")){
+        logger.warn("doi must start with 10.1360/");//由于中国科学在CrossRef上机构代号为10.1360所以只有为10.1360开头的doi注册的权限.
+        return;
+    }
 
     var article = Articles.findOne({doi:doi}, {fields: {journalId: 1, doi: 1, title: 1, year: 1}});
     if (!article) {
-        throw new Error("Can't find article with doi:" + doi);
+        logger.error("Can't find article with doi:" + doi);
+        return;
     }
 
     var title = article.title.en || article.title.cn;

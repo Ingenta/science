@@ -328,7 +328,15 @@ Tasks.insertArticleTask = function (logId, result) {
             {_id: logId},
             {$set: {status: "Success", articleId: articleId, articleUrl: url}}
         );
-        Science.Interface.CrossRef.registerOne(result.doi);
+        if(Meteor.isLive){
+            //var taskId = UploadTasks.insert({
+            //    action: "registerDOI",
+            //    started: new Date(),
+            //    status: "sending",
+            //    logId: logId
+            //});
+            Science.Interface.CrossRef.registerOne(result.doi);
+        }
     }
 }
 var insertKeywords = function (a) {
