@@ -329,12 +329,6 @@ Tasks.insertArticleTask = function (logId, result) {
             {$set: {status: "Success", articleId: articleId, articleUrl: url}}
         );
         if(Meteor.isLive){
-            //var taskId = UploadTasks.insert({
-            //    action: "registerDOI",
-            //    started: new Date(),
-            //    status: "sending",
-            //    logId: logId
-            //});
             Science.Interface.CrossRef.registerOne(result.doi);
         }
     }
