@@ -61,7 +61,7 @@ Template.UserSettingsChangePass.events({
 				return false;
 			} else {
 				pageSession.set("errorMessage", "");
-				pageSession.set("infoMessage", TAPi18n.__("NewPasSet"));
+				pageSession.set("infoMessage", TAPi18n.__("Password reset"));
 				t.find('#old_password').value = "";
 				t.find('#new_password').value = "";
 				t.find('#confirm_pass').value = "";
