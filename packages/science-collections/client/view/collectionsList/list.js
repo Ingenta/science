@@ -19,7 +19,7 @@ Template.collectionsList.helpers({
         } else {
             reg = "^" + first;
         }
-        first && (q.title = {$regex: reg, $options: "i"});
+        first && (q["title.en"] = {$regex: reg, $options: "i"});
         return collPaginator.find(q, {itemsPerPage: numPerPage, sort: {createDate: -1}});
     },
     collectionPageCount: function () {
@@ -35,7 +35,7 @@ Template.collectionsList.helpers({
         } else {
             reg = "^" + first;
         }
-        first && (q.title = {$regex: reg, $options: "i"});
+        first && (q["title.en"] = {$regex: reg, $options: "i"});
         return collPaginator.find(q).count() > 10;
     }
 });
