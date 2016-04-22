@@ -107,6 +107,8 @@ Meteor.methods({
     nextDoi: function (elocationId, issueId) {
         if (!elocationId)return;
         if (!issueId)return;
+        if(typeof elocationId !== "string") logger.info(elocationId);
+        if(typeof issueId !== "string") logger.info(issueId);
         check(elocationId, String);
         check(issueId, String);
         return getNextPage(issueId,elocationId,true);
