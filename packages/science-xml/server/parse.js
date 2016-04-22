@@ -35,7 +35,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
     if (doi === undefined) results.errors.push("No doi found");
     else {
         doi = doi.trim();
-        if (!ScienceXML.isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 11.1111/111");
+        if (!ScienceXML.isValidDoi(doi)) results.errors.push("doi: bad format should be in the form 10.1000/xyz000 %#?\" and space must be encoded");
         else {
             results.doi = doi;
             results.articledoi = ScienceXML.getArticleDoiFromFullDOI(doi);
