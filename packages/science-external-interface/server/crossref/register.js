@@ -172,7 +172,7 @@ var post2CrossRef = function (taskId, filepath) {
 var generationXMLForSingleArticle = function (doi, callback) {
     check(doi, String);
     if (!doi.startWith("10.1360/")){
-        logger.warn("doi must start with 10.1360/");//由于中国科学在CrossRef上机构代号为10.1360所以只有为10.1360开头的doi注册的权限.
+        logger.info("ignore this doi registration, because doi must start with 10.1360/, and the doi is:" + doi);//由于中国科学在CrossRef上机构代号为10.1360所以只有为10.1360开头的doi注册的权限.
         return;
     }
 
