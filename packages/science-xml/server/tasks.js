@@ -328,7 +328,9 @@ Tasks.insertArticleTask = function (logId, result) {
             {_id: logId},
             {$set: {status: "Success", articleId: articleId, articleUrl: url}}
         );
-        Science.Interface.CrossRef.registerOne(result.doi);
+        if(Meteor.isLive){
+            Science.Interface.CrossRef.registerOne(result.doi);
+        }
     }
 }
 var insertKeywords = function (a) {
