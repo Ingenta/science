@@ -8,6 +8,17 @@ ScienceXML.FileExists = function (path) {
     }
     return false;
 }
+ScienceXML.IsImageTypeSupported = function (path) {
+    if (!path)return false;
+    var fileExt = Science.String.getExt(path);
+    if (fileExt) {
+        fileExt = fileExt.toLowerCase();
+        if (fileExt === "jpg") return true;
+        if (fileExt === "jpeg") return true;
+        if (fileExt === "png") return true;
+    }
+    return false;
+}
 ScienceXML.FolderExists = function (path) {
     if (!path)return false;
     if (Science.FSE.ensureDirSync(path)) {
@@ -58,7 +69,7 @@ ScienceXML.getFileContentsFromRemotePath = function (path) {
 }
 ScienceXML.getFileContentsFromLocalPath = function (path) {
     var text = Science.FSE.readFileSync(path, "utf8");
-    return text.replace(/\sxml:base=/g,' ref-type=');
+    return text.replace(/\sxml:base=/g, ' ref-type=');
 }
 
 ScienceXML.getAuthorInfo = function (results, doc) {
@@ -67,32 +78,32 @@ ScienceXML.getAuthorInfo = function (results, doc) {
     results.affiliations = [];
     var authorNodes = parserHelper.getNodes("//article-meta/contrib-group/contrib[@contrib-type='author']", doc);
     _.each(authorNodes, function (author) {
-        var nameNodes = parserHelper.getNodes("descendant::name",author);
-        if(!_.isEmpty(nameNodes)){
+        var nameNodes = parserHelper.getNodes("descendant::name", author);
+        if (!_.isEmpty(nameNodes)) {
             var fullnamePart = {};
-            var surnamePart={};
-            var givenPart={};
-            var useSameVal=nameNodes.length==1;
-            _.each(nameNodes,function(nNode){
-                var lang=parserHelper.getFirstAttribute("attribute::lang",nNode) || "en";
-                var style=parserHelper.getFirstAttribute("attribute::name-style",nNode) || "western";
-                var space=style=="western"?" ":"";
-                var surName=parserHelper.getSimpleVal("child::surname",nNode);
-                var givenName=parserHelper.getSimpleVal("child::given-names",nNode);
-                _.each(parserHelper.langNames,function(val,key){
-                    if(val==lang){
-                        lang=key;
+            var surnamePart = {};
+            var givenPart = {};
+            var useSameVal = nameNodes.length == 1;
+            _.each(nameNodes, function (nNode) {
+                var lang = parserHelper.getFirstAttribute("attribute::lang", nNode) || "en";
+                var style = parserHelper.getFirstAttribute("attribute::name-style", nNode) || "western";
+                var space = style == "western" ? " " : "";
+                var surName = parserHelper.getSimpleVal("child::surname", nNode);
+                var givenName = parserHelper.getSimpleVal("child::given-names", nNode);
+                _.each(parserHelper.langNames, function (val, key) {
+                    if (val == lang) {
+                        lang = key;
                         return;
                     }
                 })
-                surnamePart[lang]=surName;
-                givenPart[lang]=givenName;
-                fullnamePart[lang]=surName+space+givenName;
-                if(useSameVal){
-                    var anthorLang = lang == 'en'?"cn":"en";
-                    surnamePart[anthorLang]=surName;
-                    givenPart[anthorLang]=givenName;
-                    fullnamePart[anthorLang]=surName+space+givenName;
+                surnamePart[lang] = surName;
+                givenPart[lang] = givenName;
+                fullnamePart[lang] = surName + space + givenName;
+                if (useSameVal) {
+                    var anthorLang = lang == 'en' ? "cn" : "en";
+                    surnamePart[anthorLang] = surName;
+                    givenPart[anthorLang] = givenName;
+                    fullnamePart[anthorLang] = surName + space + givenName;
                 }
             })
             var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
@@ -138,9 +149,9 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 _.each(multiLangNote, function (noteContent, key) {
                     if (!_.isEmpty(entry.email)) {
                         noteContent = noteContent.toString();
-                        _.each(entry.email,function(em){
+                        _.each(entry.email, function (em) {
                             var mailTag = "<a href=\"mailto:<m>\"><m></a>".replace(/<m>/g, em);
-                            noteContent = noteContent.replace(new RegExp("<ext-link[^<]+"+em+"<\/ext-link>"), mailTag);
+                            noteContent = noteContent.replace(new RegExp("<ext-link[^<]+" + em + "<\/ext-link>"), mailTag);
                         })
 
                     }
@@ -241,11 +252,11 @@ var getParagraphs = function (paragraphNodes) {
         } else {
             var parseResult = ScienceXML.handlePara(paragraph);
             var sectionText = new serializer().serializeToString(parseResult.paraNode);
-            if(!_.isEmpty(parseResult.figures)){
-                paragraphs.figures= _.union(paragraphs.figures,parseResult.figures);
+            if (!_.isEmpty(parseResult.figures)) {
+                paragraphs.figures = _.union(paragraphs.figures, parseResult.figures);
             }
-            if(!_.isEmpty(parseResult.tables)){
-                paragraphs.tables= _.union(paragraphs.tables,parseResult.tables);
+            if (!_.isEmpty(parseResult.tables)) {
+                paragraphs.tables = _.union(paragraphs.tables, parseResult.tables);
             }
             paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(sectionText));
 
@@ -312,7 +323,7 @@ ScienceXML.getFullText = function (results, doc) {
     return results;
 };
 
-var trimWrapTagP = function(str){
+var trimWrapTagP = function (str) {
     str = str.trim()
     if (str.startWith("<p>") && str.endWith("</p>"))
         return str.slice(3, -4)
@@ -321,17 +332,17 @@ var trimWrapTagP = function(str){
 
 ScienceXML.getAbstract = function (results, doc) {
     if (!results.errors) results.errors = [];
-    var abstractCn = parserHelper.getXmlString("//abstract[@lang='zh-Hans'] | //trans-abstract[@lang='zh-Hans']",doc,true);
-    var abstractEn = parserHelper.getXmlString("//abstract[@lang='en'] | //trans-abstract[@lang='en']",doc,true);
-    if(abstractCn || abstractEn){
-        if(abstractCn)
-            abstractCn=trimWrapTagP(abstractCn);
-        if(abstractEn)
-            abstractEn=trimWrapTagP(abstractEn);
-    }else{
+    var abstractCn = parserHelper.getXmlString("//abstract[@lang='zh-Hans'] | //trans-abstract[@lang='zh-Hans']", doc, true);
+    var abstractEn = parserHelper.getXmlString("//abstract[@lang='en'] | //trans-abstract[@lang='en']", doc, true);
+    if (abstractCn || abstractEn) {
+        if (abstractCn)
+            abstractCn = trimWrapTagP(abstractCn);
+        if (abstractEn)
+            abstractEn = trimWrapTagP(abstractEn);
+    } else {
         abstractCn = parserHelper.getXmlString("//abstract", doc, true);
         abstractEn = parserHelper.getXmlString("//trans-abstract", doc, true);
-        if(abstractCn || abstractEn) {
+        if (abstractCn || abstractEn) {
             if (abstractCn)
                 abstractCn = trimWrapTagP(abstractCn);
             if (abstractEn)
@@ -339,8 +350,8 @@ ScienceXML.getAbstract = function (results, doc) {
         }
     }
 
-    if(abstractCn || abstractEn){
-        results.abstract={cn:(abstractCn || abstractEn),en:(abstractEn || abstractCn)};
+    if (abstractCn || abstractEn) {
+        results.abstract = {cn: (abstractCn || abstractEn), en: (abstractEn || abstractCn)};
     }
     return results;
 };
@@ -491,7 +502,7 @@ var getFigure = function (fig) {
             figure.graphics.push(g);
         })
     }
-    if(_.isEmpty(figure.graphics)){
+    if (_.isEmpty(figure.graphics)) {
         throw (new Error("No graphic node found inside of fig " + id || ""));
         return result;
     }
@@ -516,14 +527,14 @@ var getTable = function (tableWrapNode) {
     table.id = parserHelper.getFirstAttribute("./@id", tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
     table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
-    if(_.isEmpty(table.label)){
-        var xref=xpath.useNamespaces({"base":""})("child::caption/p/bold/xref",tableWrapNode);
-        if(xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
-            table.label=xref[0].childNodes[0].data;
+    if (_.isEmpty(table.label)) {
+        var xref = xpath.useNamespaces({"base": ""})("child::caption/p/bold/xref", tableWrapNode);
+        if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+            table.label = xref[0].childNodes[0].data;
     }
     table.caption = parserHelper.getSimpleVal("child::caption/p", tableWrapNode);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
-    if(!_.isEmpty(table.table))table.table = table.table.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+    if (!_.isEmpty(table.table))table.table = table.table.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
 };
 
@@ -541,19 +552,19 @@ ScienceXML.getTables = function (doc) {
 
 ScienceXML.handlePara = function (paragraph) {
     var handled = {paraNode: paragraph};
-    var figAndTbl=xpath.select("descendant::fig[@id] | descendant::table-wrap[@id]",paragraph);
-    if(!_.isEmpty(figAndTbl)){
-        figAndTbl.forEach(function(ftNode){
-            if(ftNode.tagName=='fig'){
-                handled.figures=handled.figures || [];
+    var figAndTbl = xpath.select("descendant::fig[@id] | descendant::table-wrap[@id]", paragraph);
+    if (!_.isEmpty(figAndTbl)) {
+        figAndTbl.forEach(function (ftNode) {
+            if (ftNode.tagName == 'fig') {
+                handled.figures = handled.figures || [];
                 var figure = getFigure(ftNode);
                 figure && handled.figures.push(figure);
                 while (ftNode.firstChild)
                     ftNode.removeChild(ftNode.firstChild);
                 var nd = ScienceXML.xmlStringToXmlDoc('<p><xref original="true" ref-type="fig" rid="' + figure.id + '">' + figure.label + '</xref></p>');
                 ftNode.appendChild(nd.documentElement);
-            }else if(ftNode.tagName=='table-wrap'){
-                handled.tables=handled.tables || [];
+            } else if (ftNode.tagName == 'table-wrap') {
+                handled.tables = handled.tables || [];
                 var table = getTable(ftNode);
                 table && handled.tables.push(table);
                 while (ftNode.firstChild)
@@ -703,18 +714,18 @@ ScienceXML.getFunding = function (doc) {
     return fundingObjects;
 }
 
-ScienceXML.getTitle=function(doc){
-    var primaryTitle = parserHelper.getXmlString("//article-meta/title-group/article-title", doc,true);
+ScienceXML.getTitle = function (doc) {
+    var primaryTitle = parserHelper.getXmlString("//article-meta/title-group/article-title", doc, true);
     if (primaryTitle === undefined)
         return;
     else {
         var title = {
-            en:primaryTitle,
-            cn:primaryTitle
+            en: primaryTitle,
+            cn: primaryTitle
         };
         var primaryLang = parserHelper.getFirstAttribute("//article-meta/title-group/article-title/attribute::lang", doc);
         if (primaryLang) {
-            var secondaryTitle = parserHelper.getXmlString("//article-meta/title-group/trans-title-group/trans-title", doc,true);
+            var secondaryTitle = parserHelper.getXmlString("//article-meta/title-group/trans-title-group/trans-title", doc, true);
             if (primaryLang === 'en') {
                 title.en = primaryTitle;
                 if (secondaryTitle === undefined) title.cn = primaryTitle;
