@@ -13,6 +13,10 @@ Router.map(function () {
         path: '/citation/plaintext/:publisherDoi/:articleDoi',
         action: function () {
             var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            if(!obj){
+                this.response.writeHead(302, {'Location': "/"});
+                return this.response.end();
+            }
             var text = undefined;
             if (obj.language == 1) {
                 text = (obj.title.en || obj.title.cn) + "\n";
@@ -46,6 +50,10 @@ Router.map(function () {
         path: '/citation/bibtex/:publisherDoi/:articleDoi',
         action: function () {
             var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            if(!obj){
+                this.response.writeHead(302, {'Location': "/"});
+                return this.response.end();
+            }
             var publisher = Publishers.findOne({_id: obj.publisher});
             var name1 = "publisher/" + publisher.name + "/journal/" + obj.journal.title + "/" + obj.volume + "/" + obj.issue + "/" + obj.doi;
             var text = "@article{:/" + name1 + ",\n   author = \"";
@@ -77,6 +85,10 @@ Router.map(function () {
         path: '/citation/endnote/:publisherDoi/:articleDoi',
         action: function () {
             var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            if(!obj){
+                this.response.writeHead(302, {'Location': "/"});
+                return this.response.end();
+            }
             var publisher = Publishers.findOne({_id: obj.publisher});
             var name1 = "publisher/" + publisher.name + "/journal/" + obj.journal.title + "/" + obj.volume + "/" + obj.issue + "/" + obj.doi;
             var text = "%0 Journal Article\n";
@@ -114,6 +126,10 @@ Router.map(function () {
         path: '/citation/refworks/:publisherDoi/:articleDoi',
         action: function () {
             var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            if(!obj){
+                this.response.writeHead(302, {'Location': "/"});
+                return this.response.end();
+            }
             var publisher = Publishers.findOne({_id: obj.publisher});
             var name1 = "publisher/" + publisher.name + "/journal/" + obj.journal.title + "/" + obj.volume + "/" + obj.issue + "/" + obj.doi;
             var text = "RT Journal Article\nSR Electronic(1)\n";
@@ -145,6 +161,10 @@ Router.map(function () {
         path: '/citation/pubmed/:publisherDoi/:articleDoi',
         action: function () {
             var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            if(!obj){
+                this.response.writeHead(302, {'Location': "/"});
+                return this.response.end();
+            }
             var publisher = Publishers.findOne({_id: obj.publisher});
             var text = "%0 Journal Article\n%D " + obj.year + "\n%@ " + obj.journal.issn.substring(0, 4) + "-" + obj.journal.issn.substring(3);
             if (obj.language == 1) {
