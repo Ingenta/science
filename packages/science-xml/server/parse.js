@@ -16,6 +16,8 @@ ScienceXML.isValidDoi = function (doi) {
     return Science.DOIValidator({exact: true}).test(doi);
 }
 
+
+
 ScienceXML.parseXml = function (path, pubStatus) {
     var results = {};
     //Step 1: get the file
@@ -78,22 +80,9 @@ ScienceXML.parseXml = function (path, pubStatus) {
 
     var year = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/year", doc);
     if (year === undefined && pubStatus === 'normal') results.errors.push("No year found");
+    else if(!isNumeric(year)) results.errors.push("Year found but is not a number");
     else results.year = year;
     logger.info('parsed year');
-
-    //var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subj-group/subject", doc);
-    //if (topic === undefined) {
-    //    topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
-    //    if (topic === undefined)results.errors.push("No subject found");
-    //}
-    //else {
-    //    var topicEneity = Topics.findOne({"englishName": topic});
-    //    if (topicEneity)
-    //        results.topic = topicEneity._id;
-    //    else {
-    //        results.errors.push("No subject match:" + topic);
-    //    }
-    //}
 
     var topic = ScienceXML.getSimpleValueByXPath("//subj-group/subject", doc);
     logger.info(topic);
@@ -105,10 +94,6 @@ ScienceXML.parseXml = function (path, pubStatus) {
     }
     logger.info('parsed topic');
 
-    //var keywords = xpath.select("//kwd-group[@kwd-group-type='inspec']/kwd/text()", doc).toString();
-    //keywords = keywords.split(',');
-    //if (keywords === undefined) results.errors.push("No keywords found");
-    //else results.keywords = keywords;
 
     var keywordsCn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()", doc);
     var keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()", doc);
@@ -116,7 +101,6 @@ ScienceXML.parseXml = function (path, pubStatus) {
         keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
         if (_.isEmpty(keywordsEn)) {
             results.keywords = {};
-            //results.errors.push("No keywords found");//允许没有关键词信息
         } else {
             results.keywords = {en: keywordsEn, cn: keywordsEn};
         }
