@@ -44,6 +44,13 @@ Template.UserSettingsChangePass.events({
 			t.find('#confirm_pass').focus();
 			return false;
 		}
+		// check new password
+		if(old_password == new_password)
+		{
+			pageSession.set("errorMessage",TAPi18n.__("SamePassword"));
+			t.find('#new_password').focus();
+			return false;
+		}
 		// check password length
 		var min_password_len = 6;
 		if (!isValidPassword(new_password, min_password_len)) {
