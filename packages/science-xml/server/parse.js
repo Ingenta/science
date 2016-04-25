@@ -80,7 +80,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
 
     var year = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/year", doc);
     if (year === undefined && pubStatus === 'normal') results.errors.push("No year found");
-    else if(!isNumeric(year)) results.errors.push("Year found but is not a number");
+    else if(!Science.isNumeric(year)) results.errors.push("Year found but is not a number");
     else results.year = year;
     logger.info('parsed year');
 
