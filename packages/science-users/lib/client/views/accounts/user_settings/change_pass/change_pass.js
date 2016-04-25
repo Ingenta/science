@@ -44,7 +44,13 @@ Template.UserSettingsChangePass.events({
 			t.find('#confirm_pass').focus();
 			return false;
 		}
-
+		// check password length
+		var min_password_len = 6;
+		if (!isValidPassword(new_password, min_password_len)) {
+			pageSession.set("errorMessage", "Your password must be at least " + min_password_len + " characters long.");
+			t.find('#new_password').focus();
+			return false;
+		}
 		// check new password
 		if(new_password != confirm_pass)
 		{
@@ -70,7 +76,6 @@ Template.UserSettingsChangePass.events({
 		});
 		return false; 
 	}
-	
 });
 
 Template.UserSettingsChangePass.helpers({
