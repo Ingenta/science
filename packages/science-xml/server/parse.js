@@ -64,22 +64,22 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed acknowledgements');
 
     var volume = ScienceXML.getSimpleValueByXPath("//article-meta/volume", doc);
-    if (volume === undefined && pubStatus === 'normal') results.errors.push("No volume found");
+    if (volume === undefined && pubStatus === 'normal') results.errors.push("//article-meta/volume not found");
     else results.volume = volume;
     logger.info('parsed volume');
 
     var issue = ScienceXML.getSimpleValueByXPath("//article-meta/issue", doc);
-    if (issue === undefined && pubStatus === 'normal') results.errors.push("No issue found");
+    if (issue === undefined && pubStatus === 'normal') results.errors.push("//article-meta/issue not found");
     else results.issue = issue;
     logger.info('parsed issue');
 
     var month = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/month", doc);
-    if (month === undefined && pubStatus === 'normal') results.errors.push("No month found");
+    if (month === undefined && pubStatus === 'normal') results.errors.push("//article-meta/pub-date/month not found");
     else results.month = month;
     logger.info('parsed month');
 
     var year = ScienceXML.getSimpleValueByXPath("//article-meta/pub-date/year", doc);
-    if (year === undefined && pubStatus === 'normal' && !Science.isNumeric(year)) results.errors.push("No year found, or is not a number");
+    if (year === undefined && pubStatus === 'normal' && !Science.isNumeric(year)) results.errors.push("article-meta/pub-date/year not found, or is not a number");
     else results.year = year;
     logger.info('parsed year');
 
@@ -87,9 +87,9 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info(topic);
     if (topic) {
         topic = topic.trim();
-        var topicEneity = Topics.findOne({$or: [{name: topic}, {englishName: topic}]});
-        if (topicEneity)
-            results.topic = [topicEneity._id];
+        var topicEntity = Topics.findOne({$or: [{name: topic}, {englishName: topic}]});
+        if (topicEntity)
+            results.topic = [topicEntity._id];
     }
     logger.info('parsed topic');
 
