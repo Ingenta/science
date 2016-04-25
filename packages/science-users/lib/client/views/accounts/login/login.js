@@ -45,7 +45,8 @@ Template.Login.events({
 			submit_button.button("reset");
 			if (err)
 			{
-				pageSession.set("errorMessage", err);
+				//pageSession.set("errorMessage", err);
+				pageSession.set("errorMessage", TAPi18n.__("Account or password error"));
 				return false;
 			}
 			else{

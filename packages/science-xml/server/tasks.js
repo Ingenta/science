@@ -268,6 +268,9 @@ Tasks.insertArticleImages = function (logId, result) {
                     logger.warn("image missing from import: " + log.name, figName);
                     log.errors.push("image missing: " + figName);
                 }
+                else if (!ScienceXML.IsImageTypeSupported(figLocation)) {
+                    log.errors.push("image type not supported: " + figName);
+                }
                 else {
                     FiguresStore.insert(figLocation, function (err, fileObj) {
                         if (err) {

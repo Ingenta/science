@@ -31,7 +31,7 @@ Template.onePublisherInCollFilterList.helpers({
 		var first = Session.get('firstLetter');
 		if (first === undefined)
 			return ArticleCollections.find({publisherId: this._id}).count();
-		return ArticleCollections.find({publisherId: this._id, title: {$regex: "^" + first, $options: "i"}}).count();
+		return ArticleCollections.find({publisherId: this._id, 'title.en': {$regex: "^" + first, $options: "i"}}).count();
 	}
 });
 

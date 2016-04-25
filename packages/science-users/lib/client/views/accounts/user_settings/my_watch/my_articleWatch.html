@@ -17,7 +17,7 @@
                         </div>
                     </td>
                     <td>
-                        {{#if can "delete-tag" "resource"}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}
+                        {{#if can "modify-article" "resource"}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}
                     </td>
                 </tr>
             {{/with}}
@@ -27,5 +27,5 @@
         {{/mathjax}}
         </tbody>
     </table>
-    <button type="button" class="btn" style="text-align:right">{{_ "Cancel Watch"}}</button>
+    <button type="button" class="btn btn-primary" style="float:right">{{_ "Cancel Watch"}}</button>
 </template>

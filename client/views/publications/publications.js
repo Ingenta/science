@@ -15,12 +15,13 @@ Template.onePublication.helpers({
 
 Template.onePublisherInFilterList.helpers({
     count: function (id) {
-        var first = Session.get('firstLetter');
+        var first = Session.get('pubFirstLetter');
         var q={publisher:id};
         if(!Permissions.userCan("modify-journal", "resource",this.userId))
             q.visible="1";
         if (first !== undefined)
             q.shortTitle={$regex: "^" + first, $options: "i"};
+        console.log(q);
         return Publications.find(q).count();
     }
 });

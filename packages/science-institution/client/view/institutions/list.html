@@ -5,7 +5,9 @@
                 {{> oneInstitution}}
             {{/each}}
             {{> Paginator_UI institutions}}
-            {{> displayPerPage}}
+            {{#if institutionsCount}}
+                {{> displayPerPage}}
+            {{/if}}
         </div>
     </div>
 </template>
