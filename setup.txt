@@ -53,7 +53,7 @@ docker run -d --name meteor --restart=always --link freegeoip:freegeoip -e ROOT_
 docker run -d --name meteorTasks --restart=always -e RUN_TASKS=1 -e ROOT_URL=http://219.238.6.215:8082 -e MONGO_URL=mongodb://192.168.0.24:27017/meteor -e SOLR_URL=http://192.168.0.24 -v ~/app:/bundle -p 8082:80 -v /etc/localtime:/etc/localtime:ro jackkav/docker-meteor
 
 
-docker run -d --name jenkinsci  --restart=always -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai -p 8081:8080 -v /var/jenkins_home jenkins
+docker run -d --name jenkins9999  --restart=always -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai -p 9999:8080 --volumes-from jenkins-dv index.alauda.cn/jackkav/meteor-jenkins-ci
 
 [nginx server requires a folder on the server with config found here]
 docker run -d --name nginx -p 80:80 -v ~/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /etc/localtime:/etc/localtime:ro nginx

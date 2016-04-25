@@ -12,6 +12,7 @@ SolrClient = Solr.createClient({
 
 Future = Npm.require('fibers/future');
 
+Config.clearSpecialCharacterRegEx = /[&\/\\#,+()$~%.'"-:*?!<>^{}\[\]]/g;
 SolrUtils = {
     fieldMap: {
         "title": ["title.cn", "title.en"],
@@ -46,9 +47,8 @@ SolrUtils = {
     getQueryStr: function (queryArr) {
         var qstring;
         if (queryArr) {
-            var clearReg=/[&\/\\#,+()$~%.'":*?!<>^{}\[\]]/g;
             if (typeof queryArr === 'string')
-                return queryArr.replace(clearReg," ").trim().toLowerCase();
+                return queryArr.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase();
             qstring = "";
             var isFirstOne = true;
             _.each(queryArr, function (sQuery) {
