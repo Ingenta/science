@@ -44,7 +44,7 @@ docker run -d --name mongo --restart=always -v ~/data/db:/data/db -v /etc/localt
 
 docker run -d --name conn --restart=always --link solr:solr --link mongo:mongo -v /etc/localtime:/etc/localtime:ro jackjk/conn
 
-docker run -d --name freegeoip -p 8080:8080 --restart=always -v /etc/localtime:/etc/localtime:ro fiorix/freegeoip
+docker run -d --name freegeoip -p 10000:8080 --restart=always -v /etc/localtime:/etc/localtime:ro fiorix/freegeoip
 [1 server]
 docker run -d --name meteor --link mongo:mongo --link solr:solr --link freegeoip:freegeoip -e KADIRA_APP_ID=xiLpgDoy5GzczyxeQ -e KADIRA_APP_SECRET=47b59966-ce84-44a0-8d9b-5ae265bc4133 -e ROOT_URL=http://219.238.6.215 -e MONGO_URL=mongodb://mongo:27017/meteor -v ~/app:/bundle -p 88:80 -v /etc/localtime:/etc/localtime:ro jackkav/docker-meteor
 
