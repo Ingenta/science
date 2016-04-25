@@ -9,6 +9,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             {
                 Session.set('currentIssueId', this.params.hash);
                 Session.set("activeTab", "Browse");
+            }else{
+                Science.setActiveTabByUrl(window.location.search);
             }
             return journal;
         }

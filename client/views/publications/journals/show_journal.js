@@ -4,6 +4,7 @@ Template.journalTabs.onCreated(function () {
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug, template) {
+        history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (Router.current().params.journalShortTitle) {
