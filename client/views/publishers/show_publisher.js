@@ -1,5 +1,8 @@
 ReactiveTabs.createInterface({
-    template: 'publisherTabs'
+    template: 'publisherTabs',
+    onChange:function(slug){
+        history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
+    }
 });
 
 Template.publisherOptions.helpers({

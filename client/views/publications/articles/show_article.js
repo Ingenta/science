@@ -37,6 +37,7 @@ var delayRender = function () {
 ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
+        history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
         var article = Router.current().data && Router.current().data();
         if (!article && !article.doi)return;
         if (slug === 'abstract') {

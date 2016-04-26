@@ -183,13 +183,15 @@ Template.registerHelper('showTopicName',function(topics){
     return topic && ( TAPi18n.getLanguage()=='zh-CN'?topic.name:topic.englishName);
 })
 
-Science.setActiveTabByUrl=function(searchStr){
+Science.setActiveTabByUrl=function(searchStr, range, defaultTab){
     if(searchStr){
         var slug = /slug=([^&#]+)/.exec(searchStr);
         if(!_.isEmpty(slug)){
-            Session.set("activeTab",decodeURI(slug[1]));
-            return;
+            if(_.isEmpty(range) || _.contains(range,decodeURI(slug[1]))){
+                Session.set("activeTab",decodeURI(slug[1]));
+                return;
+            }
         }
     }
-    Session.set("activeTab","");
+    Session.set("activeTab",defaultTab);
 }

@@ -163,6 +163,7 @@ Router.map(function () {
                 Session.set('filterPublisher', pub._id);
                 return pub;
             }
+            Science.setActiveTabByUrl(window.location.search,["collections","journals"],"journals");
         },
         template: "ShowPublisher",
         parent: "publishers",
