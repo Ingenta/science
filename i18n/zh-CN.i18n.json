@@ -1472,6 +1472,7 @@
   "abstract":"摘要",
   "Close":"关闭",
   "PasswordNotMatch":"您的新密码和确定密码不匹配",
+  "SamePassword":"您的新密码和旧密码相同",
   "OldPassword":"请输入旧密码",
   "NewPassword":"请输入新密码",
   "ConfirmNewPas":"请确认您的新密码",

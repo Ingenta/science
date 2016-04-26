@@ -1,6 +1,6 @@
 //访问路径
 Router.map(function () {
-    //新闻平台首页
+    //杂志社平台首页
     this.route("newsPlatform", {
         data: function () {
             var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});

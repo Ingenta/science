@@ -9,8 +9,7 @@ Template.authorCentered.helpers({
 
             if(journal){
                 var publisher = Publishers.findOne({_id: journal.publisher});
-                Session.set("activeTab", "Author Center");
-                return "/publisher/"+publisher.shortname+"/journal/"+journal.shortTitle;
+                return "/publisher/"+publisher.shortname+"/journal/"+journal.shortTitle+"?slug=Author Center";
             }
         }
     }
