@@ -182,3 +182,14 @@ Template.registerHelper('showTopicName',function(topics){
     var topic = Topics.findOne({_id:topicId});
     return topic && ( TAPi18n.getLanguage()=='zh-CN'?topic.name:topic.englishName);
 })
+
+Science.setActiveTabByUrl=function(searchStr){
+    if(searchStr){
+        var slug = /slug=([^&#]+)/.exec(searchStr);
+        if(!_.isEmpty(slug)){
+            Session.set("activeTab",decodeURI(slug[1]));
+            return;
+        }
+    }
+    Session.set("activeTab","");
+}

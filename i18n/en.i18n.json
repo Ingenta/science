@@ -1141,6 +1141,7 @@
     "Logs":"Logs",
     "Site Statistics":"Site Statistics",
     "PasswordNotMatch":"Your new password and confirm password doesn't match.",
+    "SamePassword":"Your new password is the same as the old password.",
     "OldPassword":"Please enter your old password.",
     "NewPassword":"Please enter your new password.",
     "ConfirmNewPas":"Please confirm your new password.",
