@@ -58,7 +58,7 @@ SolrUtils = {
                 isFirstOne = false;
                 var solrFields = SolrUtils.fieldMap[sQuery.key];
                 var subQueues = _.map(solrFields, function (sField) {
-                    return sField + ":(" + sQuery.val.replace(clearReg," ").trim().toLowerCase() + ")";
+                    return sField + ":(" + sQuery.val.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase() + ")";
                 });
                 qstring += "(" + subQueues.join(" OR ") + ")";
             })
