@@ -1,7 +1,7 @@
 <template name="layoutRightNews">
     <div class="mainPart">
         <div class="mainTitle">
-            <p class="fl w300 mt12"><span class="mr20"><a href="/miniplatform/newsCenter?slug=scpNews" style="color: #2d2d2d">{{_ "Magazine dynamic"}}</a></span></p>
+            <p class="fl w300 mt12"><span class="mr20"><a href="{{pathFor 'newsCenter'}}" style="color: #2d2d2d">{{_ "Magazine dynamic"}}</a></span></p>
             <p class="fr mt8"><a href="{{pathFor 'dynamicShow'}}"><img src="/goAll.png"/></a></p>
         </div>
         {{#each layoutRecommendMagazines}}
@@ -24,7 +24,7 @@
 
     <div class="mainPart mt20">
         <div class="mainTitle">
-            <p class="fl w300 mt12"><span class="mr20"><a href="/miniplatform/newsCenter?slug=publishingNews" style="color: #2d2d2d">{{_ "Publishing Dynamic"}}</a></span></p>
+            <p class="fl w300 mt12"><span class="mr20"><a href="/miniplatform/newsCenter?slug=publishingNews" target="_self" style="color: #2d2d2d">{{_ "Publishing Dynamic"}}</a></span></p>
             <p class="fr mt8"><a href="{{pathFor 'publishingShow'}}"><img src="/goAll.png"/></a></p>
         </div>
     {{#each layoutPublishingMagazines}}
