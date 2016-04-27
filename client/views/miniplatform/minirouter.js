@@ -52,6 +52,9 @@ Router.map(function () {
     this.route("newsCenter", {
         path: "/miniplatform/newsCenter",
         layoutTemplate: "miniLayout",
+        data: function () {
+            Science.setActiveTabByUrl(window.location.search,["scpNews","publishingNews"],"scpNews");
+        },
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_center'),
