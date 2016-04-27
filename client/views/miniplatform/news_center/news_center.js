@@ -5,19 +5,13 @@ ReactiveTabs.createInterface({
     }
 });
 
-Template.newCenterOptions.helpers({
-    tabs: function () {
-        return [
-            {name: TAPi18n.__("Magazine dynamic"), slug: 'scpNews'},
-            {name: TAPi18n.__("Publishing Dynamic"), slug: 'publishingNews'}
-        ];
+Template.newsCenter.helpers({
+    recruitInfo: function () {
+        return NewsCenter.find({types:"4"},{limit:1});
     },
-    activeTab: function () {
-        return Session.get('activeTab');
-    }
-});
-
-Template.magazineDynamic.helpers({
+    hide: function () {
+        return NewsCenter.find({types:"4"}).count()<1 ? "": "hide";
+    },
     miniMagazines: function () {
         var numPerPage = Session.get('PerPage');
         if (numPerPage === undefined) {
@@ -28,29 +22,6 @@ Template.magazineDynamic.helpers({
     magazinesCount: function () {
         return NewsCenter.find({types:"2"}).count()>10;
     },
-    whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
-        return "/miniplatform/newsCenter/" + this._id;
-    }
-});
-
-Template.magazineDynamic.events({
-    'click #magDel': function (e) {
-        var mid = this._id;
-        confirmDelete(e,function(){
-            NewsCenter.remove({_id:mid});
-        })
-    },
-    'click .perPage': function (event) {
-        Session.set('PerPage', undefined);
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
-Template.publishingDynamic.helpers({
     miniPublishing: function () {
         var numPerPage = Session.get('PerPage');
         if (numPerPage === undefined) {
@@ -66,10 +37,31 @@ Template.publishingDynamic.helpers({
             return this.link;
         }
         return "/miniplatform/newsCenter/" + this._id;
+    },
+    tabs: function () {
+        return [
+            {name: TAPi18n.__("Magazine dynamic"), slug: 'scpNews'},
+            {name: TAPi18n.__("Publishing Dynamic"), slug: 'publishingNews'}
+        ];
+    },
+    activeTab: function () {
+        return Session.get('activeTab');
     }
 });
 
-Template.publishingDynamic.events({
+Template.newsCenter.events({
+    'click #recruitDel': function (e) {
+        var nid = this._id;
+        confirmDelete(e,function(){
+            NewsCenter.remove({_id:nid});
+        })
+    },
+    'click #magDel': function (e) {
+        var mid = this._id;
+        confirmDelete(e,function(){
+            NewsCenter.remove({_id:mid});
+        })
+    },
     'click #pubDel': function (e) {
         var pid = this._id;
         confirmDelete(e,function(){
@@ -80,30 +72,6 @@ Template.publishingDynamic.events({
         Session.set('PerPage', undefined);
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
-    }
-});
-
-Template.newsCenter.helpers({
-    recruitInfo: function () {
-        return NewsCenter.find({types:"4"},{limit:1});
-    },
-    hide: function () {
-        return NewsCenter.find({types:"4"}).count()<1 ? "": "hide";
-    },
-    whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
-        return "/miniplatform/newsCenter/" + this._id;
-    }
-});
-
-Template.newsCenter.events({
-    'click #recruitDel': function (e) {
-        var nid = this._id;
-        confirmDelete(e,function(){
-            NewsCenter.remove({_id:nid});
-        })
     }
 });
 

@@ -12,21 +12,60 @@
                     <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecruitmentModal"></span>{{> addRecruitmentModalForm}}
                 {{/if}}<hr>
             </div>
-            {{> newCenterOptions}}
+            <!--杂志社动态Tab页面-->
+            {{#newCenterTabs name="" tabs=tabs activeTab=activeTab}}
+                {{#tabContent slug="scpNews"}}
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
+                    <hr>
+                    <div>
+                        {{#each miniMagazines}}
+                            <ul class="dotted list-unstyled">
+                                <li>
+                                    <p>
+                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
+                            </ul>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                        <br>
+                        {{> Paginator_UI miniMagazines}}
+                        {{#if magazinesCount}}
+                            {{> displayPerPage}}
+                        {{/if}}
+                    </div><hr>
+                {{/tabContent}}
+                <!--出版动态Tab页面-->
+                {{#tabContent slug="publishingNews"}}
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
+                    <hr>
+                    <div>
+                        {{#each miniPublishing}}
+                            <ul class="dotted list-unstyled">
+                                <li>
+                                    <p>
+                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
+                                </li>
+                            </ul>
+                        {{else}}
+                            {{_ "No results found!"}}
+                        {{/each}}
+                        <br>
+                        {{> Paginator_UI miniPublishing}}
+                        {{#if publishingCount}}
+                            {{> displayPerPage}}
+                        {{/if}}
+                    </div><hr>
+                {{/tabContent}}
+            {{/newCenterTabs}}
         </div>
     </div>
-</template>
-
-<template name="newCenterOptions">
-    {{#newCenterTabs name="" tabs=tabs activeTab=activeTab}}
-        {{#tabContent slug="scpNews"}}
-            {{> magazineDynamic}}
-        {{/tabContent}}
-
-        {{#tabContent slug="publishingNews"}}
-            {{> publishingDynamic}}
-        {{/tabContent}}
-    {{/newCenterTabs}}
 </template>
 
 <template name="newCenterTabs">
@@ -46,56 +85,6 @@
             {{> UI.contentBlock context=__context__ }}
         </div>
     </div>
-</template>
-
-<template name="magazineDynamic">
-    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
-    <hr>
-    <div>
-        {{#each miniMagazines}}
-            <ul class="dotted list-unstyled">
-                <li>
-                    <p>
-                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
-                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                        {{#if miniPlatformPermission}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
-                    </p>
-                </li>
-            </ul>
-        {{else}}
-            {{_ "No results found!"}}
-        {{/each}}
-        <br>
-        {{> Paginator_UI miniMagazines}}
-        {{#if magazinesCount}}
-            {{> displayPerPage}}
-        {{/if}}
-    </div><hr>
-</template>
-
-<template name="publishingDynamic">
-    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
-    <hr>
-    <div>
-        {{#each miniPublishing}}
-            <ul class="dotted list-unstyled">
-                <li>
-                    <p>
-                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
-                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
-                        {{#if miniPlatformPermission}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
-                    </p>
-                </li>
-            </ul>
-        {{else}}
-            {{_ "No results found!"}}
-        {{/each}}
-        <br>
-        {{> Paginator_UI miniPublishing}}
-        {{#if publishingCount}}
-            {{> displayPerPage}}
-        {{/if}}
-    </div><hr>
 </template>
 
 <template name="updateRecruitmentModalForm">
