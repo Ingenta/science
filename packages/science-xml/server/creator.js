@@ -26,13 +26,16 @@ ScienceXML.IssueCreator = function () {
                         Issues.update({_id:issue._id},{$set:{year:issue.year}})
                     }
                 } else {
+                    var sortOrder = obj.year+Science.String.PadLeft(obj.volume,"0",8)+Science.String.PadLeft(obj.issue,"0",8);
+                    //NOTE: if issue contains - eg. 25-26 then discard the last part
+                    if(obj.issue.indexOf("-")>-1)sortOrder = obj.year+Science.String.PadLeft(obj.volume,"0",8)+Science.String.PadLeft(obj.issue.split("-")[0],"0",8);
                     issue=Issues.insert({
                         journalId: obj.journalId,
                         volume: obj.volume,
                         issue: obj.issue,
                         year: obj.year,
                         month: obj.month,
-                        order: obj.year+Science.String.PadLeft(obj.volume,"0",8)+Science.String.PadLeft(obj.issue,"0",8),
+                        order: sortOrder,
                         createDate: new Date()
                     })
                 }
