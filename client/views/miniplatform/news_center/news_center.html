@@ -12,38 +12,9 @@
                     <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addRecruitmentModal"></span>{{> addRecruitmentModalForm}}
                 {{/if}}<hr>
             </div>
-            <ul class="nav nav-tabs" role="tablist">
-                <!--<li role="presentation" class="active"><a href="#newsBtn" aria-controls="home" role="tab" data-toggle="tab">{{_ "News"}}>></a></li>-->
-                 <li role="presentation" class="active"><a href="#magazineBtn" aria-controls="profile" role="tab" data-toggle="tab">{{_ "Magazine dynamic"}}</a></li>
-                 <li role="presentation"><a href="#publishingBtn" aria-controls="messages" role="tab" data-toggle="tab">{{_ "Publishing Dynamic"}}</a></li>
-            </ul>
-            <div class="tab-content">
-                <!--<div role="tabpanel" class="tab-pane active" id="newsBtn" style="margin-left: 20px">-->
-                    <!--&lt;!&ndash;<strong style="font-size: 18px">新闻</strong>&ndash;&gt;-->
-                    <!--<div class="pull-right">-->
-                        <!--{{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniNewsModal"></span>{{> addMiniNewsModalForm}}{{/if}}-->
-                    <!--</div><hr>-->
-                    <!--<div>-->
-                        <!--{{#each miniNews}}-->
-                            <!--<ul class="dotted list-unstyled">-->
-                                <!--<li>-->
-                                    <!--<p>-->
-                                        <!--<a style="font-size: 15px" href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>-->
-                                        <!--{{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}-->
-                                        <!--{{#if miniPlatformPermission}}<a href="#" id="newsDel" class="fa fa-trash"></a>{{/if}}-->
-                                    <!--</p>-->
-                                <!--</li>-->
-                            <!--</ul>-->
-                        <!--{{else}}-->
-                            <!--{{_ "No results found!"}}-->
-                        <!--{{/each}}-->
-                        <!--{{> Paginator_UI miniNews}}-->
-                        <!--{{#if newsCount}}-->
-                            <!--{{> displayPerPage}}-->
-                        <!--{{/if}}-->
-                    <!--</div><hr>-->
-                <!--</div>-->
-                <div role="tabpanel" class="tab-pane active" id="magazineBtn" style="margin-left: 20px">
+            <!--杂志社动态Tab页面-->
+            {{#newCenterTabs name="" tabs=tabs activeTab=activeTab}}
+                {{#tabContent slug="scpNews"}}
                     {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
                     <hr>
                     <div>
@@ -66,8 +37,9 @@
                             {{> displayPerPage}}
                         {{/if}}
                     </div><hr>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="publishingBtn" style="margin-left: 20px">
+                {{/tabContent}}
+                <!--出版动态Tab页面-->
+                {{#tabContent slug="publishingNews"}}
                     {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
                     <hr>
                     <div>
@@ -90,14 +62,29 @@
                             {{> displayPerPage}}
                         {{/if}}
                     </div><hr>
-                </div>
-            </div>
+                {{/tabContent}}
+            {{/newCenterTabs}}
         </div>
     </div>
 </template>
 
-<template name="updateMiniNewsCenterModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsCenter" doc=_id operation="update" omitFields="pageView,createDate,types"}}{{/afModal}}
+<template name="newCenterTabs">
+    <div class="newCenterTabs-container">
+        {{#if activeTab}}
+            {{trackActiveTab activeTab}}
+        {{/if}}
+        {{trackTabs tabs}}
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each tabs}}
+                <li role="presentation" class="tab-item {{isActiveTab slug}}">
+                    <a role="tab" data-toggle="tab" href="#">{{name}}</a>
+                </li>
+            {{/each}}
+        </ul>
+        <div class="tabs-content-container">
+            {{> UI.contentBlock context=__context__ }}
+        </div>
+    </div>
 </template>
 
 <template name="updateRecruitmentModalForm">
@@ -126,37 +113,6 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
                     </div>
-                {{/autoForm}}
-            </div>
-        </div>
-    </div>
-</template>
-
-<template name="addMiniNewsModalForm">
-    <div class="modal fade" id="addMiniNewsModal" role="dialog" aria-labelledby="addMiniNewsModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addMiniNewsModalLabel">{{_ "Add new"}}</h4>
-                </div>
-                {{#autoForm id="addMiniNewsModalForm" collection="NewsCenter" type="insert"}}
-                <div class="modal-body">
-                    {{> afQuickField name="title"}}
-                    {{> afQuickField name="author"}}
-                    {{> afQuickField name="abstract"}}
-                    {{> afQuickField name="content"}}
-                    {{> afQuickField name="recommend"}}
-                    {{> afQuickField name="link"}}
-                    {{> afQuickField name="releaseTime"}}
-                    {{> afQuickField name="picture"}}
-                    {{> afQuickField name="fileId"}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
-                </div>
                 {{/autoForm}}
             </div>
         </div>
@@ -223,4 +179,8 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="updateMiniNewsCenterModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="NewsCenter" doc=_id operation="update" omitFields="pageView,createDate,types"}}{{/afModal}}
 </template>

@@ -30,15 +30,18 @@ Template.AdvancedSearch.events({
         Session.set("publisherId", publisherId);
     },
     'click .searchBtn': function () {
+
+        var params = {};
+
         // 检索条件
-        var name1 = $('#searchValue1').val();
-        var name2 = $('#searchValue3').val();
-        var name3 = $('#searchValue5').val();
-        var value1 = $('#searchValue6').val();
-        var value2 = $('#searchValue7').val();
-        var value3 = $('#searchValue8').val();
-        var condition1 = $('#searchValue2').val();
-        var condition2 = $('#searchValue4').val();
+        var name1 = $('#searchValue1').val().trim();
+        var name2 = $('#searchValue3').val().trim();
+        var name3 = $('#searchValue5').val().trim();
+        var value1 = $('#searchValue6').val().trim();
+        var value2 = $('#searchValue7').val().trim();
+        var value3 = $('#searchValue8').val().trim();
+        var condition1 = $('#searchValue2').val().trim();
+        var condition2 = $('#searchValue4').val().trim();
 
         var query = [];
         var flag=false;
@@ -62,7 +65,9 @@ Template.AdvancedSearch.events({
             query.push(p);
             flag=true;
         }
-
+        if(!_.isEmpty(query)){
+            params.query=query;
+        }
         //---------------------------------------筛选条件------------------------------------------
 
         //出版时间
@@ -92,6 +97,10 @@ Template.AdvancedSearch.events({
         if(contentType){
             filterQuery["contentType"] = contentType;
         }
+
+        if(!_.isEmpty(filterQuery)){
+            params.filterQuery=filterQuery;
+        }
         //---------------------------------------结果排序------------------------------------------
 
         //结果排序
@@ -106,6 +115,10 @@ Template.AdvancedSearch.events({
             sorting = "publishDate asc";
         }
 
-        SolrQuery.search({query:query,filterQuery:filterQuery,setting:{sort:sorting}});
+        if(sorting){
+            params.setting={sort:sorting};
+        }
+
+        SolrQuery.search(params);
     }
 });
