@@ -171,6 +171,14 @@ Science.String.PadLeft = function (str, pchar, len) {
     ).join(pchar) + str);
 }
 
+Science.String.PadLeftForNumber = function(str, pchar, len){
+    var headNumbers=/^\d+/.exec(str);
+    if(!_.isEmpty(headNumbers)){
+        str=headNumbers[0];
+    }
+    return Science.String.PadLeft(str,pchar,len);
+}
+
 Science.escapeRegEx = Science.String.escapeRegEx;
 Science.replaceSubstrings = Science.String.replaceSubstrings;
 Science.clearTags = Science.String.clearTags;
