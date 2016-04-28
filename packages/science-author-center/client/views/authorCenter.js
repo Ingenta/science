@@ -20,7 +20,6 @@ Template.SingleJournal.helpers({
 
             if(journal){
                 var publisher = Publishers.findOne({_id: journal.publisher});
-                //Session.set("activeTab", "Author Center"); commented out need to find a better way to move tabs
                 return "/publisher/"+publisher.shortname+"/journal/"+journal.shortTitle+"?slug=Author Center";
             }
         }
