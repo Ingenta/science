@@ -127,6 +127,9 @@ Router.map(function () {
     this.route("enterpriseCulture", {
         path: "/miniplatform/enterpriseCulture",
         layoutTemplate: "miniLayout",
+        data: function () {
+            Science.setActiveTabByUrl(window.location.search,["enterNews","editCorner"],"enterNews");
+        },
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_contact'),

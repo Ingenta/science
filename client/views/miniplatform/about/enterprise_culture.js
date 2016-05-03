@@ -1,15 +1,45 @@
+ReactiveTabs.createInterface({
+    template: 'enterCultureTabs',
+    onChange:function(slug){
+        history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
+    }
+});
+
 Template.enterpriseCulture.helpers({
     enterpriseNews: function () {
-        return NewsContact.find({types:"6"},{sort: {releaseTime: -1}});
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
+        return newsContactPagination.find({types:"6"}, {itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+    },
+    enterpriseNewsCount: function () {
+        return NewsContact.find({types:"6"}).count()>10;
     },
     editFields: function () {
-        return NewsContact.find({types:"7"},{sort: {releaseTime: -1}});
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
+        return newsContactPagination.find({types:"7"}, {itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+    },
+    editFieldsCount: function () {
+        return NewsContact.find({types:"7"}).count()>10;
     },
     whichUrl: function () {
         if (this.link) {
             return this.link;
         }
         return "/miniplatform/enterpriseCulture/" + this._id;
+    },
+    tabs: function () {
+        return [
+            {name: TAPi18n.__("Corporate News"), slug: 'enterNews'},
+            {name: TAPi18n.__("Edit Corner"), slug: 'editCorner'}
+        ];
+    },
+    activeTab: function () {
+        return Session.get('activeTab');
     }
 });
 
@@ -25,6 +55,10 @@ Template.enterpriseCulture.events({
         confirmDelete(e,function(){
             NewsContact.remove({_id:pid});
         })
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 
