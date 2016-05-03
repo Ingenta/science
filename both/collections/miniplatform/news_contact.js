@@ -62,3 +62,7 @@ Meteor.startup(function () {
     NewsContactSchema.i18n("schemas.newsContact");
     NewsContact.attachSchema(NewsContactSchema);
 });
+
+if (Meteor.isClient) {
+    newsContactPagination = new Paginator(NewsContact);
+}
