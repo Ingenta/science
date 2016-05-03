@@ -69,7 +69,6 @@ Template.newsCenter.events({
         })
     },
     'click .perPage': function (event) {
-        Session.set('PerPage', undefined);
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
     }
