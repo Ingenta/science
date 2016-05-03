@@ -19,9 +19,32 @@ IssuesSchema = new SimpleSchema({
     },
     description: {
         type: String,
+        optional:true,
+        autoform: {
+            type: "jkfroala",
+            afFieldInput: {
+                froalaOptions: {
+                    language:'zh_cn',
+                    inlineMode: false,
+                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','table', 'undo', 'redo'],
+                    height: '400'
+                }
+            }
+        }
+    },
+    descriptionCn: {
+        type: String,
         optional: true,
         autoform: {
-            rows: 4
+            type: "jkfroala",
+            afFieldInput: {
+                froalaOptions: {
+                    language:'zh_cn',
+                    inlineMode: false,
+                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','table', 'undo', 'redo'],
+                    height: '400'
+                }
+            }
         }
     },
     createDate: {

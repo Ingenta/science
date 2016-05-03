@@ -683,7 +683,10 @@
     },
     "issues": {
       "description": {
-        "label": "封面描述"
+        "label": "英文封面描述"
+      },
+      "descriptionCn": {
+        "label": "中文封面描述"
       }
     },
     "collections": {

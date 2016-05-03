@@ -539,7 +539,10 @@
         },
         "issues": {
             "description": {
-                "label": "Cover Description"
+                "label": "English Cover Description"
+            },
+            "descriptionCn": {
+                "label": "Chinese Cover Description"
             }
         },
         "collections": {
