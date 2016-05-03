@@ -37,6 +37,11 @@ Router.onBeforeAction(function () {
         this.next();
     }
 });
+Router.onAfterAction(function(){
+    if(this.ready()){
+        Meteor.isReadyForSpiderable = true;
+    }
+})
 Meteor.startup(function () {
     if (Meteor.isClient) {
         //This code is needed to detect if there is a subdomain. So the system wants to know the routes of the subdomain
