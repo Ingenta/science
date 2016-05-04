@@ -57,7 +57,7 @@ Template.articleListRight.helpers({
             return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {accepted: -1}});
         }
         if (Template.currentData().pubStatus === 'online_first') {
-            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {padPage: 1}});
+            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {published: -1}});
         }
         if (Template.currentData().pubStatus === 'normal') {
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
