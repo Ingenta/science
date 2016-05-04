@@ -24,7 +24,6 @@ Meteor.methods({
         check(action, String);
         check(articleId, String);
         var myFuture = new Future();
-        console.time('aaab')
 
         PageViews.rawCollection().group(
             {ip: true},
@@ -62,35 +61,34 @@ Meteor.methods({
     },
     'getArticlePageViewsGraphData': function (articleId) {
         check(articleId, String);
+        var myFuture = new Future();
         var currentDate = new Date;
-        var a = new Array();
-        var f = new Array();
-        var c = new Array();
-        var m = [];
-        var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-        for (var i = 1; i <= 12; i++) {
-            var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-            var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-            a.unshift(PageViews.find({
-                action: "abstract",
-                articleId: articleId,
-                when: {$gte: startDate, $lt: endDate}
-            }).count());
-            f.unshift(PageViews.find({
-                action: "fulltext",
-                articleId: articleId,
-                when: {$gte: startDate, $lt: endDate}
-            }).count());
-            m.unshift(month[currentDate.getMonth() % 12] + currentDate.getFullYear());
-            currentDate.setMonth(currentDate.getMonth() - 1);
-        }
-
-        _.each(a, function (el, index) {
-            var value = el + f[index];
-            c.push(value);
-        });
-        var result = {abstract: a, fulltext: f, total: c, months: m};
-        return result;
+        var startDate = new Date().addMonths(-11);
+        var currentDateCode = currentDate.getFullYear()*100+currentDate.getMonth();
+        var startDateCode = startDate.getFullYear()*100+startDate.getMonth();
+        PageViews.rawCollection().group(
+            {dateCode: true},
+            {articleId: articleId, action: {$in:["abstract","fulltext"]}, dateCode:{$gte:startDateCode,$lte:currentDateCode}},
+            {total: 0, abstract: 0, fulltext: 0},
+            function (doc, result) {
+                result.total++;
+                result[doc.action]++;
+            },
+            Meteor.bindEnvironment(function (err, result) {
+                var month = ['','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                var dcode=startDateCode;
+                var finalizeData={abstract:[],fulltext:[],months:[],total:[]};
+                while(dcode<=currentDateCode){
+                    var m=_.find(result,function(item){return item.dateCode==dcode});
+                    finalizeData.abstract.push(m? m.abstract:0);
+                    finalizeData.fulltext.push(m? m.fulltext:0);
+                    finalizeData.total.push(m? m.total:0);
+                    finalizeData.months.push(Math.round(dcode/100)+" "+month[dcode%100]);
+                    dcode+=(dcode%100==12)?89:1;
+                }
+                return myFuture.return(finalizeData);
+            })
+        )
+        return myFuture.wait()
     }
 });

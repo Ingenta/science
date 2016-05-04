@@ -34,7 +34,7 @@ prepareMetricsForThisArticle = function(){
     Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
         buildHitCounterChart(response);
     });
-        Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
+    Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
         var data = new Array();
         var index = 0;
         _.each(arr, function (obj) {
@@ -47,6 +47,9 @@ prepareMetricsForThisArticle = function(){
             }
         });
         buildLocationChart(data);
+    });
+    Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
+        buildHitCounterGraph(response);
     });
 }
 
