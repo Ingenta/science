@@ -97,7 +97,11 @@ Template.AdminUsersViewTableItems.events({
 						pageSession.set("errorMessage", err.reason);
 					}
 					else {
-						sweetAlert(TAPi18n.__("Password reset"));
+						sweetAlert({
+							title: TAPi18n.__("Password reset"),
+							type : "success",
+							timer: 3000
+						});
 					}
 				});
 				return false;
