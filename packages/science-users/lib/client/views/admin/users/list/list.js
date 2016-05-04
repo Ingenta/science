@@ -78,16 +78,31 @@ Template.AdminUsersViewTableItems.events({
 		return false;
 	},
 	"click #undo-button": function() {
-		var default_password = "123456";
-		Meteor.call("changeUsersPass", this._id, default_password, function (err) {
-			if (err) {
-				pageSession.set("errorMessage", err.reason);
-			}
-			else {
-				pageSession.set("errorMessage", "");
-				sweetAlert(TAPi18n.__("Password reset"));
-			}
-		});
+		var user = Users.findOne({_id:this._id});
+		if(user){
+			sweetAlert({
+				title             : TAPi18n.__("Are you sure?"),
+				text              : TAPi18n.__("The user name")+': '+'<span style="color:red"><b>'+user.username+'</b></span>'+' '+TAPi18n.__("Password reset to")+": <b>123456</b>",
+				type              : "warning",
+				showCancelButton  : true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText : TAPi18n.__("OK"),
+				cancelButtonText  : TAPi18n.__("Cancel"),
+				closeOnConfirm    : true,
+				html              : true
+			}, function () {
+				var default_password = "123456";
+				Meteor.call("changeUsersPass", user._id, default_password, function (err) {
+					if (err) {
+						pageSession.set("errorMessage", err.reason);
+					}
+					else {
+						sweetAlert(TAPi18n.__("Password reset"));
+					}
+				});
+				return false;
+			});
+		}
 		return false;
 	}
 });
