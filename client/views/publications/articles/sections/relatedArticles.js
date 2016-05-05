@@ -11,7 +11,7 @@ Template.relatedArticles.onRendered(function(){
 	}
 	var title = Science.JSON.try2GetRightLangVal(this.data.title);
 	var query = {
-		q: title.replace(Config.clearSpecialCharacterRegEx," "),
+		q: title.replace(Config.clearSpecialCharacterRegEx," ").trim().tolowerCase().replace(/\s+/g," AND "),
 		fq:fq,
 		st:{rows: 10}
 	};

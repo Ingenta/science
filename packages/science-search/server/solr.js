@@ -12,14 +12,14 @@ SolrClient = Solr.createClient({
 
 Future = Npm.require('fibers/future');
 
-Config.clearSpecialCharacterRegEx = /[&\/\\#,+()$~%.'"-:*?!<>^{}\[\]]/g;
+Config.clearSpecialCharacterRegEx = /[&\/\\#,+()$~%\.'"\-*?!<>^{}\[\]:]/g;
 SolrUtils = {
     fieldMap: {
         "title": ["title.cn", "title.en"],
         "doi": ["doi"],
-        "issn": ["issn", "EISSN"],
+        "issn": ["journal.issn", "journal.EISSN"],
         "cn": ["CN"],
-        "code": ["doi", "issn", "EISSN", "CN"],
+        "code": ["doi", "journal.issn", "journal.EISSN", "journal.CN"],
         "journalTitle": ["journal.title", "journal.titleCn"],
         "keyword": ["all_keywords"],
         "author": ["all_authors_en", "all_authors_cn"],
@@ -48,7 +48,7 @@ SolrUtils = {
         var qstring;
         if (queryArr) {
             if (typeof queryArr === 'string')
-                return queryArr.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase();
+                return queryArr.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase().replace(/\s+/g," AND ");
             qstring = "";
             var isFirstOne = true;
             _.each(queryArr, function (sQuery) {
@@ -58,7 +58,7 @@ SolrUtils = {
                 isFirstOne = false;
                 var solrFields = SolrUtils.fieldMap[sQuery.key];
                 var subQueues = _.map(solrFields, function (sField) {
-                    return sField + ":(" + sQuery.val.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase() + ")";
+                    return sField + ":(" + sQuery.val.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase().replace(/\s+/g," AND ") + ")";
                 });
                 qstring += "(" + subQueues.join(" OR ") + ")";
             })
