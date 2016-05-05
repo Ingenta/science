@@ -18,7 +18,7 @@ SolrUtils = {
         "title": ["title.cn", "title.en"],
         "doi": ["doi"],
         "issn": ["journal.issn", "journal.EISSN"],
-        "cn": ["CN"],
+        "cn": ["journal.CN"],
         "code": ["doi", "journal.issn", "journal.EISSN", "journal.CN"],
         "journalTitle": ["journal.title", "journal.titleCn"],
         "keyword": ["all_keywords"],
@@ -48,7 +48,7 @@ SolrUtils = {
         var qstring;
         if (queryArr) {
             if (typeof queryArr === 'string')
-                return queryArr.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase().replace(/\s+/g," AND ");
+                return queryArr.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase();
             qstring = "";
             var isFirstOne = true;
             _.each(queryArr, function (sQuery) {
@@ -58,7 +58,10 @@ SolrUtils = {
                 isFirstOne = false;
                 var solrFields = SolrUtils.fieldMap[sQuery.key];
                 var subQueues = _.map(solrFields, function (sField) {
-                    return sField + ":(" + sQuery.val.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase().replace(/\s+/g," AND ") + ")";
+                    if(_.contains(["journal.issn","journal.EISSN","journal.CN","doi"],sField))
+                        return sField + ":(" + sQuery.val.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase().replace(/\s+/g," AND ") + ")";
+                    else
+                        return sField + ":(" + sQuery.val.replace(Config.clearSpecialCharacterRegEx," ").trim().toLowerCase() + ")";
                 });
                 qstring += "(" + subQueues.join(" OR ") + ")";
             })
