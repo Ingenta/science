@@ -175,8 +175,8 @@ SolrUtils = {
             "hl.simple.pre": "<span class='highlight'>",
             "hl.simple.post": "</span>",
             "hl.fragsize":0,
-            "defType":"dismax",
-            "qf":"title.en^3 title.cn^3 all_authors_en^2 all_authors_cn^2 doi^1.5 all_keywords^1.5 abstract^1.1 fulltext^0.1",
+            //"defType":"dismax",
+            //"qf":"title.en^3 title.cn^3 all_authors_en^2 all_authors_cn^2 doi^1.5 all_keywords^1.5 abstract^1.1 fulltext^0.1",
             "wt": "json"
         };
         var userParams = _.clone(params) || {q: "*"};
