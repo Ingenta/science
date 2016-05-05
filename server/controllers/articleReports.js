@@ -35,25 +35,35 @@ Meteor.methods({
             Meteor.bindEnvironment(function (err, result) {
                 var countryViews = {};
                 var other = {name: {cn: '其他', en: 'Others'}, locationCount: 0};
+                var china = {name: {cn: "中国", en: "China"}, locationCount: 0};
                 _.each(result, function (item) {
-                    var currentUserIPNumber = Science.ipToNumber(item.ip);
-                    var country = IP2Country.findOne({
-                        startIpLong: {$lte: currentUserIPNumber},
-                        endIpLong: {$gte: currentUserIPNumber}
-                    }, {fields: {country: 1, countryCode2: 1}});
-                    if (country) {
-                        if (countryViews[country.countryCode2]) {
-                            countryViews[country.countryCode2].locationCount += item.count;
-                        } else {
-                            countryViews[country.countryCode2] = {name: country.country, locationCount: item.count}
-                        }
+                    if (item.ip.startWith("192.168.")) {
+                        china.locationCount += item.count;
                     } else {
-                        other.locationCount += item.count;
+                        var currentUserIPNumber = Science.ipToNumber(item.ip);
+                        var country = IP2Country.findOne({
+                            startIpLong: {$lte: currentUserIPNumber},
+                            endIpLong: {$gte: currentUserIPNumber}
+                        }, {fields: {country: 1, countryCode2: 1}});
+                        if (country) {
+                            if (_.contains(Config.chinaCodes,country.countryCode2)) {
+                                china.locationCount += item.count;
+                            } else if (countryViews[country.countryCode2]) {
+                                countryViews[country.countryCode2].locationCount += item.count;
+                            } else {
+                                countryViews[country.countryCode2] = {name: country.country, locationCount: item.count}
+                            }
+                        } else {
+                            other.locationCount += item.count;
+                        }
                     }
                 })
                 countryViews = _.values(countryViews);
                 if (other.locationCount > 0)
                     countryViews.push(other);
+                if (china.locationCount > 0) {
+                    countryViews.unshift(china);
+                }
                 return myFuture.return(countryViews);
             })
         )
@@ -61,34 +71,40 @@ Meteor.methods({
     },
     'getArticlePageViewsGraphData': function (articleId) {
         check(articleId, String);
-        var myFuture = new Future();
+        var myFuture2 = new Future();
         var currentDate = new Date;
         var startDate = new Date().addMonths(-11);
-        var currentDateCode = currentDate.getFullYear()*100+currentDate.getMonth();
-        var startDateCode = startDate.getFullYear()*100+startDate.getMonth();
+        var currentDateCode = currentDate.getFullYear() * 100 + currentDate.getMonth();
+        var startDateCode = startDate.getFullYear() * 100 + startDate.getMonth();
         PageViews.rawCollection().group(
             {dateCode: true},
-            {articleId: articleId, action: {$in:["abstract","fulltext"]}, dateCode:{$gte:startDateCode,$lte:currentDateCode}},
+            {
+                articleId: articleId,
+                action: {$in: ["abstract", "fulltext"]},
+                dateCode: {$gte: startDateCode, $lte: currentDateCode}
+            },
             {total: 0, abstract: 0, fulltext: 0},
             function (doc, result) {
                 result.total++;
                 result[doc.action]++;
             },
             Meteor.bindEnvironment(function (err, result) {
-                var month = ['','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                var dcode=startDateCode;
-                var finalizeData={abstract:[],fulltext:[],months:[],total:[]};
-                while(dcode<=currentDateCode){
-                    var m=_.find(result,function(item){return item.dateCode==dcode});
-                    finalizeData.abstract.push(m? m.abstract:0);
-                    finalizeData.fulltext.push(m? m.fulltext:0);
-                    finalizeData.total.push(m? m.total:0);
-                    finalizeData.months.push(Math.round(dcode/100)+" "+month[dcode%100]);
-                    dcode+=(dcode%100==12)?89:1;
+                var month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                var dcode = startDateCode;
+                var finalizeData = {abstract: [], fulltext: [], months: [], total: []};
+                while (dcode <= currentDateCode) {
+                    var m = _.find(result, function (item) {
+                        return item.dateCode == dcode
+                    });
+                    finalizeData.abstract.push(m ? m.abstract : 0);
+                    finalizeData.fulltext.push(m ? m.fulltext : 0);
+                    finalizeData.total.push(m ? m.total : 0);
+                    finalizeData.months.push(Math.round(dcode / 100) + " " + month[dcode % 100]);
+                    dcode += (dcode % 100 == 12) ? 89 : 1;
                 }
-                return myFuture.return(finalizeData);
+                return myFuture2.return(finalizeData);
             })
         )
-        return myFuture.wait()
+        return myFuture2.wait()
     }
 });
