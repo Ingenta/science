@@ -225,6 +225,7 @@ Router.map(function () {
                     articledoi: 1,
                     title: 1,
                     journal: 1,
+                    journalId:1,
                     publisher: 1,
                     authors: 1,
                     volume: 1,
@@ -257,7 +258,7 @@ Router.map(function () {
             //准备需要添加到pdf中的数据
             var lang = this.params.query.lang || "en";
 
-            var journalInfo = Publications.findOne({_id: article.journal._id});
+            var journalInfo = Publications.findOne({_id: article.journalId});
             var publisherInfo = Publishers.findOne({_id: article.publisher});
             var langArr = ["en", "cn"];
             var getContentByLanguage = function (data, lang, specialArr) {

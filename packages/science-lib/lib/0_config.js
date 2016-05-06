@@ -76,6 +76,7 @@ Config = {
         "title",
         "abstract",
         "journalId",
+        "journal",
         "publisher",
         "elocationId",
         "startPage",
