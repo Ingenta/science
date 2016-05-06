@@ -59,10 +59,6 @@ ScienceXML.parseXml = function (path, pubStatus) {
     ScienceXML.getContentType(results, doc);
     logger.info('parsed content type');
 
-    var ack = ScienceXML.getValueByXPathIncludingXml("//back/ack", doc);
-    if (ack !== undefined) results.acknowledgements = ack;
-    logger.info('parsed acknowledgements');
-
     var volume = ScienceXML.getSimpleValueByXPath("//article-meta/volume", doc);
     if (volume === undefined && pubStatus === 'normal') results.errors.push("//article-meta/volume not found");
     else results.volume = volume;
@@ -222,9 +218,16 @@ ScienceXML.parseXml = function (path, pubStatus) {
 
     var ack = ScienceXML.getAck(doc);
     if(!_.isEmpty(ack)){
-        results.ack = ack;
+        results.acknowledgements = ack;
     }
     logger.info("parsed ack");
+
+    var sst = ScienceXML.getSpecialTopicTitle(doc);
+    if(!_.isEmpty(sst)){
+        results.special = sst;
+    }
+    logger.info("parsed special topic title");
+
     return results;
 }
 

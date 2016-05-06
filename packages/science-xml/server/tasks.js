@@ -395,17 +395,6 @@ var insertArticle = function (a) {
         a.pacs = matchs;
     }
 
-    //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
-    var existArticle = Articles.findOne({doi: a.doi});
-    if (existArticle) {
-        var sets={};
-        _.each(Config.fieldsFromXmlToUpdate,function(key){
-            sets[key]=a[key];
-        })
-        Articles.update({_id: existArticle._id}, {$set: sets});
-        return existArticle._id;
-    }
-
     var journalInfo = Publications.findOne({_id: a.journalId}, {
         fields: {
             title: 1,
@@ -417,6 +406,16 @@ var insertArticle = function (a) {
     });
     a.journalInfo = journalInfo;
 
+    //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
+    var existArticle = Articles.findOne({doi: a.doi});
+    if (existArticle) {
+        var sets={};
+        _.each(Config.fieldsFromXmlToUpdate,function(key){
+            sets[key]=a[key];
+        })
+        Articles.update({_id: existArticle._id}, {$set: sets});
+        return existArticle._id;
+    }
 
     //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsFromXmlToUpdate
     var id = Articles.insert({
@@ -442,7 +441,7 @@ var insertArticle = function (a) {
         published: a.published,
         topic: [a.topic],
         contentType: a.contentType,
-        acknowledgements: a.ack,
+        acknowledgements: a.acknowledgements,//致谢信息
         pdfId: a.pdfId,
         authors: a.authors,
         authorNotes: a.authorNotes,
@@ -457,7 +456,6 @@ var insertArticle = function (a) {
         language: a.language,
         pacs: a.pacs,
         fundings: a.fundings,
-        ack: a.ack, //致谢信息
         special: a.special //专题名 (该专题名仅从xml数据中取得,与系统功能中的专题无关)
     });
     return id;

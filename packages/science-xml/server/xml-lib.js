@@ -743,8 +743,13 @@ ScienceXML.getTitle = function (doc) {
 
 //提取致谢信息
 ScienceXML.getAck = function(doc){
-    var ack = parserHelper.getXmlString("//ack/p | //ack",doc,true);
+    var ack = parserHelper.getXmlString("//ack",doc,true);
     return ack;
 }
 
+//提取专题名称
+ScienceXML.getSpecialTopicTitle = function(doc){
+    var stt = parserHelper.getXmlString("//front/article-meta/issue-title",doc,true);
+    return stt;
+}
 

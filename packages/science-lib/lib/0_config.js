@@ -108,7 +108,6 @@ Config = {
         "language",
         "pacs",
         "fundings",
-        "ack",
         "special"
     ],
     pdf: {
