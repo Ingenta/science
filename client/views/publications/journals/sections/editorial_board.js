@@ -51,7 +51,7 @@ Template.EditorialBoardMembersList.helpers({
     editorialBoards: function () {
         var aboutId = Session.get('tabBoard');
         var publicationId = Session.get('currentJournalId');
-        return EditorialBoard.find({about: aboutId,publications:publicationId});
+        return EditorialBoard.find({about: aboutId,publications:publicationId},{sort: {name: 1}});
     }
 });
 
