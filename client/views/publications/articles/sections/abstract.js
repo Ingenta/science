@@ -38,7 +38,6 @@ Template.fundingInfo.helpers({
 						code:item.contract
 					}
 				}
-				console.log(result);
 				return result;
 			},{});
 			return _.first(_.values(aftReduce), 3);
