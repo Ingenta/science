@@ -2,6 +2,11 @@
 
     <ul class="dotted list-unstyled article-info" style="font-size: 12px">
         <li>
+            {{#if special}}
+            <div style="margin-bottom: 10px;">
+                <span class="label label-primary">{{special}}</span>
+            </div>
+            {{/if}}
             <div style="margin-bottom: 10px;">
                 <span class="label label-primary">{{contentType}}</span>
                 {{> topicNameTemplate}}
