@@ -1194,5 +1194,6 @@
     "type":"Type",
     "operation":"Operation",
     "play":"Play",
-    "download":"Download"
+    "download":"Download",
+    "appendix":"Appendix"
 }

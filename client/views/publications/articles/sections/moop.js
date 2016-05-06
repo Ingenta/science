@@ -15,6 +15,9 @@ Template.moopDetails.helpers({
     },
     moopDatas: function () {
         return moopCache.get("moop_" + this._id);
+    },
+    getName: function(){
+        return _.contains(Router.current().data().tabSelections,"MOOP")?TAPi18n.__("MOOP"):TAPi18n.__("Appendix")
     }
 })
 
