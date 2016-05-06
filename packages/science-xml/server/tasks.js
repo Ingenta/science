@@ -456,7 +456,9 @@ var insertArticle = function (a) {
         accessKey: a.accessKey,
         language: a.language,
         pacs: a.pacs,
-        fundings: a.fundings
+        fundings: a.fundings,
+        ack: a.ack, //致谢信息
+        special: a.special //专题名 (该专题名仅从xml数据中取得,与系统功能中的专题无关)
     });
     return id;
 };

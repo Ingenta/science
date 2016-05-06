@@ -740,3 +740,11 @@ ScienceXML.getTitle = function (doc) {
         return title;
     }
 }
+
+//提取致谢信息
+ScienceXML.getAck = function(doc){
+    var ack = parserHelper.getXmlString("//ack/p | //ack",doc,true);
+    return ack;
+}
+
+

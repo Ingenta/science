@@ -107,7 +107,9 @@ Config = {
         "accessKey",
         "language",
         "pacs",
-        "fundings"
+        "fundings",
+        "ack",
+        "special"
     ],
     pdf: {
         watermark: "Accepted",

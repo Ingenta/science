@@ -219,6 +219,12 @@ ScienceXML.parseXml = function (path, pubStatus) {
         results.fundings = fundings;
     }
     logger.info("parsed fundings");
+
+    var ack = ScienceXML.getAck(doc);
+    if(!_.isEmpty(ack)){
+        results.ack = ack;
+    }
+    logger.info("parsed ack");
     return results;
 }
 

@@ -95,9 +95,9 @@ Science.XPath.ParseHelper = {
 			return;
 		if(onlyInside){
 			var reg =new RegExp('^<\\s*?'+val[0].tagName+'[^>]*>|<\\s*?\/\\s*?'+val[0].tagName+'\\s*?>$','g');
-			return val[0].toString().replace(reg,'');
+			return val[0].toString().replace(reg,'').trim();
 		}
-		return val[0].toString();
+		return val[0].toString().trim();
 	},
 	/**
 	 * 同步方法
