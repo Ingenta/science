@@ -587,10 +587,10 @@ ScienceXML.handlePara = function (paragraph) {
             if (label && label.length) {
                 formula.label = label[0].textContent;
             }
-            var tex = xpath.select("child::alternatives/tex-math", fnode);
+            var tex = xpath.select("descendant::tex-math", fnode);
             if (tex && tex.length) {
-                if (tex[0].childNodes[2] && tex[0].childNodes[2].nodeName == '#cdata-section') {
-                    formula.tex = tex[0].childNodes[2].data;
+                if (tex[0].childNodes[0] && tex[0].childNodes[0].nodeName == '#cdata-section') {
+                    formula.tex = tex[0].childNodes[0].data;
                 }
 
             }
