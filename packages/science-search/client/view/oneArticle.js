@@ -9,7 +9,6 @@ Template.oneSolrArticle.helpers({
 			authors= this[isLangCn?"all_authors_cn":"all_authors_en"];
 		}
 		var order = this[isLangCn?"orderAuthors.cn":"orderAuthors.en"];
-		console.log('aaa')
 		if(!order)
 			return authors;
 		return _.sortBy(authors,function(author){
