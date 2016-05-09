@@ -108,7 +108,8 @@ Config = {
         "language",
         "pacs",
         "fundings",
-        "special"
+        "special",
+        "orderAuthors" //作者列表顺序,用于解决Solr检索结果中作者顺序错乱的问题
     ],
     pdf: {
         watermark: "Accepted",

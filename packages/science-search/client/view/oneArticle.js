@@ -2,11 +2,19 @@ Template.oneSolrArticle.helpers({
 	getAuthors:function(){
 		var hl = SolrQuery.session.get("highlight")[this._id];
 		var isLangCn = TAPi18n.getLanguage()==="zh-CN";
+		var authors;
 		if(hl && hl[isLangCn?"all_authors_cn":"all_authors_en"]){
-			return hl[isLangCn?"all_authors_cn":"all_authors_en"];
+			authors= hl[isLangCn?"all_authors_cn":"all_authors_en"];
 		}else{
-			return this["all_authors_"+isLangCn?"cn":"en"];
+			authors= this[isLangCn?"all_authors_cn":"all_authors_en"];
 		}
+		var order = this[isLangCn?"orderAuthors.cn":"orderAuthors.en"];
+		console.log('aaa')
+		if(!order)
+			return authors;
+		return _.sortBy(authors,function(author){
+			return order.indexOf(author.replace(/<\/?[^>]*?>/g, ""));
+		})
 	},
 	query      : function () {
 		return Router.current().params.searchQuery;

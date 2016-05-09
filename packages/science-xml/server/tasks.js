@@ -406,6 +406,19 @@ var insertArticle = function (a) {
     });
     a.journalInfo = journalInfo;
 
+    if(!_.isEmpty(a.authors)){
+        var orderAuthors={cn:"",en:""};
+        _.each(a.authors,function(author){
+            if(!_.isEmpty(author.fullname)){
+                if(_.isString(author.fullname.cn) && author.fullname.cn.trim())
+                    orderAuthors.cn+=author.fullname.cn.trim()+"|";
+                if(_.isString(author.fullname.en) && author.fullname.en.trim())
+                    orderAuthors.en+=author.fullname.en.trim()+"|";
+            }
+        })
+        a.orderAuthors=orderAuthors;
+    }
+
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
     if (existArticle) {
@@ -456,7 +469,8 @@ var insertArticle = function (a) {
         language: a.language,
         pacs: a.pacs,
         fundings: a.fundings,
-        special: a.special //专题名 (该专题名仅从xml数据中取得,与系统功能中的专题无关)
+        special: a.special, //专题名 (该专题名仅从xml数据中取得,与系统功能中的专题无关)
+        orderAuthors: a.orderAuthors
     });
     return id;
 };
