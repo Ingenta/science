@@ -6,6 +6,9 @@ Template.secSearch.events({
 		//NOTE: if refine search value is empty don't perform the search
 		if(!searchval)return;
 		SolrQuery.addSecondQuery(searchval);
+		var setting = SolrQuery.params("st") || {};
+		setting.start = 0
+		SolrQuery.params("st",setting);
 		Router.go(SolrQuery.makeUrl());
 	},
 	'click .sq-reset':function(e){
