@@ -31,7 +31,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
         if (subject && subject.en) {
             var topic = Topics.findOne({englishName: subject.en});
             if (topic)
-                return topic._id;
+                return [topic._id];
         }
     };
 

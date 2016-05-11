@@ -452,7 +452,7 @@ var insertArticle = function (a) {
         received: a.received,
         accepted: a.accepted,
         published: a.published,
-        topic: [a.topic],
+        topic: a.topic,
         contentType: a.contentType,
         acknowledgements: a.acknowledgements,//致谢信息
         pdfId: a.pdfId,
