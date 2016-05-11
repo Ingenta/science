@@ -26,7 +26,7 @@ IssuesSchema = new SimpleSchema({
                 froalaOptions: {
                     language:'zh_cn',
                     inlineMode: false,
-                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','table', 'undo', 'redo'],
+                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','align', 'outdent', 'indent','table', 'undo', 'redo'],
                     height: '400'
                 }
             }
@@ -41,7 +41,7 @@ IssuesSchema = new SimpleSchema({
                 froalaOptions: {
                     language:'zh_cn',
                     inlineMode: false,
-                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','table', 'undo', 'redo'],
+                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'formatBlock', 'blockStyle', 'inlineStyle','align', 'outdent', 'indent','table', 'undo', 'redo'],
                     height: '400'
                 }
             }
