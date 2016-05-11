@@ -33,6 +33,12 @@ Template.SolrSearchResults.helpers({
     'statusOK':function(){
         return SolrQuery.get("ok");
     },
+    'resultFound':function(){
+        return !!SolrQuery.get("numFound")
+    },
+    'showWaitting':function(){
+        return SolrQuery.get("showWaitting");
+    },
     'filters': function () {
         var facets = SolrQuery.get("facets");
         if(facets){

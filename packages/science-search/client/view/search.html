@@ -31,24 +31,55 @@
         </label>
     </div>
 
-	<div class="row">
-		<div class="col-xs-4">
-			{{#each filters}}
-				{{> solrFilterItem}}
-			{{/each}}
-		</div>
-		<div class="col-xs-8">
-			<h4>{{_ "Search results"}}</h4>
-			{{#if statusOK}}
-				{{#each articles}}
-					{{> oneSolrArticle}}
-				{{/each}}
-				{{> btPagination rows=rows total=total currPage=currPage  maxShow=10 onClick=pagingFunc}}
-			{{else}}
-				{{_ "No results found!"}}
-			{{/if}}
+    {{#if statusOK}}
+        <div class="row">
+            <div class="col-xs-12"><h4>{{_ "Search results"}}</h4></div>
+        </div>
+        <div class="row">
+            {{#if resultFound}}
+                <div class="col-xs-4">
+                    {{#each filters}}
+                        {{> solrFilterItem}}
+                    {{/each}}
+                </div>
+                <div class="col-xs-8">
+                    {{#each articles}}
+                        {{> oneSolrArticle}}
+                    {{/each}}
+                    {{> btPagination rows=rows total=total currPage=currPage  maxShow=10 onClick=pagingFunc}}
+                </div>
+            {{else}}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <br>
+                        <br>
+                        <br>
+                        <div class="loading">
+                            {{_ "No results found!"}}
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
 
-		</div>
-	</div>
+            {{/if}}
+        </div>
+    {{/if}}
+    {{#if showWaitting}}
+        <div class="row">
+            <div class="col-xs-12">
+                <br>
+                <br>
+                <br>
+                <div class="loading">
+                    <i class="loading fa fa-circle-o-notch fa-3x fa-spin"></i>
+                </div>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    {{/if}}
 </template>
 

@@ -182,6 +182,7 @@ SolrQuery = {
 			return;
 		}
 		SolrQuery.reset();
+		SolrQuery.set("showWaitting",true);
 		var params = QueryUtils.parseUrl();
 		if (!_.isEmpty(params.q) && _.isString(params.q)) {
 			//更新用户的最近搜索(cookies)
@@ -221,6 +222,7 @@ SolrQuery = {
 					SolrQuery.session.set("highlight", result.highlighting);
 				}
 			}
+			SolrQuery.set("showWaitting",false);
 		});
 	},
 	select2Options:function(filter) {
