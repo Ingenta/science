@@ -4,6 +4,7 @@ Template.solrFilterItem.events({
 	'click .filter-me':function(e){
 		e.preventDefault();
 		SolrQuery.toggleFilterQuery(this.field,this.val,!this.selStatus);
+		SolrQuery.resetStartPage();
 		Router.go(SolrQuery.makeUrl());
 	},
 	'click .show-more':function(e,t){

@@ -169,6 +169,14 @@ SolrQuery = {
 		SolrQuery.params("sq", []);
 	},
 	/**
+	 * 重置搜索结果起始页为第一页
+	 */
+	resetStartPage		  : function(){
+		var setting = SolrQuery.params("st") || {};
+		setting.start = 0
+		SolrQuery.params("st",setting);
+	},
+	/**
 	 * 若两次检索时间间隔小于0.5秒,拒绝请求
 	 * @returns {null|boolean}
 	 */

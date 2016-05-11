@@ -71,6 +71,7 @@ Template.btPagination.events({
 		e.preventDefault();
 		var rows = $(e.currentTarget).data("pagenum");
 		var setting = SolrQuery.params('st');
+		setting.start=0;
 		setting.rows=rows;
 		SolrQuery.params('st',setting);
 		Router.go(SolrQuery.makeUrl());
