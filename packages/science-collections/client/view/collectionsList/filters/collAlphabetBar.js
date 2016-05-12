@@ -11,16 +11,19 @@ Template.collAlphabetBar.helpers({
 
 Template.collAlphabetBar.events({
 	'click .letterFilter': function (event) {
+		event.preventDefault();
 		var num = $(event.target).text();
 		Session.set('firstLetter', num);
 		Session.set('filterPublisher', undefined);
 		Session.set('PerPage', 10);
 	},
-	'click .resetAlphabetFilter': function () {
+	'click .resetAlphabetFilter': function (e) {
+		event.preventDefault();
 		Session.set('firstLetter', undefined);
 		Session.set('PerPage', 10);
 	},
-    'click .resetOtherFilter': function () {
+    'click .resetOtherFilter': function (e) {
+		event.preventDefault();
         Session.set('firstLetter',"other");
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
