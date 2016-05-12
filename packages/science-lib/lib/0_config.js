@@ -1,4 +1,4 @@
-Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.origin).indexOf('localhost') != -1;
+Meteor.isDevelopment = (Meteor.isServer ? process.env.ROOT_URL : window.location.host).indexOf('localhost') != -1;
 
 Config = {
     isDevMode: Meteor.isDevelopment,
@@ -109,7 +109,7 @@ Config = {
         "pacs",
         "fundings",
         "special",
-        "orderAuthors" //作者列表顺序,用于解决Solr检索结果中作者顺序错乱的问题
+        "orderAuthors" //作者列表顺序,Solr检索结果
     ],
     pdf: {
         watermark: "Accepted",
