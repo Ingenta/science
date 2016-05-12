@@ -45,17 +45,20 @@ Template.PublicationsAlphabetBar.helpers({
 });
 Template.PublicationsAlphabetBar.events({
     'click .letterFilter': function (event) {
+        event.preventDefault();
         var num = $(event.target).text();
         Session.set('pubFirstLetter', num);
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
     },
-    'click .resetOtherFilter': function () {
+    'click .resetOtherFilter': function (event) {
+        event.preventDefault();
         Session.set('pubFirstLetter', "other");
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
     },
     'click .resetAlphabetFilter': function (event) {
+        event.preventDefault();
         Session.set('pubFirstLetter', undefined);
         Session.set('PerPage', 10);
     }
