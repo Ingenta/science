@@ -37,5 +37,9 @@
             {{/each}}
             </tbody>
         </table>
+        {{> Paginator_UI recentLogs}}
+        {{#if logsCount}}
+            {{> displayPerPage}}
+        {{/if}}
     </div>
 </template>
