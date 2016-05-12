@@ -250,3 +250,7 @@ ul > li {
 li.active {
     font-weight: bold;
 }
+
+.auto-height{
+    height:auto;
+}
