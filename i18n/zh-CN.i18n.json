@@ -17,6 +17,7 @@
   "Editorial Department": "编辑部",
   "Start Date":"开始日期",
   "End Date":"结束日期",
+  "Start date should be less than end date":"开始日期应小于结束日期",
   "Page View":"浏览次数",
   "Batch Add": "批量添加",
   "Ad Center": "广告中心",
