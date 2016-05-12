@@ -24,6 +24,10 @@
 					{{/each}}
 					</tbody>
 				</table>
+                {{> Paginator_UI userDatas}}
+                {{#if usersCount}}
+                    {{> displayPerPage}}
+                {{/if}}
 			</div>
 		{{else}}
 			<div class="alert alert-info">

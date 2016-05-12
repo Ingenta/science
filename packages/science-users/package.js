@@ -32,7 +32,8 @@ Package.onUse(function (api) {
 	api.use([
 		"reactive-var",
 		"vazco:universe-autoform-select",
-		"natestrauser:select2"
+		"natestrauser:select2",
+		"hitchcott:paginator"
 	], 'client')
 
 	api.addFiles([

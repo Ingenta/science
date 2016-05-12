@@ -37,7 +37,23 @@ Template.AdminUsersView.helpers({
 	"userDatas": function() {
 		var searchStr = Session.get(getSearchStrKey.call(this));
 		var query = getQuery.call(this,searchStr);
-		return Meteor.users.find(query)
+		var numPerPage = Session.get('PerPage');
+		if (numPerPage === undefined) {
+			numPerPage = 10;
+		}
+		return myUsersPagination.find(query,{itemsPerPage: numPerPage})
+	},
+	"usersCount": function() {
+		var searchStr = Session.get(getSearchStrKey.call(this));
+		var query = getQuery.call(this,searchStr);
+		return Meteor.users.find(query).count()>10;
+	}
+});
+
+Template.AdminUsersView.events({
+	'click .perPage': function (event) {
+		var pageNum = $(event.target).data().pagenum;
+		Session.set('PerPage', pageNum);
 	}
 });
 
