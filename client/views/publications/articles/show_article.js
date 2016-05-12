@@ -210,12 +210,12 @@ Template.articlePageNavigation.onCreated(function () {
     this.prevDoi = new ReactiveVar(0);
     if (this.data.elocationId && this.data.issueId) {
         var pDoi = this.prevDoi;
-        Meteor.call("previousDoi", this.data.elocationId, this.data.issueId, function (err, response) {
+        Meteor.call("previousDoi", this.data.padPage, this.data.issueId, function (err, response) {
             if (err) console.log(err);
             pDoi.set(response);
         })
         var nDoi = this.nextDoi;
-        Meteor.call("nextDoi", this.data.elocationId, this.data.issueId, function (err, response) {
+        Meteor.call("nextDoi", this.data.padPage, this.data.issueId, function (err, response) {
             if (err) console.log(err);
             nDoi.set(response);
         })

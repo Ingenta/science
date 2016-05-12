@@ -97,21 +97,21 @@ Meteor.methods({
         });
         return latestIssue._id;
     },
-    previousDoi: function (elocationId, issueId) {
-        if (!elocationId)return;
+    previousDoi: function (padPage, issueId) {
+        if (!padPage)return;
         if (!issueId)return;
-        check(elocationId, String);
+        check(padPage, String);
         check(issueId, String);
-        return getNextPage(issueId,elocationId,false);
+        return getNextPage(issueId,padPage,false);
     },
-    nextDoi: function (elocationId, issueId) {
-        if (!elocationId)return;
+    nextDoi: function (padPage, issueId) {
+        if (!padPage)return;
         if (!issueId)return;
-        if(typeof elocationId !== "string") logger.info(elocationId);
+        if(typeof padPage !== "string") logger.info(padPage);
         if(typeof issueId !== "string") logger.info(issueId);
-        check(elocationId, String);
+        check(padPage, String);
         check(issueId, String);
-        return getNextPage(issueId,elocationId,true);
+        return getNextPage(issueId,padPage,true);
     },
     volumesAtJournal: function (journalId) {
         if (!journalId)return;
@@ -124,15 +124,13 @@ Meteor.methods({
 
 });
 
-var getNextPage = function (issue, page, ascending) {
-    var articlesInThisIssue = Articles.find({issueId: issue}, {fields: {elocationId: 1, doi: 1}}).fetch();
-    var articlesOrderedByPage = _.sortBy(articlesInThisIssue, function (a) {
-        return parseInt(a.elocationId, 10);
-    });
-    var dois = _.pluck(articlesOrderedByPage, "elocationId");
-    var positionInList = _.indexOf(dois, page, true);
-    var nextPageIndex = ascending ? positionInList + 1 : positionInList - 1;
-    if (!articlesOrderedByPage[nextPageIndex]) return false;
-    var nextDoi = articlesOrderedByPage[nextPageIndex].doi;
-    return nextDoi.substring(nextDoi.lastIndexOf("/") + 1);
+var getNextPage = function (issue, padPage, ascending) {
+    var query={issueId:issue,padPage:{}};
+    var key = ascending?"$gt":"$lt";
+    var sort = ascending?1:-1;
+    query.padPage[key]=padPage;
+    var nextArticle = Articles.findOne(query, {fields: {doi: 1},sort:{padPage:sort}});
+    if(!nextArticle || !nextArticle.doi)
+        return;
+    return nextArticle.doi.substring(nextArticle.doi.lastIndexOf("/") + 1);
 }
