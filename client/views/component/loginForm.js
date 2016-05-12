@@ -9,6 +9,17 @@ Template.loginForm.rendered = function () {
 	});
 };
 
+Template.loginForm.events({
+	'click .btn': function (event) {
+		var inputValue = $("#login-form-journal").val();
+		var journal = Publications.findOne({_id:inputValue});
+		if(!journal){
+			sweetAlert(TAPi18n.__("Please select a journal"));
+			return false;
+		}
+	}
+});
+
 Template.loginForm.helpers({
 	publicationsList:function(){
 		return Publications.find({visible:"1",submissionReview: {$exists: true}});
@@ -16,24 +27,7 @@ Template.loginForm.helpers({
 	loginUrl: function(){
 		var code = Session.get("pubValue");
 		if(code)return code;
-		//window.close();
 	}
-	//loginUrl: function(){
-	//	var pageCode = Session.get("pubValue");
-	//	var lang = Session.get("Language");
-	//	if (lang == "1") return Config.otherPlatformLoginUrl.scholarone+pageCode;
-	//	return Config.otherPlatformLoginUrl.editors+pageCode;
-	//},
-	//registerUrl: function(){
-	//	var pageCode = Session.get("pubValue");
-	//	var lang = Session.get("Language");
-	//	if (lang == "1")return Config.otherPlatformLoginUrl.scholarone+pageCode;
-	//	return Config.otherPlatformRegisterUrl.editors;
-	//},
-	//isDisplayLogin: function(){
-	//	var lang = Session.get("Language");
-	//	if (lang == "2") return true;
-	//}
 });
 
 Template.otherPlatformloginButtons.helpers({

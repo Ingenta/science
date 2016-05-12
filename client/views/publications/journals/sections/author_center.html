@@ -43,55 +43,22 @@
 </template>
 
 <template name="guideArticles">
-    <div class="col-xs-4">
-        <div class="part h220">
-            <div class="dotted mb15 text-center" >
-                <h5 style="margin-left: 5px">{{_ "Submission Guidelines"}}
-                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addInstructionsModal"></span>
-                    {{> addInstructionsModalForm}}
-                {{/if}}</h5>
-            </div>
-            {{#each instructions}}
-                <ul>
-                    <li style="margin-left: -25px;">
-                        <a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
-                        {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                            {{> updateAuthorCenterModalForm}}
-                        {{/if}}
-                        {{#if can "delete-author-center" "resource"  }}
-                            <a href="#" class="fa fa-trash"></a>
-                        {{/if}}
-                    </li>
-                </ul>
-            {{else}}
-                {{_ "No results found!"}}
-            {{/each}}
-        </div>
-    </div>
-    <div class="col-xs-4">
-        <div class="part h220">
-            <div class="dotted mb15 text-center">
-                <h5 style="margin-left: 5px">{{_ "Prepare Manuscript"}}
-                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addManuscriptModal"></span>
-                    {{> addManuscriptModalForm}}
-                {{/if}}</h5>
-            </div>
-            {{#each manuscript}}
-                <p style="font-size: 12px"><strong> >> {{{translateThis title.cn title.en}}}</strong>
-                    {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                        {{> updateSubmitManuscriptModalForm}}
-                    {{/if}}
-                    {{#if can "delete-author-center" "resource"  }}
-                        <a href="#" class="fa fa-trash"></a>
-                    {{/if}}
-                </p>
-                {{#each childList}}
+    <div class="dotted">
+        <div class="col-xs-4">
+            <div class="part h220">
+                <div class="dotted mb15 text-center" >
+                    <h5 style="margin-left: 5px">{{_ "Submission Guidelines"}}
+                    {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
+                        <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addInstructionsModal"></span>
+                        {{> addInstructionsModalForm}}
+                    {{/if}}</h5>
+                </div>
+                {{#each instructions}}
                     <ul>
-                        <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                        <li style="margin-left: -25px;">
+                            <a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                             {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                                {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
+                                {{> updateAuthorCenterModalForm}}
                             {{/if}}
                             {{#if can "delete-author-center" "resource"  }}
                                 <a href="#" class="fa fa-trash"></a>
@@ -99,35 +66,70 @@
                         </li>
                     </ul>
                 {{else}}
+                    {{_ "No results found!"}}
                 {{/each}}
-            {{else}}
-                {{_ "No results found!"}}
-            {{/each}}
-        </div>
-    </div>
-    <div class="col-xs-4">
-        <div class="part h220">
-            <div class="dotted mb15 text-center">
-                <h5 style="margin-left: 5px">{{_ "Submit  Manuscript"}}
-                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>
-                    {{> addSubmitManuscriptModalForm}}
-                {{/if}}</h5>
             </div>
-            {{#each submitManuscript}}
-                <ul>
-                    <li style="margin-left: -25px;"><a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+        </div>
+        <div class="col-xs-4">
+            <div class="part h220">
+                <div class="dotted mb15 text-center">
+                    <h5 style="margin-left: 5px">{{_ "Prepare Manuscript"}}
+                    {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
+                        <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addManuscriptModal"></span>
+                        {{> addManuscriptModalForm}}
+                    {{/if}}</h5>
+                </div>
+                {{#each manuscript}}
+                    <p style="font-size: 12px"><strong> >> {{{translateThis title.cn title.en}}}</strong>
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateSubmitManuscriptModalForm}}
                         {{/if}}
                         {{#if can "delete-author-center" "resource"  }}
                             <a href="#" class="fa fa-trash"></a>
                         {{/if}}
-                    </li>
-                </ul>
-            {{else}}
-                {{_ "No results found!"}}
-            {{/each}}
+                    </p>
+                    {{#each childList}}
+                        <ul>
+                            <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                                    {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
+                                {{/if}}
+                                {{#if can "delete-author-center" "resource"  }}
+                                    <a href="#" class="fa fa-trash"></a>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    {{else}}
+                    {{/each}}
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="part h220">
+                <div class="dotted mb15 text-center">
+                    <h5 style="margin-left: 5px">{{_ "Submit  Manuscript"}}
+                    {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
+                        <span class="fa fa-plus" style="color: #2b8118;cursor: pointer;font-size:12px;" data-toggle="modal" data-target="#addSubmitManuscriptModal"></span>
+                        {{> addSubmitManuscriptModalForm}}
+                    {{/if}}</h5>
+                </div>
+                {{#each submitManuscript}}
+                    <ul>
+                        <li style="margin-left: -25px;"><a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                                {{> updateSubmitManuscriptModalForm}}
+                            {{/if}}
+                            {{#if can "delete-author-center" "resource"  }}
+                                <a href="#" class="fa fa-trash"></a>
+                            {{/if}}
+                        </li>
+                    </ul>
+                {{else}}
+                    {{_ "No results found!"}}
+                {{/each}}
+            </div>
         </div>
     </div>
 </template>

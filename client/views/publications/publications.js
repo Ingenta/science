@@ -119,10 +119,10 @@ Template.FilterList.helpers({
         var pubId = Session.get('filterPublisher');
         var first = Session.get('pubFirstLetter');
         var topicId = Session.get('filterTopics');
-        topicId = _.isArray(topicId)?topicId:[topicId];
+        topicId = _.isArray(topicId) ? topicId : [topicId];
         var q = {};
-        if(!Permissions.userCan("modify-journal", "resource",this.userId))
-            q.visible="1";
+        if (!Permissions.userCan("modify-journal", "resource", this.userId))
+            q.visible = "1";
         pubId && (q.publisher = pubId);
         var reg;
         if (first && first == "other") {
@@ -131,10 +131,10 @@ Template.FilterList.helpers({
             reg = "^" + first;
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
-        if(!_.isEmpty(_.compact(topicId))){
-            q.topicId={$in:topicId}
+        if (!_.isEmpty(_.compact(topicId))) {
+            q.topicId = {$in: topicId}
         }
-        return myPubPagination.find(q).count()>10;
+        return Publications.find(q).count()>10;
     }
 });
 
@@ -159,7 +159,6 @@ Template.FilterList.events({
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
     },
-
     'click .perPage': function (event) {
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);

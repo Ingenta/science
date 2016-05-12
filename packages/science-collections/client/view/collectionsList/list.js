@@ -23,7 +23,9 @@ Template.collectionsList.helpers({
         return collPaginator.find(q, {itemsPerPage: numPerPage, sort: {createDate: -1}});
     },
     collectionPageCount: function () {
-        var journalId = Session.get("currentJournalId");
+        var journalId
+        if (Router.current().route.getName() !== "publisher.name")
+            journalId = Session.get("currentJournalId");
         var pubId = Session.get('filterPublisher');
         var first = Session.get('firstLetter');
         var q = {};
@@ -36,7 +38,14 @@ Template.collectionsList.helpers({
             reg = "^" + first;
         }
         first && (q["title.en"] = {$regex: reg, $options: "i"});
-        return collPaginator.find(q).count() > 10;
+        return ArticleCollections.find(q).count() > 10;
+    }
+});
+
+Template.collectionsList.events({
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 

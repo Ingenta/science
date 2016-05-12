@@ -33,6 +33,8 @@ Template.PublicationList.helpers({
         var pubId = this._id;
         var first = Session.get('pubFirstLetter');
         var q = {};
+        if(!Permissions.userCan("modify-journal", "resource",this.userId))
+            q.visible="1";
         pubId && (q.publisher = pubId);
         var reg;
         if (first && first == "other") {
@@ -41,7 +43,7 @@ Template.PublicationList.helpers({
             reg = "^" + first;
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
-        return myPubPagination.find(q).count()>10;
+        return Publications.find(q).count()>10;
     }
 });
 
