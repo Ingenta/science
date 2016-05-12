@@ -22,7 +22,8 @@ Package.onUse(function (api) {
             'science-lib',
             'science-topics',
             'didstopia:admzip',
-            'cfs:power-queue'
+            'cfs:power-queue',
+            "hitchcott:paginator"
         ],
         both);
     api.addFiles('both/routes.js', both);

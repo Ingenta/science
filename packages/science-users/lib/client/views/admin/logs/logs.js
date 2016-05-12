@@ -1,6 +1,13 @@
 Template.AdminLogs.helpers({
     recentLogs: function () {
-        return Logs.find();
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
+        return logsPagination.find({}, {itemsPerPage: numPerPage});
+    },
+    logsCount: function(){
+        return Logs.find().count()>10;
     },
     metaToString: function (meta) {
         return JSON.stringify(meta, null, '\t');
@@ -14,5 +21,9 @@ Template.AdminLogs.helpers({
 Template.AdminLogs.events({
     'click .metaLogPopOver': function (e) {
         $(e.target).popover('show')
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
