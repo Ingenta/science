@@ -1,25 +1,43 @@
 Template.AdminUpload.helpers({
     uploadHistory: function () {
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
         if(Session.get('searchValue')){
-            var tagName = Session.get('searchValue');
+            var name = Session.get('searchValue');
             var mongoDbArr = [];
-            mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
-            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
-             return UploadLog.find({$or: mongoDbArr});
+            mongoDbArr.push({'name': {$regex: name, $options: "i"}});
+             return uploadLogPagination.find({$or: mongoDbArr},{itemsPerPage: numPerPage});
         }
         if(Router.current().route.getName() == "publisher.upload") {
             if(!Meteor.user().publisherId) return;
-            return UploadLog.find(
+            return uploadLogPagination.find(
                 {$or: [
                     {publisherId: Meteor.user().publisherId},
                     {creator: Meteor.userId()}
                 ]
-                }, {sort: {'uploadedAt': -1}}
+                }, {itemsPerPage: numPerPage, sort: {'uploadedAt': -1}}
             );
         }
-        else return UploadLog.find({}, {sort: {'uploadedAt': -1}});
+        else return uploadLogPagination.find({}, {itemsPerPage: numPerPage, sort: {'uploadedAt': -1}});
+    },
+    uploadHistoryCount: function(){
+        var name = Session.get('searchValue');
+        var mongoDbArr = [];
+            mongoDbArr.push({'name': {$regex: name, $options: "i"}});
+        if(name)return UploadLog.find({$or: mongoDbArr}).count()>10;
+        return UploadLog.find().count()>10;
     }
 });
+
+Template.AdminUpload.events({
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
+    }
+});
+
 Template.UploadLogModal.helpers({
     uploadTasks: function () {
         var logId = Session.get('uploadLogId');
