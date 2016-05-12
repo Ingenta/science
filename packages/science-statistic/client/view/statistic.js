@@ -45,8 +45,13 @@ Template.statistic.events({
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
         var reportType = $("#reportType").val();
+        if(endDate<startDate){
+            sweetAlert(TAPi18n.__( "Start date should be less than end date"));
+            return false;
+        }
         if(!reportType){
-            alert(TAPi18n.__( "Choose statistics template"));
+            sweetAlert(TAPi18n.__( "Choose statistics template"));
+            return false;
         }else{
             window.location.href = "/download-data?publisher="+publisher + "&publications="+publication+"&institution="+institution+"&startDate="+startDate+"&endDate="+endDate+"&reportType="+reportType
         }
