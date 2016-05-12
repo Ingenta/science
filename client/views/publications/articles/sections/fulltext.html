@@ -3,34 +3,37 @@
     {{>AbstractContentAndKeywords}}
     {{/if}}
     {{> sectionSelector sections=sections}}
+
     <div class="row">
         <div id="fulltext-viewer" class="col-xs-12">
-            {{#mathjax}}
-                {{#each sections}}
-                    <div>
-                        <h3 id="sec-{{clearStr title}}" class="sectionDivider-title sectionDivider">{{label}} {{{handledTitle}}}</h3>
-                    </div>
-                    <p>
-                        {{{body.html}}}
-                    </p>
+            {{#if shouldShowContent}}
+                {{#mathjax}}
                     {{#each sections}}
                         <div>
-                            <h4 class="sectionDivider-title" id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
+                            <h3 id="sec-{{clearStr title}}" class="sectionDivider-title sectionDivider">{{label}} {{{handledTitle}}}</h3>
                         </div>
                         <p>
                             {{{body.html}}}
                         </p>
                         {{#each sections}}
                             <div>
-                                <h5 class="sectionDivider-title" id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+                                <h4 class="sectionDivider-title" id="sec-{{clearStr title}}">{{label}} {{{title}}}</h4>
                             </div>
                             <p>
                                 {{{body.html}}}
                             </p>
+                            {{#each sections}}
+                                <div>
+                                    <h5 class="sectionDivider-title" id="sec-{{clearStr title}}">{{label}} {{{title}}}</h5>
+                                </div>
+                                <p>
+                                    {{{body.html}}}
+                                </p>
+                            {{/each}}
                         {{/each}}
                     {{/each}}
-                {{/each}}
-            {{/mathjax}}
+                {{/mathjax}}
+            {{/if}}
             {{#if anyReference}}
                 <br>
                 {{> acknowledgment}}
