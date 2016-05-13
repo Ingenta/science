@@ -26,7 +26,7 @@ var getOptions = function(){
 		JET.previewData.set(userData);
 		options.previewData=userData;
 	}
-	options.content=JET.editor().code().trim();
+	options.content=JET.editor().summernote('code').trim();
 	return options;
 };
 
@@ -49,11 +49,11 @@ Template.etEditor.events({
 				if(obj.previewData){
 					instance.$("#etData").val(JSON.stringify(obj.previewData));
 				}
-				JET.editor().code(obj.content)
+				JET.editor().summernote('code',obj.content)
 			}else{
 				instance.$("#etDescription").val("");
 				instance.$("#etData").val("");
-				JET.editor().code("");
+				JET.editor().summernote("code","");
 			}
 		}
 	}
