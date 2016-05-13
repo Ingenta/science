@@ -80,12 +80,16 @@ Science.Email.searchFrequencyEmail = function () {
     }
 };
 
-Science.Email.tableOfContentEmail = function (date) {
+Science.Email.tableOfContentEmail = function (date,email) {
     var emailConfig = EmailConfig.findOne({key: "watchJournal"});
     Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
-        var userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
-        if(!userList.count()) return;
-        logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
+        var userList;
+        if(!email){
+            userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
+            if(!userList.count()) return;
+            logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
+        }
+
         var articleList = Articles.find({
             journalId: oneIssue.journalId,
             volume: oneIssue.volume,
@@ -144,20 +148,28 @@ Science.Email.tableOfContentEmail = function (date) {
             "articleList": articleList,
             "journalNews": journalNews
         });
-
-        userList.forEach(function (oneUser) {
-            logger.info("sent watchJournal email to "+oneUser.emails[0].address);
+        if(email){
             Email.send({
-                to: oneUser.emails[0].address,
+                to: email,
                 from: Config.mailServer.address,
                 subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
                 html: content
             });
-        });
+        }else{
+            userList.forEach(function (oneUser) {
+                logger.info("sent watchJournal email to "+oneUser.emails[0].address);
+                Email.send({
+                    to: oneUser.emails[0].address,
+                    from: Config.mailServer.address,
+                    subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                    html: content
+                });
+            });
+        }
     });
 };
 
-Science.Email.availableOnline = function (date) {
+Science.Email.availableOnline = function (date ,email) {
     var emailConfig = EmailConfig.findOne({key: "availableOnline"});
     Articles.aggregate([{
         $match: {
@@ -183,13 +195,22 @@ Science.Email.availableOnline = function (date) {
             }}
         }
     }]).forEach(function (obj) {
-        var userList = Users.find({'profile.journalsOfInterest': {$in: [obj._id]}});
-        if(!userList.count()) return;
+        var userList;
+        if(!email) {
+            userList = Users.find({'profile.journalsOfInterest': {$in: [obj._id]}});
+            if (!userList.count()) return;
+        }
+
         if (!obj.articleList || !obj.articleList.length) return;
         var journal = {};
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
         journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
-        if (journal.banner) journal.banner = Meteor.absoluteUrl(Images.findOne({_id: journal.banner}).url({auth:false}).substring(1));
+        if (journal.banner) {
+            var banner = Images.findOne({_id: journal.banner});
+            if(banner){
+                journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
+            }
+        }
         generateArticleLinks(obj.articleList, journal.url);
 
         var content = JET.render('availableOnline', {
@@ -198,14 +219,23 @@ Science.Email.availableOnline = function (date) {
             "journal": journal,
             "articleList": obj.articleList
         });
-        userList.forEach(function (oneUser) {
+        if(email){
             Email.send({
-                to: oneUser.emails[0].address,
+                to: email,
                 from: Config.mailServer.address,
                 subject: emailConfig ? emailConfig.subject : "Available Online Now",
                 html: content
             });
-        });
+        }else{
+            userList.forEach(function (oneUser) {
+                Email.send({
+                    to: oneUser.emails[0].address,
+                    from: Config.mailServer.address,
+                    subject: emailConfig ? emailConfig.subject : "Available Online Now",
+                    html: content
+                });
+            });
+        }
     });
 };
 

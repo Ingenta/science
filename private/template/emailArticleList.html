@@ -1,6 +1,7 @@
 {{#each articleList}}
     <p>
-        <a href="{{url}}">{{{title.en}}}</a>
+        <a target="_blank" href="{{url}}">{{{title.en}}}</a>
+        {{#if authors}}
         <br>
         <span>
             {{#each authors}}
@@ -9,8 +10,9 @@
                 </span>
             {{/each}}
         </span>
+        {{/if}}
         <br>
-        <a href="{{journal.url}}">{{journal.title}}</a>
+        <a target="_blank" href="{{journal.url}}">{{journal.title}}</a>
         {{#if year}}, {{year}}{{/if}}
         {{#if volume}}, {{volume}}{{/if}}
         {{#if issue}}({{issue}}){{/if}}
