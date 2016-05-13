@@ -170,8 +170,9 @@ Science.Email.availableOnline = function (date) {
                 authors: "$authors",
                 year: "$year:",
                 volume: "$volume",
-                //issue: "$issue",
+                issue: "$issue",
                 elocationId: "$elocationId",
+                endPage:"$engPage",
                 journalId: "$journalId",
                 journal: "$journal"
             }}
@@ -187,7 +188,6 @@ Science.Email.availableOnline = function (date) {
         generateArticleLinks(obj.articleList, journal.url);
 
         var content = JET.render('availableOnline', {
-            "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "onlineUrl": Config.rootUrl + "email/online.jpg",
             "rootUrl": Config.rootUrl,
             "journal": journal,

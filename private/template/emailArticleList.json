@@ -5,7 +5,7 @@
         "cn": "直流驱动氩气等离子体刷的放电特性研究",
         "en": "Discharge characteristics of a brush-shaped argon plasma plume driven by a direct-current voltage"
       },
-      "url": "http://localhost:3000/ublisher/kexuechubanshe/journal/math/45/9/10.1360/SSPMA2015-00175",
+      "url": "http://localhost:3000/publisher/kexuechubanshe/journal/math/45/9/10.1360/SSPMA2015-00175",
       "authors": [
         {
           "fullname": {
@@ -32,7 +32,8 @@
       "year": 2015,
       "volume": 45,
       "issue": 2,
-      "elocationId": "024201"
+      "elocationId": "024201",
+      "endPage": ""
     }
   ]
 }

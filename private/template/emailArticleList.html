@@ -1,6 +1,6 @@
 {{#each articleList}}
     <p>
-        <a href="{{url}}">{{{title.cn}}}</a>
+        <a href="{{url}}">{{{title.en}}}</a>
         <br>
         <span>
             {{#each authors}}
@@ -10,6 +10,11 @@
             {{/each}}
         </span>
         <br>
-        <a href="{{journal.url}}">{{journal.titleCn}}</a>, {{year}}, {{volume}}({{issue}}){{#if elocationId}}: {{elocationId}}{{/if}}
+        <a href="{{journal.url}}">{{journal.title}}</a>
+        {{#if year}}, {{year}}{{/if}}
+        {{#if volume}}, {{volume}}{{/if}}
+        {{#if issue}}({{issue}}){{/if}}
+        {{#if elocationId}}: {{elocationId}}{{/if}}
+        {{#if endPage}}-{{engPage}}{{/if}}
     </p>
 {{/each}}

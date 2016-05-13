@@ -18,8 +18,7 @@ Science.URL.issueDetail = function (issueId) {
         var pub = Publishers.findOne({_id: journal.publisher}, {fields: {shortname: 1}});
         if (!pub)return;
         var journalPart = "/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
-        var issuePart = "/" + issue.volume + "/" + issue.issue;
-        return journalPart + issuePart;
+        return journalPart + "#" + issueId;
     }
 };
 
