@@ -19,12 +19,13 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use([
     'reactive-var',
-    'froala:editor@2.2.3',
+    'froala:editor@2.2.4',
     'templating',
-    'aldeed:autoform',
+    'aldeed:autoform'
+  ],'client');
+  api.use([
     'iron:router'
-  ],['client', 'server']);
-
+  ],'server');
   api.addFiles(['afFroalaEditor.html','afFroalaEditor.js','stylesheet.css'],'client');
   api.addFiles(['upload.js'],'server'); // there is a bug with Router.onBeforeAction
 });
