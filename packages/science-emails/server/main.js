@@ -95,13 +95,18 @@ Science.Email.tableOfContentEmail = function (date) {
             fields: {
                 _id: 1,
                 title: 1,
+                doi:1,
                 authors: 1,
                 year: 1,
                 volume: 1,
                 issue: 1,
                 elocationId: 1,
-                'journal.titleCn': 1
+                engPage:1,
+                'journal.title': 1
+            },sort:{
+                padPage:1
             }
+
         }).fetch();
         if (!articleList || !articleList.length) return;
 
@@ -128,7 +133,7 @@ Science.Email.tableOfContentEmail = function (date) {
         generateArticleLinks(articleList, journal.url);
 
         oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
-
+        oneIssue.month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+oneIssue.month];
         var journalNews = journalIdToNews(oneIssue.journalId);
 
         var content = JET.render('watchJournal', {
