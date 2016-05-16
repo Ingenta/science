@@ -949,6 +949,9 @@
       "recipient": {
         "label": "收件人的邮件地址"
       },
+      "userLevel":{
+        "label":"收件用户级别"
+      },
       "subject": {
         "label": "标题"
       },

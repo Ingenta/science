@@ -80,7 +80,23 @@ EmailsSchema  = new SimpleSchema({
 BroadcastEmailsSchema = new SimpleSchema({
     recipient:{
         type:String,
-        regEx: SimpleSchema.RegEx.Email
+        optional:true,
+        regEx:/^([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6};?)*$/i //支持用;分隔的多个邮箱地址
+    },
+    userLevel:{
+        type:[String],
+        optional:true,
+        autoform: {
+            type: "select-checkbox",
+            options: function () {
+                return [
+                    {label: TAPi18n.__("level.admin"), value: "admin"},
+                    {label: TAPi18n.__("level.publisher"), value: "publisher"},
+                    {label: TAPi18n.__("level.institution"), value: "institution"},
+                    {label: TAPi18n.__("level.normal"), value: "normal"}
+                ];
+            }
+        }
     },
     subject:{
         type:String

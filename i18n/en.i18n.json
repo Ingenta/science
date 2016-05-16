@@ -802,6 +802,9 @@
             "recipient": {
                 "label": "Recipient"
             },
+            "userLevel": {
+                "label": "User level"
+            },
             "subject": {
                 "label": "Subject"
             },

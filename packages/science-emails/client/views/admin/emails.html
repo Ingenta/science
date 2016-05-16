@@ -62,6 +62,7 @@
     {{#autoForm schema="BroadcastEmailsSchema" id="broadcastEmailsModalForm" type="method" meteormethod="broadcastEmail"}}
         <div class="modal-body">
             {{> afQuickField name="recipient"}}
+            {{> afQuickField name="userLevel"}}
             {{> afQuickField name="subject"}}
             {{> afQuickField name='content'}}
         </div>

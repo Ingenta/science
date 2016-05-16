@@ -68,17 +68,40 @@ Meteor.methods({
     },
     broadcastEmail: function (values) {
         Meteor.defer(function () {
-            Email.send({
-                to: values.recipient,
-                from: Config.mailServer.address,
-                subject: values.subject,
-                html: JET.render('broadcastEmail', {
-                    //"subject": values.subject,
-                    "content": values.content,
-                    "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                    "rootUrl": Config.rootUrl
-                })
-            });
+            var emails=[];
+            if(!_.isEmpty(values.userLevel)){
+                if(values.userLevel.indexOf('publisher')>-1)
+                    values.userLevel.push("journal");
+                var reciveUsers = Meteor.users.find({"emails.verified":true,level:{$in:values.userLevel}},{fields:{emails:1}});
+                if(reciveUsers.count()>0){
+                    reciveUsers.forEach(function(user){
+                        if(!_.isEmpty(user.emails) && user.emails[0].address)
+                            emails.push(user.emails[0].address)
+                    })
+                }
+            }
+            if(!_.isEmpty(values.recipient)){
+                var recipientArr = values.recipient.split(';');
+                emails = _.union(emails,recipientArr);
+            }
+
+            if(_.isEmpty(emails))
+                return;
+
+            var content = JET.render('broadcastEmail', {
+                "subject": values.subject,
+                "content": values.content,
+                "scpLogoUrl": Config.rootUrl + "email/logo.png",
+                "rootUrl": Config.rootUrl
+            })
+            _.each(emails,function(email){
+                Email.send({
+                    to: email,
+                    from: Config.mailServer.address,
+                    subject: values.subject,
+                    html: content
+                });
+            })
         });
     }
 });
