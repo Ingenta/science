@@ -47,6 +47,10 @@ IssuesSchema = new SimpleSchema({
             }
         }
     },
+    order:{
+        type: String,
+        optional:true
+    },
     createDate: {
         type: Date
     }
