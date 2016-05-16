@@ -69,6 +69,21 @@ Template.singleReferenceTemplate.helpers({
 		var queryStr = paramsStrArr.join("&");
 		return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:href+queryStr,name:"Google Scholar"});
 	},
+	pubmedLink:function(){
+		if(this.pubmed){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://www.ncbi.nlm.nih.gov/pubmed/"+this.pubmed,name:"PubMed"});
+		}
+	},
+	adsLink:function(){
+		if(this.ads){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://adsabs.harvard.edu/abs/"+this.ads,name:"ADS"});
+		}
+	},
+	arxivLink:function(){
+		if(this.arxiv){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://arxiv.org/abs/"+this.arxiv,name:"arXiv"});
+		}
+	},
 	formatSource:function(){
 		var sourceArr=[];
 		//publisher part begin

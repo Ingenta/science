@@ -677,6 +677,9 @@ ScienceXML.getReferences = function (results, doc) {
             ref.lastPage = parserHelper.getSimpleVal("child::element-citation/lpage", refNode);
             ref.collab = parserHelper.getSimpleVal("child::element-citation/collab", refNode);
             ref.doi = parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='doi']", refNode);
+            ref.pmid = parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='pmid']", refNode);
+            ref.ads = parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='ads']", refNode);
+            ref.arxiv = parserHelper.getSimpleVal("child::element-citation/pub-id[@pub-id-type='arxiv']", refNode);
             ref.source = parserHelper.getSimpleVal("child::element-citation/source", refNode) || parserHelper.getSimpleVal("child::element-citation/source/uri", refNode);
             ref.href = parserHelper.getFirstAttribute("child::element-citation/source/uri/@xlink:href", refNode, {"xlink": "http://www.w3.org/1999/xlink"});
             refs.push(ref);
