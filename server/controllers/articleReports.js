@@ -74,8 +74,8 @@ Meteor.methods({
         var myFuture2 = new Future();
         var currentDate = new Date;
         var startDate = new Date().addMonths(-11);
-        var currentDateCode = currentDate.getFullYear() * 100 + currentDate.getMonth();
-        var startDateCode = startDate.getFullYear() * 100 + startDate.getMonth();
+        var currentDateCode = currentDate.getFullYear() * 100 + currentDate.getMonth()+1;
+        var startDateCode = startDate.getFullYear() * 100 + startDate.getMonth()+1;
         PageViews.rawCollection().group(
             {dateCode: true},
             {
