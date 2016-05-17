@@ -1,9 +1,11 @@
-User-Agent: bingbot
-Crawl-delay: 30
+User-agent: bingbot
+User-agent: bing
 Disallow: /downloadPdf/
 Disallow: /citation/
 Disallow: /xml/
 Disallow: /cfs/
+Disallow: /admin/
+Crawl-delay: 30
 
 User-agent: *
 Disallow: /
