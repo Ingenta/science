@@ -19,7 +19,7 @@ copy *.tar.gz to ~/app folder on server
 --------------------------
 3. cd to respective folder and build docker images
 
-docker pull index.alauda.cn/jackkav/docker-meteor
+docker pull index.alauda.cn/jackkav/meteor-pdf
 docker pull index.alauda.cn/library/mongo
 docker build -t jackjk/mongo https://github.com/Ingenta/docker-mongo.git
 
