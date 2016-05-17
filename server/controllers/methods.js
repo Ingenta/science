@@ -41,6 +41,12 @@ Meteor.methods({
         var datetime = new Date();
         var dateCode = datetime.getUTCFullYear() * 100 + (datetime.getUTCMonth() + 1);
         var user = Users.findOne({_id: userId}, {fields: {institutionId: 1}});
+        var ip;
+        var ipAddrStr = this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress;
+        var matchedIpArr = ipAddrStr.match(/(?:[0-9]{1,3}\.){3}[0-9]{1,3}/g);
+        if(_.isArray(matchedIpArr) && !_.isEmpty(matchedIpArr)){
+            ip= _.last(matchedIpArr);
+        }
         PageViews.insert({
             articleId: articleId,
             userId: userId,
@@ -51,7 +57,8 @@ Meteor.methods({
             when: datetime,
             dateCode: dateCode,
             action: action,
-            ip: this.connection.httpHeaders['x-forwarded-for'] || this.connection.clientAddress
+            ip: ip,
+            origIp: ipAddrStr
         });
     },
     getDefaultPublisherId: function () {
