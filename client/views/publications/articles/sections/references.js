@@ -70,8 +70,8 @@ Template.singleReferenceTemplate.helpers({
 		return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:href+queryStr,name:"Google Scholar"});
 	},
 	pubmedLink:function(){
-		if(this.pubmed){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://www.ncbi.nlm.nih.gov/pubmed/"+this.pubmed,name:"PubMed"});
+		if(this.pmid){
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://www.ncbi.nlm.nih.gov/pubmed/"+this.pmid,name:"PubMed"});
 		}
 	},
 	adsLink:function(){
