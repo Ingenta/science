@@ -1,5 +1,6 @@
 User-agent: bingbot
 User-agent: bing
+User-agent: Baiduspider
 Disallow: /downloadPdf/
 Disallow: /citation/
 Disallow: /xml/
@@ -9,6 +10,5 @@ Crawl-delay: 30
 
 User-agent: *
 Disallow: /
-
 
 Host: engine.scichina.com
