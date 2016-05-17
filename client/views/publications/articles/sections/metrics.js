@@ -189,6 +189,9 @@ function buildHitCounterGraph(data) {
         }, {
             name: TAPi18n.__("fulltext"),
             data: data.fulltext
+        },{
+            name: TAPi18n.__("download"),
+            data: data.download
         }, {
             name: TAPi18n.__("combined"),
             data: data.total

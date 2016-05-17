@@ -33,21 +33,27 @@ var delayRender = function () {
         });
     }, 1000)
 }
-
+var lastInsertAuditTime = new Date();
 ReactiveTabs.createInterface({
     template: 'articleTabs',
     onChange: function (slug, template) {
         history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
         var article = Router.current().data && Router.current().data();
         if (!article && !article.doi)return;
+        var result = (new Date() - lastInsertAuditTime) > 500
+        lastInsertAuditTime = new Date();
         if (slug === 'abstract') {
-            Meteor.call("insertAudit", Meteor.userId(), "abstract", article.publisher, article.journalId, article._id, function (err, response) {
-                if (err) console.log(err);
-            });
+            if(result){
+                Meteor.call("insertAudit", Meteor.userId(), "abstract", article.publisher, article.journalId, article._id, function (err, response) {
+                    if (err) console.log(err);
+                });
+            }
         } else if (slug === 'full text') {
-            Meteor.call("insertAudit", Meteor.userId(), "fulltext", article.publisher, article.journalId, article._id, function (err, response) {
-                if (err) console.log(err);
-            });
+            if(result){
+                Meteor.call("insertAudit", Meteor.userId(), "fulltext", article.publisher, article.journalId, article._id, function (err, response) {
+                    if (err) console.log(err);
+                });
+            }
             if (!_.isEmpty(article.keywords)) {
                 var keywords = _.compact(_.union(article.keywords.en, article.keywords.cn));
                 if (!_.isEmpty(keywords)) {

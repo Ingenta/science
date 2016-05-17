@@ -1199,5 +1199,7 @@
     "play":"Play",
     "download":"Download",
     "appendix":"Appendix",
-    "acknowledgment":"Acknowledgment"
+    "acknowledgment":"Acknowledgment",
+    "confirmTitle":"Confirm",
+    "confirmChangeUserLevel":"After changing the user's level, his current role will be removed. Do you want to continue?"
 }

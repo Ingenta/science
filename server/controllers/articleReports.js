@@ -74,16 +74,16 @@ Meteor.methods({
         var myFuture2 = new Future();
         var currentDate = new Date;
         var startDate = new Date().addMonths(-11);
-        var currentDateCode = currentDate.getFullYear() * 100 + currentDate.getMonth();
-        var startDateCode = startDate.getFullYear() * 100 + startDate.getMonth();
+        var currentDateCode = currentDate.getFullYear() * 100 + currentDate.getMonth()+1;
+        var startDateCode = startDate.getFullYear() * 100 + startDate.getMonth()+1;
         PageViews.rawCollection().group(
             {dateCode: true},
             {
                 articleId: articleId,
-                action: {$in: ["abstract", "fulltext"]},
+                action: {$in: ["abstract", "fulltext","pdfDownload"]},
                 dateCode: {$gte: startDateCode, $lte: currentDateCode}
             },
-            {total: 0, abstract: 0, fulltext: 0},
+            {total: 0, abstract: 0, fulltext: 0, pdfDownload:0},
             function (doc, result) {
                 result.total++;
                 result[doc.action]++;
@@ -91,13 +91,14 @@ Meteor.methods({
             Meteor.bindEnvironment(function (err, result) {
                 var month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 var dcode = startDateCode;
-                var finalizeData = {abstract: [], fulltext: [], months: [], total: []};
+                var finalizeData = {abstract: [], fulltext: [], download:[], months: [], total: []};
                 while (dcode <= currentDateCode) {
                     var m = _.find(result, function (item) {
                         return item.dateCode == dcode
                     });
                     finalizeData.abstract.push(m ? m.abstract : 0);
                     finalizeData.fulltext.push(m ? m.fulltext : 0);
+                    finalizeData.download.push(m ? m.pdfDownload : 0);
                     finalizeData.total.push(m ? m.total : 0);
                     finalizeData.months.push(Math.round(dcode / 100) + " " + month[dcode % 100]);
                     dcode += (dcode % 100 == 12) ? 89 : 1;
