@@ -233,5 +233,13 @@ Meteor.methods({
         check(userId, String);
         check(newPass, String);
         return Accounts.setPassword(userId,newPass);
+    },
+    changeUserLevel:function(userId,newlevel){
+        if(!Permissions.userCan("modify-user","user",Meteor.userId()))
+            return "permission deny";
+        check(userId, String);
+        check(newlevel, String);
+        Meteor.users.update({_id:userId},{$set:{level:newlevel,orbit_roles:null}});
+        return true;
     }
 });

@@ -29,3 +29,18 @@ Science.dom.clearSelect2Record = function () {
 	})
 	select2keeper = [];
 }
+
+Science.dom.confirm = function(title,content,callback){
+	sweetAlert({
+		title             : title,
+		text              : content,
+		type              : "warning",
+		showCancelButton  : true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText : "Yes",
+		cancelButtonText  : "Cancel",
+		closeOnConfirm    : true
+	}, function () {
+		callback && callback();
+	});
+}

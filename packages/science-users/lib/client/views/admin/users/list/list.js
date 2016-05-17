@@ -58,25 +58,7 @@ Template.AdminUsersView.events({
 });
 
 Template.AdminUsersViewTableItems.events({
-	"click td": function(e, t) {
-		e.preventDefault();
-		//if (Router.current().route.getName() === "publisher.account" && _.contains(Users.findOne({_id: this._id}, {}).orbit_roles, "publisher:publisher-manager-from-user") && this._id !== Meteor.userId()){
-		if (!(Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope) && this._id !== Meteor.userId())){
-			sweetAlert({
-				title             : TAPi18n.__("Warning"),
-				text              : TAPi18n.__("Permission denied"),
-				type              : "warning",
-				showCancelButton  : false,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText : TAPi18n.__("OK"),
-				closeOnConfirm    : true
-			});
-			return false;
-		}
-		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
-		return false;
-	},
-	"click #edit-button": function(e) {
+	"click .modifyUser": function(e) {
 		e.preventDefault();
 		if (!Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope)){
 			sweetAlert({
@@ -93,7 +75,25 @@ Template.AdminUsersViewTableItems.events({
 		Router.go(Router.current().route.getName() + ".edit", {userId: this._id});
 		return false;
 	},
-	"click #undo-button": function() {
+	"click .changeLevel": function(e) {
+		e.preventDefault();
+		pageSession.set("newUserLevel",null);
+		if (!Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope)){
+			sweetAlert({
+				title             : TAPi18n.__("Warning"),
+				text              : TAPi18n.__("Permission denied"),
+				type              : "warning",
+				showCancelButton  : false,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText : TAPi18n.__("OK"),
+				closeOnConfirm    : true
+			});
+			return false;
+		}
+		pageSession.set("userInfoForChangeLevel",this);
+		$("#updateUserLevelFormModal").modal('show');
+	},
+	"click .resetUserPass": function() {
 		var user = Users.findOne({_id:this._id});
 		if(user){
 			sweetAlert({
@@ -228,5 +228,68 @@ Template.userButtons.events({
 		if(this.scope && this.scope.publisherId)
 			query.query=query.query+ "&publisherId="+this.scope.publisherId;
 		Router.go(Router.current().route.getName() + ".insert", {insId: Router.current().params.insId, pubId: Router.current().params.pubId},query);
+	}
+})
+
+Template.updateUserLevelForm.helpers({
+	"userInfo":function(){
+		return pageSession.get("userInfoForChangeLevel")
+	},
+	"levelsWithoutCurrentOne":function(){
+		var userlevel=this.level;
+		var levels=[
+			{label: TAPi18n.__("level.admin"), value: "admin"},
+			{label: TAPi18n.__("level.publisher"), value: "publisher"},
+			{label: TAPi18n.__("level.institution"), value: "institution"},
+			{label: TAPi18n.__("level.normal"), value: "normal"}
+		]
+		return _.filter(levels,function(level){
+			return level.value!=userlevel;
+		})
+	}
+})
+
+Template.updateUserLevelForm.events({
+	"click label.btn":function(e){
+		pageSession.set("newUserLevel",this.value);
+	},
+	"click #submitChangeLevel":function(){
+		var userInfo=pageSession.get("userInfoForChangeLevel");
+		var newlevel=pageSession.get("newUserLevel");
+		if(!newlevel){
+			sweetAlert({
+				title: "错误",
+				text: "请选择一个用户级别",
+				type: "error",
+				showCancelButton  : false,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText : TAPi18n.__("OK"),
+				closeOnConfirm    : true
+			})
+			return;
+		}
+		if(!userInfo || !userInfo._id){
+			sweetAlert({
+				title: "错误",
+				text: "未取得用户信息",
+				type: "error",
+				showCancelButton  : false,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText : TAPi18n.__("OK"),
+				closeOnConfirm    : true
+			})
+			return;
+		}
+		Science.dom.confirm(TAPi18n.__("confirmTitle"),TAPi18n.__("confirmChangeUserLevel"),function(){
+			if(userInfo && newlevel){
+				Meteor.call("changeUserLevel",userInfo._id,newlevel,function(e,r){
+					if(r)
+						FlashMessages.sendSuccess(TAPi18n.__("Operation_success"));
+					else
+						FlashMessages.sendError(TAPi18n.__("Failed"));
+				})
+				$("#updateUserLevelFormModal").modal('hide');
+			}
+		})
 	}
 })
