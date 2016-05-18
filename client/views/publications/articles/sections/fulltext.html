@@ -6,8 +6,13 @@
 
     <div class="row">
         <div id="fulltext-viewer" class="col-xs-12">
-            {{#if shouldShowContent}}
-                {{#mathjax}}
+            {{#mathjax}}
+                {{#if isOnlyIntroduction}}
+                    <hr>
+                    <p>
+                        {{{introduction}}}
+                    </p>
+                {{else}}
                     {{#each sections}}
                         <div>
                             <h3 id="sec-{{clearStr title}}" class="sectionDivider-title sectionDivider">{{label}} {{{handledTitle}}}</h3>
@@ -32,8 +37,8 @@
                             {{/each}}
                         {{/each}}
                     {{/each}}
-                {{/mathjax}}
-            {{/if}}
+                {{/if}}
+            {{/mathjax}}
             {{#if anyReference}}
                 {{> acknowledgment}}
                 <div class="sectionDivider sectionDivider-title">{{_ "References"}}</div>

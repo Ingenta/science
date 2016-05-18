@@ -27,13 +27,11 @@ Template.FullTextTemplate.helpers({
     hasAbstractOrKeyword:function(){
         return (this.abstract && (this.abstract.cn || this.abstract.en)) || !_.isEmpty(this.keywords);
     },
-    shouldShowContent:function(){
-        if(_.isEmpty(this.sections))
-            return false;
-        //所有类型文章，在只有引言，没有其他章节时，引言也不显示。应5月12日黄,侯需求调整
-        if(this.sections.length==1 && this.sections[0].title == "__start__")
-            return false;
-        return true;
+    isOnlyIntroduction:function(){
+        return !_.isEmpty(this.sections) && this.sections.length==1 && this.sections[0].title == "__start__";
+    },
+    introduction:function(){
+        return this.sections[0].body.html;
     }
 })
 
