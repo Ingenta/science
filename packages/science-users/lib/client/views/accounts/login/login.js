@@ -43,13 +43,11 @@ Template.Login.events({
 		submit_button.button("loading");
 		Meteor.loginWithPassword(login_email, login_password, function(err) {
 			submit_button.button("reset");
-			if (err)
-			{
-				//pageSession.set("errorMessage", err);
-				pageSession.set("errorMessage", TAPi18n.__("Account or password error"));
+			if (err){
+				var msg = _.isObject(err)?TAPi18n.__(err.reason):err.message;
+				pageSession.set("errorMessage",msg);
 				return false;
-			}
-			else{
+			}else{
 				pageSession.set("errorMessage", "");
 				history.back();
 				//Router.go("home",{});
