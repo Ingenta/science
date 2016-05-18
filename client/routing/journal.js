@@ -5,12 +5,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
-            if(this.params.hash)
-            {
+            if (this.params.hash && this.params.hash !== "!") {
                 Session.set('currentIssueId', this.params.hash);
                 Session.set("activeTab", "Browse");
-            }else{
-                Science.setActiveTabByUrl(window.location.search,journal.tabSelections,"Overview");
+            } else {
+                Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Overview");
             }
             return journal;
         }
@@ -27,20 +26,20 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     name: "journal.name",
     waitOn: function () {
         return [
-            Meteor.subscribe("journalOverviewTab",this.params.journalShortTitle),
+            Meteor.subscribe("journalOverviewTab", this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('tag')
         ]
     },
-    onStop:function(){
+    onStop: function () {
         Science.dom.clearSelect2Record();
     }
 });
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
     data: function () {
-        return SpecialTopics.findOne({_id:this.params.specialTopicsId});
+        return SpecialTopics.findOne({_id: this.params.specialTopicsId});
     },
     template: "addArticleForSpecialTopics",
     name: "specialTopics.selectArticles",
@@ -51,13 +50,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics
     waitOn: function () {
         return [
             Meteor.subscribe('articlesInSpecTopic', this.params.specialTopicsId),
-            Meteor.subscribe('journalSpecialTopics',this.params.journalShortTitle),
-            Meteor.subscribe('journalIssuesIncludingHistorical',this.params.journalShortTitle)
+            Meteor.subscribe('journalSpecialTopics', this.params.journalShortTitle),
+            Meteor.subscribe('journalIssuesIncludingHistorical', this.params.journalShortTitle)
         ]
     }
 });
-
-
 
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscript/:guideId', {
