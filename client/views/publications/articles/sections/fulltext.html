@@ -8,7 +8,9 @@
         <div id="fulltext-viewer" class="col-xs-12">
             {{#mathjax}}
                 {{#if isOnlyIntroduction}}
-                    <hr>
+                    {{#if hasAbstractOrKeyword}}
+                        <hr>
+                    {{/if}}
                     <p>
                         {{{introduction}}}
                     </p>
