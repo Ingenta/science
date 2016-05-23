@@ -285,7 +285,7 @@ ScienceXML.getFullText = function (results, doc) {
     // 先检查body下是否有不包含在sec节点中的p节点，如果有的话，
     // 将这些p节点提取出来作为一个新的章节放到章节列表的顶部
     var ghostSec, normalSecs = [];
-    var pUnderBody = xpath.select("//body/p | //body/fig", doc);
+    var pUnderBody = xpath.select("//body/p | //body/fig | //body/table-wrap", doc);
     if (!_.isEmpty(pUnderBody)) {
         var ghostContent = getParagraphs(pUnderBody);
         ghostSec = ghostContent && {label: undefined, title: "__start__", body: ghostContent};
