@@ -1,11 +1,10 @@
 <template name="affiliation">
     {{#if affiliations}}
-            <i class="fa fa-plus" data-toggle="collapse" data-target="#authorAffiliations"></i>
-            <a href="#" data-toggle="collapse" data-target="#authorAffiliations"
-               aria-expanded="false" aria-controls="authorAffiliations">
-                {{_ "Affiliations"}}
-            </a>
-
+        <i class="fa fa-plus" data-toggle="collapse" data-target="#authorAffiliations"></i>
+        <a href="#" data-toggle="collapse" data-target="#authorAffiliations"
+           aria-expanded="false" aria-controls="authorAffiliations">
+            {{_ "Affiliations"}}
+        </a>
         <div class="collapse" id="authorAffiliations">
             <ol class="affiliationList">
                 {{#each affiliations}}
