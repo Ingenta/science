@@ -12,11 +12,11 @@
         <!-- 推荐文章部分开始 -->
         {{#each recommendArticles}}
             <div class="contPart">
-                <div class="fl w80"><a href="{{urlToArticleById ArticlesId}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
+                <div class="fl w80"><a href="{{articlesUrl ArticlesId}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
                 <div class="fl w350">
                     <div class="h50">
                         <p>
-                            <a href="{{urlToArticleById ArticlesId}}" target="_blank">{{titles ArticlesId}}</a>
+                            <a href="{{articlesUrl ArticlesId}}" target="_blank">{{titles ArticlesId}}</a>
                             {{#if miniPlatformPermission}}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
                             {{#if miniPlatformPermission}}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
                         </p>

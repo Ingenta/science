@@ -25,6 +25,12 @@ Template.layoutLatestArticles.helpers({
             if(_.isString(article.published))return article.published;
             return article.published && article.published.format("yyyy-MM-dd");
         }
+    },
+    articlesUrl: function(id){
+        var article = Articles.findOne({_id: id}, {fields: {doi: 1}});
+        if (article) {
+            return  "http://engine.scichina.com/doi/" + article.doi;
+        }
     }
 });
 
