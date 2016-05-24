@@ -8,9 +8,12 @@ Template.layoutPublications.helpers({
             return Publications.find({publisher:publisher._id,visible:"1"},{sort: sort});
         }
     },
-    publisherUrl: function(){
-        var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
-        if(publisher)return "/publisher/"+publisher.name;
+    journalUrl: function(id){
+        var journal = Publications.findOne({_id: id}, {fields: {shortTitle: 1, publisher: 1}});
+        if (!journal)return;
+        var pub = Publishers.findOne({_id: journal.publisher}, {fields: {shortname: 1}});
+        if (!pub)return;
+        return "http://engine.scichina.com/publisher/" + pub.shortname + "/journal/" + journal.shortTitle;
     }
 });
 

@@ -6,7 +6,7 @@
                         <!-- 代码 开始 -->
                         {{#each hasJournal}}
                             <div class="bookPart oh">
-                                <a href="{{urlToJournalById _id}}" target="_blank">
+                                <a href="{{journalUrl _id}}" target="_blank">
                                     <img class="miniplatform-cover" src="{{getImageHelper picture}}"/>
                                 </a>
                                 <p>{{_ "EIC"}}:{{translateThis chiefEditor.cn chiefEditor.en}}</p>
