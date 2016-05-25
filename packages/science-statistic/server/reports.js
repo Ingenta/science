@@ -10,7 +10,8 @@ Science.Reports.getLastTwelveMonths = function (start, end) {
         var currStartMonth = startYear == year ? start.getMonth() + 1 : 1;
         var currEndMonth = year == endYear ? end.getMonth() + 1 : 12;
         for (var month = currStartMonth; month <= currEndMonth; month++) {
-            result.push(year.toString() + month.toString())
+            var monthstr=month<10?"0"+month.toString():month.toString();
+            result.push(year.toString() + monthstr)
         }
     }
     return result;
