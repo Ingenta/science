@@ -27,7 +27,8 @@
         }
       ],
       "journal": {
-        "titleCn": "中国科学 物理学 力学 天文学"
+        "title": "中国科学 物理学 力学 天文学",
+        "url": "http://engine.scichina.com/"
       },
       "year": 2015,
       "volume": 45,
