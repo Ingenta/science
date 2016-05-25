@@ -70,6 +70,7 @@ Template.ShowJournal.helpers({
         if (!journalId || !publisher) return;
         Session.set('currentJournalId', journalId);
         Session.set('currentPublisherId', publisher);
+        Session.set('currentIssueId',null);
         if (Router.current().params.journalShortTitle) {
             if (!Router.current().params.hash) {
                 Meteor.call("getLatestIssueId", journalId, function (err, response) {
