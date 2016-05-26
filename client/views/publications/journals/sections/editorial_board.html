@@ -38,7 +38,7 @@
         <div class="part"><h4>{{_ "Editorial Board"}}——{{translateThis title.cn title.en}}</h4>
 
             <div class="pull-right">
-                {{#if can "add-editorial-member" "resource" }}{{> addEditorialBoardModalForm}}{{/if}}
+                {{#if canDoThis}}{{> addEditorialBoardModalForm}}{{/if}}
             </div>
         </div>
         <hr>

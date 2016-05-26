@@ -52,6 +52,9 @@ Template.EditorialBoardMembersList.helpers({
         var aboutId = Session.get('tabBoard');
         var publicationId = Session.get('currentJournalId');
         return EditorialBoard.find({about: aboutId,publications:publicationId},{sort: {name: 1}});
+    },
+    canDoThis:function(){
+        return Permissions.userCan("modify-journal", "resource", Meteor.userId(), {journal:Session.get('currentJournalId')});
     }
 });
 

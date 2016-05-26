@@ -2,13 +2,13 @@ this.Meeting = new Meteor.Collection("meeting_info");
 
 this.Meeting.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-meeting-info", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-meeting-info", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-meeting-info", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     }
 });
 
