@@ -17,17 +17,17 @@ Router.route('downloadExcel', {
         if (this.request.query.institution && this.request.query.institution !== 'null') {
             query.institutionId = {$in: this.request.query.institution.split(',')};
         }
-        if (this.request.query.startDate && this.request.query.startDate !== 'null' && this.request.query.endDate && this.request.query.endDate !== 'null') {
-            query.when = {$gte: new Date(this.request.query.startDate), $lte: new Date(this.request.query.endDate)};
-        }
         if (this.request.query.startDate && this.request.query.startDate !== 'null') {
             start = new Date(this.request.query.startDate);
             query.when = {$gte: new Date(this.request.query.startDate)};
         }
-
         if (this.request.query.endDate && this.request.query.endDate !== 'null') {
             end = new Date(this.request.query.endDate);
-            query.when = {$lte: new Date(this.request.query.endDate)};
+            if(query.when){
+                query.when["$lte"]= new Date(this.request.query.endDate);
+            }else{
+                query.when = {$lte: new Date(this.request.query.endDate)};
+            }
         }
         var reportType = this.request.query.reportType;
         var file;
