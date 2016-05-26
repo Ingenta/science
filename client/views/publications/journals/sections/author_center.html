@@ -60,7 +60,7 @@
                             {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 {{> updateAuthorCenterModalForm}}
                             {{/if}}
-                            {{#if can "delete-author-center" "resource"  }}
+                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 <a href="#" class="fa fa-trash"></a>
                             {{/if}}
                         </li>
@@ -84,7 +84,7 @@
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{> updateSubmitManuscriptModalForm}}
                         {{/if}}
-                        {{#if can "delete-author-center" "resource"  }}
+                        {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             <a href="#" class="fa fa-trash"></a>
                         {{/if}}
                     </p>
@@ -94,7 +94,7 @@
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                     {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
                                 {{/if}}
-                                {{#if can "delete-author-center" "resource"  }}
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                     <a href="#" class="fa fa-trash"></a>
                                 {{/if}}
                             </li>
@@ -121,7 +121,7 @@
                             {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 {{> updateSubmitManuscriptModalForm}}
                             {{/if}}
-                            {{#if can "delete-author-center" "resource"  }}
+                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                 <a href="#" class="fa fa-trash"></a>
                             {{/if}}
                         </li>

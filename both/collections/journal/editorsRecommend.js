@@ -2,13 +2,13 @@ this.EditorsRecommend = new Meteor.Collection("recommend");
 
 this.EditorsRecommend.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-recommend", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-recommend", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-recommend", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     }
 });
 

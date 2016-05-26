@@ -2,13 +2,13 @@ this.About = new Meteor.Collection("about");
 
 this.About.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-about", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-about", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-about", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     }
 });
 

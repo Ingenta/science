@@ -5,10 +5,10 @@ this.SpecialTopics.allow({
         return Permissions.userCan("add-special-issue", "collections", userId);
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-special-issue", "collections", userId);
+        return Permissions.userCan("modify-special-issue", "collections", userId,{journal:doc.journalId});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-special-issue", "collections", userId);
+        return Permissions.userCan("delete-special-issue", "collections", userId,{journal:doc.journalId});
     }
 });
 

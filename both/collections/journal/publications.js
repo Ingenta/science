@@ -5,13 +5,12 @@ this.Publications.allow({
         return Permissions.userCan("add-journal", "resource", userId);
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-journal", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc._id});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-journal", "resource", userId);
+        return Permissions.userCan("delete-journal", "resource", userId,{journal:doc._id});
     }
 });
-
 
 var getTags = function () {
     var tags = Tags.find({}).fetch();

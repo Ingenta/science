@@ -2,13 +2,13 @@ this.AuthorCenter = new Meteor.Collection("author_center");
 
 this.AuthorCenter.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-author-center", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-author-center", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-author-center", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     }
 });
 

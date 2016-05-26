@@ -2,13 +2,13 @@ this.EditorialBoard = new Meteor.Collection("editorial_board");
 
 this.EditorialBoard.allow({
     insert: function (userId, doc) {
-        return Permissions.userCan("add-editorial-board", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     update: function (userId, doc) {
-        return Permissions.userCan("modify-editorial-board", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     },
     remove: function (userId, doc) {
-        return Permissions.userCan("delete-editorial-board", "resource", userId);
+        return Permissions.userCan("modify-journal", "resource", userId,{journal:doc.publications});
     }
 });
 
