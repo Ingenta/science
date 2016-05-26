@@ -43,9 +43,19 @@ Template.statistic.events({
         var publication = $("#filter-journal").val();
         var institution = $("#filter-institutions").val();
         var startDate = $("#startDate").val();
-        var endDate = $("#endDate").val();
+        var endMonth = $("#endDate").val()
+        if(endMonth){
+            var months = endMonth.substring(5,7);
+            if(months=="02"){
+                var endDate = endMonth+"-28";
+            }else{
+                var endDate = endMonth+"-30";
+            }
+        }else {
+            var endDate = new Date();
+        }
         var reportType = $("#reportType").val();
-        if(endDate<startDate){
+        if(endDate&&endDate<startDate){
             sweetAlert(TAPi18n.__( "Start date should be less than end date"));
             return false;
         }
