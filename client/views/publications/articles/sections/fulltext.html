@@ -127,7 +127,7 @@
                             {{/mathjax}}
                         </div>
                         {{#if foot}}
-                            {{foot}}
+                            <div style="text-align:left">{{#mathjax}}{{{foot}}}{{/mathjax}}</div>
                         {{/if}}
                     </div>
                 </div>
@@ -178,11 +178,14 @@
 <template name="atttable">
     <div class="att-table">
         <div>
-            {{{table}}}
-        </div>
-        <div>
             <b>{{label}} {{{caption}}}</b>
         </div>
+        <div>
+            {{{table}}}
+        </div>
+        {{#if foot}}
+            <div style="text-align:left">{{#mathjax}}{{{foot}}}{{/mathjax}}</div>
+        {{/if}}
     </div>
 </template>
 
