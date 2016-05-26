@@ -45,10 +45,19 @@ Template.statistic.events({
         var startDate = $("#startDate").val();
         var endMonth = $("#endDate").val()
         if(endMonth){
+            var years = endMonth.substring(0,4);
             var months = endMonth.substring(5,7);
             if(months=="02"){
-                var endDate = endMonth+"-28";
-            }else{
+                if((years%4==0 && years%100!=0) || years%400==0) {
+                    var endDate = endMonth + "-29";
+                }else{
+                    var endDate = endMonth + "-28";
+                }
+            }
+            if(months=="01" || months=="03" || months=="05" || months=="07" || months=="08" || months=="10" || months=="12"){
+                var endDate = endMonth+"-31";
+            }
+            if(months=="04" || months=="06" || months=="09" || months=="11" ){
                 var endDate = endMonth+"-30";
             }
         }else {
