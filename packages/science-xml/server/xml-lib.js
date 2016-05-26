@@ -109,7 +109,7 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
 
             //通讯作者信息
-            var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
+            var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='Recommend']/attribute::rid | child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
             if (noteAttr) {
                 authorObj.email = noteAttr;
                 logger.info('parse email done')
@@ -131,7 +131,9 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
     var authorNotesNodes = parserHelper.getNodes("//article-meta/author-notes/fn[@id]", doc);
     authorNotesNodes.forEach(function (note) {
-        var noteLabel = parserHelper.getSimpleVal("child::label", note);
+        var noteLabel = parserHelper.getSimpleVal("child::label/sup", note);
+        if(!noteLabel)
+            noteLabel=parserHelper.getSimpleVal("child::label", note);
         var email = parserHelper.getAllMatchedVal("descendant::ext-link", note);
         var multiLangNote = parserHelper.getMultiVal("child::p[@lang='{lang}']", note, {
             planb: "child::p",
