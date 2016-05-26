@@ -110,6 +110,7 @@
 <template name="tableModal">
     <div class="modal fade table-modal" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-md">
+            {{#with tableInfo}}
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -135,6 +136,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
                 </div>
             </div>
+            {{/with}}
         </div>
     </div>
 </template>
