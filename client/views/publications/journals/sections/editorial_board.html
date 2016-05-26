@@ -58,8 +58,8 @@
     {{#each editorialBoards}}
         <div class="part" id="{{_id}}">
             <div class="pull-right">
-                {{#if can "modify-editorial-member" "resource" }}{{> updateEditorialBoardModalForm}}{{/if}}
-                {{#if can "delete-editorial-member" "resource" }}<a href="#" class="fa fa-trash"></a>{{/if}}
+                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}{{> updateEditorialBoardModalForm}}{{/if}}
+                {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
             </div>
 
             <div class="row">
