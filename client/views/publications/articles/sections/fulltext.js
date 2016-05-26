@@ -130,20 +130,10 @@ Template.figModal.helpers({
     }
 });
 Template.tableModal.helpers({
-    "label": function () {
-        if (!Session.get("table"))
-            return "";
-        return Session.get("table").label;
-    },
-    "caption": function () {
+    "tableInfo": function () {
         if (!Session.get("table"))
             return;
-        return Session.get("table").caption;
-    },
-    "table": function () {
-        if (!Session.get("table"))
-            return;
-        return Session.get("table").table;
+        return Session.get("table");
     }
 });
 Template.tableModal.onRendered(function(){
