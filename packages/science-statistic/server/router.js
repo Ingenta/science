@@ -23,8 +23,13 @@ Router.route('downloadExcel', {
         }
         if (this.request.query.endDate && this.request.query.endDate !== 'null') {
             end = new Date(this.request.query.endDate);
-            query.when = {$lte: new Date(this.request.query.endDate)};
+            if(query.when){
+                query.when["$lte"]= new Date(this.request.query.endDate);
+            }else{
+                query.when = {$lte: new Date(this.request.query.endDate)};
+            }
         }
+        console.log(query);
         var reportType = this.request.query.reportType;
         var file;
         var fileName = "statistic";
