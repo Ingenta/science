@@ -69,6 +69,7 @@ ScienceXML.getFileContentsFromRemotePath = function (path) {
 }
 ScienceXML.getFileContentsFromLocalPath = function (path) {
     var text = Science.FSE.readFileSync(path, "utf8");
+    text=text.replace(/<\?Pub.*?\?>/img,'');//去除为生成pdf加入的特殊标记内容
     return text.replace(/\sxml:base=/g, ' ref-type=');
 }
 
