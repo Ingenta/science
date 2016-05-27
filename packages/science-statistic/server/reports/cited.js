@@ -1,6 +1,6 @@
 //CitedJournal
 Science.Reports.getCitedJournalReportFile = function (query, fileName) {
-    delete query.when;
+    delete query.dateCode;
     delete query.institutionId;
     delete query.action;
     query.citations = {$exists: true};
@@ -10,7 +10,7 @@ Science.Reports.getCitedJournalReportFile = function (query, fileName) {
 };
 //CitedArticle
 Science.Reports.getCitedArticleReportFile = function (query, fileName) {
-    delete query.when;
+    delete query.dateCode;
     delete query.institutionId;
     delete query.action;
     query.citations = {$exists: true};

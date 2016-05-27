@@ -42,28 +42,17 @@ Template.statistic.events({
         var publisher = $("#filter-publisher").val();
         var publication = $("#filter-journal").val();
         var institution = $("#filter-institutions").val();
-        var startDate = $("#startDate").val();
-        var endMonth = $("#endDate").val()
-        if(endMonth){
-            var years = endMonth.substring(0,4);
-            var months = endMonth.substring(5,7);
-            if(months=="02"){
-                if((years%4==0 && years%100!=0) || years%400==0) {
-                    var endDate = endMonth + "-29";
-                }else{
-                    var endDate = endMonth + "-28";
-                }
-            }
-            if(months=="01" || months=="03" || months=="05" || months=="07" || months=="08" || months=="10" || months=="12"){
-                var endDate = endMonth+"-31";
-            }
-            if(months=="04" || months=="06" || months=="09" || months=="11" ){
-                var endDate = endMonth+"-30";
-            }
-        }else {
-            var endDate = new Date();
-        }
+        var startMonth = $("#startDate").val();
+        var endMonth = $("#endDate").val();
         var reportType = $("#reportType").val();
+        var startDate = "";
+        var endDate = "";
+        if(startMonth){
+            startDate = startMonth.replace("-","");
+        }
+        if(endMonth){
+            endDate = endMonth.replace("-","");
+        }
         if(endDate&&endDate<startDate){
             sweetAlert(TAPi18n.__( "Start date should be less than end date"));
             return false;
