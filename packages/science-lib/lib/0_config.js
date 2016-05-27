@@ -140,7 +140,10 @@ Config = {
             mooPaper:["MOO论文","moo paper","moo papers"],
             erratum:["勘误","erratum","erratums","更正","勘 误","更 正"],
             invitedReview:["invited review","invited reviews","特邀评述"],
-            retraction:["撤稿","retraction note","retraction notes","retraction","retractions","撤 稿"]
+            retraction:["撤稿","retraction note","retraction notes","retraction","retractions","撤 稿"],
+            messages:["消息","messages"],
+            profile:["profile","人物评传"],
+            hisOfScience:["history of science","科学史话"]
         }
     },
     otherPlatformLoginUrl: {

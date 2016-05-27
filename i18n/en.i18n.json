@@ -138,6 +138,9 @@
         "erratum":"Erratum",
         "invitedReview":"Invited Review",
         "retraction":"retraction note",
+        "messages":"Messages",
+        "profile":"Profile",
+        "hisOfScience":"History of science",
         "other":"other"
     },
     "clickToView":"Click to view",
