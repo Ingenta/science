@@ -18,17 +18,22 @@ Router.route('downloadExcel', {
             query.institutionId = {$in: this.request.query.institution.split(',')};
         }
         if (this.request.query.startDate && this.request.query.startDate !== 'null') {
-            start = new Date(this.request.query.startDate);
-            query.when = {$gte: new Date(this.request.query.startDate)};
+            start = new Date(this.request.query.startDate.substring(0,4)+"-"+this.request.query.startDate.substring(4,6));
+            query.dateCode = {$gte:Number(this.request.query.startDate)};
         }
         if (this.request.query.endDate && this.request.query.endDate !== 'null') {
-            end = new Date(this.request.query.endDate);
-            if(query.when){
-                query.when["$lte"]= new Date(this.request.query.endDate);
+            end = new Date(this.request.query.endDate.substring(0,4)+"-"+this.request.query.endDate.substring(4,6));
+            if(query.dateCode){
+                query.dateCode["$lte"]= Number(this.request.query.endDate);
             }else{
-                query.when = {$lte: new Date(this.request.query.endDate)};
+                query.dateCode = {$lte: Number(this.request.query.endDate)};
             }
         }
+        console.log(this.request.query.startDate);
+        console.log(this.request.query.endDate);
+        console.log(start);
+        console.log(end);
+        console.log(query);
         var reportType = this.request.query.reportType;
         var file;
         var fileName = "statistic";
