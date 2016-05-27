@@ -198,17 +198,21 @@ Meteor.methods({
                         if (workbookJson[i].journals) {
                             _.map(workbookJson[i].journals.split(","), function (item) {
                                 var journals = Publications.find({issn: item.trim()}, {_id: 1}).fetch();
-                                _.each(journals, function (item) {
-                                    journal.push(item._id);
-                                });
+                                if(journals){
+                                    _.each(journals, function (item) {
+                                        journal.push(item._id);
+                                    });
+                                }
                             });
                         }
                         if (workbookJson[i].topics) {
                             _.map(workbookJson[i].topics.split(","), function (item) {
                                 var topics = Topics.find({name: item.trim(), "parentId": null}, {_id: 1}).fetch();
-                                _.each(topics, function (item) {
-                                    topic.push(item._id);
-                                });
+                                if(topics){
+                                    _.each(topics, function (item) {
+                                        topic.push(item._id);
+                                    });
+                                }
                             });
                         }
                         Users.update({_id: id}, {
