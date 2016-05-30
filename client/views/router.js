@@ -41,7 +41,7 @@ Router.onBeforeAction(function () {
             if(!_.isEmpty(article.authors)){
                 var authorNames="";
                 _.each(article.authors,function(author){
-                    authorName+=Science.JSON.try2GetRightLangVal(author.fullname)+"|";
+                    authorNames+=Science.JSON.try2GetRightLangVal(author.fullname)+"|";
                 })
                 if(authorNames){
                     authorNames=authorNames.slice(0,-1);
