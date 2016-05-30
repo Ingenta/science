@@ -44,3 +44,11 @@ Science.dom.confirm = function(title,content,callback){
 		callback && callback();
 	});
 }
+
+Science.dom.removeMeta = function(name){
+	$("meta[name="+name+"]").remove();
+}
+Science.dom.setMeta = function(name,content){
+	Science.dom.removeMeta(name);
+	$("head").append('<meta name="'+name+'" content="'+content+'">');
+}

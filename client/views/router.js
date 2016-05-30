@@ -8,6 +8,7 @@ Router.configure({
     progressSpinner: false,
     defaultBreadcrumbLastLink: false
 });
+
 HomePageSubs = new SubsManager();
 CollectionSubs = new SubsManager();
 MiniPlatformSubs = new SubsManager();
@@ -33,6 +34,25 @@ Router.onBeforeAction(function () {
     if (!this.ready()) {
         $("body").addClass("wait");
     } else {
+        if(this.route.getName()=='article.show' || this.route.getName()=='article.show.strange'){
+            var article=this.data();
+            Science.dom.setMeta('title',Science.JSON.try2GetRightLangVal(article.title));
+            Science.dom.setMeta('description',Science.JSON.try2GetRightLangVal(article.abstract));
+            if(!_.isEmpty(article.authors)){
+                var authorNames="";
+                _.each(article.authors,function(author){
+                    authorName+=Science.JSON.try2GetRightLangVal(author.fullname)+"|";
+                })
+                if(authorNames){
+                    authorNames=authorNames.slice(0,-1);
+                    Science.dom.setMeta('author',authorNames);
+                }
+            }
+        }else{
+            Science.dom.removeMeta('author');
+            Science.dom.setMeta('title',TAPi18n.__("Science China Press"));
+            Science.dom.setMeta('description',"Science China Press - Providing researchers with access to millions of scientific documents from journals, books, series, protocols and reference works.");
+        }
         $("body").removeClass("wait");
         this.next();
     }
