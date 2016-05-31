@@ -127,8 +127,31 @@ Meteor.methods({
         return _.sortBy(v, function (oneVolume) {
             return parseInt(oneVolume.volume, 10);
         }).reverse();
+    },
+    removeArticle:function(doi){
+        check(doi,String);
+        var article=Articles.findOne({doi:doi});
+        Permissions.check("delegate-and-revoke", "permissions", {journal:article.journalId});
+        Collections.Medias.remove({doi:doi});
+        SubTasks.remove({doi:doi});
+        MostCited.remove({articleId:article._id});
+        NewsRecommend.remove({ArticlesId:article._id});
+        Citations.remove({articleId:article._id});
+        EditorsRecommend.remove({ArticlesId:article._id});
+        PageViews.remove({ArticlesId:article._id});
+        SpecialTopics.update({articles:article._id},{$pull:{articles:article._id}},{multi: true});
+        ArticleCollections.update({articles:article._id},{$pull:{articles:article._id}},{multi: true});
+        Users.update({"favorite.articleId":article._id},{$pull:{favorite:{articleId:article._id}}},{multi:true});
+        Users.update({"profile.articlesOfInterest":article._id},{$pull:{"profile.articlesOfInterest":article._id}},{multi:true});
+        var logs=UploadLog.find({articleId:article._id},{_id:1});
+        if(logs.count()){
+            var logIdArr= _.pluck(logs.fetch(),'_id')
+            UploadTasks.remove({logId:{$in:logIdArr}});
+            UploadLog.remove({articleId:article._id})
+        }
+        Articles.remove({doi:doi});
+        return true;
     }
-
 });
 
 var getNextPage = function (issue, padPage, ascending) {

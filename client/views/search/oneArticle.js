@@ -11,7 +11,9 @@ Template.oneArticle.events({
 	"click .btn-delete-article": function (e) {
 		var articleId = this._id;
 		confirmDelete(e,function(){
-			Articles.remove({_id:articleId});
-		})
+			Meteor.call("removeArticle",doi,function(e,r){
+				e && sweetAlert("Error","删除文章失败");
+			})
+		});
 	}
 })

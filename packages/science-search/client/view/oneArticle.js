@@ -60,12 +60,3 @@ Template.oneSolrArticle.helpers({
 		return this.abstract;
 	}
 });
-
-Template.oneSolrArticle.events({
-	"click .btn-delete-article": function () {
-		var articleId = this._id;
-		confirmDelete(e,function(){
-			Articles.remove({_id:articleId});
-		});
-	}
-})

@@ -25,13 +25,11 @@ _.extend(Permissions, {
     },
     check: function (perm, pkg, scope) {
         if (Meteor.user() && Meteor.user().disable) {
-            console.log("account disabled");
             Meteor.logout();
             Router.go("home");
             return;
         }
         if (!Meteor.user()) {
-            console.log("hasn't login");
             Router.go("login");
             return;
         }
