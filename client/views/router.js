@@ -84,7 +84,7 @@ Router.onBeforeAction(function () {
                                 var affText = Science.JSON.try2GetRightLangVal(item.affText,null,'en');
                                 if(label && label.length<3 && affText.startWith(label))
                                     affText= affText.substr(label.length)
-                                citationMetaTags.push({name:"citation_author_institution",content:affText})
+                                citationMetaTags.push({name:"citation_author_institution",content:affText.trim()})
                             }
                         })
                     }
