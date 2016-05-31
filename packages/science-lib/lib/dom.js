@@ -48,7 +48,13 @@ Science.dom.confirm = function(title,content,callback){
 Science.dom.removeMeta = function(name){
 	$("meta[name="+name+"]").remove();
 }
+Science.dom.addMeta = function(name,content){
+	$("head").append('<meta name="'+name+'" content="'+content+'">');
+}
 Science.dom.setMeta = function(name,content){
 	Science.dom.removeMeta(name);
-	$("head").append('<meta name="'+name+'" content="'+content+'">');
+	Science.dom.addMeta(name,content);
+}
+Science.dom.clearCitationMeta = function(){
+	$("meta[name^='citation_']").remove();
 }

@@ -34,24 +34,74 @@ Router.onBeforeAction(function () {
     if (!this.ready()) {
         $("body").addClass("wait");
     } else {
+        Science.dom.clearCitationMeta();
+        Science.dom.removeMeta('author');
+        Science.dom.setMeta('title',TAPi18n.__("Science China Press"));
+        Science.dom.setMeta('description',"Science China Press - Providing researchers with access to millions of scientific documents from journals, books, series, protocols and reference works.");
         if(this.route.getName()=='article.show' || this.route.getName()=='article.show.strange'){
             var article=this.data();
-            Science.dom.setMeta('title',Science.JSON.try2GetRightLangVal(article.title));
-            Science.dom.setMeta('description',Science.JSON.try2GetRightLangVal(article.abstract));
+            Science.dom.setMeta('title',Science.JSON.try2GetRightLangVal(article.title,null,'en'));
+            Science.dom.setMeta('description',Science.JSON.try2GetRightLangVal(article.abstract,null,'en'));
+            var citationMetaTags = [];
+            citationMetaTags.push({name:"citation_publisher",content:Publishers.findOne({_id:article.publisher}).name});
+            citationMetaTags.push({name:'citation_title',content:Science.JSON.try2GetRightLangVal(article.title,null,'en')});
+            _.isDate(article.published) && citationMetaTags.push({name:"citation_date",content:article.published.format("yyyy/MM/dd")})
+            citationMetaTags.push({name:"citation_doi",content:article.doi});
+            citationMetaTags.push({name:'citation_abstract',content:Science.JSON.try2GetRightLangVal(article.abstract,null,'en')});
+            //-------期刊信息-------
+            var journal=Publications.findOne({_id:article.journalId});
+            if(journal){
+                citationMetaTags.push({name:"citation_journal_title",content:journal.title});
+                citationMetaTags.push({name:"citation_journal_abbrev",content:journal.shortTitle});
+                citationMetaTags.push({name:"citation_issn",content:journal.issn.slice(0, 4) + "-" + journal.issn.slice(4)});
+                citationMetaTags.push({name:"citation_issn",content:journal.EISSN});
+            }
+            //------卷期页码------
+            article.volume && citationMetaTags.push({name:"citation_volume",content:article.volume});
+            article.issue && citationMetaTags.push({name:"citation_issue",content:article.issue});
+            (article.startPage || article.elocationId) && citationMetaTags.push({name:"citation_firstpage",content:(article.startPage || article.elocationId)})
+            article.endPage && citationMetaTags.push({name:"citation_lastpage",content:article.endPage});
+            //------作者信息-------
             if(!_.isEmpty(article.authors)){
                 var authorNames="";
                 _.each(article.authors,function(author){
-                    authorNames+=Science.JSON.try2GetRightLangVal(author.fullname)+"|";
+                    authorNames+=Science.JSON.try2GetRightLangVal(author.fullname,null,'en')+"|";
+                    citationMetaTags.push({name:"citation_author",content:Science.JSON.try2GetRightLangVal(author.fullname,null,'en')});
+                    if(author.email){
+                        var email=_.find(article.authorNotes,function(item){
+                            return author.email==item.id;
+                        })
+                        if(email)
+                            citationMetaTags.push({name:"citation_author_email",content:email.email})
+                    }
+                    if(!_.isEmpty(article.affiliations)){
+                        if(_.isEmpty(author.affs)){
+                            author.affs="all";
+                        }
+                        _.each(article.affiliations,function(item){
+                            if(author.affs=="all" || _.contains(author.affs,item.id)){
+                                var label=Science.JSON.try2GetRightLangVal(item.label,null,'en');
+                                var affText = Science.JSON.try2GetRightLangVal(item.affText,null,'en');
+                                if(label && label.length<3 && affText.startWith(label))
+                                    affText= affText.substr(label.length)
+                                citationMetaTags.push({name:"citation_author_institution",content:affText})
+                            }
+                        })
+                    }
                 })
                 if(authorNames){
                     authorNames=authorNames.slice(0,-1);
                     Science.dom.setMeta('author',authorNames);
                 }
             }
-        }else{
-            Science.dom.removeMeta('author');
-            Science.dom.setMeta('title',TAPi18n.__("Science China Press"));
-            Science.dom.setMeta('description',"Science China Press - Providing researchers with access to millions of scientific documents from journals, books, series, protocols and reference works.");
+            //----url----
+            citationMetaTags.push({name:"citation_abstract_html_url",content:window.location.href});
+            article.pdfId && citationMetaTags.push({name:"citation_pdf_url",content:window.location.origin+"/downloadPdf/"+article._id});
+
+            //----插入meta标签到head中---
+            _.each(citationMetaTags,function(item){
+                Science.dom.addMeta(item.name,item.content);
+            })
         }
         $("body").removeClass("wait");
         this.next();
