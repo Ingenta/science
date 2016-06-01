@@ -5,6 +5,7 @@ Disallow: /downloadPdf/
 Disallow: /citation/
 Disallow: /xml/
 Disallow: /cfs/
+Disallow: /search
 Disallow: /admin/
 Crawl-delay: 30
 
