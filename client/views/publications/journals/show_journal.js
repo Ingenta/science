@@ -20,7 +20,6 @@ ReactiveTabs.createInterface({
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
-                Session.set("activeTab", ""); //NOTE: possibly need this to prevent page sticking to browse or could disable tabs
             } else if (slug === 'Editorial Board') {
                 Meteor.subscribe("journalEditorialBoard", Router.current().params.journalShortTitle);
             } else if (slug === 'Accepted') {
@@ -65,21 +64,21 @@ Template.journalBanner.helpers({
     }
 });
 
-Template.ShowJournal.helpers({
-    initPage: function (journalId, publisher) {
-        if (!journalId || !publisher) return;
-        Session.set('currentJournalId', journalId);
-        Session.set('currentPublisherId', publisher);
-        Session.set('currentIssueId',null);
-        if (Router.current().params.journalShortTitle) {
-            if (!Router.current().params.hash) {
-                Meteor.call("getLatestIssueId", journalId, function (err, response) {
-                    if (err) return console.log(err);
-                    response && Session.set("currentIssueId", response);
-                    // window.location.hash = response;
-                });
-                console.log("getting latest issue")
-            }
+Template.ShowJournal.onCreated(function(){
+    var journalId=this._id;
+    var publisher=this.publisher;
+    if (!journalId || !publisher) return;
+    Session.set('currentJournalId', journalId);
+    Session.set('currentPublisherId', publisher);
+    Session.set('currentIssueId',null);
+    if (Router.current().params.journalShortTitle) {
+        if (!Router.current().params.hash) {
+            Meteor.call("getLatestIssueId", journalId, function (err, response) {
+                if (err) return console.log(err);
+                response && Session.set("currentIssueId", response);
+                // window.location.hash = response;
+            });
+            console.log("getting latest issue")
         }
     }
 });
