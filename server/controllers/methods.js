@@ -131,7 +131,7 @@ Meteor.methods({
     removeArticle:function(doi){
         check(doi,String);
         var article=Articles.findOne({doi:doi});
-        Permissions.check("delegate-and-revoke", "permissions", {journal:article.journalId});
+        Permissions.check("delete-article", "resource", {journal:article.journalId});
         Collections.Medias.remove({doi:doi});
         SubTasks.remove({doi:doi});
         MostCited.remove({articleId:article._id});
