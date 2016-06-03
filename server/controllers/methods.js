@@ -131,7 +131,9 @@ Meteor.methods({
     removeArticle:function(doi){
         check(doi,String);
         var article=Articles.findOne({doi:doi});
-        Permissions.check("delegate-and-revoke", "permissions", {journal:article.journalId});
+        if(!Permissions.userCan("delete-article", "resource",Meteor.userId(), {journal:article.journalId})){
+            throw new Meteor.Error(401, "permissions denied");
+        }
         Collections.Medias.remove({doi:doi});
         SubTasks.remove({doi:doi});
         MostCited.remove({articleId:article._id});
