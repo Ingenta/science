@@ -19,11 +19,19 @@ AdvertisementSchema = new SimpleSchema({
     },
     link: {
         type: String,
-        optional: true
+        regEx: SimpleSchema.RegEx.Url,
+        optional: true,
+        autoform: {
+            type: "url"
+        }
     },
     defaultLink: {
         type: String,
-        optional: true
+        regEx: SimpleSchema.RegEx.Url,
+        optional: true,
+        autoform: {
+            type: "url"
+        }
     },
     types: {
         type: String,
