@@ -312,6 +312,10 @@
             "adBanner": {
                 "label": "Choose Image for Banner inside PDF"
             },
+            "adhref":{
+                "label": "Type the url for the advertisement inside PDF",
+                "placeholder":"http://"
+            },
             "submissionReview":{
                 "label":"Submission and Review"
             },

@@ -223,6 +223,10 @@ PublicationsSchema = new SimpleSchema({
             }
         }
     },
+    adhref: {
+        type: String,
+        optional:true
+    },
     //scholarOneCode: {
     //    type: String,
     //    optional: true

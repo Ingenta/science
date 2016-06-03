@@ -456,6 +456,10 @@
       "adBanner": {
         "label": "选择PDF广告横幅图片"
       },
+      "adhref":{
+        "label": "设置PDF广告横幅图片的链接地址",
+        "placeholder":"http://"
+      },
       "submissionReview":{
         "label":"投审稿地址"
       },

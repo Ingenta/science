@@ -297,6 +297,7 @@ Router.map(function () {
             }
             if (journalInfo.adBanner && Images.findOne({_id: journalInfo.adBanner})) {
                 data.ad = host + Images.findOne({_id: journalInfo.adBanner}).url({auth: false});
+                data.adhref=journalInfo.adhref;
             }
 
             //parse article metadata
@@ -350,11 +351,9 @@ Router.map(function () {
 
                 var html = JET.render('pdf', data);
 
-                wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>', Meteor.bindEnvironment(function (code, signal) {
-                    if (code) {
-                        //logger.error(code);
-                        console.dir(code);
-                        console.dir(signal);
+                wkhtmltopdf('<html><head><meta charset="utf-8"/></head><body>' + html + '</body></html>',{output:adPdf}, Meteor.bindEnvironment(function (err, stream) {
+                    if (err) {
+                        console.dir(err);
                     }
                     var ip = request.headers["x-forwarded-for"] || request.connection.remoteAddress || request.socket.remoteAddress;
                     var footmark = Config.pdf.footmark.replace("{ip}", ip || "unknown")
@@ -371,44 +370,43 @@ Router.map(function () {
                         params = _.union(params, ["-w", Config.pdf.watermark]);
                     }
                     Science.Pdf(params, function (error, stdout, stderr) {
-                            Science.FSE.remove(adPdf);
-                            if (stdout) {
-                                // logger.debug(stdout);
-                            }
-                            if (stderr) {
-                                console.log('------STDERR--------');
-                                console.dir(stderr);
-                                console.log('------STDERR--------');
-                            }
-                            if (!error) {
-                                Science.FSE.exists(outputPath, function (result) {
-                                    if (result) {
-                                        var stat = null;
-                                        try {
-                                            stat = Science.FSE.statSync(outputPath);
-                                        } catch (_error) {
-                                            logger.error(_error);
-                                            response.statusCode = 404;
-                                            response.end();
-                                            return;
-                                        }
-                                        var headers = {
-                                            'Content-Type': "application/pdf",
-                                            'Content-Disposition': "attachment; filename=" + article.articledoi + ".pdf",
-                                            'Content-Length': stat.size
-                                        };
-
-                                        response.writeHead(200, headers);
-
-                                        Science.FSE.createReadStream(outputPath).pipe(response);
-                                    }
-                                });
-                            } else {
-                                throw error;
-                            }
+                        Science.FSE.remove(adPdf);
+                        if (stdout) {
+                            // logger.debug(stdout);
                         }
-                    );
-                })).pipe(Science.FSE.createWriteStream(adPdf));
+                        if (stderr) {
+                            console.log('------STDERR--------');
+                            console.dir(stderr);
+                            console.log('------STDERR--------');
+                        }
+                        if (!error) {
+                            Science.FSE.exists(outputPath, function (result) {
+                                if (result) {
+                                    var stat = null;
+                                    try {
+                                        stat = Science.FSE.statSync(outputPath);
+                                    } catch (_error) {
+                                        logger.error(_error);
+                                        response.statusCode = 404;
+                                        response.end();
+                                        return;
+                                    }
+                                    var headers = {
+                                        'Content-Type': "application/pdf",
+                                        'Content-Disposition': "attachment; filename=" + article.articledoi + ".pdf",
+                                        'Content-Length': stat.size
+                                    };
+
+                                    response.writeHead(200, headers);
+
+                                    Science.FSE.createReadStream(outputPath).pipe(response);
+                                }
+                            });
+                        } else {
+                            throw error;
+                        }
+                    });
+                }))
 
             });
 
