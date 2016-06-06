@@ -5,8 +5,12 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         if (journal) {
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
-            if (this.params.hash && this.params.hash !== "!") {
-                Session.set('currentIssueId', this.params.hash);
+            if(this.params.query.vol && this.params.query.iss){
+                var query={journalId:journal._id};
+                query.volume=this.params.query.vol;
+                query.issue=this.params.query.iss;
+                var currentIssue = Issues.findOne(query);
+                currentIssue && Session.set("currentIssueId",currentIssue._id);
                 Session.set("activeTab", "Browse");
             } else {
                 Session.set('currentIssueId', null);
@@ -26,18 +30,29 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     parent: "publisher.name",
     name: "journal.name",
     waitOn: function () {
-        return [
-            Meteor.subscribe("journalOverviewTab", this.params.journalShortTitle),
-            CollectionSubs.subscribe('allCollections'),
-            JournalSubs.subscribe('medias'),
-            JournalSubs.subscribe('files'),
-            JournalSubs.subscribe('tag')
-        ]
+        if(this.params.query.slug=='Browse'){
+            return [
+                JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
+                JournalSubs.subscribe('medias'),
+                JournalSubs.subscribe('files'),
+                JournalSubs.subscribe('tag')
+            ]
+        }else{
+            return [
+                JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
+                CollectionSubs.subscribe('allCollections'),
+                JournalSubs.subscribe('medias'),
+                JournalSubs.subscribe('files'),
+                JournalSubs.subscribe('tag')
+            ]
+        }
+
     },
     onStop: function () {
         Science.dom.clearSelect2Record();
     }
 });
+
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
     data: function () {
         return SpecialTopics.findOne({_id: this.params.specialTopicsId});

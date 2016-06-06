@@ -4,17 +4,24 @@ Template.journalTabs.onCreated(function () {
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug, template) {
-        history.replaceState({},document.title,window.location.pathname + "?slug="+slug+window.location.hash);
+        var urlSearchPart="slug="+slug;
+        if(slug=='Browse' && Session.get("currentIssueId")){
+            var cissue=Issues.findOne({_id:Session.get("currentIssueId")});
+            urlSearchPart="vol="+cissue.volume+"&iss="+cissue.issue+"&"+urlSearchPart;
+        }
+        history.replaceState({},document.title,window.location.pathname + "?"+urlSearchPart);
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (Router.current().params.journalShortTitle) {
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
+                JournalSubs.subscribe("journalOverviewTab", Router.current().params.journalShortTitle);
+                CollectionSubs.subscribe('allCollections');
                 Meteor.call("insertAudit", Meteor.userId(), "journalOverview", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
-                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
+                JournalSubs.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
@@ -36,7 +43,7 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe("editorial_member", Router.current().params.journalShortTitle);
             } else if (slug === 'MOOP') {
                 Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
-                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
+                JournalSubs.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabArticleList', Session.get('currMoopIssue_' + journal._id));
             } else if (slug === 'News') {
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)

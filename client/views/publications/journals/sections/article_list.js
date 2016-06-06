@@ -39,9 +39,11 @@ Template.journalNavigationPanel.events({
         $(event.currentTarget).next(".issues").slideToggle(200);
     },
     "click .issue": function (event) {
-        var issueId = $(event.target).data().value;
+        var data = $(event.target).data();
+        var issueId = data.value;
         issueId && Session.set("currentIssueId", issueId);
-        window.location.hash = issueId;
+        var newurl=window.location.href.replace(/vol=[^&#\b]+/,"vol="+data.volume).replace(/iss=[^&#\b]+/,"iss="+data.issue);
+        history.replaceState({},document.title,newurl);
     }
 });
 
@@ -60,7 +62,7 @@ Template.articleListRight.helpers({
             return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {published: -1}});
         }
         if (Template.currentData().pubStatus === 'normal') {
-            if(!Session.get("currentIssueId") && Session.get("currentJournalId")){
+            if(!Session.get("currentIssueId") && !Session.get("currentIssueCode") && Session.get("currentJournalId")){
                 var latestIssue=Issues.findOne({journalId:Session.get("currentJournalId")},{sort:{order:-1}});
                 latestIssue && Session.set("currentIssueId",latestIssue._id);
             }
