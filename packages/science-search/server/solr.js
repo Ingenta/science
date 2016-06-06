@@ -91,7 +91,7 @@ SolrUtils = {
                 var solrFields = SolrUtils.facetFieldMap[key];
                 if(key == 'journalId') {
                     var journalIdForSolr = SolrUtils.getRelatedJournals(val);
-                    val = journalIdForSolr.join(" OR ");
+                    val = "("+journalIdForSolr.join(" OR ")+")";
                 }
                 if (key == 'publishDate') {
                     if (val && (val.start || val.end)) {

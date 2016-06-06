@@ -70,7 +70,8 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
             fields: {
                 title: 1,
                 journalId: 1,
-                doi: 1
+                doi: 1,
+                contentType: 1
             }
         }),
         Publishers.find({}, {
