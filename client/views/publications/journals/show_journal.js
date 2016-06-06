@@ -4,7 +4,7 @@ Template.journalTabs.onCreated(function () {
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug, template) {
-        history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
+        history.replaceState({},document.title,window.location.pathname + "?slug="+slug+window.location.hash);
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (Router.current().params.journalShortTitle) {
@@ -70,7 +70,6 @@ Template.ShowJournal.onCreated(function(){
     if (!journalId || !publisher) return;
     Session.set('currentJournalId', journalId);
     Session.set('currentPublisherId', publisher);
-    Session.set('currentIssueId',null);
     if (Router.current().params.journalShortTitle) {
         if (!Router.current().params.hash) {
             Meteor.call("getLatestIssueId", journalId, function (err, response) {
