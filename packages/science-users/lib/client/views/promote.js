@@ -30,7 +30,7 @@ Template.sidebarAd.helpers({
         if (isJournalPage) {
             query.publications = Session.get('currentJournalId');
         }
-        if (4 < Advertisement.find(query).count()) {
+        if (49 < Advertisement.find(query).count()) {
             return false;
         }
         return true;
