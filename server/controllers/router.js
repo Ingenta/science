@@ -276,7 +276,7 @@ Router.map(function () {
             //create path to expected first page of pdf
             var adPdf = Config.staticFiles.uploadPdfDir + "/handle/" + this.params.articleId + (new Date()).getTime() + ".pdf";
             //准备需要添加到pdf中的数据
-            var lang = this.params.query.lang || "en";
+            //var lang = this.params.query.lang || "en";
 
             var journalInfo = Publications.findOne({_id: article.journalId});
             var publisherInfo = Publishers.findOne({_id: article.publisher});
@@ -289,6 +289,7 @@ Router.map(function () {
                 }
                 return data[langArr[index]] || data[langArr[1 - index]];
             };
+            var lang = langArr[(journalInfo.language || 2) - 1];//使用文章所属刊的语言作为优先显示语言
             var data = {};
             //create path to journal banner and advert banner
             var host = Config.isDevMode ? Config.rootUrl : "http://localhost";
