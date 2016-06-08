@@ -16,13 +16,10 @@ ReactiveTabs.createInterface({
         if (Router.current().params.journalShortTitle) {
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
-                JournalSubs.subscribe("journalOverviewTab", Router.current().params.journalShortTitle);
-                CollectionSubs.subscribe('allCollections');
                 Meteor.call("insertAudit", Meteor.userId(), "journalOverview", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
-                JournalSubs.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {

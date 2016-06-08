@@ -25,6 +25,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         return [
             JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
+            JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('tag')
@@ -48,7 +49,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             query.issue=this.params.issue;
             var currentIssue = Issues.findOne(query);
             currentIssue && Session.set("currentIssueId",currentIssue._id);
-            Session.set("activeTab", "Browse");
+            Session.get("activeTab")!="Browse" && Session.set("activeTab", "Browse");
 
             return journal;
         }
@@ -65,6 +66,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     name: "journal.name.long",
     waitOn: function () {
         return [
+            JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
+            CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
