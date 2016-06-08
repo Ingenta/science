@@ -4,12 +4,13 @@ Template.journalTabs.onCreated(function () {
 ReactiveTabs.createInterface({
     template: 'journalTabs',
     onChange: function (slug, template) {
-        var urlSearchPart="slug="+slug;
+        var url = Session.get('baseJournalUrl');
         if(slug=='Browse' && Session.get("currentIssueId")){
             var cissue=Issues.findOne({_id:Session.get("currentIssueId")});
-            urlSearchPart="vol="+cissue.volume+"&iss="+cissue.issue+"&"+urlSearchPart;
+            url+="/"+cissue.volume+"/"+cissue.issue;
         }
-        history.replaceState({},document.title,window.location.pathname + "?"+urlSearchPart);
+        url+="?slug="+slug;
+        history.replaceState({},document.title,url);
         //Session.set("activeTab", "")
         //when on table of contents page and another tab is clicked switch to basic route
         if (Router.current().params.journalShortTitle) {

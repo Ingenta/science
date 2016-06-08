@@ -33,7 +33,8 @@ Config = {
             journal: [
                 'article.show',
                 'article.show.strange',
-                'journal.name'
+                'journal.name',
+                'journal.name.long'
             ],
             global: [
                 'home',
@@ -46,7 +47,8 @@ Config = {
         },
         NewsPage: {
             journal: [
-                'journal.name'
+                'journal.name',
+                'journal.name.long'
             ],
             global: [
                 'home'
@@ -56,6 +58,7 @@ Config = {
             'publisher.name',
             'publications',
             'journal.name',
+            'journal.name.long',
             'article.show',
             'article.show.strange',
             'solrsearch'
@@ -64,7 +67,8 @@ Config = {
             journal: [
                 'article.show',
                 'article.show.strange',
-                'journal.name'
+                'journal.name',
+                'journal.name.long'
             ]
         }
     },

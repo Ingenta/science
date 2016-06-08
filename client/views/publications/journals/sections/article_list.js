@@ -42,7 +42,7 @@ Template.journalNavigationPanel.events({
         var data = $(event.target).data();
         var issueId = data.value;
         issueId && Session.set("currentIssueId", issueId);
-        var newurl=window.location.href.replace(/vol=[^&#\b]+/,"vol="+data.volume).replace(/iss=[^&#\b]+/,"iss="+data.issue);
+        var newurl=Session.get('baseJournalUrl')+"/"+data.volume + "/"+data.issue + "?slug=Browse";
         history.replaceState({},document.title,newurl);
     }
 });

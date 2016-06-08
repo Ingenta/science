@@ -53,8 +53,7 @@ Template.LayoutSideBar.helpers({
     },
     isJournalPage: function () {
         if (Router.current() && Router.current().route)
-            if (Router.current().route.getName() == "journal.name")
-                return true;
+            return _.contains(["journal.name","journal.name.long"],Router.current().route.getName())
     },
     favoriteName: function () {
         var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;

@@ -130,7 +130,7 @@
                   {{/if}}
                   |
                   {{#if hasIssue}}
-                      <a href="{{urlToJournalById journalId}}?slug=Browse&vol={{volume}}&iss={{issue}}"><b>{{_ "Table of Contents"}}</b></a>
+                      <a href="{{urlToJournalById journalId}}/{{volume}}/{{issue}}?slug=Browse"><b>{{_ "Table of Contents"}}</b></a>
                   {{else}}
                       <b>{{_ "Table of Contents"}}</b>
                   {{/if}}
