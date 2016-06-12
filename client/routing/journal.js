@@ -58,7 +58,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             query.issue=this.params.issue;
             var currentIssue = Issues.findOne(query);
             currentIssue && Session.set("currentIssueId",currentIssue._id);
-            Session.get("activeTab")!="Browse" && Session.set("activeTab", "Browse");
+            Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Browse");
         }
         this.next();
     },
