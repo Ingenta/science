@@ -1545,5 +1545,7 @@
   "appendix":"附录",
   "acknowledgment":"致谢",
   "confirmTitle":"确认操作",
-  "confirmChangeUserLevel":"更改用户的级别后,他当前所拥有的所有角色将被重置,需要继续吗?"
+  "confirmChangeUserLevel":"更改用户的级别后,他当前所拥有的所有角色将被重置,需要继续吗?",
+  "signInOrRegister":"登录或注册",
+  "signInFirst":"请注册并登录到系统之后再使用此功能"
 }

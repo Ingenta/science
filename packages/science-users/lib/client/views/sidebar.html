@@ -32,9 +32,6 @@
                 <li><a class="watchArticle" href=""><i class="glyphicon glyphicon-heart"></i> {{articleWatchState}}</a></li>
                 <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i class="fa fa-envelope"></i> {{_ "emailThis"}}</a></li>
             {{/if}}
-            {{#if isJournalPage}}
-                <li><a class="watchJournal" href=""><i class="glyphicon glyphicon-heart"></i> {{journalWatchState}}</a></li>
-            {{/if}}
         {{else}}
             <li>
                 <a style="font-size:18px;" href="{{pathFor 'login'}}"><i class="fa fa-user"></i> {{_ "Sign in"}}</a>
@@ -43,6 +40,9 @@
             {{#if isArticlePage}}
                 {{>exportCitationSidebar}}
             {{/if}}
+        {{/if}}
+        {{#if isJournalPage}}
+            <li><a class="watchJournal" href=""><i class="glyphicon glyphicon-heart"></i> {{journalWatchState}}</a></li>
         {{/if}}
     </ul>
     {{> otherPlatformloginButtons}}
