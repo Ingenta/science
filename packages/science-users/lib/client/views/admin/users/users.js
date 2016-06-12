@@ -1,8 +1,9 @@
 ReactiveTabs.createInterface({
 	template: 'accountTabs',
 	onChange: function (slug) {
-		if(slug !== Session.get('activeTab'))
-			Session.set('activeTab', slug);
+		history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
+		//if(slug !== Session.get('activeTab'))
+		//	Session.set('activeTab', slug);
 	}
 });
 
@@ -21,3 +22,8 @@ Template.accountOptions.helpers({
 	}
 });
 
+Template.accountTabs.events({
+	'click .tab-item':function(e){
+		history.go(0);
+	}
+});
