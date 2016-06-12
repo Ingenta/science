@@ -162,6 +162,17 @@ Template.LayoutSideBar.events({
                 });
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.journalsOfInterest": pro}});
+        }else{
+            sweetAlert({
+                title             : TAPi18n.__("signInOrRegister"),
+                text              : TAPi18n.__("signInFirst"),
+                type              : "info",
+                showCancelButton  : false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText : TAPi18n.__("OK"),
+                closeOnConfirm    : true
+            });
+            return false;
         }
     }
 })

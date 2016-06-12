@@ -1,10 +1,8 @@
 this.AdminUsersController = RouteController.extend({
     template: "Admin",
 
-
     yieldTemplates: {
         'AccountTabsTemplate': {to: 'AdminSubcontent'}
-
     },
 
     onBeforeAction: function () {
@@ -13,9 +11,7 @@ this.AdminUsersController = RouteController.extend({
         Session.set("user-search-string-for-institution","");
         Session.set("user-search-string-for-normal","");
         Permissions.check("list-user", "user");
+        Science.setActiveTabByUrl(window.location.search,["admin","normal","publisher","institution"],"admin");
         this.next();
-    },
-    data:function(){
-        return {};
     }
 });

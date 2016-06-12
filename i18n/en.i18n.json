@@ -1208,5 +1208,7 @@
     "appendix":"Appendix",
     "acknowledgment":"Acknowledgment",
     "confirmTitle":"Confirm",
-    "confirmChangeUserLevel":"After changing the user's level, his current role will be removed. Do you want to continue?"
+    "confirmChangeUserLevel":"After changing the user's level, his current role will be removed. Do you want to continue?",
+    "signInOrRegister":"Sign in or register",
+    "signInFirst":"Please sign in or register to use this feature"
 }
