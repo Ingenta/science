@@ -2,6 +2,12 @@ var pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage", "");
 
+var userPaginations = {
+	"admin":new Paginator(Users),
+	"normal":new Paginator(Users),
+	"publisher":new Paginator(Users),
+	"institution":new Paginator(Users)
+}
 var getSearchStrKey = function(){
 	var obj=Science.JSON.MergeObject({},{level:this.level},this.scope);
 	var searchStrKey = _.reduce(obj,function(mem,val,key){
@@ -41,7 +47,7 @@ Template.AdminUsersView.helpers({
 		if (numPerPage === undefined) {
 			numPerPage = 10;
 		}
-		return myUsersPagination.find(query,{itemsPerPage: numPerPage})
+		return userPaginations[this.level].find(query,{itemsPerPage: numPerPage})
 	},
 	"usersCount": function() {
 		var searchStr = Session.get(getSearchStrKey.call(this));

@@ -17,7 +17,3 @@ Users.getUser = function (userOrUserId) {
 Meteor.startup(function(){
     userSchema.i18n("schemas.users");
 });
-
-if (Meteor.isClient) {
-    myUsersPagination = new Paginator(Users);
-}
