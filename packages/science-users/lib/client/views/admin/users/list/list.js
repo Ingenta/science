@@ -23,7 +23,7 @@ var getQuery = function(searchStr){
 	if(!_.isEmpty(this.scope))
 		_.extend(query,this.scope);
 	if(searchStr)
-		_.extend(query,{username:{$regex:searchStr}});
+		_.extend(query,{$or:[{username:{$regex:searchStr}},{"emails.address":{$regex:searchStr}}]});
 	return query;
 }
 
