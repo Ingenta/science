@@ -141,7 +141,7 @@ Template.AdminUsersViewTableItems.helpers({
 		return Permissions.getRoleDescByCode(code).name;
 	},
 	"canModify":function(){
-		return Permissions.userCan("modify-user","user",Meteor.userId(),Router.current().data().scope) && (this._id !== Meteor.userId()); //用户不可以在用户管理页中修改自己的信息
+		return Permissions.userCan("modify-user","user",Meteor.userId(),{level:this.level}) && (this._id !== Meteor.userId()); //用户不可以在用户管理页中修改自己的信息
 	},
 	errorMessage: function () {
 		return pageSession.get("errorMessage");

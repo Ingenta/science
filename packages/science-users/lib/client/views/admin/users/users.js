@@ -21,9 +21,3 @@ Template.accountOptions.helpers({
 		return Session.get('activeTab');
 	}
 });
-
-Template.accountTabs.events({
-	'click .tab-item':function(e){
-		history.go(0);
-	}
-});
