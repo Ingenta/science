@@ -1,15 +1,20 @@
 Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     data: function () {
-        var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        return journal;
+    },
+    onBeforeAction:function(){
+        var journal=this.data();
         if (journal) {
+            var pub = Publishers.findOne({shortname: this.params.publisherName});
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
-            Session.set('currentIssueId', null);
             Session.set('baseJournalUrl',Config.rootUrl+"publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
             Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Overview");
-            return journal;
+            var latestIssue=Issues.findOne({journalId:journal._id},{sort:{order:-1}});
+            latestIssue && Session.set("currentIssueId",latestIssue._id);
         }
+        this.next();
     },
     template: "ShowJournal",
     title: function () {
@@ -38,9 +43,13 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue', {
     data: function () {
-        var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
+        return journal;
+    },
+    onBeforeAction:function(){
+        var journal = this.data();
         if (journal) {
+            var pub = Publishers.findOne({shortname: this.params.publisherName});
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
             Session.set('baseJournalUrl',Config.rootUrl+"publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
@@ -49,10 +58,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             query.issue=this.params.issue;
             var currentIssue = Issues.findOne(query);
             currentIssue && Session.set("currentIssueId",currentIssue._id);
-            Session.get("activeTab")!="Browse" && Session.set("activeTab", "Browse");
-
-            return journal;
+            Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Browse");
         }
+        this.next();
     },
     template: "ShowJournal",
     title: function () {
