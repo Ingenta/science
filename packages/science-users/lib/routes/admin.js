@@ -71,6 +71,9 @@ Router.route("admin.roles.choose.permissions", {
 Router.route("admin.users", {
     path: "/admin/users",
     controller: "AdminUsersController",
+    data: function () {
+        Science.setActiveTabByUrl(window.location.search,["admin","normal","publisher","institution"],"admin");
+    },
     title: function () {
         return TAPi18n.__("Account");
     },

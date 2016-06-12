@@ -71,6 +71,9 @@ Template.newsCenter.events({
     'click .perPage': function (event) {
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);
+    },
+    'click .tab-item':function(e){
+        history.go(0);
     }
 });
 
