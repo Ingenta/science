@@ -62,10 +62,6 @@ Template.articleListRight.helpers({
             return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {published: -1}});
         }
         if (Template.currentData().pubStatus === 'normal') {
-            if(!Session.get("currentIssueId") && !Session.get("currentIssueCode") && Session.get("currentJournalId")){
-                var latestIssue=Issues.findOne({journalId:Session.get("currentJournalId")},{sort:{order:-1}});
-                latestIssue && Session.set("currentIssueId",latestIssue._id);
-            }
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
             return Articles.find(query, {sort: {padPage: 1}});
         }
