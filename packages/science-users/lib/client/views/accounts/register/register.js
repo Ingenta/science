@@ -47,7 +47,8 @@ Template.Register.events({
         Meteor.call("registerUser", register_name, register_password, register_email, function (err) {
             submit_button.button("reset");
             if (err) {
-                pageSession.set("errorMessage", err.reason);
+                var msg = TAPi18n.__(err.reason.replace('.',''));
+                pageSession.set("errorMessage", msg);
             }
             else {
                 pageSession.set("errorMessage", "");

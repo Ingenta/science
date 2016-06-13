@@ -44,7 +44,7 @@ Template.Login.events({
 		Meteor.loginWithPassword(login_email, login_password, function(err) {
 			submit_button.button("reset");
 			if (err){
-				var msg = _.isObject(err)?TAPi18n.__(err.reason):err.message;
+				var msg = TAPi18n.__(err.reason.replace('.',''))||err.message;
 				pageSession.set("errorMessage",msg);
 				return false;
 			}else{
