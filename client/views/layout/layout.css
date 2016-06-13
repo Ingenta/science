@@ -44,8 +44,7 @@ a.fa-trash {
     border-color : #06a4d1;
 }
 
-.resultsList a {
-    display: block;
+.resultsList div {
     margin-left: 28px;
 }
 .resultsList img {
