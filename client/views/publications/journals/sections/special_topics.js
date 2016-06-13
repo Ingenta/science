@@ -46,10 +46,8 @@ Template.SpecialTopics.helpers({
     specialTopicsCount: function(){
         return SpecialTopics.find({journalId:this._id}).count()>10;
     },
-    year: function () {
-        var issue = Issues.findOne({_id: this.IssueId});
-        if (issue)
-            return issue.volume+"("+issue.issue+")"+", "+TAPi18n.__("Published")+":"+issue.year;
+    issueInfo: function () {
+        return this.volume+"("+this.issue+")"+", "+TAPi18n.__("Published")+":"+this.year;
     },
     name: function () {
         var id = Session.get("specialTopicsId");
@@ -92,6 +90,9 @@ AutoForm.addHooks(['addSpecialTopicsModalForm'], {
                 var issue = Issues.findOne({_id: doc.IssueId});
                 if(issue){
                     doc.order = issue.order;
+                    doc.year = issue.year;
+                    doc.volume=issue.volume;
+                    doc.issue=issue.issue;
                 }
             }
             doc.journalId = Router.current().data()._id;
