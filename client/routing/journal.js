@@ -43,7 +43,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
     data: function () {
-        console.log('a')
         return SpecialTopics.findOne({_id: this.params.specialTopicsId});
     },
     template: "addArticleForSpecialTopics",
@@ -106,8 +105,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         Science.dom.clearSelect2Record();
     }
 });
-
-
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscript/:guideId', {
     data: function () {

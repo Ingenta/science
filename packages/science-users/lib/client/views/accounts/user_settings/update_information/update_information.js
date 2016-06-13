@@ -115,7 +115,7 @@ Template.UserSettingsUpdateInformationForm.helpers({
         return pageSession.get("userSettingsUpdateInformationFormErrorMessage");
     },
     publicationList: function () {
-        var pubs = Publications.find({},{title:1}).fetch();
+        var pubs = Publications.find({visible:"1"},{title:1}).fetch();
         var result = [];
         _.each(pubs,function(item){
             result.push({label:item.title,value:item._id});

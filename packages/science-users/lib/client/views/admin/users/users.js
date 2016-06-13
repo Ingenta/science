@@ -2,8 +2,6 @@ ReactiveTabs.createInterface({
 	template: 'accountTabs',
 	onChange: function (slug) {
 		history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
-		//if(slug !== Session.get('activeTab'))
-		//	Session.set('activeTab', slug);
 	}
 });
 
