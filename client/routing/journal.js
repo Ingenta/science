@@ -41,6 +41,26 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     }
 });
 
+Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
+    data: function () {
+        console.log('a')
+        return SpecialTopics.findOne({_id: this.params.specialTopicsId});
+    },
+    template: "addArticleForSpecialTopics",
+    name: "specialTopics.selectArticles",
+    parent: "journal.name",
+    title: function () {
+        return TAPi18n.__("Special Topics");
+    },
+    waitOn: function () {
+        return [
+            Meteor.subscribe('articlesInSpecTopic', this.params.specialTopicsId),
+            Meteor.subscribe('journalSpecialTopics', this.params.journalShortTitle),
+            Meteor.subscribe('journalIssuesIncludingHistorical', this.params.journalShortTitle)
+        ]
+    }
+});
+
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue', {
     data: function () {
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
@@ -87,24 +107,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     }
 });
 
-Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
-    data: function () {
-        return SpecialTopics.findOne({_id: this.params.specialTopicsId});
-    },
-    template: "addArticleForSpecialTopics",
-    name: "specialTopics.selectArticles",
-    parent: "journal.name",
-    title: function () {
-        return TAPi18n.__("Special Topics");
-    },
-    waitOn: function () {
-        return [
-            Meteor.subscribe('articlesInSpecTopic', this.params.specialTopicsId),
-            Meteor.subscribe('journalSpecialTopics', this.params.journalShortTitle),
-            Meteor.subscribe('journalIssuesIncludingHistorical', this.params.journalShortTitle)
-        ]
-    }
-});
 
 
 Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscript/:guideId', {
