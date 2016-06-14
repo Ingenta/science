@@ -3,7 +3,7 @@
         <div class="part">
             <div align="center"><span class="title-font">{{{translateThis title.cn title.en}}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{#if can "edit-homepage-news" "news" }}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}</div><br>
             <p class="text-center">{{#if releaseTime}}{{_ "Published online"}}：{{formatDate releaseTime "YYYY-MM-DD"}}&nbsp;&nbsp;&nbsp;&nbsp;{{/if}}{{_ "Page View"}}：{{pageView}}&nbsp;&nbsp;&nbsp;&nbsp;{{#if author}}{{_ "Author"}}：{{translateThis author.cn author.en}}{{/if}}</p><br>
-            <p align="text-center" style="margin-left: 1.5%">{{{translateThis content.cn content.en}}}</p>
+            <p align="text-center" class="fr-view" style="margin-left: 1.5%">{{{translateThis content.cn content.en}}}</p>
             {{#if fields}}
                 <p><a style="color: red" href="{{wordValue}}" target="_blank"><img src="/load_word.png">&nbsp;&nbsp;{{_ "Download The Attachment"}}</a></p>
             {{/if}}
