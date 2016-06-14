@@ -1,5 +1,5 @@
 Meteor.publish('homepageNews', function () {
-    return News.find({publications: {$exists: false}},{fields: {content: 0}});
+    return News.find({publications: {$exists: false}});
 });
 
 Meteor.publish('journalNews', function (journalShortTitle) {
@@ -10,7 +10,7 @@ Meteor.publish('journalNews', function (journalShortTitle) {
     var journalId = journal._id;
 
     return [
-        News.find({publications: journalId}, {fields: {content: 0}}),
+        News.find({publications: journalId}),
         Meeting.find({publications: journalId})
     ]
 });
