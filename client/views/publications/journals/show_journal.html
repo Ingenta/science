@@ -31,75 +31,51 @@
     {{#journalTabs name="" tabs=tabs activeTab=activeTab}}
         {{#with journalContext}}
             {{#tabContent slug="Overview"}}
-                {{#if isSlugRight "Overview"}}
-                    {{> JournalOverview}}
-                {{/if}}
+                {{> JournalOverview}}
             {{/tabContent}}
 
             {{#tabContent slug="Browse"}}
-                {{#if isSlugRight "Browse"}}
                 {{> articleList}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="About"}}
-                {{#if isSlugRight "About"}}
                 {{> aboutTopics}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Editorial Board"}}
-                {{#if isSlugRight "Editorial Board"}}
                 {{> aboutTitle}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="News"}}
-                {{#if isSlugRight "News"}}
                 {{> newContent}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Media"}}
-                {{#if isSlugRight "Media"}}
                 {{> mediaList}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Special Topics"}}
-                {{#if isSlugRight "Special Topics"}}
                 {{> SpecialTopics}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Collections"}}
-                {{#if isSlugRight "Collections"}}
                 {{> collections publisherId=publisher journalId=_id}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Accepted"}}
-                {{#if isSlugRight "Accepted"}}
                 {{> articleListRight pubStatus="accepted"}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Online First"}}
-                {{#if isSlugRight "Online First"}}
                 {{> articleListRight pubStatus="online_first"}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="MOOP"}}
-                {{#if isSlugRight "MOOP"}}
                 {{> moopArticleList}}
-                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="Author Center"}}
-                {{#if isSlugRight "Author Center"}}
                 {{> authorCenterList}}
-                {{/if}}
             {{/tabContent}}
         {{/with}}
     {{/journalTabs}}
