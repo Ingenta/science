@@ -11,8 +11,15 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             Session.set('currentPublisherId', pub._id);
             Session.set('baseJournalUrl',Config.rootUrl+"publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
             Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Overview");
+
             var latestIssue=Issues.findOne({journalId:journal._id},{sort:{order:-1}});
             latestIssue && Session.set("currentIssueId",latestIssue._id);
+            
+            var v = Volumes.find({'journalId': journal._id}).fetch();
+            var lastVolume = _.sortBy(v, function (oneVolume) {
+                return -parseInt(oneVolume.volume, 10);
+            })[0];
+            lastVolume && Session.set('currentVolumeId',lastVolume._id);
         }
         this.next();
     },
@@ -77,6 +84,13 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             query.issue=this.params.issue;
             var currentIssue = Issues.findOne(query);
             currentIssue && Session.set("currentIssueId",currentIssue._id);
+
+            var v = Volumes.find({'journalId': journal._id}).fetch();
+            var lastVolume = _.sortBy(v, function (oneVolume) {
+                return -parseInt(oneVolume.volume, 10);
+            })[0];
+            lastVolume && Session.set('currentVolumeId',lastVolume._id);
+
             Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Browse");
         }
         this.next();
