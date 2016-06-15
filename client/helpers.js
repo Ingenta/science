@@ -195,3 +195,7 @@ Science.setActiveTabByUrl=function(searchStr, range, defaultTab){
     }
     Session.set("activeTab",defaultTab);
 }
+
+Template.registerHelper('isSlugRight',function(slug){
+    return window.location.search.indexOf(slug)>0;
+})
