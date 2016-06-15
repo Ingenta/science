@@ -197,5 +197,5 @@ Science.setActiveTabByUrl=function(searchStr, range, defaultTab){
 }
 
 Template.registerHelper('isSlugRight',function(slug){
-    return window.location.search.indexOf(slug)>0;
+    return Session.get("activeTab") == slug;
 })
