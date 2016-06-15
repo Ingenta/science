@@ -266,6 +266,8 @@ OrbitPermissions = {
 			//若自鉴权方法检查通过或权限定义中不包含鉴权方法(但约束了权限的有效范围),则使用以下的一般规则进行鉴权
 			//即:待鉴权用户(user)的所有包含权限(package_name:permission)的角色的权限范围,是否能够完全的包含待检查的范围(scope)
 			var fullScope = OrbitPermissions.getPermissionRange(user, package_name + ":" + permission);
+			if(_.isEmpty(fullScope))
+				return false;
 			var flag      = true;
 			_.each(scope, function (val, key) {
 				if(val !=='any'){
