@@ -41,8 +41,13 @@
                     {{/each}}
                 {{/if}}
             {{/mathjax}}
-            {{#if anyReference}}
+            {{#if acknowledgements}}
                 {{> acknowledgment}}
+            {{/if}}
+            {{#if appendix}}
+                {{> appendixTemplate}}
+            {{/if}}
+            {{#if anyReference}}
                 <div class="sectionDivider sectionDivider-title">{{_ "References"}}</div>
                 {{> ReferencesTemplate}}
             {{/if}}
