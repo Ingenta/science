@@ -11,6 +11,17 @@
 </template>
 
 <template name="UserSettingsUpdateInformationForm">
+    {{#if errorMessage}}
+        <div class="alert alert-warning">
+            {{errorMessage}}
+        </div>
+    {{/if}}
+
+    {{#if infoMessage}}
+        <div class="alert alert-success">
+            {{infoMessage}}
+        </div>
+    {{/if}}
 	<div class="">
         {{> columeTitle titleName="Please update your registered information (optional)"}}
 		{{#autoForm schema=getUserProfileSchema doc=current_user_data collection="Users" id="updateUserProfiles" type="update"}}
