@@ -181,39 +181,55 @@
     {{#articleTabs name="" tabs=tabs activeTab=activeTab}}
         {{#with context}}
             {{#tabContent slug="abstract"}}
+                {{#if isSlugRight "abstract"}}
                 {{> AbstractTemplate}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="full text"}}
+                {{#if isSlugRight "full text"}}
                 {{#if ipRedirect}}
                     {{> FullTextTemplate}}
                 {{else}}
                     {{> RedirectTemplate}}
                 {{/if}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="references"}}
+                {{#if isSlugRight "references"}}
                 {{> ReferencesTemplate}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="cited by"}}
+                {{#if isSlugRight "cited by"}}
                 {{> CitedByTemplate}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="data media"}}
+                {{#if isSlugRight "data media"}}
                 {{> DataMediaTemplate}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="metrics"}}
+                {{#if isSlugRight "metrics"}}
                 {{> MetricsTemplate}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="related"}}
+                {{#if isSlugRight "related"}}
                 {{> relatedArticles}}
+                {{/if}}
             {{/tabContent}}
 
             {{#tabContent slug="moop"}}
+                {{#if isSlugRight "moop"}}
                 {{> MoopTemplate}}
+                {{/if}}
             {{/tabContent}}
 
         {{/with}}
