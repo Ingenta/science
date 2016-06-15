@@ -228,6 +228,10 @@ ScienceXML.parseXml = function (path, pubStatus) {
     }
     logger.info("parsed special topic title");
 
+    var appendix = ScienceXML.getAppendix(doc);
+    if(!_.isEmpty(appendix)){
+        results.appendix = appendix;
+    }
     return results;
 }
 

@@ -761,3 +761,8 @@ ScienceXML.getSpecialTopicTitle = function(doc){
     return stt;
 }
 
+//提取附录信息
+ScienceXMl.getAppendix = function(doc){
+    var app = parserHelper.getXmlString("//app-group/app",doc,true);
+    return app;
+}

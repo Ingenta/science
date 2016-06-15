@@ -470,7 +470,8 @@ var insertArticle = function (a) {
         pacs: a.pacs,
         fundings: a.fundings,
         special: a.special, //专题名 (该专题名仅从xml数据中取得,与系统功能中的专题无关)
-        orderAuthors: a.orderAuthors
+        orderAuthors: a.orderAuthors,
+        appendix: a.appendix
     });
     return id;
 };

@@ -113,7 +113,8 @@ Config = {
         "pacs",
         "fundings",
         "special",
-        "orderAuthors" //作者列表顺序,Solr检索结果
+        "orderAuthors", //作者列表顺序,Solr检索结果
+        "appendix" //附录信息
     ],
     pdf: {
         watermark: "Accepted",
