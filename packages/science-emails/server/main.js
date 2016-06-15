@@ -22,7 +22,7 @@ Science.Email.authorCitationAlertEmail = function (date) {
                 issue: 1,
                 elocationId: 1,
                 journalId: 1,
-                'journal.titleCn': 1
+                journal: 1
             }
         });
         if(!article) return;
@@ -106,7 +106,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 issue: 1,
                 elocationId: 1,
                 engPage:1,
-                'journal.title': 1
+                journal: 1
             },sort:{
                 padPage:1
             }
@@ -261,7 +261,7 @@ Science.Email.watchTopicEmail = function (date) {
                 issue: 1,
                 elocationId: 1,
                 journalId: 1,
-                'journal.titleCn': 1
+                journal: 1
             }
         }).fetch();
         if (!articleList || !articleList.length) return;
@@ -307,7 +307,7 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
                 issue: 1,
                 elocationId: 1,
                 journalId: 1,
-                'journal.titleCn': 1
+                journal: 1
             }
         });
         if (!article) return;
@@ -343,6 +343,7 @@ var generateArticleLinks = function (articles, journalUrl) {
     articles.forEach(function (article) {
         if (article._id)
             article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+        article.journal= article.journal || {};
         if (journalUrl)
             article.journal.url = journalUrl;
         else
