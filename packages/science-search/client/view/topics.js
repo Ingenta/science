@@ -3,7 +3,8 @@ Template.relatedTopicLists.helpers({
 		if(SolrQuery.params("st") && SolrQuery.params("st").from ==='topic' && SolrQuery.params("fq")){
 			var fq =SolrQuery.params("fq");
 			if(!_.isEmpty(fq.topic)){
-				return Topics.findOne({_id:fq.topic[0]});
+				fq.topic = _.isArray(fq.topic)?fq.topic[0]:fq.topic;
+				return Topics.findOne({_id:fq.topic});
 			}
 		}
 	},
