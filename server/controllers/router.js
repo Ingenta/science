@@ -305,19 +305,23 @@ Router.map(function () {
             data.title = getContentByLanguage(article.title, lang);
             if (article.authors) {
                 data.authors = _.map(article.authors, function (author) {
-                    return getContentByLanguage(author.fullname, lang);
+                    return {
+                        name:getContentByLanguage(author.fullname, lang),
+                        authorUrl:Config.rootUrl + 'search?fq={"author":["\\"'+author.fullname + '\\""]}'
+                    };
                 });
             }
             data.journal = getContentByLanguage(journalInfo, lang, ["title", "titleCn"]);
+            data.journalUrl = Config.rootUrl + "publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle
             data.volume = article.volume;
             data.issue = article.issue;
             data.page = article.elocationId || article.firstPage;
             data.year = article.year;
             data.doi = article.doi;
             data.fulltextUrl = Config.rootUrl + "doi/" + article.doi;
-            data.tocUrl = Config.rootUrl + "publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "#" +article.issueId;
+            data.tocUrl = Config.rootUrl + "publisher/" + publisherInfo.shortname + "/journal/" + journalInfo.shortTitle + "/" +article.volume + "/" + article.issue;
             data.publisher = getContentByLanguage(publisherInfo, lang, ["name", "chinesename"]);
-
+            data.publisherUrl = Config.rootUrl + "publisher/" + publisherInfo.shortname;
             //create related article query
             var query = {q: "_text_:(" + data.title + ") AND NOT _id:" + article._id, wt: "json"};
             var topicArr = _.compact(article.topic);

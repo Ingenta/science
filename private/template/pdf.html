@@ -1,9 +1,9 @@
 <style>
     * {
-        font-family: Arial,"宋体", "Helvetica Neue", Helvetica, sans-serif;
+        font-family: Arial,"宋体", sans-serif;
     }
     h1, h2, h3, h4, h5, h6, .title{
-        font-family: Arial,"黑体", "Helvetica Neue", Helvetica, sans-serif;
+        font-family: Arial,"黑体", sans-serif;
     }
     .separate-comma:not(:last-child):after{
         content:", ";
@@ -29,16 +29,16 @@
             <h4 style="margin-bottom: 4px;">{{{title}}}</h4>
             <div style="margin:8px 0px;">
                 {{#each authors}}
-                    <span class="separate-and separate-comma" style="font-size:13px">{{this}}</span>
+                    <span class="separate-and separate-comma" style="font-size:13px"><a href="{{authorUrl}}">{{name}}</a></span>
                 {{/each}}
             </div>
-            <div style="font-size:13px;margin-bottom: 10px;">Citation: {{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}
+            <div style="font-size:13px;margin-bottom: 10px;">Citation: <a href="{{journalUrl}}">{{journal}}</a> <b>{{volume}}</b>{{#if page}}, {{page}}{{/if}} {{#if year}}({{year}}
                 ){{/if}}{{#if doi}}; doi: {{doi}}{{/if}}</div>
             <div style="font-size:13px;margin-bottom: 10px;">View online: <a href="{{fulltextUrl}}">{{fulltextUrl}}</a></div>
             {{#if volume}}
             <div style="font-size:13px;margin-bottom: 10px;">View Table of Contents:<a href="{{tocUrl}}">{{tocUrl}}</a></div>
             {{/if}}
-            <div style="font-size:13px">Published by the <b>{{publisher}}</b></div>
+            <div style="font-size:13px">Published by the <b><a href="{{publisherUrl}}">{{publisher}}</a></b></div>
         </div>
         <hr>
         <div>
@@ -46,7 +46,7 @@
             <ul style="padding: 0px">
                 {{#each similar}}
                     <li style="list-style: none;padding-bottom:18px">
-                        <div class="title" style="font-size:14px"><a href="{{fulltextUrl}}"><b>{{{title}}}</b></a></div>
+                        <div class="title" style="font-size:14px"><a href="{{fulltextUrl}}">{{{title}}}</a></div>
                         <div style="font-size:13px">{{journal}} <b>{{volume}}</b>, {{page}} {{#if year}}({{year}}){{/if}};</div>
                         {{#if doi}} <div style="font-size:13px"></div>{{/if}}
                     </li>
