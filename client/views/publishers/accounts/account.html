@@ -2,5 +2,5 @@
     {{#with getPublisherNameById}}
         <h3>{{translateThis this.chinesename this.name}}</h3>
     {{/with}}
-    {{> AdminUsersView scope=scope}}
+    {{> AdminUsersView level="publisher" scope=scope}}
 </template>
