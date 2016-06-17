@@ -67,9 +67,8 @@
             {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
         </div>
         </p>
-        <p>
-            <img src="{{getImageHelper picture}}" width="89" height="126"/>{{{translateThis abstract.cn abstract.en}}}
-        </p>
+        <p class="col-xs-3"><img src="{{getImageHelper picture}}" width="89" height="126"/></p>
+        <p class="col-xs-9">{{{translateThis abstract.cn abstract.en}}}</p>
     </div>
     {{else}}
     {{_ "No content found!"}}
@@ -156,6 +155,7 @@
                     {{> afQuickField name="url"}}
                     {{> afQuickField name="releaseTime"}}
                     {{> afQuickField name="abstract"}}
+                    {{> afQuickField name="content"}}
                     {{> afQuickField name="picture"}}
                     {{> afQuickField name="fileId"}}
                 </div>
@@ -169,7 +169,7 @@
 </template>
 
 <template name="updatePublishingDynamicModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,releaseTime,abstract,picture,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="News" doc=_id operation="update" fields="title,url,releaseTime,abstract,content,picture,fileId" buttonContent=getUpdateButtonContent}}{{/afModal}}
 </template>
 
 
