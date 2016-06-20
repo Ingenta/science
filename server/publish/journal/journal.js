@@ -45,6 +45,37 @@ Meteor.publish('journalBrowseTabArticleList', function (issueId) {
 
 });
 
+Meteor.publish('journalMoopTabArticleList', function (journalId) {
+    if (!journalId)return this.ready();
+    check(journalId, String);
+
+    var moopdois = Collections.Medias.find({journalId:journalId,doi:{$exists:1}},{fields:{doi:1}}).fetch();
+    if(_.isEmpty(moopdois))
+        return this.ready();
+
+    moopdois= _.pluck(moopdois,"doi");
+    //get all topic id
+    var topics = Articles.find({doi:{$in:moopdois}}, {fields: {topic: 1}}).fetch();
+    var topicsArr = _.reduce(topics, function (memo, item) {
+        if (item.topic) {
+            return _.union(memo, item.topic);
+        }
+        return memo;
+    }, []);
+    topicsArr = _.compact(topicsArr);
+
+    var publishList = [
+        Articles.find({doi:{$in:moopdois}}, {
+            fields: articleWithMetadata
+        })
+    ];
+
+    if (!_.isEmpty(topicsArr)) {
+        publishList.push(Topics.find({_id: {$in: topicsArr}}))
+    }
+    return publishList;
+
+});
 
 Meteor.publish('journalOverviewTab', function (journalShortTitle) {
     if (!journalShortTitle)return this.ready();

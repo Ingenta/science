@@ -37,4 +37,8 @@
             {{_ "No articles found!"}}
         {{/each}}
     </ul>
+    {{> Paginator_UI articles}}
+    {{#if moreThan10}}
+        {{> displayPerPage}}
+    {{/if}}
 </template>

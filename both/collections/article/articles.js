@@ -38,4 +38,6 @@ Meteor.startup(function () {
     ArticleTitleSchema.i18n("schemas.articles");
     ArticleAbstractSchema.i18n("schemas.articles");
     ArticleSchema.i18n("schemas.articles");
+    if(Meteor.isClient)
+        articlePaginator=new Paginator(Articles);
 });

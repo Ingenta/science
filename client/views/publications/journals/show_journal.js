@@ -42,7 +42,7 @@ ReactiveTabs.createInterface({
             } else if (slug === 'MOOP') {
                 Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
                 JournalSubs.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                Meteor.subscribe('journalBrowseTabArticleList', Session.get('currMoopIssue_' + journal._id));
+                Meteor.subscribe('journalMoopTabArticleList', journal._id);
             } else if (slug === 'News') {
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }

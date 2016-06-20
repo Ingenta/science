@@ -1,4 +1,13 @@
-var allmoops = new ReactiveVar();
+var allmoops = new ReactiveVar([]);
+
+var moopdoi = function(journalId){
+    if(Session.get("currMoopIssue_"+journalId)){
+        return _.pluck(_.filter(allmoops.get(), function (item) {
+            return item.issueId == Session.get("currMoopIssue_" + journalId);
+        }), "doi");
+    }
+    return _.pluck(allmoops.get(),"doi");
+}
 
 Template.journalNavigationPanelOnlyMoop.onRendered(function(){
     if (this.data && this.data._id) {
@@ -28,9 +37,6 @@ Template.journalNavigationPanelOnlyMoop.helpers({
                 return item.volumeId = volumeId;
             }),"issueId"));
             var iss = Issues.find({'journalId': journalId, '_id':{$in:iArr}},{fields: {createDate: 0}, sort: {order: -1}}).fetch();
-            if(!_.isEmpty(iss) && iss[0].volume==Session.get("currMoopVol_"+journalId)){
-                Session.set("currMoopIssue_"+journalId,iss[0]._id);
-            }
             return iss;
         }
     },
@@ -57,12 +63,12 @@ Template.journalNavigationPanelOnlyMoop.events({
 
 Template.articleListRightOnlyMoop.helpers({
     articles: function () {
+        var numPerPage = Session.get('PerPage') || 10;
+        return articlePaginator.find({doi:{$in:moopdoi(this._id)}}, {itemsPerPage: numPerPage, sort: {padPage: 1}});
+    },
+    moreThan10: function(){
         if(!_.isEmpty(allmoops.get())){
-            var journalId = this._id;
-            var dois = _.pluck(_.filter(allmoops.get(),function(item){
-                return item.issueId == Session.get("currMoopIssue_"+journalId);
-            }),"doi");
-            return Articles.find({doi:{$in:dois}}, {sort: {elocationId: 1}});
+            return moopdoi(this._id).length > 10;
         }
     }
 });
