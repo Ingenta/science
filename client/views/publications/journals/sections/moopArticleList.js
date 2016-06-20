@@ -61,10 +61,12 @@ Template.journalNavigationPanelOnlyMoop.events({
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
         issueId && Session.set("currMoopIssue_" + this.journalId, issueId);
+        articlePaginator.reset();
     },
     "click .showAllMoop": function(e){
         e.preventDefault();
         Session.set("currMoopIssue_" + this._id, null);
+        articlePaginator.reset();
     }
 });
 
