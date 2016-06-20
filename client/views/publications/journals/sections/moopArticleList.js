@@ -45,6 +45,9 @@ Template.journalNavigationPanelOnlyMoop.helpers({
     },
     issueDisplay: function () {
         return this._id === Session.get("currentVolumeId") ? "block" : "none";
+    },
+    isUseless:function(){
+        return !Session.get("currMoopIssue_"+this._id);
     }
 });
 
@@ -58,6 +61,10 @@ Template.journalNavigationPanelOnlyMoop.events({
     "click .issue": function (event) {
         var issueId = $(event.target).data().value;
         issueId && Session.set("currMoopIssue_" + this.journalId, issueId);
+    },
+    "click .showAllMoop": function(e){
+        e.preventDefault();
+        Session.set("currMoopIssue_" + this._id, null);
     }
 });
 

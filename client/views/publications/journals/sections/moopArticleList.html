@@ -13,6 +13,11 @@
 </template>
 
 <template name="journalNavigationPanelOnlyMoop">
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-success pull-right showAllMoop {{#if isUseless}}disabled{{/if}}" style="margin-bottom:5px">{{_ "showAllMoop"}}</button>
+        </div>
+    </div>
     <ul class="list-group">
         {{#each volumeInJournal _id}}
             <li class="volume list-group-item">
