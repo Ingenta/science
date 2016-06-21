@@ -13,8 +13,8 @@ Template.AdvancedSearch.helpers({
     },
     publicationList: function () {
         var publisherId = Session.get("publisherId");
-        if(publisherId)return Publications.find({publisher:{$in: publisherId}});
-        return Publications.find();
+        if(publisherId)return Publications.find({publisher:{$in: publisherId},visible:"1"});
+        return Publications.find({visible:"1"});
     },
     topicList: function () {
         return Topics.find({parentId: undefined});
