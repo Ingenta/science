@@ -1,9 +1,9 @@
 <template name="layoutRightNews">
+    <div class="mainTitle">
+        <p class="fl w300 mt12"><span class="mr20"><a href="{{pathFor 'newsCenter'}}" style="color: #2d2d2d">{{_ "Magazine dynamic"}}</a></span></p>
+        <p class="fr mt8"><a href="{{pathFor 'dynamicShow'}}"><img src="/goAll.png"/></a></p>
+    </div>
     <div class="mainPart">
-        <div class="mainTitle">
-            <p class="fl w300 mt12"><span class="mr20"><a href="{{pathFor 'newsCenter'}}" style="color: #2d2d2d">{{_ "Magazine dynamic"}}</a></span></p>
-            <p class="fr mt8"><a href="{{pathFor 'dynamicShow'}}"><img src="/goAll.png"/></a></p>
-        </div>
         {{#each layoutRecommendMagazines}}
             <div class="contPart">
                 <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
@@ -22,11 +22,11 @@
         {{/each}}
     </div>
 
-    <div class="mainPart mt20">
-        <div class="mainTitle">
-            <p class="fl w300 mt12"><span class="mr20"><a href="/miniplatform/newsCenter?slug=publishingNews" target="_self" style="color: #2d2d2d">{{_ "Publishing Dynamic"}}</a></span></p>
-            <p class="fr mt8"><a href="{{pathFor 'publishingShow'}}"><img src="/goAll.png"/></a></p>
-        </div>
+    <div class="mainTitle">
+        <p class="fl w300 mt12"><span class="mr20"><a href="/miniplatform/newsCenter?slug=publishingNews" target="_self" style="color: #2d2d2d">{{_ "Publishing Dynamic"}}</a></span></p>
+        <p class="fr mt8"><a href="{{pathFor 'publishingShow'}}"><img src="/goAll.png"/></a></p>
+    </div>
+    <div class="mainPart">
     {{#each layoutPublishingMagazines}}
         <div class="contPart">
             <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>

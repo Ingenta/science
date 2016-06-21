@@ -560,6 +560,10 @@ ul.tree-view ul.tree-view {
     background: none;
     height: auto;
   }
+  .nav-tabs > li.active > a {
+    background: #027fd1;
+    color: #fff;
+  }
   .navMini .curLi, .navMini li:hover {
     background: #027fd1;
     color: #fff;
@@ -684,11 +688,14 @@ ul.tree-view ul.tree-view {
     font-weight: bold;
     overflow: hidden;
   }
-  .mainPart .contPart {
-    margin: 5px 8px 0 8px;
-    background: #fff;
+  .mainPart>.contPart {
+    padding: 5px 15px;
+    list-style-type: none;
     overflow: hidden;
-    padding: 8px 15px;
+    border-top: 1px solid #eee;
+  }
+  .mainPart>.contPart:first-child {
+    border-top: 0;
   }
   .mainRight {
     width: 490px;

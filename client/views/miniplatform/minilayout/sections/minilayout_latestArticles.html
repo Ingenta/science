@@ -1,14 +1,14 @@
 <template name="layoutLatestArticles">
+    <div class="mainTitle">
+        <p class="fl w300 mt12">
+            <span class="mr20">{{_ "Latest articles published"}}</span>
+            {{#if miniPlatformPermission}}
+                <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addLatestArticlesModal"></span>{{> addLatestArticlesModalForm}}
+            {{/if}}
+        </p>
+        <p class="fr mt8"><a href="{{pathFor 'dynamicArticleShow'}}"><img src="/goAll.png"/></a></p>
+    </div>
     <div class="mainPart">
-        <div class="mainTitle">
-            <p class="fl w300 mt12">
-                <span class="mr20">{{_ "Latest articles published"}}</span>
-                {{#if miniPlatformPermission}}
-                    <span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addLatestArticlesModal"></span>{{> addLatestArticlesModalForm}}
-                {{/if}}
-            </p>
-            <p class="fr mt8"><a href="{{pathFor 'dynamicArticleShow'}}"><img src="/goAll.png"/></a></p>
-        </div>
         <!-- 推荐文章部分开始 -->
         {{#each recommendArticles}}
             <div class="contPart">
@@ -24,6 +24,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
         {{else}}
         {{/each}}
         <!-- 推荐文章部分结束 -->
