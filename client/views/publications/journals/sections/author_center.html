@@ -54,17 +54,32 @@
                     {{/if}}</h5>
                 </div>
                 {{#each instructions}}
-                    <ul>
-                        <li style="margin-left: -25px;">
-                            <a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
-                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                                {{> updateAuthorCenterModalForm}}
-                            {{/if}}
-                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                                <a href="#" class="fa fa-trash"></a>
-                            {{/if}}
-                        </li>
-                    </ul>
+                    <p style="font-size: 12px">
+                        {{#if childInstructionsListCount}}
+                            <strong> >> <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
+                        {{else}}
+                            <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                        {{/if}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                            {{>jkafModal template="updateInstructionsModalForm" doc=this id="updateInstructionsModal"}}
+                        {{/if}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                            <a href="#" class="fa fa-trash"></a>
+                        {{/if}}
+                    </p>
+                    {{#each childInstructionsList}}
+                        <ul>
+                            <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                                    {{>jkafModal template="updateInstructionsModalForm" doc=this id="updateInstructionsModal"}}
+                                {{/if}}
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                                    <a href="#" class="fa fa-trash"></a>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    {{else}}
+                    {{/each}}
                 {{else}}
                     {{_ "No results found!"}}
                 {{/each}}
@@ -80,15 +95,20 @@
                     {{/if}}</h5>
                 </div>
                 {{#each manuscript}}
-                    <p style="font-size: 12px"><strong> >> {{{translateThis title.cn title.en}}}</strong>
+                    <p style="font-size: 12px">
+                        {{#if childManuscriptListCount}}
+                            <strong> >> <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
+                        {{else}}
+                            <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                        {{/if}}
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                            {{> updateSubmitManuscriptModalForm}}
+                            {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
                         {{/if}}
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             <a href="#" class="fa fa-trash"></a>
                         {{/if}}
                     </p>
-                    {{#each childList}}
+                    {{#each childManuscriptList}}
                         <ul>
                             <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
@@ -116,16 +136,32 @@
                     {{/if}}</h5>
                 </div>
                 {{#each submitManuscript}}
-                    <ul>
-                        <li style="margin-left: -25px;"><a style="font-size: 12px" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
-                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                                {{> updateSubmitManuscriptModalForm}}
-                            {{/if}}
-                            {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
-                                <a href="#" class="fa fa-trash"></a>
-                            {{/if}}
-                        </li>
-                    </ul>
+                    <p style="font-size: 12px">
+                        {{#if childSubmitManuscriptListCount}}
+                            <strong> >> <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
+                        {{else}}
+                            <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                        {{/if}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                            {{>jkafModal template="updateSubmitManuscriptModalForm" doc=this id="updateSubmitManuscriptModal"}}
+                        {{/if}}
+                        {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                            <a href="#" class="fa fa-trash"></a>
+                        {{/if}}
+                    </p>
+                    {{#each childSubmitManuscriptList}}
+                        <ul>
+                            <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                                    {{>jkafModal template="updateSubmitManuscriptModalForm" doc=this id="updateSubmitManuscriptModal"}}
+                                {{/if}}
+                                {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
+                                    <a href="#" class="fa fa-trash"></a>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    {{else}}
+                    {{/each}}
                 {{else}}
                     {{_ "No results found!"}}
                 {{/each}}
@@ -171,6 +207,7 @@
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="parentId" options=getManuscript }}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -218,7 +255,9 @@
                 {{#autoForm id="addSubmitManuscriptModalForm" collection="AuthorCenter" type="insert"}}
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
+                    {{> afQuickField name="content"}}
                     {{> afQuickField name="url"}}
+                    {{> afQuickField name="parentId" options=getManuscript }}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
@@ -229,8 +268,8 @@
     </div>
 </template>
 
-<template name="updateManuscriptModalForm">
-    {{#autoForm doc=this collection="AuthorCenter" id="updateManuscriptModal" type="update" buttonContent=getUpdateButtonContent}}
+<template name="updateInstructionsModalForm">
+    {{#autoForm doc=this collection="AuthorCenter" id="updateInstructionsModal" type="update" buttonContent=getUpdateButtonContent}}
     <fieldset>
         {{> afQuickField name="title"}}
         {{> afQuickField name="content"}}
@@ -241,10 +280,26 @@
     {{/autoForm}}
 </template>
 
-<template name="updateAuthorCenterModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AuthorCenter" doc=_id operation="update" fields="title,content,url" buttonContent=getUpdateButtonContent}}{{/afModal}}
+<template name="updateManuscriptModalForm">
+    {{#autoForm doc=this collection="AuthorCenter" id="updateManuscriptModal" type="update" buttonContent=getUpdateButtonContent}}
+        <fieldset>
+            {{> afQuickField name="title"}}
+            {{> afQuickField name="content"}}
+            {{> afQuickField name="url"}}
+            {{> afQuickField name="parentId" options=getManuscript }}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
 
 <template name="updateSubmitManuscriptModalForm">
-    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="AuthorCenter" doc=_id operation="update" fields="title,url" buttonContent=getUpdateButtonContent}}{{/afModal}}
+    {{#autoForm doc=this collection="AuthorCenter" id="updateSubmitManuscriptModal" type="update" buttonContent=getUpdateButtonContent}}
+        <fieldset>
+            {{> afQuickField name="title"}}
+            {{> afQuickField name="content"}}
+            {{> afQuickField name="url"}}
+            {{> afQuickField name="parentId" options=getManuscript }}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
+    {{/autoForm}}
 </template>
