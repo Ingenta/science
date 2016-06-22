@@ -5,7 +5,7 @@ Meteor.publish('journalIssuesIncludingHistorical', function(journalShortTitle) {
     if(!journal)return this.ready();
     var journalId=journal._id;
     if(!journalId)return this.ready();
-    if(!Permissions.userCan("modify-journal","resource",Meteor.userId(),{journalId:journalId}))
+    if(!Permissions.userCan("modify-journal","resource",this.userId,{journalId:journalId}))
         return this.ready();
     var idArr = [journalId];
     if(journal && !_.isEmpty(journal.historicalJournals)){
