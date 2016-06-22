@@ -13,7 +13,7 @@
     }
     .ad-link{
         position: absolute;
-        font-size: 100px;
+        font-size: 90px;
         color: #ffffff;
         z-index: 99;
         text-decoration: none;
@@ -23,7 +23,11 @@
 <div style="height:100%;position: relative;">
     <div>
         {{#if banner}}
-            <div><a href="http://engine.scichina.com"><img style="width:100%;max-height:120px" src="{{banner}}"/></a></div>
+
+            <div>
+                <a class="ad-link" href="http://engine.scichina.com">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <img style="width:100%;max-height:120px" src="{{banner}}"/>
+            </div>
         {{/if}}
         <div style="padding-bottom:10px;">
             <h4 style="margin-bottom: 4px;">{{{title}}}</h4>
