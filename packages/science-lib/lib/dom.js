@@ -58,3 +58,11 @@ Science.dom.setMeta = function(name,content){
 Science.dom.clearCitationMeta = function(){
 	$("meta[name^='citation_']").remove();
 }
+
+Science.dom.jiathisShare = function(article,priority){
+	return {
+		url: "http://engine.scichina.com/doi/"+article.doi,
+		title: TAPi18n.__("title")+": " + Science.String.forceClear(Science.JSON.try2GetRightLangVal(article.title,null,priority)) + "\n",
+		summary:TAPi18n.__("Abstract")+": "  + Science.String.forceClear(Science.JSON.try2GetRightLangVal(article.abstract,null,priority))
+	}
+}

@@ -190,3 +190,7 @@ Science.getParamsFormUrl = Science.String.getParamsFormUrl;
 Science.isNumeric = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+//去除html标签,并且将连续空白字符替换为单个空格
+Science.String.forceClear=function(string){
+    return Science.String.clearTags(string).replace(/\s+/g," ").trim();
+}

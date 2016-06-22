@@ -13,6 +13,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             }
             if(article){
                 Session.set("articleTitle",TAPi18n.getLanguage() === "en" ? article.title.en:article.title.cn)
+                article.journal=journal;
             }
             return article;
         }
@@ -45,9 +46,10 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         //        }
         //    })
         //}
-        if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
+        var articledata = this.data();
+        if (!_.isEmpty(articledata.affiliations) && articledata.affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
-
+        jiathis_config=Science.dom.jiathisShare(articledata,["en","cn"][articledata.journal.language-1]);
         this.next();
     },
     onStop: function () {
@@ -63,7 +65,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             journal && Session.set('currentJournalId', journal._id);
             pub && Session.set('currentPublisherId', pub._id);
             Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi);
-            return Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var article= Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            article && (article.journal=journal);
+            return article
         }
     },
     template: "showArticle",
@@ -84,10 +88,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
         ]
     },
     onBeforeAction: function () {
-        if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
+        var articledata=this.data();
+        if (!_.isEmpty(articledata.affiliations) && articledata.affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
-        Session.set("activeTab", _.isEmpty(this.data().sections)?"abstract":"full text");
-
+        Session.set("activeTab", _.isEmpty(articledata.sections)?"abstract":"full text");
+        jiathis_config=Science.dom.jiathisShare(articledata,["en","cn"][articledata.journal.language-1]);
         this.next();
     },
     onStop: function () {
