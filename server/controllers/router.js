@@ -307,7 +307,7 @@ Router.map(function () {
                 data.authors = _.map(article.authors, function (author) {
                     return {
                         name:getContentByLanguage(author.fullname, lang),
-                        authorUrl:Config.rootUrl + 'search?fq={"author":["\\"'+getContentByLanguage(author.fullname, lang) + '\\""]}'
+                        authorUrl:Config.rootUrl + 'search?fq={"author":["\\"'+ encodeURI(getContentByLanguage(author.fullname, lang)) + '\\""]}'
                     };
                 });
             }
