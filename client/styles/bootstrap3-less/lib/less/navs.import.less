@@ -30,14 +30,8 @@
     // Disabled state sets text to gray and nukes hover/tab effects
     &.disabled > a {
       color: @nav-disabled-link-color;
-
-      &:hover,
-      &:focus {
-        color: @nav-disabled-link-hover-color;
-        text-decoration: none;
-        background-color: transparent;
-        cursor: not-allowed;
-      }
+      border-radius: @border-radius-base @border-radius-base 0 0;
+      background-color: @nav-disabled-bg-color;
     }
   }
 

@@ -175,7 +175,7 @@ Template.articleOptions.helpers({
     tabs: function () {
         var tabArr = [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
-            {name: TAPi18n.__("Full Text"), slug: 'full text'},
+            {name: TAPi18n.__("Full Text"), slug: 'full text', isDisabled: _.isEmpty(this.sections)},
             {
                 name: TAPi18n.__("References") + "(" + (this.references ? this.references.length : 0) + ")",
                 slug: 'references'

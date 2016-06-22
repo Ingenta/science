@@ -59,7 +59,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
     data: function () {
         var pub = Publishers.findOne({shortname: this.params.publisherName});
         var journal = Publications.findOne({shortTitle: this.params.journalShortTitle});
-        Session.set("activeTab", "full text");
         if (pub) {
             journal && Session.set('currentJournalId', journal._id);
             pub && Session.set('currentPublisherId', pub._id);
@@ -87,6 +86,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
     onBeforeAction: function () {
         if (!_.isEmpty(this.data().affiliations) && this.data().affiliations.length == 1) Session.set("hideAffLabel", true);
         else Session.set("hideAffLabel", false);
+        Session.set("activeTab", _.isEmpty(this.data().sections)?"abstract":"full text");
 
         this.next();
     },
