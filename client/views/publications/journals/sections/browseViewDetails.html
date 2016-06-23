@@ -1,0 +1,50 @@
+<template name="articleViewDescription">
+    <p>
+        <i class="fa fa-plus" data-toggle="collapse" data-target="#toggle{{_id}}"></i>
+        <a href="#" type="button" data-toggle="collapse" data-target="#toggle{{_id}}" aria-expanded="false" aria-controls="toggle{{_id}}"> {{_ "Details"}}</a>
+    </p>
+    <div class="collapse" id="toggle{{_id}}">
+        <ul class="list-unstyled">
+            {{#if notEmptyField}}
+                <li>{{{getContent field}}}</li><br>
+            {{/if}}
+            <li>
+                <div class="col-xs-6" style="background-color: #ebebeb;border: 1px solid #cccccc;">
+                    <p style="margin-top: 12px">
+                        {{#if pdfId}}
+                            <a href="/downloadPdf/{{_id}}" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Download"}} PDF</b></a>
+                        {{else}}
+                            <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Download"}} PDF</b>
+                        {{/if}}
+                    </p>
+                    <p style="margin-top: 12px;">
+                        <a href="{{urlToArticleById _id}}"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Read Online"}}</b></a>
+                    </p>
+                </div>
+                <div class="col-xs-6">
+                    <p>
+                        {{#if islogin}}
+                            <a href="#" class="favorite"><i class="fa fa-star"></i>&nbsp;&nbsp;<b>{{favoriteName}}</b></a>
+                        {{else}}
+                            <a href="#" class="loginFavorite"><i class="fa fa-star"></i>&nbsp;&nbsp;<b>{{_ "Favorite"}}</b></a>
+                        {{/if}}
+                    </p>
+                    <p>{{>exportCitationBrowse}}</p>
+                    <p><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i class="fa fa-envelope"></i>&nbsp;&nbsp;<b>{{_ "emailThis"}}</b></a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</template>
+
+<template name="exportCitationBrowse">
+    <li><a class="exportCitations" href="#" data-toggle="collapse" data-target="#{{_id}}collapseOne"><span
+            class="fa fa-arrow-circle-o-right"></span> <b>{{_ "Export Citations"}}</b></a></li>
+    <div id="{{_id}}collapseOne" class="collapse">
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/bibtex/{{doi}}" target="_blank">BibTeX</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/endnote/{{doi}}" target="_blank">Endnote</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/plaintext/{{doi}}" target="_blank">Plain Text</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/refworks/{{doi}}" target="_blank">RefWorks</a></li>
+        <li>&nbsp;&nbsp;&nbsp;<a href="/citation/pubmed/{{doi}}" target="_blank">PubMed</a></li>
+    </div>
+</template>
