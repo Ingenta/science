@@ -1,12 +1,12 @@
 Template.searchHistoryList.helpers({
     searchHistory:function(){
-        return Meteor.user().history && Meteor.user().history.unsave
+        return Meteor.user()&&Meteor.user().history && Meteor.user().history.unsave.sort(function(a,b){return a.createOn< b.createOn?1:-1});
     },
     time : function(){
         return this.createOn.format("yyyy-MM-dd");
     },
     folder : function(){
-        return Meteor.user().history && Meteor.user().history.saved
+        return Meteor.user()&&Meteor.user().history && Meteor.user().history.saved
     },
     form : function(){
         var form = (_.contains(["bar","history"],this.from))?TAPi18n.__("Common Search"):"";
@@ -16,7 +16,7 @@ Template.searchHistoryList.helpers({
         return SolrQuery.makeUrl({query:this.word,setting:{from:"history"}});
     },
     hasFolder:function(){
-        return Meteor.user().history && Meteor.user().history.saved;
+        return Meteor.user()&&Meteor.user().history && Meteor.user().history.saved;
     }
 })
 
