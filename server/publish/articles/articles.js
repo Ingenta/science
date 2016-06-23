@@ -28,7 +28,8 @@ articleWithMetadata = {
     publisher: 1,
     contentType: 1,
     padPage: 1,
-    special: 1
+    special: 1,
+    pdfId: 1
 };
 
 Meteor.publish('articleSearchResults', function () {

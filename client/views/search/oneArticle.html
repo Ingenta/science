@@ -35,12 +35,18 @@
                     <a style="margin-left:0.5em;" href="http://dx.doi.org/{{doi}}">{{doi}} <i class="fa fa-external-link"></i></a>
                 </li>
                 <li>
-                    {{> abstractDetails}}
+                    {{> FieldBrowseDetails}}
                 </li>
                 {{> moopDetails}}
             </ul>
         </li>
     </ul>
+</template>
+
+<template name="FieldBrowseDetails">
+    {{#mathjax}}
+        {{> articleViewDescription field=abstract _id=_id doi=doi}}
+    {{/mathjax}}
 </template>
 
 <template name="abstractDetails">

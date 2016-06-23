@@ -58,7 +58,7 @@ Template.toggleFieldBrowse.events({
 
 Template.sendEmails.helpers({
     getCurrentUrl: function () {
-        return window.location.href;
+        return "http://engine.scichina.com/doi/" + Session.get("currentDoi");
     },
     getDoi: function () {
         return Session.get("currentDoi");
@@ -69,7 +69,7 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
     onSuccess: function () {
         $("#sendEmailModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Session.get("currentDoi");
         var article = Articles.findOne({doi: currentDoi});
         if (!article)return;
         Meteor.call("insertAudit", Meteor.userId(), "emailThis", article.publisher, article.journalId, article._id, function (err, response) {

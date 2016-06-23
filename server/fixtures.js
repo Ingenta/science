@@ -63,7 +63,7 @@ Meteor.startup(function () {
             {key: "magazineProfile", e: "Magazine Profile", c: "杂志社简介"},
             {key: "council", e: "Council", c: "两刊理事会"},
             {key: "memorabilia", e: "Two Issue Of Memorabilia", c: "两刊大事记"},
-            {key: "subscription", e: "Subscription Info", c: "订阅信息"},
+            {key: "subscription", e: "Subscription", c: "期刊订阅"},
             {key: "enterpriseCulture", e: "Enterprise Culture", c: "企业文化"}
         ];
         _.each(names, function (name) {
