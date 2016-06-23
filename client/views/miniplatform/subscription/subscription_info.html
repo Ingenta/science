@@ -16,11 +16,11 @@
 <template name="subscriptionList">
     {{#each subscriptions}}
         <div class="partContent">
-            <div align="center"><span style="font-size:24px;">{{title}}</span>
+            <div align="center"><span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
                 {{#if miniPlatformPermission}}{{> updateSubscriptionModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="subDel" class="fa fa-trash"></a>{{/if}}</div><br>
-            <p>{{{content}}}</p>
-            <p><a style="color: red" href="{{wordValue}}" target="_blank"><img src="/load_word.png">&nbsp;&nbsp;{{fileName}}</a></p>
+            <p>{{{translateThis content.cn content.en}}}</p>
+            <!--<p><a style="color: red" href="{{wordValue}}" target="_blank"><img src="/load_word.png">&nbsp;&nbsp;{{fileName}}</a></p>-->
         </div>
     {{else}}
         {{_ "No results found!"}}
@@ -28,7 +28,7 @@
 </template>
 
 <template name="updateSubscriptionModalForm">
-    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="accordion,releaseTime,createDate,link,types"}}{{/afModal}}
+    {{#afModal formId=_id class="fa fa-pencil" title=getUpdateButtonContent collection="NewsContact" doc=_id operation="update" omitFields="accordion,releaseTime,createDate,link,types,fileName,fileId"}}{{/afModal}}
 </template>
 
 <template name="addSubscriptionModalForm">
@@ -45,8 +45,6 @@
                 <div class="modal-body">
                     {{> afQuickField name="title"}}
                     {{> afQuickField name="content"}}
-                    {{> afQuickField name="fileName"}}
-                    {{> afQuickField name="fileId"}}
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
