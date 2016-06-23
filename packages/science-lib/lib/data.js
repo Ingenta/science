@@ -22,9 +22,9 @@ Science.data.isValidDoi = function (doi) {
 Science.data.getArticleDoiFromFullDOI = function (fullDOI) {
     if (!fullDOI) return "";
     if (fullDOI.indexOf("/") === -1) return fullDOI;
-    var index = doi.indexOf('/');
-    if (index<=0 || index>=doi.length-1) return fullDOI;
-    var articleDOI = doi.slice(index+1).trim();
+    var index = fullDOI.indexOf('/');
+    if (index<=0 || index>=fullDOI.length-1) return fullDOI;
+    var articleDOI = fullDOI.slice(index+1).trim();
     if(_.isEmpty(articleDOI)) return fullDOI;
     return articleDOI;
 }

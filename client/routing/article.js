@@ -6,8 +6,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         if (pub) {
             journal && Session.set('currentJournalId', journal._id);
             pub && Session.set('currentPublisherId', pub._id);
-            Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/"));
-            var article = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")});
+            Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/"));
+            var article = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             if(article && _.contains(journal.tabSelections,"MOOP")){
                 article.hasMoop=true;
             }
@@ -26,9 +26,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     name: "article.show",
     waitOn: function () {
         return [
-            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")),
-            Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")),
-            Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")),
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
+            Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
+            Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
@@ -64,8 +64,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
         if (pub) {
             journal && Session.set('currentJournalId', journal._id);
             pub && Session.set('currentPublisherId', pub._id);
-            Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/"));
-            var article= Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")});
+            Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/"));
+            var article= Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             article && (article.journal=journal);
             return article
         }
@@ -78,9 +78,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
     name: "article.show.strange",
     waitOn: function () {
         return [
-            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")),
-            Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")),
-            Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")),
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
+            Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
+            Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             Meteor.subscribe('journalMostRead', this.params.journalShortTitle),
@@ -102,7 +102,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
 
 Router.route('/doi/:publisherDoi/:articleDoi', function () {
     var article = Articles.findOne(
-        {doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/")},
+        {doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")},
         {
             fields: {
                 journalId: 1,
@@ -114,7 +114,7 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
         }
     );
     if (!article) {
-        console.log(this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/") + ' doi not found, redirecting to homepage')
+        console.log(this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/") + ' doi not found, redirecting to homepage')
         return Router.go('home')
     }
     var journal = Publications.findOne({_id: article.journalId}, {fields: {shortTitle: 1}});
@@ -141,11 +141,11 @@ Router.route('/doi/:publisherDoi/:articleDoi', function () {
 }, {
     waitOn: function () {
         return [
-            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/%2F/g,"/"))
+            Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/"))
         ]
     }
 });
 
 Router.route('/doi/:publisherDoi/:articleDoi/:secArticleDoi', function () {
-    Router.go(this.params.publisherDoi + "/" + this.params.articleDoi+"%2F"+this.params.secArticleDoi);
+    Router.go("/doi/"+this.params.publisherDoi + "/" + this.params.articleDoi+"-slash-"+this.params.secArticleDoi);
 });

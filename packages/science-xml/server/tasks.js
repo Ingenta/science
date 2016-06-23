@@ -404,7 +404,7 @@ var insertArticle = function (a) {
             CN: 1
         }
     });
-    a.journalInfo = journalInfo;
+    a.journal = journalInfo;
 
     if(!_.isEmpty(a.authors)){
         var orderAuthors={cn:"",en:""};
@@ -437,7 +437,7 @@ var insertArticle = function (a) {
         title: a.title,
         abstract: a.abstract,
         journalId: a.journalId,
-        journal: a.journalInfo,//journal是后加的
+        journal: a.journal,//journal是后加的
         publisher: a.publisher,
         elocationId: a.elocationId,
         startPage: a.startPage,

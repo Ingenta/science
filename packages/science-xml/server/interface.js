@@ -64,7 +64,7 @@ Router.route('downloadXml', {
     where: 'server',
     path: '/xml/:doiPartOne/:doiPartTwo',
     action: function () {
-        var fullDoi = this.params.doiPartOne + "/" + this.params.doiPartTwo.replace(/%2F/g,"/");
+        var fullDoi = this.params.doiPartOne + "/" + this.params.doiPartTwo.replace(/-slash-/g,"/");
         var art = Articles.findOne({doi: fullDoi}, {fields: {_id: 1}});
         if (!art) {
             this.response.writeHead(400);
