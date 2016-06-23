@@ -1,6 +1,6 @@
 Template.exportCitationSidebar.helpers({
     getCurrentDoi: function () {
-        return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
     }
 })
 Template.LayoutSideBar.helpers({
@@ -48,7 +48,7 @@ Template.LayoutSideBar.helpers({
     getdoi:function(){
         if (Router.current() && Router.current().route
             && Router.current().route.getName() == "article.show" || Router.current().route.getName() == "article.show.strange"){
-            return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+            return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
         }
     },
     isJournalPage: function () {
@@ -56,7 +56,7 @@ Template.LayoutSideBar.helpers({
             return _.contains(["journal.name","journal.name.long"],Router.current().route.getName())
     },
     favoriteName: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
         var thisArticle = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && currentDoi && thisArticle) {
             var listOfUserFavourites = Meteor.user().favorite || [];
@@ -68,7 +68,7 @@ Template.LayoutSideBar.helpers({
         }
     },
     articleWatchState: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
             var wat = [];
@@ -105,7 +105,7 @@ Template.LayoutSideBar.helpers({
 
 Template.LayoutSideBar.events({
     "click .favorite": function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
             var fav = Meteor.user().favorite || [];
@@ -125,7 +125,7 @@ Template.LayoutSideBar.events({
         }
     },
     "click .watchArticle": function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
         var article = Articles.findOne({doi: currentDoi});
         if (Meteor.userId() && article) {
             var wat = [];

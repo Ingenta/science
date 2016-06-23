@@ -69,7 +69,7 @@ AutoForm.addHooks(['sendEmailsModalForm'], {
     onSuccess: function () {
         $("#sendEmailModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/%2F/g,"/");
         var article = Articles.findOne({doi: currentDoi});
         if (!article)return;
         Meteor.call("insertAudit", Meteor.userId(), "emailThis", article.publisher, article.journalId, article._id, function (err, response) {

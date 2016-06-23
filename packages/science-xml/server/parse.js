@@ -3,17 +3,19 @@ Science.DOIValidator = {};
 Science.DOIValidator = Npm.require('doi-regex');
 
 ScienceXML.getArticleDoiFromFullDOI = function (fullDOI) {
-    if (!fullDOI) return "";
-    if (fullDOI.indexOf("/") === -1) return fullDOI;
-    var articleDOI = fullDOI.split("/")[1];
-    if (!articleDOI) return fullDOI;
-    return articleDOI;
+    //if (!fullDOI) return "";
+    //if (fullDOI.indexOf("/") === -1) return fullDOI;
+    //var articleDOI = fullDOI.split("/")[1];
+    //if (!articleDOI) return fullDOI;
+    //return articleDOI;
+    return Science.data.getArticleDoiFromFullDOI(fullDOI)
 }
 ScienceXML.isValidDoi = function (doi) {
-    if (!doi) return false;
-    //NOTE: only has one slash, for now not allowing oxford press data
-    if (doi.split('/').length !== 2) return false;
-    return Science.DOIValidator({exact: true}).test(doi);
+    //if (!doi) return false;
+    ////NOTE: only has one slash, for now not allowing oxford press data
+    //if (doi.split('/').length !== 2) return false;
+    //return Science.DOIValidator({exact: true}).test(doi);
+    return Science.data.isValidDoi(doi);
 }
 
 

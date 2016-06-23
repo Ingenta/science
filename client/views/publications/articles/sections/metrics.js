@@ -28,7 +28,7 @@
 //     });
 // }
 prepareMetricsForThisArticle = function(){
-    var article = Articles.findOne({articledoi: Router.current().params.articleDoi}, {fields: {_id: 1}});
+    var article = Articles.findOne({articledoi: Router.current().params.articleDoi.replace(/%2F/g,"/")}, {fields: {_id: 1}});
     if (!article || !article._id)return;
 
     Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
