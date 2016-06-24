@@ -373,7 +373,7 @@ var homepageNews = function () {
     var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
     var rootUrl = Config.rootUrl;
     news.forEach(function (item) {
-        item.abstract.cn = cutString(item.abstract.cn, 415);
+        item.abstract.cn = cutString(Science.String.forceClear(item.abstract.cn), 415);
         if (!item.url) item.url = rootUrl + "news/" + item._id
     });
     return news;
