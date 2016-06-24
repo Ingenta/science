@@ -134,7 +134,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
             }
         }
-        generateArticleLinks(articleList, journal.url);
+        generateArticleLinks(articleList, journal);
 
         oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
         oneIssue.month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+oneIssue.month];
@@ -202,7 +202,16 @@ Science.Email.availableOnline = function (date ,email) {
         }
 
         if (!obj.articleList || !obj.articleList.length) return;
-        var journal = {};
+        var journal = Publications.findOne({_id: obj._id}, {
+            fields: {
+                title: 1,
+                titleCn: 1,
+                description: 1,
+                banner: 1,
+                submissionReview: 1
+            }
+        });
+        if(!journal) return;
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
         journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
         if (journal.banner) {
@@ -211,7 +220,7 @@ Science.Email.availableOnline = function (date ,email) {
                 journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
             }
         }
-        generateArticleLinks(obj.articleList, journal.url);
+        generateArticleLinks(obj.articleList, journal);
 
         var content = JET.render('availableOnline', {
             "onlineUrl": Config.rootUrl + "email/online.jpg",
@@ -339,14 +348,12 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
 
 
 
-var generateArticleLinks = function (articles, journalUrl) {
+var generateArticleLinks = function (articles, journal) {
     articles.forEach(function (article) {
         if (article._id)
             article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
-        article.journal= article.journal || {};
-        if (journalUrl)
-            article.journal.url = journalUrl;
-        else
+        article.journal= journal || article.journal || {};
+        if (journal && journal.url)
             article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
     });
 };
