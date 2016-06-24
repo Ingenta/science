@@ -10,7 +10,7 @@ Science.String.replaceSubstrings = function (string, find, replace) {
 };
 
 Science.String.clearTags = function (string) {
-    return string && string.replace(new RegExp("</?[^>]*?>", 'g'), "");
+    return string && string.replace(new RegExp("</?[^>]*?>", 'g'), " ") || "";
 }
 
 Science.String.joinStrings = function (stringArray, join) {
