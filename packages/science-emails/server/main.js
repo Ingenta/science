@@ -221,12 +221,13 @@ Science.Email.availableOnline = function (date ,email) {
             }
         }
         generateArticleLinks(obj.articleList, journal);
-
+        var journalNews = journalIdToNews(journal._id);
         var content = JET.render('availableOnline', {
             "onlineUrl": Config.rootUrl + "email/online.jpg",
             "rootUrl": Config.rootUrl,
             "journal": journal,
-            "articleList": obj.articleList
+            "articleList": obj.articleList,
+            "journalNews":journalNews
         });
         if(email){
             Email.send({
