@@ -392,7 +392,7 @@ Router.map(function () {
         }
     });
 
-    this.route('/publisher/account/:pubId', {
+    this.route('/publisherPanel/account', {
         template: "PublisherPanel",
         name: "publisher.account",
         parent: "home",
@@ -420,7 +420,7 @@ Router.map(function () {
         }
     });
 
-    this.route("/publisher/account/insert/:pubId", {
+    this.route("/publisherPanel/account/insert", {
         template: "PublisherPanel",
         name: "publisher.account.insert",
         parent: "publisher.account",
@@ -443,7 +443,7 @@ Router.map(function () {
         }
     });
 
-    this.route("/publisher/account/edit/:userId", {
+    this.route("/publisherPanel/account/edit/:userId", {
         template: "PublisherPanel",
         name: "publisher.account.edit",
         parent: "publisher.account",
@@ -486,7 +486,7 @@ Router.map(function () {
         }
     });
 
-    this.route("/publisherPanel/:pubId", {
+    this.route("/publisherPanel", {
         name: "publisherPanel",
         controller: "publisherPanelController",
         parent: "home",
@@ -495,7 +495,7 @@ Router.map(function () {
         }
     });
 
-    this.route("/publisher/upload/:pubId", {
+    this.route("/publisherPanel/upload", {
         template: "PublisherPanel",
         name: "publisher.upload",
         parent: "publisherPanel",
@@ -511,43 +511,16 @@ Router.map(function () {
                 //Meteor.subscribe('publishers')
             ]
         }
-        //onBeforeAction: function () {
-        //    Permissions.check("add-user", "user",{publisher:this.params.pubId});
-        //    this.next();
-        //}
     });
-
-    //this.route("testTemplate", {
-    //    path: "/testTemplate"
-    //});
-    //this.route("editseaTemp", {
-    //    path: "/editseaTemp"
-    //});
-    //this.route("searchResult", {
-    //    path: "/searchResult"
-    //});
-    //this.route("loginNew", {
-    //    path: "/loginNew"
-    //});
-    //this.route("userAgreement", {
-    //    path: "/userAgreement"
-    //});
-    //this.route("publishCont", {
-    //    path: "/publishCont"
-    //});
-    //this.route("publishRecommed", {
-    //    path: "/publishRecommed"
-    //});
-    //this.route("publishAuthor", {
-    //    path: "/publishAuthor"
-    //});
-    //this.route("personal1", {
-    //    path: "/personal1"
-    //});
-    //this.route("news", {
-    //    path: "/news"
-    //});
-    //this.route("edit_author", {
-    //    path: "/edit_author"
-    //});
+    this.route("/publisherPanel/statistic/", {
+        template: "PublisherPanel",
+        name: "publisher.statistic",
+        parent: "publisherPanel",
+        yieldTemplates: {
+            'statistic': {to: 'PublisherSubcontent'}
+        },
+        title: function () {
+            return TAPi18n.__("Statistical Management");
+        }
+    });
 });

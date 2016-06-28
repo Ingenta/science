@@ -13,15 +13,22 @@
     <ul id="menu-items" class="nav nav-stacked nav-pills">
         {{#if can "list-user" "user" getScope}}
             <li id="menu-item-simple" class="{{menuItemClass 'publisher.account'}}">
-                <a href="{{pathFor 'publisher.account' pubId=getPublisherId query='level=normal'}}">
+                <a href="{{pathFor 'publisher.account' query='level=normal'}}">
                     {{_ "Publisher"}}
                 </a>
             </li>
         {{/if}}
         {{#if can "add-article" "resource" getScope}}
             <li id="menu-item-simple" class="{{menuItemClass 'publisher.upload'}}">
-                <a href="{{pathFor 'publisher.upload' pubId=getPublisherId}}">
+                <a href="{{pathFor 'publisher.upload'}}">
                     {{_ "Upload"}}
+                </a>
+            </li>
+        {{/if}}
+        {{#if can "use-statistic" "platform" getScope}}
+            <li id="menu-item-simple" class="{{menuItemClass 'admin.statistic'}}">
+                <a href="{{pathFor 'publisher.statistic'}}">
+                    {{_ "Statistical Management"}}
                 </a>
             </li>
         {{/if}}

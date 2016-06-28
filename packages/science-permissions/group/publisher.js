@@ -28,6 +28,7 @@ publisherPermissions
         "permissions:delegate-and-revoke",
         "permissions:get-users-roles",
         "platform:use-publisher-panel",
+        "platform:use-statistic",
 
         "modify-publisher",
 

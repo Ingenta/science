@@ -496,6 +496,8 @@ OrbitPermissions = {
 			})
 		});
 	},
+	// 获取某个用户的某权限的有效范围,由于某权限可能被赋予给了多个角色,而用户又可能被赋予了多个角色,
+	// 不同角色的范围又可能不一样,所以查询用户的某个特定权限的范围时,需要取其所有包含此权限的角色范围的并集.
 	getPermissionRange         : function (userId, permission) {
 		if(!userId && Meteor.isClient)
 			userId = Meteor.userId();

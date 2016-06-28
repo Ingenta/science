@@ -42,6 +42,11 @@ platformPermissions
         options: {
             level: publisherLevel
         }
+    })
+    .definePermission("use-statistic",{
+        en: {name: "access to statistic page", summary:"access to statistic page"},
+        cn: {name: "使用统计管理功能", summary:"使用统计管理功能"},
+        options: journalLevel
     });
 
 platformPermissions

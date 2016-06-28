@@ -28,9 +28,16 @@ Template.statistic.helpers({
         return Publishers.find();
     },
     publicationList: function () {
+        var query={};
         var publisherId = Session.get("publisherId");
-        if(publisherId)return Publications.find({publisher:{$in: publisherId}});
-        return Publications.find();
+        if(publisherId)
+            query.publisher={$in: publisherId};
+        if(!Permissions.isAdmin()){
+            var permissionScope = Permissions.getPermissionRange(Meteor.userId(),"platform:use-statistic");
+            query._id = {$in:permissionScope.journal};
+        }
+        console.log(query);
+        return Publications.find(query);
     },
     institutionsList:function(){
         return Institutions.find();

@@ -27,8 +27,7 @@ Package.onUse(function (api) {
         'client/view/statistic.html',
         'client/view/statistic.js',
         'client/view/site-reports/reports.html',
-        'client/view/site-reports/reports.js',
-        'client/router.js'
+        'client/view/site-reports/reports.js'
     ], 'client')
 });
 

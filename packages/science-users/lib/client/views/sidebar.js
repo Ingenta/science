@@ -39,7 +39,7 @@ Template.LayoutSideBar.helpers({
         return Meteor.user().level === Permissions.level.institution && Permissions.userCan("use-institution-panel", 'platform', Meteor.userId(), {institution: Meteor.user().institutionId});
     },
     canUsePublisherPanel: function () {
-        return (Meteor.user().level === Permissions.level.publisher || Meteor.user().level === Permissions.level.journal) && Permissions.userCan("use-publisher-panel", 'platform', Meteor.userId(), {publisher: Meteor.user().publisherId});
+        return (Meteor.user().level === Permissions.level.publisher || Meteor.user().level === Permissions.level.journal) && Permissions.userCan("use-publisher-panel", 'platform', Meteor.userId(), {publisher: "any"});
     },
     isArticlePage: function () {
         if (Router.current() && Router.current().route)
