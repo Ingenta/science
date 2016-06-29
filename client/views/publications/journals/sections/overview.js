@@ -104,3 +104,20 @@ Template.addRecommendModalForm.helpers({
         return SolrQuery.select2Options({"journalId":Session.get("currentJournalId")})
     }
 });
+
+Template.issueCoverSummary.helpers({
+    getCoverUrl:function(){
+        var pictureId=this.defaultCover;
+
+        var issueId=Session.get("currentIssueId");
+        if(issueId){
+            var issue = Issues.findOne({_id:issueId});
+            if(issue && issue.picture)
+                pictureId=issue.picture;
+        }
+
+        var noPicture = "http://sbiapps.sitesell.com/sitebuilder/sitedesigner/resource/basic_white_nce/image-files/thumbnail1.jpg";
+        var imgObj = Images && pictureId && Images.findOne({_id: pictureId});
+        return (imgObj && imgObj.url({auth:false})) || noPicture;
+    }
+})

@@ -689,6 +689,9 @@
       }
     },
     "issues": {
+      "picture":{
+        "label":"封面图片"
+      },
       "description": {
         "label": "英文封面描述"
       },

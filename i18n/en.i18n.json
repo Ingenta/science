@@ -545,6 +545,9 @@
             }
         },
         "issues": {
+            "picture":{
+                "label":"Cover"
+            },
             "description": {
                 "label": "English Cover Description"
             },

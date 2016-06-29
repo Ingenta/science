@@ -1,7 +1,7 @@
 <template name="articleList">
     <div class="row">
         <div class="col-xs-3">
-            {{> journalCoverSummary}}
+            {{> issueCoverSummary}}
             {{> journalNavigationPanel}}
             {{> historicalJournalNavigationPanel}}
         </div>
@@ -31,7 +31,11 @@
                 {{#each issueInVolume journalId volume}}
                     <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}"
                         data-issue="{{issue}}">
-                        {{_ "issueItem" issue }}
+                        <span>{{_ "issueItem" issue }}</span>
+                        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                            {{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture" buttonContent=getUpdateButtonContent}}
+                            {{/afModal}}
+                        {{/if}}
                     </li>
                 {{/each}}
             </ul>

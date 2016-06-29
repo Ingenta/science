@@ -39,7 +39,7 @@ Template.journalNavigationPanel.events({
         $(event.currentTarget).next(".issues").slideToggle(200);
     },
     "click .issue": function (event) {
-        var data = $(event.target).data();
+        var data = $(event.currentTarget).data();
         var issueId = data.value;
         issueId && Session.set("currentIssueId", issueId);
         var newurl=Session.get('baseJournalUrl')+"/"+data.volume + "/"+data.issue + "?slug=Browse";

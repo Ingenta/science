@@ -17,6 +17,20 @@ IssuesSchema = new SimpleSchema({
         type: String,
         optional:true
     },
+    picture: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png',
+                label: function () {
+                    return TAPi18n.__("Choose file")
+                }
+            }
+        }
+    },
     description: {
         type: String,
         optional:true,
