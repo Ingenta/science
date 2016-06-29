@@ -195,6 +195,20 @@ PublicationsSchema = new SimpleSchema({
             }
         }
     },
+    defaultCover: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/gif,image/jpeg,image/png,.gif,.jpeg,.jpg,.png',
+                label: function () {
+                    return TAPi18n.__("Choose file")
+                }
+            }
+        }
+    },
     banner: {
         type: String,
         optional: true,

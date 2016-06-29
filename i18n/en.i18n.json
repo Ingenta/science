@@ -306,6 +306,9 @@
             "picture": {
                 "label": "Choose Image for Cover"
             },
+            "defaultCover":{
+                "label": "Choose Image for Default Cover"
+            },
             "banner": {
                 "label": "Choose Image for Banner"
             },

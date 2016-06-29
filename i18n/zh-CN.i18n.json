@@ -450,6 +450,9 @@
       "picture": {
         "label": "选择封面图片"
       },
+      "defaultCover":{
+        "label": "选择默认封面图片"
+      },
       "banner": {
         "label": "选择横幅图片"
       },
