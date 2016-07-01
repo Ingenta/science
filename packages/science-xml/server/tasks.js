@@ -404,7 +404,7 @@ var insertArticle = function (a) {
             CN: 1
         }
     });
-    a.journalInfo = journalInfo;
+    a.journal = journalInfo;
 
     if(!_.isEmpty(a.authors)){
         var orderAuthors={cn:"",en:""};
@@ -430,6 +430,10 @@ var insertArticle = function (a) {
         return existArticle._id;
     }
 
+    //设置padPage
+    var atcpage= a.elocationId || a.startPage;
+    a.padPage = a.journal.issn+Science.String.PadLeft(a.volume,"0",8)+Science.String.PadLeft(a.issue,"0",8)+Science.String.PadLeft(atcpage,"0",10);
+
     //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsFromXmlToUpdate
     var id = Articles.insert({
         doi: a.doi,
@@ -437,7 +441,7 @@ var insertArticle = function (a) {
         title: a.title,
         abstract: a.abstract,
         journalId: a.journalId,
-        journal: a.journalInfo,//journal是后加的
+        journal: a.journal,//journal是后加的
         publisher: a.publisher,
         elocationId: a.elocationId,
         startPage: a.startPage,

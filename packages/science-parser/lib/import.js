@@ -337,7 +337,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
 
                                 var padPage = article.elocationId || article.startPage;
                                 if(padPage){
-                                    newOne.padPage = Science.String.PadLeft(padPage,"0",10);
+                                    newOne.padPage = newOne.journal.issn+Science.String.PadLeft(newOne.volume,"0",8)+Science.String.PadLeft(newOne.issue,"0",8)+Science.String.PadLeft(padPage,"0",10);
                                 }
                             }
                             if (options.importPdf && article.pdf) {
