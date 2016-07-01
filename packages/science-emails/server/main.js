@@ -27,8 +27,11 @@ Science.Email.authorCitationAlertEmail = function (date) {
         });
         if(!article) return;
         article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
-        if(!article.journal) article.journal = {};
-        if(article.journalId) article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1))
+        if(article.journalId) {
+            article.journal = Publications.findOne({_id:article.journalId}) || {};
+            article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
+        }
+
         article.authorNotes.forEach(function (address) {
             var authorName = _.find(article.authors, function (obj) {
                 return obj.email == address.id;
@@ -42,7 +45,11 @@ Science.Email.authorCitationAlertEmail = function (date) {
                     "authorName": authorName,
                     "citations": item.citations,
                     "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                    "rootUrl": Config.rootUrl
+                    "rootUrl": Config.rootUrl,
+                    "phone":article.journal.phone,
+                    "fax":article.journal.fax,
+                    "email":article.journal.email,
+                    "address":article.journal.address?article.journal.address.en:null
                 })
             });
             logger.silly("citation alert email sent");
@@ -69,7 +76,11 @@ Science.Email.searchFrequencyEmail = function () {
             html: JET.render('searchFrequency', {
                 "searchLogs": searchLogs,
                 "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                "rootUrl": Config.rootUrl
+                "rootUrl": Config.rootUrl,
+                "email":Config.contactInfo.email,
+                "fax":Config.contactInfo.fax,
+                "address":Config.contactInfo.address,
+                "phone":Config.contactInfo.phone
             })
 
         });
@@ -121,7 +132,11 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 titleCn: 1,
                 description: 1,
                 banner: 1,
-                submissionReview: 1
+                submissionReview: 1,
+                email:1,
+                address:1,
+                fax:1,
+                phone:1
             }
         });
         if(!journal) return;
@@ -146,7 +161,11 @@ Science.Email.tableOfContentEmail = function (date,email) {
             "issue": oneIssue,
             "journal": journal,
             "articleList": articleList,
-            "journalNews": journalNews
+            "journalNews": journalNews,
+            "email":journal.email,
+            "address":journal.address?journal.address.en:null,
+            "fax":journal.fax,
+            "phone":journal.phone
         });
         if(email){
             Email.send({
@@ -208,7 +227,11 @@ Science.Email.availableOnline = function (date ,email) {
                 titleCn: 1,
                 description: 1,
                 banner: 1,
-                submissionReview: 1
+                submissionReview: 1,
+                email:1,
+                address:1,
+                fax:1,
+                phone:1
             }
         });
         if(!journal) return;
@@ -227,7 +250,11 @@ Science.Email.availableOnline = function (date ,email) {
             "rootUrl": Config.rootUrl,
             "journal": journal,
             "articleList": obj.articleList,
-            "journalNews":journalNews
+            "journalNews":journalNews,
+            "email":journal.email,
+            "address":journal.address?journal.address.en:null,
+            "fax":journal.fax,
+            "phone":journal.phone
         });
         if(email){
             Email.send({
@@ -282,7 +309,11 @@ Science.Email.watchTopicEmail = function (date) {
             "rootUrl": Config.rootUrl,
             "topic": oneTopic,
             "articleList": articleList,
-            "homePageNews": homePageNews
+            "homePageNews": homePageNews,
+            "email":Config.contactInfo.email,
+            "fax":Config.contactInfo.fax,
+            "address":Config.contactInfo.address,
+            "phone":Config.contactInfo.phone
         });
         userList.forEach(function (oneUser) {
             Email.send({
@@ -322,8 +353,8 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
         });
         if (!article) return;
         article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
-        if(!article.journal) article.journal = {};
         if (article.journalId) {
+            article.journal = Publications.findOne({_id:article.journalId});
             article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
             article.journal.banner = Publications.findOne({_id: article.journalId},{fields: {banner: 1}}).banner;
             if (article.journal.banner) article.journal.banner = Meteor.absoluteUrl(Images.findOne({_id: article.journal.banner}).url({auth:false}).substring(1));
@@ -333,8 +364,11 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
             "rootUrl": Config.rootUrl,
             "article": article,
             "userName": "USERNAME",
-            "citations": articleCitations.citations
-
+            "citations": articleCitations.citations,
+            "phone":article.journal.phone,
+            "fax":article.journal.fax,
+            "email":article.journal.email,
+            "address":article.journal.address?article.journal.address.en:null
         });
         userList.forEach(function (oneUser) {
             Email.send({

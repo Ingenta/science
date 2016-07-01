@@ -198,5 +198,11 @@ if (Meteor.isServer) {
     }
     Meteor.isLive = process.env.ROOT_URL == "http://engine.scichina.com";
     Config.chinaCodes=["CN","HK","TW","MO"]; //用于地区统计处,将香港\台湾\澳门归并到中国范围中
+    Config.contactInfo={
+        email:"sales@scichina.org",
+        phone:"86-10-64019709",
+        address:"#16 Donghuangchenggen North Street, Beijing, China (100717)",
+        fax:"86-10-64016350"
+    }
 }
 

@@ -6,6 +6,6 @@
     <p style="display:none">To unsubscribe from ALL table of contents alerts, please click here. </p>
     <p>For all enquiries, problems or suggestions regarding this service, please contact on <a href="{{rootUrl}}">{{rootUrl}}</a>.</p>
     <p>SCP respects your privacy and does not disclose, sell or rent your personal information to any nonaffiliated third parties without your consent. Please visit the SciEngine</p>
-    <p>Address: SCIENCE CHINA Physics, Mechanics & Astronomy, 16 Donghuangchenggen North Street, Beijing, China (100717)</p>
-    <p>Tel: 010-64015835   Fax: 010-64016350  {{#if email}} E-Mail: <a href="mailto:{{email}}">{{email}}</a>{{/if}}</p>
+    {{#if address}}<p>Address: {{address}}</p>{{/if}}
+    <p>{{#if phone}}Tel: {{phone}}{{/if}}   {{#if fax}}Tel: {{fax}}{{/if}}  {{#if email}} E-Mail: <a href="mailto:{{email}}">{{email}}</a>{{/if}}</p>
 </div>
