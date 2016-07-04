@@ -1,5 +1,6 @@
 <template name="aboutTitle">
     <div class="tabbable">
+    {{#if Template.subscriptionsReady}}
         <div class="col-xs-4">
             <ul class="nav nav-pills nav-stacked aboutNavTabs">
                 {{#each abouts}}
@@ -30,6 +31,10 @@
         <div class="tab-content col-xs-8 editorial-board-list">
             <div class="tab-pane active">{{> EditorialBoardMembersList}}</div>
         </div>
+    {{else}}
+        <br><br><br>
+        {{> loading}}
+    {{/if}}
     </div>
 </template>
 
