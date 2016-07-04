@@ -418,6 +418,9 @@ var insertArticle = function (a) {
         })
         a.orderAuthors=orderAuthors;
     }
+    //设置padPage
+    var atcpage= a.elocationId || a.startPage || "";
+    a.padPage = a.journal.issn+Science.String.PadLeft(a.volume || "novolume","0",8)+Science.String.PadLeft(a.issue || "noissue","0",8)+Science.String.PadLeft(atcpage,"0",10);
 
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
@@ -429,10 +432,6 @@ var insertArticle = function (a) {
         Articles.update({_id: existArticle._id}, {$set: sets});
         return existArticle._id;
     }
-
-    //设置padPage
-    var atcpage= a.elocationId || a.startPage;
-    a.padPage = a.journal.issn+Science.String.PadLeft(a.volume,"0",8)+Science.String.PadLeft(a.issue,"0",8)+Science.String.PadLeft(atcpage,"0",10);
 
     //如果以后这里增加了新的字段，不要忘记更新Config中的fieldsFromXmlToUpdate
     var id = Articles.insert({
