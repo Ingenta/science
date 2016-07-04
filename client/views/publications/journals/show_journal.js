@@ -25,8 +25,6 @@ ReactiveTabs.createInterface({
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
-            } else if (slug === 'Editorial Board') {
-
             } else if (slug === 'Accepted') {
                 Meteor.subscribe("journalAcceptedTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Online First') {
