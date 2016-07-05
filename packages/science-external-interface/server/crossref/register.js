@@ -180,6 +180,9 @@ var generationXMLForSingleArticle = function (doi, callback) {
     if (!article) {
         logger.error("Can't find article with doi:" + doi);
         return;
+    }else if(!_.isNumeric(article.year)){
+        logger.error("Can't find year (or year is not number) from this article with doi:" + doi);
+        return;
     }
 
     var title = article.title.en || article.title.cn;
