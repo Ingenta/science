@@ -39,8 +39,8 @@ ReactiveTabs.createInterface({
     onChange: function (slug, template) {
         history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
         var article = Router.current().data && Router.current().data();
-        if (!article && !article.doi)return;
-        var result = (new Date() - lastInsertAuditTime) > 500
+        if (!article || !article.doi)return;
+        var result = (new Date() - lastInsertAuditTime) > 500;
         lastInsertAuditTime = new Date();
         if (slug === 'abstract') {
             if(result){

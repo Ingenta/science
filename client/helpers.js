@@ -130,6 +130,7 @@ Template.registerHelper('pluralize', pluralize);
 
 
 Template.registerHelper('clearStr', function (str) {
+    if(!str)return "";
     str = str.replace(/(<\/?[^>]+?>|\.)/g, '');
     return str.replace(/[^\w\d_-]/g, "-")
 });
