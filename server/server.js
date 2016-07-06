@@ -5,6 +5,8 @@ Meteor.startup(function () {
             process.env[variableName] = Meteor.settings.env[variableName];
         }
     }
-    if(Spiderable && _.isArray(Spiderable.userAgentRegExps))
-        Spiderable.userAgentRegExps.push(/baiduspider/i)
+    if(Spiderable && _.isArray(Spiderable.userAgentRegExps)){
+        Spiderable.userAgentRegExps.push(/baiduspider/i);
+        Spiderable.userAgentRegExps.push(/Googlebot/i);
+    }
 });
