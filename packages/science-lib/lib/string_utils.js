@@ -164,11 +164,15 @@ Science.String.toDate = function (str) {
     return new Date(p);
 }
 
-Science.String.PadLeft = function (str, pchar, len) {
-    var curLen = ('' + str).length;
+Science.String.PadLeft = function (str, pchar, len, keepMinus) {
+    var val=str || "";
+    if(!keepMinus && str.indexOf('-')>=0){
+        val=val.slice(0,val.indexOf("-"));
+    }
+    var curLen = ('' + val).length;
     return (Array(
         len > curLen ? len - curLen + 1 || 0 : 0
-    ).join(pchar) + str);
+    ).join(pchar) + val);
 }
 
 Science.String.PadLeftForNumber = function(str, pchar, len){
