@@ -9,7 +9,7 @@ Template.miniLayout.helpers({
         return NewsLink.find({types:"1"});
     },
     hide: function () {
-        return NewsLink.find({types:"1"}).count()<6 ? "": "hide";
+        return NewsLink.find({types:"1"}).count()<8 ? "": "hide";
     },
     menuClass:function(routeName){
         if (!Router.current() || !Router.current().route) {
