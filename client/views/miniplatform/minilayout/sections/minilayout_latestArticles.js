@@ -1,6 +1,6 @@
 Template.layoutLatestArticles.helpers({
     recommendArticles: function () {
-        return NewsRecommend.find({},{sort: {createDate: -1}, limit: 6});
+        return NewsRecommend.find({},{sort: {createDate: -1}, limit: 7});
     },
     //lastArticle: function () {
     //    var publisher = Publishers.findOne({shortname : Config.defaultPublisherShortName});
