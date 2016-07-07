@@ -19,6 +19,7 @@ ScienceXML.isValidDoi = function (doi) {
 
 
 ScienceXML.parseXml = function (path, pubStatus) {
+    logger.info("parse xml start..");
     var results = {};
     //Step 1: get the file
     var xml = ScienceXML.getFileContentsFromLocalPath(path);
