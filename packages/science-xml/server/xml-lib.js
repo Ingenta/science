@@ -602,6 +602,7 @@ ScienceXML.handlePara = function (paragraph) {
             var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
             var mathml = mmlSelect('descendant::mml:math', fnode);
             if (mathml && mathml.length) {
+                logger.info("mathml detected!");
                 formula.mathml = mathml[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
             }
             handled.formulas.push(formula);
