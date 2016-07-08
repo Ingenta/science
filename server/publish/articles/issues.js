@@ -7,10 +7,12 @@ Meteor.publish('journalIssuesIncludingHistorical', function(journalShortTitle) {
     if(!journalId)return this.ready();
     if(!Permissions.userCan("modify-journal","resource",this.userId,{journalId:journalId}))
         return this.ready();
-    var idArr = [journalId];
+    var idArr = [];
     if(journal && !_.isEmpty(journal.historicalJournals)){
         idArr = _.union(idArr,journal.historicalJournals)
     }
+    if(_.isEmpty(idArr))
+        return this.ready();
     return Issues.find({journalId:{$in:idArr}});
 });
 Meteor.startup(function () {
