@@ -55,4 +55,16 @@ Meteor.startup(function(){
 
 if (Meteor.isClient) {
     mySpecialTopicsPagination = new Paginator(SpecialTopics);
+}else if(Meteor.isServer){
+    SpecialTopics.before.insert(function(userId,doc){
+        if(doc.IssueId){
+            var issue = Issues.findOne({_id: doc.IssueId});
+            if(issue){
+                doc.order = issue.order;
+                doc.year = issue.year;
+                doc.volume=issue.volume;
+                doc.issue=issue.issue;
+            }
+        }
+    })
 }

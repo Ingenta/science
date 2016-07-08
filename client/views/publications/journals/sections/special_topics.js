@@ -86,15 +86,6 @@ Template.SpecialTopics.helpers({
 AutoForm.addHooks(['addSpecialTopicsModalForm'], {
     before: {
         insert: function (doc) {
-            if(doc.IssueId){
-                var issue = Issues.findOne({_id: doc.IssueId});
-                if(issue){
-                    doc.order = issue.order;
-                    doc.year = issue.year;
-                    doc.volume=issue.volume;
-                    doc.issue=issue.issue;
-                }
-            }
             doc.journalId = Router.current().data()._id;
             doc.createDate = new Date();
             return doc;
