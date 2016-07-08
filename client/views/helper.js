@@ -62,6 +62,11 @@ Template.sendEmails.helpers({
     },
     getDoi: function () {
         return Session.get("currentDoi");
+    },
+    getEmail:function(){
+        var userInfo = Meteor.user();
+        if(!userInfo || _.isEmpty(userInfo.emails)) return;
+        return userInfo.emails[0].address;
     }
 });
 

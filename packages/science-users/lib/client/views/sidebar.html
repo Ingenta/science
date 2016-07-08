@@ -39,6 +39,7 @@
             <li><a href="{{pathFor 'register'}}"><i class="fa fa-pencil"></i> {{_ "Register"}}</a></li>
             {{#if isArticlePage}}
                 {{>exportCitationSidebar}}
+                <li><a class="emailThis" href="" data-toggle="modal" data-target="#sendEmailModal"><i class="fa fa-envelope"></i> {{_ "emailThis"}}</a></li>
             {{/if}}
         {{/if}}
         {{#if isJournalPage}}

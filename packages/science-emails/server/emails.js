@@ -28,12 +28,12 @@ Meteor.methods({
         });
     },
     emailThis: function (values) {
-        if (!Meteor.user())return;
-        if (!Meteor.user().emails[0])return;
-        if (!Meteor.user().emails[0].address)return;
-
-        var user = Meteor.user().emails[0].address;
-        if (Meteor.user().profile)
+        check(values.reasons,String);
+        check(values.recipient,String);
+        check(values.sender,String);
+        var senderEmail = values.sender;
+        var user="";
+        if (Meteor.user() && Meteor.user().profile)
             if (Meteor.user().profile.realName)
                 user = Meteor.user().profile.realName;
 
@@ -48,7 +48,7 @@ Meteor.methods({
         if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
 
-        var emailSubject = user + ' has sent you an article';
+        var emailSubject = user+'<'+ senderEmail + '> has sent you an article';
 
         Meteor.defer(function () {
             Email.send({
@@ -57,6 +57,7 @@ Meteor.methods({
                 subject: emailSubject,
                 html: JET.render('emailThis', {
                     "user": user,
+                    "senderEmail":senderEmail,
                     "reason": values.reasons,
                     "articleList": [article],
                     "scpLogoUrl": Config.rootUrl + "email/logo.png",

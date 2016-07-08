@@ -804,6 +804,9 @@
             }
         },
         "emails": {
+            "sender":{
+               "label": "Your email address"
+            },
             "recipient": {
                 "label": "Recipient's email address"
             },

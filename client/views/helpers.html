@@ -62,6 +62,7 @@
 <template name="sendEmails">
     {{#autoForm schema="EmailsSchema" id="sendEmailsModalForm" type="method" meteormethod="emailThis"}}
         <div class="modal-body">
+            {{> afQuickField name="sender" value=getEmail}}
             {{> afQuickField name="recipient"}}
             {{> afQuickField name="reasons"}}
             {{> afFieldInput name='url' value=getCurrentUrl}}

@@ -948,6 +948,9 @@
       }
     },
     "emails": {
+      "sender":{
+        "label":"您的邮件地址"
+      },
       "recipient": {
         "label": "收件人的邮件地址"
       },
