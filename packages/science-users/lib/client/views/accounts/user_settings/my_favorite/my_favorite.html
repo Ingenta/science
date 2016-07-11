@@ -22,10 +22,10 @@
         {{#mathjax}}
             <div class="pull-right"><a href="#" class="fa fa-trash "></a></div>
             <div class="resultsList pub-title">{{> accessKeyImage}}
-                <div><a style="font-size:12px" href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div>
+                <div><a style="font-size:13px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>
             </div>
 
-            <ul class="list-unstyled">
+            <ul class="list-unstyled" style="font-size: 12px">
                 <li>
                     {{#each authors}}
                         <span class="{{#unless isChinese}}separate-and {{/unless}}separate-comma author-display">{{> authorPopButton}}</span>
