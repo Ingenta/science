@@ -132,7 +132,7 @@ Config = {
             editorials:["社论","editorials","editorial","Preface","Prefaces","社 论","编者按"],
             highlights:["亮点","highlights","highlight","亮 点","research highlight","research highlights"],
             forums:["论坛","forums","forum","论 坛"],
-            progress:["进展","progress","动态","Trends","Trend","动 态","进 展"],
+            progress:["进展","progress","动态","trends","trend","动 态","进 展"],
             communications:["信息交流","communications","communication"],
             perspectives:["观点","perspectives","perspective","展望","展 望"],
             correspondance:["争鸣","correspondance","correspondances","争 鸣"],
@@ -149,7 +149,7 @@ Config = {
             messages:["消息","messages"],
             profile:["profile","人物评传"],
             hisOfScience:["history of science","科学史话"],
-            InvitedArticles:["特约文章","Invited Articles"]
+            InvitedArticles:["特约文章","invited articles"]
         }
     },
     otherPlatformLoginUrl: {
