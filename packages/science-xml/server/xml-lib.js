@@ -594,10 +594,12 @@ ScienceXML.handlePara = function (paragraph) {
             }
             var tex = xpath.select("descendant::tex-math", fnode);
             if (tex && tex.length) {
-                if (tex[0].childNodes[0] && tex[0].childNodes[0].nodeName == '#cdata-section') {
-                    formula.tex = tex[0].childNodes[0].data;
+                var texDataNode = _.find(tex[0].childNodes,function(n){
+                    return n.nodeName == "#cdata-section";
+                })
+                if (texDataNode){
+                    formula.tex = texDataNode.data;
                 }
-
             }
             var mmlSelect = xpath.useNamespaces({"mml": "http://www.w3.org/1998/Math/MathML"});
             var mathml = mmlSelect('descendant::mml:math', fnode);
