@@ -323,7 +323,19 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 newOne.abstract = article.abstract;
                                 var authors = getAuthors(article.authors);
                                 if (!_.isEmpty(authors)) {
-                                    _.extend(newOne, authors);
+                                    newOne.authors=authors;
+                                    if(!_.isEmpty(authors)){
+                                        var orderAuthors={cn:"",en:""};
+                                        _.each(a.authors,function(author){
+                                            if(!_.isEmpty(author.fullname)){
+                                                if(_.isString(author.fullname.cn) && author.fullname.cn.trim())
+                                                    orderAuthors.cn+=author.fullname.cn.trim()+"|";
+                                                if(_.isString(author.fullname.en) && author.fullname.en.trim())
+                                                    orderAuthors.en+=author.fullname.en.trim()+"|";
+                                            }
+                                        })
+                                        newOne.orderAuthors=orderAuthors;
+                                    }
                                 }
                                 newOne.keywords = article.indexing;
                                 insertKeywords(newOne.keywords);
