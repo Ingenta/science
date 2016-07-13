@@ -17,8 +17,7 @@ Science.schemas.MultipleTextOptionalSchema = new SimpleSchema({
 	},
 	cn:{
 		type: String,
-		optional: true,
-		max: 50
+		optional: true
 	}
 });
 //
