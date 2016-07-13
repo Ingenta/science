@@ -148,7 +148,8 @@ Config = {
             retraction:["撤稿","retraction note","retraction notes","retraction","retractions","撤 稿"],
             messages:["消息","messages"],
             profile:["profile","人物评传"],
-            hisOfScience:["history of science","科学史话"]
+            hisOfScience:["history of science","科学史话"],
+            InvitedArticles:["特约文章","Invited Articles"]
         }
     },
     otherPlatformLoginUrl: {
