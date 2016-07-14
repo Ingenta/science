@@ -323,10 +323,10 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 newOne.abstract = article.abstract;
                                 var authors = getAuthors(article.authors);
                                 if (!_.isEmpty(authors)) {
-                                    newOne.authors=authors;
-                                    if(!_.isEmpty(authors)){
+                                    _.extend(newOne,authors);
+                                    if(!_.isEmpty(newOne.authors)){
                                         var orderAuthors={cn:"",en:""};
-                                        _.each(a.authors,function(author){
+                                        _.each(newOne.authors,function(author){
                                             if(!_.isEmpty(author.fullname)){
                                                 if(_.isString(author.fullname.cn) && author.fullname.cn.trim())
                                                     orderAuthors.cn+=author.fullname.cn.trim()+"|";
@@ -395,7 +395,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
 Meteor.methods({
     PastDataImportMethod: function (path, pdfFolder, options) {
         logger.info("Client request for historical data import");
-        if(Permissions.isAdmin()){
+        if(Permissions.isAdmin(Meteor.user())){
             PastDataImport(path, pdfFolder, options);
             return "Import task working...";
         }else{
