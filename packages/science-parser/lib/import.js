@@ -323,8 +323,8 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                 newOne.abstract = article.abstract;
                                 var authors = getAuthors(article.authors);
                                 if (!_.isEmpty(authors)) {
-                                    newOne.authors=authors;
-                                    if(!_.isEmpty(authors)){
+                                    _.extend(newOne,authors);
+                                    if(!_.isEmpty(newOne.authors)){
                                         var orderAuthors={cn:"",en:""};
                                         _.each(newOne.authors,function(author){
                                             if(!_.isEmpty(author.fullname)){
