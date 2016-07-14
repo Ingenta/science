@@ -62,7 +62,8 @@ Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 					imageUploadURL:"/upload_froala",
 					fileUploadURL:"/upload_froala_file",
 					tableResizerOffset: 10,
-					tableResizingLimit: 20
+					tableResizingLimit: 20,
+					imageMaxSize: 1024 * 1024 * 1
 				}
 			}
 		}
@@ -81,7 +82,8 @@ Science.schemas.MultipleTextAreaSchema = new SimpleSchema({
 					imageUploadURL:"/upload_froala",
 					fileUploadURL:"/upload_froala_file",
 					tableResizerOffset: 10,
-					tableResizingLimit: 20
+					tableResizingLimit: 20,
+					imageMaxSize: 1024 * 1024 * 1
 				}
 			}
 		}
