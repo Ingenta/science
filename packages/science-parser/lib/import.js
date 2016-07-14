@@ -395,7 +395,7 @@ PastDataImport = function (path, pdfFolder, userOptions) {
 Meteor.methods({
     PastDataImportMethod: function (path, pdfFolder, options) {
         logger.info("Client request for historical data import");
-        if(Permissions.isAdmin()){
+        if(Permissions.isAdmin(Meteor.user())){
             PastDataImport(path, pdfFolder, options);
             return "Import task working...";
         }else{
