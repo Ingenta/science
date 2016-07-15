@@ -2,7 +2,7 @@ Template.articlesInSpecialTopics.helpers({
     articles: function () {
         if(_.isEmpty(this.articles))
             return ;
-        return Articles.find({_id: {$in: this.articles}}, {sort: {elocationId: 1}});
+        return Articles.find({_id: {$in: this.articles}}, {sort: {padPage: 1}});
     },
     scope:function(){
         return {journal:Router.current().data().journalId}
