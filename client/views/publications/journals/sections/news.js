@@ -45,6 +45,10 @@ Template.meetingInfoList.events({
         confirmDelete(e,function(){
             Meeting.remove({_id:id});
         })
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 
@@ -100,9 +104,18 @@ Template.pubDynamicList.helpers({
 
 Template.meetingInfoList.helpers({
     meetingContent: function () {
+        var numPerPage = Session.get('PerPage');
+        if (numPerPage === undefined) {
+            numPerPage = 10;
+        }
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return Meeting.find({about: aboutId,publications:publicationId},{sort: {startDate: -1}});
+        return meetingPagination.find({about: aboutId,publications:publicationId},{itemsPerPage: numPerPage, sort: {startDate: -1}});
+    },
+    meetingCount: function(){
+        var aboutId = Session.get('tabNews');
+        var publicationId = Session.get('currentJournalId');
+        return Meeting.find({about: aboutId,publications:publicationId}).count()>10;
     },
     StartDate: function () {
         if(this.startDate){
