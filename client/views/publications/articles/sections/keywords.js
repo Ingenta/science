@@ -25,7 +25,7 @@ Template.keywordsPanel.helpers({
     },
     searchLink: function(){
         var option = {
-            query:this.word,
+            query:Science.String.forceClear(this.word),
             setting:{from:'keyword'}
         };
         return SolrQuery.makeUrl(option);
