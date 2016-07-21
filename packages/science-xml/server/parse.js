@@ -91,10 +91,10 @@ ScienceXML.parseXml = function (path, pubStatus) {
     logger.info('parsed topic');
 
 
-    var keywordsCn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd/text()", doc);
-    var keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd/text()", doc);
+    var keywordsCn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='zh-Hans']/kwd", doc);
+    var keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec'][@lang='en']/kwd", doc);
     if (_.isEmpty(keywordsCn) && _.isEmpty(keywordsEn)) {
-        keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec']/kwd/text()", doc);
+        keywordsEn = ScienceXML.getKeywords("//article-meta/kwd-group[@kwd-group-type='inspec']/kwd", doc);
         if (_.isEmpty(keywordsEn)) {
             results.keywords = {};
         } else {
