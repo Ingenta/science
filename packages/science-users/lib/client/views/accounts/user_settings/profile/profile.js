@@ -69,7 +69,7 @@ Template.UserSettingsProfileEditForm.events({
 
 		function errorAction(msg) {
 			var message = msg || "Error.";
-			pageSession.set("userSettingsProfileEditFormErrorMessage", message);
+			pageSession.set("userSettingsProfileEditFormErrorMessage", TAPi18n.__("Email already exists"));
 		}
 
 		validateForm(

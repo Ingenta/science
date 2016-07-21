@@ -52,3 +52,7 @@ Meteor.startup(function () {
     MeetingSchema.i18n("schemas.meetingInfo");
     Meeting.attachSchema(MeetingSchema);
 });
+
+if (Meteor.isClient) {
+    meetingPagination = new Paginator(Meeting);
+}

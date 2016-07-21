@@ -35,22 +35,23 @@
 
 <template name="newsCenterList">
     {{#each newsContent}}
-    <div class="part"><p>
-        <a href="{{whichUrl}}"><strong>{{translateThis title.cn title.en}}</strong></a>
-
-        <div class="pull-right">
-            {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
-            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
-            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="part">
+            <p>
+                <a href="{{whichUrl}}"><strong>{{translateThis title.cn title.en}}</strong></a>
+                <div class="pull-right">
+                    {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
+                    {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
+                    {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                </div>
+            </p>
+            <p>
+                {{{translateThis abstract.cn abstract.en}}}
+            </p>
         </div>
-        </p>
-        <p>
-            {{{translateThis abstract.cn abstract.en}}}
-        </p>
-    </div>
     {{else}}
-    {{_ "No content found!"}}
+        {{_ "No content found!"}}
     {{/each}}
+
     {{> Paginator_UI newsContent}}
     {{#if newsContentCount}}
         {{> displayPerPage}}
@@ -59,20 +60,21 @@
 
 <template name="pubDynamicList">
     {{#each pubDynamic}}
-    <div class="part"><p>
-        <a href={{whichUrl}}><strong>{{translateThis title.cn title.en}}</strong></a>
-
-        <div class="pull-right">
-            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
-            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="part">
+            <p>
+                <a href={{whichUrl}}><strong>{{translateThis title.cn title.en}}</strong></a>
+                <div class="pull-right">
+                    {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
+                    {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                </div>
+            </p>
+            <p class="col-xs-3"><img src="{{getImageHelper picture}}" width="89" height="126"/></p>
+            <p class="col-xs-9">{{{translateThis abstract.cn abstract.en}}}</p>
         </div>
-        </p>
-        <p class="col-xs-3"><img src="{{getImageHelper picture}}" width="89" height="126"/></p>
-        <p class="col-xs-9">{{{translateThis abstract.cn abstract.en}}}</p>
-    </div>
     {{else}}
-    {{_ "No content found!"}}
+        {{_ "No content found!"}}
     {{/each}}
+
     {{> Paginator_UI pubDynamic}}
     {{#if pubDynamicCount}}
         {{> displayPerPage}}
@@ -81,32 +83,37 @@
 
 <template name="meetingInfoList">
     {{#each meetingContent}}
-    <div class="part"><p>
-        <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
-
-        <div class="pull-right">
-            {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateMeetingInfoModalForm}}{{/if}}
-            {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
+        <div class="part">
+            <p>
+                <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
+                <div class="pull-right">
+                    {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateMeetingInfoModalForm}}{{/if}}
+                    {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
+                </div>
+            </p>
+            <p>
+                {{#if StartDate}}
+                    {{_ "Meeting Time"}}：&nbsp;{{formatDate startDate "YYYY-MM-DD"}}&nbsp;&nbsp;
+                {{/if}}
+                {{#if Phone}}
+                    {{_ "Contact Way"}}：&nbsp;{{phone}}<br>
+                {{/if}}
+                {{#if Address}}
+                    {{_ "Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>
+                {{/if}}
+                {{#if Theme}}
+                    {{_ "Conference Theme"}}：&nbsp;{{{translateThis theme.cn theme.en}}}
+                {{/if}}
+            </p>
         </div>
-        </p>
-        <p>
-            {{#if StartDate}}
-                {{_ "Meeting Time"}}：&nbsp;{{formatDate startDate "YYYY-MM-DD"}}&nbsp;&nbsp;
-            {{/if}}
-            {{#if Phone}}
-                {{_ "Contact Way"}}：&nbsp;{{phone}}<br>
-            {{/if}}
-            {{#if Address}}
-                {{_ "Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>
-            {{/if}}
-            {{#if Theme}}
-                {{_ "Conference Theme"}}：&nbsp;{{{translateThis theme.cn theme.en}}}
-            {{/if}}
-        </p>
-    </div>
     {{else}}
-    {{_ "No content found!"}}
+        {{_ "No content found!"}}
     {{/each}}
+
+    {{> Paginator_UI meetingContent}}
+    {{#if meetingCount}}
+        {{> displayPerPage}}
+    {{/if}}
 </template>
 
 
