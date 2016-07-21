@@ -32,7 +32,7 @@ Template.fundingInfo.helpers({
 			var aftReduce = _.reduce(this.fundings,function(result, item){
 				if(result[item.source])
 					result[item.source].code+=", "+ item.contract;
-				else if(item.contract){
+				else{
 					result[item.source]={
 						name:item.source,
 						code:item.contract
