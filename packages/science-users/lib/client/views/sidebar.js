@@ -48,7 +48,7 @@ Template.LayoutSideBar.helpers({
     getdoi:function(){
         if (Router.current() && Router.current().route
             && Router.current().route.getName() == "article.show" || Router.current().route.getName() == "article.show.strange"){
-            return Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+            return Session.get("currentDoi");
         }
     },
     isJournalPage: function () {

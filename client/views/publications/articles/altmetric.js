@@ -1,16 +1,5 @@
 var altmetricData = new ReactiveVar();
-
-Template.altmetric.onCreated(function(){
-	altmetricData.set(undefined);
-	var doi  = Template.currentData().doi;
-	if(doi){
-		$.get("http://api.altmetric.com/v1/doi/"+doi,function(data){
-			if(data){
-				altmetricData.set( data);
-			}
-		})
-	}
-})
+var lastdoi;
 
 Template.altmetric.helpers({
 	imageLink:function(){
@@ -20,6 +9,18 @@ Template.altmetric.helpers({
 		return altmetricData.get().details_url;
 	},
 	getData:function(){
+		var doi  = Template.currentData().doi;
+		if(doi != lastdoi){
+			lastdoi=doi;
+			altmetricData.set(undefined);
+			if(doi){
+				$.get("http://api.altmetric.com/v1/doi/"+doi,function(data){
+					if(data){
+						altmetricData.set(data);
+					}
+				})
+			}
+		}
 		return altmetricData.get();
 	}
 })
