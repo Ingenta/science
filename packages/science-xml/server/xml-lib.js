@@ -475,6 +475,11 @@ var getFigure = function (fig) {
     if (caption && caption.length) {
         figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     }
+
+    var subCaption = parserHelper.getXmlString("child::p",fig,true);
+    if(subCaption){
+        figure.subCaption = subCaption.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+    }
     //中国科学数据中无此项
     //var graphicLinks = xpath.select("child::graphic", fig);
     //if (graphicLinks && graphicLinks.length) {
@@ -535,9 +540,10 @@ var getTable = function (tableWrapNode) {
         if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
             table.label = xref[0].childNodes[0].data;
     }
-    table.caption = parserHelper.getSimpleVal("child::caption/p", tableWrapNode);
+    table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
-    table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode);
+    table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode,true);
+    table.footLabel=parserHelper.getSimpleVal("child::table-wrap-foot/fn-group/fn/label",tableWrapNode);
     if (!_.isEmpty(table.table))table.table = table.table.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     if (!_.isEmpty(table.foot))table.foot = table.foot.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;

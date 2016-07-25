@@ -103,6 +103,7 @@
                     <p>
                         {{{caption}}}
                     </p>
+                    {{#if subCaption}}<p>{{subCaption}}</p>{{/if}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
@@ -177,7 +178,12 @@
             <a href="#">{{_ "clickToView"}}</a>
         </div>
         <div class="figure-caption">
-            <b>{{label}}</b>&nbsp;&nbsp;{{#mathjax}}{{{caption}}}{{/mathjax}}</div>
+            <b>{{label}}</b>&nbsp;&nbsp;
+            {{#mathjax}}
+                {{{caption}}}
+                {{#if subCaption}}<p>{{subCaption}}</p>{{/if}}
+            {{/mathjax}}
+        </div>
         <div style="clear:both;"></div>
     </div>
 </template>
@@ -191,7 +197,9 @@
             {{{table}}}
         </div>
         {{#if foot}}
-            <div style="text-align:left">{{#mathjax}}{{{foot}}}{{/mathjax}}</div>
+            <div style="text-align:left">
+                <p>{{#if footLabel}}{{footLabel}}{{/if}}{{#mathjax}}{{{foot}}}{{/mathjax}}</p>
+            </div>
         {{/if}}
     </div>
 </template>

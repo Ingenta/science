@@ -44,3 +44,11 @@
     padding: 1px 0px;
     margin: 0px 0px;
 }
+
+.appendix-container{
+    text-align:inherit;
+}
+
+.appendix-container label+p {
+    display:inline-block;
+}
