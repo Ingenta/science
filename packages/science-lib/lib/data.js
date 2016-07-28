@@ -1,6 +1,7 @@
 Science.data={};
 
 Science.data.tranContentType = function(origType){
+    if(!origType)return "other";
     var contentType = origType.trim().toLowerCase();
     var trans ="other";
     _.each(Config.parser.contentTypeDic,function(dic,key){

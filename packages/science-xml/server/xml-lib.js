@@ -89,8 +89,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 var lang = parserHelper.getFirstAttribute("attribute::lang", nNode) || "en";
                 var style = parserHelper.getFirstAttribute("attribute::name-style", nNode) || "western";
                 var space = style == "western" ? " " : "";
-                var surName = parserHelper.getSimpleVal("child::surname", nNode);
-                var givenName = parserHelper.getSimpleVal("child::given-names", nNode);
+                var surName = parserHelper.getSimpleVal("child::surname", nNode) || "";
+                var givenName = parserHelper.getSimpleVal("child::given-names", nNode) || "";
                 _.each(parserHelper.langNames, function (val, key) {
                     if (val == lang) {
                         lang = key;
@@ -99,12 +99,12 @@ ScienceXML.getAuthorInfo = function (results, doc) {
                 })
                 surnamePart[lang] = surName;
                 givenPart[lang] = givenName;
-                fullnamePart[lang] = surName + space + givenName;
+                fullnamePart[lang] = (surName + space + givenName).trim();
                 if (useSameVal) {
                     var anthorLang = lang == 'en' ? "cn" : "en";
                     surnamePart[anthorLang] = surName;
                     givenPart[anthorLang] = givenName;
-                    fullnamePart[anthorLang] = surName + space + givenName;
+                    fullnamePart[anthorLang] = (surName + space + givenName).trim();
                 }
             })
             var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
