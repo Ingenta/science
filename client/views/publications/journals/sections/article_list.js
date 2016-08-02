@@ -97,6 +97,9 @@ Template.articleListRight.helpers({
     },
     normal: function () {
         return Template.currentData().pubStatus == "normal"
+    },
+    hasDescription: function(){
+        return this.description || this.descriptionCn
     }
 });
 Template.HistoricalJournalTable.helpers({

@@ -53,7 +53,7 @@
                     {{> updateIssueDescriptionModalForm}}
                 </div>
             {{/if}}
-            {{#if description}}
+            {{#if hasDescription}}
                 {{{translateThis descriptionCn description}}}
             {{else}}
                 {{#if can "modify-journal" "resource" }}
