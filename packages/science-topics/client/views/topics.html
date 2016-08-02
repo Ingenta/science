@@ -37,7 +37,7 @@
 </template>
 
 <template name="deleteTopicModalForm">
-    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=selectedTopic prompt=getPrompt buttonContent=getDeleteButtonContent title=getDeleteButtonContent}}
+    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=selectedTopicObj prompt=getPrompt buttonContent=getDeleteButtonContent title=getDeleteButtonContent}}
     {{/afModal}}
 </template>
 

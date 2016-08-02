@@ -23,6 +23,11 @@ Template.Topics.helpers({
     selectedTopic: function () {
         return Session.get("selectedTopic");
     },
+    selectedTopicObj: function () {
+        if(Session.get("selectedTopic"))
+            return Topics.findOne({_id:Sessoin.get("selectedTopic")});
+        return {};
+    },
     getAddNewStr: function () {
         return TAPi18n.__("Add new");
     },
@@ -46,7 +51,8 @@ AutoForm.addHooks(['addTopicModalForm'], {
     },
     before: {
         insert: function (doc) {
-            doc.parentId = Session.get('selectedTopic');
+            if(Session.get('selectedTopic'))
+                doc.parentId = Session.get('selectedTopic');
             return doc;
         }
     }
