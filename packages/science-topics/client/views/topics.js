@@ -1,4 +1,4 @@
-Template.Topics.onRendered(function () {
+var refreshTopicTree=function(){
     Session.set("selectedTopic", null);
     var isLangCn = TAPi18n.getLanguage() === "zh-CN";
     Meteor.call("flatTopicsToTreeNodes", isLangCn, function (err, result) {
@@ -16,17 +16,16 @@ Template.Topics.onRendered(function () {
             }
         });
     });
+}
+
+Template.Topics.onRendered(function () {
+    refreshTopicTree();
 })
 
 
 Template.Topics.helpers({
     selectedTopic: function () {
         return Session.get("selectedTopic");
-    },
-    selectedTopicObj: function () {
-        if(Session.get("selectedTopic"))
-            return Topics.findOne({_id:Sessoin.get("selectedTopic")});
-        return {};
     },
     getAddNewStr: function () {
         return TAPi18n.__("Add new");
@@ -45,9 +44,10 @@ Template.Topics.helpers({
     }
 });
 
-AutoForm.addHooks(['addTopicModalForm'], {
+AutoForm.addHooks(['addTopicModalForm','updateTopicModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        refreshTopicTree();
     },
     before: {
         insert: function (doc) {
@@ -70,5 +70,12 @@ Template.Topics.events({
             $('#tree').treeview('search', [pattern, options]);
         }
         if (e.keyCode === 8) $('#tree').treeview('collapseAll');
+    },
+    'click .removeTopic':function(e){
+        var tid=Session.get("selectedTopic");
+        confirmDelete(e,function(){
+            Topics.remove({_id:tid});
+            refreshTopicTree();
+        })
     }
 })

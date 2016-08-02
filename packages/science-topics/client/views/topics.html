@@ -2,27 +2,28 @@
     <div class="container-fluid">
         {{> pageElement key="topic"}}
         <input id="topic-search" class="form-control" placeholder="{{_ 'Search'}}" autofocus="autofocus">
-        {{#if selectedTopic}}
+
             <div class="container-fluid">
                 <div class="pull-right">
                     {{#if can "add-topic" "topic" }}
                         {{>jkafModal class="fa fa-plus" template="addTopicModalForm" id="addTopicModalForm" title=getAddNewStr}}
                     {{/if}}
-                    {{#if can "modify-topic" "topic" }}
-                        {{>jkafModal class="fa fa-pencil" doc=getDoc template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
-                    {{/if}}
-                    {{#if can "delete-topic" "topic" }}
-                        {{#if hasNoChildTopics}}
-                            {{> deleteTopicModalForm}}
+                    {{#if selectedTopic}}
+                        {{#if can "modify-topic" "topic" }}
+                            {{>jkafModal class="fa fa-pencil" doc=getDoc template="updateTopicModalForm" id="updateTopicModalForm" title=getUpdateStr}}
                         {{/if}}
-                    {{/if}}
-                    {{#if can "add-article-to-topic" "topic" }}
-                        <a class="fa fa-long-arrow-right"
-                           href="{{pathFor 'topics.selectArticles' topicsId=selectedTopic}}"></a>
+                        {{#if can "delete-topic" "topic" }}
+                            {{#if hasNoChildTopics}}
+                                <a class="fa fa-trash removeTopic"></a>
+                            {{/if}}
+                        {{/if}}
+                        {{#if can "add-article-to-topic" "topic" }}
+                            <a class="fa fa-long-arrow-right"
+                               href="{{pathFor 'topics.selectArticles' topicsId=selectedTopic}}"></a>
+                        {{/if}}
                     {{/if}}
                 </div>
             </div>
-        {{/if}}
         <div id="tree"></div>
     </div>
 </template>
@@ -34,11 +35,6 @@
         {{> afQuickField name='relatedTopics' options=topics type="universe-select" multiple=true}}
         <button type="submit" class="btn btn-primary">{{_ "Update"}}</button>
     {{/autoForm}}
-</template>
-
-<template name="deleteTopicModalForm">
-    {{#afModal class="fa fa-trash" collection="Topics" operation="remove" doc=selectedTopicObj prompt=getPrompt buttonContent=getDeleteButtonContent title=getDeleteButtonContent}}
-    {{/afModal}}
 </template>
 
 <template name="addTopicModalForm">
