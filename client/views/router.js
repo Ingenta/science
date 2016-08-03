@@ -33,10 +33,10 @@ Router.onBeforeAction(function () {
     if(window.location.hostname.indexOf("scichina.com")>0){
         if(this.url.indexOf("/miniplatform")==0 && window.location.hostname.indexOf("www")!=0){
             //指向小平台的url,应当使用一级域名www.scichina.com
-            window.location.href=this.originalUrl.replace(/[^\.]+\.scichina\.com/i,"www.scichina.com");
+            window.location.href=this.originalUrl.replace(/\w+\.scichina\.com/i,"www.scichina.com");
         }else if(this.url.indexOf("/miniplatform")<0 && window.location.hostname.indexOf("www")==0){
             //不是指向小平台的url,应当使用二级域名engine.scichina.com
-            window.location.href=this.originalUrl.replace(/[^\.]+\.scichina\.com/i,"engine.scichina.com");
+            window.location.href=this.originalUrl.replace(/\w+\.scichina\.com/i,"engine.scichina.com");
         }
     }
 
