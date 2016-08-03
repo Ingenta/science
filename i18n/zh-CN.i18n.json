@@ -452,7 +452,7 @@
         "label": "选择封面图片"
       },
       "defaultCover":{
-        "label": "选择默认封面图片"
+        "label": "选择默认卷期封面"
       },
       "banner": {
         "label": "选择横幅图片"

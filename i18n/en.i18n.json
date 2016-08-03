@@ -309,7 +309,7 @@
                 "label": "Choose Image for Cover"
             },
             "defaultCover":{
-                "label": "Choose Image for Default Cover"
+                "label": "Choose Image for Default Issue Cover"
             },
             "banner": {
                 "label": "Choose Image for Banner"
