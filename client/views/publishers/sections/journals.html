@@ -65,7 +65,7 @@
                     {{#if permissionCheckWithScope "modify-journal" "resource" "journal" _id}}
                         {{> displayPublication}}
                         {{#afModal class="fa fa-pencil" title=getModalTitle collection="Publications" doc=_id operation="update"
-                        fields="title,titleCn,shortTitle,publicationDate,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,defaultCover,banner,adBanner,adhref,submissionReview,tabSelections,historicalJournals" buttonContent=getUpdateButtonContent}}
+                        fields="title,titleCn,shortTitle,publicationDate,chiefEditor,competentOrganization,sponsor,frequencyPublication,included,description,topicId,accessKey,visible,picture,defaultCover,banner,adBanner,adhref,submissionReview,tabSelections,historicalJournals" buttonContent=getUpdateButtonContent}}
                         {{/afModal}}
                     {{/if}}
                     {{#if permissionCheckWithScope "delete-journal" "resource" "publisher" publisher}}
@@ -142,6 +142,7 @@
                         {{> afQuickField name="accessKey"}}
                         {{> afQuickField name="visible"}}
                         {{> afQuickField name="picture"}}
+                        {{> afQuickField name="defaultCover"}}
                         {{> afQuickField name="banner"}}
                         {{> afQuickField name="adBanner"}}
                         {{> afQuickField name="adhref"}}
