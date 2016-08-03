@@ -30,6 +30,16 @@ HomePageSubs.subscribe('topics');
 // HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
+    if(window.location.hostname.indexOf("scichina.com")>0){
+        if(this.url.indexOf("/miniplatform")==0 && window.location.hostname.indexOf("www")!=0){
+            //指向小平台的url,应当使用一级域名www.scichina.com
+            window.location.href=this.originalUrl.replace("engine.scichina.com","www.scichina.com");
+        }else if(this.url.indexOf("/miniplatform")<0 && window.location.hostname.indexOf("www")==0){
+            //不是指向小平台的url,应当使用二级域名engine.scichina.com
+            window.location.href=this.originalUrl.replace("www.scichina.com","engine.scichina.com");
+        }
+    }
+
     // loading indicator here
     if (!this.ready()) {
         $("body").addClass("wait");
