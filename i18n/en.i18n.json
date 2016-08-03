@@ -694,7 +694,7 @@
                 "label": "E_Mail"
             },
             "researchArea": {
-                "label": "Research area",
+                "label": "Research interests",
                 "cn": {
                     "label": "Chinese"
                 },
@@ -710,6 +710,9 @@
                 "en": {
                     "label": "English"
                 }
+            },
+            "url": {
+                "label":"My homepage"
             },
             "picture": {
                 "label": "Choose file"

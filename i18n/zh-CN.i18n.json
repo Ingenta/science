@@ -222,7 +222,7 @@
   "Phone": "电话",
   "Fax": "传真",
   "E-mail": "邮箱",
-  "Research Area": "研究方向",
+  "Research interests": "研究领域",
   "Introduction": "简介",
   "Email address": "邮件地址",
   "Meeting Time": "会议时间",
@@ -837,7 +837,7 @@
         "label": "邮箱"
       },
       "researchArea": {
-        "label": "研究方向",
+        "label": "研究领域",
         "cn": {
           "label": "中文"
         },
@@ -853,6 +853,9 @@
         "en": {
           "label": "英文"
         }
+      },
+      "url": {
+        "label":"个人主页"
       },
       "picture": {
         "label": "选择图片"
