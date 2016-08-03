@@ -9,7 +9,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             var pub = Publishers.findOne({shortname: this.params.publisherName});
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
-            Session.set('baseJournalUrl',Config.rootUrl+"publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
+            Session.set('baseJournalUrl',"/publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
             Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Overview");
 
             var latestIssue=Issues.findOne({journalId:journal._id},{sort:{order:-1}});
@@ -78,7 +78,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             var pub = Publishers.findOne({shortname: this.params.publisherName});
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
-            Session.set('baseJournalUrl',Config.rootUrl+"publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
+            Session.set('baseJournalUrl',"/publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
             var query={journalId:journal._id};
             query.volume=this.params.volume;
             query.issue=this.params.issue;
