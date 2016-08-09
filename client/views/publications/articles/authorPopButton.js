@@ -3,7 +3,7 @@ Template.authorPopButton.events({
         event.preventDefault();
         var ele = $(event.currentTarget);
         var name = this.name || (TAPi18n.getLanguage() === "zh-CN" ? this.fullname.cn : this.fullname.en);
-        var clearname=Science.clearTags(name);
+        var clearname=Science.String.forceClear(name);
         var title = Blaze.toHTMLWithData(Template.authorPopTitle,{
             name:clearname
         });
