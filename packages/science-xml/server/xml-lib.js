@@ -529,6 +529,24 @@ ScienceXML.getFigures = function (doc) {
     }
     return null;
 };
+var removeChildNodes = function(eleobj, childNodesForRemove){
+    if(_.isEmpty(childNodesForRemove)) return eleobj;
+    var index=0;
+    while(true){
+        if(eleobj.firstChild.tagName==childNodesForRemove[index]){
+            eleobj.removeChild(eleobj.firstChild);
+            index++;
+        }else if(eleobj.firstChild.tagName=="#Text" && eleobj.firstChild.toString().trim()==""){
+            eleobj.removeChild(eleobj.firstChild)
+        }else{
+            break;
+        }
+        if(index>=childNodesForRemove.length){
+            break;
+        }
+    }
+    return eleobj;
+}
 
 var getTable = function (tableWrapNode) {
     var table = {};
@@ -540,7 +558,9 @@ var getTable = function (tableWrapNode) {
         if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
             table.label = xref[0].childNodes[0].data;
     }
-    table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode);
+    var cptNode = parserHelper.getFirstNode("child::caption/p",tableWrapNode);
+    removeChildNodes(cptNode,["bold","x"]);
+    table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
     table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode,true);
     table.footLabel=parserHelper.getSimpleVal("child::table-wrap-foot/fn-group/fn/label",tableWrapNode);
@@ -772,7 +792,7 @@ ScienceXML.getSpecialTopicTitle = function(doc){
 }
 
 //提取附录信息
-ScienceXML.getAppendix = function(doc){
-    var app = parserHelper.getXmlString("//app-group/app",doc,true);
+ScienceXML.getAppendix = function(doc) {
+    var app = parserHelper.getXmlString("//app-group/app", doc, true);
     return app;
 }
