@@ -172,7 +172,7 @@ SolrUtils = {
         var options = {
             "facet": true,
             "facet.field": ["publisher", "journalId", "all_topics", "facet_all_authors_cn", "facet_all_authors_en", "year", "pacsCodes", "contentType"],
-            //"facet.limit":200,
+            "facet.limit":200,
             "hl": true,
             "hl.fl": "title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics,doi,abstract,accessKey",
             "hl.preserveMulti": true,
