@@ -12,7 +12,7 @@ SolrClient = Solr.createClient({
 
 Future = Npm.require('fibers/future');
 
-Config.clearSpecialCharacterRegEx = /[&\/\\#,+()$~%\.'"\-*?!<>^{}\[\]:]/g;
+Config.clearSpecialCharacterRegEx = /[&\/\\#,+()$~%\.'\-*?!<>^{}\[\]:]/g;
 SolrUtils = {
     fieldMap: {
         "title": ["title.cn", "title.en"],
@@ -22,10 +22,10 @@ SolrUtils = {
         "code": ["doi", "journal.issn", "journal.EISSN", "journal.CN"],
         "journalTitle": ["journal.title", "journal.titleCn"],
         "keyword": ["all_keywords"],
-        "author": ["all_authors_en", "all_authors_cn"],
+        "author": ["facet_all_authors_en", "facet_all_authors_cn","all_authors_en", "all_authors_cn"],
         "affiliation": ["all_affiliations_en", "all_affiliations_cn"],
         "abstract": ["abstract"],
-        "fulltext": ["fulltext"],
+        "fulltext": ["fulltext"]
     },
     facetFieldMap: {
         "publisher": ["publisher"],
@@ -172,6 +172,7 @@ SolrUtils = {
         var options = {
             "facet": true,
             "facet.field": ["publisher", "journalId", "all_topics", "facet_all_authors_cn", "facet_all_authors_en", "year", "pacsCodes", "contentType"],
+            //"facet.limit":200,
             "hl": true,
             "hl.fl": "title.en,title.cn,all_authors_cn,all_authors_en,all_topics,year,all_topics,doi,abstract,accessKey",
             "hl.preserveMulti": true,
