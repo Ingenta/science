@@ -298,75 +298,79 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                     }
                     if (vi && (options.importArticle || options.importPdf)) {
                         _.each(issue.articles, function (article) {
-                            logger.info("import " + article.doi + " started");
-                            var newOne = {};
-                            if (options.importArticle) {
-                                newOne.journalId = journal._id;
-                                newOne.journal = journal;
-                                newOne.volume = issue.volume;
-                                newOne.issue = issue.issue;
-                                newOne.year = issue.year;
+                            if(!article.doi){
+                                logger.error("article info with out doi,journalId:"+journal._id+", volume:"+issue.volume + ", issue:"+issue.issue);
+                            }else{
+                                logger.info("import " + article.doi + " started");
+                                var newOne = {};
+                                if (options.importArticle) {
+                                    newOne.journalId = journal._id;
+                                    newOne.journal = journal;
+                                    newOne.volume = issue.volume;
+                                    newOne.issue = issue.issue;
+                                    newOne.year = issue.year;
 
-                                newOne.volumeId = vi.volumeId;
-                                newOne.issueId = vi.issueId;
-                                newOne.doi = article.doi;
-                                newOne.articledoi = getDoiSecondPart(article.doi);
-                                newOne.title = article.title;
-                                newOne.publisher = journal.publisher;
-                                newOne.startPage = article.startPage;
-                                newOne.endPage = article.endPage;
-                                newOne.elocationId = article.startPage;
-                                newOne.accepted = Science.String.toDate(article.acceptDate);
-                                newOne.published = Science.String.toDate(article.publishDate);
-                                newOne.topic = getTopic(article.subspecialty);
-                                newOne.contentType = article.contentType;
-                                newOne.abstract = article.abstract;
-                                var authors = getAuthors(article.authors);
-                                if (!_.isEmpty(authors)) {
-                                    _.extend(newOne,authors);
-                                    if(!_.isEmpty(newOne.authors)){
-                                        var orderAuthors={cn:"",en:""};
-                                        _.each(newOne.authors,function(author){
-                                            if(!_.isEmpty(author.fullname)){
-                                                if(_.isString(author.fullname.cn) && author.fullname.cn.trim())
-                                                    orderAuthors.cn+=author.fullname.cn.trim()+"|";
-                                                if(_.isString(author.fullname.en) && author.fullname.en.trim())
-                                                    orderAuthors.en+=author.fullname.en.trim()+"|";
-                                            }
-                                        })
-                                        newOne.orderAuthors=orderAuthors;
+                                    newOne.volumeId = vi.volumeId;
+                                    newOne.issueId = vi.issueId;
+                                    newOne.doi = article.doi;
+                                    newOne.articledoi = getDoiSecondPart(article.doi);
+                                    newOne.title = article.title;
+                                    newOne.publisher = journal.publisher;
+                                    newOne.startPage = article.startPage;
+                                    newOne.endPage = article.endPage;
+                                    newOne.elocationId = article.startPage;
+                                    newOne.accepted = Science.String.toDate(article.acceptDate);
+                                    newOne.published = Science.String.toDate(article.publishDate);
+                                    newOne.topic = getTopic(article.subspecialty);
+                                    newOne.contentType = article.contentType;
+                                    newOne.abstract = article.abstract;
+                                    var authors = getAuthors(article.authors);
+                                    if (!_.isEmpty(authors)) {
+                                        _.extend(newOne,authors);
+                                        if(!_.isEmpty(newOne.authors)){
+                                            var orderAuthors={cn:"",en:""};
+                                            _.each(newOne.authors,function(author){
+                                                if(!_.isEmpty(author.fullname)){
+                                                    if(_.isString(author.fullname.cn) && author.fullname.cn.trim())
+                                                        orderAuthors.cn+=author.fullname.cn.trim()+"|";
+                                                    if(_.isString(author.fullname.en) && author.fullname.en.trim())
+                                                        orderAuthors.en+=author.fullname.en.trim()+"|";
+                                                }
+                                            })
+                                            newOne.orderAuthors=orderAuthors;
+                                        }
+                                    }
+                                    newOne.keywords = article.indexing;
+                                    insertKeywords(newOne.keywords);
+                                    newOne.pubStatus = "normal";
+                                    newOne.accessKey = journal.accessKey;
+                                    newOne.language = article.language == 'zh_CN' ? 2 : 1;
+                                    var refs = getReference(article.citations);
+                                    if (!_.isEmpty(refs)) {
+                                        newOne.references = refs;
+                                    }
+
+                                    var padPage = article.elocationId || article.startPage || "";
+                                    if(padPage){
+                                        newOne.padPage = newOne.journal.issn+Science.String.PadLeft(newOne.volume || "novolume","0",8)+Science.String.PadLeft(newOne.issue || "noissue","0",8)+Science.String.PadLeft(padPage,"0",10);
                                     }
                                 }
-                                newOne.keywords = article.indexing;
-                                insertKeywords(newOne.keywords);
-                                newOne.pubStatus = "normal";
-                                newOne.accessKey = journal.accessKey;
-                                newOne.language = article.language == 'zh_CN' ? 2 : 1;
-                                var refs = getReference(article.citations);
-                                if (!_.isEmpty(refs)) {
-                                    newOne.references = refs;
+                                if (options.importPdf && article.pdf) {
+                                    var a = Articles.findOne({doi: article.doi}, {fields: {pdfId: 1}});
+                                    if (!a || !a.pdfId) {//已经成功上传过pdf不再处理
+                                        importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
+                                            if (result) {
+                                                newOne.pdfId = result;
+                                                logger.info("pdf imported for: " + article.doi);
+                                            }
+                                            saveArticle(newOne);
+                                        }))
+                                    } else {
+                                        logger.info("import " + article.doi + " skipped");
+                                    }
+                                } else if (options.importArticle) {
+                                    saveArticle(newOne)
                                 }
-
-                                var padPage = article.elocationId || article.startPage || "";
-                                if(padPage){
-                                    newOne.padPage = newOne.journal.issn+Science.String.PadLeft(newOne.volume || "novolume","0",8)+Science.String.PadLeft(newOne.issue || "noissue","0",8)+Science.String.PadLeft(padPage,"0",10);
-                                }
-                            }
-                            if (options.importPdf && article.pdf) {
-                                var a = Articles.findOne({doi: article.doi}, {fields: {pdfId: 1}});
-                                if (!a || !a.pdfId) {//已经成功上传过pdf不再处理
-                                    importPdf(journal.issn, article.pdf, Meteor.bindEnvironment(function (result) {
-                                        if (result) {
-                                            newOne.pdfId = result;
-                                            logger.info("pdf imported for: " + article.doi);
-                                        }
-                                        saveArticle(newOne);
-                                    }))
-                                } else {
-                                    logger.info("import " + article.doi + " skipped");
-                                }
-                            } else if (options.importArticle) {
-                                saveArticle(newOne)
                             }
                         })
                     }
