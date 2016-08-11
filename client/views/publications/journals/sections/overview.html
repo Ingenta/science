@@ -33,11 +33,11 @@
     </dl>
 </template>
 <template name="issueCoverSummary">
-    <div class="pull-right">
-        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}
-            {{> updatePublicationPictureModalForm}}
-        {{/if}}
-    </div>
+    <!--<div class="pull-right">-->
+        <!--{{#if permissionCheckWithScope "modify-journal" "resource"  "journal" _id}}-->
+            <!--{{> updatePublicationPictureModalForm}}-->
+        <!--{{/if}}-->
+    <!--</div>-->
     <p><img src="{{getCoverUrl}}" width="137"/></p>
     <dl class="dl-horizontal journal-summary">
         <dt>ISSN</dt>
