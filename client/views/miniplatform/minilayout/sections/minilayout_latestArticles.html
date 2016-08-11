@@ -16,7 +16,7 @@
                 <div class="fl w350">
                     <div class="h50">
                         <p>
-                            <a href="{{articlesUrl ArticlesId}}" target="_blank">{{titles ArticlesId}}</a>
+                            <a href="{{articlesUrl ArticlesId}}" target="_blank">{{{titles ArticlesId}}}</a>
                             {{#if miniPlatformPermission}}{{>jkafModal template="updateLatestArticlesModalForm" doc=this id="updateLatestArticlesModal"}}{{/if}}
                             {{#if miniPlatformPermission}}<a href="#" id="latestADel" class="fa fa-trash"></a>{{/if}}
                         </p>
