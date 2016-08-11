@@ -9,7 +9,7 @@ Template.newsSearchShowPage.helpers({
         var q = Router.current().params.searchQuery;
         if (q) {
             var sort = {};
-            if(Session.get("sort"))sort={"createDate":Session.get("sort")};
+            if(Session.get("sort"))sort={"releaseTime":Session.get("sort")};
             var mongoDbArr = [];
             mongoDbArr.push({'title.en': {$regex: q, $options: "i"}});
             mongoDbArr.push({'title.cn': {$regex: q, $options: "i"}});
