@@ -2,11 +2,15 @@ var delayRender = function () {
     Meteor.setTimeout(function () {
         console.log('dr..');
 
-        if (!Router.current().data || !Router.current().data() || !Router.current().data().figures) {
+        if (!Router.current().data) {
             return;
         }
-        var figs = Router.current().data().figures;
-        _.each(figs, function (fig) {
+        var articleObj = Router.current().data();
+        if(!articleObj)
+            return;
+
+        //--------------渲染正文中的图表开始--------------
+        _.each(articleObj.figures, function (fig) {
             var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
             if (_.isEmpty(refs)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
@@ -24,13 +28,42 @@ var delayRender = function () {
             }
         });
 
-        var tbs = Router.current().data().tables;
-        _.each(tbs, function (tb) {
+        _.each(articleObj.tables, function (tb) {
             var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
             if (refs && refs.length) {
                 Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
             }
         });
+        //--------------渲染正文中的图表结束--------------
+
+
+        //--------------渲染附录中的图表开始--------------
+        if(!articleObj.appendix)
+            return;
+        _.each(articleObj.appendix.figures, function (fig) {
+            var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
+            if (_.isEmpty(refs)) {
+                refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
+            }
+            if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
+                refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
+            }
+            if (refs && refs.length) {
+                var closestP = $(refs[0]).closest("p");
+                if (closestP.length) {
+                    Blaze.renderWithData(Template.figure, fig, closestP[0]);
+                    closestP.show();
+                    //$(refs[0]).remove();
+                }
+            }
+        });
+        _.each(articleObj.appendix.tables, function (tb) {
+            var refs = $("xref[ref-type='table'][rid='" + tb.id + "']");
+            if (refs && refs.length) {
+                Blaze.renderWithData(Template.atttable, tb, $(refs[0]).closest("p")[0]);
+            }
+        });
+        //--------------渲染正文中的图表结束--------------
     }, 1000)
 }
 var lastInsertAuditTime = new Date();

@@ -531,7 +531,7 @@ ScienceXML.getFigures = function (doc) {
     return null;
 };
 var removeChildNodes = function(eleobj, childNodesForRemove){
-    if(_.isEmpty(childNodesForRemove)) return eleobj;
+    if(!eleobj || _.isEmpty(childNodesForRemove)) return eleobj;
     var index=0;
     while(true){
         if(eleobj.firstChild.tagName==childNodesForRemove[index]){
@@ -584,7 +584,8 @@ ScienceXML.getTables = function (doc) {
 
 ScienceXML.handlePara = function (paragraph) {
     var handled = {paraNode: paragraph};
-    var figAndTbl = xpath.select("descendant::fig[@id] | descendant::table-wrap[@id]", paragraph);
+    var xp = "descendant::fig[@id] | descendant::table-wrap[@id]";
+    var figAndTbl = parserHelper.getNodes(xp,paragraph);
     if (!_.isEmpty(figAndTbl)) {
         figAndTbl.forEach(function (ftNode) {
             if (ftNode.tagName == 'fig') {
@@ -794,6 +795,8 @@ ScienceXML.getSpecialTopicTitle = function(doc){
 
 //提取附录信息
 ScienceXML.getAppendix = function(doc) {
-    var app = parserHelper.getXmlString("//app-group/app", doc, true);
-    return app;
+    //var app = parserHelper.getXmlString("//app-group/app", doc, true);
+    var appNode = parserHelper.getFirstNode("//app-group/app",doc);
+    if(appNode)
+        return ScienceXML.getParagraphsFromASectionNode(appNode);
 }
