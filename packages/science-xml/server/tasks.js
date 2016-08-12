@@ -252,7 +252,7 @@ Tasks.insertArticleImages = function (logId, result) {
     if (_.isEmpty(unionFigures)) {
         readyToStartArticleImport(log, logId, taskId, result);
     } else {
-        unionFigures.figures.forEach(function (fig) {
+        unionFigures.forEach(function (fig) {
             var onlineOne = _.findWhere(fig.graphics, {use: "online"});
             // 兼容中国科学数据
             onlineOne = onlineOne || _.find(fig.graphics, function (g) {
