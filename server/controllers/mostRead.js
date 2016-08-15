@@ -54,7 +54,7 @@ createMostReadList = function (journalId, limit) {
     if (suggestion) {
         allIds.push(suggestion._id);
     }
-    return _.first(_.union(allIds,most),5); //This removes any duplicates after initial
+    return _.first(_.union(allIds,most),limit || 5); //This removes any duplicates after initial
 }
 
 updateMostCited = function(){
