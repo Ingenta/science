@@ -47,3 +47,7 @@ Meteor.startup(function () {
     TagsSchema.i18n("schemas.tags");
     Tags.attachSchema(TagsSchema);
 });
+
+if (Meteor.isClient) {
+    tagsPagination = new Paginator(Tags);
+}
