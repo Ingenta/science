@@ -7,7 +7,6 @@ Meteor.startup(function () {
     }
     if(Spiderable && _.isArray(Spiderable.userAgentRegExps)){
         Spiderable.userAgentRegExps.push(/baiduspider/i);
-        Spiderable.userAgentRegExps.push(/Googlebot/i);
         Spiderable.userAgentRegExps.push(/bingbot/i);
     }
 });
