@@ -65,14 +65,14 @@ Template.articleListRight.helpers({
     articles: function () {
         var numPerPage = Session.get('PerPage') || 10;
         if (Template.currentData().pubStatus === 'accepted') {
-            return articlePaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {accepted: -1}});
+            return acceptedArticlesPaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {accepted: -1}});
         }
         if (Template.currentData().pubStatus === 'online_first') {
-            return articlePaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {published: -1}});
+            return onlineFirstArticlesPaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {published: -1}});
         }
         if (Template.currentData().pubStatus === 'normal') {
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
-            return articlePaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
+            return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
         }
     },
     articlesCount: function () {

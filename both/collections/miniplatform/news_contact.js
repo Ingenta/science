@@ -64,5 +64,6 @@ Meteor.startup(function () {
 });
 
 if (Meteor.isClient) {
-    newsContactPagination = new Paginator(NewsContact);
+    enterNewsPaginator = new Paginator(NewsContact);
+    enterEditorPaginator = new Paginator(NewsContact);
 }

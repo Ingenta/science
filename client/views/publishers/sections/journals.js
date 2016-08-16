@@ -23,8 +23,8 @@ Template.PublicationList.helpers({
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
         Session.set("totalPublicationResults", Publications.find(q).count());
-        if(TAPi18n.getLanguage() === "en")return myPubPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
-        return myPubPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
+        if(TAPi18n.getLanguage() === "en")return journalPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
+        return journalPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
     },
     publicationPageCount: function () {
         var pubId = this._id;

@@ -57,7 +57,7 @@ Template.newsCenterList.helpers({
         var numPerPage = Session.get('PerPage') || 10;
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return myNewsPagination.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+        return newsContentPaginator.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     whichUrl: function() {
         var journalId = Session.get('currentJournalId');
@@ -79,7 +79,7 @@ Template.pubDynamicList.helpers({
         var numPerPage = Session.get('PerPage') || 10;
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
-        return myNewsPagination.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+        return pubDynamicPaginator.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     whichUrl: function() {
         var journalId = Session.get('currentJournalId');
