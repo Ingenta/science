@@ -72,7 +72,8 @@ Template.articleListRight.helpers({
         }
         if (Template.currentData().pubStatus === 'normal') {
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
-            return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
+            return Articles.find(query, {sort: {padPage: 1}})
+            //return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
         }
     },
     articlesCount: function () {
@@ -82,10 +83,10 @@ Template.articleListRight.helpers({
         if (Template.currentData().pubStatus === 'online_first') {
             return Articles.find({pubStatus: Template.currentData().pubStatus}).count()>10;
         }
-        if (Template.currentData().pubStatus === 'normal') {
-            query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
-            return Articles.find(query).count()>10;
-        }
+        //if (Template.currentData().pubStatus === 'normal') {
+        //    query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
+        //    return Articles.find(query).count()>10;
+        //}
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");
