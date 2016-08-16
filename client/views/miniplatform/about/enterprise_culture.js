@@ -8,14 +8,14 @@ ReactiveTabs.createInterface({
 Template.enterpriseCulture.helpers({
     enterpriseNews: function () {
         var numPerPage = Session.get('PerPage') || 10;
-        return newsContactPagination.find({types:"6"}, {itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+        return enterNewsPaginator.find({types:"6"}, {itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     enterpriseNewsCount: function () {
         return NewsContact.find({types:"6"}).count()>10;
     },
     editFields: function () {
         var numPerPage = Session.get('PerPage') || 10;
-        return newsContactPagination.find({types:"7"}, {itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+        return enterEditorPaginator.find({types:"7"}, {itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     editFieldsCount: function () {
         return NewsContact.find({types:"7"}).count()>10;

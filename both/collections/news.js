@@ -88,5 +88,6 @@ Meteor.startup(function () {
 });
 
 if (Meteor.isClient) {
-    myNewsPagination = new Paginator(News);
+    newsContentPaginator = new Paginator(News);
+    pubDynamicPaginator = new Paginator(News);
 }
