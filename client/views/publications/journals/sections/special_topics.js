@@ -37,10 +37,7 @@ Template.SpecialTopics.events({
 
 Template.SpecialTopics.helpers({
     specialTopics: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         return mySpecialTopicsPagination.find({journalId:this._id},{itemsPerPage: numPerPage, sort: {order: -1}});
     },
     specialTopicsCount: function(){

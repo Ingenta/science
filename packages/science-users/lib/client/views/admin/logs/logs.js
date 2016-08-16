@@ -1,9 +1,6 @@
 Template.AdminLogs.helpers({
     recentLogs: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         return logsPagination.find({}, {itemsPerPage: numPerPage});
     },
     logsCount: function(){

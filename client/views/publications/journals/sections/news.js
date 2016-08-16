@@ -54,10 +54,7 @@ Template.meetingInfoList.events({
 
 Template.newsCenterList.helpers({
     newsContent: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
         return myNewsPagination.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
@@ -79,10 +76,7 @@ Template.newsCenterList.helpers({
 
 Template.pubDynamicList.helpers({
     pubDynamic: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
         return myNewsPagination.find({about: aboutId,publications:publicationId,types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
@@ -104,10 +98,7 @@ Template.pubDynamicList.helpers({
 
 Template.meetingInfoList.helpers({
     meetingContent: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
         return meetingPagination.find({about: aboutId,publications:publicationId},{itemsPerPage: numPerPage, sort: {startDate: -1}});

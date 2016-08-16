@@ -76,10 +76,7 @@ Template.FilterList.helpers({
         var first = Session.get('pubFirstLetter');
         var topicId = Session.get('filterTopics');
         topicId = _.isArray(topicId)?topicId:[topicId];
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         var q = {};
         if(!Permissions.userCan("modify-journal", "resource",this.userId))
             q.visible="1";

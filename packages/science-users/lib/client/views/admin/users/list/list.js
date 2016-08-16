@@ -43,10 +43,7 @@ Template.AdminUsersView.helpers({
 	"userDatas": function() {
 		var searchStr = Session.get(getSearchStrKey.call(this));
 		var query = getQuery.call(this,searchStr);
-		var numPerPage = Session.get('PerPage');
-		if (numPerPage === undefined) {
-			numPerPage = 10;
-		}
+		var numPerPage = Session.get('PerPage') || 10;
 		return userPaginations[this.level].find(query,{itemsPerPage: numPerPage})
 	},
 	"usersCount": function() {

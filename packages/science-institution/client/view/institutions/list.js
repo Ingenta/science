@@ -4,10 +4,7 @@ Template.AdminInstitutionsList.onRendered(function(){
 
 Template.AdminInstitutionsList.helpers({
 	institutions:function(){
-		var numPerPage = Session.get('PerPage');
-		if(numPerPage === undefined){
-			numPerPage = 10;
-		}
+		var numPerPage = Session.get('PerPage') || 10;
 		return institutionPaginator.find({},{itemsPerPage:numPerPage});
 	},
 	institutionsCount: function(){
