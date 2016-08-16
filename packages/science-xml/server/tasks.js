@@ -247,18 +247,19 @@ Tasks.insertArticleImages = function (logId, result) {
     });
 
     var log = UploadLog.findOne({_id: logId});
-    if (_.isEmpty(result.figures)) {
+    var appendixFigures = result.appendix?result.appendix.figures:null;
+    var unionFigures = _.compact(_.union(result.figures,appendixFigures));
+    if (_.isEmpty(unionFigures)) {
         readyToStartArticleImport(log, logId, taskId, result);
-    }
-    else {
-        result.figures.forEach(function (fig) {
+    } else {
+        unionFigures.forEach(function (fig) {
             var onlineOne = _.findWhere(fig.graphics, {use: "online"});
             // 兼容中国科学数据
             onlineOne = onlineOne || _.find(fig.graphics, function (g) {
                     return !g.use;
                 });
             if (!onlineOne) {
-                if (_.last(result.figures) === fig) {
+                if (_.last(unionFigures) === fig) {
                     readyToStartArticleImport(log, logId, taskId, result)
                 }
             } else {
@@ -279,7 +280,7 @@ Tasks.insertArticleImages = function (logId, result) {
                         }
                         else {
                             fig.imageId = fileObj._id;
-                            if (_.last(result.figures) === fig) {
+                            if (_.last(unionFigures) === fig) {
                                 readyToStartArticleImport(log, logId, taskId, result);
                             }
                         }

@@ -13,21 +13,15 @@ Template.newsCenter.helpers({
         return NewsCenter.find({types:"4"}).count()<1 ? "": "hide";
     },
     miniMagazines: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
-        return myNewsCenterPagination.find({types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+        var numPerPage = Session.get('PerPage') || 10;
+        return magazinesPaginator.find({types:"2"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     magazinesCount: function () {
         return NewsCenter.find({types:"2"}).count()>10;
     },
     miniPublishing: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
-        return myNewsCenterPagination.find({types:"3"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
+        var numPerPage = Session.get('PerPage') || 10;
+        return publishingPaginator.find({types:"3"},{itemsPerPage: numPerPage, sort: {releaseTime: -1}});
     },
     publishingCount: function () {
         return NewsCenter.find({types:"3"}).count()>10;

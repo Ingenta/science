@@ -49,6 +49,10 @@
             <td>{{#if can "modify-tag" "resource"}}{{> updateTagModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-tag" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
         </tr>
         {{/each}}
+        {{> Paginator_UI tags}}
+        {{#if tagsCount}}
+            {{> displayPerPage}}
+        {{/if}}
         </tbody>
     </table>
 </template>

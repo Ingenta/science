@@ -52,19 +52,41 @@ Template.articleList.helpers({
         //will get journal tabs template where instance variable is set
         return Template.instance().parent(2,true).waiting.get()
     }
-})
+});
+
+Template.articleListRight.events({
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
+    }
+});
+
 Template.articleListRight.helpers({
     articles: function () {
+        var numPerPage = Session.get('PerPage') || 10;
         if (Template.currentData().pubStatus === 'accepted') {
-            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {accepted: -1}});
+            return acceptedArticlesPaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {accepted: -1}});
         }
         if (Template.currentData().pubStatus === 'online_first') {
-            return Articles.find({pubStatus: Template.currentData().pubStatus}, {sort: {published: -1}});
+            return onlineFirstArticlesPaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {published: -1}});
         }
         if (Template.currentData().pubStatus === 'normal') {
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
-            return Articles.find(query, {sort: {padPage: 1}});
+            return Articles.find(query, {sort: {padPage: 1}})
+            //return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
         }
+    },
+    articlesCount: function () {
+        if (Template.currentData().pubStatus === 'accepted') {
+            return Articles.find({pubStatus: Template.currentData().pubStatus}).count()>10;
+        }
+        if (Template.currentData().pubStatus === 'online_first') {
+            return Articles.find({pubStatus: Template.currentData().pubStatus}).count()>10;
+        }
+        //if (Template.currentData().pubStatus === 'normal') {
+        //    query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
+        //    return Articles.find(query).count()>10;
+        //}
     },
     getIssueTitle: function () {
         var curIssue = Session.get("currentIssueId");

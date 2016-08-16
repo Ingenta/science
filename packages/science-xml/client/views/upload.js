@@ -1,9 +1,6 @@
 Template.AdminUpload.helpers({
     uploadHistory: function () {
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         if(Session.get('searchValue')){
             var name = Session.get('searchValue');
             var mongoDbArr = [];

@@ -1,13 +1,25 @@
 Template.tagList.helpers({
     tags: function () {
+        var numPerPage = Session.get('PerPage') || 10;
         if(Session.get('searchValue')){
             var tagName = Session.get('searchValue');
             var mongoDbArr = [];
             mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
             mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
-            return Tags.find({$or: mongoDbArr});
+            return tagsPagination.find({$or: mongoDbArr}, {itemsPerPage: numPerPage, sort: {createDate: -1}});
         }else{
-            return Tags.find();
+            return tagsPagination.find({}, {itemsPerPage: numPerPage, sort: {createDate: -1}});
+        }
+    },
+    tagsCount: function () {
+        if(Session.get('searchValue')){
+            var tagName = Session.get('searchValue');
+            var mongoDbArr = [];
+            mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
+            return Tags.find({$or: mongoDbArr}).count()>10;
+        }else{
+            return Tags.find().count()>10;
         }
     }
 });
@@ -18,6 +30,10 @@ Template.tagList.events({
         confirmDelete(e,function(){
             Tags.remove({_id:id});
         })
+    },
+    'click .perPage': function (event) {
+        var pageNum = $(event.target).data().pagenum;
+        Session.set('PerPage', pageNum);
     }
 });
 

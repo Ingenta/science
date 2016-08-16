@@ -6,10 +6,7 @@ Template.collectionsList.helpers({
             journalId = Session.get("currentJournalId");
         var pubId = Session.get('filterPublisher');
         var first = Session.get('firstLetter');
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         var q = {};
         pubId && (q.publisherId = pubId);
         journalId && (q.journalId = journalId);

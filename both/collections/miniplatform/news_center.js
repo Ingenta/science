@@ -83,5 +83,6 @@ Meteor.startup(function () {
 });
 
 if (Meteor.isClient) {
-    myNewsCenterPagination = new Paginator(NewsCenter);
+    magazinesPaginator = new Paginator(NewsCenter);
+    publishingPaginator = new Paginator(NewsCenter);
 }

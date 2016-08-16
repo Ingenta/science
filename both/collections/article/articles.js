@@ -41,3 +41,9 @@ Meteor.startup(function () {
     if(Meteor.isClient)
         articlePaginator=new Paginator(Articles);
 });
+
+if (Meteor.isClient) {
+    acceptedArticlesPaginator = new Paginator(Articles);
+    normalArticlesPaginator = new Paginator(Articles);
+    onlineFirstArticlesPaginator = new Paginator(Articles);
+}

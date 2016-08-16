@@ -278,5 +278,6 @@ Meteor.startup(function () {
     Publications.attachSchema(PublicationsSchema);
 });
 if (Meteor.isClient) {
+    journalPagination = new Paginator(Publications);
     myPubPagination = new Paginator(Publications);
 }

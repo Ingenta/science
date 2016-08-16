@@ -3,8 +3,8 @@ Meteor.publish('homepageMostRecentArticles', function () {
         Articles.find({}, {
             sort: {createdAt: -1},
             limit: 10,
-            fields: {title: 1, doi: 1}
-        }),
+            fields: {title: 1, doi: 1, createdAt:1}
+        })
     ]
 });
 Meteor.publish('miniplatformMostRecentArticles', function () {

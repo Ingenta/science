@@ -6,7 +6,8 @@ minimumArticle = {
     issueId: 1,
     volume: 1,
     published: 1,
-    publisher: 1
+    publisher: 1,
+    createdAt: 1
 };
 articleWithMetadata = {
     title: 1,
@@ -29,7 +30,8 @@ articleWithMetadata = {
     contentType: 1,
     padPage: 1,
     special: 1,
-    pdfId: 1
+    pdfId: 1,
+    createdAt:1
 };
 
 Meteor.publish('articleSearchResults', function () {

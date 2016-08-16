@@ -10,10 +10,7 @@ Template.PublicationList.helpers({
     publications: function () {
         var pubId = this._id;
         var first = Session.get('pubFirstLetter');
-        var numPerPage = Session.get('PerPage');
-        if (numPerPage === undefined) {
-            numPerPage = 10;
-        }
+        var numPerPage = Session.get('PerPage') || 10;
         var q = {};
         if(!Permissions.userCan("modify-journal", "resource",this.userId))
             q.visible="1";
@@ -26,8 +23,8 @@ Template.PublicationList.helpers({
         }
         first && (q.shortTitle = {$regex: reg, $options: "i"});
         Session.set("totalPublicationResults", Publications.find(q).count());
-        if(TAPi18n.getLanguage() === "en")return myPubPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
-        return myPubPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
+        if(TAPi18n.getLanguage() === "en")return journalPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
+        return journalPagination.find(q, {itemsPerPage: numPerPage, sort: {title: 1}});
     },
     publicationPageCount: function () {
         var pubId = this._id;
