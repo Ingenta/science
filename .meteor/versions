@@ -114,7 +114,7 @@ meteor-platform@1.2.3
 meteorhacks:aggregate@1.3.0
 meteorhacks:async@1.0.0
 meteorhacks:collection-utils@1.2.0
-meteorhacks:kadira@2.27.2
+meteorhacks:kadira@2.30.0
 meteorhacks:meteorx@1.4.1
 meteorhacks:npm@1.5.0
 meteorhacks:ssr@2.2.0
