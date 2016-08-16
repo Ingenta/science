@@ -95,6 +95,8 @@ jackjiang:solr@0.0.2
 jackkav:xpath@0.0.11
 jazeee:spiderable-longer-timeout@1.2.13
 jquery@1.11.4
+kadira:debug@3.2.2
+kadira:runtime-dev@0.0.1
 kaso:bootstrap-treeview@0.0.2
 kevohagan:sweetalert@1.0.0
 lai:collection-extensions@0.1.4
