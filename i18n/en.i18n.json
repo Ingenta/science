@@ -41,6 +41,7 @@
     "roleSummaryCN": "Chinese Role Summary",
     "addNewRole": "Add new role",
     "editRole": "Edit role",
+    "Editorial Member":"Member of editorial office",
     "permissions-get-users-roles": "Get All Roles",
     "permissions-edit-custom-roles": "Edit Custom Roles",
     "permissions-delegate-and-revoke": "Delegate And Revoke",
