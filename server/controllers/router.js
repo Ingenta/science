@@ -12,7 +12,7 @@ Router.map(function () {
         where: 'server',
         path: '/citation/plaintext/:publisherDoi/:articleDoi',
         action: function () {
-            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             if(!obj){
                 this.response.writeHead(302, {'Location': "/"});
                 return this.response.end();
@@ -53,7 +53,7 @@ Router.map(function () {
         where: 'server',
         path: '/citation/bibtex/:publisherDoi/:articleDoi',
         action: function () {
-            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             if(!obj){
                 this.response.writeHead(302, {'Location': "/"});
                 return this.response.end();
@@ -92,7 +92,7 @@ Router.map(function () {
         where: 'server',
         path: '/citation/endnote/:publisherDoi/:articleDoi',
         action: function () {
-            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             if(!obj){
                 this.response.writeHead(302, {'Location': "/"});
                 return this.response.end();
@@ -137,7 +137,7 @@ Router.map(function () {
         where: 'server',
         path: '/citation/refworks/:publisherDoi/:articleDoi',
         action: function () {
-            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             if(!obj){
                 this.response.writeHead(302, {'Location': "/"});
                 return this.response.end();
@@ -176,7 +176,7 @@ Router.map(function () {
         where: 'server',
         path: '/citation/pubmed/:publisherDoi/:articleDoi',
         action: function () {
-            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi});
+            var obj = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
             if(!obj){
                 this.response.writeHead(302, {'Location': "/"});
                 return this.response.end();
@@ -398,7 +398,7 @@ Router.map(function () {
                                     }
                                     var headers = {
                                         'Content-Type': "application/pdf",
-                                        'Content-Disposition': "attachment; filename=" + article.articledoi + ".pdf",
+                                        'Content-Disposition': "attachment; filename=" + article.articledoi.replace(/\//g,"+") + ".pdf",
                                         'Content-Length': stat.size
                                     };
 
