@@ -1,4 +1,5 @@
 Science.Interface ={
 	CrossRef:{},
-	Springer:{}
+	Springer:{},
+	WebOfScience:{}
 };
