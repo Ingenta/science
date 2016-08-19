@@ -149,7 +149,9 @@ Config = {
             messages:["消息","messages"],
             profile:["profile","人物评传"],
             hisOfScience:["history of science","科学史话"],
-            InvitedArticles:["特约文章","invited articles"]
+            InvitedArticles:["特约文章","invited articles"],
+            discussion:["讨论","discussion"],
+            preface:["卷首语","preface"]
         }
     },
     otherPlatformLoginUrl: {
