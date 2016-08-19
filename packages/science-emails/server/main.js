@@ -389,7 +389,7 @@ var generateArticleLinks = function (articles, journal) {
             article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
         article.journal= journal || article.journal || {};
         if (journal && journal.url)
-            article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
+            article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journal._id).substring(1));
     });
 };
 
