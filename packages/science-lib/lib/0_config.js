@@ -129,7 +129,7 @@ Config = {
             article: ["article","articles", "论文", "research paper","research papers","feature article","feature articles","invited article","invited articles", "论 文", "特邀论文"],
             reviews:[ "评述","review","reviews","专题论述","综述","mini review","mini reviews","研究述评", "评 述","综 述"],
             letters:["快讯","letter","letters","快 讯","快报","快 报","letter to the editor"],
-            editorials:["社论","editorials","editorial","Preface","Prefaces","社 论","编者按"],
+            editorials:["社论","editorials","editorial","社 论","编者按"],
             highlights:["亮点","highlights","highlight","亮 点","research highlight","research highlights"],
             forums:["论坛","forums","forum","论 坛"],
             progress:["进展","progress","动态","trends","trend","动 态","进 展"],
@@ -151,7 +151,7 @@ Config = {
             hisOfScience:["history of science","科学史话"],
             InvitedArticles:["特约文章","invited articles"],
             discussion:["讨论","discussion"],
-            preface:["卷首语","preface"]
+            preface:["卷首语","preface","Preface","Prefaces"]
         }
     },
     otherPlatformLoginUrl: {
