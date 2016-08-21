@@ -144,6 +144,8 @@
         "profile":"Profile",
         "hisOfScience":"History of science",
         "InvitedArticles":"Invited Articles",
+        "discussion":"Discussion",
+        "preface":"Preface",
         "other":"other"
     },
     "clickToView":"Click to view",
