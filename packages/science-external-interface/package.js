@@ -21,7 +21,8 @@ Package.onUse(function(api) {
     'server/index.js',
     'server/springer/citedby.js',
     'server/crossref/register.js',
-    'server/crossref/citedby.js'
+    'server/crossref/citedby.js',
+    'server/webOfScience/amr.js'
   ],'server');
 
 });
