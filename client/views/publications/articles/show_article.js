@@ -202,7 +202,7 @@ Template.showArticle.helpers({
 
 Template.articleOptions.helpers({
     context: function () {
-        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi;
+        var currentDoi = Router.current().params.publisherDoi + "/" + Router.current().params.articleDoi.replace(/-slash-/g,"/");
         return Articles.findOne({doi: currentDoi});
     },
     tabs: function () {

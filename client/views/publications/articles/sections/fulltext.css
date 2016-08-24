@@ -27,6 +27,10 @@
     margin:5px;
 }
 
+#fulltext-viewer x[content-type]{
+    margin:1px !important;
+}
+
 .att-table table {
     border-top: 2px solid;
     border-bottom: 2px solid;
