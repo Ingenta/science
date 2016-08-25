@@ -117,7 +117,7 @@ Meteor.startup(function () {
     if (Meteor.isClient) {
         //This code is needed to detect if there is a subdomain. So the system wants to know the routes of the subdomain
         var hostnameArray = document.location.hostname.split(".");
-        if (hostnameArray[0] === "www"||hostnameArray[0] === "127") {
+        if (hostnameArray[0] === "www"|| hostnameArray[0].startWith("www") || hostnameArray[0] === "127") {
             Router.route("home", {
                 data: function () {
                     var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
