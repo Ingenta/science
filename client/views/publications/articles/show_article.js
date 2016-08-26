@@ -169,6 +169,7 @@ Template.showArticle.onRendered(function () {
 
 Template.showArticle.helpers({
     refs: function () {
+        if(!Router.current().data) return;
         var affObjs = Router.current().data().affiliations;
         var allrefs = [];
         if (!_.isEmpty(this.affs)) {
