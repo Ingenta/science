@@ -30,16 +30,6 @@ HomePageSubs.subscribe('topics');
 // HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
-    if(window.location.hostname.indexOf("scichina.com")>0){
-        if(this.url.indexOf("/miniplatform")==0 && window.location.hostname.indexOf("www")!=0){
-            //指向小平台的url,应当使用一级域名www.scichina.com
-            window.location.href=this.originalUrl.replace(/\w+\.scichina\.com/i,"www.scichina.com");
-        }else if(window.location.href.length>25 && this.url.indexOf("/miniplatform")<0 && window.location.hostname.indexOf("www")==0){
-            //不是指向小平台的url,应当使用二级域名engine.scichina.com
-            window.location.href=this.originalUrl.replace(/\w+\.scichina\.com/i,"engine.scichina.com");
-        }
-    }
-
     // loading indicator here
     if (!this.ready()) {
         $("body").addClass("wait");
@@ -127,7 +117,7 @@ Meteor.startup(function () {
     if (Meteor.isClient) {
         //This code is needed to detect if there is a subdomain. So the system wants to know the routes of the subdomain
         var hostnameArray = document.location.hostname.split(".");
-        if (hostnameArray[0] === "www"||hostnameArray[0] === "127") {
+        if (hostnameArray[0] === "www"|| hostnameArray[0].startWith("www") || hostnameArray[0] === "127") {
             Router.route("home", {
                 data: function () {
                     var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
