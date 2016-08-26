@@ -2,7 +2,7 @@ Template.miniLayout.helpers({
     collectionsLink: function () {
         var publisher = Publishers.findOne({shortname: Config.defaultPublisherShortName});
         if(publisher){
-            return "/publisher/" + publisher.shortname+"?slug=collections";
+            return "http://engine.scichina.com/publisher/" + publisher.shortname+"?slug=collections";
         }
     },
     myLinks: function () {
