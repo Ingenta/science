@@ -1229,5 +1229,8 @@
     "signInOrRegister":"Sign in or register",
     "signInFirst":"Please sign in or register to use this feature",
     "Username already exists": "Username already exists.",
-    "showAllMoop": "Show All"
+    "showAllMoop": "Show All",
+    "timesCited":"Times Cited",
+    "sourceArticle":"Source Article",
+    "relatedRecords":"Related Records"
 }

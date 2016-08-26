@@ -18,6 +18,14 @@ Science.Queue.Citation.taskHandler = function(data,next){
 	logger.info("updating citation of doi:"+data.doi);
 	AutoTasks.update({_id:data.taskId},{$set:{processing:Science.Queue.Citation.processing(),status:"processing"}});
 	SubTasks.update({_id:data.id},{$set:{ status : "processing"}});
+	Science.Interface.WebOfScience.amr(data.doi,Meteor.bindEnvironment(function(err,result){
+		if(!err && result && data.doi==result.doi){
+			var amrObj = {};
+			amrObj.info = result;
+			amrObj.updatedAt = new Date();
+			Articles.update({doi:data.doi},{$set:{webOfScience:amrObj}});
+		}
+	}));
 	Science.Interface.CrossRef.getCitedBy(data.doi,Meteor.bindEnvironment(function(crErr,crResult){
 		if(crErr || !crResult || !crResult.length){
 			Science.Interface.Springer.getCitedBy(data.doi,Meteor.bindEnvironment(function(spErr,spResult){
@@ -42,6 +50,7 @@ Science.Queue.Citation.taskHandler = function(data,next){
 							Citations.insert({doi: data.doi, articleId:data.articleId, citation: item, source: 'springer', createdAt: new Date()});
 					})
 				}
+				next();
 			}))
 		}else{
 			Articles.update({doi:data.doi},{$set:{citations:crResult, citationCount:crResult.length}});
@@ -52,8 +61,8 @@ Science.Queue.Citation.taskHandler = function(data,next){
 				if (!Citations.find({doi: data.doi, 'citation.doi': item.doi}).count())
 					Citations.insert({doi: data.doi, articleId:data.articleId, citation: item, source: 'crossref', createdAt: new Date()});
 			});
+			next();
 		}
-		next();
 	}))
 };
 

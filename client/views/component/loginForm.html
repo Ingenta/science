@@ -29,13 +29,11 @@
 
 <template name="otherPlatformloginButtons">
 	<hr>
-	<ul class="list-unstyled">
-        {{#if hideUrl}}
-            <li><a data-toggle="modal" href="#" data-target="#myModalLogin"><b>{{_ "Submission and Review"}}</b></a></li>
-        {{else}}
-            <li><a href="{{urlSubmission}}" target="_blank"><b>{{_ "Submission and Review"}}</b></a></li>
-        {{/if}}
-	</ul>
+    {{#if hideUrl}}
+        <h4>{{_ "Submission and Review"}} <a class="fa fa-external-link" data-toggle="modal" href="#" data-target="#myModalLogin"></a></h4>
+    {{else}}
+        <h4>{{_ "Submission and Review"}} <a class="fa fa-external-link" href="{{urlSubmission}}" target="_blank"></a></h4>
+    {{/if}}
     <div class="modal fade" id="myModalLogin" role="dialog" aria-labelledby="myModalLoginLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
