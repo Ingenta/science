@@ -8,7 +8,7 @@ Template.i18n_switch.events({
 
 Template.i18n_switch.helpers({
     miniPlatform : function(){
-        return "www.scichina.com" || Router.current().url.indexOf("miniplatform")>-1
+        return window.location.host=="www.scichina.com" || Router.current().url.indexOf("miniplatform")>-1
     }
 });
 
