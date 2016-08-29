@@ -6,6 +6,8 @@ FiguresStore = new FS.Collection("figures", {
     stores: [new FS.Store.FileSystem("figures", {
         transformWrite: createThumb,
         path: Config.staticFiles.uploadFiguresDir
+    }),new FS.Store.FileSystem("orig_figures", {
+        path: Config.staticFiles.uploadFiguresOrigDir
     })],
     filter: {
         allow: {
