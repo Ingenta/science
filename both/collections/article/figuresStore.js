@@ -2,7 +2,8 @@ var createThumb = function (fileObj, readStream, writeStream) {
     // Transform the image into a 10x10px thumbnail
     //gm(readStream, fileObj.name()).resize('600', '900').stream().pipe(writeStream);
     var maxThumbSize={width:600, height:900};
-    //console.log("fileObj's size is:" + fileObj.size());
+    logger.info("fileObj's name is:" + fileObj.name());
+    logger.info("fileObj's size is:" + fileObj.size());
     gm(readStream, fileObj.name()).filesize({bufferStream: true},function(err,filesize){
         if(err){
             console.log(err.message);
