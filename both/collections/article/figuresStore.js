@@ -1,12 +1,6 @@
-var createThumb = function(fileObj, readStream, writeStream){
-    if(!Science.ThumbUtils.TaskManager.exists(fileObj.name()))
-        return;
-    gm(readStream, fileObj.name()).resize('600', '900').stream().pipe(writeStream);
-}
-
 FiguresStore = new FS.Collection("figures", {
     stores: [new FS.Store.FileSystem("figures", {
-        transformWrite: createThumb,
+        //transformWrite: createThumb,
         path: Config.staticFiles.uploadFiguresDir
     }),new FS.Store.FileSystem("orig_figures", {
         path: Config.staticFiles.uploadFiguresOrigDir

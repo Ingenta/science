@@ -249,6 +249,7 @@ Tasks.insertArticleImages = function (logId, result) {
     var log = UploadLog.findOne({_id: logId});
     var appendixFigures = result.appendix?result.appendix.figures:null;
     var unionFigures = _.compact(_.union(result.figures,appendixFigures));
+    var finishCount=0;
     if (_.isEmpty(unionFigures)) {
         readyToStartArticleImport(log, logId, taskId, result);
     } else {
@@ -273,15 +274,15 @@ Tasks.insertArticleImages = function (logId, result) {
                     log.errors.push("image type not supported: " + figName);
                 }
                 else {
-                    Science.ThumbUtils.TaskManager.add(figLocation);
                     FiguresStore.insert(figLocation, function (err, fileObj) {
+                        finishCount++;
                         if (err) {
                             logger.error(err);
                             log.errors.push(err.toString());
                         }
                         else {
                             fig.imageId = fileObj._id;
-                            if (_.last(unionFigures) === fig) {
+                            if (unionFigures.length === finishCount) {
                                 readyToStartArticleImport(log, logId, taskId, result);
                             }
                         }
@@ -317,6 +318,10 @@ Tasks.insertArticleTask = function (logId, result) {
         if (articleId) {
             insertKeywords(result.keywords);
         }
+        Meteor.setTimeout(function(){
+            Science.ThumbUtils.addCreateThumbTasks(_.pluck(result.figures,"imageId"));
+        },2000);
+
     }
     catch (ex) {
         Tasks.failSimple(taskId, logId, _.union(result.errors, ex.message));
