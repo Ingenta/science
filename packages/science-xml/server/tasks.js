@@ -273,6 +273,7 @@ Tasks.insertArticleImages = function (logId, result) {
                     log.errors.push("image type not supported: " + figName);
                 }
                 else {
+                    Science.ThumbUtils.TaskManager.add(figLocation);
                     FiguresStore.insert(figLocation, function (err, fileObj) {
                         if (err) {
                             logger.error(err);

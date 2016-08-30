@@ -59,7 +59,8 @@ Package.onUse(function (api) {
         'lib/xss.js',
         'lib/pdf.js',
         'lib/SSR.js',
-        'lib/data.js'
+        'lib/data.js',
+        'lib/thumbUtils.js'
     ], 'server');
 
     api.addFiles([
