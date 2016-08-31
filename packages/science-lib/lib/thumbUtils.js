@@ -1,3 +1,4 @@
+FS.debug=true;
 Science.ThumbUtils={};
 
 var maxThumbSize={width:600, height:900};
