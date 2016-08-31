@@ -1,6 +1,10 @@
+FS.debug=true;
+
 FiguresStore = new FS.Collection("figures", {
     stores: [new FS.Store.FileSystem("figures", {
-        //transformWrite: createThumb,
+        transformWrite: function(fileObj,readStream,writeStream){
+            gm(readStream, fileObj.name()).resize('600', '900').stream().pipe(writeStream);
+        },
         path: Config.staticFiles.uploadFiguresDir
     }),new FS.Store.FileSystem("orig_figures", {
         path: Config.staticFiles.uploadFiguresOrigDir

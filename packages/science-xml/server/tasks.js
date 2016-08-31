@@ -318,9 +318,9 @@ Tasks.insertArticleTask = function (logId, result) {
         if (articleId) {
             insertKeywords(result.keywords);
         }
-        Meteor.setTimeout(function(){
-            Science.ThumbUtils.addCreateThumbTasks(_.pluck(result.figures,"imageId"));
-        },2000);
+        //Meteor.setTimeout(function(){
+        //    Science.ThumbUtils.addCreateThumbTasks(_.pluck(result.figures,"imageId"));
+        //},2000);
 
     }
     catch (ex) {
