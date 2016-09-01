@@ -92,6 +92,7 @@ jackjiang:solr
 cfs:filesystem
 cfs:standard-packages
 cfs:gridfs
+cfs:worker
 cfs:ui
 cfs:autoform
 cfs:graphicsmagick

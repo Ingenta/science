@@ -19,7 +19,9 @@ Science.Queue.Citation.taskHandler = function(data,next){
 	AutoTasks.update({_id:data.taskId},{$set:{processing:Science.Queue.Citation.processing(),status:"processing"}});
 	SubTasks.update({_id:data.id},{$set:{ status : "processing"}});
 	Science.Interface.WebOfScience.amr(data.doi,Meteor.bindEnvironment(function(err,result){
+		logger.info("got result from Web of Science AMR");
 		if(!err && result && data.doi==result.doi){
+			logger.info("save AMR information to db");
 			var amrObj = {};
 			amrObj.info = result;
 			amrObj.updatedAt = new Date();

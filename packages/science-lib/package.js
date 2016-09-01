@@ -39,6 +39,8 @@ Package.onUse(function (api) {
     ];
     api.use(packages,['server', 'client']);
 
+    api.use('cfs:power-queue','server');
+
     api.imply(packages);
     api.addAssets('pdf.jar', 'server');
     api.addFiles([
@@ -59,7 +61,8 @@ Package.onUse(function (api) {
         'lib/xss.js',
         'lib/pdf.js',
         'lib/SSR.js',
-        'lib/data.js'
+        'lib/data.js',
+        'lib/thumbUtils.js'
     ], 'server');
 
     api.addFiles([
