@@ -1,4 +1,4 @@
-FS.debug=true;
+FS.debug=false;
 
 FiguresStore = new FS.Collection("figures", {
     stores: [new FS.Store.FileSystem("figures", {
