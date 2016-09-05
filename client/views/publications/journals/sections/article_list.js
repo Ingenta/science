@@ -72,8 +72,8 @@ Template.articleListRight.helpers({
         }
         if (Template.currentData().pubStatus === 'normal') {
             query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
-            return Articles.find(query, {sort: {padPage: 1}})
-            //return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
+            //return Articles.find(query, {sort: {padPage: 1}})
+            return normalArticlesPaginator.find(query, {itemsPerPage: 100, sort: {padPage: 1}});
         }
     },
     articlesCount: function () {
