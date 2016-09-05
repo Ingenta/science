@@ -70,10 +70,12 @@
         {{else}}
             {{_ "No articles found!"}}
         {{/each}}
-
-        {{> Paginator_UI articles}}
-        {{#if articlesCount}}
-            {{> displayPerPage}}
+            
+        {{#if pubStatusNormal}}
+            {{> Paginator_UI articles}}
+            {{#if articlesCount}}
+                {{> displayPerPage}}
+            {{/if}}
         {{/if}}
     </ul>
 </template>
