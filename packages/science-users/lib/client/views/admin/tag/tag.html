@@ -41,20 +41,22 @@
         </thead>
         <tbody>
         {{#each tags}}
-        <tr>
-            <td>{{tagNumber}}</td>
-            <td>{{translateThis name.cn name.en}}</td>
-            <td>{{createdBy}}</td>
-            <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
-            <td>{{#if can "modify-tag" "resource"}}{{> updateTagModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-tag" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
-        </tr>
+            <tr>
+                <td>{{tagNumber}}</td>
+                <td>{{translateThis name.cn name.en}}</td>
+                <td>{{createdBy}}</td>
+                <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
+                <td>{{#if can "modify-tag" "resource"}}{{> updateTagModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-tag" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
+            </tr>
+        {{else}}
+            {{_ "No results found!"}}
         {{/each}}
-        {{> Paginator_UI tags}}
-        {{#if tagsCount}}
-            {{> displayPerPage}}
-        {{/if}}
         </tbody>
     </table>
+    {{> Paginator_UI tags}}
+    {{#if tagsCount}}
+        {{> displayPerPage}}
+    {{/if}}
 </template>
 
 <template name="addTagModalForm">
