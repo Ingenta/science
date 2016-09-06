@@ -20,7 +20,8 @@ ScienceXML.isValidDoi = function (doi) {
 
 
 
-ScienceXML.parseXml = function (path, pubStatus) {
+ScienceXML.parseXml = function (path, log) {
+    var pubStatus = log.pubStatus;
     logger.info("parse xml start..");
     var results = {};
     //Step 1: get the file
@@ -172,6 +173,7 @@ ScienceXML.parseXml = function (path, pubStatus) {
     results = ScienceXML.getAbstract(results, doc);
     logger.info('parsed abstract');
 
+    ScienceXML.getOtherFigures(doc,log)
 
     results = ScienceXML.getFullText(results, doc);
     logger.info('parsed fulltext');

@@ -518,6 +518,40 @@ var getFigure = function (fig) {
     return figure;
 };
 
+ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
+    var otherFiguresNode = xpath.select("//body/descendant::alternatives[not(parent::fig)]", doc);
+    if (otherFiguresNode && otherFiguresNode.length) {
+        var finishCount=0;
+        var exNodes=[];
+        otherFiguresNode.forEach(function (fig) {
+            var href = parserHelper.getFirstAttribute("descendant::graphic[@specific-use='online']/@href",fig);
+            exNodes.push({name:Science.String.getFileName(href),node:fig});
+            var figLocation = log.extractTo + "/" + href;
+            Science.ThumbUtils.TaskManager.add("figures",href);
+            FiguresStore.insert(figLocation, function (err, fileObj) {
+                finishCount++;
+                if (err) {
+                    logger.error(err);
+                    log.errors.push(err.toString());
+                }  else {
+                    var url = "/cfs/files/" + fileObj.collectionName + "/" + fileObj._id + "/" + fileObj.name();
+                    var currNode = _.find(exNodes,function(n){return n.name==fileObj.name()}).node;
+
+                    var parentNode=currNode.parentNode;
+                    var newNode= doc.createElement("img");
+                    newNode.setAttribute("src",url);
+                    newNode.setAttribute("class","other-figure");
+                    parentNode.replaceChild(newNode,currNode);
+
+                    if (otherFiguresNode.length === finishCount) {
+                        callback && callback();
+                    }
+                }
+            });
+        });
+    }
+});
+
 ScienceXML.getFigures = function (doc) {
     var figNodes = xpath.select("//floats-group/fig", doc);
     if (figNodes && figNodes.length) {
@@ -530,6 +564,7 @@ ScienceXML.getFigures = function (doc) {
     }
     return null;
 };
+
 var removeChildNodes = function(eleobj, childNodesForRemove){
     if(!eleobj || _.isEmpty(childNodesForRemove)) return eleobj;
     var index=0;

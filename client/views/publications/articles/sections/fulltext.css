@@ -56,3 +56,7 @@
 .appendix-container label+p {
     display:inline-block;
 }
+
+#fulltext-viewer .other-figure {
+    width:400px;
+}

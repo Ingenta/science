@@ -19,9 +19,9 @@ var taskManager = {
             return taskfile.fileName == filename;
         })
     },
-    add:function(filename){
+    add:function(storeName,filename){
         filename = Science.String.getFileName(filename).trim().toLowerCase();
-        if(!this.exists(filename))
+        if(!this.exists(storeName,filename))
             thumbTasks.push({fileName:filename,createOn:new Date().getTime()});
     }
 }

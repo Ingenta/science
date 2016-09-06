@@ -147,7 +147,7 @@ Tasks.parse = function (logId, pathToXml) {
         if (log.pubStatus == "accepted")
             result = Science.parserAccepted(pathToXml)
         else
-            result = ScienceXML.parseXml(pathToXml, log.pubStatus);
+            result = ScienceXML.parseXml(pathToXml, log);
         log.errors = result.errors;
         if (!_.isEmpty(log.errors)) {
             Tasks.fail(taskId, logId, log.errors);
@@ -274,7 +274,7 @@ Tasks.insertArticleImages = function (logId, result) {
                     log.errors.push("image type not supported: " + figName);
                 }
                 else {
-                    Science.ThumbUtils.TaskManager.add(figLocation);
+                    Science.ThumbUtils.TaskManager.add("figures",figLocation);
                     FiguresStore.insert(figLocation, function (err, fileObj) {
                         finishCount++;
                         if (err) {
