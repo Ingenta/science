@@ -549,6 +549,8 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
                 }
             });
         });
+    }else{
+        callback && callback();
     }
 });
 
