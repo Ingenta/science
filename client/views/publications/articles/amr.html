@@ -5,10 +5,10 @@
             <ul style="list-style: none; padding-left: 10px;">
                 {{#with getData}}
                     {{#if timesCited}}
-                        <li><a href="{{citingArticlesUrl}}">{{_ "timesCited"}} [{{timesCited}}]</a></li>
+                        <li><a href="{{citingArticlesUrl}}" target="_blank">{{_ "timesCited"}} [{{timesCited}}]</a></li>
                     {{/if}}
-                        <li><a href="{{sourceUrl}}">{{_ "sourceArticle"}}</a></li>
-                        <li><a href="{{relatedRecordsUrl}}">{{_ "relatedRecords"}}</a></li>
+                        <li><a href="{{sourceUrl}}" target="_blank">{{_ "sourceArticle"}}</a></li>
+                        <li><a href="{{relatedRecordsUrl}}" target="_blank">{{_ "relatedRecords"}}</a></li>
                 {{/with}}
             </ul>
         </div>
