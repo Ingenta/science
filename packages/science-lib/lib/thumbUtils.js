@@ -2,9 +2,15 @@ Science.ThumbUtils={};
 
 Science.ThumbUtils.size={width:600, height:900};
 
+
 var thumbTasks = [];
+var thumbCollections = ["figures"];
 var taskManager = {
-    exists:function(filename){
+    exists:function(storeName, filename){
+        if(!_.find(thumbCollections,function(cname){
+            return cname == storeName;
+        })) return;
+        
         filename = filename.trim().toLowerCase();
         var num = _.sortedIndex(thumbTasks, {fileName: '', createOn: new Date().getTime() - 5*60*1000}, 'createOn');
         thumbTasks.splice(0,num);
@@ -17,9 +23,6 @@ var taskManager = {
         filename = Science.String.getFileName(filename).trim().toLowerCase();
         if(!this.exists(filename))
             thumbTasks.push({fileName:filename,createOn:new Date().getTime()});
-    },
-    remove:function(filename){
-        thumbTasks.splice(filename,1);
     }
 }
 
