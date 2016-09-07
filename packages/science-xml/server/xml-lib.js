@@ -524,37 +524,62 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
         var finishCount=0;
         var exNodes=[];
         otherFiguresNode.forEach(function (fig) {
-            var href = parserHelper.getFirstAttribute("descendant::graphic[@specific-use='online']/@href",fig);
-            exNodes.push({name:Science.String.getFileName(href),node:fig});
-            var figLocation = log.extractTo + "/" + href;
-            if (!ScienceXML.IsImageTypeSupported(figLocation)) {
-                log.errors.push("image type not supported: " + href);
-            } else {
-                Science.ThumbUtils.TaskManager.add("figures",href);
-                FiguresStore.insert(figLocation, function (err, fileObj) {
-                    finishCount++;
-                    if (err) {
-                        logger.error(err);
-                        log.errors.push(err.toString());
-                    }  else {
-                        var url = "/cfs/files/" + fileObj.collectionName + "/" + fileObj._id + "/" + fileObj.name();
-                        var currNode = _.find(exNodes,function(n){return n.name==fileObj.name()}).node;
-
-                        var parentNode=currNode.parentNode;
-                        var newNode= doc.createElement("img");
-                        newNode.setAttribute("src",url);
-                        newNode.setAttribute("class","other-figure");
-                        parentNode.replaceChild(newNode,currNode);
-
-                        if (otherFiguresNode.length === finishCount) {
-                            callback && callback();
-                        }
+            var figure = {};
+            var graphics = xpath.select("descendant::graphic", fig);
+            if (graphics && graphics.length) {
+                figure.graphics = [];
+                graphics.forEach(function (grap) {
+                    var g = {};
+                    var suse = xpath.select("./@specific-use", grap);
+                    if (suse && suse.length) {
+                        g.use = suse[0].value;
                     }
+                    var href = xpath.select('@href', grap);
+                    if (href && href.length) {
+                        g.href = href[0].value && href[0].value.replace('\\', '/');//兼容windows的分隔符\
+                    }
+                    figure.graphics.push(g);
                 });
+            }
+            var onlineOne = _.findWhere(figure.graphics, {use: "online"});
+            onlineOne = onlineOne || _.find(figure.graphics, function (g) {
+                    return !g.use;
+            });
+            if (onlineOne) {
+                var href = onlineOne.href;
+                exNodes.push({name: Science.String.getFileName(href), node: fig});
+                var figLocation = log.extractTo + "/" + href;
+                if (!ScienceXML.IsImageTypeSupported(figLocation)) {
+                    log.errors.push("image type not supported: " + href);
+                } else {
+                    Science.ThumbUtils.TaskManager.add("figures", href);
+                    FiguresStore.insert(figLocation, function (err, fileObj) {
+                        finishCount++;
+                        if (err) {
+                            logger.error(err);
+                            log.errors.push(err.toString());
+                        } else {
+                            var url = "/cfs/files/" + fileObj.collectionName + "/" + fileObj._id + "/" + fileObj.name();
+                            var currNode = _.find(exNodes, function (n) {
+                                return n.name == fileObj.name()
+                            }).node;
+
+                            var parentNode = currNode.parentNode;
+                            var newNode = doc.createElement("img");
+                            newNode.setAttribute("src", url);
+                            newNode.setAttribute("class", "other-figure");
+                            parentNode.replaceChild(newNode, currNode);
+
+                            if (otherFiguresNode.length === finishCount) {
+                                callback && callback();
+                            }
+                        }
+                    });
+                }
             }
         });
     }else{
-        callback && callback();
+        callback();
     }
 });
 
