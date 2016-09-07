@@ -31,7 +31,13 @@ getMostReadByJournal = function (journalId, limit) {
             , {$limit: limit}]);
     }
     if (!mostRead)return;
-    return _.pluck(mostRead, "_id");
+    var most = [];
+    mostRead.forEach(function (item) {
+        var article = Articles.findOne({_id: item._id});
+        if(!article)return;
+        most.push(article._id);
+    });
+    return most;
 }
 getMostReadSuggestion = function (currentJournalId) {
     //add suggestion if journalId not set or its journalId equals current
