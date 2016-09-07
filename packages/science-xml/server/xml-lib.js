@@ -527,27 +527,31 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
             var href = parserHelper.getFirstAttribute("descendant::graphic[@specific-use='online']/@href",fig);
             exNodes.push({name:Science.String.getFileName(href),node:fig});
             var figLocation = log.extractTo + "/" + href;
-            Science.ThumbUtils.TaskManager.add("figures",href);
-            FiguresStore.insert(figLocation, function (err, fileObj) {
-                finishCount++;
-                if (err) {
-                    logger.error(err);
-                    log.errors.push(err.toString());
-                }  else {
-                    var url = "/cfs/files/" + fileObj.collectionName + "/" + fileObj._id + "/" + fileObj.name();
-                    var currNode = _.find(exNodes,function(n){return n.name==fileObj.name()}).node;
+            if (!ScienceXML.IsImageTypeSupported(figLocation)) {
+                log.errors.push("image type not supported: " + href);
+            } else {
+                Science.ThumbUtils.TaskManager.add("figures",href);
+                FiguresStore.insert(figLocation, function (err, fileObj) {
+                    finishCount++;
+                    if (err) {
+                        logger.error(err);
+                        log.errors.push(err.toString());
+                    }  else {
+                        var url = "/cfs/files/" + fileObj.collectionName + "/" + fileObj._id + "/" + fileObj.name();
+                        var currNode = _.find(exNodes,function(n){return n.name==fileObj.name()}).node;
 
-                    var parentNode=currNode.parentNode;
-                    var newNode= doc.createElement("img");
-                    newNode.setAttribute("src",url);
-                    newNode.setAttribute("class","other-figure");
-                    parentNode.replaceChild(newNode,currNode);
+                        var parentNode=currNode.parentNode;
+                        var newNode= doc.createElement("img");
+                        newNode.setAttribute("src",url);
+                        newNode.setAttribute("class","other-figure");
+                        parentNode.replaceChild(newNode,currNode);
 
-                    if (otherFiguresNode.length === finishCount) {
-                        callback && callback();
+                        if (otherFiguresNode.length === finishCount) {
+                            callback && callback();
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     }else{
         callback && callback();
