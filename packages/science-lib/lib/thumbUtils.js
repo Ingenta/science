@@ -21,7 +21,7 @@ var taskManager = {
     },
     add:function(storeName,filename){
         filename = Science.String.getFileName(filename).trim().toLowerCase();
-        if(!this.exists(storeName,filename))
+        if(this.exists(storeName,filename))
             thumbTasks.push({fileName:filename,createOn:new Date().getTime()});
     }
 }
