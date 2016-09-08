@@ -160,15 +160,10 @@ function getDoneQuery(stores) {
  * have, potentially overwriting any previously saved data. Synchronous.
  */
 function saveCopy(fsFile, storeName, options) {
-  if(storeName =="images"){
-
-  }else{
-    if(!Science.ThumbUtils.TaskManager.exists(storeName,fsFile.name())){
-      FS.debug && console.log('that no my job!!!!!! store:' +storeName + ', filename:' + fsFile.name());
-      return;
-    }
+  if(!Science.ThumbUtils.TaskManager.isMyJob(storeName,fsFile.name())){
+    FS.debug && console.log('that no my job!!!!!! store:' +storeName + ', filename:' + fsFile.name());
+    return;
   }
-
 
   options = options || {};
 
