@@ -16,7 +16,7 @@
 <template name="subscriptionList">
     {{#each subscriptions}}
         <div class="partContent">
-            <div align="center"><span style="font-size:24px;">{{translateThis title.cn title.en}}</span>
+            <div align="center"><span style="font-size:24px;">{{{translateThis title.cn title.en}}}</span>
                 {{#if miniPlatformPermission}}{{> updateSubscriptionModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="subDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{translateThis content.cn content.en}}}</p>

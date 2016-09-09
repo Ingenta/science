@@ -21,7 +21,6 @@ Template.onePublisherInFilterList.helpers({
             q.visible="1";
         if (first !== undefined)
             q.shortTitle={$regex: "^" + first, $options: "i"};
-        console.log(q);
         return Publications.find(q).count();
     }
 });

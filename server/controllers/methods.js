@@ -162,7 +162,10 @@ var getNextPage = function (issue, padPage, ascending) {
     var sort = ascending?1:-1;
     query.padPage[key]=padPage;
     var nextArticle = Articles.findOne(query, {fields: {doi: 1},sort:{padPage:sort}});
-    if(!nextArticle || !nextArticle.doi)
-        return;
-    return nextArticle.doi.substring(nextArticle.doi.lastIndexOf("/") + 1);
+    if(!nextArticle || !nextArticle.doi)return;
+    var pubDoi = nextArticle.doi.substring(0,nextArticle.doi.indexOf("/")+1);
+    var endDoi = nextArticle.doi.substring(nextArticle.doi.indexOf("/")+1);
+    var articleDoi = endDoi.replace("/","-slash-");
+    var doi = pubDoi+articleDoi;
+    return doi.substring(doi.lastIndexOf("/") + 1);
 }

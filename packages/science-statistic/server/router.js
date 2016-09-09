@@ -29,11 +29,6 @@ Router.route('downloadExcel', {
                 query.dateCode = {$lte: Number(this.request.query.endDate)};
             }
         }
-        console.log(this.request.query.startDate);
-        console.log(this.request.query.endDate);
-        console.log(start);
-        console.log(end);
-        console.log(query);
         var reportType = this.request.query.reportType;
         var file;
         var fileName = "statistic";

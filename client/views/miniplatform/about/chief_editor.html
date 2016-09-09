@@ -16,7 +16,7 @@
 <template name="chiefEditorList">
     {{#each chiefEditor}}
         <div class="partContent">
-            <div align="center"><span class="title-font">{{translateThis title.cn title.en}}</span>
+            <div align="center"><span class="title-font">{{{translateThis title.cn title.en}}}</span>
                 {{#if miniPlatformPermission}}{{> updateChiefEditorModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="chiefEdi" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{translateThis content.cn content.en}}}</p>

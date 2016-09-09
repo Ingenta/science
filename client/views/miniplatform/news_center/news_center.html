@@ -4,7 +4,7 @@
             {{> pageElement key="newsCenter" isMiniPlatform=true}}
             <div class="row" style="margin-left: 10px">
                 {{#each recruitInfo}}
-                    <strong><a style="font-size: 14px;color: red" href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a></strong>
+                    <strong><a style="font-size: 14px;color: red" href="{{whichUrl}}" target="_blank">{{{translateThis title.cn title.en}}}</a></strong>
                     {{#if miniPlatformPermission}}{{> updateRecruitmentModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="recruitDel" class="fa fa-trash"></a>{{/if}}
                 {{/each}}
@@ -22,7 +22,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        <a href="{{whichUrl}}" target="_blank">{{{translateThis title.cn title.en}}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="magDel" class="fa fa-trash"></a>{{/if}}
                                     </p>
@@ -48,7 +48,7 @@
                             <ul class="dotted list-unstyled">
                                 <li>
                                     <p>
-                                        <a href="{{whichUrl}}" target="_blank">{{translateThis title.cn title.en}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
+                                        <a href="{{whichUrl}}" target="_blank">{{{translateThis title.cn title.en}}}</a><span class="pull-right">({{formatDate releaseTime "YYYY-MM-DD"}})</span>
                                         {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
                                         {{#if miniPlatformPermission}}<a href="#" id="pubDel" class="fa fa-trash"></a>{{/if}}
                                     </p>

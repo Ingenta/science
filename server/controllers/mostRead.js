@@ -2,7 +2,7 @@ getMostReadByJournal = function (journalId, limit) {
     if (!limit)limit = 20;
     var mostRead;
     if (journalId) {
-        mostRead = PageViews.aggregate([{
+        var fulltext = PageViews.aggregate([{
             $match: {
                 journalId: journalId,
                 action: "fulltext",
@@ -14,24 +14,52 @@ getMostReadByJournal = function (journalId, limit) {
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            ,{$limit:30}]);
-    }
-    else {
-        mostRead = PageViews.aggregate([{
+            ,{$limit:20}]);
+        var abstract = PageViews.aggregate([{
             $match: {
-                action: "fulltext",
+                journalId: journalId,
+                action: "abstract",
                 articleId: {$exists:true, $ne: null}
             }
-        },{
+        }, {
             $group: {
                 _id: '$articleId',
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            ,{$limit:30}]);
+            ,{$limit:20}]);
     }
+    else {
+        var fulltext = PageViews.aggregate([{
+            $match: {
+                action: "fulltext",
+                articleId: {$exists:true, $ne: null}
+            }
+        }, {
+            $group: {
+                _id: '$articleId',
+                count: {$sum: 1}
+            }
+        }, {$sort: {count: -1}}
+            ,{$limit:20}]);
+        var abstract = PageViews.aggregate([{
+            $match: {
+                action: "abstract",
+                articleId: {$exists:true, $ne: null}
+            }
+        }, {
+            $group: {
+                _id: '$articleId',
+                count: {$sum: 1}
+            }
+        }, {$sort: {count: -1}}
+            ,{$limit:20}]);
+    }
+    mostRead =_.union(fulltext,abstract);
     if (!mostRead)return;
+    mostRead=_.sortBy(mostRead, 'count');
     var most = [];
+    mostRead.reverse();
     mostRead.forEach(function (item) {
         var article = Articles.findOne({_id: item._id});
         if(article){

@@ -3,7 +3,9 @@ Template.ShowGuidelines.helpers({
         var guideId = Router.current().params.guideId;
         var journalId = Session.get('currentJournalId');
         var guide = AuthorCenter.findOne({_id:guideId});
-        return AuthorCenter.find({type:guide.type,url:null,publications:journalId,parentId:null});
+        if(guide){
+            return AuthorCenter.find({type:guide.type,url:null,publications:journalId,parentId:null});
+        }
     },
     childTitle: function () {
         return AuthorCenter.find({type:this.type,publications:this.publications,parentId:this._id});
