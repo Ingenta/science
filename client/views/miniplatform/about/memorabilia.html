@@ -16,7 +16,7 @@
 <template name="memorabiliaList">
     {{#each memorabilias}}
         <div class="partContent">
-            <div align="center"><span class="title-font"><b>{{translateThis title.cn title.en}}</b></span>
+            <div align="center"><span class="title-font"><b>{{{translateThis title.cn title.en}}}</b></span>
                 {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
                 {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}</div><br>
             <p>{{{translateThis content.cn content.en}}}</p>

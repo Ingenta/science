@@ -37,7 +37,7 @@
     {{#each newsContent}}
         <div class="part">
             <p>
-                <a href="{{whichUrl}}"><strong>{{translateThis title.cn title.en}}</strong></a>
+                <a href="{{whichUrl}}"><strong>{{{translateThis title.cn title.en}}}</strong></a>
                 <div class="pull-right">
                     {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
                     {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
@@ -62,7 +62,7 @@
     {{#each pubDynamic}}
         <div class="part">
             <p>
-                <a href={{whichUrl}}><strong>{{translateThis title.cn title.en}}</strong></a>
+                <a href={{whichUrl}}><strong>{{{translateThis title.cn title.en}}}</strong></a>
                 <div class="pull-right">
                     {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
                     {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
@@ -85,7 +85,7 @@
     {{#each meetingContent}}
         <div class="part">
             <p>
-                <a href={{url}} target="_blank"><strong>{{translateThis title.cn title.en}}</strong></a>
+                <a href={{url}} target="_blank"><strong>{{{translateThis title.cn title.en}}}</strong></a>
                 <div class="pull-right">
                     {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateMeetingInfoModalForm}}{{/if}}
                     {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}

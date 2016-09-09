@@ -36,7 +36,6 @@ Template.statistic.helpers({
             var permissionScope = Permissions.getPermissionRange(Meteor.userId(),"platform:use-statistic");
             query._id = {$in:permissionScope.journal};
         }
-        console.log(query);
         return Publications.find(query);
     },
     institutionsList:function(){
