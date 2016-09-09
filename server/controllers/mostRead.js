@@ -57,7 +57,9 @@ getMostReadByJournal = function (journalId, limit) {
     }
     mostRead =_.union(fulltext,abstract);
     if (!mostRead)return;
+    mostRead=_.sortBy(mostRead, 'count');
     var most = [];
+    mostRead.reverse();
     mostRead.forEach(function (item) {
         var article = Articles.findOne({_id: item._id});
         if(article){
