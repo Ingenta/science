@@ -13,8 +13,7 @@ getMostReadByJournal = function (journalId, limit) {
                 _id: '$articleId',
                 count: {$sum: 1}
             }
-        }, {$sort: {count: -1}}
-            , {$limit: limit}]);
+        }, {$sort: {count: -1}}]);
     }
     else {
         mostRead = PageViews.aggregate([{
@@ -27,17 +26,17 @@ getMostReadByJournal = function (journalId, limit) {
                 _id: '$articleId',
                 count: {$sum: 1}
             }
-        }, {$sort: {count: -1}}
-            , {$limit: limit}]);
+        }, {$sort: {count: -1}}]);
     }
     if (!mostRead)return;
     var most = [];
     mostRead.forEach(function (item) {
         var article = Articles.findOne({_id: item._id});
-        if(!article)return;
-        most.push(article._id);
+        if(article){
+            most.push(article._id);
+        }
     });
-    return most;
+    return _.first(most,limit);
 }
 getMostReadSuggestion = function (currentJournalId) {
     //add suggestion if journalId not set or its journalId equals current

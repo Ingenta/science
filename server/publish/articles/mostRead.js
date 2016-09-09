@@ -29,7 +29,7 @@ Meteor.publish('homepageMostReadBrief', function () {
 
 Meteor.publish('journalMostRead', function (journalId) {
     check(journalId, String);
-    var result = createMostReadList(journalId);
+    var result = createMostReadList(journalId,20);
     if(_.isEmpty(result))return this.ready();
     return [
         Articles.find({_id: {$in: result}}, {
