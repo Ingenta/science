@@ -13,7 +13,8 @@ getMostReadByJournal = function (journalId, limit) {
                 _id: '$articleId',
                 count: {$sum: 1}
             }
-        }, {$sort: {count: -1}}]);
+        }, {$sort: {count: -1}}
+            ,{$limit:30}]);
     }
     else {
         mostRead = PageViews.aggregate([{
@@ -26,7 +27,8 @@ getMostReadByJournal = function (journalId, limit) {
                 _id: '$articleId',
                 count: {$sum: 1}
             }
-        }, {$sort: {count: -1}}]);
+        }, {$sort: {count: -1}}
+            ,{$limit:30}]);
     }
     if (!mostRead)return;
     var most = [];
