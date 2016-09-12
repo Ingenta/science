@@ -7,9 +7,7 @@ Template.newsCenterDetails.helpers({
         return NewsCenter.find({},{sort: {releaseTime: -1}, limit: 10});
     },
     whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
+        if (this.link)return this.link;
         return "/miniplatform/newsCenter/" + this._id;
     },
     fields:function(){
@@ -17,11 +15,10 @@ Template.newsCenterDetails.helpers({
         return false;
     },
     wordValue:function(){
-        if(this.fileId===undefined){
-            return null;
+        if(this.fileId){
+            var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
+            return file.url({auth:false});
         }
-        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        return file.url({auth:false});
     }
 });
 

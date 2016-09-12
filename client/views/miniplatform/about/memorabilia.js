@@ -12,8 +12,7 @@ Template.memorabiliaList.helpers({
         return !_.isEmpty(this.accordion);
     },
     historyNewsExists: function () {
-        var history = NewsContact.find({types:"8"});
-        if(history.count()>0)return true;
+       return NewsContact.find({types:"8"}).count()>0;
     },
     historyList: function () {
         return NewsContact.find({types:"8"},{sort: {title: 1}});

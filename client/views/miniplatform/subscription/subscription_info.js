@@ -7,13 +7,6 @@ Template.subscription.helpers({
 Template.subscriptionList.helpers({
     subscriptions: function () {
         return NewsContact.find({types:"5"});
-    },
-    wordValue:function(){
-        if(this.fileId===undefined){
-            return null;
-        }
-        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        return file.url({auth:false});
     }
 });
 

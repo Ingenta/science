@@ -27,9 +27,7 @@ Template.newsCenter.helpers({
         return NewsCenter.find({types:"3"}).count()>10;
     },
     whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
+        if (this.link)return this.link;
         return "/miniplatform/newsCenter/" + this._id;
     },
     tabs: function () {

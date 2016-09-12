@@ -6,9 +6,7 @@ Template.layoutRightNews.helpers({
         return NewsCenter.find({recommend:"1",types:"3"},{sort: {createDate: -1}, limit: 5});
     },
     whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
+        if (this.link)return this.link;
         return "/miniplatform/newsCenter/" + this._id;
     }
 });
