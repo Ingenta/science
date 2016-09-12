@@ -1,8 +1,9 @@
 Template.dynamicArticleShow.helpers({
-    mostPublishingArticles: function () {var pubSort = {};
+    mostPublishingArticles: function () {
+        var pubSort = {};
         if(Session.get("sort"))
-            pubSort = {"createDate": Session.get("sort")};
-        var recommendArticle = NewsRecommend.find({},{sort: pubSort, limit: 20}).fetch();
+            pubSort = {"published": Session.get("sort")};
+        var recommendArticle = NewsRecommend.find({},{limit:20}).fetch();
         // 获取更多Id
         var allId = [];
         _.each(recommendArticle, function (item) {
