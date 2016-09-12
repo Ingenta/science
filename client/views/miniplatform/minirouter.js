@@ -17,7 +17,7 @@ Router.map(function () {
                 MiniPlatformSubs.subscribe('news_center'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
-                MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles'),
+                MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
                 MiniPlatformSubs.subscribe('news_link'),
                 MiniPlatformSubs.subscribe('miniplatformMostRecentArticles')
             ]
@@ -195,7 +195,7 @@ Router.map(function () {
             return [
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
-                MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles'),
+                MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',20),
                 MiniPlatformSubs.subscribe('news_link')
             ]
         }
