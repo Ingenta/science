@@ -55,7 +55,7 @@ Meteor.publish('oneArticleByDoi', function (doi) {
     this.ready();
 });
 Meteor.publish('recommendedMiniPlatformArticles', function () {
-    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}}, {limit: 6}).fetch();
+    var recommended = NewsRecommend.find({}, {fields: {ArticlesId: 1}}, {sort: {createDate:-1}, limit: 20}).fetch();
     var articleIds = _.pluck(recommended, "ArticlesId");
     return Articles.find({_id: {$in: articleIds}}, {
         fields: articleWithMetadata
