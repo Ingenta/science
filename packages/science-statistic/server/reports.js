@@ -92,6 +92,7 @@ Science.Reports.getArticleReportData = function (query) {
             result[doc.action].months[doc.dateCode] = result[doc.action].months[doc.dateCode] + 1
         },
         Meteor.bindEnvironment( function (err, result) {
+            var deletedArticles =[];
             _.each(result, function (item) {
                 var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
                 if(article){
@@ -103,8 +104,11 @@ Science.Reports.getArticleReportData = function (query) {
                     x.issue = article.issue;
                     x.volume = article.volume;
                     _.extend(item, x);
+                }else{
+                    deletedArticles.push(item);
                 }
             })
+            result = _.difference(result,deletedArticles);
             return myFuture.return(result);
         })
     );
@@ -173,6 +177,7 @@ Science.Reports.getInstitutionActionData = function(query){
             result[doc.action]++;
         },
         Meteor.bindEnvironment( function (err, result) {
+            var deletedInstitution = []
             _.each(result, function (item) {
                 var institution = Institutions.findOne({_id: item.institutionId},{fields:{name:1,number:1,type:1}});
                 var x = {};
@@ -198,9 +203,11 @@ Science.Reports.getInstitutionActionData = function(query){
                     x.name = "无";
                     x.number = "无";
                     x.type = "无";
+                    deletedInstitution.push(item);
                 }
                 _.extend(item, x);
             })
+            result = _.difference(result,deletedInstitution);
             return myFuture.return(result);
         })
     );
@@ -282,6 +289,7 @@ Science.Reports.getArticleReportDataNew = function (query) {
             result[doc.action]++;
         },
         Meteor.bindEnvironment( function (err, result) {
+            var deletedArticles =[];
             _.each(result, function (item) {
                 var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
                 if(article){
@@ -293,8 +301,11 @@ Science.Reports.getArticleReportDataNew = function (query) {
                     x.issue = article.issue;
                     x.volume = article.volume;
                     _.extend(item, x);
+                }else{
+                    deletedArticles.push(item);
                 }
             })
+            result = _.difference(result,deletedArticles);
             return myFuture.return(result);
         })
     );
