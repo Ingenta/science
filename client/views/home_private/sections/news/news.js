@@ -47,9 +47,7 @@ Template.SingleNews.helpers({
         return News.find({types: "1"}).count() > 1;
     },
     whichUrl: function () {
-        if (this.url) {
-            return this.url;
-        }
+        if (this.url)return this.url;
         return "/news/" + this._id;
     }
 });
@@ -91,9 +89,3 @@ AutoForm.addHooks(['updateNewsModalForm'], {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
     }
 });
-
-//Template.updateNewsModalForm.helpers({
-//    getTitle: function () {
-//        return TAPi18n.__("Update");
-//    }
-//});

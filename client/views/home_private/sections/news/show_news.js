@@ -1,18 +1,13 @@
 Template.showNewsArticle.helpers({
     newsArticles: function () {
         var newId = Router.current().params.newsId;
-        return News.find({_id: newId});
-    },
-    fields:function(){
-        if(this.fileId)return true;
-        return false;
+        if(newId)return News.find({_id: newId});
     },
     wordValue:function(){
-        if(this.fileId===undefined){
-            return null;
+        if(this.fileId) {
+            var file = Collections.JournalMediaFileStore.findOne({_id: this.fileId});
+            return file.url({auth: false});
         }
-        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        return file.url({auth:false});
     }
 });
 

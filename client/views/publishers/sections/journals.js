@@ -75,7 +75,7 @@ Template.SinglePublication.helpers({
     //}
 });
 
-Template.PublicationList.events({
+Template.displayPerPage.events({
     'click .perPage': function (event) {
         var pageNum = $(event.target).data().pagenum;
         Session.set('PerPage', pageNum);

@@ -47,10 +47,6 @@ Template.enterpriseCulture.events({
         confirmDelete(e,function(){
             NewsContact.remove({_id:pid});
         })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 

@@ -5,16 +5,18 @@ Template.aboutTitle.onCreated(function(){
 Template.aboutTitle.helpers({
     abouts: function () {
         var publicationsId = Session.get('currentJournalId');
-        return About.find({publications: publicationsId});
+        if(publicationsId)return About.find({publications: publicationsId});
     },
     isActive: function (id) {
         var aboutId = Session.get('tabBoard');
         var publicationsId = Session.get('currentJournalId');
-        var about = About.findOne({publications: publicationsId});
-        if(aboutId){
-            if (aboutId === id)return "active";
-        }else{
-            Session.set('tabBoard', about._id);
+        if(publicationsId){
+            var about = About.findOne({publications: publicationsId});
+            if(aboutId){
+                if (aboutId === id)return "active";
+            }else{
+                Session.set('tabBoard', about._id);
+            }
         }
     }
 });
@@ -50,7 +52,7 @@ Template.EditorialBoardMembersList.onRendered(function () {
 Template.EditorialBoardMembersList.helpers({
     about: function () {
         var aboutId = Session.get('tabBoard');
-        return About.findOne({_id: aboutId});
+        if(aboutId)return About.findOne({_id: aboutId});
     },
     editorialBoards: function () {
         var aboutId = Session.get('tabBoard');

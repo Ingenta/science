@@ -59,10 +59,6 @@ Template.newsCenter.events({
         confirmDelete(e,function(){
             NewsCenter.remove({_id:pid});
         })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 

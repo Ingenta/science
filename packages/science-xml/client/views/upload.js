@@ -28,13 +28,6 @@ Template.AdminUpload.helpers({
     }
 });
 
-Template.AdminUpload.events({
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
 Template.UploadLogModal.helpers({
     uploadTasks: function () {
         var logId = Session.get('uploadLogId');

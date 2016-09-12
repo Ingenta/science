@@ -16,7 +16,9 @@ Template.ShowGuidelines.helpers({
         if(gid){
             return AuthorCenter.find({_id:gid});
         }
-        return AuthorCenter.find({_id:guideId});
+        if(guideId){
+            return AuthorCenter.find({_id:guideId});
+        }
 
     },
     LeftTitle:function(){
@@ -32,18 +34,6 @@ Template.ShowGuidelines.helpers({
             var name = iscn?"准备手稿":"Prepare Manuscript";
             return name;
         }
-        return null;
-    },
-    fields:function(){
-        if(this.fileId)return true;
-        return false;
-    },
-    wordValue:function(){
-        if(this.fileId===undefined){
-            return null;
-        }
-        var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-        return file.url({auth:false});
     }
 });
 

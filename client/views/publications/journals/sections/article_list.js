@@ -54,13 +54,6 @@ Template.articleList.helpers({
     }
 });
 
-Template.articleListRight.events({
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
 Template.articleListRight.helpers({
     articles: function () {
         var numPerPage = Session.get('PerPage') || 10;
