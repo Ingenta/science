@@ -3,10 +3,7 @@
         <div class="container-fluid" style="margin-left: 41px">
             <h3 class="dotted"><b>{{_ "Latest published Articles View"}}&nbsp;:</b></h3>
             <div class="dotted">
-                <label>{{_ "Sort Results By"}}：</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1"> {{_ "First release"}}</label>
+                {{> sortByResults}}
             </div>
             <div class="dotted">
                 <h4><b>{{_ "Most recent"}}：</b></h4>

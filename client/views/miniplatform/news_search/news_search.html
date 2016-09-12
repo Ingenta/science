@@ -1,12 +1,16 @@
+<template name="sortByResults">
+    <label>{{_ "Sort Results By"}}：</label>
+    <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
+    <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
+    <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1">{{_ "First release"}}</label>
+</template>
+
 <template name="newsSearchShowPage">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
             <h3 class="dotted"><b>{{_ "View Search Results"}}>></b></h3>
             <div class="dotted">
-                <label>{{_ "Sort Results By"}}：</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="" checked> {{_ "Relevance"}}</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="-1"> {{_ "Latest release"}}</label>
-                <label class="radio-inline"><input class="datesort" type="radio" name="sort" value="1">{{_ "First release"}}</label>
+                {{> sortByResults}}
             </div>
             <div class="dotted">
                 <table class="table table-bordered table-condensed">

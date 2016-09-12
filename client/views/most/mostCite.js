@@ -11,8 +11,8 @@ Template.mostCitedArticleFullList.helpers({
     mostCitedArticles: function () {
         var citedAr = undefined;
         var journalId = Router.current().params.journalId;
-        if (journalId) citedAr = MostCited.find({journalId: journalId}).fetch();
-        else citedAr = MostCited.find().fetch();
+        if (journalId) citedAr = MostCited.find({journalId: journalId}, {sort: {count: -1}}).fetch();
+        else citedAr = MostCited.find({},{sort: {count: -1}}).fetch();
         // 获取更多Id
         var allId = _.pluck(citedAr, 'articleId');
         // 返回article信息，并排序

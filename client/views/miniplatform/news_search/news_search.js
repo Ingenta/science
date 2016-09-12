@@ -1,4 +1,4 @@
-Template.dynamicShow.events({
+Template.newsSearchShowPage.events({
     'click .datesort': function (event) {
         Session.set("sort",event.target.value);
     }
