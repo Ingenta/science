@@ -24,7 +24,7 @@ Template.ShowGuidelines.helpers({
     LeftTitle:function(){
         var guideId = Router.current().params.guideId;
         var guide = AuthorCenter.findOne({_id:guideId});
-        var typeTitle = ["", "Submission Guidelines", "Prepare Manuscript"];
+        var typeTitle = ["", "Submission Guidelines", "Prepare Manuscript","Submit  Manuscript"];
         if(guide){
             return TAPi18n.__(typeTitle[guide.type]);
         }
