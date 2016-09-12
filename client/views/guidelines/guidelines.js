@@ -24,15 +24,9 @@ Template.ShowGuidelines.helpers({
     LeftTitle:function(){
         var guideId = Router.current().params.guideId;
         var guide = AuthorCenter.findOne({_id:guideId});
-        if(guide.type==="1"){
-            var iscn=TAPi18n.getLanguage()==='zh-CN';
-            var name = iscn?"投稿前须知":"Submission Guidelines";
-            return name;
-        }
-        if(guide.type==="2"){
-            var iscn=TAPi18n.getLanguage()==='zh-CN';
-            var name = iscn?"准备手稿":"Prepare Manuscript";
-            return name;
+        var typeTitle = ["", "Submission Guidelines", "Prepare Manuscript"];
+        if(guide){
+            return TAPi18n.__(typeTitle[guide.type]);
         }
     }
 });
