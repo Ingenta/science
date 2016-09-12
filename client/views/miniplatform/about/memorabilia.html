@@ -37,9 +37,11 @@
                             </div>
                             <div id="collapse{{@index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{@index}}">
                                 <div class="panel-body">
-                                    {{{translateThis content.cn content.en}}}
-                                    {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
-                                    {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}
+                                    <p>
+                                        {{{translateThis content.cn content.en}}}
+                                        {{#if miniPlatformPermission}}{{> updateMemorabiliaModalForm}}{{/if}}
+                                        {{#if miniPlatformPermission}}<a href="#" id="memDel" class="fa fa-trash"></a>{{/if}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
