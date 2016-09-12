@@ -10,42 +10,20 @@ Template.journalSummary.helpers({
     Title: function (id) {
         var iscn = TAPi18n.getLanguage() === 'zh-CN';
         var publishers = Publishers.findOne({_id: id});
-        var title = iscn ? publishers.chinesename : publishers.name;
-        return title;
+        if(publishers){
+            return iscn ? publishers.chinesename : publishers.name;
+        }
     },
     Frequency: function (num) {
-        var iscn = TAPi18n.getLanguage() === 'zh-CN';
-        if (num == "1") {
-            var title = iscn ? "季刊" : "Quarterly Publication";
-            return title;
-        }
-        if (num == "2") {
-            var title = iscn ? "月刊" : "Monthly Publication";
-            return title;
-        }
-        if (num == "3") {
-            var title = iscn ? "半月刊" : "Semimonthly Publication";
-            return title;
-        }
-        if (num == "4") {
-            var title = iscn ? "旬刊" : "Ten-day Publication";
-            return title;
-        }
-        if (num == "5") {
-            var title = iscn ? "周刊" : "Weekly Publication";
-            return title;
-        }
-        if (num == "6") {
-            var title = iscn ? "双月刊" : "Bi-monthly Publication";
-            return title;
+        var frequency = ["", "Quarterly Publication", "Monthly Publication", "Semimonthly Publication", "Ten-day Publication", "Weekly Publication", "Bi-monthly Publication"];
+        if (num) {
+            return TAPi18n.__(frequency[num]);
         }
     },
-    articleLanguage: function (num2) {
-        if (num2 == "1") {
-            return TAPi18n.__("English");
-        }
-        if (num2 == "2") {
-            return TAPi18n.__("Chinese");
+    articleLanguage: function (num) {
+        var language = ["", "English", "Chinese"];
+        if (num) {
+            return TAPi18n.__(language[num]);
         }
     }
 });

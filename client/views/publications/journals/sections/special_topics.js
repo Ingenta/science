@@ -28,10 +28,6 @@ Template.SpecialTopics.events({
         confirmDelete(e, function () {
             SpecialTopics.remove({_id: id});
         })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 

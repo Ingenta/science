@@ -18,9 +18,5 @@ Template.AdminLogs.helpers({
 Template.AdminLogs.events({
     'click .metaLogPopOver': function (e) {
         $(e.target).popover('show')
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });

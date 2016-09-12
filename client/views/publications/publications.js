@@ -154,10 +154,6 @@ Template.FilterList.events({
     'click .clearPublisher': function (event) {
         Session.set('filterPublisher', undefined);
         Session.set('PerPage', 10);
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 Template.FilterList.onRendered(function () {

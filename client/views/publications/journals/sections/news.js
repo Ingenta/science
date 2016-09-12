@@ -13,45 +13,6 @@ Template.newsCenterList.onRendered(function () {
     }
 });
 
-Template.newsCenterList.events({
-    'click .fa-trash': function (e) {
-        var id = this._id;
-        confirmDelete(e,function(){
-            News.remove({_id:id});
-        })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
-Template.pubDynamicList.events({
-    'click .fa-trash': function (e) {
-        var id = this._id;
-        confirmDelete(e,function(){
-            News.remove({_id:id});
-        })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
-Template.meetingInfoList.events({
-    'click .fa-trash': function (e) {
-        var id = this._id;
-        confirmDelete(e,function(){
-            Meeting.remove({_id:id});
-        })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
 Template.newsCenterList.helpers({
     newsContent: function () {
         var numPerPage = Session.get('PerPage') || 10;
@@ -62,9 +23,7 @@ Template.newsCenterList.helpers({
     whichUrl: function() {
         var journalId = Session.get('currentJournalId');
         var publication = Publications.findOne({_id:journalId});
-        if(this.url){
-            return this.url;
-        }
+        if(this.url)return this.url;
         return publication.shortTitle+"/news/journalNews/"+this._id;
     },
     newsContentCount: function(){
@@ -84,9 +43,7 @@ Template.pubDynamicList.helpers({
     whichUrl: function() {
         var journalId = Session.get('currentJournalId');
         var publication = Publications.findOne({_id:journalId});
-        if(this.url){
-            return this.url;
-        }
+        if(this.url)return this.url;
         return publication.shortTitle+"/news/journalNews/"+this._id;
     },
     pubDynamicCount: function(){
@@ -107,30 +64,33 @@ Template.meetingInfoList.helpers({
         var aboutId = Session.get('tabNews');
         var publicationId = Session.get('currentJournalId');
         return Meeting.find({about: aboutId,publications:publicationId}).count()>10;
-    },
-    StartDate: function () {
-        if(this.startDate){
-            return true;
-        }
-        return false;
-    },
-    Phone: function () {
-        if(this.phone){
-            return true;
-        }
-        return false;
-    },
-    Address: function () {
-        if(this.address && (this.address.en||this.address.cn)){
-            return true;
-        }
-        return false;
-    },
-    Theme: function () {
-        if(this.theme && (this.theme.en||this.theme.cn)){
-            return true;
-        }
-        return false;
+    }
+});
+
+Template.newsCenterList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            News.remove({_id:id});
+        })
+    }
+});
+
+Template.pubDynamicList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            News.remove({_id:id});
+        })
+    }
+});
+
+Template.meetingInfoList.events({
+    'click .fa-trash': function (e) {
+        var id = this._id;
+        confirmDelete(e,function(){
+            Meeting.remove({_id:id});
+        })
     }
 });
 

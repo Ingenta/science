@@ -39,13 +39,6 @@ Template.collectionsList.helpers({
     }
 });
 
-Template.collectionsList.events({
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
-    }
-});
-
 Template.updateCollectionForm.helpers({
     getTitle: function () {
         return TAPi18n.__("Update");

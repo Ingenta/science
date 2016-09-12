@@ -30,10 +30,6 @@ Template.tagList.events({
         confirmDelete(e,function(){
             Tags.remove({_id:id});
         })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 

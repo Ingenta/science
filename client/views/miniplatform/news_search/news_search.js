@@ -1,4 +1,4 @@
-Template.dynamicShow.events({
+Template.sortByResults.events({
     'click .datesort': function (event) {
         Session.set("sort",event.target.value);
     }
@@ -21,9 +21,7 @@ Template.newsSearchShowPage.helpers({
         }
     },
     whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
+        if (this.link)return this.link;
         return "/miniplatform/newsCenter/" + this._id;
     }
 });

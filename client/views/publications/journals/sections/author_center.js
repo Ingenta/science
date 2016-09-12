@@ -14,47 +14,47 @@ Template.publicationPdfContent.helpers({
 Template.guideArticles.helpers({
     instructions: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "1", publications: journalId, parentId: null});
+        if(journalId)return AuthorCenter.find({type: "1", publications: journalId, parentId: null});
     },
     childInstructionsList: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "1", publications: journalId, parentId: this._id});
+        if(journalId)return AuthorCenter.find({type: "1", publications: journalId, parentId: this._id});
     },
     manuscript: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "2", publications: journalId, parentId: null});
+        if(journalId)return AuthorCenter.find({type: "2", publications: journalId, parentId: null});
     },
     childManuscriptList: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "2", publications: journalId, parentId: this._id});
+        if(journalId)return AuthorCenter.find({type: "2", publications: journalId, parentId: this._id});
     },
     submitManuscript: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "3", publications: journalId, parentId: null});
+        if(journalId)return AuthorCenter.find({type: "3", publications: journalId, parentId: null});
     },
     childSubmitManuscriptList: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "3", publications: journalId, parentId: this._id});
+        if(journalId)return AuthorCenter.find({type: "3", publications: journalId, parentId: this._id});
     },
     whichUrl: function () {
-        if (this.url) {
-            return this.url;
-        }
+        if (this.url)return this.url;
         var journalId = Session.get('currentJournalId');
-        var publication = Publications.findOne({_id: journalId});
-        return publication.shortTitle + "/guide/Manuscript/" + this._id;
+        if(journalId){
+            var publication = Publications.findOne({_id: journalId});
+            if(publication)return publication.shortTitle + "/guide/Manuscript/" + this._id;
+        }
     },
     childInstructionsListCount: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "1", publications: journalId, parentId: this._id}).count()>0;
+        if(journalId)return AuthorCenter.find({type: "1", publications: journalId, parentId: this._id}).count()>0;
     },
     childManuscriptListCount: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "2", publications: journalId, parentId: this._id}).count()>0;
+        if(journalId)return AuthorCenter.find({type: "2", publications: journalId, parentId: this._id}).count()>0;
     },
     childSubmitManuscriptListCount: function () {
         var journalId = Session.get('currentJournalId');
-        return AuthorCenter.find({type: "3", publications: journalId, parentId: this._id}).count()>0;
+        if(journalId)return AuthorCenter.find({type: "3", publications: journalId, parentId: this._id}).count()>0;
     }
 });
 

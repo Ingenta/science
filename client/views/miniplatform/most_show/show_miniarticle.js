@@ -1,9 +1,3 @@
-Template.dynamicArticleShow.events({
-    'click .datesort': function (event) {
-        Session.set("sort",event.target.value);
-    }
-});
-
 Template.dynamicArticleShow.helpers({
     mostPublishingArticles: function () {var pubSort = {};
         if(Session.get("sort"))

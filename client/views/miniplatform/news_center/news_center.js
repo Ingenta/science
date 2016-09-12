@@ -27,9 +27,7 @@ Template.newsCenter.helpers({
         return NewsCenter.find({types:"3"}).count()>10;
     },
     whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
+        if (this.link)return this.link;
         return "/miniplatform/newsCenter/" + this._id;
     },
     tabs: function () {
@@ -61,10 +59,6 @@ Template.newsCenter.events({
         confirmDelete(e,function(){
             NewsCenter.remove({_id:pid});
         })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 

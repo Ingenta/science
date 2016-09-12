@@ -21,9 +21,7 @@ Template.enterpriseCulture.helpers({
         return NewsContact.find({types:"7"}).count()>10;
     },
     whichUrl: function () {
-        if (this.link) {
-            return this.link;
-        }
+        if (this.link)return this.link;
         return "/miniplatform/enterpriseCulture/" + this._id;
     },
     tabs: function () {
@@ -49,10 +47,6 @@ Template.enterpriseCulture.events({
         confirmDelete(e,function(){
             NewsContact.remove({_id:pid});
         })
-    },
-    'click .perPage': function (event) {
-        var pageNum = $(event.target).data().pagenum;
-        Session.set('PerPage', pageNum);
     }
 });
 

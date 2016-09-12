@@ -53,13 +53,6 @@ Template.AdminUsersView.helpers({
 	}
 });
 
-Template.AdminUsersView.events({
-	'click .perPage': function (event) {
-		var pageNum = $(event.target).data().pagenum;
-		Session.set('PerPage', pageNum);
-	}
-});
-
 Template.AdminUsersViewTableItems.events({
 	"click .modifyUser": function(e) {
 		e.preventDefault();
