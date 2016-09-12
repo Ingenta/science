@@ -1,9 +1,3 @@
-Template.dynamicShow.events({
-    'click .datesort': function (event) {
-        Session.set("sort",event.target.value);
-    }
-});
-
 Template.dynamicShow.helpers({
     mostMagazines: function () {
         var sort = {};

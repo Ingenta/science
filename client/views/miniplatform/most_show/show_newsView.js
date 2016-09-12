@@ -1,9 +1,3 @@
-Template.newsShow.events({
-    'click .datesort': function (event) {
-        Session.set("sort",event.target.value);
-    }
-});
-
 Template.newsShow.helpers({
     mostNews: function () {
         var sort = {};

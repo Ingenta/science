@@ -1,9 +1,3 @@
-Template.publishingShow.events({
-    'click .datesort': function (event) {
-        Session.set("sort",event.target.value);
-    }
-});
-
 Template.publishingShow.helpers({
     mostMagazines: function () {
         var sort = {};
