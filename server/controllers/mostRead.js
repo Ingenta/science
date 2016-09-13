@@ -163,11 +163,13 @@ createMostReadList = function (journalId, limit) {
         var most = getMostReadByJournal(journalId, limit);
     }
     if (!most)return [];
-    //get the suggestion
-    var suggestion = getMostReadSuggestion(journalId);
-    //add suggestion to top of list
-    if (suggestion) {
-        allIds.push(suggestion._id);
+    if(!journalId){
+        //get the suggestion
+        var suggestion = getMostReadSuggestion(journalId);
+        //add suggestion to top of list
+        if (suggestion) {
+            allIds.push(suggestion._id);
+        }
     }
     return _.first(_.union(allIds,most),limit || 5); //This removes any duplicates after initial
 }
