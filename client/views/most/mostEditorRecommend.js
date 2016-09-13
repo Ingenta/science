@@ -5,7 +5,7 @@ Template.mostRecommendArticles.helpers({
             pubSort = {"published": Session.get("sort")};
         }
         var journalId = Router.current().params.journalId;
-        var editorRecommends = EditorsRecommend.find({publications: journalId}, {limit: 20}).fetch();
+        var editorRecommends = EditorsRecommend.find({publications: journalId}, {sort: {createDate: -1}, limit: 20}).fetch();
         // 获取更多Id
         var allId = [];
         _.each(editorRecommends, function (item) {

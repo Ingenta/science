@@ -1,5 +1,5 @@
 Meteor.publish('homepageNews', function () {
-    return News.find({publications: {$exists: false}});
+    return News.find({publications: {$exists: false}},{limit:3});
 });
 
 Meteor.publish('journalNews', function (journalShortTitle) {
