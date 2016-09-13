@@ -7,7 +7,7 @@ Meteor.publish('editorRecommends', function (journalId) {
 		Articles.find({_id: {$in: articleIds}}, {
 			fields: articleWithMetadata
 		}),
-		EditorsRecommend.find({publications: journalId})
+		EditorsRecommend.find({publications: journalId},{sort: {createDate:-1}, limit: 20})
 	];
 });
 Meteor.startup(function () {

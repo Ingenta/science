@@ -83,8 +83,8 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
-            Meteor.subscribe('journalMostRead', this.params.journalShortTitle),
-            Meteor.subscribe('journalMostCited', this.params.journalShortTitle)
+            Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
+            Meteor.subscribe('journalMostCitedBrief', this.params.journalShortTitle)
         ]
     },
     onBeforeAction: function () {

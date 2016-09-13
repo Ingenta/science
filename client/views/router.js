@@ -133,11 +133,9 @@ Meteor.startup(function () {
                         MiniPlatformSubs.subscribe('news_recommend'),
                         MiniPlatformSubs.subscribe('column'),
                         MiniPlatformSubs.subscribe('news_center'),
-                        HomePageSubs.subscribe('publishers'),
                         HomePageSubs.subscribe('publications'),
                         MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
-                        MiniPlatformSubs.subscribe('news_link'),
-                        MiniPlatformSubs.subscribe('miniplatformMostRecentArticles')
+                        MiniPlatformSubs.subscribe('news_link')
                     ]
                 }
             });
@@ -155,7 +153,7 @@ Meteor.startup(function () {
                         HomePageSubs.subscribe('images'),
                         HomePageSubs.subscribe('homepageMostRecentArticles'),
                         HomePageSubs.subscribe('homepageMostCitedBrief'),
-                        HomePageSubs.subscribe('homepageMostReadBrief')
+                        HomePageSubs.subscribe('journalMostReadBrief',undefined)
                     ]
                 },
                 onStop: function () {
@@ -285,7 +283,6 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('publishers'),
                 JournalSubs.subscribe("journal_ad")
             ]
         }
@@ -301,7 +298,7 @@ Router.map(function () {
         name: "mostRead.show",
         waitOn: function () {
             return [
-                Meteor.subscribe('homepageMostRead')
+                Meteor.subscribe('homepageMostRead',undefined)
             ]
         }
     });
@@ -315,7 +312,7 @@ Router.map(function () {
         name: "mostRead.showWithJournalId",
         waitOn: function () {
             return [
-                Meteor.subscribe('journalMostRead', this.params.journalId)
+                Meteor.subscribe('homepageMostRead', this.params.journalId)
             ]
         }
     });

@@ -15,11 +15,10 @@ Router.map(function () {
                 MiniPlatformSubs.subscribe('news_recommend'),
                 MiniPlatformSubs.subscribe('column'),
                 MiniPlatformSubs.subscribe('news_center'),
-                HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
                 MiniPlatformSubs.subscribe('news_link'),
-                MiniPlatformSubs.subscribe('miniplatformMostRecentArticles')
+                //MiniPlatformSubs.subscribe('miniplatformMostRecentArticles')
             ]
         }
     });
@@ -30,7 +29,6 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
                 MiniPlatformSubs.subscribe('news_link')
             ]
@@ -145,23 +143,22 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_contact'),
-                JournalSubs.subscribe('files'),
                 MiniPlatformSubs.subscribe('news_link')
             ]
         }
     });
 
     //更多新闻
-    this.route("newsShow", {
-        path: "/miniplatform/newsShow",
-        layoutTemplate: "miniLayout",
-        waitOn: function () {
-            return [
-                MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('news_link')
-            ]
-        }
-    });
+    //this.route("newsShow", {
+    //    path: "/miniplatform/newsShow",
+    //    layoutTemplate: "miniLayout",
+    //    waitOn: function () {
+    //        return [
+    //            MiniPlatformSubs.subscribe('news_center'),
+    //            MiniPlatformSubs.subscribe('news_link')
+    //        ]
+    //    }
+    //});
 
     //更多杂志社动态
     this.route("dynamicShow", {
@@ -193,8 +190,6 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('publications'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',20),
                 MiniPlatformSubs.subscribe('news_link')
             ]
