@@ -26,10 +26,9 @@
         {{#each mostReadArticles}}
             <ul class="dotted list-unstyled">
                 <li>
-                    <div class="resultsList article-title">{{> accessKeyImage}}
-                        <div><a style="font-size:12px" href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div>
+                    <div class="resultsList">{{> accessKeyImage}}
+                        <div><a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>
                     </div>
-
                     <ul class="list-unstyled">
                         <li>
                             {{#each authors}}

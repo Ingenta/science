@@ -13,7 +13,9 @@
                 {{#each mostPublishingArticles}}
                     <ul class="dotted list-unstyled">
                         <li>
-                            <div class="resultsList pub-title">{{> accessKeyImage}}<div><a style="font-size:12px" href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div></div>
+                            <div class="resultsList">{{> accessKeyImage}}
+                                <div><a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>
+                            </div>
 
                             <ul class="list-unstyled article-desc-ul">
                                 <li>

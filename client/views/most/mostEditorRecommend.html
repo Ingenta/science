@@ -9,12 +9,9 @@
         {{#each mostRecommendArticles}}
             <ul class="dotted list-unstyled">
                 <li>
-                    <h4>
-                        <div class="resultsList">{{> accessKeyImage}}
-                            <div><a href="{{urlToArticleById _id}}">{{{translateThis title.cn title.en}}}</a></div>
-                        </div>
-                    </h4>
-
+                    <div class="resultsList">{{> accessKeyImage}}
+                        <div><a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>
+                    </div>
                     <ul class="list-unstyled">
                         <li>
                             {{#each authors}}
@@ -24,8 +21,7 @@
                         <li>
                             <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
                             <b>{{volume}}</b>, {{elocationId}} {{#if year}}({{year}}){{/if}}
-                            <a href="http://dx.doi.org/{{doi}}">{{doi}} <i
-                                    class="fa fa-external-link"></i></a>
+                            <a href="http://dx.doi.org/{{doi}}">{{doi}} <i class="fa fa-external-link"></i></a>
                         </li>
                         {{> abstractDetails}}
                     </ul>
