@@ -75,6 +75,10 @@ Template.SinglePublication.helpers({
     //}
 });
 
+Template.displayPerPage.onRendered(function(){
+    Session.set('PerPage', undefined);
+})
+
 Template.displayPerPage.events({
     'click .perPage': function (event) {
         var pageNum = $(event.target).data().pagenum;
