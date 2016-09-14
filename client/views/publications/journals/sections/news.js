@@ -7,10 +7,7 @@ Template.newContent.events({
 });
 
 Template.newsCenterList.onRendered(function () {
-    if (Session.get('tabNews')===undefined) {
-        Session.set('PerPage', undefined);
-        Session.set('tabNews', "a1");
-    }
+    Session.set('tabNews', "a1");
 });
 
 Template.newsCenterList.helpers({

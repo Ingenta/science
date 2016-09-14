@@ -549,8 +549,13 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
                 var href = onlineOne.href;
                 exNodes.push({name: Science.String.getFileName(href), node: fig});
                 var figLocation = log.extractTo + "/" + href;
-                if (!ScienceXML.IsImageTypeSupported(figLocation)) {
+                if (!ScienceXML.FileExists(figLocation)) {
+                    logger.warn("image missing from import: " + log.name, href);
+                    log.errors.push("image missing: " + href);
+                    callback && callback();
+                }else if (!ScienceXML.IsImageTypeSupported(figLocation)) {
                     log.errors.push("image type not supported: " + href);
+                    callback && callback();
                 } else {
                     Science.ThumbUtils.TaskManager.add("figures", href);
                     FiguresStore.insert(figLocation, function (err, fileObj) {
@@ -558,6 +563,7 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
                         if (err) {
                             logger.error(err);
                             log.errors.push(err.toString());
+                            callback && callback();
                         } else {
                             var url = "/cfs/files/" + fileObj.collectionName + "/" + fileObj._id + "/" + fileObj.name();
                             var currNode = _.find(exNodes, function (n) {

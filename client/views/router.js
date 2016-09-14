@@ -152,8 +152,8 @@ Meteor.startup(function () {
                         HomePageSubs.subscribe('homepageNews'),
                         HomePageSubs.subscribe('images'),
                         HomePageSubs.subscribe('homepageMostRecentArticles'),
-                        HomePageSubs.subscribe('homepageMostCitedBrief'),
-                        HomePageSubs.subscribe('journalMostReadBrief',undefined)
+                        HomePageSubs.subscribe('journalMostReadBrief',undefined),
+                        HomePageSubs.subscribe('homepageMostCitedBrief')
                     ]
                 },
                 onStop: function () {

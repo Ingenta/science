@@ -36,7 +36,6 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
             } else if (slug === 'About') {
                 Meteor.subscribe("journalAboutTab", Router.current().params.journalShortTitle);
-                Meteor.subscribe("editorial_member", Router.current().params.journalShortTitle);
             } else if (slug === 'MOOP') {
                 Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
                 JournalSubs.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);

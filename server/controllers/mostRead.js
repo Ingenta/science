@@ -1,76 +1,3 @@
-getHomeMostReadByJournal = function (journalId, limit) {
-    if (!limit)limit = 5;
-    var mostRead;
-    if (journalId) {
-        var fulltext = PageViews.aggregate([{
-            $match: {
-                journalId: journalId,
-                action: "fulltext",
-                articleId: {$exists:true, $ne: null}
-            }
-        }, {
-            $group: {
-                _id: '$articleId',
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            ,{$limit:5}]);
-        var abstract = PageViews.aggregate([{
-            $match: {
-                journalId: journalId,
-                action: "abstract",
-                articleId: {$exists:true, $ne: null}
-            }
-        }, {
-            $group: {
-                _id: '$articleId',
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            ,{$limit:5}]);
-    }
-    else {
-        var fulltext = PageViews.aggregate([{
-            $match: {
-                action: "fulltext",
-                articleId: {$exists:true, $ne: null}
-            }
-        }, {
-            $group: {
-                _id: '$articleId',
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            ,{$limit:5}]);
-        var abstract = PageViews.aggregate([{
-            $match: {
-                action: "abstract",
-                articleId: {$exists:true, $ne: null}
-            }
-        }, {
-            $group: {
-                _id: '$articleId',
-                count: {$sum: 1}
-            }
-        }, {$sort: {count: -1}}
-            ,{$limit:5}]);
-    }
-    mostRead =_.union(fulltext,abstract);
-    if (!mostRead)return;
-    mostRead=_.sortBy(mostRead, 'count');
-    var most = [];
-    mostRead.reverse();
-    mostRead.forEach(function (item) {
-        var article = Articles.findOne({_id: item._id});
-        if(article){
-            most.push(article._id);
-            if(most.length==limit){
-                return;
-            }
-        }
-    });
-    return _.first(most,limit);
-}
 getMostReadByJournal = function (journalId, limit) {
     if (!limit)limit = 20;
     var mostRead;
@@ -87,7 +14,7 @@ getMostReadByJournal = function (journalId, limit) {
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            ,{$limit:20}]);
+            ,{$limit:limit}]);
         var abstract = PageViews.aggregate([{
             $match: {
                 journalId: journalId,
@@ -100,7 +27,7 @@ getMostReadByJournal = function (journalId, limit) {
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            ,{$limit:20}]);
+            ,{$limit:limit}]);
     }
     else {
         var fulltext = PageViews.aggregate([{
@@ -114,7 +41,7 @@ getMostReadByJournal = function (journalId, limit) {
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            ,{$limit:20}]);
+            ,{$limit:limit}]);
         var abstract = PageViews.aggregate([{
             $match: {
                 action: "abstract",
@@ -126,7 +53,7 @@ getMostReadByJournal = function (journalId, limit) {
                 count: {$sum: 1}
             }
         }, {$sort: {count: -1}}
-            ,{$limit:20}]);
+            ,{$limit:limit}]);
     }
     mostRead =_.union(fulltext,abstract);
     if (!mostRead)return;
@@ -157,17 +84,15 @@ getMostReadSuggestion = function (currentJournalId) {
 createMostReadList = function (journalId, limit) {
     var allIds = [];
     //get the most read object by grouping articleviews
-    if(limit==5){
-        var most = getHomeMostReadByJournal(journalId, limit);
-    }else{
-        var most = getMostReadByJournal(journalId, limit);
-    }
+    var most = getMostReadByJournal(journalId, limit);
     if (!most)return [];
-    //get the suggestion
-    var suggestion = getMostReadSuggestion(journalId);
-    //add suggestion to top of list
-    if (suggestion) {
-        allIds.push(suggestion._id);
+    if(!journalId){
+        //get the suggestion
+        var suggestion = getMostReadSuggestion(journalId);
+        //add suggestion to top of list
+        if (suggestion) {
+            allIds.push(suggestion._id);
+        }
     }
     return _.first(_.union(allIds,most),limit || 5); //This removes any duplicates after initial
 }
