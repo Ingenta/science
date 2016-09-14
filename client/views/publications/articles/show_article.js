@@ -209,6 +209,9 @@ Template.articleOptions.helpers({
         return Articles.findOne({doi: currentDoi});
     },
     tabs: function () {
+        if(_.isEmpty(this.sections)){
+            Session.set("activeTab", 'abstract');
+        }
         var tabArr = [
             {name: TAPi18n.__("Abstract"), slug: 'abstract'},
             {name: TAPi18n.__("Full Text"), slug: 'full text', isDisabled: _.isEmpty(this.sections)},
