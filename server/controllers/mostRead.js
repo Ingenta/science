@@ -57,19 +57,18 @@ getMostReadByJournal = function (journalId, limit) {
     }
     mostRead =_.union(fulltext,abstract);
     if (!mostRead)return;
-    mostRead=_.sortBy(mostRead, 'count');
     var most = [];
-    mostRead.reverse();
     mostRead.forEach(function (item) {
         var article = Articles.findOne({_id: item._id});
         if(article){
-            most.push(article._id);
-            if(most.length==limit){
+            most.push(item);
+            if(most.length === limit){
                 return;
             }
         }
     });
-    return _.first(most,limit);
+    most = _.sortBy(most, function(array){0-array.count});
+    return _.pluck(most, '_id');
 }
 getMostReadSuggestion = function (currentJournalId) {
     //add suggestion if journalId not set or its journalId equals current
