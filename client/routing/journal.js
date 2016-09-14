@@ -101,7 +101,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     }
 });
 
-Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/:specialTopicsId', {
+Router.route('/publisher/:publisherName/journal/:journalShortTitle/specialTopics/postArticles/:specialTopicsId', {
     data: function () {
         return SpecialTopics.findOne({_id: this.params.specialTopicsId});
     },

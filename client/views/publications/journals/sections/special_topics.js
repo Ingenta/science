@@ -69,7 +69,7 @@ Template.SpecialTopics.helpers({
         if (!journalId)return;
         var journalPart = getJournalComponentByJournalId(journalId);
         if (!journalPart)return;
-        return journalPart + "/specialTopics/" + specialTopicId;
+        return journalPart + "/specialTopics/postArticles/" + specialTopicId;
     },
     getData:function(){
         return _.extend({specialTopicsId:this._id},Router.current().params);
