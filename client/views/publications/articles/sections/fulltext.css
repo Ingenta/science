@@ -57,6 +57,10 @@
     display:inline-block;
 }
 
+#fulltext-viewer .other-figure {
+    width:360px;
+}
+
 #fulltext-viewer .other-figure-max {
     width:360px;
 }
