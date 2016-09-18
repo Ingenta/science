@@ -573,7 +573,12 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
                             var parentNode = currNode.parentNode;
                             var newNode = doc.createElement("img");
                             newNode.setAttribute("src", url);
-                            newNode.setAttribute("class", "other-figure");
+                            //小于50Kb的图片宽度设置低点，适应表
+                            if(fileObj.size() > 50000){
+                                newNode.setAttribute("class", "other-figure-max");
+                            }else{
+                                newNode.setAttribute("class", "other-figure-min");
+                            }
                             parentNode.replaceChild(newNode, currNode);
 
                             if (otherFiguresNode.length === finishCount) {
