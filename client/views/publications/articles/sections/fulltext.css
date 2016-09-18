@@ -58,5 +58,13 @@
 }
 
 #fulltext-viewer .other-figure {
-    width:300px;
+    width:320px;
+}
+
+#fulltext-viewer .other-figure-max {
+    width:320px;
+}
+
+#fulltext-viewer .other-figure-min {
+    width:90px;
 }
