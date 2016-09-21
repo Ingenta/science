@@ -27,7 +27,14 @@
                     <h6 class="text-uppercase bg-eee" align="center" style="font-size: 15px"><strong>{{_ "Latest News"}}</strong></h6>
                     {{#each latestNews}}
                         <ul class="list-unstyled">
-                            <li><p><a href="{{whichUrl}}" target="_self">{{{translateThis title.cn title.en}}}&nbsp;({{formatDate releaseTime "YYYY-MM-DD"}})</a></p></li>
+                            <li>
+                                <p class="pull-right">
+                                    ({{formatDate releaseTime "YYYY-MM-DD"}})
+                                </p>
+                                <p class="displayModal mini-news-hiddenTitle">
+                                    <a href="{{whichUrl}}" target="_self" title={{translateThis title.cn title.en}}>{{{translateThis title.cn title.en}}}</a>
+                                </p>
+                            </li>
                         </ul>
                     {{else}}
                         {{_ "No results found!"}}

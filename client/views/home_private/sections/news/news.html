@@ -44,11 +44,11 @@
                 {{/if}}
             {{/if}}
         </div>
-        <div class="row">
+        <div class="row displayModal mini-hiddenTitle">
             {{#if url}}
-                <a href="{{whichUrl}}" target="_blank">{{{translateThis title.cn title.en}}}</a>
+                <a href="{{whichUrl}}" target="_blank" title={{translateThis title.cn title.en}}>{{{translateThis title.cn title.en}}}</a>
             {{else}}
-                <a href="{{whichUrl}}">{{{translateThis title.cn title.en}}}</a>
+                <a href="{{whichUrl}}" title={{translateThis title.cn title.en}}>{{{translateThis title.cn title.en}}}</a>
             {{/if}}
         </div>
         <div>

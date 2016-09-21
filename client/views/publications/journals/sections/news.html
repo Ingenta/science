@@ -26,7 +26,11 @@
             </div><hr>
                 {{> pubDynamicList}}
             </div>
-            <div class="tab-pane" id="c1"><div class="part"><h4>{{_ "Meeting Information"}}</h4><div class="pull-right">{{#if permissionCheckWithScope "add-journal-news" "news" "journal" _id}}{{> addMeetingInfoModalForm}}{{/if}}</div></div><hr>
+            <div class="tab-pane" id="c1"><div class="part"><h4>{{_ "Meeting Information"}}</h4>
+                <div class="pull-right">
+                    {{#if permissionCheckWithScope "add-journal-news" "news" "journal" _id}}{{> addMeetingInfoModalForm}}{{/if}}
+                </div>
+            </div><hr>
                 {{> meetingInfoList}}
             </div>
         </div>
@@ -36,17 +40,15 @@
 <template name="newsCenterList">
     {{#each newsContent}}
         <div class="part">
-            <p>
-                <a href="{{whichUrl}}"><strong>{{{translateThis title.cn title.en}}}</strong></a>
-                <div class="pull-right">
-                    {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
-                    {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
-                    {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
-                </div>
+            <p class="pull-right">
+                {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
+                {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
+                {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
             </p>
-            <p>
-                {{{translateThis abstract.cn abstract.en}}}
+            <p class="displayModal publication-news-hiddenTitle">
+                <a href="{{whichUrl}}" title={{translateThis title.cn title.en}}><strong>{{{translateThis title.cn title.en}}}</strong></a>
             </p>
+            <p>{{{translateThis abstract.cn abstract.en}}}</p>
         </div>
     {{else}}
         {{_ "No content found!"}}
@@ -61,13 +63,11 @@
 <template name="pubDynamicList">
     {{#each pubDynamic}}
         <div class="part">
-            <p>
-                <a href={{whichUrl}}><strong>{{{translateThis title.cn title.en}}}</strong></a>
-                <div class="pull-right">
-                    {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
-                    {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
-                </div>
+            <p class="pull-right">
+                {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updatePublishingDynamicModalForm}}{{/if}}
+                {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
             </p>
+            <p><a href={{whichUrl}}><strong>{{{translateThis title.cn title.en}}}</strong></a></p>
             <p class="col-xs-3"><img src="{{getImageHelper picture}}" width="89" height="126"/></p>
             <p class="col-xs-9">{{{translateThis abstract.cn abstract.en}}}</p>
         </div>
@@ -84,20 +84,18 @@
 <template name="meetingInfoList">
     {{#each meetingContent}}
         <div class="part">
-            <p>
-                <a href={{url}} target="_blank"><strong>{{{translateThis title.cn title.en}}}</strong></a>
-                <div class="pull-right">
-                    {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateMeetingInfoModalForm}}{{/if}}
-                    {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
-                </div>
+            <p class="pull-right">
+                {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{> updateMeetingInfoModalForm}}{{/if}}
+                {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
             </p>
+            <p><a href={{url}} target="_blank"><strong>{{{translateThis title.cn title.en}}}</strong></a></p>
             <p>
                 {{#if startDate}}
                     {{_ "Meeting Time"}}：&nbsp;{{formatDate startDate "YYYY-MM-DD"}}&nbsp;&nbsp;
                 {{/if}}
                 {{#if phone}}
-                    {{_ "Contact Way"}}：&nbsp;{{phone}}<br>
-                {{/if}}
+                    {{_ "Contact Way"}}：&nbsp;{{phone}}
+                {{/if}}<br>
                 {{#if address}}
                     {{_ "Address"}}：&nbsp;{{translateThis address.cn address.en}}<br>
                 {{/if}}

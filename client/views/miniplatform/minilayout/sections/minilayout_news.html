@@ -8,10 +8,12 @@
             <div class="contPart">
                 <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
                 <div class="fl w350">
+                    <div class="pull-right">
+                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                    </div>
                     <div class="h50">
-                        <p>
-                            <a href="{{whichUrl}}" target="_blank">{{{translateThis title.cn title.en}}}</a>
-                            {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                        <p class="displayModal mini-hiddenTitle">
+                            <a href="{{whichUrl}}" target="_blank" title={{translateThis title.cn title.en}}>{{{translateThis title.cn title.en}}}</a>
                         </p>
                         <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                     </div>
@@ -31,10 +33,12 @@
         <div class="contPart">
             <div class="fl w80"><a href="{{whichUrl}}" target="_blank"><img src="{{getImageHelper picture}}" height="52" width="49"/></a></div>
             <div class="fl w350">
+                <div class="pull-right">
+                    {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                </div>
                 <div class="h50">
-                    <p>
-                        <a href="{{whichUrl}}" target="_blank">{{{translateThis title.cn title.en}}}</a>
-                        {{#if miniPlatformPermission}}{{> updateMiniNewsCenterModalForm}}{{/if}}
+                    <p class="displayModal mini-hiddenTitle">
+                        <a href="{{whichUrl}}" target="_blank" title={{translateThis title.cn title.en}}>{{{translateThis title.cn title.en}}}</a>
                     </p>
                     <p class="col777">{{translateThis author.cn author.en}}({{formatDate createDate "YYYY-MM-DD"}})</p>
                 </div>

@@ -1,9 +1,9 @@
 <template name="columnViewsDetails">
     <div class="banner">
-        <div class="container-fluid" style="margin-left: 18px">
+        <div class="container-fluid">
             <div class="row"><h3>{{translateThis columnTitle.cn columnTitle.en}} >></h3></div><hr>
             <div class="tabbable">
-                <div class="col-xs-4 text-left">
+                <div class="col-xs-3 text-left">
                     <ul class="nav nav-pills nav-stacked aboutNavTabs">
                         {{#each columnList}}
                             <div class="pull-right row aboutEditButtons">
@@ -11,7 +11,7 @@
                                 {{#if miniPlatformPermission}}<a href="#" class="fa fa-trash columnDel"></a>{{/if}}
                             </div>
                             <li class="{{isActive _id}}">
-                                <a class="activeBut" style="border:1px solid #d7d7d7;font-size: 12px;text-align: left;" data-columnid="{{_id}}" data-toggle="tab">
+                                <a class="activeBut displayModal mini-news-hiddenTitle" style="border:1px solid #d7d7d7;font-size: 12px;text-align: left;" data-columnid="{{_id}}" data-toggle="tab" title={{translateThis title.cn title.en}}>
                                     {{translateThis title.cn title.en}}
                                 </a>
                             </li>
@@ -23,7 +23,7 @@
                         </div>
                     </ul>
                 </div>
-                <div class="tab-content col-xs-8">
+                <div class="tab-content col-xs-9">
                     <div class="tab-pane active">
                         <div class="partContent">
                             <p><div align="center"><span class="title-font">{{{translateThis columnViewsTitle.cn columnViewsTitle.en}}}</span></div></p><hr>
