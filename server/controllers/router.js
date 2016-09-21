@@ -404,7 +404,12 @@ Router.map(function () {
 
                                     response.writeHead(200, headers);
 
-                                    Science.FSE.createReadStream(outputPath).pipe(response);
+                                    var outstream = Science.FSE.createReadStream(outputPath);
+                                    //将加了水印的pdf文件在下载结束后删除掉，避免过多占用存储空间
+                                    outstream.on('close', function(){
+                                        Science.FSE.remove(outputPath)
+                                    });
+                                    outstream.pipe(response);
                                 }
                             });
                         } else {
