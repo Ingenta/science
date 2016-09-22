@@ -14,7 +14,7 @@ Template.layoutLatestArticles.helpers({
         var article = Articles.findOne({_id: Apid});
         if(article && article.published){
             if(_.isString(article.published))return article.published;
-            return article.published && article.published.format("yyyy-MM-dd");
+            return article.published && "(" + article.published.format("yyyy-MM-dd") + ")";
         }
     },
     articlesUrl: function(id){
