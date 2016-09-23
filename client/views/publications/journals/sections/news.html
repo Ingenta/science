@@ -40,13 +40,11 @@
 <template name="newsCenterList">
     {{#each newsContent}}
         <div class="part">
-            <p class="pull-right">
+            <p>
+                <a href="{{whichUrl}}"><strong>{{{translateThis title.cn title.en}}}</strong></a>
                 {{#if releaseTime}}({{formatDate releaseTime "YYYY-MM-DD"}}){{/if}}
                 {{#if permissionCheckWithScope "edit-journal-news" "news" "journal" publications}}{{>jkafModal template="updateNewsModalForm" doc=this}}{{/if}}
                 {{#if permissionCheckWithScope "delete-journal-news" "news" "journal" publications}}<a href="#" class="fa fa-trash"></a>{{/if}}
-            </p>
-            <p class="displayModal publication-news-hiddenTitle">
-                <a href="{{whichUrl}}" title={{translateThis title.cn title.en}}><strong>{{{translateThis title.cn title.en}}}</strong></a>
             </p>
             <p>{{{translateThis abstract.cn abstract.en}}}</p>
         </div>
