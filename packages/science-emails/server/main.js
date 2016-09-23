@@ -210,7 +210,9 @@ Science.Email.availableOnline = function (date ,email) {
                 elocationId: "$elocationId",
                 endPage:"$engPage",
                 journalId: "$journalId",
-                journal: "$journal"
+                journal: "$journal",
+                doi:"$doi",
+                contentType:"$contentType"
             }}
         }
     }]).forEach(function (obj) {
@@ -227,6 +229,7 @@ Science.Email.availableOnline = function (date ,email) {
                 titleCn: 1,
                 description: 1,
                 banner: 1,
+                picture:1,
                 submissionReview: 1,
                 email:1,
                 address:1,
@@ -236,17 +239,32 @@ Science.Email.availableOnline = function (date ,email) {
         });
         if(!journal) return;
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
+        journal.pdfUrl = Meteor.absoluteUrl();
         journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
+        journal.picture = Publications.findOne({_id: obj._id},{fields: {picture: 1}}).picture;
         if (journal.banner) {
             var banner = Images.findOne({_id: journal.banner});
             if(banner){
                 journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
             }
         }
+        if (journal.picture) {
+            var picture = Images.findOne({_id: journal.picture});
+            if(picture){
+                journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
+            }
+        }
         generateArticleLinks(obj.articleList, journal);
         var journalNews = journalIdToNews(journal._id);
+        var newDate = new Date();
+        var lastDate = new Date(newDate-86400000*7);
+        var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var onlineTitle = journal.title + " Advance Access for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + " " + newDate.getFullYear();
+        var nextWeek = newDate.getDate() + " " + month[newDate.getMonth()+1] + " " + newDate.getFullYear();
+        var lastWeek = lastDate.getDate() + " " + month[lastDate.getMonth()+1] + " " + lastDate.getFullYear();
         var content = JET.render('availableOnline', {
             "onlineUrl": Config.rootUrl + "email/online.jpg",
+            "onlineNowUrl": Config.rootUrl + "email/nowOnline.jpg",
             "rootUrl": Config.rootUrl,
             "journal": journal,
             "articleList": obj.articleList,
@@ -254,13 +272,16 @@ Science.Email.availableOnline = function (date ,email) {
             "email":journal.email,
             "address":journal.address?journal.address.en:null,
             "fax":journal.fax,
-            "phone":journal.phone
+            "phone":journal.phone,
+            "nextWeek":nextWeek,
+            "lastWeek":lastWeek
         });
         if(email){
             Email.send({
                 to: email,
                 from: Config.mailServer.address,
-                subject: emailConfig ? emailConfig.subject : "Available Online Now",
+                //subject: emailConfig ? emailConfig.subject : "Available Online Now",
+                subject:onlineTitle,
                 html: content
             });
         }else{
@@ -268,7 +289,8 @@ Science.Email.availableOnline = function (date ,email) {
                 Email.send({
                     to: oneUser.emails[0].address,
                     from: Config.mailServer.address,
-                    subject: emailConfig ? emailConfig.subject : "Available Online Now",
+                    //subject: emailConfig ? emailConfig.subject : "Available Online Now",
+                    subject:onlineTitle,
                     html: content
                 });
             });
