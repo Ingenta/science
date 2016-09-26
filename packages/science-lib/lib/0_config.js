@@ -208,5 +208,19 @@ if (Meteor.isServer) {
         address:"#16 Donghuangchenggen North Street, Beijing, China (100717)",
         fax:"86-10-64016350"
     }
+    Config.bestedmInfo = {
+        username:"scichina",
+        password:"Ntsvr2010wlb",
+        apiList:{
+            customer:{
+                url:"http://www.bestedm.org/mm-ms/api/mloperate.php",
+                doList:{
+                    subject:{
+                        add:"maillist-add"
+                    }
+                }
+            }
+        }
+    }
 }
 
