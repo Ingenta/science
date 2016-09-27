@@ -62,7 +62,9 @@ var buildHitCounterChart = function (data) {
             plotBorderWidth: null,
             plotShadow: false
         },
-
+        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00',
+            '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#7cb5ec', '#434348', '#90ed7d', '#f7a35c',                                                                  // 1253
+            '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
         title: {
             text: ''
         },
@@ -80,12 +82,11 @@ var buildHitCounterChart = function (data) {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
-                    //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    //                style: {
-                    //                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    //                },
-                    //connectorColor: 'silver'
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
@@ -126,19 +127,17 @@ var buildLocationChart = function (data) {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
-                    //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    //                style: {
-                    //                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    //                },
-                    //connectorColor: 'silver'
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
         },
 
         series: [{
-            type: 'pie',
             name: 'views',
             data: data
         }]
