@@ -13,8 +13,8 @@
                     <td>
                         <a>{{translateThis name englishName}}</a>
                     </td>
-                    <td>{{#if can "modify-topic" "resource"}}
-                        <input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}
+                    <td>
+                        {{#if _id}}<input type="checkbox" name="selectedTopic" value={{_id}}>{{/if}}
                     </td>
                 </tr>
             {{/with}}
