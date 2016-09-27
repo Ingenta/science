@@ -5,10 +5,10 @@
                 <ul class="list-unstyled">
                     <h6 class="bg-eee" align="center">{{LeftTitle}}</h6>
                     {{#each authorTitle}}
-                        <li style="cursor: pointer;margin-left: 5px;border-bottom: 1px #ccc solid;overflow:hidden;padding-top: 6px;padding-bottom: 6px;"><a class="leftButton" data-guideid="{{_id}}"><strong>{{translateThis title.cn title.en}}</strong></a></li>
+                        <li style="cursor: pointer;margin-left: 5px;border-bottom: 1px #ccc solid;overflow:hidden;padding-top: 10px;padding-bottom: 10px;"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
                         <ul class="list-unstyled">
                             {{#each childTitle}}
-                                <li style="margin-left: 12px;cursor: pointer;border-bottom: 1px #ccc solid;overflow:hidden;padding-top: 6px;padding-bottom: 6px;"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
+                                <li style="margin-left: 12px;cursor: pointer;border-bottom: 1px #ccc solid;overflow:hidden;padding-top: 5px;padding-bottom: 5px;"><a class="leftButton" data-guideid="{{_id}}">{{translateThis title.cn title.en}}</a></li>
                             {{else}}
                             {{/each}}
                         </ul>

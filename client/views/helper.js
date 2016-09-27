@@ -58,7 +58,7 @@ Template.toggleFieldBrowse.events({
 
 Template.sendEmails.helpers({
     getCurrentUrl: function () {
-        return Config.rootUrl + "/doi/" + Session.get("currentDoi");
+        return Config.rootUrl + "doi/" + Session.get("currentDoi");
     },
     getDoi: function () {
         return Session.get("currentDoi");

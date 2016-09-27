@@ -6,8 +6,15 @@
     {{else}}
         {{> scpBanner}}
     {{/if}}
-    <div>
-        <img src="{{onlineUrl}}">
+    <div class="new_big">
+        <div class="new_left">
+            <div class="date-text">
+                <p>Advance Access Alert</p>
+                <p>{{lastWeek}} to {{nextWeek}}</p>
+            </div>
+            <div class="nowOnline"><img src="{{onlineNowUrl}}"></div>
+        </div>
+        <div class="right-img"><img src="{{journal.picture}}" width="110"></div>
     </div>
     <div class="content">
         <div class="oh">

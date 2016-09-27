@@ -1,5 +1,7 @@
 {{#each articleList}}
     <p>
+        <b>{{contentType}}</b>
+        <br>
         <a target="_blank" href="{{url}}">{{{title.en}}}</a>
         {{#if authors}}
         <br>
@@ -18,5 +20,9 @@
         {{#if issue}}({{issue}}){{/if}}
         {{#if elocationId}}: {{elocationId}}{{/if}}
         {{#if endPage}}-{{engPage}}{{/if}}
+        <br>
+        <a href="{{journal.url}}/{{volume}}/{{issue}}/{{doi}}?slug=abstract" target="_blank">[Abstract]</a>&nbsp;&nbsp;
+        <a href="{{journal.pdfUrl}}downloadPdf/{{_id}}" target="_blank">[PDF]</a>&nbsp;&nbsp;
+        <a href="{{journal.url}}/{{volume}}/{{issue}}/{{doi}}?slug=full text" target="_blank">[Full Text]</a>
     </p>
 {{/each}}

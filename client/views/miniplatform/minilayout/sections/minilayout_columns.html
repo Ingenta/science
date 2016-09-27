@@ -3,10 +3,10 @@
         <div class="part part1">
             {{#each firstColumn}}
                 <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{{translateThis title.cn title.en}}}</a>
-                <p class="tr mr10 pull-right">
+                <span class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="meetingDel" class="fa fa-trash"></a>{{/if}}
-                </p>
+                </span>
             {{else}}
                 <a style="font-size: 12px;color: black;">{{_ "No results found!"}}</a>
             {{/each}}
@@ -15,10 +15,10 @@
         <div class="part part2">
             {{#each secondColumn}}
                 <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{{translateThis title.cn title.en}}}</a>
-                <p class="tr mr10 pull-right">
+                <span class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="fundDel" class="fa fa-trash"></a>{{/if}}
-                </p>
+                </span>
             {{else}}
                 <a style="font-size: 12px;color: black;">{{_ "No results found!"}}</a>
             {{/each}}
@@ -27,10 +27,10 @@
         <div class="part part3">
             {{#each thirdColumn}}
                 <img src="{{getImageHelper picture}}"/><a href="{{ColumnUrl}}">{{{translateThis title.cn title.en}}}</a>
-                <p class="tr mr10 pull-right">
+                <span class="tr mr10 pull-right">
                     {{#if miniPlatformPermission}}{{> updateColumnModalForm}}{{/if}}
                     {{#if miniPlatformPermission}}<a href="#" id="forumDel" class="fa fa-trash"></a>{{/if}}
-                </p>
+                </span>
             {{else}}
                 <a style="font-size: 12px;color: black;">{{_ "No results found!"}}</a>
             {{/each}}

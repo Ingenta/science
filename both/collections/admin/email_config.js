@@ -61,7 +61,8 @@ EmailsSchema  = new SimpleSchema({
     },
     recipient:{
         type:String,
-        regEx: SimpleSchema.RegEx.Email
+        optional:true,
+        regEx:/^([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6};?)*$/i //支持用;分隔的多个邮箱地址
     },
     reasons:{
         type:String,
