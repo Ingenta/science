@@ -31,6 +31,15 @@ Meteor.methods({
         check(values.reasons,String);
         check(values.recipient,String);
         check(values.sender,String);
+        var emails=[];
+
+        if(!_.isEmpty(values.recipient)){
+            var recipientArr = values.recipient.split(';');
+            emails = _.union(emails,recipientArr);
+        }
+
+        if(_.isEmpty(emails))return;
+
         var senderEmail = values.sender;
         var user="";
         if (Meteor.user() && Meteor.user().profile)
@@ -42,27 +51,29 @@ Meteor.methods({
         var article = Articles.findOne({
             doi: values.doi
         }, {
-            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1, journalId: 1, 'journal.title': 1}
+            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1,endPage:1, journalId: 1, 'journal.title': 1,doi:1,pdfId:1}
         });
         article.url = values.url;
         if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
-
+        article.journal.pdfUrl = Config.rootUrl;
         var emailSubject = user+'<'+ senderEmail + '> has sent you an article';
 
         Meteor.defer(function () {
-            Email.send({
-                to: values.recipient,
-                from: Config.mailServer.address,
-                subject: emailSubject,
-                html: JET.render('emailThis', {
-                    "user": user,
-                    "senderEmail":senderEmail,
-                    "reason": values.reasons,
-                    "articleList": [article],
-                    "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                    "rootUrl": Config.rootUrl
-                })
+            _.each(emails,function(email){
+                Email.send({
+                    to: email,
+                    from: Config.mailServer.address,
+                    subject: emailSubject,
+                    html: JET.render('emailThis', {
+                        "user": user,
+                        "senderEmail":senderEmail,
+                        "reason": values.reasons,
+                        "articleList": [article],
+                        "scpLogoUrl": Config.rootUrl + "email/logo.png",
+                        "rootUrl": Config.rootUrl
+                    })
+                });
             });
         });
 

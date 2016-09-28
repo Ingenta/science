@@ -16,7 +16,7 @@
                         </a>
                     </td>
                     <td>
-                        {{#if can "modify-journal" "resource"}}<input type="checkbox" name="selectedJournal" value={{_id}}>{{/if}}
+                        {{#if _id}}<input type="checkbox" name="selectedJournal" value={{_id}}>{{/if}}
                     </td>
                 </tr>
             {{/with}}

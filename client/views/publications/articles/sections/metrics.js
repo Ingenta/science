@@ -63,6 +63,14 @@ var buildHitCounterChart = function (data) {
             plotShadow: false
         },
 
+        colors: [
+            '#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#7cb5ec',
+            '#434348', '#90ed7d', '#f7a35c','#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1','#ef5b9c',
+            '#f05b72','#f391a9','#ed1941','#f26522','#ef4136','#853f04','#840228','#78331e','#f15a22','#6a3427',
+            '#ffd400','#fcf16e','#cbc547','#596032','#c7a252','#fdb933','#ba8448','#e0861a','#c37e00','#b76f40',
+            '#f47920','#b2d235','#5c7a29','#7fb80e','#1d953f','#293047','#00ae9d','#009ad6','#11264f','#6950a1'
+        ],
+
         title: {
             text: ''
         },
@@ -80,12 +88,11 @@ var buildHitCounterChart = function (data) {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
-                    //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    //                style: {
-                    //                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    //                },
-                    //connectorColor: 'silver'
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
@@ -109,6 +116,14 @@ var buildLocationChart = function (data) {
             plotShadow: false
         },
 
+        colors: [
+            '#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4','#7cb5ec',
+            '#434348', '#90ed7d', '#f7a35c','#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1','#ef5b9c',
+            '#f05b72','#f391a9','#ed1941','#f26522','#ef4136','#853f04','#840228','#78331e','#f15a22','#6a3427',
+            '#ffd400','#fcf16e','#cbc547','#596032','#c7a252','#fdb933','#ba8448','#e0861a','#c37e00','#b76f40',
+            '#f47920','#b2d235','#5c7a29','#7fb80e','#1d953f','#293047','#00ae9d','#009ad6','#11264f','#6950a1'
+        ],
+
         title: {
             text: ''
         },
@@ -126,12 +141,11 @@ var buildLocationChart = function (data) {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
-                    //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    //                style: {
-                    //                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    //                },
-                    //connectorColor: 'silver'
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }

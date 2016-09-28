@@ -18,11 +18,10 @@
         {{#if year}}, {{year}}{{/if}}
         {{#if volume}}, {{volume}}{{/if}}
         {{#if issue}}({{issue}}){{/if}}
-        {{#if elocationId}}: {{elocationId}}{{/if}}
-        {{#if endPage}}-{{engPage}}{{/if}}
+        {{#if elocationId}}: {{elocationId}}{{/if}}{{#if endPage}}-{{endPage}}{{/if}}
         <br>
         <a href="{{journal.url}}/{{volume}}/{{issue}}/{{doi}}?slug=abstract" target="_blank">[Abstract]</a>&nbsp;&nbsp;
-        <a href="{{journal.pdfUrl}}downloadPdf/{{_id}}" target="_blank">[PDF]</a>&nbsp;&nbsp;
+        {{#if pdfId}}<a href="{{journal.pdfUrl}}downloadPdf/{{_id}}" target="_blank">[PDF]</a>&nbsp;&nbsp;{{/if}}
         <a href="{{journal.url}}/{{volume}}/{{issue}}/{{doi}}?slug=full text" target="_blank">[Full Text]</a>
     </p>
 {{/each}}

@@ -117,7 +117,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 issue: 1,
                 elocationId: 1,
                 engPage:1,
-                journal: 1
+                journal: 1,
+                pdfId: 1
             },sort:{
                 padPage:1
             }
@@ -142,6 +143,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
         if(!journal) return;
 
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
+        journal.pdfUrl = Meteor.absoluteUrl();
         journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
         if (journal.banner) {
             var banner = Images.findOne({_id: journal.banner});
@@ -204,15 +206,16 @@ Science.Email.availableOnline = function (date ,email) {
                 _id: "$_id",
                 title: "$title",
                 authors: "$authors",
-                year: "$year:",
+                year: "$year",
                 volume: "$volume",
                 issue: "$issue",
                 elocationId: "$elocationId",
-                endPage:"$engPage",
+                endPage:"$endPage",
                 journalId: "$journalId",
                 journal: "$journal",
                 doi:"$doi",
-                contentType:"$contentType"
+                contentType:"$contentType",
+                pdfId:"$pdfId",
             }}
         }
     }]).forEach(function (obj) {
@@ -320,7 +323,8 @@ Science.Email.watchTopicEmail = function (date) {
                 issue: 1,
                 elocationId: 1,
                 journalId: 1,
-                journal: 1
+                journal: 1,
+                pdfId: 1
             }
         }).fetch();
         if (!articleList || !articleList.length) return;

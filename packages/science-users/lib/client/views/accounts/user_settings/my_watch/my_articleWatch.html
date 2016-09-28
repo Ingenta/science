@@ -17,7 +17,7 @@
                         </div>
                     </td>
                     <td>
-                        {{#if can "modify-article" "resource"}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}
+                        {{#if _id}}<input type="checkbox" name="selectedArticle" value={{_id}}>{{/if}}
                     </td>
                 </tr>
             {{/with}}
