@@ -1,30 +1,34 @@
 <div class="meau-list">
-    <h1>新闻中心</h1>
+    <h2>News Center</h2>
     {{#each journalNews.newsCenter}}
         <div class="mt10">
             {{#if url}}
-                <h2><a href="{{url}}">{{title.cn}}</a></h2>
+                <h3><a href="{{url}}">{{title.en}}</a></h3>
             {{/if}}
-            <p>{{abstract.cn}}</p>
+            {{#if abstract.en}}
+                <p class="multi-break">{{{abstract.en}}}</p>
+            {{/if}}
         </div>
     {{/each}}
-    <h1>出版动态</h1>
+    <h2>Publication Trends</h2>
     {{#each journalNews.publishingDynamic}}
         <div class="mt10">
-            <h2><a href="{{url}}">{{title.cn}}</a></h2>
-            <p>{{abstract.cn}}</p>
-        </div>
-    {{/each}}
-    <h1>会议信息</h1>
-    {{#each journalNews.meetingInfo}}
-        <div class="mt10">
-            {{#if url}}
-                <h2><a href="{{url}}">{{title.cn}}</a></h2>
-            {{else}}
-                <h2>{{title.cn}}</h2>
+            <h3><a href="{{url}}">{{title.en}}</a></h3>
+            {{#if abstract.en}}
+                <p class="multi-break">{{{abstract.en}}}</p>
             {{/if}}
-            <p>{{startDate}}</p>
-            <p>{{address.cn}}</p>
         </div>
     {{/each}}
+    <!--<h2>会议信息</h2>-->
+    <!--{{#each journalNews.meetingInfo}}-->
+        <!--<div class="mt10">-->
+            <!--{{#if url}}-->
+                <!--<h3><a href="{{url}}">{{title.cn}}</a></h3>-->
+            <!--{{else}}-->
+                <!--<h3>{{title.cn}}</h3>-->
+            <!--{{/if}}-->
+            <!--<p>{{startDate}}</p>-->
+            <!--<p>{{address.cn}}</p>-->
+        <!--</div>-->
+    <!--{{/each}}-->
 </div>

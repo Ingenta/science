@@ -116,7 +116,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 volume: 1,
                 issue: 1,
                 elocationId: 1,
-                engPage:1,
+                endPage:1,
                 journal: 1,
                 pdfId: 1
             },sort:{
@@ -133,6 +133,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 titleCn: 1,
                 description: 1,
                 banner: 1,
+                picture:1,
                 submissionReview: 1,
                 email:1,
                 address:1,
@@ -151,12 +152,20 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
             }
         }
+        if (journal.picture) {
+            var picture = Images.findOne({_id: journal.picture});
+            if(picture){
+                journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
+            }
+        }
         generateArticleLinks(articleList, journal);
 
         oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
         oneIssue.month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+oneIssue.month];
         var journalNews = journalIdToNews(oneIssue.journalId);
-
+        var newDate = new Date();
+        var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var subjectTitle = journal.title + " Table of Contents for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear()+"; "+"Vol. "+oneIssue.volume+", Issue "+oneIssue.issue;
         var content = JET.render('watchJournal', {
             "scpLogoUrl": Config.rootUrl + "email/logo.png",
             "rootUrl": Config.rootUrl,
@@ -173,7 +182,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
             Email.send({
                 to: email,
                 from: Config.mailServer.address,
-                subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                subject:subjectTitle,
                 html: content
             });
         }else{
@@ -182,7 +192,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 Email.send({
                     to: oneUser.emails[0].address,
                     from: Config.mailServer.address,
-                    subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                    //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                    subject:subjectTitle,
                     html: content
                 });
             });

@@ -1,8 +1,8 @@
 <div class="logo">
     {{#if journal.submissionReview}}
-        <a target="_blank" href="{{journal.submissionReview}}">Submit Your Manuscript</a>|
+        <a target="_blank" href="{{journal.submissionReview}}">Submit Your Manuscript</a>&nbsp;|&nbsp;
     {{/if}}
-    <a target="_blank" href="{{journal.url}}?activeTab=Author Center">Author Guidelines</a>|
-    <a target="_blank" href="{{issue.url}}">Current Issue</a>|
-    <a target="_blank" href="{{journal.mostRead}}">Most Read</a>|
+    <a target="_blank" href="{{journal.url}}?slug=Author Center">Author Guidelines</a>&nbsp;|&nbsp;
+    <a target="_blank" href="{{journal.url}}/{{issue.volume}}/{{issue.issue}}?slug=Browse">Current Issue</a>&nbsp;|&nbsp;
+    <a target="_blank" href="{{journal.mostRead}}">Most Read</a>&nbsp;|
 </div>

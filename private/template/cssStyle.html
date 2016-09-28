@@ -48,9 +48,25 @@
     }
     .right-img{
         float:right;
-        padding-left:5px;
+        padding-left: 5px;
         padding-right: 5px;
     }
+    .conTop{
+        width:610px;
+        padding-top: 15px;
+        overflow: hidden;
+    }
+    .conTop-left{
+        width:380px;
+        float:left;
+        padding: 0px 20px;
+    }
+    .conTopimg{
+        float: right;
+        padding-right:15px;
+        padding-top:10px;
+    }
+
     .top {
         background: #036cb0;
         color: #fff;
@@ -67,7 +83,7 @@
     }
 
     .logo {
-        background: #68a7d0;
+        background: #A9A9A9;
         height: 30px;
         line-height: 30px;
         padding: 0 20px;
@@ -88,7 +104,7 @@
         width: 350px;
         float: left;
         background: #fff;
-        padding: 25px 20px;
+        padding: 0px 20px;
     }
 
     .new-list.full-width {
@@ -99,6 +115,21 @@
         width: 200px;
         float: right;
         font-family: Arial;
+    }
+
+    .multi-break {
+        position: relative;
+        height: 50px;
+        line-height: 25px;
+        overflow: hidden;
+    }
+    .multi-break:after {
+        content: '...';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 2em;
+        text-align: right;
     }
 
     .new-list h1 {
@@ -141,23 +172,28 @@
     }
 
     .border-div {
-        border-bottom: 1px solid #e5e5e5;
+        border-top: 1px solid #e5e5e5;
         padding: 10px 0;
     }
 
-    .meau-list h1 {
-        font-size: 20px;
+    .border-div p {
+        font-size: 12px;
+    }
+
+    .meau-list h2 {
+        font-size: 17px;
         color: #036cb0;
         margin-top: 25px;
     }
 
-    .meau-list h2 {
+    .meau-list h3 {
         font-size: 14px;
         color: #777;
         line-height: 20px;
     }
 
     .meau-list p {
+        font-size: 12px;
         color: #999;
     }
 
