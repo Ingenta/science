@@ -36,7 +36,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     waitOn: function () {
         return [
             JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
-            JournalSubs.subscribe("journalMostRecentArticles", this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
@@ -90,7 +89,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     waitOn: function () {
         return [
             JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
-            JournalSubs.subscribe("journalMostRecentArticles", this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
