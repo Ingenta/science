@@ -88,13 +88,7 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
     var mostRead = createMostReadList(journalId, 5);
     var mostCitedList = MostCited.find({journalId: journalId}, {limit: 5, sort: {count: -1}});
     var mostCited = _.pluck(mostCitedList.fetch(), 'articleId');
-    var recentlyUploadedList = Articles.find({journalId: journalId}, {
-        sort: {createdAt: -1},
-        limit: 10,
-        fields: {_id: 1}
-    })
-    var recentlyUploaded = _.pluck(recentlyUploadedList.fetch(), '_id');
-    var homepageArticles = _.union(recommendedArticleIds, mostRead, mostCited, recentlyUploaded);
+    var homepageArticles = _.union(recommendedArticleIds, mostRead, mostCited);
 
     return [
         Articles.find({_id: {$in: homepageArticles}}, {
