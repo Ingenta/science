@@ -1,24 +1,22 @@
-{{> cssStyle}}
-
-<div class="big">
+<div style="width: 610px;margin: 0 auto;">
     {{#if journal.banner}}
-        <div><img src="{{journal.banner}}" class="big"></div>
+        <div><img src="{{journal.banner}}" width="610"></div>
     {{else}}
         {{> scpBanner}}
     {{/if}}
-    <div class="new_big">
-        <div class="new_left">
-            <div class="date-text">
+    <div style="width:610px;margin:0 auto;padding:20px 0;overflow: hidden;background:#cac0b7;">
+        <div style="float:left;">
+            <div style="line-height:8px;color:#fff;padding-bottom:10px;padding-top:25px;margin-left: 20px;">
                 <p>Advance Access Alert</p>
                 <p>{{lastWeek}} to {{nextWeek}}</p>
             </div>
             <div class="nowOnline"><img src="{{onlineNowUrl}}"></div>
         </div>
-        <div class="right-img"><img src="{{journal.picture}}" width="110"></div>
+        <div style="float:right;padding-left: 5px;padding-right: 5px;"><img src="{{journal.picture}}" width="110"></div>
     </div>
-    <div class="content">
-        <div class="oh">
-            <div class="new-list">
+    <div style="background: #f6f6f6;">
+        <div style="overflow: hidden;">
+            <div style="width: 350px;float: left;background: #fff;padding: 0px 20px;">
                 {{> emailArticleList}}
             </div>
             {{> emailJournalNewsBar}}
