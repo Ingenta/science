@@ -1,11 +1,13 @@
 <div class="meau-list">
-    <h1>平台最新动态</h1>
+    <h2>平台最新动态</h2>
     {{#each homePageNews}}
         <div class="mt10">
             {{#if url}}
-                <h2><a target="_blank" href="{{url}}">{{title.cn}}</a></h2>
+                <h3><a target="_blank" href="{{url}}">{{title.cn}}</a></h3>
             {{/if}}
-            <p>{{abstract.cn}}</p>
+            {{#if abstract.cn}}
+                <p class="multi-break">{{{abstract.cn}}}</p>
+            {{/if}}
         </div>
     {{/each}}
 </div>

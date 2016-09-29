@@ -7,6 +7,7 @@ Meteor.publish('homepageMostRecentArticles', function () {
         })
     ]
 });
+
 Meteor.publish('miniplatformMostRecentArticles', function () {
     var limit = 6;
     var query = {};

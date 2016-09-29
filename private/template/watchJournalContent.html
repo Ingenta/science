@@ -1,13 +1,19 @@
 <div class="content">
     <div class="oh">
-        <div class="new-list">
-            <h1><a target="_blank" href="{{journal.url}}">{{journal.title}}</a></h1>
-            <h4>Volume {{issue.volume}}, Issue {{issue.issue}}, {{issue.year}}</h4>
-            <h4>published {{#if issue.month}}{{#if issue.day}}{{issue.day}}{{/if}} {{issue.month}}{{/if}} {{issue.year}}</h4>
-
-            <div class="border-div">
-                <p>{{journal.description.en}}</p>
+        <div class="conTop">
+            <div class="conTop-left">
+                <h3><a target="_blank" href="{{journal.url}}">{{journal.title}}</a></h3>
+                <h3>Volume {{issue.volume}}, Issue {{issue.issue}}, {{#if issue.month}}{{issue.month}}&nbsp;&nbsp;{{/if}}{{issue.year}}</h3>
+                <!--<h4>published {{#if issue.month}}{{#if issue.day}}{{issue.day}}{{/if}} {{issue.month}}{{/if}} {{issue.year}}</h4>-->
+                {{#if issue.description}}
+                    <div class="border-div">
+                        <p>{{{issue.description}}}</p>
+                    </div>
+                {{/if}}
             </div>
+            <div class="conTopimg"><img src="{{journal.picture}}" width="110"></div>
+        </div>
+        <div class="new-list">
             {{> emailArticleList}}
         </div>
         {{> emailJournalNewsBar}}
