@@ -3,7 +3,7 @@
     {{#each journalNews.newsCenter}}
         <div class="mt10">
         {{#if url}}
-                <h3><a href="{{url}}">{{title.en}}</a></h3>
+                <h3><a href="{{url}}"><b>{{title.en}}</b></a></h3>
             {{/if}}
             {{#if abstract.en}}
                 <p class="multi-break">{{{abstract.en}}}</p>
@@ -13,7 +13,7 @@
     <h2>Publication Trends</h2>
     {{#each journalNews.publishingDynamic}}
         <div class="mt10">
-            <h3><a href="{{url}}">{{title.en}}</a></h3>
+            <h3><a href="{{url}}"><b>{{title.en}}</b></a></h3>
             {{#if abstract.en}}
                 <p class="multi-break">{{{abstract.en}}}</p>
             {{/if}}
