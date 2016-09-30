@@ -151,7 +151,8 @@ Config = {
             hisOfScience:["history of science","科学史话"],
             InvitedArticles:["特约文章","invited articles"],
             discussion:["讨论","discussion"],
-            preface:["卷首语","preface","Preface","Prefaces"]
+            preface:["卷首语","preface","Preface","Prefaces"],
+            insight:["观察","insight","insights"]
         }
     },
     otherPlatformLoginUrl: {
