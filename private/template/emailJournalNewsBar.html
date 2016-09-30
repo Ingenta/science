@@ -1,21 +1,21 @@
-<div style="width: 200px;float: right;font-family: Arial;">
-    <h2 style="font-size: 17px;color: #036cb0;margin-top: 25px;">News Center</h2>
+<div class="meau-list">
+    <h2>News Center</h2>
     {{#each journalNews.newsCenter}}
-        <div style="margin-top: 10px;">
-            {{#if url}}
-                <h3 style="font-size: 14px;color: #777;line-height: 20px;"><a href="{{url}}">{{title.en}}</a></h3>
+        <div class="mt10">
+        {{#if url}}
+                <h3><a href="{{url}}">{{title.en}}</a></h3>
             {{/if}}
             {{#if abstract.en}}
-                <p style="font-size: 12px;color: #999;">{{{abstract.en}}}</p>
+                <p class="multi-break">{{{abstract.en}}}</p>
             {{/if}}
         </div>
     {{/each}}
-    <h2 style="font-size: 17px;color: #036cb0;margin-top: 25px;">Publication Trends</h2>
+    <h2>Publication Trends</h2>
     {{#each journalNews.publishingDynamic}}
-        <div style="margin-top: 10px;">
-            <h3 style="font-size: 14px;color: #777;line-height: 20px;"><a href="{{url}}">{{title.en}}</a></h3>
+        <div class="mt10">
+            <h3><a href="{{url}}">{{title.en}}</a></h3>
             {{#if abstract.en}}
-                <p style="font-size: 12px;color: #999;">{{{abstract.en}}}</p>
+                <p class="multi-break">{{{abstract.en}}}</p>
             {{/if}}
         </div>
     {{/each}}

@@ -118,7 +118,9 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 elocationId: 1,
                 endPage:1,
                 journal: 1,
-                pdfId: 1
+                pdfId: 1,
+                contentType:1,
+                sections:1
             },sort:{
                 padPage:1
             }
@@ -227,6 +229,7 @@ Science.Email.availableOnline = function (date ,email) {
                 doi:"$doi",
                 contentType:"$contentType",
                 pdfId:"$pdfId",
+                sections:"$sections"
             }}
         }
     }]).forEach(function (obj) {
@@ -273,7 +276,7 @@ Science.Email.availableOnline = function (date ,email) {
         var newDate = new Date();
         var lastDate = new Date(newDate-86400000*7);
         var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var onlineTitle = journal.title + " Advance Access for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + " " + newDate.getFullYear();
+        var onlineTitle = journal.title + " Advance Access for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear();
         var nextWeek = newDate.getDate() + " " + month[newDate.getMonth()+1] + " " + newDate.getFullYear();
         var lastWeek = lastDate.getDate() + " " + month[lastDate.getMonth()+1] + " " + lastDate.getFullYear();
         var content = JET.render('availableOnline', {
