@@ -29,6 +29,10 @@ Template.keywordsPanel.helpers({
             setting:{from:'keyword'}
         };
         return SolrQuery.makeUrl(option);
+    },
+    scoreNumber: function(num){
+        if(num)return parseInt(num);
+        return "0";
     }
 });
 Template.keywordsPanel.events({
