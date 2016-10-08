@@ -433,7 +433,7 @@ var generateArticleLinks = function (articles, journal) {
         if(article.authors)
             var author = [];
             article.authors.forEach(function (item) {
-                if (!item.authors) {
+                if (item.fullname.en) {
                     author.push(item.fullname.en);
                 }
             });
