@@ -51,12 +51,19 @@ Meteor.methods({
         var article = Articles.findOne({
             doi: values.doi
         }, {
-            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1,endPage:1, journalId: 1, 'journal.title': 1,doi:1,pdfId:1}
+            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1,endPage:1, journalId: 1, 'journal.title': 1,doi:1,pdfId:1,contentType:1,sections:1}
         });
         article.url = values.url;
         if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
         article.journal.pdfUrl = Config.rootUrl;
+        var author = [];
+        article.authors.forEach(function (item) {
+            if (!item.authors) {
+                author.push(item.fullname.en);
+            }
+        });
+        article.authorFullName = author.join(", ");
         var emailSubject = user+'<'+ senderEmail + '> has sent you an article';
 
         Meteor.defer(function () {

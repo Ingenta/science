@@ -37,7 +37,7 @@ Router.map(function () {
                 text = text.substring(0, text.length - 5);
                 text += ", " + (obj.journal.titleCn || obj.journal.title) + ", ";
             }
-            text += obj.volume + ", " + obj.elocationId + " (" + obj.year + "), DOI:http://dx.doi.org/" + obj.doi;
+            text += obj.volume + ", " + obj.elocationId + " (" + obj.year + "), DOI:https://doi.org/" + obj.doi;
 
             var filename = this.params.articleDoi + '.txt';
             var headers = {
@@ -76,7 +76,7 @@ Router.map(function () {
                 }
                 text = text.substring(0, text.length - 5) + "\",\n   title = \"" + obj.title.cn + "\",\n   journal = \"" + obj.journal.titleCn;
             }
-            text += "\",\n   year = \"" + obj.year + "\",\n   volume = \"" + obj.volume + "\",\n   number = \"" + obj.issue + "\",\n   eid = " + (obj.elocationId || "") + ",\n   pages = \"" + (obj.startPage || "") + "-" + (obj.endPage || "") + "\",\n   url = \"" + Config.rootUrl + name1 + "\",\n   doi = \"http://dx.doi.org/" + obj.doi + "\" \n}\n\n";
+            text += "\",\n   year = \"" + obj.year + "\",\n   volume = \"" + obj.volume + "\",\n   number = \"" + obj.issue + "\",\n   eid = " + (obj.elocationId || "") + ",\n   pages = \"" + (obj.startPage || "") + "-" + (obj.endPage || "") + "\",\n   url = \"" + Config.rootUrl + name1 + "\",\n   doi = \"https://doi.org/" + obj.doi + "\" \n}\n\n";
 
             var filename = this.params.articleDoi + '.bib';
             var headers = {
@@ -115,7 +115,7 @@ Router.map(function () {
                 }
                 text += "%T " + (obj.title.cn || obj.title.en) + "\n%D " + obj.year + "\n%J " + (obj.journal.titleCn || obj.journal.title);
             }
-            text += "\n%V " + obj.volume + "\n%N " + obj.issue + "\n%P " + (obj.elocationId || "") + "\n%R doi:http://dx.doi.org/" + obj.doi + "\n";
+            text += "\n%V " + obj.volume + "\n%N " + obj.issue + "\n%P " + (obj.elocationId || "") + "\n%R doi:https://doi.org/" + obj.doi + "\n";
             if (obj.keywords && obj.keywords.cn) {
                 obj.keywords.cn.forEach(function (keyword) {
                     text += "%K " + keyword + "\n";
@@ -160,7 +160,7 @@ Router.map(function () {
                 }
                 text += "YR " + obj.year + "\nT1 " + (obj.title.cn || obj.title.en) + "\nJF " + (obj.journal.titleCn || obj.journal.title);
             }
-            text += "\nVO " + obj.volume + "\nIS " + obj.issue + "\nSP " + (obj.elocationId || "") + "\nOP " + (obj.startPage ? obj.startPage + "-" + obj.endPage : "") + "\nDO http://dx.doi.org/" + obj.doi + "\nUL " + Config.rootUrl + name1 + "\n\n";
+            text += "\nVO " + obj.volume + "\nIS " + obj.issue + "\nSP " + (obj.elocationId || "") + "\nOP " + (obj.startPage ? obj.startPage + "-" + obj.endPage : "") + "\nDO https://doi.org/" + obj.doi + "\nUL " + Config.rootUrl + name1 + "\n\n";
 
             var filename = this.params.articleDoi + '.ref';
             var headers = {
@@ -190,9 +190,9 @@ Router.map(function () {
             }
             text += obj.volume + "\n%N " + obj.issue + "\n%R " + obj.doi + "\n%T ";
             if (obj.language == 1) {
-                text += (obj.title.en || obj.title.cn) + "\n%U http://dx.doi.org/" + obj.doi + "\n%I " + publisher.name;
+                text += (obj.title.en || obj.title.cn) + "\n%U https://doi.org/" + obj.doi + "\n%I " + publisher.name;
             } else {
-                text += (obj.title.cn || obj.title.en) + "\n%U http://dx.doi.org/" + obj.doi + "\n%I " + publisher.chinesename;
+                text += (obj.title.cn || obj.title.en) + "\n%U https://doi.org/" + obj.doi + "\n%I " + publisher.chinesename;
             }
             text += "\n%8 " + (obj.published ? obj.published.format("yyyy-MM-dd") : "") + "\n";
             if (obj.keywords && obj.keywords.cn) {

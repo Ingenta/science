@@ -25,9 +25,9 @@
             <h4>引用文章：</h4>
             {{#each citations}}
                 <p>
-                    <a target="_blank" href="http://dx.doi.org/{{doi}}">{{articleTitle}}</a>, <span>{{#each contributors}}<span class="separate-comma">{{surname}} {{givenName}}</span>{{/each}}</span><br>
+                    <a target="_blank" href="https://doi.org/{{doi}}">{{articleTitle}}</a>, <span>{{#each contributors}}<span class="separate-comma">{{surname}} {{givenName}}</span>{{/each}}</span><br>
                     {{journal.title}}, {{#if volume}}{{volume}}{{/if}}{{#if issue}}({{issue}}){{#if firstPage}}: {{/if}}{{/if}}{{#if firstPage}}{{firstPage}}{{/if}}<br>
-                    {{#if doi}}doi: <a href="http://dx.doi.org/{{doi}}">{{doi}}</a>{{/if}}
+                    {{#if doi}}doi: <a href="https://doi.org/{{doi}}">{{doi}}</a>{{/if}}
                 </p>
 
             {{/each}}

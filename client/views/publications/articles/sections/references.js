@@ -37,7 +37,7 @@ Template.singleReferenceTemplate.helpers({
 	},
 	link:function(){
 		if(this.doi){
-			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"http://dx.doi.org/"+this.doi,name:"CrossRef"});
+			return Blaze.toHTMLWithData(Template.referenceLinkTemplate,{href:"https://doi.org/"+this.doi,name:"CrossRef"});
 		}
 	},
 	googleScholar:function(){

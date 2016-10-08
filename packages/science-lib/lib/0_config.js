@@ -119,8 +119,7 @@ Config = {
     ],
     pdf: {
         watermark: "Accepted",
-        footmark: "All article content, except where otherwise noted, is licensed under a Creative Commons Attribution 3.0 Unported license.\n"
-        + "Downloaded to IP: {ip} On: {time} {url}"
+        footmark: "Downloaded to IP: {ip} On: {time} {url}"
     },
     rootUrl: Meteor.absoluteUrl(),
     searchKeywordFrequency: 3000,
@@ -152,7 +151,8 @@ Config = {
             hisOfScience:["history of science","科学史话"],
             InvitedArticles:["特约文章","invited articles"],
             discussion:["讨论","discussion"],
-            preface:["卷首语","preface","Preface","Prefaces"]
+            preface:["卷首语","preface","Preface","Prefaces"],
+            insight:["观察","insight","insights"]
         }
     },
     otherPlatformLoginUrl: {

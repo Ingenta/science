@@ -1,16 +1,17 @@
 {{#each articleList}}
     <p>
-        <b>{{contentType}}</b>
+        <b style="text-transform:capitalize;">{{contentType}}</b>
         <br>
         <a target="_blank" href="{{url}}">{{{title.en}}}</a>
         {{#if authors}}
         <br>
         <span>
-            {{#each authors}}
-                <span class="separate-comma">
-                    {{fullname.en}}
-                </span>
-            {{/each}}
+            <!--{{#each authors}}-->
+                <!--<span class="separate-comma">-->
+                    <!--{{fullname.en}}-->
+                <!--</span>-->
+            <!--{{/each}}-->
+            {{authorFullName}}
         </span>
         {{/if}}
         <br>
@@ -20,8 +21,8 @@
         {{#if issue}}({{issue}}){{/if}}
         {{#if elocationId}}: {{elocationId}}{{/if}}{{#if endPage}}-{{endPage}}{{/if}}
         <br>
-        <a href="{{journal.url}}/{{volume}}/{{issue}}/{{doi}}?slug=abstract" target="_blank">[Abstract]</a>&nbsp;&nbsp;
+        <a href="{{journal.url}}{{#if issue}}/{{volume}}/{{issue}}{{else}}/doi{{/if}}/{{doi}}?slug=abstract" target="_blank">[Abstract]</a>&nbsp;&nbsp;
         {{#if pdfId}}<a href="{{journal.pdfUrl}}downloadPdf/{{_id}}" target="_blank">[PDF]</a>&nbsp;&nbsp;{{/if}}
-        <a href="{{journal.url}}/{{volume}}/{{issue}}/{{doi}}?slug=full text" target="_blank">[Full Text]</a>
+        {{#if sections}}<a href="{{url}}" target="_blank">[Full Text]</a>{{/if}}
     </p>
 {{/each}}
