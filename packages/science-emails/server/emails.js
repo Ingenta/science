@@ -57,6 +57,13 @@ Meteor.methods({
         if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
         article.journal.pdfUrl = Config.rootUrl;
+        var author = [];
+        article.authors.forEach(function (item) {
+            if (!item.authors) {
+                author.push(item.fullname.en);
+            }
+        });
+        article.authorFullName = author.join(", ");
         var emailSubject = user+'<'+ senderEmail + '> has sent you an article';
 
         Meteor.defer(function () {
