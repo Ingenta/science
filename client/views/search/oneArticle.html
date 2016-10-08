@@ -4,11 +4,11 @@
         <li>
             {{#if special}}
             <div style="margin-bottom: 10px;">
-                <span class="label label-primary">{{special}}</span>
+                <span class="label label-primary" style="font-size: 12px">{{special}}</span>
             </div>
             {{/if}}
             <div style="margin-bottom: 10px;">
-                <span class="label label-primary">{{contentType}}</span>
+                <span class="label label-primary" style="font-size: 12px">{{contentType}}</span>
                 {{> topicNameTemplate}}
             </div>
 	        <!--{{#if can "delete-article" "resource"}}-->
@@ -57,6 +57,6 @@
 
 <template name="topicNameTemplate">
     {{#if topic}}
-        <span class="label label-primary">{{showTopicName topic}}</span>
+        <span class="label label-primary" style="font-size: 12px">{{showTopicName topic}}</span>
     {{/if}}
 </template>
