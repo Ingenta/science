@@ -266,9 +266,15 @@ Template.articlePageNavigation.onCreated(function () {
 
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
+        var rootUrl = window.location.pathname;
+        var url = rootUrl.substring(0,rootUrl.lastIndexOf("/") + 1);
+        if(Template.instance().prevDoi.get())return url + Template.instance().prevDoi.get();
         return Template.instance().prevDoi.get();
     },
     nextArticle: function () {
+        var rootUrl = window.location.pathname;
+        var url = rootUrl.substring(0,rootUrl.lastIndexOf("/") + 1);
+        if(Template.instance().nextDoi.get())return url + Template.instance().nextDoi.get();
         return Template.instance().nextDoi.get();
     },
     hasIssue: function () {

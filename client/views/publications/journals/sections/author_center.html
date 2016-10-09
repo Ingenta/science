@@ -56,9 +56,9 @@
                 {{#each instructions}}
                     <p style="font-size: 12px">
                         {{#if childInstructionsListCount}}
-                            <strong> >> <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
+                            <strong> >> <a target="_self" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
                         {{else}}
-                            <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            <a target="_self" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                         {{/if}}
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{>jkafModal template="updateInstructionsModalForm" doc=this id="updateInstructionsModal"}}
@@ -69,7 +69,7 @@
                     </p>
                     {{#each childInstructionsList}}
                         <ul>
-                            <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            <li style="margin-left: -20px;"><a target="_self" style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                     {{>jkafModal template="updateInstructionsModalForm" doc=this id="updateInstructionsModal"}}
                                 {{/if}}
@@ -97,9 +97,9 @@
                 {{#each manuscript}}
                     <p style="font-size: 12px">
                         {{#if childManuscriptListCount}}
-                            <strong> >> <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
+                            <strong> >> <a target="_self" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
                         {{else}}
-                            <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            <a target="_self" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                         {{/if}}
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
@@ -110,7 +110,7 @@
                     </p>
                     {{#each childManuscriptList}}
                         <ul>
-                            <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            <li style="margin-left: -20px;"><a target="_self" style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                     {{>jkafModal template="updateManuscriptModalForm" doc=this id="updateManuscriptModal"}}
                                 {{/if}}
@@ -138,9 +138,9 @@
                 {{#each submitManuscript}}
                     <p style="font-size: 12px">
                         {{#if childSubmitManuscriptListCount}}
-                            <strong> >> <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
+                            <strong> >> <a target="_self" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a></strong>
                         {{else}}
-                            <a href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            <a target="_self" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                         {{/if}}
                         {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                             {{>jkafModal template="updateSubmitManuscriptModalForm" doc=this id="updateSubmitManuscriptModal"}}
@@ -151,7 +151,7 @@
                     </p>
                     {{#each childSubmitManuscriptList}}
                         <ul>
-                            <li style="margin-left: -20px;"><a style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
+                            <li style="margin-left: -20px;"><a target="_self" style="font-size: 12px;" href={{whichUrl}}>{{{translateThis title.cn title.en}}}</a>
                                 {{#if permissionCheckWithScope "modify-journal" "resource" "journal" publications}}
                                     {{>jkafModal template="updateSubmitManuscriptModalForm" doc=this id="updateSubmitManuscriptModal"}}
                                 {{/if}}
