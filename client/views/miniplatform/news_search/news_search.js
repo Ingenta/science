@@ -17,7 +17,7 @@ Template.newsSearchShowPage.helpers({
             mongoDbArr.push({'author.cn': {$regex: q, $options: "i"}});
             mongoDbArr.push({'abstract.en': {$regex: q, $options: "i"}});
             mongoDbArr.push({'abstract.cn': {$regex: q, $options: "i"}});
-            return NewsCenter.find({$or: mongoDbArr},{sort: sort});
+            return NewsCenter.find({$or: mongoDbArr},{sort: sort,limit:20});
         }
     },
     whichUrl: function () {
