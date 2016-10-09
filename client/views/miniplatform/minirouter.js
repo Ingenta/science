@@ -12,13 +12,14 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_recommend'),
                 MiniPlatformSubs.subscribe('column'),
-                MiniPlatformSubs.subscribe('news_center'),
-                HomePageSubs.subscribe('publications'),
+                MiniPlatformSubs.subscribe('miniPlatformHomeScpNews'),
+                MiniPlatformSubs.subscribe('miniPlatformHomePublishingNews'),
+                MiniPlatformSubs.subscribe('miniPlatformHomeNewsShow'),
+                MiniPlatformSubs.subscribe('miniPlatformHomeNewsRecommend'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
-                MiniPlatformSubs.subscribe('news_link'),
-                //MiniPlatformSubs.subscribe('miniplatformMostRecentArticles')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink')
             ]
         }
     });
@@ -29,8 +30,7 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('publications'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -56,7 +56,19 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+            ]
+        }
+    });
+
+    //订阅信息
+    this.route("subscription", {
+        path: "/miniplatform/subscription",
+        layoutTemplate: "miniLayout",
+        waitOn: function () {
+            return [
+                MiniPlatformSubs.subscribe('miniPlatformSubscription'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -67,8 +79,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformNewsContact'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -79,8 +91,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformMagazineProfile'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -91,8 +103,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCouncil'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -103,8 +115,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformChiefEditor'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -115,8 +127,9 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformMemorabilia'),
+                MiniPlatformSubs.subscribe('miniPlatformHistoryNews'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -130,35 +143,12 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformEnterNews'),
+                MiniPlatformSubs.subscribe('miniPlatformEditFields'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
-
-    //订阅信息
-    this.route("subscription", {
-        path: "/miniplatform/subscription",
-        layoutTemplate: "miniLayout",
-        waitOn: function () {
-            return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
-            ]
-        }
-    });
-
-    //更多新闻
-    //this.route("newsShow", {
-    //    path: "/miniplatform/newsShow",
-    //    layoutTemplate: "miniLayout",
-    //    waitOn: function () {
-    //        return [
-    //            MiniPlatformSubs.subscribe('news_center'),
-    //            MiniPlatformSubs.subscribe('news_link')
-    //        ]
-    //    }
-    //});
 
     //更多杂志社动态
     this.route("dynamicShow", {
@@ -166,8 +156,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformMostScpNews'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -178,8 +168,8 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformMostPublishingNews'),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -190,20 +180,21 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
+                MiniPlatformSubs.subscribe('miniPlatformMostNewsRecommend'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',20),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
 
-    //关于我们-企业文化-详情页
+    //企业文化详情页
     this.route("enterpriseCultureDetails", {
         path: "/miniplatform/enterpriseCulture/:cultureId",
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_contact'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCulturePage',this.params.cultureId),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -214,9 +205,10 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_center'),
+                MiniPlatformSubs.subscribe('miniPlatformNews',this.params.newsCenterId),
+                MiniPlatformSubs.subscribe('miniPlatformLastNews'),
                 JournalSubs.subscribe('files'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -228,8 +220,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('column'),
-                MiniPlatformSubs.subscribe('column_views'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformColumnViews',this.params.columnId),
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });
@@ -241,7 +233,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]
         }
     });

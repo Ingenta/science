@@ -1,6 +1,6 @@
 Template.layoutNewsShow.helpers({
     layoutNewsShow: function (type) {
-        var n = NewsCenter.find({recommend:"2"},{sort: {createDate: -1}, limit: 3});
+        var n = NewsCenter.find({recommend:"2"},{sort: {releaseTime: -1}, limit: 3});
         if (type == 'extend') {
             n = n.map(function (picItem, index) {
                 picItem.index = index;
