@@ -51,12 +51,42 @@ Meteor.methods({
         var article = Articles.findOne({
             doi: values.doi
         }, {
-            fields: {_id: 1, title: 1, authors: 1, year: 1, volume: 1, issue: 1, elocationId: 1,endPage:1, journalId: 1, 'journal.title': 1,doi:1,pdfId:1,contentType:1,sections:1}
+            fields: {
+                _id: 1,
+                title: 1,
+                authors: 1,
+                year: 1,
+                volume: 1,
+                issue: 1,
+                elocationId: 1,
+                endPage:1,
+                journalId: 1,
+                'journal.title': 1,
+                doi:1,
+                pdfId:1,
+                contentType:1,
+                sections:1,
+                special:1,
+                topic:1
+            }
         });
         article.url = values.url;
         if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
         article.journal.pdfUrl = Config.rootUrl;
+        if(article.contentType){
+            article.contentType = TAPi18n.__("contentType." + article.contentType).replace("contentType.","");
+        }
+        if(article.topic){
+            var topicId;
+            if(_.isArray(article.topic) && !_.isEmpty(article.topic)){
+                topicId = article.topic[0];
+            } else if(_.isString(article.topic)){
+                topicId = article.topic;
+            }
+            var topic = Topics.findOne({_id:topicId});
+            article.topic = topic && topic.englishName;
+        }
         var author = [];
         article.authors.forEach(function (item) {
             if (!item.authors) {

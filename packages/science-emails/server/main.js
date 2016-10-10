@@ -120,7 +120,9 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 journal: 1,
                 pdfId: 1,
                 contentType:1,
-                sections:1
+                sections:1,
+                special:1,
+                topic:1
             },sort:{
                 padPage:1
             }
@@ -229,7 +231,9 @@ Science.Email.availableOnline = function (date ,email) {
                 doi:"$doi",
                 contentType:"$contentType",
                 pdfId:"$pdfId",
-                sections:"$sections"
+                sections:"$sections",
+                special:"$special",
+                topic:"$topic"
             }}
         }
     }]).forEach(function (obj) {
@@ -438,6 +442,17 @@ var generateArticleLinks = function (articles, journal) {
                 }
             });
         article.authorFullName = author.join(", ");
+        if(article.contentType)
+            article.contentType = TAPi18n.__("contentType." + article.contentType).replace("contentType.","");
+        if(article.topic)
+            var topicId;
+            if(_.isArray(article.topic) && !_.isEmpty(article.topic)){
+                topicId = article.topic[0];
+            } else if(_.isString(article.topic)){
+                topicId = article.topic;
+            }
+            var topic = Topics.findOne({_id:topicId});
+            article.topic = topic && topic.englishName;
     });
 };
 
