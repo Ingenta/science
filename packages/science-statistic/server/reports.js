@@ -141,6 +141,38 @@ Science.Reports.getUserActionData = function(query){
                         if(users.profile.institution){
                             x.institutionName = users.profile.institution;
                         }
+                        if(users.profile.fieldOfResearch){
+                            x.fieldOfResearch = users.profile.fieldOfResearch;
+                        }
+                        if(users.profile.journalsOfInterest){
+                            var journals = [];
+                            users.profile.journalsOfInterest.forEach(function (journalId) {
+                                var journal = Publications.findOne({_id:journalId},{fields:{titleCn:1}});
+                                if(journal){
+                                    journals.push(journal.titleCn);
+                                }
+                            });
+                            x.journalsOfInterest = journals.join(", ");
+                        }
+                        if(users.profile.topicsOfInterest){
+                            var topics = [];
+                            users.profile.topicsOfInterest.forEach(function (topicId) {
+                                var topic = Topics.findOne({_id:topicId},{fields:{name:1}});
+                                if(topic){
+                                    topics.push(topic.name);
+                                }
+                            });
+                            x.topicsOfInterest = topics.join(", ");
+                        }
+                        if(users.profile.phone){
+                            x.phone = users.profile.phone;
+                        }
+                        if(users.profile.address){
+                            x.address = users.profile.address;
+                        }
+                        if(users.profile.weChat){
+                            x.weChat = users.profile.weChat;
+                        }
                     }
                     if(users.level=="admin"){
                         x.userType = "超级管理员";
