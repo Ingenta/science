@@ -115,10 +115,12 @@ Template.UserSettingsUpdateInformationForm.helpers({
         return pageSession.get("userSettingsUpdateInformationFormErrorMessage");
     },
     publicationList: function () {
-        var pubs = Publications.find({visible:"1"},{title:1}).fetch();
+        var iscn = TAPi18n.getLanguage() === 'zh-CN';
+        var pubs = Publications.find({visible:"1"}, {title: 1, titleCn: 1}).fetch();
         var result = [];
-        _.each(pubs,function(item){
-            result.push({label:item.title,value:item._id});
+        _.each(pubs, function (item) {
+            var title = iscn ? item.titleCn : item.title;
+            result.push({label: title, value: item._id});
         });
         return result;
     },
