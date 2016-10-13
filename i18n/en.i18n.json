@@ -817,7 +817,7 @@
                "label": "Your email address"
             },
             "recipient": {
-                "label": "Recipient's email address"
+                "label": "Recipient's email address (More than one email address, please use;)"
             },
             "reasons": {
                 "label": "Reasons"
@@ -825,7 +825,7 @@
         },
         "broadcastEmails": {
             "recipient": {
-                "label": "Recipient"
+                "label": "Recipient (More than one email address, please use;)"
             },
             "userLevel": {
                 "label": "User level"
