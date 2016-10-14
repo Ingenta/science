@@ -35,6 +35,36 @@ Science.Reports.getUsersJournalReportFields = function () {
             width: 25
         },
         {
+            key: 'fieldOfResearch',
+            title: '研究领域',
+            width: 20
+        },
+        {
+            key: 'journalsOfInterest',
+            title: '关注期刊名称',
+            width: 25
+        },
+        {
+            key: 'topicsOfInterest',
+            title: '关注专题名称',
+            width: 25
+        },
+        {
+            key: 'phone',
+            title: '联系方式',
+            width: 18
+        },
+        {
+            key: 'address',
+            title: '地址',
+            width: 30
+        },
+        {
+            key: 'weChat',
+            title: '微信',
+            width: 18
+        },
+        {
             key: 'journalOverview',
             title: '期刊首页浏览',
             width: 20,
@@ -75,6 +105,36 @@ Science.Reports.getUsersArticleReportFields = function () {
             key: 'institutionName',
             title: '所属机构',
             width: 25
+        },
+        {
+            key: 'fieldOfResearch',
+            title: '研究领域',
+            width: 20
+        },
+        {
+            key: 'journalsOfInterest',
+            title: '关注期刊名称',
+            width: 25
+        },
+        {
+            key: 'topicsOfInterest',
+            title: '关注专题名称',
+            width: 25
+        },
+        {
+            key: 'phone',
+            title: '联系方式',
+            width: 18
+        },
+        {
+            key: 'address',
+            title: '地址',
+            width: 30
+        },
+        {
+            key: 'weChat',
+            title: '微信',
+            width: 18
         },
         {
             key: 'fulltext',

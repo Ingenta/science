@@ -207,7 +207,7 @@ Meteor.methods({
                         }
                         if (workbookJson[i].topics) {
                             _.map(workbookJson[i].topics.split(","), function (item) {
-                                var topics = Topics.find({name: item.trim(), "parentId": null}, {_id: 1}).fetch();
+                                var topics = Topics.find({name: item.trim()}, {_id: 1}).fetch();
                                 if(topics){
                                     _.each(topics, function (item) {
                                         topic.push(item._id);

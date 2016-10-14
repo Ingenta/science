@@ -963,7 +963,7 @@
         "label":"您的邮件地址"
       },
       "recipient": {
-        "label": "收件人的邮件地址"
+        "label": "收件人的邮件地址 （支持用;分隔的多个邮箱地址）"
       },
       "reasons": {
         "label": "推荐理由"
@@ -971,7 +971,7 @@
     },
     "broadcastEmails": {
       "recipient": {
-        "label": "收件人的邮件地址"
+        "label": "收件人的邮件地址 （支持用;分隔的多个邮箱地址）"
       },
       "userLevel":{
         "label":"收件用户级别"
