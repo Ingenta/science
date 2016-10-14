@@ -393,7 +393,7 @@ Science.Reports.getArticleCitedReportData = function (query) {
     var myFuture = new Future();
     var allPublisher = Publishers.find().fetch();
     Articles.rawCollection().group(
-        {"_id": true},
+        {"citations.year": true},
         query,
         {total:0,years:{},min:new Date().getFullYear()},
         function (doc, result) {
