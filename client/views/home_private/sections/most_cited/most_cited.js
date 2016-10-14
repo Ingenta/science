@@ -9,5 +9,12 @@ Template.mostCitedArticleShortList.helpers({
         }else {
             return MostCited.find().count() >= 5;
         }
+    },
+    isMostCited: function(){
+        if (this.journalId){
+            return MostCited.find({journalId: this.journalId}).count() > 0;
+        }else {
+            return MostCited.find().count() > 0;
+        }
     }
 });
