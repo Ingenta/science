@@ -345,14 +345,13 @@ Science.Reports.getArticleReportDataNew = function (query) {
 };
 
 Science.Reports.getJournalCitedReportData = function (query) {
-
     var myFuture = new Future();
     var allJournals = Publications.find().fetch();
     var allPublisher = Publishers.find().fetch();
     Articles.rawCollection().group(
         {journalId: true},
         query,
-        {total:0,years:{},min:"2016"},
+        {total:0,years:{},min:new Date().getFullYear()},
         function (doc, result) {
             result.total+=doc.citations.length;
             doc.citations.forEach(function(d){
@@ -381,6 +380,52 @@ Science.Reports.getJournalCitedReportData = function (query) {
                     x.title = journal.titleCn;
                     x.issn = journal.issn;
                     x.EISSN = journal.EISSN;
+                    _.extend(item, x);
+                }
+            })
+            return myFuture.return(result);
+        }
+    );
+    return myFuture.wait();
+};
+
+Science.Reports.getArticleCitedReportData = function (query) {
+    var myFuture = new Future();
+    var allPublisher = Publishers.find().fetch();
+    Articles.rawCollection().group(
+        {"_id": true},
+        query,
+        {total:0,years:{},min:new Date().getFullYear()},
+        function (doc, result) {
+            result.total+=doc.citations.length;
+            doc.citations.forEach(function(d){
+                if (d.year){
+                    if(d.year<result.min)
+                        result.min= d.year;
+                    var k="year"+ d.year;
+                    if(!result.years[k])
+                        result.years[k] = 0;
+                    result.years[k]++;
+                }
+            })
+        },
+        function (err, result) {
+            var currYear=new Date().getFullYear();
+            var yearRange={max:currYear,min:currYear-10};
+            var min = parseInt(_.min(_.pluck(result,"min")));
+            if(min<yearRange.min)
+                yearRange.min=min;
+            result.range=yearRange;
+            result.forEach(function (item) {
+                var article = Articles.findOne({_id: item._id},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
+                if(article){
+                    var x = {};
+                    x.journal = article.journal.titleCn;
+                    x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
+                    x.title = article.title.cn;
+                    x.doi = article.doi;
+                    x.issue = article.issue;
+                    x.volume = article.volume;
                     _.extend(item, x);
                 }
             })
