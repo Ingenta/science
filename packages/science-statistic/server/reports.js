@@ -390,48 +390,28 @@ Science.Reports.getJournalCitedReportData = function (query) {
 };
 
 Science.Reports.getArticleCitedReportData = function (query) {
-    var myFuture = new Future();
-    var allPublisher = Publishers.find().fetch();
-    Articles.rawCollection().group(
-        {"citations.year": true},
-        query,
-        {total:0,years:{},min:new Date().getFullYear()},
-        function (doc, result) {
-            result.total+=doc.citations.length;
-            doc.citations.forEach(function(d){
-                if (d.year){
-                    if(d.year<result.min)
-                        result.min= d.year;
-                    var k="year"+ d.year;
-                    if(!result.years[k])
-                        result.years[k] = 0;
-                    result.years[k]++;
-                }
-            })
-        },
-        function (err, result) {
-            var currYear=new Date().getFullYear();
-            var yearRange={max:currYear,min:currYear-10};
-            var min = parseInt(_.min(_.pluck(result,"min")));
-            if(min<yearRange.min)
-                yearRange.min=min;
-            result.range=yearRange;
-            result.forEach(function (item) {
-                var article = Articles.findOne({_id: item._id},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
-                if(article){
-                    var x = {};
-                    x.journal = article.journal.titleCn;
-                    x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
-                    x.title = article.title.cn;
-                    x.doi = article.doi;
-                    x.issue = article.issue;
-                    x.volume = article.volume;
-                    _.extend(item, x);
-                }
-            })
-            return myFuture.return(result);
-        }
-    );
-    return myFuture.wait();
+    var articles = Articles.find(query,{fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citations:1}}).fetch();
+    var currYear=new Date().getFullYear();
+    var yearRange={max:currYear,min:currYear-10};
+    articles.forEach(function (article) {
+        article.year = {};
+        article.min = new Date().getFullYear();
+        article.total = article.citations.length;
+        article.citations.forEach(function (item) {
+            if (item.year) {
+                if(item.year<article.min)
+                    article.min= item.year;
+                var k="year"+ item.year;
+                if(!article.year[k])
+                    article.year[k] = 0;
+                article.year[k]++;
+            }
+        });
+        var min = parseInt(article.min);
+        if(min<yearRange.min)
+            yearRange.min=min;
+    });
+    articles.range=yearRange;
+    return articles;
 };
 //-----------------------------数据范围------------------------------
