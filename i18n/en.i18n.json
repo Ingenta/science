@@ -1156,6 +1156,23 @@
             "releaseTime": {
                 "label": "Release Time"
             }
+        },
+        "contentType": {
+            "subject": {
+                "label": "Tag in English "
+            },
+            "name": {
+                "label": "Article Column Name",
+                "cn": {
+                    "label": "Chinese"
+                },
+                "en": {
+                    "label": "English"
+                }
+            },
+            "references": {
+                "label": "Reference Phrase (Support for using ',' multiple words separated)"
+            }
         }
     },
     "roleScope":"Scope of the functionality",
