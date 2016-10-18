@@ -18,11 +18,10 @@ ContentTypeSchema = new SimpleSchema({
         unique: true
     },
     name: {
-        type: Science.schemas.MultiLangSchema,
+        type: Science.schemas.MultipleTextRequiredSchema
     },
     references: {
         type: String,
-        optional: true,
         autoform: {
             rows: 2
         }

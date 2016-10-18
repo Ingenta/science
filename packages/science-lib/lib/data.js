@@ -1,12 +1,13 @@
 Science.data={};
 
 Science.data.tranContentType = function(origType){
-    if(!origType)return "other";
+    if(!origType)return null;
     var contentType = origType.trim().toLowerCase();
-    var trans ="other";
-    _.each(Config.parser.contentTypeDic,function(dic,key){
-        if (_.contains(dic, contentType))
-            trans=key;
+    var trans = null;
+    var articleType = ContentType.find().fetch();
+    _.each(articleType,function(type){
+        if (_.contains(type.references.split(","),contentType))
+            trans=type.subject;
     })
     return trans;
 }

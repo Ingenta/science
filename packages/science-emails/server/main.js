@@ -443,7 +443,9 @@ var generateArticleLinks = function (articles, journal) {
             });
         article.authorFullName = author.join(", ");
         if(article.contentType)
-            article.contentType = TAPi18n.__("contentType." + article.contentType).replace("contentType.","");
+            var articleType = ContentType.findOne({subject:article.contentType});
+            if(articleType)
+                article.contentType = TAPi18n.getLanguage()=='zh-CN'?articleType.name.cn:articleType.name.en;
         if(article.topic)
             var topicId;
             if(_.isArray(article.topic) && !_.isEmpty(article.topic)){

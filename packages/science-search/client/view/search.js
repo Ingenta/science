@@ -169,13 +169,15 @@ Template.SolrSearchResults.helpers({
                     var facetType = facets[fields[i]];
                     for(var j=0;j<facetType.length;j+=2){
                         if(facetType[j+1]>0){
-                            filter.filterOptions.push({
-                                name:TAPi18n.__("contentType."+facetType[j],"zh-CN").replace("contentType.",""),
-                                cname:TAPi18n.__("contentType."+facetType[j],"en").replace("contentType.",""),
-                                count:facetType[j+1],
-                                field:"contentType",
-                                val:facetType[j]
-                            })
+                            var articleType = ContentType.findOne({subject:facetType[j]});
+                            if(articleType)
+                                filter.filterOptions.push({
+                                    name:TAPi18n.getLanguage()=='zh-CN'?articleType.name.cn:articleType.name.en,
+                                    cname:TAPi18n.getLanguage()=='en'?articleType.name.en:articleType.name.cn,
+                                    count:facetType[j+1],
+                                    field:"contentType",
+                                    val:facetType[j]
+                                })
                         }
                     }
                     results.push(filter);

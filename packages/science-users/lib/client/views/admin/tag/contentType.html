@@ -44,7 +44,7 @@
             <tr>
                 <td>{{subject}}</td>
                 <td>{{translateThis name.cn name.en}}</td>
-                <td>{{references}}</td>
+                <td style="display: block;width:240px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{references}}">{{references}}</td>
                 <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
                 <td>{{#if can "modify-contentType" "resource"}}{{> updateContentTypeModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-contentType" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
             </tr>
