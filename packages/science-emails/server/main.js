@@ -105,7 +105,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
             journalId: oneIssue.journalId,
             volume: oneIssue.volume,
             issue: oneIssue.issue,
-            pubStatus: 'normal'
+            pubStatus: 'normal',
+            contentType:{$ne:"erratum"}
         }, {
             fields: {
                 _id: 1,
