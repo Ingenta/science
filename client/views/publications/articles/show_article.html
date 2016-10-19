@@ -80,16 +80,14 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    {{#if ipRedirect}}
-                        {{#if pdfId}}
-                            <li class="pdf">
-                                <a target="_blank" class="pdfDownload" href="/downloadPdf/{{_id}}">
-                                    <img style="height:50px" src="/pdf.png"/>
+                    {{#if pdfId}}
+                        <li class="pdf">
+                            <a target="_blank" class="pdfDownload" href="/downloadPdf/{{_id}}">
+                                <img style="height:50px" src="/pdf.png"/>
 
-                                    <p>{{_ "Download"}} PDF</p>
-                                </a>
-                            </li>
-                        {{/if}}
+                                <p>{{_ "Download"}} PDF</p>
+                            </a>
+                        </li>
                     {{/if}}
                 </div>
             </div>
