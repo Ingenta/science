@@ -77,7 +77,7 @@ Meteor.methods({
         if(article.contentType){
             var articleType = ContentType.findOne({subject:article.contentType});
             if(articleType)
-                article.contentType = TAPi18n.getLanguage()=='zh-CN'?articleType.name.cn:articleType.name.en;
+                article.contentType = articleType.name.en;
         }
         if(article.topic){
             var topicId;
