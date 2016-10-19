@@ -105,7 +105,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
             journalId: oneIssue.journalId,
             volume: oneIssue.volume,
             issue: oneIssue.issue,
-            pubStatus: 'normal'
+            pubStatus: 'normal',
+            contentType:{$ne:"erratum"}
         }, {
             fields: {
                 _id: 1,
@@ -211,7 +212,8 @@ Science.Email.availableOnline = function (date ,email) {
         $match: {
             $and: [
                 {pubStatus: 'online_first'},
-                {createdAt: {$gt: date}}
+                {createdAt: {$gt: date}},
+                {contentType:{$ne:"erratum"}}
             ]
         }
     }, {
@@ -443,7 +445,9 @@ var generateArticleLinks = function (articles, journal) {
             });
         article.authorFullName = author.join(", ");
         if(article.contentType)
-            article.contentType = TAPi18n.__("contentType." + article.contentType).replace("contentType.","");
+            var articleType = ContentType.findOne({subject:article.contentType});
+            if(articleType)
+                article.contentType = articleType.name.en;
         if(article.topic)
             var topicId;
             if(_.isArray(article.topic) && !_.isEmpty(article.topic)){

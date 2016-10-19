@@ -1,0 +1,87 @@
+<template name="AdminContentType">
+    <div class="container-fluid">
+        {{> pageElement key="contentType"}}
+        {{> searchContentType}}
+        <div class="row">
+            {{#if can "add-contentType" "resource"}}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addContentTypeModal">
+                    {{_ "Add new"}} <i class="fa fa-plus"></i>
+                </button>
+                {{> addContentTypeModalForm}}
+            {{/if}}
+        </div>
+        <hr>
+        <div class="row">
+            {{> contentTypeList}}
+        </div>
+    </div>
+</template>
+
+<template name="searchContentType">
+    <div class="form-group form-inline">
+        <input id="searchColumn" type="text" class="form-control">
+        <select id="articleColumnId" class="form-control" style="padding: 2px 12px;">
+            <option value="subject">{{_ "Column Tag"}}</option>
+            <option value="name">{{_ "Column Name"}}</option>
+        </select>
+        <button class="btn btn-info btn-sm">{{_ "search"}}</button>
+    </div>
+</template>
+
+<template name="contentTypeList">
+    <table class="table table-bordered table-condensed">
+        <thead>
+        <tr>
+            <td>{{_ "Column Tag"}}</td>
+            <td>{{_ "Column Name"}}</td>
+            <td>{{_ "Reference Phrase"}}</td>
+            <td>{{_ "createAt"}}</td>
+            <td>{{_ "Action"}}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each contentType}}
+            <tr>
+                <td>{{subject}}</td>
+                <td>{{translateThis name.cn name.en}}</td>
+                <td style="display: block;width:240px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{references}}">{{references}}</td>
+                <td>{{formatDate createDate "YYYY-MM-DD"}}</td>
+                <td>{{#if can "modify-contentType" "resource"}}{{> updateContentTypeModalForm}}{{/if}}&nbsp;&nbsp;{{#if can "delete-contentType" "resource"}}<a href="#" class="fa fa-trash"></a>{{/if}}</td>
+            </tr>
+        {{else}}
+            {{_ "No results found!"}}
+        {{/each}}
+        </tbody>
+    </table>
+    {{> Paginator_UI contentType}}
+    {{#if contentTypeCount}}
+        {{> displayPerPage}}
+    {{/if}}
+</template>
+
+<template name="addContentTypeModalForm">
+    <div class="modal fade" id="addContentTypeModal" role="dialog" aria-labelledby="addContentTypeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addContentTypeModalLabel">{{_ "Add new"}}</h4>
+                </div>
+                {{#autoForm id="addContentTypeModalForm" collection="ContentType" type="insert"}}
+                    <div class="modal-body">
+                        {{> afQuickField name="subject"}}
+                        {{> afQuickField name="name"}}
+                        {{> afQuickField name="references"}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{_ "Create"}}</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="updateContentTypeModalForm">
+    {{#afModal class="fa fa-pencil" title=getUpdateButtonContent collection="ContentType" doc=_id operation="update" omitFields="createDate"}}{{/afModal}}
+</template>

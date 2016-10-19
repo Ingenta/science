@@ -62,12 +62,14 @@ Meteor.methods({
                 endPage:1,
                 journalId: 1,
                 'journal.title': 1,
+                'journal.titleCn': 1,
                 doi:1,
                 pdfId:1,
                 contentType:1,
                 sections:1,
                 special:1,
-                topic:1
+                topic:1,
+                language:1
             }
         });
         article.url = values.url;
@@ -75,7 +77,9 @@ Meteor.methods({
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
         article.journal.pdfUrl = Config.rootUrl;
         if(article.contentType){
-            article.contentType = TAPi18n.__("contentType." + article.contentType).replace("contentType.","");
+            var articleType = ContentType.findOne({subject:article.contentType});
+            if(articleType)
+                article.contentType = articleType.name.en;
         }
         if(article.topic){
             var topicId;

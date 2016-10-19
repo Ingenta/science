@@ -159,6 +159,16 @@ Template.showArticle.onRendered(function () {
                     }
                     arr.push({"user": Meteor.userId(), score: score});
                     Articles.update({_id: aid}, {$set: {rating: arr}});
+                }else{
+                    sweetAlert({
+                        title             : TAPi18n.__("signInOrRegister"),
+                        text              : TAPi18n.__("signInFirst"),
+                        type              : "info",
+                        showCancelButton  : false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText : TAPi18n.__("OK"),
+                        closeOnConfirm    : true
+                    });
                 }
                 return false;
             }
@@ -231,10 +241,10 @@ Template.articleOptions.helpers({
     },
     ipRedirect: function () {
         //NOTE: no articles redirect as this functionality was only temporary until february 28th 2016
-        return true;
-        //if (Permissions.isAdmin())return true;
-        //if (this.language === "2") return true;
-        //return Session.get("ipInChina");
+        //return true;
+        if (Permissions.isAdmin())return true;
+        if (this.language === "2") return true;
+        return Session.get("ipInChina");
     }
 });
 

@@ -3,7 +3,10 @@ Template.oneArticle.helpers({
 		return Router.current().params.searchQuery;
 	},
 	"contentType": function(){
-		return TAPi18n.__("contentType." + this.contentType).replace("contentType.","");
+		var articleType = ContentType.findOne({subject:this.contentType});
+		if(articleType){
+			return TAPi18n.getLanguage()=='zh-CN'?articleType.name.cn:articleType.name.en;
+		}
 	}
 });
 

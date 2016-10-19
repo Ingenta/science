@@ -128,6 +128,23 @@ Router.route("admin.tag", {
         ]
     }
 });
+Router.route("admin.contentType", {
+    path: "/admin/contentType",
+    title: function () {
+        return TAPi18n.__("Articles Column Tags");
+    },
+    parent: "admin",
+    template: "Admin",
+    yieldTemplates: {
+        'AdminContentType': {to: 'AdminSubcontent'}
+    },
+    waitOn: function () {
+        return [
+            HomePageSubs.subscribe("contentType"),
+            HomePageSubs.subscribe('pages')
+        ]
+    }
+});
 Router.route("admin.logs", {
     path: "/admin/logs",
     title: function () {

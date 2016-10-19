@@ -25,6 +25,7 @@ HomePageSubs.subscribe('searchHistory');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
+HomePageSubs.subscribe('contentType');
 HomePageSubs.subscribe('topics');
 
 // HomePageSubs.subscribe('news');
@@ -320,7 +321,7 @@ Router.map(function () {
     this.route('/mostCitedArticles', {
         template: "mostCitedArticleFullList",
         title: function () {
-            return TAPi18n.__("Most cited");
+            return TAPi18n.__("Most cited articles");
         },
         parent: "home",
         name: "mostCite.show",
@@ -334,7 +335,7 @@ Router.map(function () {
     this.route('/mostCitedArticles/:journalId', {
         template: "mostCitedArticleFullList",
         title: function () {
-            return TAPi18n.__("Most cited");
+            return TAPi18n.__("Most cited articles");
         },
         parent: "home",
         name: "mostCite.showWithJournalId",

@@ -55,6 +55,7 @@ Meteor.startup(function () {
             {key: "watch", e: "My Alerts", c: "我的关注"},
             {key: "searchHistory", e: "Search History", c: "搜索历史"},
             {key: "tags", e: "Journal label", c: "期刊收录类型"},
+            {key: "contentType", e: "Articles Column Tags", c: "文章栏目类型"},
             {key: "specialTopics", e: "Special Topics", c: "专题推荐"},
             {key: "adCenter", e: "Advertisement Center", c: "广告中心"},
             {key: "cooperation", e: "Publishing Cooperation", c: "出版合作"},

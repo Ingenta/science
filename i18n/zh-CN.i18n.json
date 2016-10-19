@@ -78,6 +78,7 @@
   "Editor-in-Chief":"主编",
   "Journal label": "期刊收录类型",
   "Journal Tags": "收录类型",
+  "Articles Column Tags": "文章栏目类型",
   "Release Date": "创刊日期",
   "Co-ordinator": "主办单位",
   "Sponsored by":"主办单位",
@@ -172,6 +173,9 @@
   "Tag Number": "标签编号",
   "Tag Name": "标签全称",
   "Creator": "创建者",
+  "Column Tag": "英文关键词",
+  "Column Name": "栏目名称",
+  "Reference Phrase": "参考词组",
   "Abstract": "摘要",
   "Full Text": "全文",
   "References": "参考文献",
@@ -1307,6 +1311,23 @@
       },
       "releaseTime": {
         "label": "发布时间"
+      }
+    },
+    "contentType": {
+      "subject": {
+        "label": "英文关键词"
+      },
+      "name": {
+        "label": "文章栏目名称",
+        "cn": {
+          "label": "中文"
+        },
+        "en": {
+          "label": "英文"
+        }
+      },
+      "references": {
+        "label": "参考词组（支持用,分隔的多个词语）"
       }
     }
   },

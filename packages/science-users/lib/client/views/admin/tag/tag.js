@@ -5,7 +5,8 @@ Template.tagList.helpers({
             var tagName = Session.get('searchValue');
             var mongoDbArr = [];
             mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
-            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name.en': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name.cn': {$regex: tagName, $options: "i"}});
             return tagsPagination.find({$or: mongoDbArr}, {itemsPerPage: numPerPage, sort: {createDate: -1}});
         }else{
             return tagsPagination.find({}, {itemsPerPage: numPerPage, sort: {createDate: -1}});
@@ -16,7 +17,8 @@ Template.tagList.helpers({
             var tagName = Session.get('searchValue');
             var mongoDbArr = [];
             mongoDbArr.push({'tagNumber': {$regex: tagName, $options: "i"}});
-            mongoDbArr.push({'name': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name.en': {$regex: tagName, $options: "i"}});
+            mongoDbArr.push({'name.cn': {$regex: tagName, $options: "i"}});
             return Tags.find({$or: mongoDbArr}).count()>10;
         }else{
             return Tags.find().count()>10;
