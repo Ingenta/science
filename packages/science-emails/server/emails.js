@@ -62,12 +62,14 @@ Meteor.methods({
                 endPage:1,
                 journalId: 1,
                 'journal.title': 1,
+                'journal.titleCn': 1,
                 doi:1,
                 pdfId:1,
                 contentType:1,
                 sections:1,
                 special:1,
-                topic:1
+                topic:1,
+                language:1
             }
         });
         article.url = values.url;
