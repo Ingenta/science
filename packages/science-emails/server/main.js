@@ -212,7 +212,8 @@ Science.Email.availableOnline = function (date ,email) {
         $match: {
             $and: [
                 {pubStatus: 'online_first'},
-                {createdAt: {$gt: date}}
+                {createdAt: {$gt: date}},
+                {contentType:{$ne:"erratum"}}
             ]
         }
     }, {
