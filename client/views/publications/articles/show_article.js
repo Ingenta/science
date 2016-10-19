@@ -159,6 +159,16 @@ Template.showArticle.onRendered(function () {
                     }
                     arr.push({"user": Meteor.userId(), score: score});
                     Articles.update({_id: aid}, {$set: {rating: arr}});
+                }else{
+                    sweetAlert({
+                        title             : TAPi18n.__("signInOrRegister"),
+                        text              : TAPi18n.__("signInFirst"),
+                        type              : "info",
+                        showCancelButton  : false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText : TAPi18n.__("OK"),
+                        closeOnConfirm    : true
+                    });
                 }
                 return false;
             }
