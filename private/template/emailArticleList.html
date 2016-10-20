@@ -11,23 +11,18 @@
             <b style="text-transform:capitalize;margin-left: 5px;">{{topic}}</b>
         {{/if}}
         <br>
-        <a target="_blank" href="{{url}}">{{{title.en}}}</a>
+        <a target="_blank" href="{{url}}">{{{title}}}</a>
         {{#if authors}}
-        <br>
-        <span>
-            <!--{{#each authors}}-->
-                <!--<span class="separate-comma">-->
-                    <!--{{fullname.en}}-->
-                <!--</span>-->
-            <!--{{/each}}-->
-            {{authorFullName}}
-        </span>
+            <br>
+            <span>
+                {{authorFullName}}
+            </span>
         {{/if}}
         <br>
         <a target="_blank" href="{{journal.url}}">{{journal.title}}</a>{{#if year}}, {{year}}{{/if}}{{#if volume}}, {{volume}}{{/if}}{{#if issue}}({{issue}}){{/if}}{{#if elocationId}}: {{elocationId}}{{/if}}{{#if endPage}}-{{endPage}}{{/if}}
         <br>
-        <a href="{{journal.url}}{{#if issue}}/{{volume}}/{{issue}}{{else}}/doi{{/if}}/{{doi}}?slug=abstract" target="_blank">[Abstract]</a>&nbsp;&nbsp;
-        {{#if pdfId}}<a href="{{journal.pdfUrl}}downloadPdf/{{_id}}" target="_blank">[PDF]</a>&nbsp;&nbsp;{{/if}}
-        {{#if sections}}<a href="{{url}}" target="_blank">[Full Text]</a>{{/if}}
+        <a href="{{journal.url}}{{#if issue}}/{{volume}}/{{issue}}{{else}}/doi{{/if}}/{{doi}}?slug=abstract" target="_blank">{{abstractLabel}}</a>&nbsp;&nbsp;
+        {{#if pdfId}}<a href="{{pdfUrl}}downloadPdf/{{_id}}" target="_blank">[PDF]</a>&nbsp;&nbsp;{{/if}}
+        {{#if sections}}<a href="{{url}}" target="_blank">{{fulltextLabel}}</a>{{/if}}
     </p>
 {{/each}}
