@@ -11,6 +11,10 @@
             <li>
                 <div><a href={{urlToArticleByDoi doi}}>{{{translateThis title.cn title.en}}}</a></div>
             </li>
+        {{else}}
+            <div class="loading">
+                <i class="fa fa-circle-o-notch fa-4x fa-spin"></i>
+            </div>
         {{/each}}
         {{/mathjax}}
     </ul>
