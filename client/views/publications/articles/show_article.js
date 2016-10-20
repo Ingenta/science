@@ -208,6 +208,13 @@ Template.showArticle.helpers({
     },
     getLabel: function () {
         return this.label || "*";
+    },
+    ipDownloadLimitation: function () {
+        //NOTE: no articles redirect as this functionality was only temporary until february 28th 2016
+        //return true;
+        if (Permissions.isAdmin())return true;
+        if (this.language === "2") return true;
+        return Session.get("ipInChina");
     }
 });
 
