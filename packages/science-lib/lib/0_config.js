@@ -175,7 +175,6 @@ if (Meteor.isServer) {
         //address: "test@scichina.org",
         //password: 'Test123123',
         //server: 'smtp.bestedm.org',
-        //port: 25
         address: 'publish@scichina.org',
         password: 'P@ssw0rd',
         server: '219.238.6.202',

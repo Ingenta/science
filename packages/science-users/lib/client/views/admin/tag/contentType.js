@@ -7,9 +7,9 @@ Template.contentTypeList.helpers({
             mongoDbArr.push({'subject': {$regex: tagName, $options: "i"}});
             mongoDbArr.push({'name.en': {$regex: tagName, $options: "i"}});
             mongoDbArr.push({'name.cn': {$regex: tagName, $options: "i"}});
-            return contentTypePagination.find({$or: mongoDbArr}, {itemsPerPage: numPerPage, sort: {createDate: -1}});
+            return contentTypePagination.find({$or: mongoDbArr}, {itemsPerPage: numPerPage, sort: {subject: 1}});
         }else{
-            return contentTypePagination.find({}, {itemsPerPage: numPerPage, sort: {createDate: -1}});
+            return contentTypePagination.find({}, {itemsPerPage: numPerPage, sort: {subject: 1}});
         }
     },
     contentTypeCount: function () {
