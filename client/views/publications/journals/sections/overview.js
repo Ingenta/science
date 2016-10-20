@@ -49,7 +49,7 @@ Template.editorRecommendedArticles.helpers({
     },
     hasMoreThanFiveRecommendedArticles: function () {
         var journalId = Session.get('currentJournalId');
-        if (journalId)return EditorsRecommend.find({publications: journalId}).count() >= 5;
+        if (journalId)return EditorsRecommend.find({publications: journalId}).count() > 5;
     }
 });
 

@@ -41,7 +41,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.call("getLocationByCurrentIP", function (err, result) {
                 if (!result)console.log("ip not found.");
                 else {
-                    console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+                    //console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
                     Session.set("ipInChina", result.country_code === "CN");
                 }
             })
