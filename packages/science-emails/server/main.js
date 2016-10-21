@@ -315,7 +315,7 @@ Science.Email.availableOnline = function (date ,email) {
         var lastDate = new Date(newDate-86400000*7);
         var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var onlineTitle = journal.title + " Advance Access for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear();
-        var nextWeek = newDate.getDate() + " " + month[newDate.getMonth()+1] + " " + newDate.getFullYear();
+        var nextWeek = newDate.getDate()-1 + " " + month[newDate.getMonth()+1] + " " + newDate.getFullYear();
         var lastWeek = lastDate.getDate() + " " + month[lastDate.getMonth()+1] + " " + lastDate.getFullYear();
         var content = JET.render('availableOnline', {
             "onlineUrl": Config.rootUrl + "email/online.jpg",
