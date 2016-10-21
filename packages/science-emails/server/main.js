@@ -171,15 +171,19 @@ Science.Email.tableOfContentEmail = function (date,email) {
             journal.authorCenterLabel = "Author Guidelines";
             journal.currentIssueLabel = "Current Issue";
             journal.mostReadLabel = "Most Read Articles";
-            journal.newsCenter = "News Center"
-            journal.pubTrends = "Publication Trends"
+            journal.newsCenter = "News Center";
+            journal.pubTrends = "Publication Trends";
+            journal.volumeLabel = "Volume " + oneIssue.volume;
+            journal.issueLabel = "Issue " + oneIssue.issue;
         }else{
             journal.manuscriptLabel = "投审稿入口";
             journal.authorCenterLabel = "作者须知";
             journal.currentIssueLabel = "当期目录";
             journal.mostReadLabel = "热读文章";
-            journal.newsCenter = "新闻中心"
-            journal.pubTrends = "出版动态"
+            journal.newsCenter = "新闻中心";
+            journal.pubTrends = "出版动态";
+            journal.volumeLabel = "第" + oneIssue.volume + "卷";
+            journal.issueLabel = "第" + oneIssue.issue + "期";
         }
         generateArticleLinks(articleList, journal);
 
@@ -299,11 +303,11 @@ Science.Email.availableOnline = function (date ,email) {
         }
         //期刊栏目
         if(journal.language == "1"){
-            journal.newsCenter = "News Center"
-            journal.pubTrends = "Publication Trends"
+            journal.newsCenter = "News Center";
+            journal.pubTrends = "Publication Trends";
         }else{
-            journal.newsCenter = "新闻中心"
-            journal.pubTrends = "出版动态"
+            journal.newsCenter = "新闻中心";
+            journal.pubTrends = "出版动态";
         }
         generateArticleLinks(obj.articleList, journal);
         var journalNews = journalIdToNews(journal._id);

@@ -3,7 +3,7 @@
         <div class="conTop">
             <div class="conTop-left">
                 <h3><a target="_blank" href="{{journal.url}}">{{journal.title}}</a></h3>
-                <h3>Volume {{issue.volume}}, Issue {{issue.issue}}, {{#if issue.month}}{{issue.month}}&nbsp;&nbsp;{{/if}}{{issue.year}}</h3>
+                <h3>{{journal.volumeLabel}}, {{journal.issueLabel}}, {{#if issue.month}}{{issue.month}}&nbsp;&nbsp;{{/if}}{{issue.year}}</h3>
                 <!--<h4>published {{#if issue.month}}{{#if issue.day}}{{issue.day}}{{/if}} {{issue.month}}{{/if}} {{issue.year}}</h4>-->
                 {{#if issue.description}}
                     <div class="border-div">
