@@ -1,7 +1,7 @@
 <template name="chiefEditor">
     <div class="banner">
         <div class="container-fluid" style="margin-left: 41px">
-            {{> pageElement key="council" isMiniPlatform=true}}
+            {{> pageElement key="chiefEditor" isMiniPlatform=true}}
             <div class="row">
                 {{#if miniPlatformPermission}}
                     <span class="fa fa-plus {{hide}}" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addChiefEditorModal"></span>{{> addChiefEditorModalForm}}
