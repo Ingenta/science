@@ -1171,7 +1171,7 @@
                 }
             },
             "references": {
-                "label": "Reference Phrase (Support for using ',' multiple words separated)"
+                "label": "Reference Phrase (Support for using ',' multiple words separated;English lowercase letters)"
             }
         }
     },
