@@ -390,7 +390,7 @@ Science.Reports.getJournalCitedReportData = function (query) {
 };
 
 Science.Reports.getArticleCitedReportData = function (query) {
-    var articles = Articles.find(query,{fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citations:1}}).fetch();
+    var articles = Articles.find(query,{fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citations:1,year:1,elocationId:1,endPage:1}}).fetch();
     var currYear=new Date().getFullYear();
     var yearRange={max:currYear,min:currYear-10};
     articles.forEach(function (article) {

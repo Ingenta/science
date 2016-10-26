@@ -121,7 +121,7 @@ Router.route('downloadExcel', {
             file = Science.Reports.getCitedJournalReportFile(query, fileName);
         }else if (reportType === "articleCited") {
             fileName = "Article_Cited_Report";
-            file = Science.Reports.getCitedArticleReportFile(query, fileName);
+            file = Science.Reports.getCitedArticleReportFile(query, fileName, start, end);
         }else return;
         var headers = {
             'Content-type': 'application/vnd.openxmlformats;charset=utf-8',

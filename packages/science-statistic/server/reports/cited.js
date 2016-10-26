@@ -9,10 +9,16 @@ Science.Reports.getCitedJournalReportFile = function (query, fileName) {
     return Excel.export(fileName, fields, data);
 };
 //CitedArticle
-Science.Reports.getCitedArticleReportFile = function (query, fileName) {
+Science.Reports.getCitedArticleReportFile = function (query, fileName, start, end) {
     delete query.dateCode;
     delete query.institutionId;
     delete query.action;
+    query.year = {$gte:Number(start.substring(0,4))};
+    if(query.year){
+        query.year["$lte"]= Number(end.substring(0,4));
+    }else{
+        query.year = {$lte: Number(end.substring(0,4))};
+    }
     query.citations = {$elemMatch:{$ne:null}};
     var data = Science.Reports.getArticleCitedReportData(query);
     var fields = Science.Reports.getCitedArticleReportFields(data.range);
@@ -100,6 +106,21 @@ Science.Reports.getCitedArticleReportFields = function (range) {
         {
             key: 'volume',
             title: '卷号',
+            width: 8
+        },
+        {
+            key: 'year',
+            title: '出版年',
+            width: 8
+        },
+        {
+            key: 'elocationId',
+            title: '首页码',
+            width: 8
+        },
+        {
+            key: 'endPage',
+            title: '尾页码',
             width: 8
         },
         {
