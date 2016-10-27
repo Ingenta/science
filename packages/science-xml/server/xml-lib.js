@@ -292,7 +292,8 @@ ScienceXML.getFullText = function (results, doc) {
     var pUnderBody = xpath.select("//body/p | //body/fig | //body/table-wrap", doc);
     if (!_.isEmpty(pUnderBody)) {
         var ghostContent = getParagraphs(pUnderBody);
-        ghostSec = ghostContent && {label: undefined, title: "__start__", body: ghostContent};
+        var startNull = ghostContent.html.replace(/^(<p?\/>)/,'');
+        ghostSec = startNull && ghostContent && {label: undefined, title: "__start__", body: ghostContent};
     }
     // 取出body下的正常章节信息
     var sectionNodes = xpath.select("//body/sec", doc);
@@ -782,6 +783,8 @@ ScienceXML.getReferences = function (results, doc) {
             //提取引文作者信息 完成
             ref.title = parserHelper.getXmlString("child::element-citation/article-title", refNode, true);
             ref.title = ref.title && ref.title.replace(/\r\n/g, " ").trim();
+            ref.label = parserHelper.getXmlString("child::element-citation/label", refNode, true);
+            ref.label = ref.label && ref.label.replace(/\r\n/g, " ").trim();
             ref.publisherLoc = parserHelper.getSimpleVal("child::element-citation/publisher-loc", refNode);
             ref.publisherName = parserHelper.getSimpleVal("child::element-citation/publisher-name", refNode);
             ref.year = parserHelper.getSimpleVal("child::element-citation/year", refNode);
