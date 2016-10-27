@@ -47,7 +47,7 @@ Meteor.methods({
                 user = Meteor.user().profile.realName;
 
         if (values.reasons === undefined)values.reasons = "";
-
+        //文章信息
         var article = Articles.findOne({
             doi: values.doi
         }, {
@@ -61,8 +61,7 @@ Meteor.methods({
                 elocationId: 1,
                 endPage:1,
                 journalId: 1,
-                'journal.title': 1,
-                'journal.titleCn': 1,
+                journal: 1,
                 doi:1,
                 pdfId:1,
                 contentType:1,
@@ -72,15 +71,22 @@ Meteor.methods({
                 language:1
             }
         });
+        //文章链接和hostname
         article.url = values.url;
+        article.pdfUrl = Config.rootUrl;
+        //文章标题
+        article.title = article.language == "1"?article.title.en:article.title.cn;
+        //期刊名称
+        article.journal.title = article.language == "1"?article.journal.title:article.journal.titleCn;
+        //期刊链接
         if(!article.journal) article.journal = {};
         article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journalId).substring(1));
-        article.journal.pdfUrl = Config.rootUrl;
+        //提取文章栏目类型
         if(article.contentType){
             var articleType = ContentType.findOne({subject:article.contentType});
-            if(articleType)
-                article.contentType = articleType.name.en;
+            article.contentType = articleType && article.language == "1"?articleType.name.en:articleType.name.cn;
         }
+        //提取主题学科
         if(article.topic){
             var topicId;
             if(_.isArray(article.topic) && !_.isEmpty(article.topic)){
@@ -89,15 +95,31 @@ Meteor.methods({
                 topicId = article.topic;
             }
             var topic = Topics.findOne({_id:topicId});
-            article.topic = topic && topic.englishName;
+            article.topic = topic && article.language == "1"?topic.englishName:topic.name;
         }
-        var author = [];
-        article.authors.forEach(function (item) {
-            if (!item.authors) {
-                author.push(item.fullname.en);
-            }
-        });
-        article.authorFullName = author.join(", ");
+        //提取作者
+        if(article.authors){
+            var author = [];
+            article.authors.forEach(function (item) {
+                if (item.fullname) {
+                    if(article.language == "1"){
+                        author.push(item.fullname.en);
+                    }else{
+                        author.push(item.fullname.cn);
+                    }
+                }
+            });
+            article.authorFullName = author.join(", ");
+        }
+        //邮件内容标签字段
+        if(article.language == "1"){
+            article.abstractLabel = "[Abstract]";
+            article.fulltextLabel = "[Full Text]";
+        }else{
+            article.abstractLabel = "[摘要]";
+            article.fulltextLabel = "[全文]";
+        }
+        //邮件名称
         var emailSubject = user+'<'+ senderEmail + '> has sent you an article';
 
         Meteor.defer(function () {

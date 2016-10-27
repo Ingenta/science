@@ -9,10 +9,15 @@ Science.Reports.getCitedJournalReportFile = function (query, fileName) {
     return Excel.export(fileName, fields, data);
 };
 //CitedArticle
-Science.Reports.getCitedArticleReportFile = function (query, fileName) {
+Science.Reports.getCitedArticleReportFile = function (query, fileName, start, end) {
     delete query.dateCode;
     delete query.institutionId;
     delete query.action;
+    var years = [];
+    for (var year = start.getFullYear(); year <= end.getFullYear(); year++) {
+        years.push(year.toString());
+    }
+    query.year = {$in:years};
     query.citations = {$elemMatch:{$ne:null}};
     var data = Science.Reports.getArticleCitedReportData(query);
     var fields = Science.Reports.getCitedArticleReportFields(data.range);
@@ -103,6 +108,21 @@ Science.Reports.getCitedArticleReportFields = function (range) {
             width: 8
         },
         {
+            key: 'year',
+            title: '出版年',
+            width: 8
+        },
+        {
+            key: 'elocationId',
+            title: '首页码',
+            width: 8
+        },
+        {
+            key: 'endPage',
+            title: '尾页码',
+            width: 8
+        },
+        {
             key: 'total',
             title: '被引用次数',
             width: 15,
@@ -113,16 +133,16 @@ Science.Reports.getCitedArticleReportFields = function (range) {
     for(var i=range.max;i>=range.min;i--) {
         yearArr.push(String(i));
     }
-    _.each(yearArr,function(year){
+    _.each(yearArr,function(yearTitle){
         fields.push({
-            key: 'year',
-            title: year,
+            key: 'years',
+            title: yearTitle,
             width: 8,
             type: 'number',
             transform: function (val, doc) {
                 if(!val)return 0;
-                if(!val["year"+year])return 0;
-                return val["year"+year];
+                if(!val["year"+yearTitle])return 0;
+                return val["year"+yearTitle];
             }
         })
     })

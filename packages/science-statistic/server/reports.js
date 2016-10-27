@@ -390,11 +390,11 @@ Science.Reports.getJournalCitedReportData = function (query) {
 };
 
 Science.Reports.getArticleCitedReportData = function (query) {
-    var articles = Articles.find(query,{fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citations:1}}).fetch();
+    var articles = Articles.find(query,{fields: {title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,citations:1,year:1,elocationId:1,endPage:1}, sort: {year: 1}}).fetch();
     var currYear=new Date().getFullYear();
     var yearRange={max:currYear,min:currYear-10};
     articles.forEach(function (article) {
-        article.year = {};
+        article.years = {};
         article.min = new Date().getFullYear();
         article.total = article.citations.length;
         article.citations.forEach(function (item) {
@@ -402,9 +402,9 @@ Science.Reports.getArticleCitedReportData = function (query) {
                 if(item.year<article.min)
                     article.min= item.year;
                 var k="year"+ item.year;
-                if(!article.year[k])
-                    article.year[k] = 0;
-                article.year[k]++;
+                if(!article.years[k])
+                    article.years[k] = 0;
+                article.years[k]++;
             }
         });
         var min = parseInt(article.min);

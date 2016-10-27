@@ -24,6 +24,9 @@ Template.singleReferenceTemplate.helpers({
 	formatTitle:function(){
 		return this.title && (this.title + ". ");
 	},
+	formatLabel:function(){
+		return this.label && (" ["+this.label + "]. ");
+	},
 	formatContentType:function(){
 		if(this.type && contentType[this.type]){
 			return "["+contentType[this.type.toLowerCase().trim()] + "]. ";

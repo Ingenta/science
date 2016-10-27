@@ -1,16 +1,16 @@
-Template.council.helpers({
+Template.chiefEditor.helpers({
     hide: function () {
         return NewsContact.find({types:"9"}).count()<1 ? "": "hide";
     }
 });
 
-Template.councilList.helpers({
+Template.chiefEditorList.helpers({
     chiefEditor: function () {
         return NewsContact.find({types:"9"});
     }
 });
 
-Template.councilList.events({
+Template.chiefEditorList.events({
     'click #chiefEdi': function (e) {
         var id = this._id;
         confirmDelete(e,function(){

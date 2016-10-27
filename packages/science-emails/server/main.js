@@ -123,7 +123,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 contentType:1,
                 sections:1,
                 special:1,
-                topic:1
+                topic:1,
+                language:1
             },sort:{
                 padPage:1
             }
@@ -143,13 +144,13 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 email:1,
                 address:1,
                 fax:1,
-                phone:1
+                phone:1,
+                language:1
             }
         });
         if(!journal) return;
-
+        journal.title = journal.language == "1"?journal.title:journal.titleCn;
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
-        journal.pdfUrl = Meteor.absoluteUrl();
         journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
         if (journal.banner) {
             var banner = Images.findOne({_id: journal.banner});
@@ -157,11 +158,32 @@ Science.Email.tableOfContentEmail = function (date,email) {
                 journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
             }
         }
+
         if (journal.picture) {
             var picture = Images.findOne({_id: journal.picture});
             if(picture){
                 journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
             }
+        }
+        //期刊栏目
+        if(journal.language == "1"){
+            journal.manuscriptLabel = "Submit And Manuscript";
+            journal.authorCenterLabel = "Author Guidelines";
+            journal.currentIssueLabel = "Current Issue";
+            journal.mostReadLabel = "Most Read Articles";
+            journal.newsCenter = "News Center";
+            journal.pubTrends = "Publication Trends";
+            journal.volumeLabel = "Volume " + oneIssue.volume;
+            journal.issueLabel = "Issue " + oneIssue.issue;
+        }else{
+            journal.manuscriptLabel = "投审稿入口";
+            journal.authorCenterLabel = "作者须知";
+            journal.currentIssueLabel = "当期目录";
+            journal.mostReadLabel = "热读文章";
+            journal.newsCenter = "新闻中心";
+            journal.pubTrends = "出版动态";
+            journal.volumeLabel = "第" + oneIssue.volume + "卷";
+            journal.issueLabel = "第" + oneIssue.issue + "期";
         }
         generateArticleLinks(articleList, journal);
 
@@ -235,7 +257,8 @@ Science.Email.availableOnline = function (date ,email) {
                 pdfId:"$pdfId",
                 sections:"$sections",
                 special:"$special",
-                topic:"$topic"
+                topic:"$topic",
+                language:"$language"
             }}
         }
     }]).forEach(function (obj) {
@@ -257,12 +280,13 @@ Science.Email.availableOnline = function (date ,email) {
                 email:1,
                 address:1,
                 fax:1,
-                phone:1
+                phone:1,
+                language:1
             }
         });
         if(!journal) return;
+        journal.title = journal.language == "1"?journal.title:journal.titleCn;
         journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(obj._id).substring(1));
-        journal.pdfUrl = Meteor.absoluteUrl();
         journal.banner = Publications.findOne({_id: obj._id},{fields: {banner: 1}}).banner;
         journal.picture = Publications.findOne({_id: obj._id},{fields: {picture: 1}}).picture;
         if (journal.banner) {
@@ -277,13 +301,21 @@ Science.Email.availableOnline = function (date ,email) {
                 journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
             }
         }
+        //期刊栏目
+        if(journal.language == "1"){
+            journal.newsCenter = "News Center";
+            journal.pubTrends = "Publication Trends";
+        }else{
+            journal.newsCenter = "新闻中心";
+            journal.pubTrends = "出版动态";
+        }
         generateArticleLinks(obj.articleList, journal);
         var journalNews = journalIdToNews(journal._id);
         var newDate = new Date();
         var lastDate = new Date(newDate-86400000*7);
         var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var onlineTitle = journal.title + " Advance Access for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear();
-        var nextWeek = newDate.getDate() + " " + month[newDate.getMonth()+1] + " " + newDate.getFullYear();
+        var nextWeek = newDate.getDate()-1 + " " + month[newDate.getMonth()+1] + " " + newDate.getFullYear();
         var lastWeek = lastDate.getDate() + " " + month[lastDate.getMonth()+1] + " " + lastDate.getFullYear();
         var content = JET.render('availableOnline', {
             "onlineUrl": Config.rootUrl + "email/online.jpg",
@@ -331,20 +363,28 @@ Science.Email.watchTopicEmail = function (date) {
             $and: [
                 {topic: {$in: [oneTopic._id]}},
                 {createdAt: {$gt: date}},
-                {pubStatus: 'normal'}
+                {pubStatus: 'normal'},
+                {contentType:{$ne:"erratum"}}
             ]
         }, {
             fields: {
                 _id: 1,
                 title: 1,
+                doi:1,
                 authors: 1,
                 year: 1,
                 volume: 1,
                 issue: 1,
                 elocationId: 1,
+                endPage:1,
                 journalId: 1,
                 journal: 1,
-                pdfId: 1
+                pdfId: 1,
+                contentType:1,
+                sections:1,
+                special:1,
+                topic:1,
+                language:1
             }
         }).fetch();
         if (!articleList || !articleList.length) return;
@@ -427,28 +467,41 @@ Science.Email.watchArticleCitedAlertEmail = function (date) {
     });
 };
 
-
-
 var generateArticleLinks = function (articles, journal) {
     articles.forEach(function (article) {
-        if (article._id)
+        //文章链接和hostname
+        if (article._id){
             article.url = Meteor.absoluteUrl(Science.URL.articleDetail(article._id).substring(1));
+            article.pdfUrl = Config.rootUrl;
+            //文章标题
+            article.title = article.language == "1"?article.title.en:article.title.cn;
+            //期刊名称
+            article.journal.title = article.language == "1"?article.journal.title:article.journal.titleCn;
+        }
+        //期刊链接
         article.journal= journal || article.journal || {};
         if (journal && journal.url)
             article.journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(article.journal._id).substring(1));
-        if(article.authors)
+        //提取作者
+        if(article.authors){
             var author = [];
             article.authors.forEach(function (item) {
-                if (item.fullname.en) {
-                    author.push(item.fullname.en);
-                }
+                if(item.fullname)
+                    if(article.language == "1"){
+                        author.push(item.fullname.en);
+                    }else{
+                        author.push(item.fullname.cn);
+                    }
             });
-        article.authorFullName = author.join(", ");
-        if(article.contentType)
+            article.authorFullName = author.join(", ");
+        }
+        //提取文章栏目类型
+        if(article.contentType){
             var articleType = ContentType.findOne({subject:article.contentType});
-            if(articleType)
-                article.contentType = articleType.name.en;
-        if(article.topic)
+            article.contentType = articleType && article.language == "1"?articleType.name.en:articleType.name.cn;
+        }
+        //提取主题学科
+        if(article.topic){
             var topicId;
             if(_.isArray(article.topic) && !_.isEmpty(article.topic)){
                 topicId = article.topic[0];
@@ -456,22 +509,35 @@ var generateArticleLinks = function (articles, journal) {
                 topicId = article.topic;
             }
             var topic = Topics.findOne({_id:topicId});
-            article.topic = topic && topic.englishName;
+            article.topic = topic && article.language == "1"?topic.englishName:topic.name;
+        }
+        //邮件内容标签字段
+        if(article.language == "1"){
+            article.abstractLabel = "[Abstract]";
+            article.fulltextLabel = "[Full Text]";
+        }else{
+            article.abstractLabel = "[摘要]";
+            article.fulltextLabel = "[全文]";
+        }
     });
 };
 
 var journalIdToNews = function (journalId) {
     var news = {};
-    var journal = Publications.findOne({_id: journalId}, {fields: {shortTitle: 1, publisher: 1}});
+    var journal = Publications.findOne({_id: journalId}, {fields: {shortTitle: 1, publisher: 1,language:1}});
     if(journal)var publisher = Publishers.findOne({_id: journal.publisher}, {fields: {shortname: 1}});
-    news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {releaseTime: -1}, limit: 3}).fetch();
-    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {sort: {releaseTime: -1}, limit: 3}).fetch();
+    news.newsCenter = News.find({publications: journalId, about: 'a1'}, {sort: {releaseTime: -1}, limit: 3, fields: {title: 1,abstract:1,url:1}}).fetch();
+    news.publishingDynamic = News.find({publications: journalId, about: 'b1'}, {sort: {releaseTime: -1}, limit: 3, fields: {title: 1,abstract:1,url:1}}).fetch();
     //news.meetingInfo = Meeting.find({publications: journalId, about: 'c1'}, {sort: {startDate: -1}, limit: 3}).fetch();
     var rootUrl = Config.rootUrl;
     news.newsCenter.forEach(function (item) {
+        if(item.title)item.title = item.title && journal.language == "1"?item.title.en:item.title.cn;
+        if(item.abstract)item.abstract = item.abstract && journal.language == "1"?item.abstract.en:item.abstract.cn;
         if (!item.url) item.url = rootUrl + "publisher/" + publisher.shortname + "/journal/" + journal.shortTitle + "/news/journalNews/" + item._id
     });
     news.publishingDynamic.forEach(function (item) {
+        if(item.title)item.title = item.title && journal.language == "1"?item.title.en:item.title.cn;
+        if(item.abstract)item.abstract = item.abstract && journal.language == "1"?item.abstract.en:item.abstract.cn;
         if (!item.url) item.url = rootUrl + "publisher/" + publisher.shortname + "/journal/" + journal.shortTitle + "/news/journalNews/" + item._id
     });
     //news.meetingInfo.forEach(function (item) {
@@ -481,7 +547,7 @@ var journalIdToNews = function (journalId) {
 };
 
 var homepageNews = function () {
-    var news = News.find({types: '1'}, {sort: {createDate: -1}}).fetch();
+    var news = News.find({types: '1'}, {sort: {releaseTime: -1}, fields: {title: 1,abstract:1,url:1}}).fetch();
     var rootUrl = Config.rootUrl;
     news.forEach(function (item) {
         item.abstract.cn = cutString(Science.String.forceClear(item.abstract.cn), 415);
