@@ -11,8 +11,12 @@
             <li>
                 <div class="col-xs-6" style="background-color: #ebebeb;border: 1px solid #cccccc;">
                     <p style="margin-top: 12px">
-                        {{#if pdfId}}
-                            <a href="/downloadPdf/{{_id}}" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Download"}} PDF</b></a>
+                        {{#if browseIpDownloadLimitation}}
+                            {{#if pdfId}}
+                                <a href="/downloadPdf/{{_id}}" target="_blank"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Download"}} PDF</b></a>
+                            {{else}}
+                                <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Download"}} PDF</b>
+                            {{/if}}
                         {{else}}
                             <i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{_ "Download"}} PDF</b>
                         {{/if}}
