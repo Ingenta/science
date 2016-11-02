@@ -225,6 +225,24 @@ ScienceXML.parseXml = function (path, log) {
     }
     logger.info("parsed ack");
 
+    var openAccess = ScienceXML.getOpenAccess(doc);
+    if(!_.isEmpty(openAccess)){
+        results.openAccess = openAccess;
+    }
+    logger.info("parsed open access");
+
+    var interestStatement = ScienceXML.getInterestStatement(doc);
+    if(!_.isEmpty(interestStatement)){
+        results.interestStatement = interestStatement;
+    }
+    logger.info("parsed interest statement");
+
+    var contributions = ScienceXML.getContributionsStatement(doc);
+    if(!_.isEmpty(contributions)){
+        results.contributionsStatement = contributions;
+    }
+    logger.info("parsed contributions statement");
+
     var sst = ScienceXML.getSpecialTopicTitle(doc);
     if(!_.isEmpty(sst)){
         results.special = sst;

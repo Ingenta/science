@@ -482,7 +482,10 @@ var insertArticle = function (a) {
         fundings: a.fundings,
         special: a.special, //专题名 (该专题名仅从xml数据中取得,与系统功能中的专题无关)
         orderAuthors: a.orderAuthors,
-        appendix: a.appendix
+        appendix: a.appendix,
+        openAccess: a.openAccess, //开放获取
+        interest: a.interestStatement, //利益冲突声明
+        contributions: a.contributionsStatement //作者贡献声明
     });
     return id;
 };

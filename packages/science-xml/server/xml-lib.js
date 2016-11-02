@@ -867,6 +867,24 @@ ScienceXML.getAck = function(doc){
     return ack;
 }
 
+//提取开放获取信息
+ScienceXML.getOpenAccess = function(doc){
+    var openAccess = parserHelper.getXmlString("//open-access",doc,true);
+    return openAccess;
+}
+
+//提取利益声明信息
+ScienceXML.getInterestStatement = function(doc){
+    var interest = parserHelper.getXmlString("//article-meta/author-notes/fn[@fn-type='sta']/p",doc,true);
+    return interest;
+}
+
+//提取作者贡献声明信息
+ScienceXML.getContributionsStatement = function(doc){
+    var contributions = parserHelper.getXmlString("//article-meta/author-notes/fn[@fn-type='contributions']/p",doc,true);
+    return contributions;
+}
+
 //提取专题名称
 ScienceXML.getSpecialTopicTitle = function(doc){
     var stt = parserHelper.getXmlString("//front/article-meta/issue-title",doc,true);
