@@ -12,6 +12,7 @@
     "Abstract Views": "阅读摘要",
     "Full text Views": "阅读全文",
     "PDF Downloads": "下载",
+    "Upload Images Error":"Please upload image, with size equal or less than 1MB",
     "moreContentBy": "More content by",
     "PasswordResetInstructions": "Password reset instructions are sent to your e-mail address.",
     "PleaseEmail": "Please enter valid e-mail address.",
@@ -310,10 +311,10 @@
                 }
             },
             "picture": {
-                "label": "Choose Image for Cover"
+                "label": "Choose Image for Cover (The Image size equal or less than 1MB)"
             },
             "defaultCover":{
-                "label": "Choose Image for Default Issue Cover"
+                "label": "Choose Image for Default Issue Cover (The Image size equal or less than 1MB)"
             },
             "banner": {
                 "label": "Choose Image for Banner"
@@ -505,7 +506,7 @@
                 "label": "Release Time"
             },
             "picture": {
-                "label": "Choose file"
+                "label": "Choose file (The Image size equal or less than 1MB)"
             },
             "fileId": {
                 "label": "Choose file"
@@ -556,6 +557,9 @@
         "issues": {
             "picture":{
                 "label":"Cover"
+            },
+            "partial":{
+                "label":"The current issue is uploaded?"
             },
             "description": {
                 "label": "English Cover Description"
@@ -643,7 +647,7 @@
                 "label": "Title"
             },
             "behalfPicture": {
-                "label": "Choose file"
+                "label": "Choose file (The Image size equal or less than 1MB)"
             }
         },
         "editorialMember": {
@@ -1065,7 +1069,7 @@
                 "label": "Release Time"
             },
             "picture": {
-                "label": "Choose file"
+                "label": "Choose file (The Image size equal or less than 1MB)"
             },
             "fileId": {
                 "label": "Choose file"
@@ -1076,7 +1080,7 @@
                 "label": "Title"
             },
             "picture": {
-                "label": "Choose file"
+                "label": "Choose file (The Image size equal or less than 1MB)"
             }
         },
         "column": {

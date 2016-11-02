@@ -70,9 +70,16 @@ AutoForm.addHooks(['addRecommendModalForm'], {
     },
     before: {
         insert: function (doc) {
-            doc.publications = Session.get('currentJournalId');
-            doc.createDate = new Date();
-            return doc;
+            // Allow upload files under 1MB
+            var image = Images.findOne({_id:doc.behalfPicture});
+            if (image.original.size <= 1048576) {
+                doc.publications = Session.get('currentJournalId');
+                doc.createDate = new Date();
+                return doc;
+            }else{
+                $("#addRecommendModal").modal('hide');
+                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+            }
         }
     }
 }, true);

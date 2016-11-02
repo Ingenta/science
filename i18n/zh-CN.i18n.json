@@ -10,6 +10,8 @@
   "more": "更多",
   "Abbr": "简称",
   "Topical Collection": "专题集",
+  "Partial":"部分",
+  "Upload Images Error":"请上传小于或等于1Mb大小的图片",
   "Quarterly Publication":"季刊",
   "Monthly Publication":"月刊",
   "Semimonthly Publication":"半月刊",
@@ -461,10 +463,10 @@
         }
       },
       "picture": {
-        "label": "选择封面图片"
+        "label": "选择封面图片 (图片大小1MB)"
       },
       "defaultCover":{
-        "label": "选择默认卷期封面"
+        "label": "选择默认卷期封面 (图片大小1MB)"
       },
       "banner": {
         "label": "选择横幅图片"
@@ -656,7 +658,7 @@
         "label": "发布时间"
       },
       "picture": {
-        "label": "选择图片"
+        "label": "选择图片 (图片大小1MB)"
       },
       "fileId": {
         "label": "上传附件"
@@ -707,6 +709,9 @@
     "issues": {
       "picture":{
         "label":"封面图片"
+      },
+      "partial":{
+        "label":"当期是否上传完毕？"
       },
       "description": {
         "label": "英文封面描述"
@@ -794,7 +799,7 @@
         "label": "标题"
       },
       "behalfPicture": {
-        "label": "选择代表图片"
+        "label": "选择代表图片 (图片大小1MB)"
       }
     },
     "editorialMember": {
@@ -1216,7 +1221,7 @@
         "label": "发布时间"
       },
       "picture": {
-        "label": "新闻配图"
+        "label": "新闻配图 (图片大小1MB)"
       },
       "fileId": {
         "label": "上传附件"
@@ -1233,7 +1238,7 @@
         }
       },
       "picture": {
-          "label": "选择代表图片"
+          "label": "选择代表图片 (图片大小1MB)"
       }
     },
     "column": {

@@ -116,13 +116,20 @@ AutoForm.addHooks(['addPublishingDynamicForm'], {
     },
     before: {
         insert: function (doc) {
-            var newPage=_.contains(Config.Routes.NewsPage.journal,Router.current().route.getName());
-            var type =newPage?2:1;
-            doc.types = type;
-            doc.createDate = new Date();
-            doc.about = Session.get('tabNews');
-            doc.publications = Session.get('currentJournalId');
-            return doc;
+            // Allow upload files under 1MB
+            var image = Images.findOne({_id:doc.picture});
+            if (image.original.size <= 1048576) {
+                var newPage=_.contains(Config.Routes.NewsPage.journal,Router.current().route.getName());
+                var type =newPage?2:1;
+                doc.types = type;
+                doc.createDate = new Date();
+                doc.about = Session.get('tabNews');
+                doc.publications = Session.get('currentJournalId');
+                return doc;
+            }else{
+                $("#addPublishingDynamicModal").modal('hide');
+                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+            }
         }
     }
 }, true);
