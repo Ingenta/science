@@ -3,8 +3,8 @@
 <div class="css_big">
     {{> scpBanner}}
     <div class="ziduan">
-        <h3>您好</h3>
-        <p><span class="indent"></span>您的朋友{{user}}{{#if senderEmail}}<a href="mailto:{{senderEmail}}">{{senderEmail}}</a>{{/if}}向您推荐了一篇文章。</p>
+        <h3>{{#if recipients}}<a href="mailto:{{recipients}}">{{recipients}}</a>{{/if}} 您好</h3>
+        <p><span class="indent"></span>您的朋友{{user}}{{#if senderEmail}}<a href="mailto:{{senderEmail}}">{{senderEmail}}</a>{{/if}}向您推荐了一篇文章。</p><br>
         {{#if reason}}
             <h3>推荐理由: </h3>
             <p><span class="indent"></span>{{reason}}</p>

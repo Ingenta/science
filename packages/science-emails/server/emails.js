@@ -130,6 +130,7 @@ Meteor.methods({
                     subject: emailSubject,
                     html: JET.render('emailThis', {
                         "user": user,
+                        "recipients":email,
                         "senderEmail":senderEmail,
                         "reason": values.reasons,
                         "articleList": [article],
