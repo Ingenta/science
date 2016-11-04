@@ -13,7 +13,11 @@ Science.FTP.getSingleFile = function (options, targetFile, callback) {
 		if (originalSize !== downloadedSize)
 			err = new Error("size error");
 		self.end();
-		callback && callback(err);
+		if(err){
+			Science.FTP.getSingleFile(options, targetFile, callback);
+		}else{
+			callback && callback(err);
+		}
 	};
 	var streamError = function (err) {
 		if (err) {
