@@ -76,13 +76,7 @@
     }
 
     .top {
-        background: #036cb0;
-        color: #fff;
         height: 88px;
-        font-size: 28px;
-        line-height: 88px;
-        padding: 0 20px;
-        font-family: Arial;
     }
 
     .top img {
@@ -123,21 +117,7 @@
         width: 200px;
         float: right;
         font-family: Arial;
-    }
-
-    .multi-break {
-        position: relative;
-        height: 50px;
-        line-height: 25px;
-        overflow: hidden;
-    }
-    .multi-break:after {
-        content: '...';
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 2em;
-        text-align: right;
+        margin-right: 5px;
     }
 
     .new-list h1 {
@@ -203,6 +183,13 @@
     .meau-list p {
         font-size: 12px;
         color: #999;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        -moz-line-clamp: 3;
+        -moz-box-orient: vertical;
     }
 
     .cont-bottom {
