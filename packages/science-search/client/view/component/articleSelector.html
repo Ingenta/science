@@ -27,7 +27,7 @@
 				<li>
 					{{journalName journalId}}
 					{{#if volume}}<b>{{volume}}</b>{{#if issue}}({{issue}}){{/if}},{{/if}}
-                    {{#if elocationId}}{{elocationId}}{{/if}}
+                    {{#if elocationId}}{{elocationId}}{{/if}}{{#if endPage}}-{{endPage}}{{/if}}
                     {{#if year}}({{year}}){{/if}} , <span style="margin-left:0.5em;">{{doi}}</span>
 				</li>
 			</ul>

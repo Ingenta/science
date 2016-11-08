@@ -38,7 +38,7 @@
                         <li>
                             <a class="journalTitle" href="{{urlToJournal title.en}}">{{journalName journalId}}</a>
                             {{#if volume}}<b>{{volume}}</b>, {{/if}}
-                            {{#if elocationId}}{{elocationId}}{{/if}}
+                            {{#if elocationId}}{{elocationId}}{{/if}}{{#if endPage}}-{{endPage}}{{/if}}
                             {{#if year}}({{year}}){{/if}}
                             <a href="https://doi.org/{{doi}}">{{doi}} <i class="fa fa-external-link"></i></a>
                         </li>
