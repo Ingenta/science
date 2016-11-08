@@ -107,12 +107,13 @@
                     <div>
                         <img style="width:100%" src="{{getFigFromSession}}"/>
                     </div>
-                    <h5>{{label}}</h5>
-
-                    <p>
-                        {{{caption}}}
-                    </p>
-                    {{#if subCaption}}<p>{{subCaption}}</p>{{/if}}
+                    {{#mathjax}}
+                        <h5>{{label}}</h5>
+                        <p>
+                            {{{caption}}}
+                        </p>
+                        {{#if subCaption}}<p>{{subCaption}}</p>{{/if}}
+                    {{/mathjax}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Close"}}</button>
@@ -134,17 +135,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="att-table">
-                        <div>
-                            <b>{{label}} {{{caption}}}</b>
-                        </div>
-                        <div>
-                            {{#mathjax}}
-                            {{{table}}}
-                            {{/mathjax}}
-                        </div>
-                        {{#if foot}}
-                            <div style="text-align:left">{{#mathjax}}{{{foot}}}{{/mathjax}}</div>
-                        {{/if}}
+                        {{#mathjax}}
+                            <div>
+                                <b style="float: left">{{label}} {{{caption}}}</b>
+                            </div>
+                            <div>
+                                {{{table}}}
+                            </div>
+                            {{#if foot}}
+                                <div style="text-align:left">{{{foot}}}</div>
+                            {{/if}}
+                        {{/mathjax}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -199,17 +200,19 @@
 
 <template name="atttable">
     <div class="att-table">
-        <div>
-            <b style="float: left">{{label}} {{{caption}}}</b>
-        </div>
-        <div>
-            {{{table}}}
-        </div>
-        {{#if foot}}
-            <div style="text-align:left">
-                <p>{{#if footLabel}}{{footLabel}}{{/if}}{{#mathjax}}{{{foot}}}{{/mathjax}}</p>
+        {{#mathjax}}
+            <div>
+                <b style="float: left">{{label}} {{{caption}}}</b>
             </div>
-        {{/if}}
+            <div>
+                {{{table}}}
+            </div>
+            {{#if foot}}
+                <div style="text-align:left">
+                    <p>{{#if footLabel}}{{footLabel}}{{/if}}{{{foot}}}</p>
+                </div>
+            {{/if}}
+        {{/mathjax}}
     </div>
 </template>
 
