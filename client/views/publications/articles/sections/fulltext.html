@@ -142,8 +142,19 @@
                             <div>
                                 {{{table}}}
                             </div>
+                            {{#if foots}}
+                                {{#each foots}}
+                                    {{#if foot}}
+                                        <div style="text-align:left">
+                                            <p>{{#if footLabel}}{{footLabel}}{{/if}}{{{foot}}}</p>
+                                        </div>
+                                    {{/if}}
+                                {{/each}}
+                            {{/if}}
                             {{#if foot}}
-                                <div style="text-align:left">{{{foot}}}</div>
+                                <div style="text-align:left">
+                                    <p>{{#if footLabel}}{{footLabel}}{{/if}}{{{foot}}}</p>
+                                </div>
                             {{/if}}
                         {{/mathjax}}
                     </div>
@@ -207,6 +218,15 @@
             <div>
                 {{{table}}}
             </div>
+            {{#if foots}}
+                {{#each foots}}
+                    {{#if foot}}
+                        <div style="text-align:left">
+                            <p>{{#if footLabel}}{{footLabel}}{{/if}}{{{foot}}}</p>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            {{/if}}
             {{#if foot}}
                 <div style="text-align:left">
                     <p>{{#if footLabel}}{{footLabel}}{{/if}}{{{foot}}}</p>

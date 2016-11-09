@@ -641,8 +641,24 @@ var getTable = function (tableWrapNode) {
     removeChildNodes(cptNode,["bold","x"]);
     table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
-    table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode,true);
-    table.footLabel=parserHelper.getSimpleVal("child::table-wrap-foot/fn-group/fn/label",tableWrapNode);
+
+    var tableWarpFootNode = parserHelper.getNodes("child::table-wrap-foot/fn-group/fn", tableWrapNode);
+    var foots = [];
+    //解析表注多条的情况
+    if(tableWarpFootNode.length>1){
+        _.each(tableWarpFootNode, function (tableFootNode) {
+            var foot = {};
+            foot.foot = parserHelper.getXmlString("child::p",tableFootNode,true);
+            foot.footLabel=parserHelper.getSimpleVal("child::label",tableFootNode);
+            if (!_.isEmpty(foot.foot))foot.foot = foot.foot.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+            foots.push(foot);
+        });
+        if (!_.isEmpty(foots))table.foots = foots;
+    }else{
+        //只有一条或者为空的情况
+        table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode,true);
+        table.footLabel=parserHelper.getSimpleVal("child::table-wrap-foot/fn-group/fn/label",tableWrapNode);
+    }
     if (!_.isEmpty(table.table))table.table = table.table.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     if (!_.isEmpty(table.foot))table.foot = table.foot.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
