@@ -167,7 +167,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
         }
         //期刊栏目
         if(journal.language == "1"){
-            journal.manuscriptLabel = "Submission And Review";
+            journal.manuscriptLabel = "Submission and Review";
             journal.authorCenterLabel = "Author Guidelines";
             journal.currentIssueLabel = "Current Issue";
             journal.mostReadLabel = "Most Read Articles";
