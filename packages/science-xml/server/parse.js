@@ -233,13 +233,13 @@ ScienceXML.parseXml = function (path, log) {
 
     var interestStatement = ScienceXML.getInterestStatement(doc);
     if(!_.isEmpty(interestStatement)){
-        results.interestStatement = interestStatement;
+        results.interest = interestStatement;
     }
     logger.info("parsed interest statement");
 
     var contributions = ScienceXML.getContributionsStatement(doc);
     if(!_.isEmpty(contributions)){
-        results.contributionsStatement = contributions;
+        results.contributions = contributions;
     }
     logger.info("parsed contributions statement");
 

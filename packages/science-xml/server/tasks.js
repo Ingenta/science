@@ -484,8 +484,8 @@ var insertArticle = function (a) {
         orderAuthors: a.orderAuthors,
         appendix: a.appendix,
         openAccess: a.openAccess, //开放获取
-        interest: a.interestStatement, //利益冲突声明
-        contributions: a.contributionsStatement //作者贡献声明
+        interest: a.interest, //利益冲突声明
+        contributions: a.contributions //作者贡献声明
     });
     return id;
 };

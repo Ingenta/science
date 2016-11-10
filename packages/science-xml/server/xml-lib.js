@@ -173,7 +173,12 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var affiliation = {id: undefined, affText: {}};
             affiliation.id = parserHelper.getFirstAttribute("attribute::id", affNode);
             affiliation.label = parserHelper.getSimpleVal("child::label[1]", affNode);
-            affiliation.affText.en = parserHelper.getSimpleVal("child::label[last()]", affNode);
+            var affTextLabel = parserHelper.getSimpleVal("child::label[last()]", affNode);
+            var affTextLabelItalic = parserHelper.getSimpleVal("child::label[last()]/italic", affNode);
+            affiliation.affText.en = affTextLabel;
+            //兼容italic排版标签的内容
+            if(affTextLabelItalic)
+                affiliation.affText.en = affTextLabel+affTextLabelItalic;
             results.affiliations.push(affiliation);
         })
     } else {
@@ -191,8 +196,12 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             }
             index++;
             // -------临时逻辑 结束----------
-
-            affiliation.affText = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
+            var affTextLabel = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
+            var affTextLabelItalic = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]/italic", affNode);
+            affiliation.affText = affTextLabel;
+            //兼容italic排版标签的内容
+            if(affTextLabelItalic)
+                affiliation.affText = affTextLabel+affTextLabelItalic;
             results.affiliations.push(affiliation);
         });
     }
