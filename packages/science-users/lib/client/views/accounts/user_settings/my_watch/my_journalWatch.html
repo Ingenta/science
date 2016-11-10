@@ -25,5 +25,7 @@
         {{/each}}
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary" style="float:right">{{_ "Cancel Watch"}}</button>
+    {{#if journalWatchCount}}
+        <button type="button" class="btn btn-primary" style="float:right">{{_ "Cancel Watch"}}</button>
+    {{/if}}
 </template>
