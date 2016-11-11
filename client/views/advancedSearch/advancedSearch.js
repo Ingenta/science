@@ -21,6 +21,9 @@ Template.AdvancedSearch.helpers({
     },
     tagList: function () {
         return Tags.find();
+    },
+    contentTypeList: function(){
+        return ContentType.find();
     }
 });
 
@@ -42,7 +45,6 @@ Template.AdvancedSearch.events({
         var value3 = $('#searchValue8').val().trim();
         var condition1 = $('#searchValue2').val().trim();
         var condition2 = $('#searchValue4').val().trim();
-
         var query = [];
         var flag=false;
         if(name1){

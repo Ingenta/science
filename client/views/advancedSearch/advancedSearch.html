@@ -122,12 +122,9 @@
             <div class="col-xs-3"><label>{{_ "Article Content Type"}} : </label></div>
             <div class="col-xs-9">
                 <select id="filter-contentType" class="form-control js-multiple4" multiple="multiple" style="width: 82%">
-                    <option>{{_ "Article"}}</option>
-                    <option>{{_ "Review"}}</option>
-                    <option>{{_ "Research Highlights"}}</option>
-                    <option>{{_ "Editorial"}}</option>
-                    <option>{{_ "Letter"}}</option>
-                    <option>{{_ "Blogs"}}</option>
+                    {{#each contentTypeList}}
+                        <option value="{{subject}}">{{translateThis name.cn name.en}}</option>
+                    {{/each}}
                 </select>
             </div>
         </div>
