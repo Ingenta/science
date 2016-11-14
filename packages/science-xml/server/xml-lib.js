@@ -640,21 +640,50 @@ var getTable = function (tableWrapNode) {
     var table = {};
     table.id = parserHelper.getFirstAttribute("./@id", tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
-    table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
-    if (_.isEmpty(table.label)) {
-        var xref = xpath.useNamespaces({"base": ""})("child::caption/p/bold/xref", tableWrapNode);
-        if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
-            table.label = xref[0].childNodes[0].data;
+
+    //2016年11月14日科学社提出解析表格标题中英文
+    var tableWarpTitleNode = parserHelper.getNodes("child::caption/p", tableWrapNode);
+    if(tableWarpTitleNode.length > 1){
+        //表格中文标题
+        table.labelCn = parserHelper.getSimpleVal("child::caption/p[@lang='zh-Hans']/bold/xref | child::caption/p[@lang='zh-Hans']/bold", tableWrapNode);
+        if (_.isEmpty(table.labelCn)) {
+            var xref = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='zh-Hans']/bold/xref", tableWrapNode);
+            if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+                table.labelCn = xref[0].childNodes[0].data;
+        }
+        var cptNode = parserHelper.getFirstNode("child::caption/p[@lang='zh-Hans']",tableWrapNode);
+        removeChildNodes(cptNode,["bold","x"]);
+        table.captionCn = parserHelper.getXmlString("child::caption/p[@lang='zh-Hans']", tableWrapNode,true);
+
+        //表格英文标题
+        table.label = parserHelper.getSimpleVal("child::caption/p[@lang='en']/bold/xref | child::caption/p[@lang='en']/bold", tableWrapNode);
+        if (_.isEmpty(table.label)) {
+            var xref = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='en']/bold/xref", tableWrapNode);
+            if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+                table.label = xref[0].childNodes[0].data;
+        }
+        var cptNode = parserHelper.getFirstNode("child::caption/p[@lang='en']",tableWrapNode);
+        removeChildNodes(cptNode,["bold","x"]);
+        table.caption = parserHelper.getXmlString("child::caption/p[@lang='en']", tableWrapNode,true);
+    }else{
+        //只有一种语言和空的情况，默认按照原来的路径解析（默认英文）
+        table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
+        if (_.isEmpty(table.label)) {
+            var xref = xpath.useNamespaces({"base": ""})("child::caption/p/bold/xref", tableWrapNode);
+            if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+                table.label = xref[0].childNodes[0].data;
+        }
+        var cptNode = parserHelper.getFirstNode("child::caption/p",tableWrapNode);
+        removeChildNodes(cptNode,["bold","x"]);
+        table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
     }
-    var cptNode = parserHelper.getFirstNode("child::caption/p",tableWrapNode);
-    removeChildNodes(cptNode,["bold","x"]);
-    table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
 
+    //2016年11月9日科学社提出解析表格结尾表注有多条进行兼容（两条路径解析，但两条数据不并存，不然前台页面会显示两个结果）
     var tableWarpFootNode = parserHelper.getNodes("child::table-wrap-foot/fn-group/fn", tableWrapNode);
     var foots = [];
-    //解析表注多条的情况
-    if(tableWarpFootNode.length>1){
+    if(tableWarpFootNode.length > 1){
+        //解析表注多条的情况
         _.each(tableWarpFootNode, function (tableFootNode) {
             var foot = {};
             foot.foot = parserHelper.getXmlString("child::p",tableFootNode,true);

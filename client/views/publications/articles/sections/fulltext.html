@@ -131,13 +131,30 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">{{label}}</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">
+                        {{#if labelCn}}
+                            {{translateThis labelCn label}}
+                        {{else}}
+                            {{label}}
+                        {{/if}}
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <div class="att-table">
                         {{#mathjax}}
                             <div>
-                                <b style="float: left">{{label}} {{{caption}}}</b>
+                                <b style="float: left">
+                                    {{#if labelCn}}
+                                        {{translateThis labelCn label}}
+                                    {{else}}
+                                        {{label}}
+                                    {{/if}}
+                                    {{#if captionCn}}
+                                        {{{translateThis captionCn caption}}}
+                                    {{else}}
+                                        {{{caption}}}
+                                    {{/if}}
+                                </b>
                             </div>
                             <div>
                                 {{{table}}}
@@ -213,7 +230,18 @@
     <div class="att-table">
         {{#mathjax}}
             <div>
-                <b style="float: left">{{label}} {{{caption}}}</b>
+                <b style="float: left">
+                    {{#if labelCn}}
+                        {{translateThis labelCn label}}
+                    {{else}}
+                        {{label}}
+                    {{/if}}
+                    {{#if captionCn}}
+                        {{{translateThis captionCn caption}}}
+                    {{else}}
+                        {{{caption}}}
+                    {{/if}}
+                </b>
             </div>
             <div>
                 {{{table}}}
