@@ -47,7 +47,6 @@ Template.SingleNews.helpers({
         return News.find({types: "1"}).count() > 1;
     },
     whichUrl: function () {
-        if (this.url)return this.url;
         return "/news/" + this._id;
     }
 });
