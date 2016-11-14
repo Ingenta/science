@@ -465,26 +465,76 @@ var getFigure = function (fig) {
     if (position && position.length) {
         figure.position = position[0].value;
     }
-
-    var label = xpath.select("child::label/text()", fig);
-    if (!label || !label.length) {
-        var labelNode = xpath.select("child::caption/title", fig);//兼容中国科学的数据 T-T
-        if (!_.isEmpty(labelNode)) {
-            var textNodes = xpath.select("descendant::text()", labelNode[0]);
-            if (!_.isEmpty(textNodes)) {
-                var l = _.pluck(textNodes, "data").join(" ").trim();
-                if (l)
-                    label = [l];
+    //2016年11月14日科学社提出解析图片中英文标题
+    var figTitleNode = xpath.select("child::caption", fig);
+    if(figTitleNode.length > 1){
+        //图片中中文标题
+        var labelCn = xpath.select("child::label/text()", fig);
+        if (!labelCn || !labelCn.length) {
+            var labelNodeCn = xpath.select("child::caption[@lang='zh-Hans']/title", fig);//兼容中国科学的数据 T-T
+            if (!_.isEmpty(labelNodeCn)) {
+                var textNodesCn = xpath.select("descendant::text()", labelNodeCn[0]);
+                if (!_.isEmpty(textNodesCn)) {
+                    var l = _.pluck(textNodesCn, "data").join(" ").trim();
+                    if (l)
+                        labelCn = [l];
+                }
             }
         }
-    }
-    if (label && label.length) {
-        figure.label = label[0].toString();
-    }
 
-    var caption = xpath.select("child::caption/p", fig);
-    if (caption && caption.length) {
-        figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        if (labelCn && labelCn.length) {
+            figure.labelCn = labelCn[0].toString();
+        }
+
+        var captionCn = xpath.select("child::caption[@lang='zh-Hans']/p", fig);
+        if (captionCn && captionCn.length) {
+            figure.captionCn = captionCn[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
+
+        //图片中英文标题
+        var label = xpath.select("child::label/text()", fig);
+        if (!label || !label.length) {
+            var labelNode = xpath.select("child::caption[@lang='en']/title", fig);//兼容中国科学的数据 T-T
+            if (!_.isEmpty(labelNode)) {
+                var textNodes = xpath.select("descendant::text()", labelNode[0]);
+                if (!_.isEmpty(textNodes)) {
+                    var l = _.pluck(textNodes, "data").join(" ").trim();
+                    if (l)
+                        label = [l];
+                }
+            }
+        }
+
+        if (label && label.length) {
+            figure.label = label[0].toString();
+        }
+
+        var caption = xpath.select("child::caption[@lang='en']/p", fig);
+        if (caption && caption.length) {
+            figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
+    }else{
+        //只有一种语言和空的情况，默认按照原来的路径解析（默认英文）
+        var label = xpath.select("child::label/text()", fig);
+        if (!label || !label.length) {
+            var labelNode = xpath.select("child::caption/title", fig);//兼容中国科学的数据 T-T
+            if (!_.isEmpty(labelNode)) {
+                var textNodes = xpath.select("descendant::text()", labelNode[0]);
+                if (!_.isEmpty(textNodes)) {
+                    var l = _.pluck(textNodes, "data").join(" ").trim();
+                    if (l)
+                        label = [l];
+                }
+            }
+        }
+        if (label && label.length) {
+            figure.label = label[0].toString();
+        }
+
+        var caption = xpath.select("child::caption/p", fig);
+        if (caption && caption.length) {
+            figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
     }
 
     var subCaption = parserHelper.getXmlString("child::p",fig,true);
@@ -641,22 +691,22 @@ var getTable = function (tableWrapNode) {
     table.id = parserHelper.getFirstAttribute("./@id", tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
 
-    //2016年11月14日科学社提出解析表格标题中英文
+    //2016年11月14日科学社提出解析表格中英文标题
     var tableWarpTitleNode = parserHelper.getNodes("child::caption/p", tableWrapNode);
     if(tableWarpTitleNode.length > 1){
         //表格中文标题
-        table.labelCn = parserHelper.getSimpleVal("child::caption/p[@lang='zh-Hans']/bold/xref | child::caption/p[@lang='zh-Hans']/bold", tableWrapNode);
+        table.labelCn = parserHelper.getSimpleVal("child::caption/p[@lang='zh-Hans']/bold/xref | child::caption/p[@lang='zh-Hans']/bold | child::label", tableWrapNode);
         if (_.isEmpty(table.labelCn)) {
-            var xref = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='zh-Hans']/bold/xref", tableWrapNode);
-            if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
-                table.labelCn = xref[0].childNodes[0].data;
+            var xrefCn = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='zh-Hans']/bold/xref", tableWrapNode);
+            if (xrefCn && xrefCn.length && xrefCn[0].childNodes && xrefCn[0].childNodes.length && xrefCn[0].childNodes[0].data)
+                table.labelCn = xrefCn[0].childNodes[0].data;
         }
-        var cptNode = parserHelper.getFirstNode("child::caption/p[@lang='zh-Hans']",tableWrapNode);
-        removeChildNodes(cptNode,["bold","x"]);
+        var cptNodeCn = parserHelper.getFirstNode("child::caption/p[@lang='zh-Hans']",tableWrapNode);
+        removeChildNodes(cptNodeCn,["bold","x"]);
         table.captionCn = parserHelper.getXmlString("child::caption/p[@lang='zh-Hans']", tableWrapNode,true);
 
         //表格英文标题
-        table.label = parserHelper.getSimpleVal("child::caption/p[@lang='en']/bold/xref | child::caption/p[@lang='en']/bold", tableWrapNode);
+        table.label = parserHelper.getSimpleVal("child::caption/p[@lang='en']/bold/xref | child::caption/p[@lang='en']/bold | child::label", tableWrapNode);
         if (_.isEmpty(table.label)) {
             var xref = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='en']/bold/xref", tableWrapNode);
             if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)

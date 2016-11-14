@@ -108,7 +108,9 @@
                         <img style="width:100%" src="{{getFigFromSession}}"/>
                     </div>
                     {{#mathjax}}
-                        <h5>{{label}}</h5>
+                        <h5>
+                            {{label}}
+                        </h5>
                         <p>
                             {{{caption}}}
                         </p>
@@ -216,9 +218,19 @@
             <a href="#">{{_ "clickToView"}}</a>
         </div>
         <div class="figure-caption">
-            <b>{{label}}</b>&nbsp;&nbsp;
             {{#mathjax}}
-                {{{caption}}}
+                <b>
+                    {{#if labelCn}}
+                        {{translateThis labelCn label}}
+                    {{else}}
+                        {{label}}
+                    {{/if}}
+                </b>&nbsp;&nbsp;
+                {{#if captionCn}}
+                    {{{translateThis captionCn caption}}}
+                {{else}}
+                    {{{caption}}}
+                {{/if}}
                 {{#if subCaption}}<p>{{{subCaption}}}</p>{{/if}}
             {{/mathjax}}
         </div>

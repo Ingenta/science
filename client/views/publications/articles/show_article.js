@@ -305,11 +305,15 @@ Template.figModal.helpers({
     "label": function () {
         if (!Session.get("fig"))
             return "";
+        if(Session.get("fig").labelCn)
+            return TAPi18n.getLanguage() == "zh-CN" ? Session.get("fig").labelCn : Session.get("fig").label;
         return Session.get("fig").label;
     },
     "caption": function () {
         if (!Session.get("fig"))
             return;
+        if(Session.get("fig").captionCn)
+            return TAPi18n.getLanguage() == "zh-CN" ? Session.get("fig").captionCn : Session.get("fig").caption;
         return Session.get("fig").caption;
     },
     "img": function () {
