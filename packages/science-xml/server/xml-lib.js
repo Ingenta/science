@@ -196,12 +196,21 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             }
             index++;
             // -------临时逻辑 结束----------
-            var affTextLabel = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
-            var affTextLabelItalic = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]/italic", affNode);
-            affiliation.affText = affTextLabel;
+            //affiliation.affText = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
+            //作者地址中文
+            var affTextLabelCn = parserHelper.getSimpleVal("child::aff[@lang='zh-Hans']/label[last()]", affNode);
+            var affTextLabelItalicCn = parserHelper.getSimpleVal("child::aff[@lang='zh-Hans']/label[last()]/italic", affNode);
+            affiliation.affText.cn = affTextLabelCn;
+            //兼容italic排版标签的内容
+            if(affTextLabelItalicCn)
+                affiliation.affText.cn = affTextLabelCn+affTextLabelItalicCn;
+            //作者地址英文
+            var affTextLabel = parserHelper.getSimpleVal("child::aff[@lang='en']/label[last()]", affNode);
+            var affTextLabelItalic = parserHelper.getSimpleVal("child::aff[@lang='en']/label[last()]/italic", affNode);
+            affiliation.affText.en = affTextLabel;
             //兼容italic排版标签的内容
             if(affTextLabelItalic)
-                affiliation.affText = affTextLabel+affTextLabelItalic;
+                affiliation.affText.en = affTextLabel+affTextLabelItalic;
             results.affiliations.push(affiliation);
         });
     }
