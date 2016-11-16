@@ -394,22 +394,24 @@ Science.Reports.getArticleCitedReportData = function (query) {
     var currYear=new Date().getFullYear();
     var yearRange={max:currYear,min:currYear-10};
     articles.forEach(function (article) {
-        article.years = {};
-        article.min = new Date().getFullYear();
-        article.total = article.citations.length;
-        article.citations.forEach(function (item) {
-            if (item.year) {
-                if(item.year<article.min)
-                    article.min= item.year;
-                var k="year"+ item.year;
-                if(!article.years[k])
-                    article.years[k] = 0;
-                article.years[k]++;
-            }
-        });
-        var min = parseInt(article.min);
-        if(min<yearRange.min)
-            yearRange.min=min;
+        if(article.citations){
+            article.years = {};
+            article.min = new Date().getFullYear();
+            article.total = article.citations.length;
+            article.citations.forEach(function (item) {
+                if (item.year) {
+                    if(item.year<article.min)
+                        article.min= item.year;
+                    var k="year"+ item.year;
+                    if(!article.years[k])
+                        article.years[k] = 0;
+                    article.years[k]++;
+                }
+            });
+            var min = parseInt(article.min);
+            if(min<yearRange.min)
+                yearRange.min=min;
+        }
     });
     articles.range=yearRange;
     return articles;

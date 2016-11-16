@@ -52,9 +52,11 @@ Template.statistic.events({
         if(publication==null){
             if(user){
                 if(user.orbit_roles){
-                    if(user.orbit_roles[1].scope){
-                        if(user.orbit_roles[1].scope.journal){
-                            publication = user.orbit_roles[1].scope.journal;
+                    if(user.orbit_roles[1]) {
+                        if (user.orbit_roles[1].scope) {
+                            if (user.orbit_roles[1].scope.journal) {
+                                publication = user.orbit_roles[1].scope.journal;
+                            }
                         }
                     }
                 }

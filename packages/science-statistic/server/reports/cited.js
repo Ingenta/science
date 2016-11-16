@@ -18,7 +18,7 @@ Science.Reports.getCitedArticleReportFile = function (query, fileName, start, en
         years.push(year.toString());
     }
     query.year = {$in:years};
-    query.citations = {$elemMatch:{$ne:null}};
+    //query.citations = {$elemMatch:{$ne:null}};
     var data = Science.Reports.getArticleCitedReportData(query);
     var fields = Science.Reports.getCitedArticleReportFields(data.range);
     return Excel.export(fileName, fields, data);
