@@ -11,6 +11,11 @@ Template.JournalWatch.helpers({
         if (Users.findOne().profile)
             if (Users.findOne().profile.journalsOfInterest)
                 return Users.findOne().profile.journalsOfInterest.length;
+    },
+    journalWatchCount: function(){
+        var user = Users.findOne({_id: Meteor.userId()});
+        if (user && user.profile)
+            return user.profile.journalsOfInterest.length > 0;
     }
 })
 Template.JournalWatch.events({

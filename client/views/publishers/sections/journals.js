@@ -114,10 +114,17 @@ AutoForm.addHooks(['addPublicationModalForm'], {
     },
     before: {
         insert: function (doc) {
-            doc.createDate = new Date();
-            doc.publisher = Session.get('currentPublisherId');
-            if (doc.issn) doc.issn = doc.issn.trim().replace("-", "");
-            return doc;
+            // Allow upload files under 1MB
+            var image = Images.findOne({_id:doc.picture});
+            if (image.original.size <= 1048576) {
+                doc.createDate = new Date();
+                doc.publisher = Session.get('currentPublisherId');
+                if (doc.issn) doc.issn = doc.issn.trim().replace("-", "");
+                return doc;
+            }else{
+                $("#addPublicationModal").modal('hide');
+                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+            }
         }
     }
 }, true);

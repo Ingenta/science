@@ -18,7 +18,13 @@ Template.keywordsPanel.helpers({
         });
         _.each(result, function (item) {
             item.percent = item.score / total * 100;
+            //科学社要求和AIP相同展示Content Score is **，所以增加一个字段
+            item.proportion = parseInt(item.score / total * 100);
         });
+        //科学社要求搜索最高的改成黄条满格，所以最高的赋值为100
+        var max = _.max(result, function(result){return result.percent;});
+        max.percent = 100;
+
         return _.sortBy(result, function (obj) {
             return -obj.score;
         });
@@ -29,10 +35,6 @@ Template.keywordsPanel.helpers({
             setting:{from:'keyword'}
         };
         return SolrQuery.makeUrl(option);
-    },
-    scoreNumber: function(num){
-        if(num)return parseInt(num);
-        return "0";
     }
 });
 Template.keywordsPanel.events({

@@ -173,7 +173,12 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var affiliation = {id: undefined, affText: {}};
             affiliation.id = parserHelper.getFirstAttribute("attribute::id", affNode);
             affiliation.label = parserHelper.getSimpleVal("child::label[1]", affNode);
-            affiliation.affText.en = parserHelper.getSimpleVal("child::label[last()]", affNode);
+            var affTextLabel = parserHelper.getSimpleVal("child::label[last()]", affNode);
+            var affTextLabelItalic = parserHelper.getSimpleVal("child::label[last()]/italic", affNode);
+            affiliation.affText.en = affTextLabel;
+            //兼容italic排版标签的内容
+            if(affTextLabelItalic)
+                affiliation.affText.en = affTextLabel+affTextLabelItalic;
             results.affiliations.push(affiliation);
         })
     } else {
@@ -191,8 +196,21 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             }
             index++;
             // -------临时逻辑 结束----------
-
-            affiliation.affText = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
+            //affiliation.affText = parserHelper.getMultiVal("child::aff[@lang='{lang}']/label[last()]", affNode);
+            //作者地址中文
+            var affTextLabelCn = parserHelper.getSimpleVal("child::aff[@lang='zh-Hans']/label[last()]", affNode);
+            var affTextLabelItalicCn = parserHelper.getSimpleVal("child::aff[@lang='zh-Hans']/label[last()]/italic", affNode);
+            affiliation.affText.cn = affTextLabelCn;
+            //兼容italic排版标签的内容
+            if(affTextLabelItalicCn)
+                affiliation.affText.cn = affTextLabelCn+affTextLabelItalicCn;
+            //作者地址英文
+            var affTextLabel = parserHelper.getSimpleVal("child::aff[@lang='en']/label[last()]", affNode);
+            var affTextLabelItalic = parserHelper.getSimpleVal("child::aff[@lang='en']/label[last()]/italic", affNode);
+            affiliation.affText.en = affTextLabel;
+            //兼容italic排版标签的内容
+            if(affTextLabelItalic)
+                affiliation.affText.en = affTextLabel+affTextLabelItalic;
             results.affiliations.push(affiliation);
         });
     }
@@ -456,26 +474,76 @@ var getFigure = function (fig) {
     if (position && position.length) {
         figure.position = position[0].value;
     }
-
-    var label = xpath.select("child::label/text()", fig);
-    if (!label || !label.length) {
-        var labelNode = xpath.select("child::caption/title", fig);//兼容中国科学的数据 T-T
-        if (!_.isEmpty(labelNode)) {
-            var textNodes = xpath.select("descendant::text()", labelNode[0]);
-            if (!_.isEmpty(textNodes)) {
-                var l = _.pluck(textNodes, "data").join(" ").trim();
-                if (l)
-                    label = [l];
+    //2016年11月14日科学社提出解析图片中英文标题
+    var figTitleNode = xpath.select("child::caption", fig);
+    if(figTitleNode.length > 1){
+        //图片中中文标题
+        var labelCn = xpath.select("child::label/text()", fig);
+        if (!labelCn || !labelCn.length) {
+            var labelNodeCn = xpath.select("child::caption[@lang='zh-Hans']/title", fig);//兼容中国科学的数据 T-T
+            if (!_.isEmpty(labelNodeCn)) {
+                var textNodesCn = xpath.select("descendant::text()", labelNodeCn[0]);
+                if (!_.isEmpty(textNodesCn)) {
+                    var l = _.pluck(textNodesCn, "data").join(" ").trim();
+                    if (l)
+                        labelCn = [l];
+                }
             }
         }
-    }
-    if (label && label.length) {
-        figure.label = label[0].toString();
-    }
 
-    var caption = xpath.select("child::caption/p", fig);
-    if (caption && caption.length) {
-        figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        if (labelCn && labelCn.length) {
+            figure.labelCn = labelCn[0].toString();
+        }
+
+        var captionCn = xpath.select("child::caption[@lang='zh-Hans']/p", fig);
+        if (captionCn && captionCn.length) {
+            figure.captionCn = captionCn[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
+
+        //图片中英文标题
+        var label = xpath.select("child::label/text()", fig);
+        if (!label || !label.length) {
+            var labelNode = xpath.select("child::caption[@lang='en']/title", fig);//兼容中国科学的数据 T-T
+            if (!_.isEmpty(labelNode)) {
+                var textNodes = xpath.select("descendant::text()", labelNode[0]);
+                if (!_.isEmpty(textNodes)) {
+                    var l = _.pluck(textNodes, "data").join(" ").trim();
+                    if (l)
+                        label = [l];
+                }
+            }
+        }
+
+        if (label && label.length) {
+            figure.label = label[0].toString();
+        }
+
+        var caption = xpath.select("child::caption[@lang='en']/p", fig);
+        if (caption && caption.length) {
+            figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
+    }else{
+        //只有一种语言和空的情况，默认按照原来的路径解析（默认英文）
+        var label = xpath.select("child::label/text()", fig);
+        if (!label || !label.length) {
+            var labelNode = xpath.select("child::caption/title", fig);//兼容中国科学的数据 T-T
+            if (!_.isEmpty(labelNode)) {
+                var textNodes = xpath.select("descendant::text()", labelNode[0]);
+                if (!_.isEmpty(textNodes)) {
+                    var l = _.pluck(textNodes, "data").join(" ").trim();
+                    if (l)
+                        label = [l];
+                }
+            }
+        }
+        if (label && label.length) {
+            figure.label = label[0].toString();
+        }
+
+        var caption = xpath.select("child::caption/p", fig);
+        if (caption && caption.length) {
+            figure.caption = caption[0].toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
     }
 
     var subCaption = parserHelper.getXmlString("child::p",fig,true);
@@ -631,18 +699,63 @@ var getTable = function (tableWrapNode) {
     var table = {};
     table.id = parserHelper.getFirstAttribute("./@id", tableWrapNode);
     table.position = parserHelper.getFirstAttribute("./@position", tableWrapNode);
-    table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
-    if (_.isEmpty(table.label)) {
-        var xref = xpath.useNamespaces({"base": ""})("child::caption/p/bold/xref", tableWrapNode);
-        if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
-            table.label = xref[0].childNodes[0].data;
+
+    //2016年11月14日科学社提出解析表格中英文标题
+    var tableWarpTitleNode = parserHelper.getNodes("child::caption/p", tableWrapNode);
+    if(tableWarpTitleNode.length > 1){
+        //表格中文标题
+        table.labelCn = parserHelper.getSimpleVal("child::caption/p[@lang='zh-Hans']/bold/xref | child::caption/p[@lang='zh-Hans']/bold | child::label", tableWrapNode);
+        if (_.isEmpty(table.labelCn)) {
+            var xrefCn = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='zh-Hans']/bold/xref", tableWrapNode);
+            if (xrefCn && xrefCn.length && xrefCn[0].childNodes && xrefCn[0].childNodes.length && xrefCn[0].childNodes[0].data)
+                table.labelCn = xrefCn[0].childNodes[0].data;
+        }
+        var cptNodeCn = parserHelper.getFirstNode("child::caption/p[@lang='zh-Hans']",tableWrapNode);
+        removeChildNodes(cptNodeCn,["bold","x"]);
+        table.captionCn = parserHelper.getXmlString("child::caption/p[@lang='zh-Hans']", tableWrapNode,true);
+
+        //表格英文标题
+        table.label = parserHelper.getSimpleVal("child::caption/p[@lang='en']/bold/xref | child::caption/p[@lang='en']/bold | child::label", tableWrapNode);
+        if (_.isEmpty(table.label)) {
+            var xref = xpath.useNamespaces({"base": ""})("child::caption/p[@lang='en']/bold/xref", tableWrapNode);
+            if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+                table.label = xref[0].childNodes[0].data;
+        }
+        var cptNode = parserHelper.getFirstNode("child::caption/p[@lang='en']",tableWrapNode);
+        removeChildNodes(cptNode,["bold","x"]);
+        table.caption = parserHelper.getXmlString("child::caption/p[@lang='en']", tableWrapNode,true);
+    }else{
+        //只有一种语言和空的情况，默认按照原来的路径解析（默认英文）
+        table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
+        if (_.isEmpty(table.label)) {
+            var xref = xpath.useNamespaces({"base": ""})("child::caption/p/bold/xref", tableWrapNode);
+            if (xref && xref.length && xref[0].childNodes && xref[0].childNodes.length && xref[0].childNodes[0].data)
+                table.label = xref[0].childNodes[0].data;
+        }
+        var cptNode = parserHelper.getFirstNode("child::caption/p",tableWrapNode);
+        removeChildNodes(cptNode,["bold","x"]);
+        table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
     }
-    var cptNode = parserHelper.getFirstNode("child::caption/p",tableWrapNode);
-    removeChildNodes(cptNode,["bold","x"]);
-    table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
-    table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode,true);
-    table.footLabel=parserHelper.getSimpleVal("child::table-wrap-foot/fn-group/fn/label",tableWrapNode);
+
+    //2016年11月9日科学社提出解析表格结尾表注有多条进行兼容（两条路径解析，但两条数据不并存，不然前台页面会显示两个结果）
+    var tableWarpFootNode = parserHelper.getNodes("child::table-wrap-foot/fn-group/fn", tableWrapNode);
+    var foots = [];
+    if(tableWarpFootNode.length > 1){
+        //解析表注多条的情况
+        _.each(tableWarpFootNode, function (tableFootNode) {
+            var foot = {};
+            foot.foot = parserHelper.getXmlString("child::p",tableFootNode,true);
+            foot.footLabel=parserHelper.getSimpleVal("child::label",tableFootNode);
+            if (!_.isEmpty(foot.foot))foot.foot = foot.foot.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+            foots.push(foot);
+        });
+        if (!_.isEmpty(foots))table.foots = foots;
+    }else{
+        //只有一条或者为空的情况
+        table.foot = parserHelper.getXmlString("child::table-wrap-foot/fn-group/fn/p",tableWrapNode,true);
+        table.footLabel=parserHelper.getSimpleVal("child::table-wrap-foot/fn-group/fn/label",tableWrapNode);
+    }
     if (!_.isEmpty(table.table))table.table = table.table.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     if (!_.isEmpty(table.foot))table.foot = table.foot.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
     return table;
@@ -865,6 +978,24 @@ ScienceXML.getTitle = function (doc) {
 ScienceXML.getAck = function(doc){
     var ack = parserHelper.getXmlString("//ack",doc,true);
     return ack;
+}
+
+//提取开放获取信息
+ScienceXML.getOpenAccess = function(doc){
+    var openAccess = parserHelper.getXmlString("//open-access",doc,true);
+    return openAccess;
+}
+
+//提取利益声明信息
+ScienceXML.getInterestStatement = function(doc){
+    var interest = parserHelper.getXmlString("//article-meta/author-notes/fn[@fn-type='sta']/p",doc,true);
+    return interest;
+}
+
+//提取作者贡献声明信息
+ScienceXML.getContributionsStatement = function(doc){
+    var contributions = parserHelper.getXmlString("//article-meta/author-notes/fn[@fn-type='contributions']/p",doc,true);
+    return contributions;
 }
 
 //提取专题名称

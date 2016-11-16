@@ -26,9 +26,9 @@ Meteor.methods({
             return;
         var arr = (typeof keywords === 'string') ? [keywords] : keywords;
         var sc = score || 1;
-        //Meteor.defer(function () {
-        //    Keywords.update({name: {$in: arr}}, {$inc: {"score": sc}}, {multi: true});
-        //});
+        Meteor.defer(function () {
+            Keywords.update({name: {$in: arr}}, {$inc: {"score": sc}}, {multi: true});
+        });
         return true;
     },
     'insertAudit': function (userId, action, publisherId, journalId, articleId, keywords) {

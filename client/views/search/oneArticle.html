@@ -2,13 +2,10 @@
 
     <ul class="dotted list-unstyled article-info" style="font-size: 12px">
         <li>
-            {{#if special}}
             <div style="margin-bottom: 10px;">
-                <span class="label label-primary" style="font-size: 12px">{{special}}</span>
-            </div>
-            {{/if}}
-            <div style="margin-bottom: 10px;">
-                <span class="label label-primary" style="font-size: 12px">{{contentType}}</span>
+                {{#if contentType}}
+                    <span class="label label-primary" style="font-size: 12px">{{contentType}}</span>
+                {{/if}}
                 {{> topicNameTemplate}}
             </div>
 	        <!--{{#if can "delete-article" "resource"}}-->
@@ -16,6 +13,12 @@
 	        <!--{{/if}}-->
             {{#mathjax}}
             <div class="resultsList">{{> accessKeyImage}}
+                <div class="pull-right divTip">
+                    {{#if special}}
+                        <span class="label label-primary">{{_ "Topical Collection"}}</span>
+                        <p>{{special}}</p>
+                    {{/if}}
+                </div>
                 <div><a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>
             </div>
             {{/mathjax}}

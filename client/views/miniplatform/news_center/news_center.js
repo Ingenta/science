@@ -69,9 +69,16 @@ AutoForm.addHooks(['addMiniMagazineModalForm'], {
     },
     before: {
         insert: function (doc) {
-            doc.types = "2";
-            doc.createDate = new Date();
-            return doc;
+            // Allow upload files under 1MB
+            var image = Images.findOne({_id:doc.picture});
+            if (image.original.size <= 1048576) {
+                doc.types = "2";
+                doc.createDate = new Date();
+                return doc;
+            }else{
+                $("#addMiniMagazineModal").modal('hide');
+                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+            }
         }
     }
 }, true);
@@ -83,9 +90,16 @@ AutoForm.addHooks(['addMiniPublishingModalForm'], {
     },
     before: {
         insert: function (doc) {
-            doc.types = "3";
-            doc.createDate = new Date();
-            return doc;
+            // Allow upload files under 1MB
+            var image = Images.findOne({_id:doc.picture});
+            if (image.original.size <= 1048576) {
+                doc.types = "3";
+                doc.createDate = new Date();
+                return doc;
+            }else{
+                $("#addMiniPublishingModal").modal('hide');
+                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+            }
         }
     }
 }, true);

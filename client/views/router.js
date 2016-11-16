@@ -83,10 +83,11 @@ Router.onBeforeAction(function () {
                             if(author.affs=="all" || _.contains(author.affs,item.id)){
                                 var label=Science.JSON.try2GetRightLangVal(item.label,null,'en');
                                 var affText = Science.JSON.try2GetRightLangVal(item.affText,null,'en');
-                                if(label && label.length<3 && affText.startWith(label))
-                                    affText= affText.substr(label.length)
-                                if(_.isString(affText))
-                                    citationMetaTags.push({name:"citation_author_institution",content:affText.trim()})
+                                if(affText)
+                                    if(label && label.length<3 && affText.startWith(label))
+                                        affText= affText.substr(label.length)
+                                    if(_.isString(affText))
+                                        citationMetaTags.push({name:"citation_author_institution",content:affText.trim()})
                             }
                         })
                     }

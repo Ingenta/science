@@ -9,5 +9,10 @@ Router.route('/search', {
 		$(".slimScrollDiv").remove();
 		SolrQuery.callSearchMethod();
 		this.next();
+	},
+	waitOn: function () {
+		return [
+			Meteor.subscribe('contentType')
+		]
 	}
 });

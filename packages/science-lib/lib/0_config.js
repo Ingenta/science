@@ -115,7 +115,10 @@ Config = {
         "fundings",
         "special",
         "orderAuthors", //作者列表顺序,Solr检索结果
-        "appendix" //附录信息
+        "appendix", //附录信息
+        "openAccess", //开放获取
+        "interest", //利益冲突声明
+        "contributions" //作者贡献声明
     ],
     pdf: {
         watermark: "Accepted",

@@ -9,8 +9,9 @@ Template.affiliation.helpers({
 	formatAddr:function(){
 		var label=Science.JSON.try2GetRightLangVal(this.label,null,TAPi18n.getLanguage());
 		var affText = Science.JSON.try2GetRightLangVal(this.affText,null,TAPi18n.getLanguage());
-		if(label && label.length<3 && affText.startWith(label))
-			return affText.substr(label.length)
+		if(affText)
+			if(label && label.length<3 && affText.startWith(label))
+				return affText.substr(label.length)
 		return affText;
 	}
 })

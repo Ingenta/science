@@ -6,6 +6,11 @@ Template.ArticleWatch.helpers({
     },
     articleWatch: function () {
         return Articles.findOne({_id: this.toString()})
+    },
+    articleWatchCount: function(){
+        var user = Users.findOne({_id: Meteor.userId()});
+        if (user && user.profile)
+            return user.profile.articlesOfInterest.length > 0;
     }
 });
 

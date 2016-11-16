@@ -11,6 +11,11 @@ Template.TopicWatch.helpers({
         if (Users.findOne().profile)
             if (Users.findOne().profile.topicsOfInterest)
                 return Users.findOne().profile.topicsOfInterest.length;
+    },
+    topicWatchCount: function(){
+        var user = Users.findOne({_id: Meteor.userId()});
+        if (user && user.profile)
+            return user.profile.topicsOfInterest.length > 0;
     }
 })
 Template.TopicWatch.events({

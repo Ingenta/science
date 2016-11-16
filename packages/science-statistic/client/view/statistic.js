@@ -34,7 +34,8 @@ Template.statistic.helpers({
             query.publisher={$in: publisherId};
         if(!Permissions.isAdmin()){
             var permissionScope = Permissions.getPermissionRange(Meteor.userId(),"platform:use-statistic");
-            query._id = {$in:permissionScope.journal};
+            if(permissionScope.length)
+                query._id = {$in:permissionScope.journal};
         }
         return Publications.find(query);
     },
@@ -45,8 +46,22 @@ Template.statistic.helpers({
 
 Template.statistic.events({
     'click .btn': function(){
+        var user = Users.findOne({_id: Meteor.userId()});
         var publisher = $("#filter-publisher").val();
         var publication = $("#filter-journal").val();
+        if(publication==null){
+            if(user){
+                if(user.orbit_roles){
+                    if(user.orbit_roles[1]) {
+                        if (user.orbit_roles[1].scope) {
+                            if (user.orbit_roles[1].scope.journal) {
+                                publication = user.orbit_roles[1].scope.journal;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         var institution = $("#filter-institutions").val();
         var startMonth = $("#startDate").val();
         var endMonth = $("#endDate").val();

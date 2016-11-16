@@ -41,22 +41,19 @@ Template.Topics.helpers({
         var topicId = Session.get("selectedTopic");
         if (!topicId)return;
         return Topics.findOne({_id: topicId});
-    }
-});
-
-AutoForm.addHooks(['addTopicModalForm','updateTopicModalForm'], {
-    onSuccess: function () {
-        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
-        refreshTopicTree();
     },
-    before: {
-        insert: function (doc) {
-            if(Session.get('selectedTopic'))
-                doc.parentId = Session.get('selectedTopic');
-            return doc;
+    topicWatchState: function () {
+        var topicId=Session.get("selectedTopic");
+        var topic = Topics.findOne({_id: topicId});
+        if (Meteor.userId() && topic) {
+            if (!Meteor.user().profile)return TAPi18n.__("watchTopic");
+            var pro = Meteor.user().profile.topicsOfInterest || [];
+            return _.contains(pro, topic._id) ? TAPi18n.__("Watched") : TAPi18n.__("watchTopic");
+        } else {
+            return TAPi18n.__("watchTopic");
         }
-    }
-}, true);
+    },
+});
 
 Template.Topics.events({
     'keyup #topic-search': function (e) {
@@ -77,5 +74,46 @@ Template.Topics.events({
             Topics.remove({_id:tid});
             refreshTopicTree();
         })
+    },
+    "click .watchTopic": function () {
+        var topicId=Session.get("selectedTopic");
+        var topic = Topics.findOne({_id: topicId});
+        if (Meteor.userId()) {
+            var pro = [];
+            if (Meteor.user().profile) {
+                pro = Meteor.user().profile.topicsOfInterest || [];
+            }
+            if (_.contains(pro, topic._id)) {
+                pro = _.without(pro, topic._id)
+            } else {
+                pro.push(topic._id);
+            }
+            Users.update({_id: Meteor.userId()}, {$set: {"profile.topicsOfInterest": pro}});
+        }else{
+            sweetAlert({
+                title             : TAPi18n.__("signInOrRegister"),
+                text              : TAPi18n.__("signInFirst"),
+                type              : "info",
+                showCancelButton  : false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText : TAPi18n.__("OK"),
+                closeOnConfirm    : true
+            });
+            return false;
+        }
     }
-})
+});
+
+AutoForm.addHooks(['addTopicModalForm','updateTopicModalForm'], {
+    onSuccess: function () {
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        refreshTopicTree();
+    },
+    before: {
+        insert: function (doc) {
+            if(Session.get('selectedTopic'))
+                doc.parentId = Session.get('selectedTopic');
+            return doc;
+        }
+    }
+}, true);
