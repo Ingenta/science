@@ -39,9 +39,9 @@
                             {{/if}}
                         {{else}}
                             {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
-                                <!--{{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture,partial" buttonContent="TAPi18n.__('OK')"}}-->
+                                <!--{{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture,partial" buttonContent=getUpdateButtonContent}}-->
                                 <!--{{/afModal}}-->
-                                    {{>jkafModal template="updateIssuePartialModalForm" doc=this id="updateIssuePartial"}}
+                                    {{>jkafModal template="updateIssuePartialModalForm" doc=this}}
                             {{/if}}
                         {{/if}}
                     </li>
@@ -146,7 +146,7 @@
 </template>
 
 <template name="updateIssuePartialModalForm">
-    {{#autoForm collection="Issues" id="updateIssuePartial" doc=this type="update" buttonContent=getUpdateButtonContent}}
+    {{#autoForm collection="Issues" id="updateIssuePartialModalForm" doc=this type="update" buttonContent=getUpdateButtonContent}}
         {{> afQuickField name="picture"}}
         {{> afQuickField name="partial"}}
         <button type="submit" class="btn btn-primary">{{_ "OK"}}</button>

@@ -91,9 +91,10 @@ Science.Email.searchFrequencyEmail = function () {
     }
 };
 
+//期刊关注邮件
 Science.Email.tableOfContentEmail = function (date,email) {
     var emailConfig = EmailConfig.findOne({key: "watchJournal"});
-    Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
+    Issues.find({partial:true,updateDate: {$gt: date}}).forEach(function (oneIssue) {
         var userList;
         if(!email){
             userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
@@ -228,6 +229,7 @@ Science.Email.tableOfContentEmail = function (date,email) {
     });
 };
 
+//优先出版邮件
 Science.Email.availableOnline = function (date ,email) {
     var emailConfig = EmailConfig.findOne({key: "availableOnline"});
     Articles.aggregate([{
@@ -353,6 +355,7 @@ Science.Email.availableOnline = function (date ,email) {
     });
 };
 
+//主题学科关注
 Science.Email.watchTopicEmail = function (date) {
     var emailConfig = EmailConfig.findOne({key: "watchTopic"});
     var homePageNews = homepageNews();

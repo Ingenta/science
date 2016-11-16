@@ -155,4 +155,18 @@ Template.historicalJournalNavigationPanel.helpers({
         if (this._id)
             return getJournalComponentByJournalId(this._id);
     }
+});
+
+AutoForm.addHooks(['updateIssuePartialModalForm'],{
+    onSuccess: function () {
+        $("#jkafModal").modal('hide');
+        FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+    },
+    before: {
+        update: function (doc) {
+            console.log(doc)
+            doc.$set.updateDate = new Date();
+            return doc;
+        }
+    }
 })
