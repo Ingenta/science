@@ -26,6 +26,10 @@ IssuesSchema = new SimpleSchema({
         type: String,
         optional:true
     },
+    partial: {
+        type: Boolean,
+        defaultValue: false
+    },
     picture: {
         type: String,
         optional: true,

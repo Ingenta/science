@@ -28,6 +28,15 @@ Template.journalNavigationPanel.helpers({
     },
     issueDisplay: function () {
         return this._id === Session.get("currentVolumeId") ? "block" : "none";
+    },
+    finishPartial: function(){
+        var journalId = Session.get("currentJournalId");
+        var issue = Issues.findOne({journalId: journalId},{sort: {createDate: -1}});
+        if(issue && this.partial==false)return true;
+    },
+    isPartial:function(){
+        if(this.partial==undefined)return true;
+        return this.partial;
     }
 });
 

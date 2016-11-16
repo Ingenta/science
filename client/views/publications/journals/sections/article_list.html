@@ -31,10 +31,18 @@
                 {{#each issueInVolume journalId volume}}
                     <li class="issue list-group-item" data-value="{{_id}}" data-volume="{{volume}}"
                         data-issue="{{issue}}">
-                        <span>{{_ "issueItem" issue }}</span>
-                        {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
-                            {{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture" buttonContent=getUpdateButtonContent}}
-                            {{/afModal}}
+                        <span>{{_ "issueItem" issue }}{{#if finishPartial}}&nbsp;&nbsp;({{_ "Partial"}}){{/if}}</span>
+                        {{#if isPartial}}
+                            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                                {{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture" buttonContent=getUpdateButtonContent}}
+                                {{/afModal}}
+                            {{/if}}
+                        {{else}}
+                            {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
+                                <!--{{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture,partial" buttonContent="TAPi18n.__('OK')"}}-->
+                                <!--{{/afModal}}-->
+                                    {{>jkafModal template="updateIssuePartialModalForm" doc=this id="updateIssuePartial"}}
+                            {{/if}}
                         {{/if}}
                     </li>
                 {{/each}}
@@ -135,4 +143,12 @@
             {{/each}}
         </div>
     {{/if}}
+</template>
+
+<template name="updateIssuePartialModalForm">
+    {{#autoForm collection="Issues" id="updateIssuePartial" doc=this type="update" buttonContent=getUpdateButtonContent}}
+        {{> afQuickField name="picture"}}
+        {{> afQuickField name="partial"}}
+        <button type="submit" class="btn btn-primary">{{_ "OK"}}</button>
+    {{/autoForm}}
 </template>
