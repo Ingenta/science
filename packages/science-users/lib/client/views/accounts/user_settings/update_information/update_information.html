@@ -30,6 +30,7 @@
 				{{> afQuickField name='profile.institution'}}
 				{{> afQuickField name='profile.fieldOfResearch'}}
 				{{> afQuickField name='profile.journalsOfInterest' options=publicationList}}
+                <b>{{_ "A link to The topics"}}</b><a class="fa fa-external-link" href="{{pathFor 'topics'}}"></a>
 				{{> afQuickField name='profile.topicsOfInterest' options=topicList}}
 				{{> afQuickField name='profile.phone'}}
 				{{> afQuickField name='profile.address'}}

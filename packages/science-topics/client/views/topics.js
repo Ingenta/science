@@ -76,6 +76,7 @@ Template.Topics.events({
         })
     },
     "click .watchTopic": function () {
+        var stairTopics = Topics.find({parentId: null}).fetch();
         var topicId=Session.get("selectedTopic");
         var topic = Topics.findOne({_id: topicId});
         if (Meteor.userId()) {
@@ -83,10 +84,35 @@ Template.Topics.events({
             if (Meteor.user().profile) {
                 pro = Meteor.user().profile.topicsOfInterest || [];
             }
-            if (_.contains(pro, topic._id)) {
-                pro = _.without(pro, topic._id)
-            } else {
-                pro.push(topic._id);
+            if(topic.parentId){
+                if(_.contains(_.pluck(stairTopics, '_id'), topic.parentId)){
+                    var secondaryTopics = Topics.find({parentId: topic._id});
+                    if (_.contains(pro, topic._id)) {
+                        pro = _.without(pro, topic._id)
+                        secondaryTopics.forEach(function(topics){
+                            if (_.contains(pro, topics._id)) {
+                                pro = _.without(pro, topics._id)
+                            }
+                        });
+                    } else {
+                        pro.push(topic._id);
+                        secondaryTopics.forEach(function(topics){
+                            pro.push(topics._id);
+                        });
+                    }
+                }else{
+                    if (_.contains(pro, topic._id)) {
+                        pro = _.without(pro, topic._id)
+                    } else {
+                        pro.push(topic._id);
+                    }
+                }
+            }else{
+                if (_.contains(pro, topic._id)) {
+                    pro = _.without(pro, topic._id)
+                } else {
+                    pro.push(topic._id);
+                }
             }
             Users.update({_id: Meteor.userId()}, {$set: {"profile.topicsOfInterest": pro}});
         }else{
