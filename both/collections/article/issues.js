@@ -78,6 +78,10 @@ IssuesSchema = new SimpleSchema({
         type: String,
         optional:true
     },
+    updateDate: {
+        type: Date,
+        optional:true
+    },
     createDate: {
         type: Date
     }

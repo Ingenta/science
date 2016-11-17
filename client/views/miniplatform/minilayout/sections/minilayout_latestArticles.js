@@ -68,12 +68,17 @@ AutoForm.addHooks(['addLatestArticlesModalForm'], {
         insert: function (doc) {
             // Allow upload files under 1MB
             var image = Images.findOne({_id:doc.picture});
-            if (image.original.size <= 10485760) {
+            if(image){
+                if (image.original.size <= 10485760) {
+                    doc.createDate = new Date();
+                    return doc;
+                }else{
+                    $("#addLatestArticlesModal").modal('hide');
+                    FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+                }
+            }else{
                 doc.createDate = new Date();
                 return doc;
-            }else{
-                $("#addLatestArticlesModal").modal('hide');
-                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
             }
         }
     }

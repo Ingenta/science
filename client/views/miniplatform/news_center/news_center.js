@@ -71,13 +71,19 @@ AutoForm.addHooks(['addMiniMagazineModalForm'], {
         insert: function (doc) {
             // Allow upload files under 1MB
             var image = Images.findOne({_id:doc.picture});
-            if (image.original.size <= 1048576) {
+            if(image){
+                if (image.original.size <= 1048576) {
+                    doc.types = "2";
+                    doc.createDate = new Date();
+                    return doc;
+                }else{
+                    $("#addMiniMagazineModal").modal('hide');
+                    FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+                }
+            }else{
                 doc.types = "2";
                 doc.createDate = new Date();
                 return doc;
-            }else{
-                $("#addMiniMagazineModal").modal('hide');
-                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
             }
         }
     }
@@ -92,13 +98,19 @@ AutoForm.addHooks(['addMiniPublishingModalForm'], {
         insert: function (doc) {
             // Allow upload files under 1MB
             var image = Images.findOne({_id:doc.picture});
-            if (image.original.size <= 1048576) {
+            if(image){
+                if (image.original.size <= 1048576) {
+                    doc.types = "3";
+                    doc.createDate = new Date();
+                    return doc;
+                }else{
+                    $("#addMiniPublishingModal").modal('hide');
+                    FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
+                }
+            }else{
                 doc.types = "3";
                 doc.createDate = new Date();
                 return doc;
-            }else{
-                $("#addMiniPublishingModal").modal('hide');
-                FlashMessages.sendError(TAPi18n.__("Upload Images Error"), {hideDelay: 30000});
             }
         }
     }
