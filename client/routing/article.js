@@ -66,6 +66,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             pub && Session.set('currentPublisherId', pub._id);
             Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/"));
             var article= Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
+            if(article && _.contains(journal.tabSelections,"MOOP")){
+                article.hasMoop=true;
+            }
             article && (article.journal=journal);
             return article
         }
