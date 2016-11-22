@@ -8,6 +8,7 @@ Router.route("/authorCenter/", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('publishers'),
+            HomePageSubs.subscribe('HomeAdvertisementShowPage'),
             HomePageSubs.subscribe('publications')
         ]
     }

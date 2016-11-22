@@ -164,7 +164,6 @@ AutoForm.addHooks(['updateIssuePartialModalForm'],{
     },
     before: {
         update: function (doc) {
-            console.log(doc)
             doc.$set.updateDate = new Date();
             return doc;
         }

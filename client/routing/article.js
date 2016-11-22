@@ -31,6 +31,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
+            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
             Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
             Meteor.subscribe('journalMostCitedBrief', this.params.journalShortTitle)
         ]
@@ -66,6 +67,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             pub && Session.set('currentPublisherId', pub._id);
             Session.set('currentDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/"));
             var article= Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
+            if(article && _.contains(journal.tabSelections,"MOOP")){
+                article.hasMoop=true;
+            }
             article && (article.journal=journal);
             return article
         }
@@ -83,6 +87,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
+            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
             Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
             Meteor.subscribe('journalMostCitedBrief', this.params.journalShortTitle)
         ]
