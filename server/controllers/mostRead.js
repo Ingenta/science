@@ -1,3 +1,38 @@
+getHomeMostReadArticles = function (journalId,limit) {
+    if (!limit)limit = 20;
+    var mostRead;
+    if (journalId) {
+        mostRead = PageViews.aggregate([{
+            $match: {
+                journalId: journalId,
+                action: "fulltext",
+                articleId: {$ne: null}
+            }
+        }, {
+            $group: {
+                _id: '$articleId',
+                count: {$sum: 1}
+            }
+        }, {$sort: {count: -1}}
+            ,{$limit:limit}]);
+    }else {
+        mostRead= PageViews.aggregate([{
+            $match: {
+                action: "fulltext",
+                articleId: {$ne: null}
+            }
+        }, {
+            $group: {
+                _id: '$articleId',
+                count: {$sum: 1}
+            }
+        }, {$sort: {count: -1}}
+            ,{$limit:limit}]);
+    }
+    if (!mostRead)return;
+    return _.pluck(mostRead, "_id");
+}
+
 getMostReadByJournal = function (journalId, limit) {
     if (!limit)limit = 20;
     var mostRead;
@@ -82,8 +117,17 @@ getMostReadSuggestion = function (currentJournalId) {
 }
 createMostReadList = function (journalId, limit) {
     var allIds = [];
+    var most;
     //get the most read object by grouping articleviews
-    var most = getMostReadByJournal(journalId, limit);
+
+    if(limit == 20){
+        most = getMostReadByJournal(journalId, limit);
+    }else{
+        most = getHomeMostReadArticles(journalId,limit);
+        if(most.length < 5){
+            most = getMostReadByJournal(journalId, limit);
+        }
+    }
     if (!most)return [];
     if(!journalId){
         //get the suggestion
