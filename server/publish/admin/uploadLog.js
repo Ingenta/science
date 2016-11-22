@@ -2,7 +2,7 @@ Meteor.publish('uploadPage', function () {//TODO this should use one collection 
     return [
         UploadLog.find({}, {
             sort: {uploadedAt: -1},
-            limit: 50
+            limit: 100
         }),
         UploadTasks.find({}, {
             sort: {started: -1},
