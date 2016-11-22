@@ -2,13 +2,6 @@ ReactiveTabs.createInterface({
 	template: 'accountTabs',
 	onChange: function (slug, template) {
 		history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
-		if (slug === 'normal') {
-			Meteor.subscribe("usersPageType", "normal");
-		} else if (slug === 'publisher') {
-			Meteor.subscribe("usersPageType", "publisher");
-		} else if (slug === 'institution') {
-			Meteor.subscribe("usersPageType", "institution");
-		}
 	}
 });
 
