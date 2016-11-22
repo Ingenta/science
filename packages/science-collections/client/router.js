@@ -9,6 +9,7 @@ Router.route("/collections/", {
 		return [
 			CollectionSubs.subscribe('allCollections'),
 			HomePageSubs.subscribe('images'),
+			HomePageSubs.subscribe('HomeAdvertisementShowPage'),
 			HomePageSubs.subscribe('publishers')
 		]
 	},
