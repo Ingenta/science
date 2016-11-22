@@ -4,20 +4,12 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         return journal;
     },
     onBeforeAction:function(){
-        if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
-            Meteor.call("getLocationByCurrentIP", function (err, result) {
-                if (!result)console.log("ip not found.");
-                else {
-                    //console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-                    Session.set("ipInChina", result.country_code === "CN");
-                }
-            })
-        }
         var journal=this.data();
         if (journal) {
             var pub = Publishers.findOne({shortname: this.params.publisherName});
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
+            Session.set('currentJournalLanguage', journal.language);
             Session.set('baseJournalUrl',"/publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
             Science.setActiveTabByUrl(window.location.search, journal.tabSelections, "Overview");
 
@@ -65,20 +57,12 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
         return journal;
     },
     onBeforeAction:function(){
-        if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
-            Meteor.call("getLocationByCurrentIP", function (err, result) {
-                if (!result)console.log("ip not found.");
-                else {
-                    //console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
-                    Session.set("ipInChina", result.country_code === "CN");
-                }
-            })
-        }
         var journal = this.data();
         if (journal) {
             var pub = Publishers.findOne({shortname: this.params.publisherName});
             Session.set('currentJournalId', journal._id);
             Session.set('currentPublisherId', pub._id);
+            Session.set('currentJournalLanguage', journal.language);
             Session.set('baseJournalUrl',"/publisher/"+this.params.publisherName+"/journal/"+this.params.journalShortTitle);
             var query={journalId:journal._id};
             query.volume=this.params.volume;

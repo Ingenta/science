@@ -77,7 +77,8 @@ Router.route("admin.users", {
     parent: "admin",
     waitOn: function () {
         return [
-            Meteor.subscribe('file_excel')
+            Meteor.subscribe('file_excel'),
+            Meteor.subscribe("usersPageType", "admin")
         ]
     }
 });
@@ -157,8 +158,7 @@ Router.route("admin.logs", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe("latestFiftyLogs"),
-            Meteor.subscribe("usersPageType", "admin")
+            Meteor.subscribe("latestFiftyLogs")
         ]
     }
 });

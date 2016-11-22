@@ -20,14 +20,50 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
+                if (Permissions.isAdmin()){
+                }else{
+                    if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
+                        Meteor.call("getLocationByCurrentIP", function (err, result) {
+                            if (!result)console.log("ip not found.");
+                            else {
+                                //console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+                                Session.set("ipInChina", result.country_code === "CN");
+                            }
+                        })
+                    }
+                }
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
             } else if (slug === 'Accepted') {
+                if (Permissions.isAdmin()){
+                }else{
+                    if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
+                        Meteor.call("getLocationByCurrentIP", function (err, result) {
+                            if (!result)console.log("ip not found.");
+                            else {
+                                //console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+                                Session.set("ipInChina", result.country_code === "CN");
+                            }
+                        })
+                    }
+                }
                 Meteor.subscribe("journalAcceptedTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Online First') {
+                if (Permissions.isAdmin()){
+                }else{
+                    if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
+                        Meteor.call("getLocationByCurrentIP", function (err, result) {
+                            if (!result)console.log("ip not found.");
+                            else {
+                                //console.log("Your location has been detected as: " + JSON.stringify(result));//result.country_name ? result.country_name : result);//"No country found!");
+                                Session.set("ipInChina", result.country_code === "CN");
+                            }
+                        })
+                    }
+                }
                 Meteor.subscribe("journalOnlineFirstTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Author Center') {
                 Meteor.subscribe("journalAuthorCenterTab", Router.current().params.journalShortTitle);
