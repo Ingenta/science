@@ -157,7 +157,8 @@ Router.route("admin.logs", {
     },
     waitOn: function () {
         return [
-            Meteor.subscribe("latestFiftyLogs")
+            Meteor.subscribe("latestFiftyLogs"),
+            Meteor.subscribe("usersPageType", "admin")
         ]
     }
 });

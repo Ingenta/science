@@ -29,7 +29,7 @@ var getQuery = function(searchStr){
 	if(!_.isEmpty(this.scope))
 		_.extend(query,this.scope);
 	if(searchStr)
-		_.extend(query,{$or:[{username:{$regex:searchStr}},{"emails.address":{$regex:searchStr}}]});
+		_.extend(query,{$or:[{username:{$regex:searchStr, $options: "i"}},{"emails.address":{$regex:searchStr}}]});
 	return query;
 }
 
@@ -192,6 +192,10 @@ Template.permissionScopeView.helpers({
 Template.userButtons.helpers({
 	"isNormalTab": function() {
 		return this.level === "normal"
+	},
+	isInstitutionTab: function(){
+		if(this.level == "institution")return;
+		return true;
 	},
 	"isNotEmpty":function(){
 		return Meteor.users.find(getQuery.call(this)).count()
