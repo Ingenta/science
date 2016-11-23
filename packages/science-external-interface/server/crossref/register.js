@@ -12,8 +12,9 @@ var bodyStr = '<body>{journals}</body>';
 var journalStr = '<journal><journal_metadata language="en"><full_title>{journalTitle}</full_title>' +
     '<abbrev_title>{abbrTitle}</abbrev_title><issn media_type="print">{issn}</issn></journal_metadata>' +
     '{articles}</journal>';
-var articleStr = '<journal_article publication_type="full_text"><titles><title>{title}</title></titles>' +
-    '<publication_date media_type="online"><year>{year}</year></publication_date>' +
+var articleStr = '{journalIssue}' +
+    '<journal_article publication_type="full_text"><titles><title>{title}</title></titles>' +
+    '{authors}{articlePublished}{pubDate}{pages}{crossMark}' +
     '<doi_data><doi>{doi}</doi><resource>{url}</resource></doi_data></journal_article>';
 
 var updateTask = function (taskId, setobj) {
@@ -69,13 +70,101 @@ var generationXML = function (options, callback) {
 
             inQuery && articleInfo.doi && dois.push(articleInfo.doi);
             //单条article的xml内容
+            var pages ="";
+            var published = "";
+            var authors = "";
+            var journalIssue = "";
+            var pubDate = "";
             var title = articleInfo.title.en || articleInfo.title.cn;
-            if (title)
-                title = title.replace(/</g, '&#60;').replace(/>/g, '&#62;').replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, "&#39;");
+            if (title){
+                //title = title.replace(/</g, '&#60;').replace(/>/g, '&#62;').replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, "&#39;");
+                title = title.replace(/<sup>/g, '&1sA').replace(/<\/sup>/g, '&2sB').replace(/<sub>/g, '&3sA').replace(/<\/sub>/g, '&4sB').replace(/<(?:.|\s)*?>/g, "")
+                    .replace(/&1sA/g, '<sup>').replace(/&2sB/g, '</sup>').replace(/&3sA/g, '<sub>').replace(/&4sB/g, '</sub>');
+            }
+            //crossMark信息
+            var crossMark = "<crossmark><crossmark_version>1</crossmark_version>" +
+                "<crossmark_policy>10.1360/scp-crossmark-policy-page</crossmark_policy>" +
+                "<crossmark_domains><crossmark_domain><domain>engine.scichina.com</domain></crossmark_domain></crossmark_domains>" +
+                "<crossmark_domain_exclusive>false</crossmark_domain_exclusive></crossmark>";
+            //判断出版日期是否为空，默认日为当月1日
+            if(articleInfo.year){
+                pubDate = "<publication_date media_type='print'><year>"+articleInfo.year+"</year></publication_date>";
+                if(articleInfo.month){
+                    pubDate = "<publication_date media_type='print'><month>"+articleInfo.month+"</month><day>1</day><year>"+articleInfo.year+"</year></publication_date>";
+                }
+            }
+            //判断尾页码是否为空
+            if (articleInfo.elocationId){
+                pages ="<pages><first_page>"+articleInfo.elocationId+"</first_page></pages>";
+                if(articleInfo.endPage){
+                    pages ="<pages><first_page>"+articleInfo.elocationId+"</first_page><last_page>"+articleInfo.endPage+"</last_page></pages>";
+                }
+            }
+            //判断在线出版日期是否为空
+            if(articleInfo.published){
+                var month = articleInfo.published.getMonth()+1;
+                published = "<publication_date media_type='online'><month>"+month+"</month>" +
+                    "<day>"+articleInfo.published.getDate()+"</day><year>"+articleInfo.published.getFullYear()+"</year></publication_date>";
+            }
+            //判断作者是否为空还是单个
+            if(articleInfo.authors){
+                if(articleInfo.authors.length > 1){
+                    var authorsInfo = [];
+                    var firstNode = "<contributors>";
+                    authorsInfo.push(firstNode);
+                    var firstGivenName = articleInfo.authors[0].given.en || articleInfo.authors[0].given.cn;
+                    var firstSurname = articleInfo.authors[0].surname.en || articleInfo.authors[0].surname.cn;
+                    var firstAuthor = "<person_name contributor_role='author' sequence='first'>" +
+                        "<given_name>"+firstGivenName+"</given_name><surname>"+firstSurname+"</surname></person_name>";
+                    authorsInfo.push(firstAuthor);
+                    _.rest(articleInfo.authors).forEach(function(author){
+                        var givenName = author.given.en || author.given.cn;
+                        var surname = author.surname.en || author.surname.cn;
+                        var author = "<person_name contributor_role='author' sequence='additional'>" +
+                            "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name>";
+                        authorsInfo.push(author);
+                    });
+                    var endNode = "</contributors>";
+                    authorsInfo.push(endNode);
+                    authors = authorsInfo.join("");
+                }else{
+                    var givenName = articleInfo.authors[0].given.en || articleInfo.authors[0].given.cn;
+                    var surname = articleInfo.authors[0].surname.en || articleInfo.authors[0].surname.cn;
+                    authors = "<contributors><person_name contributor_role='author' sequence='first'>" +
+                        "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name></contributors>";
+                }
+            }
+            //判断时间和卷期是否为空
+            if(articleInfo.issue){
+                journalIssue = "<journal_issue><journal_volume><volume>"+articleInfo.volume+"</volume></journal_volume><issue>"+articleInfo.issue+"</issue></journal_issue>";
+                if(articleInfo.year){
+                    journalIssue = "<journal_issue><publication_date media_type='print'><year>"+articleInfo.year+"</year></publication_date>" +
+                        "<journal_volume><volume>"+articleInfo.volume+"</volume></journal_volume><issue>"+articleInfo.issue+"</issue></journal_issue>";
+                    if(articleInfo.month){
+                        journalIssue = "<journal_issue><publication_date media_type='print'><month>"+articleInfo.month+"</month><day>1</day><year>"+articleInfo.year+"</year></publication_date>" +
+                            "<journal_volume><volume>"+articleInfo.volume+"</volume></journal_volume><issue>"+articleInfo.issue+"</issue></journal_issue>";
+                        if(articleInfo.published){
+                            var month = articleInfo.published.getMonth()+1;
+                            journalIssue = "<journal_issue><publication_date media_type='online'><month>"+month+"</month>" +
+                                "<day>"+articleInfo.published.getDate()+"</day><year>"+articleInfo.published.getFullYear()+"</year></publication_date>" +
+                                "<publication_date media_type='print'><month>"+articleInfo.month+"</month><day>1</day><year>"+articleInfo.year+"</year>" +
+                                "</publication_date><journal_volume><volume>"+articleInfo.volume+"</volume></journal_volume><issue>"+articleInfo.issue+"</issue></journal_issue>";
+                        }
+                    }
+                }
+            }
             articleInfo.xmlContent = JEC.name2Char(articleStr.replace("{title}", title)
                 .replace("{year}", articleInfo.year)
+                .replace("{month}", articleInfo.month)
+                .replace("{journalIssue}", journalIssue)
+                .replace("{authors}", authors)
+                .replace("{articlePublished}", published)
+                .replace("{pubDate}", pubDate)
+                .replace("{pages}", pages)
+                .replace("{crossMark}", crossMark)
                 .replace("{doi}", articleInfo.doi)
                 .replace("{url}", options.rootUrl + articleInfo.doi));
+
             //结果集中若没有当前这篇文章所属的期刊，先将这个刊加入结果集。
             if (!journals.hasOwnProperty(articleInfo.journalId)) {
                 //查询得到刊的信息
@@ -176,7 +265,7 @@ var generationXMLForSingleArticle = function (doi, callback) {
         return;
     }
 
-    var article = Articles.findOne({doi:doi}, {fields: {journalId: 1, doi: 1, title: 1, year: 1}});
+    var article = Articles.findOne({doi:doi}, {fields: {journalId: 1, volume: 1, issue: 1, doi: 1, title: 1, year: 1, month: 1, published: 1, elocationId: 1, endPage: 1, authors:1}});
     if (!article) {
         logger.error("Can't find article with doi:" + doi);
         return;
@@ -184,12 +273,99 @@ var generationXMLForSingleArticle = function (doi, callback) {
         logger.error("Can't find year (or year is not number) from this article with doi:" + doi);
         return;
     }
-
+    //文章信息
+    var pages ="";
+    var published = "";
+    var authors = "";
+    var journalIssue = "";
+    var pubDate = "";
     var title = article.title.en || article.title.cn;
-    if (title)
-        title = title.replace(/</g, '&#60;').replace(/>/g, '&#62;').replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, "&#39;");
+    if (title){
+        //title = title.replace(/</g, '&#60;').replace(/>/g, '&#62;').replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, "&#39;");
+        title = title.replace(/<sup>/g, '&1sA').replace(/<\/sup>/g, '&2sB').replace(/<sub>/g, '&3sA').replace(/<\/sub>/g, '&4sB').replace(/<(?:.|\s)*?>/g, "")
+            .replace(/&1sA/g, '<sup>').replace(/&2sB/g, '</sup>').replace(/&3sA/g, '<sub>').replace(/&4sB/g, '</sub>');
+    }
+    //crossMark信息
+    var crossMark = "<crossmark><crossmark_version>1</crossmark_version>" +
+        "<crossmark_policy>10.1360/scp-crossmark-policy-page</crossmark_policy>" +
+        "<crossmark_domains><crossmark_domain><domain>engine.scichina.com</domain></crossmark_domain></crossmark_domains>" +
+        "<crossmark_domain_exclusive>false</crossmark_domain_exclusive></crossmark>";
+    //判断出版日期是否为空，默认日为当月1日
+    if(article.year){
+        pubDate = "<publication_date media_type='print'><year>"+article.year+"</year></publication_date>";
+        if(article.month){
+            pubDate = "<publication_date media_type='print'><month>"+article.month+"</month><day>1</day><year>"+article.year+"</year></publication_date>";
+        }
+    }
+    //判断尾页码是否为空
+    if (article.elocationId){
+        pages ="<pages><first_page>"+article.elocationId+"</first_page></pages>";
+        if(article.endPage){
+            pages ="<pages><first_page>"+article.elocationId+"</first_page><last_page>"+article.endPage+"</last_page></pages>";
+        }
+    }
+    //判断在线出版日期是否为空
+    if(article.published){
+        var month = article.published.getMonth()+1;
+        published = "<publication_date media_type='online'><month>"+month+"</month>" +
+            "<day>"+article.published.getDate()+"</day><year>"+article.published.getFullYear()+"</year></publication_date>";
+    }
+    //判断作者是否为空还是单个
+    if(article.authors){
+        if(article.authors.length > 1){
+            var authorsInfo = [];
+            var firstNode = "<contributors>";
+            authorsInfo.push(firstNode);
+            var firstGivenName = article.authors[0].given.en || article.authors[0].given.cn;
+            var firstSurname = article.authors[0].surname.en || article.authors[0].surname.cn;
+            var firstAuthor = "<person_name contributor_role='author' sequence='first'>" +
+                "<given_name>"+firstGivenName+"</given_name><surname>"+firstSurname+"</surname></person_name>";
+            authorsInfo.push(firstAuthor);
+            _.rest(article.authors).forEach(function(author){
+                var givenName = author.given.en || author.given.cn;
+                var surname = author.surname.en || author.surname.cn;
+                var author = "<person_name contributor_role='author' sequence='additional'>" +
+                    "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name>";
+                authorsInfo.push(author);
+            });
+            var endNode = "</contributors>";
+            authorsInfo.push(endNode);
+            authors = authorsInfo.join("");
+        }else{
+            var givenName = article.authors[0].given.en || article.authors[0].given.cn;
+            var surname = article.authors[0].surname.en || article.authors[0].surname.cn;
+            authors = "<contributors><person_name contributor_role='author' sequence='first'>" +
+                "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name></contributors>";
+        }
+    }
+    //判断时间和卷期是否为空
+    if(article.issue){
+        journalIssue = "<journal_issue><journal_volume><volume>"+article.volume+"</volume></journal_volume><issue>"+article.issue+"</issue></journal_issue>";
+        if(article.year){
+            journalIssue = "<journal_issue><publication_date media_type='print'><year>"+article.year+"</year></publication_date>" +
+                "<journal_volume><volume>"+article.volume+"</volume></journal_volume><issue>"+article.issue+"</issue></journal_issue>";
+            if(article.month){
+                journalIssue = "<journal_issue><publication_date media_type='print'><month>"+article.month+"</month><day>1</day><year>"+article.year+"</year></publication_date>" +
+                    "<journal_volume><volume>"+article.volume+"</volume></journal_volume><issue>"+article.issue+"</issue></journal_issue>";
+                if(article.published){
+                    var month = article.published.getMonth()+1;
+                    journalIssue = "<journal_issue><publication_date media_type='online'><month>"+month+"</month>" +
+                        "<day>"+article.published.getDate()+"</day><year>"+article.published.getFullYear()+"</year></publication_date>" +
+                        "<publication_date media_type='print'><month>"+article.month+"</month><day>1</day><year>"+article.year+"</year>" +
+                        "</publication_date><journal_volume><volume>"+article.volume+"</volume></journal_volume><issue>"+article.issue+"</issue></journal_issue>";
+                }
+            }
+        }
+    }
     article.xmlContent = JEC.name2Char(articleStr.replace("{title}", title)
         .replace("{year}", article.year)
+        .replace("{month}", article.month)
+        .replace("{journalIssue}", journalIssue)
+        .replace("{authors}", authors)
+        .replace("{articlePublished}", published)
+        .replace("{pubDate}", pubDate)
+        .replace("{pages}", pages)
+        .replace("{crossMark}", crossMark)
         .replace("{doi}", article.doi)
         .replace("{url}", Config.AutoTasks.DOI_Register.rootUrl + doi));
 
@@ -218,9 +394,9 @@ var generationXMLForSingleArticle = function (doi, callback) {
     var filePath = Config.AutoTasks.DOI_Register.savePath + journal.issn + "_" + timestamp + ".xml";
 
     Science.FSE.outputFile(filePath, finallyXmlContent, Meteor.bindEnvironment(function (err) {
-            if (!err && callback) {
-                callback(doi,filePath);
-            }
+            //if (!err && callback) {
+            //    callback(doi,filePath);
+            //}
         })
     );
 };
