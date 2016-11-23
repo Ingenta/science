@@ -394,9 +394,9 @@ var generationXMLForSingleArticle = function (doi, callback) {
     var filePath = Config.AutoTasks.DOI_Register.savePath + journal.issn + "_" + timestamp + ".xml";
 
     Science.FSE.outputFile(filePath, finallyXmlContent, Meteor.bindEnvironment(function (err) {
-            //if (!err && callback) {
-            //    callback(doi,filePath);
-            //}
+            if (!err && callback) {
+                callback(doi,filePath);
+            }
         })
     );
 };
