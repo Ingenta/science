@@ -1,2 +1,14 @@
+User-agent: bingbot
+User-agent: bing
+User-agent: Baiduspider
+User-agent: Googlebot
+Disallow: /downloadPdf/
+Disallow: /citation/
+Disallow: /xml/
+Disallow: /cfs/
+Disallow: /search
+Disallow: /admin/
+Crawl-delay: 30
+
 User-agent: *
 Disallow: /
