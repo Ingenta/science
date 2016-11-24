@@ -200,6 +200,9 @@ if (Meteor.isServer) {
         },
         FTPSCAN: {
             rate: "every 30 minutes"
+        },
+        Most_Count: {
+            rate: "at 3:00 am"
         }
     }
     Meteor.isLive = process.env.ROOT_URL == "http://engine.scichina.com";
