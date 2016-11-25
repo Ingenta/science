@@ -117,17 +117,8 @@ getMostReadSuggestion = function (currentJournalId) {
 }
 createMostReadList = function (journalId, limit) {
     var allIds = [];
-    var most;
     //get the most read object by grouping articleviews
-
-    if(limit == 20){
-        most = getMostReadByJournal(journalId, limit);
-    }else{
-        most = getHomeMostReadArticles(journalId,limit);
-        if(most.length < 5){
-            most = getMostReadByJournal(journalId, limit);
-        }
-    }
+    var most = getMostReadByJournal(journalId, limit);
     if (!most)return [];
     if(!journalId){
         //get the suggestion
