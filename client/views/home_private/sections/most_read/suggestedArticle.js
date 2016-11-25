@@ -13,8 +13,8 @@ Template.suggestedMostReadButtons.events({
         var id = SuggestedArticles.findOne()._id;
         confirmDelete(e, function () {
             SuggestedArticles.remove({_id: id});
+            setTimeout('location.reload()',3000);
         })
-
     }
 })
 Template.suggestedMostReadElement.helpers({
@@ -40,5 +40,6 @@ Template.suggestedMostReadModalForm.events({
         var articleId = t.$("#saSelectorForMostRead").select2('val');
         SuggestedArticles.insert({articleId:articleId});
         $("#suggestedArticlesModal").modal('hide');
+        setTimeout('location.reload()',2000);
     }
 })
