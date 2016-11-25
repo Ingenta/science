@@ -32,7 +32,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
-            Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
+            Meteor.subscribe('journalMostReadArticle', Session.get('currentJournalId')),
             Meteor.subscribe('journalMostCitedBrief', this.params.journalShortTitle)
         ]
     },
@@ -91,7 +91,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
-            Meteor.subscribe('journalMostReadBrief', this.params.journalShortTitle),
+            Meteor.subscribe('journalMostReadArticle', Session.get('currentJournalId')),
             Meteor.subscribe('journalMostCitedBrief', this.params.journalShortTitle)
         ]
     },

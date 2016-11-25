@@ -26,7 +26,6 @@ HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
 HomePageSubs.subscribe('tag');
 HomePageSubs.subscribe('contentType');
-HomePageSubs.subscribe('most_count');
 HomePageSubs.subscribe('topics');
 
 // HomePageSubs.subscribe('news');
@@ -156,7 +155,7 @@ Meteor.startup(function () {
                         HomePageSubs.subscribe('HomeAdvertisementShowPage'),
                         HomePageSubs.subscribe('images'),
                         HomePageSubs.subscribe('homepageMostRecentArticles'),
-                        HomePageSubs.subscribe('journalMostReadBrief',undefined),
+                        Meteor.subscribe('homeMostReadArticle'),
                         HomePageSubs.subscribe('homepageMostCitedBrief')
                     ]
                 },
@@ -305,7 +304,7 @@ Router.map(function () {
         name: "mostRead.show",
         waitOn: function () {
             return [
-                Meteor.subscribe('homepageMostRead',undefined)
+                Meteor.subscribe('homeMostReadArticle')
             ]
         }
     });
@@ -319,7 +318,7 @@ Router.map(function () {
         name: "mostRead.showWithJournalId",
         waitOn: function () {
             return [
-                Meteor.subscribe('homepageMostRead', this.params.journalId)
+                Meteor.subscribe('journalMostReadArticle', this.params.journalId)
             ]
         }
     });

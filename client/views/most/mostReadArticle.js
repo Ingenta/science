@@ -14,12 +14,12 @@ Template.mostReadArticle.helpers({
         }
         if(mostRead){
             var mostReadArticleIdList = mostRead.ArticlesId;
-        }else{
-            // 获取更多Id
-            Meteor.call("getMostRead", journalId, 20, function (err, result) {
-                Session.set("mostReadIds", result);
-            });
-            var mostReadArticleIdList = Session.get("mostReadIds");
+        //}else{
+        //    // 获取更多Id
+        //    Meteor.call("getMostRead", journalId, 20, function (err, result) {
+        //        Session.set("mostReadIds", result);
+        //    });
+        //    var mostReadArticleIdList = Session.get("mostReadIds");
         }
         // 返回article信息，并排序
         if (!Session.get("sort"))return _.map(mostReadArticleIdList, function (id) {
