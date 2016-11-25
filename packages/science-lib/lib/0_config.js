@@ -202,7 +202,7 @@ if (Meteor.isServer) {
             rate: "every 30 minutes"
         },
         Most_Count: {
-            rate: "at 1:00 am on Fri"
+            rate: "at 10:30 am on Fri"
         }
     }
     Meteor.isLive = process.env.ROOT_URL == "http://engine.scichina.com";
