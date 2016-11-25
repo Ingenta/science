@@ -19,23 +19,33 @@ Template.mostReadArticleList.onCreated(function(){
 })
 Template.mostReadArticleList.helpers({
     mostReadArticlesTopFive: function () {
-        //NOTE: get 6 of each so that more button will show if more than 6 exist
-        //homepage
-        if(Router.current().route.getName() === "home")
-        {
-            if(_.isEmpty(Session.get("homePageMostReadArticleIds"))) return;
-            return _.map(Session.get("homePageMostReadArticleIds"), function (id) {
-                return Articles.findOne({_id: id})
-            });
-        }
-        else if(this.journalId){
+        var mostRead;
+        if(Router.current().route.getName() === "home") {
+            mostRead = MostCount.findOne({type:"homeMostRead"},{sort:{createDate:-1}});
+            if(mostRead){
+                return _.map(_.first(mostRead.ArticlesId,5), function (id) {
+                    return Articles.findOne({_id: id})
+                });
+            }else{
+                if(_.isEmpty(Session.get("homePageMostReadArticleIds"))) return;
+                return _.map(Session.get("homePageMostReadArticleIds"), function (id) {
+                    return Articles.findOne({_id: id})
+                });
+            }
+        }else if(this.journalId){
             var journalId = this.journalId;
-            if(_.isEmpty(Session.get("mostReadIds"+journalId))) return;
-            return _.map(Session.get("mostReadIds"+journalId), function (id) {
-                return Articles.findOne({_id: id})
-            });
+            mostRead= MostCount.findOne({type:"journalMostRead",journalId:journalId},{sort:{createDate:-1}});
+            if(mostRead){
+                return _.map(_.first(mostRead.ArticlesId,5), function (id) {
+                    return Articles.findOne({_id: id})
+                });
+            }else{
+                if(_.isEmpty(Session.get("mostReadIds"+journalId))) return;
+                return _.map(Session.get("mostReadIds"+journalId), function (id) {
+                    return Articles.findOne({_id: id})
+                });
+            }
         }
-
     },
     hasFiveOrMoreMostReadArticles: function () {
       if (Router.current().route.getName() === "home") {

@@ -37,7 +37,8 @@ Package.onUse(function(api) {
       'server/cronTasks/Postman.js',
       'server/cronTasks/FTPScan.js',
       'server/cronTasks/DOIRegister.js',
-      'server/cronTasks/CitationUpdate.js'
+      'server/cronTasks/CitationUpdate.js',
+      'server/cronTasks/MostCount.js'
   ],'server');
 
   api.addFiles([
