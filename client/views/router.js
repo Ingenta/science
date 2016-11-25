@@ -318,7 +318,7 @@ Router.map(function () {
         name: "mostRead.showWithJournalId",
         waitOn: function () {
             return [
-                Meteor.subscribe('journalMostReadArticle', this.params.journalId)
+                Meteor.subscribe('journalMostReadPage', this.params.journalId)
             ]
         }
     });
