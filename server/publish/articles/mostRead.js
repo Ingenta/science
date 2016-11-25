@@ -35,25 +35,3 @@ Meteor.publish('journalMostReadBrief', function (journalShortTitle) {
     ]
 
 });
-
-Meteor.publish('insertHomeMostRead', function () {
-    var result = createMostReadList(undefined,20);
-    if(_.isEmpty(result))return this.ready();
-    var mostRead = MostCount.findOne({type:"homeMostRead"},{sort:{createDate:-1}});
-    if(!mostRead || _.difference(mostRead.ArticlesId,result).length > 0){
-        MostCount.insert({ArticlesId:result, type:"homeMostRead", createDate:new Date()});
-    }
-    return this.ready();
-});
-
-Meteor.publish('insertJournalMostRead', function (journalId) {
-    if(journalId){
-        var result = createMostReadList(journalId,20);
-        if(_.isEmpty(result))return this.ready();
-        var mostRead = MostCount.findOne({type:"journalMostRead",journalId:journalId},{sort:{createDate:-1}});
-        if(!mostRead || _.difference(mostRead.ArticlesId,result).length > 0){
-            MostCount.insert({ArticlesId:result, journalId:journalId, type:"journalMostRead", createDate:new Date()});
-        }
-    }
-    return this.ready();
-});
