@@ -4,6 +4,7 @@ Meteor.publish('most_count', function() {
 
 Meteor.publish('homeMostReadArticle', function() {
     var mostRead = MostCount.find({type:"homeMostRead"},{sort:{createDate:-1}, limit: 1});
+    if(!mostRead)return this.ready();
     var mostReadArticle = mostRead && _.pluck(mostRead.fetch(), "ArticlesId");
     return [
         Articles.find({_id: {$in: mostReadArticle[0]}}, {
@@ -17,6 +18,7 @@ Meteor.publish('homeMostReadArticle', function() {
 Meteor.publish('journalMostReadArticle', function(journalId) {
     check(journalId, String);
     var mostRead = MostCount.find({type:"journalMostRead", journalId:journalId},{sort:{createDate:-1}, limit: 1});
+    if(!mostRead)return this.ready();
     var mostReadArticle = mostRead && _.pluck(mostRead.fetch(), "ArticlesId");
     return [
         Articles.find({_id: {$in: mostReadArticle[0]}}, {
