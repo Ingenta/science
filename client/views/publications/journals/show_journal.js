@@ -16,7 +16,7 @@ ReactiveTabs.createInterface({
         if (Router.current().params.journalShortTitle) {
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
-                Meteor.subscribe("insertMostReadArticles");//只为本地和测试环境提供热读文章信息，不需要开启
+                //Meteor.subscribe("insertMostReadArticles");//只为本地和测试环境提供热读文章信息，不需要开启
                 Meteor.call("insertAudit", Meteor.userId(), "journalOverview", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
