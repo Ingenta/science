@@ -155,7 +155,7 @@ Meteor.startup(function () {
                         HomePageSubs.subscribe('HomeAdvertisementShowPage'),
                         HomePageSubs.subscribe('images'),
                         HomePageSubs.subscribe('homepageMostRecentArticles'),
-                        Meteor.subscribe('homeMostReadArticle'),
+                        HomePageSubs.subscribe('homeMostReadArticle'),
                         HomePageSubs.subscribe('homepageMostCitedBrief')
                     ]
                 },

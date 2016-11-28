@@ -13,7 +13,7 @@ Template.journalNavigationPanel.helpers({
     },
     issueInVolume: function (journalId, volume) {
         if (journalId && volume) {
-            return Issues.find({'journalId': journalId, 'volume': volume},{fields: {createDate: 0}, sort: {order: -1}});
+            return Issues.find({'journalId': journalId, 'volume': volume},{fields: {updateDate:0, createDate: 0}, sort: {order: -1}});
         }
     },
     unionYear: function () { //TODO: this is inefficient consider moving year to volumes collection
@@ -105,9 +105,7 @@ Template.articleListRight.helpers({
         if (curIssue) {
             var i = Issues.findOne({_id: curIssue});
         } else {
-            var v = Volumes.findOne({'journalId': this._id}, {sort: {volume: -1}});
-            if (!v)return;
-            var i = Issues.findOne({'journalId': this._id, 'volume': v.volume}, {sort: {order: -1}});
+            var i=Issues.findOne({journalId:this._id},{sort:{order:-1}});
         }
         if (!i)return;
         var title = TAPi18n.__("volumeItem", i.volume) + ", " + TAPi18n.__("issueItem", i.issue) + ", ";
