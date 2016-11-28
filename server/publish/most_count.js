@@ -28,7 +28,6 @@ Meteor.publish('journalMostReadArticle', function(journalShortTitle) {
         Articles.find({_id: {$in: mostReadArticle[0]}}, {
             fields:articleWithMetadata
         }),
-        SuggestedArticles.find(),
         mostRead
     ]
 });
@@ -43,7 +42,6 @@ Meteor.publish('journalMostReadPage', function(journalId) {
         Articles.find({_id: {$in: mostReadArticle[0]}}, {
             fields:articleWithMetadata
         }),
-        SuggestedArticles.find(),
         mostRead
     ]
 });
