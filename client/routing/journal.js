@@ -38,7 +38,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
         return [
             JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
-            JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
+            //JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('tag'),
