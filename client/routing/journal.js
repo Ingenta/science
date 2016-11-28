@@ -37,13 +37,12 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     waitOn: function () {
         return [
             JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
+            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
-            JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('tag'),
-            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
-            JournalSubs.subscribe('contentType')
+            JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle)
         ]
     },
     onStop: function () {
@@ -93,13 +92,12 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     waitOn: function () {
         return [
             JournalSubs.subscribe("journalOverviewTab", this.params.journalShortTitle),
+            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
-            JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('medias'),
             JournalSubs.subscribe('files'),
             JournalSubs.subscribe('tag'),
-            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
-            JournalSubs.subscribe('contentType')
+            JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle)
         ]
     },
     onStop: function () {
