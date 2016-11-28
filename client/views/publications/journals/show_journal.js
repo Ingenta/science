@@ -34,6 +34,7 @@ ReactiveTabs.createInterface({
                 }
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
+                JournalSubs.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.call("insertAudit", Meteor.userId(), "journalBrowse", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
