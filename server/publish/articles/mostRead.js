@@ -58,3 +58,14 @@ Meteor.publish('insertMostReadArticles', function () {
     }
     return this.ready();
 });
+
+Meteor.publish('insertHomeMostReadArticles', function () {
+    Meteor.call("getMostRead", undefined, 20, function (err, result) {
+        if(_.isEmpty(result))return this.ready();
+        var mostRead = MostCount.findOne({type:"homeMostRead"},{sort:{createDate:-1}});
+        if(mostRead===undefined || _.difference(mostRead.ArticlesId,result).length > 0){
+            MostCount.insert({ArticlesId:result, type:"homeMostRead", createDate:new Date()});
+        }
+    });
+    return this.ready();
+});
