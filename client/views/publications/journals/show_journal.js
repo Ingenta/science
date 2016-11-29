@@ -21,8 +21,9 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
-                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
-                template.waiting.set(!articlesSub.ready());
+                Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
+                //var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
+                //template.waiting.set(!articlesSub.ready());
                 if (Permissions.isAdmin()){
                 }else{
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
