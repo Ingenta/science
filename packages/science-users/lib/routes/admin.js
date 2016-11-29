@@ -123,8 +123,7 @@ Router.route("admin.tag", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe("tag"),
-            HomePageSubs.subscribe('pages')
+            HomePageSubs.subscribe('tag')
         ]
     }
 });
@@ -140,8 +139,7 @@ Router.route("admin.contentType", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe("contentType"),
-            HomePageSubs.subscribe('pages')
+            HomePageSubs.subscribe('contentType')
         ]
     }
 });

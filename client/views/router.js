@@ -18,17 +18,10 @@ ArticleSubs = new SubsManager();
 HomePageSubs.subscribe("current_user_data");
 Meteor.subscribe('pages');
 HomePageSubs.subscribe('images');
-Meteor.subscribe('advertisement');
 HomePageSubs.subscribe('institutions');
 HomePageSubs.subscribe('searchHistory');
-// HomePageSubs.subscribe('emailConfig');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
-HomePageSubs.subscribe('tag');
-HomePageSubs.subscribe('contentType');
-HomePageSubs.subscribe('topics');
-
-// HomePageSubs.subscribe('news');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -135,7 +128,6 @@ Meteor.startup(function () {
                         MiniPlatformSubs.subscribe('news_recommend'),
                         MiniPlatformSubs.subscribe('column'),
                         MiniPlatformSubs.subscribe('news_center'),
-                        HomePageSubs.subscribe('publications'),
                         MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
                         MiniPlatformSubs.subscribe('news_link')
                     ]
