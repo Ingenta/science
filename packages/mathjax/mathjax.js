@@ -49,6 +49,7 @@ function onMathJaxReady(callback) {
 	} else {
 		if (!onMathJaxReady.listeners) {
 			$.getScript( // TODO: let the user change the source
+				//'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 				'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML'
 			).done(function () {
 					//------------------
