@@ -129,7 +129,8 @@ Meteor.startup(function () {
                         MiniPlatformSubs.subscribe('column'),
                         MiniPlatformSubs.subscribe('news_center'),
                         MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
-                        MiniPlatformSubs.subscribe('news_link')
+                        MiniPlatformSubs.subscribe('news_link'),
+                        MiniPlatformSubs.subscribe('publications')
                     ]
                 }
             });
@@ -190,7 +191,7 @@ Router.route("topics/:topicsId/", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('topics'),
-            Meteor.subscribe('articlesInTopic', this.params.topicsId)
+            HomePageSubs.subscribe('articlesInTopic', this.params.topicsId)
         ]
     }
 });
@@ -252,6 +253,7 @@ Router.map(function () {
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
                 CollectionSubs.subscribe('allCollections'),
+                HomePageSubs.subscribe('topics'),
                 HomePageSubs.subscribe('tag')
             ]
         }
@@ -266,8 +268,7 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('publishers'),
-                JournalSubs.subscribe("journal_ad")
+                Meteor.subscribe("journal_ad")
             ]
         }
     });
@@ -281,7 +282,7 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                JournalSubs.subscribe("journal_ad")
+                Meteor.subscribe("journal_ad")
             ]
         }
     });
@@ -364,9 +365,11 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('publications'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('topics')
+                HomePageSubs.subscribe('publications'),
+                HomePageSubs.subscribe('contentType'),
+                HomePageSubs.subscribe('topics'),
+                HomePageSubs.subscribe('tag')
             ]
         }
     });
@@ -381,7 +384,7 @@ Router.map(function () {
         name: "news.show",
         waitOn: function () {
             return [
-                JournalSubs.subscribe('files'),
+                Meteor.subscribe('files'),
                 Meteor.subscribe('fullNewsPage', this.params.newsId)
             ]
         }
