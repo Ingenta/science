@@ -42,7 +42,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('journalOverviewTab', this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
-            JournalSubs.subscribe('medias'),
+            //JournalSubs.subscribe('journalMediasInfo', this.params.journalShortTitle),
             JournalSubs.subscribe('files')
         ]
     },
@@ -98,7 +98,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             JournalSubs.subscribe('journalOverviewTab', this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
-            JournalSubs.subscribe('medias'),
+            //JournalSubs.subscribe('journalMediasInfo', this.params.journalShortTitle),
             JournalSubs.subscribe('files')
         ]
     },
@@ -143,7 +143,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/guide/Manuscr
     waitOn: function () {
         return [
             Meteor.subscribe('AuthorCenterPage', this.params.guideId,this.params.journalShortTitle)
-            //JournalSubs.subscribe('files')
         ]
     }
 

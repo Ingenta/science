@@ -95,9 +95,12 @@ ReactiveTabs.createInterface({
                 }
             }
             Users.recent.read(article);
-        }
-        else if (slug === 'metrics') {
+        } else if (slug === 'metrics') {
             prepareMetricsForThisArticle();
+        } else if (slug === 'data media') {
+            Meteor.subscribe('articleMediasInfo', article.doi);
+        } else if (slug === 'moop') {
+            Meteor.subscribe('articleMediasInfo', article.doi);
         }
     }
 });
