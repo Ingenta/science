@@ -21,11 +21,9 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
-                Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
-                //var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
-                //template.waiting.set(!articlesSub.ready());
-                if (Permissions.isAdmin()){
-                }else{
+                var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
+                template.waiting.set(!articlesSub.ready());
+                if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
                             if (!result)console.log("ip not found.");
@@ -41,8 +39,7 @@ ReactiveTabs.createInterface({
                 });
             } else if (slug === 'Accepted') {
                 Meteor.subscribe("journalAcceptedTab", journal._id);
-                if (Permissions.isAdmin()){
-                }else{
+                if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
                             if (!result)console.log("ip not found.");
@@ -55,8 +52,7 @@ ReactiveTabs.createInterface({
                 }
             } else if (slug === 'Online First') {
                 Meteor.subscribe("journalOnlineFirstTab", journal._id);
-                if (Permissions.isAdmin()){
-                }else{
+                if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
                             if (!result)console.log("ip not found.");

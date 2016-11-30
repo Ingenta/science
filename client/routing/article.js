@@ -38,8 +38,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     },
     onBeforeAction: function () {
         Session.set('moopFile',null);
-        if (Permissions.isAdmin()){
-        }else{
+        if (Permissions.isAdmin() === false){
             if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                 Meteor.call("getLocationByCurrentIP", function (err, result) {
                     if (!result)console.log("ip not found.");
@@ -96,8 +95,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
         ]
     },
     onBeforeAction: function () {
-        if (Permissions.isAdmin()){
-        }else{
+        if (Permissions.isAdmin() === false){
             if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                 Meteor.call("getLocationByCurrentIP", function (err, result) {
                     if (!result)console.log("ip not found.");
