@@ -107,64 +107,36 @@ Meteor.publish('journalOverviewTab', function (journalShortTitle) {
                 createdAt:1
             }
         }),
-        Publishers.find({}, {
-            fields: {shortname: 1}
-        }),
-        Publications.find({}, {
-            fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
-        }),
-        SuggestedArticles.find(),
         recommended,
         mostRead,
         mostCitedList
     ]
-
 });
 
 Meteor.publish('publishersJournalsTab', function (journalId) {
     if (!journalId)return this.ready();
     return Articles.find({journalId: journalId});
 })
-Meteor.publish('journalOnlineFirstTab', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalOnlineFirstTab', function (journalId) {
+    if (!journalId)return this.ready();
     return Articles.find({journalId: journalId, pubStatus: "online_first"});
 })
-Meteor.publish('journalAcceptedTab', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalAcceptedTab', function (journalId) {
+    if (!journalId)return this.ready();
     return Articles.find({journalId: journalId, pubStatus: "accepted"});
 })
-Meteor.publish('journalEditorialBoard', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalEditorialBoard', function (journalId) {
+    if (!journalId)return this.ready();
     return [
         EditorialBoard.find({publications: journalId}),
         About.find({publications: journalId})
     ]
 })
-Meteor.publish('journalAuthorCenterTab', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalAuthorCenterTab', function (journalId) {
+    if (!journalId)return this.ready();
     return AuthorCenter.find({publications: journalId});
 })
-Meteor.publish('journalMoopTab', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalMoopTab', function (journalId) {
+    if (!journalId)return this.ready();
     return Collections.Medias.find({journalId: journalId});
 })
