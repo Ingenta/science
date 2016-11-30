@@ -22,7 +22,6 @@ HomePageSubs.subscribe('institutions');
 HomePageSubs.subscribe('searchHistory');
 HomePageSubs.subscribe('publishers');
 HomePageSubs.subscribe('publications');
-HomePageSubs.subscribe('advertisement');
 
 Router.onBeforeAction(function () {
     // loading indicator here
@@ -146,7 +145,7 @@ Meteor.startup(function () {
                 waitOn: function () {
                     return [
                         HomePageSubs.subscribe('homepageNews'),
-                        //HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+                        HomePageSubs.subscribe('HomeAdvertisementShowPage'),
                         HomePageSubs.subscribe('images'),
                         HomePageSubs.subscribe('homepageMostRecentArticles'),
                         HomePageSubs.subscribe('homeMostReadArticle'),
@@ -171,7 +170,7 @@ Router.route("/topics/", {
     },
     waitOn: function () {
         return [
-            //HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+            HomePageSubs.subscribe('HomeAdvertisementShowPage'),
             HomePageSubs.subscribe('topics')
         ]
     },
@@ -208,7 +207,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 HomePageSubs.subscribe('images'),
-                //HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+                HomePageSubs.subscribe('HomeAdvertisementShowPage'),
                 HomePageSubs.subscribe('publishers')
             ]
         }
@@ -222,7 +221,7 @@ Router.map(function () {
         waitOn: function () {
             return [
                 HomePageSubs.subscribe('images'),
-                //HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+                HomePageSubs.subscribe('HomeAdvertisementShowPage'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications')
             ]
