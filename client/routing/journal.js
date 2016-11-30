@@ -36,9 +36,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
     name: "journal.name",
     waitOn: function () {
         return [
-            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
+            //JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
             JournalSubs.subscribe('tag'),
-            JournalSubs.subscribe('contentType'),
+            //JournalSubs.subscribe('contentType'),
             JournalSubs.subscribe('journalOverviewTab', this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
@@ -92,9 +92,9 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     name: "journal.name.long",
     waitOn: function () {
         return [
-            JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
+            //JournalSubs.subscribe('JournalAdvertisementShowPage',this.params.journalShortTitle),
             JournalSubs.subscribe('tag'),
-            JournalSubs.subscribe('contentType'),
+            //JournalSubs.subscribe('contentType'),
             JournalSubs.subscribe('journalOverviewTab', this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
