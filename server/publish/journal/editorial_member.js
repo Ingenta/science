@@ -1,9 +1,5 @@
-Meteor.publish('journalAboutTab', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
+Meteor.publish('journalAboutTab', function (journalId) {
+    if (!journalId)return this.ready();
     return [
         EditorialMember.find({publications: journalId}),
         AboutArticles.find({publications: journalId})

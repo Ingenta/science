@@ -2,13 +2,8 @@ Meteor.publish('homepageNews', function () {
     return News.find({publications: {$exists: false}},{limit:3});
 });
 
-Meteor.publish('journalNews', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
-
+Meteor.publish('journalNews', function (journalId) {
+    if (!journalId)return this.ready();
     return [
         News.find({publications: journalId}),
         Meeting.find({publications: journalId})

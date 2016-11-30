@@ -1,7 +1,3 @@
-Template.aboutTitle.onCreated(function(){
-    this.subscribe("journalEditorialBoard", Router.current().params.journalShortTitle);
-})
-
 Template.aboutTitle.helpers({
     abouts: function () {
         var publicationsId = Session.get('currentJournalId');
