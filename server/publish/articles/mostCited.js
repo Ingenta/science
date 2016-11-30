@@ -8,13 +8,7 @@ Meteor.publish('journalMostCited', function (journalId) {
         Articles.find({_id: {$in: ids}}, {
             fields: articleWithMetadata
         }),
-        mostCited,
-        Publishers.find({}, {
-            fields: {shortname: 1}
-        }),
-        Publications.find({}, {
-            fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
-        })
+        mostCited
     ]
 });
 Meteor.publish('journalMostCitedBrief', function (journalShortTitle) {
@@ -41,13 +35,7 @@ Meteor.publish('homepageMostCited', function () {
         Articles.find({_id: {$in: ids}}, {
             fields: articleWithMetadata
         }),
-        MostCited.find(),
-        Publishers.find({}, {
-            fields: {shortname: 1}
-        }),
-        Publications.find({}, {
-            fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
-        })
+        mostCited
     ]
 });
 Meteor.publish('homepageMostCitedBrief', function () {
@@ -57,13 +45,7 @@ Meteor.publish('homepageMostCitedBrief', function () {
         Articles.find({_id: {$in: ids}}, {
             fields: {doi: 1, title: 1}
         }),
-        mostCited,
-        Publishers.find({}, {
-            fields: {shortname: 1}
-        }),
-        Publications.find({}, {
-            fields: {publisher: 1, shortTitle: 1, title: 1, titleCn: 1}
-        })
+        mostCited
     ]
 });
 
