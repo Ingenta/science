@@ -40,6 +40,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('journalOverviewTab', this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
+            JournalSubs.subscribe('journalMoopTab', this.params.journalShortTitle),
             JournalSubs.subscribe('files')
         ]
     },
@@ -93,6 +94,7 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             JournalSubs.subscribe('journalOverviewTab', this.params.journalShortTitle),
             CollectionSubs.subscribe('allCollections'),
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
+            JournalSubs.subscribe('journalMoopTab', this.params.journalShortTitle),
             JournalSubs.subscribe('files')
         ]
     },

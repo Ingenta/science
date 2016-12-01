@@ -69,16 +69,9 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe("journalAuthorCenterTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Special Topics') {
                 Meteor.subscribe('journalSpecialTopics', Router.current().params.journalShortTitle);
-                //Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
             } else if (slug === 'About') {
                 Meteor.subscribe("journalAboutTab", Router.current().params.journalShortTitle);
-            } else if (slug === 'Media') {
-                Meteor.subscribe('journalMediasInfo', Router.current().params.journalShortTitle);
             } else if (slug === 'MOOP') {
-                Meteor.subscribe('journalMediasInfo', Router.current().params.journalShortTitle);
-                Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
-                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
-                Meteor.subscribe("journalBrowseTabIssuesList", Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalMoopTabArticleList', journal._id);
             } else if (slug === 'News') {
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
