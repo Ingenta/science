@@ -24,6 +24,7 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe('contentType');
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
+                Meteor.subscribe("journalBrowseTabIssuesList", Router.current().params.journalShortTitle);
                 if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
@@ -39,7 +40,7 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Accepted') {
-                Meteor.subscribe("journalAcceptedTab", journal._id);
+                Meteor.subscribe("journalAcceptedTab", Router.current().params.journalShortTitle);
                 if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
@@ -52,7 +53,7 @@ ReactiveTabs.createInterface({
                     }
                 }
             } else if (slug === 'Online First') {
-                Meteor.subscribe("journalOnlineFirstTab", journal._id);
+                Meteor.subscribe("journalOnlineFirstTab", Router.current().params.journalShortTitle);
                 if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
@@ -65,21 +66,21 @@ ReactiveTabs.createInterface({
                     }
                 }
             } else if (slug === 'Author Center') {
-                Meteor.subscribe("journalAuthorCenterTab", journal._id);
+                Meteor.subscribe("journalAuthorCenterTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Special Topics') {
                 Meteor.subscribe('journalSpecialTopics', Router.current().params.journalShortTitle);
                 Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
             } else if (slug === 'About') {
-                Meteor.subscribe("journalAboutTab", journal._id);
+                Meteor.subscribe("journalAboutTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Media') {
-                Meteor.subscribe('journalMediasInfo', journal._id);
+                Meteor.subscribe('journalMediasInfo', Router.current().params.journalShortTitle);
             } else if (slug === 'MOOP') {
-                Meteor.subscribe('journalMediasInfo', journal._id);
-                Meteor.subscribe("journalMoopTab", journal._id);
+                Meteor.subscribe('journalMediasInfo', Router.current().params.journalShortTitle);
+                Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalMoopTabArticleList', journal._id);
             } else if (slug === 'News') {
-                Meteor.subscribe('journalNewsMeeting', journal._id)
+                Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }
         }
     }
