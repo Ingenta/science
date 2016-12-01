@@ -39,7 +39,7 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Accepted') {
-                Meteor.subscribe("journalAcceptedTab", Router.current().params.journalShortTitle);
+                Meteor.subscribe("journalAcceptedTab", journal._id);
                 if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
