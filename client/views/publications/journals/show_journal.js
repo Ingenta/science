@@ -16,7 +16,7 @@ ReactiveTabs.createInterface({
         if (Router.current().params.journalShortTitle) {
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
-                //Meteor.subscribe("insertMostReadArticles");//只为本地和测试环境提供热读文章信息，不需要开启
+                Meteor.subscribe('tag');
                 Meteor.call("insertAudit", Meteor.userId(), "journalOverview", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
@@ -39,7 +39,7 @@ ReactiveTabs.createInterface({
                     if (err) console.log(err);
                 });
             } else if (slug === 'Accepted') {
-                Meteor.subscribe("journalAcceptedTab", journal._id);
+                Meteor.subscribe("journalAcceptedTab", Router.current().params.journalShortTitle);
                 if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
@@ -69,8 +69,6 @@ ReactiveTabs.createInterface({
             } else if (slug === 'Special Topics') {
                 Meteor.subscribe('journalSpecialTopics', Router.current().params.journalShortTitle);
                 Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
-            } else if (slug === 'Editorial Board') {
-                Meteor.subscribe("journalEditorialBoard", journal._id);
             } else if (slug === 'About') {
                 Meteor.subscribe("journalAboutTab", journal._id);
             } else if (slug === 'Media') {
@@ -81,7 +79,7 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalMoopTabArticleList', journal._id);
             } else if (slug === 'News') {
-                Meteor.subscribe('journalNews', journal._id)
+                Meteor.subscribe('journalNewsMeeting', journal._id)
             }
         }
     }

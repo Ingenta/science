@@ -125,11 +125,22 @@ Meteor.publish('journalAcceptedTab', function (journalId) {
     if (!journalId)return this.ready();
     return Articles.find({journalId: journalId, pubStatus: "accepted"});
 })
-Meteor.publish('journalEditorialBoard', function (journalId) {
-    if (!journalId)return this.ready();
+Meteor.publish('journalEditorialBoard', function (journalShortTitle) {
+    if (!journalShortTitle)return this.ready();
+    check(journalShortTitle, String);
+    var journal = Publications.findOne({shortTitle: journalShortTitle});
+    if (!journal)return this.ready();
+    var journalId = journal._id;
     return [
         EditorialBoard.find({publications: journalId}),
         About.find({publications: journalId})
+    ]
+})
+Meteor.publish('journalNewsMeeting', function (journalId) {
+    if (!journalId)return this.ready();
+    return [
+        News.find({publications: journalId}),
+        Meeting.find({publications: journalId})
     ]
 })
 Meteor.publish('journalAuthorCenterTab', function (journalId) {
