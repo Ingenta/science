@@ -22,9 +22,9 @@ ReactiveTabs.createInterface({
                 });
             } else if (slug === 'Browse') {
                 Meteor.subscribe('contentType');
+                Meteor.subscribe("journalBrowseTabIssuesList", Router.current().params.journalShortTitle);
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
-                Meteor.subscribe("journalBrowseTabIssuesList", Router.current().params.journalShortTitle);
                 if (Permissions.isAdmin() === false){
                     if (!Session.get("ipInChina")) { //TODO: can be removed after february when the rules about springerlink licensing change
                         Meteor.call("getLocationByCurrentIP", function (err, result) {
@@ -69,7 +69,7 @@ ReactiveTabs.createInterface({
                 Meteor.subscribe("journalAuthorCenterTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Special Topics') {
                 Meteor.subscribe('journalSpecialTopics', Router.current().params.journalShortTitle);
-                Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
+                //Meteor.subscribe("journalIssuesIncludingHistorical", Router.current().params.journalShortTitle);
             } else if (slug === 'About') {
                 Meteor.subscribe("journalAboutTab", Router.current().params.journalShortTitle);
             } else if (slug === 'Media') {
@@ -77,9 +77,9 @@ ReactiveTabs.createInterface({
             } else if (slug === 'MOOP') {
                 Meteor.subscribe('journalMediasInfo', Router.current().params.journalShortTitle);
                 Meteor.subscribe("journalMoopTab", Router.current().params.journalShortTitle);
+                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
                 Meteor.subscribe("journalBrowseTabIssuesList", Router.current().params.journalShortTitle);
                 Meteor.subscribe('journalMoopTabArticleList', journal._id);
-                Meteor.subscribe('journalBrowseTabVolumeList', Router.current().params.journalShortTitle);
             } else if (slug === 'News') {
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }
