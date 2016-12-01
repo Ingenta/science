@@ -4,7 +4,6 @@ Template.journalNavigationPanel.onCreated(function () {
     Meteor.call("volumesAtJournal", this.data._id, function (err, response) {
         if (err) console.log(err);
         x.set(response);
-        response[0] && Session.set('currentVolumeId',response[0]._id);
     })
 })
 
