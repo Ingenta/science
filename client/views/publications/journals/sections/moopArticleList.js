@@ -76,9 +76,8 @@ Template.articleListRightOnlyMoop.helpers({
         return articlePaginator.find({doi:{$in:moopdoi(this._id)}}, {itemsPerPage: numPerPage, sort: {padPage: 1}});
     },
     moreThan10: function(){
-        return articlePaginator.find({doi:{$in:moopdoi(this._id)}}).count()>10;
-        //if(!_.isEmpty(allmoops.get())){
-        //    return moopdoi(this._id).length > 10;
-        //}
+        if(!_.isEmpty(allmoops.get())){
+            return moopdoi(this._id).length > 10;
+        }
     }
 });

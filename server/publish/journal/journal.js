@@ -15,7 +15,7 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     }
     return [
         Volumes.find({journalId: {$in: idArr}}),
-        Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1},limit:300})
+        Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1},limit:360})
     ]
 });
 
@@ -34,7 +34,7 @@ Meteor.publish('journalBrowseTabIssuesList', function (journalShortTitle) {
         idArr = _.union(idArr, journal.historicalJournals)
     }
     return [
-        Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1},skip:300})
+        Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1},skip:360})
     ]
 });
 
