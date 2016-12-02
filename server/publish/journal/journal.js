@@ -13,7 +13,6 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     if (journal && !_.isEmpty(journal.historicalJournals)) {
         idArr = _.union(idArr, journal.historicalJournals)
     }
-    updateVolumeYear()
     return [
         Volumes.find({journalId: {$in: idArr}}),
         Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1}})
