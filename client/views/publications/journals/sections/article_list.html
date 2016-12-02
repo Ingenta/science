@@ -24,8 +24,8 @@
 <template name="journalNavigationPanel">
     <ul class="list-group">
         {{#each volumeInJournal}}
-            <li class="volume list-group-item">
-                <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }} {{unionYear}}</span>
+            <li class="volume list-group-item" data-value="{{_id}}">
+                <span class="volume-toggle"><i class="fa {{class}}"></i> {{_ "volumeItem" volume }} {{year}}</span>
             </li>
             <ul id="vol_{{_id}}" class="issues list-group" style="display:{{issueDisplay}}">
                 {{#each issueInVolume journalId volume}}
@@ -39,8 +39,6 @@
                             {{/if}}
                         {{else}}
                             {{#if permissionCheckWithScope "modify-journal" "resource"  "journal" journalId}}
-                                <!--{{#afModal class="fa fa-pencil pull-right" title=getUpdateButtonContent collection="Issues" doc=_id operation="update" fields="picture,partial" buttonContent=getUpdateButtonContent}}-->
-                                <!--{{/afModal}}-->
                                     {{>jkafModal template="updateIssuePartialModalForm" doc=this}}
                             {{/if}}
                         {{/if}}
