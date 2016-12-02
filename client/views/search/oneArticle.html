@@ -4,7 +4,7 @@
         <li>
             <div style="margin-bottom: 10px;">
                 {{#if contentType}}
-                    <span class="label label-primary" style="font-size: 12px">{{contentType}}</span>
+                    <span class="label label-primary" style="font-size: 12px">{{{contentType}}}</span>
                 {{/if}}
                 {{> topicNameTemplate}}
             </div>
@@ -16,7 +16,7 @@
                 <div class="pull-right divTip">
                     {{#if special}}
                         <span class="label label-primary">{{_ "Topical Collection"}}</span>
-                        <p>{{special}}</p>
+                        <p>{{{special}}}</p>
                     {{/if}}
                 </div>
                 <div><a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>
@@ -60,6 +60,6 @@
 
 <template name="topicNameTemplate">
     {{#if topic}}
-        <span class="label label-primary" style="font-size: 12px">{{showTopicName topic}}</span>
+        <span class="label label-primary" style="font-size: 12px">{{{showTopicName topic}}}</span>
     {{/if}}
 </template>
