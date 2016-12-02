@@ -203,7 +203,10 @@ if (Meteor.isServer) {
         },
         Most_Count: {
             rate: "at 1:00 am on Sun"
-        }
+        },
+        VolumeYear: {
+            rate: "at 4:50 pm"
+        },
     }
     Meteor.isLive = process.env.ROOT_URL == "http://engine.scichina.com";
     Config.chinaCodes=["CN","HK","TW","MO"]; //用于地区统计处,将香港\台湾\澳门归并到中国范围中
