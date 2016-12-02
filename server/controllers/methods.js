@@ -69,6 +69,10 @@ Meteor.methods({
         updateMostCited && updateMostCited();
         return true;
     },
+    updateVolumeYear: function () {
+        updateVolumeYear && updateVolumeYear();
+        return true;
+    },
     getMoopForArticle: function (doi) {
         if (!doi) return;
         check(doi, String);

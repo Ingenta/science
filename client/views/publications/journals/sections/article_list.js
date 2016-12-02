@@ -11,18 +11,22 @@ Template.journalNavigationPanel.helpers({
     volumeInJournal: function () {
         return Template.instance().volumes.get()
     },
-    issueInVolume: function (journalId, volume) {
-        if (journalId && volume) {
-            return Issues.find({'journalId': journalId, 'volume': volume},{fields: {updateDate:0, createDate: 0}, sort: {order: -1}});
+    issueInVolume: function (journalId,volume) {
+        var volumeId = Session.get("currentVolumeId");
+        var vol = Volumes.findOne({_id:volumeId});
+        if (journalId && vol) {
+            if(vol.volume ===volume){
+                return Issues.find({'journalId': journalId, 'volume': vol.volume},{fields: {updateDate:0, createDate: 0}, sort: {order: -1}});
+            }
         }
     },
-    unionYear: function () { //TODO: this is inefficient consider moving year to volumes collection
-        var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume}, {fields: {year: 1}}).fetch();
-        var years = _.pluck(issues, 'year');
-        years = _.uniq(years.join(", ").split(/, ?/)).sort();
-        if (!_.isEmpty(years))
-            return "(" + years.join(", ") + ")"
-    },
+    //unionYear: function () { //TODO: this is inefficient consider moving year to volumes collection
+    //    var issues = Issues.find({'journalId': this.journalId, 'volume': this.volume}, {fields: {year: 1}}).fetch();
+    //    var years = _.pluck(issues, 'year');
+    //    years = _.uniq(years.join(", ").split(/, ?/)).sort();
+    //    if (!_.isEmpty(years))
+    //        return "(" + years.join(", ") + ")"
+    //},
     class: function () {
         return this._id === Session.get("currentVolumeId") ? "fa-minus" : "fa-plus";
     },
@@ -42,6 +46,8 @@ Template.journalNavigationPanel.helpers({
 
 Template.journalNavigationPanel.events({
     "click .volume": function (event) {
+        var v = $(event.currentTarget).data().value;
+        v && Session.set('currentVolumeId',v);
         var toggleOption = ["fa-plus", "fa-minus"];
         var remove = $(event.currentTarget).find("i.fa-plus").length ? 0 : 1;
         $(event.currentTarget).find("i").removeClass(toggleOption[remove]).addClass(toggleOption[1 - remove]);

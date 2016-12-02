@@ -13,27 +13,11 @@ Meteor.publish('journalBrowseTabVolumeList', function (journalShortTitle) {
     if (journal && !_.isEmpty(journal.historicalJournals)) {
         idArr = _.union(idArr, journal.historicalJournals)
     }
+    updateVolumeYear()
     return [
         Volumes.find({journalId: {$in: idArr}}),
-        Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1},limit:360})
+        Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1}})
     ]
-});
-
-Meteor.publish('journalBrowseTabIssuesList', function (journalShortTitle) {
-    if (!journalShortTitle)return this.ready();
-    check(journalShortTitle, String);
-    var journal = Publications.findOne({shortTitle: journalShortTitle});
-    if (!journal)return this.ready();
-    var journalId = journal._id;
-
-    //combine all historical journals
-    var idArr = [journalId];
-    var journal = Publications.findOne({_id: journalId}, {fields: {historicalJournals: 1}});
-
-    if (journal && !_.isEmpty(journal.historicalJournals)) {
-        idArr = _.union(idArr, journal.historicalJournals)
-    }
-    return Issues.find({journalId: {$in: idArr}}, {fields: {updateDate:0,createDate: 0}, sort: {order: -1},skip:360});
 });
 
 Meteor.publish('journalBrowseTabArticleList', function (issueId) {

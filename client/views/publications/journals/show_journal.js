@@ -22,7 +22,6 @@ ReactiveTabs.createInterface({
                 });
             } else if (slug === 'Browse') {
                 Meteor.subscribe('contentType');
-                Meteor.subscribe("journalBrowseTabIssuesList", Router.current().params.journalShortTitle);
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
                 if (Permissions.isAdmin() === false){
