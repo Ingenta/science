@@ -71,20 +71,17 @@ Template.articleList.helpers({
 
 Template.articleListRight.helpers({
     articles: function () {
-        var journalId = Session.get("currentJournalId");
-        if(journalId){
-            var numPerPage = Session.get('PerPage') || 10;
-            if (Template.currentData().pubStatus === 'accepted') {
-                return acceptedArticlesPaginator.find({journalId:journalId, pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {accepted: -1}});
-            }
-            if (Template.currentData().pubStatus === 'online_first') {
-                return onlineFirstArticlesPaginator.find({journalId:journalId, pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {published: -1}});
-            }
-            if (Template.currentData().pubStatus === 'normal') {
-                query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId"), journalId:journalId}
-                return Articles.find(query, {sort: {padPage: 1}})
-                //return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
-            }
+        var numPerPage = Session.get('PerPage') || 10;
+        if (Template.currentData().pubStatus === 'accepted') {
+            return acceptedArticlesPaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {accepted: -1}});
+        }
+        if (Template.currentData().pubStatus === 'online_first') {
+            return onlineFirstArticlesPaginator.find({pubStatus: Template.currentData().pubStatus}, {itemsPerPage: numPerPage, sort: {published: -1}});
+        }
+        if (Template.currentData().pubStatus === 'normal') {
+            query = {pubStatus: {$ne: 'accepted'}, issueId: Session.get("currentIssueId")}
+            return Articles.find(query, {sort: {padPage: 1}})
+            //return normalArticlesPaginator.find(query, {itemsPerPage: numPerPage, sort: {padPage: 1}});
         }
     },
     pubStatusNormal:function(){
