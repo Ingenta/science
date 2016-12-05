@@ -16,7 +16,6 @@ Router.map(function () {
                 MiniPlatformSubs.subscribe('miniPlatformHomeScpNews'),
                 MiniPlatformSubs.subscribe('miniPlatformHomePublishingNews'),
                 MiniPlatformSubs.subscribe('miniPlatformHomeNewsShow'),
-                MiniPlatformSubs.subscribe('miniPlatformHomeNewsRecommend'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
                 MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
                 MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink')
@@ -180,7 +179,6 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('miniPlatformMostNewsRecommend'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',20),
                 MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
             ]

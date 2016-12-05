@@ -125,12 +125,13 @@ Meteor.startup(function () {
                 layoutTemplate: "miniLayout",
                 waitOn: function () {
                     return [
-                        MiniPlatformSubs.subscribe('news_recommend'),
                         MiniPlatformSubs.subscribe('column'),
-                        MiniPlatformSubs.subscribe('news_center'),
+                        MiniPlatformSubs.subscribe('miniPlatformHomeScpNews'),
+                        MiniPlatformSubs.subscribe('miniPlatformHomePublishingNews'),
+                        MiniPlatformSubs.subscribe('miniPlatformHomeNewsShow'),
                         MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
-                        MiniPlatformSubs.subscribe('news_link'),
-                        MiniPlatformSubs.subscribe('publications')
+                        MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                        MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink')
                     ]
                 }
             });
