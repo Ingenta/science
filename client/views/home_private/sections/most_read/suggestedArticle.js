@@ -41,6 +41,5 @@ Template.suggestedMostReadModalForm.events({
         SuggestedArticles.insert({articleId:articleId});
         $("#suggestedArticlesModal").modal('hide');
         Meteor.subscribe("insertHomeMostReadArticles");
-        setTimeout('location.reload()',2000);
     }
 })

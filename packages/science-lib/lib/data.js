@@ -4,7 +4,7 @@ Science.data.tranContentType = function(origType){
     if(!origType)return null;
     var contentType = origType.trim().toLowerCase();
     var trans = null;
-    var articleType = ContentType.find().fetch();
+    var articleType = ContentType.find({},{fields: {subject: 1, references:1}}).fetch();
     _.each(articleType,function(type){
         if (_.contains(type.references.split(","),contentType))
             trans=type.subject;
