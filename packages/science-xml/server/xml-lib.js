@@ -712,7 +712,10 @@ var getTable = function (tableWrapNode) {
         }
         var cptNodeCn = parserHelper.getFirstNode("child::caption/p[@lang='zh-Hans']",tableWrapNode);
         removeChildNodes(cptNodeCn,["bold","x"]);
-        table.captionCn = parserHelper.getXmlString("child::caption/p[@lang='zh-Hans']", tableWrapNode,true);
+        var captionCn = parserHelper.getXmlString("child::caption/p[@lang='zh-Hans']", tableWrapNode,true);
+        if (captionCn && captionCn.length) {
+            table.captionCn = captionCn.toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
 
         //表格英文标题
         table.label = parserHelper.getSimpleVal("child::caption/p[@lang='en']/bold/xref | child::caption/p[@lang='en']/bold | child::label", tableWrapNode);
@@ -723,7 +726,10 @@ var getTable = function (tableWrapNode) {
         }
         var cptNode = parserHelper.getFirstNode("child::caption/p[@lang='en']",tableWrapNode);
         removeChildNodes(cptNode,["bold","x"]);
-        table.caption = parserHelper.getXmlString("child::caption/p[@lang='en']", tableWrapNode,true);
+        var caption = parserHelper.getXmlString("child::caption/p[@lang='en']", tableWrapNode,true);
+        if (caption && caption.length) {
+            table.caption = caption.toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
     }else{
         //只有一种语言和空的情况，默认按照原来的路径解析（默认英文）
         table.label = parserHelper.getSimpleVal("child::caption/p/bold/xref | child::caption/p/bold | child::label", tableWrapNode);
@@ -734,7 +740,10 @@ var getTable = function (tableWrapNode) {
         }
         var cptNode = parserHelper.getFirstNode("child::caption/p",tableWrapNode);
         removeChildNodes(cptNode,["bold","x"]);
-        table.caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
+        var caption = parserHelper.getXmlString("child::caption/p", tableWrapNode,true);
+        if (caption && caption.length) {
+            table.caption = caption.toString().replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
     }
     table.table = parserHelper.getXmlString("child::table", tableWrapNode);
 
