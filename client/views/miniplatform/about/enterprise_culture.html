@@ -5,8 +5,7 @@
             <!--企业新闻Tab页面-->
             {{#enterCultureTabs name="" tabs=tabs activeTab=activeTab}}
                 {{#tabContent slug="enterNews"}}
-                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span>{{> addMiniEnterModalForm}}{{/if}}
-                    <hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEnterModal"></span><hr>{{> addMiniEnterModalForm}}{{/if}}
                     <div>
                         {{#each enterpriseNews}}
                             <ul class="dotted list-unstyled">
@@ -31,8 +30,7 @@
                 {{/tabContent}}
                 <!--编辑园地Tab页面-->
                 {{#tabContent slug="editCorner"}}
-                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span>{{> addMiniEditFieldModalForm}}{{/if}}
-                    <hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniEditFieldModal"></span><hr>{{> addMiniEditFieldModalForm}}{{/if}}
                     <div>
                         {{#each editFields}}
                             <ul class="dotted list-unstyled">

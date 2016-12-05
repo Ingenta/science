@@ -15,8 +15,7 @@
             <!--杂志社动态Tab页面-->
             {{#newCenterTabs name="" tabs=tabs activeTab=activeTab}}
                 {{#tabContent slug="scpNews"}}
-                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span>{{> addMiniMagazineModalForm}}{{/if}}
-                    <hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniMagazineModal"></span><hr>{{> addMiniMagazineModalForm}}{{/if}}
                     <div>
                         {{#each miniMagazines}}
                             <ul class="dotted list-unstyled">
@@ -41,8 +40,7 @@
                 {{/tabContent}}
                 <!--出版动态Tab页面-->
                 {{#tabContent slug="publishingNews"}}
-                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span>{{> addMiniPublishingModalForm}}{{/if}}
-                    <hr>
+                    {{#if miniPlatformPermission}}<span class="fa fa-plus" style="color: #2b8118;cursor: pointer" data-toggle="modal" data-target="#addMiniPublishingModal"></span><hr>{{> addMiniPublishingModalForm}}{{/if}}
                     <div>
                         {{#each miniPublishing}}
                             <ul class="dotted list-unstyled">
