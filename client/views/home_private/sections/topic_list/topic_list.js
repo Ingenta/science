@@ -11,7 +11,7 @@ Template.homePageTopicList.helpers({
             {name: "动物学", englishName: "Zoology"},
             {name: "微生物学", englishName: "Microbiology"},
             {name: "地质学", englishName: "Geology"},
-            {name: "大气科学", englishName: "Atmospheric sciences"},
+            {name: "大气科学", englishName: "Atmospheric science"},
             {name: "海洋科学", englishName: "Oceanography"},
             {name: "材料科学与工程", englishName: "Materials Science and Engineering"},
             {name: "机械工程", englishName: "Mechanical Engineering"},
