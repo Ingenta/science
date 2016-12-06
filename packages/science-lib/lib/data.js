@@ -4,9 +4,13 @@ Science.data.tranContentType = function(origType){
     if(!origType)return null;
     var contentType = origType.trim().toLowerCase();
     var trans = null;
+    console.log("111111");
+    console.log(ContentType.find({},{fields: {subject: 1, references:1}}).fetch());
+    console.log("222222");
     ContentType.find({},{fields: {subject: 1, references:1}}).forEach(function(item){
         if (_.contains(item.references.split(","),contentType)){
             trans=item.subject;
+            console.log(item);
         }
     })
     return trans;

@@ -77,6 +77,7 @@ Parser = function (filepath, options, callback) {
             var property = parseHelper.getSimpleVal("child::title", sec);
             _.each(articleNodes, function (articleNode) {
                 var article = {};
+                console.log(property);
                 article.contentType = Science.data.tranContentType(property);
                 article.language = parseHelper.getSimpleVal("child::language", articleNode);
                 article.doi = parseHelper.getSimpleVal("child::id[@type=\"doi\"]", articleNode);
