@@ -129,7 +129,7 @@ Config = {
     sysAdmin: "admin",
     parser: {
         contentTypeDic: {
-            article: ["article","articles", "论文", "research paper","research papers","feature article","feature articles","invited article","invited articles", "论 文", "特邀论文"],
+            article: ["article","articles", "论文", "research paper","research papers","research pape","feature article","feature articles","invited article","invited articles", "论 文", "特邀论文"],
             reviews:[ "评述","review","reviews","专题论述","综述","mini review","mini reviews","研究述评", "评 述","综 述"],
             letters:["快讯","letter","letters","快 讯","快报","快 报","letter to the editor"],
             editorials:["社论","editorials","editorial","社 论","编者按"],
@@ -145,17 +145,20 @@ Config = {
             briefReport:["简报","brief report","brief reports","简 报"],
             scienceNews:["科学新闻","science news"],
             bookReview:["书评","book review","book reviews","书 评"],
-            mooPaper:["MOO论文","moo paper","moo papers"],
+            mooPaper:["MOO论文","moo paper","moo papers","moop"],
             erratum:["勘误","erratum","erratums","更正","勘 误","更 正"],
             invitedReview:["invited review","invited reviews","特邀评述"],
             retraction:["撤稿","retraction note","retraction notes","retraction","retractions","撤 稿"],
             messages:["消息","messages"],
             profile:["profile","人物评传"],
             hisOfScience:["history of science","科学史话"],
-            InvitedArticles:["特约文章","invited articles"],
+            invitedArticles:["特约文章","invited articles"],
             discussion:["讨论","discussion"],
-            preface:["卷首语","preface","Preface","Prefaces"],
-            insight:["观察","insight","insights"]
+            preface:["卷首语","preface",,"prefaces"],
+            insight:["观察","insight","insights"],
+            guestEditorial:["guest editorial","特邀编者按"],
+            featureArticle:["feature article","专题评述"],
+            letterCommentary:["letter and commentary","短评","letter and commentarys","letters & commentaries"]
         }
     },
     otherPlatformLoginUrl: {
