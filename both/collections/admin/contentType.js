@@ -15,7 +15,8 @@ this.ContentType.allow({
 ContentTypeSchema = new SimpleSchema({
     subject: {
         type: String,
-        unique: true
+        unique: true,
+        regEx:/^[A-Za-z]+$/ //仅支持英文字母
     },
     name: {
         type: Science.schemas.MultipleTextRequiredSchema
