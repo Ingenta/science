@@ -175,11 +175,6 @@ Router.route("/topics/", {
             HomePageSubs.subscribe('HomeAdvertisementShowPage'),
             HomePageSubs.subscribe('topics')
         ]
-    },
-    onBeforeAction: function () {
-        Session.set('PerPage', 10);
-        Session.set('journalId', undefined);
-        this.next();
     }
 });
 
@@ -192,7 +187,7 @@ Router.route("topics/:topicsId/", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe('topics'),
+            HomePageSubs.subscribe('topicsRelatedArticles', this.params.topicsId),
             HomePageSubs.subscribe('articlesInTopic', this.params.topicsId)
         ]
     }
