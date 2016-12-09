@@ -1,6 +1,6 @@
 Template.PublisherList.helpers({
     publishers: function () {
-        return Publishers.find();
+        return Publishers.find({},{sort:{chinesename:1}});
     }
 });
 

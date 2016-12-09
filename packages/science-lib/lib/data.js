@@ -4,10 +4,21 @@ Science.data.tranContentType = function(origType){
     if(!origType)return null;
     var contentType = origType.trim().toLowerCase();
     var trans = null;
-    var articleType = ContentType.find().fetch();
-    _.each(articleType,function(type){
-        if (_.contains(type.references.split(","),contentType))
-            trans=type.subject;
+    ContentType.find({},{fields: {subject: 1, references:1}}).forEach(function(item){
+        if (_.contains(item.references.split(","),contentType)){
+            trans=item.subject;
+        }
+    })
+    return trans;
+}
+
+Science.data.tranOldJournalContentType = function(origType){
+    if(!origType)return null;
+    var contentType = origType.trim().toLowerCase();
+    var trans = null;
+    _.each(Config.parser.contentTypeDic,function(dic,key){
+        if (_.contains(dic, contentType))
+            trans=key;
     })
     return trans;
 }

@@ -34,3 +34,5 @@ Column.permit(['insert', 'update', 'remove']).apply();
 ColumnViews.permit(['insert', 'update', 'remove']).apply();
 JournalAC.permit(['insert', 'update', 'remove']).apply();
 SuggestedArticles.permit(['insert', 'update', 'remove']).apply();
+ContentType.permit(['insert', 'update', 'remove']).apply();
+MostCount.permit(['insert', 'update', 'remove']).apply();

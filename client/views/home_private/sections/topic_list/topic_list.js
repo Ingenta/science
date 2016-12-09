@@ -10,12 +10,12 @@ Template.homePageTopicList.helpers({
             {name: "植物学", englishName: "Botany"},
             {name: "动物学", englishName: "Zoology"},
             {name: "微生物学", englishName: "Microbiology"},
-            {name: "地质科学", englishName: "Geology"},
-            {name: "大气科学", englishName: "Atmospheric sciences"},
+            {name: "地质学", englishName: "Geology"},
+            {name: "大气科学", englishName: "Atmospheric science"},
             {name: "海洋科学", englishName: "Oceanography"},
             {name: "材料科学与工程", englishName: "Materials Science and Engineering"},
             {name: "机械工程", englishName: "Mechanical Engineering"},
-            {name: "航空航天科学", englishName: "Aviation & Aerospace"},
+            {name: "航空航天科学技术", englishName: "Aviation & Aerospace"},
             {name: "智能控制", englishName: "Intelligent Control"},
             {name: "计算机科学与技术", englishName: "Computer Science & Technology"},
             {name: "计算机图形与图像", englishName: "Computer Graphics"},
@@ -24,10 +24,12 @@ Template.homePageTopicList.helpers({
             {name: "凝聚态物理学", englishName: "Condensed Matter Physics"}
         ];
     },
-    searchUrl: function () {
+    searchUrl: function (name){
+        var topic = Topics.findOne({englishName:name});
+        if(!topic)return;
         var option = {
             filterQuery: {
-                topic: [this._id]
+                topic: [topic._id]
             },
             setting: {from: 'topic'}
         };
