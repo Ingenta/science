@@ -14,7 +14,7 @@ this.SpecialTopics.allow({
 
 SpecialTopicsSchema  = new SimpleSchema({
     title:{
-        type:Science.schemas.MultiLangSchema
+        type:Science.schemas.MultipleTextRequiredSchema
     },
     journalId:{
         type: String

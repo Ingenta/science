@@ -438,6 +438,27 @@ var insertArticle = function (a) {
             sets[key]=a[key];
         })
         Articles.update({_id: existArticle._id}, {$set: sets});
+
+        //创建期刊专题
+        if(a.issueId&&a.special&& _.contains(journal.tabSelections,"Special Topics")){
+            var qureyArr = [];
+            qureyArr.push({'title.en': a.special});
+            qureyArr.push({'title.cn': a.special});
+            var symposium = SpecialTopics.findOne({$or: qureyArr});
+            if(symposium && symposium.journalId===a.journalId) {
+                var newArr = _.union(symposium.articles, existArticle._id);
+                SpecialTopics.update({_id: symposium._id}, {$set: {articles: newArr}});
+            }else{
+                var specialId = SpecialTopics.insert({
+                    title: {cn: a.special, en: a.special},
+                    journalId:a.journalId,
+                    IssueId:a.issueId,
+                    createDate:new Date()
+                });
+                SpecialTopics.update({_id: specialId}, {$set: {articles: [existArticle._id]}});
+            }
+        }
+
         return existArticle._id;
     }
 
@@ -487,5 +508,26 @@ var insertArticle = function (a) {
         interest: a.interest, //利益冲突声明
         contributions: a.contributions //作者贡献声明
     });
+
+    //创建期刊专题
+    if(a.issueId&&a.special&& _.contains(journal.tabSelections,"Special Topics")){
+        var qureyArr = [];
+        qureyArr.push({'title.en': a.special});
+        qureyArr.push({'title.cn': a.special});
+        var symposium = SpecialTopics.findOne({$or: qureyArr});
+        if(symposium && symposium.journalId===a.journalId) {
+            var newArr = _.union(symposium.articles, id);
+            SpecialTopics.update({_id: symposium._id}, {$set: {articles: newArr}});
+        }else{
+            var specialId = SpecialTopics.insert({
+                title: {cn: a.special, en: a.special},
+                journalId:a.journalId,
+                IssueId:a.issueId,
+                createDate:new Date()
+            });
+            SpecialTopics.update({_id: specialId}, {$set: {articles: [id]}});
+        }
+    }
+
     return id;
 };
