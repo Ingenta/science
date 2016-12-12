@@ -3,7 +3,7 @@ Tasks = {};
 Tasks.startJob = function (pathToFile, fileName, fileType, formFields) {
     if (!pathToFile || !fileName || !fileType)return;
     //TODO: fix this for shared paths to take after the last / or \
-    var fileNameWithoutExtension = fileName.substr(0, fileName.lastIndexOf(".")); //fileName.replace(/.*[\/\\]([^\/\\]+)\..*/i,"$1");
+    var fileNameWithoutExtension = new Date().getTime()+"_"+fileName.substr(0, fileName.lastIndexOf(".")); //fileName.replace(/.*[\/\\]([^\/\\]+)\..*/i,"$1");
     //文章的出版状态(默认是正式出版)
     var pubstatus = formFields ? formFields.pubStatus : "normal";
     formFields = _.isEmpty(formFields) ? {} : formFields;

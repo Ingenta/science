@@ -107,6 +107,7 @@ Router.route("admin.users.edit", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('publishers'),
+            HomePageSubs.subscribe('publications'),
             HomePageSubs.subscribe('institutions')
         ]
     }
