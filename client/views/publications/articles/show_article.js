@@ -200,8 +200,9 @@ Template.showArticle.helpers({
             }
         }
         if (this.email && Router.current().data) {
+            var email = this.email;
             var note = _.find(Router.current().data().authorNotes, function (note) {
-                return note.id == this.email
+                return note.id == email;
             });
             allrefs.push((note && note.label) || "*");
         }
