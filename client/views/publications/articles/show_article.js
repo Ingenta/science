@@ -187,7 +187,7 @@ Template.showArticle.helpers({
         var allrefs = [];
         if (!_.isEmpty(this.affs)) {
             _.each(this.affs, function (aff) {
-                var match = /\d/.exec(aff);
+                var match = /[0-9]*[0-9]/.exec(aff);
                 var labelInId = !_.isEmpty(match) && match[0];
                 var currAffObj = _.find(affObjs, function (ao) {
                     return ao.id == aff;
