@@ -1,8 +1,8 @@
 <template name="pacsTemplate">
-    <i class="fa fa-plus" data-toggle="collapse" data-target="#pacs"></i>
-	<a data-toggle="collapse" data-target="#pacs"
-       aria-expanded="false" aria-controls="pacs">{{_ "PACS" count=pacs.length}}
-    </a>
+    <p>
+        <i class="fa fa-plus" data-toggle="collapse" data-target="#pacs"></i>
+        <a style="cursor: pointer" data-toggle="collapse" data-target="#pacs" aria-expanded="false" aria-controls="pacs">{{_ "PACS" count=pacs.length}}</a>
+    </p>
     <div class="collapse" id="pacs">
         <ol class="affiliationList">
             <table class="pacs-table" style="margin-left: -10px">
