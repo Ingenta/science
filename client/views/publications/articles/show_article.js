@@ -186,22 +186,39 @@ Template.showArticle.helpers({
         var affObjs = Router.current().data().affiliations;
         var allrefs = [];
         if (!_.isEmpty(this.affs)) {
-            _.each(this.affs, function (aff) {
-                var match = /\d/.exec(aff);
+            _.each(this.affs.sort(), function (aff) {
+                var match = /[0-9]*[0-9]/.exec(aff);
                 var labelInId = !_.isEmpty(match) && match[0];
                 var currAffObj = _.find(affObjs, function (ao) {
                     return ao.id == aff;
                 })
-                var labelInData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage() == "zh-CN" ? "cn" : "en"]
-                allrefs.push(labelInData || labelInId)
+                var labelInData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage() == "zh-CN" ? "cn" : "en"];
+                if(labelInData){
+                    allrefs.push(labelInData);
+                }else{
+                    var labelInDataNoZHCN = currAffObj && currAffObj.label;
+                    if(labelInDataNoZHCN){
+                        allrefs.push(labelInDataNoZHCN);
+                    }else{
+                        var affFnObj = Router.current().data().authorNotes;
+                        var currFnObj = _.find(affFnObj, function (ob) {
+                            return ob.id == aff;
+                        })
+                        var labelFn = currFnObj && currFnObj.label;
+                        if(labelFn){
+                            allrefs.push(labelFn);
+                        }
+                    }
+                }
             })
             if (!_.isEmpty(allrefs)) {
-                allrefs = allrefs.sort();
+                allrefs = _.sortBy(allrefs,Math.abs);
             }
         }
         if (this.email && Router.current().data) {
+            var email = this.email;
             var note = _.find(Router.current().data().authorNotes, function (note) {
-                return note.id == this.email
+                return note.id == email;
             });
             allrefs.push((note && note.label) || "*");
         }

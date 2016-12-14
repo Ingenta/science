@@ -14,4 +14,15 @@ Template.affiliation.helpers({
 				return affText.substr(label.length)
 		return affText;
 	}
-})
+});
+
+Template.affiliation.events({
+	'hide.bs.collapse .collapse':function(e,t){
+		e.stopPropagation();
+		$(e.currentTarget).siblings('p').find("i").removeClass("fa-minus").addClass("fa-plus");
+	},
+	'show.bs.collapse .collapse':function(e,t){
+		e.stopPropagation();
+		$(e.currentTarget).siblings('p').find("i").removeClass("fa-plus").addClass("fa-minus");
+	}
+});
