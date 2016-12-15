@@ -130,8 +130,10 @@ var generationXML = function (options, callback) {
                 }else{
                     var givenName = articleInfo.authors[0].given.en || articleInfo.authors[0].given.cn;
                     var surname = articleInfo.authors[0].surname.en || articleInfo.authors[0].surname.cn;
-                    authors = "<contributors><person_name contributor_role='author' sequence='first'>" +
-                        "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name></contributors>";
+                    if(givenName && surname){
+                        authors = "<contributors><person_name contributor_role='author' sequence='first'>" +
+                            "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name></contributors>";
+                    }
                 }
             }
             //判断时间和卷期是否为空
@@ -272,6 +274,9 @@ var generationXMLForSingleArticle = function (doi, callback) {
     }else if(!/\d+/.test(article.year)){
         logger.error("Can't find year (or year is not number) from this article with doi:" + doi);
         return;
+    }else if(!/^(0?[1-9]|1[0-2])$/.test(article.month)){
+        logger.error("Can't find month (or month is not normal) from this article with doi:" + doi);
+        return;
     }
     //文章信息
     var pages ="";
@@ -334,8 +339,10 @@ var generationXMLForSingleArticle = function (doi, callback) {
         }else{
             var givenName = article.authors[0].given.en || article.authors[0].given.cn;
             var surname = article.authors[0].surname.en || article.authors[0].surname.cn;
-            authors = "<contributors><person_name contributor_role='author' sequence='first'>" +
-                "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name></contributors>";
+            if(givenName && surname){
+                authors = "<contributors><person_name contributor_role='author' sequence='first'>" +
+                    "<given_name>"+givenName+"</given_name><surname>"+surname+"</surname></person_name></contributors>";
+            }
         }
     }
     //判断时间和卷期是否为空
