@@ -640,13 +640,14 @@ ScienceXML.getOtherFigures = Meteor.wrapAsync(function (doc,log,callback) {
                             }).node;
 
                             var parentNode = currNode.parentNode;
+                            var tBodyNode = currNode.parentNode.parentNode.parentNode.parentNode.nodeName;
                             var newNode = doc.createElement("img");
                             newNode.setAttribute("src", url);
                             //小于50Kb的图片宽度设置低点，适应表
-                            if(fileObj.size() > 50000){
-                                newNode.setAttribute("class", "other-figure-max");
-                            }else{
+                            if(tBodyNode =="tbody"){
                                 newNode.setAttribute("class", "other-figure-min");
+                            }else{
+                                newNode.setAttribute("class", "other-figure-max");
                             }
                             parentNode.replaceChild(newNode, currNode);
 
