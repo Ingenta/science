@@ -17,5 +17,15 @@ Template.specialTopicsDetailHeader.helpers({
             return this.articles.length;
         }
         return 0;
+    },
+    spcTitle: function(){
+        var symposium = SpecialTopics.findOne({_id: Router.current().params.specialTopicsId});
+        if(!symposium)return;
+        return TAPi18n.getLanguage()=='zh-CN'?symposium.title.cn:symposium.title.en;
+    },
+    spcAbstract: function(){
+        var symposium = SpecialTopics.findOne({_id: Router.current().params.specialTopicsId});
+        if(!symposium)return;
+        return TAPi18n.getLanguage()=='zh-CN'?symposium.abstract.cn:symposium.abstract.en;
     }
 })

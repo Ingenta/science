@@ -7,6 +7,18 @@ Template.oneArticle.helpers({
 		if(articleType){
 			return TAPi18n.getLanguage()=='zh-CN'?articleType.name.cn:articleType.name.en;
 		}
+	},
+	"splLink": function(name){
+		var journalId = Session.get("currentJournalId");
+		if (!journalId)return;
+		var journalPart = getJournalComponentByJournalId(journalId);
+		if (!journalPart)return;
+		var qureyArr = [];
+		qureyArr.push({'title.en': name});
+		qureyArr.push({'title.cn': name});
+		var symposium = SpecialTopics.findOne({$or: qureyArr});
+		if (!symposium)return;
+		return journalPart + "/specialTopics/postArticles/" + symposium._id;
 	}
 });
 
