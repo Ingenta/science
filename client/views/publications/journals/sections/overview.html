@@ -26,8 +26,10 @@
     <dl class="dl-horizontal journal-summary">
         <dt>ISSN</dt>
         <dd>{{formatissn issn}}</dd>
-        <dt>E-ISSN</dt>
-        <dd>{{EISSN}}</dd>
+        {{#if EISSN}}
+            <dt>E-ISSN</dt>
+            <dd>{{EISSN}}</dd>
+        {{/if}}
         <dt>CN</dt>
         <dd>{{CN}}</dd>
     </dl>
@@ -42,8 +44,10 @@
     <dl class="dl-horizontal journal-summary">
         <dt>ISSN</dt>
         <dd>{{formatissn issn}}</dd>
-        <dt>E-ISSN</dt>
-        <dd>{{EISSN}}</dd>
+        {{#if EISSN}}
+            <dt>E-ISSN</dt>
+            <dd>{{EISSN}}</dd>
+        {{/if}}
         <dt>CN</dt>
         <dd>{{CN}}</dd>
     </dl>
