@@ -94,276 +94,139 @@ Science.Email.searchFrequencyEmail = function () {
 //期刊关注邮件
 Science.Email.tableOfContentEmail = function (date,email) {
     var emailConfig = EmailConfig.findOne({key: "watchJournal"});
-    var issue = Issues.findOne({partial:true});
-    if(issue){
-        Issues.find({partial:true,updateDate: {$gt: date}}).forEach(function (oneIssue) {
-            var userList;
-            if(!email){
-                userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
-                if(!userList.count()) return;
-                logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
+    Issues.find({partial:true,updateDate: {$gt: date}}).forEach(function (oneIssue) {
+        var userList;
+        if(!email){
+            userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
+            if(!userList.count()) return;
+            logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
+        }
+
+        var articleList = Articles.find({
+            journalId: oneIssue.journalId,
+            volume: oneIssue.volume,
+            issue: oneIssue.issue,
+            pubStatus: 'normal',
+            contentType:{$ne:"erratum"}
+        }, {
+            fields: {
+                _id: 1,
+                title: 1,
+                doi:1,
+                authors: 1,
+                year: 1,
+                volume: 1,
+                issue: 1,
+                elocationId: 1,
+                endPage:1,
+                journal: 1,
+                pdfId: 1,
+                contentType:1,
+                sections:1,
+                special:1,
+                topic:1,
+                language:1
+            },sort:{
+                padPage:1
             }
 
-            var articleList = Articles.find({
-                journalId: oneIssue.journalId,
-                volume: oneIssue.volume,
-                issue: oneIssue.issue,
-                pubStatus: 'normal',
-                contentType:{$ne:"erratum"}
-            }, {
-                fields: {
-                    _id: 1,
-                    title: 1,
-                    doi:1,
-                    authors: 1,
-                    year: 1,
-                    volume: 1,
-                    issue: 1,
-                    elocationId: 1,
-                    endPage:1,
-                    journal: 1,
-                    pdfId: 1,
-                    contentType:1,
-                    sections:1,
-                    special:1,
-                    topic:1,
-                    language:1
-                },sort:{
-                    padPage:1
-                }
+        }).fetch();
+        if (!articleList || !articleList.length) return;
 
-            }).fetch();
-            if (!articleList || !articleList.length) return;
+        logger.info("finded " + articleList.length+" articles in the newest issue which has the id: " + oneIssue._id);
+        var journal = Publications.findOne({_id: oneIssue.journalId}, {
+            fields: {
+                title: 1,
+                titleCn: 1,
+                description: 1,
+                banner: 1,
+                picture:1,
+                submissionReview: 1,
+                email:1,
+                address:1,
+                fax:1,
+                phone:1,
+                language:1
+            }
+        });
+        if(!journal) return;
+        journal.title = journal.language == "1"?journal.title:journal.titleCn;
+        journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
+        journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
+        if (journal.banner) {
+            var banner = Images.findOne({_id: journal.banner});
+            if(banner){
+                journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
+            }
+        }
 
-            logger.info("finded " + articleList.length+" articles in the newest issue which has the id: " + oneIssue._id);
-            var journal = Publications.findOne({_id: oneIssue.journalId}, {
-                fields: {
-                    title: 1,
-                    titleCn: 1,
-                    description: 1,
-                    banner: 1,
-                    picture:1,
-                    submissionReview: 1,
-                    email:1,
-                    address:1,
-                    fax:1,
-                    phone:1,
-                    language:1
-                }
+        if (journal.picture) {
+            var picture = Images.findOne({_id: journal.picture});
+            if(picture){
+                journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
+            }
+        }
+        //期刊栏目
+        if(journal.language == "1"){
+            journal.manuscriptLabel = "Submission and Review";
+            journal.authorCenterLabel = "Author Guidelines";
+            journal.currentIssueLabel = "Current Issue";
+            journal.mostReadLabel = "Most Read Articles";
+            journal.newsCenter = "News Center";
+            journal.pubTrends = "Publication Trends";
+            journal.volumeLabel = "Volume " + oneIssue.volume;
+            journal.issueLabel = "Issue " + oneIssue.issue;
+        }else{
+            journal.manuscriptLabel = "投审稿入口";
+            journal.authorCenterLabel = "作者须知";
+            journal.currentIssueLabel = "当期目录";
+            journal.mostReadLabel = "热读文章";
+            journal.newsCenter = "新闻中心";
+            journal.pubTrends = "出版动态";
+            journal.volumeLabel = "第" + oneIssue.volume + "卷";
+            journal.issueLabel = "第" + oneIssue.issue + "期";
+        }
+        generateArticleLinks(articleList, journal);
+
+        oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
+        oneIssue.month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+oneIssue.month];
+        var journalNews = journalIdToNews(oneIssue.journalId);
+        var newDate = new Date();
+        var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var subjectTitle = journal.title + " Table of Contents for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear()+"; "+"Vol. "+oneIssue.volume+", Issue "+oneIssue.issue;
+        var content = JET.render('watchJournal', {
+            "scpLogoUrl": Config.rootUrl + "email/logo.png",
+            "rootUrl": Config.rootUrl,
+            "issue": oneIssue,
+            "journal": journal,
+            "articleList": articleList,
+            "journalNews": journalNews,
+            "email":journal.email,
+            "address":journal.address?journal.address.en:null,
+            "fax":journal.fax,
+            "phone":journal.phone
+        });
+        if(email){
+            Email.send({
+                to: email,
+                from: Config.mailServer.address,
+                //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
+                subject:subjectTitle,
+                html: content
             });
-            if(!journal) return;
-            journal.title = journal.language == "1"?journal.title:journal.titleCn;
-            journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
-            journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
-            if (journal.banner) {
-                var banner = Images.findOne({_id: journal.banner});
-                if(banner){
-                    journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
-                }
-            }
-
-            if (journal.picture) {
-                var picture = Images.findOne({_id: journal.picture});
-                if(picture){
-                    journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
-                }
-            }
-            //期刊栏目
-            if(journal.language == "1"){
-                journal.manuscriptLabel = "Submission and Review";
-                journal.authorCenterLabel = "Author Guidelines";
-                journal.currentIssueLabel = "Current Issue";
-                journal.mostReadLabel = "Most Read Articles";
-                journal.newsCenter = "News Center";
-                journal.pubTrends = "Publication Trends";
-                journal.volumeLabel = "Volume " + oneIssue.volume;
-                journal.issueLabel = "Issue " + oneIssue.issue;
-            }else{
-                journal.manuscriptLabel = "投审稿入口";
-                journal.authorCenterLabel = "作者须知";
-                journal.currentIssueLabel = "当期目录";
-                journal.mostReadLabel = "热读文章";
-                journal.newsCenter = "新闻中心";
-                journal.pubTrends = "出版动态";
-                journal.volumeLabel = "第" + oneIssue.volume + "卷";
-                journal.issueLabel = "第" + oneIssue.issue + "期";
-            }
-            generateArticleLinks(articleList, journal);
-
-            oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
-            oneIssue.month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+oneIssue.month];
-            var journalNews = journalIdToNews(oneIssue.journalId);
-            var newDate = new Date();
-            var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var subjectTitle = journal.title + " Table of Contents for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear()+"; "+"Vol. "+oneIssue.volume+", Issue "+oneIssue.issue;
-            var content = JET.render('watchJournal', {
-                "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                "rootUrl": Config.rootUrl,
-                "issue": oneIssue,
-                "journal": journal,
-                "articleList": articleList,
-                "journalNews": journalNews,
-                "email":journal.email,
-                "address":journal.address?journal.address.en:null,
-                "fax":journal.fax,
-                "phone":journal.phone
-            });
-            if(email){
+        }else{
+            userList.forEach(function (oneUser) {
+                logger.info("sent watchJournal email to "+oneUser.emails[0].address);
                 Email.send({
-                    to: email,
+                    to: oneUser.emails[0].address,
                     from: Config.mailServer.address,
                     //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
                     subject:subjectTitle,
                     html: content
                 });
-            }else{
-                userList.forEach(function (oneUser) {
-                    logger.info("sent watchJournal email to "+oneUser.emails[0].address);
-                    Email.send({
-                        to: oneUser.emails[0].address,
-                        from: Config.mailServer.address,
-                        //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
-                        subject:subjectTitle,
-                        html: content
-                    });
-                });
-            }
-        });
-    }else{
-        Issues.find({createDate: {$gt: date}}).forEach(function (oneIssue) {
-            var userList;
-            if(!email){
-                userList = Users.find({'profile.journalsOfInterest': {$in: [oneIssue.journalId]}});
-                if(!userList.count()) return;
-                logger.info("found " + userList.count()+" users watched this journal which has the id: " + oneIssue.journalId);
-            }
-
-            var articleList = Articles.find({
-                journalId: oneIssue.journalId,
-                volume: oneIssue.volume,
-                issue: oneIssue.issue,
-                pubStatus: 'normal',
-                contentType:{$ne:"erratum"}
-            }, {
-                fields: {
-                    _id: 1,
-                    title: 1,
-                    doi:1,
-                    authors: 1,
-                    year: 1,
-                    volume: 1,
-                    issue: 1,
-                    elocationId: 1,
-                    endPage:1,
-                    journal: 1,
-                    pdfId: 1,
-                    contentType:1,
-                    sections:1,
-                    special:1,
-                    topic:1,
-                    language:1
-                },sort:{
-                    padPage:1
-                }
-
-            }).fetch();
-            if (!articleList || !articleList.length) return;
-
-            logger.info("finded " + articleList.length+" articles in the newest issue which has the id: " + oneIssue._id);
-            var journal = Publications.findOne({_id: oneIssue.journalId}, {
-                fields: {
-                    title: 1,
-                    titleCn: 1,
-                    description: 1,
-                    banner: 1,
-                    picture:1,
-                    submissionReview: 1,
-                    email:1,
-                    address:1,
-                    fax:1,
-                    phone:1,
-                    language:1
-                }
             });
-            if(!journal) return;
-            journal.title = journal.language == "1"?journal.title:journal.titleCn;
-            journal.url = Meteor.absoluteUrl(Science.URL.journalDetail(oneIssue.journalId).substring(1));
-            journal.mostRead = Meteor.absoluteUrl("mostReadArticles/" + oneIssue.journalId);
-            if (journal.banner) {
-                var banner = Images.findOne({_id: journal.banner});
-                if(banner){
-                    journal.banner=Meteor.absoluteUrl(banner.url({auth:false}).substring(1));
-                }
-            }
-
-            if (journal.picture) {
-                var picture = Images.findOne({_id: journal.picture});
-                if(picture){
-                    journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
-                }
-            }
-            //期刊栏目
-            if(journal.language == "1"){
-                journal.manuscriptLabel = "Submission and Review";
-                journal.authorCenterLabel = "Author Guidelines";
-                journal.currentIssueLabel = "Current Issue";
-                journal.mostReadLabel = "Most Read Articles";
-                journal.newsCenter = "News Center";
-                journal.pubTrends = "Publication Trends";
-                journal.volumeLabel = "Volume " + oneIssue.volume;
-                journal.issueLabel = "Issue " + oneIssue.issue;
-            }else{
-                journal.manuscriptLabel = "投审稿入口";
-                journal.authorCenterLabel = "作者须知";
-                journal.currentIssueLabel = "当期目录";
-                journal.mostReadLabel = "热读文章";
-                journal.newsCenter = "新闻中心";
-                journal.pubTrends = "出版动态";
-                journal.volumeLabel = "第" + oneIssue.volume + "卷";
-                journal.issueLabel = "第" + oneIssue.issue + "期";
-            }
-            generateArticleLinks(articleList, journal);
-
-            oneIssue.url = Meteor.absoluteUrl(Science.URL.issueDetail(oneIssue._id).substring(1));
-            oneIssue.month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+oneIssue.month];
-            var journalNews = journalIdToNews(oneIssue.journalId);
-            var newDate = new Date();
-            var month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var subjectTitle = journal.title + " Table of Contents for " + month[newDate.getMonth()+1] + " " + newDate.getDate() + ", " + newDate.getFullYear()+"; "+"Vol. "+oneIssue.volume+", Issue "+oneIssue.issue;
-            var content = JET.render('watchJournal', {
-                "scpLogoUrl": Config.rootUrl + "email/logo.png",
-                "rootUrl": Config.rootUrl,
-                "issue": oneIssue,
-                "journal": journal,
-                "articleList": articleList,
-                "journalNews": journalNews,
-                "email":journal.email,
-                "address":journal.address?journal.address.en:null,
-                "fax":journal.fax,
-                "phone":journal.phone
-            });
-            if(email){
-                Email.send({
-                    to: email,
-                    from: Config.mailServer.address,
-                    //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
-                    subject:subjectTitle,
-                    html: content
-                });
-            }else{
-                userList.forEach(function (oneUser) {
-                    logger.info("sent watchJournal email to "+oneUser.emails[0].address);
-                    Email.send({
-                        to: oneUser.emails[0].address,
-                        from: Config.mailServer.address,
-                        //subject: emailConfig ? emailConfig.subject : journal.titleCn + " 更新第" + oneIssue.issue + "期",
-                        subject:subjectTitle,
-                        html: content
-                    });
-                });
-            }
-        });
-    }
+        }
+    });
 };
 
 //优先出版邮件

@@ -97,9 +97,13 @@ Science.Reports.getArticleReportData = function (query) {
                 var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
                 if(article){
                     var x = {};
-                    x.journal = article.journal.titleCn;
+                    if(article.journal){
+                        x.journal = article.journal?article.journal.titleCn:article.journal.title;
+                    }else{
+                        x.journal = "";
+                    }
                     x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
-                    x.title = article.title.cn;
+                    x.title = article.title.cn || article.title.en;
                     x.doi = article.doi;
                     x.issue = article.issue;
                     x.volume = article.volume;
@@ -326,7 +330,11 @@ Science.Reports.getArticleReportDataNew = function (query) {
                 var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
                 if(article){
                     var x = {};
-                    x.journal = article.journal.titleCn;
+                    if(article.journal){
+                        x.journal = article.journal?article.journal.titleCn:article.journal.title;
+                    }else{
+                        x.journal = "";
+                    }
                     x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
                     x.title = article.title.cn;
                     x.doi = article.doi;
