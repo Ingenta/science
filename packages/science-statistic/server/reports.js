@@ -94,11 +94,16 @@ Science.Reports.getArticleReportData = function (query) {
         Meteor.bindEnvironment( function (err, result) {
             var deletedArticles =[];
             _.each(result, function (item) {
-                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
+                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,journalId:1}});
                 if(article){
                     var x = {};
-                    if(article.journal){
-                        x.journal = article.journal?article.journal.titleCn:article.journal.title;
+                    if(article.journalId){
+                        var journal = Publications.findOne({_id:article.journalId});
+                        if(journal){
+                            x.journal = journal?journal.titleCn:journal.title;
+                        }else{
+                            x.journal = "";
+                        }
                     }else{
                         x.journal = "";
                     }
@@ -266,7 +271,6 @@ Science.Reports.getRegionalData = function(query){
                 var regional = getLocationFromLocalDatabase(item.ip);
                 var x = {};
                 if(regional){
-
                     x.country = regional.country_chinese_name;
                     x.region = regional.region_chinese_name;
                 }else{
@@ -327,11 +331,16 @@ Science.Reports.getArticleReportDataNew = function (query) {
         Meteor.bindEnvironment( function (err, result) {
             var deletedArticles =[];
             _.each(result, function (item) {
-                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
+                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,journalId:1}});
                 if(article){
                     var x = {};
-                    if(article.journal){
-                        x.journal = article.journal?article.journal.titleCn:article.journal.title;
+                    if(article.journalId){
+                        var journal = Publications.findOne({_id:article.journalId});
+                        if(journal){
+                            x.journal = journal?journal.titleCn:journal.title;
+                        }else{
+                            x.journal = "";
+                        }
                     }else{
                         x.journal = "";
                     }
