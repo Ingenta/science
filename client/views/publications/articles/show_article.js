@@ -12,10 +12,10 @@ var delayRender = function () {
         //--------------渲染正文中的图表开始--------------
         _.each(articleObj.figures, function (fig) {
             var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
-            if (_.isEmpty(refs)) {
+            if (_.isEmpty(refs.length)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
             }
-            if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
+            if (!_.isEmpty(refs.length) && !_.isEmpty(fig.links)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }
             if (refs && refs.length) {
@@ -42,10 +42,10 @@ var delayRender = function () {
             return;
         _.each(articleObj.appendix.figures, function (fig) {
             var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
-            if (_.isEmpty(refs)) {
+            if (_.isEmpty(refs.length)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
             }
-            if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
+            if (!_.isEmpty(refs.length) && !_.isEmpty(fig.links)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }
             if (refs && refs.length) {
@@ -303,15 +303,13 @@ Template.articlePageNavigation.onCreated(function () {
 
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        var rootUrl = window.location.pathname;
-        var url = rootUrl.substring(0,rootUrl.lastIndexOf("/") + 1);
-        if(Template.instance().prevDoi.get())return url + Template.instance().prevDoi.get();
+        var rootUrl = Meteor.absoluteUrl();
+        if(Template.instance().prevDoi.get())return rootUrl+ "doi/" + Template.instance().prevDoi.get();
         return Template.instance().prevDoi.get();
     },
     nextArticle: function () {
-        var rootUrl = window.location.pathname;
-        var url = rootUrl.substring(0,rootUrl.lastIndexOf("/") + 1);
-        if(Template.instance().nextDoi.get())return url + Template.instance().nextDoi.get();
+        var rootUrl = Meteor.absoluteUrl();
+        if(Template.instance().nextDoi.get())return rootUrl+ "doi/" + Template.instance().nextDoi.get();
         return Template.instance().nextDoi.get();
     },
     hasIssue: function () {
