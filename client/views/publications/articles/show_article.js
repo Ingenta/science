@@ -12,10 +12,10 @@ var delayRender = function () {
         //--------------渲染正文中的图表开始--------------
         _.each(articleObj.figures, function (fig) {
             var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
-            if (_.isEmpty(refs.length)) {
+            if (_.isEmpty(refs)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
             }
-            if (!_.isEmpty(refs.length) && !_.isEmpty(fig.links)) {
+            if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }
             if (refs && refs.length) {
@@ -42,10 +42,10 @@ var delayRender = function () {
             return;
         _.each(articleObj.appendix.figures, function (fig) {
             var refs = $("xref[original='true'][ref-type='fig'][rid='" + fig.id + "']");
-            if (_.isEmpty(refs.length)) {
+            if (_.isEmpty(refs)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.id + "']");
             }
-            if (!_.isEmpty(refs.length) && !_.isEmpty(fig.links)) {
+            if (!_.isEmpty(refs) && !_.isEmpty(fig.links)) {
                 refs = $("xref[ref-type='fig'][rid='" + fig.links[0] + "']");
             }
             if (refs && refs.length) {
