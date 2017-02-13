@@ -353,6 +353,10 @@ PastDataImport = function (path, pdfFolder, userOptions) {
                                     var padPage = article.elocationId || article.startPage || "";
                                     if(padPage){
                                         newOne.padPage = newOne.journal.issn+Science.String.PadLeft(newOne.volume || "novolume","0",8)+Science.String.PadLeft(newOne.issue || "noissue","0",8)+Science.String.PadLeft(padPage,"0",10);
+                                        var atcendpage= article.endPage || "";
+                                        if(atcendpage){
+                                            newOne.padPage = newOne.journal.issn+Science.String.PadLeft(newOne.volume || "novolume","0",8)+Science.String.PadLeft(newOne.issue || "noissue","0",8)+Science.String.PadLeft(padPage,"0",10)+Science.String.PadLeft(atcendpage,"0",10);
+                                        }
                                     }
                                 }
                                 if (options.importPdf && article.pdf) {
