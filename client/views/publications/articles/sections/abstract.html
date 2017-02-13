@@ -85,13 +85,11 @@
 
 <template name="fundingInfo">
     <div class="row">
-        <div class="col-xs-9">
-            <h4>{{_ "funding"}}</h4>
-            <ul class="list-unstyled">
-                {{#each fundingsGroup}}
-                    <li>{{name}}{{#if code}}({{code}}){{/if}}</li>
-                {{/each}}
-            </ul>
-        </div>
+        <h4>{{_ "funding"}}</h4>
+        <ul class="list-unstyled">
+            {{#each fundingsGroup}}
+                <li>{{name}}{{#if code}}({{code}}){{/if}}</li>
+            {{/each}}
+        </ul>
     </div>
 </template>
