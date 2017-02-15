@@ -537,9 +537,17 @@ var journalIdToNews = function (journalId) {
         if(item.title)item.title = item.title && journal.language == "1"?item.title.en:item.title.cn;
         if(item.abstract){
             if(journal.language == "1"){
-                item.abstract = item.abstract.en && item.abstract.en.length < 120?item.abstract.en:item.abstract.en.substring(0,120)+"...";
+                if(item.abstract.en){
+                    item.abstract = item.abstract.en && item.abstract.en.length < 120?item.abstract.en:item.abstract.en.substring(0,120)+"...";
+                }else{
+                    item.abstract = "";
+                }
             }else{
-                item.abstract = item.abstract.cn && item.abstract.cn.length < 47?item.abstract.cn:item.abstract.cn.substring(0,47)+"...";
+                if(item.abstract.cn){
+                    item.abstract = item.abstract.cn && item.abstract.cn.length < 47?item.abstract.cn:item.abstract.cn.substring(0,47)+"...";
+                }else{
+                    item.abstract = "";
+                }
             }
         }
         if (!item.url) item.url = rootUrl + "publisher/" + publisher.shortname + "/journal/" + journal.shortTitle + "/news/journalNews/" + item._id
@@ -548,9 +556,17 @@ var journalIdToNews = function (journalId) {
         if(item.title)item.title = item.title && journal.language == "1"?item.title.en:item.title.cn;
         if(item.abstract){
             if(journal.language == "1"){
-                item.abstract = item.abstract.en && item.abstract.en.length < 120?item.abstract.en:item.abstract.en.substring(0,120)+"...";
+                if(item.abstract.en){
+                    item.abstract = item.abstract.en && item.abstract.en.length < 120?item.abstract.en:item.abstract.en.substring(0,120)+"...";
+                }else{
+                    item.abstract = "";
+                }
             }else{
-                item.abstract = item.abstract.cn && item.abstract.cn.length < 47?item.abstract.cn:item.abstract.cn.substring(0,47)+"...";
+                if(item.abstract.cn){
+                    item.abstract = item.abstract.cn && item.abstract.cn.length < 47?item.abstract.cn:item.abstract.cn.substring(0,47)+"...";
+                }else{
+                    item.abstract = "";
+                }
             }
         }
         if (!item.url) item.url = rootUrl + "publisher/" + publisher.shortname + "/journal/" + journal.shortTitle + "/news/journalNews/" + item._id
