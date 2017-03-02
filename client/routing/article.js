@@ -71,13 +71,17 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
             if(article && _.contains(journal.tabSelections,"MOOP")){
                 article.hasMoop=true;
             }
+            if(article){
+                Session.set("articleTitle",TAPi18n.getLanguage() === "en" ? article.title.en:article.title.cn)
+                article.journal=journal;
+            }
             article && (article.journal=journal);
             return article
         }
     },
     template: "showArticle",
     title: function () {
-        return TAPi18n.__("Article");
+        return Session.get("articleTitle");
     },
     parent: "journal.name",
     name: "article.show.strange",
