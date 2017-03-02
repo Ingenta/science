@@ -1,4 +1,9 @@
 <template name="showArticle">
+    {{#if secitionisEmpty}}
+        <div style="margin:0 auto;display:none;">
+            <img src="/wei_xin_share.jpg" alt="SciEngine">
+        </div>
+    {{/if}}
     {{> journalBanner journal=journalId}}
     <div class="row articleHeading">
         <div class="col-xs-12">

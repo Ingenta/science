@@ -235,6 +235,9 @@ Template.showArticle.helpers({
         if (Permissions.isAdmin())return true;
         if (this.language === "2") return true;
         return Session.get("ipInChina");
+    },
+    secitionisEmpty:function(){
+        return _.isEmpty(this.sections);
     }
 });
 
