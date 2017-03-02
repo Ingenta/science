@@ -237,7 +237,7 @@ Template.showArticle.helpers({
         return Session.get("ipInChina");
     },
     secitionisEmpty:function(){
-        return _.isEmpty(this.sections);
+        return _.isEmpty(this.sections) || _.isEmpty(this.figures);
     }
 });
 
