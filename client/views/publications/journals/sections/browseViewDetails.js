@@ -35,10 +35,10 @@ Template.articleViewDescription.helpers({
         }
     },
     browseIpDownloadLimitation: function () {
-        //return true;
-        if (Permissions.isAdmin())return true;
-        if (Session.get("currentJournalLanguage") === "2") return true;
-        return Session.get("ipInChina");
+        return true;
+        //if (Permissions.isAdmin())return true;
+        //if (Session.get("currentJournalLanguage") === "2") return true;
+        //return Session.get("ipInChina");
     }
 });
 
