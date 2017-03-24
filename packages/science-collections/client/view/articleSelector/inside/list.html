@@ -1,4 +1,7 @@
 <template name="articlesInCollection">
+    <div class="dotted">
+        {{>sortByDateControl}}
+    </div>
     <ul class="list-unstyled">
         {{#each articles}}
             {{> singleArticleInColl}}
