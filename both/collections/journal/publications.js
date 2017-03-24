@@ -55,7 +55,8 @@ PublicationsSchema = new SimpleSchema({
         unique: true
     },
     abbrevTitle: {
-        type: String
+        type: String,
+        optional: true
     },
     issn: {
         type: String,
