@@ -312,8 +312,12 @@
         "placeholder": "中国科学 数学"
       },
       "shortTitle": {
-        "label": "简称",
+        "label": "路径短称",
         "placeholder": "math"
+      },
+      "abbrevTitle": {
+        "label": "出版物简称",
+        "placeholder": "Sci Sin-Inf"
       },
       "issn": {
         "label": "ISSN",

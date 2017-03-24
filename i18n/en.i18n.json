@@ -170,6 +170,10 @@
                 "label": "Short Title",
                 "placeholder": "math"
             },
+            "abbrevTitle": {
+                "label": "Abbrev Journal Title",
+                "placeholder": "Sci Sin-Inf"
+            },
             "issn": {
                 "label": "ISSN",
                 "placeholder": "1234-5678"
