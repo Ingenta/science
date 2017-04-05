@@ -275,7 +275,7 @@ Science.Reports.getRegionalData = function(query){
                     x.region = regional.region_chinese_name;
                 }else{
                     x.country = "中国";
-                    x.region = "北京市";
+                    x.region = "";
                 }
                 _.extend(item, x);
             })
