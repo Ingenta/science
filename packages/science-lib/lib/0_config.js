@@ -181,9 +181,14 @@ if (Meteor.isServer) {
         //address: "test@scichina.org",
         //password: 'Test123123',
         //server: 'smtp.bestedm.org',
-        address: 'publish@scichina.org',
-        password: 'P@ssw0rd',
-        server: '219.238.6.202',
+
+        //address: 'publish@scichina.org',
+        //password: 'P@ssw0rd',
+        //server: '219.238.6.202',
+
+        address: 'publish@scp.ac.cn',
+        password: 'Sciengine_2016',
+        server: '219.238.6.208',
         port: 25
     };
     Config.AutoTasks = {
