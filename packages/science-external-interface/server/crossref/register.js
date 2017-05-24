@@ -173,13 +173,13 @@ var generationXML = function (options, callback) {
                 var journalInfo = Publications.findOne({_id: articleInfo.journalId}, {
                     fields: {
                         title: 1,
-                        shortTitle: 1,
+                        abbrevTitle: 1,
                         issn: 1
                     }
                 });
                 journalInfo.xmlContent = JEC.name2Char(
                     journalStr.replace("{journalTitle}", journalInfo.title.replace(/</g, '&#60;').replace(/>/g, '&#62;').replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, "&#39;"))
-                        .replace("{abbrTitle}", journalInfo.shortTitle)
+                        .replace("{abbrTitle}", journalInfo.abbrevTitle)
                         .replace("{issn}", journalInfo.issn));
                 //加入结果集
                 journalInfo.articles = [];
@@ -381,13 +381,13 @@ var generationXMLForSingleArticle = function (doi, callback) {
     var journal = Publications.findOne({_id: article.journalId}, {
         fields: {
             title: 1,
-            shortTitle: 1,
+            abbrevTitle: 1,
             issn: 1
         }
     });
     journal.xmlContent = JEC.name2Char(
         journalStr.replace("{journalTitle}", journal.title.replace(/</g, '&#60;').replace(/>/g, '&#62;').replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, "&#39;"))
-            .replace("{abbrTitle}", journal.shortTitle)
+            .replace("{abbrTitle}", journal.abbrevTitle)
             .replace("{issn}", journal.issn));
     journal.xmlContent=journal.xmlContent.replace("{articles}",article.xmlContent);
     //以当前时间命名准备提交个crossRef的xml文件
