@@ -94,6 +94,31 @@ Meteor.publish('articlesInSpecTopic', function (stid) {
     }
     return this.ready();
 })
+
+Meteor.publish('doiCreateHtml', function (doi) {
+    check(doi, String);
+    var article = Articles.findOne({doi: doi});
+    var content = undefined;
+    var title;
+    var author;
+    if(article.language =="1"){
+        title = article.title.en || article.title.cn;
+        author = article.orderAuthors.en || article.orderAuthors.cn;
+        content = '<head>\n<meta name="title" content='+ title +'>\n';
+        content+= '<meta name="author" content='+ author +'>\n';
+        content+='<meta name="doi" content='+ article.doi +'>\n</head>';
+    }else{
+        title = article.title.cn || article.title.en;
+        author = article.orderAuthors.cn || article.orderAuthors.en;
+        content = '<head>\n<meta name="title" content='+ title +'>\n';
+        content+= '<meta name="author" content='+ author +'>\n';
+        content+='<meta name="doi" content='+ article.doi +'>\n</head>';
+    }
+    var filePath = Config.staticFiles.seoHeadFileDir + "headSeo.html";
+    Science.FSE.outputFile(filePath, content, Meteor.bindEnvironment(function (err) {}));
+    this.ready();
+});
+
 Meteor.startup(function () {
     Articles._ensureIndex({doi: 1});
 });
