@@ -153,7 +153,7 @@
   "Submit  Manuscript": "提交稿件",
   "Collections": "文章集",
   "Received": "收稿时间",
-  "Accepted Date": "接收时间",
+  "Accepted Date": "接受时间",
   "Published online": "发布时间",
   "Accepted": "预出版",
   "Online First": "优先出版",
@@ -312,8 +312,12 @@
         "placeholder": "中国科学 数学"
       },
       "shortTitle": {
-        "label": "简称",
+        "label": "路径短称",
         "placeholder": "math"
+      },
+      "abbrevTitle": {
+        "label": "出版物简称",
+        "placeholder": "Sci Sin-Inf"
       },
       "issn": {
         "label": "ISSN",
@@ -1594,6 +1598,7 @@
   "play":"播放",
   "download":"下载",
   "appendix":"附录",
+  "Author Information":"作者信息",
   "acknowledgment":"致谢",
   "Open Access":"开放获取",
   "Interest Statement":"利益冲突声明",

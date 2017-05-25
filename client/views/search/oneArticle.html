@@ -13,10 +13,10 @@
 	        <!--{{/if}}-->
             {{#mathjax}}
             <div class="resultsList">{{> accessKeyImage}}
-                <div class="pull-right divTip">
+                <div id="nav-item-dropdown" class="pull-right dropdown navbar-left-button divTip">
                     {{#if special}}
-                        <span class="label label-primary">{{_ "Topical Collection"}}</span>
-                        <p>{{{special}}}</p>
+                        <span class="label label-primary dropdown-toggle">{{_ "Topical Collection"}}</span>
+                        <div id="dropdown-nav-items" class="dropdown-menu tipPs"><a href="{{splLink special}}">{{{special}}}</a></div>
                     {{/if}}
                 </div>
                 <div><a style="font-size:12px" href="{{urlToArticleById _id}}"><b>{{{translateThis title.cn title.en}}}</b></a></div>

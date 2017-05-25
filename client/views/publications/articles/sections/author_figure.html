@@ -1,0 +1,11 @@
+<template name="authorFiguresSta">
+    {{#if authorFigures}}
+        <h3 class="sectionDivider-title sectionDivider">{{_ "Author Information"}}</h3>
+        {{#each authorFigures}}
+        <div class="row">
+            <div class="col-md-3" style="text-align:center;"><img src="{{getAuthorFigById imageId}}" class="article-author-figure"/></div>
+            <div class="col-md-9"><p>{{{introduce}}}</p></div>
+        </div><hr>
+        {{/each}}
+    {{/if}}
+</template>

@@ -89,7 +89,16 @@ Science.parserAccepted = function(filepath){
             article.accepted = new Date(Date.parse(acceptedDateStr.split("T")[0]));
         }else{
             acceptedDateStr = parserHelper.getSimpleVal("//publish_date",dom)
-            article.accepted = new Date(Date.parse(acceptedDateStr));
+            if(acceptedDateStr){
+                article.accepted = new Date(Date.parse(acceptedDateStr));
+            }else{
+                var yearAc = parserHelper.getSimpleVal("//ms_id/decision_date/year", dom);
+                var monthAc = parserHelper.getSimpleVal("//ms_id/decision_date/month", dom);
+                var dayAc = parserHelper.getSimpleVal("//ms_id/decision_date/day", dom);
+                if(yearAc && monthAc && dayAc){
+                    article.accepted = new Date(Date.parse(yearAc + '/ ' + monthAc + '/' + dayAc));
+                }
+            }
         }
 
         var topicStr = parserHelper.getFirstAttribute("//content/attr_type[@name='Speciality']/attribute/attribute::name", dom);

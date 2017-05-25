@@ -94,12 +94,21 @@ Science.Reports.getArticleReportData = function (query) {
         Meteor.bindEnvironment( function (err, result) {
             var deletedArticles =[];
             _.each(result, function (item) {
-                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
+                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,journalId:1}});
                 if(article){
                     var x = {};
-                    x.journal = article.journal.titleCn;
+                    if(article.journalId){
+                        var journal = Publications.findOne({_id:article.journalId});
+                        if(journal){
+                            x.journal = journal?journal.titleCn:journal.title;
+                        }else{
+                            x.journal = "";
+                        }
+                    }else{
+                        x.journal = "";
+                    }
                     x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
-                    x.title = article.title.cn;
+                    x.title = article.title.cn || article.title.en;
                     x.doi = article.doi;
                     x.issue = article.issue;
                     x.volume = article.volume;
@@ -262,12 +271,11 @@ Science.Reports.getRegionalData = function(query){
                 var regional = getLocationFromLocalDatabase(item.ip);
                 var x = {};
                 if(regional){
-
                     x.country = regional.country_chinese_name;
                     x.region = regional.region_chinese_name;
                 }else{
-                    x.country = "未知";
-                    x.region = "未知";
+                    x.country = "中国";
+                    x.region = "";
                 }
                 _.extend(item, x);
             })
@@ -323,10 +331,19 @@ Science.Reports.getArticleReportDataNew = function (query) {
         Meteor.bindEnvironment( function (err, result) {
             var deletedArticles =[];
             _.each(result, function (item) {
-                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1}});
+                var article = Articles.findOne({_id: item.articleId},{fields:{title:1,doi:1,issue:1,volume:1,journal:1,publisher:1,journalId:1}});
                 if(article){
                     var x = {};
-                    x.journal = article.journal.titleCn;
+                    if(article.journalId){
+                        var journal = Publications.findOne({_id:article.journalId});
+                        if(journal){
+                            x.journal = journal?journal.titleCn:journal.title;
+                        }else{
+                            x.journal = "";
+                        }
+                    }else{
+                        x.journal = "";
+                    }
                     x.publisher = _.findWhere(allPublisher, {_id: article.publisher}).chinesename;
                     x.title = article.title.cn;
                     x.doi = article.doi;

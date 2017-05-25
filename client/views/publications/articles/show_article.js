@@ -231,10 +231,13 @@ Template.showArticle.helpers({
     },
     ipDownloadLimitation: function () {
         //NOTE: no articles redirect as this functionality was only temporary until february 28th 2016
-        //return true;
-        if (Permissions.isAdmin())return true;
-        if (this.language === "2") return true;
-        return Session.get("ipInChina");
+        return true;
+        //if (Permissions.isAdmin())return true;
+        //if (this.language === "2") return true;
+        //return Session.get("ipInChina");
+    },
+    secitionisEmpty:function(){
+        return _.isEmpty(this.sections) || _.isEmpty(this.figures);
     }
 });
 
@@ -303,15 +306,13 @@ Template.articlePageNavigation.onCreated(function () {
 
 Template.articlePageNavigation.helpers({
     previousArticle: function () {
-        var rootUrl = window.location.pathname;
-        var url = rootUrl.substring(0,rootUrl.lastIndexOf("/") + 1);
-        if(Template.instance().prevDoi.get())return url + Template.instance().prevDoi.get();
+        var rootUrl = Meteor.absoluteUrl();
+        if(Template.instance().prevDoi.get())return rootUrl+ "doi/" + Template.instance().prevDoi.get();
         return Template.instance().prevDoi.get();
     },
     nextArticle: function () {
-        var rootUrl = window.location.pathname;
-        var url = rootUrl.substring(0,rootUrl.lastIndexOf("/") + 1);
-        if(Template.instance().nextDoi.get())return url + Template.instance().nextDoi.get();
+        var rootUrl = Meteor.absoluteUrl();
+        if(Template.instance().nextDoi.get())return rootUrl+ "doi/" + Template.instance().nextDoi.get();
         return Template.instance().nextDoi.get();
     },
     hasIssue: function () {

@@ -171,5 +171,6 @@ var getNextPage = function (issue, padPage, ascending) {
     var endDoi = nextArticle.doi.substring(nextArticle.doi.indexOf("/")+1);
     var articleDoi = endDoi.replace("/","-slash-");
     var doi = pubDoi+articleDoi;
-    return doi.substring(doi.lastIndexOf("/") + 1);
+    return doi;
+    //return doi.substring(doi.lastIndexOf("/") + 1);
 }

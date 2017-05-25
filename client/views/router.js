@@ -46,7 +46,7 @@ Router.onBeforeAction(function () {
             var journal=Publications.findOne({_id:article.journalId});
             if(journal){
                 citationMetaTags.push({name:"citation_journal_title",content:journal.title});
-                citationMetaTags.push({name:"citation_journal_abbrev",content:journal.shortTitle});
+                citationMetaTags.push({name:"citation_journal_abbrev",content:journal.abbrevTitle});
                 citationMetaTags.push({name:"citation_issn",content:journal.issn.slice(0, 4) + "-" + journal.issn.slice(4)});
                 citationMetaTags.push({name:"citation_issn",content:journal.EISSN});
             }

@@ -5,7 +5,8 @@ Template.articlesInCollection.helpers({
 			return [];
 		var publisherId = this.collInfo.publisherId;
 		var journalId = this.collInfo.journalId;
-		var articleList =  Articles.find({_id:{$in:addedArticles}},{sort: {padPage: 1}}).fetch();
+		var sort = {"published": Session.get("sort")};
+		var articleList =  Articles.find({_id:{$in:addedArticles}},{sort: sort}).fetch();
 		articleList.forEach(function (oneArticle) {	
 			oneArticle.publisherIdFromColl = publisherId;
 			oneArticle.journalIdFromColl = journalId;

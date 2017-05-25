@@ -428,7 +428,8 @@ var insertArticle = function (a) {
     }
     //设置padPage
     var atcpage= a.elocationId || a.startPage || "";
-    a.padPage = a.journal.issn+Science.String.PadLeft(a.volume || "novolume","0",8)+Science.String.PadLeft(a.issue || "noissue","0",8)+Science.String.PadLeft(atcpage,"0",10);
+    var atcendpage= a.endPage || "";
+    a.padPage = a.journal.issn+Science.String.PadLeft(a.volume || "novolume","0",8)+Science.String.PadLeft(a.issue || "noissue","0",8)+Science.String.PadLeft(atcpage,"0",10)+Science.String.PadLeft(atcendpage,"0",10);
 
     //若DOI已存在于数据库中，则更新配置文件中设置的指定字段内容。
     var existArticle = Articles.findOne({doi: a.doi});
@@ -506,7 +507,8 @@ var insertArticle = function (a) {
         appendix: a.appendix,
         openAccess: a.openAccess, //开放获取
         interest: a.interest, //利益冲突声明
-        contributions: a.contributions //作者贡献声明
+        contributions: a.contributions, //作者贡献声明
+        authorFigures: a.authorFigures //作者图片简介
     });
 
     //创建期刊专题

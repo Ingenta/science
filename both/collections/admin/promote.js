@@ -47,6 +47,7 @@ AdvertisementSchema = new SimpleSchema({
     },
     pictures: {
         type: String,
+        optional: true,
         autoform: {
             afFieldInput: {
                 type: 'fileUpload',
@@ -57,6 +58,7 @@ AdvertisementSchema = new SimpleSchema({
     },
     defaultPictures: {
         type: String,
+        optional: true,
         autoform: {
             afFieldInput: {
                 type: 'fileUpload',
