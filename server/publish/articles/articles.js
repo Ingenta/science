@@ -114,7 +114,7 @@ Meteor.publish('doiCreateHtml', function (doi) {
         content+= '<meta name="author" content='+ author +'>\n';
         content+='<meta name="doi" content='+ article.doi +'>';
     }
-    var filePath = Config.staticFiles.seoHeadFileDir + "head.html";
+    var filePath = Config.staticFiles.seoHeadFileDir + "headSeo.html";
     Science.FSE.outputFile(filePath, content, Meteor.bindEnvironment(function (err) {}));
     this.ready();
 });
