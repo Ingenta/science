@@ -1023,3 +1023,63 @@ ScienceXML.getAppendix = function(doc) {
     if(appNode)
         return ScienceXML.getParagraphsFromASectionNode(appNode);
 }
+
+//提取bio标签中作者图片信息
+ScienceXML.getAuthorFiguresInBio = function (doc,log) {
+    var authorFiguresNodes = xpath.select("//bio/descendant::tr", doc);
+    if (authorFiguresNodes && authorFiguresNodes.length) {
+        var authorFigures = [];
+        var finishCount=0;
+        authorFiguresNodes.forEach(function (fig) {
+            var figure = {};
+            var introduce = parserHelper.getXmlString("child::td/p[@specific-use='author_intro']", fig,true);
+            if (introduce && introduce.length) {
+                figure.introduce = introduce;
+            }
+            var graphics = xpath.select("descendant::alternatives/graphic", fig);
+            if (graphics && graphics.length) {
+                figure.graphics = [];
+                graphics.forEach(function (grap) {
+                    var g = {};
+                    var suse = xpath.select("./@specific-use", grap);
+                    if (suse && suse.length) {
+                        g.use = suse[0].value;
+                    }
+                    var href = xpath.select('@href', grap);
+                    if (href && href.length) {
+                        g.href = href[0].value && href[0].value.replace('\\', '/');//兼容windows的分隔符\
+                    }
+                    figure.graphics.push(g);
+                });
+            }
+            var onlineOne = _.findWhere(figure.graphics, {use: "online"});
+            onlineOne = onlineOne || _.find(figure.graphics, function (g) {
+                    return !g.use;
+                });
+            if (onlineOne) {
+                var href = onlineOne.href;
+                var figLocation = log.extractTo + "/" + href;
+                if (!ScienceXML.FileExists(figLocation)) {
+                    logger.warn("image missing from import: " + log.name, href);
+                    log.errors.push("image missing: " + href);
+                }else if (!ScienceXML.IsImageTypeSupported(figLocation)) {
+                    log.errors.push("image type not supported: " + href);
+                } else {
+                    Science.ThumbUtils.TaskManager.add("figures", href);
+                    FiguresStore.insert(figLocation, function (err, fileObj) {
+                        finishCount++;
+                        if (err) {
+                            logger.error(err);
+                            log.errors.push(err.toString());
+                        }else{
+                            figure.imageId = fileObj._id;
+                        }
+                    });
+                }
+            }
+            figure && authorFigures.push(figure);
+        });
+        return authorFigures;
+    }
+    return null;
+};

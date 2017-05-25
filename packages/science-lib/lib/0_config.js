@@ -14,7 +14,8 @@ Config = {
         uploadFiguresOrigDir: Meteor.isDevelopment ? '/tmp/orig_figures' : '/bundle/cfs/files/orig_figures',
         uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdfs' : '/bundle/upload/pdfs',
         uploadPicDir: Meteor.isDevelopment ? '/tmp/images/' : '/bundle/upload/images/',
-        uploadFileDir: Meteor.isDevelopment ? '/tmp/files/' : '/bundle/upload/files/'
+        uploadFileDir: Meteor.isDevelopment ? '/tmp/files/' : '/bundle/upload/files/',
+        seoHeadFileDir: Meteor.isDevelopment ? '/Users/yxx/Documents/science/i18n/' : '/bundle/bundle/programs/web.browser'
     },
 
     ftp: {
@@ -118,7 +119,8 @@ Config = {
         "appendix", //附录信息
         "openAccess", //开放获取
         "interest", //利益冲突声明
-        "contributions" //作者贡献声明
+        "contributions", //作者贡献声明
+        "authorFigures"  //作者图片简介
     ],
     pdf: {
         watermark: "Accepted",

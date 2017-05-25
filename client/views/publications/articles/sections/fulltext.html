@@ -56,6 +56,9 @@
             {{#if appendix}}
                 {{> appendixTemplate}}
             {{/if}}
+            {{#if authorFigures}}
+                {{> authorFiguresSta}}
+            {{/if}}
             {{#if anyReference}}
                 <div class="sectionDivider sectionDivider-title">{{_ "References"}}</div>
                 {{> ReferencesTemplate}}

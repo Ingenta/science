@@ -7,6 +7,6 @@ Meteor.publish('oneArticleFigures', function (articleDoi) {
     if(!articleDoi)return this.ready();
     var a = Articles.findOne({doi: articleDoi});
     if (!a)return this.ready();
-    var thisArticleImageIds = _.pluck(a.figures, "imageId");
+    var thisArticleImageIds = _.union(_.pluck(a.figures, "imageId"),_.pluck(a.authorFigures, "imageId"));
     return FiguresStore.find({_id: {$in: thisArticleImageIds}}, {sort: {'uploadedAt': -1}});
 });

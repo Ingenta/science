@@ -507,7 +507,8 @@ var insertArticle = function (a) {
         appendix: a.appendix,
         openAccess: a.openAccess, //开放获取
         interest: a.interest, //利益冲突声明
-        contributions: a.contributions //作者贡献声明
+        contributions: a.contributions, //作者贡献声明
+        authorFigures: a.authorFigures //作者图片简介
     });
 
     //创建期刊专题
