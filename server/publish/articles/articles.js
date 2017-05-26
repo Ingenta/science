@@ -101,11 +101,19 @@ Meteor.publish('doiCreateHtml', function (doi) {
     var content = undefined;
     var title;
     var author;
-    title = article.title.en || article.title.cn;
-    author = article.orderAuthors.en || article.orderAuthors.cn;
-    content = '<meta name="title" content='+ title +'>\n';
-    content+= '<meta name="author" content='+ author +'>\n';
-    content+='<meta name="doi" content='+ article.doi +'>';
+    if(article.language =="1"){
+        title = article.title.en || article.title.cn;
+        author = article.orderAuthors.en || article.orderAuthors.cn;
+        content = '<head>\n<meta name="title" content='+ title +'>\n';
+        content+= '<meta name="author" content='+ author +'>\n';
+        content+='<meta name="doi" content='+ article.doi +'>\n</head>';
+    }else{
+        title = article.title.cn || article.title.en;
+        author = article.orderAuthors.cn || article.orderAuthors.en;
+        content = '<head>\n<meta name="title" content='+ title +'>\n';
+        content+= '<meta name="author" content='+ author +'>\n';
+        content+='<meta name="doi" content='+ article.doi +'>\n</head>';
+    }
     var filePath = Config.staticFiles.seoHeadFileDir + "head.html";
     Science.FSE.outputFile(filePath, content, Meteor.bindEnvironment(function (err) {}));
     this.ready();
