@@ -8,22 +8,6 @@ Meteor.startup(function () {
     }
 })
 Router.map(function () {
-  this.route('articlePage', {
-      where: 'server',
-      path: '/meta/publisher/:publisherName/journal/:journalShortTitle/:volume/:issue/:publisherDoi/:articleDoi',
-    }).get(function(){
-      this.response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      return this.response.end(
-        '<!DOCTYPE html>'
-        +'<html lang="en">'
-        +'  <head>'
-        +'    <meta charset="utf-8">'
-        +'    <meta name="author" content="test">'
-        +'    <script type="text/javascript" src="/redirct.js"></script>'
-        +'  </head>'
-        +'</html>'
-      )
-    });
     this.route('PlainText', {
         where: 'server',
         path: '/citation/plaintext/:publisherDoi/:articleDoi',
