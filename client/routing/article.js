@@ -27,7 +27,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
     waitOn: function () {
         return [
             Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
-            Meteor.subscribe('doiCreateHtml', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             Meteor.subscribe('files'),
@@ -89,7 +88,6 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/doi/:publishe
     waitOn: function () {
         return [
             Meteor.subscribe('oneArticleByDoi', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
-            Meteor.subscribe('doiCreateHtml', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             Meteor.subscribe('oneArticleKeywords', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             Meteor.subscribe('oneArticleFigures', this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")),
             Meteor.subscribe('files'),
