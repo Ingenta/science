@@ -118,6 +118,118 @@ Router.map(function () {
         +'</html>'
       )
     });
+
+    this.route('articleDoiPage', {
+        where: 'server',
+        path: '/publisher/:publisherName/journal/:journalShortTitle/doi/:publisherDoi/:articleDoi',
+    }).get(function(){
+        var article = Articles.findOne({doi: this.params.publisherDoi + "/" + this.params.articleDoi.replace(/-slash-/g,"/")});
+        var title = article.title.en || article.title.cn;
+        var description = "";
+        if(article.abstract){
+            description = article.abstract.en || article.abstract.cn;
+        }
+        var publisher = Publishers.findOne({_id:article.publisher});
+        var publisherName = "";
+        if(publisher){
+            publisherName = publisher.name || publisher.chinesename;
+        }
+        var journal = Publications.findOne({_id:article.journalId});
+        var journalName = "";
+        if(journal){
+            journalName = journal.title || journal.titleCn;
+        }
+        var published = "";
+        if(article.published){
+            published = article.published.format("yyyy/MM/dd")
+        }
+        var firstPage = article.startPage || article.elocationId;
+        var author = '';
+        var authorMetaTag = [];
+        if(!_.isEmpty(article.authors)){
+            var authorNames="";
+            _.each(article.authors,function(author){
+                authorNames+=Science.JSON.try2GetRightLangVal(author.fullname,null,'en')+"|";
+                authorMetaTag.push('<meta name="citation_author" content=' + Science.JSON.try2GetRightLangVal(author.fullname,null,'en') + '>\n');
+                if(author.email){
+                    var email=_.find(article.authorNotes,function(item){
+                        return author.email==item.id;
+                    })
+                    if(email)
+                        authorMetaTag.push('<meta name="citation_author_email" content=' + email.email + '>\n')
+                }
+                if(!_.isEmpty(article.affiliations)){
+                    if(_.isEmpty(author.affs)){
+                        author.affs="all";
+                    }
+                    _.each(article.affiliations,function(item){
+                        if(author.affs=="all" || _.contains(author.affs,item.id)){
+                            var label=Science.JSON.try2GetRightLangVal(item.label,null,'en');
+                            var affText = Science.JSON.try2GetRightLangVal(item.affText,null,'en');
+                            if(affText)
+                                if(label && label.length<3 && affText.startWith(label))
+                                    affText= affText.substr(label.length)
+                            if(_.isString(affText))
+                                authorMetaTag.push('<meta name="citation_author_institution" content=' + affText.trim() + '>\n')
+                        }
+                    })
+                }
+            })
+            if(authorMetaTag.length > 0)
+                var authorArr = authorMetaTag.join(" ");
+            if(authorNames){
+                authorNames=authorNames.slice(0,-1);
+                author = authorNames;
+            }
+        }
+        var htmlHref = Meteor.absoluteUrl() + "doi/" + article.doi;
+        var pdfHref = Meteor.absoluteUrl()+"downloadPdf/"+article._id;
+        this.response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+        return this.response.end(
+            '<!DOCTYPE html>\n'
+            +'<html>\n'
+            +'  <head>\n'
+            +'    <link rel="stylesheet" type="text/css" class="__meteor-css__" href="/b1507784cc951fd05883029bbe12562ca74ab551.css?meteor_css_resource=true">  <link rel="stylesheet" type="text/css" class="__meteor-css__" href="/d3787456fd39465964aa7d2088a9ee3ba1fdbe47.css?meteor_css_resource=true">\n\n\n'
+            +'    <script type="text/javascript">__meteor_runtime_config__ = JSON.parse(decodeURIComponent("%7B%22meteorRelease%22%3A%22METEOR%401.2.1%22%2C%22PUBLIC_SETTINGS%22%3A%7B%7D%2C%22ROOT_URL%22%3A%22http%3A%2F%2Fengine.scichina.com%22%2C%22ROOT_URL_PATH_PREFIX%22%3A%22%22%2C%22autoupdateVersion%22%3A%227c20b022ee6533a292bb49e45bfc10729f6ab3ed%22%2C%22autoupdateVersionRefreshable%22%3A%225ad99d377c38b01b6dc0ab7402502ec8760910ff%22%2C%22autoupdateVersionCordova%22%3A%22none%22%7D"));</script>\n\n'
+            +'    <script type="text/javascript" src="/1b1920021f39c46022c75a10b71287cf5490b560.js?meteor_js_resource=true"></script>\n\n'
+            +'    <script type="text/javascript" src="/redirct.js"></script>\n\n\n'
+            +'    <meta name="fragment" content="!">\n'
+            +'    <meta charset="utf-8">\n'
+            +'    <meta http-equiv= "X-UA-Compatible" content = "IE=edge,chrome=1">\n'
+            +'    <meta name="renderer" content="webkit">\n'
+            +'    <meta name="google-site-verification" content="YoQfE59JUfygdO2GC0OLqjidR-HLBAwHwaKBhmcb9gk" />\n'
+            +'    <meta name="msvalidate.01" content="040A97EE05E6F2ECE4496950615497A6" />\n'
+            +'    <meta name="baidu-site-verification" content="RlyapmbKao" />\n'
+            +'    <link href="/favicon.png" type="image/x-icon" rel="icon"/>\n'
+            +'    <title>\n'
+            +'         《中国科学》杂志社\n'
+            +'    </title>\n'
+            +'    <meta name="title" content="' + title + '">\n'
+            +'    <meta name="author" content="' + author + '">\n'
+            +'    <meta name="description" content="' + description + '">\n'
+            +'    <meta name="citation_publisher" content="' + publisherName + '">\n'
+            +'    <meta name="citation_title" content="' + title + '">\n'
+            +'    <meta name="citation_date" content="' + published + '">\n'
+            +'    <meta name="citation_doi" content="' + article.doi + '">\n'
+            +'    <meta name="citation_abstract" content="' + description + '">\n'
+            +'    <meta name="citation_journal_title" content="' + journalName + '">\n'
+            +'    <meta name="citation_journal_abbrev" content="' + journal.abbrevTitle + '">\n'
+            +'    <meta name="citation_issn" content="' + journal.issn.slice(0, 4) + "-" + journal.issn.slice(4) + '">\n'
+            +'    <meta name="citation_eissn" content="' + journal.EISSN + '">\n'
+            +'    <meta name="citation_volume" content="' + article.volume + '">\n'
+            +'    <meta name="citation_issue" content="' + article.issue + '">\n'
+            +'    <meta name="citation_firstpage" content="' + firstPage + '">\n'
+            +'    <meta name="citation_lastpage" content="' + article.endPage + '">\n'
+            +      authorArr
+            +'    <meta name="citation_abstract_html_url" content="' + htmlHref + '">\n'
+            +'    <meta name="citation_pdf_url" content="' + pdfHref + '">\n'
+            +'  </head>\n'
+            +'  <body>\n\n'
+            +'  </body>\n'
+            +'</html>'
+        )
+    });
+
     this.route('PlainText', {
         where: 'server',
         path: '/citation/plaintext/:publisherDoi/:articleDoi',
