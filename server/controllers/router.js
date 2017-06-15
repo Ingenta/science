@@ -36,8 +36,13 @@ Router.map(function () {
       var author = ''
       if(!_.isEmpty(article.authors)){
           var authorsArr = []
-          article.authors.forEach(function (author) {
-              authorsArr.push((author.given.en || author.given.cn) + " " + (author.surname.en || author.surname.cn));
+          article.authors.forEach(function (item) {
+              if(item.fullname)
+                  if(article.language == "1"){
+                      authorsArr.push(item.fullname.en);
+                  }else{
+                      authorsArr.push(item.fullname.cn);
+                  }
           });
           author = authorsArr.join('|')
       }
