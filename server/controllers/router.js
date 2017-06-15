@@ -41,8 +41,8 @@ Router.map(function () {
           });
           author = authorsArr.join('|')
       }
-      var htmlHref = window.location.href;
-      var pdfHref = window.location.origin+"/downloadPdf/"+article._id;
+      var htmlHref = location.href;
+      var pdfHref = location.origin+"/downloadPdf/"+article._id;
       this.response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
       return this.response.end(
         '<!DOCTYPE html>\n'
