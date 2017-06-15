@@ -41,6 +41,8 @@ Router.map(function () {
           });
           author = authorsArr.join('|')
       }
+      var htmlHref = window.location.href;
+      var pdfHref = window.location.origin+"/downloadPdf/"+article._id;
       this.response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
       return this.response.end(
         '<!DOCTYPE html>\n'
@@ -76,8 +78,8 @@ Router.map(function () {
         +'    <meta name="citation_issue" content="' + article.issue + '">\n'
         +'    <meta name="citation_firstpage" content="' + firstPage + '">\n'
         +'    <meta name="citation_lastpage" content="' + article.endPage + '">\n'
-        +'    <meta name="citation_abstract_html_url" content="' + window.location.href + '">\n'
-        +'    <meta name="citation_pdf_url" content="' + window.location.origin+"/downloadPdf/"+article._id + '">\n'
+        +'    <meta name="citation_abstract_html_url" content="' + htmlHref + '">\n'
+        +'    <meta name="citation_pdf_url" content="' + pdfHref + '">\n'
         +'  </head>\n'
         +'  <body>\n\n'
         +'  </body>\n'
