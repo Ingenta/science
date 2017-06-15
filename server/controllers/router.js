@@ -71,7 +71,7 @@ Router.map(function () {
         +'    <meta name="citation_date" content="' + published + '">\n'
         +'    <meta name="citation_doi" content="' + article.doi + '">\n'
         +'    <meta name="citation_abstract" content="' + description + '">\n'
-        +'    <meta name="citation_journal_title" content="' + journalName + '">\n'
+        //+'    <meta name="citation_journal_title" content="' + journalName + '">\n'
         //+'    <meta name="citation_journal_abbrev" content="' + journal.abbrevTitle + '">\n'
         //+'    <meta name="citation_issn" content="' + journal.issn.slice(0, 4) + "-" + journal.issn.slice(4) + '">\n'
         //+'    <meta name="citation_volume" content="' + article.volume + '">\n'
