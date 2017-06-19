@@ -215,12 +215,21 @@ Template.showArticle.helpers({
                 allrefs = _.sortBy(allrefs,Math.abs);
             }
         }
-        if (this.email && Router.current().data) {
-            var email = this.email;
-            var note = _.find(Router.current().data().authorNotes, function (note) {
-                return note.id == email;
-            });
-            allrefs.push((note && note.label) || "*");
+        if (!_.isEmpty(this.email)) {
+            if(typeof (this.email) =="string"){
+                var email = this.email;
+                var note = _.find(Router.current().data().authorNotes, function (note) {
+                    return note.id == email;
+                });
+                allrefs.push((note && note.label) || "*");
+            }else{
+                _.each(this.email.sort(), function (email) {
+                    var note = _.find(Router.current().data().authorNotes, function (note) {
+                        return note.id == email;
+                    });
+                    allrefs.push((note && note.label) || "*");
+                });
+            }
         }
         if (!_.isEmpty(allrefs)) {
             return allrefs;
