@@ -112,8 +112,8 @@ ScienceXML.getAuthorInfo = function (results, doc) {
 
             //通讯作者信息
             var noteAttr = parserHelper.getAttributes("child::xref[@ref-type='Recommend']/attribute::rid | child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
-            if (noteAttr) {
-                authorObj.email = noteAttr;
+            if (!_.isEmpty(noteAttr)) {
+                authorObj.email = _.uniq(noteAttr);
                 logger.info('parse email done')
             }
 
