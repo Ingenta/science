@@ -20,6 +20,7 @@ AutoForm.addHooks(['addPictureModalForm'], {
     onSuccess: function () {
         $("#addPictureModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('newsLinkImage');
     },
     before: {
         insert: function (doc) {

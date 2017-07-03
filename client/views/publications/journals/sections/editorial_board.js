@@ -79,6 +79,7 @@ AutoForm.addHooks(['addAboutTitleModalForm'], {
 AutoForm.addHooks(['addEditorialBoardModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('journalEditorBoardImage',Router.current().params.journalShortTitle)
     },
     before: {
         insert: function (doc) {

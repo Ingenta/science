@@ -17,11 +17,13 @@ ReactiveTabs.createInterface({
             var journal = Publications.findOne({shortTitle: Router.current().params.journalShortTitle});
             if (slug === 'Overview') {
                 Meteor.subscribe('tag');
+                Meteor.subscribe('journalImages', Router.current().params.journalShortTitle);
                 Meteor.call("insertAudit", Meteor.userId(), "journalOverview", journal.publisher, journal._id, function (err, response) {
                     if (err) console.log(err);
                 });
             } else if (slug === 'Browse') {
                 Meteor.subscribe('journalSpecialTopics', Router.current().params.journalShortTitle);
+                Meteor.subscribe('journalIssuesImage', Router.current().params.journalShortTitle);
                 var articlesSub = Meteor.subscribe('journalBrowseTabArticleList', Session.get("currentIssueId"));
                 template.waiting.set(!articlesSub.ready());
                 //if (Permissions.isAdmin() === false){
@@ -69,10 +71,13 @@ ReactiveTabs.createInterface({
             } else if (slug === 'Special Topics') {
                 Meteor.subscribe('journalSpecialTopics', Router.current().params.journalShortTitle);
             } else if (slug === 'About') {
+                Meteor.subscribe('journalAboutImage', Router.current().params.journalShortTitle);
                 Meteor.subscribe("journalAboutTab", Router.current().params.journalShortTitle);
             } else if (slug === 'MOOP') {
                 Meteor.subscribe('journalMoopTabArticleList', journal._id);
+                Meteor.subscribe('journalIssuesImage', Router.current().params.journalShortTitle);
             } else if (slug === 'News') {
+                Meteor.subscribe('journalNewsImage',Router.current().params.journalShortTitle),
                 Meteor.subscribe('journalNews', Router.current().params.journalShortTitle)
             }
         }

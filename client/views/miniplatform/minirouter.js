@@ -18,7 +18,15 @@ Router.map(function () {
                 MiniPlatformSubs.subscribe('miniPlatformHomeNewsShow'),
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
                 MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
-                MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink'),
+                Meteor.subscribe('newsJournalImages'),
+                Meteor.subscribe('columnImage'),
+                Meteor.subscribe('newsCenterRecImage'),
+                Meteor.subscribe('newsCenterRecMaImage'),
+                Meteor.subscribe('newsCenterRecPubImage'),
+                Meteor.subscribe('newsRecommendImage'),
+                Meteor.subscribe('newsLinkImage'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -29,7 +37,9 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsJournalImages'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -40,7 +50,9 @@ Router.map(function () {
         layoutTemplate: "miniLayout",
         waitOn: function () {
             return [
-                MiniPlatformSubs.subscribe('news_link')
+                MiniPlatformSubs.subscribe('news_link'),
+                Meteor.subscribe('cooperationImage'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -55,7 +67,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -67,7 +80,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformSubscription'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -79,7 +93,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformNewsContact'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -91,7 +106,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformMagazineProfile'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -103,7 +119,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformCouncil'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -115,7 +132,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformChiefEditor'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -128,7 +146,8 @@ Router.map(function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformMemorabilia'),
                 MiniPlatformSubs.subscribe('miniPlatformHistoryNews'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -144,7 +163,8 @@ Router.map(function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformEnterNews'),
                 MiniPlatformSubs.subscribe('miniPlatformEditFields'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -156,7 +176,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformMostScpNews'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -168,7 +189,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformMostPublishingNews'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -180,7 +202,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',20),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -192,7 +215,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('miniPlatformCulturePage',this.params.cultureId),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -206,7 +230,8 @@ Router.map(function () {
                 MiniPlatformSubs.subscribe('miniPlatformNews',this.params.newsCenterId),
                 MiniPlatformSubs.subscribe('miniPlatformLastNews'),
                 JournalSubs.subscribe('files'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -219,7 +244,8 @@ Router.map(function () {
             return [
                 MiniPlatformSubs.subscribe('column'),
                 MiniPlatformSubs.subscribe('miniPlatformColumnViews',this.params.columnId),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });
@@ -231,7 +257,8 @@ Router.map(function () {
         waitOn: function () {
             return [
                 MiniPlatformSubs.subscribe('news_center'),
-                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink')
+                MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
+                Meteor.subscribe('newsBottomLinkImage')
             ]
         }
     });

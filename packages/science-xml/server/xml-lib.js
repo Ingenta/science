@@ -111,9 +111,9 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             var authorObj = {given: givenPart, surname: surnamePart, fullname: fullnamePart};
 
             //通讯作者信息
-            var noteAttr = parserHelper.getFirstAttribute("child::xref[@ref-type='Recommend']/attribute::rid | child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
-            if (noteAttr) {
-                authorObj.email = noteAttr;
+            var noteAttr = parserHelper.getAttributes("child::xref[@ref-type='Recommend']/attribute::rid | child::xref[@ref-type='author-note']/attribute::rid | child::xref[@ref-type='Corresp']/attribute::rid", author);
+            if (!_.isEmpty(noteAttr)) {
+                authorObj.email = _.uniq(noteAttr);
                 logger.info('parse email done')
             }
 

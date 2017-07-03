@@ -64,6 +64,7 @@ AutoForm.addHooks(['addNewsModalForm'], {
     onSuccess: function () {
         $("#addNewsModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('homeNewsImage');
     },
     before: {
         insert: function (doc) {
@@ -101,5 +102,6 @@ AutoForm.addHooks(['updateNewsModalForm'], {
     onSuccess: function () {
         $("#jkafModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('homeNewsImage');
     }
 });

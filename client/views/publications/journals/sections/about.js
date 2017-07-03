@@ -65,6 +65,7 @@ AutoForm.addHooks(['addAboutArticlesModal'], {
 AutoForm.addHooks(['addEditorialMemberModal'], {
     onSuccess: function () {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('journalAboutImage', Router.current().params.journalShortTitle)
     },
     before: {
         insert: function (doc) {

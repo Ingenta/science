@@ -15,7 +15,7 @@ Config = {
         uploadPdfDir: Meteor.isDevelopment ? '/tmp/pdfs' : '/bundle/upload/pdfs',
         uploadPicDir: Meteor.isDevelopment ? '/tmp/images/' : '/bundle/upload/images/',
         uploadFileDir: Meteor.isDevelopment ? '/tmp/files/' : '/bundle/upload/files/'
-},
+    },
 
     ftp: {
         downloadDir: "/tmp/downloads",

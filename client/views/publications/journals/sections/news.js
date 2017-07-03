@@ -113,6 +113,7 @@ AutoForm.addHooks(['addPublishingDynamicForm'], {
     onSuccess: function () {
         $("#addPublishingDynamicModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe("journalNewsImage", Router.current().params.journalShortTitle);
     },
     before: {
         insert: function (doc) {
