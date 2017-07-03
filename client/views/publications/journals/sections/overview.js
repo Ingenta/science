@@ -66,6 +66,7 @@ AutoForm.addHooks(['addRecommendModalForm'], {
     onSuccess: function () {
         $("#addRecommendModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('journalRecommendImage',Router.current().params.journalShortTitle);
         Meteor.subscribe("recommendedJournalArticles",Session.get('currentJournalId'));
     },
     before: {

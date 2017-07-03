@@ -48,6 +48,7 @@ AutoForm.addHooks(['addXianMeetingModalForm'], {
     onSuccess: function () {
         $("#addXianMeetingModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('columnImage');
     },
     before: {
         insert: function (doc) {
@@ -61,6 +62,7 @@ AutoForm.addHooks(['addFundsModalForm'], {
     onSuccess: function () {
         $("#addFundsModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('columnImage');
     },
     before: {
         insert: function (doc) {
@@ -74,6 +76,7 @@ AutoForm.addHooks(['addForumColumnModalForm'], {
     onSuccess: function () {
         $("#addForumColumnModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        Meteor.subscribe('columnImage');
     },
     before: {
         insert: function (doc) {

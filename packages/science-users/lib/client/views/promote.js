@@ -61,6 +61,11 @@ Template.sidebarAd.events({
 AutoForm.addHooks(['addAdvertisementModalForm'], {
     onSuccess: function () {
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
+        if(Router.current().params.journalShortTitle){
+            Meteor.subscribe('journalPromoteImage',Router.current().params.journalShortTitle);
+        }else{
+            Meteor.subscribe('homePromoteImage');
+        }
     },
     before: {
         insert: function (doc) {

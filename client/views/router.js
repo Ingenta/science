@@ -17,7 +17,6 @@ ArticleSubs = new SubsManager();
 
 HomePageSubs.subscribe("current_user_data");
 Meteor.subscribe('pages');
-HomePageSubs.subscribe('images');
 HomePageSubs.subscribe('institutions');
 HomePageSubs.subscribe('searchHistory');
 HomePageSubs.subscribe('publishers');
@@ -131,7 +130,15 @@ Meteor.startup(function () {
                         MiniPlatformSubs.subscribe('miniPlatformHomeNewsShow'),
                         MiniPlatformSubs.subscribe('recommendedMiniPlatformArticles',7),
                         MiniPlatformSubs.subscribe('miniPlatformCommonNewsLink'),
-                        MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink')
+                        MiniPlatformSubs.subscribe('miniPlatformHomeNewsLink'),
+                        Meteor.subscribe('newsJournalImages'),
+                        Meteor.subscribe('columnImage'),
+                        Meteor.subscribe('newsCenterRecImage'),
+                        Meteor.subscribe('newsCenterRecMaImage'),
+                        Meteor.subscribe('newsCenterRecPubImage'),
+                        Meteor.subscribe('newsRecommendImage'),
+                        Meteor.subscribe('newsLinkImage'),
+                        Meteor.subscribe('newsBottomLinkImage')
                     ]
                 }
             });
@@ -147,7 +154,8 @@ Meteor.startup(function () {
                     return [
                         HomePageSubs.subscribe('homepageNews'),
                         HomePageSubs.subscribe('HomeAdvertisementShowPage'),
-                        HomePageSubs.subscribe('images'),
+                        HomePageSubs.subscribe('homeNewsImage'),
+                        HomePageSubs.subscribe('homePromoteImage'),
                         HomePageSubs.subscribe('homepageMostRecentArticles'),
                         HomePageSubs.subscribe('homeMostReadArticle'),
                         HomePageSubs.subscribe('homepageMostCitedBrief'),
@@ -173,6 +181,7 @@ Router.route("/topics/", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+            HomePageSubs.subscribe('homePromoteImage'),
             HomePageSubs.subscribe('topics')
         ]
     }
@@ -203,8 +212,9 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('images'),
+                HomePageSubs.subscribe('publisherImage'),
                 HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+                HomePageSubs.subscribe('homePromoteImage'),
                 HomePageSubs.subscribe('publishers')
             ]
         }
@@ -217,8 +227,9 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('images'),
+                Meteor.subscribe('newsJournalImages'),
                 HomePageSubs.subscribe('HomeAdvertisementShowPage'),
+                HomePageSubs.subscribe('homePromoteImage'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications')
             ]
@@ -246,7 +257,9 @@ Router.map(function () {
         name: "publisher.name",
         waitOn: function () {
             return [
-                HomePageSubs.subscribe('images'),
+                Meteor.subscribe('newsJournalImages'),
+                Meteor.subscribe('publisherCollectionsImage',this.params.publisherName),
+                HomePageSubs.subscribe('publisherImage'),
                 HomePageSubs.subscribe('publishers'),
                 HomePageSubs.subscribe('publications'),
                 CollectionSubs.subscribe('allCollections'),
@@ -265,6 +278,7 @@ Router.map(function () {
         },
         waitOn: function () {
             return [
+                HomePageSubs.subscribe('publisherImage'),
                 Meteor.subscribe("journal_ad")
             ]
         }

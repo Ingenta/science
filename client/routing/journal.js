@@ -40,6 +40,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle', {
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('journalMoopTab', this.params.journalShortTitle),
             JournalSubs.subscribe('contentType'),
+            Meteor.subscribe('journalImages',this.params.journalShortTitle),
+            Meteor.subscribe('journalPromoteImage',this.params.journalShortTitle),
+            Meteor.subscribe('journalRecommendImage',this.params.journalShortTitle),
+            Meteor.subscribe('journalEditorBoardImage',this.params.journalShortTitle),
+            Meteor.subscribe('journalCollectionsImage',this.params.journalShortTitle),
             JournalSubs.subscribe('files')
         ]
     },
@@ -91,6 +96,11 @@ Router.route('/publisher/:publisherName/journal/:journalShortTitle/:volume/:issu
             JournalSubs.subscribe('journalBrowseTabVolumeList', this.params.journalShortTitle),
             JournalSubs.subscribe('journalMoopTab', this.params.journalShortTitle),
             JournalSubs.subscribe('contentType'),
+            Meteor.subscribe('journalImages',this.params.journalShortTitle),
+            Meteor.subscribe('journalPromoteImage',this.params.journalShortTitle),
+            Meteor.subscribe('journalRecommendImage',this.params.journalShortTitle),
+            Meteor.subscribe('journalEditorBoardImage',this.params.journalShortTitle),
+            Meteor.subscribe('journalCollectionsImage',this.params.journalShortTitle),
             JournalSubs.subscribe('files')
         ]
     },
