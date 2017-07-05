@@ -3,7 +3,7 @@ ReactiveTabs.createInterface({
 	onChange: function (slug, template) {
 		history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
 		if (slug === 'admin') {
-			Meteor.subscribe("usersPageType", "admin")
+			Meteor.subscribe("usersPageType", "admin");
 		} else if (slug === 'normal') {
 			Meteor.subscribe("usersPageType", "normal");
 		}else if (slug === 'publisher') {
