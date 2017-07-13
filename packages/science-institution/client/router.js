@@ -14,7 +14,8 @@ Router.route("/admin/institutions/", {
     },
     waitOn: function () {
         return [
-            HomePageSubs.subscribe('institutions')
+            HomePageSubs.subscribe('institutions'),
+            Meteor.subscribe("institutionsImage")
         ]
     }
 });
@@ -32,6 +33,7 @@ Router.route("/admin/institutions/detail/:insId/", {
     waitOn: function () {
         return [
             HomePageSubs.subscribe('institutions'),
+            Meteor.subscribe("institutionsImage")
         ]
     }
 });

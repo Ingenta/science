@@ -338,3 +338,15 @@ Meteor.publish('cooperationImage', function () {
     });
     return Images.find({_id: {$in: newsLinkImage}});
 });
+
+Meteor.publish('institutionsImage', function () {
+    var institutions = Institutions.find().fetch();
+    if (!institutions)return this.ready();
+    var institutionsImage =[];
+    _.each(institutions,function(item){
+        if(item.logo){
+            institutionsImage.push(item.logo);
+        }
+    });
+    return Images.find({_id: {$in: institutionsImage}});
+});
