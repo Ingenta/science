@@ -7,7 +7,7 @@ Router.route('/api', function () {
     res.writeHead(200, {
         'Content-Type': 'application/json; charset=utf-8'
     });
-    if (req.method !== 'POST' && req.headers.content - type !== 'application/x-www-form-urlencoded') {
+    if (req.method !== 'POST' && req.headers['content-type'] !== 'application/x-www-form-urlencoded') {
         result.result = "failed";
         result.message = "wrong method, please use POST method with 'x-www-form-urlencoded'";
         res.write(JSON.stringify(result));
