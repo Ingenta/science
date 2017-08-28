@@ -67,7 +67,7 @@ Meteor.startup(function () {
 
 //override default publish
 Meteor.publish(null, function () {
-    if (this.userId) {
+    if (this.userId && process.env.HIDE_USER_LIST) {
         var query = {};
         var fields = {
             profile: 1,
