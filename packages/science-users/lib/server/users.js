@@ -67,7 +67,7 @@ Meteor.startup(function () {
 
 //override default publish
 Meteor.publish(null, function () {
-    if (this.userId && !process.env.HIDE_USER_LIST) {
+    if (this.userId) {
         var query = {};
         var fields = {
             profile: 1,
@@ -84,6 +84,10 @@ Meteor.publish(null, function () {
             history: 1,
             level:1
         };
+        if(process.env.HIDE_USER_LIST) {
+            query._id = this.userId;
+            return Meteor.users.find(query, {fields: fields});
+        }
         var scope = Permissions.getPermissionRange(this.userId,"user:list-user");
         if (Permissions.userCan("list-user", "user", this.userId, scope)) {
             var scopeQuery = [];
