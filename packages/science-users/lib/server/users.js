@@ -66,6 +66,28 @@ Meteor.startup(function () {
 });
 
 //override default publish
+Meteor.publish(null, function () {
+     if (this.userId) {
+        var fields = {
+            profile: 1,
+            username: 1,
+            emails: 1,
+            disable: 1,
+            orbit_roles: 1,
+            favorite: 1,
+            watch: 1,
+            institutionId: 1,
+            publisherId: 1,
+            journalId: 1,
+            emailFrequency: 1,
+            history: 1,
+            level:1
+        };
+         return Meteor.users.find({_id: this.userId}, {fields: fields});
+     }
+    return null
+}
+               
 Meteor.publish("allUsers", function () {
     if (this.userId) {
         var query = {};
