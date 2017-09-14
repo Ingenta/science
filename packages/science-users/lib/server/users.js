@@ -66,7 +66,7 @@ Meteor.startup(function () {
 });
 
 //override default publish
-Meteor.publish(allUsers, function () {
+Meteor.publish("allUsers", function () {
     if (this.userId) {
         var query = {};
         var fields = {
