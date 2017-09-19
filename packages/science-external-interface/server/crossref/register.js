@@ -56,7 +56,7 @@ var generationXML = function (options, callback) {
         //query.pubStatus="normal";
         //for(var i=0;i<volumes.length;i++){
         query.journalId = chineseJournals[j]._id;
-        articles = Articles.find(query, {fields: {journalId: 1, doi: 1, title: 1, year: 1}});
+        articles = Articles.find(query, {fields: {journalId: 1, volume: 1, issue: 1, doi: 1, title: 1, year: 1, month: 1, published: 1, elocationId: 1, endPage: 1, authors:1, createdAt:1}});
         var count = articles.count();
         if (count == 0) {
             continue;
@@ -64,7 +64,11 @@ var generationXML = function (options, callback) {
         options.taskId && AutoTasks.update({_id: options.taskId}, {$set: {status: "splicing"}, $inc: {total: count}});
         journals = {};
         articles.forEach(function (articleInfo) {
-
+            //如果出版日期published为空 则将出版时间createdAt作为出版日期
+            if(articleInfo.year==null)
+                articleInfo.year = articleInfo.createdAt.getFullYear().toString();
+            if(articleInfo.month==null)
+                articleInfo.month = (articleInfo.createdAt.getMonth()+1).toString();
             //计数器
             journals.articleCount = (journals.articleCount || 0) + 1;
 
@@ -267,7 +271,12 @@ var generationXMLForSingleArticle = function (doi, callback) {
         return;
     }
 
-    var article = Articles.findOne({doi:doi}, {fields: {journalId: 1, volume: 1, issue: 1, doi: 1, title: 1, year: 1, month: 1, published: 1, elocationId: 1, endPage: 1, authors:1}});
+    var article = Articles.findOne({doi:doi}, {fields: {journalId: 1, volume: 1, issue: 1, doi: 1, title: 1, year: 1, month: 1, published: 1, elocationId: 1, endPage: 1, authors:1, createdAt:1}});
+    //如果出版日期published为空 则将出版时间createdAt作为出版日期
+    if(article.year==null)
+        article.year = article.createdAt.getFullYear().toString();
+    if(article.month==null)
+        article.month = (article.createdAt.getMonth()+1).toString();
     if (!article) {
         logger.error("Can't find article with doi:" + doi);
         return;
