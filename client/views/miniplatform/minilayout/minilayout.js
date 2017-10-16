@@ -26,6 +26,9 @@ Template.miniLayout.helpers({
             return currentPath == routePath ? "curLi" : "";
         }
         return currentPath.indexOf(routePath) === 0 ? "curLi" : "";
+    },
+    currYear:function(){
+        return new Date().getYear()+1900;
     }
 });
 
