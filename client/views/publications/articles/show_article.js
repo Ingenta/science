@@ -196,17 +196,27 @@ Template.showArticle.helpers({
                 if(labelInData){
                     allrefs.push(labelInData);
                 }else{
-                    var labelInDataNoZHCN = currAffObj && currAffObj.label;
-                    if(labelInDataNoZHCN){
-                        allrefs.push(labelInDataNoZHCN);
+                    var labelOtherData;
+                    if(TAPi18n.getLanguage()=="zh-CN"){
+                        labelOtherData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage() == "zh-CN" ? "en" : "cn"];
                     }else{
-                        var affFnObj = Router.current().data().authorNotes;
-                        var currFnObj = _.find(affFnObj, function (ob) {
-                            return ob.id == aff;
-                        })
-                        var labelFn = currFnObj && currFnObj.label;
-                        if(labelFn){
-                            allrefs.push(labelFn);
+                        labelOtherData = currAffObj && !_.isEmpty(currAffObj.label) && currAffObj.label[TAPi18n.getLanguage() == "en" ? "cn" : "en"];
+                    }
+                    if(labelOtherData){
+                        allrefs.push(labelOtherData);
+                    }else{
+                        var labelInDataNoZHCN = currAffObj && currAffObj.label;
+                        if(labelInDataNoZHCN){
+                            allrefs.push(labelInDataNoZHCN);
+                        }else{
+                            var affFnObj = Router.current().data().authorNotes;
+                            var currFnObj = _.find(affFnObj, function (ob) {
+                                return ob.id == aff;
+                            })
+                            var labelFn = currFnObj && currFnObj.label;
+                            if(labelFn){
+                                allrefs.push(labelFn);
+                            }
                         }
                     }
                 }
