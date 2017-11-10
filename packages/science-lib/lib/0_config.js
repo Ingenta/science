@@ -189,7 +189,7 @@ if (Meteor.isServer) {
 
         address: 'publish@scp.ac.cn',
         password: 'Sciengine_2016',
-        server: '219.238.6.208',
+        server: '192.168.0.7',
         port: 25
     };
     Config.AutoTasks = {
