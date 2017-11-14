@@ -36,7 +36,7 @@ Meteor.publish('journalMostReadBrief', function (journalShortTitle) {
 
 });
 
-Meteor.publish('insertMostReadArticles', function () {
+/*Meteor.publish('insertMostReadArticles', function () {
     Meteor.call("getMostRead", undefined, 20, function (err, result) {
         if(_.isEmpty(result))return this.ready();
         var mostRead = MostCount.findOne({type:"homeMostRead"},{sort:{createDate:-1}});
@@ -57,7 +57,7 @@ Meteor.publish('insertMostReadArticles', function () {
         });
     }
     return this.ready();
-});
+});*/
 
 Meteor.publish('insertHomeMostReadArticles', function () {
     Meteor.call("getMostRead", undefined, 20, function (err, result) {
