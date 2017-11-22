@@ -68,3 +68,18 @@
 #fulltext-viewer .other-figure-min {
     width:90px;
 }
+
+#fulltext-viewer .other-figure-min {
+    width:90px;
+}
+
+#fulltext-viewer .fulltextMathCss .fulltextMathCss{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    list-style-image : none;
+}
+
+#fulltext-viewer .fulltextMathCss .fulltextMathCss p{
+    display: inline;
+}

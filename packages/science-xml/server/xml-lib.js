@@ -71,6 +71,7 @@ ScienceXML.getFileContentsFromLocalPath = function (path) {
     var text = Science.FSE.readFileSync(path, "utf8");
     text=text.replace(/<\?Pub.*?\?>/img,'');//去除为生成pdf加入的特殊标记内容
     text=text.replace(/<(_ufe:[^\s>]+)\s[^>]*?>[\s\S]*?<\/\1\s*>/img,'');//去除ufe标签,侯老师说这个标签是生成pdf排版用的对平台内容展示无影响
+    text=text.replace(/<list list-type="ITEMIZE"[^>]*>/g,'<p><ul class="fulltextMathCss">').replace(/<\/?list>/g,'</ul></p>').replace(/<list-item[^>]*>/g,'<li>').replace(/<\/?list-item>/g,'</li>');
     return text.replace(/\sxml:base=/g, ' ref-type=');
 }
 
