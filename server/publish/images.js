@@ -95,6 +95,27 @@ Meteor.publish('newsJournalImages', function () {
     return Images.find({_id: {$in: journalImage}});
 });
 
+Meteor.publish('journalAllImages', function () {
+    var journal = Publications.find().fetch();
+    if (!journal)return this.ready();
+    var journalImage =[];
+    _.each(journal,function(item){
+        if(item.picture){
+            journalImage.push(item.picture);
+        }
+        if(item.defaultCover){
+            journalImage.push(item.defaultCover);
+        }
+        if(item.banner){
+            journalImage.push(item.banner);
+        }
+        if(item.adBanner){
+            journalImage.push(item.adBanner);
+        }
+    });
+    return Images.find({_id: {$in: journalImage}});
+});
+
 Meteor.publish('journalImages', function (journalShortTitle) {
     if(!journalShortTitle)return this.ready();
     check(journalShortTitle, String);

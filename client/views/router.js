@@ -232,7 +232,8 @@ Router.map(function () {
                 HomePageSubs.subscribe('HomeAdvertisementShowPage'),
                 HomePageSubs.subscribe('homePromoteImage'),
                 HomePageSubs.subscribe('publishers'),
-                HomePageSubs.subscribe('publications')
+                HomePageSubs.subscribe('publications'),
+                HomePageSubs.subscribe('topics')
             ]
         }
     });
@@ -258,7 +259,7 @@ Router.map(function () {
         name: "publisher.name",
         waitOn: function () {
             return [
-                Meteor.subscribe('newsJournalImages'),
+                Meteor.subscribe('journalAllImages'),
                 Meteor.subscribe('publisherCollectionsImage',this.params.publisherName),
                 HomePageSubs.subscribe('publisherImage'),
                 HomePageSubs.subscribe('publishers'),
