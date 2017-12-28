@@ -192,8 +192,14 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             // -------临时逻辑 开始--------
             // 若取到了中文标签但是没取到英文标签,用序号做英文标签.
             // 待中国科学方正确调整了affiliation数据,测试通过后应当删除这段代码
-            if ((affiliation.label.cn && !affiliation.label.en) || (!affiliation.label.en || affiliation.label.en.length > 2)) {
+            /*if ((affiliation.label.cn && !affiliation.label.en) || (!affiliation.label.en || affiliation.label.en.length > 2)) {
                 affiliation.label.en = String(index);
+            }*/
+            if (affiliation.label.en || affiliation.label.en.length > 2) {
+                affiliation.label.en = String(index);
+            }
+            if (affiliation.label.cn || affiliation.label.cn.length > 2) {
+                affiliation.label.cn = String(index);
             }
             index++;
             // -------临时逻辑 结束----------
