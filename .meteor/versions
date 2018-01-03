@@ -143,6 +143,7 @@ natestrauser:connection-banner@0.4.3
 natestrauser:select2@4.0.0_1
 netanelgilad:excel@0.2.6
 nicolaslopezj:excel-export@1.0.0
+nitrolabs:cdn@1.2.10
 npm-bcrypt@0.7.8_2
 npm-container@1.2.0
 npm-mongo@1.4.39_1
