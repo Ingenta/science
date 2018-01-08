@@ -3,6 +3,6 @@ Template.authorFiguresSta.helpers({
         if (!id)return;
         var fig = FiguresStore.findOne({_id: id});
         if (!fig)return;
-        return fig.url({auth:false});
+        return CDN.get_cdn_url() + fig.url({auth:false});
     }
 });

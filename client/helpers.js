@@ -74,13 +74,13 @@ Template.registerHelper('urlToPublisherById', function (id) {
 Template.registerHelper('getImageHelper', function (pictureId) {
     var noPicture = "/thumbnail.jpg";
     var imgObj = Images && pictureId && Images.findOne({_id: pictureId});
-    return (imgObj && imgObj.url({auth:false})) || noPicture;
+    return (imgObj && CDN.get_cdn_url() + imgObj.url({auth:false})) || noPicture;
 });
 
 Template.registerHelper('getHeadImageHelper', function (pictureId) {
     var noPicture = "";
     var imgObj = Images && pictureId && Images.findOne({_id: pictureId});
-    return (imgObj && imgObj.url({auth:false})) || noPicture;
+    return (imgObj && CDN.get_cdn_url() + imgObj.url({auth:false})) || noPicture;
 });
 
 Template.registerHelper('isChinese', function (language) {

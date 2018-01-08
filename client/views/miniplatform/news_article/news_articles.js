@@ -17,7 +17,8 @@ Template.newsCenterDetails.helpers({
     wordValue:function(){
         if(this.fileId){
             var file = Collections.JournalMediaFileStore.findOne({_id:this.fileId});
-            return file.url({auth:false});
+            if (!file)return;
+            return CDN.get_cdn_url() + file.url({auth:false});
         }
     }
 });
