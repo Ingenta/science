@@ -195,10 +195,10 @@ ScienceXML.getAuthorInfo = function (results, doc) {
             /*if ((affiliation.label.cn && !affiliation.label.en) || (!affiliation.label.en || affiliation.label.en.length > 2)) {
                 affiliation.label.en = String(index);
             }*/
-            if (affiliation.label.en || affiliation.label.en.length > 2) {
+            if (!affiliation.label.en || (affiliation.label.en && affiliation.label.en.length > 2)) {
                 affiliation.label.en = String(index);
             }
-            if (affiliation.label.cn || affiliation.label.cn.length > 2) {
+            if (!affiliation.label.cn || (affiliation.label.cn&&affiliation.label.cn.length > 2)) {
                 affiliation.label.cn = String(index);
             }
             index++;
