@@ -589,6 +589,9 @@
           "label": "英文"
         }
       },
+      "releaseTime": {
+        "label": "创建时间"
+      },
       "agree": {
         "label": "是否同意创建编委列表?"
       }

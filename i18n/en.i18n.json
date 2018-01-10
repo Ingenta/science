@@ -444,6 +444,9 @@
                     "label": "English"
                 }
             },
+            "releaseTime": {
+                "label": "Created Time"
+            },
             "agree": {
                 "label": "Do you agree to create a list?"
             }

@@ -5,7 +5,7 @@ Template.aboutTitle.onCreated(function(){
 Template.aboutTitle.helpers({
     abouts: function () {
         var publicationsId = Session.get('currentJournalId');
-        if(publicationsId)return About.find({publications: publicationsId});
+        if(publicationsId)return About.find({publications: publicationsId},{sort: {releaseTime: -1}});
     },
     isActive: function (id) {
         var aboutId = Session.get('tabBoard');

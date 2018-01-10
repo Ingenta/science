@@ -16,6 +16,15 @@ AboutSchema = new SimpleSchema({
     title: {
         type: Science.schemas.MultipleTextRequiredSchema
     },
+    releaseTime: {
+        type: Date,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: "bootstrap-datepicker"
+            }
+        }
+    },
     agree: {
         type: Boolean,
         defaultValue: false
