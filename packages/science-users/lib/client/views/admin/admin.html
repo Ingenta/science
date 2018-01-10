@@ -11,6 +11,11 @@
 
 <template name="AdminSideMenu">
     <ul id="menu-items" class="nav nav-stacked nav-pills">
+        <li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
+            <a href="{{pathFor 'admin.upload'}}">
+                {{_ "Upload"}}
+            </a>
+        </li>
         {{#if can "list-user" "user"}}<!--canUseAdminPanel-->
             <li id="menu-item-simple" class="{{menuItemClass 'admin.users'}}">
                 <a href="{{pathFor 'admin.users'}}">
@@ -25,11 +30,6 @@
                 </a>
             </li>
         {{/if}}
-        <li id="menu-item-simple" class="{{menuItemClass 'admin.upload'}}">
-            <a href="{{pathFor 'admin.upload'}}">
-                {{_ "Upload"}}
-            </a>
-        </li>
         {{#if can "add-institution" "institution"}}
             <li id="menu-item-simple" class="{{menuItemClass 'admin.institutions'}}">
                 <a href="{{pathFor 'admin.institutions'}}">

@@ -277,7 +277,7 @@ Template.articleOptions.helpers({
             },
             {name: TAPi18n.__("Cited By") + "(" + (this.citations ? this.citations.length : 0) + ")", slug: 'cited by',isDisabled:_.isEmpty(this.citations)},
             {name: TAPi18n.__("Data & Media"), slug: 'data media'},
-            {name: TAPi18n.__("Metrics"), slug: 'metrics'},
+            /*{name: TAPi18n.__("Metrics"), slug: 'metrics'},*/
             {name: TAPi18n.__("Related"), slug: 'related'}
         ];
         if (this.hasMoop) {

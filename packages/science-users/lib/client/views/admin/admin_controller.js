@@ -12,7 +12,7 @@ this.AdminController = RouteController.extend({
 	},
 
 	action: function() {
-		this.redirect('admin.users', this.params || {});
+		this.redirect('admin.upload', this.params || {});
 		/*ACTION_FUNCTION*/
 	},
 
