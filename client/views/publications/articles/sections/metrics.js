@@ -30,27 +30,18 @@
 prepareMetricsForThisArticle = function(){
     var article = Articles.findOne({articledoi: Router.current().params.articleDoi.replace(/-slash-/g,"/")}, {fields: {_id: 1}});
     if (!article || !article._id)return;
-
-    Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
-        buildHitCounterChart(response);
-    });
-    Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
-        var data = new Array();
-        var index = 0;
-        _.each(arr, function (obj) {
-            index++;
-            if (obj.name) {
-                data.push({
-                    name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
-                    y: obj.locationCount
-                });
-            }
-        });
-        buildLocationChart(data);
-    });
-    Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
-        buildHitCounterGraph(response);
-    });
+    var pie = MetricsCount.findOne({articleId:article._id,type:"1"});
+    if(pie){
+        buildHitCounterChart(pie.dataCount);
+    }
+    var country = MetricsCount.findOne({articleId:article._id,type:"2"});
+    if(country){
+        buildLocationChart(country.dataCount);
+    }
+    var line = MetricsCount.findOne({articleId:article._id,type:"3"});
+    if(line){
+        buildHitCounterGraph(line.dataCount);
+    }
 }
 
 var buildHitCounterChart = function (data) {

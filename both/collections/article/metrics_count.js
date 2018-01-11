@@ -1,0 +1,1 @@
+this.MetricsCount = new Meteor.Collection("metrics_count");
