@@ -381,7 +381,13 @@ ScienceXML.getAbstract = function (results, doc) {
     }
 
     if (abstractCn || abstractEn) {
-        results.abstract = {cn: (abstractCn || abstractEn), en: (abstractEn || abstractCn)};
+        if(abstractCn){
+            var absCn = abstractCn.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
+        if(abstractEn){
+            var absEn = abstractEn.replace(/<mml:/g, '<').replace(/<\/mml:/g, '</');
+        }
+        results.abstract = {cn: (absCn || absEn), en: (absEn || absCn)};
     }
     return results;
 };
