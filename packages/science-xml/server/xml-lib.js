@@ -409,6 +409,8 @@ ScienceXML.replaceItalics = function (input) {
 ScienceXML.replaceNewLines = function (input) {
     input = Science.replaceSubstrings(input, "\r\n", " ");
     input = Science.replaceSubstrings(input, "\n", " ");
+    //2018年1月18日，公式解析中出现红色未解析公式，去除错误，支持公式解析
+    input = Science.replaceSubstrings(input, "\zetaup", "\zeta");
     return input;
 }
 
