@@ -39,7 +39,8 @@ Package.onUse(function(api) {
       'server/cronTasks/DOIRegister.js',
       'server/cronTasks/CitationUpdate.js',
       'server/cronTasks/mostCount.js',
-      'server/cronTasks/volumeYear.js'
+      'server/cronTasks/volumeYear.js',
+      'server/cronTasks/articleMetricsCount.js'
   ],'server');
 
   api.addFiles([
