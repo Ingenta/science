@@ -9,6 +9,7 @@
              article.forEach(function (article) {
                  if (!article || !article._id)return;
                  Meteor.call("getArticlePageViewsPieChartData", article._id, function (err, response) {
+                     if(_.isEmpty(response))return this.ready();
                      var count = MetricsCount.find({articleId:article._id}, {fields: {_id: 1}}).fetch();
                      if(count){
                          count.forEach(function (item) {
@@ -22,26 +23,17 @@
                          createDate:new Date()
                      });
                  });
-                 Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
-                     var data = new Array();
-                     var index = 0;
-                     _.each(arr, function (obj) {
-                         index++;
-                         if (obj.name) {
-                             data.push({
-                                 name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
-                                 y: obj.locationCount
-                             });
-                         }
-                     });
+                 Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, response) {
+                     if(_.isEmpty(response))return this.ready();
                      MetricsCount.insert({
                          articleId: article._id,
-                         dataCount: data,
+                         dataCount: response,
                          type: "2",
                          createDate:new Date()
                      });
                  });
                  Meteor.call("getArticlePageViewsGraphData", article._id, function (err, response) {
+                     if(_.isEmpty(response))return this.ready();
                      MetricsCount.insert({
                          articleId: article._id,
                          dataCount: response,

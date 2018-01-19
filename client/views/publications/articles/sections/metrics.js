@@ -36,7 +36,18 @@ prepareMetricsForThisArticle = function(){
     }
     var country = MetricsCount.findOne({articleId:article._id,type:"2"});
     if(country){
-        buildLocationChart(country.dataCount);
+        var data = new Array();
+        var index = 0;
+        _.each(country.dataCount, function (obj) {
+            index++;
+            if (obj.name) {
+                data.push({
+                    name: TAPi18n.getLanguage() === "zh-CN" ? obj.name.cn : obj.name.en,
+                    y: obj.locationCount
+                });
+            }
+        });
+        buildLocationChart(data);
     }
     var line = MetricsCount.findOne({articleId:article._id,type:"3"});
     if(line){
