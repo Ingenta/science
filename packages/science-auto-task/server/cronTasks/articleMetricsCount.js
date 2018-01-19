@@ -23,11 +23,10 @@
                          createDate:new Date()
                      });
                  });
-                 Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, response) {
-                     if(_.isEmpty(response))return this.ready();
+                 Meteor.call("getArticlePageLocationReport", "fulltext", article._id, function (err, arr) {
                      MetricsCount.insert({
                          articleId: article._id,
-                         dataCount: response,
+                         dataCount: arr,
                          type: "2",
                          createDate:new Date()
                      });
