@@ -1,7 +1,7 @@
  SyncedCron.add({
      name: 'ArticlesMetrics',
      schedule: function (parser) {
-         return parser.text(Config.AutoTasks.articleMetrics.rate || "at 1:30 am");//默认每天凌晨1点半检查一次
+         return parser.text(Config.AutoTasks.articleMetrics.rate || "at 1:30 am on Sun");//默认每周凌晨1点半检查一次
      },
      job: function () {
          var article = Articles.find({}, {fields: {_id: 1}}).fetch();
