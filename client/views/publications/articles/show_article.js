@@ -96,6 +96,11 @@ ReactiveTabs.createInterface({
             }
             Users.recent.read(article);
         } else if (slug === 'metrics') {
+            var today = moment().startOf('day');
+            var lastWeek = moment(today).subtract(7, 'days').toDate();
+            if(!MetricsCount.findOne({articleId:article._id,type:"1"}, {fields: {createDate: 1}}) || MetricsCount.findOne({articleId:article._id,type:"1"}, {fields: {createDate: 1}}).createDate.getTime() <= lastWeek.getTime()){
+                Meteor.subscribe('oneArticleMetricsReport', article._id);
+            }
             prepareMetricsForThisArticle();
         } else if (slug === 'data media') {
             Meteor.subscribe('articleMediasInfo', article.doi);
