@@ -217,7 +217,7 @@ if (Meteor.isServer) {
             rate: "at 4:00 am"
         },
         articleMetrics: {
-            rate: "at 2:00 am on Sat"
+            rate: "at 2:00 am on Sun"
         },
     }
     Meteor.isLive = process.env.ROOT_URL == "http://engine.scichina.com";
