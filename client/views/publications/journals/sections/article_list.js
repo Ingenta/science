@@ -162,7 +162,7 @@ AutoForm.addHooks(['updateIssuePartialModalForm'],{
     onSuccess: function () {
         $("#jkafModal").modal('hide');
         FlashMessages.sendSuccess(TAPi18n.__("Success"), {hideDelay: 3000});
-        Meteor.subscribe('journalIssuesImage', Router.current().params.journalShortTitle,Router.current().params.volume,Router.current().params.issue);
+        Meteor.subscribe('journalIssuesImage', Router.current().params.journalShortTitle);
     },
     before: {
         update: function (doc) {
