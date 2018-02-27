@@ -160,8 +160,8 @@ Science.Email.tableOfContentEmail = function (date,email) {
             }
         }
 
-        if (journal.picture) {
-            var picture = Images.findOne({_id: journal.picture});
+        if (oneIssue.picture) {
+            var picture = Images.findOne({_id: oneIssue.picture});
             if(picture){
                 journal.picture=Meteor.absoluteUrl(picture.url({auth:false}).substring(1));
             }

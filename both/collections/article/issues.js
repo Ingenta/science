@@ -2,7 +2,7 @@ this.Issues = new Meteor.Collection("issues");
 
 if(Meteor.isServer){
     Issues.after.update(function (userId, doc, fieldNames, modifier) {
-        lastIssue=Issues.findOne({journalId:doc.journalId},{sort:{order:-1}});
+        lastIssue=Issues.findOne({journalId:doc.journalId,partial:true},{sort:{order:-1}});
         if(lastIssue._id==doc._id){
             Publications.update({_id:doc.journalId},{$set:{picture:doc.picture}});
         }
