@@ -73,11 +73,6 @@ ReactiveTabs.createInterface({
         history.replaceState({},document.title,window.location.pathname + "?slug="+slug);
         var article = Router.current().data && Router.current().data();
         if (!article || !article.doi)return;
-        var today = moment().startOf('day');
-        var lastWeek = moment(today).subtract(7, 'days').toDate();
-        if(!MetricsCount.findOne({articleId:article._id,type:"1"}, {fields: {createDate: 1}}) || MetricsCount.findOne({articleId:article._id,type:"1"}, {fields: {createDate: 1}}).createDate.getTime() <= lastWeek.getTime()){
-            Meteor.subscribe('oneArticleMetricsReport', article._id);
-        }
         var result = (new Date() - lastInsertAuditTime) > 500;
         lastInsertAuditTime = new Date();
         if (slug === 'abstract') {
@@ -101,7 +96,12 @@ ReactiveTabs.createInterface({
             }
             Users.recent.read(article);
         } else if (slug === 'metrics') {
-            Meteor.subscribe('oneArticleMetricsCount',article._id),
+            var today = moment().startOf('day');
+            var lastWeek = moment(today).subtract(7, 'days').toDate();
+            if(!MetricsCount.findOne({articleId:article._id,type:"1"}, {fields: {createDate: 1}}) || MetricsCount.findOne({articleId:article._id,type:"1"}, {fields: {createDate: 1}}).createDate.getTime() <= lastWeek.getTime()){
+                Meteor.subscribe('oneArticleMetricsReport', article._id);
+            }
+            Meteor.subscribe('oneArticleMetricsCount',article.doi);
             prepareMetricsForThisArticle();
         } else if (slug === 'data media') {
             Meteor.subscribe('articleMediasInfo', article.doi);
