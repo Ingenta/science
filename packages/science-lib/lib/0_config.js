@@ -188,7 +188,7 @@ if (Meteor.isServer) {
         //server: '219.238.6.202',
 
         address: 'publish@scp.ac.cn',
-        password: 'Sciengine_2016',
+        password: 'Sciengine_2018',
         server: '192.168.0.7',
         port: 25
     };
