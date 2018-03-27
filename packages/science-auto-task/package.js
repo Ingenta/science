@@ -34,12 +34,14 @@ Package.onUse(function(api) {
       'server/queue.js',
       'server/publish.js',
       'server/cron.js',
+      'server/metricsQueue.js',
       'server/cronTasks/Postman.js',
       'server/cronTasks/FTPScan.js',
       'server/cronTasks/DOIRegister.js',
       'server/cronTasks/CitationUpdate.js',
       'server/cronTasks/mostCount.js',
-      'server/cronTasks/volumeYear.js'
+      'server/cronTasks/volumeYear.js',
+      'server/cronTasks/MetricsUpdate.js'
   ],'server');
 
   api.addFiles([
