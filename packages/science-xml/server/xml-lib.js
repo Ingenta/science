@@ -417,6 +417,10 @@ ScienceXML.replaceNewLines = function (input) {
     input = Science.replaceSubstrings(input, "\n", " ");
     //2018年1月18日，公式解析中出现红色未解析公式，去除错误，支持公式解析
     input = Science.replaceSubstrings(input, "\zetaup", "\zeta");
+    //2018年4月25日，内容解析中出现链接
+    input = Science.replaceSubstrings(input, "<uri", "<a");
+    input = Science.replaceSubstrings(input, "</uri", "</a");
+    input = Science.replaceSubstrings(input, "xlink:href", "href");
     return input;
 }
 
@@ -1036,7 +1040,49 @@ ScienceXML.getAppendix = function(doc) {
     //var app = parserHelper.getXmlString("//app-group/app", doc, true);
     var appNode = parserHelper.getFirstNode("//app-group/app",doc);
     if(appNode)
-        return ScienceXML.getParagraphsFromASectionNode(appNode);
+        //2018年4月25日科学社附录内容多标签
+        /*return ScienceXML.getParagraphsFromASectionNode(appNode);*/
+        var paragraphNodes = xpath.select("child::p | child::sec | child::title | child::fig | child::table-wrap[@id]", appNode);
+        var paragraphs = {html: "", tex: [], figures: [], tables: []};
+        paragraphNodes.forEach(function (paragraph) {
+            if (paragraph.tagName === 'fig') {
+                //兼容中国科学插图数据处理
+                var fig = getFigure(paragraph);
+                if (fig) {
+                    paragraphs.figures.push(fig);
+                    var ref = '<p><xref original="true" ref-type="fig" rid="' + fig.id + '">' + fig.label + '</xref></p>';
+                    paragraphs.html += ref;
+                }
+            } else if (paragraph.tagName === 'table-wrap') {
+                var table = getTable(paragraph);
+                if (table) {
+                    paragraphs.tables.push(table);
+                    var ref = '<p><xref original="true" ref-type="table" rid="' + table.id + '">' + table.label + '</xref></p>';
+                    paragraphs.html += ref;
+                }
+            } else {
+                var parseResult = ScienceXML.handlePara(paragraph);
+                var sectionText = new serializer().serializeToString(parseResult.paraNode);
+                if (!_.isEmpty(parseResult.figures)) {
+                    paragraphs.figures = _.union(paragraphs.figures, parseResult.figures);
+                }
+                if (!_.isEmpty(parseResult.tables)) {
+                    paragraphs.tables = _.union(paragraphs.tables, parseResult.tables);
+                }
+                paragraphs.html += ScienceXML.replaceItalics(ScienceXML.replaceNewLines(ScienceXML.replaceAppendixTitle(sectionText)));
+
+                if (parseResult.formulas && parseResult.formulas.length) {
+                    paragraphs.tex = _.union(paragraphs.tex, parseResult.formulas);
+                }
+            }
+        });
+        return paragraphs;
+}
+
+ScienceXML.replaceAppendixTitle = function (input) {
+    input = Science.replaceSubstrings(input, "<title", "<p><strong");
+    input = Science.replaceSubstrings(input, "</title>", "</strong></p>");
+    return input;
 }
 
 //提取bio标签中作者图片信息
