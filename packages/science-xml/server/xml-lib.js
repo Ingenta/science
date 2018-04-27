@@ -1039,7 +1039,7 @@ ScienceXML.getSpecialTopicTitle = function(doc){
 ScienceXML.getAppendix = function(doc) {
     //var app = parserHelper.getXmlString("//app-group/app", doc, true);
     var appNode = parserHelper.getFirstNode("//app-group/app",doc);
-    if(appNode)
+    if(appNode){
         //2018年4月25日科学社附录内容多标签
         /*return ScienceXML.getParagraphsFromASectionNode(appNode);*/
         var paragraphNodes = xpath.select("child::p | child::sec | child::title | child::fig | child::table-wrap[@id]", appNode);
@@ -1077,6 +1077,7 @@ ScienceXML.getAppendix = function(doc) {
             }
         });
         return paragraphs;
+    }
 }
 
 ScienceXML.replaceAppendixTitle = function (input) {
