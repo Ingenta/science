@@ -193,7 +193,7 @@ if (Meteor.isServer) {
         port: 25
     };
     Config.AutoTasks = {
-        start: process.env.RUN_TASKS,
+        start: process.env.RUN_TASKS||process.env.RUN_TASKS_C,
         DOI_Register: {
             savePath: "/tmp/doi-register-file/",//生成的注册文件保存位置，必须。
             recvEmail: "doi@scichina.org",//接受注册结果反馈的邮箱地址，必须
@@ -202,7 +202,7 @@ if (Meteor.isServer) {
             condition: 1 //新的注册任务只处理多少天以前注册过，或从未注册过的的doi ,默认1天前
         },
         Citation: {
-            rate: "at 1:00 am on Weds" //提交注册请求的频率，默认每周三凌晨1点"
+            rate: "at 2:00 am on Sat"
         },
         Postman: {
             rate: "at 3:00 am"

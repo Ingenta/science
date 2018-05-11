@@ -1,15 +1,15 @@
-Science.Queue = {
+Science.metricsQueue = {
 	Metrics:new PowerQueue({
 		maxProcessing: 10,//10并发
 		maxFailures: 3 //对失败的子任务重试2次（加上第一次失败共3次）
 	})
 };
 
-Science.Queue.Metrics.errorHandler = function(data){
+Science.metricsQueue.Metrics.errorHandler = function(data){
 	logger.info("got error from updateMetrics Queue doi:"+data.doi);
 };
 
-Science.Queue.Metrics.taskHandler = function(data,next){
+Science.metricsQueue.Metrics.taskHandler = function(data,next){
 	logger.info("updating metrics of doi:"+data.doi);
 	Meteor.call("getArticlePageViewsPieChartData", data.articleId, function (err, response) {
 		var count = MetricsCount.find({articleId:data.articleId}, {fields: {_id: 1}});
@@ -29,6 +29,6 @@ Science.Queue.Metrics.taskHandler = function(data,next){
 	next();
 };
 
-Science.Queue.Metrics.onEnded = function(){
+Science.metricsQueue.Metrics.onEnded = function(){
 	logger.info("update metrics Queue success");
 };
