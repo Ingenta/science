@@ -21,7 +21,7 @@ Template.newsCenterList.helpers({
         var journalId = Session.get('currentJournalId');
         var publication = Publications.findOne({_id:journalId});
         if(this.url)return this.url;
-        return publication.shortTitle+"/news/journalNews/"+this._id;
+        return "/publisher/scp/journal/"+publication.shortTitle+"/news/journalNews/"+this._id;
     },
     newsContentCount: function(){
         var aboutId = Session.get('tabNews');
